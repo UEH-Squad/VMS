@@ -2,7 +2,7 @@
 
 namespace VMS.Domain.Models
 {
-    public class ProjectSkill : Entity
+    public class ProjectSkill : DeleteEntity<int>
     {
         [ForeignKey(nameof(Project))]
         public int ProjectId { get; set; }

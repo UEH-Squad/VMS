@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VMS.Infrastructure.Data\VMS.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\VMS.Infrastructure.IoC\VMS.Infrastructure.IoC.csproj" />
   </ItemGroup>
 
 </Project>

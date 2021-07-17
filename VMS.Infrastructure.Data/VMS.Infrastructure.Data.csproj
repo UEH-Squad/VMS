@@ -14,11 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

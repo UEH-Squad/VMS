@@ -2,7 +2,7 @@
 
 namespace VMS.Domain.Models
 {
-    public class Project : Entity
+    public class Project : AuditEntity<int>
     {
         [ForeignKey(nameof(Organization))]
         public string OrganizationId { get; set; }

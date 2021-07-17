@@ -1,0 +1,23 @@
+﻿@page "/hoat-dong"
+@using VMS.Application.Interfaces;
+@using VMS.Domain.Models;
+@inject IProjectService ProjectService
+
+<h3>All projects will be shown here...</h3>
+
+@if (projects != null && projects.Any())
+{
+    @foreach (var project in projects)
+    {
+        <p>@project.Name</p>
+    }
+}
+
+@code {
+    private List<Project> projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        projects = await ProjectService.GetAllProjects();
+    }
+}

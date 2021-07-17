@@ -2,7 +2,7 @@
 
 namespace VMS.Domain.Models
 {
-    public class VolunteerSkill : Entity
+    public class VolunteerSkill : DeleteEntity<int>
     {
         [ForeignKey(nameof(Volunteer))]
         public string VolunteerId { get; set; }

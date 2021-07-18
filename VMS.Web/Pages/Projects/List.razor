@@ -1,23 +1,27 @@
 ﻿@page "/hoat-dong"
+
 @using VMS.Application.Interfaces;
 @using VMS.Domain.Models;
+
 @inject IProjectService ProjectService
 
 <h3>All projects will be shown here...</h3>
 
-@if (projects != null && projects.Any())
+<NavLink class="nav-link" href="/them-hoat-dong">Thêm hoạt động</NavLink>
+
+@if (_projects != null && _projects.Any())
 {
-    @foreach (var project in projects)
+    @foreach (Project project in _projects)
     {
         <p>@project.Name</p>
     }
 }
 
 @code {
-    private List<Project> projects;
+    private List<Project> _projects;
 
     protected override async Task OnInitializedAsync()
     {
-        projects = await ProjectService.GetAllProjects();
+        _projects = await ProjectService.GetAllProjects();
     }
 }

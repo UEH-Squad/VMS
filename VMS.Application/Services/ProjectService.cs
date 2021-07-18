@@ -8,16 +8,16 @@ namespace VMS.Application.Services
 {
     public class ProjectService : IProjectService
     {
-        private readonly IRepository repository;
+        private readonly IRepository _repository;
 
         public ProjectService(IRepository repository)
         {
-            this.repository = repository;
+            _repository = repository;
         }
 
         public Task<List<Project>> GetAllProjects()
         {
-            return repository.GetListAsync<Project>();
+            return _repository.GetListAsync<Project>();
         }
     }
 }

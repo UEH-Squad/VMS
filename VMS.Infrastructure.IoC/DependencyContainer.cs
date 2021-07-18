@@ -6,7 +6,7 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Infrastructure.IoC
 {
-    public class DependencyContainer
+    public static class DependencyContainer
     {
         public static void RegisterServices(IServiceCollection services)
         {

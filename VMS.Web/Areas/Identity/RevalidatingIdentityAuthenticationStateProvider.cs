@@ -34,7 +34,7 @@ namespace VMS.Web.Areas.Identity
             AuthenticationState authenticationState, CancellationToken cancellationToken)
         {
             // Get the user manager from a new scope to ensure it fetches fresh data
-            var scope = _scopeFactory.CreateScope();
+            IServiceScope scope = _scopeFactory.CreateScope();
             try
             {
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
@@ -55,7 +55,7 @@ namespace VMS.Web.Areas.Identity
 
         private async Task<bool> ValidateSecurityStampAsync(UserManager<TUser> userManager, ClaimsPrincipal principal)
         {
-            var user = await userManager.GetUserAsync(principal);
+            TUser user = await userManager.GetUserAsync(principal);
             if (user == null)
             {
                 return false;
@@ -66,8 +66,8 @@ namespace VMS.Web.Areas.Identity
             }
             else
             {
-                var principalStamp = principal.FindFirstValue(_options.ClaimsIdentity.SecurityStampClaimType);
-                var userStamp = await userManager.GetSecurityStampAsync(user);
+                string principalStamp = principal.FindFirstValue(_options.ClaimsIdentity.SecurityStampClaimType);
+                string userStamp = await userManager.GetSecurityStampAsync(user);
                 return principalStamp == userStamp;
             }
         }

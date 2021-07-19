@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2003A924-8544-44B8-AE08-31BB5D9B066D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VMS", "VMS\VMS.csproj", "{912A8E7E-65C8-4E3F-950A-36CE873577F5}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Application", "VMS.Application\VMS.Application.csproj", "{D3FB706B-27B3-4F48-A8CC-78289EC82BE0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Domain", "VMS.Domain\VMS.Domain.csproj", "{A17636FF-21D8-45F8-AD95-33B6D2D5DFC8}"
@@ -12,8 +14,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Infrastructure.Data", "VMS.Infrastructure.Data\VMS.Infrastructure.Data.csproj", "{DB5E3CE2-66AD-461D-84D3-BD7C43EF41B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Infrastructure.IoC", "VMS.Infrastructure.IoC\VMS.Infrastructure.IoC.csproj", "{CB9B9D40-91E6-4D99-82A0-AD5370259842}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VMS", "VMS\VMS.csproj", "{912A8E7E-65C8-4E3F-950A-36CE873577F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

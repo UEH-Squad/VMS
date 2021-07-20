@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "watch:js": "webpack --mode production",
     "watch:scss": "node-sass -r -w --output-style compressed scss -o ../wwwroot/css",
     "dev": "npm-run-all -p watch:js watch:scss"

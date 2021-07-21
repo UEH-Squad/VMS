@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Infrastructure.Data", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Infrastructure.IoC", "VMS.Infrastructure.IoC\VMS.Infrastructure.IoC.csproj", "{CB9B9D40-91E6-4D99-82A0-AD5370259842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VMS.Common", "VMS.Common\VMS.Common.csproj", "{8263223E-CAB1-4018-B14C-3595BCC9FA0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VMS.Common", "VMS.Common\VMS.Common.csproj", "{8263223E-CAB1-4018-B14C-3595BCC9FA0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,7 +11,8 @@ namespace VMS.Infrastructure.IoC
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddGenericRepository<VmsDbContext>();
-            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IHolidaysApiService, HolidaysApiService>();
+            services.AddHttpClient();
         }
     }
 }

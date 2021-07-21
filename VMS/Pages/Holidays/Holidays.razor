@@ -1,0 +1,73 @@
+﻿@page "/ngay-le"
+
+@*@using VMS.Application.Interfaces;
+@using VMS.Application.ViewModels;*@
+
+<h3>Danh sách ngày lễ</h3>
+<br />
+
+<EditForm Model="@holidayModel" OnValidSubmit="@HandleValidSubmit" class="form-inline">
+
+    <label class="ml-2">Mã quốc gia:</label>
+    <InputText id="CountryCode" @bind-Value="holidayModel.CountryCode" class="form-control" />
+
+    <label class="ml-2">Năm:</label>
+    <InputNumber id="Year" @bind-Value="holidayModel.Year" class="form-control" />
+
+    <button class="btn btn-primary ml-2" type="submit">Tra cứu</button>
+</EditForm>
+
+<br />
+
+@if (!isFirstLoad && (holidays != null && holidays.Any()))
+{
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Local Name</th>
+                <th>Country Code</th>
+                <th>Global</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var holiday in holidays)
+            {
+                <tr>
+                    <td>@holiday.Date.Value.ToShortDateString()</td>
+                    <td>@holiday.Name</td>
+                    <td>@holiday.LocalName</td>
+                    <td>@holiday.CountryCode</td>
+                    <td>@holiday.Global</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (isFirstLoad)
+{
+    <p>Vui lòng nhập mã quốc gia và năm cần tra cứu</p>
+}
+else
+{
+    <p>Đang tải, vui lòng chờ...</p>
+}
+
+@code {
+    // We can put logic here (simple logic) or in code-behind (complicated logic, see Holidays.razor.cs)
+
+    //private bool isFirstLoad = true;
+    //private readonly HolidayRequestModel holidayModel = new();
+    //private IEnumerable<HolidayResponseModel> holidays;
+
+    //[Inject]
+    //protected IHolidaysApiService HolidaysApiService { get; set; }
+
+    //private async Task HandleValidSubmit()
+    //{
+    //    isFirstLoad = false;
+    //    holidays = null;
+    //    holidays = await HolidaysApiService.GetHolidays(holidayModel);
+    //}
+}

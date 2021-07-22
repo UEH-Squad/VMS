@@ -12,11 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VMS</title>
     <base href="~/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
     <link href="VMS.styles.css" rel="stylesheet" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <component type="typeof(App)" render-mode="ServerPrerendered" />
 
     <div id="blazor-error-ui">
@@ -31,6 +31,7 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="js/vms.js"></script>
 </body>
 </html>

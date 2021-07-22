@@ -43,4 +43,8 @@
     <ProjectReference Include="..\VMS.Infrastructure.IoC\VMS.Infrastructure.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
+  </ItemGroup>
+
 </Project>

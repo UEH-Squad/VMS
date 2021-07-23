@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hangfire;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -268,21 +270,6 @@ namespace VMS.Infrastructure.Data.Repositories
             return await query.Select(selectExpression).ToListAsync(cancellationToken);
         }
 
-        [Obsolete("This method has been marked as obsolete and will be removed in next version. Please use GetListAsync() method with same overload.")]
-        public async Task<PaginatedList<T>> GetPaginatedListAsync<T>(
-            PaginationSpecification<T> specification,
-            CancellationToken cancellationToken = default)
-            where T : class
-        {
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            PaginatedList<T> paginatedList = await _dbContext.Set<T>().ToPaginatedListAsync(specification, cancellationToken);
-            return paginatedList;
-        }
-
         public async Task<PaginatedList<T>> GetListAsync<T>(
             PaginationSpecification<T> specification,
             CancellationToken cancellationToken = default)
@@ -303,31 +290,6 @@ namespace VMS.Infrastructure.Data.Repositories
 
             _cacheService(cacheTech).Set(cacheKey, paginatedList);
 
-            return paginatedList;
-        }
-
-        [Obsolete("This method has been marked as obsolete and will be removed in next version. Please use GetListAsync() method with same overload.")]
-        public async Task<PaginatedList<TProjectedType>> GetPaginatedListAsync<T, TProjectedType>(
-            PaginationSpecification<T> specification,
-            Expression<Func<T, TProjectedType>> selectExpression,
-            CancellationToken cancellationToken = default)
-            where T : class
-            where TProjectedType : class
-        {
-            if (specification == null)
-            {
-                throw new ArgumentNullException(nameof(specification));
-            }
-
-            if (selectExpression == null)
-            {
-                throw new ArgumentNullException(nameof(selectExpression));
-            }
-
-            IQueryable<T> query = _dbContext.Set<T>().GetSpecifiedQuery((SpecificationBase<T>)specification);
-
-            PaginatedList<TProjectedType> paginatedList = await query.Select(selectExpression)
-                .ToPaginatedListAsync(specification.PageIndex, specification.PageSize, cancellationToken);
             return paginatedList;
         }
 
@@ -659,6 +621,8 @@ namespace VMS.Infrastructure.Data.Repositories
             object[] primaryKeyValue = entityEntry.Metadata.FindPrimaryKey().Properties.
                 Select(p => entityEntry.Property(p.Name).CurrentValue).ToArray();
 
+            BackgroundJob.Enqueue(() => RefreshCache());
+
             return primaryKeyValue;
         }
 
@@ -672,6 +636,8 @@ namespace VMS.Infrastructure.Data.Repositories
 
             await _dbContext.Set<T>().AddRangeAsync(entities, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            BackgroundJob.Enqueue(() => RefreshCache());
         }
 
         public async Task UpdateAsync<T>(T entity, CancellationToken cancellationToken = default)
@@ -713,6 +679,8 @@ namespace VMS.Infrastructure.Data.Repositories
             }
 
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            BackgroundJob.Enqueue(() => RefreshCache());
         }
 
         public async Task UpdateAsync<T>(IEnumerable<T> entities, CancellationToken cancellationToken = default)
@@ -725,6 +693,8 @@ namespace VMS.Infrastructure.Data.Repositories
 
             _dbContext.Set<T>().UpdateRange(entities);
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            BackgroundJob.Enqueue(() => RefreshCache());
         }
 
         public async Task DeleteAsync<T>(T entity, CancellationToken cancellationToken = default)
@@ -737,6 +707,8 @@ namespace VMS.Infrastructure.Data.Repositories
 
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            BackgroundJob.Enqueue(() => RefreshCache());
         }
 
         public async Task DeleteAsync<T>(IEnumerable<T> entities, CancellationToken cancellationToken = default)
@@ -749,6 +721,8 @@ namespace VMS.Infrastructure.Data.Repositories
 
             _dbContext.Set<T>().RemoveRange(entities);
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            BackgroundJob.Enqueue(() => RefreshCache());
         }
 
         public async Task<int> GetCountAsync<T>(CancellationToken cancellationToken = default)
@@ -878,6 +852,15 @@ namespace VMS.Infrastructure.Data.Repositories
         public void ResetContextState()
         {
             _dbContext.ChangeTracker.Clear();
+        }
+
+        private void RefreshCache()
+        {
+            IEnumerable cacheKeys = _cacheService(cacheTech).GetKeys();
+            foreach (string key in cacheKeys)
+            {
+                _cacheService(cacheTech).Remove(key);
+            }
         }
     }
 }

@@ -9,11 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\VMS.Infrastructure.Data\VMS.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>

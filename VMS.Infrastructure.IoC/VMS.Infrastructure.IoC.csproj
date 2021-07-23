@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VMS.Application\VMS.Application.csproj" />
-    <ProjectReference Include="..\VMS.Infrastructure.Data\VMS.Infrastructure.Data.csproj" />
     <ProjectReference Include="..\VMS.Infrastructure.Services\VMS.Infrastructure.Services.csproj" />
   </ItemGroup>
 

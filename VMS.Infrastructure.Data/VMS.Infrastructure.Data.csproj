@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.7.24" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -15,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VMS.Common\VMS.Common.csproj" />
-    <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
   </ItemGroup>
 
 </Project>

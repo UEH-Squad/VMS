@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VMS.Areas.Identity;
-using VMS.Domain.Configurations;
 using VMS.Infrastructure.Data.Context;
 using VMS.Infrastructure.IoC;
 
@@ -36,10 +35,8 @@ namespace VMS
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.Configure<CacheConfiguration>(Configuration.GetSection("CacheConfiguration"));
-
             // Custom registrations
-            DependencyContainer.RegisterServices(services);
+            DependencyContainer.RegisterServices(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +53,9 @@ namespace VMS
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Custom configurations
+            DependencyContainer.Configure(app, env);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

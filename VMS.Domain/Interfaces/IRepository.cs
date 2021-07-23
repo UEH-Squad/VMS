@@ -210,43 +210,10 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="PaginatedList{T}"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="specification"/> is smaller than 1.</exception>
-        [Obsolete("This method has been marked as obsolete and will be removed in next version. Please use GetListAsync() method with same overload.")]
-        Task<PaginatedList<TEntity>> GetPaginatedListAsync<TEntity>(
-            PaginationSpecification<TEntity> specification,
-            CancellationToken cancellationToken = default)
-            where TEntity : class;
-
-        /// <summary>
-        /// This method returns a <see cref="PaginatedList{T}"/>.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="specification">An object of <see cref="PaginationSpecification{T}"/>.</param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>Returns <see cref="PaginatedList{T}"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="specification"/> is smaller than 1.</exception>
         Task<PaginatedList<TEntity>> GetListAsync<TEntity>(
             PaginationSpecification<TEntity> specification,
             CancellationToken cancellationToken = default)
             where TEntity : class;
-
-        /// <summary>
-        /// This method returns a <see cref="PaginatedList{T}"/>.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <typeparam name="TProjectedType">The projected type.</typeparam>
-        /// <param name="specification">An object of <see cref="PaginationSpecification{T}"/>.</param>
-        /// <param name="selectExpression">The <see cref="System.Linq"/> select query.</param>
-        /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="specification"/> is smaller than 1.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="selectExpression"/> is smaller than 1.</exception>
-        [Obsolete("This method has been marked as obsolete and will be removed in next version. Please use GetListAsync() method with same overload.")]
-        Task<PaginatedList<TProjectedType>> GetPaginatedListAsync<TEntity, TProjectedType>(
-            PaginationSpecification<TEntity> specification,
-            Expression<Func<TEntity, TProjectedType>> selectExpression,
-            CancellationToken cancellationToken = default)
-            where TEntity : class
-            where TProjectedType : class;
 
         /// <summary>
         /// This method returns a <see cref="PaginatedList{T}"/>.

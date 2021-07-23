@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VMS.Areas.Identity;
+using VMS.Domain.Configurations;
 using VMS.Infrastructure.Data.Context;
 using VMS.Infrastructure.IoC;
 
@@ -34,6 +35,8 @@ namespace VMS
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.Configure<CacheConfiguration>(Configuration.GetSection("CacheConfiguration"));
 
             // Custom registrations
             DependencyContainer.RegisterServices(services);

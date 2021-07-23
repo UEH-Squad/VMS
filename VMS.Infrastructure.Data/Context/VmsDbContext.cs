@@ -88,6 +88,22 @@ namespace VMS.Infrastructure.Data.Context
                     UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7"
                 }
             );
+
+            // Seed categories
+            builder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "Test category 1",
+                    IsDeleted = false
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Test category 2",
+                    IsDeleted = false
+                }
+            );
         }
     }
 }

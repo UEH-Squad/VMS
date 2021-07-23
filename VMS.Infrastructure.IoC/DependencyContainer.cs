@@ -19,6 +19,7 @@ namespace VMS.Infrastructure.IoC
     {
         public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHttpContextAccessor();
             services.Configure<CacheConfiguration>(configuration.GetSection("CacheConfiguration"));
             services.AddMemoryCache();
             services.AddTransient<MemoryCacheService>();
@@ -45,6 +46,7 @@ namespace VMS.Infrastructure.IoC
 
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<ICategoryService, CategoryService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

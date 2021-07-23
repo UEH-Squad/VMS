@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using VMS.Domain.Interfaces;
 
 namespace VMS.Common.Extensions
 {
@@ -15,10 +14,10 @@ namespace VMS.Common.Extensions
             typeof(MemoryCache).GetProperty("EntriesCollection", BindingFlags.NonPublic | BindingFlags.Instance).GetGetMethod(true),
             throwOnBindFailure: true) as Func<MemoryCache, object>;
 
-        public static IEnumerable GetKeys(this ICacheService memoryCache)
-            => ((IDictionary)GetEntriesCollection((MemoryCache)memoryCache)).Keys;
+        public static IEnumerable GetKeys(this MemoryCache memoryCache)
+            => ((IDictionary)GetEntriesCollection(memoryCache)).Keys;
 
-        public static IEnumerable<T> GetKeys<T>(this ICacheService memoryCache)
+        public static IEnumerable<T> GetKeys<T>(this MemoryCache memoryCache)
             => GetKeys(memoryCache).OfType<T>();
     }
 }

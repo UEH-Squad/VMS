@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections;
+using VMS.Common.Extensions;
 using VMS.Domain.Configurations;
 using VMS.Domain.Interfaces;
 
@@ -42,6 +44,12 @@ namespace VMS.Infrastructure.Services
         public void Remove(string cacheKey)
         {
             _memoryCache.Remove(cacheKey);
+        }
+
+        public IEnumerable GetKeys()
+        {
+            MemoryCache cache = _memoryCache as MemoryCache;
+            return cache.GetKeys();
         }
     }
 }

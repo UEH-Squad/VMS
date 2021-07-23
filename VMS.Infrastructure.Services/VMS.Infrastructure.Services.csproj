@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VMS.Common\VMS.Common.csproj" />
     <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
   </ItemGroup>
 

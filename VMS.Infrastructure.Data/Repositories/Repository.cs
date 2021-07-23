@@ -854,7 +854,7 @@ namespace VMS.Infrastructure.Data.Repositories
             _dbContext.ChangeTracker.Clear();
         }
 
-        private void RefreshCache()
+        public void RefreshCache()
         {
             IEnumerable cacheKeys = _cacheService(cacheTech).GetKeys();
             foreach (string key in cacheKeys)

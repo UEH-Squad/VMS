@@ -8,19 +8,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VMS</title>
-    <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Identity/css/site.css" />
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="css/site.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" href="~/">VMS</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm">
+        <div class="container">
+            <div class="nav-menu d-flex align-items-center">
+                <a href="/" class="navbar-brand" Match="NavLinkMatch.All">
+                    <img src="/img/GOVOLUNTEER.png" alt="" width="45" />
+                </a>
+                <ul class="navbar-nav justify-content-center">
+                    <li class="nav-item">
+                        <a href="/hoat-dong" class="nav-link active">Hoạt động</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarToggler" class="collapse navbar-collapse mt-2 mt-sm-0 flex-sm-grow-0">
+                <ul class="navbar-nav me-auto d-flex flex-row justify-content-around">
                     @{
                         var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                     }
@@ -34,23 +45,22 @@
                             "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
                             $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
                     }
-                </div>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    <footer class="footer border-top text-muted">
+    <main class="container flex-grow-1 my-2">
+        @RenderBody()
+    </main>
+
+    <footer class="lh-lg">
         <div class="container">
-            &copy; 2021 - VMS - <a asp-area="" asp-page="Privacy">Privacy</a>
+            Khoa Hệ thống Thông tin Kinh doanh
         </div>
     </footer>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/Identity/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

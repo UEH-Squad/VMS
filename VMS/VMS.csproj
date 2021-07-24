@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Resources\package-lock.json" />
+    <Content Remove="Resources\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
@@ -19,8 +24,26 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
+    <ItemGroup>
+      <Watch Remove="Resources\src\common\lodash.js" />
+      <Watch Remove="Resources\scss\Index.scss" />
+      <Watch Remove="Resources\scss\Layout.scss" />
+      <Watch Remove="Resources\webpack.config.js" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="Resources\package-lock.json" />
+      <None Include="Resources\package.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\VMS.Infrastructure.IoC\VMS.Infrastructure.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>

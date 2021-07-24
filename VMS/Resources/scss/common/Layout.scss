@@ -1,4 +1,13 @@
-﻿.valid.modified:not([type=checkbox]) {
+﻿body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+.material-icons {
+    font-size: 1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
 

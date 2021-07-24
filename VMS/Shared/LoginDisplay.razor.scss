@@ -1,0 +1,15 @@
+﻿@import '../Resources/scss/common/_variables';
+
+.my-notifications {
+    color: $blue;
+    font-size: 36px;
+}
+
+.my-person {
+    color: $blue;
+    font-size: 36px;
+
+    @include on('lg') {
+        font-size: 70px;
+    }
+}

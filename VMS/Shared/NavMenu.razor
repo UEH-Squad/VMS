@@ -1,22 +1,36 @@
-﻿<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm">
-    <div class="container">
-        <div class="nav-menu d-flex align-items-center">
-            <NavLink href="" class="navbar-brand" Match="NavLinkMatch.All">
-                <img src="img/GOVOLUNTEER.png" alt="" height="45" />
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-white py-0 py-lg-2 my-navbar">
+    <div class="container px-0 px-lg-1 my-navbar-container">
+        <div class="d-flex flex-column align-items-center">
+            <NavLink href="" class="navbar-brand p-0 m-0" Match="NavLinkMatch.All">
+                <img src="img/logo UEH tieng Anh.png" alt="" class="my-ueh-logo" />
             </NavLink>
-            <ul class="navbar-nav justify-content-center">
-                <li class="nav-item">
-                    <NavLink href="/hoat-dong" class="nav-link active">Hoạt động</NavLink>
-                </li>
-            </ul>
+            <NavLink href="/hoat-dong" class="navbar-brand p-0 m-0">
+                <img src="img/GoVolunteer (1).png" alt="" class="my-go-volunteer" />
+            </NavLink>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler me-2 me-sm-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbarToggler" class="collapse navbar-collapse mt-2 mt-sm-0 flex-sm-grow-0">
-            <ul class="navbar-nav me-auto d-flex flex-row justify-content-around">
-                <LoginDisplay />
-            </ul>
+        <div id="navbarToggler" class="collapse navbar-collapse mt-2 mt-sm-0 flex-sm-grow-1 bg-white">
+            <div class="d-flex flex-column-reverse flex-lg-row flex-lg-grow-1">
+                <ul class="navbar-nav me-lg-auto d-flex flex-column justify-content-around align-items-center flex-grow-1 flex-lg-row">
+                    <li class="nav-item">
+                        <a href="" class="nav-link my-nav-link">Trang chu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/hoat-dong" class="nav-link my-nav-link">Go Volunteer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/hoat-dong" class="nav-link my-nav-link">Don vi to chuc</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/hoat-dong" class="nav-link my-nav-link">Ban do</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav d-flex flex-row align-items-center ms-lg-4 justify-content-end justify-content-lg-center me-2 me-sm-0">
+                    <LoginDisplay />
+                </ul>
+            </div>
         </div>
     </div>
 </nav>

@@ -1,0 +1,16 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-notifications {
+  color: #18A0FB;
+  font-size: 36px; }
+
+.my-person {
+  color: #18A0FB;
+  font-size: 36px; }
+  @media (min-width: 992px) {
+    .my-person {
+      font-size: 70px; } }

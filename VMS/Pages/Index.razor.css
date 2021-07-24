@@ -1,0 +1,12 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-slogan {
+  background-color: #64D72F; }
+  .my-slogan p {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700; }

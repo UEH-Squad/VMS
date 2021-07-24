@@ -1,0 +1,16 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-navbar {
+  min-height: 80px; }
+  .my-navbar .my-navbar-container .my-ueh-logo {
+    height: 54px; }
+  .my-navbar .my-navbar-container .my-go-volunteer {
+    height: 16px; }
+  .my-navbar .my-navbar-container .my-nav-link {
+    color: #18A0FB;
+    font-size: 20px;
+    font-weight: 700; }

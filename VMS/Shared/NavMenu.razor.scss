@@ -1,7 +1,7 @@
 ﻿@import '../Resources/scss/common/_variables';
 
 .my-navbar {
-    height: 100px;
+    min-height: 80px;
 
     .my-navbar-container {
         .my-ueh-logo {
@@ -16,7 +16,6 @@
             color: $blue;
             font-size: 20px;
             font-weight: 700;
-            margin: 0 10px;
         }
     }
 }

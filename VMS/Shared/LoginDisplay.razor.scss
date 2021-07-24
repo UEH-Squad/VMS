@@ -1,13 +1,16 @@
 ﻿@import '../Resources/scss/common/_variables';
 
-.my-notifications {
+@mixin profile-icon-mobile {
     color: $blue;
     font-size: 36px;
 }
 
+.my-notifications {
+    @include profile-icon-mobile;
+}
+
 .my-person {
-    color: $blue;
-    font-size: 36px;
+    @include profile-icon-mobile;
 
     @include on('lg') {
         font-size: 70px;

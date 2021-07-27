@@ -23,13 +23,13 @@ namespace VMS.Infrastructure.Data.Repositories
 {
     public class Repository : IRepository
     {
-        private readonly VmsDbContext _dbContext;
+        private readonly IDbContextFactory<VmsDbContext> _dbContextFactory;
         private readonly Func<CacheTech, ICacheService> _cacheService;
         private readonly static CacheTech cacheTech = CacheTech.Memory;
 
-        public Repository(VmsDbContext dbContext, Func<CacheTech, ICacheService> cacheService)
+        public Repository(IDbContextFactory<VmsDbContext> dbContextFactory, Func<CacheTech, ICacheService> cacheService)
         {
-            _dbContext = dbContext;
+            _dbContextFactory = dbContextFactory;
             _cacheService = cacheService;
         }
 
@@ -37,14 +37,16 @@ namespace VMS.Infrastructure.Data.Repositories
             IsolationLevel isolationLevel = IsolationLevel.Unspecified,
             CancellationToken cancellationToken = default)
         {
-            IDbContextTransaction dbContextTransaction = await _dbContext.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+            IDbContextTransaction dbContextTransaction = await vmsDbContext.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
             return dbContextTransaction;
         }
 
         public IQueryable<T> GetQueryable<T>()
             where T : class
         {
-            return _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+            return vmsDbContext.Set<T>();
         }
 
         public async Task<List<T>> GetListAsync<T>(CancellationToken cancellationToken = default)
@@ -80,7 +82,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return entities;
             }
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (includes != null)
             {
@@ -127,7 +131,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return entities;
             }
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (condition != null)
             {
@@ -166,7 +172,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return entities;
             }
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (specification != null)
             {
@@ -201,7 +209,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return entities;
             }
 
-            entities = await _dbContext.Set<T>().Select(selectExpression).ToListAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            entities = await vmsDbContext.Set<T>().Select(selectExpression).ToListAsync(cancellationToken);
 
             _cacheService(cacheTech).Set(cacheKey, entities);
 
@@ -225,7 +235,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return entities;
             }
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (condition != null)
             {
@@ -256,7 +268,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return entities;
             }
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (specification != null)
             {
@@ -286,7 +300,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return paginatedList;
             }
 
-            paginatedList = await _dbContext.Set<T>().ToPaginatedListAsync(specification, cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            paginatedList = await vmsDbContext.Set<T>().ToPaginatedListAsync(specification, cancellationToken);
 
             _cacheService(cacheTech).Set(cacheKey, paginatedList);
 
@@ -316,7 +332,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 return paginatedList;
             }
 
-            IQueryable<T> query = _dbContext.Set<T>().GetSpecifiedQuery((SpecificationBase<T>)specification);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>().GetSpecifiedQuery((SpecificationBase<T>)specification);
 
             paginatedList = await query.Select(selectExpression)
                 .ToPaginatedListAsync(specification.PageIndex, specification.PageSize, cancellationToken);
@@ -377,7 +395,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(id));
             }
 
-            IEntityType entityType = _dbContext.Model.FindEntityType(typeof(T));
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IEntityType entityType = vmsDbContext.Model.FindEntityType(typeof(T));
 
             string primaryKeyName = entityType.FindPrimaryKey().Properties.Select(p => p.Name).FirstOrDefault();
             Type primaryKeyType = entityType.FindPrimaryKey().Properties.Select(p => p.ClrType).FirstOrDefault();
@@ -404,7 +424,7 @@ namespace VMS.Infrastructure.Data.Repositories
             BinaryExpression body = Expression.Equal(me, constant);
             Expression<Func<T, bool>> expressionTree = Expression.Lambda<Func<T, bool>>(body, new[] { pe });
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (includes != null)
             {
@@ -436,7 +456,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(selectExpression));
             }
 
-            IEntityType entityType = _dbContext.Model.FindEntityType(typeof(T));
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IEntityType entityType = vmsDbContext.Model.FindEntityType(typeof(T));
 
             string primaryKeyName = entityType.FindPrimaryKey().Properties.Select(p => p.Name).FirstOrDefault();
             Type primaryKeyType = entityType.FindPrimaryKey().Properties.Select(p => p.ClrType).FirstOrDefault();
@@ -463,7 +485,7 @@ namespace VMS.Infrastructure.Data.Repositories
             BinaryExpression body = Expression.Equal(me, constant);
             Expression<Func<T, bool>> expressionTree = Expression.Lambda<Func<T, bool>>(body, new[] { pe });
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             return await query.Where(expressionTree).Select(selectExpression).FirstOrDefaultAsync(cancellationToken);
         }
@@ -501,7 +523,9 @@ namespace VMS.Infrastructure.Data.Repositories
             CancellationToken cancellationToken = default)
            where T : class
         {
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (condition != null)
             {
@@ -530,7 +554,9 @@ namespace VMS.Infrastructure.Data.Repositories
         public async Task<T> GetAsync<T>(Specification<T> specification, bool asNoTracking, CancellationToken cancellationToken = default)
             where T : class
         {
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (specification != null)
             {
@@ -556,7 +582,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(selectExpression));
             }
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (condition != null)
             {
@@ -577,7 +605,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(selectExpression));
             }
 
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (specification != null)
             {
@@ -596,7 +626,9 @@ namespace VMS.Infrastructure.Data.Repositories
         public async Task<bool> ExistsAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
            where T : class
         {
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (condition == null)
             {
@@ -615,8 +647,10 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            EntityEntry<T> entityEntry = await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            EntityEntry<T> entityEntry = await vmsDbContext.Set<T>().AddAsync(entity, cancellationToken);
+            await vmsDbContext.SaveChangesAsync(cancellationToken);
 
             object[] primaryKeyValue = entityEntry.Metadata.FindPrimaryKey().Properties.
                 Select(p => entityEntry.Property(p.Name).CurrentValue).ToArray();
@@ -634,8 +668,10 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(entities));
             }
 
-            await _dbContext.Set<T>().AddRangeAsync(entities, cancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            await vmsDbContext.Set<T>().AddRangeAsync(entities, cancellationToken);
+            await vmsDbContext.SaveChangesAsync(cancellationToken);
 
             BackgroundJob.Enqueue(() => RefreshCache());
         }
@@ -648,11 +684,13 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            EntityEntry<T> trackedEntity = _dbContext.ChangeTracker.Entries<T>().FirstOrDefault(x => x.Entity == entity);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            EntityEntry<T> trackedEntity = vmsDbContext.ChangeTracker.Entries<T>().FirstOrDefault(x => x.Entity == entity);
 
             if (trackedEntity == null)
             {
-                IEntityType entityType = _dbContext.Model.FindEntityType(typeof(T));
+                IEntityType entityType = vmsDbContext.Model.FindEntityType(typeof(T));
 
                 if (entityType == null)
                 {
@@ -675,10 +713,10 @@ namespace VMS.Infrastructure.Data.Repositories
                     }
                 }
 
-                _dbContext.Set<T>().Update(entity);
+                vmsDbContext.Set<T>().Update(entity);
             }
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await vmsDbContext.SaveChangesAsync(cancellationToken);
 
             BackgroundJob.Enqueue(() => RefreshCache());
         }
@@ -691,8 +729,10 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(entities));
             }
 
-            _dbContext.Set<T>().UpdateRange(entities);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            vmsDbContext.Set<T>().UpdateRange(entities);
+            await vmsDbContext.SaveChangesAsync(cancellationToken);
 
             BackgroundJob.Enqueue(() => RefreshCache());
         }
@@ -705,8 +745,10 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            vmsDbContext.Set<T>().Remove(entity);
+            await vmsDbContext.SaveChangesAsync(cancellationToken);
 
             BackgroundJob.Enqueue(() => RefreshCache());
         }
@@ -719,8 +761,10 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(entities));
             }
 
-            _dbContext.Set<T>().RemoveRange(entities);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            vmsDbContext.Set<T>().RemoveRange(entities);
+            await vmsDbContext.SaveChangesAsync(cancellationToken);
 
             BackgroundJob.Enqueue(() => RefreshCache());
         }
@@ -728,14 +772,18 @@ namespace VMS.Infrastructure.Data.Repositories
         public async Task<int> GetCountAsync<T>(CancellationToken cancellationToken = default)
             where T : class
         {
-            int count = await _dbContext.Set<T>().CountAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            int count = await vmsDbContext.Set<T>().CountAsync(cancellationToken);
             return count;
         }
 
         public async Task<int> GetCountAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
             where T : class
         {
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (condition != null)
             {
@@ -748,7 +796,9 @@ namespace VMS.Infrastructure.Data.Repositories
         public async Task<int> GetCountAsync<T>(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
             where T : class
         {
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (conditions != null)
             {
@@ -764,14 +814,18 @@ namespace VMS.Infrastructure.Data.Repositories
         public async Task<long> GetLongCountAsync<T>(CancellationToken cancellationToken = default)
             where T : class
         {
-            long count = await _dbContext.Set<T>().LongCountAsync(cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            long count = await vmsDbContext.Set<T>().LongCountAsync(cancellationToken);
             return count;
         }
 
         public async Task<long> GetLongCountAsync<T>(Expression<Func<T, bool>> condition, CancellationToken cancellationToken = default)
             where T : class
         {
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (condition != null)
             {
@@ -784,7 +838,9 @@ namespace VMS.Infrastructure.Data.Repositories
         public async Task<long> GetLongCountAsync<T>(IEnumerable<Expression<Func<T, bool>>> conditions, CancellationToken cancellationToken = default)
             where T : class
         {
-            IQueryable<T> query = _dbContext.Set<T>();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            IQueryable<T> query = vmsDbContext.Set<T>();
 
             if (conditions != null)
             {
@@ -807,7 +863,9 @@ namespace VMS.Infrastructure.Data.Repositories
 
             IEnumerable<object> parameters = new List<object>();
 
-            List<T> items = await _dbContext.GetFromQueryAsync<T>(sql, parameters, cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            List<T> items = await vmsDbContext.GetFromQueryAsync<T>(sql, parameters, cancellationToken);
             return items;
         }
 
@@ -818,8 +876,9 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(sql));
             }
 
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
             List<object> parameters = new() { parameter };
-            List<T> items = await _dbContext.GetFromQueryAsync<T>(sql, parameters, cancellationToken);
+            List<T> items = await vmsDbContext.GetFromQueryAsync<T>(sql, parameters, cancellationToken);
             return items;
         }
 
@@ -830,28 +889,38 @@ namespace VMS.Infrastructure.Data.Repositories
                 throw new ArgumentNullException(nameof(sql));
             }
 
-            List<T> items = await _dbContext.GetFromQueryAsync<T>(sql, parameters, cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            List<T> items = await vmsDbContext.GetFromQueryAsync<T>(sql, parameters, cancellationToken);
             return items;
         }
 
         public async Task<int> ExecuteSqlCommandAsync(string sql, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Database.ExecuteSqlRawAsync(sql, cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            return await vmsDbContext.Database.ExecuteSqlRawAsync(sql, cancellationToken);
         }
 
         public async Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
         {
-            return await _dbContext.Database.ExecuteSqlRawAsync(sql, parameters);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            return await vmsDbContext.Database.ExecuteSqlRawAsync(sql, parameters);
         }
 
         public async Task<int> ExecuteSqlCommandAsync(string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Database.ExecuteSqlRawAsync(sql, parameters, cancellationToken);
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            return await vmsDbContext.Database.ExecuteSqlRawAsync(sql, parameters, cancellationToken);
         }
 
         public void ResetContextState()
         {
-            _dbContext.ChangeTracker.Clear();
+            using VmsDbContext vmsDbContext = _dbContextFactory.CreateDbContext();
+
+            vmsDbContext.ChangeTracker.Clear();
         }
 
         public void RefreshCache()

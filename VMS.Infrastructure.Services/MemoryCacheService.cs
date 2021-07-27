@@ -38,7 +38,12 @@ namespace VMS.Infrastructure.Services
 
         public T Set<T>(string cacheKey, T value)
         {
-            return _memoryCache.Set(cacheKey, value, _cacheOptions);
+            if (_cacheConfig.IsCacheEnabled)
+            {
+                return _memoryCache.Set(cacheKey, value, _cacheOptions);
+            }
+
+            return default;
         }
 
         public void Remove(string cacheKey)

@@ -621,7 +621,7 @@ namespace VMS.Infrastructure.Data.Repositories
             object[] primaryKeyValue = entityEntry.Metadata.FindPrimaryKey().Properties.
                 Select(p => entityEntry.Property(p.Name).CurrentValue).ToArray();
 
-            BackgroundJob.Enqueue(() => RefreshCache());
+            //BackgroundJob.Enqueue(() => RefreshCache());
 
             return primaryKeyValue;
         }

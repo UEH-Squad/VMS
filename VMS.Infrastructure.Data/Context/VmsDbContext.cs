@@ -15,6 +15,7 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<ProjectSkill> ProjectSkills { get; set; }
         public DbSet<ProjectVolunteer> ProjectVolunteers { get; set; }
         public DbSet<VolunteerSkill> VolunteerSkills { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {
@@ -94,14 +95,12 @@ namespace VMS.Infrastructure.Data.Context
                 new Category
                 {
                     Id = 1,
-                    Name = "Test category 1",
-                    IsDeleted = false
+                    Name = "Test category 1"
                 },
                 new Category
                 {
                     Id = 2,
-                    Name = "Test category 2",
-                    IsDeleted = false
+                    Name = "Test category 2"
                 }
             );
         }

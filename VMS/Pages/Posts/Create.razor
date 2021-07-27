@@ -1,0 +1,79 @@
+﻿@page "/tao-bai-viet";
+@page "/bai-viet/{id}"
+
+@using VMS.Application.ViewModels;
+@using VMS.Application.Interfaces;
+
+@inject ICategoryService CategoryService;
+@inject IPostService PostService;
+@inject NavigationManager NavigationManager;
+@inject IJSRuntime JsRuntime;
+
+<h3>Trang tạo bài viết</h3>
+
+<EditForm Model="postWithCat" OnValidSubmit="AddPostWithCat">
+    <div class="">
+        <label for="projectName" class="col-form-label">Tiêu đề: </label>
+        <InputText @bind-Value="@postWithCat.Title" id="projectName" />
+    </div>
+    <div class="">
+        <label for="shortDescription" class="col-form-label">Nội dung: </label>
+        <InputText @bind-Value="@postWithCat.Content" id="shortDescription" />
+    </div>
+    <div>
+        <label></label>
+        <select @bind="@postWithCat.CategoryName">
+            <option value=0 selected>[Select Publisher]</option>
+            @foreach (var category in postWithCat.Categories)
+            {
+                <option value="@category.Name">
+                    @category.Name
+                </option>
+            }
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Them moi" />
+</EditForm>
+
+@code {
+    private CreatePostWithCatViewModel postWithCat = new CreatePostWithCatViewModel();
+    private bool isLoading;
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        postWithCat.Categories = await CategoryService.GetAllCategories();
+
+        // call service to get the correct post to update
+
+        if (!string.IsNullOrEmpty(Id))
+        {
+            postWithCat = await PostService.GetPostWithCat(int.Parse(Id));
+        }
+    }
+
+    private async Task AddPostWithCat()
+    {
+        if (string.IsNullOrEmpty(postWithCat.CategoryName))
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Vui lòng chọn một category!!!");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(Id))
+        {
+            // call service to add post with cat to database
+            await PostService.AddPostWithCat(postWithCat);
+        }
+        else
+        {
+            await PostService.UpdatePostWithCat(int.Parse(Id), postWithCat);
+        }
+
+        isLoading = true;
+
+        NavigationManager.NavigateTo("/bai-viet");
+    }
+}

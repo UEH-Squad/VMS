@@ -1,0 +1,45 @@
+﻿@page "/bai-viet"
+
+@using VMS.Application.ViewModels;
+@using VMS.Application.Interfaces;
+
+@inject IPostService PostService;
+@inject NavigationManager NavigationManager;
+
+<h1>Tất cả bài viết</h1>
+
+<NavLink href="/tao-bai-viet">Tạo bài viết</NavLink>
+
+@if (posts != null && posts.Any())
+{
+    @foreach (var post in posts)
+    {
+        <div class="post">
+            <h1 class="title">@post.Title</h1>
+            <h3 class="category">@post.Category</h3>
+            <a href="/bai-viet/@post.Id">Sửa</a>
+            <a href="" @onclick="@((e)=>HandleDeletePost(e, post.Id))">Xóa</a>
+        </div>
+    }
+}
+else
+{
+    <p>No posts</p>
+}
+
+@code {
+    private List<PostViewModel> posts;
+
+    protected async override Task OnInitializedAsync()
+    {
+        // get all posts to show on UI
+        posts = await PostService.PostsWithCategory();
+    }
+
+    private async Task HandleDeletePost(MouseEventArgs e, int id)
+    {
+        await PostService.DeletePost(id);
+
+        NavigationManager.NavigateTo("bai-viet");
+    }
+}

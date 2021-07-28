@@ -8,22 +8,20 @@ using VMS.Application.ViewModels;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
+using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public class ProjectService : IProjectService
+    public class ProjectService : BaseService, IProjectService
     {
-        private readonly IRepository _repository;
-        private readonly UserManager<IdentityUser> _usermanager;
-        private readonly IHttpContextAccessor _httpContext;
+        private readonly IIdentityService _userService;
 
         public ProjectService(IRepository repository,
-                              UserManager<IdentityUser> userManager,
-                              IHttpContextAccessor httpContext)
+                              IDbContextFactory<VmsDbContext> dbContextFactory,
+                              IIdentityService userService)
+            : base(repository, dbContextFactory)
         {
-            _repository = repository;
-            _usermanager = userManager;
-            _httpContext = httpContext;
+            _userService = userService;
         }
 
         public async Task<List<ProjectViewModel>> GetAllProjects()
@@ -33,7 +31,9 @@ namespace VMS.Application.Services
                 Includes = project => project.Include(x => x.Category).Include(x => x.Organization)
             };
 
-            List<Project> projects = await _repository.GetListAsync(specification);
+            DbContext context = _dbContextFactory.CreateDbContext();
+
+            List<Project> projects = await _repository.GetListAsync(context, specification);
 
             List<ProjectViewModel> projectVM = new();
             foreach (var project in projects)
@@ -44,7 +44,7 @@ namespace VMS.Application.Services
                     Category = project.Category.Name
                 };
 
-                viewModel.Organization = (await _usermanager.FindByIdAsync(project.OrganizationId))?.UserName;
+                viewModel.Organization = _userService.FindUserById(project.OrganizationId)?.UserName;
 
                 projectVM.Add(viewModel);
             }
@@ -54,8 +54,9 @@ namespace VMS.Application.Services
 
         public async Task<int> CreateProject(CreateProjectViewModel project)
         {
-            IdentityUser currentUser = await _usermanager.GetUserAsync(_httpContext.HttpContext.User);
-            var projectMapping = new Project()
+            DbContext context = _dbContextFactory.CreateDbContext();
+            IdentityUser currentUser = _userService.GetCurrentUser();
+            Project projectMapping = new()
             {
                 Name = project.Name,
                 ShortDescription = project.ShortDescription,
@@ -63,7 +64,7 @@ namespace VMS.Application.Services
                 OrganizationId = currentUser.Id
             };
 
-            var newId = await _repository.InsertAsync<Project>(projectMapping);
+            object[] newId = await _repository.InsertAsync(context, projectMapping);
             return (int)newId[0];
         }
     }

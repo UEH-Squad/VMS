@@ -29,7 +29,7 @@ namespace VMS.Infrastructure.Data.Context
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Id = "2c5e174e-3b0e-446f-86af-483d56fd7211", Name = "Organization", NormalizedName = "ORGANIZATION".ToUpper() });
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Id = "2c5e174e-3b0e-446f-86af-483d56fd7212", Name = "Volunteer", NormalizedName = "VOLUNTEER".ToUpper() });
 
-            PasswordHasher<IdentityUser> hasher = new PasswordHasher<IdentityUser>();
+            PasswordHasher<IdentityUser> hasher = new();
 
             //Seeding sample users to AspNetUsers table
             builder.Entity<IdentityUser>().HasData(
@@ -86,6 +86,22 @@ namespace VMS.Infrastructure.Data.Context
                 {
                     RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7212",
                     UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7"
+                }
+            );
+
+            // Seed categories
+            builder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "Test category 1",
+                    IsDeleted = false
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Test category 2",
+                    IsDeleted = false
                 }
             );
         }

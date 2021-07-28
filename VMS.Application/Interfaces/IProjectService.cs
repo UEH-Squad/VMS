@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using VMS.Domain.Models;
+using VMS.Application.ViewModels;
 
 namespace VMS.Application.Interfaces
 {
     public interface IProjectService
     {
-        Task<List<Project>> GetAllProjects();
+        Task<List<ProjectViewModel>> GetAllProjects();
+
+        Task<int> CreateProject(CreateProjectViewModel project);
     }
 }

@@ -1,7 +1,7 @@
 ﻿@page "/hoat-dong"
 
 @using VMS.Application.Interfaces;
-@using VMS.Domain.Models;
+@using VMS.Application.ViewModels;
 
 @inject IProjectService ProjectService
 
@@ -11,14 +11,14 @@
 
 @if (_projects != null && _projects.Any())
 {
-    @foreach (Project project in _projects)
+    @foreach (var project in _projects)
     {
-        <p>@project.Name</p>
+        <p>@project.Name => @project.Category => @project.Organization</p>
     }
 }
 
 @code {
-    private List<Project> _projects;
+    private List<ProjectViewModel> _projects;
 
     protected override async Task OnInitializedAsync()
     {

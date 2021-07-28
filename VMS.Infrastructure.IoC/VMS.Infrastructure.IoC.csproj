@@ -6,12 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-    <PackageReference Include="TanvirArjel.EFCore.GenericRepository" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\VMS.Application\VMS.Application.csproj" />
-    <ProjectReference Include="..\VMS.Infrastructure.Data\VMS.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\VMS.Infrastructure.Services\VMS.Infrastructure.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
+using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public class PostService : IPostService
+    public class PostService : BaseService, IPostService
     {
-        private readonly IRepository _repository;
-
-        public PostService(IRepository repository)
+        public PostService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory) : base(repository, dbContextFactory)
         {
-            _repository = repository;
         }
 
         public async Task AddPostWithCat(CreatePostWithCatViewModel postWithCatViewModel)
@@ -27,9 +27,16 @@ namespace VMS.Application.Services
                 Content = postWithCatViewModel.Content
             };
 
-            Specification<Category> catSpec = new();
-            catSpec.Conditions.Add(x => x.Name == postWithCatViewModel.CategoryName);
-            Category cat = await _repository.GetAsync(catSpec);
+            DbContext context = _dbContextFactory.CreateDbContext();
+
+            Specification<Category> catSpec = new()
+            {
+                Conditions = new List<Expression<Func<Category, bool>>>
+                {
+                    x => x.Name == postWithCatViewModel.CategoryName
+                }
+            };
+            Category cat = await _repository.GetAsync(context, catSpec);
 
             if (cat != null)
             {
@@ -38,16 +45,23 @@ namespace VMS.Application.Services
                     cat
                 };
 
-                await _repository.InsertAsync(post);
+                await _repository.InsertAsync(context, post);
             }
         }
 
         public async Task DeletePost(int id)
         {
-            Specification<Post> postSpec = new();
-            postSpec.Conditions.Add(x => x.Id == id);
-            Post post = await _repository.GetAsync(postSpec);
-            await _repository.DeleteAsync(post);
+            DbContext context = _dbContextFactory.CreateDbContext();
+            Specification<Post> postSpec = new()
+            {
+                Conditions = new List<Expression<Func<Post, bool>>>
+                {
+                    x => x.Id == id
+                }
+            };
+            Post post = await _repository.GetAsync(context, postSpec);
+
+            await _repository.DeleteAsync(context, post);
         }
 
         public async Task<CreatePostWithCatViewModel> GetPostWithCat(int id)
@@ -57,11 +71,18 @@ namespace VMS.Application.Services
                 return new CreatePostWithCatViewModel();
             }
 
-            Specification<Post> postSpec = new();
-            postSpec.Conditions.Add(x => x.Id == id);
-            Post post = await _repository.GetAsync(postSpec);
+            DbContext context = _dbContextFactory.CreateDbContext();
 
-            List<Category> categories = await _repository.GetListAsync<Category>();
+            Specification<Post> postSpec = new()
+            {
+                Conditions = new List<Expression<Func<Post, bool>>>
+                {
+                    x => x.Id == id
+                }
+            };
+            Post post = await _repository.GetAsync(context, postSpec);
+
+            List<Category> categories = await _repository.GetListAsync<Category>(context);
 
             CreatePostWithCatViewModel postWithCat = new()
             {
@@ -75,12 +96,12 @@ namespace VMS.Application.Services
 
         public async Task<List<PostViewModel>> PostsWithCategory()
         {
+            DbContext context = _dbContextFactory.CreateDbContext();
             Specification<Post> postsWithCatSpec = new()
             {
                 Includes = post => post.Include(x => x.Categories)
             };
-
-            List<Post> posts = await _repository.GetListAsync(postsWithCatSpec);
+            List<Post> posts = await _repository.GetListAsync(context, postsWithCatSpec);
 
             IEnumerable<PostViewModel> postsWithCat = posts.Select(x => new PostViewModel
             {
@@ -94,19 +115,32 @@ namespace VMS.Application.Services
 
         public async Task UpdatePostWithCat(int id, CreatePostWithCatViewModel postWithCatViewModel)
         {
-            Specification<Post> postSpec = new();
-            postSpec.Conditions.Add(x => x.Id == id);
-            Post post = await _repository.GetAsync(postSpec);
+            DbContext context = _dbContextFactory.CreateDbContext();
 
-            Specification<Category> catSpec = new();
-            catSpec.Conditions.Add(x => x.Name == postWithCatViewModel.CategoryName);
-            Category cat = await _repository.GetAsync(catSpec);
+            Specification<Post> postSpec = new()
+            {
+                Includes = post => post.Include(x => x.Categories),
+                Conditions = new List<Expression<Func<Post, bool>>>
+                {
+                    x => x.Id == id
+                }
+            };
+            Post post = await _repository.GetAsync(context, postSpec);
+
+            Specification<Category> catSpec = new()
+            {
+                Conditions = new List<Expression<Func<Category, bool>>>
+                {
+                    x => x.Name == postWithCatViewModel.CategoryName
+                }
+            };
+            Category cat = await _repository.GetAsync(context, catSpec);
 
             post.Title = postWithCatViewModel.Title;
             post.Content = postWithCatViewModel.Content;
             post.Categories = new List<Category>() { cat };
 
-            await _repository.UpdateAsync(post);
+            await _repository.UpdateAsync(context, post);
         }
     }
 }

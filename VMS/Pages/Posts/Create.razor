@@ -37,7 +37,6 @@
 
 @code {
     private CreatePostWithCatViewModel postWithCat = new CreatePostWithCatViewModel();
-    private bool isLoading;
 
     [Parameter]
     public string Id { get; set; }
@@ -71,8 +70,6 @@
         {
             await PostService.UpdatePostWithCat(int.Parse(Id), postWithCat);
         }
-
-        isLoading = true;
 
         NavigationManager.NavigateTo("/bai-viet");
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a <see cref="IDbContextTransaction"/> instance.</returns>
         Task<IDbContextTransaction> BeginTransactionAsync(
+            DbContext dbContext,
             IsolationLevel isolationLevel = IsolationLevel.Unspecified,
             CancellationToken cancellationToken = default);
 
@@ -31,7 +33,7 @@ namespace VMS.Domain.Interfaces
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <returns>Returns <see cref="IQueryable{T}"/>.</returns>
-        IQueryable<TEntity> GetQueryable<TEntity>()
+        IQueryable<TEntity> GetQueryable<TEntity>(DbContext dbContext)
             where TEntity : class;
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace VMS.Domain.Interfaces
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="List{T}"/>.</returns>
-        Task<List<TEntity>> GetListAsync<TEntity>(CancellationToken cancellationToken = default)
+        Task<List<TEntity>> GetListAsync<TEntity>(DbContext dbContext, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace VMS.Domain.Interfaces
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="List{T}"/>.</returns>
-        Task<List<TEntity>> GetListAsync<TEntity>(bool asNoTracking, CancellationToken cancellationToken = default)
+        Task<List<TEntity>> GetListAsync<TEntity>(DbContext dbContext, bool asNoTracking, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -63,6 +65,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="List{T}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
+            DbContext dbContext,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
             CancellationToken cancellationToken = default)
             where TEntity : class;
@@ -78,6 +81,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="List{T}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
+            DbContext dbContext,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
             bool asNoTracking,
             CancellationToken cancellationToken = default)
@@ -90,7 +94,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="condition">The condition on which entity list will be returned.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
-        Task<List<TEntity>> GetListAsync<TEntity>(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Task<List<TEntity>> GetListAsync<TEntity>(DbContext dbContext, Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -104,6 +108,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
+            DbContext dbContext,
             Expression<Func<TEntity, bool>> condition,
             bool asNoTracking,
             CancellationToken cancellationToken = default)
@@ -121,6 +126,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
         Task<List<TEntity>> GetListAsync<TEntity>(
+            DbContext dbContext,
             Expression<Func<TEntity, bool>> condition,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
             bool asNoTracking = false,
@@ -136,7 +142,7 @@ namespace VMS.Domain.Interfaces
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
-        Task<List<TEntity>> GetListAsync<TEntity>(Specification<TEntity> specification, CancellationToken cancellationToken = default)
+        Task<List<TEntity>> GetListAsync<TEntity>(DbContext dbContext, Specification<TEntity> specification, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -151,7 +157,7 @@ namespace VMS.Domain.Interfaces
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="List{TEntity}"/>.</returns>
-        Task<List<TEntity>> GetListAsync<TEntity>(Specification<TEntity> specification, bool asNoTracking, CancellationToken cancellationToken = default)
+        Task<List<TEntity>> GetListAsync<TEntity>(DbContext dbContext, Specification<TEntity> specification, bool asNoTracking, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -163,6 +169,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         Task<List<TProjectedType>> GetListAsync<TEntity, TProjectedType>(
+            DbContext dbContext,
             Expression<Func<TEntity, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
             where TEntity : class;
@@ -178,6 +185,7 @@ namespace VMS.Domain.Interfaces
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="selectExpression"/> is <see langword="null"/>.</exception>
         Task<List<TProjectedType>> GetListAsync<TEntity, TProjectedType>(
+            DbContext dbContext,
             Expression<Func<TEntity, bool>> condition,
             Expression<Func<TEntity, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
@@ -197,6 +205,7 @@ namespace VMS.Domain.Interfaces
         /// <returns>Return <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="selectExpression"/> is <see langword="null"/>.</exception>
         Task<List<TProjectedType>> GetListAsync<TEntity, TProjectedType>(
+            DbContext dbContext,
             Specification<TEntity> specification,
             Expression<Func<TEntity, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
@@ -211,6 +220,7 @@ namespace VMS.Domain.Interfaces
         /// <returns>Returns <see cref="PaginatedList{T}"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="specification"/> is smaller than 1.</exception>
         Task<PaginatedList<TEntity>> GetListAsync<TEntity>(
+            DbContext dbContext,
             PaginationSpecification<TEntity> specification,
             CancellationToken cancellationToken = default)
             where TEntity : class;
@@ -227,6 +237,7 @@ namespace VMS.Domain.Interfaces
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="specification"/> is smaller than 1.</exception>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="selectExpression"/> is smaller than 1.</exception>
         Task<PaginatedList<TProjectedType>> GetListAsync<TEntity, TProjectedType>(
+            DbContext dbContext,
             PaginationSpecification<TEntity> specification,
             Expression<Func<TEntity, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
@@ -241,7 +252,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="id">The primary key value of the entity.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<TEntity> GetByIdAsync<TEntity>(object id, CancellationToken cancellationToken = default)
+        Task<TEntity> GetByIdAsync<TEntity>(DbContext dbContext, object id, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -255,7 +266,7 @@ namespace VMS.Domain.Interfaces
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<TEntity> GetByIdAsync<TEntity>(object id, bool asNoTracking, CancellationToken cancellationToken = default)
+        Task<TEntity> GetByIdAsync<TEntity>(DbContext dbContext, object id, bool asNoTracking, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -268,6 +279,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         Task<TEntity> GetByIdAsync<TEntity>(
+            DbContext dbContext,
             object id,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
             CancellationToken cancellationToken = default)
@@ -286,6 +298,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         Task<TEntity> GetByIdAsync<TEntity>(
+            DbContext dbContext,
             object id,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
             bool asNoTracking,
@@ -304,6 +317,7 @@ namespace VMS.Domain.Interfaces
         /// <returns>Returns <see cref="Task"/> of <typeparamref name="TProjectedType"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="selectExpression"/> is <see langword="null"/>.</exception>
         Task<TProjectedType> GetByIdAsync<TEntity, TProjectedType>(
+            DbContext dbContext,
             object id,
             Expression<Func<TEntity, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
@@ -316,7 +330,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="condition">The conditon on which entity will be returned.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
-        Task<TEntity> GetAsync<TEntity>(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Task<TEntity> GetAsync<TEntity>(DbContext dbContext, Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -330,6 +344,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
         Task<TEntity> GetAsync<TEntity>(
+            DbContext dbContext,
             Expression<Func<TEntity, bool>> condition,
             bool asNoTracking,
             CancellationToken cancellationToken = default)
@@ -344,6 +359,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
         Task<TEntity> GetAsync<TEntity>(
+            DbContext dbContext,
             Expression<Func<TEntity, bool>> condition,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
             CancellationToken cancellationToken = default)
@@ -361,6 +377,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <typeparamref name="TEntity"/>.</returns>
         Task<TEntity> GetAsync<TEntity>(
+            DbContext dbContext,
             Expression<Func<TEntity, bool>> condition,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
             bool asNoTracking,
@@ -376,7 +393,7 @@ namespace VMS.Domain.Interfaces
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<TEntity> GetAsync<TEntity>(Specification<TEntity> specification, CancellationToken cancellationToken = default)
+        Task<TEntity> GetAsync<TEntity>(DbContext dbContext, Specification<TEntity> specification, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -391,7 +408,7 @@ namespace VMS.Domain.Interfaces
         /// </param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<TEntity> GetAsync<TEntity>(Specification<TEntity> specification, bool asNoTracking, CancellationToken cancellationToken = default)
+        Task<TEntity> GetAsync<TEntity>(DbContext dbContext, Specification<TEntity> specification, bool asNoTracking, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -405,6 +422,7 @@ namespace VMS.Domain.Interfaces
         /// <returns>Retuns <typeparamref name="TProjectedType"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="selectExpression"/> is <see langword="null"/>.</exception>
         Task<TProjectedType> GetAsync<TEntity, TProjectedType>(
+            DbContext dbContext,
             Expression<Func<TEntity, bool>> condition,
             Expression<Func<TEntity, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
@@ -424,6 +442,7 @@ namespace VMS.Domain.Interfaces
         /// <returns>Retuns <typeparamref name="TProjectedType"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="selectExpression"/> is <see langword="null"/>.</exception>
         Task<TProjectedType> GetAsync<TEntity, TProjectedType>(
+            DbContext dbContext,
             Specification<TEntity> specification,
             Expression<Func<TEntity, TProjectedType>> selectExpression,
             CancellationToken cancellationToken = default)
@@ -436,7 +455,7 @@ namespace VMS.Domain.Interfaces
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="bool"/>.</returns>
-        Task<bool> ExistsAsync<TEntity>(CancellationToken cancellationToken = default)
+        Task<bool> ExistsAsync<TEntity>(DbContext dbContext, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -447,7 +466,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="condition">The condition based on which the existence will checked.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="bool"/>.</returns>
-        Task<bool> ExistsAsync<TEntity>(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Task<bool> ExistsAsync<TEntity>(DbContext dbContext, Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -457,7 +476,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="entity">The entity to be inserted.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/>.</returns>
-        Task<object[]> InsertAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
+        Task<object[]> InsertAsync<TEntity>(DbContext dbContext, TEntity entity, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -467,7 +486,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="entities">The entities to be inserted.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/>.</returns>
-        Task InsertAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        Task InsertAsync<TEntity>(DbContext dbContext, IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -477,7 +496,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="entity">The entity to be updated.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/>.</returns>
-        Task UpdateAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
+        Task UpdateAsync<TEntity>(DbContext dbContext, TEntity entity, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -487,7 +506,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="entities">The entities to be updated.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/>.</returns>
-        Task UpdateAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        Task UpdateAsync<TEntity>(DbContext dbContext, IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -497,7 +516,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="entity">The entity to be deleted.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/>.</returns>
-        Task DeleteAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
+        Task DeleteAsync<TEntity>(DbContext dbContext, TEntity entity, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -507,7 +526,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="entities">The list of entities to be deleted.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/>.</returns>
-        Task DeleteAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+        Task DeleteAsync<TEntity>(DbContext dbContext, IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -516,7 +535,7 @@ namespace VMS.Domain.Interfaces
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="int"/>.</returns>
-        Task<int> GetCountAsync<TEntity>(CancellationToken cancellationToken = default)
+        Task<int> GetCountAsync<TEntity>(DbContext dbContext, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -526,7 +545,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="condition">The condition based on which count will be done.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="int"/>.</returns>
-        Task<int> GetCountAsync<TEntity>(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Task<int> GetCountAsync<TEntity>(DbContext dbContext, Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -536,7 +555,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="conditions">The conditions based on which count will be done.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task"/> of <see cref="int"/>.</returns>
-        Task<int> GetCountAsync<TEntity>(IEnumerable<Expression<Func<TEntity, bool>>> conditions, CancellationToken cancellationToken = default)
+        Task<int> GetCountAsync<TEntity>(DbContext dbContext, IEnumerable<Expression<Func<TEntity, bool>>> conditions, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -545,7 +564,7 @@ namespace VMS.Domain.Interfaces
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Retuns <see cref="Task"/> of <see cref="long"/>.</returns>
-        Task<long> GetLongCountAsync<TEntity>(CancellationToken cancellationToken = default)
+        Task<long> GetLongCountAsync<TEntity>(DbContext dbContext, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -555,7 +574,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="condition">The condition based on which count will be done.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Retuns <see cref="Task"/> of <see cref="long"/>.</returns>
-        Task<long> GetLongCountAsync<TEntity>(Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
+        Task<long> GetLongCountAsync<TEntity>(DbContext dbContext, Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         /// <summary>
@@ -565,7 +584,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="conditions">The conditions based on which count will be done.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Retuns <see cref="Task"/> of <see cref="long"/>.</returns>
-        Task<long> GetLongCountAsync<TEntity>(IEnumerable<Expression<Func<TEntity, bool>>> conditions, CancellationToken cancellationToken = default)
+        Task<long> GetLongCountAsync<TEntity>(DbContext dbContext, IEnumerable<Expression<Func<TEntity, bool>>> conditions, CancellationToken cancellationToken = default)
             where TEntity : class;
 
         // Context level members
@@ -578,7 +597,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="sql"/> is <see langword="null"/>.</exception>
-        Task<List<T>> GetFromRawSqlAsync<T>(string sql, CancellationToken cancellationToken = default);
+        Task<List<T>> GetFromRawSqlAsync<T>(DbContext dbContext, string sql, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method takes <paramref name="sql"/> string and the value of <paramref name="parameter"/> mentioned in the sql query as parameters
@@ -590,7 +609,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="sql"/> is <see langword="null"/>.</exception>
-        Task<List<T>> GetFromRawSqlAsync<T>(string sql, object parameter, CancellationToken cancellationToken = default);
+        Task<List<T>> GetFromRawSqlAsync<T>(DbContext dbContext, string sql, object parameter, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method takes <paramref name="sql"/> string and values of the <paramref name="parameters"/> mentioned in the sql query as parameters
@@ -602,7 +621,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="sql"/> is <see langword="null"/>.</exception>
-        Task<List<T>> GetFromRawSqlAsync<T>(string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default);
+        Task<List<T>> GetFromRawSqlAsync<T>(DbContext dbContext, string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute raw sql command against the configured database asynchronously.
@@ -610,7 +629,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="sql">The sql string.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<int> ExecuteSqlCommandAsync(string sql, CancellationToken cancellationToken = default);
+        Task<int> ExecuteSqlCommandAsync(DbContext dbContext, string sql, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute raw sql command against the configured database asynchronously.
@@ -618,7 +637,7 @@ namespace VMS.Domain.Interfaces
         /// <param name="sql">The sql string.</param>
         /// <param name="parameters">The paramters in the sql string.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters);
+        Task<int> ExecuteSqlCommandAsync(DbContext dbContext, string sql, params object[] parameters);
 
         /// <summary>
         /// Execute raw sql command against the configured database asynchronously.
@@ -627,11 +646,11 @@ namespace VMS.Domain.Interfaces
         /// <param name="parameters">The paramters in the sql string.</param>
         /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns <see cref="Task{TResult}"/>.</returns>
-        Task<int> ExecuteSqlCommandAsync(string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default);
+        Task<int> ExecuteSqlCommandAsync(DbContext dbContext, string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Reset the DbContext state by removing all the tracked and attached entities.
         /// </summary>
-        void ResetContextState();
+        void ResetContextState(DbContext dbContext);
     }
 }

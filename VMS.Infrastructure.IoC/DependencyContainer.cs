@@ -45,6 +45,7 @@ namespace VMS.Infrastructure.IoC
             services.AddHangfireServer();
 
             services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<ICategoryService, CategoryService>();
         }

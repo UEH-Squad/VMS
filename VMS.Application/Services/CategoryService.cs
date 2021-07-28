@@ -1,23 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
+using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : BaseService, ICategoryService
     {
-        private readonly IRepository _repository;
-
-        public CategoryService(IRepository repository)
+        public CategoryService(IRepository repository,
+                               IDbContextFactory<VmsDbContext> dbContextFactory)
+            : base(repository, dbContextFactory)
         {
-            _repository = repository;
         }
 
         public Task<List<Category>> GetAllCategories()
         {
-            return _repository.GetListAsync<Category>();
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            return _repository.GetListAsync<Category>(dbContext);
         }
     }
 }

@@ -125,21 +125,14 @@ namespace VMS.Infrastructure.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressPathTypeId = table.Column<int>(type: "int", nullable: false),
-                    NextPathId = table.Column<int>(type: "int", nullable: false),
-                    PreviousPathId = table.Column<int>(type: "int", nullable: false)
+                    ParentPathId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AddressPaths", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AddressPaths_AddressPaths_NextPathId",
-                        column: x => x.NextPathId,
-                        principalTable: "AddressPaths",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AddressPaths_AddressPaths_PreviousPathId",
-                        column: x => x.PreviousPathId,
+                        name: "FK_AddressPaths_AddressPaths_ParentPathId",
+                        column: x => x.ParentPathId,
                         principalTable: "AddressPaths",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -629,14 +622,9 @@ namespace VMS.Infrastructure.Data.Migrations
                 column: "AddressPathTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddressPaths_NextPathId",
+                name: "IX_AddressPaths_ParentPathId",
                 table: "AddressPaths",
-                column: "NextPathId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AddressPaths_PreviousPathId",
-                table: "AddressPaths",
-                column: "PreviousPathId");
+                column: "ParentPathId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

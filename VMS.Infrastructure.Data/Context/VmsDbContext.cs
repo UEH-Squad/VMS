@@ -43,15 +43,9 @@ namespace VMS.Infrastructure.Data.Context
                 .HasForeignKey(x => x.ApprovedBy);
 
             builder.Entity<AddressPath>()
-                .HasOne(x => x.NextPath)
-                .WithMany(x => x.ParentNextPaths)
-                .HasForeignKey(x => x.NextPathId)
-                .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
-
-            builder.Entity<AddressPath>()
                 .HasOne(x => x.PreviousPath)
-                .WithMany(x => x.ParentPreviousPaths)
-                .HasForeignKey(x => x.PreviousPathId)
+                .WithMany(x => x.SubPaths)
+                .HasForeignKey(x => x.ParentPathId)
                 .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
         }
     }

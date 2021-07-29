@@ -10,7 +10,7 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    [Migration("20210728102727_InitDatabase")]
+    [Migration("20210729081604_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -416,19 +416,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NextPathId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PreviousPathId")
+                    b.Property<int?>("ParentPathId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressPathTypeId");
 
-                    b.HasIndex("NextPathId");
-
-                    b.HasIndex("PreviousPathId");
+                    b.HasIndex("ParentPathId");
 
                     b.ToTable("AddressPaths");
                 });
@@ -892,21 +887,12 @@ namespace VMS.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.AddressPath", "NextPath")
-                        .WithMany("ParentNextPaths")
-                        .HasForeignKey("NextPathId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("VMS.Domain.Models.AddressPath", "PreviousPath")
-                        .WithMany("ParentPreviousPaths")
-                        .HasForeignKey("PreviousPathId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany("SubPaths")
+                        .HasForeignKey("ParentPathId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("AddressPathType");
-
-                    b.Navigation("NextPath");
 
                     b.Navigation("PreviousPath");
                 });
@@ -1016,9 +1002,7 @@ namespace VMS.Infrastructure.Data.Migrations
                 {
                     b.Navigation("ActivityAddresses");
 
-                    b.Navigation("ParentNextPaths");
-
-                    b.Navigation("ParentPreviousPaths");
+                    b.Navigation("SubPaths");
 
                     b.Navigation("UserAddresses");
                 });

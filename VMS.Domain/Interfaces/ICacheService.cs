@@ -1,0 +1,15 @@
+﻿using System.Collections;
+
+namespace VMS.Domain.Interfaces
+{
+    public interface ICacheService
+    {
+        bool TryGet<T>(string cacheKey, out T value);
+
+        T Set<T>(string cacheKey, T value);
+
+        void Remove(string cacheKey);
+
+        IEnumerable GetKeys();
+    }
+}

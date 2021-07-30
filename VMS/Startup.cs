@@ -25,10 +25,14 @@ namespace VMS
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<VmsDbContext>(options =>
+            services.AddDbContextFactory<VmsDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddScoped(x => x.GetRequiredService<IDbContextFactory<VmsDbContext>>().CreateDbContext());
+            services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
                 .AddEntityFrameworkStores<VmsDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -36,7 +40,7 @@ namespace VMS
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             // Custom registrations
-            DependencyContainer.RegisterServices(services);
+            DependencyContainer.RegisterServices(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +57,9 @@ namespace VMS
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            // Custom configurations
+            DependencyContainer.Configure(app, env);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

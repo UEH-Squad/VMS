@@ -1,5 +1,6 @@
 ﻿import lodash from './common/lodash';
+import homepage from './homepage'
 
 export const CloneDeep = (object) => lodash.CloneDeep(object);
-
-export const Flatten = (array) => lodash.Flatten(array);
+export const Slick = (slidesToShow, slidesToScroll, isInfinite) => homepage.slick(slidesToShow, slidesToScroll, isInfinite);
+export const PlayVideo = (src) => homepage.playVideo(src);

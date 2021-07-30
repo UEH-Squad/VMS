@@ -1,20 +1,19 @@
 ﻿<AuthorizeView>
     <Authorized>
-        <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
-        <form method="post" action="Identity/Account/LogOut">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
-        </form>
-    </Authorized>
-    <NotAuthorized>
         <li class="nav-item">
-            <a href="/dang-nhap" class="text-decoration-none">
-                <span class="material-icons my-notifications">notifications_none</span>
+            <a href="" class="text-decoration-none">
+                <span class="material-icons my-notifications" data-icon="notifications_none"></span>
             </a>
         </li>
         <li class="nav-item text-decoration-none">
-            <a href="/dang-ky">
-                <span class="material-icons-outlined my-person">account_circle</span>
+            <a href="">
+                <span class="material-icons-outlined my-person" data-icon="account_circle"></span>
             </a>
+        </li>
+    </Authorized>
+    <NotAuthorized>
+        <li class="nav-item">
+            <a href="@Routes.LogIn" class="btn btn-danger" role="button">Đăng nhập</a>
         </li>
     </NotAuthorized>
 </AuthorizeView>

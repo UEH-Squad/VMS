@@ -1,0 +1,26 @@
+﻿@inject IJSRuntime JsRuntime;
+
+<div class="my-category-carousel">
+    <p class="mx-5 text-center">Kham pha <span class="my-special-text">hoat dong & chuong trinh</span> tinh nguyen <span class="my-special-text">phu hop voi ban</span></p>
+    <div class="position-relative my-carousel-container">
+        <button id="prev-btn" type='button' class='slick-prev pull-left my-prev-btn'>Prev</button>
+        <div class="slick-container">
+            @for (int i = 0; i < num; i++)
+            {
+                <a href="" class="d-flex justify-content-center text-decoration-none">
+                    <span class="material-icons my-test-item">circle</span>
+                </a>
+            }
+        </div>
+        <button id="next-btn" type='button' class='slick-next pull-right my-next-btn'>Next</button>
+    </div>
+</div>
+
+@code {
+    private int num = 7;
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("vms.Slick", num, 1, false);
+    }
+}

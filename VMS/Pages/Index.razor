@@ -1,5 +1,7 @@
-﻿@page "/"
+﻿@attribute [Route(Routes.HomePage)]
 
-<div class="my-slogan">
-    <p class="text-center h-100 m-0 py-2">Go Volunteer: Cong dong Tinh nguyen truc tuyen Truong Dai hoc Kinh te TP.HCM</p>
-</div>
+@inject IJSRuntime JsRuntime
+
+<VMS.Pages.Homepage.SloganAndVideo />
+
+<VMS.Pages.Homepage.AreaCarousel />

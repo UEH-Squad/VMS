@@ -7,10 +7,18 @@
 
 .my-notifications {
     @include profile-icon-mobile;
+
+    &:after {
+        content: attr(data-icon);
+    }
 }
 
 .my-person {
     @include profile-icon-mobile;
+
+    &:after {
+        content: attr(data-icon);
+    }
 
     @include on('lg') {
         font-size: 70px;

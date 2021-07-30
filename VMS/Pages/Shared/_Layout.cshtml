@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Hosting
 @using Microsoft.AspNetCore.Mvc.ViewEngines
+@using VMS.Common
 @inject IWebHostEnvironment Environment
 @inject ICompositeViewEngine Engine
 <!DOCTYPE html>
@@ -15,42 +16,43 @@
     <link rel="stylesheet" href="css/site.css" />
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm">
-        <div class="container">
-            <div class="nav-menu d-flex align-items-center">
-                <a href="/" class="navbar-brand" Match="NavLinkMatch.All">
-                    <img src="/img/GOVOLUNTEER.png" alt="" width="45" />
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-0 my-navbar">
+        <div class="container px-0 my-navbar-container">
+            <div class="nav-menu d-flex flex-column align-items-center">
+                <a href="@Routes.HomePage" class="navbar-brand p-0 m-0" Match="NavLinkMatch.All">
+                    <img src="img/logo UEH tieng Anh.png" alt="UEH logo" class="my-ueh-logo" />
                 </a>
-                <ul class="navbar-nav justify-content-center">
-                    <li class="nav-item">
-                        <a href="/hoat-dong" class="nav-link active">Hoạt động</a>
-                    </li>
-                </ul>
+                <a href="@Routes.Activities" class="navbar-brand p-0 m-0">
+                    <img src="img/GoVolunteer (1).png" alt="Go Volunteer logo" class="my-go-volunteer" />
+                </a>
             </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler me-2 me-sm-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div id="navbarToggler" class="collapse navbar-collapse mt-2 mt-sm-0 flex-sm-grow-0">
-                <ul class="navbar-nav me-auto d-flex flex-row justify-content-around">
-                    @{
-                        var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
-                    }
-                    @if (result.Success)
-                    {
-                        await Html.RenderPartialAsync("_LoginPartial");
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
-                            "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
-                            $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
-                    }
-                </ul>
+            <div id="navbarToggler" class="collapse navbar-collapse bg-white">
+                <div class="d-flex flex-column-reverse flex-lg-row flex-lg-grow-1">
+                    <ul class="navbar-nav me-lg-auto d-flex flex-column justify-content-around align-items-center flex-grow-1 flex-lg-row">
+                        <li class="nav-item">
+                            <a href="@Routes.HomePage" class="nav-link my-nav-link">Trang chu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Routes.Activities" class="nav-link my-nav-link">Go Volunteer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Routes.Organizations" class="nav-link my-nav-link">Don vi to chuc</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Routes.Map" class="nav-link my-nav-link">Ban do</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav d-flex flex-row align-items-center ms-lg-4 justify-content-end justify-content-lg-center me-2 me-sm-0">
+                        @{ await Html.RenderPartialAsync("_LoginPartial"); }
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
-
-    <main class="container flex-grow-1 my-2">
+    <main class="container flex-grow-1 mt-2">
         @RenderBody()
     </main>
 
@@ -62,6 +64,7 @@
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+    <script src="js/vms.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,15 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.my-slogan {
+    background-color: $green;
+
+    p {
+        color: $white;
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+
+.my-homepage-video {
+    width: 100%;
+}

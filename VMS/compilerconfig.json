@@ -4,15 +4,23 @@
     "inputFile": "Shared/MainLayout.razor.scss"
   },
   {
-    "outputFile": "Shared/NavMenu.razor.css",
-    "inputFile": "Shared/NavMenu.razor.scss"
-  },
-  {
     "outputFile": "Shared/LoginDisplay.razor.css",
     "inputFile": "Shared/LoginDisplay.razor.scss"
   },
   {
     "outputFile": "Pages/Index.razor.css",
     "inputFile": "Pages/Index.razor.scss"
+  },
+  {
+    "outputFile": "Shared/NavMenu.razor.css",
+    "inputFile": "Shared/NavMenu.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/SloganAndVideo.razor.css",
+    "inputFile": "Pages/Homepage/SloganAndVideo.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/AreaCarousel.razor.css",
+    "inputFile": "Pages/Homepage/AreaCarousel.razor.scss"
   }
 ]

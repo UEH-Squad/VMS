@@ -7,10 +7,14 @@
 .my-notifications {
   color: #18A0FB;
   font-size: 36px; }
+  .my-notifications:after {
+    content: attr(data-icon); }
 
 .my-person {
   color: #18A0FB;
   font-size: 36px; }
+  .my-person:after {
+    content: attr(data-icon); }
   @media (min-width: 992px) {
     .my-person {
       font-size: 70px; } }

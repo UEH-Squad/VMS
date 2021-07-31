@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using VMS.Domain.Interfaces;
 using VMS.Infrastructure.Data.Context;
 
@@ -10,12 +9,15 @@ namespace VMS.Application.Services
     {
         protected readonly IRepository _repository;
         protected readonly IDbContextFactory<VmsDbContext> _dbContextFactory;
+        protected readonly IMapper _mapper;
 
         public BaseService(IRepository repository,
-                           IDbContextFactory<VmsDbContext> dbContextFactory)
+                           IDbContextFactory<VmsDbContext> dbContextFactory,
+                           IMapper mapper)
         {
             _repository = repository;
             _dbContextFactory = dbContextFactory;
+            _mapper = mapper;
         }
     }
 }

@@ -47,6 +47,68 @@ namespace VMS.Infrastructure.Data.Context
                 .WithMany(x => x.SubPaths)
                 .HasForeignKey(x => x.ParentPathId)
                 .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+
+            // add demo data for skills and requirements
+            builder.Entity<Skill>().HasData(
+                    new Skill
+                    {
+                        Id = 1,
+                        Name = "C#/.NET",
+                        IsDeleted = false
+                    },
+                    new Skill
+                    {
+                        Id = 2,
+                        Name = "HTML/CSS",
+                        IsDeleted = false
+                    },
+                    new Skill
+                    {
+                        Id = 3,
+                        Name = "Java",
+                        IsDeleted = false
+                    }
+                );
+            builder.Entity<Requirement>().HasData(
+                    new Requirement
+                    {
+                        Id = 1,
+                        Name = "Văn hay chữ tốt",
+                        IsDeleted = false
+                    },
+                    new Skill
+                    {
+                        Id = 2,
+                        Name = "Bậc thầy tính toán",
+                        IsDeleted = false
+                    },
+                    new Skill
+                    {
+                        Id = 3,
+                        Name = "Phù thủy hóa học",
+                        IsDeleted = false
+                    }
+                );
+            builder.Entity<Area>().HasData(
+                new Area
+                {
+                    Id = 1,
+                    Name = "Công nghệ thông tin",
+                    IsDeleted = false
+                },
+                new Area
+                {
+                    Id = 2,
+                    Name = "Marketing",
+                    IsDeleted = false
+                },
+                new Area
+                {
+                    Id = 3,
+                    Name = "Cộng đồng",
+                    IsDeleted = false
+                }
+            );
         }
     }
 }

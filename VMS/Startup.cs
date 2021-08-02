@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VMS.Application.Interfaces;
+using VMS.Application.Services;
 using VMS.Areas.Identity;
 using VMS.Infrastructure.Data.Context;
 using VMS.Infrastructure.IoC;
@@ -38,6 +40,11 @@ namespace VMS
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddTransient<IActivityService, ActivityService>();
+            services.AddTransient<ISkillService, SkillService>();
+            services.AddTransient<IRequirementService, RequirementService>();
+            services.AddTransient<IAreaService, AreaService>();
+            services.AddTransient<IUploadService, UploadService>();
 
             // Custom registrations
             DependencyContainer.RegisterServices(services, Configuration);

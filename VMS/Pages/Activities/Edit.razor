@@ -1,0 +1,212 @@
+﻿@attribute [Route(Routes.EditActivity + "/{id}")]
+@attribute [Authorize]
+
+
+@using Microsoft.AspNetCore.Hosting
+@using System.IO
+@using Microsoft.AspNetCore.Identity
+@using VMS.Application.Interfaces
+@using VMS.Application.Services
+@using VMS.Application.ViewModels
+@using VMS.Domain.Models
+
+@inject IIdentityService IdentityService
+@inject IAreaService AreaService
+@inject ISkillService SkillService
+@inject IRequirementService RequirementService
+@inject IActivityService ActivityService
+@inject NavigationManager NavigationManager
+@inject IWebHostEnvironment WebHostEnvironment
+@inject IUploadService UploadService
+
+@if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != user.Id)
+{
+    <div class="alert alert-info">Không tìm thấy hoạt động..<a href="@Routes.Activities">Quay lại</a></div>
+}
+else
+{
+    <div class="alert alert-info"><a href="@Routes.ViewActivity/@Id" class="btn btn-success">Quay lại</a></div>
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm Model="activity" OnValidSubmit="UpdateActivity">
+                <div class="card card-body">
+                    Tên hoạt động:
+                    <InputText @bind-Value="@activity.Name" class="form-control" />
+                </div>
+                <div class="card card-body">
+                    Lĩnh vực:
+                    <InputSelect @bind-Value="@activity.AreaId" class="form-control">
+                        <option value="0">Chọn lĩnh vực</option>
+                        @if (areas is not null)
+                        {
+                            @foreach (var area in areas)
+                            {
+                                <option value="@area.Id">@area.Name</option>
+                            }
+                        }
+
+                    </InputSelect>
+                </div>
+                <div class="card card-body">
+                    Ngày bắt đầu:
+                    <InputDate @bind-Value="@activity.StartDate" class="form-control" />
+                </div>
+                <div class="card card-body">
+                    Ngày kết thúc:
+                    <InputDate @bind-Value="@activity.EndDate" class="form-control" />
+                </div>
+                <div class="card card-body">
+                    Địa chỉ:
+                    <InputText @bind-Value="@activity.Address" class="form-control" />
+                </div>
+                <div class="card card-body">
+                    Số lượng người tham gia:
+                    <InputNumber @bind-Value="@activity.MemberQuantity" class="form-control" />
+                </div>
+                <div class="card card-body">
+                    Mô tả:
+                    <InputTextArea @bind-Value="@activity.Description" class="form-control"></InputTextArea>
+                </div>
+                <div class="card card-body">
+                    Nhiệm vụ:
+                    <InputTextArea @bind-Value="@activity.Mission" class="form-control"></InputTextArea>
+                </div>
+                <div class="card card-body">
+                    <InputCheckbox @bind-Value="@activity.IsVirtual" />  Is Virtual?
+                </div>
+                @if (skills is not null)
+                    {
+                        <div class="card card-body">
+                            Skill:
+                            @foreach (var skill in skills)
+                            {
+                                <label for="@skill.Name">
+                                    @if (activity.Skills.FirstOrDefault(s => s.Id == skill.Id) == null)
+                                    {
+                                        <input type="checkbox" id="@skill.Name" @onchange="@((e) => CheckboxChanged(e, skill))" /> @skill.Name
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="@skill.Name" checked="checked" @onchange="@((e) => CheckboxChanged(e, skill))" /> @skill.Name
+                                    }
+                                </label>
+                            }
+                        </div>
+                    }
+                    @if (requirements is not null)
+                    {
+                        <div class="card card-body">
+                            Requirement:
+                            @foreach (var requirement in requirements)
+                            {
+                                <label for="@requirement.Name">
+                                    @if (activity.Requirements.FirstOrDefault(s => s.Id == requirement.Id) == null)
+                                    {
+                                        <input type="checkbox" id="@requirement.Name" @onchange="@((e) => CheckboxChanged(e, requirement))" /> @requirement.Name
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="@requirement.Name" checked="checked" @onchange="@((e) => CheckboxChanged(e, requirement))" /> @requirement.Name
+                                    }
+                                </label>
+                            }
+                        </div>
+                    }
+                    <div class="card card-body">
+                        Website:
+                        <InputText @bind-Value="@activity.Website" class="form-control" />
+                    </div>
+                    <div class="card card-body">
+                        Banner:
+                        <InputFile OnChange="OnInputFileChange" />
+                        <span style="color: red">@messageFileWarning</span>
+                        @if (!string.IsNullOrEmpty(activity.Banner))
+                        {
+                            <img src="/img/@activity.Banner"/>
+                        }
+                    </div>
+                    <div class="card card-body">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    private CreateActivityViewModel activity;
+    private IdentityUser user;
+    private List<Skill> skills;
+    private List<Requirement> requirements;
+    private List<Area> areas;
+    private string messageFileWarning = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        activity = await ActivityService.GetCreateActivityViewModel(int.Parse(Id));
+        skills = await SkillService.GetAllSkills();
+        requirements = await RequirementService.GetAllRequirements();
+        areas = await AreaService.GetAllAreas();
+        user = IdentityService.GetCurrentUser();
+    }
+
+    private void CheckboxChanged(ChangeEventArgs e, object obj)
+    {
+        if (obj.GetType() == typeof(Skill))
+        {
+            Skill skill = activity.Skills.FirstOrDefault(s => s.Id == ((Skill)obj).Id);
+            if (skill is null)
+            {
+                activity.Skills.Add((Skill)obj);
+            }
+            else
+            {
+                activity.Skills.Remove(skill);
+            }
+        }
+
+        if (obj.GetType() == typeof(Requirement))
+        {
+            Requirement requirement = activity.Requirements.FirstOrDefault(s => s.Id == ((Requirement)obj).Id);
+            if (requirement is null)
+            {
+                activity.Requirements.Add((Requirement)obj);
+            }
+            else
+            {
+                activity.Requirements.Remove(requirement);
+            }
+        }
+    }
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        if (e.File.ContentType != "image/jpeg")
+        {
+            messageFileWarning = $"File không đúng định dạng..";
+            this.StateHasChanged();
+            return;
+        }
+        else
+        {
+            messageFileWarning = "";
+            activity.Banner = await UploadService.ImageProcessing(e.File, activity.Banner);
+        }
+    }
+
+    private async Task UpdateActivity()
+    {
+        // check area
+        if (areas.FirstOrDefault(a => a.Id == activity.AreaId) is null)
+        {
+            return;
+        }
+
+        await ActivityService.UpdateActivity(activity, int.Parse(Id));
+
+        NavigationManager.NavigateTo(Routes.Activities);
+    }
+}

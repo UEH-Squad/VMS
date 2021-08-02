@@ -1,0 +1,32 @@
+﻿@attribute [Route(Routes.Activities)]
+
+@using Application.ViewModels;
+@using Application.Interfaces;
+
+@inject IActivityService ActivityService;
+
+<div><a href="@Routes.CreateActivity" class="btn btn-danger">Tạo hoạt động</a></div>
+
+@if (activities is null || activities.Count == 0)
+{
+    <div class="card card-body">Hiện tại chưa có hoạt động nào..</div>
+}
+else
+{
+    @foreach(var activity in activities)
+    {
+        <div class="card card-body">
+            <p><a href="@Routes.ViewActivity/@activity.Id">@activity.Name</a></p>
+            <p>@activity.Description</p>
+        </div>
+    }
+}
+
+@code {
+    private List<ActivityViewModel> activities;
+
+    protected async override Task OnInitializedAsync()
+    {
+        activities = await ActivityService.GetAllActivities();
+    }
+}

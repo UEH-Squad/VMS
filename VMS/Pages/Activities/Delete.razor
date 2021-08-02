@@ -1,0 +1,43 @@
+﻿@attribute [Route(Routes.DeleteActivity + "/{id}")]
+@attribute [Authorize]
+
+@using Microsoft.AspNetCore.Identity
+@using VMS.Application.Interfaces
+@using VMS.Application.ViewModels
+
+@inject IIdentityService IdentityService
+@inject IActivityService ActivityService
+@inject NavigationManager NavigationManager
+
+@if (string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != user.Id)
+{
+    <div class="card card-body">Không tìm thấy hoạt động..<a href="@Routes.Activities">Quay lại</a></div>
+}
+else
+{
+    <EditForm Model="activity" OnValidSubmit="DeleteActivity">
+        <div class="alert alert-info">
+            Bạn có chắc muốn xóa hoạt động @activity.Name ?
+            <input type ="submit" class="btn btn-warning" value="Xác nhận"/> <a href="@Routes.Activities" class="btn btn-success">Hủy bỏ</a>
+        </div>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    private CreateActivityViewModel activity = new CreateActivityViewModel();
+    private IdentityUser user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        activity = await ActivityService.GetCreateActivityViewModel(int.Parse(Id));
+        user = IdentityService.GetCurrentUser();
+    }
+    private async Task DeleteActivity()
+    {
+        await ActivityService.DeleteActivity(int.Parse(Id));
+
+        NavigationManager.NavigateTo(Routes.Activities);
+    }
+}

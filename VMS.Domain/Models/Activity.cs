@@ -14,6 +14,7 @@ namespace VMS.Domain.Models
         public DateTime StartDate { get; set; }
         public DateTime PostDate { get; set; }
         public DateTime EndDate { get; set; }
+        public string Address { get; set; }
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Mission { get; set; }

@@ -24,3 +24,67 @@
         font-size: 70px;
     }
 }
+
+.login-btn {
+    background-color: $blue;
+    width: 150px;
+    height: 45px;
+
+    &:hover {
+        background-color: #0b588c;
+    }
+
+    @include on('xl') {
+        width: 200px;
+        height: 60px;
+        font-size: 24px;
+        line-height: 60px;
+    }
+}
+.user-link {
+    .user-avatar-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 100%;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+        display: none;
+        @include on('xl') {
+            width: 65px;
+        }
+    }
+
+    .user-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+
+        @include on('xl') {
+            width: 65px;
+            height: 65px;
+        }
+    }
+
+    .user-label {
+        display: block;
+        color: $green;
+        @include on('xl') {
+            display: none;
+        }
+    }
+
+    &:hover .user-label {
+        color: $blue;
+    }
+
+    &hover .user-avatar-wrapper::before {
+        display: block;
+    }
+}

@@ -1,1 +1,112 @@
 ﻿@import '../Resources/scss/common/NavBar.scss';
+.my-navbar {
+    min-height: 85px;
+
+    @include on('lg') {
+        min-height: 110px;
+    }
+
+    .navbar-brand {
+        height: 50%;
+        display: block;
+    }
+
+    .brand__ueh {
+        height: 40px;
+        margin-bottom: -7px;
+
+        @include on('lg') {
+            height: 3.4rem;
+        }
+    }
+
+    .brand__govirlunteer {
+        height: 12px;
+
+        @include on('lg') {
+            height: 1.4rem;
+        }
+    }
+
+    .my-navbar__hamburger {
+        border: none;
+        background: transparent;
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+
+        @include on('xl') {
+            display: none;
+        }
+
+        .hamburger-icon {
+            color: $blue;
+            font-size: 44px;
+
+            @include on('xl') {
+                display: none;
+            }
+        }
+    }
+
+    .my-collapse {
+        display: flex;
+        flex-direction: column-reverse;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        border-radius: 5px;
+        top: 90%;
+        right: 15px;
+        min-width: 220px;
+        width: 40vw;
+
+        @include on('xl') {
+            position: unset;
+            box-shadow: none;
+            border-radius: 0;
+            flex-direction: unset;
+        }
+
+        .my-collapse__list {
+            width: 100%;
+
+            @include on('xl') {
+                margin-left: 180px;
+            }
+
+            .my-collapse__list__link {
+                font-size: 16px;
+                color: $blue;
+                display: block;
+
+                @include on('xl') {
+                    font-size: 24px;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        height: 5px;
+                        top: 147%;
+                        background-color: $blue-bold;
+                        display: none;
+                    }
+
+                    &:hover.my-collapse__list__link::before {
+                        display: block;
+                    }
+                }
+
+                &:hover {
+                    color: $blue-bold;
+                }
+            }
+        }
+    }
+
+    .collapse:not(.show) {
+        display: none;
+    }
+}
+

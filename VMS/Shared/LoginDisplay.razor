@@ -1,19 +1,24 @@
 ﻿<AuthorizeView>
     <Authorized>
-        <li class="nav-item">
+        @*<li class="nav-item">
             <a href="" class="text-decoration-none">
                 <span class="material-icons my-notifications" data-icon="notifications_none"></span>
             </a>
-        </li>
-        <li class="nav-item text-decoration-none">
-            <a href="">
-                <span class="material-icons-outlined my-person" data-icon="account_circle"></span>
+        </li>*@
+        <li class="nav-item dflex flex-column align-items-center">
+            <a href="" class="d-block text-decoration-none user-link">
+                <div class="user-avatar-wrapper position-relative">
+                    <img src="../wwwroot/img/GOVOLUNTEER.png" alt="user avatar" class="user-avatar">
+                </div>
+                <span class="user-label mt-2 fw-bold">Trang cá nhân</span>
             </a>
         </li>
     </Authorized>
     <NotAuthorized>
-        <li class="nav-item">
-            <a href="@Routes.LogIn" class="btn btn-danger" role="button">Đăng nhập</a>
+        <li class="nav-item ">
+            <a class="btn login-btn d-flex align-items-center justify-content-center fw-bold p-0 position-relative text-white" href="@Routes.LogIn">
+                Đăng nhập
+            </a>
         </li>
     </NotAuthorized>
 </AuthorizeView>

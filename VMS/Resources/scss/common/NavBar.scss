@@ -1,21 +1,2 @@
 ﻿@import '_variables';
 
-.my-navbar {
-    min-height: 80px;
-
-    .my-navbar-container {
-        .my-ueh-logo {
-            height: 54px;
-        }
-
-        .my-go-volunteer {
-            height: 16px;
-        }
-
-        .my-nav-link {
-            color: $green;
-            font-size: 20px;
-            font-weight: 700;
-        }
-    }
-}

@@ -48,6 +48,12 @@ namespace VMS.Infrastructure.IoC
 
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IIdentityService, IdentityService>();
+
+            services.AddTransient<IActivityService, ActivityService>();
+            services.AddTransient<ISkillService, SkillService>();
+            services.AddTransient<IRequirementService, RequirementService>();
+            services.AddTransient<IAreaService, AreaService>();
+            services.AddTransient<IUploadService, UploadService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

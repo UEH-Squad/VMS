@@ -40,11 +40,6 @@ namespace VMS
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddTransient<IActivityService, ActivityService>();
-            services.AddTransient<ISkillService, SkillService>();
-            services.AddTransient<IRequirementService, RequirementService>();
-            services.AddTransient<IAreaService, AreaService>();
-            services.AddTransient<IUploadService, UploadService>();
 
             // Custom registrations
             DependencyContainer.RegisterServices(services, Configuration);

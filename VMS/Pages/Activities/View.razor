@@ -15,7 +15,7 @@ else
 {
     <div class="alert alert-info">
         <a href="@Routes.Activities" class="btn btn-success">Quay lại trang hoạt động</a>
-        @if (user.Id == activity.OrgId)
+        @if (user is not null && user.Id == activity.OrgId)
         {
             <a href="@Routes.EditActivity/@Id" style="margin-left: 5px"  class="btn btn-primary">Chỉnh sửa</a>
             <a href="@Routes.DeleteActivity/@Id" class="btn btn-danger">Xóa hoạt động</a>

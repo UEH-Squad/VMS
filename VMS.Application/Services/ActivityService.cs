@@ -18,50 +18,24 @@ namespace VMS.Application.Services
         public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
         }
+
         public async Task<List<ActivityViewModel>> GetAllActivities()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-            // get all activities from database
             List<Activity> activities = await _repository.GetListAsync<Activity>(dbContext);
-
-            // transform Activity model to ActivityViewModel
-            IEnumerable<ActivityViewModel> activitiesViewModel = activities.Select(a => new ActivityViewModel
-            {
-                Id = a.Id,
-                Name = a.Name,
-                StartDate = a.StartDate,
-                EndDay = a.EndDate,
-                MemberQuantity = a.MemberQuantity,
-                Description = a.Description,
-                Mission = a.Mission,
-                Banner = a.Banner
-            }).OrderByDescending(a => a.Id);
-            return activitiesViewModel.ToList();
+            List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
+            return activitiesViewModel;
         }
 
         public async Task AddActivity(CreateActivityViewModel activityViewModel)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Activity activity = new Activity
-            {
-                OrgId = activityViewModel.OrgId,
-                AreaId = activityViewModel.AreaId,
-                Name = activityViewModel.Name,
-                StartDate = activityViewModel.StartDate,
-                Address = activityViewModel.Address,
-                EndDate = activityViewModel.EndDate,
-                MemberQuantity = activityViewModel.MemberQuantity,
-                Description = activityViewModel.Description,
-                Mission = activityViewModel.Mission,
-                IsVirtual = activityViewModel.IsVirtual,
-                Website = activityViewModel.Website,
-                Banner = activityViewModel.Banner,
-                IsApproved = false,
+            Activity activity = _mapper.Map<Activity>(activityViewModel);
+            activity.IsApproved = false;
+            activity.CreatedBy = activity.OrgId;
+            activity.CreatedDate = DateTime.Now;
 
-                CreatedBy = activityViewModel.OrgId,
-                CreatedDate = DateTime.Now
-            };
             await _repository.InsertAsync(dbContext, activity);
 
             List<ActivitySkill> activitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
@@ -94,26 +68,11 @@ namespace VMS.Application.Services
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
                                 .Include(x => x.ActivityRequirements).ThenInclude(r => r.Requirement)
             };
-
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
             if (activity is null) return new CreateActivityViewModel();
 
-            CreateActivityViewModel activityViewModel = new CreateActivityViewModel
-            {
-                OrgId = activity.OrgId,
-                AreaId = activity.AreaId,
-                Name = activity.Name,
-                StartDate = activity.StartDate,
-                Address = activity.Address,
-                EndDate = activity.EndDate,
-                MemberQuantity = activity.MemberQuantity,
-                Description = activity.Description,
-                Mission = activity.Mission,
-                IsVirtual = activity.IsVirtual,
-                Website = activity.Website,
-                Banner = activity.Banner
-            };
+            CreateActivityViewModel activityViewModel = _mapper.Map<CreateActivityViewModel>(activity);
 
             activityViewModel.Skills = activity.ActivitySkills.Select(a => new Skill
             {
@@ -145,23 +104,9 @@ namespace VMS.Application.Services
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
                                 .Include(x => x.ActivityRequirements).ThenInclude(r => r.Requirement)
             };
-
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
-            activity.OrgId = activityViewModel.OrgId;
-            activity.AreaId = activityViewModel.AreaId;
-            activity.Name = activityViewModel.Name;
-            activity.Address = activityViewModel.Address;
-            activity.StartDate = activityViewModel.StartDate;
-            activity.EndDate = activityViewModel.EndDate;
-            activity.MemberQuantity = activityViewModel.MemberQuantity;
-            activity.Description = activityViewModel.Description;
-            activity.Mission = activityViewModel.Mission;
-            activity.IsVirtual = activityViewModel.IsVirtual;
-            activity.Website = activityViewModel.Website;
-            activity.Banner = activityViewModel.Banner;
-            activity.UpdatedBy = activityViewModel.OrgId;
-            activity.UpdatedDate = DateTime.Now;
+            activity = _mapper.Map(activityViewModel, activity);
 
             activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
             {
@@ -206,25 +151,8 @@ namespace VMS.Application.Services
 
             if (activity is null) return new ViewActivityViewModel();
 
-            ViewActivityViewModel activityViewModel = new ViewActivityViewModel
-            {
-                OrgId = activity.OrgId,
-                AreaId = activity.AreaId,
-                Name = activity.Name,
-                Address = activity.Address,
-                StartDate = activity.StartDate,
-                EndDate = activity.EndDate,
-                MemberQuantity = activity.MemberQuantity,
-                Description = activity.Description,
-                Mission = activity.Mission,
-                IsApproved = activity.IsApproved,
-                IsVirtual = activity.IsVirtual,
-                Website = activity.Website,
-                Banner = activity.Banner,
-                Area = activity.Area,
-                ActivityImages = activity.ActivityImages
-            };
-            
+            ViewActivityViewModel activityViewModel = _mapper.Map<ViewActivityViewModel>(activity);
+
             activityViewModel.Skills = activity.ActivitySkills.Select(a => new Skill
             {
                 Id = a.SkillId,

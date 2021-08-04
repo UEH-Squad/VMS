@@ -1,17 +1,25 @@
 ﻿<AuthorizeView>
     <Authorized>
-        @*<li class="nav-item">
-            <a href="" class="text-decoration-none">
-                <span class="material-icons my-notifications" data-icon="notifications_none"></span>
-            </a>
-        </li>*@
-        <li class="nav-item dflex flex-column align-items-center">
-            <a href="" class="d-block text-decoration-none user-link">
+        <li class="user-section nav-item dflex flex-column align-items-center position-relative">
+            <a href="" class="d-block text-decoration-none user-section__link">
                 <div class="user-avatar-wrapper position-relative">
-                    <img src="../wwwroot/img/GOVOLUNTEER.png" alt="user avatar" class="user-avatar">
+                    <img src="img/hsv.png" alt="user avatar" class="user-avatar">
                 </div>
                 <span class="user-label mt-2 fw-bold">Trang cá nhân</span>
             </a>
+            <span class="material-icons-outlined position-absolute user-section__dropdown-icon">
+                arrow_drop_down
+            </span>
+            <div class="user-section__list-wrapper position-absolute">
+                <ul class="user-section__list list-unstyled bg-white">
+                    <li class="text-center">
+                        <a href="https://shopee.vn/" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
+                    </li>
+                    <li class="text-center">
+                        <button class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
+                    </li>
+                </ul>
+            </div>
         </li>
     </Authorized>
     <NotAuthorized>

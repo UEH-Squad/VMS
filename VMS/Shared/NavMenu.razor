@@ -1,36 +1,40 @@
 ﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 fixed-top shadow-sm my-navbar">
-    <div class="container-lg p-0">
+    <div class="container-lg p-0 my-navbar-container">
         <div class="d-flex flex-column my-navbar__brand">
-            <NavLink href="@Routes.HomePage" class="navbar-brand ps-1 ps-xl-2 py-0 m-0" Match="NavLinkMatch.All">
+            <NavLink href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
                 <img src="img/logo UEH tieng Anh.png" alt="UEH logo" class="brand__ueh" />
             </NavLink>
-            <NavLink href="@Routes.Activities" class="navbar-brand ps-3 ps-xl-4 py-0 m-0">
-                <img src="img/GoVolunteer (1).png" alt="Go Volunteer logo" class="brand__govirlunteer" />
+            <NavLink href="@Routes.Activities" class="my-navbar__brand-item">
+                <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
             </NavLink>
         </div>
-        <button class="my-navbar__hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="material-icons hamburger-icon">
-                menu
-            </span>
-        </button>
+        <div class="my-navbar__hamburger-wrapper">
+            <Notification />
+            <button class="my-navbar__hamburger-wrapper__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="material-icons hamburger-icon">
+                    menu
+                </span>
+            </button>
+        </div>
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
                 <ul class="navbar-nav navbar-list mb-4 mb-xl-0 text-center fw-bold my-collapse__list">
                     <li class="nav-item">
-                        <a href="@Routes.HomePage" class="text-decoration-none mx-3 py-2 position-relative my-collapse__list__link">Trang chủ</a>
+                        <a href="@Routes.HomePage" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Routes.Activities" class="text-decoration-none mx-3 py-2 position-relative my-collapse__list__link">Go Virlunteer</a>
+                        <a href="@Routes.Activities" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Routes.Organizations" class="text-decoration-none mx-3 position-relative py-2 my-collapse__list__link">Đơn vị tổ chức</a>
+                        <a href="@Routes.Organizations" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Routes.Map" class="text-decoration-none mx-3 py-2 position-relative my-collapse__list__link">Bản đồ</a>
+                        <a href="@Routes.Map" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</a>
                     </li>
                 </ul>
-                <ul class="my-collapse__login-area navbar-nav d-flex flex-column align-items-center mt-4 mb-2 my-xl-0">
+                <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
                     <LoginDisplay />
                 </ul>
         </div>
+                   
     </div>
 </nav>

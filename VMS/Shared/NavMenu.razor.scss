@@ -1,53 +1,91 @@
 ﻿@import '../Resources/scss/common/NavBar.scss';
 .my-navbar {
     min-height: 85px;
+    z-index: 1;
 
     @include on('lg') {
         min-height: 110px;
     }
 
-    .navbar-brand {
-        height: 50%;
-        display: block;
-    }
-
-    .brand__ueh {
-        height: 40px;
-        margin-bottom: -7px;
-
-        @include on('lg') {
-            height: 3.4rem;
+    .my-navbar-container {
+        @include on('xl') {
+            position: relative;
         }
     }
 
-    .brand__govirlunteer {
-        height: 12px;
+    &__brand {
+        margin-left: 10px;
 
-        @include on('lg') {
-            height: 1.4rem;
+        @include on('md') {
+            margin-left: 20px;
         }
-    }
-
-    .my-navbar__hamburger {
-        border: none;
-        background: transparent;
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
 
         @include on('xl') {
-            display: none;
+            margin: 0;
         }
 
-        .hamburger-icon {
-            color: $blue;
-            font-size: 44px;
+        &-item {
+            height: 50%;
+            display: block;
+
+                .brand__ueh {
+                    height: 40px;
+                    margin-bottom: -7px;
+                    margin-left: -16px;
+
+                    @include on('lg') {
+                        height: 3.4rem;
+                    }
+                }
+
+                .brand__govirlunteer {
+                    height: 16px;
+
+                    @include on('lg') {
+                        height: 28px;
+                    }
+                }
+        }
+
+    }
+
+    &__hamburger-wrapper {
+        position: relative;
+
+        @include on('xl') {
+            position: unset;
+        }
+
+        &__btn {
+            border: none;
+            background: transparent;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+
+            /*@include on('md') {
+                margin-right: 20px;
+            }
+
+            @include on('lg') {
+                margin-right: -30px;
+            }*/
 
             @include on('xl') {
                 display: none;
             }
+
+            .hamburger-icon {
+                color: $blue;
+                font-size: 44px;
+
+                @include on('xl') {
+                    display: none;
+                }
+            }
         }
     }
+
 
     .my-collapse {
         display: flex;
@@ -67,14 +105,18 @@
             flex-direction: unset;
         }
 
-        .my-collapse__list {
+        &__list {
             width: 100%;
 
             @include on('xl') {
-                margin-left: 180px;
+                margin-left: 6%;
             }
 
-            .my-collapse__list__link {
+            @include on('xxl') {
+                margin-left: 18%;
+            }
+
+            &__link {
                 font-size: 16px;
                 color: $blue;
                 display: block;
@@ -88,7 +130,7 @@
                         left: 0;
                         right: 0;
                         height: 5px;
-                        top: 147%;
+                        top: 84px;
                         background-color: $blue-bold;
                         display: none;
                     }
@@ -101,6 +143,14 @@
                 &:hover {
                     color: $blue-bold;
                 }
+            }
+        }
+
+        .my-collapse__login-area {
+            flex-direction: column;
+
+            @include on('xl') {
+                flex-direction: row;
             }
         }
     }

@@ -8,6 +8,7 @@
 @inject IIdentityService IdentityService
 @inject IActivityService ActivityService
 @inject NavigationManager NavigationManager
+@inject IUploadService UploadService
 
 @if (string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != user.Id)
 {
@@ -36,8 +37,12 @@ else
     }
     private async Task DeleteActivity()
     {
-        await ActivityService.DeleteActivity(int.Parse(Id));
+        if (!string.IsNullOrEmpty(activity.Banner))
+        {
+            UploadService.RemoveImage(activity.Banner);
+        }
 
+        await ActivityService.DeleteActivity(int.Parse(Id));
         NavigationManager.NavigateTo(Routes.Activities);
     }
 }

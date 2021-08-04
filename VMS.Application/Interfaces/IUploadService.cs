@@ -5,6 +5,8 @@ namespace VMS.Application.Interfaces
 {
     public interface IUploadService
     {
-        Task<string> ImageProcessing(IBrowserFile browserFile, string activityBanner);
+        Task<string> GetDataUri(IBrowserFile file);
+        Task<string> SaveImage(IBrowserFile file);
+        void RemoveImage(string fileName);
     }
 }

@@ -101,13 +101,16 @@ else
                     <InputText @bind-Value="@activity.Website" class="form-control" />
                  </div>
                 <div class="card card-body">
-                        Banner:
-                        <InputFile OnChange="OnInputFileChange" />
+                    Banner:
+                    <InputFile OnChange="OnInputFileChange" />
+                    @if (!string.IsNullOrEmpty(messageFileWarning))
+                    {
                         <span style="color: red">@messageFileWarning</span>
-                        @if (!string.IsNullOrEmpty(activity.Banner))
-                        {
-                            <img src="/img/@activity.Banner"/>
-                        }
+                    }
+                    @if (!string.IsNullOrEmpty(imageDataUri))
+                    {
+                        <img src="@imageDataUri"/>
+                    }
                 </div>
                 <div class="card card-body">
                     <input type="submit" value="Update" class="btn btn-primary" />
@@ -125,7 +128,9 @@ else
     private IdentityUser user;
     private List<Skill> skills;
     private List<Area> areas;
-    private string messageFileWarning = "";
+    private string messageFileWarning;
+    private string imageDataUri;
+    private IBrowserFile browserFile;
 
     protected override async Task OnInitializedAsync()
     {
@@ -133,6 +138,7 @@ else
         skills = await SkillService.GetAllSkills();
         areas = await AreaService.GetAllAreas();
         user = IdentityService.GetCurrentUser();
+        imageDataUri = "/img/" + activity.Banner;
     }
 
     private void CheckboxChanged(ChangeEventArgs e, object obj)
@@ -162,7 +168,8 @@ else
         else
         {
             messageFileWarning = "";
-            activity.Banner = await UploadService.ImageProcessing(e.File, activity.Banner);
+            browserFile = e.File;
+            imageDataUri = await UploadService.GetDataUri(browserFile);
         }
     }
 
@@ -172,6 +179,16 @@ else
         if (areas.FirstOrDefault(a => a.Id == activity.AreaId) is null)
         {
             return;
+        }
+
+        // save banner
+        if (browserFile is not null)
+        {
+            if (!string.IsNullOrEmpty(activity.Banner))
+            {
+                UploadService.RemoveImage(activity.Banner);
+            }
+            activity.Banner = await UploadService.SaveImage(browserFile);
         }
 
         await ActivityService.UpdateActivity(activity, int.Parse(Id));

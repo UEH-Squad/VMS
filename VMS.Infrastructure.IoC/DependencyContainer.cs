@@ -51,7 +51,6 @@ namespace VMS.Infrastructure.IoC
 
             services.AddTransient<IActivityService, ActivityService>();
             services.AddTransient<ISkillService, SkillService>();
-            services.AddTransient<IRequirementService, RequirementService>();
             services.AddTransient<IAreaService, AreaService>();
             services.AddTransient<IUploadService, UploadService>();
         }

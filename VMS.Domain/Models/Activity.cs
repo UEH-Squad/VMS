@@ -18,6 +18,7 @@ namespace VMS.Domain.Models
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Mission { get; set; }
+        public string Requirement { get; set; }
         public bool IsApproved { get; set; }
 
         [ForeignKey(nameof(Approver))]
@@ -35,7 +36,5 @@ namespace VMS.Domain.Models
         public virtual ICollection<ActivitySkill> ActivitySkills { get; set; }
         public virtual ICollection<ActivityAddress> ActivityAddresses { get; set; }
         public virtual ICollection<ActivityImage> ActivityImages { get; set; }
-        public virtual ICollection<ActivityRequirement> ActivityRequirements { get; set; }
-        public virtual ICollection<Recruitment> Recruitments { get; set; }
     }
 }

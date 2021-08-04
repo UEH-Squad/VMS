@@ -9,7 +9,6 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAddress> ActivityAddresses { get; set; }
         public DbSet<ActivityImage> ActivityImages { get; set; }
-        public DbSet<ActivityRequirement> ActivityRequirements { get; set; }
         public DbSet<ActivitySkill> ActivitySkills { get; set; }
         public DbSet<AddressPath> AddressPaths { get; set; }
         public DbSet<AddressPathType> AddressPathTypes { get; set; }
@@ -17,7 +16,6 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Recruitment> Recruitments { get; set; }
         public DbSet<RecruitmentRating> RecruitmentRatings { get; set; }
-        public DbSet<Requirement> Requirements { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public new DbSet<User> Users { get; set; }
         public DbSet<UserAddress> UserAddresses { get; set; }
@@ -66,26 +64,6 @@ namespace VMS.Infrastructure.Data.Context
                     {
                         Id = 3,
                         Name = "Java",
-                        IsDeleted = false
-                    }
-                );
-            builder.Entity<Requirement>().HasData(
-                    new Requirement
-                    {
-                        Id = 1,
-                        Name = "Văn hay chữ tốt",
-                        IsDeleted = false
-                    },
-                    new Skill
-                    {
-                        Id = 2,
-                        Name = "Bậc thầy tính toán",
-                        IsDeleted = false
-                    },
-                    new Skill
-                    {
-                        Id = 3,
-                        Name = "Phù thủy hóa học",
                         IsDeleted = false
                     }
                 );

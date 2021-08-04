@@ -13,7 +13,6 @@
 @inject IIdentityService IdentityService
 @inject IAreaService AreaService
 @inject ISkillService SkillService
-@inject IRequirementService RequirementService
 @inject IActivityService ActivityService
 @inject NavigationManager NavigationManager
 @inject IWebHostEnvironment WebHostEnvironment
@@ -93,30 +92,15 @@ else
                             }
                         </div>
                     }
-                    @if (requirements is not null)
-                    {
-                        <div class="card card-body">
-                            Requirement:
-                            @foreach (var requirement in requirements)
-                            {
-                                <label for="@requirement.Name">
-                                    @if (activity.Requirements.FirstOrDefault(s => s.Id == requirement.Id) == null)
-                                    {
-                                        <input type="checkbox" id="@requirement.Name" @onchange="@((e) => CheckboxChanged(e, requirement))" /> @requirement.Name
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" id="@requirement.Name" checked="checked" @onchange="@((e) => CheckboxChanged(e, requirement))" /> @requirement.Name
-                                    }
-                                </label>
-                            }
-                        </div>
-                    }
-                    <div class="card card-body">
-                        Website:
-                        <InputText @bind-Value="@activity.Website" class="form-control" />
-                    </div>
-                    <div class="card card-body">
+                <div class="card card-body">
+                    Requirement:
+                    <InputTextArea @bind-Value="@activity.Requirement" class="form-control"></InputTextArea>
+                </div>
+                <div class="card card-body">
+                    Website:
+                    <InputText @bind-Value="@activity.Website" class="form-control" />
+                 </div>
+                <div class="card card-body">
                         Banner:
                         <InputFile OnChange="OnInputFileChange" />
                         <span style="color: red">@messageFileWarning</span>
@@ -124,10 +108,10 @@ else
                         {
                             <img src="/img/@activity.Banner"/>
                         }
-                    </div>
-                    <div class="card card-body">
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>
+                </div>
+                <div class="card card-body">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
             </EditForm>
         </div>
     </div>
@@ -140,7 +124,6 @@ else
     private CreateActivityViewModel activity;
     private IdentityUser user;
     private List<Skill> skills;
-    private List<Requirement> requirements;
     private List<Area> areas;
     private string messageFileWarning = "";
 
@@ -148,7 +131,6 @@ else
     {
         activity = await ActivityService.GetCreateActivityViewModel(int.Parse(Id));
         skills = await SkillService.GetAllSkills();
-        requirements = await RequirementService.GetAllRequirements();
         areas = await AreaService.GetAllAreas();
         user = IdentityService.GetCurrentUser();
     }
@@ -165,19 +147,6 @@ else
             else
             {
                 activity.Skills.Remove(skill);
-            }
-        }
-
-        if (obj.GetType() == typeof(Requirement))
-        {
-            Requirement requirement = activity.Requirements.FirstOrDefault(s => s.Id == ((Requirement)obj).Id);
-            if (requirement is null)
-            {
-                activity.Requirements.Add((Requirement)obj);
-            }
-            else
-            {
-                activity.Requirements.Remove(requirement);
             }
         }
     }
@@ -207,6 +176,6 @@ else
 
         await ActivityService.UpdateActivity(activity, int.Parse(Id));
 
-        NavigationManager.NavigateTo(Routes.Activities);
+        NavigationManager.NavigateTo(Routes.ViewActivity + "/" + Id);
     }
 }

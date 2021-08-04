@@ -56,13 +56,7 @@ else
             <span>@skill.Name</span>
         }
     </div>
-    <div class="card card-body">
-        <i>Requirements:</i> 
-        @foreach(var requirement in activity.Requirements)
-        {
-            <span>@requirement.Name</span>
-        }
-    </div>
+    <div class="card card-body">Requirement: @activity.Requirement</div>
 }
 
 

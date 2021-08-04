@@ -15,11 +15,11 @@ namespace VMS.Application.ViewModels
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Mission { get; set; }
+        public string Requirement { get; set; }
         public bool IsVirtual { get; set; }
         public string Website { get; set; }
         public string Banner { get; set; }
 
         public ICollection<Skill> Skills { get; set; }
-        public ICollection<Requirement> Requirements { get; set; }
     }
 }

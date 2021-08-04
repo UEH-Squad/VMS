@@ -12,7 +12,6 @@
 @inject IIdentityService IdentityService
 @inject IAreaService AreaService
 @inject ISkillService SkillService
-@inject IRequirementService RequirementService
 @inject IActivityService ActivityService
 @inject NavigationManager NavigationManager
 @inject IWebHostEnvironment WebHostEnvironment
@@ -89,25 +88,10 @@
                     }
                 </div>
             }
-            @if (requirements is not null)
-            {
-                <div class="card card-body">
-                    Requirement:
-                    @foreach (var requirement in requirements)
-                    {
-                        <label for="@requirement.Name">
-                            @if (!activity.Requirements.Contains(requirement))
-                            {
-                                <input type="checkbox" id="@requirement.Name" @onchange="@((e) => CheckboxChanged(e, requirement))" /> @requirement.Name
-                            }
-                            else
-                            {
-                                <input type="checkbox" id="@requirement.Name" checked="checked" @onchange="@((e) => CheckboxChanged(e, requirement))" /> @requirement.Name
-                            }
-                        </label>
-                    }
-                </div>
-            }
+            <div class="card card-body">
+                Requirement:
+                <InputTextArea @bind-Value="@activity.Requirement" class="form-control"></InputTextArea>
+            </div>
             <div class="card card-body">
                 Website:
                 <InputText @bind-Value="@activity.Website" class="form-control" />
@@ -132,18 +116,15 @@
     private CreateActivityViewModel activity = new CreateActivityViewModel();
     private List<Area> areas;
     private List<Skill> skills;
-    private List<Requirement> requirements;
     private string messageFileWarning = "";
 
     protected async override Task OnInitializedAsync()
     {
         skills = await SkillService.GetAllSkills();
-        requirements = await RequirementService.GetAllRequirements();
         areas = await AreaService.GetAllAreas();
 
         // init collection for activity
         activity.Skills = new List<Skill>();
-        activity.Requirements = new List<Requirement>();
 
     }
 
@@ -159,19 +140,6 @@
             else
             {
                 activity.Skills.Remove(skill);
-            }
-        }
-
-        if (obj.GetType() == typeof(Requirement))
-        {
-            Requirement requirement = (Requirement)obj;
-            if (!activity.Requirements.Contains(requirement))
-            {
-                activity.Requirements.Add(requirement);
-            }
-            else
-            {
-                activity.Requirements.Remove(requirement);
             }
         }
     }

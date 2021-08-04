@@ -45,14 +45,6 @@ namespace VMS.Application.Services
                 IsDeleted = false
             }).ToList();
             await _repository.InsertAsync<ActivitySkill>(dbContext, activitySkills);
-
-            List<ActivityRequirement> activityRequirements = activityViewModel.Requirements.Select(r => new ActivityRequirement
-            {
-                ActivityId = activity.Id,
-                RequirementId = r.Id,
-                IsDeleted = false
-            }).ToList();
-            await _repository.InsertAsync<ActivityRequirement>(dbContext, activityRequirements);
         }
 
         public async Task<CreateActivityViewModel> GetCreateActivityViewModel(int id)
@@ -66,7 +58,6 @@ namespace VMS.Application.Services
                     a => a.Id == id
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
-                                .Include(x => x.ActivityRequirements).ThenInclude(r => r.Requirement)
             };
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
@@ -79,13 +70,6 @@ namespace VMS.Application.Services
                 Id = a.SkillId,
                 Name = a.Skill.Name,
                 IsDeleted = a.Skill.IsDeleted
-            }).ToList();
-
-            activityViewModel.Requirements = activity.ActivityRequirements.Select(a => new Requirement
-            {
-                Id = a.Requirement.Id,
-                Name = a.Requirement.Name,
-                IsDeleted = a.Requirement.IsDeleted
             }).ToList();
 
             return activityViewModel;
@@ -102,7 +86,6 @@ namespace VMS.Application.Services
                     a => a.Id == id
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
-                                .Include(x => x.ActivityRequirements).ThenInclude(r => r.Requirement)
             };
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
@@ -114,13 +97,6 @@ namespace VMS.Application.Services
                 ActivityId = activity.Id,
                 IsDeleted = false
             }).ToList() ;
-
-            activity.ActivityRequirements = activityViewModel.Requirements.Select(r => new ActivityRequirement
-            {
-                RequirementId = r.Id,
-                ActivityId = activity.Id,
-                IsDeleted = false
-            }).ToList();
 
             await _repository.UpdateAsync(dbContext, activity);
         }
@@ -143,7 +119,6 @@ namespace VMS.Application.Services
                     a => a.Id == id
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
-                                .Include(x => x.ActivityRequirements).ThenInclude(r => r.Requirement)
                                 .Include(x => x.Area)
             };
 
@@ -158,13 +133,6 @@ namespace VMS.Application.Services
                 Id = a.SkillId,
                 Name = a.Skill.Name,
                 IsDeleted = a.Skill.IsDeleted
-            }).ToList();
-
-            activityViewModel.Requirements = activity.ActivityRequirements.Select(a => new Requirement
-            {
-                Id = a.Requirement.Id,
-                Name = a.Requirement.Name,
-                IsDeleted = a.Requirement.IsDeleted
             }).ToList();
 
             return activityViewModel;

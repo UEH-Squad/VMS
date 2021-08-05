@@ -6,7 +6,7 @@ namespace VMS.Application.Interfaces
     public interface IUploadService
     {
         Task<string> GetDataUri(IBrowserFile file);
-        Task<string> SaveImage(IBrowserFile file);
+        Task<string> SaveImage(IBrowserFile file, string userId);
         void RemoveImage(string fileName);
     }
 }

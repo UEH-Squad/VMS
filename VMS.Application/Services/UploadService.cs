@@ -30,11 +30,11 @@ namespace VMS.Application.Services
             return $"data:image/jpeg;base64,{Convert.ToBase64String(memoryStream.ToArray())}";
         }
 
-        public async Task<string> SaveImage(IBrowserFile file)
+        public async Task<string> SaveImage(IBrowserFile file, string userId)
         {
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
 
-            string fileName = $"{DateTime.Now.ToFileTime()}_{file.Name}";
+            string fileName = $"{DateTime.Now.ToFileTime()}_{userId}.jpg";
             string pathFile = @$"{_webHostEnvironment.WebRootPath}\img";
 
             using FileStream fileStream = File.Create(@$"{pathFile}\{fileName}");

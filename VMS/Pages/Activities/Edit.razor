@@ -188,7 +188,7 @@ else
             {
                 UploadService.RemoveImage(activity.Banner);
             }
-            activity.Banner = await UploadService.SaveImage(browserFile);
+            activity.Banner = await UploadService.SaveImage(browserFile, user.Id);
         }
 
         await ActivityService.UpdateActivity(activity, int.Parse(Id));

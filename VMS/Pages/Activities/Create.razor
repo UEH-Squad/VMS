@@ -99,10 +99,13 @@
             <div class="card card-body">
                 Banner:
                 <InputFile OnChange="OnInputFileChange" />
-                <span style="color: red">@messageFileWarning</span>
-                @if (!string.IsNullOrEmpty(activity.Banner))
+                @if (!string.IsNullOrEmpty(messageFileWarning))
                 {
-                    <img src="/img/@activity.Banner"/>
+                    <span style="color: red">@messageFileWarning</span>
+                }
+                @if (!string.IsNullOrEmpty(imageDataUri))
+                {
+                    <img src="@imageDataUri"/>
                 }
             </div>
             <div class="card card-body">
@@ -116,7 +119,9 @@
     private CreateActivityViewModel activity = new CreateActivityViewModel();
     private List<Area> areas;
     private List<Skill> skills;
-    private string messageFileWarning = "";
+    private string messageFileWarning;
+    private string imageDataUri;
+    private IBrowserFile browserFile;
 
     protected async override Task OnInitializedAsync()
     {
@@ -155,13 +160,13 @@
         else
         {
             messageFileWarning = "";
-            activity.Banner = await UploadService.ImageProcessing(e.File, activity.Banner);
+            browserFile = e.File;
+            imageDataUri = await UploadService.GetDataUri(browserFile);
         }
     }
 
     private async Task AddActivity()
     {
-
         // check area
         if (areas.Where(a => a.Id == activity.AreaId).FirstOrDefault() is null)
         {
@@ -170,6 +175,12 @@
 
         IdentityUser user = IdentityService.GetCurrentUser();
         activity.OrgId = user.Id;
+
+        // save banner
+        if (browserFile is not null)
+        {
+            activity.Banner = await UploadService.SaveImage(browserFile, user.Id);
+        }
 
         await ActivityService.AddActivity(activity);
 

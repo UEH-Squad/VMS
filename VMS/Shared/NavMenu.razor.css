@@ -11,8 +11,40 @@
     .my-navbar {
       min-height: 110px; } }
   @media (min-width: 1200px) {
-    .my-navbar .my-navbar-container {
+    .my-navbar-container {
       position: relative; } }
+  .my-navbar-container .my-login-btn,
+  .my-navbar-container .my-register-btn,
+  .my-navbar-container .my-home-btn {
+    background-color: #18A0FB;
+    width: 100px;
+    height: 27px;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-right: 10px; }
+    .my-navbar-container .my-login-btn:hover,
+    .my-navbar-container .my-register-btn:hover,
+    .my-navbar-container .my-home-btn:hover {
+      background-color: #0B588C; }
+    @media (min-width: 768px) {
+      .my-navbar-container .my-login-btn,
+      .my-navbar-container .my-register-btn,
+      .my-navbar-container .my-home-btn {
+        width: 150px;
+        height: 40px;
+        font-size: 18px;
+        margin-right: 15px; } }
+    @media (min-width: 992px) {
+      .my-navbar-container .my-login-btn,
+      .my-navbar-container .my-register-btn,
+      .my-navbar-container .my-home-btn {
+        width: 200px;
+        height: 60px;
+        font-size: 24px;
+        margin-right: 0; } }
+  @media (min-width: 992px) {
+    .my-navbar-container .my-login-btn, .my-navbar-container .my-register-btn {
+      margin-right: 20px; } }
   .my-navbar__brand {
     margin-left: 10px; }
     @media (min-width: 768px) {

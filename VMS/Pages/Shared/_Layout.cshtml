@@ -16,40 +16,45 @@
     <link rel="stylesheet" href="css/site.css" />
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-0 my-navbar">
-        <div class="container px-0 my-navbar-container">
-            <div class="nav-menu d-flex flex-column align-items-center">
-                <a href="@Routes.HomePage" class="navbar-brand p-0 m-0" Match="NavLinkMatch.All">
-                    <img src="img/logo UEH tieng Anh.png" alt="UEH logo" class="my-ueh-logo" />
+    <nav class="navbar navbar-expand-xl navbar-light bg-white py-0 shadow-sm my-navbar">
+        <div class="container-lg p-0 my-navbar-container">
+            <div class="d-flex flex-column my-navbar__brand">
+                <a href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
+                    <img src="img/logo UEH tieng Anh.png" alt="UEH logo" class="brand__ueh" />
                 </a>
-                <a href="@Routes.Activities" class="navbar-brand p-0 m-0">
-                    <img src="img/GoVolunteer (1).png" alt="Go Volunteer logo" class="my-go-volunteer" />
+                <a href="@Routes.Activities" class="my-navbar__brand-item">
+                    <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
                 </a>
             </div>
-            <button class="navbar-toggler me-2 me-sm-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbarToggler" class="collapse navbar-collapse bg-white">
-                <div class="d-flex flex-column-reverse flex-lg-row flex-lg-grow-1">
-                    <ul class="navbar-nav me-lg-auto d-flex flex-column justify-content-around align-items-center flex-grow-1 flex-lg-row">
-                        <li class="nav-item">
-                            <a href="@Routes.HomePage" class="nav-link my-nav-link">Trang chu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Routes.Activities" class="nav-link my-nav-link">Go Volunteer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Routes.Organizations" class="nav-link my-nav-link">Don vi to chuc</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Routes.Map" class="nav-link my-nav-link">Ban do</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav d-flex flex-row align-items-center ms-lg-4 justify-content-end justify-content-lg-center me-2 me-sm-0">
-                        @{ await Html.RenderPartialAsync("_LoginPartial"); }
-                    </ul>
-                </div>
+            @*<button class="navbar-toggler me-2 me-sm-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarToggler" class="collapse navbar-collapse bg-white">
+            <div class="d-flex flex-column-reverse flex-lg-row flex-lg-grow-1">
+                <ul class="navbar-nav me-lg-auto d-flex flex-column justify-content-around align-items-center flex-grow-1 flex-lg-row">
+                    <li class="nav-item">
+                        <a href="@Routes.HomePage" class="nav-link my-nav-link">Trang chu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Routes.Activities" class="nav-link my-nav-link">Go Volunteer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Routes.Organizations" class="nav-link my-nav-link">Don vi to chuc</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Routes.Map" class="nav-link my-nav-link">Ban do</a>
+                    </li>
+                </ul>
             </div>
+                <ul class="navbar-nav d-flex flex-row align-items-center ms-lg-4 justify-content-end justify-content-lg-center me-2 me-sm-0">
+                    @{ await Html.RenderPartialAsync("_LoginPartial"); }
+                </ul>
+        </div>*@
+        <div class="my-buttons-wrapper d-flex align-items-center">
+            <a class="btn my-home-btn d-flex align-items-center justify-content-center fw-bold p-0 position-relative text-white" href="@Routes.HomePage">
+                Trang chủ
+            </a>
+        </div>
         </div>
     </nav>
     <main class="container flex-grow-1 mt-2">

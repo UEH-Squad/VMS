@@ -16,7 +16,9 @@
                         <a href="https://shopee.vn/" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
                     </li>
                     <li class="text-center">
-                        <button class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
+                        <form method="post" action="Identity/Account/LogOut">
+                            <button type="submit" class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
+                        </form>
                     </li>
                 </ul>
             </div>

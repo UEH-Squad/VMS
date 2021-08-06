@@ -19,7 +19,7 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<ActivityViewModel>> GetAllActivities()
+        public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
             List<Activity> activities = await _repository.GetListAsync<Activity>(dbContext);
@@ -27,7 +27,7 @@ namespace VMS.Application.Services
             return activitiesViewModel;
         }
 
-        public async Task AddActivity(CreateActivityViewModel activityViewModel)
+        public async Task AddActivityAsync(CreateActivityViewModel activityViewModel)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -47,7 +47,7 @@ namespace VMS.Application.Services
             await _repository.InsertAsync<ActivitySkill>(dbContext, activitySkills);
         }
 
-        public async Task<CreateActivityViewModel> GetCreateActivityViewModel(int id)
+        public async Task<CreateActivityViewModel> GetCreateActivityViewModelAsync(int activityId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -55,7 +55,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
                 {
-                    a => a.Id == id
+                    a => a.Id == activityId
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
             };
@@ -75,7 +75,7 @@ namespace VMS.Application.Services
             return activityViewModel;
         }
 
-        public async Task UpdateActivity(CreateActivityViewModel activityViewModel, int id)
+        public async Task UpdateActivityAsync(CreateActivityViewModel activityViewModel, int activityId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -83,7 +83,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
                 {
-                    a => a.Id == id
+                    a => a.Id == activityId
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
             };
@@ -101,14 +101,14 @@ namespace VMS.Application.Services
             await _repository.UpdateAsync(dbContext, activity);
         }
 
-        public async Task DeleteActivity(int id)
+        public async Task DeleteActivityAsync(int activityId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, id);
+            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, activityId);
             await _repository.DeleteAsync(dbContext, activity);
         }
 
-        public async Task<ViewActivityViewModel> GetViewActivityViewModel(int id)
+        public async Task<ViewActivityViewModel> GetViewActivityViewModelAsync(int activityId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -116,7 +116,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
                 {
-                    a => a.Id == id
+                    a => a.Id == activityId
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
                                 .Include(x => x.Area)

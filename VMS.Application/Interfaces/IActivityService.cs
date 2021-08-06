@@ -6,11 +6,11 @@ namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<List<ActivityViewModel>> GetAllActivities();
-        Task AddActivity(CreateActivityViewModel activity);
-        Task<CreateActivityViewModel> GetCreateActivityViewModel(int id);
-        Task UpdateActivity(CreateActivityViewModel activityViewModel, int id);
-        Task DeleteActivity(int id);
-        Task<ViewActivityViewModel> GetViewActivityViewModel(int id);
+        Task<List<ActivityViewModel>> GetAllActivitiesAsync();
+        Task AddActivityAsync(CreateActivityViewModel activity);
+        Task<CreateActivityViewModel> GetCreateActivityViewModelAsync(int activityId);
+        Task UpdateActivityAsync(CreateActivityViewModel activityViewModel, int activityId);
+        Task DeleteActivityAsync(int activityId);
+        Task<ViewActivityViewModel> GetViewActivityViewModelAsync(int activityId);
     }
 }

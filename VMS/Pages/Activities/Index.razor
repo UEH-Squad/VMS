@@ -1,11 +1,5 @@
 ﻿@attribute [Route(Routes.Activities)]
 
-@using Application.ViewModels;
-@using Application.Interfaces;
-@using Microsoft.AspNetCore.Identity
-
-@inject IActivityService ActivityService;
-@inject IIdentityService IdentityService;
 
 @if (user is not null)
 {
@@ -28,12 +22,5 @@ else
 }
 
 @code {
-    private List<ActivityViewModel> activities;
-    private IdentityUser user;
 
-    protected async override Task OnInitializedAsync()
-    {
-        activities = await ActivityService.GetAllActivities();
-        user = IdentityService.GetCurrentUser();
-    }
 }

@@ -15,7 +15,7 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<Skill>> GetAllSkills()
+        public async Task<List<Skill>> GetAllSkillsAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
             return await _repository.GetListAsync<Skill>(dbContext);

@@ -1,26 +1,10 @@
 ﻿@attribute [Route(Routes.CreateActivity)]
 @attribute [Authorize]
 
-@using Microsoft.AspNetCore.Hosting
-@using System.IO
-@using Microsoft.AspNetCore.Identity
-@using VMS.Application.Interfaces
-@using VMS.Application.Services
-@using VMS.Application.ViewModels
-@using VMS.Domain.Models
-
-@inject IIdentityService IdentityService
-@inject IAreaService AreaService
-@inject ISkillService SkillService
-@inject IActivityService ActivityService
-@inject NavigationManager NavigationManager
-@inject IWebHostEnvironment WebHostEnvironment
-@inject IUploadService UploadService
-
 <h3>Create</h3>
 <div class="row">
     <div class="col-md-4">
-        <EditForm Model="activity" OnValidSubmit="AddActivity">
+        <EditForm Model="activity" OnValidSubmit="AddActivityAsync">
             <div class="card card-body">
                 Tên hoạt động:
                 <InputText @bind-Value="@activity.Name" class="form-control" />
@@ -98,14 +82,14 @@
             </div>
             <div class="card card-body">
                 Banner:
-                <InputFile OnChange="OnInputFileChange" />
-                @if (!string.IsNullOrEmpty(messageFileWarning))
+                <InputFile OnChange="OnInputFileChangeAsync" />
+                @if (!string.IsNullOrEmpty(message))
                 {
-                    <span style="color: red">@messageFileWarning</span>
+                    <span style="color: red">@message</span>
                 }
-                @if (!string.IsNullOrEmpty(imageDataUri))
+                @if (!string.IsNullOrEmpty(banner))
                 {
-                    <img src="@imageDataUri"/>
+                    <img src="@banner"/>
                 }
             </div>
             <div class="card card-body">
@@ -116,74 +100,5 @@
 </div>
 
 @code {
-    private CreateActivityViewModel activity = new CreateActivityViewModel();
-    private List<Area> areas;
-    private List<Skill> skills;
-    private string messageFileWarning;
-    private string imageDataUri;
-    private IBrowserFile browserFile;
 
-    protected async override Task OnInitializedAsync()
-    {
-        skills = await SkillService.GetAllSkills();
-        areas = await AreaService.GetAllAreas();
-
-        // init collection for activity
-        activity.Skills = new List<Skill>();
-
-    }
-
-    private void CheckboxChanged(ChangeEventArgs e, object obj)
-    {
-        if (obj.GetType() == typeof(Skill))
-        {
-            Skill skill = (Skill)obj;
-            if (!activity.Skills.Contains(skill))
-            {
-                activity.Skills.Add(skill);
-            }
-            else
-            {
-                activity.Skills.Remove(skill);
-            }
-        }
-    }
-
-    private async Task OnInputFileChange(InputFileChangeEventArgs e)
-    {
-        if (e.File.ContentType != "image/jpeg")
-        {
-            messageFileWarning = $"File không đúng định dạng..";
-            this.StateHasChanged();
-            return;
-        }
-        else
-        {
-            messageFileWarning = "";
-            browserFile = e.File;
-            imageDataUri = await UploadService.GetDataUri(browserFile);
-        }
-    }
-
-    private async Task AddActivity()
-    {
-        // check area
-        if (areas.Where(a => a.Id == activity.AreaId).FirstOrDefault() is null)
-        {
-            return;
-        }
-
-        IdentityUser user = IdentityService.GetCurrentUser();
-        activity.OrgId = user.Id;
-
-        // save banner
-        if (browserFile is not null)
-        {
-            activity.Banner = await UploadService.SaveImage(browserFile, user.Id);
-        }
-
-        await ActivityService.AddActivity(activity);
-
-        NavigationManager.NavigateTo(Routes.Activities);
-    }
 }

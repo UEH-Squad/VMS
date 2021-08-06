@@ -1,11 +1,4 @@
-﻿@attribute [Route(Routes.ViewActivity + "/{id}")]
-
-@using Microsoft.AspNetCore.Identity
-@using VMS.Application.Interfaces
-@using VMS.Application.ViewModels
-
-@inject IActivityService ActivityService
-@inject IIdentityService IdentityService
+﻿@attribute [Route(Routes.ViewActivity + "/{activityid}")]
 
 @if (activity is null || string.IsNullOrEmpty(activity.OrgId))
 {
@@ -17,8 +10,8 @@ else
         <a href="@Routes.Activities" class="btn btn-success">Quay lại trang hoạt động</a>
         @if (user is not null && user.Id == activity.OrgId)
         {
-            <a href="@Routes.EditActivity/@Id" style="margin-left: 5px"  class="btn btn-primary">Chỉnh sửa</a>
-            <a href="@Routes.DeleteActivity/@Id" class="btn btn-danger">Xóa hoạt động</a>
+            <a href="@Routes.EditActivity/@ActivityId" style="margin-left: 5px"  class="btn btn-primary">Chỉnh sửa</a>
+            <a href="@Routes.DeleteActivity/@ActivityId" class="btn btn-danger">Xóa hoạt động</a>
         }
     </div>
     @if (!string.IsNullOrEmpty(activity.Banner))
@@ -61,14 +54,5 @@ else
 
 
 @code {
-    [Parameter]
-    public string Id { get; set; }
-    private ViewActivityViewModel activity;
-    private IdentityUser user;
 
-    protected override async Task OnInitializedAsync()
-    {
-        activity = await ActivityService.GetViewActivityViewModel(int.Parse(Id));
-        user = IdentityService.GetCurrentUser();
-    }
 }

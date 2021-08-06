@@ -1,0 +1,27 @@
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
+
+namespace VMS.Pages.Activities
+{
+    public partial class View
+    {
+        private ViewActivityViewModel activity;
+        private IdentityUser user;
+
+        [Parameter]
+        public string ActivityId { get; set; }
+        [Inject]
+        protected IActivityService ActivityService { get; set; }
+        [Inject]
+        protected IIdentityService IdentityService { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
+            user = IdentityService.GetCurrentUser();
+        }
+    }
+}

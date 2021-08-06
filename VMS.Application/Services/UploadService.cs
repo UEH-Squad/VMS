@@ -19,7 +19,7 @@ namespace VMS.Application.Services
         {
             _webHostEnvironment = webHostEnvironment;
         }
-        public async Task<string> GetDataUri(IBrowserFile file)
+        public async Task<string> GetDataUriAsync(IBrowserFile file)
         {
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
 
@@ -30,7 +30,7 @@ namespace VMS.Application.Services
             return $"data:image/jpeg;base64,{Convert.ToBase64String(memoryStream.ToArray())}";
         }
 
-        public async Task<string> SaveImage(IBrowserFile file, string userId)
+        public async Task<string> SaveImageAsync(IBrowserFile file, string userId)
         {
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
 

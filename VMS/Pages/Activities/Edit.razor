@@ -1,22 +1,5 @@
-﻿@attribute [Route(Routes.EditActivity + "/{id}")]
+﻿@attribute [Route(Routes.EditActivity + "/{activityid}")]
 @attribute [Authorize]
-
-
-@using Microsoft.AspNetCore.Hosting
-@using System.IO
-@using Microsoft.AspNetCore.Identity
-@using VMS.Application.Interfaces
-@using VMS.Application.Services
-@using VMS.Application.ViewModels
-@using VMS.Domain.Models
-
-@inject IIdentityService IdentityService
-@inject IAreaService AreaService
-@inject ISkillService SkillService
-@inject IActivityService ActivityService
-@inject NavigationManager NavigationManager
-@inject IWebHostEnvironment WebHostEnvironment
-@inject IUploadService UploadService
 
 @if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != user.Id)
 {
@@ -24,10 +7,10 @@
 }
 else
 {
-    <div class="alert alert-info"><a href="@Routes.ViewActivity/@Id" class="btn btn-success">Quay lại</a></div>
+    <div class="alert alert-info"><a href="@Routes.ViewActivity/@ActivityId" class="btn btn-success">Quay lại</a></div>
     <div class="row">
         <div class="col-md-4">
-            <EditForm Model="activity" OnValidSubmit="UpdateActivity">
+            <EditForm Model="activity" OnValidSubmit="UpdateActivityAsync">
                 <div class="card card-body">
                     Tên hoạt động:
                     <InputText @bind-Value="@activity.Name" class="form-control" />
@@ -43,7 +26,6 @@ else
                                 <option value="@area.Id">@area.Name</option>
                             }
                         }
-
                     </InputSelect>
                 </div>
                 <div class="card card-body">
@@ -102,14 +84,14 @@ else
                  </div>
                 <div class="card card-body">
                     Banner:
-                    <InputFile OnChange="OnInputFileChange" />
-                    @if (!string.IsNullOrEmpty(messageFileWarning))
+                    <InputFile OnChange="OnInputFileChangeAsync" />
+                    @if (!string.IsNullOrEmpty(message))
                     {
-                        <span style="color: red">@messageFileWarning</span>
+                        <span style="color: red">@message</span>
                     }
-                    @if (!string.IsNullOrEmpty(imageDataUri))
+                    @if (!string.IsNullOrEmpty(banner))
                     {
-                        <img src="@imageDataUri"/>
+                        <img src="@banner"/>
                     }
                 </div>
                 <div class="card card-body">
@@ -120,79 +102,6 @@ else
     </div>
 }
 
-
 @code {
-    [Parameter]
-    public string Id { get; set; }
-    private CreateActivityViewModel activity;
-    private IdentityUser user;
-    private List<Skill> skills;
-    private List<Area> areas;
-    private string messageFileWarning;
-    private string imageDataUri;
-    private IBrowserFile browserFile;
 
-    protected override async Task OnInitializedAsync()
-    {
-        activity = await ActivityService.GetCreateActivityViewModel(int.Parse(Id));
-        skills = await SkillService.GetAllSkills();
-        areas = await AreaService.GetAllAreas();
-        user = IdentityService.GetCurrentUser();
-        imageDataUri = "/img/" + activity.Banner;
-    }
-
-    private void CheckboxChanged(ChangeEventArgs e, object obj)
-    {
-        if (obj.GetType() == typeof(Skill))
-        {
-            Skill skill = activity.Skills.FirstOrDefault(s => s.Id == ((Skill)obj).Id);
-            if (skill is null)
-            {
-                activity.Skills.Add((Skill)obj);
-            }
-            else
-            {
-                activity.Skills.Remove(skill);
-            }
-        }
-    }
-
-    private async Task OnInputFileChange(InputFileChangeEventArgs e)
-    {
-        if (e.File.ContentType != "image/jpeg")
-        {
-            messageFileWarning = $"File không đúng định dạng..";
-            this.StateHasChanged();
-            return;
-        }
-        else
-        {
-            messageFileWarning = "";
-            browserFile = e.File;
-            imageDataUri = await UploadService.GetDataUri(browserFile);
-        }
-    }
-
-    private async Task UpdateActivity()
-    {
-        // check area
-        if (areas.FirstOrDefault(a => a.Id == activity.AreaId) is null)
-        {
-            return;
-        }
-
-        // save banner
-        if (browserFile is not null)
-        {
-            if (!string.IsNullOrEmpty(activity.Banner))
-            {
-                UploadService.RemoveImage(activity.Banner);
-            }
-            activity.Banner = await UploadService.SaveImage(browserFile, user.Id);
-        }
-
-        await ActivityService.UpdateActivity(activity, int.Parse(Id));
-
-        NavigationManager.NavigateTo(Routes.ViewActivity + "/" + Id);
-    }
 }

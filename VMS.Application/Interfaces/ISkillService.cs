@@ -6,6 +6,6 @@ namespace VMS.Application.Interfaces
 {
     public interface ISkillService
     {
-        Task<List<Skill>> GetAllSkills();
+        Task<List<Skill>> GetAllSkillsAsync();
     }
 }

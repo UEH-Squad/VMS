@@ -6,6 +6,6 @@ namespace VMS.Application.Interfaces
 {
     public interface IAreaService
     {
-        Task<List<Area>> GetAllAreas();
+        Task<List<Area>> GetAllAreasAsync();
     }
 }

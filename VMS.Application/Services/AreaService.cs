@@ -15,7 +15,7 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<Area>> GetAllAreas()
+        public async Task<List<Area>> GetAllAreasAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
             return await _repository.GetListAsync<Area>(dbContext);

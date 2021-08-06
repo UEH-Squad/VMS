@@ -56,7 +56,7 @@ const getUserLocation = () => {
         }
     }
 
-function showPosition(position) {
+let showPosition = position => {
     var result = {
         Lat: position.coords.latitude,
         Long: position.coords.longitude,

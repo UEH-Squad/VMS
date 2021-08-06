@@ -1,0 +1,17 @@
+@page "/address"
+
+@using VMS.Application.Interfaces
+@using VMS.Application.ViewModels
+
+@inject IAddressPathService AddressPathService
+    <h1>Hello, world!</h1>
+
+    successfully.
+
+
+    @code {
+        protected override async Task OnInitializedAsync()
+        {
+            await AddressPathService.InsertToDatabase();
+        }
+    }

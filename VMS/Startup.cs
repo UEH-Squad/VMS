@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VMS.Application.Interfaces;
+using VMS.Application.Services;
 using VMS.Areas.Identity;
 using VMS.Infrastructure.Data.Context;
 using VMS.Infrastructure.IoC;

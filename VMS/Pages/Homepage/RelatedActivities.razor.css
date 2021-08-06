@@ -37,8 +37,8 @@
 
 @media (min-width: 768px) {
   .padding-10 {
-    padding-right: .625rem !important;
-    padding-left: .625rem !important; } }
+    padding-right: .625rem;
+    padding-left: .625rem; } }
 
 .act-header {
   display: block;

@@ -46,8 +46,8 @@ $grey-hv: #646464;
 }
 .padding-10 {
     @include on('md') {
-    padding-right: .625rem !important;
-    padding-left: .625rem !important;
+    padding-right: .625rem;
+    padding-left: .625rem;
     }
 }
 

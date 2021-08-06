@@ -1,0 +1,189 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+
+$greyicon: #B4B4B4;
+$grey: #F3F3F5;
+$blue-hv: #0B588c;
+$green-hv: #306C14;
+$grey-hv: #646464;
+
+.my-row {
+    display: flex;
+    height: 168px;
+    margin: 0 -4px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    & > * {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    @include on('sm') {
+        height: 468px;
+        padding-top: 16px;
+    }
+
+    @include on('xl') {
+        height: 468px;
+        overflow-x: hidden;
+        width: 1316px;
+    }
+}
+
+.item-wrapper {
+    height: 162.28px;
+    position: relative;
+    width: 131px;
+    
+    @include on('sm') {
+        height: 450px;
+        width: 331px;
+    }
+
+    @include on('xl') {
+        height: 422px;
+    }
+}
+.padding-10 {
+    @include on('md') {
+    padding-right: .625rem !important;
+    padding-left: .625rem !important;
+    }
+}
+
+.act {
+    &-header {
+        display: block;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 19.5px;
+        margin-bottom: 15px;
+        margin-top: 28px;
+        text-transform: capitalize;
+        text-decoration: none;
+
+        &__green {
+            color: $green;
+        }
+
+        &__blue {
+            color: $blue;
+        }
+
+        @include on('sm') {
+            font-size: 1.5rem;
+        }
+
+        @include on('md') {
+            font-size: 2rem;
+        }
+
+        @include on('xl') {
+            font-size: 3rem;
+            line-height: 59px;
+            margin-bottom: 35px;
+            margin-top: 95px;
+        }
+    }
+
+    &-item {
+        text-decoration: none;
+
+        &--img {
+            border-radius: 10px 10px 0 0;
+            width: 100%;
+        }
+
+        &--title {
+            background-color: $grey;
+            border-radius: 0 0 10px 10px;
+            color: $blue;
+            font-size: .5rem;
+            line-height: 9.75px;
+            margin: 0;
+            width: inherit;
+            position: relative;
+            padding: 8px 8.61px 7.61px 7px;
+
+            @include on('sm') {
+                font-size: 1.5rem;
+                line-height: 29.26px;
+                padding: 17px 10px 26px 29px;
+            }
+        }
+
+        &:hover {
+            & > .act-item--title {
+                color: $blue-hv;
+            }
+
+            & > .act-item--img {
+                background-color: $grey-hv;
+                opacity: .6;
+            }
+        }
+    }
+
+    &-more {
+        color: $green;
+        font-size: .625rem;
+        font-weight: 600;
+        position: absolute;
+        padding-right: 10px;
+        right: 0;
+        text-decoration: none;
+
+        @include on('sm') {
+            font-size: 1.25rem;
+            line-height: 29.26px;
+        }
+
+        @include on('xl') {
+            font-size: 1.5rem;
+            line-height: 29.26px;
+        }
+
+        &:hover {
+            color: $green-hv;
+        }
+    }
+}
+
+.act-unchecked,
+.act-checked {
+    position: absolute;
+    right: 2px;
+    top: 143px;
+
+    @include on('sm') {
+        top: 388px;
+    }
+
+    @include on('xl') {
+        right: 5px;
+        top: 384px;
+    }
+}
+
+.material-icons-outlined {
+    color: $greyicon;
+}
+
+.material-icons {
+    color: $green;
+}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 24px;
+
+    @include on('sm') {
+        font-size: 50px;
+    }
+
+    @include on ('xl') {
+        font-size: 58px;
+    }
+} 
+
+

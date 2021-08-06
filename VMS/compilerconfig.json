@@ -22,5 +22,9 @@
   {
     "outputFile": "Pages/Homepage/AreaCarousel.razor.css",
     "inputFile": "Pages/Homepage/AreaCarousel.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/RelatedActivities.razor.css",
+    "inputFile": "Pages/Homepage/RelatedActivities.razor.scss"
   }
 ]

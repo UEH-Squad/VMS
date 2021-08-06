@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace VMS.Application.ViewModels
 {
-    class UserLocation
+    class UserViewModel
     {
-        public float LatUser { get; set; }
-        public float LonUser { get; set; }
-
+        public double Lat { get; set; }
+        public double Lon { get; set; }
+        
     }
 }

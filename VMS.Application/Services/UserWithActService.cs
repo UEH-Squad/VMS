@@ -13,9 +13,9 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public class ActivityService : BaseService, IActivityService
+    public class UserWithActService : BaseService, IUserWithActService
     {
-        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
+        public UserWithActService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
         }
 
@@ -45,20 +45,35 @@ namespace VMS.Application.Services
             {
                 for (int i = 0; i < acts.Count(); i++)
                 {
+                    userWithAct.Add(new UserWithActivityViewModel());
                     userWithAct[i].Name = acts[i].Name;
-                    //userWithAct[i].Distance = Haversine(user, acts[i]);
+                    userWithAct[i].Distance = Haversine(user, acts[i]);
                 }
             }
             else
             {
                 return null;
             }
+            userWithAct.Sort((e1, e2) =>
+            {
+                return e1.Distance.CompareTo(e2.Distance);
+            });
 
             return userWithAct;
         }
+        static double Haversine(UserViewModel user, ActivityViewModel acts)
+        {
+            double dLat = (Math.PI / 180) * (acts.Lat - user.Lat);
+            double dLon = (Math.PI / 180) * (acts.Lon - user.Lon);
 
-        
+            double rLat1 = (Math.PI / 180) * user.Lat;
+            double rLat2 = (Math.PI / 180) * acts.Lat;
 
-        
+            double a = Math.Pow(Math.Sin(dLat / 2), 2) + Math.Pow(Math.Sin(dLon / 2), 2) * Math.Cos(rLat1) * Math.Cos(rLat2);
+
+            double d = Math.Round(2 * 6371 * Math.Asin(Math.Sqrt(a)), 2);
+
+            return d;
+        }
     }
 }

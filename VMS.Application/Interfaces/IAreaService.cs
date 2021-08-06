@@ -7,8 +7,8 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Application.Interfaces
 {
-    public interface IActivityService
+    public interface IAreaService
     {
-        Task<List<UserWithActivityViewModel>> GetAllActivities();        
+        Task<List<AreaViewModel>> GetAllAreas();
     }
 }

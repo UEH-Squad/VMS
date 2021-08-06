@@ -1,0 +1,34 @@
+﻿@using VMS.Application.ViewModels
+@using VMS.Application.Interfaces
+
+@inject IJSRuntime JsRuntime;
+@inject IUserWithActService UserWithActService
+
+<h3>NHỮNG HOẠT ĐỘNG GẦN NHẤT</h3>
+
+<div class="activity">
+    <div>
+        @if (userWithActs != null)
+        {
+            @for (int i = 0; i < userWithActs.Count(); i++)
+            {
+                <h3>@userWithActs[i].Name - @userWithActs[i].Distance km</h3>
+            }
+        }
+            else
+            {
+                <h4>No Activities</h4>
+            }
+
+
+    </div>
+</div>
+
+
+@code {
+    private List<UserWithActivityViewModel> userWithActs;
+    protected async override Task OnInitializedAsync()
+    {
+        userWithActs = await UserWithActService.GetAllActivities();
+    }
+}

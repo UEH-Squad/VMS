@@ -7,7 +7,7 @@ namespace VMS.Application.Interfaces
 {
     public interface IAddressPathService
     {
-        Task<IEnumerable<Provinces>> GetProvinces();
-        Task InsertToDatabase();
+        Task<IEnumerable<Province>> GetProvincesAsync();
+        Task InsertToDatabaseAsync();
     }
 }

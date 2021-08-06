@@ -10,8 +10,9 @@
 
 
     @code {
+
         protected override async Task OnInitializedAsync()
         {
-            await AddressPathService.InsertToDatabase();
+            await AddressPathService.InsertToDatabaseAsync();
         }
     }

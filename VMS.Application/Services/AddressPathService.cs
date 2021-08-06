@@ -24,7 +24,7 @@ namespace VMS.Application.Services
             _clientFactory = clientFactory;
         }
 
-        public async Task<IEnumerable<Provinces>> GetProvinces()
+        public async Task<IEnumerable<Province>> GetProvincesAsync()
         {
             // Instead of calling API, we can make calls to database to retrieve data
 
@@ -44,21 +44,23 @@ namespace VMS.Application.Services
                 return
                     (
 
-                    System.Text.Json.JsonSerializer.Deserialize<List<Provinces>>(stringResponse,
+                    System.Text.Json.JsonSerializer.Deserialize<List<Province>>(stringResponse,
                     new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })
 
                     );
             }
             else
             {
-                return Array.Empty<Provinces>();
+                return Array.Empty<Province>();
             }
         }
 
-        public async Task InsertToDatabase()
+        public async Task InsertToDatabaseAsync()
         {
-            IEnumerable<Provinces> provinces = await GetProvinces();
             DbContext dbContext = _dbContextFactory.CreateDbContext();
+            if (await _repository.GetCountAsync<AddressPathType>(dbContext) != 0) return;
+            IEnumerable<Province> provinces = await GetProvincesAsync();
+           
             List<string> divitionTypes = new List<string>();
             foreach (var province in provinces)
             {

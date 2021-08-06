@@ -8,20 +8,20 @@ using VMS.Domain.Models;
 
 namespace VMS.Application.ViewModels
 {
-    public class Provinces
+    public class Province
     {
 
         public string Name { get; set; }
         public string Division_type { get; set; }
-        public List<Districts> Districts { get; set; }
+        public List<District> Districts { get; set; }
     }
-    public class Districts
+    public class District
     {
         public string Name { get; set; }
         public string Division_type { get; set; }
-        public List<Wards> Wards { get; set; }
+        public List<Ward> Wards { get; set; }
     }
-    public class Wards
+    public class Ward
     {
         public string Name { get; set; }
         public string Division_type { get; set; }

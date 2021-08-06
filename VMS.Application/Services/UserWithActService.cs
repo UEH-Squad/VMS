@@ -27,47 +27,39 @@ namespace VMS.Application.Services
             IEnumerable<ActivityViewModel> Activities = activities.Select(x => new ActivityViewModel
             {
                 Name = x.Name,
-                Lat = x.Latitude,
-                Lon = x.Longitude
+                Latitude = x.Latitude,
+                Longitude = x.Longitude
             }
             );
 
             //Seeding to user loacation
-            UserViewModel user = new UserViewModel();
-            user.Lat = 14.155555;
-            user.Lon = 125.124444;
+            var user = new UserViewModel();
+            user.Latitude = 14.155555;
+            user.Longitude = 125.124444;
 
             List<ActivityViewModel> acts = Activities.ToList();
 
-            List<UserWithActivityViewModel> userWithAct = new List<UserWithActivityViewModel>();
+            IEnumerable<UserWithActivityViewModel> userWithAct = acts.Select(x => new UserWithActivityViewModel
+            {
+                Name = x.Name,
+                Distance = Haversine(user,x.Latitude,x.Longitude)
+            });
 
-            if (acts != null)
-            {
-                for (int i = 0; i < acts.Count(); i++)
-                {
-                    userWithAct.Add(new UserWithActivityViewModel());
-                    userWithAct[i].Name = acts[i].Name;
-                    userWithAct[i].Distance = Haversine(user, acts[i]);
-                }
-            }
-            else
-            {
-                return null;
-            }
-            userWithAct.Sort((e1, e2) =>
+            List<UserWithActivityViewModel> UserWithActList = userWithAct.ToList();
+            UserWithActList.Sort((e1, e2) =>
             {
                 return e1.Distance.CompareTo(e2.Distance);
             });
 
-            return userWithAct;
+            return UserWithActList;
         }
-        static double Haversine(UserViewModel user, ActivityViewModel acts)
+        static double Haversine(UserViewModel user, double latitude, double longitude)
         {
-            double dLat = (Math.PI / 180) * (acts.Lat - user.Lat);
-            double dLon = (Math.PI / 180) * (acts.Lon - user.Lon);
+            double dLat = (Math.PI / 180) * (latitude - user.Latitude);
+            double dLon = (Math.PI / 180) * (longitude - user.Longitude);
 
-            double rLat1 = (Math.PI / 180) * user.Lat;
-            double rLat2 = (Math.PI / 180) * acts.Lat;
+            double rLat1 = (Math.PI / 180) * user.Latitude;
+            double rLat2 = (Math.PI / 180) * latitude;
 
             double a = Math.Pow(Math.Sin(dLat / 2), 2) + Math.Pow(Math.Sin(dLon / 2), 2) * Math.Cos(rLat1) * Math.Cos(rLat2);
 

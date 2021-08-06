@@ -12,13 +12,17 @@
         {
             @for (int i = 0; i < userWithActs.Count(); i++)
             {
-                <h3>@userWithActs[i].Name - @userWithActs[i].Distance km</h3>
+                if (@userWithActs[i].Distance <= 5)
+                {
+                    <h3>@userWithActs[i].Name - @userWithActs[i].Distance km</h3>
+                }
+
             }
         }
-            else
-            {
-                <h4>No Activities</h4>
-            }
+        else
+        {
+            <h4>No Activities</h4>
+        }
 
 
     </div>

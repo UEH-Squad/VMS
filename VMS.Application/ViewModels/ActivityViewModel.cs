@@ -9,7 +9,7 @@ namespace VMS.Application.ViewModels
     public class ActivityViewModel
     {
         public string Name { get; set; }
-        public double Lat { get; set; }
-        public double Lon { get; set; }        
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }        
     }
 }

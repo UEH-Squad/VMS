@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace VMS.Application.ViewModels
 {
-    public class UserViewModel
+    public class ActivityAddressViewModel
     {
-        public double Lat { get; set; }
-        public double Long { get; set; }
-        public string Distrist { get; set; }
+        public int Id { get; set; }
+        public int ActivityId { get; set; }
+        public int AddressPathId { get; set; }
     }
 }

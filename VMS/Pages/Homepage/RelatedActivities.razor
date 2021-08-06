@@ -8,15 +8,33 @@
 
 <div class="activity">
     <div>
-        @if (userWithActs != null)
+        @if (activities != null)
         {
-            @for (int i = 0; i < userWithActs.Count(); i++)
+            @for (int i = 0; i < 4; i++)
             {
-                if (@userWithActs[i].Distance <= 5)
+                if (activities[i].Distance <= 5)
                 {
-                    <h3>@userWithActs[i].Name - @userWithActs[i].Distance km</h3>
+                    <h3>@activities[i].Name - @activities[i].Distance km</h3>
                 }
+            }
+        }
+        else
+        {
+            <h4>No Activities</h4>
+        }
 
+
+    </div>
+</div>
+<h3>NHỮNG HOẠT ĐỘNG NỔI BẬT</h3>
+<div class="activity">
+    <div>
+
+        @if (featuredActivities != null)
+        {
+            @for (int i = 0; i < 4; i++)
+            {
+                <h3>@featuredActivities[i].Name - @featuredActivities[i].MemberQuantity người tham gia</h3>
             }
         }
         else
@@ -30,9 +48,11 @@
 
 
 @code {
-    private List<UserWithActivityViewModel> userWithActs;
+    private List<UserWithActivityViewModel> activities, featuredActivities;
+
     protected async override Task OnInitializedAsync()
     {
-        userWithActs = await UserWithActService.GetAllActivities();
+        activities = await UserWithActService.GetNearestActivitiesAsync();
+        featuredActivities = await UserWithActService.GetFeaturedActivitiesAsync();
     }
 }

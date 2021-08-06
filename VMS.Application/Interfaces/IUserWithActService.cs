@@ -9,6 +9,7 @@ namespace VMS.Application.Interfaces
 {
     public interface IUserWithActService
     {
-        Task<List<UserWithActivityViewModel>> GetAllActivities();
+        Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesAsync();
+        Task<List<UserWithActivityViewModel>> GetNearestActivitiesAsync();
     }
 }

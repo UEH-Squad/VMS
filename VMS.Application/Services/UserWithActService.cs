@@ -19,7 +19,7 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<UserWithActivityViewModel>> GetAllActivities()
+        public async Task<List<UserWithActivityViewModel>> GetNearestActivitiesAsync()
         {
             DbContext context = _dbContextFactory.CreateDbContext();
             List<Activity> activities = await _repository.GetListAsync<Activity>(context);
@@ -28,44 +28,81 @@ namespace VMS.Application.Services
             {
                 Name = x.Name,
                 Latitude = x.Latitude,
-                Longitude = x.Longitude
+                Longitude = x.Longitude,                
             }
             );
 
             //Seeding to user loacation
             var user = new UserViewModel();
-            user.Latitude = 14.155555;
-            user.Longitude = 125.124444;
+            user.Lat = 14.155555;
+            user.Long = 125.124444;
 
-            List<ActivityViewModel> acts = Activities.ToList();
+            List<ActivityViewModel> activitiesList = Activities.ToList();
 
-            IEnumerable<UserWithActivityViewModel> userWithAct = acts.Select(x => new UserWithActivityViewModel
+            IEnumerable<UserWithActivityViewModel> userWithActivity = activitiesList.Select(x => new UserWithActivityViewModel
             {
                 Name = x.Name,
-                Distance = Haversine(user,x.Latitude,x.Longitude)
+                Distance = Haversine(user,x.Latitude,x.Longitude),
+                MemberQuantity = x.MemberQuantity
             });
 
-            List<UserWithActivityViewModel> UserWithActList = userWithAct.ToList();
-            UserWithActList.Sort((e1, e2) =>
+            List<UserWithActivityViewModel> ActivitiesList = userWithActivity.ToList();
+            ActivitiesList.Sort((e1, e2) =>
             {
                 return e1.Distance.CompareTo(e2.Distance);
             });
-
-            return UserWithActList;
+            ActivitiesList.Sort((e1, e2) =>
+            {
+                return e1.MemberQuantity.CompareTo(e2.MemberQuantity);
+            });
+            return ActivitiesList;
         }
         static double Haversine(UserViewModel user, double latitude, double longitude)
         {
-            double dLat = (Math.PI / 180) * (latitude - user.Latitude);
-            double dLon = (Math.PI / 180) * (longitude - user.Longitude);
+            double latDistance = (Math.PI / 180) * (latitude - user.Lat);
+            double longDistance = (Math.PI / 180) * (longitude - user.Long);
 
-            double rLat1 = (Math.PI / 180) * user.Latitude;
-            double rLat2 = (Math.PI / 180) * latitude;
+            double userLatRadian = (Math.PI / 180) * user.Lat;
+            double actLatRadian = (Math.PI / 180) * latitude;
 
-            double a = Math.Pow(Math.Sin(dLat / 2), 2) + Math.Pow(Math.Sin(dLon / 2), 2) * Math.Cos(rLat1) * Math.Cos(rLat2);
+            double formula = Math.Pow(Math.Sin(latDistance / 2), 2) + Math.Pow(Math.Sin(longDistance / 2), 2) * Math.Cos(userLatRadian) * Math.Cos(actLatRadian);
 
-            double d = Math.Round(2 * 6371 * Math.Asin(Math.Sqrt(a)), 2);
+            double distance = Math.Round(2 * 6371 * Math.Asin(Math.Sqrt(formula)), 2);
 
-            return d;
+            return distance;
+        }
+
+        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesAsync()
+        {
+            DbContext context = _dbContextFactory.CreateDbContext();
+            List<Activity> activities = await _repository.GetListAsync<Activity>(context);
+
+            IEnumerable<ActivityViewModel> Activities = activities.Select(x => new ActivityViewModel
+            {
+                Name = x.Name,                
+                MemberQuantity = x.MemberQuantity
+            }
+            );
+
+            //Seeding to user loacation
+            var user = new UserViewModel();
+            user.Lat = 14.155555;
+            user.Long = 125.124444;
+
+            List<ActivityViewModel> activitiesList = Activities.ToList();
+            IEnumerable<UserWithActivityViewModel> userWithActivity = activitiesList.Select(x => new UserWithActivityViewModel
+            {
+                Name = x.Name,
+                MemberQuantity = x.MemberQuantity
+            });
+
+            List<UserWithActivityViewModel> FeaturesActivitiesList = userWithActivity.ToList();
+            FeaturesActivitiesList.Sort((e1, e2) =>
+            {
+                return e2.MemberQuantity.CompareTo(e1.MemberQuantity);
+            });
+
+            return FeaturesActivitiesList;
         }
     }
 }

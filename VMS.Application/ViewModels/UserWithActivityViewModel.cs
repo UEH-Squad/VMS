@@ -10,5 +10,6 @@ namespace VMS.Application.ViewModels
     {
         public string Name { get; set; }
         public double Distance { get; set; }
+        public int MemberQuantity { get; set; }
     }
 }

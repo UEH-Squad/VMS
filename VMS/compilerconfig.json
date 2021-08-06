@@ -22,5 +22,13 @@
   {
     "outputFile": "Pages/Homepage/AreaCarousel.razor.css",
     "inputFile": "Pages/Homepage/AreaCarousel.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/Filter.razor.css",
+    "inputFile": "Pages/Homepage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/LogoBaner.razor.css",
+    "inputFile": "Pages/Homepage/LogoBaner.razor.scss"
   }
 ]

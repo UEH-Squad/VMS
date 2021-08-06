@@ -1,0 +1,166 @@
+﻿@import "../../Resources/scss/common/_variables";
+.my-filter {
+    padding: 50px 0;
+    text-align: center;
+
+    .container {
+        padding: 0;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+        font-size: 16px;
+        font-weight: 700;
+        color: $blue;
+
+        span {
+            color: $green;
+        }
+
+        @include on("sm") {
+            font-size: 30px;
+        }
+
+        @include on("lg") {
+            font-size: 36px;
+        }
+    }
+
+    .owl-carousel {
+        position: relative;
+        padding: 0 30px;
+
+        @include on("sm") {
+            padding: 0 60px;
+        }
+
+        @include on("lg") {
+            padding: 0 80px;
+        }
+    }
+
+    .item {
+        text-align: center;
+
+        &:hover > i {
+            font-size: 32px
+        }
+
+        &:hover > span {
+            transform: translateY(-5px);
+        }
+
+        i {
+            display: block;
+            background-color: $blue;
+            border-radius: 50%;
+            color: white;
+            margin: 5px auto;
+            transition: all 0.3s linear;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 24px;
+
+            @include on("sm") {
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+                font-size: 30px;
+            }
+
+            @include on("lg") {
+                width: 80px;
+                height: 80px;
+                line-height: 80px;
+                font-size: 30px;
+            }
+        }
+
+        span {
+            color: $green;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s linear;
+            font-size: 16px;
+
+            @include on("sm") {
+                font-size: 20px;
+            }
+
+            @include on("lg") {
+                font-size: 24px;
+            }
+        }
+
+        @include on("sm") {
+            &:hover > i {
+                font-size: 40px
+            }
+        }
+
+        @include on("lg") {
+            &:hover > i {
+                font-size: 45px
+            }
+        }
+    }
+
+    ::deep .owl-nav {
+        .owl-prev {
+            position: absolute;
+            top: -35px;
+            left: 0;
+
+            span {
+                font-size: 80px;
+                color: $blue;
+                transition: all 0.3s linear;
+
+                &:hover {
+                    color: #0B588C;
+                }
+            }
+
+            &:hover {
+                background: none;
+            }
+
+            @include on("lg") {
+                top: -30px;
+                left: 30px;
+            }
+        }
+
+        .owl-next {
+            position: absolute;
+            top: -35px;
+            right: 0;
+
+            span {
+                font-size: 80px;
+                color: $blue;
+                transition: all 0.3s linear;
+
+                &:hover {
+                    color: #0B588C;
+                }
+            }
+
+            &:hover {
+                background: none;
+            }
+
+            @include on("lg") {
+                top: -30px;
+                right: 30px;
+            }
+        }
+    }
+
+
+    ::deep .owl-dots {
+        display: none;
+    }
+}
+

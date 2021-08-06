@@ -48,4 +48,20 @@ const playVideo = (src) => {
     }
 }
 
-export default { slick, playVideo };
+const getUserLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            return null;
+        }
+    }
+
+function showPosition(position) {
+    var result = {
+        Lat: position.coords.latitude,
+        Long: position.coords.longitude,
+    }
+    return result;
+}
+
+export default { slick, playVideo, getUserLocation };

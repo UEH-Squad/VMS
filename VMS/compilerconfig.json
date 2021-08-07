@@ -22,5 +22,9 @@
   {
     "outputFile": "Pages/Homepage/AreaCarousel.razor.css",
     "inputFile": "Pages/Homepage/AreaCarousel.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Footer.razor.css",
+    "inputFile": "Shared/Footer.razor.scss"
   }
 ]

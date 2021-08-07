@@ -53,7 +53,7 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<ISkillService, SkillService>();
             services.AddTransient<IAreaService, AreaService>();
             services.AddTransient<IUploadService, UploadService>();
-            services.AddTransient<IAddressLocationApiService, AddressLocationApiService>();
+            services.AddTransient<IApiService, ApiService>();
             services.AddHttpClient();
         }
 

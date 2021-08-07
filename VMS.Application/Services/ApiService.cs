@@ -6,17 +6,17 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Application.Services
 {
-    public class AddressLocationApiService : IAddressLocationApiService
+    public class ApiService : IApiService
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly string _apiKey = "Sra1zcTjUuhm1suxPB0mXKF-vyajcClci_jHqiT9ycU";
 
-        public AddressLocationApiService(IHttpClientFactory clientFactory)
+        public ApiService(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
 
-        public async Task<AddressLocationReponse> GetAddressLocationAsync(string address)
+        public async Task<CoordinateReponse> GetCoordinateAsync(string address)
         {
             string url = string.Format("https://geocode.search.hereapi.com/v1/geocode?q={0}&apiKey={1}", address, _apiKey);
 
@@ -33,11 +33,11 @@ namespace VMS.Application.Services
                 dynamic deserialized = JsonConvert.DeserializeObject(stringResponse);
                 dynamic postion = deserialized["items"][0]["position"];
 
-                return new AddressLocationReponse() { Latitude = postion["lat"], Longitude = postion["lng"] };
+                return new CoordinateReponse() { Latitude = postion["lat"], Longitude = postion["lng"] };
             }
             else
             {
-                return new AddressLocationReponse();
+                return new CoordinateReponse();
             }
         }
     }

@@ -16,12 +16,12 @@ namespace VMS.Application.Services
     public class ActivityService : BaseService, IActivityService
     {
         private readonly IIdentityService _identityService;
-        private readonly IAddressLocationApiService _addressLocationApiService;
+        private readonly IApiService _apiService;
 
-        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IAddressLocationApiService addressLocationApiService) : base(repository, dbContextFactory, mapper)
+        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IApiService apiService) : base(repository, dbContextFactory, mapper)
         {
             _identityService = identityService;
-            _addressLocationApiService = addressLocationApiService;
+            _apiService = apiService;
         }
 
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
@@ -49,9 +49,9 @@ namespace VMS.Application.Services
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
 
-            AddressLocationReponse addressLocationReponse = await _addressLocationApiService.GetAddressLocationAsync(activity.Address);
-            activity.Latitude = addressLocationReponse.Latitude;
-            activity.Longitude = addressLocationReponse.Longitude;
+            CoordinateReponse coordinateReponse = await _apiService.GetCoordinateAsync(activity.Address);
+            activity.Latitude = coordinateReponse.Latitude;
+            activity.Longitude = coordinateReponse.Longitude;
 
             await _repository.InsertAsync(dbContext, activity);
 
@@ -114,6 +114,10 @@ namespace VMS.Application.Services
                 ActivityId = activity.Id,
                 IsDeleted = false
             }).ToList() ;
+
+            CoordinateReponse addressLocationReponse = await _apiService.GetCoordinateAsync(activity.Address);
+            activity.Latitude = addressLocationReponse.Latitude;
+            activity.Longitude = addressLocationReponse.Longitude;
 
             await _repository.UpdateAsync(dbContext, activity);
         }

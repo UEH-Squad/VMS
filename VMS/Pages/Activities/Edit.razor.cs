@@ -42,7 +42,10 @@ namespace VMS.Pages.Activities
             skills = await SkillService.GetAllSkillsAsync();
             areas = await AreaService.GetAllAreasAsync();
             user = IdentityService.GetCurrentUser();
-            banner = "/img/" + activity.Banner;
+            if (!string.IsNullOrEmpty(activity.Banner))
+            {
+                banner = "/img/" + activity.Banner;
+            }
         }
 
         private void CheckboxChanged(ChangeEventArgs e, Skill skill)

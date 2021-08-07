@@ -1,7 +1,7 @@
 ﻿@page
-@using Microsoft.AspNetCore.Identity
+@using VMS.Domain.Models
 @attribute [IgnoreAntiforgeryToken]
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<User> SignInManager
 @functions {
     public async Task<IActionResult> OnPost()
     {

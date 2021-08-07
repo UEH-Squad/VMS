@@ -40,7 +40,7 @@
 
 .my-logoBaner ::deep .owl-nav .owl-prev {
   position: absolute;
-  top: -28px;
+  top: -10px;
   left: 0; }
   .my-logoBaner ::deep .owl-nav .owl-prev span {
     font-size: 80px;
@@ -52,16 +52,16 @@
     background: none; }
   @media (min-width: 576px) {
     .my-logoBaner ::deep .owl-nav .owl-prev {
-      top: -8px;
+      top: -5px;
       left: 0; } }
   @media (min-width: 992px) {
     .my-logoBaner ::deep .owl-nav .owl-prev {
-      top: 20px;
+      top: 5px;
       left: 30px; } }
 
 .my-logoBaner ::deep .owl-nav .owl-next {
   position: absolute;
-  top: -28px;
+  top: -10px;
   right: 0; }
   .my-logoBaner ::deep .owl-nav .owl-next span {
     font-size: 80px;
@@ -73,53 +73,11 @@
     background: none; }
   @media (min-width: 576px) {
     .my-logoBaner ::deep .owl-nav .owl-next {
-      top: -8px;
+      top: -5px;
       right: 0; } }
   @media (min-width: 992px) {
     .my-logoBaner ::deep .owl-nav .owl-next {
-      top: 20px;
-      right: 30px; } }
-
-.my-logoBaner .owl-prev {
-  position: absolute;
-  top: -28px;
-  left: 0; }
-  .my-logoBaner .owl-prev span {
-    font-size: 80px;
-    color: #18A0FB;
-    transition: all 0.3s linear; }
-    .my-logoBaner .owl-prev span:hover {
-      color: #0B588C; }
-  .my-logoBaner .owl-prev:hover {
-    background: none; }
-  @media (min-width: 576px) {
-    .my-logoBaner .owl-prev {
-      top: -8px;
-      left: 0; } }
-  @media (min-width: 992px) {
-    .my-logoBaner .owl-prev {
-      top: 20px;
-      left: 30px; } }
-
-.my-logoBaner .owl-next {
-  position: absolute;
-  top: -28px;
-  right: 0; }
-  .my-logoBaner .owl-next span {
-    font-size: 80px;
-    color: #18A0FB;
-    transition: all 0.3s linear; }
-    .my-logoBaner .owl-next span:hover {
-      color: #0B588C; }
-  .my-logoBaner .owl-next:hover {
-    background: none; }
-  @media (min-width: 576px) {
-    .my-logoBaner .owl-next {
-      top: -8px;
-      right: 0; } }
-  @media (min-width: 992px) {
-    .my-logoBaner .owl-next {
-      top: 20px;
+      top: 5px;
       right: 30px; } }
 
 .my-logoBaner ::deep .owl-dots {

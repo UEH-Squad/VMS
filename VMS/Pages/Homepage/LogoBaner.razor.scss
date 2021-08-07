@@ -49,7 +49,7 @@
     ::deep .owl-nav {
         .owl-prev {
             position: absolute;
-            top: -28px;
+            top: -10px;
             left: 0;
 
             span {
@@ -67,19 +67,19 @@
             }
 
             @include on("sm") {
-                top: -8px;
+                top: -5px;
                 left: 0;
             }
 
             @include on("lg") {
-                top: 20px;
+                top: 5px;
                 left: 30px;
             }
         }
 
         .owl-next {
             position: absolute;
-            top: -28px;
+            top: -10px;
             right: 0;
 
             span {
@@ -97,74 +97,14 @@
             }
 
             @include on("sm") {
-                top: -8px;
+                top: -5px;
                 right: 0;
             }
 
             @include on("lg") {
-                top: 20px;
+                top: 5px;
                 right: 30px;
             }
-        }
-    }
-
-    .owl-prev {
-        position: absolute;
-        top: -28px;
-        left: 0;
-
-        span {
-            font-size: 80px;
-            color: $blue;
-            transition: all 0.3s linear;
-
-            &:hover {
-                color: #0B588C;
-            }
-        }
-
-        &:hover {
-            background: none;
-        }
-
-        @include on("sm") {
-            top: -8px;
-            left: 0;
-        }
-
-        @include on("lg") {
-            top: 20px;
-            left: 30px;
-        }
-    }
-
-    .owl-next {
-        position: absolute;
-        top: -28px;
-        right: 0;
-
-        span {
-            font-size: 80px;
-            color: $blue;
-            transition: all 0.3s linear;
-
-            &:hover {
-                color: #0B588C;
-            }
-        }
-
-        &:hover {
-            background: none;
-        }
-
-        @include on("sm") {
-            top: -8px;
-            right: 0;
-        }
-
-        @include on("lg") {
-            top: 20px;
-            right: 30px;
         }
     }
 

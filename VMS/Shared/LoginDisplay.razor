@@ -1,7 +1,7 @@
 ﻿<AuthorizeView>
     <Authorized>
         <li class="user-section nav-item dflex flex-column align-items-center position-relative">
-            <a href="" class="d-block text-decoration-none user-section__link">
+            <a href="@Routes.User" class="d-block text-decoration-none user-section__link">
                 <div class="user-avatar-wrapper position-relative">
                     <img src="img/hsv.png" alt="user avatar" class="user-avatar">
                 </div>
@@ -13,10 +13,10 @@
             <div class="user-section__list-wrapper position-absolute">
                 <ul class="user-section__list list-unstyled bg-white">
                     <li class="text-center">
-                        <a href="https://shopee.vn/" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
+                        <a href="@Routes.User" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
                     </li>
                     <li class="text-center">
-                        <form method="post" action="Identity/Account/LogOut">
+                        <form method="post" action="@Routes.LogOut">
                             <button type="submit" class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
                         </form>
                     </li>

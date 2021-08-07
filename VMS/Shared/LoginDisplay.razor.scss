@@ -45,22 +45,7 @@
 
 .user-section {
     &__link {
-        /*.user-avatar-wrapper::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 100%;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            display: none;
-            @include on('xl') {
-                width: 65px;
-            }
-        }*/
+        
 
         .user-avatar {
             width: 80px;
@@ -88,9 +73,7 @@
         &:hover .user-label {
             color: $green-bold;
         }
-        /*&:hover .user-avatar-wrapper::before {
-            display: block;
-        }*/
+        
     }
 
     &__dropdown-icon {

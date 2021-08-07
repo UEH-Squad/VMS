@@ -26,35 +26,12 @@
                     <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
                 </a>
             </div>
-            @*<button class="navbar-toggler me-2 me-sm-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navbarToggler" class="collapse navbar-collapse bg-white">
-            <div class="d-flex flex-column-reverse flex-lg-row flex-lg-grow-1">
-                <ul class="navbar-nav me-lg-auto d-flex flex-column justify-content-around align-items-center flex-grow-1 flex-lg-row">
-                    <li class="nav-item">
-                        <a href="@Routes.HomePage" class="nav-link my-nav-link">Trang chu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Routes.Activities" class="nav-link my-nav-link">Go Volunteer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Routes.Organizations" class="nav-link my-nav-link">Don vi to chuc</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Routes.Map" class="nav-link my-nav-link">Ban do</a>
-                    </li>
-                </ul>
+           
+            <div class="my-buttons-wrapper d-flex align-items-center">
+                <a class="btn my-home-btn d-flex align-items-center justify-content-center fw-bold p-0 position-relative text-white" href="@Routes.HomePage">
+                    Trang chủ
+                </a>
             </div>
-                <ul class="navbar-nav d-flex flex-row align-items-center ms-lg-4 justify-content-end justify-content-lg-center me-2 me-sm-0">
-                    @{ await Html.RenderPartialAsync("_LoginPartial"); }
-                </ul>
-        </div>*@
-        <div class="my-buttons-wrapper d-flex align-items-center">
-            <a class="btn my-home-btn d-flex align-items-center justify-content-center fw-bold p-0 position-relative text-white" href="@Routes.HomePage">
-                Trang chủ
-            </a>
-        </div>
         </div>
     </nav>
     <main class="container flex-grow-1 mt-2">

@@ -17,25 +17,26 @@
     .my-logoBaner .owl-carousel {
       padding: 0 80px; } }
 
-.my-logoBaner .item .logoBaner__group {
-  display: flex;
-  justify-content: space-around;
+.my-logoBaner .item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
-  margin-bottom: 20px; }
-  .my-logoBaner .item .logoBaner__group img {
+  grid-row-gap: 40px; }
+  .my-logoBaner .item img {
+    margin: auto;
     width: 16px; }
     @media (min-width: 576px) {
-      .my-logoBaner .item .logoBaner__group img {
+      .my-logoBaner .item img {
         width: 24px; } }
     @media (min-width: 992px) {
-      .my-logoBaner .item .logoBaner__group img {
+      .my-logoBaner .item img {
         width: 36px; } }
   @media (min-width: 576px) {
-    .my-logoBaner .item .logoBaner__group {
-      margin-bottom: 30px; } }
+    .my-logoBaner .item {
+      grid-row-gap: 30px; } }
   @media (min-width: 992px) {
-    .my-logoBaner .item .logoBaner__group {
-      margin-bottom: 40px; } }
+    .my-logoBaner .item {
+      grid-row-gap: 20px; } }
 
 .my-logoBaner ::deep .owl-nav .owl-prev {
   position: absolute;

@@ -19,31 +19,30 @@
     }
 
     .item {
-        .logoBaner__group {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
+        grid-row-gap: 40px;
 
-            img {
-                width: 16px;
-
-                @include on("sm") {
-                    width: 24px;
-                }
-
-                @include on("lg") {
-                    width: 36px;
-                }
-            }
+        img {
+            margin:auto;
+            width: 16px;
 
             @include on("sm") {
-                margin-bottom: 30px;
+                width: 24px;
             }
 
             @include on("lg") {
-                margin-bottom: 40px;
+                width: 36px;
             }
+        }
+
+        @include on("sm") {
+            grid-row-gap: 30px;
+        }
+
+        @include on("lg") {
+            grid-row-gap: 20px;
         }
     }
 

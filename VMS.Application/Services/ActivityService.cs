@@ -15,14 +15,24 @@ namespace VMS.Application.Services
 {
     public class ActivityService : BaseService, IActivityService
     {
-        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
+        private readonly IIdentityService _identityService;
+
+        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService) : base(repository, dbContextFactory, mapper)
         {
+            _identityService = identityService;
         }
 
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Includes = a => a.Include(x => x.ActivitySkills)
+            };
             List<Activity> activities = await _repository.GetListAsync<Activity>(dbContext);
+            activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
+
             List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
             return activitiesViewModel;
         }

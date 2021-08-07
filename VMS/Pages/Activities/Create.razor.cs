@@ -7,9 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-
 using VMS.Common;
-
 using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities

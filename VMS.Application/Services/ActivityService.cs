@@ -16,10 +16,12 @@ namespace VMS.Application.Services
     public class ActivityService : BaseService, IActivityService
     {
         private readonly IIdentityService _identityService;
+        private readonly IAddressLocationApiService _addressLocationApiService;
 
-        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService) : base(repository, dbContextFactory, mapper)
+        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IAddressLocationApiService addressLocationApiService) : base(repository, dbContextFactory, mapper)
         {
             _identityService = identityService;
+            _addressLocationApiService = addressLocationApiService;
         }
 
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
@@ -42,9 +44,14 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Activity activity = _mapper.Map<Activity>(activityViewModel);
+            activity.PostDate = DateTime.Now;
             activity.IsApproved = false;
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
+
+            AddressLocationReponse addressLocationReponse = await _addressLocationApiService.GetAddressLocationAsync(activity.Address);
+            activity.Latitude = addressLocationReponse.Latitude;
+            activity.Longitude = addressLocationReponse.Longitude;
 
             await _repository.InsertAsync(dbContext, activity);
 

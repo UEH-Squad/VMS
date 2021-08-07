@@ -4,12 +4,63 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-slogan {
-  background-color: #64D72F; }
-  .my-slogan p {
-    color: #FFFFFF;
-    font-size: 20px;
-    font-weight: 700; }
+@keyframes Swipe {
+  0% {
+    transform: translate(-50%, 100px);
+    opacity: 0; }
+  100% {
+    transform: translateY(-50%, 0);
+    opacity: 1; } }
 
-.my-homepage-video {
-  width: 100%; }
+@keyframes Hidden {
+  0% {
+    opacity: 1; }
+  90% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+.video-header {
+  position: relative;
+  width: auto;
+  height: 820px; }
+  .video-header__note {
+    position: relative;
+    top: 0;
+    height: 60px;
+    width: auto;
+    color: #FFFFFF;
+    background-color: #64D72F;
+    padding: 12px 0;
+    z-index: 2;
+    opacity: 0;
+    animation: Hidden 3s ease 0.5s 1 backwards; }
+    .video-header__note__text {
+      position: relative;
+      display: inline-block;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+  .video-header__source {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    object-fit: cover;
+    background-repeat: no-repeat; }
+  .video-header__title {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, 0);
+    animation: Swipe 1s ease 0.5s 1 backwards; }
+    .video-header__title--main {
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 72px; }
+    .video-header__title--sub {
+      color: #FFFFFF;
+      font-weight: 500;
+      font-size: 72px; }

@@ -1,12 +1,24 @@
 ﻿@inject IJSRuntime JsRuntime
 
-<div class="my-slogan">
-    <p class="text-center h-100 m-0 py-2">Go Volunteer: Cong dong Tinh nguyen truc tuyen Truong Dai hoc Kinh te TP.HCM</p>
+<div class="video-header">
+    <div class="video-header__note">
+        <div class="video-header__note__text">
+            GoVirlunteer: Cộng đồng Tình nguyện trực tuyến Trường Đại học Kinh tế TP. HCM
+        </div>
+    </div>
+    <video src=@videoUrl class="video-header__source" loop muted autoplay></video>
+    <div class="video-header__title">
+        <div class="video-header__title--main">
+            Get Ready UEH
+        </div>
+        <div class="video-header__title--sub">
+            Go Virlunteer
+        </div>
+    </div>
 </div>
-<video autoplay muted class="my-homepage-video"></video>
 
 @code {
-    private string videoUrl = "https://r2---sn-vgqsknls.googlevideo.com/videoplayback?expire=1627682360&ei=2CEEYaSXLsKT8gSOj7eIBw&ip=216.131.105.3&id=o-AAm5SScW0DhyiMpVW8H9IXNzzuRMm1QYtx4CXWLQUSyn&itag=18&source=youtube&requiressl=yes&vprv=1&mime=video%2Fmp4&ns=DcuJ2pHbR1VGRYgePw2mdDsG&gir=yes&clen=26040054&ratebypass=yes&dur=336.248&lmt=1557126732956982&fexp=24001373,24007246&c=WEB&txp=5531432&n=nj9bKU8SmoJv_q02N&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIga_VowiDfms_jtFZhNRGLru7_Z7IbG39kh21madSgs9ICIQDhmWYyAqR2M9pEFb1aWh0epjtzaL0Oqmc0yEW8ubFKGg%3D%3D&rm=sn-p5qy776,sn-q4fese7l&req_id=1b7ea9bcb37fa3ee&ipbypass=yes&cm2rm=sn-5hnese7l&redirect_counter=3&cms_redirect=yes&mh=Qk&mip=8.21.11.180&mm=39&mn=sn-vgqsknls&ms=ltr&mt=1627660589&mv=m&mvi=2&pl=24&lsparams=ipbypass,mh,mip,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRQIhAJ-M8LQqYat-T8RRcIvySvievvVNN4zqhT18W93FYMmKAiA-qviaNZcaAgrremmeOY2RugGWrmHUf7KLo6fpLYHtUA%3D%3D";
+    string videoUrl = "https://player.vimeo.com/external/359344963.sd.mp4?s=95e2d6120bf8034a2f0d9c797f9b6a059e1deaf1&profile_id=165";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

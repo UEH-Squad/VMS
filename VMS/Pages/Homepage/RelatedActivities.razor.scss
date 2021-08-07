@@ -3,7 +3,8 @@
 .my-row {
     display: flex;
     height: 168px;
-    margin: 0 -4px;
+    margin-left: -4px;
+    margin-right: -16px;
     overflow-x: scroll;
     overflow-y: hidden;
 
@@ -16,21 +17,25 @@
         height: 300px;
         padding-top: 16px;
     }
+
     @include on('md') {
         height: 423px;
     }
+
     @include on('lg') {
         height: 450px;
-        width: 939px;
+        margin-right: -100px;
     }
+
     @include on('xl') {
-        width: 1110px;
+        margin-right: -4px;
+        width: 1140px;
         overflow-x: hidden;
     }
 
     @include on('xxl') {
+        width: 1320px;
         height: 455px;
-        width: 1300px;
     }
 }
 
@@ -38,30 +43,42 @@
     height: 162.28px;
     position: relative;
     width: 138px;
-    
+
     @include on('sm') {
         height: 280px;
         width: 200px;
     }
+
     @include on ('md') {
         width: 260px;
     }
+
     @include on('lg') {
         width: 283px;
     }
+
     @include on('xl') {
         height: 412px;
-        width: 278px;
+        width: 282px;
+        margin: 0 3px;
     }
+
     @include on('xxl') {
-        width: 323px;
-        margin-right: 2px;
+        width: 325px;
+        margin: 0 4px;
     }
 }
 .padding-10 {
     @include on('md') {
     padding-right: .625rem;
     padding-left: .625rem;
+    }
+}
+.margin-10 {
+    margin-left: 10px;
+
+    @include on('xl') {
+        margin-left: 0px;
     }
 }
 
@@ -172,13 +189,14 @@
         }
 
         @include on('lg') {
-            top: 457px
+            top: 457px;
+            right: -90px;
         }
 
         @include on('xl') {
             font-size: 1.5rem;
             line-height: 29.26px;
-            right: 18px;
+            right: 4px;
             top: 523px;
         }
 
@@ -214,13 +232,14 @@
         }
 
         @include on('lg') {
-            top: 969px
+            top: 969px;
+            right: -90px;
         }
 
         @include on('xl') {
             font-size: 1.5rem;
             line-height: 29.26px;
-            right: 18px;
+            right: 4px;
             top: 1162px;
         }
 
@@ -243,16 +262,20 @@
     @include on('sm') {
         top: 229px;
     }
+
     @include on('md') {
         top: 335px;
     }
+
     @include on ('lg') {
         top: 354px;
     }
+
     @include on('xl') {
         right: 5px;
         top: 347px;
     }
+
     @include on('xxl') {
         top: 384px;
     }

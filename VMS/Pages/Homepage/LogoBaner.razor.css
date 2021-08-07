@@ -9,7 +9,8 @@
 
 .my-logoBaner .owl-carousel {
   position: relative;
-  padding: 0 30px; }
+  padding: 0 30px;
+  z-index: 0; }
   @media (min-width: 576px) {
     .my-logoBaner .owl-carousel {
       padding: 0 60px; } }

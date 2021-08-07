@@ -20,10 +20,6 @@
     "inputFile": "Pages/Homepage/SloganAndVideo.razor.scss"
   },
   {
-    "outputFile": "Pages/Homepage/AreaCarousel.razor.css",
-    "inputFile": "Pages/Homepage/AreaCarousel.razor.scss"
-  },
-  {
     "outputFile": "Shared/Notification.razor.css",
     "inputFile": "Shared/Notification.razor.scss"
   },

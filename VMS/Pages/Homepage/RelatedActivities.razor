@@ -1,40 +1,36 @@
 ﻿@using VMS.Application.ViewModels
 @using VMS.Application.Interfaces
+@using Microsoft.AspNetCore.Identity
 
 @inject IJSRuntime JsRuntime;
 @inject IUserWithActService UserWithActService
-
-<h3>NHỮNG HOẠT ĐỘNG GẦN NHẤT</h3>
+@inject IIdentityService IdentityService
+<h3>NHỮNG HOẠT ĐỘNG MỚI NHẤT GẦN BẠN</h3>
 
 <div class="activity">
     <div>
-        @if (activities != null)
+        @if (newestActivities != null)
         {
-            @for (int i = 0; i < 4; i++)
+            @for (int i = 0; i < newestActivities.Count(); i++)
             {
-                if (activities[i].Distance <= 5)
-                {
-                    <h3>@activities[i].Name - @activities[i].Distance km</h3>
-                }
+                    <h3>@newestActivities[i].Name - @newestActivities[i].ActivityId</h3>
             }
         }
         else
         {
             <h4>No Activities</h4>
         }
-
-
     </div>
 </div>
-<h3>NHỮNG HOẠT ĐỘNG NỔI BẬT</h3>
+<h3>NHỮNG HOẠT ĐỘNG NỔI BẬT GẦN BẠN</h3>
 <div class="activity">
     <div>
 
-        @if (featuredActivities != null)
+        @if (featureActivities != null)
         {
-            @for (int i = 0; i < 4; i++)
+            @for (int i = 0; i < featureActivities.Count(); i++)
             {
-                <h3>@featuredActivities[i].Name - @featuredActivities[i].MemberQuantity người tham gia</h3>
+                <h3>@featureActivities[i].Name @featureActivities[i].MemberQuantity</h3>
             }
         }
         else
@@ -48,11 +44,15 @@
 
 
 @code {
-    private List<UserWithActivityViewModel> activities, featuredActivities;
+        private List<UserWithActivityViewModel> newestActivities, featureActivities;
+        private IdentityUser user;   
+  
 
     protected async override Task OnInitializedAsync()
-    {
-        activities = await UserWithActService.GetNearestActivitiesAsync();
-        featuredActivities = await UserWithActService.GetFeaturedActivitiesAsync();
+    {          
+        newestActivities = await UserWithActService.GetNewestActivitiesAsync();
+        featureActivities = await UserWithActService.GetFeaturedActivitiesAsync();
+        user = IdentityService.GetCurrentUser();
     }
+
 }

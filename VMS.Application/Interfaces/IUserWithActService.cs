@@ -8,8 +8,9 @@ using VMS.Application.ViewModels;
 namespace VMS.Application.Interfaces
 {
     public interface IUserWithActService
-    {
+    {      
+        Task<List<UserWithActivityViewModel>> GetActivitiesAsync();
+        Task<List<UserWithActivityViewModel>> GetNewestActivitiesAsync();
         Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesAsync();
-        Task<List<UserWithActivityViewModel>> GetNearestActivitiesAsync();
     }
 }

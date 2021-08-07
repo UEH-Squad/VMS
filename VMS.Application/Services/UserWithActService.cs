@@ -18,17 +18,18 @@ namespace VMS.Application.Services
         public UserWithActService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
         }
-
-        public async Task<List<UserWithActivityViewModel>> GetNearestActivitiesAsync()
+        public async Task<List<UserWithActivityViewModel>> GetActivitiesAsync()
         {
             DbContext context = _dbContextFactory.CreateDbContext();
             List<Activity> activities = await _repository.GetListAsync<Activity>(context);
 
             IEnumerable<ActivityViewModel> Activities = activities.Select(x => new ActivityViewModel
             {
+                Id = x.Id,
                 Name = x.Name,
                 Latitude = x.Latitude,
-                Longitude = x.Longitude,                
+                Longitude = x.Longitude,
+                MemberQuantity = x.MemberQuantity
             }
             );
 
@@ -41,23 +42,15 @@ namespace VMS.Application.Services
 
             IEnumerable<UserWithActivityViewModel> userWithActivity = activitiesList.Select(x => new UserWithActivityViewModel
             {
+                ActivityId = x.Id,
                 Name = x.Name,
                 Distance = Haversine(user,x.Latitude,x.Longitude),
                 MemberQuantity = x.MemberQuantity
             });
 
-            List<UserWithActivityViewModel> ActivitiesList = userWithActivity.ToList();
-            ActivitiesList.Sort((e1, e2) =>
-            {
-                return e1.Distance.CompareTo(e2.Distance);
-            });
-            ActivitiesList.Sort((e1, e2) =>
-            {
-                return e1.MemberQuantity.CompareTo(e2.MemberQuantity);
-            });
-            return ActivitiesList;
+            return userWithActivity.OrderBy(x => x.Distance).ToList();
         }
-        static double Haversine(UserViewModel user, double latitude, double longitude)
+        static double Haversine(UserViewModel user, double latitude, double longitude) 
         {
             double latDistance = (Math.PI / 180) * (latitude - user.Lat);
             double longDistance = (Math.PI / 180) * (longitude - user.Long);
@@ -70,39 +63,22 @@ namespace VMS.Application.Services
             double distance = Math.Round(2 * 6371 * Math.Asin(Math.Sqrt(formula)), 2);
 
             return distance;
+            /* Source: https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/ */
+        }
+
+        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesAsync()
+        {
+            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesAsync();
+            List<UserWithActivityViewModel> newestActivities = nearestActivities.Take(4).ToList();
+            
+            return newestActivities.OrderByDescending(x => x.ActivityId).ToList();
         }
 
         public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesAsync()
         {
-            DbContext context = _dbContextFactory.CreateDbContext();
-            List<Activity> activities = await _repository.GetListAsync<Activity>(context);
-
-            IEnumerable<ActivityViewModel> Activities = activities.Select(x => new ActivityViewModel
-            {
-                Name = x.Name,                
-                MemberQuantity = x.MemberQuantity
-            }
-            );
-
-            //Seeding to user loacation
-            var user = new UserViewModel();
-            user.Lat = 14.155555;
-            user.Long = 125.124444;
-
-            List<ActivityViewModel> activitiesList = Activities.ToList();
-            IEnumerable<UserWithActivityViewModel> userWithActivity = activitiesList.Select(x => new UserWithActivityViewModel
-            {
-                Name = x.Name,
-                MemberQuantity = x.MemberQuantity
-            });
-
-            List<UserWithActivityViewModel> FeaturesActivitiesList = userWithActivity.ToList();
-            FeaturesActivitiesList.Sort((e1, e2) =>
-            {
-                return e2.MemberQuantity.CompareTo(e1.MemberQuantity);
-            });
-
-            return FeaturesActivitiesList;
+            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesAsync();
+            List<UserWithActivityViewModel> featuredtActivities = nearestActivities.Take(4).ToList();
+            return featuredtActivities.OrderByDescending(x => x.MemberQuantity).ToList();
         }
     }
 }

@@ -13,29 +13,49 @@
     }
 
     @include on('sm') {
-        height: 468px;
+        height: 300px;
         padding-top: 16px;
     }
-
+    @include on('md') {
+        height: 423px;
+    }
+    @include on('lg') {
+        height: 450px;
+        width: 939px;
+    }
     @include on('xl') {
-        height: 468px;
+        width: 1110px;
         overflow-x: hidden;
-        width: 1316px;
+    }
+
+    @include on('xxl') {
+        height: 455px;
+        width: 1300px;
     }
 }
 
 .item-wrapper {
     height: 162.28px;
     position: relative;
-    width: 131px;
+    width: 138px;
     
     @include on('sm') {
-        height: 450px;
-        width: 331px;
+        height: 280px;
+        width: 200px;
     }
-
+    @include on ('md') {
+        width: 260px;
+    }
+    @include on('lg') {
+        width: 283px;
+    }
     @include on('xl') {
-        height: 422px;
+        height: 412px;
+        width: 278px;
+    }
+    @include on('xxl') {
+        width: 323px;
+        margin-right: 2px;
     }
 }
 .padding-10 {
@@ -100,9 +120,22 @@
             padding: 8px 8.61px 7.61px 7px;
 
             @include on('sm') {
-                font-size: 1.5rem;
+                font-size: 14px;
+                line-height: 22.26px;
+            }
+
+            @include on('md') {
+                font-size: 20px;
                 line-height: 29.26px;
                 padding: 17px 10px 26px 29px;
+            }
+            
+            @include on('lg') {
+                font-size: 22px;
+            }
+            
+            @include on('xxl') {
+                font-size: 25px;
             }
         }
 
@@ -128,13 +161,30 @@
         text-decoration: none;
 
         @include on('sm') {
+            font-size: 16px;
+            top: 324px;
+        }
+
+        @include on('md') {
             font-size: 1.25rem;
             line-height: 29.26px;
+            top: 448px;
+        }
+
+        @include on('lg') {
+            top: 457px
         }
 
         @include on('xl') {
             font-size: 1.5rem;
             line-height: 29.26px;
+            right: 18px;
+            top: 523px;
+        }
+
+        @include on('xxl') {
+            top: 563px;
+            right: 10px;
         }
 
         &:hover {
@@ -150,11 +200,19 @@
     top: 143px;
 
     @include on('sm') {
-        top: 388px;
+        top: 229px;
     }
-
+    @include on('md') {
+        top: 335px;
+    }
+    @include on ('lg') {
+        top: 354px;
+    }
     @include on('xl') {
         right: 5px;
+        top: 347px;
+    }
+    @include on('xxl') {
         top: 384px;
     }
 }
@@ -172,6 +230,10 @@
     font-size: 24px;
 
     @include on('sm') {
+        font-size: 40px;
+    }
+
+    @include on('md') {
         font-size: 50px;
     }
 

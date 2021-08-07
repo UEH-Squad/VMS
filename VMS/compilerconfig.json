@@ -24,6 +24,10 @@
     "inputFile": "Pages/Homepage/AreaCarousel.razor.scss"
   },
   {
+    "outputFile": "Shared/Notification.razor.css",
+    "inputFile": "Shared/Notification.razor.scss"
+  },
+  {
     "outputFile": "Pages/Homepage/Filter.razor.css",
     "inputFile": "Pages/Homepage/Filter.razor.scss"
   },

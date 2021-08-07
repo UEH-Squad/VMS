@@ -48,4 +48,31 @@ const playVideo = (src) => {
     }
 }
 
-export default { slick, playVideo };
+const showResult = () => {
+    const showAnimation = () => {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100;
+        counters.forEach(counter => {
+            const updateCount = () => {
+
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = count + inc;
+                    setTimeout(updateCount, 300);
+                } else {
+                    count.innerText = target;
+                }
+            }
+            updateCount();
+        })
+    }
+    const Scroll = () => {
+        window.addEventListener('scroll', showAnimation);
+    }
+    Scroll();
+}
+
+export default { slick, playVideo, showResult};

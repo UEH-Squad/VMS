@@ -1,6 +1,7 @@
 ﻿@import '../../Resources/scss/common/_variables.scss';
 
 .my-row {
+    width: 101%;
     display: flex;
     height: 168px;
     margin-left: -4px;
@@ -23,8 +24,8 @@
     }
 
     @include on('lg') {
+        width: 104%;
         height: 450px;
-        margin-right: -100px;
     }
 
     @include on('xl') {
@@ -179,7 +180,7 @@
 
         @include on('sm') {
             font-size: 1rem;
-            top: 324px;
+            top: 330px;
         }
 
         @include on('md') {
@@ -189,20 +190,20 @@
         }
 
         @include on('lg') {
-            top: 457px;
-            right: -90px;
+            top: 464px;
+            right: -9px;
         }
 
         @include on('xl') {
             font-size: 1.5rem;
             line-height: 29.26px;
             right: 4px;
-            top: 523px;
+            top: 536px;
         }
 
         @include on('xxl') {
-            top: 563px;
-            right: 10px;
+            right: 0;
+            top: 574px;
         }
 
         &:hover {
@@ -222,31 +223,30 @@
 
         @include on('sm') {
             font-size: 1rem;
-            top: 684px;
+            top: 694px;
         }
 
         @include on('md') {
             font-size: 1.25rem;
             line-height: 29.26px;
-            top: 929px;
+            top: 930px;
         }
 
         @include on('lg') {
-            top: 969px;
-            right: -90px;
+            top: 996px;
+            right: -9px;
         }
 
         @include on('xl') {
             font-size: 1.5rem;
             line-height: 29.26px;
             right: 4px;
-            top: 1162px;
+            top: 1174px;
         }
 
         @include on('xxl') {
-            top: 563px;
-            right: 10px;
-            top: 1212px;
+            right: 0;
+            top: 1220px;
         }
 
         &:hover {

@@ -27,7 +27,6 @@
     }
 
     @include on('xxl') {
-        width: 100%;
         height: 455px;
     }
 }
@@ -226,7 +225,7 @@
         }
 
         @include on('lg') {
-            top: 996px;
+            top: 977px;
             right: -9px;
         }
 

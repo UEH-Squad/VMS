@@ -1,66 +1,191 @@
 ﻿@import '../../Resources/scss/common/_variables';
 @import '../../Resources/scss/common/_animation.scss';
 
+//---------------MOBILE UI------------------//
+//-----------------------------------------//
 .video-header {
     position: relative;
     width: auto;
-    height: 820px;
+    height: auto;
+    margin-top: 85px;
 
     &__note {
-        position: relative;
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        height: 41px;
         top: 0;
-        height: 60px;
-        width: auto;
+        left: 0;
+        right: 0;
         color: $white;
         background-color: $green;
-        padding: 12px 0;
-        z-index: 2;
         opacity: 0;
-        animation: Hidden 3s ease 0.5s 1 backwards;
+        animation: Hidden 6s ease 0.5s 1 backwards;
 
         &__text {
             position: relative;
             display: inline-block;
+            width: 320px;
+            height: 30px;
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: center;
         }
     }
 
     &__source {
-        position: absolute;
+        position: relative;
         width: 100%;
-        height: 100%;
+        height: auto;
+        // keep original ratio of the video (fullHD)
         top: 0;
         object-fit: cover;
         background-repeat: no-repeat;
+        z-index: -1;
     }
 
     &__title {
-        position: relative;
+        position: absolute;
         display: inline-block;
         text-align: center;
         left: 50%;
-        top: 60%;
+        bottom: 10%;
         transform: translate(-50%,0);
+        font-size: 18px;
+        color: $white;
+        font-style: normal;
         animation: Swipe 1s ease 0.5s 1 backwards;
 
         &--main {
-            color: $white;
+            font-weight: bold;
             font-weight: 700;
-            font-size: 72px;
         }
 
         &--sub {
-            color: $white;
+            font-weight: normal;
             font-weight: 500;
-            font-size: 72px;
         }
     }
 }
 
-@include on('xxl'){
+//---------------BREAKPOINT 576PX------------------//
+//------------------------------------------------//
+@include on('sm') {
+    .video-header {
+        margin-top: 110px;
+
+        &__note {
+            height: 55px;
+
+            &__text {
+                height: 40px;
+                width: 360px;
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+        &__source {
+            // keep original ratio of the video (fullHD)
+        }
+
+        &__title {
+            font-size: 24px;
+        }
+    }
+}
 
 
+//---------------BREAKPOINT 992PX------------------//
+//------------------------------------------------//
 
+@include on('lg') {
+    .video-header {
+        margin-top: 110px;
+
+        &__note {
+            height: 65px;
+
+            &__text {
+                width: 100%;
+                height: auto;
+                font-size: 20px;
+                line-height: 22px;
+            }
+        }
+
+        &__source {
+            //height: 558px;
+            // keep original ratio of the video (fullHD)
+        }
+
+        &__title {
+            font-size: 40px;
+        }
+    }
+}
+
+
+//---------------BREAKPOINT 1200PX------------------//
+//------------------------------------------------//
+
+@include on('xl') {
+    .video-header {
+        margin-top: 110px;
+
+        &__note {
+            height: 65px;
+
+            &__text {
+                width: 100%;
+                height: auto;
+                font-size: 24px;
+                line-height: 22px;
+            }
+        }
+
+        &__source {
+            //height: 675px;
+            // keep original ratio of the video (fullHD)
+        }
+
+        &__title {
+            font-size: 60px;
+        }
+    }
+}
+
+
+//---------------BREAKPOINT 1400PX------------------//
+//------------------------------------------------//
+
+@include on('xxl') {
+    .video-header {
+        margin-top: 110px;
+
+        &__note {
+            height: 65px;
+
+            &__text {
+                width: 100%;
+                height: auto;
+                font-size: 24px;
+                line-height: 22px;
+            }
+        }
+
+        &__source {
+            //height: 787.5px;
+            // keep original ratio of the video (fullHD)
+        }
+
+        &__title {
+            font-size: 72px;
+        }
+    }
 }

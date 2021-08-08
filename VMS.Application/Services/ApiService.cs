@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
@@ -31,9 +32,15 @@ namespace VMS.Application.Services
                 string stringResponse = await response.Content.ReadAsStringAsync();
 
                 dynamic deserialized = JsonConvert.DeserializeObject(stringResponse);
-                dynamic postion = deserialized["items"][0]["position"];
-
-                return new CoordinateReponse() { Latitude = postion["lat"], Longitude = postion["lng"] };
+                try
+                {
+                    dynamic postion = deserialized["items"][0]["position"];
+                    return new CoordinateReponse() { Latitude = postion["lat"], Longitude = postion["lng"] };
+                }
+                catch (Exception)
+                {
+                    return new CoordinateReponse();
+                }
             }
             else
             {

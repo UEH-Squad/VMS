@@ -1,0 +1,115 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-filter {
+  padding: 50px 0;
+  text-align: center; }
+  .my-filter .container {
+    padding: 0; }
+  .my-filter h1 {
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #18A0FB; }
+    .my-filter h1 span {
+      color: #64D72F; }
+    @media (min-width: 576px) {
+      .my-filter h1 {
+        font-size: 30px; } }
+    @media (min-width: 992px) {
+      .my-filter h1 {
+        font-size: 36px; } }
+  .my-filter .owl-carousel {
+    position: relative;
+    padding: 0 30px;
+    z-index: 0; }
+    @media (min-width: 576px) {
+      .my-filter .owl-carousel {
+        padding: 0 60px; } }
+    @media (min-width: 992px) {
+      .my-filter .owl-carousel {
+        padding: 0 80px; } }
+  .my-filter .item {
+    text-align: center; }
+    .my-filter .item:hover > i {
+      font-size: 32px; }
+    .my-filter .item:hover > span {
+      transform: translateY(-5px); }
+    .my-filter .item i {
+      display: block;
+      background-color: #18A0FB;
+      border-radius: 50%;
+      color: white;
+      margin: 5px auto;
+      transition: all 0.3s linear;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 24px; }
+      @media (min-width: 576px) {
+        .my-filter .item i {
+          width: 70px;
+          height: 70px;
+          line-height: 70px;
+          font-size: 30px; } }
+      @media (min-width: 992px) {
+        .my-filter .item i {
+          width: 80px;
+          height: 80px;
+          line-height: 80px;
+          font-size: 30px; } }
+    .my-filter .item span {
+      color: #64D72F;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s linear;
+      font-size: 16px; }
+      @media (min-width: 576px) {
+        .my-filter .item span {
+          font-size: 20px; } }
+      @media (min-width: 992px) {
+        .my-filter .item span {
+          font-size: 24px; } }
+    @media (min-width: 576px) {
+      .my-filter .item:hover > i {
+        font-size: 40px; } }
+    @media (min-width: 992px) {
+      .my-filter .item:hover > i {
+        font-size: 45px; } }
+  .my-filter ::deep .owl-nav .owl-prev {
+    position: absolute;
+    top: -35px;
+    left: 0; }
+    .my-filter ::deep .owl-nav .owl-prev span {
+      font-size: 80px;
+      color: #18A0FB;
+      transition: all 0.3s linear; }
+      .my-filter ::deep .owl-nav .owl-prev span:hover {
+        color: #0B588C; }
+    .my-filter ::deep .owl-nav .owl-prev:hover {
+      background: none; }
+    @media (min-width: 992px) {
+      .my-filter ::deep .owl-nav .owl-prev {
+        top: -30px;
+        left: 30px; } }
+  .my-filter ::deep .owl-nav .owl-next {
+    position: absolute;
+    top: -35px;
+    right: 0; }
+    .my-filter ::deep .owl-nav .owl-next span {
+      font-size: 80px;
+      color: #18A0FB;
+      transition: all 0.3s linear; }
+      .my-filter ::deep .owl-nav .owl-next span:hover {
+        color: #0B588C; }
+    .my-filter ::deep .owl-nav .owl-next:hover {
+      background: none; }
+    @media (min-width: 992px) {
+      .my-filter ::deep .owl-nav .owl-next {
+        top: -30px;
+        right: 30px; } }
+  .my-filter ::deep .owl-dots {
+    display: none; }

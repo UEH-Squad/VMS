@@ -54,30 +54,40 @@ const logoBanerCarousel = () => {
 }
 
 const showResult = () => {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    const boxInfo = document.querySelector('.BoxInformation');
+    const boxInfoY = boxInfo.offsetTop;
+
     const showAnimation = () => {
-        const counters = document.querySelectorAll('.counter');
-        const speed = 100;
-        counters.forEach(counter => {
-            const updateCount = () => {
+        const viewportY = window.pageYOffset + window.innerHeight;
 
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const inc = target / speed;
+        if (viewportY >= boxInfoY) {
 
-                if (count < target) {
-                    counter.innerText = count + inc;
-                    setTimeout(updateCount, 300);
-                } else {
-                    count.innerText = target;
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                const updateCount = () => {
+                    const count = +counter.innerText;
+                    const increasement = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increasement);
+                        setTimeout(updateCount, 200);
+                    }
+                    else {
+                        counter.innerText = target;
+                    }
                 }
-            }
-            updateCount();
-        })
+
+                updateCount();
+            })
+        }
     }
-    const Scroll = () => {
+    const event = () => {
         window.addEventListener('scroll', showAnimation);
     }
-    Scroll();
+    event();
 }
 
-export default { playVideo, filterCarousel, logoBaner, showResult }
+export default { playVideo, filterCarousel, showResult, logoBanerCarousel }

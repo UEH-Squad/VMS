@@ -9,6 +9,8 @@
         public const string Organizations = "/don-vi-to-chuc";
         public const string Map = "/ban-do";
 
+        public const string User = "/trang-ca-nhan";
+
         #endregion Main
 
         #region Identity

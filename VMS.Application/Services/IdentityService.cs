@@ -2,18 +2,19 @@
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Domain.Models;
 
 namespace VMS.Application.Services
 {
     public class IdentityService : IIdentityService
     {
-        private readonly UserManager<IdentityUser> _usermanager;
+        private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContext;
 
-        public IdentityService(UserManager<IdentityUser> userManager,
+        public IdentityService(UserManager<User> userManager,
                            IHttpContextAccessor httpContext)
         {
-            _usermanager = userManager;
+            _userManager = userManager;
             _httpContext = httpContext;
         }
 
@@ -22,14 +23,14 @@ namespace VMS.Application.Services
          * To avoid this, we have to queue a Task related to UserManager to run on the thread pool and then return the result using Task.Run(() => ...).Result;
          */
 
-        public IdentityUser FindUserById(string userId)
+        public User FindUserById(string userId)
         {
-            return Task.Run(() => _usermanager.FindByIdAsync(userId)).Result;
+            return Task.Run(() => _userManager.FindByIdAsync(userId)).Result;
         }
 
-        public IdentityUser GetCurrentUser()
+        public User GetCurrentUser()
         {
-            return Task.Run(() => _usermanager.GetUserAsync(_httpContext.HttpContext.User)).Result;
+            return Task.Run(() => _userManager.GetUserAsync(_httpContext.HttpContext?.User)).Result;
         }
     }
 }

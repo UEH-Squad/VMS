@@ -1,30 +1,4 @@
-﻿const slick = (slidesToShow, slidesToScroll, isInfinite) => {
-    $('.slick-container').slick({
-        infinite: isInfinite,
-        slidesToShow: 3,
-        slidesToScroll: slidesToScroll,
-        prevArrow: document.getElementById('prev-btn'),
-        nextArrow: document.getElementById('next-btn'),
-        mobileFirst: true,
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: slidesToShow
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 5,
-                    slidesToScroll: slidesToScroll + 2
-                }
-            }
-        ]
-    });
-}
-
-const playVideo = (src) => {
+﻿const playVideo = (src) => {
     const video = document.querySelector('.my-homepage-video');
 
     let timer = null,
@@ -48,13 +22,44 @@ const playVideo = (src) => {
     }
 }
 
-const getUserLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            return null;
+const filterCarousel = () => {
+    $('.filter__carousel').owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: true,
+        responsive: {
+            0: {
+                items: 4,
+                slideBy: 4,
+            },
+            1200: {
+                items: 6,
+                slideBy: 6,
+            },
+
         }
+    })
+}
+const logoBanerCarousel = () => {
+    $('.logoBaner__carousel').owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+        }
+    })
+}
+
+const getUserLocation = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        return null;
     }
+}
 
 let showPosition = position => {
     var result = {
@@ -64,4 +69,4 @@ let showPosition = position => {
     return result;
 }
 
-export default { slick, playVideo, getUserLocation };
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation};

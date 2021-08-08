@@ -5,54 +5,104 @@
 @inject IJSRuntime JsRuntime;
 @inject IUserWithActService UserWithActService
 @inject IIdentityService IdentityService
-<h3>NHỮNG HOẠT ĐỘNG MỚI NHẤT GẦN BẠN</h3>
-
-<div class="activity">
-    <div>
-        @if (newestActivities != null)
-        {
-            @for (int i = 0; i < newestActivities.Count(); i++)
-            {
-                    <h3>@newestActivities[i].Name - @newestActivities[i].ActivityId</h3>
-            }
-        }
-        else
-        {
-            <h4>No Activities</h4>
-        }
-    </div>
-</div>
-<h3>NHỮNG HOẠT ĐỘNG NỔI BẬT GẦN BẠN</h3>
-<div class="activity">
-    <div>
-
-        @if (featureActivities != null)
-        {
-            @for (int i = 0; i < featureActivities.Count(); i++)
-            {
-                <h3>@featureActivities[i].Name @featureActivities[i].MemberQuantity</h3>
-            }
-        }
-        else
-        {
-            <h4>No Activities</h4>
-        }
 
 
-    </div>
-</div>
+@if (user.StudentId == null)
+{
+    if (user.Lat == 0 && user.Long == 0)
+    {
+        <h3>NHỮNG HOẠT ĐỘNG MỚI NHẤT</h3>
 
+        <div class="activity">
+            <div>
+                @if (newestActivitiesWithoutUserLoc != null)
+                {
+                    @for (int i = 0; i < newestActivitiesWithoutUserLoc.Count(); i++)
+                    {
+                        <h3>@newestActivitiesWithoutUserLoc[i].Name - @newestActivitiesWithoutUserLoc[i].ActivityId</h3>
+                    }
+                }
+                else
+                {
+                    <h4>No Activities</h4>
+                }
+            </div>
+        </div>
+    }
+    else if (user.Lat != 0 && user.Long != 0)
+    {
+        <h3>NHỮNG HOẠT ĐỘNG MỚI NHẤT</h3>
+
+        <div class="activity">
+            <div>
+                @if (newestActivitiesWithUserLoc != null)
+                {
+                    @for (int i = 0; i < newestActivitiesWithUserLoc.Count(); i++)
+                    {
+                        <h3>@newestActivitiesWithUserLoc[i].Name - @newestActivitiesWithUserLoc[i].ActivityId</h3>
+                    }
+                }
+                else
+                {
+                    <h4>No Activities</h4>
+                }
+            </div>
+        </div>
+    }
+}
+@if (user.StudentId != null)
+{
+    if (user.Lat != 0 && user.Long != 0)
+    {
+        <h3>NHỮNG HOẠT ĐỘNG MỚI NHẤT GẦN BẠN</h3>
+
+        <div class="activity">
+            <div>
+                @if (newestActivitiesWithUserLoc != null)
+                {
+                    @for (int i = 0; i < newestActivitiesWithUserLoc.Count(); i++)
+                    {
+                        <h3>@newestActivitiesWithUserLoc[i].Name - @newestActivitiesWithUserLoc[i].ActivityId</h3>
+                    }
+                }
+                else
+                {
+                    <h4>No Activities</h4>
+                }
+            </div>
+        </div>
+    }
+    else if(user.Lat == 0 && user.Long == 0)
+                {
+                    <h3>Not done yet</h3>
+                }
+
+}
 
 @code {
-        private List<UserWithActivityViewModel> newestActivities, featureActivities;
-        private IdentityUser user;   
-  
+    private List<UserWithActivityViewModel> newestActivitiesWithUserLoc, featureActivitiesWithUserLoc;
+    private List<UserWithActivityViewModel> newestActivitiesWithoutUserLoc, featureActivitiesWithoutUserLoc;
+    private UserViewModel user;
+
+    //private IdentityUser user;
+
 
     protected async override Task OnInitializedAsync()
-    {          
-        newestActivities = await UserWithActService.GetNewestActivitiesAsync();
-        featureActivities = await UserWithActService.GetFeaturedActivitiesAsync();
-        user = IdentityService.GetCurrentUser();
+    {
+
+
+        user.StudentId = "abc";
+        user.Lat = 14.155555;
+        user.Long = 125.124444;
+        user.Distrist = "";
+
+        newestActivitiesWithoutUserLoc = await UserWithActService.GetNewestActivitiesWithoutUserLocAsync();
+        featureActivitiesWithoutUserLoc = await UserWithActService.GetFeaturedActivitiesWithoutUserLocAsync();
+
+        newestActivitiesWithUserLoc = await UserWithActService.GetNewestActivitiesWithUserLocAsync();
+        featureActivitiesWithUserLoc = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync();
+
+        //user = IdentityService.GetCurrentUser();
     }
 
 }

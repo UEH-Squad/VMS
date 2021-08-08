@@ -66,19 +66,35 @@ namespace VMS.Application.Services
             /* Source: https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/ */
         }
 
-        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesAsync()
+        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithUserLocAsync()
         {
             List<UserWithActivityViewModel> nearestActivities = await GetActivitiesAsync();
             List<UserWithActivityViewModel> newestActivities = nearestActivities.Take(4).ToList();
-            
+
             return newestActivities.OrderByDescending(x => x.ActivityId).ToList();
         }
 
-        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesAsync()
+        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithUserLocAsync()
         {
             List<UserWithActivityViewModel> nearestActivities = await GetActivitiesAsync();
             List<UserWithActivityViewModel> featuredtActivities = nearestActivities.Take(4).ToList();
+
             return featuredtActivities.OrderByDescending(x => x.MemberQuantity).ToList();
         }
+
+        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync()
+        {
+            List<UserWithActivityViewModel> newestActivities = await GetActivitiesAsync();
+
+            return newestActivities.OrderByDescending(x => x.ActivityId).Take(4).ToList();
+        }
+        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync()
+        {
+            List<UserWithActivityViewModel> featuredActivities = await GetActivitiesAsync();
+
+            return featuredActivities.OrderByDescending(x => x.MemberQuantity).Take(4).ToList();
+        }
+
+
     }
 }

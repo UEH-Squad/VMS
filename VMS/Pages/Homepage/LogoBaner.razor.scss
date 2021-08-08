@@ -1,0 +1,115 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+.my-logoBaner {
+    .container {
+        padding: 0;
+    }
+
+    .owl-carousel {
+        position: relative;
+        padding: 0 30px;
+        z-index:0;
+
+        @include on("sm") {
+            padding: 0 60px;
+        }
+
+        @include on("lg") {
+            padding: 0 80px;
+        }
+    }
+
+    .item {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
+        grid-row-gap: 40px;
+
+        img {
+            margin:auto;
+            width: 16px;
+
+            @include on("sm") {
+                width: 24px;
+            }
+
+            @include on("lg") {
+                width: 36px;
+            }
+        }
+
+        @include on("sm") {
+            grid-row-gap: 30px;
+        }
+
+        @include on("lg") {
+            grid-row-gap: 20px;
+        }
+    }
+
+    ::deep .owl-nav {
+        .owl-prev {
+            position: absolute;
+            top: -10px;
+            left: 0;
+
+            span {
+                font-size: 80px;
+                color: $blue;
+                transition: all 0.3s linear;
+
+                &:hover {
+                    color: #0B588C;
+                }
+            }
+
+            &:hover {
+                background: none;
+            }
+
+            @include on("sm") {
+                top: -5px;
+                left: 0;
+            }
+
+            @include on("lg") {
+                top: 5px;
+                left: 30px;
+            }
+        }
+
+        .owl-next {
+            position: absolute;
+            top: -10px;
+            right: 0;
+
+            span {
+                font-size: 80px;
+                color: $blue;
+                transition: all 0.3s linear;
+
+                &:hover {
+                    color: #0B588C;
+                }
+            }
+
+            &:hover {
+                background: none;
+            }
+
+            @include on("sm") {
+                top: -5px;
+                right: 0;
+            }
+
+            @include on("lg") {
+                top: 5px;
+                right: 30px;
+            }
+        }
+    }
+
+    ::deep .owl-dots {
+        display: none;
+    }
+}

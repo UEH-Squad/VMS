@@ -5,7 +5,8 @@
 /*#region mixins */
 /*#endregion */
 .footer {
-  position: relative; }
+  position: relative;
+  margin-top: 10px; }
 
 /*-------mobile------------*/
 .btn-back-top {

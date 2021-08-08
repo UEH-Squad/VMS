@@ -58,8 +58,28 @@
         font-size: 50px;
     }
 }
-/*-------pc------------*/
+/*-------pc min width:1200px------------*/
 @include on ('xl') {
+    .btn-back-top {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        color: #ffffff;
+        background-color: $green;
+        display: flex;
+        text-decoration: none;
+        position: absolute;
+        right: 55px;
+        top: -35px;
+    }
+
+    .btn-back-top-icon {
+        margin: auto;
+        font-size: 65px;
+    }
+}
+/*-------pc min width:1400px------------*/
+@include on ('xxl') {
     .btn-back-top {
         width: 80px;
         height: 80px;
@@ -108,8 +128,8 @@
         max-width: 100%;
     }
 }
-/*-------pc------------*/
-@include on('xl') {
+/*-------pc min width:1400px------------*/
+@include on('xxl') {
     .container {
         border-top: #808080 solid 1px;
         padding: 60px 0;
@@ -151,7 +171,7 @@
     }
 
     .left__text {
-    margin-top: 10px;
+    margin: 10px 0 10px;
     font-size: 8px;
     color: $grey-text;
     font-weight: 400;
@@ -185,7 +205,7 @@
         height: 51px;
     }
     .left__text {
-        margin-top: 20px;
+        margin-top: 15px;
         font-size: 12px;
         color: $grey-text;
         font-weight: 400;
@@ -212,7 +232,7 @@
     }
     .logo-ueh {
         width: 205px;
-        height: 35px;
+        height: 33px;
     }
     .logo-hsv {
         margin-left: 15px;
@@ -220,7 +240,7 @@
         height: 51px;
     }
     .left__text {
-        margin-top: 20px;
+        margin-top: 15px;
         font-size: 12px;
         color: $grey-text;
         font-weight: 400;
@@ -228,8 +248,48 @@
         width: unset;
     }
 }
-/*-------pc------------*/
-@include on('xl') {
+/*-------pc min width:1200px------------*/
+@include on('xl') { //////////
+    .left {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left__logo-govirlunteer {
+        width: 388px;
+        height: 49px;
+        order: 1;
+    }
+
+    .left__logo-ueh-hsv {
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+        order: 2;
+    }
+
+    .logo-ueh {
+        width: 268px;
+        height: 44px;
+    }
+
+    .logo-hsv {
+        margin-left: 25px;
+        width: 65px;
+        height: 65px;
+    }
+
+    .left__text {
+        margin-top: 30px;
+        font-size: 15px;
+        color: $grey-text;
+        font-weight: 400;
+        order: 3;
+        width: unset;
+    }
+}
+/*-------pc min width:1400px------------*/
+@include on('xxl') {
     .left {
         display: flex;
         flex-direction: column;
@@ -292,8 +352,29 @@
                 text-decoration: none;
             }
         }
-        /*-------pc------------*/
+        /*-------pc min width 1200px------------*/
         @include on('xl') {
+            .contact {
+                display: block;
+            }
+
+            .contact-items {
+                color: $grey-text;
+                font-size: 15px;
+                line-height: 36px;
+                font-weight: 400;
+            }
+
+            .contact__name {
+                font-weight: 700;
+            }
+
+            .contact__contribute {
+                text-decoration: none;
+            }
+        }
+        /*-------pc min width 1400px------------*/
+        @include on('xxl') {
             .contact {
                 display: block;
             }
@@ -367,8 +448,26 @@
                 line-height: 20px;
             }
         }
-        /*-------pc------------*/
+        /*-------pc min width 1200px------------*/
         @include on('xl') {
+            .right {
+                display: flex;
+                flex-direction: column;
+                text-align: end;
+                padding-top: unset;
+            }
+
+            .right a {
+                color: $grey-text;
+                margin-bottom: 12px;
+                font-size: 15px;
+                font-weight: 400;
+                text-decoration: none;
+                line-height: 40px;
+            }
+        }
+        /*-------pc min width 1400px------------*/
+        @include on('xxl') {
             .right {
                 display: flex;
                 flex-direction: column;

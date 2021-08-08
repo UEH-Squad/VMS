@@ -57,8 +57,25 @@
     margin: auto;
     font-size: 50px; } }
 
-/*-------pc------------*/
+/*-------pc min width:1200px------------*/
 @media (min-width: 1200px) {
+  .btn-back-top {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: #64D72F;
+    display: flex;
+    text-decoration: none;
+    position: absolute;
+    right: 55px;
+    top: -35px; }
+  .btn-back-top-icon {
+    margin: auto;
+    font-size: 65px; } }
+
+/*-------pc min width:1400px------------*/
+@media (min-width: 1400px) {
   .btn-back-top {
     width: 80px;
     height: 80px;
@@ -100,8 +117,8 @@
     justify-content: space-around;
     max-width: 100%; } }
 
-/*-------pc------------*/
-@media (min-width: 1200px) {
+/*-------pc min width:1400px------------*/
+@media (min-width: 1400px) {
   .container {
     border-top: #808080 solid 1px;
     padding: 60px 0;
@@ -135,7 +152,7 @@
   height: 25px; }
 
 .left__text {
-  margin-top: 10px;
+  margin: 10px 0 10px;
   font-size: 8px;
   color: #515151;
   font-weight: 400;
@@ -164,7 +181,7 @@
     width: 51px;
     height: 51px; }
   .left__text {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 12px;
     color: #515151;
     font-weight: 400;
@@ -187,21 +204,50 @@
     order: 2; }
   .logo-ueh {
     width: 205px;
-    height: 35px; }
+    height: 33px; }
   .logo-hsv {
     margin-left: 15px;
     width: 51px;
     height: 51px; }
   .left__text {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 12px;
     color: #515151;
     font-weight: 400;
     order: 3;
     width: unset; } }
 
-/*-------pc------------*/
+/*-------pc min width:1200px------------*/
 @media (min-width: 1200px) {
+  .left {
+    display: flex;
+    flex-direction: column; }
+  .left__logo-govirlunteer {
+    width: 388px;
+    height: 49px;
+    order: 1; }
+  .left__logo-ueh-hsv {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    order: 2; }
+  .logo-ueh {
+    width: 268px;
+    height: 44px; }
+  .logo-hsv {
+    margin-left: 25px;
+    width: 65px;
+    height: 65px; }
+  .left__text {
+    margin-top: 30px;
+    font-size: 15px;
+    color: #515151;
+    font-weight: 400;
+    order: 3;
+    width: unset; } }
+
+/*-------pc min width:1400px------------*/
+@media (min-width: 1400px) {
   .left {
     display: flex;
     flex-direction: column; }
@@ -247,8 +293,22 @@
   .contact__contribute {
     text-decoration: none; } }
 
-/*-------pc------------*/
+/*-------pc min width 1200px------------*/
 @media (min-width: 1200px) {
+  .contact {
+    display: block; }
+  .contact-items {
+    color: #515151;
+    font-size: 15px;
+    line-height: 36px;
+    font-weight: 400; }
+  .contact__name {
+    font-weight: 700; }
+  .contact__contribute {
+    text-decoration: none; } }
+
+/*-------pc min width 1400px------------*/
+@media (min-width: 1400px) {
   .contact {
     display: block; }
   .contact-items {
@@ -308,8 +368,23 @@
     text-decoration: none;
     line-height: 20px; } }
 
-/*-------pc------------*/
+/*-------pc min width 1200px------------*/
 @media (min-width: 1200px) {
+  .right {
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+    padding-top: unset; }
+  .right a {
+    color: #515151;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    line-height: 40px; } }
+
+/*-------pc min width 1400px------------*/
+@media (min-width: 1400px) {
   .right {
     display: flex;
     flex-direction: column;

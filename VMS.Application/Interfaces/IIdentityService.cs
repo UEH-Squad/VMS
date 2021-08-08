@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using VMS.Domain.Models;
 
 namespace VMS.Application.Interfaces
 {
     public interface IIdentityService
     {
-        IdentityUser FindUserById(string userId);
-        IdentityUser GetCurrentUser();
+        User FindUserById(string userId);
+        
+        User GetCurrentUser();
     }
 }

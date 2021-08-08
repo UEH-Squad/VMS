@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Homepage\" />
     <Folder Include="wwwroot\img\RelatedActivities\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>

@@ -9,31 +9,21 @@
         "js/bootstrap.bundle.min.js",
         "css/bootstrap.min.css"
       ]
-    },
-    {
-      "library": "slick-carousel@1.8.1",
-      "destination": "wwwroot/lib/slick-carousel/",
-      "files": [
-        "slick.min.js",
-        "ajax-loader.gif",
-        "slick-theme.css",
-        "slick-theme.min.css",
-        "slick-theme.min.css.map",
-        "slick.css",
-        "slick.js",
-        "slick.min.css",
-        "slick.min.css.map",
-        "fonts/slick.eot",
-        "fonts/slick.svg",
-        "fonts/slick.ttf",
-        "fonts/slick.woff"
-      ]
-    },
+    },  
     {
       "library": "jquery@3.6.0",
       "destination": "wwwroot/lib/jquery/",
       "files": [
         "jquery.min.js"
+      ]
+    },
+    {
+      "library": "OwlCarousel2@2.3.4",
+      "destination": "wwwroot/lib/OwlCarousel2/",
+      "files": [
+        "owl.carousel.min.js",
+        "assets/owl.theme.default.min.css",
+        "assets/owl.carousel.min.css"
       ]
     }
   ]

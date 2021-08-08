@@ -245,6 +245,19 @@
             color: $green-hv;
         }
 }
+
+.limited-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 3;
+
+    @include on('sm') {
+        -webkit-line-clamp: 4;
+    }
+}
 .act-unchecked,
 .act-checked {
     position: absolute;
@@ -252,7 +265,7 @@
     top: 143px;
 
     @include on('sm') {
-        top: 229px;
+        top: 242px;
     }
 
     @include on('md') {

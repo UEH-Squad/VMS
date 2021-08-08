@@ -195,6 +195,17 @@
   .act-more-2:hover {
     color: #306C14; }
 
+.limited-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 3; }
+  @media (min-width: 576px) {
+    .limited-text {
+      -webkit-line-clamp: 4; } }
+
 .act-unchecked,
 .act-checked {
   position: absolute;
@@ -203,7 +214,7 @@
   @media (min-width: 576px) {
     .act-unchecked,
     .act-checked {
-      top: 229px; } }
+      top: 242px; } }
   @media (min-width: 768px) {
     .act-unchecked,
     .act-checked {

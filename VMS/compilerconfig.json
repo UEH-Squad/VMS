@@ -27,10 +27,10 @@
     "outputFile": "Pages/Homepage/Filter.razor.css",
     "inputFile": "Pages/Homepage/Filter.razor.scss"
   },
-  {
-    "outputFile": "Pages/Homepage/LogoBaner.razor.css",
-    "inputFile": "Pages/Homepage/LogoBaner.razor.scss"
-  },
+    {
+        "outputFile": "Pages/Homepage/LogoBaner.razor.css",
+        "inputFile": "Pages/Homepage/LogoBaner.razor.scss"
+    },
   {
     "outputFile": "Pages/Homepage/RelatedActivities.razor.css",
     "inputFile": "Pages/Homepage/RelatedActivities.razor.scss"
@@ -38,5 +38,9 @@
   {
     "outputFile": "Pages/Homepage/QuoteBanner.razor.css",
     "inputFile": "Pages/Homepage/QuoteBanner.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Footer.razor.css",
+    "inputFile": "Shared/Footer.razor.scss"
   }
 ]

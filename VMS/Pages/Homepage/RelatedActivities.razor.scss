@@ -75,6 +75,22 @@
     }
 }
 
+.margin-bt {
+    margin-bottom: 30px;
+
+    @include on('sm') {
+        margin-bottom: 40px;
+    }
+
+    @include on('xl') {
+        margin-bottom: 50px;
+    }
+
+    @include on('xxl') {
+        margin-bottom: 60px;
+    }
+}
+
 .act {
     &-header {
         display: block;
@@ -106,7 +122,7 @@
             font-size: 3rem;
             line-height: 59px;
             margin-bottom: 35px;
-            margin-top: 95px;
+            margin-top: 50px;
         }
     }
 
@@ -203,69 +219,35 @@
         }
     }
 }
+.limited-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 3;
 
-.act-more-2 {
-        color: $green ;
-        font-size: .625rem;
-        font-weight: 600;
-        position: absolute;
-        padding-right: 10px;
-        right: 0;
-        text-decoration: none;
-
-        @include on('sm') {
-            font-size: 1rem;
-            top: 694px;
-        }
-
-        @include on('md') {
-            font-size: 1.25rem;
-            line-height: 29.26px;
-            top: 930px;
-        }
-
-        @include on('lg') {
-            top: 977px;
-            right: -9px;
-        }
-
-        @include on('xl') {
-            font-size: 1.5rem;
-            line-height: 29.26px;
-            right: 4px;
-            top: 1174px;
-        }
-
-        @include on('xxl') {
-            right: 0;
-            top: 1220px;
-        }
-
-        &:hover {
-            color: $green-hv;
-        }
+    @include on('sm') {
+        -webkit-line-clamp: 4;
+    }
 }
+
 .act-unchecked,
 .act-checked {
     position: absolute;
-    right: 2px;
-    top: 143px;
+    right: 5px;
+    top: 139px;
 
     @include on('sm') {
-        top: 229px;
+        top: 241px;
     }
 
     @include on('md') {
-        top: 335px;
+        top: 341px;
     }
 
     @include on ('lg') {
         top: 354px;
-    }
-
-    @include on('xl') {
-        right: 5px;
-        top: 347px;
     }
 
     @include on('xxl') {

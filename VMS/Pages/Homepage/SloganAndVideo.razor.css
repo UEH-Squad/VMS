@@ -58,36 +58,17 @@
     object-fit: cover;
     background-repeat: no-repeat;
     z-index: -1; }
-  .video-header__title {
-    position: absolute;
-    display: inline-block;
-    text-align: center;
-    left: 50%;
-    bottom: 10%;
-    transform: translate(-50%, 0);
-    font-size: 18px;
-    color: #FFFFFF;
-    font-style: normal;
-    animation: Swipe 1s ease 0.5s 1 backwards; }
-    .video-header__title--main {
-      font-weight: bold;
-      font-weight: 700; }
-    .video-header__title--sub {
-      font-weight: normal;
-      font-weight: 500; }
 
 @media (min-width: 576px) {
   .video-header {
-    margin-top: 110px; }
+    margin-top: 85px; }
     .video-header__note {
       height: 55px; }
       .video-header__note__text {
         height: 40px;
         width: 360px;
         font-size: 14px;
-        line-height: 20px; }
-    .video-header__title {
-      font-size: 24px; } }
+        line-height: 20px; } }
 
 @media (min-width: 992px) {
   .video-header {
@@ -98,9 +79,7 @@
         width: 100%;
         height: auto;
         font-size: 20px;
-        line-height: 22px; }
-    .video-header__title {
-      font-size: 40px; } }
+        line-height: 22px; } }
 
 @media (min-width: 1200px) {
   .video-header {
@@ -111,9 +90,7 @@
         width: 100%;
         height: auto;
         font-size: 24px;
-        line-height: 22px; }
-    .video-header__title {
-      font-size: 60px; } }
+        line-height: 22px; } }
 
 @media (min-width: 1400px) {
   .video-header {
@@ -124,6 +101,4 @@
         width: 100%;
         height: auto;
         font-size: 24px;
-        line-height: 22px; }
-    .video-header__title {
-      font-size: 72px; } }
+        line-height: 22px; } }

@@ -12,12 +12,7 @@ namespace VMS.Application.Services
         private readonly IHttpClientFactory _clientFactory;
         private readonly string _apiKey = "Sra1zcTjUuhm1suxPB0mXKF-vyajcClci_jHqiT9ycU";
 
-        public ApiService(IHttpClientFactory clientFactory)
-        {
-            _clientFactory = clientFactory;
-        }
-
-        public async Task<CoordinateReponse> GetCoordinateAsync(string address)
+        public async Task<CoordinateResponse> GetCoordinateAsync(string address)
         {
             string url = string.Format("https://geocode.search.hereapi.com/v1/geocode?q={0}&apiKey={1}", address, _apiKey);
 
@@ -35,16 +30,16 @@ namespace VMS.Application.Services
                 try
                 {
                     dynamic postion = deserialized["items"][0]["position"];
-                    return new CoordinateReponse() { Latitude = postion["lat"], Longitude = postion["lng"] };
+                    return new CoordinateResponse() { Latitude = postion["lat"], Longitude = postion["lng"] };
                 }
                 catch (Exception)
                 {
-                    return new CoordinateReponse();
+                    return new CoordinateResponse();
                 }
             }
             else
             {
-                return new CoordinateReponse();
+                return new CoordinateResponse();
             }
         }
     }

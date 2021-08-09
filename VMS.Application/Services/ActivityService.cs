@@ -49,7 +49,7 @@ namespace VMS.Application.Services
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
 
-            CoordinateReponse coordinateReponse = await _apiService.GetCoordinateAsync(activity.Address);
+            CoordinateResponse coordinateReponse = await _apiService.GetCoordinateAsync(activity.Address);
             activity.Latitude = coordinateReponse.Latitude;
             activity.Longitude = coordinateReponse.Longitude;
 
@@ -115,7 +115,7 @@ namespace VMS.Application.Services
                 IsDeleted = false
             }).ToList() ;
 
-            CoordinateReponse addressLocationReponse = await _apiService.GetCoordinateAsync(activity.Address);
+            CoordinateResponse addressLocationReponse = await _apiService.GetCoordinateAsync(activity.Address);
             activity.Latitude = addressLocationReponse.Latitude;
             activity.Longitude = addressLocationReponse.Longitude;
 

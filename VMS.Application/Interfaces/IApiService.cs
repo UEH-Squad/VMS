@@ -5,6 +5,6 @@ namespace VMS.Application.Interfaces
 {
     public interface IApiService
     {
-        Task<CoordinateReponse> GetCoordinateAsync(string address);
+        Task<CoordinateResponse> GetCoordinateAsync(string address);
     }
 }

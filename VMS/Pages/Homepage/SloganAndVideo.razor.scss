@@ -1,5 +1,4 @@
 ﻿@import '../../Resources/scss/common/_variables';
-@import '../../Resources/scss/common/_animation.scss';
 
 //---------------MOBILE UI------------------//
 //-----------------------------------------//
@@ -19,8 +18,7 @@
         right: 0;
         color: $white;
         background-color: $green;
-        //opacity: 0;
-        //animation: Hidden 6s ease 0.5s 1 backwards;
+
 
         &__text {
             position: relative;
@@ -68,10 +66,6 @@
             }
         }
 
-        &__source {
-            // keep original ratio of the video (fullHD)
-        }
-
     }
 }
 
@@ -92,11 +86,6 @@
                 font-size: 20px;
                 line-height: 22px;
             }
-        }
-
-        &__source {
-            //height: 558px;
-            // keep original ratio of the video (fullHD)
         }
 
     }
@@ -121,11 +110,6 @@
             }
         }
 
-        &__source {
-            //height: 675px;
-            // keep original ratio of the video (fullHD)
-        }
-
     }
 }
 
@@ -146,11 +130,6 @@
                 font-size: 24px;
                 line-height: 22px;
             }
-        }
-
-        &__source {
-            //height: 787.5px;
-            // keep original ratio of the video (fullHD)
         }
 
     }

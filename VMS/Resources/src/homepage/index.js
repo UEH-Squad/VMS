@@ -1,25 +1,26 @@
 ﻿const playVideo = (src) => {
-    const video = document.querySelector('.my-homepage-video');
+    const video = document.querySelector('.video-header__source');
 
     let timer = null,
-        totalTime = 0,
-        time = new Date();
-
-    video.addEventListener("play", () => {
-        timer = window.setInterval(() => {
-            totalTime += new Date().getTime() - time.getTime();
-
-            if (totalTime >= 5 * 1000) {
-                document.querySelector('.my-slogan').style.display = 'none';
-                clearInterval(timer);
-            }
-        }, 10);
-    });
+        totalTime = 0;
 
     if (video) {
         video.src = src;
         video.play();
+
+        video.addEventListener("play", () => {
+            timer = window.setInterval(() => {
+                totalTime += 1000;
+                console.log(totalTime)
+                if (totalTime >= 6 * 1000) {
+                    document.querySelector('.video-header__note').style.display = 'none';
+                    clearInterval(timer);
+                }
+            }, 1000);
+        });
     }
+
+    
 }
 
 const filterCarousel = () => {

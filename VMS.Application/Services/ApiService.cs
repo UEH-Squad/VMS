@@ -12,6 +12,11 @@ namespace VMS.Application.Services
         private readonly IHttpClientFactory _clientFactory;
         private readonly string _apiKey = "Sra1zcTjUuhm1suxPB0mXKF-vyajcClci_jHqiT9ycU";
 
+        public ApiService(IHttpClientFactory clientFactory)
+        {
+            _clientFactory = clientFactory;
+        }
+
         public async Task<CoordinateResponse> GetCoordinateAsync(string address)
         {
             string url = string.Format("https://geocode.search.hereapi.com/v1/geocode?q={0}&apiKey={1}", address, _apiKey);

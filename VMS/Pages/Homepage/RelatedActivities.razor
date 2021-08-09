@@ -1,4 +1,11 @@
-﻿@inject IJSRuntime JsRuntime
+﻿@using Microsoft.AspNetCore.Identity
+@using VMS.Domain.Models
+@using VMS.Application.Interfaces
+@using VMS.Application.ViewModels
+
+@inject IIdentityService IdentityService 
+@inject IJSRuntime JsRuntime
+@inject IUserWithActService UserWithActService
 <div class="container-lg p-0 position-relative">
 
     <div class="act-container">
@@ -126,6 +133,11 @@
 
 
 @code {
+    private User user;
+    private UserLocation location;
+    private List<UserWithActivityViewModel> newestActivities, featuredActivities;
+
+
     class UserLocation
     {
         public double Lat { get; set; }
@@ -134,6 +146,19 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var location = await JsRuntime.InvokeAsync<UserLocation>("vms.GetUserLocation");
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        location = await JsRuntime.InvokeAsync<UserLocation>("vms.GetUserLocation");
+        if (location == null)
+        {
+            location = new UserLocation();
+        }
+        newestActivities = await UserWithActService.GetNewestActivitiesWithUserLocAsync(location.Lat, location.Long);
+        featuredActivities = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync(location.Lat, location.Long);
+
+        user = IdentityService.GetCurrentUser();
     }
 }

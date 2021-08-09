@@ -18,7 +18,7 @@ namespace VMS.Application.Services
         public UserWithActService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
         }
-        public async Task<List<UserWithActivityViewModel>> GetActivitiesAsync()
+        public async Task<List<UserWithActivityViewModel>> GetActivitiesWithUserLocAsync(double Lat, double Long)
         {
             DbContext context = _dbContextFactory.CreateDbContext();
             List<Activity> activities = await _repository.GetListAsync<Activity>(context);
@@ -33,10 +33,6 @@ namespace VMS.Application.Services
             }
             );
 
-            //Seeding to user loacation
-            var user = new UserViewModel();
-            user.Lat = 14.155555;
-            user.Long = 125.124444;
 
             List<ActivityViewModel> activitiesList = Activities.ToList();
 
@@ -44,19 +40,19 @@ namespace VMS.Application.Services
             {
                 ActivityId = x.Id,
                 Name = x.Name,
-                Distance = Haversine(user,x.Latitude,x.Longitude),
+                Distance = Haversine(Lat, Long, x.Latitude, x.Longitude),
                 MemberQuantity = x.MemberQuantity
             });
 
             return userWithActivity.OrderBy(x => x.Distance).ToList();
         }
-        static double Haversine(UserViewModel user, double latitude, double longitude) 
+        static double Haversine(double userLat, double userLong, double activityLat, double activityLon) 
         {
-            double latDistance = (Math.PI / 180) * (latitude - user.Lat);
-            double longDistance = (Math.PI / 180) * (longitude - user.Long);
+            double latDistance = (Math.PI / 180) * (activityLat - userLat);
+            double longDistance = (Math.PI / 180) * (activityLon - userLong);
 
-            double userLatRadian = (Math.PI / 180) * user.Lat;
-            double actLatRadian = (Math.PI / 180) * latitude;
+            double userLatRadian = (Math.PI / 180) * userLat;
+            double actLatRadian = (Math.PI / 180) * activityLat;
 
             double formula = Math.Pow(Math.Sin(latDistance / 2), 2) + Math.Pow(Math.Sin(longDistance / 2), 2) * Math.Cos(userLatRadian) * Math.Cos(actLatRadian);
 
@@ -65,32 +61,32 @@ namespace VMS.Application.Services
             return distance;
             /* Source: https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/ */
         }
-
-        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithUserLocAsync()
+        
+        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithUserLocAsync(double Lat, double Long)
         {
-            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesAsync();
+            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
             List<UserWithActivityViewModel> newestActivities = nearestActivities.Take(4).ToList();
 
             return newestActivities.OrderByDescending(x => x.ActivityId).ToList();
         }
 
-        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithUserLocAsync()
+        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithUserLocAsync(double Lat, double Long)
         {
-            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesAsync();
+            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
             List<UserWithActivityViewModel> featuredtActivities = nearestActivities.Take(4).ToList();
 
             return featuredtActivities.OrderByDescending(x => x.MemberQuantity).ToList();
         }
 
-        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync()
+        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync(double Lat, double Long)
         {
-            List<UserWithActivityViewModel> newestActivities = await GetActivitiesAsync();
+            List<UserWithActivityViewModel> newestActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
 
             return newestActivities.OrderByDescending(x => x.ActivityId).Take(4).ToList();
         }
-        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync()
+        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync(double Lat, double Long)
         {
-            List<UserWithActivityViewModel> featuredActivities = await GetActivitiesAsync();
+            List<UserWithActivityViewModel> featuredActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
 
             return featuredActivities.OrderByDescending(x => x.MemberQuantity).Take(4).ToList();
         }

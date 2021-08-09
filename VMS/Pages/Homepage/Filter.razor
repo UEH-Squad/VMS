@@ -1,10 +1,28 @@
-﻿@inject IJSRuntime JSRuntinme
+﻿@using VMS.Application.ViewModels
+@using VMS.Application.Interfaces
+
+@inject IJSRuntime JSRuntinme
+@inject IAreaService AreaService
 
 <section class="my-filter">
     <div class="container">
         <h1>Khám phá <span>hoạt động & chương trình tình nguyện</span> phù hợp với bạn</h1>
         <div class="owl-carousel owl-theme filter__carousel">
-            <div class="item">
+
+            @if (areas != null)
+            {
+                foreach(var area in areas)
+                {
+                    <div class="item">
+                        <i class="material-icons">
+                            @area.Icon
+                        </i>
+                        <span>@area.Name</span>
+                    </div>
+                }
+            }
+            
+            @*<div class="item">
                 <i class="material-icons">
                     group
                 </i>
@@ -14,7 +32,7 @@
                 <i class="material-icons">
                     import_contacts
                 </i>
-                <span>Giáo dục </span>
+                <span>Giáo dục</span>
             </div>
             <div class="item">
                 <i class="material-icons">
@@ -81,15 +99,25 @@
                     groups
                 </i>
                 <span>Cộng đồng</span>
-            </div>
+            </div>*@
 
         </div>
     </div>
 
 </section>
 @code {
-    protected override async Task OnAfterRenderAsync(bool firstRender) 
+    private List<AreaViewModel> areas;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntinme.InvokeVoidAsync("vms.FilterCarousel");        
+        if (areas != null)
+        {
+            await JSRuntinme.InvokeVoidAsync("vms.FilterCarousel");
+        }
+
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        areas = await AreaService.GetAllAreas();
     }
 }

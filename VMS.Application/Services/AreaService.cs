@@ -30,7 +30,8 @@ namespace VMS.Application.Services
 
             IEnumerable<AreaViewModel> Areas = areas.Select(x => new AreaViewModel
             {
-                Name = x.Name
+                Name = x.Name,
+                Icon = x.Icon
             });
 
             return Areas.ToList();

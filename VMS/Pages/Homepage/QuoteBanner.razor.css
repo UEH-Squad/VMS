@@ -5,8 +5,15 @@
 /*#region mixins */
 /*#endregion */
 .IntroduceParagraph {
+  margin-top: 25px;
   position: relative;
   background: #FFFFFF; }
+  @media (min-width: 768px) {
+    .IntroduceParagraph {
+      margin-top: 50px; } }
+  @media (min-width: 1200px) {
+    .IntroduceParagraph {
+      margin-top: 100px; } }
   .IntroduceParagraph-banner1 {
     width: 100%;
     filter: blur(2px); }
@@ -441,11 +448,13 @@
 
 .QuoteBanner {
   position: relative;
-  height: 172px;
-  border: 0.25px solid #C4C4C4; }
+  border: 0.25px solid #C4C4C4;
+  margin-bottom: 25px; }
+  @media (min-width: 768px) {
+    .QuoteBanner {
+      margin-bottom: 50px; } }
   .QuoteBanner-banner2 {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
-    position: absolute;
     width: 100%; }
   .QuoteBanner__text {
     position: absolute;

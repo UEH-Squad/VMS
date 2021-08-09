@@ -1,5 +1,5 @@
 ﻿const playVideo = (src) => {
-    const video = document.querySelector('.my-homepage-video');
+    const video = document.querySelector('.video-header__source');
 
     let timer = null,
         totalTime = 0,
@@ -10,7 +10,7 @@
             totalTime += new Date().getTime() - time.getTime();
 
             if (totalTime >= 5 * 1000) {
-                document.querySelector('.my-slogan').style.display = 'none';
+                document.querySelector('.video-header__note').style.display = 'none';
                 clearInterval(timer);
             }
         }, 10);

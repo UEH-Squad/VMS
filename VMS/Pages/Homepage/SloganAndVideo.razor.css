@@ -34,9 +34,7 @@
     left: 0;
     right: 0;
     color: #FFFFFF;
-    background-color: #64D72F;
-    opacity: 0;
-    animation: Hidden 6s ease 0.5s 1 backwards; }
+    background-color: #64D72F; }
     .video-header__note__text {
       position: relative;
       display: inline-block;

@@ -10,7 +10,7 @@ namespace VMS.Pages.Activities
     public partial class Index
     {
         private List<ActivityViewModel> activities;
-        private IdentityUser user;
+        private bool isLoggedIn;
 
         [Inject]
         protected IActivityService ActivityService { get; set; }
@@ -20,7 +20,7 @@ namespace VMS.Pages.Activities
         protected async override Task OnInitializedAsync()
         {
             activities = await ActivityService.GetAllActivitiesAsync();
-            user = IdentityService.GetCurrentUser();
+            isLoggedIn = IdentityService.IsLoggedIn();
         }
     }
 }

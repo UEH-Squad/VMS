@@ -11,7 +11,6 @@
         video.addEventListener("play", () => {
             timer = window.setInterval(() => {
                 totalTime += 1000;
-                console.log(totalTime)
                 if (totalTime >= 6 * 1000) {
                     document.querySelector('.video-header__note').style.display = 'none';
                     clearInterval(timer);
@@ -19,8 +18,6 @@
             }, 1000);
         });
     }
-
-    
 }
 
 const filterCarousel = () => {

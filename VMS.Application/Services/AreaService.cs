@@ -35,10 +35,6 @@ namespace VMS.Application.Services
             });
 
             return Areas.ToList();
-
-        }      
-
-        
-
-}
+        }
+    }
 }

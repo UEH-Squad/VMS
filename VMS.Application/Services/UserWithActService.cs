@@ -78,19 +78,36 @@ namespace VMS.Application.Services
             return featuredtActivities.OrderByDescending(x => x.MemberQuantity).ToList();
         }
 
-        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync(double Lat, double Long)
+
+
+        public async Task<List<UserWithActivityViewModel>> GetActivitiesWithoutUserLocAsync()
         {
-            List<UserWithActivityViewModel> newestActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
+            DbContext context = _dbContextFactory.CreateDbContext();
+            List<Activity> activities = await _repository.GetListAsync<Activity>(context);
+
+            IEnumerable<UserWithActivityViewModel> userWithActivity = activities.Select(x => new UserWithActivityViewModel
+            {
+                ActivityId = x.Id,
+                Name = x.Name,
+                MemberQuantity = x.MemberQuantity
+            }
+            );
+
+            return userWithActivity.ToList();
+        }
+        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync()
+        {
+            List<UserWithActivityViewModel> newestActivities = await GetActivitiesWithoutUserLocAsync();
 
             return newestActivities.OrderByDescending(x => x.ActivityId).Take(4).ToList();
         }
-        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync(double Lat, double Long)
+        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync()
         {
-            List<UserWithActivityViewModel> featuredActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
+            List<UserWithActivityViewModel> featuredActivities = await GetActivitiesWithoutUserLocAsync();
 
             return featuredActivities.OrderByDescending(x => x.MemberQuantity).Take(4).ToList();
         }
 
-
+        
     }
 }

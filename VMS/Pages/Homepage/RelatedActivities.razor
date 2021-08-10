@@ -9,61 +9,34 @@
 <div class="container-lg p-0 position-relative">
 
     <div class="act-container">
-        <div class="act-section margin-10">
+        <div class="act-section margin-10">            
             <a href="@Routes.Activities" class="act-header">
-                <span class="act-header__green">hoạt động</span>
+                <span class="act-header__green">Hoạt động</span>
                 <span class="act-header__blue">mới nhất</span>
                 <span class="act-header__green">gần bạn</span>
             </a>
-
             <div class="my-row">
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
+                @if (newestActivities != null)
+                {
+                    foreach (var activity in newestActivities)
+                    {
+                        <div class="col-lg-3 col-4 padding-10 item-wrapper">
+                            <a href="@Routes.Activities" class="act-item">
+                                <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
+                                <div class="act-item--title fw-bold">
+                                    <p class="m-0">@activity.Name</p>
+                                </div>
+                                <span class="act-unchecked material-icons-outlined">
+                                    check_circle_outline
+                                </span>
+                            </a>
                         </div>
-                        <span class="act-unchecked material-icons-outlined">
-                            check_circle_outline
-                        </span>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                        </div>
-                        <span class="act-checked material-icons">
-                            check_circle
-                        </span>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                        </div>
-                        <span class="act-checked material-icons">
-                            check_circle
-                        </span>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                        </div>
-                        <span class="act-checked material-icons">
-                            check_circle
-                        </span>
-                    </a>
-                </div>
+                    }
+                }
+                else
+                {
+                    <p>Không có hoạt động</p>
+                }
             </div>
         </div>
         <a href="@Routes.Activities" class="act-more">Nhiều hơn >></a>
@@ -71,64 +44,40 @@
 
     <div class="act-container">
         <div class="act-section margin-10">
+            
             <a href="@Routes.Activities" class="act-header">
-                <span class="act-header__green">hoạt động</span>
-                <span class="act-header__blue">mới nhất</span>
+                <span class="act-header__green">Hoạt động</span>
+                <span class="act-header__blue">nổi bật</span>
                 <span class="act-header__green">gần bạn</span>
             </a>
 
             <div class="my-row">
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
+                @if (featuredActivities != null)
+                {
+                    foreach (var activity in featuredActivities)
+                    {
+                        <div class="col-lg-3 col-4 padding-10 item-wrapper">
+                            <a href="@Routes.Activities" class="act-item">
+                                <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
+                                <div class="act-item--title fw-bold">
+                                    <p class="m-0">@activity.Name</p>
+                                </div>
+                                <span class="act-unchecked material-icons-outlined">
+                                    check_circle_outline
+                                </span>
+                            </a>
                         </div>
-                        <span class="act-unchecked material-icons-outlined">
-                            check_circle_outline
-                        </span>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                        </div>
-                        <span class="act-checked material-icons">
-                            check_circle
-                        </span>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                        </div>
-                        <span class="act-checked material-icons">
-                            check_circle
-                        </span>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                    <a href="@Routes.Activities" class="act-item">
-                        <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                        <div class="act-item--title fw-bold">
-                            <p class="m-0">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                        </div>
-                        <span class="act-checked material-icons">
-                            check_circle
-                        </span>
-                    </a>
-                </div>
+                    }
+                }
+                else
+                {
+                    <p>Không có hoạt động</p>
+                }
             </div>
         </div>
         <a href="@Routes.Activities" class="act-more-2">Nhiều hơn >></a>
     </div>
+
 </div>
 
 
@@ -146,19 +95,40 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-
+        await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
     }
 
     protected override async Task OnInitializedAsync()
     {
-        location = await JsRuntime.InvokeAsync<UserLocation>("vms.GetUserLocation");
-        if (location == null)
-        {
-            location = new UserLocation();
-        }
-        newestActivities = await UserWithActService.GetNewestActivitiesWithUserLocAsync(location.Lat, location.Long);
-        featuredActivities = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync(location.Lat, location.Long);
-
         user = IdentityService.GetCurrentUser();
+
+        location = await JsRuntime.InvokeAsync<UserLocation>("vms.GetUserLocation");
+
+        if (user == null)
+        {
+            if (location != null)
+            {
+                newestActivities = await UserWithActService.GetNewestActivitiesWithUserLocAsync(location.Lat, location.Long);
+                featuredActivities = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync(location.Lat, location.Long);
+            }
+            else
+            {
+                newestActivities = await UserWithActService.GetNewestActivitiesWithoutUserLocAsync();
+                featuredActivities = await UserWithActService.GetFeaturedActivitiesWithoutUserLocAsync();
+            }
+        }
+        else
+        {
+            if (location != null)
+            {
+                newestActivities = await UserWithActService.GetNewestActivitiesWithUserLocAsync(location.Lat, location.Long);
+                featuredActivities = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync(location.Lat, location.Long);
+            }
+            else
+            {
+                //not done yet
+            }
+        }
+
     }
 }

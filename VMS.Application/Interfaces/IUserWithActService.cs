@@ -12,7 +12,10 @@ namespace VMS.Application.Interfaces
         Task<List<UserWithActivityViewModel>> GetActivitiesWithUserLocAsync(double Lat, double Long);
         Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithUserLocAsync(double Lat, double Long);
         Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithUserLocAsync(double Lat, double Long);
-        Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync(double Lat, double Long);
-        Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync(double Lat, double Long);
+
+
+        Task<List<UserWithActivityViewModel>> GetActivitiesWithoutUserLocAsync();
+        Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync();
+        Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,16 +11,17 @@ namespace VMS.Application.Services
     public class ApiService : IApiService
     {
         private readonly IHttpClientFactory _clientFactory;
-        private readonly string _apiKey = "Sra1zcTjUuhm1suxPB0mXKF-vyajcClci_jHqiT9ycU";
+        private readonly IConfiguration _configuration;
 
-        public ApiService(IHttpClientFactory clientFactory)
+        public ApiService(IHttpClientFactory clientFactory,IConfiguration configuration)
         {
             _clientFactory = clientFactory;
+            _configuration = configuration;
         }
 
         public async Task<CoordinateResponse> GetCoordinateAsync(string address)
         {
-            string url = string.Format("https://geocode.search.hereapi.com/v1/geocode?q={0}&apiKey={1}", address, _apiKey);
+            string url = string.Format(_configuration.GetValue<string>("GeocodingAPI:Url"), address, _configuration.GetValue<string>("GeocodingAPI:Key"));
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
 

@@ -11,7 +11,6 @@
         video.addEventListener("play", () => {
             timer = window.setInterval(() => {
                 totalTime += 1000;
-                console.log(totalTime)
                 if (totalTime >= 6 * 1000) {
                     document.querySelector('.video-header__note').style.display = 'none';
                     clearInterval(timer);
@@ -19,8 +18,6 @@
             }, 1000);
         });
     }
-
-    
 }
 
 const filterCarousel = () => {
@@ -61,6 +58,42 @@ const getUserLocation = () => {
         return null;
     }
 }
+const showResult = () => {
+    const counters = document.querySelectorAll('.counter');
+    const boxInfo = document.querySelector('.BoxInformation');
+    const boxInfoY = boxInfo.offsetTop;
+
+    const showAnimation = () => {
+        const viewportY = window.pageYOffset + window.innerHeight;
+
+        if (viewportY >= boxInfoY) {
+
+            counters.forEach(each => IncreaseNumber(each));
+        }
+    }
+    const event = () => {
+        window.addEventListener('scroll', showAnimation);
+    }
+    event();
+}
+
+const IncreaseNumber = (counter) => {
+    const speed = 200;
+    const target = parseInt(counter.dataset.target);
+    const updateCount = () => {
+        const count = +counter.innerText;
+        const increasement = target / speed;
+        if (count < target) {
+            counter.innerText = Math.ceil(count + increasement);
+            setTimeout(updateCount, 200);
+        }
+        else {
+            counter.innerText = target;
+        }
+    }
+
+    updateCount();
+}
 
 let showPosition = position => {
     var result = {
@@ -70,4 +103,4 @@ let showPosition = position => {
     return result;
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation};
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult };

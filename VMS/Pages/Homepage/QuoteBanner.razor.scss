@@ -22,13 +22,11 @@
         position: absolute;
         left: 10px;
         top: 20px;
-        font-family: Montserrat;
         font-style: normal;
         font-weight: 600;
         font-size: 20px;
         line-height: 24px;
         color: $green;
-        border: 0.25px solid rgba(0, 0, 0, 0.2);
 
         @include on('sm') {
             font-size: 25px;

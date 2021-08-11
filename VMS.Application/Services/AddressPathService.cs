@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -41,7 +39,6 @@ namespace VMS.Application.Services
             }
             await _repository.InsertAsync<AddressPathType>(dbContext, addressPathTypes);
             await _repository.InsertAsync<AddressPath>(dbContext, addressPaths);
-        }
         }
 
         private void AddressPathsRecursive(List<AddressPath> addressPaths, List<AddressPathType> addressPathTypes, AddressPath parentAddressPath, Division addressPathResponse)

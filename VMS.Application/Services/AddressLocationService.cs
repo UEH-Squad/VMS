@@ -44,10 +44,8 @@ namespace VMS.Application.Services
                     return new CoordinateResponse();
                 }
             }
-            else
-            {
-                return new CoordinateResponse();
-            }
+
+            return new CoordinateResponse();
         }
     }
 }

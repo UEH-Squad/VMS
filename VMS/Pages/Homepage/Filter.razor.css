@@ -12,7 +12,7 @@
   .my-filter h1 {
     margin-bottom: 30px;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 500;
     color: #18A0FB; }
     .my-filter h1 span {
       color: #64D72F; }
@@ -63,7 +63,7 @@
           font-size: 30px; } }
     .my-filter .item span {
       color: #64D72F;
-      font-weight: 600;
+      font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;
       font-size: 16px; }

@@ -22,7 +22,6 @@
         position: absolute;
         left: 10px;
         top: 20px;
-        font-style: normal;
         font-weight: 600;
         font-size: 20px;
         line-height: 24px;
@@ -62,9 +61,7 @@
         top: 60px;
         right: 15px;
         left: 10px;
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: normal;
+        font-weight: 400;
         font-size: 11px;
         line-height: 12px;
         display: flex;
@@ -200,8 +197,6 @@
             width: 142px;
             height: 55px;
             top: 10px;
-            font-family: Montserrat;
-            font-style: normal;
             font-weight: 600;
             font-size: 36px;
             line-height: 44px;
@@ -238,9 +233,7 @@
             width: 180px;
             height: 31px;
             top: 55px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: normal;
+            font-weight:400;
             font-size: 11px;
             line-height: 13px;
             text-align: center;
@@ -268,7 +261,6 @@
             }
 
             @include on('xxl') {
-                font-size: 50px;
                 width: 380px;
                 margin-top: 40px;
             }
@@ -284,8 +276,6 @@
             width: 142px;
             height: 55px;
             top: 86px;
-            font-family: Montserrat;
-            font-style: normal;
             font-weight: 600;
             font-size: 36px;
             line-height: 44px;
@@ -322,9 +312,7 @@
             width: 180px;
             height: 31px;
             top: 131px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: normal;
+            font-weight: 400;
             font-size: 11px;
             line-height: 13px;
             text-align: center;
@@ -352,7 +340,6 @@
             }
 
             @include on('xxl') {
-                font-size: 50px;
                 width: 420px;
                 margin-top: 40px;
             }
@@ -369,8 +356,6 @@
             width: 142px;
             height: 55px;
             top: 162px;
-            font-family: Montserrat;
-            font-style: normal;
             font-weight: 600;
             font-size: 36px;
             line-height: 44px;
@@ -408,9 +393,7 @@
             width: 200px;
             height: 31px;
             top: 207px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: normal;
+            font-weight: 400;
             font-size: 11px;
             line-height: 13px;
             color: $grey-text;
@@ -441,7 +424,6 @@
             }
 
             @include on('xxl') {
-                font-size: 50px;
                 width: 420px;
                 margin-top: 40px;
                 line-height: 50px;
@@ -458,8 +440,6 @@
             width: 142px;
             height: 55px;
             top: 238px;
-            font-family: Montserrat;
-            font-style: normal;
             font-weight: 600;
             font-size: 36px;
             line-height: 44px;
@@ -497,9 +477,7 @@
             width: 180px;
             height: 31px;
             top: 283px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: normal;
+            font-weight: 400;
             font-size: 11px;
             line-height: 13px;
             text-align: center;
@@ -531,7 +509,6 @@
             }
 
             @include on('xxl') {
-                font-size: 50px;
                 width: 380px;
                 margin-top: 40px;
                 line-height: 50px;
@@ -559,9 +536,7 @@
         height: 27.94px;
         left: 99.13px;
         top: 10px;
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: normal;
+        font-weight: 400;
         font-size: 15px;
         line-height: 18px;
         letter-spacing: -0.015em;
@@ -654,7 +629,7 @@
         top: 72px;
         font-family: Nunito;
         font-style: normal;
-        font-weight: bold;
+        font-weight: 700;
         font-size: 9px;
         line-height: 12px;
         color: #64D72F;
@@ -738,9 +713,7 @@
         height: 11px;
         left: 159px;
         top: 80px;
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: bold;
+        font-weight: 700;
         font-size: 11px;
         line-height: 11px;
         text-align: center;

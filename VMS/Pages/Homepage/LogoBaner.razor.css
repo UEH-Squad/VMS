@@ -4,6 +4,21 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.my-logoBaner h1 {
+  text-align: center;
+  margin-bottom: 50px;
+  color: #18A0FB;
+  font-size: 13px;
+  font-weight: 500; }
+  @media (min-width: 576px) {
+    .my-logoBaner h1 {
+      font-size: 32px;
+      font-weight: 600; } }
+  @media (min-width: 992px) {
+    .my-logoBaner h1 {
+      font-size: 64px;
+      font-weight: 600; } }
+
 .my-logoBaner .container {
   padding: 0; }
 

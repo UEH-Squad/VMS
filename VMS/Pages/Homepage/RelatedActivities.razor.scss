@@ -94,7 +94,7 @@
 .act {
     &-header {
         display: block;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 1rem;
         line-height: 19.5px;
         margin-bottom: 15px;
@@ -139,6 +139,7 @@
             border-radius: 0 0 10px 10px;
             color: $blue;
             font-size: .5rem;
+            font-weight:400;
             line-height: 9.75px;
             margin: 0;
             width: inherit;
@@ -180,7 +181,7 @@
     &-more {
         color: $green;
         font-size: .625rem;
-        font-weight: 600;
+        font-weight: 400;
         position: absolute;
         padding-right: 10px;
         right: 0;

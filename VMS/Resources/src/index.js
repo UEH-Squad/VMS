@@ -7,3 +7,4 @@ export const FilterCarousel = () => homepage.filterCarousel();
 export const LogoBanerCarousel = () => homepage.logoBanerCarousel();
 export const GetUserLocation = () => homepage.getUserLocation();
 export const ShowResult = () => homepage.showResult();
+export const IncreaseNumber1 = () => homepage.increaseNumber1();

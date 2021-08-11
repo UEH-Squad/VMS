@@ -1,0 +1,39 @@
+﻿@inject IJSRuntime JSRuntinme
+
+<section class="my-poster1">
+    <img class="w-100" src="/img/poster1.jfif" alt="">
+</section>
+<section class="my-quoteBaner">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 quoteBaner__item quoteBaner__item-left">
+                <h1>
+                    <span class="counter">5,000</span>
+                    +
+                </h1>
+                <h3>Tình nguyện viên</h3>
+            </div>
+            <div class="col-6 quoteBaner__item quoteBaner__item-right">
+                <h1><span class="counter">100</span>+</h1>
+                <h3>Tổ chức tình nguyện</h3>
+            </div>
+            <div class="col-6 quoteBaner__item quoteBaner__item-left">
+                <h1><span class="counter">2,000</span>+</h1>
+                <h3>Hoạt động, chương trình tình nguyện</h3>
+            </div>
+            <div class="col-6 quoteBaner__item quoteBaner__item-right">
+                <h1><span class="counter">3,000</span>+</h1>
+                <h3>Hoành thành nhiệm vụ</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="my-poster2">
+    <img class="w-100" src="/img/poster2.jfif" alt="">
+</section>
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.IncreaseNumber1");
+    }
+}

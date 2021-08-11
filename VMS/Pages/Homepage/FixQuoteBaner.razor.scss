@@ -1,0 +1,28 @@
+﻿.my-quoteBaner {
+    padding: 50px 0;
+    text-align: center;
+
+    .quoteBaner__item {
+        padding-bottom: 50px;
+        color: #64D72F;
+
+        h1 {
+            font-size: 96px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 36px;
+            font-weight: 400;
+            color: black;
+        }
+    }
+
+    .quoteBaner__item-left {
+        padding-right: 150px;
+    }
+
+    .quoteBaner__item-right {
+        padding-left: 150px;
+    }
+}

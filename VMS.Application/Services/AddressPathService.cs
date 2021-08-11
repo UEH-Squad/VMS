@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ToTitleCaseBase;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Domain.Interfaces;
@@ -40,14 +40,10 @@ namespace VMS.Application.Services
             await _repository.InsertAsync<AddressPathType>(dbContext, addressPathTypes);
             await _repository.InsertAsync<AddressPath>(dbContext, addressPaths);
         }
-        public string ToTitleCase(string str)
-        {
-            TextInfo textInfo = new CultureInfo("vi-VN", false).TextInfo;
-            return textInfo.ToTitleCase(str);
-        }
+
         private void AddressPathsRecursive(List<AddressPath> addressPaths, List<AddressPathType> addressPathTypes, AddressPath parentAddressPath, Division addressPathResponse)
         {
-            string divisionType = ToTitleCase(addressPathResponse.DivisionType);
+            string divisionType = addressPathResponse.DivisionType.ToTitleCase();
             AddressPathType addressPathType = addressPathTypes.FirstOrDefault(t => t.Type == divisionType);
             if (addressPathType is null)
             {
@@ -93,5 +89,4 @@ namespace VMS.Application.Services
             return new List<AddressPathResponse>(); 
         }
     }
-
 }

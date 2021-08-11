@@ -40,11 +40,14 @@ namespace VMS.Application.Services
             await _repository.InsertAsync<AddressPathType>(dbContext, addressPathTypes);
             await _repository.InsertAsync<AddressPath>(dbContext, addressPaths);
         }
-
-        private void AddressPathsRecursive(List<AddressPath> addressPaths, List<AddressPathType> addressPathTypes, AddressPath parentAddressPath, Division addressPathResponse)
+        public string ToTitleCase(string str)
         {
             TextInfo textInfo = new CultureInfo("vi-VN", false).TextInfo;
-            string divisionType = textInfo.ToTitleCase(addressPathResponse.DivisionType);
+            return textInfo.ToTitleCase(str);
+        }
+        private void AddressPathsRecursive(List<AddressPath> addressPaths, List<AddressPathType> addressPathTypes, AddressPath parentAddressPath, Division addressPathResponse)
+        {
+            string divisionType = ToTitleCase(addressPathResponse.DivisionType);
             AddressPathType addressPathType = addressPathTypes.FirstOrDefault(t => t.Type == divisionType);
             if (addressPathType is null)
             {

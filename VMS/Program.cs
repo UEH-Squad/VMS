@@ -17,12 +17,10 @@ namespace VMS
         {
             var host = CreateHostBuilder(args).Build();
 
-            var startupTasks = host.Services.GetServices<IAddressPathService>();
+            var startupTask = host.Services.GetRequiredService<IAddressPathService>();
 
-            foreach (var startupTask in startupTasks)
-            {
                 await startupTask.InitializeAddressPathsAsync();
-            }
+
             await host.RunAsync();
         }
 

@@ -16,12 +16,12 @@ namespace VMS.Application.Services
     public class ActivityService : BaseService, IActivityService
     {
         private readonly IIdentityService _identityService;
-        private readonly IAddressLocationService _apiService;
+        private readonly IAddressLocationService _addressLocationService;
 
-        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IAddressLocationService apiService) : base(repository, dbContextFactory, mapper)
+        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IAddressLocationService addressLocationService) : base(repository, dbContextFactory, mapper)
         {
             _identityService = identityService;
-            _apiService = apiService;
+            _addressLocationService = addressLocationService;
         }
 
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
@@ -49,7 +49,7 @@ namespace VMS.Application.Services
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
 
-            CoordinateResponse coordinateReponse = await _apiService.GetCoordinateAsync(activity.Address);
+            CoordinateResponse coordinateReponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
             activity.Latitude = coordinateReponse.Latitude;
             activity.Longitude = coordinateReponse.Longitude;
 
@@ -115,7 +115,7 @@ namespace VMS.Application.Services
                 IsDeleted = false
             }).ToList() ;
 
-            CoordinateResponse addressLocationReponse = await _apiService.GetCoordinateAsync(activity.Address);
+            CoordinateResponse addressLocationReponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
             activity.Latitude = addressLocationReponse.Latitude;
             activity.Longitude = addressLocationReponse.Longitude;
 

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -18,20 +20,62 @@ namespace VMS.Application.Services
     public class AddressPathService : BaseService, IAddressPathService
     {
         private readonly IHttpClientFactory _clientFactory;
+        private readonly IConfiguration _configuration;
 
-        public AddressPathService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IHttpClientFactory clientFactory) : base(repository, dbContextFactory, mapper)
+        public AddressPathService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IHttpClientFactory httpClientFactory, IConfiguration configuration) : base(repository, dbContextFactory, mapper)
         {
-            _clientFactory = clientFactory;
+            _clientFactory = httpClientFactory;
+            _configuration = configuration;
         }
 
-        public async Task<IEnumerable<Province>> GetProvincesAsync()
+        public async Task InitializeAddressPathsAsync()
         {
-            // Instead of calling API, we can make calls to database to retrieve data
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            if (await _repository.GetCountAsync<AddressPathType>(dbContext) != 0) return;
+            List<AddressPathResponse> addressPathResponses = await GetAddressPathsAsync();
+            List<AddressPath> addressPaths = new();
+            List<AddressPathType> addressPathTypes = new();
+            foreach (var a in addressPathResponses)
+            {
+                AddressPathsRecursive(addressPaths, addressPathTypes, null, new Division() { Name = a.Name, DivisionType = a.DivisionType, Paths = a.Paths });
+            }
+            await _repository.InsertAsync<AddressPathType>(dbContext, addressPathTypes);
+            await _repository.InsertAsync<AddressPath>(dbContext, addressPaths);
+        }
+        }
 
-            string url = string.Format("https://provinces.open-api.vn/api/?depth=3");
+        private void AddressPathsRecursive(List<AddressPath> addressPaths, List<AddressPathType> addressPathTypes, AddressPath parentAddressPath, Division addressPathResponse)
+        {
+            TextInfo textInfo = new CultureInfo("vi-VN", false).TextInfo;
+            string divisionType = textInfo.ToTitleCase(addressPathResponse.DivisionType);
+            AddressPathType addressPathType = addressPathTypes.FirstOrDefault(t => t.Type == divisionType);
+            if (addressPathType is null)
+            {
+                addressPathType = new() { Type = divisionType};
+                addressPathTypes.Add(addressPathType);
+            }
+
+            AddressPath addressPath = new()
+            {
+                Name = addressPathResponse.Name,
+                AddressPathType = addressPathType,
+                PreviousPath = parentAddressPath
+            };
+            addressPaths.Add(addressPath);
+
+            if (addressPathResponse.Paths is null) return;
+
+            foreach (var apr in addressPathResponse.Paths)
+            {
+                AddressPathsRecursive(addressPaths, addressPathTypes, addressPath, apr);
+            }
+        }
+
+        private async Task<List<AddressPathResponse>> GetAddressPathsAsync()
+        {
+            string url = _configuration.GetValue<string>("AddressAPI:Url");
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("Accept", "application/vnd.github.v3+json");
 
             HttpClient client = _clientFactory.CreateClient();
 
@@ -41,73 +85,13 @@ namespace VMS.Application.Services
             {
                 string stringResponse = await response.Content.ReadAsStringAsync();
 
-                return
-                    (
+                List<AddressPathResponse> addressPathResponses = JsonConvert.DeserializeObject<List<AddressPathResponse>>(stringResponse);
 
-                    System.Text.Json.JsonSerializer.Deserialize<List<Province>>(stringResponse,
-                    new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })
+                return addressPathResponses;
+            }
 
-                    );
-            }
-            else
-            {
-                return Array.Empty<Province>();
-            }
+            return new List<AddressPathResponse>(); 
         }
-
-        public async Task InsertToDatabaseAsync()
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-            if (await _repository.GetCountAsync<AddressPathType>(dbContext) != 0) return;
-            IEnumerable<Province> provinces = await GetProvincesAsync();
-           
-            List<string> divitionTypes = new List<string>();
-            foreach (var province in provinces)
-            {
-
-                if (string.IsNullOrEmpty(divitionTypes.FirstOrDefault(a => a == province.Division_type)))
-                {
-                    divitionTypes.Add(province.Division_type);
-                }
-                foreach (var district in province.Districts)
-                {
-                    if (string.IsNullOrEmpty(divitionTypes.FirstOrDefault(a => a == district.Division_type)))
-                    {
-                        divitionTypes.Add(district.Division_type);
-                    }
-                    foreach (var ward in district.Wards)
-                    {
-                        if (string.IsNullOrEmpty(divitionTypes.FirstOrDefault(a => a == ward.Division_type)))
-                        {
-                            divitionTypes.Add(ward.Division_type);
-                        }
-                    }
-                }
-            }
-            List<AddressPathType> addressPathTypes = divitionTypes.Select(a => new AddressPathType
-            {
-                Type = a
-            }).ToList();
-            await _repository.InsertAsync<AddressPathType>(dbContext, addressPathTypes);
-            //add data to AddressPath
-            foreach (var province in provinces)
-            {
-                AddressPath provinceAddressPath = new AddressPath() { Name = province.Name, AddressPathTypeId = addressPathTypes.Find(a => a.Type == province.Division_type).Id };
-                await _repository.InsertAsync(dbContext, provinceAddressPath);
-                foreach (var district in province.Districts)
-                {
-                    AddressPath districtAddressPath = new AddressPath() { Name = district.Name, AddressPathTypeId = addressPathTypes.Find(a => a.Type == district.Division_type).Id, ParentPathId = provinceAddressPath.Id };
-                    await _repository.InsertAsync(dbContext, districtAddressPath);
-                    foreach (var ward in district.Wards)
-                    {
-                        AddressPath wardAddressPath = new AddressPath() { Name = ward.Name, AddressPathTypeId = addressPathTypes.Find(a => a.Type == ward.Division_type).Id, ParentPathId = districtAddressPath.Id };
-                        await _repository.InsertAsync(dbContext, wardAddressPath);
-                    }
-                }
-            }
-
-        }
-
     }
 
 }

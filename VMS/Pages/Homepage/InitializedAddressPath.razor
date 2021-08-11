@@ -1,0 +1,10 @@
+@using VMS.Application.Interfaces
+
+@inject IAddressPathService AddressPathService 
+
+@code{ 
+    protected override async Task OnInitializedAsync()
+    {
+        await AddressPathService.InitializeAddressPathsAsync();
+    }
+}

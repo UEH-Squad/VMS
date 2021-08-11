@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 
-namespace ToTitleCaseBase
+namespace VMS.Common.Extensions
 {
-    public static class ToTitleCaseBase
+    public static class StringExtentions
     {
         public static string ToTitleCase(this string str)
         {

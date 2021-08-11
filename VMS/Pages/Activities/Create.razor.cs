@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -85,13 +84,12 @@ namespace VMS.Pages.Activities
                 return;
             }
 
-            IdentityUser user = IdentityService.GetCurrentUser();
-            activity.OrgId = user.Id;
+            activity.OrgId = IdentityService.GetCurrentUserId();
 
             // save banner
             if (file is not null)
             {
-                activity.Banner = await UploadService.SaveImageAsync(file, user.Id);
+                activity.Banner = await UploadService.SaveImageAsync(file, activity.OrgId);
             }
 
             await ActivityService.AddActivityAsync(activity);

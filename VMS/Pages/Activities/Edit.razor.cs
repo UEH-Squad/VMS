@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace VMS.Pages.Activities
     public partial class Edit
     {
         private CreateActivityViewModel activity;
-        private IdentityUser user;
+        private string userId;
         private List<Skill> skills;
         private List<Area> areas;
         private string message;
@@ -41,7 +40,7 @@ namespace VMS.Pages.Activities
             activity = await ActivityService.GetCreateActivityViewModelAsync(int.Parse(ActivityId));
             skills = await SkillService.GetAllSkillsAsync();
             areas = await AreaService.GetAllAreasAsync();
-            user = IdentityService.GetCurrentUser();
+            userId = IdentityService.GetCurrentUserId();
             if (!string.IsNullOrEmpty(activity.Banner))
             {
                 banner = "/img/" + activity.Banner;
@@ -91,7 +90,7 @@ namespace VMS.Pages.Activities
                 {
                     UploadService.RemoveImage(activity.Banner);
                 }
-                activity.Banner = await UploadService.SaveImageAsync(file, user.Id);
+                activity.Banner = await UploadService.SaveImageAsync(file, userId);
             }
 
             await ActivityService.UpdateActivityAsync(activity, int.Parse(ActivityId));

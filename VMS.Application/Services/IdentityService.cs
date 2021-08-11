@@ -37,5 +37,10 @@ namespace VMS.Application.Services
         {
             return _httpContext.HttpContext.User.Identity.IsAuthenticated;
         }
+
+        public string GetCurrentUserId()
+        {
+            return GetCurrentUser()?.Id;
+        }
     }
 }

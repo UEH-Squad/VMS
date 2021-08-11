@@ -16,9 +16,9 @@ namespace VMS.Application.Services
     public class ActivityService : BaseService, IActivityService
     {
         private readonly IIdentityService _identityService;
-        private readonly IApiService _apiService;
+        private readonly IAddressLocationService _apiService;
 
-        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IApiService apiService) : base(repository, dbContextFactory, mapper)
+        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IAddressLocationService apiService) : base(repository, dbContextFactory, mapper)
         {
             _identityService = identityService;
             _apiService = apiService;

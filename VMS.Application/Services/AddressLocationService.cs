@@ -8,14 +8,14 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Application.Services
 {
-    public class ApiService : IApiService
+    public class AddressLocationService : IAddressLocationService
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _configuration;
 
-        public ApiService(IHttpClientFactory clientFactory,IConfiguration configuration)
+        public AddressLocationService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _clientFactory = clientFactory;
+            _clientFactory = httpClientFactory;
             _configuration = configuration;
         }
 

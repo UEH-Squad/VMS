@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -9,7 +8,7 @@ namespace VMS.Pages.Activities
     public partial class View
     {
         private ViewActivityViewModel activity;
-        private IdentityUser user;
+        private string userId;
 
         [Parameter]
         public string ActivityId { get; set; }
@@ -21,7 +20,7 @@ namespace VMS.Pages.Activities
         protected override async Task OnInitializedAsync()
         {
             activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
-            user = IdentityService.GetCurrentUser();
+            userId = IdentityService.GetCurrentUserId();
         }
     }
 }

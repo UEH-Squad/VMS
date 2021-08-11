@@ -1,7 +1,7 @@
 ﻿@attribute [Route(Routes.EditActivity + "/{activityid}")]
 @attribute [Authorize]
 
-@if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != user.Id)
+@if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != userId)
 {
     <div class="alert alert-info">Không tìm thấy hoạt động..<a href="@Routes.Activities">Quay lại</a></div>
 }

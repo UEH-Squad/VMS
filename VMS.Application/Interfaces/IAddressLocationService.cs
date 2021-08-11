@@ -3,7 +3,7 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Application.Interfaces
 {
-    public interface IApiService
+    public interface IAddressLocationService
     {
         Task<CoordinateResponse> GetCoordinateAsync(string address);
     }

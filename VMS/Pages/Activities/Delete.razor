@@ -2,7 +2,7 @@
 @attribute [Authorize]
 
 
-@if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != user.Id)
+@if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != userId)
 {
     <div class="card card-body">Không tìm thấy hoạt động..<a href="@Routes.Activities">Quay lại</a></div>
 }

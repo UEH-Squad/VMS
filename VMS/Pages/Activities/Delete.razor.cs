@@ -10,7 +10,7 @@ namespace VMS.Pages.Activities
     public partial class Delete
     {
         private CreateActivityViewModel activity;
-        private IdentityUser user;
+        private string userId;
 
         [Parameter]
         public string ActivityId { get; set; }
@@ -26,7 +26,7 @@ namespace VMS.Pages.Activities
         protected override async Task OnInitializedAsync()
         {
             activity = await ActivityService.GetCreateActivityViewModelAsync(int.Parse(ActivityId));
-            user = IdentityService.GetCurrentUser();
+            userId = IdentityService.GetCurrentUserId();
         }
         private async Task DeleteActivityAsync()
         {

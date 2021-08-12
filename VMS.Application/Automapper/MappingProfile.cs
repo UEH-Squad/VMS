@@ -8,7 +8,6 @@ namespace VMS.Application.Automapper
     {
         public MappingProfile()
         {
-            //CreateMap<Area, AreaViewModel>();
         }
     }
 }

@@ -56,7 +56,7 @@ const logoBanerCarousel = () => {
 const setUserLocation = () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setPosition);
-    } else {        
+    } else {
         return null;
     }
 }
@@ -102,7 +102,6 @@ const getUserLocation = () => {
     if (location) {
         return JSON.parse(location);
     }
-
     return null;
 }
 
@@ -113,5 +112,4 @@ const setPosition = position => {
     }
     localStorage.setItem('UserLocation', JSON.stringify(result));
 }
-
 export default { playVideo, filterCarousel, logoBanerCarousel, setUserLocation, getUserLocation, showResult };

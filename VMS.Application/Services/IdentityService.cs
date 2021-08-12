@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Models;
@@ -16,7 +17,7 @@ namespace VMS.Application.Services
         {
             _userManager = userManager;
             _httpContext = httpContext;
-        }
+        }       
 
         /*
          * As UserManager requires a scoped DbContext, there're cases that two or more threads trying to access one DbContext at a time.
@@ -31,6 +32,19 @@ namespace VMS.Application.Services
         public User GetCurrentUser()
         {
             return Task.Run(() => _userManager.GetUserAsync(_httpContext.HttpContext?.User)).Result;
+        }
+
+        public string GetCurrentUserId()
+        {
+            return GetCurrentUser()?.Id;
+        }
+        public User GetCurrentUserWithAddresses()
+        {
+            string currentUserId = GetCurrentUserId();
+            return Task.Run(() => _userManager.Users.Include(x => x.UserAddresses)
+                                                    .ThenInclude(x => x.AddressPath)
+                                                    .ThenInclude(x => x.AddressPathType)
+                                                    .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
         }
     }
 }

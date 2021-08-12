@@ -11,6 +11,5 @@ namespace VMS.Application.ViewModels
         public string StudentId { get; set; }
         public double Lat { get; set; }
         public double Long { get; set; }
-        public string Distrist { get; set; }
     }
 }

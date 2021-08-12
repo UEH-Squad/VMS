@@ -1,7 +1,7 @@
 ﻿@import '../Resources/scss/common/_variables';
 .footer{
     position:relative;
-    margin-top:10px;
+    margin-top:150px;
 }
 //======button back to top==========
 /*-------mobile------------*/
@@ -26,17 +26,11 @@
     .btn-back-top {
         width: 50px;
         height: 50px;
-        border-radius: 50%;
-        color: #ffffff;
-        background-color: $green;
-        display: flex;
-        text-decoration: none;
         position: absolute;
         right: 40px;
         top: -25px;
     }
     .btn-back-top-icon {
-        margin: auto;
         font-size:40px;
     }
 }
@@ -45,17 +39,11 @@
     .btn-back-top {
         width: 60px;
         height: 60px;
-        border-radius: 50%;
-        color: #ffffff;
-        background-color: $green;
-        display: flex;
-        text-decoration: none;
         position: absolute;
         right: 50px;
         top: -30px;
     }
     .btn-back-top-icon {
-        margin: auto;
         font-size: 50px;
     }
 }
@@ -63,19 +51,13 @@
 @include on ('xl') {
     .btn-back-top {
         width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        color: #ffffff;
-        background-color: $green;
-        display: flex;
-        text-decoration: none;
+        height: 70px;      
         position: absolute;
-        right: 55px;
-        top: -35px;
+        right: 40px;
+        top: -70px;
     }
 
     .btn-back-top-icon {
-        margin: auto;
         font-size: 65px;
     }
 }
@@ -90,11 +72,10 @@
         display: flex;
         text-decoration: none;
         position: absolute;
-        right: 62px;
-        top: -40px;
+        right: 100px;
+        top: -100px;
     }
     .btn-back-top-icon {
-        margin: auto;
         font-size:75px;
     }
 }
@@ -102,41 +83,13 @@
 
 //========container=========
 /*-------mobile------------*/
-    .container {
-        border-top: #808080 solid 1px;
-        padding: 20px 0;
-        display: flex;
-        justify-content: space-between;
-        max-width: 100%;
-    }
-/*-------tablet min-width: 576px---------*/
-@include on('sm') {
-    .container {
-        border-top: #808080 solid 1px;
-        padding: 35px 0;
-        display: flex;
-        justify-content: space-between;
-        max-width: 100%;
-    }
-}
-/*-------tablet min-width: 992px---------*/
-@include on('lg') {
-    .container {
-        border-top: #808080 solid 1px;
-        padding: 50px 0;
-        display: flex;
-        justify-content: space-around;
-        max-width: 100%;
-    }
-}
-/*-------pc min width:1400px------------*/
-@include on('xxl') {
-    .container {
-        border-top: #808080 solid 1px;
-        padding: 60px 0;
-        display: flex;
-        justify-content: space-around;
-        max-width:100%;
+.container {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+
+    @include on ('xl'){
+        padding: 0;
     }
 }
 //====end container=========
@@ -146,7 +99,6 @@
     .left{
         display:flex;
         flex-direction:column;
-        margin-left:15px;
     }
     .left__logo-govirlunteer {
         width: 94px;
@@ -182,9 +134,6 @@
 /*-------tablet min-width: 576px-----*/
 @include on('sm') {
     .left {
-        display: flex;
-        flex-direction: column;
-    }
     .left__logo-govirlunteer {
         width: 312px;
         height: 43px;
@@ -216,10 +165,6 @@
 }
 /*-------tablet min-width: 992px-----*/
 @include on('lg') {
-    .left {
-        display: flex;
-        flex-direction: column;
-    }
     .left__logo-govirlunteer {
         width: 312px;
         height: 43px;
@@ -251,11 +196,6 @@
 }
 /*-------pc min width:1200px------------*/
 @include on('xl') { //////////
-    .left {
-        display: flex;
-        flex-direction: column;
-    }
-
     .left__logo-govirlunteer {
         width: 388px;
         height: 49px;
@@ -291,10 +231,6 @@
 }
 /*-------pc min width:1400px------------*/
 @include on('xxl') {
-    .left {
-        display: flex;
-        flex-direction: column;
-    }
     .left__logo-govirlunteer {
         width: 530px;
         height: 73px;
@@ -484,4 +420,6 @@
                 line-height: 40px;
             }
         }
+
+}
         //======end right=======

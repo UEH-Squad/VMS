@@ -6,16 +6,18 @@
 /*#endregion */
 .my-logoBaner h1 {
   text-align: center;
-  margin-bottom: 50px;
+  margin: 30px 0;
   color: #18A0FB;
   font-size: 13px;
   font-weight: 500; }
   @media (min-width: 576px) {
     .my-logoBaner h1 {
+      margin: 40px 0;
       font-size: 32px;
       font-weight: 600; } }
   @media (min-width: 992px) {
     .my-logoBaner h1 {
+      margin: 50px 0;
       font-size: 64px;
       font-weight: 600; } }
 
@@ -72,7 +74,7 @@
       left: 0; } }
   @media (min-width: 992px) {
     .my-logoBaner ::deep .owl-nav .owl-prev {
-      top: 5px;
+      top: 20px;
       left: 30px; } }
 
 .my-logoBaner ::deep .owl-nav .owl-next {
@@ -93,7 +95,7 @@
       right: 0; } }
   @media (min-width: 992px) {
     .my-logoBaner ::deep .owl-nav .owl-next {
-      top: 5px;
+      top: 20px;
       right: 30px; } }
 
 .my-logoBaner ::deep .owl-dots {

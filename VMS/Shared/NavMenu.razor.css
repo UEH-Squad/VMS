@@ -121,7 +121,7 @@
     display: block; }
     @media (min-width: 1200px) {
       .my-collapse__list__link {
-        font-size: 24px; }
+        font-size: 22px; }
         .my-collapse__list__link:before {
           content: "";
           position: absolute;
@@ -133,6 +133,9 @@
           display: none; }
         .my-collapse__list__link:hover.my-collapse__list__link::before {
           display: block; } }
+    @media (min-width: 1400px) {
+      .my-collapse__list__link {
+        font-size: 24px; } }
     .my-collapse__list__link:hover {
       color: #0B588C; }
   .my-collapse .my-collapse__login-area {

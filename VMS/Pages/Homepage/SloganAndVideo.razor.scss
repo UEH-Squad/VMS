@@ -38,7 +38,7 @@
     &__source {
         position: relative;
         width: 100%;
-        height: auto;
+        max-height: auto;
         // keep original ratio of the video (fullHD)
         top: 0;
         object-fit: cover;

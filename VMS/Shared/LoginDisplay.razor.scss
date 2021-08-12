@@ -38,8 +38,12 @@
     @include on('xl') {
         width: 200px;
         height: 60px;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 60px;
+    }
+
+    @include on('xxl') {
+        font-size: 24px;
     }
 }
 

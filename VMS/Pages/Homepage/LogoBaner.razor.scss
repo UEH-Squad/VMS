@@ -3,17 +3,19 @@
 .my-logoBaner {
     h1 {
         text-align: center;
-        margin-bottom: 50px;
+        margin: 30px 0;
         color: $blue;
         font-size: 13px;
         font-weight: 500;
 
         @include on("sm") {
+            margin: 40px 0;
             font-size: 32px;
             font-weight: 600;
         }
 
         @include on("lg") {
+            margin: 50px 0;
             font-size: 64px;
             font-weight: 600;
         }
@@ -91,7 +93,7 @@
             }
 
             @include on("lg") {
-                top: 5px;
+                top: 20px;
                 left: 30px;
             }
         }
@@ -121,7 +123,7 @@
             }
 
             @include on("lg") {
-                top: 5px;
+                top: 20px;
                 right: 30px;
             }
         }

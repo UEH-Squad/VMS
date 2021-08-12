@@ -19,7 +19,10 @@
     @media (min-width: 576px) {
       .my-filter h1 {
         font-size: 30px; } }
-    @media (min-width: 992px) {
+    @media (min-width: 1200px) {
+      .my-filter h1 {
+        font-size: 32px; } }
+    @media (min-width: 1400px) {
       .my-filter h1 {
         font-size: 36px; } }
   .my-filter .owl-carousel {

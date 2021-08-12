@@ -1,4 +1,6 @@
-﻿const playVideo = (src) => {
+﻿import counterUp from 'counterup2';
+
+const playVideo = (src) => {
     const video = document.querySelector('.video-header__source');
 
     let timer = null,
@@ -34,7 +36,6 @@ const filterCarousel = () => {
                 items: 6,
                 slideBy: 6,
             },
-
         }
     })
 }
@@ -67,7 +68,6 @@ const showResult = () => {
         const viewportY = window.pageYOffset + window.innerHeight;
 
         if (viewportY >= boxInfoY) {
-
             counters.forEach(each => IncreaseNumber(each));
         }
     }
@@ -104,11 +104,20 @@ let showPosition = position => {
 }
 
 const increaseNumber1 = () => {
-    $(document).ready(() => {
-        $(".counter").counterUp({
-            time: 1000,
-            delay: 10,
+    const handleCounterUp = el => {
+        new Waypoint({
+            element: el,
+            handler: function () {
+                counterUp(el);
+                this.destroy();
+            },
+            offset: 'bottom-in-view',
         });
+    };
+
+    $(document).ready(() => {
+        const els = document.querySelectorAll('.counter');
+        [].forEach.call(els, handleCounterUp);
     });
 }
 

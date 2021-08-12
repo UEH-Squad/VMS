@@ -46,7 +46,7 @@
         width: 24px; } }
     @media (min-width: 992px) {
       .my-logoBaner .item img {
-        width: 36px; } }
+        width: 48px; } }
   @media (min-width: 576px) {
     .my-logoBaner .item {
       grid-row-gap: 30px; } }

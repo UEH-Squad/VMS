@@ -103,4 +103,13 @@ let showPosition = position => {
     return result;
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult };
+const increaseNumber1 = () => {
+    $(document).ready(() => {
+        $(".counter").counterUp({
+            time: 1000,
+            delay: 10,
+        });
+    });
+}
+
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult, increaseNumber1 };

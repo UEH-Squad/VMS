@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -15,13 +14,13 @@ namespace VMS.Pages.Activities
         [Parameter]
         public string ActivityId { get; set; }
         [Inject]
-        protected IIdentityService IdentityService { get; set; }
+        private IIdentityService IdentityService { get; set; }
         [Inject]
-        protected IActivityService ActivityService { get; set; }
+        private IActivityService ActivityService { get; set; }
         [Inject]
-        protected NavigationManager NavigationManager { get; set; }
+        private NavigationManager NavigationManager { get; set; }
         [Inject]
-        protected IUploadService UploadService { get; set; }
+        private IUploadService UploadService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

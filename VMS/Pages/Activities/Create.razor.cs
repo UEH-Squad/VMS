@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,19 +20,17 @@ namespace VMS.Pages.Activities
         private IBrowserFile file;
 
         [Inject]
-        protected IIdentityService IdentityService { get; set; }
+        private IIdentityService IdentityService { get; set; }
         [Inject]
-        protected IAreaService AreaService { get; set; }
+        private IAreaService AreaService { get; set; }
         [Inject]
-        protected ISkillService SkillService { get; set; }
+        private ISkillService SkillService { get; set; }
         [Inject]
-        protected IActivityService ActivityService { get; set; }
+        private IActivityService ActivityService { get; set; }
         [Inject]
-        protected NavigationManager NavigationManager { get; set; }
+        private NavigationManager NavigationManager { get; set; }
         [Inject]
-        protected IWebHostEnvironment WebHostEnvironment { get; set; }
-        [Inject]
-        protected IUploadService UploadService { get; set; }
+        private IUploadService UploadService { get; set; }
 
         public Create()
         {
@@ -79,7 +76,7 @@ namespace VMS.Pages.Activities
         private async Task AddActivityAsync()
         {
             // check area
-            if (areas.Where(a => a.Id == activity.AreaId).FirstOrDefault() is null)
+            if (areas.FirstOrDefault(a => a.Id == activity.AreaId) is null)
             {
                 return;
             }

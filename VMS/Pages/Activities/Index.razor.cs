@@ -12,9 +12,9 @@ namespace VMS.Pages.Activities
         private bool isLoggedIn;
 
         [Inject]
-        protected IActivityService ActivityService { get; set; }
+        private IActivityService ActivityService { get; set; }
         [Inject]
-        protected IIdentityService IdentityService { get; set; }
+        private IIdentityService IdentityService { get; set; }
 
         protected async override Task OnInitializedAsync()
         {

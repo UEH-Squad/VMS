@@ -1,8 +1,8 @@
-﻿@attribute [Route(Routes.ViewActivity + "/{activityid}")]
+﻿@attribute [Route(Routes.Activities + "/{activityid}")]
 
 @if (activity is null || string.IsNullOrEmpty(activity.OrgId))
 {
-    <div class="card card-body">Không tìm thấy hoạt động.. <a href="@Routes.ViewActivity">Quay lại</a></div>
+    <div class="card card-body">Không tìm thấy hoạt động.. <a href="@Routes.Activities">Quay lại</a></div>
 }
 else
 {

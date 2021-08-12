@@ -10,10 +10,10 @@ namespace VMS.Application.Services
     public class UploadService : IUploadService
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public const long MaxFileSize = 1024 * 1024 * 15;
-        public const int MaxWidthFile = 2048;
-        public const int MaxHeightFile = 2048;
-        public const string FormatFile = "image/jpeg";
+        private const long MaxFileSize = 1024 * 1024 * 15;
+        private const int MaxWidthFile = 2048;
+        private const int MaxHeightFile = 2048;
+        private const string FormatFile = "image/jpeg";
 
         public UploadService(IWebHostEnvironment webHostEnvironment)
         {

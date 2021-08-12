@@ -23,17 +23,17 @@ namespace VMS.Pages.Activities
         [Parameter]
         public string ActivityId { get; set; }
         [Inject]
-        protected IIdentityService IdentityService { get; set; }
+        private IIdentityService IdentityService { get; set; }
         [Inject]
-        protected IAreaService AreaService { get; set; }
+        private IAreaService AreaService { get; set; }
         [Inject]
-        protected ISkillService SkillService { get; set; }
+        private ISkillService SkillService { get; set; }
         [Inject]
-        protected IActivityService ActivityService { get; set; }
+        private IActivityService ActivityService { get; set; }
         [Inject]
-        protected IUploadService UploadService { get; set; }
+        private IUploadService UploadService { get; set; }
         [Inject]
-        protected NavigationManager NavigationManager { get; set; }
+        private NavigationManager NavigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -95,7 +95,7 @@ namespace VMS.Pages.Activities
 
             await ActivityService.UpdateActivityAsync(activity, int.Parse(ActivityId));
 
-            NavigationManager.NavigateTo(Routes.ViewActivity + "/" + ActivityId);
+            NavigationManager.NavigateTo(Routes.Activities + "/" + ActivityId);
         }
     }
 }

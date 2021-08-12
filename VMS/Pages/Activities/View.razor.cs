@@ -13,9 +13,9 @@ namespace VMS.Pages.Activities
         [Parameter]
         public string ActivityId { get; set; }
         [Inject]
-        protected IActivityService ActivityService { get; set; }
+        private IActivityService ActivityService { get; set; }
         [Inject]
-        protected IIdentityService IdentityService { get; set; }
+        private IIdentityService IdentityService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

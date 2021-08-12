@@ -35,7 +35,7 @@ namespace VMS.Application.Services
 
         public bool IsLoggedIn()
         {
-            return _httpContext.HttpContext.User.Identity.IsAuthenticated;
+            return _httpContext.HttpContext?.User.Identity != null && _httpContext.HttpContext.User.Identity.IsAuthenticated;
         }
 
         public string GetCurrentUserId()

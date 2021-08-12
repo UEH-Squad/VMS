@@ -36,8 +36,8 @@ namespace VMS.Application.Services
                 dynamic deserialized = JsonConvert.DeserializeObject(stringResponse);
                 try
                 {
-                    dynamic postion = deserialized["items"][0]["position"];
-                    return new CoordinateResponse() { Latitude = postion["lat"], Longitude = postion["lng"] };
+                    dynamic position = deserialized["items"][0]["position"];
+                    return new CoordinateResponse() { Latitude = position["lat"], Longitude = position["lng"] };
                 }
                 catch (Exception)
                 {

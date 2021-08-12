@@ -28,10 +28,6 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Specification<Activity> specification = new()
-            {
-                Includes = a => a.Include(x => x.ActivitySkills)
-            };
             List<Activity> activities = await _repository.GetListAsync<Activity>(dbContext);
             activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
@@ -49,9 +45,9 @@ namespace VMS.Application.Services
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
 
-            CoordinateResponse coordinateReponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
-            activity.Latitude = coordinateReponse.Latitude;
-            activity.Longitude = coordinateReponse.Longitude;
+            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
+            activity.Latitude = coordinateResponse.Latitude;
+            activity.Longitude = coordinateResponse.Longitude;
 
             await _repository.InsertAsync(dbContext, activity);
 
@@ -115,9 +111,9 @@ namespace VMS.Application.Services
                 IsDeleted = false
             }).ToList() ;
 
-            CoordinateResponse addressLocationReponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
-            activity.Latitude = addressLocationReponse.Latitude;
-            activity.Longitude = addressLocationReponse.Longitude;
+            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
+            activity.Latitude = coordinateResponse.Latitude;
+            activity.Longitude = coordinateResponse.Longitude;
 
             await _repository.UpdateAsync(dbContext, activity);
         }

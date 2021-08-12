@@ -1,6 +1,4 @@
-﻿@inject NavigationManager NavigationManager
-
-<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(isFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
+﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(IsFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
     <div class="container-lg p-0 my-navbar-container">
         <div class="d-flex flex-column my-navbar__brand">
             <NavLink href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
@@ -43,14 +41,6 @@
 
 @code
 {
-    private bool isFixedTop;
-
-    protected override async Task OnInitializedAsync()
-    {
-        NavigationManager.LocationChanged += (sender, args) =>
-        {
-            isFixedTop = !args.Location.Contains(Routes.ActivitySearch);
-            StateHasChanged();
-        };
-    }
+    [Parameter]
+    public bool IsFixedTop { get; set; }
 }

@@ -1,9 +1,27 @@
 ﻿@inherits LayoutComponentBase
 
-<NavMenu />
+@inject NavigationManager NavigationManager
 
-<main class="flex-grow-1 main-layout">
+<NavMenu IsFixedTop="@isFixedTop"/>
+
+<main class="flex-grow-1 @(isFixedTop ? "main-layout" : "")">
     @Body
 </main>
 
-<Footer />
+<Footer/>
+
+@code
+{
+    private bool isFixedTop;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isFixedTop = !NavigationManager.Uri.Contains(Routes.ActivitySearch);
+
+        NavigationManager.LocationChanged += (sender, args) =>
+        {
+            isFixedTop = !args.Location.Contains(Routes.ActivitySearch);
+            StateHasChanged();
+        };
+    }
+}

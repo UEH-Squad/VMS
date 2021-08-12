@@ -6,7 +6,6 @@
     position: relative;
     width: auto;
     height: auto;
-    margin-top: 85px;
 
     &__note {
         position: absolute;
@@ -53,8 +52,6 @@
 //------------------------------------------------//
 @include on('sm') {
     .video-header {
-        margin-top: 85px;
-
         &__note {
             height: 55px;
 
@@ -75,8 +72,6 @@
 
 @include on('lg') {
     .video-header {
-        margin-top: 110px;
-
         &__note {
             height: 65px;
 
@@ -97,8 +92,6 @@
 
 @include on('xl') {
     .video-header {
-        margin-top: 110px;
-
         &__note {
             height: 65px;
 
@@ -119,8 +112,6 @@
 
 @include on('xxl') {
     .video-header {
-        margin-top: 110px;
-
         &__note {
             height: 65px;
 

@@ -5,7 +5,8 @@
         #region Main
 
         public const string HomePage = "/";
-        public const string Activities = "/hoat-dong";
+        public const string ActivitySearch = "/hoat-dong";
+        public const string ActivityInfo = "/chi-tiet-hoat-dong";
         public const string Organizations = "/don-vi-to-chuc";
         public const string Map = "/ban-do";
 

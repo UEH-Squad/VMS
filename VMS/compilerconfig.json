@@ -44,10 +44,6 @@
     "inputFile": "Shared/Footer.razor.scss"
   },
   {
-    "outputFile": "Resources/scss/common/NavBar.css",
-    "inputFile": "Resources/scss/common/NavBar.scss"
-  },
-  {
     "outputFile": "Pages/Homepage/FixQuoteBaner.razor.css",
     "inputFile": "Pages/Homepage/FixQuoteBaner.razor.scss"
   }

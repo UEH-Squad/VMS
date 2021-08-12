@@ -42,5 +42,9 @@
   {
     "outputFile": "Shared/Footer.razor.css",
     "inputFile": "Shared/Footer.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/Index.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/Index.razor.scss"
   }
 ]

@@ -1,7 +1,4 @@
-﻿
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using VMS.Application.ViewModels;
+﻿using System.Threading.Tasks;
 
 namespace VMS.Application.Interfaces
 {

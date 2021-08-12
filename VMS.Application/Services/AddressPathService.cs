@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common.Comparer;
 using VMS.Common.Extensions;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
@@ -17,76 +18,80 @@ namespace VMS.Application.Services
 {
     public class AddressPathService : BaseService, IAddressPathService
     {
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly IConfiguration _configuration;
+        private readonly IHttpClientFactory clientFactory;
+        private readonly IConfiguration configuration;
 
-        public AddressPathService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IHttpClientFactory httpClientFactory, IConfiguration configuration) : base(repository, dbContextFactory, mapper)
+        public AddressPathService(IRepository repository,
+                                  IDbContextFactory<VmsDbContext> dbContextFactory,
+                                  IMapper mapper,
+                                  IHttpClientFactory httpClientFactory,
+                                  IConfiguration configuration) : base(repository, dbContextFactory, mapper)
         {
-            _clientFactory = httpClientFactory;
-            _configuration = configuration;
+            clientFactory = httpClientFactory;
+            this.configuration = configuration;
         }
 
         public async Task InitializeAddressPathsAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-            if (await _repository.GetCountAsync<AddressPathType>(dbContext) != 0) return;
+            if (await _repository.ExistsAsync<AddressPathType>(dbContext))
+            {
+                return;
+            }
+
             List<AddressPathResponse> addressPathResponses = await GetAddressPathsAsync();
             List<AddressPath> addressPaths = new();
-            List<AddressPathType> addressPathTypes = new();
+            HashSet<AddressPathType> addressPathTypes = new(new AddressPathTypeComparer());
             foreach (var a in addressPathResponses)
             {
-                AddressPathsRecursive(addressPaths, addressPathTypes, null, new Division() { Name = a.Name, DivisionType = a.DivisionType, Paths = a.Paths });
+                AddressPathsRecursive(addressPaths, addressPathTypes, null,
+                    new Division() { Name = a.Name, DivisionType = a.DivisionType, Paths = a.Paths });
             }
+
             await _repository.InsertAsync<AddressPathType>(dbContext, addressPathTypes);
             await _repository.InsertAsync<AddressPath>(dbContext, addressPaths);
         }
 
-        private void AddressPathsRecursive(List<AddressPath> addressPaths, List<AddressPathType> addressPathTypes, AddressPath parentAddressPath, Division addressPathResponse)
+        private void AddressPathsRecursive(ICollection<AddressPath> addressPaths,
+                                           ISet<AddressPathType> addressPathTypes,
+                                           AddressPath parentAddressPath,
+                                           Division addressPathResponse)
         {
             string divisionType = addressPathResponse.DivisionType.ToTitleCase();
-            AddressPathType addressPathType = addressPathTypes.FirstOrDefault(t => t.Type == divisionType);
-            if (addressPathType is null)
-            {
-                addressPathType = new() { Type = divisionType};
-                addressPathTypes.Add(addressPathType);
-            }
+            addressPathTypes.Add(new AddressPathType() { Type = divisionType });
 
             AddressPath addressPath = new()
             {
                 Name = addressPathResponse.Name,
-                AddressPathType = addressPathType,
+                AddressPathType = addressPathTypes.FirstOrDefault(x => x.Type == divisionType),
                 PreviousPath = parentAddressPath
             };
+
             addressPaths.Add(addressPath);
 
-            if (addressPathResponse.Paths is null) return;
-
-            foreach (var apr in addressPathResponse.Paths)
+            if (addressPathResponse.Paths is not null)
             {
-                AddressPathsRecursive(addressPaths, addressPathTypes, addressPath, apr);
+                foreach (var path in addressPathResponse.Paths)
+                {
+                    AddressPathsRecursive(addressPaths, addressPathTypes, addressPath, path);
+                }
             }
         }
 
         private async Task<List<AddressPathResponse>> GetAddressPathsAsync()
         {
-            string url = _configuration.GetValue<string>("AddressAPI:Url");
-
+            string url = configuration.GetValue<string>("AddressAPI:Url");
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-
-            HttpClient client = _clientFactory.CreateClient();
-
+            HttpClient client = clientFactory.CreateClient();
             HttpResponseMessage response = await client.SendAsync(request);
 
             if (response.IsSuccessStatusCode)
             {
                 string stringResponse = await response.Content.ReadAsStringAsync();
-
-                List<AddressPathResponse> addressPathResponses = JsonConvert.DeserializeObject<List<AddressPathResponse>>(stringResponse);
-
-                return addressPathResponses;
+                return JsonConvert.DeserializeObject<List<AddressPathResponse>>(stringResponse);
             }
 
-            return new List<AddressPathResponse>(); 
+            return new List<AddressPathResponse>();
         }
     }
 }

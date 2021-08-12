@@ -38,7 +38,7 @@ namespace VMS
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
-    
+
             // Custom registrations
             DependencyContainer.RegisterServices(services, Configuration);
         }

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Comparer\" />
+  </ItemGroup>
+
 </Project>

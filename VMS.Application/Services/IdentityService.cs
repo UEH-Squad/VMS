@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Models;
@@ -41,6 +42,11 @@ namespace VMS.Application.Services
         public string GetCurrentUserId()
         {
             return GetCurrentUser()?.Id;
+        }
+
+        public List<User> GetAllOrganizers()
+        {
+            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync("Organizer")).Result;
         }
     }
 }

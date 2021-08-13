@@ -1,0 +1,48 @@
+﻿<EditForm Model="filter">
+
+	<input type="checkbox" checked="checked" id="@filter.Virtual" @onchange="@(() => filter.Virtual = !filter.Virtual)" /> Virtual
+	<input type="checkbox" checked="checked" id="@filter.Actual" @onchange="@(() => filter.Actual = !filter.Actual)" /> Actual
+	<InputSelect @bind-Value="@filter.OrgId" class="form-control">
+
+		@if (organizers is not null)
+		{
+			<option value="">Tổ chức</option>
+			@foreach (var org in organizers)
+			{
+				<option value="@org.Id">@org.UserName</option>
+			}
+		}
+	</InputSelect>
+	@if (areas is not null)
+	{
+		
+			<button @onclick="@(() =>  ShowAreasPopup())" class="form-control">Lĩnh vực</button>
+		
+	}
+
+	@if (skills is not null)
+	{
+		<div class="card card-body">
+			Skill:
+			@foreach (var skill in skills)
+			{
+				<label for="@skill.Name">
+					@if (!filter.Skills.Contains(skill))
+					{
+						<input type="checkbox" id="@skill.Name" @onchange="@((e) => SkillsCheckboxChanged(e, skill))" /> @skill.Name
+					}
+					else
+					{
+						<input type="checkbox" id="@skill.Name" checked="checked" @onchange="@((e) => SkillsCheckboxChanged(e, skill))" /> @skill.Name
+					}
+				</label>
+			}
+		</div>
+	}
+
+	<input type="submit" value="Filter" @onclick="FilterAsync" class="btn btn-primary" />
+</EditForm>
+
+@code {
+
+}

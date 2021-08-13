@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Common.Comparer;
 using VMS.Common.Extensions;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
@@ -21,6 +21,14 @@ namespace VMS.Application.Services
         private readonly IHttpClientFactory clientFactory;
         private readonly IConfiguration configuration;
 
+        private readonly string pattern;
+        private readonly Dictionary<int, List<string>> divisionDepth = new()
+        {
+            { 1, new List<string> { "Thành Phố Trung Ương", "Tỉnh" } },
+            { 2, new List<string> { "Thành Phố", "Quận", "Huyện", "Thị Xã" } },
+            { 3, new List<string> { "Phường", "Xã", "Thị Trấn" } }
+        };
+
         public AddressPathService(IRepository repository,
                                   IDbContextFactory<VmsDbContext> dbContextFactory,
                                   IMapper mapper,
@@ -29,41 +37,46 @@ namespace VMS.Application.Services
         {
             clientFactory = httpClientFactory;
             this.configuration = configuration;
+            pattern = divisionDepth.Aggregate(string.Empty, (acc, next) =>
+            {
+                acc += string.Join('|', next.Value);
+                return acc + '|';
+            }).TrimEnd('|');
         }
 
         public async Task InitializeAddressPathsAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-            if (await _repository.ExistsAsync<AddressPathType>(dbContext))
+            if (await _repository.ExistsAsync<AddressPath>(dbContext))
             {
                 return;
             }
 
             List<AddressPathResponse> addressPathResponses = await GetAddressPathsAsync();
             List<AddressPath> addressPaths = new();
-            HashSet<AddressPathType> addressPathTypes = new(new AddressPathTypeComparer());
             foreach (var a in addressPathResponses)
             {
-                AddressPathsRecursive(addressPaths, addressPathTypes, null,
+                AddressPathsRecursive(addressPaths, null,
                     new Division() { Name = a.Name, DivisionType = a.DivisionType, Paths = a.Paths });
             }
 
-            await _repository.InsertAsync<AddressPathType>(dbContext, addressPathTypes);
             await _repository.InsertAsync<AddressPath>(dbContext, addressPaths);
         }
 
         private void AddressPathsRecursive(ICollection<AddressPath> addressPaths,
-                                           ISet<AddressPathType> addressPathTypes,
                                            AddressPath parentAddressPath,
                                            Division addressPathResponse)
         {
-            string divisionType = addressPathResponse.DivisionType.ToTitleCase();
-            addressPathTypes.Add(new AddressPathType() { Type = divisionType });
+            string addressPathName = Regex.Replace(addressPathResponse.Name, $@"^({pattern})\s\W*", "", RegexOptions.IgnoreCase);
+            if (Regex.IsMatch(addressPathName, @"^\d"))
+            {
+                addressPathName = $"{addressPathResponse.DivisionType.ToTitleCase()} {addressPathName}";
+            }
 
             AddressPath addressPath = new()
             {
-                Name = addressPathResponse.Name,
-                AddressPathType = addressPathTypes.FirstOrDefault(x => x.Type == divisionType),
+                Name = addressPathName,
+                Depth = divisionDepth.FirstOrDefault(x => x.Value.Contains(addressPathResponse.DivisionType.ToTitleCase())).Key,
                 PreviousPath = parentAddressPath
             };
 
@@ -73,7 +86,7 @@ namespace VMS.Application.Services
             {
                 foreach (var path in addressPathResponse.Paths)
                 {
-                    AddressPathsRecursive(addressPaths, addressPathTypes, addressPath, path);
+                    AddressPathsRecursive(addressPaths, addressPath, path);
                 }
             }
         }

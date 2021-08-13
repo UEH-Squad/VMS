@@ -3,22 +3,25 @@
 
 @if (isLoggedIn)
 {
-<div class="alert alert-link"><a href="@Routes.CreateActivity" class="btn btn-danger">Tạo hoạt động</a></div>
+	<div class="alert alert-link"><a href="@Routes.CreateActivity" class="btn btn-danger">Tạo hoạt động</a></div>
 }
+
+<Filter FilterEventCallback="@GetFilter"></Filter>
+@filter.Virtual @filter.Actual
 
 @if (activities is null || activities.Count == 0)
 {
-    <div class="card card-body">Hiện tại chưa có hoạt động nào..</div>
+	<div class="card card-body">Hiện tại chưa có hoạt động nào..</div>
 }
 else
 {
-    @foreach(var activity in activities)
-    {
-        <div class="card card-body">
-            <p><a href="@Routes.Activities/@activity.Id">@activity.Name</a></p>
-            <p>@activity.Description</p>
-        </div>
-    }
+	@foreach (var activity in activities)
+	{
+		<div class="card card-body">
+			<p><a href="@Routes.Activities/@activity.Id">@activity.Name</a></p>
+			<p>@activity.Description</p>
+		</div>
+	}
 }
 
 @code {

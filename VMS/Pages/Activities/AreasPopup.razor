@@ -1,0 +1,11 @@
+﻿@if (areas is not null)
+{
+	foreach(var area in areas)
+	{
+		<button @onclick="(() => OnClickArea(area))" class="form-control">@area.Name</button>
+	}
+	<buton @onclick="(() => OnClickSave())" class="btn btn-primary">Lưu</buton>
+}
+
+@code {
+}

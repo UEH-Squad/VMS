@@ -10,6 +10,7 @@ namespace VMS.Pages.Activities
     {
         private List<ActivityViewModel> activities;
         private bool isLoggedIn;
+        private FilterActivityViewModel filter;
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -18,8 +19,13 @@ namespace VMS.Pages.Activities
 
         protected async override Task OnInitializedAsync()
         {
+            filter = new FilterActivityViewModel();
             activities = await ActivityService.GetAllActivitiesAsync();
             isLoggedIn = IdentityService.IsLoggedIn();
+        }
+        private void GetFilter(FilterActivityViewModel filter)
+        {
+            this.filter = filter;
         }
     }
 }

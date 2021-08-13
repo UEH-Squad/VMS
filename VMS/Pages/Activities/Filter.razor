@@ -1,44 +1,52 @@
 ﻿<EditForm Model="filter">
 
-	<input type="checkbox" checked="checked" id="@filter.Virtual" @onchange="@(() => filter.Virtual = !filter.Virtual)" /> Virtual
-	<input type="checkbox" checked="checked" id="@filter.Actual" @onchange="@(() => filter.Actual = !filter.Actual)" /> Actual
-	<InputSelect @bind-Value="@filter.OrgId" class="form-control">
+	<div class="alert" style="margin-bottom: -25px;">
+		<input type="checkbox" checked="checked" id="@filter.Virtual" @onchange="@(() => filter.Virtual = !filter.Virtual)" /> Virtual
+		<input type="checkbox" checked="checked" id="@filter.Actual" @onchange="@(() => filter.Actual = !filter.Actual)" /> Actual
+	</div>
 
-		@if (organizers is not null)
-		{
-			<option value="">Tổ chức</option>
-			@foreach (var org in organizers)
+	<div class="alert" style="display: flex">
+
+		<select @onchange="ProvinceSelectionChanged" class="form-control">
+			<option value="0">Tỉnh/Thành phố</option>
+			@if (provinces is not null)
 			{
-				<option value="@org.Id">@org.UserName</option>
+				@foreach (var province in provinces)
+				{
+					<option id="@province.Name" value="@province.Id">@province.Name</option>
+				}
 			}
-		}
-	</InputSelect>
-	@if (areas is not null)
-	{
-		<span @onclick="@(() =>  ShowAreasPopup())" class="form-control">Lĩnh vực</span>
-	}
+		</select>
 
-	@if (skills is not null)
-	{
-		<div class="card card-body">
-			Skill:
-			@foreach (var skill in skills)
+		<select @onchange="DistrictSelectionChanged" class="form-control">
+			<option value="0">Quận/Huyện</option>
+			@if (districts is not null)
 			{
-				<label for="@skill.Name">
-					@if (!filter.Skills.Contains(skill))
-					{
-						<input type="checkbox" id="@skill.Name" @onchange="@((e) => SkillsCheckboxChanged(e, skill))" /> @skill.Name
-					}
-					else
-					{
-						<input type="checkbox" id="@skill.Name" checked="checked" @onchange="@((e) => SkillsCheckboxChanged(e, skill))" /> @skill.Name
-					}
-				</label>
+				@foreach (var district in districts)
+				{
+					<option id="@district.Name" value="@district.Id">@district.Name</option>
+				}
 			}
-		</div>
-	}
+		</select>
 
-	<input type="submit" value="Filter" @onclick="FilterAsync" class="btn btn-primary" />
+		<InputSelect @bind-Value="@filter.OrgId" class="form-control">
+			@if (organizers is not null)
+			{
+				<option value="">Tổ chức</option>
+				@foreach (var org in organizers)
+				{
+					<option value="@org.Id">@org.UserName</option>
+				}
+			}
+		</InputSelect>
+
+		<span @onclick="@(() =>  ShowAreasPopupAsync())" class="form-control">Lĩnh vực</span>
+
+		<span @onclick="@(() =>  ShowSkillsPopupAsync())" class="form-control">Kỹ năng</span>
+
+		<input type="submit" value="Filter" @onclick="FilterAsync" class="btn btn-primary" />
+
+	</div>
 </EditForm>
 
 @code {

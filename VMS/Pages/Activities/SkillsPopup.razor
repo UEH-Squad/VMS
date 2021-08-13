@@ -1,0 +1,20 @@
+﻿@if (skills is not null)
+{
+	@foreach (var skill in skills)
+	{
+		@if (SelectedSkills.FirstOrDefault(s => s.Id == skill.Id) is not null)
+		{
+			<label id="@skill.Name" @onclick="(() => OnClickArea(skill))" class="alert alert-info">@skill.Name</label>
+		}
+		else
+		{
+			<label id="@skill.Name" @onclick="(() => OnClickArea(skill))" class="alert">@skill.Name</label>
+		}
+	}
+	<div class="alert" style="text-align: center">
+		<buton @onclick="(async () => await OnClickSaveAsync())" class="btn btn-primary">Lưu</buton>
+	</div>
+}
+
+@code {
+}

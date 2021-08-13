@@ -7,7 +7,8 @@
 }
 
 <Filter FilterEventCallback="@GetFilter"></Filter>
-@filter.Virtual @filter.Actual
+
+@filter.Actual || @filter.Virtual || @filter.OrgId || @filter.ProvinceId || @filter.DistrictId || @filter.Areas.Count || @filter.Skills.Count
 
 @if (activities is null || activities.Count == 0)
 {

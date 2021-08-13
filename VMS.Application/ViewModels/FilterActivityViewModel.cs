@@ -8,6 +8,8 @@ namespace VMS.Application.ViewModels
         public bool Virtual { get; set; }
         public bool Actual { get; set; }
         public string OrgId { get; set; }
+        public int ProvinceId { get; set; }
+        public int DistrictId { get; set; }
         public List<Area> Areas { get; set; }
         public List<Skill> Skills { get; set; }
         public List<AddressPath> AddressPaths { get; set; }
@@ -16,7 +18,6 @@ namespace VMS.Application.ViewModels
         {
             Virtual = true;
             Actual = false;
-            OrgId = string.Empty;
             Areas = new List<Area>();
             Skills = new List<Skill>();
             AddressPaths = new List<AddressPath>();

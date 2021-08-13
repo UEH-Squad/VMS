@@ -13,8 +13,4 @@
     <ProjectReference Include="..\VMS.Infrastructure.Data\VMS.Infrastructure.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

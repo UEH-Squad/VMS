@@ -1,4 +1,5 @@
-﻿using Blazored.Modal.Services;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -53,9 +54,14 @@ namespace VMS.Pages.Activities
 
         private async Task ShowAreasPopup()
         {
-            var messageForm = ModalService.Show<AreasPopup>();
+            var parameters = new ModalParameters();
+            parameters.Add("SelectedAreas", filter.Areas);
+            var messageForm = ModalService.Show<AreasPopup>("", parameters);
             var result = await messageForm.Result;
-            filter.Areas = (List<Area>)result.Data;
+            if (result.Data is not null)
+            {
+                filter.Areas = (List<Area>)result.Data;
+            }
         }
     }
 }

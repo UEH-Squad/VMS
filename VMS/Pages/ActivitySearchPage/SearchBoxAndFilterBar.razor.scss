@@ -18,7 +18,7 @@
         width: 40%;
         outline: none;
         border: none;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid $border-color-normal;
         font-size: 18px;
         color: $blue;
 
@@ -94,7 +94,7 @@
 
 .filter-item {
     width: 200px;
-    &__select {
+    &__select-city {
 
     }
 
@@ -112,6 +112,7 @@
         border-radius: 8px;
         height: 40px;
         background-color: transparent;
+        border-color: $border-color-bold;
 
         .select2-selection__rendered {
             line-height: 40px;
@@ -128,12 +129,7 @@
         }
 
         .select2-selection__clear {
-            margin-right: 35px;
-            height: 38px;
-
-            span {
-                font-size: 24px;
-            }
+            display: none;
         }
     }
 
@@ -148,9 +144,10 @@
 
     .my-dropdown {
         padding: 15px 25px;
+        border-radius: 4px;
         border: none;
         margin-top: 10px;
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
         .select2-search {
             display: none;
@@ -177,5 +174,9 @@
     .select2-results__option--highlighted {
         background-color: unset;
         color: $blue;
+    }
+
+    .select2-results__option--selected {
+        background-color: unset;
     }
 }

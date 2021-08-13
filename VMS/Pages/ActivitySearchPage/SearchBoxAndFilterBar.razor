@@ -26,30 +26,57 @@
     </div>
 </div>
 
-<div class="filter-bar">
-    <div class="filter-item position-relative">
-        <select name="abc" class="filter-item__select js-states form-control">
+<form class="filter-bar d-flex">
+    <div class="filter-item filter-item-city position-relative me-4">
+        <select name="abc" class="filter-item__select-city js-states form-control">
             <option value=""></option>
-            <option value="1">một</option>
-            <option value="2">hai</option>
-            <option value="3">ba</option>
-            <option value="4">bốn</option>
-            <option value="5">năm</option>
-            <option value="6">sáu</option>
-            <option value="7">bảy</option>
-            <option value="8">tám</option>
-            <option value="9">chín</option>
+            <option value="hochiminh">Hồ Chí Minh</option>
+            <option value="longan">Long An</option>
+            <option value="lamdong">Lâm Đồng</option>
+            <option value="quangtri">Quảng Trị</option>
+            <option value="binhdinh">Bình Định</option>
+            <option value="hanoi">Hà Nội</option>
+            <option value="danang">Đà Nẵng</option>
+            <option value="cantho">Cần Thơ</option>
         </select>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
-</div>
+
+    <div class="filter-item filter-item-district position-relative me-4">
+        <select name="abc" class="filter-item__select-district js-states form-control">
+            <option value=""></option>
+            <option value="hochiminh-quan1">Quận 1</option>
+            <option value="hochiminh-quanthuduc">Quận Thủ Đức</option>
+            <option value="hochiminh-quan10">Quận 10</option>
+            <option value="longan-benluc">Bến Lức</option>
+            <option value="longan-tanan">Tân An</option>
+            <option value="longan-thuthua">Thủ Thừa</option>
+            <option value="quangtri1">Quảng Trị 1</option>
+            <option value="quangtri2">Quảng Trị 2</option>
+            <option value="quangtri3">Quảng Trị 3</option>
+            <option value="binhdinh1">Bình Định 1</option>
+            <option value="binhdinh2">Bình Định 2</option>
+            <option value="hanoi1">Hà Nội 1</option>
+            <option value="hanoi2">Hà Nội 2</option>
+            <option value="danang1">Đà Nẵng 1</option>
+            <option value="danang2">Đà Nẵng 2</option>
+            <option value="cantho1">Cần Thơ 1</option>
+            <option value="cantho2">Cần Thơ 2</option>
+        </select>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+</form>
 
 
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select", "Tỉnh/Thành phố");
+        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-city", "Tỉnh/Thành phố", ".filter-item-city");
+        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-district", "Quận/Huyện", ".filter-item-district");
+        await JSRuntime.InvokeVoidAsync("vms.Cascading", ".filter-item__select-city", ".filter-item__select-district");
     }
 }

@@ -1,6 +1,8 @@
-﻿using Blazored.Modal.Services;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Models;
@@ -10,32 +12,35 @@ namespace VMS.Pages.Activities
 	public partial class AreasPopup
 	{
 		private List<Area> areas;
-		private List<Area> selectedAreas;
 
+		[Parameter]
+		public List<Area> SelectedAreas { get; set; }
+		[CascadingParameter]
+		private BlazoredModalInstance ModalInstance { get; set; }
 		[Inject]
 		private IAreaService AreaService { get; set; }
 
 		protected async override Task OnInitializedAsync()
 		{
 			areas = await AreaService.GetAllAreasAsync();
-			selectedAreas = new List<Area>();
 		}
 
 		private void OnClickArea(Area area)
 		{
-			if (!selectedAreas.Contains(area))
+			Area areaInSelectedAreas = SelectedAreas.FirstOrDefault(a => a.Id == area.Id);
+			if (areaInSelectedAreas is null)
 			{
-				selectedAreas.Add(area);
+				SelectedAreas.Add(area);
 			}
 			else
 			{
-				selectedAreas.Remove(area);
+				SelectedAreas.Remove(areaInSelectedAreas);
 			}
 		}
 
-		private void OnClickSave()
+		private async Task OnClickSaveAsync()
 		{
-			ModalResult.Ok(selectedAreas);
+			await ModalInstance.CloseAsync(ModalResult.Ok(SelectedAreas));
 		}
 	}
 }

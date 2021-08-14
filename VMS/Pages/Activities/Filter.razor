@@ -7,7 +7,7 @@
 
 	<div class="alert" style="display: flex">
 
-		<select @onchange="ProvinceSelectionChanged" class="form-control">
+		<InputSelect Value="filter.ProvinceId" ValueChanged="@(async (int id) => await ProvinceSelectionChanged(id))" ValueExpression="@(() => filter.ProvinceId)" class="form-control">
 			<option value="0">Tỉnh/Thành phố</option>
 			@if (provinces is not null)
 			{
@@ -16,9 +16,9 @@
 					<option id="@province.Name" value="@province.Id">@province.Name</option>
 				}
 			}
-		</select>
+		</InputSelect>
 
-		<select @onchange="DistrictSelectionChanged" class="form-control">
+		<InputSelect Value="filter.DistrictId" ValueChanged="@((int id) => DistrictSelectionChanged(id))" ValueExpression="@(() => filter.DistrictId)" class="form-control">
 			<option value="0">Quận/Huyện</option>
 			@if (districts is not null)
 			{
@@ -27,7 +27,7 @@
 					<option id="@district.Name" value="@district.Id">@district.Name</option>
 				}
 			}
-		</select>
+		</InputSelect>
 
 		<InputSelect @bind-Value="@filter.OrgId" class="form-control">
 			@if (organizers is not null)

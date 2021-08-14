@@ -11,7 +11,6 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<ActivityImage> ActivityImages { get; set; }
         public DbSet<ActivitySkill> ActivitySkills { get; set; }
         public DbSet<AddressPath> AddressPaths { get; set; }
-        public DbSet<AddressPathType> AddressPathTypes { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Recruitment> Recruitments { get; set; }

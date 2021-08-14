@@ -1,0 +1,95 @@
+﻿@inject IJSRuntime JSRuntinme
+
+<section class="my-filter">
+    <div class="container">
+        <h1>Khám phá <span>hoạt động & chương trình tình nguyện</span> phù hợp với bạn</h1>
+        <div class="owl-carousel owl-theme filter__carousel">
+            <div class="item">
+                <i class="material-icons">
+                    group
+                </i>
+                <span>Cộng đồng</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    import_contacts
+                </i>
+                <span>Giáo dục </span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    local_hospital
+                </i>
+                <span>Sức khỏe</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    wb_sunny
+                </i>
+                <span>Môi trường</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    directions_bike
+                </i>
+                <span>Thể thao</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    groups
+                </i>
+                <span>Cộng đồng</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    calendar_today
+                </i>
+                <span>Sự kiện</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    groups
+                </i>
+                <span>Khẩn cấp</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    computer
+                </i>
+                <span>Công nghệ</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    home
+                </i>
+                <span>Chuyển nhà</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    drive_eta
+                </i>
+                <span>Phương tiện</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    pan_tool
+                </i>
+                <span>Hỗ trợ</span>
+            </div>
+            <div class="item">
+                <i class="material-icons">
+                    groups
+                </i>
+                <span>Cộng đồng</span>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender) 
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.FilterCarousel");        
+    }
+}

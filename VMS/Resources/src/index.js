@@ -1,6 +1,9 @@
 ﻿import lodash from './common/lodash';
-import homepage from './homepage'
+import homepage from './homepage';
 
 export const CloneDeep = (object) => lodash.CloneDeep(object);
-export const Slick = (slidesToShow, slidesToScroll, isInfinite) => homepage.slick(slidesToShow, slidesToScroll, isInfinite);
 export const PlayVideo = (src) => homepage.playVideo(src);
+export const FilterCarousel = () => homepage.filterCarousel();
+export const LogoBanerCarousel = () => homepage.logoBanerCarousel();
+export const GetUserLocation = () => homepage.getUserLocation();
+export const ShowResult = () => homepage.showResult();

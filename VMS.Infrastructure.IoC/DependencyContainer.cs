@@ -57,6 +57,8 @@ namespace VMS.Infrastructure.IoC
 
             services.AddTransient<IAddressLocationService, AddressLocationService>();
             services.AddHttpClient();
+
+            services.AddTransient<IAddressPathService, AddressPathService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

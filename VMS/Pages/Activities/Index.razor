@@ -27,7 +27,7 @@ else
 	@foreach (var activity in activities)
 	{
 		<div class="alert alert-secondary">
-			<p><a href="@Routes.ActivitySearch/@activity.Id">@activity.Name</a></p>
+			<p><a href="@Routes.ActivityInfo/@activity.Id">@activity.Name</a></p>
 			<p>@activity.Description</p>
 		</div>
 	}

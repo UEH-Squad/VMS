@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Interfaces;
@@ -25,16 +26,16 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<System.Linq.Expressions.Expression<Func<AddressPath, bool>>>()
                 {
-                    a => a.AddressPathType.Type == "Tỉnh" || a.AddressPathType.Type == "Thành Phố Trung Ương"
+                    a => a.Depth == 1
                 }
             };
 
             List<AddressPath> addressPaths = await _repository.GetListAsync(dbContext, specification);
 
-            return addressPaths;
+            return addressPaths.OrderBy(a => a.Name).ToList();
         }
 
-        public async Task<List<AddressPath>> GetAllDistrictsByParentIdAsync(int parentId)
+        public async Task<List<AddressPath>> GetAllAddressPathsByParentIdAsync(int parentId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -48,7 +49,7 @@ namespace VMS.Application.Services
 
             List<AddressPath> addressPaths = await _repository.GetListAsync(dbContext, specification);
 
-            return addressPaths;
+            return addressPaths.OrderBy(a => a.Name).ToList();
         }
-    }
+	}
 }

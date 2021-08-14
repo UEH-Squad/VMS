@@ -1,13 +1,13 @@
-﻿@attribute [Route(Routes.Activities + "/{activityid}")]
+﻿@attribute [Route(Routes.ActivitySearch + "/{activityid}")]
 
 @if (activity is null || string.IsNullOrEmpty(activity.OrgId))
 {
-    <div class="card card-body">Không tìm thấy hoạt động.. <a href="@Routes.Activities">Quay lại</a></div>
+    <div class="card card-body">Không tìm thấy hoạt động.. <a href="@Routes.ActivitySearch">Quay lại</a></div>
 }
 else
 {
     <div class="alert alert-info">
-        <a href="@Routes.Activities" class="btn btn-success">Quay lại trang hoạt động</a>
+        <a href="@Routes.ActivitySearch" class="btn btn-success">Quay lại trang hoạt động</a>
         @if (userId == activity.OrgId)
         {
             <a href="@Routes.EditActivity/@ActivityId" style="margin-left: 5px"  class="btn btn-primary">Chỉnh sửa</a>

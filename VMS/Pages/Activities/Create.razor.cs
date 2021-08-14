@@ -15,6 +15,9 @@ namespace VMS.Pages.Activities
         private CreateActivityViewModel activity;
         private List<Area> areas;
         private List<Skill> skills;
+        private List<AddressPath> provinces;
+        private List<AddressPath> districts;
+        private List<AddressPath> wards;
         private string message;
         private string banner;
         private IBrowserFile file;
@@ -31,6 +34,8 @@ namespace VMS.Pages.Activities
         private NavigationManager NavigationManager { get; set; }
         [Inject]
         private IUploadService UploadService { get; set; }
+        [Inject]
+        private IAddressService AddressService { get; set; }
 
         public Create()
         {
@@ -41,6 +46,7 @@ namespace VMS.Pages.Activities
         {
             skills = await SkillService.GetAllSkillsAsync();
             areas = await AreaService.GetAllAreasAsync();
+            provinces = await AddressService.GetAllProvincesAsync();
 
             // init collection for activity
             activity.Skills = new List<Skill>();
@@ -75,12 +81,6 @@ namespace VMS.Pages.Activities
 
         private async Task AddActivityAsync()
         {
-            // check area
-            if (areas.FirstOrDefault(a => a.Id == activity.AreaId) is null)
-            {
-                return;
-            }
-
             activity.OrgId = IdentityService.GetCurrentUserId();
 
             // save banner
@@ -91,7 +91,22 @@ namespace VMS.Pages.Activities
 
             await ActivityService.AddActivityAsync(activity);
 
-            NavigationManager.NavigateTo(Routes.Activities);
+            NavigationManager.NavigateTo(Routes.ActivitySearch);
+        }
+
+        private async Task ProvinceSelectionChanged(int id)
+        {
+            activity.ProvinceId = id;
+            activity.DistrictId = 0;
+            activity.WardId = 0;
+            districts = await AddressService.GetAllAddressPathsByParentIdAsync(activity.ProvinceId);
+        }
+
+        private async Task DistrictSelectionChanged(int id)
+        {
+            activity.DistrictId = id;
+            activity.WardId = 0;
+            wards = await AddressService.GetAllAddressPathsByParentIdAsync(activity.DistrictId);
         }
     }
 }

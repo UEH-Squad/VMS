@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace VMS.Pages.Activities
         private string userId;
         private List<Skill> skills;
         private List<Area> areas;
+        private List<AddressPath> provinces;
+        private List<AddressPath> districts;
+        private List<AddressPath> wards;
         private string message;
         private string banner;
         private IBrowserFile file;
@@ -33,18 +37,26 @@ namespace VMS.Pages.Activities
         [Inject]
         private IUploadService UploadService { get; set; }
         [Inject]
+        private IAddressService AddressService { get; set; }
+        [Inject]
         private NavigationManager NavigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            activity = await ActivityService.GetCreateActivityViewModelAsync(int.Parse(ActivityId));
-            skills = await SkillService.GetAllSkillsAsync();
-            areas = await AreaService.GetAllAreasAsync();
             userId = IdentityService.GetCurrentUserId();
+
+            activity = await ActivityService.GetCreateActivityViewModelAsync(int.Parse(ActivityId));
             if (!string.IsNullOrEmpty(activity.Banner))
             {
                 banner = "/img/" + activity.Banner;
             }
+
+            skills = await SkillService.GetAllSkillsAsync();
+            areas = await AreaService.GetAllAreasAsync();
+
+            provinces = await AddressService.GetAllProvincesAsync();
+            districts = await AddressService.GetAllAddressPathsByParentIdAsync(activity.ProvinceId);
+            wards = await AddressService.GetAllAddressPathsByParentIdAsync(activity.DistrictId);
         }
 
         private void CheckboxChanged(ChangeEventArgs e, Skill skill)
@@ -77,12 +89,6 @@ namespace VMS.Pages.Activities
 
         private async Task UpdateActivityAsync()
         {
-            // check area
-            if (areas.FirstOrDefault(a => a.Id == activity.AreaId) is null)
-            {
-                return;
-            }
-
             // save banner
             if (file is not null)
             {
@@ -95,7 +101,22 @@ namespace VMS.Pages.Activities
 
             await ActivityService.UpdateActivityAsync(activity, int.Parse(ActivityId));
 
-            NavigationManager.NavigateTo(Routes.Activities + "/" + ActivityId);
+            NavigationManager.NavigateTo(Routes.ActivitySearch + "/" + ActivityId);
+        }
+
+        private async Task ProvinceSelectionChanged(int id)
+        {
+            activity.ProvinceId = id;
+            activity.DistrictId = 0;
+            activity.WardId = 0;
+            districts = await AddressService.GetAllAddressPathsByParentIdAsync(activity.ProvinceId);
+        }
+
+        private async Task DistrictSelectionChanged(int id)
+        {
+            activity.DistrictId = id;
+            activity.WardId = 0;
+            wards = await AddressService.GetAllAddressPathsByParentIdAsync(activity.DistrictId);
         }
     }
 }

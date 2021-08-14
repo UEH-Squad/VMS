@@ -7,6 +7,6 @@ namespace VMS.Application.Interfaces
     public interface IAddressService
     {
         Task<List<AddressPath>> GetAllProvincesAsync();
-        Task<List<AddressPath>> GetAllDistrictsByParentIdAsync(int parentId);
+        Task<List<AddressPath>> GetAllAddressPathsByParentIdAsync(int parentId);
     }
 }

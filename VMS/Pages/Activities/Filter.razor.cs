@@ -1,7 +1,6 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
@@ -56,15 +55,16 @@ namespace VMS.Pages.Activities
             SkillModalService.Show<SkillsPopup>("", parameters);
         }
 
-        private async Task ProvinceSelectionChanged(ChangeEventArgs e)
+        private async Task ProvinceSelectionChanged(int id)
         {
-            filter.ProvinceId = Convert.ToInt32(e.Value);
-            districts = await AddressService.GetAllDistrictsByParentIdAsync(filter.ProvinceId);
+            filter.ProvinceId = id;
+            filter.DistrictId = 0;
+            districts = await AddressService.GetAllAddressPathsByParentIdAsync(filter.ProvinceId);
         }
 
-        private void DistrictSelectionChanged(ChangeEventArgs e)
+        private void DistrictSelectionChanged(int id)
         {
-            filter.DistrictId = Convert.ToInt32(e.Value);
+            filter.DistrictId = id;
         }
 
         private void ClearFilter()

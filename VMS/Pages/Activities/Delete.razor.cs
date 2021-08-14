@@ -35,7 +35,7 @@ namespace VMS.Pages.Activities
             }
 
             await ActivityService.DeleteActivityAsync(int.Parse(ActivityId));
-            NavigationManager.NavigateTo(Routes.Activities);
+            NavigationManager.NavigateTo(Routes.ActivitySearch);
         }
     }
 }

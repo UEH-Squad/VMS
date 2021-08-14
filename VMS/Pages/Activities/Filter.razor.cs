@@ -66,5 +66,10 @@ namespace VMS.Pages.Activities
         {
             filter.DistrictId = Convert.ToInt32(e.Value);
         }
+
+        private void ClearFilter()
+        {
+            filter = new FilterActivityViewModel();
+        }
     }
 }

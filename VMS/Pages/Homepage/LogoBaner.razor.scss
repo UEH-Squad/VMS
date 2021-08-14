@@ -1,6 +1,7 @@
 ﻿@import "../../Resources/scss/common/_variables";
 
 .my-logoBaner {
+    padding-bottom: 80px;
     h1 {
         text-align: center;
         margin: 30px 0;
@@ -10,13 +11,13 @@
 
         @include on("sm") {
             margin: 40px 0;
-            font-size: 32px;
+            font-size: 20px;
             font-weight: 600;
         }
 
         @include on("lg") {
             margin: 50px 0;
-            font-size: 64px;
+            font-size: 36px;
             font-weight: 600;
         }
     }
@@ -54,7 +55,7 @@
             }
 
             @include on("lg") {
-                width: 48px;
+                width: 50px;
             }
         }
 

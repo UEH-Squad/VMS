@@ -2,24 +2,8 @@
 
 const playVideo = (src) => {
     const video = document.querySelector('.video-header__source');
-
-    let timer = null,
-        totalTime = 0;
-
-    if (video) {
-        video.src = src;
-        video.play();
-
-        video.addEventListener("play", () => {
-            timer = window.setInterval(() => {
-                totalTime += 1000;
-                if (totalTime >= 6 * 1000) {
-                    document.querySelector('.video-header__note').style.display = 'none';
-                    clearInterval(timer);
-                }
-            }, 1000);
-        });
-    }
+    video.src = src;
+    video.play();   
 }
 
 const filterCarousel = () => {

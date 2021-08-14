@@ -24,15 +24,51 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
+        public async Task<List<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            List<Activity> activities = await _repository.GetListAsync<Activity>(dbContext);
+            Specification<Activity> specification = new()
+            {
+                Includes = a => a.Include(a => a.ActivitySkills),
+                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>()
+                {
+                    a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual
+                }
+            };
+
+            if (!string.IsNullOrEmpty(filter.OrgId))
+            {
+                specification.Conditions.Add(a => a.OrgId == filter.OrgId);
+            }
+
+            if (filter.ProvinceId != 0)
+            {
+                specification.Conditions.Add(a => a.ActivityAddresses.FirstOrDefault(x => x.AddressPathId == filter.ProvinceId) != null);
+
+                if (filter.DistrictId != 0)
+                {
+                    specification.Conditions.Add(a => a.ActivityAddresses.FirstOrDefault(x => x.AddressPathId == filter.DistrictId) != null);
+                }
+            }
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            if (filter.Areas.Count != 0)
+            {
+                activities = activities.Where(a => filter.Areas.Any(r => r.Id == a.AreaId)).ToList();
+            }
+
+            if (filter.Skills.Count != 0)
+            {
+                activities = activities.Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id))).ToList();
+            }
+
             activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
-            return activitiesViewModel;
+
+            return activitiesViewModel.OrderByDescending(a => a.PostDate).ToList();
         }
 
         public async Task AddActivityAsync(CreateActivityViewModel activityViewModel)

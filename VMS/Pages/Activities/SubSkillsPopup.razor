@@ -1,0 +1,18 @@
+﻿@if (skills is not null)
+{
+	@foreach (var skill in skills)
+	{
+		@if (SelectedSkills.FirstOrDefault(s => s.Id == skill.Id) is not null)
+		{
+			<label id="@skill.Name" @onclick="(() => OnClickSkill(skill))" class="alert alert-info">@skill.Name</label>
+		}
+		else
+		{
+			<label id="@skill.Name" @onclick="(() => OnClickSkill(skill))" class="alert">@skill.Name</label>
+		}
+		<br />
+	}
+}
+
+@code {
+}

@@ -1,5 +1,4 @@
 ﻿using Blazored.Modal;
-using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-	public partial class AreasPopup
+    public partial class AreasPopup
 	{
 		private List<Area> areas;
 
@@ -40,7 +39,7 @@ namespace VMS.Pages.Activities
 
 		private async Task OnClickSaveAsync()
 		{
-			await ModalInstance.CloseAsync(ModalResult.Ok(SelectedAreas));
+			await ModalInstance.CloseAsync();
 		}
 	}
 }

@@ -6,7 +6,7 @@ namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<List<ActivityViewModel>> GetAllActivitiesAsync();
+        Task<List<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter);
         Task AddActivityAsync(CreateActivityViewModel activity);
         Task<CreateActivityViewModel> GetCreateActivityViewModelAsync(int activityId);
         Task UpdateActivityAsync(CreateActivityViewModel activityViewModel, int activityId);

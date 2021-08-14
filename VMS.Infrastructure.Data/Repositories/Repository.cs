@@ -637,7 +637,7 @@ namespace VMS.Infrastructure.Data.Repositories
             object[] primaryKeyValue = entityEntry.Metadata.FindPrimaryKey().Properties.
                 Select(p => entityEntry.Property(p.Name).CurrentValue).ToArray();
 
-            BackgroundJob.Enqueue(() => RefreshCache());
+            RefreshCache();
 
             return primaryKeyValue;
         }
@@ -653,7 +653,7 @@ namespace VMS.Infrastructure.Data.Repositories
             await dbContext.Set<T>().AddRangeAsync(entities, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            BackgroundJob.Enqueue(() => RefreshCache());
+            RefreshCache();
         }
 
         public async Task UpdateAsync<T>(DbContext dbContext, T entity, CancellationToken cancellationToken = default)
@@ -696,7 +696,7 @@ namespace VMS.Infrastructure.Data.Repositories
 
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            BackgroundJob.Enqueue(() => RefreshCache());
+            RefreshCache();
         }
 
         public async Task UpdateAsync<T>(DbContext dbContext, IEnumerable<T> entities, CancellationToken cancellationToken = default)
@@ -710,7 +710,7 @@ namespace VMS.Infrastructure.Data.Repositories
             dbContext.Set<T>().UpdateRange(entities);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            BackgroundJob.Enqueue(() => RefreshCache());
+            RefreshCache();
         }
 
         public async Task DeleteAsync<T>(DbContext dbContext, T entity, CancellationToken cancellationToken = default)
@@ -724,7 +724,7 @@ namespace VMS.Infrastructure.Data.Repositories
             dbContext.Set<T>().Remove(entity);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            BackgroundJob.Enqueue(() => RefreshCache());
+            RefreshCache();
         }
 
         public async Task DeleteAsync<T>(DbContext dbContext, IEnumerable<T> entities, CancellationToken cancellationToken = default)
@@ -738,7 +738,7 @@ namespace VMS.Infrastructure.Data.Repositories
             dbContext.Set<T>().RemoveRange(entities);
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            BackgroundJob.Enqueue(() => RefreshCache());
+            RefreshCache();
         }
 
         public async Task<int> GetCountAsync<T>(DbContext dbContext, CancellationToken cancellationToken = default)

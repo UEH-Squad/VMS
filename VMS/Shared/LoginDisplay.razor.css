@@ -37,86 +37,78 @@
     .login-btn {
       font-size: 24px; } }
 
-.user-section__link .user-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto; }
-  @media (min-width: 1200px) {
-    .user-section__link .user-avatar {
-      width: 65px;
-      height: 65px; } }
-
-.user-section__link .user-label {
-  display: block;
-  color: #64D72F; }
-  @media (min-width: 1200px) {
-    .user-section__link .user-label {
-      display: none; } }
-
-.user-section__link:hover .user-label {
-  color: #306C14; }
-
-.user-section__dropdown-icon {
-  top: 50%;
-  transform: translateY(-50%);
-  right: -62%;
-  color: #18A0FB;
-  font-size: 40px;
-  cursor: default;
-  display: none; }
-  @media (min-width: 1200px) {
-    .user-section__dropdown-icon {
-      display: block; } }
-
-.user-section:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  height: 20px;
-  display: none; }
-  @media (min-width: 1200px) {
-    .user-section:before {
-      display: block; } }
-
-.user-section__list-wrapper {
-  width: 280px;
-  height: 150px;
-  top: 104%;
-  right: -52px;
-  overflow-y: hidden;
-  z-index: 1;
-  display: none; }
-  @media (min-width: 1200px) {
-    .user-section__list-wrapper {
-      display: block; } }
-
-.user-section__list {
-  margin: 10px auto 0;
-  width: 230px;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.2s ease-in;
-  transform: translateY(-100%);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-  visibility: hidden; }
-  .user-section__list__profile {
-    font-size: 24px;
-    color: #64D72F;
-    display: block; }
-  .user-section__list__logout {
-    font-size: 24px;
-    color: #18A0FB;
-    border: none;
-    width: 100%; }
-  .user-section__list li:nth-child(1):hover .user-section__list__profile {
+.user-section {
+  /*&__dropdown-icon.show ~ .dropdown-menu {
+        height: 120px;
+    }*/ }
+  .user-section__link .user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto; }
+    @media (min-width: 1200px) {
+      .user-section__link .user-avatar {
+        width: 65px;
+        height: 65px; } }
+  .user-section__link .user-label {
+    display: block;
+    color: #64D72F; }
+    @media (min-width: 1200px) {
+      .user-section__link .user-label {
+        display: none; } }
+  .user-section__link:hover .user-label {
     color: #306C14; }
-  .user-section__list li:nth-child(2):hover .user-section__list__logout {
-    color: #0B588C; }
-
-.user-section:hover .user-section__list {
-  transform: translateY(0);
-  visibility: unset; }
+  .user-section .dropdown {
+    position: unset;
+    height: 0;
+    width: 0; }
+  .user-section .dropdown-menu {
+    top: 100%;
+    left: auto;
+    right: -50%;
+    border: 0;
+    padding: 0;
+    transition: all 0.2s ease-in; }
+  .user-section__dropdown-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -62%;
+    color: #18A0FB;
+    font-size: 40px;
+    cursor: pointer;
+    display: none; }
+    @media (min-width: 1200px) {
+      .user-section__dropdown-icon {
+        display: block; } }
+  .user-section:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 20px;
+    display: none; }
+    @media (min-width: 1200px) {
+      .user-section:before {
+        display: block; } }
+  .user-section__list {
+    margin: 10px auto 0;
+    width: 230px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25); }
+    .user-section__list__profile {
+      font-size: 24px;
+      color: #64D72F;
+      display: block; }
+    .user-section__list__logout {
+      font-size: 24px;
+      color: #18A0FB;
+      border: none;
+      width: 100%; }
+    .user-section__list li:nth-child(1):hover .user-section__list__profile {
+      color: #306C14; }
+    .user-section__list li:nth-child(2):hover .user-section__list__logout {
+      color: #0B588C; }

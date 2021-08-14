@@ -10,8 +10,15 @@
 		{
 			<label id="@area.Name" @onclick="(() => OnClickArea(area))" class="alert">@area.Name</label>
 		}
+
+		@if (area.Id % 3 == 0)
+		{
+			<br />
+		}
 	}
-	<div class="alert" style="text-align: center"><buton @onclick="(async () => await OnClickSaveAsync())" class="btn btn-primary">Lưu</buton></div>
+	<div class="alert" style="text-align: center">
+		<buton @onclick="(async () => await OnClickSaveAsync())" class="btn btn-primary">Lưu</buton>
+	</div>
 }
 
 @code {

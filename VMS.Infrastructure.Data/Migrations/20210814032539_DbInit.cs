@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
-    public partial class InitDatabase : Migration
+    public partial class DbInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,31 +90,24 @@ namespace VMS.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Requirements",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requirements", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Skills",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentSkillId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Skills_Skills_ParentSkillId",
+                        column: x => x.ParentSkillId,
+                        principalTable: "Skills",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,9 +170,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PostDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MemberQuantity = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Mission = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Requirement = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false),
                     ApprovedBy = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IsVirtual = table.Column<bool>(type: "bit", nullable: false),
@@ -455,33 +450,6 @@ namespace VMS.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActivityRequirements",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ActivityId = table.Column<int>(type: "int", nullable: false),
-                    RequirementId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActivityRequirements", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActivityRequirements_Activities_ActivityId",
-                        column: x => x.ActivityId,
-                        principalTable: "Activities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ActivityRequirements_Requirements_RequirementId",
-                        column: x => x.RequirementId,
-                        principalTable: "Requirements",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ActivitySkills",
                 columns: table => new
                 {
@@ -566,6 +534,72 @@ namespace VMS.Infrastructure.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Areas",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, false, "Cộng đồng" },
+                    { 12, false, "Thể thao" },
+                    { 11, false, "Chuyển nhà" },
+                    { 10, false, "Môi trường" },
+                    { 8, false, "Công nghệ" },
+                    { 7, false, "Sức khỏe" },
+                    { 9, false, "Phương tiện" },
+                    { 5, false, "Khẩn cấp" },
+                    { 4, false, "Giáo dục" },
+                    { 3, false, "Hỗ trợ" },
+                    { 2, false, "Sự kiện" },
+                    { 6, false, "Kỹ thuật" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Skills",
+                columns: new[] { "Id", "IsDeleted", "Name", "ParentSkillId" },
+                values: new object[,]
+                {
+                    { 9, false, "Nhiệt tình", null },
+                    { 13, false, "Xây dựng website", null },
+                    { 12, false, "Checklist", null },
+                    { 11, false, "Chỉnh sửa/Thiết kế hình ảnh/video", null },
+                    { 10, false, "Trách nhiệm", null },
+                    { 8, false, "Hoạch định tài chính", null },
+                    { 2, false, "Kiến thức chuyên ngành", null },
+                    { 6, false, "Kiên nhẫn", null },
+                    { 5, false, "Có phương tiện di chuyển", null },
+                    { 4, false, "Lập trình", null },
+                    { 3, false, "Siêng năng", null },
+                    { 14, false, "Viết Proposal/kịch bản/content", null },
+                    { 1, false, "Kỹ năng mềm", null },
+                    { 7, false, "Thể lực tốt", null },
+                    { 15, false, "Lái xe", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Skills",
+                columns: new[] { "Id", "IsDeleted", "Name", "ParentSkillId" },
+                values: new object[,]
+                {
+                    { 16, false, "Làm việc nhóm", 1 },
+                    { 31, false, "Ngân hàng", 2 },
+                    { 30, false, "Tài chính", 2 },
+                    { 29, false, "Quản trị", 2 },
+                    { 28, false, "Marketing", 2 },
+                    { 27, false, "Kế toán/Kiểm toán", 2 },
+                    { 26, false, "Luật", 2 },
+                    { 25, false, "Kiểm soát cảm xúc", 1 },
+                    { 24, false, "Tìm kiếm & Xử lý thông tin", 1 },
+                    { 23, false, "Quan sát & Lắng nghe", 1 },
+                    { 22, false, "Đồng cảm & Sẻ chia", 1 },
+                    { 21, false, "Quản lý thời gian", 1 },
+                    { 20, false, "Giải quyết vấn đề", 1 },
+                    { 19, false, "Giao tiếp & Ứng xử", 1 },
+                    { 18, false, "Xây dựng kế hoạch", 1 },
+                    { 17, false, "Tư duy Logic", 1 },
+                    { 32, false, "Ngoại ngữ", 2 },
+                    { 33, false, "Lý luận chính trị", 2 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Activities_ApprovedBy",
                 table: "Activities",
@@ -595,16 +629,6 @@ namespace VMS.Infrastructure.Data.Migrations
                 name: "IX_ActivityImages_ActivityId",
                 table: "ActivityImages",
                 column: "ActivityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActivityRequirements_ActivityId",
-                table: "ActivityRequirements",
-                column: "ActivityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActivityRequirements_RequirementId",
-                table: "ActivityRequirements",
-                column: "RequirementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActivitySkills_ActivityId",
@@ -686,6 +710,11 @@ namespace VMS.Infrastructure.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Skills_ParentSkillId",
+                table: "Skills",
+                column: "ParentSkillId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAddresses_AddressPathId",
                 table: "UserAddresses",
                 column: "AddressPathId");
@@ -725,9 +754,6 @@ namespace VMS.Infrastructure.Data.Migrations
                 name: "ActivityImages");
 
             migrationBuilder.DropTable(
-                name: "ActivityRequirements");
-
-            migrationBuilder.DropTable(
                 name: "ActivitySkills");
 
             migrationBuilder.DropTable(
@@ -759,9 +785,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserSkills");
-
-            migrationBuilder.DropTable(
-                name: "Requirements");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

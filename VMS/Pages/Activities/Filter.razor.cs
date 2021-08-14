@@ -40,32 +40,20 @@ namespace VMS.Pages.Activities
             await FilterEventCallback.InvokeAsync(filter);
         }
 
-        private async Task ShowAreasPopupAsync()
+        private void ShowAreasPopupAsync()
         {
             ModalParameters parameters = new ModalParameters();
             parameters.Add("SelectedAreas", filter.Areas);
 
-            var messageForm = AreaModalService.Show<AreasPopup>("", parameters);
-            ModalResult result = await messageForm.Result;
-
-            if (result.Data is not null)
-            {
-                filter.Areas = (List<Area>)result.Data;
-            }
+            AreaModalService.Show<AreasPopup>("", parameters);
         }
 
-        private async Task ShowSkillsPopupAsync()
+        private void ShowSkillsPopupAsync()
         {
             ModalParameters parameters = new ModalParameters();
             parameters.Add("SelectedSkills", filter.Skills);
 
-            var messageForm = SkillModalService.Show<SkillsPopup>("", parameters);
-            ModalResult result = await messageForm.Result;
-
-            if (result.Data is not null)
-            {
-                filter.Skills = (List<Skill>)result.Data;
-            }
+            SkillModalService.Show<SkillsPopup>("", parameters);
         }
 
         private async Task ProvinceSelectionChanged(ChangeEventArgs e)

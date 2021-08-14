@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
+using VMS.GenericRepository;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
@@ -19,6 +20,21 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
             return await _repository.GetListAsync<Skill>(dbContext);
+        }
+
+        public async Task<List<Skill>> GetAllSubSkillsAsync(int parentSkillId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Skill> specification = new()
+            {
+                Conditions = new List<System.Linq.Expressions.Expression<System.Func<Skill, bool>>>()
+                {
+                    s => s.ParentSkillId == parentSkillId
+                }
+            };
+
+            return await _repository.GetListAsync(dbContext, specification);
         }
     }
 }

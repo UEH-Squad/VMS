@@ -128,24 +128,26 @@
     right: 15px;
     min-width: 220px;
     width: 40vw;
+    
 
     @include on('xl') {
         position: unset;
         box-shadow: none;
         border-radius: 0;
         flex-direction: unset;
+        justify-content: flex-end;
     }
 
     &__list {
-        width: 100%;
+        width: auto;
 
-        @include on('xl') {
+        /*@include on('xl') {
             margin-left: 6%;
         }
 
         @include on('xxl') {
             margin-left: 15%;
-        }
+        }*/
     }
 
     &__list__link {
@@ -186,6 +188,7 @@
 
         @include on('xl') {
             flex-direction: row;
+            margin-left: 20px;
         }
     }
 }

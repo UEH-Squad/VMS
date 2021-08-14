@@ -95,9 +95,6 @@
         
     }
 
-    /*&__dropdown-icon.show ~ .dropdown-menu {
-        height: 120px;
-    }*/
 
     &__dropdown-icon {
         position: absolute;
@@ -113,21 +110,6 @@
             display: block;
         }
     }
-
-    &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 100%;
-        height: 20px;
-        display: none;
-
-        @include on('xl') {
-            display: block;
-        }
-    }
-
 
     &__list {
         margin: 10px auto 0;
@@ -156,6 +138,10 @@
         & li:nth-child(2):hover &__logout {
             color: $blue-bold;
         }
+    }
+
+    @include on('xl') {
+        margin-left: 60px;      
     }
 }
 

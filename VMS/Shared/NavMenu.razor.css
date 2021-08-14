@@ -106,15 +106,17 @@
       position: unset;
       box-shadow: none;
       border-radius: 0;
-      flex-direction: unset; } }
+      flex-direction: unset;
+      justify-content: flex-end; } }
   .my-collapse__list {
-    width: 100%; }
-    @media (min-width: 1200px) {
-      .my-collapse__list {
-        margin-left: 6%; } }
-    @media (min-width: 1400px) {
-      .my-collapse__list {
-        margin-left: 15%; } }
+    width: auto;
+    /*@include on('xl') {
+            margin-left: 6%;
+        }
+
+        @include on('xxl') {
+            margin-left: 15%;
+        }*/ }
   .my-collapse__list__link {
     font-size: 16px;
     color: #18A0FB;
@@ -142,4 +144,5 @@
     flex-direction: column; }
     @media (min-width: 1200px) {
       .my-collapse .my-collapse__login-area {
-        flex-direction: row; } }
+        flex-direction: row;
+        margin-left: 20px; } }

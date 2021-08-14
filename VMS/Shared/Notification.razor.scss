@@ -1,0 +1,35 @@
+﻿@import '../Resources/scss/common/_variables';
+
+@mixin profile-icon-mobile {
+    color: $blue;
+    font-size: 36px;
+}
+
+.notification-link {
+    top: 50%;
+    transform: translateY(-50%);
+    left: -40px;
+
+    @include on('lg') {
+        left: -45px;
+    }
+
+    @include on('xl') {
+        left: unset;
+        right: 80px;
+    }
+
+    @include on('xxl') {
+        
+    }
+    
+    &__icon {
+        @include profile-icon-mobile;
+    }
+
+    &:hover &__icon {
+        color: $blue-bold;
+    }
+}
+
+

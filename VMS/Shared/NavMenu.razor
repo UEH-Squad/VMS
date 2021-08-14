@@ -1,36 +1,40 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-white py-0 my-navbar">
-    <div class="container px-0 my-navbar-container">
-        <div class="nav-menu d-flex flex-column align-items-center">
-            <NavLink href="@Routes.HomePage" class="navbar-brand p-0 m-0" Match="NavLinkMatch.All">
-                <img src="img/logo UEH tieng Anh.png" alt="UEH logo" class="my-ueh-logo" />
+﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 fixed-top shadow-sm my-navbar">
+    <div class="container-lg p-0 my-navbar-container">
+        <div class="d-flex flex-column my-navbar__brand">
+            <NavLink href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
+                <img src="img/logo UEH tieng Anh.png" alt="UEH logo" class="brand__ueh" />
             </NavLink>
-            <NavLink href="@Routes.Activities" class="navbar-brand p-0 m-0">
-                <img src="img/GoVolunteer (1).png" alt="Go Volunteer logo" class="my-go-volunteer" />
+            <NavLink href="@Routes.ActivitySearch" class="my-navbar__brand-item">
+                <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
             </NavLink>
         </div>
-        <button class="navbar-toggler me-2 me-sm-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navbarToggler" class="collapse navbar-collapse bg-white">
-            <div class="d-flex flex-column-reverse flex-lg-row flex-lg-grow-1">
-                <ul class="navbar-nav me-lg-auto d-flex flex-column justify-content-around align-items-center flex-grow-1 flex-lg-row">
+        <div class="my-navbar__hamburger-wrapper">
+            <Notification />
+            <button class="my-navbar__hamburger-wrapper__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="material-icons hamburger-icon">
+                    menu
+                </span>
+            </button>
+        </div>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
+                <ul class="navbar-nav navbar-list mb-4 mb-xl-0 text-center fw-bold my-collapse__list">
                     <li class="nav-item">
-                        <a href="@Routes.HomePage" class="nav-link my-nav-link">Trang chu</a>
+                        <a href="@Routes.HomePage" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Routes.Activities" class="nav-link my-nav-link">Go Volunteer</a>
+                        <a href="@Routes.ActivitySearch" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Routes.Organizations" class="nav-link my-nav-link">Don vi to chuc</a>
+                        <a href="@Routes.Organizations" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</a>
                     </li>
                     <li class="nav-item">
-                        <a href="@Routes.Map" class="nav-link my-nav-link">Ban do</a>
+                        <a href="@Routes.Map" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav d-flex flex-row align-items-center ms-lg-4 justify-content-end justify-content-lg-center me-2 me-sm-0">
+                <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
                     <LoginDisplay />
                 </ul>
-            </div>
         </div>
+                   
     </div>
 </nav>

@@ -10,8 +10,8 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    [Migration("20210814032539_DbInit")]
-    partial class DbInit
+    [Migration("20210814125521_dbinit")]
+    partial class dbinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -391,7 +391,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressPathTypeId")
+                    b.Property<int>("Depth")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -402,26 +402,9 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressPathTypeId");
-
                     b.HasIndex("ParentPathId");
 
                     b.ToTable("AddressPaths");
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.AddressPathType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AddressPathTypes");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>
@@ -430,6 +413,9 @@ namespace VMS.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1122,18 +1108,10 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
                 {
-                    b.HasOne("VMS.Domain.Models.AddressPathType", "AddressPathType")
-                        .WithMany("AddressPaths")
-                        .HasForeignKey("AddressPathTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("VMS.Domain.Models.AddressPath", "PreviousPath")
                         .WithMany("SubPaths")
                         .HasForeignKey("ParentPathId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("AddressPathType");
 
                     b.Navigation("PreviousPath");
                 });
@@ -1252,11 +1230,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("SubPaths");
 
                     b.Navigation("UserAddresses");
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.AddressPathType", b =>
-                {
-                    b.Navigation("AddressPaths");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>

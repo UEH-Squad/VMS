@@ -3,21 +3,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
-    public partial class DbInit : Migration
+    public partial class dbinit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AddressPathTypes",
+                name: "AddressPaths",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Depth = table.Column<int>(type: "int", nullable: false),
+                    ParentPathId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AddressPathTypes", x => x.Id);
+                    table.PrimaryKey("PK_AddressPaths", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AddressPaths_AddressPaths_ParentPathId",
+                        column: x => x.ParentPathId,
+                        principalTable: "AddressPaths",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,6 +35,7 @@ namespace VMS.Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -108,33 +117,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AddressPaths",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressPathTypeId = table.Column<int>(type: "int", nullable: false),
-                    ParentPathId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AddressPaths", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AddressPaths_AddressPaths_ParentPathId",
-                        column: x => x.ParentPathId,
-                        principalTable: "AddressPaths",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AddressPaths_AddressPathTypes_AddressPathTypeId",
-                        column: x => x.AddressPathTypeId,
-                        principalTable: "AddressPathTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -322,6 +304,33 @@ namespace VMS.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserAddresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AddressPathId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserAddresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserAddresses_AddressPaths_AddressPathId",
+                        column: x => x.AddressPathId,
+                        principalTable: "AddressPaths",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserAddresses_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserAreas",
                 columns: table => new
                 {
@@ -373,33 +382,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserAddresses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    AddressPathId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserAddresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserAddresses_AddressPaths_AddressPathId",
-                        column: x => x.AddressPathId,
-                        principalTable: "AddressPaths",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserAddresses_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -536,21 +518,21 @@ namespace VMS.Infrastructure.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Areas",
-                columns: new[] { "Id", "IsDeleted", "Name" },
+                columns: new[] { "Id", "Icon", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, false, "Cộng đồng" },
-                    { 12, false, "Thể thao" },
-                    { 11, false, "Chuyển nhà" },
-                    { 10, false, "Môi trường" },
-                    { 8, false, "Công nghệ" },
-                    { 7, false, "Sức khỏe" },
-                    { 9, false, "Phương tiện" },
-                    { 5, false, "Khẩn cấp" },
-                    { 4, false, "Giáo dục" },
-                    { 3, false, "Hỗ trợ" },
-                    { 2, false, "Sự kiện" },
-                    { 6, false, "Kỹ thuật" }
+                    { 1, null, false, "Cộng đồng" },
+                    { 12, null, false, "Thể thao" },
+                    { 11, null, false, "Chuyển nhà" },
+                    { 10, null, false, "Môi trường" },
+                    { 8, null, false, "Công nghệ" },
+                    { 7, null, false, "Sức khỏe" },
+                    { 9, null, false, "Phương tiện" },
+                    { 5, null, false, "Khẩn cấp" },
+                    { 4, null, false, "Giáo dục" },
+                    { 3, null, false, "Hỗ trợ" },
+                    { 2, null, false, "Sự kiện" },
+                    { 6, null, false, "Kỹ thuật" }
                 });
 
             migrationBuilder.InsertData(
@@ -639,11 +621,6 @@ namespace VMS.Infrastructure.Data.Migrations
                 name: "IX_ActivitySkills_SkillId",
                 table: "ActivitySkills",
                 column: "SkillId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AddressPaths_AddressPathTypeId",
-                table: "AddressPaths",
-                column: "AddressPathTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AddressPaths_ParentPathId",
@@ -800,9 +777,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Activities");
-
-            migrationBuilder.DropTable(
-                name: "AddressPathTypes");
 
             migrationBuilder.DropTable(
                 name: "Areas");

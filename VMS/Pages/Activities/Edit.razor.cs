@@ -101,7 +101,7 @@ namespace VMS.Pages.Activities
 
             await ActivityService.UpdateActivityAsync(activity, int.Parse(ActivityId));
 
-            NavigationManager.NavigateTo(Routes.ActivitySearch + "/" + ActivityId);
+            NavigationManager.NavigateTo(Routes.ActivityInfo + "/" + ActivityId);
         }
 
         private async Task ProvinceSelectionChanged(int id)

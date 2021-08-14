@@ -3,11 +3,11 @@
 
 @if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != userId)
 {
-    <div class="alert alert-info">Không tìm thấy hoạt động..<a href="@Routes.Activities">Quay lại</a></div>
+    <div class="alert alert-info">Không tìm thấy hoạt động..<a href="@Routes.ActivitySearch">Quay lại</a></div>
 }
 else
 {
-    <div class="alert alert-info"><a href="@Routes.Activities/@ActivityId" class="btn btn-success">Quay lại</a></div>
+    <div class="alert alert-info"><a href="@Routes.ActivityInfo/@ActivityId" class="btn btn-success">Quay lại</a></div>
     <div class="row">
         <div class="col-md-4">
             <EditForm Model="activity" OnValidSubmit="UpdateActivityAsync">

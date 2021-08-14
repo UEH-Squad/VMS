@@ -1,4 +1,4 @@
-﻿@attribute [Route(Routes.Activities)]
+﻿@attribute [Route(Routes.ActivitySearch)]
 
 
 @if (isLoggedIn)
@@ -15,7 +15,7 @@ else
     @foreach(var activity in activities)
     {
         <div class="card card-body">
-            <p><a href="@Routes.Activities/@activity.Id">@activity.Name</a></p>
+            <p><a href="@Routes.ActivityInfo/@activity.Id">@activity.Name</a></p>
             <p>@activity.Description</p>
         </div>
     }

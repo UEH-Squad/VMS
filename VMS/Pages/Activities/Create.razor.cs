@@ -91,7 +91,7 @@ namespace VMS.Pages.Activities
 
             await ActivityService.AddActivityAsync(activity);
 
-            NavigationManager.NavigateTo(Routes.Activities);
+            NavigationManager.NavigateTo(Routes.ActivitySearch);
         }
     }
 }

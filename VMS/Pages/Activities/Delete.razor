@@ -4,14 +4,14 @@
 
 @if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != userId)
 {
-    <div class="card card-body">Không tìm thấy hoạt động..<a href="@Routes.Activities">Quay lại</a></div>
+    <div class="card card-body">Không tìm thấy hoạt động..<a href="@Routes.ActivitySearch">Quay lại</a></div>
 }
 else
 {
     <EditForm Model="activity" OnValidSubmit="DeleteActivityAsync">
         <div class="alert alert-info">
             Bạn có chắc muốn xóa hoạt động @activity.Name ?
-            <input type ="submit" class="btn btn-warning" value="Xác nhận"/> <a href="@Routes.Activities/@ActivityId" class="btn btn-success">Hủy bỏ</a>
+            <input type ="submit" class="btn btn-warning" value="Xác nhận"/> <a href="@Routes.ActivityInfo/@ActivityId" class="btn btn-success">Hủy bỏ</a>
         </div>
     </EditForm>
 }

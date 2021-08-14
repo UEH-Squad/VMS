@@ -4,3 +4,8 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.main-layout {
+  margin-top: 85px; }
+  @media (min-width: 992px) {
+    .main-layout {
+      margin-top: 110px; } }

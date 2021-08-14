@@ -48,6 +48,8 @@ namespace VMS.Infrastructure.IoC
 
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddHttpClient();
+            services.AddTransient<IAddressPathService, AddressPathService>();
             services.AddTransient<IAreaService, AreaService>();          
             services.AddTransient<IUserWithActService, UserWithActService>();
         }

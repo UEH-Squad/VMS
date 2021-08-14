@@ -10,7 +10,7 @@
 <div class="container-lg p-0 position-relative">
     <div class="act-container position-relative">
         <div class="act-section margin-10">
-            <a href="@Routes.Activities" class="act-header">
+            <a href="@Routes.ActivitySearch" class="act-header">
                 <span class="act-header__green">Hoạt động</span>
                 <span class="act-header__blue">mới nhất</span>
                 <span class="act-header__green">gần bạn</span>
@@ -21,7 +21,7 @@
                     foreach (var activity in newestActivities)
                     {
                         <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                            <a href="@Routes.Activities" class="act-item">
+                            <a href="@Routes.ActivitySearch" class="act-item">
                                 <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
                                 <div class="act-item--title fw-bold">
                                     <p class="m-0">@activity.ActivityName</p>
@@ -32,7 +32,7 @@
                             </a>
                         </div>
                     }
-                <a href="@Routes.Activities" class="act-more">Nhiều hơn >></a>
+                <a href="@Routes.ActivitySearch" class="act-more">Nhiều hơn >></a>
                 }
                 else
                 {
@@ -43,7 +43,7 @@
     </div>
     <div class="act-container position-relative margin-bt">
         <div class="act-section margin-10">
-            <a href="@Routes.Activities" class="act-header">
+            <a href="@Routes.ActivitySearch" class="act-header">
                 <span class="act-header__green">Hoạt động</span>
                 <span class="act-header__blue">nổi bật</span>
                 <span class="act-header__green">gần bạn</span>
@@ -54,7 +54,7 @@
                     foreach (var activity in featuredActivities)
                     {
                         <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                            <a href="@Routes.Activities" class="act-item">
+                            <a href="@Routes.ActivitySearch" class="act-item">
                                 <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
                                 <div class="act-item--title fw-bold">
                                     <p class="m-0">@activity.ActivityName</p>
@@ -65,7 +65,7 @@
                             </a>
                         </div>
                     }
-                <a href="@Routes.Activities" class="act-more">Nhiều hơn >></a>
+                <a href="@Routes.ActivitySearch" class="act-more">Nhiều hơn >></a>
                 }
                 else
                 {

@@ -24,6 +24,27 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
+        /* source: https://gist.github.com/jammin77/033a332542aa24889452 */
+        private double Distance(CoordinateResponse userPosition, CoordinateResponse activityPosition)
+        {
+            double dLat = ConvertToRadian(userPosition.Lat - activityPosition.Lat);
+            double dLon = ConvertToRadian(userPosition.Long - activityPosition.Long);
+
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                        Math.Cos(ConvertToRadian(userPosition.Lat)) *
+                        Math.Cos(ConvertToRadian(activityPosition.Lat)) *
+                        Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+            double c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+
+            return 6371 * c;
+        }
+
+        private double ConvertToRadian(double value)
+        {
+            return (Math.PI / 180) * value;
+        }
+
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -61,12 +82,17 @@ namespace VMS.Application.Services
 
             if (filter.Skills.Count != 0)
             {
-                activities = activities.Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id))).ToList();
+                activities = activities.Where(a => filter.Skills
+                                                .All(s => a.ActivitySkills
+                                                .Any(x => x.SkillId == s.Id)))
+                                                .ToList();
             }
 
             activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
+
+            activitiesViewModel.ForEach(a => a.Distance = Distance(filter.UserLocation, new CoordinateResponse() { Lat = a.Latitude, Long = a.Longitude}));
 
             return activitiesViewModel.OrderByDescending(a => a.PostDate).ToList();
         }
@@ -81,9 +107,9 @@ namespace VMS.Application.Services
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
 
-            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
-            activity.Latitude = coordinateResponse.Latitude;
-            activity.Longitude = coordinateResponse.Longitude;
+            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
+            activity.Latitude = coordinateResponse.Lat;
+            activity.Longitude = coordinateResponse.Long;
 
             activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
             {
@@ -130,10 +156,10 @@ namespace VMS.Application.Services
                 IsDeleted = a.Skill.IsDeleted
             }).ToList();
 
-            activity.ActivityAddresses.OrderBy(a => a.AddressPath.Depth);
-            activityViewModel.ProvinceId = activity.ActivityAddresses.ElementAt(0).AddressPathId;
-            activityViewModel.DistrictId = activity.ActivityAddresses.ElementAt(1).AddressPathId;
-            activityViewModel.WardId = activity.ActivityAddresses.ElementAt(2).AddressPathId;
+            List<ActivityAddress> activityAddresses = activity.ActivityAddresses.OrderBy(a => a.AddressPath.Depth).ToList();
+            activityViewModel.ProvinceId = activityAddresses[0].AddressPathId;
+            activityViewModel.DistrictId = activityAddresses[1].AddressPathId;
+            activityViewModel.WardId = activityAddresses[2].AddressPathId;
 
             return activityViewModel;
         }
@@ -157,9 +183,9 @@ namespace VMS.Application.Services
 
             activity = _mapper.Map(activityViewModel, activity);
 
-            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
-            activity.Latitude = coordinateResponse.Latitude;
-            activity.Longitude = coordinateResponse.Longitude;
+            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
+            activity.Latitude = coordinateResponse.Lat;
+            activity.Longitude = coordinateResponse.Long;
 
             activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
             {

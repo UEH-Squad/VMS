@@ -36,9 +36,9 @@ const logoBanerCarousel = () => {
     })
 }
 
-const getUserLocation = () => {
+const setUserLocation = () => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(setPosition);
     } else {
         return null;
     }
@@ -79,12 +79,20 @@ const IncreaseNumber = (counter) => {
     updateCount();
 }
 
-let showPosition = position => {
+const getUserLocation = () => {
+    const location = localStorage.getItem('UserLocation');
+    if (location) {
+        return JSON.parse(location);
+    }
+    return null;
+}
+
+const setPosition = position => {
     var result = {
         Lat: position.coords.latitude,
         Long: position.coords.longitude,
     }
-    return result;
+    localStorage.setItem('UserLocation', JSON.stringify(result));
 }
 
 const increaseNumber1 = () => {
@@ -105,4 +113,4 @@ const increaseNumber1 = () => {
     });
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult, increaseNumber1 };
+export default { playVideo, filterCarousel, logoBanerCarousel, setUserLocation, getUserLocation, showResult, increaseNumber1 };

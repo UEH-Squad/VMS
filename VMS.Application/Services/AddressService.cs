@@ -44,12 +44,31 @@ namespace VMS.Application.Services
                 Conditions = new List<System.Linq.Expressions.Expression<Func<AddressPath, bool>>>()
                 {
                     a => a.ParentPathId == parentId
-                }
+                },
+                Includes = a => a.Include(x => x.PreviousPath)
             };
 
             List<AddressPath> addressPaths = await _repository.GetListAsync(dbContext, specification);
 
             return addressPaths.OrderBy(a => a.Name).ToList();
+        }
+
+        public async Task<AddressPath> GetAddressPathByIdAsync(int id)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<AddressPath> specification = new()
+            {
+                Conditions = new List<System.Linq.Expressions.Expression<Func<AddressPath, bool>>>()
+                {
+                    a => a.Id == id
+                },
+                Includes = a => a.Include(x => x.PreviousPath).ThenInclude(x => x.PreviousPath)
+            };
+
+            AddressPath addressPath = await _repository.GetAsync(dbContext, specification);
+
+            return addressPath;
         }
 	}
 }

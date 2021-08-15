@@ -14,6 +14,7 @@ namespace VMS.Application.ViewModels
         public bool IsVirtual { get; set; }
         public string Website { get; set; }
         public string Banner { get; set; }
+        public string FullAddress { get; set; }
 
         [Required]
         public string Requirement { get; set; }

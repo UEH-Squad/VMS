@@ -7,5 +7,9 @@ namespace VMS.Application.Interfaces
         User FindUserById(string userId);
         
         User GetCurrentUser();
+
+        bool IsLoggedIn();
+
+        string GetCurrentUserId();
     }
 }

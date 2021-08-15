@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using VMS.Application.ViewModels;
+using VMS.Domain.Models;
 
 namespace VMS.Application.Automapper
 {
@@ -6,6 +8,10 @@ namespace VMS.Application.Automapper
     {
         public MappingProfile()
         {
+            CreateMap<Activity, ActivityViewModel>();
+            CreateMap<CreateActivityViewModel, Activity>();
+            CreateMap<Activity, CreateActivityViewModel>();
+            CreateMap<Activity, ViewActivityViewModel>();
         }
     }
 }

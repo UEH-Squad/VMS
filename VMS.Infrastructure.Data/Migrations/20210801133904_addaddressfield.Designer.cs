@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210801133904_addaddressfield")]
+    partial class addaddressfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,9 +288,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Requirement")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -357,6 +356,31 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("ActivityImages");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.ActivityRequirement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RequirementId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("RequirementId");
+
+                    b.ToTable("ActivityRequirements");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.ActivitySkill", b =>
                 {
                     b.Property<int>("Id")
@@ -389,7 +413,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Depth")
+                    b.Property<int>("AddressPathTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -400,9 +424,26 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressPathTypeId");
+
                     b.HasIndex("ParentPathId");
 
                     b.ToTable("AddressPaths");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.AddressPathType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AddressPathTypes");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>
@@ -554,6 +595,44 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasIndex("RecruitmentId");
 
                     b.ToTable("RecruitmentRatings");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.Requirement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Requirements");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Văn hay chữ tốt"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "Bậc thầy tính toán"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "Phù thủy hóa học"
+                        });
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Skill", b =>
@@ -825,6 +904,25 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Activity");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.ActivityRequirement", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.Activity", "Activity")
+                        .WithMany("ActivityRequirements")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VMS.Domain.Models.Requirement", "Requirement")
+                        .WithMany("ActivityRequirements")
+                        .HasForeignKey("RequirementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("Requirement");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.ActivitySkill", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
@@ -846,10 +944,18 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
                 {
+                    b.HasOne("VMS.Domain.Models.AddressPathType", "AddressPathType")
+                        .WithMany("AddressPaths")
+                        .HasForeignKey("AddressPathTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("VMS.Domain.Models.AddressPath", "PreviousPath")
                         .WithMany("SubPaths")
                         .HasForeignKey("ParentPathId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("AddressPathType");
 
                     b.Navigation("PreviousPath");
                 });
@@ -866,7 +972,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany()
+                        .WithMany("Recruitments")
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -948,7 +1054,11 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Navigation("ActivityImages");
 
+                    b.Navigation("ActivityRequirements");
+
                     b.Navigation("ActivitySkills");
+
+                    b.Navigation("Recruitments");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
@@ -958,6 +1068,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("SubPaths");
 
                     b.Navigation("UserAddresses");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.AddressPathType", b =>
+                {
+                    b.Navigation("AddressPaths");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>
@@ -970,6 +1085,11 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.Navigation("RecruitmentRatings");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.Requirement", b =>
+                {
+                    b.Navigation("ActivityRequirements");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Skill", b =>

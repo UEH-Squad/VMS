@@ -1,2 +1,9 @@
 ﻿@import '../Resources/scss/common/_variables';
 
+.main-layout {
+    margin-top: 85px;
+
+    @include on('lg') {
+        margin-top: 110px;
+    }
+}

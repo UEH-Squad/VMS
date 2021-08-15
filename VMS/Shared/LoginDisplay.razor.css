@@ -1,0 +1,109 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-notifications {
+  color: #18A0FB;
+  font-size: 36px;
+  top: -52px; }
+  @media (min-width: 992px) {
+    .my-notifications {
+      top: -61px; } }
+
+.my-person {
+  color: #18A0FB;
+  font-size: 36px; }
+  .my-person:after {
+    content: attr(data-icon); }
+  @media (min-width: 992px) {
+    .my-person {
+      font-size: 70px; } }
+
+.login-btn {
+  background-color: #18A0FB;
+  width: 150px;
+  height: 45px; }
+  .login-btn:hover {
+    background-color: #0B588C; }
+  @media (min-width: 1200px) {
+    .login-btn {
+      width: 200px;
+      height: 60px;
+      font-size: 22px;
+      line-height: 60px; } }
+  @media (min-width: 1400px) {
+    .login-btn {
+      font-size: 24px; } }
+
+.user-section__link .user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto; }
+  @media (min-width: 1200px) {
+    .user-section__link .user-avatar {
+      width: 65px;
+      height: 65px; } }
+
+.user-section__link .user-label {
+  display: block;
+  color: #64D72F; }
+  @media (min-width: 1200px) {
+    .user-section__link .user-label {
+      display: none; } }
+
+.user-section__link:hover .user-label {
+  color: #306C14; }
+
+.user-section .dropdown {
+  position: unset;
+  height: 0;
+  width: 0; }
+
+.user-section .dropdown-menu {
+  top: 100%;
+  left: auto;
+  right: -50%;
+  border: 0;
+  padding: 0;
+  transition: all 0.2s ease-in; }
+
+.user-section__dropdown-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -62%;
+  color: #18A0FB;
+  font-size: 40px;
+  cursor: pointer;
+  display: none; }
+  @media (min-width: 1200px) {
+    .user-section__dropdown-icon {
+      display: block; } }
+
+.user-section__list {
+  margin: 10px auto 0;
+  width: 230px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25); }
+  .user-section__list__profile {
+    font-size: 24px;
+    color: #64D72F;
+    display: block; }
+  .user-section__list__logout {
+    font-size: 24px;
+    color: #18A0FB;
+    border: none;
+    width: 100%; }
+  .user-section__list li:nth-child(1):hover .user-section__list__profile {
+    color: #306C14; }
+  .user-section__list li:nth-child(2):hover .user-section__list__logout {
+    color: #0B588C; }
+
+@media (min-width: 1200px) {
+  .user-section {
+    margin-left: 60px; } }

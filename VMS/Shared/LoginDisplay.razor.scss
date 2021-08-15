@@ -1,0 +1,147 @@
+﻿@import '../Resources/scss/common/_variables';
+
+@mixin profile-icon-mobile {
+    color: $blue;
+    font-size: 36px;
+}
+
+.my-notifications {
+    @include profile-icon-mobile;
+    top: -52px;
+    @include on('lg') {
+        top: -61px;
+    }
+
+}
+
+.my-person {
+    @include profile-icon-mobile;
+
+    &:after {
+        content: attr(data-icon);
+    }
+
+    @include on('lg') {
+        font-size: 70px;
+    }
+}
+
+.login-btn {
+    background-color: $blue;
+    width: 150px;
+    height: 45px;
+
+    &:hover {
+        background-color: $blue-bold;
+    }
+
+    @include on('xl') {
+        width: 200px;
+        height: 60px;
+        font-size: 22px;
+        line-height: 60px;
+    }
+
+    @include on('xxl') {
+        font-size: 24px;
+    }
+}
+
+.user-section {
+    &__link {
+
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+
+            @include on('xl') {
+                width: 65px;
+                height: 65px;
+            }
+        }
+
+        .user-label {
+            display: block;
+            color: $green;
+
+
+            @include on('xl') {
+                display: none;
+            }
+        }
+
+        &:hover .user-label {
+            color: $green-bold;
+        }        
+    }
+
+    .dropdown {
+        position: unset;
+        height: 0;
+        width: 0;
+    }
+
+    .dropdown-menu {
+        top: 100%;
+        left: auto;
+        right: -50%;
+        border: 0;
+        padding: 0;
+        transition: all 0.2s ease-in;
+        
+    }
+
+
+    &__dropdown-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -62%;
+        color: $blue;
+        font-size: 40px;
+        cursor: pointer;
+        display: none;
+
+        @include on('xl') {
+            display: block;
+        }
+    }
+
+    &__list {
+        margin: 10px auto 0;
+        width: 230px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+
+        &__profile {
+            font-size: 24px;
+            color: $green;
+            display: block;
+        }
+
+        &__logout {
+            font-size: 24px;
+            color: $blue;
+            border: none;
+            width: 100%;
+        }
+
+        & li:nth-child(1):hover &__profile {
+            color: $green-bold;
+        }
+
+        & li:nth-child(2):hover &__logout {
+            color: $blue-bold;
+        }
+    }
+
+    @include on('xl') {
+        margin-left: 60px;      
+    }
+}
+

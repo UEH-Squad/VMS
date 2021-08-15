@@ -1,5 +1,9 @@
-﻿@page "/"
+﻿@attribute [Route(Routes.HomePage)]
 
-<h1>Hello, world!</h1>
+@inject IJSRuntime JsRuntime
 
-Welcome to your new app.
+<VMS.Pages.Homepage.SloganAndVideo />
+<VMS.Pages.Homepage.Filter/>
+<VMS.Pages.Homepage.RelatedActivities />
+<VMS.Pages.Homepage.QuoteBanner />
+<VMS.Pages.Homepage.LogoBaner/>

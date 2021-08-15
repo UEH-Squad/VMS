@@ -1,19 +1,35 @@
 ﻿<AuthorizeView>
     <Authorized>
-        <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
-        <form method="post" action="Identity/Account/LogOut">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
-        </form>
-    </Authorized>
-    <NotAuthorized>
-        <li class="nav-item me-0 me-sm-2">
-            <a href="/dang-nhap" class="btn btn-sm btn-primary d-flex align-items-center">
-                Đăng nhập <span class="material-icons ms-1">login</span>
+        <li class="user-section nav-item dflex flex-column align-items-center position-relative">
+            <a href="@Routes.User" class="d-block text-decoration-none user-section__link">
+                <div class="user-avatar-wrapper position-relative">
+                    <img src="img/hsv.png" alt="user avatar" class="user-avatar">
+                </div>
+                <span class="user-label mt-2 fw-bold">Trang cá nhân</span>
+                <div class="dropdown">
+                    
+                        <span class="material-icons-outlined user-section__dropdown-icon" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            arrow_drop_down
+                        </span>
+
+                    <ul class="dropdown-menu user-section__list list-unstyled bg-white">
+                        <li class="text-center">
+                            <a href="@Routes.User" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
+                        </li>
+                        <li class="text-center">
+                            <form method="post" action="@Routes.LogOut">
+                                <button type="submit" class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="/dang-ky" class="btn btn-sm btn-danger">
-                Đăng ký
+    </Authorized>
+    <NotAuthorized>
+        <li class="nav-item ">
+            <a class="btn login-btn d-flex align-items-center justify-content-center fw-bold p-0 position-relative text-white" href="@Routes.LogIn">
+                Đăng nhập
             </a>
         </li>
     </NotAuthorized>

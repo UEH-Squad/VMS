@@ -1,22 +1,40 @@
-﻿<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm">
-    <div class="container">
-        <div class="nav-menu d-flex align-items-center">
-            <NavLink href="" class="navbar-brand" Match="NavLinkMatch.All">
-                <img src="img/GOVOLUNTEER.png" alt="" height="45" />
+﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 fixed-top shadow-sm my-navbar">
+    <div class="container-lg p-0 my-navbar-container">
+        <div class="d-flex flex-column my-navbar__brand">
+            <NavLink href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
+                <img src="img/logo UEH tieng Anh.png" alt="UEH logo" class="brand__ueh" />
             </NavLink>
-            <ul class="navbar-nav justify-content-center">
-                <li class="nav-item">
-                    <NavLink href="" class="nav-link active">Nothing</NavLink>
-                </li>
-            </ul>
+            <NavLink href="@Routes.ActivitySearch" class="my-navbar__brand-item">
+                <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
+            </NavLink>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navbarToggler" class="collapse navbar-collapse mt-2 mt-sm-0 flex-sm-grow-0">
-            <ul class="navbar-nav me-auto d-flex flex-row justify-content-around">
-                <LoginDisplay />
-            </ul>
+        <div class="my-navbar__hamburger-wrapper">
+            <Notification />
+            <button class="my-navbar__hamburger-wrapper__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="material-icons hamburger-icon">
+                    menu
+                </span>
+            </button>
         </div>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
+                <ul class="navbar-nav navbar-list mb-4 mb-xl-0 text-center fw-bold my-collapse__list">
+                    <li class="nav-item">
+                        <a href="@Routes.HomePage" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Routes.ActivitySearch" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Routes.Organizations" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Routes.Map" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</a>
+                    </li>
+                </ul>
+                <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
+                    <LoginDisplay />
+                </ul>
+        </div>
+                   
     </div>
 </nav>

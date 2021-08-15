@@ -1,0 +1,81 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+.my-quoteBaner {
+    padding: 50px 0;
+    text-align: center;
+
+    .quoteBaner__item {
+        padding-bottom: 15px;
+        color: $green;
+
+        @include on('sm') {
+            padding-bottom: 30px;
+        }
+
+        @include on('lg') {
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+
+            @include on('sm') {
+                font-size: 54px;
+            }
+
+            @include on('lg') {
+                font-size: 80px;
+            }
+
+            @include on('xl') {
+                font-size: 96px;
+            }
+        }
+
+        h3 {
+            font-size: 11px;
+            font-weight: 400;
+            color: black;
+
+            @include on('sm') {
+                font-size: 20px;
+            }
+
+            @include on('lg') {
+                font-size: 30px;
+            }
+
+            @include on('xl') {
+                font-size: 36px;
+            }
+        }
+    }
+
+    .quoteBaner__item-left {
+        @include on('sm') {
+            padding-right: 50px;
+        }
+
+        @include on('xl') {
+            padding-right: 100px;
+        }
+
+        @include on('xxl') {
+            padding-right: 150px;
+        }
+    }
+
+    .quoteBaner__item-right {
+        @include on('sm') {
+            padding-left: 50px;
+        }
+
+        @include on('xl') {
+            padding-left: 100px;
+        }
+
+        @include on('xxl') {
+            padding-left: 150px;
+        }
+    }
+}

@@ -2,5 +2,45 @@
   {
     "outputFile": "Shared/MainLayout.razor.css",
     "inputFile": "Shared/MainLayout.razor.scss"
+  },
+  {
+    "outputFile": "Shared/LoginDisplay.razor.css",
+    "inputFile": "Shared/LoginDisplay.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Index.razor.css",
+    "inputFile": "Pages/Index.razor.scss"
+  },
+  {
+    "outputFile": "Shared/NavMenu.razor.css",
+    "inputFile": "Shared/NavMenu.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/SloganAndVideo.razor.css",
+    "inputFile": "Pages/Homepage/SloganAndVideo.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Notification.razor.css",
+    "inputFile": "Shared/Notification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/Filter.razor.css",
+    "inputFile": "Pages/Homepage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/LogoBaner.razor.css",
+    "inputFile": "Pages/Homepage/LogoBaner.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/RelatedActivities.razor.css",
+    "inputFile": "Pages/Homepage/RelatedActivities.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/QuoteBanner.razor.css",
+    "inputFile": "Pages/Homepage/QuoteBanner.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Footer.razor.css",
+    "inputFile": "Shared/Footer.razor.scss"
   }
 ]

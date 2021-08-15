@@ -1,29 +1,35 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+﻿@using VMS.Domain.Models
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
-            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item me-0 me-sm-2">
-        <a href="/dang-nhap" class="btn btn-sm btn-primary d-flex align-items-center">
-            Đăng nhập <span class="material-icons ms-1">login</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/dang-ky" class="btn btn-sm btn-danger">
-            Đăng ký
-        </a>
-    </li>
-}
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a href="" class="text-decoration-none">
+                <span class="material-icons my-notifications" data-icon="notifications_none"></span>
+            </a>
+        </li>
+        <li class="nav-item text-decoration-none">
+            <a href="">
+                <span class="material-icons-outlined my-person" data-icon="account_circle"></span>
+            </a>
+        </li>
+    }
+    else
+    {
+        @if (Url.RouteUrl(ViewContext.RouteData.Values).Contains("/dang-nhap"))
+        {
+            <li class="nav-item">
+                <a href="@Routes.Register" class="btn btn-danger">Đăng ký</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a href="@Routes.LogIn" class="btn btn-danger">Đăng nhập</a>
+            </li>
+        }
+    }
+</ul>

@@ -24,26 +24,6 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        /* source: https://gist.github.com/jammin77/033a332542aa24889452 */
-        private double Distance(CoordinateResponse userPosition, CoordinateResponse activityPosition)
-        {
-            double dLat = ConvertToRadian(userPosition.Lat - activityPosition.Lat);
-            double dLon = ConvertToRadian(userPosition.Long - activityPosition.Long);
-
-            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                        Math.Cos(ConvertToRadian(userPosition.Lat)) *
-                        Math.Cos(ConvertToRadian(activityPosition.Lat)) *
-                        Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
-
-            double c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
-
-            return 6371 * c;
-        }
-
-        private double ConvertToRadian(double value)
-        {
-            return (Math.PI / 180) * value;
-        }
 
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter)
         {
@@ -91,8 +71,6 @@ namespace VMS.Application.Services
             activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
-
-            activitiesViewModel.ForEach(a => a.Distance = Distance(filter.UserLocation, new CoordinateResponse() { Lat = a.Latitude, Long = a.Longitude}));
 
             return activitiesViewModel.OrderByDescending(a => a.PostDate).ToList();
         }

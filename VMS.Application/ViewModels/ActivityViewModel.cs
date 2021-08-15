@@ -11,10 +11,8 @@ namespace VMS.Application.ViewModels
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Banner { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public double Distance { get; set; }
 
+        public CoordinateResponse Coordinate { get; set; }
         public User Organizer { get; set; }
 
     }

@@ -4,6 +4,9 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.my-act {
+  margin-bottom: 120px; }
+
 .my-row {
   width: 100%;
   display: flex;
@@ -79,7 +82,7 @@
 
 .act-header {
   display: block;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
   line-height: 19.5px;
   margin-bottom: 15px;
@@ -98,7 +101,7 @@
       font-size: 2rem; } }
   @media (min-width: 1200px) {
     .act-header {
-      font-size: 3rem;
+      font-size: 36px;
       line-height: 59px;
       margin-bottom: 35px;
       margin-top: 50px; } }
@@ -113,6 +116,7 @@
     border-radius: 0 0 10px 10px;
     color: #18A0FB;
     font-size: .5rem;
+    font-weight: 400;
     line-height: 9.75px;
     margin: 0;
     width: inherit;
@@ -130,9 +134,9 @@
     @media (min-width: 992px) {
       .act-item--title {
         font-size: 1.375rem; } }
-    @media (min-width: 1400px) {
+    @media (min-width: 1200px) {
       .act-item--title {
-        font-size: 1.5625rem; } }
+        font-size: 24px; } }
   .act-item:hover > .act-item--title {
     color: #0B588c; }
   .act-item:hover > .act-item--img {
@@ -142,11 +146,11 @@
 .act-more {
   color: #64D72F;
   font-size: .625rem;
-  font-weight: 600;
+  font-weight: 400;
+  text-decoration: none;
   position: absolute;
   padding-right: 10px;
-  right: 0;
-  text-decoration: none; }
+  right: 0; }
   @media (min-width: 576px) {
     .act-more {
       font-size: 1rem;
@@ -183,47 +187,3 @@
   @media (min-width: 576px) {
     .limited-text {
       -webkit-line-clamp: 4; } }
-
-.act-unchecked,
-.act-checked {
-  position: absolute;
-  right: 5px;
-  top: 139px; }
-  @media (min-width: 576px) {
-    .act-unchecked,
-    .act-checked {
-      top: 241px; } }
-  @media (min-width: 768px) {
-    .act-unchecked,
-    .act-checked {
-      top: 341px; } }
-  @media (min-width: 992px) {
-    .act-unchecked,
-    .act-checked {
-      top: 354px; } }
-  @media (min-width: 1400px) {
-    .act-unchecked,
-    .act-checked {
-      top: 384px; } }
-
-.material-icons-outlined {
-  color: #B4B4B4; }
-
-.material-icons {
-  color: #64D72F; }
-
-.material-icons,
-.material-icons-outlined {
-  font-size: 1.5rem; }
-  @media (min-width: 576px) {
-    .material-icons,
-    .material-icons-outlined {
-      font-size: 2.5rem; } }
-  @media (min-width: 768px) {
-    .material-icons,
-    .material-icons-outlined {
-      font-size: 3.125rem; } }
-  @media (min-width: 1200px) {
-    .material-icons,
-    .material-icons-outlined {
-      font-size: 3.625rem; } }

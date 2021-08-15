@@ -1,23 +1,9 @@
-﻿const playVideo = (src) => {
+﻿import counterUp from 'counterup2';
+
+const playVideo = (src) => {
     const video = document.querySelector('.video-header__source');
-
-    let timer = null,
-        totalTime = 0;
-
-    if (video) {
-        video.src = src;
-        video.play();
-
-        video.addEventListener("play", () => {
-            timer = window.setInterval(() => {
-                totalTime += 1000;
-                if (totalTime >= 6 * 1000) {
-                    document.querySelector('.video-header__note').style.display = 'none';
-                    clearInterval(timer);
-                }
-            }, 1000);
-        });
-    }
+    video.src = src;
+    video.play();   
 }
 
 const filterCarousel = () => {
@@ -34,7 +20,6 @@ const filterCarousel = () => {
                 items: 6,
                 slideBy: 6,
             },
-
         }
     })
 }
@@ -67,7 +52,6 @@ const showResult = () => {
         const viewportY = window.pageYOffset + window.innerHeight;
 
         if (viewportY >= boxInfoY) {
-
             counters.forEach(each => IncreaseNumber(each));
         }
     }
@@ -103,4 +87,22 @@ let showPosition = position => {
     return result;
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult };
+const increaseNumber1 = () => {
+    const handleCounterUp = el => {
+        new Waypoint({
+            element: el,
+            handler: function () {
+                counterUp(el);
+                this.destroy();
+            },
+            offset: 'bottom-in-view',
+        });
+    };
+
+    $(document).ready(() => {
+        const els = document.querySelectorAll('.counter');
+        [].forEach.call(els, handleCounterUp);
+    });
+}
+
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult, increaseNumber1 };

@@ -15,6 +15,9 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JsRuntime.InvokeVoidAsync("vms.PlayVideo", videoUrl);
+        if (firstRender)
+        {
+            await JsRuntime.InvokeVoidAsync("vms.PlayVideo", videoUrl);
+        }
     }
 }

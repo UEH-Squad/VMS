@@ -1,14 +1,14 @@
-﻿@attribute [Route(Routes.EditActivity + "/{activityid}")]
+﻿@attribute [Route(Routes.EditTopic + "/{activityid}")]
 @attribute [Authorize]
 
 @if (activity is null || string.IsNullOrEmpty(activity.OrgId) || activity.OrgId != userId)
 {
-    <div class="alert alert-info">Không tìm thấy hoạt động..<a href="@Routes.ActivitySearch">Quay lại</a></div>
+    <div class="alert alert-info">Không tìm thấy hoạt động..<a href="@Routes.Topic">Quay lại</a></div>
 }
 else
 {
 	<div class="alert alert-info">
-		<a href="@Routes.ActivityInfo/@ActivityId" class="btn btn-success">Quay lại</a>
+		<a href="@Routes.Topic/@ActivityId" class="btn btn-success">Quay lại</a>
 	</div>
 
 	<EditForm Model="activity" OnValidSubmit="UpdateActivityAsync">

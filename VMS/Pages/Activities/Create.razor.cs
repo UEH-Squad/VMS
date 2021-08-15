@@ -82,7 +82,7 @@ namespace VMS.Pages.Activities
         {
             activity.OrgId = IdentityService.GetCurrentUserId();
 
-            AddressPath addressPath = await AddressService.GetAddressPathByIdAsync(activity.DistrictId);
+            AddressPath addressPath = await AddressService.GetAddressPathByIdAsync(activity.WardId);
             activity.FullAddress = $"{activity.Address}, {addressPath.Name}, {addressPath.PreviousPath.Name}, {addressPath.PreviousPath.PreviousPath.Name}";
 
             // save banner
@@ -93,7 +93,7 @@ namespace VMS.Pages.Activities
 
             await ActivityService.AddActivityAsync(activity);
 
-            NavigationManager.NavigateTo(Routes.ActivitySearch);
+            NavigationManager.NavigateTo(Routes.Topic);
         }
 
         private async Task ProvinceSelectionChanged(int id)

@@ -1,0 +1,21 @@
+﻿<div @onclick="CloseModal" class="modal-backdrop modal-dialog-centered justify-content-center">
+    <div @onclick:stopPropagation class="my-custom-popup position-relative">
+        <p class="expertise-item mb-4">Luật</p>
+        <p class="expertise-item mb-4">Kế toán/Kiểm toán</p>
+        <p class="expertise-item mb-4">Marketing</p>
+        <p class="expertise-item mb-4">Quản trị</p>
+        <p class="expertise-item mb-4">Tài chính</p>
+        <p class="expertise-item mb-4">Ngân hàng</p>
+        <p class="expertise-item mb-4">Ngoại ngữ</p>
+        <p class="expertise-item mb-4">Lý luận chính trị</p>
+
+    </div>
+</div>
+@code {
+    [CascadingParameter]
+    private BlazoredModalInstance SubSkillsModal { get; set; }
+    void CloseModal()
+    {
+        SubSkillsModal.CloseAsync();
+    }
+}

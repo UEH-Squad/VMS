@@ -13,6 +13,7 @@
     }
 }
 
+//Search box
 .my-search-box {
     &__input {
         width: 40%;
@@ -52,7 +53,9 @@
         visibility: visible;
     }
 }
+//End searchbox
 
+//Check box Vir/actual
 .my-check-box {
     border-radius: 50px;
     width: 20px;
@@ -63,7 +66,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    border: 2px solid $blue;
+    border: 2px solid $grey-icon;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -86,13 +89,19 @@
     &:checked::before {
         display: block;
     }
+
+    &:checked {
+        border-color: $blue;
+    }
 }
 
 .my-check-box-label {
     font-size: 24px;
     color: $grey-text;
 }
+//End check box Vir/actual
 
+//filter bar
 .filter-item {
     width: 200px;
     &__select-city {
@@ -220,3 +229,48 @@
         text-decoration: underline;
     }
 }
+//End filter bar
+
+//Arrange bar
+.arrange-bar {
+    label {
+        font-size: 18px;
+        color: $grey-text;
+    }
+
+    .my-radio-box {
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        vertical-align: top;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 2px solid $grey-icon;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid #18A0FB;
+            border-bottom: 2px solid #18A0FB;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+    }
+}
+//End arrange bar

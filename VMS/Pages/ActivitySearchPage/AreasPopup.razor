@@ -9,38 +9,87 @@
             <div class="row justify-content-evenly">
                 @*các items sắp xếp theo chiều từ trên xuống dưới, từ trái qua phải*@
                 <div class="col-3">
-                    @for (var i = 1; i <= 4; i++)
-                    {
-                        <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
-                            <span class="material-icons-outlined d-flex align-items-center justify-content-center">
-                                people
-                            </span>
-                            <p class="mb-0 ms-2 @chosseColor">Cộng đồng</p>
-                        </div>
-                    }
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Cộng đồng</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Giáo dục</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Sức khỏe</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Môi trường</p>
+                    </div>
                 </div>
+
                 <div class="col-3">
-                    @for (var i = 1; i <= 4; i++)
-                    {
-                        <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
-                            <span class="material-icons-outlined d-flex align-items-center justify-content-center">
-                                people
-                            </span>
-                            <p class="mb-0 ms-2 @chosseColor">Cộng đồng</p>
-                        </div>
-                    }
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Sự kiện</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Khẩn cấp</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Công nghệ</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Chuyển nhà</p>
+                    </div>
                 </div>
+
                 <div class="col-3">
-                    @for (var i = 1; i <= 4; i++)
-                    {
-                        <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
-                            <span class="material-icons-outlined d-flex align-items-center justify-content-center">
-                                people
-                            </span>
-                            <p class="mb-0 ms-2 @chosseColor">Cộng đồng</p>
-                        </div>
-                    }
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Hỗ trợ</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Kỹ thuật</p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Phương tiện </p>
+                    </div>
+                    <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                        <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                            people
+                        </span>
+                        <p class="mb-0 ms-2 @chooseColor">Thể thao</p>
+                    </div>
                 </div>
+
+
             </div>
         </div>
         <div @onclick="CloseModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
@@ -49,20 +98,19 @@
 </div>
 
 @code {
-    string chosseColor = "";
+
+    string chooseColor = "";
     void ChangeState()
     {
-        
-        if (chosseColor == "")
+        if (chooseColor == "")
         {
-            chosseColor = "colored-green";
+            chooseColor = "colored-green";
         }
         else
         {
-            chosseColor = "";
+            chooseColor = "";
         }
     }
-
 
     [CascadingParameter]
     private BlazoredModalInstance AreasModal { get; set; }

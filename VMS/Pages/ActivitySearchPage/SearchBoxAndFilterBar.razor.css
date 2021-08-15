@@ -51,7 +51,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  border: 2px solid #18A0FB;
+  border: 2px solid #B4B4B4;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -70,6 +70,8 @@
     display: none; }
   .my-check-box:checked::before {
     display: block; }
+  .my-check-box:checked {
+    border-color: #18A0FB; }
 
 .my-check-box-label {
   font-size: 24px;
@@ -170,3 +172,37 @@
   background-color: #fff; }
   .clear-filter-btn:hover {
     text-decoration: underline; }
+
+.arrange-bar label {
+  font-size: 18px;
+  color: #515151; }
+
+.arrange-bar .my-radio-box {
+  border-radius: 5px;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 2px solid #B4B4B4;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  position: relative; }
+  .arrange-bar .my-radio-box::before {
+    content: "";
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid #18A0FB;
+    border-bottom: 2px solid #18A0FB;
+    position: absolute;
+    top: 40%;
+    left: 52%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    display: none; }
+  .arrange-bar .my-radio-box:checked::before {
+    display: block; }

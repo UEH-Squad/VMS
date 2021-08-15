@@ -1,0 +1,23 @@
+﻿<div @onclick="CloseModal" class="modal-backdrop modal-dialog-centered justify-content-center">
+    <div @onclick:stopPropagation class="my-custom-popup position-relative">
+        <p class="sub-skills-item mb-4">Làm việc nhóm</p>
+        <p class="sub-skills-item mb-4">Tư duy Logic</p>
+        <p class="sub-skills-item mb-4">Xây dựng kế hoạch</p>
+        <p class="sub-skills-item mb-4">Giao tiếp & Ứng xử</p>
+        <p class="sub-skills-item mb-4">Giải quyết vấn đề</p>
+        <p class="sub-skills-item mb-4">Quản lý thời gian</p>
+        <p class="sub-skills-item mb-4">Đồng cảm & Sẻ chia</p>
+        <p class="sub-skills-item mb-4">Quan sát & Lắng nghe</p>
+        <p class="sub-skills-item mb-4">Tìm kiếm & Xử lý thông tin</p>
+        <p class="sub-skills-item mb-4">Kiểm soát cảm xúc</p>
+    </div>
+</div>
+
+@code {
+        [CascadingParameter]
+        private BlazoredModalInstance SubSkillsModal { get; set; }
+        void CloseModal()
+        {
+            SubSkillsModal.CloseAsync();
+        }
+}

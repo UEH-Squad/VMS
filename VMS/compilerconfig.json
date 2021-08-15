@@ -58,5 +58,13 @@
   {
     "outputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.css",
     "inputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/SubSkillsPopup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/SubSkillsPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/ExpertisePopup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/ExpertisePopup.razor.scss"
   }
 ]

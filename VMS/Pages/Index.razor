@@ -1,9 +1,54 @@
 ﻿@attribute [Route(Routes.HomePage)]
 
+@using VMS.Domain.Models
+@using VMS.Application.Interfaces
+@using VMS.Application.ViewModels
+
 @inject IJSRuntime JsRuntime
+@inject IIdentityService IdentityService
+@inject IUserWithActService UserWithActService
 
 <VMS.Pages.Homepage.SloganAndVideo />
-<VMS.Pages.Homepage.Filter/>
-<VMS.Pages.Homepage.RelatedActivities />
+<VMS.Pages.Homepage.Filter />
+
+<section class="my-act">
+    <div class="container-lg p-0 position-relative">
+        <VMS.Pages.Homepage.RelatedActivities Activities="@newestActivities" />
+        <VMS.Pages.Homepage.RelatedActivities Activities="@featuredActivities" IsFeaturedActivities="true" />
+    </div>
+</section>
+
 <VMS.Pages.Homepage.QuoteBanner />
-<VMS.Pages.Homepage.LogoBaner/>
+<VMS.Pages.Homepage.LogoBaner />
+
+@code
+{
+    public List<UserWithActivityViewModel> newestActivities, featuredActivities;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        User user = IdentityService.GetCurrentUser();
+        UserLocation location = await JsRuntime.InvokeAsync<UserLocation>("vms.GetUserLocation");
+
+        if (location != null)
+        {
+            newestActivities = await UserWithActService.GetNewestActivitiesWithUserLocAsync(location.Lat, location.Long);
+            featuredActivities = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync(location.Lat, location.Long);
+        }
+        else if (user == null)
+        {
+            newestActivities = await UserWithActService.GetNewestActivitiesWithoutUserLocAsync();
+            featuredActivities = await UserWithActService.GetFeaturedActivitiesWithoutUserLocAsync();
+        }
+        else
+        {
+            newestActivities = await UserWithActService.GetNewestActivitiesWithDistristAsync();
+            featuredActivities = await UserWithActService.GetfeaturedActivitiesWithDistristAsync();
+        }
+    }
+}

@@ -43,7 +43,6 @@ namespace VMS.Application.Services
             string currentUserId = GetCurrentUserId();
             return Task.Run(() => _userManager.Users.Include(x => x.UserAddresses)
                                                     .ThenInclude(x => x.AddressPath)
-                                                    .ThenInclude(x => x.AddressPathType)
                                                     .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
         }
     }

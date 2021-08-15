@@ -1,106 +1,36 @@
-﻿@using VMS.Domain.Models
-@using VMS.Application.Interfaces
-@using VMS.Application.ViewModels
+﻿@using VMS.Application.ViewModels
 
-@inject IIdentityService IdentityService 
-@inject IJSRuntime JsRuntime
-@inject IUserWithActService UserWithActService
-
-<section class="my-act">
-    <div class="container-lg p-0 position-relative">
-        @if (newestActivities is not null)
-        {
-            <div class="act-container position-relative">
-                <div class="act-section margin-10">
-                    <a href="@Routes.ActivitySearch" class="act-header">
-                        <span class="act-header__green">Hoạt động</span>
-                        <span class="act-header__blue">mới nhất</span>
-                        <span class="act-header__green">gần bạn</span>
-                    </a>
-                    <div class="my-row">
-                        @foreach (var activity in newestActivities)
-                        {
-                            <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                                <a href="@Routes.ActivitySearch" class="act-item">
-                                    <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                                    <div class="act-item--title">
-                                        <p class="m-0 limited-text">@activity.ActivityName</p>
-                                    </div>
-                                </a>
+@if (Activities is not null && Activities.Count != 0)
+{
+    <div class="act-container position-relative @(IsFeaturedActivities ? "margin-bt" : "")">
+        <div class="act-section margin-10">
+            <a href="@Routes.ActivitySearch" class="act-header">
+                <span class="act-header__green">Hoạt động</span>
+                <span class="act-header__blue">mới nhất</span>
+                <span class="act-header__green">gần bạn</span>
+            </a>
+            <div class="my-row">
+                @foreach (var activity in Activities)
+                {
+                    <div class="col-lg-3 col-4 padding-10 item-wrapper">
+                        <a href="@Routes.ActivitySearch" class="act-item">
+                            <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
+                            <div class="act-item--title">
+                                <p class="m-0 limited-text">@activity.ActivityName</p>
                             </div>
-                        }
+                        </a>
                     </div>
-                </div>
-                <a href="@Routes.ActivitySearch" class="act-more">Nhiều hơn >></a>
+                }
             </div>
-        }
-
-        @if (featuredActivities is not null)
-        {
-            <div class="act-container position-relative margin-bt">
-                <div class="act-section margin-10">
-                    <a href="@Routes.ActivitySearch" class="act-header">
-                        <span class="act-header__green">Hoạt động</span>
-                        <span class="act-header__blue">nổi bật nhất</span>
-                        <span class="act-header__green">gần bạn</span>
-                    </a>
-                    <div class="my-row">
-                        @foreach (var activity in featuredActivities)
-                        {
-                            <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                                <a href="@Routes.ActivitySearch" class="act-item">
-                                    <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
-                                    <div class="act-item--title">
-                                        <p class="m-0 limited-text">@activity.ActivityName</p>
-                                    </div>
-                                </a>
-                            </div>
-                        }
-                    </div>
-                </div>
-                <a href="@Routes.ActivitySearch" class="act-more">Nhiều hơn >></a>
-            </div>
-        }
+        </div>
+        <a href="@Routes.ActivitySearch" class="act-more">Nhiều hơn >></a>
     </div>
-</section>
-
-
+}
 
 @code {
-    private User user;
-    private UserLocation location;
-    private List<UserWithActivityViewModel> newestActivities, featuredActivities;
+    [Parameter]
+    public bool IsFeaturedActivities { get; set; }
 
-
-    class UserLocation
-    {
-        public double Lat { get; set; }
-        public double Long { get; set; }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        user = IdentityService.GetCurrentUser();
-        location = await JsRuntime.InvokeAsync<UserLocation>("vms.GetUserLocation");
-        if(location != null)
-        {
-            newestActivities = await UserWithActService.GetNewestActivitiesWithUserLocAsync(location.Lat, location.Long);
-            featuredActivities = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync(location.Lat, location.Long);
-        }
-        else if(user == null)
-        {
-            newestActivities = await UserWithActService.GetNewestActivitiesWithoutUserLocAsync();
-            featuredActivities = await UserWithActService.GetFeaturedActivitiesWithoutUserLocAsync();
-        }
-        else
-        {
-            newestActivities = await UserWithActService.GetNewestActivitiesWithDistristAsync();
-            featuredActivities = await UserWithActService.GetfeaturedActivitiesWithDistristAsync();
-        }
-    }
+    [Parameter]
+    public List<UserWithActivityViewModel> Activities { get; set; }
 }

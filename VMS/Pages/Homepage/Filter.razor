@@ -4,14 +4,13 @@
 @inject IJSRuntime JSRuntinme
 @inject IAreaService AreaService
 
-<section class="my-filter">
-    <div class="container">
-        <h1>Khám phá <span>hoạt động & chương trình tình nguyện</span> phù hợp với bạn</h1>
-        <div class="owl-carousel owl-theme filter__carousel">
-
-            @if (areas != null)
-            {
-                foreach(var area in areas)
+@if (areas is not null && areas.Count != 0)
+{
+    <section class="my-filter">
+        <div class="container">
+            <h1>Khám phá <span>hoạt động & chương trình tình nguyện</span> phù hợp với bạn</h1>
+            <div class="owl-carousel owl-theme filter__carousel">
+                @foreach (var area in areas)
                 {
                     <div class="item">
                         <i class="material-icons">
@@ -20,10 +19,11 @@
                         <span>@area.Name</span>
                     </div>
                 }
-            }
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+}
+
 @code {
     private List<AreaViewModel> areas;
 

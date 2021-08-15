@@ -108,7 +108,7 @@ namespace VMS.Application.Services
             List<Activity> activities = await _repository.GetListAsync<Activity>(context, activitySpec);
             User user = _identityService.GetCurrentUserWithAddresses();
             ICollection<UserAddress> userAddress = user.UserAddresses;
-            var userDistrict = userAddress.FirstOrDefault(x => x.AddressPath.AddressPathType.Type == "Quận" || x.AddressPath.AddressPathType.Type == "Huyện" || x.AddressPath.AddressPathType.Type == "Thị xã");
+            var userDistrict = userAddress.FirstOrDefault(x => x.AddressPath.Depth == 2);
             List<Activity> activityList = new List<Activity>();
             foreach(var act in activities)
             {

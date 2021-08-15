@@ -79,4 +79,4 @@ const increaseNumber = () => {
     });
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, increaseNumber };
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber };

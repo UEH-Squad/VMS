@@ -1,0 +1,74 @@
+﻿<div class="modal-backdrop modal-dialog-centered justify-content-center">
+    <div class="my-custom-popup position-relative">
+        <span @onclick="CloseModal" class="material-icons-outlined close-btn">
+            close
+        </span>
+        <h3 class="text-center mt-5 mb-4">Kỹ năng</h3>
+        <div class="col-10 mx-auto">
+            <div class="row justify-content-evenly ms-5">
+                <div class="col-3">
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Kỹ năng mềm</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Lập trình</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Thể lực tốt</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Trách nhiệm</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Xây dựng website</p>
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Kiến thức chuyên ngành</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Có phương tiện di chuyển</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Hoạch định tài chính</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Chỉnh sửa/Thiết kế hình ảnh/video</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Viết Proposal/kịch bản/content</p>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Siêng năng</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Kiên nhẫn</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Nhiệt tình</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Checklist</p>
+                    </div>
+                    <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <p class="m-0">Lái xe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div @onclick="CloseModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+    </div>
+</div>
+@code {
+    [CascadingParameter]
+    private BlazoredModalInstance AreasModal { get; set; }
+    void CloseModal()
+    {
+        AreasModal.CloseAsync();
+    }
+}

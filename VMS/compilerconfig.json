@@ -50,5 +50,13 @@
   {
     "outputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.css",
     "inputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/AreasPopup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/AreasPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.scss"
   }
 ]

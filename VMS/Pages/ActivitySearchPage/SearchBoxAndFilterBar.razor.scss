@@ -41,13 +41,14 @@
             border: none;
         }
 
-        .close-btn {
+        .clear-search-btn {
             margin-top: -4px;
             visibility: hidden;
+            cursor: pointer;
         }
     }
 
-    &__input:not(:placeholder-shown) ~ &__icon-wrapper .close-btn {
+    &__input:not(:placeholder-shown) ~ &__icon-wrapper .clear-search-btn {
         visibility: visible;
     }
 }
@@ -102,7 +103,7 @@
         top: 50%;
         transform: translateY(-50%);
         right: 10px;
-        z-index: -1;
+        pointer-events: none;
     }
 }
 
@@ -116,8 +117,8 @@
 
         .select2-selection__rendered {
             line-height: 40px;
-            font-size: 22px;
-            color: $blue;
+            font-size: 18px;
+            color: #b4b4b4;
         }
 
         .select2-selection__arrow {
@@ -130,6 +131,10 @@
 
         .select2-selection__clear {
             display: none;
+        }
+
+        &.select2-selection--clearable {
+            background-color: #f3f3f3;
         }
     }
 
@@ -178,5 +183,40 @@
 
     .select2-results__option--selected {
         background-color: unset;
+    }
+}
+
+.popup-btn {
+    border-radius: 8px;
+    height: 40px;
+    width: 200px;
+    border: 1px solid $border-color-bold;
+    cursor: pointer;
+    padding-left: 8px;
+    font-size: 18px;
+    color: #b4b4b4;
+    line-height: 40px;
+}
+
+.filter-btn {
+    @include green-btn;
+    font-size: 20px;
+    width: 90px;
+    height: 40px;
+
+    &:hover {
+        background-color: #306C14;
+        opacity: 78%;
+    }
+}
+
+.clear-filter-btn {
+    @include green-btn;
+    font-size: 20px;
+    width: 90px;
+    color: $grey-icon;
+    background-color: #fff;
+    &:hover {
+        text-decoration: underline;
     }
 }

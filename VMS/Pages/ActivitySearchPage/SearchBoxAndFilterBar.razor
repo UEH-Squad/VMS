@@ -1,10 +1,11 @@
 ﻿@inject IJSRuntime JSRuntime
+@inject IModalService Modal
 
 <h3 class="mt-5 mb-4 text-uppercase page-heading">We do it <span>together!</span></h3>
 <form action="/" method="post" class="my-search-box d-flex mb-5">
-    <input type="text" value="" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+    <input type="text" value=@inputValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
     <div class="my-search-box__icon-wrapper d-flex align-items-center">
-        <span class="material-icons-outlined close-btn">
+        <span @onclick="ClearInputBox" class="material-icons-outlined clear-search-btn">
             close
         </span>
         <button type="submit" class="search-btn d-flex align-items-center">
@@ -15,18 +16,18 @@
     </div>
 </form>
 
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center mb-3">
     <div class="form-check form-check-inline d-flex align-items-center ps-0 pe-5">
         <input class="my-check-box cursor-pointer" type="checkbox" id="virtual" value="virtual">
         <label class="my-check-box-label cursor-pointer" for="virtual">Virtual</label>
     </div>
-    <div class="form-check form-check-inline d-flex align-items-center">
+    <div class="form-check form-check-inline d-flex align-items-center p-0">
         <input class="my-check-box cursor-pointer" type="checkbox" id="actual" value="actual">
         <label class="my-check-box-label cursor-pointer" for="actual">Actual</label>
     </div>
 </div>
 
-<form class="filter-bar d-flex">
+<form class="filter-bar d-flex mb-5">
     <div class="filter-item filter-item-city position-relative me-4">
         <select name="abc" class="filter-item__select-city js-states form-control">
             <option value=""></option>
@@ -69,14 +70,83 @@
             expand_more
         </span>
     </div>
+
+    <div class="filter-item filter-item-organization position-relative me-4">
+        <select name="abc" class="filter-item__select-organization js-states form-control">
+            <option value=""></option>
+            <option value="hochiminh">Hồ Chí Minh</option>
+            <option value="longan">Long An</option>
+            <option value="lamdong">Lâm Đồng</option>
+            <option value="quangtri">Quảng Trị</option>
+            <option value="binhdinh">Bình Định</option>
+            <option value="hanoi">Hà Nội</option>
+            <option value="danang">Đà Nẵng</option>
+            <option value="cantho">Cần Thơ</option>
+        </select>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+
+    <div class="filter-item position-relative me-4">
+        <div @onclick="ShowAreasPopup" class="popup-btn">Lĩnh vực</div>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+
+    <div class="filter-item position-relative me-4">
+        <div @onclick="ShowSkillsPopup" class="popup-btn">Kỹ năng</div>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+
+    <button type="submit" class="filter-btn me-4">Lọc</button>
+
+    <button type="button" class="clear-filter-btn">Xóa lọc</button>
 </form>
 
 
 @code {
+    string inputValue = "";
+    void ClearInputBox()
+    {
+        inputValue = "";
+    }
+
+    void UpdateInstanceValue(ChangeEventArgs e)
+    {
+        inputValue = e.Value.ToString();
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-city", "Tỉnh/Thành phố", ".filter-item-city");
         await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-district", "Quận/Huyện", ".filter-item-district");
+        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-organization", "Tổ chức", ".filter-item-organization");
         await JSRuntime.InvokeVoidAsync("vms.Cascading", ".filter-item__select-city", ".filter-item__select-district");
+    }
+
+    void ShowAreasPopup()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<AreasPopup>("", options);
+    }
+
+    void ShowSkillsPopup()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<SkillsPopup>("", options);
     }
 }

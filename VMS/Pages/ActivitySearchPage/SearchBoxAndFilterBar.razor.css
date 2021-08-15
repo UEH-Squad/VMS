@@ -33,11 +33,12 @@
   .my-search-box__icon-wrapper .search-btn {
     background-color: transparent;
     border: none; }
-  .my-search-box__icon-wrapper .close-btn {
+  .my-search-box__icon-wrapper .clear-search-btn {
     margin-top: -4px;
-    visibility: hidden; }
+    visibility: hidden;
+    cursor: pointer; }
 
-.my-search-box__input:not(:placeholder-shown) ~ .my-search-box__icon-wrapper .close-btn {
+.my-search-box__input:not(:placeholder-shown) ~ .my-search-box__icon-wrapper .clear-search-btn {
   visibility: visible; }
 
 .my-check-box {
@@ -80,7 +81,7 @@
     top: 50%;
     transform: translateY(-50%);
     right: 10px;
-    z-index: -1; }
+    pointer-events: none; }
 
 ::deep .select2-container--default .select2-selection--single {
   border-radius: 8px;
@@ -89,14 +90,16 @@
   border-color: #707070; }
   ::deep .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 40px;
-    font-size: 22px;
-    color: #18A0FB; }
+    font-size: 18px;
+    color: #b4b4b4; }
   ::deep .select2-container--default .select2-selection--single .select2-selection__arrow {
     display: none; }
   ::deep .select2-container--default .select2-selection--single .select2-selection__placeholder {
     font-size: 18px; }
   ::deep .select2-container--default .select2-selection--single .select2-selection__clear {
     display: none; }
+  ::deep .select2-container--default .select2-selection--single.select2-selection--clearable {
+    background-color: #f3f3f3; }
 
 ::deep .select2-container--default.select2-container--open.select2-container--below .select2-selection--single {
   border-bottom-left-radius: 8px;
@@ -128,3 +131,42 @@
 
 ::deep .select2-container--default .select2-results__option--selected {
   background-color: unset; }
+
+.popup-btn {
+  border-radius: 8px;
+  height: 40px;
+  width: 200px;
+  border: 1px solid #707070;
+  cursor: pointer;
+  padding-left: 8px;
+  font-size: 18px;
+  color: #b4b4b4;
+  line-height: 40px; }
+
+.filter-btn {
+  color: #fff;
+  font-weight: bold;
+  background-color: #64D72F;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 90px;
+  height: 40px; }
+  .filter-btn:hover {
+    background-color: #306C14;
+    opacity: 78%; }
+
+.clear-filter-btn {
+  color: #fff;
+  font-weight: bold;
+  background-color: #64D72F;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 90px;
+  color: #B4B4B4;
+  background-color: #fff; }
+  .clear-filter-btn:hover {
+    text-decoration: underline; }

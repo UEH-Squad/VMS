@@ -1,0 +1,73 @@
+﻿<div class="modal-backdrop modal-dialog-centered justify-content-center">
+    <div class="my-custom-popup position-relative">
+            <span @onclick="CloseModal" class="material-icons-outlined close-btn">
+                close
+            </span>
+    
+        <h3 class="text-center mt-5 mb-4">Lĩnh Vực</h3>
+        <div class="col-10 mx-auto">
+            <div class="row justify-content-evenly">
+                @*các items sắp xếp theo chiều từ trên xuống dưới, từ trái qua phải*@
+                <div class="col-3">
+                    @for (var i = 1; i <= 4; i++)
+                    {
+                        <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                            <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                                people
+                            </span>
+                            <p class="mb-0 ms-2 @chosseColor">Cộng đồng</p>
+                        </div>
+                    }
+                </div>
+                <div class="col-3">
+                    @for (var i = 1; i <= 4; i++)
+                    {
+                        <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                            <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                                people
+                            </span>
+                            <p class="mb-0 ms-2 @chosseColor">Cộng đồng</p>
+                        </div>
+                    }
+                </div>
+                <div class="col-3">
+                    @for (var i = 1; i <= 4; i++)
+                    {
+                        <div @onclick="ChangeState" class="area-item-wrapper d-flex align-items-center mb-4">
+                            <span class="material-icons-outlined d-flex align-items-center justify-content-center">
+                                people
+                            </span>
+                            <p class="mb-0 ms-2 @chosseColor">Cộng đồng</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div @onclick="CloseModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+
+    </div>
+</div>
+
+@code {
+    string chosseColor = "";
+    void ChangeState()
+    {
+        
+        if (chosseColor == "")
+        {
+            chosseColor = "colored-green";
+        }
+        else
+        {
+            chosseColor = "";
+        }
+    }
+
+
+    [CascadingParameter]
+    private BlazoredModalInstance AreasModal { get; set; }
+    void CloseModal()
+    {
+        AreasModal.CloseAsync();
+    }
+}

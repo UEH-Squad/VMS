@@ -45,4 +45,12 @@ $breakpoints: (
     }
 }
 
+@mixin green-btn {
+    color: #fff;
+    font-weight: bold;
+    background-color: $green;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 /*#endregion */

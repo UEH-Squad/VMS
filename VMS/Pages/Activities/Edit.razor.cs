@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -89,6 +88,9 @@ namespace VMS.Pages.Activities
 
         private async Task UpdateActivityAsync()
         {
+            AddressPath addressPath = await AddressService.GetAddressPathByIdAsync(activity.WardId);
+            activity.FullAddress = $"{activity.Address}, {addressPath.Name}, {addressPath.PreviousPath.Name}, {addressPath.PreviousPath.PreviousPath.Name}";
+
             // save banner
             if (file is not null)
             {

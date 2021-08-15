@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -82,6 +81,9 @@ namespace VMS.Pages.Activities
         private async Task AddActivityAsync()
         {
             activity.OrgId = IdentityService.GetCurrentUserId();
+
+            AddressPath addressPath = await AddressService.GetAddressPathByIdAsync(activity.DistrictId);
+            activity.FullAddress = $"{activity.Address}, {addressPath.Name}, {addressPath.PreviousPath.Name}, {addressPath.PreviousPath.PreviousPath.Name}";
 
             // save banner
             if (file is not null)

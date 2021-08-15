@@ -1,4 +1,6 @@
-﻿const playVideo = (src) => {
+﻿import { result } from "lodash";
+
+const playVideo = (src) => {
     const video = document.querySelector('.video-header__source');
 
     let timer = null,
@@ -51,9 +53,9 @@ const logoBanerCarousel = () => {
     })
 }
 
-const getUserLocation = () => {
+const setUserLocation = () => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(setPosition);
     } else {
         return null;
     }
@@ -95,12 +97,19 @@ const IncreaseNumber = (counter) => {
     updateCount();
 }
 
-let showPosition = position => {
+const getUserLocation = () => {
+    const location = localStorage.getItem('UserLocation');
+    if (location) {
+        return JSON.parse(location);
+    }
+    return null;
+}
+
+const setPosition = position => {
     var result = {
         Lat: position.coords.latitude,
         Long: position.coords.longitude,
     }
-    return result;
+    localStorage.setItem('UserLocation', JSON.stringify(result));
 }
-
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult };
+export default { playVideo, filterCarousel, logoBanerCarousel, setUserLocation, getUserLocation, showResult };

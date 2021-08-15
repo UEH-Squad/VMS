@@ -8,5 +8,6 @@ namespace VMS.Application.Interfaces
     {
         Task<List<AddressPath>> GetAllProvincesAsync();
         Task<List<AddressPath>> GetAllAddressPathsByParentIdAsync(int parentId);
+        Task<AddressPath> GetAddressPathByIdAsync(int id);
     }
 }

@@ -38,14 +38,18 @@
     @include on('xl') {
         width: 200px;
         height: 60px;
-        font-size: 24px;
+        font-size: 22px;
         line-height: 60px;
+    }
+
+    @include on('xxl') {
+        font-size: 24px;
     }
 }
 
 .user-section {
     &__link {
-        
+
 
         .user-avatar {
             width: 80px;
@@ -72,62 +76,47 @@
 
         &:hover .user-label {
             color: $green-bold;
-        }
+        }        
+    }
+
+    .dropdown {
+        position: unset;
+        height: 0;
+        width: 0;
+    }
+
+    .dropdown-menu {
+        top: 100%;
+        left: auto;
+        right: -50%;
+        border: 0;
+        padding: 0;
+        transition: all 0.2s ease-in;
         
     }
 
+
     &__dropdown-icon {
+        position: absolute;
         top: 50%;
         transform: translateY(-50%);
         right: -62%;
         color: $blue;
         font-size: 40px;
-        cursor: default;
+        cursor: pointer;
         display: none;
 
         @include on('xl') {
             display: block;
         }
     }
-
-    &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 100%;
-        height: 20px;
-        display: none;
-
-        @include on('xl') {
-            display: block;
-        }
-    }
-
-    &__list-wrapper {
-        width: 280px;
-        height: 150px;
-        top: 104%;
-        right: -52px;
-        overflow-y: hidden;
-        z-index: 1;
-        display: none;
-
-        @include on('xl') {
-            display: block;
-        }
-    }
-
 
     &__list {
         margin: 10px auto 0;
         width: 230px;
         border-radius: 10px;
         overflow: hidden;
-        transition: all 0.2s ease-in;
-        transform: translateY(-100%);
         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-        visibility: hidden;
 
         &__profile {
             font-size: 24px;
@@ -151,12 +140,8 @@
         }
     }
 
-    &:hover &__list-wrapper {
-    }
-
-    &:hover &__list {
-        transform: translateY(0);
-        visibility: unset;
+    @include on('xl') {
+        margin-left: 60px;      
     }
 }
 

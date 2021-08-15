@@ -1,79 +1,39 @@
-﻿@inject IJSRuntime JsRuntime;
+﻿@inject IJSRuntime JSRuntinme
 
-<div class="IntroduceParagraph">
-    <img class="IntroduceParagraph-banner1" src="/img/Banner1.jpg" alt="Image1">
-    <h1 class="IntroduceParagraph-question">
-        Tình nguyện trực tuyến là gì?
-    </h1>
-    <p class="IntroduceParagraph-introduce">
-        Trở thành tình nguyện viên trực tuyến thật dễ dàng!
-        Tất cả những gì bạn cần là một chiếc máy tính có kết nối Internet.
-        So với làm công việc tình nguyện truyền thống, tình nguyện viên có thể tham gia hoạt động từ xa và có sự linh hoạt hơn vì bạn không bị giới hạn bởi một vị trí cụ thể.
-        Hãy cùng tham gia tình nguyện trực tuyến tại GoVirlunteer ngay nào bạn nhé!
-    </p>
-</div>
-
-<div class="BoxInformation">
-    <div class="row1">
-        <div class="row1-col1">
-            <h2 class="row1-col1__number">
-                <span class="counter" data-target="5000">0</span>
-                +
-            </h2>
-            <div class="row1-col1__info">
-                Tình nguyện viên
+<section class="my-banner-1">
+    <img class="w-100" src="/img/Baner 1.png" alt="">
+</section>
+<section class="my-quoteBaner">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 quoteBaner__item quoteBaner__item-left">
+                <h1>
+                    <span class="counter">5,000</span>
+                    +
+                </h1>
+                <h3>Tình nguyện viên</h3>
             </div>
-        </div>
-        <div class="row1-col2">
-            <h2 class="row1-col2__number">
-                <span class="counter" data-target="100">0</span>
-                +
-            </h2>
-            <div class="row1-col2__info">
-                Tổ chức tình nguyện
+            <div class="col-sm-6 quoteBaner__item quoteBaner__item-right">
+                <h1><span class="counter">100</span>+</h1>
+                <h3>Tổ chức tình nguyện</h3>
+            </div>
+            <div class="col-sm-6 quoteBaner__item quoteBaner__item-left">
+                <h1><span class="counter">2,000</span>+</h1>
+                <h3>Hoạt động, chương trình tình nguyện</h3>
+            </div>
+            <div class="col-sm-6 quoteBaner__item quoteBaner__item-right">
+                <h1><span class="counter">3,000</span>+</h1>
+                <h3>Hoành thành nhiệm vụ</h3>
             </div>
         </div>
     </div>
-    <div class="row2">
-        <div class="row2-col1">
-            <h2 class="row2-col1__number">
-                <span class="counter" data-target="2000">0</span>
-                +
-            </h2>
-            <div class="row2-col1__info">
-                Hoạt động, chương trình tình nguyện
-            </div>
-        </div>
-        <div class="row2-col2">
-            <h2 class="row2-col2__number">
-                <span class="counter" data-target="3000">0</span>
-                +
-            </h2>
-            <div class="row2-col2__info">
-                Lượt hoàn thành nhiệm vụ
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="QuoteBanner">
-    <img class="QuoteBanner-banner2" src="/img/Banner2.jpg" alt="image2">
-    <p class="QuoteBanner__text">
-        “Tình nguyện viên không nhất thiết là phải có thời gian, họ có trái tim”
-    </p>
-    <div class="QuoteBanner__line">
-        <hr class="QuoteBanner__line-1">
-        <p class="QuoteBanner__line-2">"</p>
-        <hr class="QuoteBanner__line-3">
-    </div>
-    <p class="QuoteBanner__credit">Elizabeth Andrew</p>
-</div>
+</section>
+<section class="my-banner-2">
+    <img class="w-100" src="/img/Banner 2.png" alt="">
+</section>
 @code {
-    protected async override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JsRuntime.InvokeVoidAsync("vms.ShowResult");
+        await JSRuntinme.InvokeVoidAsync("vms.IncreaseNumber");
     }
-    
 }
-
-

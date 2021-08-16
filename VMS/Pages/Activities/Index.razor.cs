@@ -11,12 +11,14 @@ namespace VMS.Pages.Activities
 {
     public partial class Index
     {
+        private const int Take = 20;
         private List<ActivityViewModel> activityViewModels;
+        private List<ActivityViewModel> filterActivities;
         private List<ActivityViewModel> activities;
-        private bool isLoggedIn;
         private CoordinateResponse userLocation;
-        private int currentPage = 1;
-        private int totalPages = 10;
+        private bool isLoggedIn;
+        private int currentPage;
+        private int totalPages;
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -33,9 +35,8 @@ namespace VMS.Pages.Activities
         }
 
         protected async override Task OnInitializedAsync()
-        {   
+        {
             userLocation = await JsRuntime.InvokeAsync<CoordinateResponse>("vms.GetUserLocation");
-
             if (userLocation is null)
             {
                 string userAddresses = IdentityService.GetCurrentUserAddress();
@@ -44,40 +45,55 @@ namespace VMS.Pages.Activities
 
             activityViewModels = await ActivityService.GetAllActivitiesAsync();
 
-            activities = activityViewModels;
-
             isLoggedIn = IdentityService.IsLoggedIn();
+
+            filterActivities = activityViewModels;
+            GetCurrentPage(1);
+        }
+
+        private void GetKeyword(string keyword)
+        {
+            filterActivities = activityViewModels.Where(a => a.Name.ToLower().Contains(keyword.Trim().ToLower())).ToList();
+            GetCurrentPage(1);
         }
 
         private void GetFilter(FilterActivityViewModel filter)
         {
-            activities = activityViewModels.Where(a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual)
-                                            .Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0)
-                                            .Where(a => a.Organizer.Id == filter.OrgId || string.IsNullOrEmpty(filter.OrgId))
-                                            .Where(a => filter.Areas.Any(x => x.Id == a.AreaId) || filter.Areas.Count == 0)
-                                            .Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id)))
-                                            .ToList();
+            filterActivities = activityViewModels.Where(a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual)
+                                                    .Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0)
+                                                    .Where(a => a.Organizer.Id == filter.OrgId || string.IsNullOrEmpty(filter.OrgId))
+                                                    .Where(a => filter.Areas.Any(x => x.Id == a.AreaId) || filter.Areas.Count == 0)
+                                                    .Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id)))
+                                                    .ToList();
+
+            GetCurrentPage(1);
         }
 
         private void GetCurrentPage(int currentPage)
-		{
+        {
             this.currentPage = currentPage;
-		}
+            totalPages = filterActivities.Count / 20 + 1;
+            int skip = Take * (currentPage - 1);
+            activities = filterActivities.Skip(skip).Take(Take).ToList();
+        }
 
         private void OrderActivities(ChangeEventArgs e)
         {
             switch ((string)e.Value)
             {
                 case "Nearest":
-                    activities = activities.OrderBy(a => Distance(userLocation, a.Coordinate)).ToList();
+                    filterActivities = filterActivities.OrderBy(a => Distance(userLocation, a.Coordinate)).ToList();
+                    GetCurrentPage(1);
                     break;
 
                 case "Hottest":
-                    activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
+                    filterActivities = filterActivities.OrderByDescending(a => a.MemberQuantity).ToList();
+                    GetCurrentPage(1);
                     break;
 
                 default:
-                    activities = activities.OrderByDescending(a => a.PostDate).ToList();
+                    filterActivities = filterActivities.OrderByDescending(a => a.PostDate).ToList();
+                    GetCurrentPage(1);
                     break;
             }
         }

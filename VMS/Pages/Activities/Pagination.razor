@@ -3,11 +3,20 @@
 		<li class="page-item">
 			<a class="page-link" href="#">Previous</a>
 		</li>
-		@for (int i = 0; i < TotalPages; i++)
+		@for (int i = 0; i < Math.Min(5, TotalPages); i++)
 		{
-			var currentIndex = i + 1;
+			int currentIndex = i + 1;
 			<li class="page-item @(i+1 == CurrentPage ? "active" : "")">
 				<a @onclick="(async () => await MoveToPageAsync(currentIndex))" class="page-link" href="@Routes.Topic">@currentIndex</a>
+			</li>
+		}
+		@if (TotalPages > 5)
+		{
+			<li class="page-item">
+				<a class="page-link" href="@Routes.Topic">...</a>
+			</li>
+			<li class="page-item @(CurrentPage == TotalPages ? "active" : "")">
+				<a @onclick="(async () => await MoveToPageAsync(TotalPages))" class="page-link" href="@Routes.Topic">@TotalPages</a>
 			</li>
 		}
 		<li class="page-item">

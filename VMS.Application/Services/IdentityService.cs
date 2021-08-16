@@ -34,10 +34,16 @@ namespace VMS.Application.Services
             return Task.Run(() => _userManager.GetUserAsync(_httpContext.HttpContext?.User)).Result;
         }
 
+        public bool IsLoggedIn()
+        {
+            return _httpContext.HttpContext?.User.Identity != null && _httpContext.HttpContext.User.Identity.IsAuthenticated;
+        }
+
         public string GetCurrentUserId()
         {
             return GetCurrentUser()?.Id;
         }
+
         public User GetCurrentUserWithAddresses()
         {
             string currentUserId = GetCurrentUserId();

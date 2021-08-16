@@ -9,14 +9,12 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAddress> ActivityAddresses { get; set; }
         public DbSet<ActivityImage> ActivityImages { get; set; }
-        public DbSet<ActivityRequirement> ActivityRequirements { get; set; }
         public DbSet<ActivitySkill> ActivitySkills { get; set; }
         public DbSet<AddressPath> AddressPaths { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Recruitment> Recruitments { get; set; }
         public DbSet<RecruitmentRating> RecruitmentRatings { get; set; }
-        public DbSet<Requirement> Requirements { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public new DbSet<User> Users { get; set; }
         public DbSet<UserAddress> UserAddresses { get; set; }
@@ -46,6 +44,48 @@ namespace VMS.Infrastructure.Data.Context
                 .WithMany(x => x.SubPaths)
                 .HasForeignKey(x => x.ParentPathId)
                 .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+
+            // add demo data for skills and requirements
+            builder.Entity<Skill>().HasData(
+                    new Skill
+                    {
+                        Id = 1,
+                        Name = "C#/.NET",
+                        IsDeleted = false
+                    },
+                    new Skill
+                    {
+                        Id = 2,
+                        Name = "HTML/CSS",
+                        IsDeleted = false
+                    },
+                    new Skill
+                    {
+                        Id = 3,
+                        Name = "Java",
+                        IsDeleted = false
+                    }
+                );
+            builder.Entity<Area>().HasData(
+                new Area
+                {
+                    Id = 1,
+                    Name = "Công nghệ thông tin",
+                    IsDeleted = false
+                },
+                new Area
+                {
+                    Id = 2,
+                    Name = "Marketing",
+                    IsDeleted = false
+                },
+                new Area
+                {
+                    Id = 3,
+                    Name = "Cộng đồng",
+                    IsDeleted = false
+                }
+            );
         }
     }
 }

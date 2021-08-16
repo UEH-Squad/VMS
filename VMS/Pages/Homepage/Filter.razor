@@ -36,6 +36,6 @@
     }
     protected async override Task OnInitializedAsync()
     {
-        areas = await AreaService.GetAllAreas();
+        areas = await AreaService.GetAllAreasAsync();
     }
 }

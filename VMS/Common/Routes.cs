@@ -14,6 +14,14 @@
 
         #endregion Main
 
+        #region Activity
+
+        public const string CreateActivity = "/hoat-dong/them-hoat-dong";
+        public const string EditActivity = "/hoat-dong/sua-hoat-dong";
+        public const string DeleteActivity = "/hoat-dong/xoa-hoat-dong";
+
+        #endregion Activity
+
         #region Identity
 
         public const string Register = "/dang-ky";

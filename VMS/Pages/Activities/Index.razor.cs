@@ -11,6 +11,7 @@ namespace VMS.Pages.Activities
 {
     public partial class Index
     {
+        private List<ActivityViewModel> activityViewModels;
         private List<ActivityViewModel> activities;
         private bool isLoggedIn;
         private CoordinateResponse userLocation;
@@ -39,16 +40,45 @@ namespace VMS.Pages.Activities
                 userLocation = await AddressLocationService.GetCoordinateAsync(userAddresses);
             }
 
-            activities = await ActivityService.GetAllActivitiesAsync(new FilterActivityViewModel() { UserLocation = userLocation });
+            activityViewModels = await ActivityService.GetAllActivitiesAsync();
+
+            activities = activityViewModels;
 
             isLoggedIn = IdentityService.IsLoggedIn();
         }
 
-        private async void GetFilter(FilterActivityViewModel filter)
+        private void GetFilter(FilterActivityViewModel filter)
         {
-            filter.UserLocation = userLocation;
-            activities = await ActivityService.GetAllActivitiesAsync(filter);
-            StateHasChanged();
+            var filterActivities = activityViewModels.Where(a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual);
+
+            if (!string.IsNullOrEmpty(filter.OrgId))
+            {
+                filterActivities = filterActivities.Where(a => a.Organizer.Id == filter.OrgId);
+            }
+
+            if (filter.ProvinceId != 0)
+            {
+                filterActivities = filterActivities.Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.ProvinceId));
+
+                if (filter.DistrictId != 0)
+                {
+                    filterActivities = filterActivities.Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.DistrictId));
+                }
+            }
+
+            if (filter.Areas.Count != 0)
+            {
+                filterActivities = filterActivities.Where(a => filter.Areas.Any(x => x.Id == a.Area.Id));
+            }
+
+            if (filter.Skills.Count != 0)
+            {
+                filterActivities = filterActivities.Where(a => filter.Skills
+                                                            .All(s => a.ActivitySkills
+                                                            .Any(x => x.SkillId == s.Id)));
+            }
+
+            activities = filterActivities.ToList();
         }
 
         private void OrderActivities(ChangeEventArgs e)

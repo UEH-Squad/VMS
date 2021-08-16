@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VMS.Domain.Models;
 
 namespace VMS.Application.ViewModels
@@ -11,9 +12,14 @@ namespace VMS.Application.ViewModels
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Banner { get; set; }
+        public bool IsVirtual { get; set; }
 
         public CoordinateResponse Coordinate { get; set; }
         public User Organizer { get; set; }
+        public Area Area { get; set; }
+
+        public List<ActivityAddress> ActivityAddresses { get; set; }
+        public List<ActivitySkill> ActivitySkills { get; set; }
 
     }
 }

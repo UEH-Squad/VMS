@@ -10,10 +10,8 @@ namespace VMS.Application.ViewModels
         public string OrgId { get; set; }
         public int ProvinceId { get; set; }
         public int DistrictId { get; set; }
-        public CoordinateResponse UserLocation { get; set; }
         public List<Area> Areas { get; set; }
         public List<Skill> Skills { get; set; }
-        public List<AddressPath> AddressPaths { get; set; }
 
         public FilterActivityViewModel()
         {
@@ -21,7 +19,6 @@ namespace VMS.Application.ViewModels
             Actual = false;
             Areas = new List<Area>();
             Skills = new List<Skill>();
-            AddressPaths = new List<AddressPath>();
         }
     }
 }

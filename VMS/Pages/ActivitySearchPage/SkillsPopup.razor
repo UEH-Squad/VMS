@@ -8,8 +8,22 @@
         <div class="col-10 mx-auto">
             <div class="row justify-content-evenly ms-5">
                 <div class="col-3">
-                    <div @onclick="ShowSubSkillsPopup" class="area-item-wrapper d-flex align-items-center mb-4">
+                    <div @onclick="ShowSubSkills" class="area-item-wrapper d-flex align-items-center mb-4 position-relative">
                         <p class="m-0">Kỹ năng mềm</p>
+                        
+                            <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(IsShowAreas ? "d-block" : "")">
+                                <p class="sub-popup-item mb-3">Làm việc nhóm</p>
+                                <p class="sub-popup-item mb-3">Tư duy Logic</p>
+                                <p class="sub-popup-item mb-3">Xây dựng kế hoạch</p>
+                                <p class="sub-popup-item mb-3">Giao tiếp & Ứng xử</p>
+                                <p class="sub-popup-item mb-3">Giải quyết vấn đề</p>
+                                <p class="sub-popup-item mb-3">Quản lý thời gian</p>
+                                <p class="sub-popup-item mb-3">Đồng cảm & Sẻ chia</p>
+                                <p class="sub-popup-item mb-3">Quan sát & Lắng nghe</p>
+                                <p class="sub-popup-item mb-3">Tìm kiếm & Xử lý thông tin</p>
+                                <p class="sub-popup-item mb-3">Kiểm soát cảm xúc</p>
+                            </div>
+
                     </div>
                     <div class="area-item-wrapper d-flex align-items-center mb-4">
                         <p class="m-0">Lập trình</p>
@@ -26,8 +40,18 @@
                 </div>
 
                 <div class="col-5">
-                    <div @onclick="ShowExpertisePopup" class="area-item-wrapper d-flex align-items-center mb-4">
+                    <div @onclick="ShowExpertise" class="area-item-wrapper d-flex align-items-center mb-4 position-relative">
                         <p class="m-0">Kiến thức chuyên ngành</p>
+                        <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(IsShowExpertise ? "d-block" : "")">
+                            <p class="sub-popup-item mb-4">Luật</p>
+                            <p class="sub-popup-item mb-4">Kế toán/Kiểm toán</p>
+                            <p class="sub-popup-item mb-4">Marketing</p>
+                            <p class="sub-popup-item mb-4">Quản trị</p>
+                            <p class="sub-popup-item mb-4">Tài chính</p>
+                            <p class="sub-popup-item mb-4">Ngân hàng</p>
+                            <p class="sub-popup-item mb-4">Ngoại ngữ</p>
+                            <p class="sub-popup-item mb-4">Lý luận chính trị</p>
+                        </div>
                     </div>
                     <div class="area-item-wrapper d-flex align-items-center mb-4">
                         <p class="m-0">Có phương tiện di chuyển</p>
@@ -62,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div @onclick="CloseModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+        <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
     </div>
 </div>
 @code {
@@ -70,28 +94,39 @@
     private BlazoredModalInstance SkillsModal { get; set; }
     void CloseModal()
     {
-        SkillsModal.CloseAsync();
+        SkillsModal.CloseAsync(ModalResult.Ok(""));
     }
 
-    void ShowSubSkillsPopup()
+    void SaveModal()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        Modal.Show<SubSkillsPopup>("", options);
+        SkillsModal.CloseAsync(ModalResult.Ok("bg-grey"));
     }
 
-    void ShowExpertisePopup()
+    private bool IsShowAreas = false;
+    void ShowSubSkills()
     {
-        var options = new ModalOptions()
+        if (!IsShowAreas)
         {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        Modal.Show<ExpertisePopup>("", options);
+            IsShowAreas = !IsShowAreas;
+        }
+        else
+        {
+            IsShowAreas = !IsShowAreas;
+        }
     }
+
+    private bool IsShowExpertise = false;
+    void ShowExpertise()
+    {
+        if (!IsShowExpertise)
+        {
+            IsShowExpertise = !IsShowExpertise;
+        }
+        else
+        {
+            IsShowExpertise = !IsShowExpertise;
+        }
+    }
+
+
 }

@@ -1,13 +1,12 @@
 ﻿@inject IJSRuntime JSRuntime
-@inject IModalService Modal
 
 <h3 class="mt-5 mb-4 text-uppercase page-heading">We do it <span>together!</span></h3>
 
 
 <form action="/" method="post" class="my-search-box d-flex mb-5">
-    <input type="text" value=@inputValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+    <input type="text" value=@myInputValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
     <div class="my-search-box__icon-wrapper d-flex align-items-center">
-        <span @onclick="ClearInputBox" class="material-icons-outlined clear-search-btn">
+        <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn" >
             close
         </span>
         <button type="submit" class="search-btn d-flex align-items-center">
@@ -90,14 +89,14 @@
         </span>
     </div>
 
-    <div class="filter-item position-relative me-4">
+    <div class="filter-item position-relative me-4 @bgColorAreas">
         <div @onclick="ShowAreasPopup" class="popup-btn">Lĩnh vực</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
-    <div class="filter-item position-relative me-4">
+    <div class="filter-item position-relative me-4 @bgColorSkills">
         <div @onclick="ShowSkillsPopup" class="popup-btn">Kỹ năng</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
@@ -127,15 +126,15 @@
 
 
 @code {
-    string inputValue = "";
-    void ClearInputBox()
-    {
-        inputValue = "";
-    }
+    string myInputValue = "";
 
     void UpdateInstanceValue(ChangeEventArgs e)
     {
-        inputValue = e.Value.ToString();
+        myInputValue = e.Value.ToString();
+    }
+    void ClearSearchBox()
+    {
+        myInputValue = "";
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -143,10 +142,11 @@
         await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-city", "Tỉnh/Thành phố", ".filter-item-city");
         await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-district", "Quận/Huyện", ".filter-item-district");
         await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-organization", "Tổ chức", ".filter-item-organization");
-        await JSRuntime.InvokeVoidAsync("vms.Cascading", ".filter-item__select-city", ".filter-item__select-district");
     }
 
-    void ShowAreasPopup()
+    string bgColorAreas = "";
+    [CascadingParameter] public IModalService Modal { get; set; }
+    async Task ShowAreasPopup()
     {
         var options = new ModalOptions()
         {
@@ -154,10 +154,17 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        Modal.Show<AreasPopup>("", options);
+        var AreasModal = Modal.Show<AreasPopup>("", options);
+        var IsClickSave = await AreasModal.Result;
+        if (bgColorAreas == "")
+        {
+            bgColorAreas = IsClickSave.Data.ToString();
+        }
     }
 
-    void ShowSkillsPopup()
+
+    string bgColorSkills = "";
+    async Task ShowSkillsPopup()
     {
         var options = new ModalOptions()
         {
@@ -165,6 +172,11 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        Modal.Show<SkillsPopup>("", options);
+        var AreasModal = Modal.Show<SkillsPopup>("", options);
+        var IsClickSave = await AreasModal.Result;
+        if (bgColorSkills == "")
+        {
+            bgColorSkills = IsClickSave.Data.ToString();
+        }
     }
 }

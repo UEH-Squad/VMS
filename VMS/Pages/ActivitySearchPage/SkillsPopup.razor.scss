@@ -4,6 +4,10 @@
     color: $green;
 }
 
+.underlined {
+    text-decoration: underline;
+}
+
 .modal-backdrop {
     background-color: rgba(196, 196, 196, 0.38);
 }
@@ -37,11 +41,11 @@
     .area-item-wrapper {
         cursor: pointer;
 
-        p {
+        & > p {
             font-size: 20px;
         }
 
-        &:hover p {
+        &:hover > p {
             color: $green;
         }
     }
@@ -52,6 +56,27 @@
         width: 90px;
         height: 40px;
         margin: auto 120px 60px auto;
+    }
+
+    .my-custom-sub-popup {
+        top: -100%;
+        left: 90%;
+        background-color: white;
+        box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
+        padding: 15px 25px 0;
+        border-radius: 5px;
+        min-width: 250px;
+        font-size: 14px;
+        z-index: 999;
+        display: none;
+
+        .sub-popup-item {
+            color: $green;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 

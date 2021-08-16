@@ -7,6 +7,9 @@
 .cursor-pointer {
   cursor: pointer; }
 
+.bg-grey {
+  background-color: #f3f3f3; }
+
 .page-heading {
   font-size: 64px;
   color: #18A0FB;

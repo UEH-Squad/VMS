@@ -4,15 +4,21 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.modal-backdrop {
-  background-color: transparent; }
-  .modal-backdrop .my-custom-popup {
-    background-color: white;
-    box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
-    padding: 15px 25px 0;
-    border-radius: 5px;
-    cursor: pointer; }
-    .modal-backdrop .my-custom-popup .expertise-item {
-      color: #64D72F; }
-      .modal-backdrop .my-custom-popup .expertise-item:hover {
-        text-decoration: underline; }
+.my-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999; }
+
+.my-custom-popup {
+  background-color: white;
+  box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
+  padding: 15px 25px 0;
+  border-radius: 5px;
+  cursor: pointer; }
+  .my-custom-popup .expertise-item {
+    color: #64D72F; }
+    .my-custom-popup .expertise-item:hover {
+      text-decoration: underline; }

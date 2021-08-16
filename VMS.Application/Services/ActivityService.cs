@@ -34,7 +34,6 @@ namespace VMS.Application.Services
                 Includes = a => a.Include(a => a.ActivitySkills)
                                  .Include(a => a.ActivityAddresses)
                                     .ThenInclude(a => a.AddressPath)
-                                 .Include(a => a.Area)
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);

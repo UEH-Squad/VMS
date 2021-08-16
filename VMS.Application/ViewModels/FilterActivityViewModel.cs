@@ -12,6 +12,10 @@ namespace VMS.Application.ViewModels
         public int DistrictId { get; set; }
         public List<Area> Areas { get; set; }
         public List<Skill> Skills { get; set; }
+        public int AddressPathId
+        {
+            get => ProvinceId != 0 ? (DistrictId != 0 ? DistrictId : ProvinceId) : 0;
+        }
 
         public FilterActivityViewModel()
         {

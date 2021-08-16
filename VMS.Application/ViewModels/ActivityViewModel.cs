@@ -7,6 +7,7 @@ namespace VMS.Application.ViewModels
     public class ActivityViewModel
     {
         public int Id { get; set; }
+        public int AreaId { get; set; }
         public string Name { get; set; }
         public DateTime PostDate { get; set; }
         public int MemberQuantity { get; set; }
@@ -16,7 +17,6 @@ namespace VMS.Application.ViewModels
 
         public CoordinateResponse Coordinate { get; set; }
         public User Organizer { get; set; }
-        public Area Area { get; set; }
 
         public List<ActivityAddress> ActivityAddresses { get; set; }
         public List<ActivitySkill> ActivitySkills { get; set; }

@@ -1,0 +1,32 @@
+﻿<nav aria-label="Page navigation activities">
+	<ul class="pagination">
+		<li class="page-item">
+			<a class="page-link" href="#">Previous</a>
+		</li>
+		@for (int i = 0; i < TotalPages; i++)
+		{
+			var currentIndex = i + 1;
+			<li class="page-item @(i+1 == CurrentPage ? "active" : "")">
+				<a @onclick="(async () => await MoveToPageAsync(currentIndex))" class="page-link" href="@Routes.Topic">@currentIndex</a>
+			</li>
+		}
+		<li class="page-item">
+			<a class="page-link" href="@Routes.Topic">Next</a>
+		</li>
+	</ul>
+</nav>
+
+@code {
+	[Parameter]
+	public int TotalPages { get; set; }
+	[Parameter]
+	public int CurrentPage { get; set; }
+	[Parameter]
+	public EventCallback<int> PageEvenCallBack { get; set; }
+
+	private async Task MoveToPageAsync(int page)
+	{
+		CurrentPage = page;
+		await PageEvenCallBack.InvokeAsync(CurrentPage);
+	}
+}

@@ -62,14 +62,10 @@ namespace VMS.Pages.Activities
             districts = await AddressService.GetAllAddressPathsByParentIdAsync(filter.ProvinceId);
         }
 
-        private void DistrictSelectionChanged(int id)
-        {
-            filter.DistrictId = id;
-        }
-
         private void ClearFilter()
         {
             filter = new FilterActivityViewModel();
+            districts = null;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace VMS.Pages.Activities
         private List<ActivityViewModel> activities;
         private bool isLoggedIn;
         private CoordinateResponse userLocation;
+        private int currentPage = 1;
+        private int totalPages = 10;
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -49,37 +51,18 @@ namespace VMS.Pages.Activities
 
         private void GetFilter(FilterActivityViewModel filter)
         {
-            var filterActivities = activityViewModels.Where(a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual);
-
-            if (!string.IsNullOrEmpty(filter.OrgId))
-            {
-                filterActivities = filterActivities.Where(a => a.Organizer.Id == filter.OrgId);
-            }
-
-            if (filter.ProvinceId != 0)
-            {
-                filterActivities = filterActivities.Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.ProvinceId));
-
-                if (filter.DistrictId != 0)
-                {
-                    filterActivities = filterActivities.Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.DistrictId));
-                }
-            }
-
-            if (filter.Areas.Count != 0)
-            {
-                filterActivities = filterActivities.Where(a => filter.Areas.Any(x => x.Id == a.Area.Id));
-            }
-
-            if (filter.Skills.Count != 0)
-            {
-                filterActivities = filterActivities.Where(a => filter.Skills
-                                                            .All(s => a.ActivitySkills
-                                                            .Any(x => x.SkillId == s.Id)));
-            }
-
-            activities = filterActivities.ToList();
+            activities = activityViewModels.Where(a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual)
+                                            .Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0)
+                                            .Where(a => a.Organizer.Id == filter.OrgId || string.IsNullOrEmpty(filter.OrgId))
+                                            .Where(a => filter.Areas.Any(x => x.Id == a.AreaId) || filter.Areas.Count == 0)
+                                            .Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id)))
+                                            .ToList();
         }
+
+        private void GetCurrentPage(int currentPage)
+		{
+            this.currentPage = currentPage;
+		}
 
         private void OrderActivities(ChangeEventArgs e)
         {

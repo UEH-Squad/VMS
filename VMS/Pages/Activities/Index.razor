@@ -8,7 +8,7 @@
 	</div>
 }
 
-<Filter FilterEventCallback="@GetFilter"></Filter>
+<Filter FilterEventCallback="GetFilter"></Filter>
 
 <div class="alert alert-light">
 	Sắp xếp theo 
@@ -31,6 +31,8 @@ else
 			<p>@activity.Description</p>
 		</div>
 	}
+
+	<Pagination PageEvenCallBack="GetCurrentPage" CurrentPage="currentPage" TotalPages="totalPages"/>
 }
 
 @code {

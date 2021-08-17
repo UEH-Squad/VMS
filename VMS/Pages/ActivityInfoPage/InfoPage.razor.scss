@@ -1,9 +1,8 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
-.TopPage {
-    .Return-text {
+.infopage-toppage {
+    .return-text {
         text-decoration: none;
-        font-family: Montserrat;
         font-style: normal;
         font-weight: 600;
         font-size: 24px;
@@ -11,11 +10,11 @@
         color: $green;
     }
 
-    .Return-text:hover {
+    .return-text:hover {
         color: $green-bold;
     }
 
-    .Line-line1 {
+    .line-line1 {
         width: 174%;
         margin-top: 0px;
         background-color: $grey-icon;
@@ -24,12 +23,11 @@
 }
 
 
-.Title {
-    .Title__content {
-        width: 88%;
+.infopage-title {
+    .title__content {
+        width: 85%;
         display: block;
         margin-top: 3%;
-        font-family: Montserrat;
         font-style: normal;
         font-weight: 500;
         font-size: 36px;
@@ -37,10 +35,9 @@
         color: $blue;
     }
 
-    .Title__name {
+    .title__name {
         margin-bottom: 2.3%;
         align-items: center;
-        font-family: Montserrat;
         font-style: normal;
         font-weight: 600;
         font-size: 18px;
@@ -58,11 +55,10 @@
         }
     }
 
-    .Title__date {
+    .title__date {
 
-        .PostDate {
+        .postdate {
             display: inline;
-            font-family: Montserrat;
             font-style: normal;
             font-weight: normal;
             font-size: 20px;
@@ -71,7 +67,7 @@
         }
 
         .heart-button1 {
-            margin-left: 54%;
+            margin-left: 51%;
             color: #F14747;
             background: transparent;
             border: none;
@@ -82,7 +78,7 @@
         }
 
         .heart-button2 {
-            margin-left: 54%;
+            margin-left: 51%;
             color: #F14747;
             background: transparent;
             border: none;
@@ -96,7 +92,7 @@
             font-size: 2.5rem;
         }
 
-        .Line-line2 {
+        .line-line2 {
             width: 85%;
             margin-top: 0px;
             background-color: $grey-icon;
@@ -105,11 +101,10 @@
     }
 }
 
-.Activity {
-    width: 88%;
+.infopage-activity {
+    width: 85%;
 
     .content {
-        font-family: Montserrat;
         font-style: normal;
         font-weight: normal;
         font-size: 24px;
@@ -117,15 +112,14 @@
         color: $grey-text;
     }
 
-    .Activity__image {
+    .activity__image {
         width: 100%;
         margin-top: 6%;
         border-radius: 10px;
     }
 
-    .Activity__mission {
+    .activity__mission {
         margin-top: 8%;
-        font-family: Montserrat;
         font-style: normal;
         font-weight: normal;
         font-size: 24px;
@@ -142,9 +136,8 @@
         }
     }
 
-    .Activity__assignment {
+    .activity__assignment {
         margin-top: 3.5%;
-        font-family: Montserrat;
         font-style: normal;
         font-weight: normal;
         font-size: 24px;

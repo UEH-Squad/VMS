@@ -1,39 +1,39 @@
-﻿<div class="InfoPage">
-    <div class="TopPage">
-        <span class="Return">
-            <a href="@Routes.ActivitySearch" class="Return-text">&#60;&#60; Quay lại</a>
+﻿<div class="infopage">
+    <div class="infopage-toppage">
+        <span class="return">
+            <a href="@Routes.ActivitySearch" class="return-text">&#60;&#60; Quay lại</a>
         </span>
-        <div><hr class="Line-line1"></div>
+        <div><hr class="line-line1"></div>
     </div>
-    <div class="Title">
-        <p class="Title__content">
+    <div class="infopage-title">
+        <p class="title__content">
             Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương
         </p>
-        <div class="Title__name">
+        <div class="title__name">
             <span class="material-icons"><span class="earth-icon">public</span></span>
             <p class="organization">Tên Đơn vị tổ chức</p>
         </div>
-        <div class="Title__date">
-            <p class="PostDate">
+        <div class="title__date">
+            <p class="postdate">
                 Ngày đăng: 20/07/2021
             </p>
-            <button @onclick="animateHeart" class="@typeButton">
+            <button @onclick="AnimateHeart" class="@typeButton">
                 <span class="material-icons"><span class="heart-icon">@typeI</span></span>
             </button>
-            <div><hr class="Line-line2"></div>
+            <div><hr class="line-line2"></div>
         </div>
     </div>
-    <div class="Activity">
-        <div class="Activity__description">
+    <div class="infopage-activity">
+        <div class="activity__description">
             <p class="content">
                 Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ,
                 tinh thần hăng hái TÌNH NGUYỆN tham gia hỗ trợ chuyên môn trong công tác phòng chống dịch tại địa phương.
             </p>
         </div>
-        <div class="Activity__image">
+        <div class="activity__image">
             <img src="./img/ActivityInfoPage/ActivityImage.png" alt="Activity Image">
         </div>
-        <div class="Activity__mission">
+        <div class="activity__mission">
             <p class="mission">Sứ mệnh:</p>
             <ul class="misson-list">
                 <li>Góp phần công sức vào công cuộc chống dịch Covid-19 của cả nước</li>
@@ -41,7 +41,7 @@
                 <li>Tình nguyện viên được hưởng 120.000 đồng/người/ngày, gồm tiền ăn là 80.000 đồng (theo mức quy định tại Khoản 5 Điều 2 Nghị quyết 16)</li>
             </ul>
         </div>
-        <div class="Activity__assignment">
+        <div class="activity__assignment">
             <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
             <ul class="assignment-list">
                 <li>Hỗ trợ nhập liệu dữ liệu trên máy tính</li>
@@ -58,7 +58,7 @@
     private string typeButton = "heart-button1";
     private string typeI = "favorite_border";
 
-    protected void animateHeart()
+    private void AnimateHeart()
     {
         if (typeButton == "heart-button1")
         {

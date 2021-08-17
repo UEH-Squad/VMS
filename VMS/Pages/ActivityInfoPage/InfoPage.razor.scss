@@ -1,0 +1,163 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.TopPage {
+    .Return-text {
+        text-decoration: none;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 30px;
+        color: $green;
+    }
+
+    .Return-text:hover {
+        color: $green-bold;
+    }
+
+    .Line-line1 {
+        width: 174%;
+        margin-top: 0px;
+        background-color: $grey-icon;
+        border: 1px solid $grey-icon;
+    }
+}
+
+
+.Title {
+    .Title__content {
+        width: 88%;
+        display: block;
+        margin-top: 3%;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 44px;
+        color: $blue;
+    }
+
+    .Title__name {
+        margin-bottom: 2.3%;
+        align-items: center;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 30px;
+        color: $grey-text;
+
+        .earth-icon {
+            font-size: 1.5rem;
+            color: $green;
+        }
+
+        .organization {
+            display: inline;
+            color: $grey-text;
+        }
+    }
+
+    .Title__date {
+
+        .PostDate {
+            display: inline;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 30px;
+            color: $grey-text;
+        }
+
+        .heart-button1 {
+            margin-left: 54%;
+            color: #F14747;
+            background: transparent;
+            border: none;
+        }
+
+        .heart-button1:hover {
+            cursor: pointer;
+        }
+
+        .heart-button2 {
+            margin-left: 54%;
+            color: #F14747;
+            background: transparent;
+            border: none;
+        }
+
+        .heart-button2:hover {
+            cursor: pointer;
+        }
+
+        .heart-icon {
+            font-size: 2.5rem;
+        }
+
+        .Line-line2 {
+            width: 85%;
+            margin-top: 0px;
+            background-color: $grey-icon;
+            border: 2px solid $grey-icon;
+        }
+    }
+}
+
+.Activity {
+    width: 88%;
+
+    .content {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 30px;
+        color: $grey-text;
+    }
+
+    .Activity__image {
+        width: 100%;
+        margin-top: 6%;
+        border-radius: 10px;
+    }
+
+    .Activity__mission {
+        margin-top: 8%;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 30px;
+        color: $grey-text;
+
+        .mission {
+            margin: 0 auto;
+            font-weight: 600;
+        }
+
+        .misson-list {
+            margin: 0 auto;
+        }
+    }
+
+    .Activity__assignment {
+        margin-top: 3.5%;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 30px;
+        color: $grey-text;
+
+        .assignment {
+            margin: 0 auto;
+            font-weight: 600;
+        }
+
+        .assignment-list {
+            margin: 0 auto;
+        }
+    }
+}

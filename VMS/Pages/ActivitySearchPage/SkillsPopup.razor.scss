@@ -13,9 +13,10 @@
 }
 
 .my-custom-popup {
-    width: 1000px;
-    height: 500px;
+    width: 50%;
+    height: 80%;
     background-color: #fff;
+    border-radius: 10px;
     z-index: 999;
 
     h3 {
@@ -38,16 +39,31 @@
         cursor: pointer;
     }
 
-    .area-item-wrapper {
+    .skill-modal-content {
+        height: 70%;
+        margin-left: 16%;
+
+        &__container {
+            height: 100%;
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+    }
+
+    .skill-item-wrapper {
         cursor: pointer;
 
         & > p {
             font-size: 20px;
         }
 
-        &:hover > p {
+        & > p:hover {
             color: $green;
         }
+        /*
+        &:nth-child(3n-1) {
+            width: 41.6667%;
+        }*/
     }
 
     .save-btn {
@@ -55,12 +71,14 @@
         font-size: 20px;
         width: 90px;
         height: 40px;
-        margin: auto 120px 60px auto;
+        position: absolute;
+        right: 60px;
+        bottom: 30px;
     }
 
     .my-custom-sub-popup {
         top: -100%;
-        left: 90%;
+        left: 110%;
         background-color: white;
         box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
         padding: 15px 25px 0;

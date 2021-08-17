@@ -146,7 +146,8 @@
   padding-left: 8px;
   font-size: 18px;
   color: #b4b4b4;
-  line-height: 40px; }
+  line-height: 40px;
+  overflow: hidden; }
 
 .filter-btn {
   color: #fff;

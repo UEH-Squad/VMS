@@ -89,15 +89,15 @@
         </span>
     </div>
 
-    <div class="filter-item position-relative me-4 @bgColorAreas">
-        <div @onclick="ShowAreasPopup" class="popup-btn">Lĩnh vực</div>
+    <div class="filter-item position-relative me-4">
+        <div @onclick="ShowAreasPopup" class="popup-btn @bgColorAreas">Lĩnh vực</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
-    <div class="filter-item position-relative me-4 @bgColorSkills">
-        <div @onclick="ShowSkillsPopup" class="popup-btn">Kỹ năng</div>
+    <div class="filter-item position-relative me-4">
+        <div @onclick="ShowSkillsPopup" class="popup-btn @bgColorSkills">Kỹ năng</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
@@ -127,6 +127,8 @@
 
 @code {
     string myInputValue = "";
+    string bgColorAreas = "";
+    string bgColorSkills = "";
 
     void UpdateInstanceValue(ChangeEventArgs e)
     {
@@ -144,7 +146,8 @@
         await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-organization", "Tổ chức", ".filter-item-organization");
     }
 
-    string bgColorAreas = "";
+    bool[] choosenAreasList = new bool[12];
+
     [CascadingParameter] public IModalService Modal { get; set; }
     async Task ShowAreasPopup()
     {
@@ -154,7 +157,9 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        var AreasModal = Modal.Show<AreasPopup>("", options);
+        var AreasParameter = new ModalParameters();
+        AreasParameter.Add("ChoosenAreasList", choosenAreasList);
+        var AreasModal = Modal.Show<AreasPopup>("", AreasParameter, options);
         var IsClickSave = await AreasModal.Result;
         if (bgColorAreas == "")
         {
@@ -162,8 +167,8 @@
         }
     }
 
+    bool[,] choosenSkillsList = new bool[15,11];
 
-    string bgColorSkills = "";
     async Task ShowSkillsPopup()
     {
         var options = new ModalOptions()
@@ -172,8 +177,10 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        var AreasModal = Modal.Show<SkillsPopup>("", options);
-        var IsClickSave = await AreasModal.Result;
+        var SkillsParameter = new ModalParameters();
+        SkillsParameter.Add("ChoosenSkillsList", choosenSkillsList);
+        var SkillsModal = Modal.Show<SkillsPopup>("", SkillsParameter, options);
+        var IsClickSave = await SkillsModal.Result;
         if (bgColorSkills == "")
         {
             bgColorSkills = IsClickSave.Data.ToString();

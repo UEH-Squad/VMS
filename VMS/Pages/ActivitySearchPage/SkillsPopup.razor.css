@@ -14,9 +14,10 @@
   background-color: rgba(196, 196, 196, 0.38); }
 
 .my-custom-popup {
-  width: 1000px;
-  height: 500px;
+  width: 50%;
+  height: 80%;
   background-color: #fff;
+  border-radius: 10px;
   z-index: 999; }
   .my-custom-popup h3 {
     font-size: 48px;
@@ -34,11 +35,22 @@
     justify-content: center;
     font-size: 34px;
     cursor: pointer; }
-  .my-custom-popup .area-item-wrapper {
-    cursor: pointer; }
-    .my-custom-popup .area-item-wrapper > p {
+  .my-custom-popup .skill-modal-content {
+    height: 70%;
+    margin-left: 16%; }
+    .my-custom-popup .skill-modal-content__container {
+      height: 100%;
+      display: grid;
+      grid-template-columns: auto auto; }
+  .my-custom-popup .skill-item-wrapper {
+    cursor: pointer;
+    /*
+        &:nth-child(3n-1) {
+            width: 41.6667%;
+        }*/ }
+    .my-custom-popup .skill-item-wrapper > p {
       font-size: 20px; }
-    .my-custom-popup .area-item-wrapper:hover > p {
+    .my-custom-popup .skill-item-wrapper > p:hover {
       color: #64D72F; }
   .my-custom-popup .save-btn {
     color: #fff;
@@ -50,10 +62,12 @@
     font-size: 20px;
     width: 90px;
     height: 40px;
-    margin: auto 120px 60px auto; }
+    position: absolute;
+    right: 60px;
+    bottom: 30px; }
   .my-custom-popup .my-custom-sub-popup {
     top: -100%;
-    left: 90%;
+    left: 110%;
     background-color: white;
     box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
     padding: 15px 25px 0;

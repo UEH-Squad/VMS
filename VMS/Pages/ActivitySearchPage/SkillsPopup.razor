@@ -4,129 +4,202 @@
         <span @onclick="CloseModal" class="material-icons-outlined close-btn">
             close
         </span>
-        <h3 class="text-center mt-5 mb-4">Kỹ năng</h3>
-        <div class="col-10 mx-auto">
-            <div class="row justify-content-evenly ms-5">
-                <div class="col-3">
-                    <div @onclick="ShowSubSkills" class="area-item-wrapper d-flex align-items-center mb-4 position-relative">
-                        <p class="m-0">Kỹ năng mềm</p>
-                        
-                            <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(IsShowAreas ? "d-block" : "")">
-                                <p class="sub-popup-item mb-3">Làm việc nhóm</p>
-                                <p class="sub-popup-item mb-3">Tư duy Logic</p>
-                                <p class="sub-popup-item mb-3">Xây dựng kế hoạch</p>
-                                <p class="sub-popup-item mb-3">Giao tiếp & Ứng xử</p>
-                                <p class="sub-popup-item mb-3">Giải quyết vấn đề</p>
-                                <p class="sub-popup-item mb-3">Quản lý thời gian</p>
-                                <p class="sub-popup-item mb-3">Đồng cảm & Sẻ chia</p>
-                                <p class="sub-popup-item mb-3">Quan sát & Lắng nghe</p>
-                                <p class="sub-popup-item mb-3">Tìm kiếm & Xử lý thông tin</p>
-                                <p class="sub-popup-item mb-3">Kiểm soát cảm xúc</p>
-                            </div>
-
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Lập trình</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Thể lực tốt</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Trách nhiệm</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Xây dựng website</p>
-                    </div>
-                </div>
-
-                <div class="col-5">
-                    <div @onclick="ShowExpertise" class="area-item-wrapper d-flex align-items-center mb-4 position-relative">
-                        <p class="m-0">Kiến thức chuyên ngành</p>
-                        <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(IsShowExpertise ? "d-block" : "")">
-                            <p class="sub-popup-item mb-4">Luật</p>
-                            <p class="sub-popup-item mb-4">Kế toán/Kiểm toán</p>
-                            <p class="sub-popup-item mb-4">Marketing</p>
-                            <p class="sub-popup-item mb-4">Quản trị</p>
-                            <p class="sub-popup-item mb-4">Tài chính</p>
-                            <p class="sub-popup-item mb-4">Ngân hàng</p>
-                            <p class="sub-popup-item mb-4">Ngoại ngữ</p>
-                            <p class="sub-popup-item mb-4">Lý luận chính trị</p>
+        <h3 class="text-center mt-4 mb-4">Kỹ năng</h3>
+        <div class="col-10 skill-modal-content">
+            <div class=" skill-modal-content__container">
+                    @for (int i = 0; i < 15; i++)
+                    {
+                        int id = i;
+                        <div class="skill-item-wrapper d-flex align-items-center">
+                            <p @onclick=" () => ChangeStateAndCheckSubPopup(id)" class="m-0 @(ChoosenSkillsList[id,0] ? "colored-green position-relative" : "") ">Kỹ năng mềm @(i+1)
+                            
+                                @if (id == 0)
+                                {
+                                    <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(IsShowSubSkills ? "d-block" : "")">
+                                        @for (int j = 1; j <= 10; j++)
+                                        {
+                                            int subID = j;
+                                            <p @onclick="() => CheckChoosenSubSkills(subID)" class="sub-popup-item mb-3 @(ChoosenSkillsList[0, subID] ? "underlined" : "")">Làm việc nhóm @(subID)</p>
+                                        }
+                                    </div>
+                                }
+                                @if (id == 1)
+                                {
+                                    <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(IsShowExpertise ? "d-block" : "")">
+                                        @for (int j = 1; j <= 8; j++)
+                                        {
+                                            int subID = j;
+                                            <p @onclick="() => CheckChoosenExpertise(subID)" class="sub-popup-item mb-3 @(ChoosenSkillsList[1, subID] ? "underlined" : "")">Kế toán/ Kiểm toán @(subID)</p>
+                                        }
+                                    </div>
+                                }
+                            </p>
                         </div>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Có phương tiện di chuyển</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Hoạch định tài chính</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Chỉnh sửa/Thiết kế hình ảnh/video</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Viết Proposal/kịch bản/content</p>
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Siêng năng</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Kiên nhẫn</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Nhiệt tình</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Checklist</p>
-                    </div>
-                    <div class="area-item-wrapper d-flex align-items-center mb-4">
-                        <p class="m-0">Lái xe</p>
-                    </div>
-                </div>
-            </div>
+                    }
         </div>
         <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
     </div>
+    </div>
 </div>
 @code {
+    [Parameter]
+    public bool[,] ChoosenSkillsList { get; set; }
+    bool IsShowExpertise = false;
+    bool IsShowSubSkills = false;
+    bool IsThereSelectedItem = false;
+    int numberOfSkills = 15;
+    int numberOfSubSkills = 10;
+
+    bool[,] BoolArraySkills = new bool[15,11];
+    protected override async Task OnInitializedAsync()
+    {
+        //create a curent list when modal open incase user click close button but don't save
+        for (int SkillIndex = 0; SkillIndex < numberOfSkills; SkillIndex++)
+        {
+            for (int SubIndex = 0; SubIndex <= numberOfSubSkills; SubIndex++)
+            {
+                BoolArraySkills[SkillIndex, SubIndex] = ChoosenSkillsList[SkillIndex, SubIndex];
+            }
+        }
+
+        //Check Is any Sub items selected
+        ChoosenSkillsList[0, 0] = ChoosenSkillsList[1, 0] = false;
+        for (int SubIndex = 1; SubIndex <= numberOfSubSkills; SubIndex++)
+        {
+            if (ChoosenSkillsList[0, SubIndex])
+            {
+                ChoosenSkillsList[0, 0] = true;
+            }
+
+            if (ChoosenSkillsList[1, SubIndex])
+            {
+                ChoosenSkillsList[1, 0] = true;
+            }
+        }
+    }
+
+    //handle change color when click items
+    void ChangeStateAndCheckSubPopup(int id)
+    {
+        ChoosenSkillsList[id,0] = !ChoosenSkillsList[id,0];
+        IsThereSelectedItem = false;
+        for (int j = 0; j < numberOfSkills; j++)
+        {
+            if (ChoosenSkillsList[j,0])
+            {
+                IsThereSelectedItem = true;
+            }
+        }
+
+        if (id == 0)
+        {
+            ShowSubSkills();
+            ChoosenSkillsList[id,0] = true;
+            if (IsThereSelectedSubItem || IsShowSubSkills)
+            {
+                IsThereSelectedItem = true;
+            }
+            else
+            {
+                ChoosenSkillsList[id, 0] = BoolArraySkills[id, 0] = false;
+            }
+        }
+        if (id == 1)
+        {
+            ShowExpertise();
+            ChoosenSkillsList[id,0] = true;
+            if (IsThereSelectedSubItem || IsShowExpertise)
+            {
+                IsThereSelectedItem = true;
+            }
+            else
+            {
+                ChoosenSkillsList[id, 0] = BoolArraySkills[id, 0] = false;
+            }
+        }
+    }
+
+    //handle underline sub skill popup items
+    bool IsThereSelectedSubItem = false;
+    void CheckChoosenSubSkills(int id)
+    {
+        ChoosenSkillsList[0, id] = !ChoosenSkillsList[0, id];
+        IsThereSelectedSubItem = false;
+        for (int j = 1; j <= numberOfSubSkills; j++)
+        {
+            if (ChoosenSkillsList[0, j])
+            {
+                ChoosenSkillsList[0, 0] = BoolArraySkills[0, 0] = true;
+                IsThereSelectedSubItem = true;
+            }
+        }
+    }
+
+    //handle underline expertise popup items
+    void CheckChoosenExpertise(int id)
+    {
+        ChoosenSkillsList[1, id] = !ChoosenSkillsList[1, id];
+
+        IsThereSelectedSubItem = false;
+        for (int j = 1; j <= 9; j++)
+        {
+            if (ChoosenSkillsList[1, j])
+            {
+                ChoosenSkillsList[1, 0] = BoolArraySkills[1, 0] = true;
+                IsThereSelectedSubItem = true;
+            }
+        }
+    }
+
+    //Show sub popup
+
+    void ShowSubSkills()
+    {
+        IsShowSubSkills = !IsShowSubSkills;
+    }
+
+    void ShowExpertise()
+    {
+        IsShowExpertise = !IsShowExpertise;
+    }
+
+
+
+
+    //Close and save button
     [CascadingParameter]
     private BlazoredModalInstance SkillsModal { get; set; }
     void CloseModal()
     {
+        for (int SkillIndex = 0; SkillIndex < numberOfSkills; SkillIndex++)
+        {
+            for (int SubIndex = 0; SubIndex <= numberOfSubSkills; SubIndex++)
+            {
+                if (ChoosenSkillsList[SkillIndex, SubIndex] && BoolArraySkills[SkillIndex, SubIndex] == false)
+                {
+                    ChoosenSkillsList[SkillIndex, SubIndex] = false;
+                }
+
+                if (ChoosenSkillsList[SkillIndex, SubIndex] == false && BoolArraySkills[SkillIndex, SubIndex])
+                {
+                    ChoosenSkillsList[SkillIndex, SubIndex] = true;
+                }
+            }
+        }
         SkillsModal.CloseAsync(ModalResult.Ok(""));
     }
 
     void SaveModal()
     {
-        SkillsModal.CloseAsync(ModalResult.Ok("bg-grey"));
-    }
-
-    private bool IsShowAreas = false;
-    void ShowSubSkills()
-    {
-        if (!IsShowAreas)
+        ChoosenSkillsList = BoolArraySkills;
+        if (IsThereSelectedItem)
         {
-            IsShowAreas = !IsShowAreas;
+            SkillsModal.CloseAsync(ModalResult.Ok("bg-grey"));
         }
         else
         {
-            IsShowAreas = !IsShowAreas;
+            SkillsModal.CloseAsync(ModalResult.Ok(""));
         }
     }
-
-    private bool IsShowExpertise = false;
-    void ShowExpertise()
-    {
-        if (!IsShowExpertise)
-        {
-            IsShowExpertise = !IsShowExpertise;
-        }
-        else
-        {
-            IsShowExpertise = !IsShowExpertise;
-        }
-    }
-
 
 }

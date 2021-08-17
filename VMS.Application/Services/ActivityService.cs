@@ -147,7 +147,10 @@ namespace VMS.Application.Services
                 new() { Activity = activity, AddressPathId = activityViewModel.ProvinceId },
                 new() { Activity = activity, AddressPathId = activityViewModel.DistrictId },
                 new() { Activity = activity, AddressPathId = activityViewModel.WardId }
-            }; 
+            };
+
+            activity.UpdatedBy = activityViewModel.OrgId;
+            activity.UpdatedDate = DateTime.Now;
 
             await _repository.UpdateAsync(dbContext, activity);
         }

@@ -90,14 +90,14 @@
     </div>
 
     <div class="filter-item position-relative me-4">
-        <div @onclick="ShowAreasPopup" class="popup-btn @bgColorAreas">Lĩnh vực</div>
+        <div @onclick="ShowAreasPopup" class="popup-btn @backgroundColorAreas">Lĩnh vực</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
     <div class="filter-item position-relative me-4">
-        <div @onclick="ShowSkillsPopup" class="popup-btn @bgColorSkills">Kỹ năng</div>
+        <div @onclick="ShowSkillsPopup" class="popup-btn @backgroundColorSkills">Kỹ năng</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
@@ -126,9 +126,17 @@
 
 
 @code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-city", "Tỉnh/Thành phố", ".filter-item-city");
+        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-district", "Quận/Huyện", ".filter-item-district");
+        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-organization", "Tổ chức", ".filter-item-organization");
+    }
+
     string myInputValue = "";
-    string bgColorAreas = "";
-    string bgColorSkills = "";
+    string backgroundColorAreas = "";
+    string backgroundColorSkills = "";
 
     void UpdateInstanceValue(ChangeEventArgs e)
     {
@@ -137,13 +145,6 @@
     void ClearSearchBox()
     {
         myInputValue = "";
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-city", "Tỉnh/Thành phố", ".filter-item-city");
-        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-district", "Quận/Huyện", ".filter-item-district");
-        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-organization", "Tổ chức", ".filter-item-organization");
     }
 
     bool[] choosenAreasList = new bool[12];
@@ -157,13 +158,13 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        var AreasParameter = new ModalParameters();
-        AreasParameter.Add("ChoosenAreasList", choosenAreasList);
-        var AreasModal = Modal.Show<AreasPopup>("", AreasParameter, options);
-        var IsClickSave = await AreasModal.Result;
-        if (bgColorAreas == "")
+        var areasParameter = new ModalParameters();
+        areasParameter.Add("choosenAreasList", choosenAreasList);
+        var areasModal = Modal.Show<AreasPopup>("", areasParameter, options);
+        var isClickSave = await areasModal.Result;
+        if (backgroundColorAreas == "")
         {
-            bgColorAreas = IsClickSave.Data.ToString();
+            backgroundColorAreas = isClickSave.Data.ToString();
         }
     }
 
@@ -177,13 +178,13 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        var SkillsParameter = new ModalParameters();
-        SkillsParameter.Add("ChoosenSkillsList", choosenSkillsList);
-        var SkillsModal = Modal.Show<SkillsPopup>("", SkillsParameter, options);
-        var IsClickSave = await SkillsModal.Result;
-        if (bgColorSkills == "")
+        var skillsParameter = new ModalParameters();
+        skillsParameter.Add("choosenSkillsList", choosenSkillsList);
+        var skillsModal = Modal.Show<SkillsPopup>("", skillsParameter, options);
+        var isClickSave = await skillsModal.Result;
+        if (backgroundColorSkills == "")
         {
-            bgColorSkills = IsClickSave.Data.ToString();
+            backgroundColorSkills = isClickSave.Data.ToString();
         }
     }
 }

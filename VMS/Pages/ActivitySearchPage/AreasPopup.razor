@@ -14,7 +14,7 @@
                             <span @onclick=" () => ChangeState(id)" class="material-icons-outlined d-flex align-items-center justify-content-center">
                                 people
                             </span>
-                            <p @onclick=" () => ChangeState(id)" class="mb-0 ms-2 @(ChoosenAreasList[id] ? "colored-green" : "")">Cộng đồng @(i+1)</p>
+                            <p @onclick=" () => ChangeState(id)" class="mb-0 ms-2 @(choosenAreasList[id] ? "colored-green" : "")">Cộng đồng @(i+1)</p>
                         </div>
                     }
             </div>
@@ -27,28 +27,28 @@
 @code {
 
     [Parameter]
-    public bool[] ChoosenAreasList { get; set; }
+    public bool[] choosenAreasList { get; set; }
     int numberOfItems = 12;
-    bool IsThereSelectedItem = false;
+    bool isThereSelectedItem = false;
 
     //create a curent list incase user click close button but don't save
-    bool[] BoolArray = new bool[12];
+    bool[] boolArray = new bool[12];
     protected override async Task OnInitializedAsync()
     {
         for (int a = 0; a < numberOfItems; a++)
         {
-            BoolArray[a] = ChoosenAreasList[a];
+            boolArray[a] = choosenAreasList[a];
         }
     }
     void ChangeState(int id)
     {
-        ChoosenAreasList[id] = !ChoosenAreasList[id];
-        IsThereSelectedItem = false;
+        choosenAreasList[id] = !choosenAreasList[id];
+        isThereSelectedItem = false;
         for (int j = 0; j < numberOfItems; j++)
         {
-            if (ChoosenAreasList[j])
+            if (choosenAreasList[j])
             {
-                IsThereSelectedItem = true;
+                isThereSelectedItem = true;
             }
         }
     }
@@ -59,13 +59,13 @@
     {
         for (int j = 0; j < numberOfItems; j++)
         {
-            if (ChoosenAreasList[j] && BoolArray[j] == false)
+            if (choosenAreasList[j] && boolArray[j] == false)
             {
-                ChoosenAreasList[j] = false;
+                choosenAreasList[j] = false;
             }
-            if (ChoosenAreasList[j] == false && BoolArray[j])
+            if (choosenAreasList[j] == false && boolArray[j])
             {
-                ChoosenAreasList[j] = true;
+                choosenAreasList[j] = true;
             }
         }
         AreasModal.CloseAsync(ModalResult.Ok(""));
@@ -74,8 +74,8 @@
 
     void SaveModal()
     {
-        ChoosenAreasList = BoolArray;
-        if (IsThereSelectedItem)
+        choosenAreasList = boolArray;
+        if (isThereSelectedItem)
         {
             AreasModal.CloseAsync(ModalResult.Ok("bg-grey"));
         }

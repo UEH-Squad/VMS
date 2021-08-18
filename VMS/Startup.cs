@@ -9,6 +9,7 @@ using VMS.Areas.Identity;
 using VMS.Domain.Models;
 using VMS.Infrastructure.Data.Context;
 using VMS.Infrastructure.IoC;
+using Blazored.Modal;
 
 namespace VMS
 {
@@ -38,7 +39,7 @@ namespace VMS
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            services.AddBlazoredModal();
             // Custom registrations
             DependencyContainer.RegisterServices(services, Configuration);
         }

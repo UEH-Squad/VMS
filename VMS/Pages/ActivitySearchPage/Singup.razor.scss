@@ -1,0 +1,73 @@
+﻿.blazored-modal{
+    height: 100%;
+}
+.form__singUp {
+    background: white;
+    padding: 50px 100px 0 100px;
+    width: 700px;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 48px;
+        font-weight: 500;
+        color: #18A0FB;
+
+        span {
+            color: #64D72F;
+        }
+    }
+
+    .form-text {
+        margin-bottom: 7px;
+        font-size: 24px;
+        font-weight: 500;
+        color: #515151;
+
+        span {
+            color: #F14747;
+        }
+    }
+
+    textarea, input {
+        border: 1.5px solid #707070;
+    }
+
+    .form-control {
+        padding: 15px 0;
+        margin-bottom: 25px;
+        font-size: 24px;
+    }
+
+    .input-radio {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        margin-right: 15px;
+    }
+
+    .input-radio ~ span {
+        font-size: 24px;
+        font-weight: 300;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 20px 0;
+        transform: translateY(45px);
+        background: #18A0FB;
+        font-size: 24px;
+        font-weight: 700;
+        color: white;
+
+        &:hover {
+            background: #0B588C;
+            color: white;
+        }
+    }
+}
+
+::deep .blazored-modal-center {
+    overflow: scroll;
+}

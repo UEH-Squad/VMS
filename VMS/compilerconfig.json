@@ -54,5 +54,9 @@
   {
     "outputFile": "Pages/ActivitySearchPage/Singup.razor.css",
     "inputFile": "Pages/ActivitySearchPage/Singup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/Signup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/Signup.razor.scss"
   }
 ]

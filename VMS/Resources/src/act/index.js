@@ -1,13 +1,19 @@
-﻿function showColor() {
-    console.log("ALo")
-    let notLike = document.querySelector(".act__notLike");
-    if (notLike.style.display !== "none") {
-        document.querySelector(".act__notLike").style.display = "none";
-        document.querySelector(".act__like").style.display = "inline-block";
-    } else {
-        document.querySelector(".act__notLike").style.display = "inline-block";
-        document.querySelector(".act__like").style.display = "none";
+﻿
+const showColor = () => {
+    const actNotLikes = document.querySelectorAll(".act__notLike")
+    const actLikes = document.querySelectorAll(".act__like")
+    for (let i = 0; i < actNotLikes.length; i++) {
+        actNotLikes[i].onclick = () => {
+            actNotLikes[i].style.display = "none"
+            actLikes[i].style.display = "inline-block"
+        }
+
+        actLikes[i].onclick = () => {
+            actLikes[i].style.display = "none"
+            actNotLikes[i].style.display = "inline-block"
+        }
     }
 }
+
 
 export default { showColor };

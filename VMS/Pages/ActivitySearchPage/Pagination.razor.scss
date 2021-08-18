@@ -45,7 +45,7 @@
     }
 }
 
-.act__singUp {
+.act__signUp {
     position: absolute;
     bottom: -10%;
     right: 5%;
@@ -173,4 +173,28 @@
         background: #18A0FB;
         color: white;
     }
+}
+
+.act__like {
+    display: none;
+}
+
+.lmtext-2, .lmtext-3, .lmtext-5 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.lmtext-2 {
+    -webkit-line-clamp: 2;
+}
+
+.lmtext-3 {
+    -webkit-line-clamp: 3;
+}
+
+.lmtext-5 {
+    -webkit-line-clamp: 5;
 }

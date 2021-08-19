@@ -1,4 +1,6 @@
-﻿.my-signUp {
+﻿@import "../../Resources/scss/common/_variables";
+
+.my-signUp {
     position: fixed;
     top: 0;
     left: 0;
@@ -18,7 +20,7 @@
         margin: auto;
         margin-top: 20px;
         border-radius: 10px;
-        background: white;
+        background: $white;
         overflow-y: scroll;
 
         .signUp__exit {
@@ -42,10 +44,10 @@
             margin-bottom: 30px;
             font-size: 48px;
             font-weight: 500;
-            color: #18A0FB;
+            color: $blue;
 
             span {
-                color: #64D72F;
+                color: $green;
             }
         }
 
@@ -53,7 +55,7 @@
             margin-bottom: 7px;
             font-size: 24px;
             font-weight: 500;
-            color: #515151;
+            color: $grey-text;
 
             span {
                 color: #F14747;
@@ -87,14 +89,14 @@
             width: 100%;
             padding: 20px 0;
             transform: translateY(45px);
-            background: #18A0FB;
+            background: $blue;
             font-size: 24px;
             font-weight: 700;
-            color: white;
+            color: $white;
 
             &:hover {
-                background: #0B588C;
-                color: white;
+                background: $blue-hv;
+                color: $white;
             }
         }
     }
@@ -124,7 +126,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
             z-index: 6;
-            background: white;
+            background: $white;
             width: 45%;
             padding: 30px 50px;
             border-radius: 10px;
@@ -133,10 +135,10 @@
             h3 {
                 font-size: 36px;
                 font-weight: 500;
-                color: #64D72F;
+                color: $green;
 
                 span {
-                    color: #18A0FB;
+                    color: $blue;
                 }
             }
         }

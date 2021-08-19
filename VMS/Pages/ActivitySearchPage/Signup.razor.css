@@ -1,4 +1,10 @@
-﻿.my-signUp {
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-signUp {
   position: fixed;
   top: 0;
   left: 0;
@@ -15,7 +21,7 @@
     margin: auto;
     margin-top: 20px;
     border-radius: 10px;
-    background: white;
+    background: #FFFFFF;
     overflow-y: scroll; }
     .my-signUp .signUp__content .signUp__exit {
       position: absolute;
@@ -66,10 +72,10 @@
       background: #18A0FB;
       font-size: 24px;
       font-weight: 700;
-      color: white; }
+      color: #FFFFFF; }
       .my-signUp .signUp__form button:hover {
-        background: #0B588C;
-        color: white; }
+        background: #0B588c;
+        color: #FFFFFF; }
   .my-signUp .signUp__report {
     height: 100%;
     width: 100%;
@@ -92,7 +98,7 @@
       top: 50%;
       transform: translate(-50%, -50%);
       z-index: 6;
-      background: white;
+      background: #FFFFFF;
       width: 45%;
       padding: 30px 50px;
       border-radius: 10px;

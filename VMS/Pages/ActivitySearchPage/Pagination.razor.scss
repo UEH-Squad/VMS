@@ -15,7 +15,7 @@
         }
 
         .act__item {
-            background-color: #F3F3F5;
+            background-color: $grey;
             padding: 30px 10px;
             border-radius: 10px;
         }
@@ -32,7 +32,7 @@
             font-weight: 600;
 
             i {
-                color: #64D72F;
+                color: $green;
                 margin-right: 5px;
             }
         }
@@ -65,15 +65,15 @@
         }
 
         button {
-            background-color: #64D72F;
+            background-color: $green;
             padding: 0px 20px;
             font-size: 20px;
             font-weight: 600;
-            color: white;
+            color: $white;
 
             &:hover {
-                background-color: #306C14;
-                color: white;
+                background-color: $green-bold;
+                color: $white;
             }
         }
     }
@@ -104,7 +104,7 @@
             left: 0;
             z-index: 10;
             padding: 36px;
-            color: white;
+            color: $white;
             transition: all 0.3s linear;
 
             h3 {
@@ -126,7 +126,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            background-color: rgba($color: #18A0FB, $alpha: 0.5);
+            background-color: rgba($color: $blue, $alpha: 0.5);
             z-index: -1;
             transition: all 0.3s linear;
         }
@@ -149,7 +149,7 @@
     }
 
     .btn-prev span, .btn-next span {
-        background-color: #18A0FB;
+        background-color: $blue;
         width: 40px;
         height: 40px;
         line-height: 40px;
@@ -161,7 +161,7 @@
     }
 
     .btn-prev span:hover, .btn-next span:hover {
-        background: #0B588C;
+        background: $blue-hv;
     }
 
     .numb {
@@ -174,7 +174,7 @@
     }
 
     .numb.active, .numb:hover {
-        background: #18A0FB;
+        background: $blue;
         color: white;
     }
 }

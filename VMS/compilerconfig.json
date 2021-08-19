@@ -50,5 +50,9 @@
   {
     "outputFile": "Pages/ActivityInfoPage/Index.razor.css",
     "inputFile": "Pages/ActivityInfoPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/Other-activities.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/Other-activities.razor.scss"
   }
 ]

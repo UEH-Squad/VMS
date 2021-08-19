@@ -1,0 +1,180 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+//---------------Title------------------//
+.other-act {
+    position: relative;
+    &__title {
+        margin-bottom: 50px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 18px;
+
+        @include on('md') {
+            font-size: 24px;
+            line-height: 124px;
+        }
+
+        @include on('xl') {
+            font-size: 28px;
+            line-height: 24px;
+        }
+
+        @include on('xxl') {
+            font-size: 36px;
+            line-height: 36px;
+        }
+
+        h3 {
+            color: #18A0FB;
+        }
+
+        span {
+            color: #64D72F;
+        }
+
+        hr {
+            margin-top: 10px;
+        }
+    }
+}
+
+//---------------Acitivities container------------------//
+.act__container {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    grid-gap: 10px;
+    justify-content: center;
+
+    @include on('md') {
+        grid-template-columns: 220px 220px 220px;
+        grid-gap: 10px;
+    }
+
+    @include on('xl') {
+        grid-template-columns: 330px 330px 330px;
+        grid-gap: 15px;
+    }
+
+    @include on('xxl') {
+        grid-template-columns: 400px 400px 400px;
+        grid-gap: 20px;
+    }
+
+    &__card {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        transition: all ease 0.2s;
+
+        &:hover {
+            filter: brightness(80%);
+        }
+
+        &__img {
+            position: relative;
+            width: 100%;
+            height: 92px;
+
+            @include on('md') {
+                height: 135px;
+            }
+
+            @include on('xl') {
+                height: 204px;
+            }
+
+            @include on('xxl') {
+                height: 247px;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px 10px 0 0;
+            }
+        }
+
+        &__desc {
+            padding: 19px;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 8px;
+            line-height: 11px;
+            color: #18A0FB;
+            //limit 3 line
+            max-height: calc(8px * 4 + 19px);
+            overflow: hidden;
+
+            @include on('md') {
+                font-size: 14px;
+                max-height: calc(14px * 4 + 19px);
+                line-height: 18px;
+            }
+
+            @include on('xl') {
+                font-size: 18px;
+                max-height: calc(18px * 4 + 19px);
+                line-height: 24px;
+            }
+
+            @include on('xxl') {
+                font-size: 24px;
+                max-height: calc(24px * 4 + 19px);
+                line-height: 29px;
+            }
+        }
+
+        &__icon {
+            align-self: flex-end;
+
+            span {
+                padding: 0px 11px 7px 0px;
+                font-size: 24px;
+                color: transparent;
+                -webkit-text-stroke: 2px tomato;
+            }
+        }
+    }
+}
+//----------------------Favourite onlick------------------------//
+.heart {
+    span {
+        color: tomato !important;
+    }
+}
+.heart-line {
+    span {
+        color: transparent !important;
+    }
+}
+
+//----------------------Custom Owl Carousel---------------------//
+::deep .owl-nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .owl-prev, .owl-next:hover{
+        background-color: transparent !important;
+    }
+    span {
+        font-size: 40px;
+        color: $white;
+        transition: all 0.3s linear;
+        border-radius: 100% !important;
+        background-color: $blue !important;
+
+        &:hover {
+            filter: blur(90%);
+        }
+    }
+}
+
+::deep .owl-drag {
+    cursor: initial !important;
+}

@@ -1,0 +1,122 @@
+﻿@inject IJSRuntime JSRuntinme;
+
+<section class="other-act">
+    <div class="other-act__title">
+        <h3>Hoạt động khác <span>của tổ chức</span></h3>
+        <hr>
+    </div>
+    <div class="owl-carousel owl-theme">
+        <div class="item">
+            <div class="act__container">
+                <div class="act__container__card" id="kiemtra">
+                    <div class="act__container__card__img">
+                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                    </div>
+                    <div class="act__container__card__desc">
+                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
+                    </div>
+                    <div class="act__container__card__icon">
+                        <div class="@typeButton"  @onclick="AnimateHeart">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="act__container__card">
+                    <div class="act__container__card__img">
+                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                    </div>
+                    <div class="act__container__card__desc">
+                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
+                    </div>
+                    <div class="act__container__card__icon">
+                        <div class="@typeButton" @onclick="AnimateHeart">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="act__container__card">
+                    <div class="act__container__card__img">
+                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                    </div>
+                    <div class="act__container__card__desc">
+                        <p>
+                            Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19
+                        </p>
+                    </div>
+                    <div class="act__container__card__icon">
+                        <div class="@typeButton" @onclick="AnimateHeart">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="act__container">
+                <div class="act__container__card" id="kiemtra">
+                    <div class="act__container__card__img">
+                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                    </div>
+                    <div class="act__container__card__desc">
+                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
+                    </div>
+                    <div class="act__container__card__icon">
+                        <div class="@typeButton" @onclick="AnimateHeart">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="act__container__card">
+                    <div class="act__container__card__img">
+                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                    </div>
+                    <div class="act__container__card__desc">
+                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
+                    </div>
+                    <div class="act__container__card__icon">
+                        <div  class="@typeButton" @onclick="AnimateHeart">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="act__container__card">
+                    <div class="act__container__card__img">
+                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                    </div>
+                    <div class="act__container__card__desc">
+                        <p>
+                            Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19
+                        </p>
+                    </div>
+                    <div class="act__container__card__icon">
+                        <div class="@typeButton" @onclick="AnimateHeart" >
+                            <span class="material-icons">favorite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+
+    private string typeButton = "heart-line";
+
+    private void AnimateHeart()
+    {
+        if (typeButton == "heart")
+        {
+            typeButton = "heart-line";
+        }
+        else
+        {
+            typeButton = "heart";
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
+    }
+}

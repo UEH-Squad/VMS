@@ -4,7 +4,7 @@
 
 
 <form action="/" method="post" class="my-search-box d-flex mb-5">
-    <input type="text" value=@myInputValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+    <input type="text" value=@mySearchValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
     <div class="my-search-box__icon-wrapper d-flex align-items-center">
         <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn" >
             close
@@ -28,83 +28,71 @@
     </div>
 </div>
 
-<form class="filter-bar d-flex mb-5">
-    <div class="filter-item filter-item-city position-relative me-4">
-        <select name="abc" class="filter-item__select-city js-states form-control">
-            <option value=""></option>
-            <option value="hochiminh">Hồ Chí Minh</option>
-            <option value="longan">Long An</option>
-            <option value="lamdong">Lâm Đồng</option>
-            <option value="quangtri">Quảng Trị</option>
-            <option value="binhdinh">Bình Định</option>
-            <option value="hanoi">Hà Nội</option>
-            <option value="danang">Đà Nẵng</option>
-            <option value="cantho">Cần Thơ</option>
-        </select>
+<form class="filter-bar d-flex justify-content-between mb-5">
+    <div class="filter-item filter-item-city position-relative">
+        <div @onclick="ToggleCityDropdown" class="popup-btn @(haveCityValue?"bg-grey":"")">@cityChoosenValue</div>
+        <div class="my-dropdown @(isCityShow ? "d-block" : "")">
+            <ul>
+                @for(int i = 0; i < 10; i++)
+            {
+                    int id = i;
+                <li @onclick="() => ChooseCityValue(id)">@nameCityValue @(id + 1)</li>
+            }
+            </ul>
+        </div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
-    <div class="filter-item filter-item-district position-relative me-4">
-        <select name="abc" class="filter-item__select-district js-states form-control">
-            <option value=""></option>
-            <option value="hochiminh-quan1">Quận 1</option>
-            <option value="hochiminh-quanthuduc">Quận Thủ Đức</option>
-            <option value="hochiminh-quan10">Quận 10</option>
-            <option value="longan-benluc">Bến Lức</option>
-            <option value="longan-tanan">Tân An</option>
-            <option value="longan-thuthua">Thủ Thừa</option>
-            <option value="quangtri1">Quảng Trị 1</option>
-            <option value="quangtri2">Quảng Trị 2</option>
-            <option value="quangtri3">Quảng Trị 3</option>
-            <option value="binhdinh1">Bình Định 1</option>
-            <option value="binhdinh2">Bình Định 2</option>
-            <option value="hanoi1">Hà Nội 1</option>
-            <option value="hanoi2">Hà Nội 2</option>
-            <option value="danang1">Đà Nẵng 1</option>
-            <option value="danang2">Đà Nẵng 2</option>
-            <option value="cantho1">Cần Thơ 1</option>
-            <option value="cantho2">Cần Thơ 2</option>
-        </select>
+    <div class="filter-item filter-item-district position-relative">
+        <div @onclick="ToggleDistrictDropdown" class="popup-btn @(haveDistrictValue?"bg-grey":"")">@districtChoosenValue</div>
+        <div class="my-dropdown @(isDistrictShow ? "d-block" : "")">
+            <ul>
+                @for (int i = 0; i < 10; i++)
+                {
+                    int id = i;
+                    <li @onclick="() => ChooseDistrictValue(id)">@nameDistrictValue @(id + 1)</li>
+                }
+            </ul>
+        </div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
-    <div class="filter-item filter-item-organization position-relative me-4">
-        <select name="abc" class="filter-item__select-organization js-states form-control">
-            <option value=""></option>
-            <option value="hochiminh">Hồ Chí Minh</option>
-            <option value="longan">Long An</option>
-            <option value="lamdong">Lâm Đồng</option>
-            <option value="quangtri">Quảng Trị</option>
-            <option value="binhdinh">Bình Định</option>
-            <option value="hanoi">Hà Nội</option>
-            <option value="danang">Đà Nẵng</option>
-            <option value="cantho">Cần Thơ</option>
-        </select>
+    <div class="filter-item filter-item-organization position-relative">
+        <div @onclick="ToggleOrganizationDropdown" class="popup-btn @(haveOrganizationValue?"bg-grey":"")">@organizationChoosenValue</div>
+        <div class="my-dropdown @(isOrganizationShow ? "d-block" : "")">
+            <ul>
+                @for (int i = 0; i < 10; i++)
+                {
+                    int id = i;
+                    <li @onclick="() => ChooseOrganizationValue(id)">@nameOrganizationValue @(id + 1)</li>
+                }
+            </ul>
+        </div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
-    <div class="filter-item position-relative me-4">
-        <div @onclick="ShowAreasPopup" class="popup-btn @backgroundColorAreas">Lĩnh vực</div>
+    <div class="filter-item position-relative">
+        <div @onclick="ShowAreasPopup" class="popup-btn @(haveAreasValue?"bg-grey":"")">Lĩnh vực</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
-    <div class="filter-item position-relative me-4">
-        <div @onclick="ShowSkillsPopup" class="popup-btn @backgroundColorSkills">Kỹ năng</div>
+    <div class="filter-item position-relative">
+        <div @onclick="ShowSkillsPopup" class="popup-btn @(haveSkillsValue?"bg-grey":"")">Kỹ năng</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
-    <button type="submit" class="filter-btn me-4">Lọc</button>
-    <button type="button" class="clear-filter-btn">Xóa lọc</button>
+    <button type="submit" class="filter-btn">Lọc</button>
+    <button @onclick="ClearFilter" type="button" class="clear-filter-btn">Xóa lọc</button>
 </form>
 
 
@@ -126,25 +114,91 @@
 
 
 @code {
+    bool isCityShow = false;
+    bool haveCityValue = false;
+    bool isDistrictShow = false;
+    bool haveDistrictValue = false;
+    bool isOrganizationShow = false;
+    bool haveOrganizationValue = false;
+    bool haveAreasValue = false;
+    bool haveSkillsValue = false;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    string cityChoosenValue = "Tỉnh/Thành phố";
+    string districtChoosenValue = "Quận/Huyện";
+    string organizationChoosenValue = "Tổ chức";
+
+    string nameCityValue = "Hồ Chí Minh";
+    string nameDistrictValue = "Quận Thủ Đức";
+    string nameOrganizationValue = "Hội đồng đồ ăn xuyên Việt";
+    string mySearchValue = "";
+
+    //function for city dropdowns
+    void ToggleCityDropdown()
     {
-        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-city", "Tỉnh/Thành phố", ".filter-item-city");
-        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-district", "Quận/Huyện", ".filter-item-district");
-        await JSRuntime.InvokeVoidAsync("vms.FilterBox", ".filter-item__select-organization", "Tổ chức", ".filter-item-organization");
+        isCityShow = !isCityShow;
+    }
+    void ChooseCityValue(int id)
+    {
+        cityChoosenValue = nameCityValue + " " + (id + 1).ToString();
+        ToggleCityDropdown();
+        haveCityValue = true;
     }
 
-    string myInputValue = "";
-    string backgroundColorAreas = "";
-    string backgroundColorSkills = "";
+    //function for district dropdowns
+    void ToggleDistrictDropdown()
+    {
+        isDistrictShow = !isDistrictShow;
+    }
+    void ChooseDistrictValue(int id)
+    {
+        districtChoosenValue = nameDistrictValue + " " + (id + 1).ToString();
+        ToggleDistrictDropdown();
+        haveDistrictValue = true;
+    }
+    //function for organization dropdowns
+    void ToggleOrganizationDropdown()
+    {
+        isOrganizationShow = !isOrganizationShow;
+    }
+    void ChooseOrganizationValue(int id)
+    {
+        organizationChoosenValue = nameOrganizationValue + " " + (id + 1).ToString();
+        ToggleOrganizationDropdown();
+        haveOrganizationValue = true;
+    }
 
+    //Clear search box button
     void UpdateInstanceValue(ChangeEventArgs e)
     {
-        myInputValue = e.Value.ToString();
+        mySearchValue = e.Value.ToString();
     }
     void ClearSearchBox()
     {
-        myInputValue = "";
+        mySearchValue = "";
+    }
+
+    void CheckBackgroundOfAreaAndSkills()
+    {
+        haveAreasValue = false;
+        haveSkillsValue = false;
+        for (int i = 0; i < 12; i++)
+        {
+            if (choosenAreasList[i])
+            {
+                haveAreasValue = true;
+            }
+        }
+
+        for (int i = 0; i < 15; i++)
+        {
+            for (int j = 0; j < 11; j++)
+            {
+                if (choosenSkillsList[i, j])
+                {
+                    haveSkillsValue = true;
+                }
+            }
+        }
     }
 
     bool[] choosenAreasList = new bool[12];
@@ -161,11 +215,8 @@
         var areasParameter = new ModalParameters();
         areasParameter.Add("choosenAreasList", choosenAreasList);
         var areasModal = Modal.Show<AreasPopup>("", areasParameter, options);
-        var isClickSave = await areasModal.Result;
-        if (backgroundColorAreas == "")
-        {
-            backgroundColorAreas = isClickSave.Data.ToString();
-        }
+        await areasModal.Result;
+        CheckBackgroundOfAreaAndSkills();
     }
 
     bool[,] choosenSkillsList = new bool[15,11];
@@ -181,10 +232,18 @@
         var skillsParameter = new ModalParameters();
         skillsParameter.Add("choosenSkillsList", choosenSkillsList);
         var skillsModal = Modal.Show<SkillsPopup>("", skillsParameter, options);
-        var isClickSave = await skillsModal.Result;
-        if (backgroundColorSkills == "")
-        {
-            backgroundColorSkills = isClickSave.Data.ToString();
-        }
+        await skillsModal.Result;
+        CheckBackgroundOfAreaAndSkills();
+    }
+
+    //clear filter bar
+    void ClearFilter()
+    {
+        cityChoosenValue = "Tỉnh/Thành phố";
+        districtChoosenValue = "Quận/Huyện";
+        organizationChoosenValue = "Tổ chức";
+        choosenAreasList = new bool[12];
+        choosenSkillsList = new bool[15, 11];
+        haveCityValue = haveDistrictValue = haveOrganizationValue = haveAreasValue = haveSkillsValue = false;
     }
 }

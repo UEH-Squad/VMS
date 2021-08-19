@@ -46,7 +46,6 @@
     public bool[,] choosenSkillsList { get; set; }
     bool isShowExpertise = false;
     bool isShowSubSkills = false;
-    bool isThereSelectedItem = false;
     bool isThereSelectedSubItem = false;
     int numberOfSkills = 15;
     int numberOfSubSkills = 10;
@@ -85,24 +84,12 @@
     void ChangeStateAndCheckSubPopup(int id)
     {
         choosenSkillsList[id,0] = !choosenSkillsList[id,0];
-        isThereSelectedItem = false;
-        for (int j = 0; j < numberOfSkills; j++)
-        {
-            if (choosenSkillsList[j,0])
-            {
-                isThereSelectedItem = true;
-            }
-        }
 
         if (id == 0)
         {
             ShowSubSkills();
             choosenSkillsList[id,0] = true;
-            if (isThereSelectedSubItem || isShowSubSkills)
-            {
-                isThereSelectedItem = true;
-            }
-            else
+            if ((isThereSelectedSubItem == false) && (isShowSubSkills == false))
             {
                 choosenSkillsList[id, 0] = boolArraySkills[id, 0] = false;
             }
@@ -111,11 +98,7 @@
         {
             ShowExpertise();
             choosenSkillsList[id,0] = true;
-            if (isThereSelectedSubItem || isShowExpertise)
-            {
-                isThereSelectedItem = true;
-            }
-            else
+            if ((isThereSelectedSubItem == false) && (isShowExpertise == false))
             {
                 choosenSkillsList[id, 0] = boolArraySkills[id, 0] = false;
             }
@@ -188,20 +171,13 @@
                 }
             }
         }
-        SkillsModal.CloseAsync(ModalResult.Ok(""));
+        SkillsModal.CloseAsync();
     }
 
     void SaveModal()
     {
         choosenSkillsList = boolArraySkills;
-        if (isThereSelectedItem)
-        {
-            SkillsModal.CloseAsync(ModalResult.Ok("bg-grey"));
-        }
-        else
-        {
-            SkillsModal.CloseAsync(ModalResult.Ok(""));
-        }
+        SkillsModal.CloseAsync();
     }
 
 }

@@ -8,5 +8,3 @@ export const FilterCarousel = () => homepage.filterCarousel();
 export const LogoBanerCarousel = () => homepage.logoBanerCarousel();
 export const GetUserLocation = () => homepage.getUserLocation();
 export const ShowResult = () => homepage.showResult();
-
-export const FilterBox = (className, placeHolder, dropdownParentNode) => activitySearch.filterBox(className, placeHolder, dropdownParentNode);

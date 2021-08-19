@@ -29,7 +29,6 @@
     [Parameter]
     public bool[] choosenAreasList { get; set; }
     int numberOfItems = 12;
-    bool isThereSelectedItem = false;
 
     //create a curent list incase user click close button but don't save
     bool[] boolArray = new bool[12];
@@ -43,14 +42,6 @@
     void ChangeState(int id)
     {
         choosenAreasList[id] = !choosenAreasList[id];
-        isThereSelectedItem = false;
-        for (int j = 0; j < numberOfItems; j++)
-        {
-            if (choosenAreasList[j])
-            {
-                isThereSelectedItem = true;
-            }
-        }
     }
 
     [CascadingParameter]
@@ -68,20 +59,13 @@
                 choosenAreasList[j] = true;
             }
         }
-        AreasModal.CloseAsync(ModalResult.Ok(""));
+        AreasModal.CloseAsync();
 
     }
 
     void SaveModal()
     {
         choosenAreasList = boolArray;
-        if (isThereSelectedItem)
-        {
-            AreasModal.CloseAsync(ModalResult.Ok("bg-grey"));
-        }
-        else
-        {
-            AreasModal.CloseAsync(ModalResult.Ok(""));
-        }
+        AreasModal.CloseAsync();
     }
 }

@@ -1,0 +1,219 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    background-color: rgba(196, 196, 196, 0.38);
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.min-overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(196, 196, 196, 0.38);
+    display: none;
+    z-index: 3;
+
+    .report-success {
+        position: absolute;
+        height: 162px;
+        width: 676px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+        background-color: white;
+        border-radius: 10px;
+        font-size: 36px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .min-overlay--icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 33px;
+            height: 33px;
+            background-color: $grey-bg;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            .material-icons {
+                font-size:22px;
+            }
+        }
+
+        .green-text {
+            color: $green;
+        }
+
+        .blue-text {
+            color: $blue;
+        }
+    }
+}
+
+.container {
+    position: absolute;
+    width: 720px;
+    height:740px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: $grey-text;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0 60px 60px 60px;
+    font-size: 24px;
+    overflow-y:scroll;
+
+    .icon-close-popup {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        display: flex;
+        background-color: $grey-bg;
+        cursor: pointer;
+
+        .material-icons {
+            margin: auto;
+            font-size: 22px;
+        }
+    }
+    .title {
+        margin-top:45px;
+        display: flex;
+        font-weight: 500;
+    }
+
+    .check {
+        color: red;
+        margin-left: 5px;
+    }
+}
+/*----title Báo cáo hoạt động----*/
+.title-header {
+    font-size: 48px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    letter-spacing: 2px;
+
+    .title-header__report {
+        color: $green;
+        margin-right: 14px;
+    }
+
+    .title-header__activity {
+        color:$blue;
+    }
+}
+/*----end title Báo cáo hoạt động----*/
+
+/*-----reporting reason------*/
+.dropdown .my-btn {
+    width: 100%;
+    border: 1px solid $grey-text;
+}
+.dropdown-menu {
+    width: 100%;
+    box-shadow: 5px 5px 10px 10px #dee2e687;
+    font-size:14px;
+    > li {
+        margin:5px 0;
+    }
+}
+.dropdown-toggle::after {
+    margin: 15px;
+    float: right;
+    font-size: 35px;
+}
+/*-----end reporting reason------*/
+
+/*-----report description-----*/
+.form-control {
+    border: 1px solid $grey-text;
+}
+/*-----end report description-----*/
+
+/*---attached proof-----*/
+.add-file {
+    border-radius: 4px;
+    border: 1px solid $grey-text;
+    height: 55px;
+    display: flex;
+
+    .add-file__block {
+        margin: auto;
+
+
+        .my-icon-upload {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: $grey-text;
+        }
+
+        .block-icon-text{
+            display:flex;
+            margin-top:5px;
+        }
+
+        .inputfile {
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .inputfile + label {
+            font-size: 24px;
+            color: #333;
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+}
+/*----end attached proof----*/
+
+
+/*button report*/
+.btn-accept {
+    display: flex;
+    margin-top: 70px;
+
+    .btn {
+        margin: auto;
+        background-color: $green;
+        color: #fff;
+        font-size: 24px;
+        border: none;
+        width: 280px;
+        height: 62px;
+        font-weight: 600;
+    }
+    .btn:hover{
+        background-color:$green-bold;
+    }
+}
+/*end button report*/
+

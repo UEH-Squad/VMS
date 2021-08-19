@@ -1,0 +1,130 @@
+﻿@inject IJSRuntime JSRuntinme
+    <div class="overlay">
+
+        <div class="min-overlay @(isShowReport ? "d-block" : "")">
+            <div class="report-success">
+
+                <div class="min-overlay--icon">
+                    <span @onclick="ShowModalReportSucess" class="material-icons">
+                        close
+                    </span>
+                </div>
+
+                <div class="report-success__text">
+                    <span class="green-text">Bạn đã</span>
+                    <span class="blue-text">báo cáo thành công</span>
+                </div>
+
+            </div>
+        </div>   
+
+        <div class="container">
+
+            <div class="icon-close-popup">
+                <span @onclick="CloseModal" class="material-icons">close</span>
+            </div>
+            
+
+            <div class="title-header">
+                <span class="title-header__report">Báo cáo</span>
+                <span class="title-header__activity">hoạt động</span>
+            </div>
+
+            <div class="reporting-reason dropdown">
+                <div class="title title-reason">
+                    <h4 class="title-discript__text">Lý do bạn muốn báo cáo</h4>
+                    <h4 class="title-discript__check check">(*)</h4>
+                </div>
+                <button class="btn dropdown-toggle my-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <input type="checkbox">
+                            <span>Hoạt động không có thật</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <input type="checkbox">
+                            <span>Hoạt động không không tương thích với nội dung đã đề cập</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <input type="checkbox">
+                            <span>Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <input type="checkbox">
+                            <span>Nội dung hoạt động không phù hợp</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <input type="checkbox">
+                            <span>Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item" href="#">
+                            <input type="checkbox">
+                            <span>Khác</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="report-description mb-3">
+                <div class="title title-discript">
+                    <h4 class="title-discript__text">Mô tả về báo cáo</h4>
+                    <h4 class="title-discript__check check">(*)</h4>
+                </div>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+            </div>
+
+            <div class="attached-proof">
+                <div class="title title-attach">
+                    <h4 class="title-attach__text">Minh chứng đính kèm</h4>
+                    <h4 class="title-attach__check check"> (*)</h4>
+                </div>
+                <div class="add-file">
+                    <div class="add-file__block">
+                        <input type="file" name="file" id="file" class="inputfile" />
+                        <label for="file">
+                            <span class="block-icon-text">
+                                <span class="material-icons my-icon-upload">cloud_upload</span>
+                                <span class="file__text">Kéo hoặc thả hình ảnh liên quan tại đây</span>
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="btn-accept">
+                <button @onclick="ShowModalReportSucess" type="submit" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    Báo cáo hoạt động
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+@code {
+    [CascadingParameter]
+    private BlazoredModalInstance ReportModal { get; set; }
+    void CloseModal()
+    {
+        ReportModal.CloseAsync();
+    }
+
+    bool isShowReport = false;
+    void ShowModalReportSucess()
+    {
+        isShowReport = !isShowReport;
+    }
+
+}

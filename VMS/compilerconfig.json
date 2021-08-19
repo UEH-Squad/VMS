@@ -54,5 +54,9 @@
   {
     "outputFile": "Pages/ActivityInfoPage/Rightrail.razor.css",
     "inputFile": "Pages/ActivityInfoPage/Rightrail.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/PopUpReport.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/PopUpReport.razor.scss"
   }
 ]

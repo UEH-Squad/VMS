@@ -1,2 +1,104 @@
-﻿body {
+﻿@import '../../Resources/scss/common/_variables';
+body {
 }
+
+.container {
+    margin-top:50px;
+    padding:0;
+}
+
+.inside-the-border {
+    float:right;
+    width: 530px;
+    height: 870px;
+    border-radius: 10px;
+    border: 1px solid #C4C4C4
+}
+/* ------icons------- */
+.icons {
+    display: flex;
+    float: right;
+    margin:30px 30px 0 0;
+
+    .icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #18A0FB;
+        display: flex;
+        margin: 7px;
+
+        .my-icons {
+            margin: auto;
+            color: white;
+            font-size: 25px;
+        }
+    }
+    .tooltip {
+        margin: 0;
+        color: #64D72F;
+        visibility: hidden;
+    }
+}
+
+.icon-tooltip:hover .tooltip {
+    visibility: visible;
+}
+/* -----end icons----- */
+
+/* -----about-infor----- */
+.about-infor {
+    margin: 130px 44px 0 44px;
+
+    .titles {
+        padding:10px 0;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 30px;
+        color:$blue;
+    }
+
+    .contents {
+        color:$grey-text;
+        margin-left: 35px;
+        font-size: 24px;
+        font-weight: 300;
+    }
+}
+
+/* ------end about-infor------- */
+
+/* -----button sign up------ */
+.btn-sign-up {
+    width: 200px;
+    height: 60px;
+    border-radius: 4px;
+    background-color: #64D72F;
+    margin: 50px 165px 0 165px;
+    border: none;
+    display: flex;
+
+    .btn-sign-up__text {
+        margin: auto;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+    }
+}
+.btn-sign-up:hover {
+    background-color:$green-bold;
+    cursor: pointer;
+}
+/* ------end button sign up------- */
+
+/*------report------ */
+.report {
+    float: right;
+    color: #F14747;
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 10px;
+    background-color:unset;
+    border:none;    
+}
+/* ------end report-----*/

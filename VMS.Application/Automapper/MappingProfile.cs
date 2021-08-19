@@ -12,6 +12,8 @@ namespace VMS.Application.Automapper
             CreateMap<CreateActivityViewModel, Activity>();
             CreateMap<Activity, CreateActivityViewModel>();
             CreateMap<Activity, ViewActivityViewModel>();
+            CreateMap<Area, AreaViewModel>();
+            CreateMap<Activity, UserWithActivityViewModel>();
         }
     }
 }

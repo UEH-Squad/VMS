@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -17,125 +16,103 @@ namespace VMS.Application.Services
 {
     public class UserWithActService : BaseService, IUserWithActService
     {
-        protected readonly IIdentityService _identityService;
-        public UserWithActService(IIdentityService identityService, IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
+        private readonly IIdentityService _identityService;
+
+        public UserWithActService(IIdentityService identityService,
+                                  IRepository repository,
+                                  IDbContextFactory<VmsDbContext> dbContextFactory,
+                                  IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
             _identityService = identityService;
         }
-        public async Task<List<UserWithActivityViewModel>> GetActivitiesWithUserLocAsync(double Lat, double Long)
-        {
-            DbContext context = _dbContextFactory.CreateDbContext();
-            List<Activity> activities = await _repository.GetListAsync<Activity>(context);
 
-            IEnumerable<ActivityViewModel> Activities = activities.Select(x => new ActivityViewModel
+        public async Task<List<UserWithActivityViewModel>> GetRelatedActivities(string userId, UserLocation location, bool isFeatured = false)
+        {
+            await using DbContext dbContext = _dbContextFactory.CreateDbContext();
+            List<Activity> activities;
+
+            if (string.IsNullOrEmpty(userId) && location == null)
             {
-                Id = x.Id,
-                Name = x.Name,
-                Latitude = x.Latitude,
-                Longitude = x.Longitude,
-                MemberQuantity = x.MemberQuantity
+                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
+                return _mapper.Map<List<UserWithActivityViewModel>>(activities);
             }
-            );
 
-            List<ActivityViewModel> activitiesList = Activities.ToList();
-            IEnumerable<UserWithActivityViewModel> userWithActivity = activitiesList.Select(x => new UserWithActivityViewModel
+            if (!string.IsNullOrEmpty(userId) && location == null)
             {
-                ActivityId = x.Id,
-                ActivityName = x.Name,
-                Distance = Haversine(Lat, Long, x.Latitude, x.Longitude),
-                MemberQuantity = x.MemberQuantity
-            });
-            return userWithActivity.OrderBy(x => x.Distance).ToList();
+                int? currentUserDistricts = _identityService.GetCurrentUserWithAddresses()?.UserAddresses
+                    .FirstOrDefault(x => x.AddressPath.Depth == 2)
+                    ?.AddressPathId;
+                if (currentUserDistricts.HasValue)
+                {
+                    activities = await GetRelatedActivitiesForUsersTurnOffLocationAsync(isFeatured, currentUserDistricts, dbContext);
+                    return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+                }
+
+                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
+                return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+            }
+
+            activities = await GetRelatedActivitiesWhenLocationTurnedOnAsync(location, isFeatured, dbContext);
+            return _mapper.Map<List<UserWithActivityViewModel>>(activities);
         }
-        static double Haversine(double userLat, double userLong, double activityLat, double activityLon)
+
+        private async Task<List<Activity>> GetRelatedActivitiesWhenLocationTurnedOnAsync(UserLocation location, bool isFeatured, DbContext dbContext)
         {
-            double latDistance = (Math.PI / 180) * (activityLat - userLat);
-            double longDistance = (Math.PI / 180) * (activityLon - userLong);
-            double userLatRadian = (Math.PI / 180) * userLat;
-            double actLatRadian = (Math.PI / 180) * activityLat;
+            Specification<Activity> spec = new()
+            {
+                OrderBy = GetOrderByClause(isFeatured)
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
+            activities = activities.OrderByDescending(x => Haversine(location.Lat, location.Long, x.Latitude, x.Longitude))
+                                   .Take(4)
+                                   .ToList();
+            return activities;
+        }
+
+        private async Task<List<Activity>> GetRelatedActivitiesForUsersTurnOffLocationAsync(bool isFeatured, int? currentUserDistricts, DbContext dbContext)
+        {
+            Specification<Activity> spec = new()
+            {
+                Includes = x => x.Include(y => y.ActivityAddresses).ThenInclude(y => y.AddressPath),
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    x => x.ActivityAddresses.Any(y => y.AddressPath.Id == currentUserDistricts)
+                },
+                OrderBy = GetOrderByClause(isFeatured),
+                Take = 4
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
+            return activities;
+        }
+
+        private async Task<List<Activity>> GetRelatedActivitiesForNonUsersTurnOffLocationAsync(bool isFeatured, DbContext dbContext)
+        {
+            Specification<Activity> spec = new()
+            {
+                OrderBy = GetOrderByClause(isFeatured),
+                Take = 4
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
+            return activities;
+        }
+
+        private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured)
+            => isFeatured ? (x => x.OrderByDescending(y => y.MemberQuantity)) : (x => x.OrderByDescending(y => y.Id));
+
+        private static double Haversine(double lat1, double long1, double lat2, double long2)
+        {
+            /* Source: https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/ */
+
+            double latDistance = (Math.PI / 180) * (lat2 - lat1);
+            double longDistance = (Math.PI / 180) * (long2 - long1);
+            double userLatRadian = (Math.PI / 180) * lat1;
+            double actLatRadian = (Math.PI / 180) * lat2;
             double formula = Math.Pow(Math.Sin(latDistance / 2), 2) + Math.Pow(Math.Sin(longDistance / 2), 2) * Math.Cos(userLatRadian) * Math.Cos(actLatRadian);
             double distance = Math.Round(2 * 6371 * Math.Asin(Math.Sqrt(formula)), 2);
             return distance;
-            /* Source: https://www.geeksforgeeks.org/haversine-formula-to-find-distance-between-two-points-on-a-sphere/ */
-        }
-
-        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithUserLocAsync(double Lat, double Long)
-        {
-            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
-            List<UserWithActivityViewModel> newestActivities = nearestActivities.Take(4).ToList();
-            return newestActivities.OrderByDescending(x => x.ActivityId).ToList();
-        }
-
-        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithUserLocAsync(double Lat, double Long)
-        {
-            List<UserWithActivityViewModel> nearestActivities = await GetActivitiesWithUserLocAsync(Lat, Long);
-            List<UserWithActivityViewModel> featuredtActivities = nearestActivities.Take(4).ToList();
-            return featuredtActivities.OrderByDescending(x => x.MemberQuantity).ToList();
-        }
-
-
-
-        public async Task<List<UserWithActivityViewModel>> GetActivitiesWithoutUserLocAsync()
-        {
-            DbContext context = _dbContextFactory.CreateDbContext();
-            List<Activity> activities = await _repository.GetListAsync<Activity>(context);
-            IEnumerable<UserWithActivityViewModel> userWithActivity = activities.Select(x => new UserWithActivityViewModel
-            {
-                ActivityId = x.Id,
-                ActivityName = x.Name,
-                MemberQuantity = x.MemberQuantity
-            }
-            );
-            return userWithActivity.ToList();
-        }
-        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithoutUserLocAsync()
-        {
-            List<UserWithActivityViewModel> newestActivities = await GetActivitiesWithoutUserLocAsync();
-            return newestActivities.OrderByDescending(x => x.ActivityId).Take(4).ToList();
-        }
-        public async Task<List<UserWithActivityViewModel>> GetFeaturedActivitiesWithoutUserLocAsync()
-        {
-            List<UserWithActivityViewModel> featuredActivities = await GetActivitiesWithoutUserLocAsync();
-            return featuredActivities.OrderByDescending(x => x.MemberQuantity).Take(4).ToList();
-        }
-        public async Task<List<UserWithActivityViewModel>> GetActivitiesWithDistristAsync()
-        {
-            DbContext context = _dbContextFactory.CreateDbContext();
-            Specification<Activity> activitySpec = new()
-            {
-                Includes = a => a.Include(x => x.ActivityAddresses)
-            };
-            List<Activity> activities = await _repository.GetListAsync<Activity>(context, activitySpec);
-            User user = _identityService.GetCurrentUserWithAddresses();
-            ICollection<UserAddress> userAddress = user.UserAddresses;
-            var userDistrict = userAddress.FirstOrDefault(x => x.AddressPath.Depth == 2);
-            List<Activity> activityList = new List<Activity>();
-            foreach(var act in activities)
-            {
-                ActivityAddress activityAddress = act.ActivityAddresses.FirstOrDefault(x => x.AddressPathId == userDistrict.AddressPathId);
-                if (activityAddress != null)
-                {
-                    activityList.Add(act);
-                }
-            }
-            IEnumerable<UserWithActivityViewModel> userWithActivity = activityList.Select(x => new UserWithActivityViewModel
-            {
-                ActivityId = x.Id,
-                ActivityName = x.Name,
-                MemberQuantity = x.MemberQuantity
-            }
-            );
-            return userWithActivity.ToList();
-        }
-        public async Task<List<UserWithActivityViewModel>> GetNewestActivitiesWithDistristAsync()
-        {
-            List<UserWithActivityViewModel> newestActivities = await GetActivitiesWithDistristAsync();
-            return newestActivities.OrderByDescending(x => x.ActivityId).Take(4).ToList();
-        }
-        public async Task<List<UserWithActivityViewModel>> GetfeaturedActivitiesWithDistristAsync()
-        {
-            List<UserWithActivityViewModel> featuredActivities = await GetActivitiesWithDistristAsync();
-            return featuredActivities.OrderByDescending(x => x.MemberQuantity).Take(4).ToList();
         }
     }
 }

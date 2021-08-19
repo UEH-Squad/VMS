@@ -35,20 +35,7 @@
         User user = IdentityService.GetCurrentUser();
         UserLocation location = await JsRuntime.InvokeAsync<UserLocation>("vms.GetUserLocation");
 
-        if (location != null)
-        {
-            newestActivities = await UserWithActService.GetNewestActivitiesWithUserLocAsync(location.Lat, location.Long);
-            featuredActivities = await UserWithActService.GetFeaturedActivitiesWithUserLocAsync(location.Lat, location.Long);
-        }
-        else if (user == null)
-        {
-            newestActivities = await UserWithActService.GetNewestActivitiesWithoutUserLocAsync();
-            featuredActivities = await UserWithActService.GetFeaturedActivitiesWithoutUserLocAsync();
-        }
-        else
-        {
-            newestActivities = await UserWithActService.GetNewestActivitiesWithDistristAsync();
-            featuredActivities = await UserWithActService.GetfeaturedActivitiesWithDistristAsync();
-        }
+        newestActivities = await UserWithActService.GetRelatedActivities(user?.Id, location);
+        featuredActivities = await UserWithActService.GetRelatedActivities(user?.Id, location, true);
     }
 }

@@ -27,8 +27,8 @@
   z-index: 3; }
   .min-overlay .report-success {
     position: absolute;
-    height: 162px;
-    width: 676px;
+    height: 90%;
+    width: 51%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

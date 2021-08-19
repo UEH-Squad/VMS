@@ -1,73 +1,144 @@
-﻿.blazored-modal{
-    height: 100%;
-}
-.form__signUp {
-    background: white;
-    padding: 50px 100px 0 100px;
-    width: 700px;
+﻿.my-signUp {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 3;
 
-    h1 {
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 48px;
-        font-weight: 500;
-        color: #18A0FB;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
-        span {
-            color: #64D72F;
+    .signUp__content {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        margin: auto;
+        margin-top: 20px;
+        border-radius: 10px;
+        background: white;
+        overflow-y: scroll;
+
+        .signUp__exit {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            height: 46px;
+            width: 46px;
+            line-height: 46px;
+            border-radius: 50%;
+            text-align: center;
+            background-color: rgba($color: #C4C4C4, $alpha: 0.5);
         }
     }
 
-    .form-text {
-        margin-bottom: 7px;
-        font-size: 24px;
-        font-weight: 500;
-        color: #515151;
+    .signUp__form {
+        padding: 50px 100px 0 100px;
 
-        span {
-            color: #F14747;
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 48px;
+            font-weight: 500;
+            color: #18A0FB;
+
+            span {
+                color: #64D72F;
+            }
         }
-    }
 
-    textarea, input {
-        border: 1.5px solid #707070;
-    }
+        .form-text {
+            margin-bottom: 7px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #515151;
 
-    .form-control {
-        padding: 15px 0;
-        margin-bottom: 25px;
-        font-size: 24px;
-    }
+            span {
+                color: #F14747;
+            }
+        }
 
-    .input-radio {
-        width: 16px;
-        height: 16px;
-        line-height: 16px;
-        margin-right: 15px;
-    }
+        textarea, input {
+            border: 1.5px solid #707070;
+        }
 
-    .input-radio ~ span {
-        font-size: 24px;
-        font-weight: 300;
-    }
+        .form-control {
+            padding: 15px 0;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
 
-    button {
-        display: block;
-        width: 100%;
-        padding: 20px 0;
-        transform: translateY(45px);
-        background: #18A0FB;
-        font-size: 24px;
-        font-weight: 700;
-        color: white;
+        .input-radio {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            margin-right: 15px;
+        }
 
-        &:hover {
-            background: #0B588C;
+        .input-radio ~ span {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 20px 0;
+            transform: translateY(45px);
+            background: #18A0FB;
+            font-size: 24px;
+            font-weight: 700;
             color: white;
+
+            &:hover {
+                background: #0B588C;
+                color: white;
+            }
         }
     }
-}
 
-::deep .blazored-modal-center {
-    overflow: scroll;
+    .signUp__report {
+        height: 100%;
+        width: 100%;
+        display: none;
+        z-index: 5;
+        background-color: rgba(196, 196, 196, 0.38);
+
+        i {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            background-color: rgba($color: #C4C4C4, $alpha: 0.5);
+        }
+
+        .signUp__report-content {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 6;
+            background: white;
+            width: 45%;
+            padding: 30px 50px;
+            border-radius: 10px;
+            text-align: center;
+
+            h3 {
+                font-size: 36px;
+                font-weight: 500;
+                color: #64D72F;
+
+                span {
+                    color: #18A0FB;
+                }
+            }
+        }
+    }
 }

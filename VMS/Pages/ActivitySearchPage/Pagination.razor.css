@@ -4,89 +4,88 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.act h3 {
+.my-act .act h3 {
+  margin-top: 10px;
   font-size: 24px;
   font-weight: 400;
   color: #18A0FB; }
-  .act h3 span {
+  .my-act .act h3 span {
     color: #64D72F; }
 
-.act__item {
+.my-act .act .act__item {
   background-color: #F3F3F5;
   padding: 30px 10px;
   border-radius: 10px; }
 
-.act__content {
+.my-act .act__content {
   padding: 0 20px;
   position: relative; }
-  .act__content h5 {
+  .my-act .act__content h5 {
     display: flex;
     align-items: center;
     font-size: 14px;
     font-weight: 600; }
-    .act__content h5 i {
+    .my-act .act__content h5 i {
       color: #64D72F;
       margin-right: 5px; }
-  .act__content p {
+  .my-act .act__content p {
     font-size: 18px;
     font-weight: 400; }
-  .act__content span {
+  .my-act .act__content span {
     font-size: 14px;
     font-weight: 400; }
 
-.act__signUp {
+.my-act .act__signUp {
   position: absolute;
   bottom: -10%;
   right: 5%;
   display: flex; }
-  .act__signUp i {
+  .my-act .act__signUp i {
     margin-right: 20px;
     font-size: 36px;
     color: #F14747; }
-  .act__signUp button {
+  .my-act .act__signUp .act__like {
+    display: none; }
+  .my-act .act__signUp button {
     background-color: #64D72F;
     padding: 0px 20px;
     font-size: 20px;
     font-weight: 600;
     color: white; }
-    .act__signUp button:hover {
+    .my-act .act__signUp button:hover {
       background-color: #306C14;
       color: white; }
 
-.featuredAct {
+.my-act .featuredAct {
   margin-left: auto; }
-  .featuredAct .featuredAct__content {
+  .my-act .featuredAct .featuredAct__content {
     position: -webkit-sticky;
     position: sticky;
-    top: 20px; }
-  .featuredAct .featuredAct__card {
+    top: 5%; }
+  .my-act .featuredAct .featuredAct__card {
     position: relative;
     border-radius: 10px;
     margin-bottom: 50px;
     overflow: hidden; }
-    .featuredAct .featuredAct__card:hover .featuredAct__overplay {
+    .my-act .featuredAct .featuredAct__card:hover .featuredAct__overplay {
       height: 100%; }
-  .featuredAct .featuredAct__title {
+  .my-act .featuredAct .featuredAct__title {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
-    padding: 24px;
+    padding: 36px;
     color: white;
     transition: all 0.3s linear; }
-    .featuredAct .featuredAct__title h3 {
+    .my-act .featuredAct .featuredAct__title h3 {
       font-size: 24px;
-      font-weight: 700; }
-    .featuredAct .featuredAct__title i {
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 50%;
-      border: 1px solid white;
-      text-align: center;
-      background-color: rgba(0, 0, 0, 0.44);
-      margin-right: 20px; }
-  .featuredAct .featuredAct__overplay {
+      font-weight: 700;
+      line-height: 30px;
+      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s linear; }
+      .my-act .featuredAct .featuredAct__title h3:hover {
+        transform: translateY(-10px); }
+  .my-act .featuredAct .featuredAct__overplay {
     width: 100%;
     height: 0;
     position: absolute;
@@ -126,9 +125,6 @@
   .pagination .numb.active, .pagination .numb:hover {
     background: #18A0FB;
     color: white; }
-
-.act__like {
-  display: none; }
 
 .lmtext-2, .lmtext-3, .lmtext-5 {
   display: -webkit-box;

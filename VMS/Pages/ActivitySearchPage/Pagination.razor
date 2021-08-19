@@ -1,13 +1,13 @@
 ﻿@inject IJSRuntime JSRuntinme
 
-<section class="my-act">
+<section class="my-act mb-5">
     <div class="container">
         <div class="row ">
             <div class="act col-8" id="act">
 
                 <h3>Có<span>10 hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
                 <div class="act__page-1">
-                    <div class="act__item row my-5">
+                    <div class="act__item row mt-5">
                         <div class="col-3">
                             <img class="w-100" src="img/act.png" alt="">
                         </div>
@@ -25,11 +25,11 @@
                             <div class="act__signUp">
                                 <i class="material-icons act__notLike">favorite_border</i>
                                 <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
+                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
                             </div>
                         </div>
                     </div>
-                    <div class="act__item row my-5">
+                    <div class="act__item row mt-5">
                         <div class="col-3">
                             <img class="w-100" src="img/act.png" alt="">
                         </div>
@@ -47,11 +47,11 @@
                             <div class="act__signUp">
                                 <i class="material-icons act__notLike">favorite_border</i>
                                 <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
+                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
                             </div>
                         </div>
                     </div>
-                    <div class="act__item row my-5">
+                    <div class="act__item row mt-5">
                         <div class="col-3">
                             <img class="w-100" src="img/act.png" alt="">
                         </div>
@@ -69,11 +69,11 @@
                             <div class="act__signUp">
                                 <i class="material-icons act__notLike">favorite_border</i>
                                 <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
+                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
                             </div>
                         </div>
                     </div>
-                    <div class="act__item row my-5">
+                    <div class="act__item row mt-5">
                         <div class="col-3">
                             <img class="w-100" src="img/act.png" alt="">
                         </div>
@@ -91,11 +91,11 @@
                             <div class="act__signUp">
                                 <i class="material-icons act__notLike">favorite_border</i>
                                 <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
+                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
                             </div>
                         </div>
                     </div>
-                    <div class="act__item row my-5">
+                    <div class="act__item row mt-5">
                         <div class="col-3">
                             <img class="w-100" src="img/act.png" alt="">
                         </div>
@@ -113,11 +113,11 @@
                             <div class="act__signUp">
                                 <i class="material-icons act__notLike">favorite_border</i>
                                 <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
+                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
                             </div>
                         </div>
                     </div>
-                    <div class="act__item row my-5">
+                    <div class="act__item row mt-5">
                         <div class="col-3">
                             <img class="w-100" src="img/act.png" alt="">
                         </div>
@@ -135,233 +135,11 @@
                             <div class="act__signUp">
                                 <i class="material-icons act__notLike">favorite_border</i>
                                 <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
+                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
                             </div>
                         </div>
                     </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row my-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i class="material-icons act__notLike">favorite_border</i>
-                                <i class="material-icons act__like">favorite</i>
-                                <button @onclick="@(() => Modal.Show<Signup>())" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
                 <a class="goToDivAct d-none " href="#act">go to div act</a>
             </div>
             <div class="featuredAct col-3 ">
@@ -370,22 +148,13 @@
                         <img class="w-100" src="img/act1.png" alt="">
                         <div class="featuredAct__title">
                             <h3 class="lmtext-5">Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương</h3>
-                            <div class="d-flex align-items-center">
-                                <i class="material-icons">arrow_right_alt </i>
-                                <span>Xem thêm</span>
-                            </div>
                             <div class="featuredAct__overplay"></div>
                         </div>
-
                     </div>
                     <div class="featuredAct__card">
                         <img class="w-100" src="img/act1.png" alt="">
                         <div class="featuredAct__title">
                             <h3>Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương</h3>
-                            <div class="d-flex align-items-center">
-                                <i class="material-icons">arrow_right_alt </i>
-                                <span>Xem thêm</span>
-                            </div>
                             <div class="featuredAct__overplay"></div>
                         </div>
 
@@ -398,7 +167,7 @@
 
 </section>
 <section class="pagination">
-    <ul>
+    <ul>      
         <li class="btn-prev"><span class="material-icons">keyboard_arrow_left</span></li>
         <li class="numb">1</li>
         <li class="dots">...</li>
@@ -415,10 +184,26 @@
 
 
 @code {
-    [CascadingParameter] public IModalService Modal { get; set; }
+
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntinme.InvokeVoidAsync("vms.ShowColor");
+
+    }
+
+
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+    async Task ShowModal()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+        Modal.Show<Signup>("", options);
     }
 
 }

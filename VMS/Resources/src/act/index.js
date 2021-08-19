@@ -1,5 +1,4 @@
-﻿
-const showColor = () => {
+﻿const showColor = () => {
     const actNotLikes = document.querySelectorAll(".act__notLike")
     const actLikes = document.querySelectorAll(".act__like")
     for (let i = 0; i < actNotLikes.length; i++) {
@@ -15,5 +14,4 @@ const showColor = () => {
     }
 }
 
-
-export default { showColor };
+export default { showColor};

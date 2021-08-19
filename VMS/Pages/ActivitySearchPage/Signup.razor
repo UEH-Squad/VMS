@@ -1,7 +1,7 @@
 ﻿@inject IJSRuntime JSRuntinme
 
 <div class="my-signUp">
-    <div class="signUp__report @(isShowReport ? "d-block" :"d-none") ">
+    <div class="signUp__report  @(isShowReport ? "d-block" :"d-none") ">
         <div class="signUp__report-content ">
                 <div>
                     <i @onclick="ShowReportSuccess" class="material-icons-outlined">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="signUp__content">
-        <i @onclick="ExitModal" class="material-icons-outlined signUp__exit">
+        <i @onclick="ExitModal"   class="material-icons-outlined signUp__exit">
             close
         </i>
         <div class="signUp__form">
@@ -40,9 +40,8 @@
                     <input class="input-radio" type="radio" name="radioSignUp">
                     <span>Cần xem xét lại thời gian cụ thể</span>
                 </div>
-                <h4 @onclick="ShowReportSuccess" class="my-3 text-center text-danger">Đăng ký</h4>
-                <button @onclick="ShowReportSuccess" class="btn">Đăng ký</button>
             </form>
+            <button @onclick="ShowReportSuccess" class="btn">Đăng ký</button>
         </div>
         <img class="w-100" src="img/formSignUp.png" alt="">
     </div>
@@ -67,6 +66,10 @@
     void ShowReportSuccess()
     {
         isShowReport = !isShowReport;
+            if (isShowReport == false)
+            {
+                Modal.CloseAsync();
+            }
     }
 
 

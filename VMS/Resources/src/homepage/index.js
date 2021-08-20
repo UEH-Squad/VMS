@@ -55,8 +55,8 @@ const getUserLocation = () => {
 
 const setPosition = position => {
     var result = {
-        Lat: position.coords.latitude,
-        Long: position.coords.longitude,
+        Latitude: position.coords.latitude,
+        Longitude: position.coords.longitude,
     }
     localStorage.setItem('UserLocation', JSON.stringify(result));
 }

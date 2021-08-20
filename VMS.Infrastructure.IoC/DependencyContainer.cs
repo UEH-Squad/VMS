@@ -55,8 +55,7 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IUploadService, UploadService>();
             services.AddTransient<IAddressPathService, AddressPathService>();
             services.AddTransient<IAddressService, AddressService>();
-            services.AddTransient<IAddressLocationService, AddressLocationService>();
-            services.AddTransient<IUserWithActService, UserWithActService>();
+            services.AddTransient<IGeoLocationService, GeoLocationService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Interfaces;
@@ -14,7 +15,9 @@ namespace VMS.Application.Services
 {
     public class AddressService : BaseService, IAddressService
     {
-        public AddressService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
+        public AddressService(IRepository repository,
+                              IDbContextFactory<VmsDbContext> dbContextFactory,
+                              IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
         }
 
@@ -24,7 +27,7 @@ namespace VMS.Application.Services
 
             Specification<AddressPath> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<AddressPath, bool>>>()
+                Conditions = new List<Expression<Func<AddressPath, bool>>>()
                 {
                     a => a.Depth == 1
                 }
@@ -41,7 +44,7 @@ namespace VMS.Application.Services
 
             Specification<AddressPath> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<AddressPath, bool>>>()
+                Conditions = new List<Expression<Func<AddressPath, bool>>>()
                 {
                     a => a.ParentPathId == parentId
                 },
@@ -59,7 +62,7 @@ namespace VMS.Application.Services
 
             Specification<AddressPath> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<AddressPath, bool>>>()
+                Conditions = new List<Expression<Func<AddressPath, bool>>>()
                 {
                     a => a.Id == id
                 },
@@ -70,5 +73,5 @@ namespace VMS.Application.Services
 
             return addressPath;
         }
-	}
+    }
 }

@@ -8,18 +8,18 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Application.Services
 {
-    public class AddressLocationService : IAddressLocationService
+    public class GeoLocationService : IGeoLocationService
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _configuration;
 
-        public AddressLocationService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public GeoLocationService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _clientFactory = httpClientFactory;
             _configuration = configuration;
         }
 
-        public async Task<CoordinateResponse> GetCoordinateAsync(string address)
+        public async Task<Coordinate> GetCoordinateAsync(string address)
         {
             string url = string.Format(_configuration.GetValue<string>("GeocodingAPI:Url"), address, _configuration.GetValue<string>("GeocodingAPI:Key"));
 
@@ -37,15 +37,15 @@ namespace VMS.Application.Services
                 try
                 {
                     dynamic position = deserialized["items"][0]["position"];
-                    return new CoordinateResponse() { Lat = position["lat"], Long = position["lng"] };
+                    return new Coordinate() { Latitude = position["lat"], Longitude = position["lng"] };
                 }
                 catch (Exception)
                 {
-                    return new CoordinateResponse();
+                    return new Coordinate();
                 }
             }
 
-            return new CoordinateResponse();
+            return new Coordinate();
         }
     }
 }

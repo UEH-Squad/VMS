@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using VMS.Domain.Models;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VMS.Application.ViewModels
 {
@@ -21,11 +18,10 @@ namespace VMS.Application.ViewModels
         public string Banner { get; set; }
         public bool IsVirtual { get; set; }
 
-        public CoordinateResponse Coordinate { get; set; }
+        public Coordinate Coordinate { get; set; }
         public User Organizer { get; set; }
 
         public List<ActivityAddress> ActivityAddresses { get; set; }
         public List<ActivitySkill> ActivitySkills { get; set; }
-
     }
 }

@@ -25,18 +25,25 @@ namespace VMS.Pages.Activities
 
         [Parameter]
         public string ActivityId { get; set; }
+
         [Inject]
         private IIdentityService IdentityService { get; set; }
+
         [Inject]
         private IAreaService AreaService { get; set; }
+
         [Inject]
         private ISkillService SkillService { get; set; }
+
         [Inject]
         private IActivityService ActivityService { get; set; }
+
         [Inject]
         private IUploadService UploadService { get; set; }
+
         [Inject]
         private IAddressService AddressService { get; set; }
+
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 

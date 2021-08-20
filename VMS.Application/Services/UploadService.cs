@@ -19,6 +19,7 @@ namespace VMS.Application.Services
         {
             _webHostEnvironment = webHostEnvironment;
         }
+
         public async Task<string> GetDataUriAsync(IBrowserFile file)
         {
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);

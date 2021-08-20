@@ -19,7 +19,7 @@ namespace VMS.Application.Services
         {
             _userManager = userManager;
             _httpContext = httpContext;
-        }       
+        }
 
         /*
          * As UserManager requires a scoped DbContext, there're cases that two or more threads trying to access one DbContext at a time.
@@ -62,9 +62,8 @@ namespace VMS.Application.Services
         public string GetCurrentUserAddress()
         {
             User user = Task.Run(() => _userManager.Users.Include(u => u.UserAddresses)
-                                                        .ThenInclude(x => x.AddressPath)
-                                                        .SingleOrDefaultAsync(u => u.Id == GetCurrentUserId()))
-                                                        .Result;
+                                                         .ThenInclude(x => x.AddressPath)
+                                                         .SingleOrDefaultAsync(u => u.Id == GetCurrentUserId())).Result;
 
             if (user is not null)
             {
@@ -74,7 +73,7 @@ namespace VMS.Application.Services
                 if (addressPaths.Count == 3)
                 {
                     return $"{user.Address}, {addressPaths[0].Name}, {addressPaths[1].Name}, {addressPaths[2].Name}";
-                } 
+                }
             }
 
             return string.Empty;

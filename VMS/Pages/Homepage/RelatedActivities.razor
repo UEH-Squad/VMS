@@ -6,7 +6,7 @@
         <div class="act-section margin-10">
             <a href="@Routes.ActivitySearch" class="act-header">
                 <span class="act-header__green">Hoạt động</span>
-                <span class="act-header__blue">mới nhất</span>
+                <span class="act-header__blue">@Title</span>
                 <span class="act-header__green">gần bạn</span>
             </a>
             <div class="my-row">
@@ -30,6 +30,9 @@
 @code {
     [Parameter]
     public bool IsFeaturedActivities { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
 
     [Parameter]
     public List<UserWithActivityViewModel> Activities { get; set; }

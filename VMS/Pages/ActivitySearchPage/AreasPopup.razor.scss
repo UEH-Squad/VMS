@@ -1,0 +1,70 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+.colored-green {
+    color: $green;
+}
+
+.modal-backdrop {
+    background-color: rgba(196, 196, 196, 0.38);
+}
+
+.my-custom-popup {
+    width: 50%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 999;
+
+    h3 {
+        font-size: 48px;
+        color: $green;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 55px;
+        height: 55px;
+        background-color: $grey-bg;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        cursor: pointer;
+    }
+
+    .area-item-wrapper {
+        width: 50%;
+        cursor: pointer;
+
+        span {
+            width: 50px;
+            height: 50px;
+            background-color: $blue;
+            border-radius: 50%;
+            color: #fff;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        span:hover ~ p,
+        p:hover {
+            color: $green;
+        }
+    }
+
+    .save-btn {
+        @include green-btn;
+        font-size: 20px;
+        width: 90px;
+        height: 40px;
+        position: absolute;
+        right: 60px;
+        bottom: 30px;
+    }
+}
+
+

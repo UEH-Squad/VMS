@@ -62,5 +62,9 @@
   {
     "outputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.css",
     "inputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Pager.razor.css",
+    "inputFile": "Shared/Pager.razor.scss"
   }
 ]

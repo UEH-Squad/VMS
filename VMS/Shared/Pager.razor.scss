@@ -1,0 +1,44 @@
+﻿@import '../Resources/scss/common/_variables';
+
+.pagination {
+    margin-left: auto;
+    margin-top: 20px;
+    justify-content: center;
+
+    li {
+        display: inline-block;
+        list-style: none;
+        margin: 0 3px;
+        font-size: 18px;
+    }
+
+    .btn-prev span, .btn-next span {
+        background-color: $blue;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        transition: all 0.3s linear;
+    }
+
+    .btn-prev span:hover, .btn-next span:hover {
+        background: $blue-hv;
+    }
+
+    .numb {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        transition: all 0.3s linear;
+    }
+
+    .numb.active, .numb:hover {
+        background: $blue;
+        color: white;
+    }
+}

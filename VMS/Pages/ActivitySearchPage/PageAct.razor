@@ -1,177 +1,117 @@
-﻿@inject IJSRuntime JSRuntinme
+﻿@inject IJSRuntime JsRuntime
 
 <section class="my-act">
-            <div class="act" id="act">
-                <h3>Có<span>10 hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
-                <div class="act__page-1">
+    <div class="act" id="act">
+        <h3>Có <span>@count hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+        <div class="act__page-1">
+            @if (pagedResult != null && pagedResult.Results.Length != 0)
+            {
+                @foreach (var item in pagedResult.Results)
+                {
                     <div class="act__item row mt-5">
                         <div class="col-3">
                             <img class="w-100" src="img/act.png" alt="">
                         </div>
                         <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
+                            <h3 class="lmtext-3">@item.Title</h3>
+                            <h5>
+                                <i class="material-icons">public</i>@item.Organizer
+                            </h5>
+                            <p class="lmtext-2">@item.ShortDescription</p>
+                            <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
                             <div class="act__signUp">
-                                <i @onclick="ChangeColorHeart" class="material-icons ">@iconValue</i>
+                                <i @onclick="@(() => HandleFav(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
                                 <button @onclick="ShowModal" class="btn">Đăng kí</button>
                             </div>
                         </div>
                     </div>
-                    <div class="act__item row mt-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i @onclick="ChangeColorHeart" class="material-icons ">@iconValue</i>
-
-                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row mt-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i @onclick="ChangeColorHeart" class="material-icons ">@iconValue</i>
-
-                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row mt-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i @onclick="ChangeColorHeart" class="material-icons ">@iconValue</i>
-
-                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row mt-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i @onclick="ChangeColorHeart" class="material-icons ">@iconValue</i>
-
-                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="act__item row mt-5">
-                        <div class="col-3">
-                            <img class="w-100" src="img/act.png" alt="">
-                        </div>
-                        <div class="col-9 act__content">
-                            <h3 class="lmtext-3">
-                                Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa
-                                phương
-                            </h3>
-                            <h5><i class="material-icons">public</i>Tên đơn vị tổ chức</h5>
-                            <p class="lmtext-2">
-                                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu
-                                có sức khoẻ, tinh thần hăng hái.
-                            </p>
-                            <span>Ngày đăng: 20/07/202</span>
-                            <div class="act__signUp">
-                                <i @onclick="ChangeColorHeart" class="material-icons ">@iconValue</i>
-
-                                <button @onclick="ShowModal" class="btn">Đăng kí</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="goToDivAct d-none " href="#act">go to div act</a>
-            </div>          
-</section>
-<section class="pagination mb-0 mt-5">
-    <ul class="mb-0">      
-        <li class="btn-prev"><span class="material-icons">keyboard_arrow_left</span></li>
-        <li class="numb">1</li>
-        <li class="dots">...</li>
-        <li class="numb">4</li>
-        <li class="numb">5</li>
-        <li class="numb">6</li>
-        <li class="dots">...</li>
-        <li class="numb">10</li>
-        <li class="btn-prev"><span class="material-icons">keyboard_arrow_right</span></li>
-    </ul>
+                }
+            }
+        </div>
+        <a class="goToDivAct d-none " href="#act">go to div act</a>
+    </div>
 </section>
 
-
-
+<Pager CurrentPage="@pagedResult.CurrentPage"
+       PageCount="@pagedResult.PageCount"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 
 @code {
-    private string iconValue = "favorite_border";
-    private void ChangeColorHeart()
+
+    private class FakeData
     {
-        if(iconValue== "favorite_border")
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Organizer { get; set; }
+        public string ShortDescription { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public bool IsFav { get; set; }
+    }
+
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+
+    private PagedResult<FakeData> pagedResult;
+    private int count = 20;
+    private int page = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
+    private async Task HandleFav(int id)
+    {
+        var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (clickedItem is not null)
         {
-            iconValue = "favorite";
-        }
-        else
-        {
-            iconValue = "favorite_border";
+            clickedItem.IsFav = !clickedItem.IsFav;
         }
     }
 
-    [CascadingParameter] public IModalService Modal { get; set; }
+    private PagedResult<FakeData> GetFakeData()
+    {
+        var result = new PagedResult<FakeData>();
+        result.CurrentPage = page;
+        result.RowCount = 100;
+        result.PageSize = 10;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
+        {
+            Id = x + 1,
+            Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương",
+            Organizer = "Tên đơn vị tổ chức",
+            ShortDescription = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
+            CreatedDate = DateTime.Now,
+            IsFav = false
+        }).ToArray();
+
+        return result;
+    }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
     async Task ShowModal()
     {
         var options = new ModalOptions()
@@ -180,8 +120,7 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true,
         };
-        Modal.Show<SignUp>("", options);
+        Modal.Show<Signup>("", options);
     }
 
 }
-    

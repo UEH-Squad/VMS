@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Models;
@@ -50,6 +52,32 @@ namespace VMS.Application.Services
             return Task.Run(() => _userManager.Users.Include(x => x.UserAddresses)
                                                     .ThenInclude(x => x.AddressPath)
                                                     .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
+        }
+
+        public List<User> GetAllOrganizers()
+        {
+            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync("Organizer")).Result;
+        }
+
+        public string GetCurrentUserAddress()
+        {
+            User user = Task.Run(() => _userManager.Users.Include(u => u.UserAddresses)
+                                                        .ThenInclude(x => x.AddressPath)
+                                                        .SingleOrDefaultAsync(u => u.Id == GetCurrentUserId()))
+                                                        .Result;
+
+            if (user is not null)
+            {
+                List<AddressPath> addressPaths = user.UserAddresses.OrderByDescending(u => u.AddressPath.Depth)
+                                                                    .Select(a => a.AddressPath)
+                                                                    .ToList();
+                if (addressPaths.Count == 3)
+                {
+                    return $"{user.Address}, {addressPaths[0].Name}, {addressPaths[1].Name}, {addressPaths[2].Name}";
+                } 
+            }
+
+            return string.Empty;
         }
     }
 }

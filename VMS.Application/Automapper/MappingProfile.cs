@@ -8,7 +8,9 @@ namespace VMS.Application.Automapper
     {
         public MappingProfile()
         {
-            CreateMap<Activity, ActivityViewModel>();
+            CreateMap<Activity, ActivityViewModel>()
+                                .ForMember(a => a.Coordinate, a => a
+                                .MapFrom(x => new CoordinateResponse() { Lat = x.Latitude, Long = x.Longitude }));
             CreateMap<CreateActivityViewModel, Activity>();
             CreateMap<Activity, CreateActivityViewModel>();
             CreateMap<Activity, ViewActivityViewModel>();

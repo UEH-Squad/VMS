@@ -1,4 +1,4 @@
-﻿@attribute [Route(Routes.DeleteActivity + "/{activityid}")]
+﻿@attribute [Route(Routes.DeleteTopic + "/{activityid}")]
 @attribute [Authorize]
 
 
@@ -11,7 +11,7 @@ else
     <EditForm Model="activity" OnValidSubmit="DeleteActivityAsync">
         <div class="alert alert-info">
             Bạn có chắc muốn xóa hoạt động @activity.Name ?
-            <input type ="submit" class="btn btn-warning" value="Xác nhận"/> <a href="@Routes.ActivityInfo/@ActivityId" class="btn btn-success">Hủy bỏ</a>
+            <input type ="submit" class="btn btn-warning" value="Xác nhận"/> <a href="@Routes.Topic/@ActivityId" class="btn btn-success">Hủy bỏ</a>
         </div>
     </EditForm>
 }

@@ -1,99 +1,145 @@
-﻿@attribute [Route(Routes.CreateActivity)]
+﻿@attribute [Route(Routes.CreateTopic)]
 @attribute [Authorize]
 
-<h3>Create</h3>
-<div class="row">
-    <div class="col-md-4">
-        <EditForm Model="activity" OnValidSubmit="AddActivityAsync">
-            <div class="card card-body">
-                Tên hoạt động:
-                <InputText @bind-Value="@activity.Name" class="form-control" />
-            </div>            
-            <div class="card card-body">
-                Lĩnh vực:
-                <InputSelect @bind-Value="@activity.AreaId" class="form-control">
-                    @if (areas is null)
-                    {
-                        <p>Lĩnh vực đang trống..</p>
-                    }
-                    else
-                    {
-                        <option value="0">Chọn lĩnh vực</option>
-                        @foreach(var area in areas)
-                        {
-                            <option value="@area.Id">@area.Name</option>
-                        }
-                    }
-                </InputSelect>
-            </div>
-            <div class="card card-body">
-                Ngày bắt đầu:
-                <InputDate @bind-Value="@activity.StartDate" class="form-control" />
-            </div>
-            <div class="card card-body">
-                Ngày kết thúc:
-                <InputDate @bind-Value="@activity.EndDate" class="form-control" />
-            </div>            
-            <div class="card card-body">
-                Địa chỉ:
-                <InputText @bind-Value="@activity.Address" class="form-control" />
-            </div>
-            <div class="card card-body">
-                Mô tả:
-                <InputTextArea @bind-Value="@activity.Description" class="form-control"></InputTextArea>
-            </div>
-            <div class="card card-body">
-                Nhiệm vụ:
-                <InputTextArea @bind-Value="@activity.Mission" class="form-control"></InputTextArea>
-            </div>
-            <div class="card card-body">
-                <InputCheckbox @bind-Value="@activity.IsVirtual" />  Is Virtual?
-            </div>
-            @if (skills is not null)
-            {
-                <div class="card card-body">
-                    Skill:
-                    @foreach (var skill in skills)
-                    {
-                        <label for="@skill.Name">
-                            @if (!activity.Skills.Contains(skill))
-                            {
-                                <input type="checkbox" id="@skill.Name" @onchange="@((e) => CheckboxChanged(e, skill))" /> @skill.Name
-                            }
-                            else
-                            {
-                                <input type="checkbox" id="@skill.Name" checked="checked" @onchange="@((e) => CheckboxChanged(e, skill))" /> @skill.Name
-                            }
-                        </label>
-                    }
-                </div>
-            }
-            <div class="card card-body">
-                Requirement:
-                <InputTextArea @bind-Value="@activity.Requirement" class="form-control"></InputTextArea>
-            </div>
-            <div class="card card-body">
-                Website:
-                <InputText @bind-Value="@activity.Website" class="form-control" />
-            </div>
-            <div class="card card-body">
-                Banner:
-                <InputFile OnChange="OnInputFileChangeAsync" />
-                @if (!string.IsNullOrEmpty(message))
-                {
-                    <span style="color: red">@message</span>
-                }
-                @if (!string.IsNullOrEmpty(banner))
-                {
-                    <img src="@banner"/>
-                }
-            </div>
-            <div class="card card-body">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </EditForm>
-    </div>
-</div>
+<div class="alert alert-info">Create</div>
+
+<EditForm Model="activity" OnValidSubmit="AddActivityAsync">
+	<DataAnnotationsValidator />
+
+	<div class="alert alert-light">
+		Tên hoạt động:
+		<InputText @bind-Value="@activity.Name" class="form-control" />
+	</div>
+
+	<div class="alert alert-light">
+		Lĩnh vực:
+		<InputSelect @bind-Value="@activity.AreaId" class="form-control">
+			@if (areas is not null)
+			{
+				<option value="0">Chọn lĩnh vực</option>
+				@foreach (var area in areas)
+				{
+					<option value="@area.Id">@area.Name</option>
+				}
+			}
+		</InputSelect>
+	</div>
+
+	<div class="alert alert-light">
+		Ngày bắt đầu:
+		<InputDate @bind-Value="@activity.StartDate" class="form-control" />
+	</div>
+
+	<div class="alert alert-light">
+		Ngày kết thúc:
+		<InputDate @bind-Value="@activity.EndDate" class="form-control" />
+	</div>
+
+	<div class="alert alert-light">
+		Số nhà, đường:
+		<InputText @bind-Value="@activity.Address" class="form-control" />
+	</div>
+
+	<div class="alert alert-light" style="display: flex;">
+		<InputSelect Value="activity.ProvinceId" ValueChanged="@(async (int id) => await ProvinceSelectionChanged(id))" ValueExpression="@(() => activity.ProvinceId)" class="form-control">
+			<option value="0">Tỉnh/Thành phố</option>
+			@if (provinces is not null)
+			{
+				@foreach (var province in provinces)
+				{
+					<option id="@province.Name" value="@province.Id">@province.Name</option>
+				}
+			}
+		</InputSelect>
+		
+		<InputSelect Value="activity.DistrictId" ValueChanged="@(async (int id) => await DistrictSelectionChanged(id))" ValueExpression="@(() => activity.DistrictId)" class="form-control">
+			<option value="0">Quận/Huyện</option>
+			@if (districts is not null)
+			{
+				@foreach (var district in districts)
+				{
+					<option id="@district.Name" value="@district.Id">@district.Name</option>
+				}
+			}
+		</InputSelect>
+
+		<InputSelect @bind-Value="activity.WardId" class="form-control">
+			<option value="0">Phường/Xã</option>
+			@if (wards is not null)
+			{
+				@foreach (var ward in wards)
+				{
+					<option id="@ward.Name" value="@ward.Id">@ward.Name</option>
+				}
+			}
+		</InputSelect>
+	</div>
+
+	<div class="alert alert-light">
+		Mô tả:
+		<InputTextArea @bind-Value="@activity.Description" class="form-control"></InputTextArea>
+	</div>
+
+	<div class="alert alert-light">
+		Nhiệm vụ:
+		<InputTextArea @bind-Value="@activity.Mission" class="form-control"></InputTextArea>
+	</div>
+
+	<div class="alert alert-light">
+		<InputCheckbox @bind-Value="@activity.IsVirtual" />  Is Virtual?
+	</div>
+
+	@if (skills is not null)
+	{
+		<div class="alert alert-light">
+			Skill:
+			@foreach (var skill in skills)
+			{
+				<p>
+					<label for="@skill.Name">
+						@if (!activity.Skills.Contains(skill))
+						{
+							<input type="checkbox" id="@skill.Name" @onchange="@((e) => CheckboxChanged(e, skill))" /> @skill.Name
+						}
+						else
+						{
+							<input type="checkbox" id="@skill.Name" checked="checked" @onchange="@((e) => CheckboxChanged(e, skill))" /> @skill.Name
+						}
+					</label>
+				</p>
+
+			}
+		</div>
+	}
+
+	<div class="alert alert-light">
+		Requirement:
+		<InputTextArea @bind-Value="@activity.Requirement" class="form-control"></InputTextArea>
+	</div>
+
+	<div class="alert alert-light">
+		Website:
+		<InputText @bind-Value="@activity.Website" class="form-control" />
+	</div>
+
+	<div class="alert alert-light">
+		Banner:
+		<InputFile OnChange="OnInputFileChangeAsync" />
+		@if (!string.IsNullOrEmpty(message))
+		{
+			<span style="color: red">@message</span>
+		}
+		@if (!string.IsNullOrEmpty(banner))
+		{
+			<img src="@banner" />
+		}
+	</div>
+
+	<div class="alert alert-light">
+		<input type="submit" value="Create" class="btn btn-primary" />
+	</div>
+
+</EditForm>
 
 @code {
 

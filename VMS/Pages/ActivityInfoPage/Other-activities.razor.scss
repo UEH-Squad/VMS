@@ -1,5 +1,10 @@
 ﻿@import "../../Resources/scss/common/_variables";
 
+//--------------Local variables-------------//
+//Default img ratio 
+$img-width:400px;
+$img-heigh: 247px;
+$fav-icon: #F14747;
 //---------------Title------------------//
 .other-act {
     position: relative;
@@ -8,29 +13,25 @@
         font-style: normal;
         font-weight: 500;
         font-size: 18px;
-        line-height: 18px;
 
         @include on('md') {
             font-size: 24px;
-            line-height: 124px;
         }
 
         @include on('xl') {
             font-size: 28px;
-            line-height: 24px;
         }
 
         @include on('xxl') {
             font-size: 36px;
-            line-height: 36px;
         }
 
         h3 {
-            color: #18A0FB;
+            color: $blue;
         }
 
         span {
-            color: #64D72F;
+            color: $green;
         }
 
         hr {
@@ -42,22 +43,26 @@
 //---------------Acitivities container------------------//
 .act__container {
     display: grid;
-    grid-template-columns: 150px 150px 150px;
+    //Make sure ratio of container, img
+    $img-width-local: calc(#{$img-width} * 0.4);
+    grid-template-columns: $img-width-local $img-width-local $img-width-local;
     grid-gap: 10px;
     justify-content: center;
 
     @include on('md') {
-        grid-template-columns: 220px 220px 220px;
+        $img-width-local: calc(#{$img-width} * 0.6);
+        grid-template-columns: $img-width-local $img-width-local $img-width-local;
         grid-gap: 10px;
     }
 
     @include on('xl') {
-        grid-template-columns: 330px 330px 330px;
+        $img-width-local: calc(#{$img-width} * 0.8);
+        grid-template-columns: $img-width-local $img-width-local $img-width-local;
         grid-gap: 15px;
     }
 
     @include on('xxl') {
-        grid-template-columns: 400px 400px 400px;
+        grid-template-columns: $img-width $img-width $img-width;
         grid-gap: 20px;
     }
 
@@ -74,18 +79,18 @@
         &__img {
             position: relative;
             width: 100%;
-            height: 92px;
+            height: calc(#{$img-heigh} * 0.4);
 
             @include on('md') {
-                height: 135px;
+                height: calc(#{$img-heigh} * 0.6);
             }
 
             @include on('xl') {
-                height: 204px;
+                height: calc(#{$img-heigh} * 0.8);
             }
 
             @include on('xxl') {
-                height: 247px;
+                height: $img-heigh;
             }
 
             img {
@@ -97,32 +102,31 @@
         }
 
         &__desc {
-            padding: 19px;
+            padding: 10px;
             font-style: normal;
             font-weight: 600;
             font-size: 8px;
-            line-height: 11px;
-            color: #18A0FB;
+            color: $blue;
             //limit 3 line
             max-height: calc(8px * 4 + 19px);
             overflow: hidden;
 
             @include on('md') {
+                padding: 14px;
                 font-size: 14px;
                 max-height: calc(14px * 4 + 19px);
-                line-height: 18px;
             }
 
             @include on('xl') {
+                padding: 16px;
                 font-size: 18px;
                 max-height: calc(18px * 4 + 19px);
-                line-height: 24px;
             }
 
             @include on('xxl') {
+                padding: 19px;
                 font-size: 24px;
                 max-height: calc(24px * 4 + 19px);
-                line-height: 29px;
             }
         }
 
@@ -131,9 +135,21 @@
 
             span {
                 padding: 0px 11px 7px 0px;
-                font-size: 24px;
+                font-size: 16px;
                 color: transparent;
-                -webkit-text-stroke: 2px tomato;
+                -webkit-text-stroke: 2px $fav-icon;
+
+                @include on('md') {
+                    font-size: 18px;
+                }
+
+                @include on('xl') {
+                    font-size: 20px;
+                }
+
+                @include on('xxl') {
+                    font-size: 24px;
+                }
             }
         }
     }
@@ -141,7 +157,7 @@
 //----------------------Favourite onlick------------------------//
 .heart {
     span {
-        color: tomato !important;
+        color: $fav-icon !important;
     }
 }
 .heart-line {

@@ -48,4 +48,16 @@
         z-index: -1;
         transition: all 0.3s linear;
     }
+
+    .lmtext-5 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+    .lmtext-5 {
+        -webkit-line-clamp: 5;
+    }
 }

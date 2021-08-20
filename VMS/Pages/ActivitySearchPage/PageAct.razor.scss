@@ -124,7 +124,7 @@
     }
 }
 
-.lmtext-2, .lmtext-3, .lmtext-5 {
+.lmtext-2, .lmtext-3,{
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -140,6 +140,3 @@
     -webkit-line-clamp: 3;
 }
 
-.lmtext-5 {
-    -webkit-line-clamp: 5;
-}

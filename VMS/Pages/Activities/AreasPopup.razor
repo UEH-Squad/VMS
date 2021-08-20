@@ -1,0 +1,25 @@
+﻿@if (areas is not null)
+{
+	@foreach (var area in areas)
+	{
+		@if (SelectedAreas.FirstOrDefault(a => a.Id == area.Id) is not null)
+		{
+			<label id="@area.Name" @onclick="(() => OnClickArea(area))" class="alert alert-info">@area.Name</label>
+		}
+		else
+		{
+			<label id="@area.Name" @onclick="(() => OnClickArea(area))" class="alert">@area.Name</label>
+		}
+
+		@if (area.Id % 3 == 0)
+		{
+			<br />
+		}
+	}
+	<div class="alert" style="text-align: center">
+		<buton @onclick="(async () => await OnClickSaveAsync())" class="btn btn-primary">Lưu</buton>
+	</div>
+}
+
+@code {
+}

@@ -24,15 +24,25 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
+
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            List<Activity> activities = await _repository.GetListAsync<Activity>(dbContext);
+            Specification<Activity> specification = new()
+            {
+                Includes = a => a.Include(a => a.ActivitySkills)
+                                 .Include(a => a.ActivityAddresses)
+                                    .ThenInclude(a => a.AddressPath)
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
             activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
-            return activitiesViewModel;
+
+            return activitiesViewModel.OrderByDescending(a => a.PostDate).ToList();
         }
 
         public async Task AddActivityAsync(CreateActivityViewModel activityViewModel)
@@ -45,19 +55,25 @@ namespace VMS.Application.Services
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
 
-            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
-            activity.Latitude = coordinateResponse.Latitude;
-            activity.Longitude = coordinateResponse.Longitude;
+            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
+            activity.Latitude = coordinateResponse.Lat;
+            activity.Longitude = coordinateResponse.Long;
 
-            await _repository.InsertAsync(dbContext, activity);
-
-            List<ActivitySkill> activitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
+            activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
             {
-                ActivityId = activity.Id,
+                Activity = activity,
                 SkillId = s.Id,
                 IsDeleted = false
             }).ToList();
-            await _repository.InsertAsync<ActivitySkill>(dbContext, activitySkills);
+
+            activity.ActivityAddresses = new List<ActivityAddress>()
+            {
+                new() { Activity = activity, AddressPathId = activityViewModel.ProvinceId },
+                new() { Activity = activity, AddressPathId = activityViewModel.DistrictId },
+                new() { Activity = activity, AddressPathId = activityViewModel.WardId }
+            };
+
+            await _repository.InsertAsync(dbContext, activity);
         }
 
         public async Task<CreateActivityViewModel> GetCreateActivityViewModelAsync(int activityId)
@@ -70,7 +86,10 @@ namespace VMS.Application.Services
                 {
                     a => a.Id == activityId
                 },
-                Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
+                Includes = a => a.Include(x => x.ActivitySkills)
+                                    .ThenInclude(s => s.Skill)
+                                    .Include(x => x.ActivityAddresses)
+                                    .ThenInclude(x => x.AddressPath)
             };
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
@@ -85,6 +104,11 @@ namespace VMS.Application.Services
                 IsDeleted = a.Skill.IsDeleted
             }).ToList();
 
+            List<ActivityAddress> activityAddresses = activity.ActivityAddresses.OrderBy(a => a.AddressPath.Depth).ToList();
+            activityViewModel.ProvinceId = activityAddresses[0].AddressPathId;
+            activityViewModel.DistrictId = activityAddresses[1].AddressPathId;
+            activityViewModel.WardId = activityAddresses[2].AddressPathId;
+
             return activityViewModel;
         }
 
@@ -98,11 +122,18 @@ namespace VMS.Application.Services
                 {
                     a => a.Id == activityId
                 },
-                Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
+                Includes = a => a.Include(x => x.ActivitySkills)
+                                    .ThenInclude(s => s.Skill)
+                                    .Include(x => x.ActivityAddresses)
+                                    .ThenInclude(s => s.AddressPath)
             };
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
             activity = _mapper.Map(activityViewModel, activity);
+
+            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
+            activity.Latitude = coordinateResponse.Lat;
+            activity.Longitude = coordinateResponse.Long;
 
             activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
             {
@@ -111,9 +142,15 @@ namespace VMS.Application.Services
                 IsDeleted = false
             }).ToList() ;
 
-            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activity.Address);
-            activity.Latitude = coordinateResponse.Latitude;
-            activity.Longitude = coordinateResponse.Longitude;
+            activity.ActivityAddresses = new List<ActivityAddress>()
+            {
+                new() { Activity = activity, AddressPathId = activityViewModel.ProvinceId },
+                new() { Activity = activity, AddressPathId = activityViewModel.DistrictId },
+                new() { Activity = activity, AddressPathId = activityViewModel.WardId }
+            };
+
+            activity.UpdatedBy = activityViewModel.OrgId;
+            activity.UpdatedDate = DateTime.Now;
 
             await _repository.UpdateAsync(dbContext, activity);
         }

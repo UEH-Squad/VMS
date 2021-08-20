@@ -37,7 +37,7 @@ namespace VMS.Application.Services
                 try
                 {
                     dynamic position = deserialized["items"][0]["position"];
-                    return new CoordinateResponse() { Latitude = position["lat"], Longitude = position["lng"] };
+                    return new CoordinateResponse() { Lat = position["lat"], Long = position["lng"] };
                 }
                 catch (Exception)
                 {

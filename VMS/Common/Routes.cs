@@ -14,13 +14,14 @@
 
         #endregion Main
 
-        #region Activity
+        #region Topic
 
-        public const string CreateActivity = "/hoat-dong/them-hoat-dong";
-        public const string EditActivity = "/hoat-dong/sua-hoat-dong";
-        public const string DeleteActivity = "/hoat-dong/xoa-hoat-dong";
+        public const string Topic = "/chu-de";
+        public const string CreateTopic = "/chu-de/them";
+        public const string EditTopic = "/chu-de/sua";
+        public const string DeleteTopic = "/chu-de/xoa";
 
-        #endregion Activity
+        #endregion Topic
 
         #region Identity
 

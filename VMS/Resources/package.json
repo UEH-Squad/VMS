@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.21",
+    "counterup2": "^2.0.1",
     "node-sass": "^6.0.1",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2"

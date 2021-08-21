@@ -6,395 +6,114 @@
 /*#endregion */
 .footer {
   position: relative;
-  margin-top: 10px; }
+  padding: 60px 0;
+  border-top: 1px solid #707070; }
 
-/*-------mobile------------*/
 .btn-back-top {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  color: #ffffff;
-  background-color: #64D72F;
-  display: flex;
-  text-decoration: none;
   position: absolute;
-  right: 20px;
-  top: -12px; }
-
-.btn-back-top-icon {
-  margin: auto; }
-
-/*-------tablet min-width: 576px------------*/
-@media (min-width: 576px) {
-  .btn-back-top {
-    width: 50px;
-    height: 50px;
+  top: 0;
+  right: 0px;
+  transform: translate(-100%, -50%); }
+  .btn-back-top .btn-back-top-icon {
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
     border-radius: 50%;
-    color: #ffffff;
-    background-color: #64D72F;
+    font-size: 16px;
+    color: #FFFFFF;
+    background: #64D72F; }
+    @media (min-width: 576px) {
+      .btn-back-top .btn-back-top-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 24px; } }
+    @media (min-width: 992px) {
+      .btn-back-top .btn-back-top-icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 44px; } }
+    @media (min-width: 1200px) {
+      .btn-back-top .btn-back-top-icon {
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        font-size: 64px; } }
+
+.footer__logo {
+  padding: 0; }
+  .footer__logo .footer__logo-govirlunteer {
+    width: 100%; }
+  .footer__logo .footer__logo-ueh-hsv {
     display: flex;
-    text-decoration: none;
-    position: absolute;
-    right: 40px;
-    top: -25px; }
-  .btn-back-top-icon {
-    margin: auto;
-    font-size: 40px; } }
+    align-items: flex-end;
+    margin: 20px 0; }
+    @media (min-width: 992px) {
+      .footer__logo .footer__logo-ueh-hsv {
+        margin: 30px 0; } }
+    @media (min-width: 1200px) {
+      .footer__logo .footer__logo-ueh-hsv {
+        margin: 50px 0; } }
+  .footer__logo .footer__logo-ueh {
+    width: 60%; }
+  .footer__logo .footer__logo-hsv {
+    width: 20%;
+    margin: auto; }
+  .footer__logo p {
+    font-size: 8px; }
+    @media (min-width: 576px) {
+      .footer__logo p {
+        font-size: 12px; } }
+    @media (min-width: 1200px) {
+      .footer__logo p {
+        font-size: 15px; } }
 
-/*-------tablet min-width: 992px------------*/
-@media (min-width: 992px) {
-  .btn-back-top {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    color: #ffffff;
-    background-color: #64D72F;
-    display: flex;
-    text-decoration: none;
-    position: absolute;
-    right: 50px;
-    top: -30px; }
-  .btn-back-top-icon {
-    margin: auto;
-    font-size: 50px; } }
-
-/*-------pc min width:1200px------------*/
-@media (min-width: 1200px) {
-  .btn-back-top {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    color: #ffffff;
-    background-color: #64D72F;
-    display: flex;
-    text-decoration: none;
-    position: absolute;
-    right: 55px;
-    top: -35px; }
-  .btn-back-top-icon {
-    margin: auto;
-    font-size: 65px; } }
-
-/*-------pc min width:1400px------------*/
-@media (min-width: 1400px) {
-  .btn-back-top {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    color: #ffffff;
-    background-color: #64D72F;
-    display: flex;
-    text-decoration: none;
-    position: absolute;
-    right: 62px;
-    top: -40px; }
-  .btn-back-top-icon {
-    margin: auto;
-    font-size: 75px; } }
-
-/*-------mobile------------*/
-.container {
-  border-top: #808080 solid 1px;
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-between;
-  max-width: 100%; }
-
-/*-------tablet min-width: 576px---------*/
-@media (min-width: 576px) {
-  .container {
-    border-top: #808080 solid 1px;
-    padding: 35px 0;
-    display: flex;
-    justify-content: space-between;
-    max-width: 100%; } }
-
-/*-------tablet min-width: 992px---------*/
-@media (min-width: 992px) {
-  .container {
-    border-top: #808080 solid 1px;
-    padding: 50px 0;
-    display: flex;
-    justify-content: space-around;
-    max-width: 100%; } }
-
-/*-------pc min width:1400px------------*/
-@media (min-width: 1400px) {
-  .container {
-    border-top: #808080 solid 1px;
-    padding: 60px 0;
-    display: flex;
-    justify-content: space-around;
-    max-width: 100%; } }
-
-/*-------mobile------------*/
-.left {
-  display: flex;
-  flex-direction: column;
-  margin-left: 15px; }
-
-.left__logo-govirlunteer {
-  width: 94px;
-  height: 13px;
-  order: 1; }
-
-.left__logo-ueh-hsv {
-  display: flex;
-  align-items: center;
-  order: 3; }
-
-.logo-ueh {
-  width: 100px;
-  height: 18px; }
-
-.logo-hsv {
-  margin-left: 10px;
-  width: 25px;
-  height: 25px; }
-
-.left__text {
-  margin: 10px 0 10px;
-  font-size: 8px;
-  color: #515151;
-  font-weight: 400;
-  order: 2;
-  width: 180px; }
-
-/*-------tablet min-width: 576px-----*/
-@media (min-width: 576px) {
-  .left {
-    display: flex;
-    flex-direction: column; }
-  .left__logo-govirlunteer {
-    width: 312px;
-    height: 43px;
-    order: 1; }
-  .left__logo-ueh-hsv {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-    order: 2; }
-  .logo-ueh {
-    width: 205px;
-    height: 35px; }
-  .logo-hsv {
-    margin-left: 15px;
-    width: 51px;
-    height: 51px; }
-  .left__text {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #515151;
+.footer__contact {
+  padding: 0;
+  padding-top: 25px; }
+  .footer__contact h6 {
+    margin-bottom: 20px;
+    font-size: 8px;
     font-weight: 400;
-    order: 3;
-    width: unset; } }
-
-/*-------tablet min-width: 992px-----*/
-@media (min-width: 992px) {
-  .left {
-    display: flex;
-    flex-direction: column; }
-  .left__logo-govirlunteer {
-    width: 312px;
-    height: 43px;
-    order: 1; }
-  .left__logo-ueh-hsv {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-    order: 2; }
-  .logo-ueh {
-    width: 205px;
-    height: 33px; }
-  .logo-hsv {
-    margin-left: 15px;
-    width: 51px;
-    height: 51px; }
-  .left__text {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #515151;
-    font-weight: 400;
-    order: 3;
-    width: unset; } }
-
-/*-------pc min width:1200px------------*/
-@media (min-width: 1200px) {
-  .left {
-    display: flex;
-    flex-direction: column; }
-  .left__logo-govirlunteer {
-    width: 388px;
-    height: 49px;
-    order: 1; }
-  .left__logo-ueh-hsv {
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
-    order: 2; }
-  .logo-ueh {
-    width: 268px;
-    height: 44px; }
-  .logo-hsv {
-    margin-left: 25px;
-    width: 65px;
-    height: 65px; }
-  .left__text {
-    margin-top: 30px;
-    font-size: 15px;
-    color: #515151;
-    font-weight: 400;
-    order: 3;
-    width: unset; } }
-
-/*-------pc min width:1400px------------*/
-@media (min-width: 1400px) {
-  .left {
-    display: flex;
-    flex-direction: column; }
-  .left__logo-govirlunteer {
-    width: 530px;
-    height: 73px;
-    order: 1; }
-  .left__logo-ueh-hsv {
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
-    order: 2; }
-  .logo-ueh {
-    width: 310px;
-    height: 55px; }
-  .logo-hsv {
-    margin-left: 25px;
-    width: 78px;
-    height: 78px; }
-  .left__text {
-    margin-top: 30px;
-    font-size: 15px;
-    color: #515151;
-    font-weight: 400;
-    order: 3;
-    width: unset; } }
-
-/*-------mobile,tablet------------*/
-.contact {
-  display: none; }
-
-/*-------tablet min-width:992px------------*/
-@media (min-width: 992px) {
-  .contact {
-    display: block; }
-  .contact-items {
-    color: #515151;
-    font-size: 12px;
-    line-height: 21px;
-    font-weight: 400; }
-  .contact__name {
+    color: #515151; }
+    @media (min-width: 576px) {
+      .footer__contact h6 {
+        font-size: 12px; } }
+    @media (min-width: 1200px) {
+      .footer__contact h6 {
+        font-size: 16px; } }
+    @media (min-width: 1400px) {
+      .footer__contact h6 {
+        font-size: 18px; } }
+    .footer__contact h6 a {
+      color: #515151;
+      text-decoration: none; }
+  .footer__contact .contact__name {
     font-weight: 700; }
-  .contact__contribute {
-    text-decoration: none; } }
 
-/*-------pc min width 1200px------------*/
-@media (min-width: 1200px) {
-  .contact {
-    display: block; }
-  .contact-items {
-    color: #515151;
-    font-size: 15px;
-    line-height: 36px;
-    font-weight: 400; }
-  .contact__name {
-    font-weight: 700; }
-  .contact__contribute {
-    text-decoration: none; } }
-
-/*-------pc min width 1400px------------*/
-@media (min-width: 1400px) {
-  .contact {
-    display: block; }
-  .contact-items {
-    color: #515151;
-    font-size: 18px;
-    line-height: 36px;
-    font-weight: 400; }
-  .contact__name {
-    font-weight: 700; }
-  .contact__contribute {
-    text-decoration: none; } }
-
-/*-------mobile------------*/
-.right {
-  display: flex;
-  flex-direction: column;
-  text-align: end;
-  margin-right: 15px;
-  padding-top: 8px; }
-
-.right a {
-  color: #515151;
-  margin-bottom: 5px;
-  font-size: 7px;
-  font-weight: 400;
-  text-decoration: none; }
-
-/*-------tablet min-width: 576px------*/
-@media (min-width: 576px) {
-  .right {
-    display: flex;
-    flex-direction: column;
-    text-align: end;
-    padding-top: unset;
-    padding-top: 10px; }
-  .right a {
-    color: #515151;
-    margin-bottom: 12px;
-    font-size: 12px;
+.footer__right {
+  padding: 0;
+  padding-top: 25px;
+  text-align: right; }
+  .footer__right h6 {
+    margin-bottom: 20px;
+    font-size: 7px;
     font-weight: 400;
-    text-decoration: none;
-    line-height: 20px; } }
-
-/*-------tablet min-width: 992px------*/
-@media (min-width: 992px) {
-  .right {
-    display: flex;
-    flex-direction: column;
-    text-align: end;
-    padding-top: unset;
-    padding-top: unset; }
-  .right a {
-    color: #515151;
-    margin-bottom: 12px;
-    font-size: 12px;
-    font-weight: 400;
-    text-decoration: none;
-    line-height: 20px; } }
-
-/*-------pc min width 1200px------------*/
-@media (min-width: 1200px) {
-  .right {
-    display: flex;
-    flex-direction: column;
-    text-align: end;
-    padding-top: unset; }
-  .right a {
-    color: #515151;
-    margin-bottom: 12px;
-    font-size: 15px;
-    font-weight: 400;
-    text-decoration: none;
-    line-height: 40px; } }
-
-/*-------pc min width 1400px------------*/
-@media (min-width: 1400px) {
-  .right {
-    display: flex;
-    flex-direction: column;
-    text-align: end;
-    padding-top: unset; }
-  .right a {
-    color: #515151;
-    margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: 400;
-    text-decoration: none;
-    line-height: 40px; } }
+    color: #515151; }
+    @media (min-width: 576px) {
+      .footer__right h6 {
+        margin-bottom: 25px;
+        font-size: 12px; } }
+    @media (min-width: 1200px) {
+      .footer__right h6 {
+        margin-bottom: 33px;
+        font-size: 16px; } }
+    @media (min-width: 1400px) {
+      .footer__right h6 {
+        margin-bottom: 35px;
+        font-size: 18px; } }
+    .footer__right h6 a {
+      color: #515151;
+      text-decoration: none; }

@@ -1,33 +1,5 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
-.infopage {
-    margin-top: 1.5%;
-}
-
-.infopage-toppage {
-    .return-text {
-        display: block;
-        text-decoration: none;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 30px;
-        color: $green;
-    }
-
-    .return-text:hover {
-        color: $green-bold;
-    }
-
-    .line-line1 {
-        width: 174%;
-        margin-top: 0px;
-        background-color: $grey-icon;
-        border: 1px solid $grey-icon;
-    }
-}
-
-
 .infopage-title {
     .title__content {
         width: 77%;
@@ -75,7 +47,7 @@
         }
 
         .heart-button1 {
-            margin-left: 45.5%;
+            margin-left: 47.5%;
             color: #F14747;
             background: transparent;
             border: none;
@@ -86,7 +58,7 @@
         }
 
         .heart-button2 {
-            margin-left: 45.5%;
+            margin-left: 47.5%;
             color: #F14747;
             background: transparent;
             border: none;
@@ -101,7 +73,7 @@
         }
 
         .line-line2 {
-            width: 75%;
+            width: 77%;
             margin-top: 0px;
             background-color: $grey-icon;
             border: 2px solid $grey-icon;

@@ -4,27 +4,6 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.infopage {
-  margin-top: 1.5%; }
-
-.infopage-toppage .return-text {
-  display: block;
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 30px;
-  color: #64D72F; }
-
-.infopage-toppage .return-text:hover {
-  color: #306C14; }
-
-.infopage-toppage .line-line1 {
-  width: 174%;
-  margin-top: 0px;
-  background-color: #B4B4B4;
-  border: 1px solid #B4B4B4; }
-
 .infopage-title .title__content {
   width: 77%;
   display: block;
@@ -60,7 +39,7 @@
   color: #515151; }
 
 .infopage-title .title__date .heart-button1 {
-  margin-left: 45.5%;
+  margin-left: 47.5%;
   color: #F14747;
   background: transparent;
   border: none; }
@@ -69,7 +48,7 @@
   cursor: pointer; }
 
 .infopage-title .title__date .heart-button2 {
-  margin-left: 45.5%;
+  margin-left: 47.5%;
   color: #F14747;
   background: transparent;
   border: none; }
@@ -81,7 +60,7 @@
   font-size: 2.5rem; }
 
 .infopage-title .title__date .line-line2 {
-  width: 75%;
+  width: 77%;
   margin-top: 0px;
   background-color: #B4B4B4;
   border: 2px solid #B4B4B4; }

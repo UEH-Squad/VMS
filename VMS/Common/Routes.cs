@@ -14,6 +14,15 @@
 
         #endregion Main
 
+        #region Topic
+
+        public const string Topic = "/chu-de";
+        public const string CreateTopic = "/chu-de/them";
+        public const string EditTopic = "/chu-de/sua";
+        public const string DeleteTopic = "/chu-de/xoa";
+
+        #endregion Topic
+
         #region Identity
 
         public const string Register = "/dang-ky";

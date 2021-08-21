@@ -26,7 +26,6 @@
   </ItemGroup>
 
     <ItemGroup>
-      <Watch Remove="Resources\src\common\lodash.js" />
       <Watch Remove="Resources\scss\Index.scss" />
       <Watch Remove="Resources\scss\Layout.scss" />
       <Watch Remove="Resources\webpack.config.js" />
@@ -44,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\src\common\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

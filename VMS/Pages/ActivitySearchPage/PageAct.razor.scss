@@ -3,12 +3,13 @@
 // my-act
 .my-act {
     .act {
+        border-top: 1px solid #bbb;
         h3 {
             margin-top: 10px;
             font-size: 24px;
             font-weight: 400;
             color: #18A0FB;
-            margin-left: -10px;
+
             span {
                 color: #64D72F;
             }
@@ -39,6 +40,7 @@
             align-items: center;
             font-size: 14px;
             font-weight: 600;
+            margin: 10px 0;
 
             i {
                 color: $green;
@@ -59,15 +61,13 @@
     }
 
     .act__signUp {
-        position: absolute;
-        bottom: -10%;
-        right: 5%;
         display: flex;
 
         i {
             font-size: 36px;
             color: #F14747;
             cursor: pointer;
+            margin-left: auto;
         }
 
         button {

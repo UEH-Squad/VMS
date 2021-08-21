@@ -4,19 +4,19 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-act .act h3 {
-  margin-top: 10px;
-  font-size: 24px;
-  font-weight: 400;
-  color: #18A0FB;
-  margin-left: -10px; }
-  .my-act .act h3 span {
-    color: #64D72F; }
-
-.my-act .act .act__item {
-  background-color: #F3F3F5;
-  padding: 30px 10px;
-  border-radius: 10px; }
+.my-act .act {
+  border-top: 1px solid #bbb; }
+  .my-act .act h3 {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #18A0FB; }
+    .my-act .act h3 span {
+      color: #64D72F; }
+  .my-act .act .act__item {
+    background-color: #F3F3F5;
+    padding: 30px 10px;
+    border-radius: 10px; }
 
 .my-act .act__content {
   padding: 0 20px;
@@ -32,7 +32,8 @@
     display: flex;
     align-items: center;
     font-size: 14px;
-    font-weight: 600; }
+    font-weight: 600;
+    margin: 10px 0; }
     .my-act .act__content h5 i {
       color: #64D72F;
       margin-right: 5px;
@@ -45,14 +46,12 @@
     font-weight: 400; }
 
 .my-act .act__signUp {
-  position: absolute;
-  bottom: -10%;
-  right: 5%;
   display: flex; }
   .my-act .act__signUp i {
     font-size: 36px;
     color: #F14747;
-    cursor: pointer; }
+    cursor: pointer;
+    margin-left: auto; }
   .my-act .act__signUp button {
     background-color: #64D72F;
     padding: 0px 20px;

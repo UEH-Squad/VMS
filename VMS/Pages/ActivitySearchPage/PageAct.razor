@@ -3,33 +3,35 @@
 <section class="my-act">
     <div class="container">
         <div class="row">
-            <div class="act col-8" id="act">
-                <h3>Có <span>@count hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
-                <div class="act__page-1">
-                    @if (pagedResult != null && pagedResult.Results.Length != 0)
-                    {
-                        @foreach (var item in pagedResult.Results)
+            <div class="act col-8 ps-0" id="act">
+            <h3>Có <span>@count hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+                <div class="px-2">
+                    <div class="act__page-1">
+                        @if (pagedResult != null && pagedResult.Results.Length != 0)
                         {
-                            <div class="act__item row mt-5">
-                                <div class="col-3">
-                                    <img class="w-100" src="img/act.png" alt="">
-                                </div>
-                                <div class="col-9 act__content">
-                                    <a href="" class="lmtext-3">@item.Title</a>
-                                    <h5>
-                                        <i class="material-icons">public</i>@item.Organizer
-                                    </h5>
-                                    <p class="lmtext-2">@item.ShortDescription</p>
-                                    <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
-                                    <div class="act__signUp">
-                                        <i @onclick="@(() => HandleFav(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
+                            @foreach (var item in pagedResult.Results)
+                            {
+                                <div class="act__item row mt-5">
+                                    <div class="col-4">
+                                        <img class="w-100" src="img/act.png" alt="">
+                                    </div>
+                                    <div class="col-8 act__content">
+                                        <a href="" class="lmtext-3">@item.Title</a>
+                                        <h5>
+                                            <i class="material-icons">public</i>@item.Organizer
+                                        </h5>
+                                        <p class="lmtext-2">@item.ShortDescription</p>
+                                        <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                                        <div class="act__signUp">
+                                            <i @onclick="@(() => HandleFav(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
-                                        <button @onclick="ShowModal" class="btn">Đăng kí</button>
+                                            <button @onclick="ShowModal" class="btn">Đăng kí</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
-                    }
+                    </div>
                 </div>
         <a class="goToDivAct d-none " href="#act">go to div act</a>
             </div>   

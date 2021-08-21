@@ -125,6 +125,10 @@
     void ShowModalReportSucess()
     {
         isShowReport = !isShowReport;
+        if (isShowReport == false)
+        {
+            ReportModal.CloseAsync();
+        }
     }
 
 }

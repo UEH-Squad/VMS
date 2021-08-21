@@ -16,8 +16,6 @@
   justify-content: center;
   z-index: 2;
   background-color: rgba(196, 196, 196, 0.38); }
-  .overlay ::-webkit-scrollbar {
-    display: none; }
 
 .min-overlay {
   height: 100%;
@@ -27,8 +25,8 @@
   z-index: 3; }
   .min-overlay .report-success {
     position: absolute;
-    height: 90%;
-    width: 51%;
+    height: 160px;
+    width: 675px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -62,8 +60,8 @@
 
 .container {
   position: absolute;
-  width: 720px;
-  height: 740px;
+  width: 51%;
+  height: 90%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -147,6 +145,8 @@
     .add-file .add-file__block .block-icon-text {
       display: flex;
       margin-top: 5px; }
+      .add-file .add-file__block .block-icon-text .file__text {
+        font-weight: 300px; }
     .add-file .add-file__block .inputfile {
       opacity: 0;
       overflow: hidden;

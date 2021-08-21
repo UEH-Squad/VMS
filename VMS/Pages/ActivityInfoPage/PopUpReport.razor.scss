@@ -13,7 +13,7 @@
     background-color: rgba(196, 196, 196, 0.38);
 
     ::-webkit-scrollbar {
-        display: none;
+        
     }
 }
 
@@ -26,8 +26,8 @@
 
     .report-success {
         position: absolute;
-        height: 90%;
-        width: 51%;
+        height: 160px;
+        width: 675px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -71,8 +71,8 @@
 
 .container {
     position: absolute;
-    width: 720px;
-    height:740px;
+    width: 51%;
+    height:90%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -176,6 +176,9 @@
         .block-icon-text{
             display:flex;
             margin-top:5px;
+             .file__text {
+                 font-weight:300px;
+             }
         }
 
         .inputfile {

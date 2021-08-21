@@ -10,8 +10,7 @@
 
 .inside-the-border {
   float: right;
-  width: 530px;
-  height: 870px;
+  width: 113%;
   border-radius: 10px;
   border: 1px solid #C4C4C4; }
 
@@ -19,7 +18,7 @@
 .icons {
   display: flex;
   float: right;
-  margin: 30px 30px 0 0; }
+  margin: 25px 25px 0 0; }
   .icons .icon {
     width: 60px;
     height: 60px;
@@ -36,13 +35,10 @@
     color: #64D72F;
     visibility: hidden; }
 
-.icon-tooltip:hover .tooltip {
-  visibility: visible; }
-
 /* -----end icons----- */
 /* -----about-infor----- */
 .about-infor {
-  margin: 130px 44px 0 44px; }
+  margin: 120px 30px 0 30px; }
   .about-infor .titles {
     padding: 10px 0;
     font-size: 24px;
@@ -51,29 +47,32 @@
     color: #18A0FB; }
   .about-infor .contents {
     color: #515151;
-    margin-left: 35px;
+    margin-left: 25px;
     font-size: 24px;
     font-weight: 300; }
 
 /* ------end about-infor------- */
 /* -----button sign up------ */
-.btn-sign-up {
-  width: 200px;
-  height: 60px;
-  border-radius: 4px;
-  background-color: #64D72F;
-  margin: 50px 165px 0 165px;
-  border: none;
-  display: flex; }
-  .btn-sign-up .btn-sign-up__text {
-    margin: auto;
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff; }
-
-.btn-sign-up:hover {
-  background-color: #306C14;
-  cursor: pointer; }
+.btn-sign-up--cover {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .btn-sign-up--cover .btn-sign-up {
+    width: 200px;
+    height: 60px;
+    border-radius: 4px;
+    background-color: #64D72F;
+    margin: 50px 0;
+    border: none;
+    display: flex; }
+    .btn-sign-up--cover .btn-sign-up .btn-sign-up__text {
+      margin: auto;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff; }
+  .btn-sign-up--cover .btn-sign-up:hover {
+    background-color: #306C14;
+    cursor: pointer; }
 
 /* ------end button sign up------- */
 /*------report------ */

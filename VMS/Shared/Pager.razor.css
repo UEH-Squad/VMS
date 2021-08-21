@@ -6,12 +6,12 @@
 /*#endregion */
 .pagination {
   margin-left: auto;
-  margin-top: 20px;
-  justify-content: center; }
+  margin-top: 30px;
+  justify-content: flex-start; }
   .pagination li {
     display: inline-block;
     list-style: none;
-    margin: 0 3px;
+    margin: 0 14px;
     font-size: 18px; }
   .pagination .btn-prev span, .pagination .btn-next span {
     background-color: #18A0FB;

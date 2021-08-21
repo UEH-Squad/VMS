@@ -66,5 +66,9 @@
   {
     "outputFile": "Shared/Pager.razor.css",
     "inputFile": "Shared/Pager.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/PageAct.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/PageAct.razor.scss"
   }
 ]

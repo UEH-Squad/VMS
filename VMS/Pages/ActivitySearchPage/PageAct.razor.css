@@ -8,7 +8,8 @@
   margin-top: 10px;
   font-size: 24px;
   font-weight: 400;
-  color: #18A0FB; }
+  color: #18A0FB;
+  margin-left: -10px; }
   .my-act .act h3 span {
     color: #64D72F; }
 
@@ -20,6 +21,13 @@
 .my-act .act__content {
   padding: 0 20px;
   position: relative; }
+  .my-act .act__content a {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #18A0FB;
+    text-decoration: none;
+    cursor: pointer; }
   .my-act .act__content h5 {
     display: flex;
     align-items: center;
@@ -27,7 +35,8 @@
     font-weight: 600; }
     .my-act .act__content h5 i {
       color: #64D72F;
-      margin-right: 5px; }
+      margin-right: 5px;
+      font-size: 24px; }
   .my-act .act__content p {
     font-size: 18px;
     font-weight: 400; }
@@ -42,7 +51,8 @@
   display: flex; }
   .my-act .act__signUp i {
     font-size: 36px;
-    color: #F14747; }
+    color: #F14747;
+    cursor: pointer; }
   .my-act .act__signUp button {
     background-color: #64D72F;
     padding: 0px 20px;
@@ -54,39 +64,7 @@
       background-color: #306C14;
       color: #FFFFFF; }
 
-.pagination {
-  width: 50%;
-  margin-left: auto;
-  margin-top: 20px; }
-  .pagination li {
-    display: inline-block;
-    list-style: none;
-    margin: 0 3px;
-    font-size: 18px; }
-  .pagination .btn-prev span, .pagination .btn-next span {
-    background-color: #18A0FB;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    text-align: center;
-    color: white;
-    font-weight: 700;
-    transition: all 0.3s linear; }
-  .pagination .btn-prev span:hover, .pagination .btn-next span:hover {
-    background: #0B588c; }
-  .pagination .numb {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    text-align: center;
-    transition: all 0.3s linear; }
-  .pagination .numb.active, .pagination .numb:hover {
-    background: #18A0FB;
-    color: white; }
-
-.lmtext-2, .lmtext-3, .lmtext-5 {
+.lmtext-2, .lmtext-3 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -98,6 +76,3 @@
 
 .lmtext-3 {
   -webkit-line-clamp: 3; }
-
-.lmtext-5 {
-  -webkit-line-clamp: 5; }

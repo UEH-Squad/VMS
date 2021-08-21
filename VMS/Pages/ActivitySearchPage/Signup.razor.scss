@@ -9,10 +9,6 @@
     background-color: rgba(196, 196, 196, 0.38);
     z-index: 3;
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
     .signUp__content {
         position: relative;
         width: 50%;
@@ -33,6 +29,7 @@
             border-radius: 50%;
             text-align: center;
             background-color: rgba($color: #C4C4C4, $alpha: 0.5);
+            cursor: pointer;
         }
     }
 
@@ -118,6 +115,7 @@
             border-radius: 50%;
             text-align: center;
             background-color: rgba($color: #C4C4C4, $alpha: 0.5);
+            cursor: pointer;
         }
 
         .signUp__report-content {

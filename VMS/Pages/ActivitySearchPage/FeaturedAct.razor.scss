@@ -22,18 +22,20 @@
         left: 0;
         z-index: 10;
         padding: 36px;
-        color: $white;
         transition: all 0.3s linear;
 
-        h3 {
+        a {
+            color: $white;
             font-size: 24px;
             font-weight: 700;
             line-height: 30px;
             text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
             transition: all 0.3s linear;
+            text-decoration: none;
 
             &:hover {
                 transform: translateY(-10px);
+                cursor: pointer;
             }
         }
     }

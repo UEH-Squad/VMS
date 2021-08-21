@@ -21,16 +21,18 @@
     left: 0;
     z-index: 10;
     padding: 36px;
-    color: #FFFFFF;
     transition: all 0.3s linear; }
-    .my-featuredAct .featuredAct__title h3 {
+    .my-featuredAct .featuredAct__title a {
+      color: #FFFFFF;
       font-size: 24px;
       font-weight: 700;
       line-height: 30px;
       text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s linear; }
-      .my-featuredAct .featuredAct__title h3:hover {
-        transform: translateY(-10px); }
+      transition: all 0.3s linear;
+      text-decoration: none; }
+      .my-featuredAct .featuredAct__title a:hover {
+        transform: translateY(-10px);
+        cursor: pointer; }
   .my-featuredAct .featuredAct__overplay {
     width: 100%;
     height: 0;

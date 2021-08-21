@@ -112,7 +112,7 @@
 }
 /*----title Báo cáo hoạt động----*/
 .title-header {
-    font-size: 48px;
+    font-size: 46px;
     font-weight: 500;
     display: flex;
     justify-content: center;
@@ -175,8 +175,9 @@
 
         .block-icon-text{
             display:flex;
-            margin-top:5px;
+            margin-top:10px;
              .file__text {
+                 font-size:22px;
                  font-weight:300px;
              }
         }

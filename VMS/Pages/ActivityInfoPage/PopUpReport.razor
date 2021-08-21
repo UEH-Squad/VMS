@@ -1,7 +1,7 @@
 ﻿@inject IJSRuntime JSRuntinme
     <div class="overlay">
 
-        <div class="min-overlay @(isShowReport ? "d-block" : "")">
+        <div class="min-overlay @(isShowReport ? "d-block" : "d-none")">
             <div class="report-success">
 
                 <div class="min-overlay--icon">
@@ -18,8 +18,7 @@
             </div>
         </div>   
 
-        <div class="container">
-
+        <div class="container @(isShowReport ? "d-none" : "d-block")">
             <div class="icon-close-popup">
                 <span @onclick="CloseModal" class="material-icons">close</span>
             </div>

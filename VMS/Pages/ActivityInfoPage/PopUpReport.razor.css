@@ -94,7 +94,7 @@
 
 /*----title Báo cáo hoạt động----*/
 .title-header {
-  font-size: 48px;
+  font-size: 46px;
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -144,8 +144,9 @@
       color: #515151; }
     .add-file .add-file__block .block-icon-text {
       display: flex;
-      margin-top: 5px; }
+      margin-top: 10px; }
       .add-file .add-file__block .block-icon-text .file__text {
+        font-size: 22px;
         font-weight: 300px; }
     .add-file .add-file__block .inputfile {
       opacity: 0;

@@ -1,0 +1,58 @@
+﻿@attribute [Route(Routes.Topic + "/{activityid}")]
+
+@if (activity is null || string.IsNullOrEmpty(activity.OrgId))
+{
+    <div class="card card-body">Không tìm thấy hoạt động.. <a href="@Routes.Topic">Quay lại</a></div>
+}
+else
+{
+    <div class="alert alert-info">
+        <a href="@Routes.Topic" class="btn btn-success">Quay lại trang hoạt động</a>
+        @if (userId == activity.OrgId)
+        {
+            <a href="@Routes.EditTopic/@ActivityId" style="margin-left: 5px"  class="btn btn-primary">Chỉnh sửa</a>
+            <a href="@Routes.DeleteTopic/@ActivityId" class="btn btn-danger">Xóa hoạt động</a>
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(activity.Banner))
+    {
+        <div class="alert alert-info"><img src="/img/@activity.Banner"/></div>
+    }
+    <div class="card card-body">
+        <span style="display: inline">
+            Tên hoạt động: @activity.Name 
+            @if (activity.IsApproved) { <img style="max-width: 20px" src="/img/verified.png"/> }
+        </span>
+    </div>
+    <div class="card card-body">Lĩnh vực: @activity.Area.Name</div>
+    <div class="card card-body">Ngày bắt đầu: @activity.StartDate.ToShortDateString()</div>
+    <div class="card card-body">Ngày kết thúc: @activity.EndDate.ToShortDateString()</div>
+    <div class="card card-body">Địa chỉ: @activity.Address</div>
+    <div class="card card-body">Số lượng: @activity.MemberQuantity</div>
+    <div class="card card-body">Mô tả: @activity.Description</div>
+    <div class="card card-body">Nhiệm vụ: @activity.Mission</div>
+    <div class="card card-body">
+        @if (activity.IsVirtual)
+        {
+            <span>Hình thức: Trực tuyến</span>
+        }
+        else
+        {
+            <span>Hình thức: Trực tiếp</span>
+        }
+    </div>
+    <div class="card card-body">Website: @activity.Website</div>
+    <div class="card card-body">
+        <i>Skills:</i> 
+        @foreach(var skill in activity.Skills)
+        {
+            <span>@skill.Name</span>
+        }
+    </div>
+    <div class="card card-body">Requirement: @activity.Requirement</div>
+}
+
+
+@code {
+
+}

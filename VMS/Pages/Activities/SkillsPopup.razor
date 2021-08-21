@@ -1,0 +1,29 @@
+﻿@if (skills is not null)
+{
+	@foreach (var skill in skills)
+	{
+		@if (skill.ParentSkillId is null)
+		{
+			@if (SelectedSkills.FirstOrDefault(s => s.Id == skill.Id || s.ParentSkillId == skill.Id) is not null)
+			{
+				<label id="@skill.Name" @onclick="(() => OnClickSkill(skill))" class="alert alert-info">@skill.Name</label>
+			}
+			else
+			{
+				<label id="@skill.Name" @onclick="(() => OnClickSkill(skill))" class="alert">@skill.Name</label>
+			}
+
+			@if(skill.Id % 3 == 0)
+			{
+				<br />
+			}
+		}
+
+	}
+	<div class="alert" style="text-align: center">
+		<buton @onclick="(async () => await OnClickSaveAsync())" class="btn btn-primary">Lưu</buton>
+	</div>
+}
+
+@code {
+}

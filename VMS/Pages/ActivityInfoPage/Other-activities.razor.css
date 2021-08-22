@@ -91,7 +91,7 @@
         .act__container__card__desc {
           padding: 19px;
           font-size: 24px;
-          max-height: calc(24px * 4 + 19px); } }
+          max-height: calc(24px * 5 + 19px); } }
     .act__container__card__icon {
       align-self: flex-end; }
       .act__container__card__icon span {

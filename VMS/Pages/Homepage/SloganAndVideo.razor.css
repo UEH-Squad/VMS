@@ -34,7 +34,7 @@
   .video-header__source {
     position: relative;
     width: 100%;
-    height: auto;
+    max-height: auto;
     top: 0;
     object-fit: cover;
     background-repeat: no-repeat;

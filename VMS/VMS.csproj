@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.Modal" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
@@ -25,7 +26,6 @@
   </ItemGroup>
 
     <ItemGroup>
-      <Watch Remove="Resources\src\common\lodash.js" />
       <Watch Remove="Resources\scss\Index.scss" />
       <Watch Remove="Resources\scss\Layout.scss" />
       <Watch Remove="Resources\webpack.config.js" />
@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\src\common\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

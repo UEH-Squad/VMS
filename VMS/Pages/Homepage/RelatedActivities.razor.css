@@ -4,9 +4,6 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-act {
-  margin-bottom: 120px; }
-
 .my-row {
   width: 100%;
   display: flex;

@@ -10,12 +10,12 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Edit
+    public partial class Edit : ComponentBase
     {
         private CreateActivityViewModel activity;
         private string userId;
         private List<Skill> skills;
-        private List<Area> areas;
+        private List<AreaViewModel> areas;
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
         private List<AddressPath> wards;
@@ -25,18 +25,25 @@ namespace VMS.Pages.Activities
 
         [Parameter]
         public string ActivityId { get; set; }
+
         [Inject]
         private IIdentityService IdentityService { get; set; }
+
         [Inject]
         private IAreaService AreaService { get; set; }
+
         [Inject]
         private ISkillService SkillService { get; set; }
+
         [Inject]
         private IActivityService ActivityService { get; set; }
+
         [Inject]
         private IUploadService UploadService { get; set; }
+
         [Inject]
         private IAddressService AddressService { get; set; }
+
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 

@@ -6,7 +6,6 @@ namespace VMS.Domain.Models
     {
         public string Name { get; set; }
         public string Icon { get; set; }
-
         public virtual ICollection<UserArea> UserAreas { get; set; }
         public virtual ICollection<Activity> Activities { get; set; }
     }

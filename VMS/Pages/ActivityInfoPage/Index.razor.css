@@ -1,0 +1,21 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.toppage {
+  margin-top: 0.5%; }
+  .toppage .return-text {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: #64D72F; }
+  .toppage .return-text:hover {
+    color: #306C14; }
+  .toppage .line-line1 {
+    margin-top: 0px;
+    background-color: #B4B4B4;
+    border: 1px solid #B4B4B4; }

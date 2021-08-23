@@ -9,7 +9,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Filter
+    public partial class Filter : ComponentBase
     {
         private List<User> organizers;
         private FilterActivityViewModel filter;
@@ -18,12 +18,16 @@ namespace VMS.Pages.Activities
 
         [Parameter]
         public EventCallback<FilterActivityViewModel> FilterEventCallback { get; set; }
+
         [Inject]
         private IIdentityService IdentityService { get; set; }
+
         [Inject]
         private IModalService AreaModalService { get; set; }
+
         [Inject]
         private IModalService SkillModalService { get; set; }
+
         [Inject]
         private IAddressService AddressService { get; set; }
 
@@ -41,7 +45,7 @@ namespace VMS.Pages.Activities
 
         private void ShowAreasPopupAsync()
         {
-            ModalParameters parameters = new ModalParameters();
+            ModalParameters parameters = new();
             parameters.Add("SelectedAreas", filter.Areas);
 
             AreaModalService.Show<AreasPopup>("", parameters);

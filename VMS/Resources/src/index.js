@@ -6,4 +6,4 @@ export const LogoBanerCarousel = () => homepage.logoBanerCarousel();
 export const SetUserLocation = () => homepage.setUserLocation();
 export const GetUserLocation = () => homepage.getUserLocation();
 export const ShowResult = () => homepage.showResult();
-export const IncreaseNumber1 = () => homepage.increaseNumber1();
+export const IncreaseNumber = () => homepage.increaseNumber();

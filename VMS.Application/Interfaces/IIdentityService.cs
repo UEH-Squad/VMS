@@ -16,5 +16,7 @@ namespace VMS.Application.Interfaces
         List<User> GetAllOrganizers();
 
         string GetCurrentUserAddress();
+
+        User GetCurrentUserWithAddresses();
     }
 }

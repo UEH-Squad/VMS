@@ -18,19 +18,25 @@ namespace VMS.Application.ViewModels
 
         [Required]
         public string Requirement { get; set; }
+
         [Required]
         public string Description { get; set; }
+
         [Required]
         public string Address { get; set; }
+
         [Required]
         public int AreaId { get; set; }
+
         [Required]
         public string Name { get; set; }
 
         [Range(1, 11371, ErrorMessage = "Invalid Address")]
         public int ProvinceId { get; set; }
+
         [Range(1, 11371, ErrorMessage = "Invalid Address")]
         public int DistrictId { get; set; }
+
         [Range(1, 11371, ErrorMessage = "Invalid Address")]
         public int WardId { get; set; }
 

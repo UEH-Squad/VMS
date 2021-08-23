@@ -1,118 +1,60 @@
 ﻿@inject IJSRuntime JSRuntinme;
 
-<section class="other-act">
-    <div class="other-act__title">
-        <h3>Hoạt động khác <span>của tổ chức</span></h3>
-        <hr>
-    </div>
-    <div class="owl-carousel owl-theme">
-        <div class="item">
-            <div class="act__container">
+@if (fakeData is not null && fakeData.Count != 0)
+{
+    <section class="other-act">
+        <div class="other-act__title">
+            <h3>Hoạt động khác <span>của tổ chức</span></h3>
+            <hr>
+        </div>
+        <div class="owl-carousel owl-theme">
+            @foreach (var data in fakeData)
+            {
                 <div class="act__container__card" id="kiemtra">
                     <div class="act__container__card__img">
-                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                        <img src="@data.Banner" alt="photo">
                     </div>
                     <div class="act__container__card__desc">
-                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
+                        <p>@data.Title</p>
                     </div>
                     <div class="act__container__card__icon">
-                        <div class="@typeButton"  @onclick="AnimateHeart">
+                        <div class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))">
                             <span class="material-icons">favorite</span>
                         </div>
                     </div>
                 </div>
-                <div class="act__container__card">
-                    <div class="act__container__card__img">
-                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
-                    </div>
-                    <div class="act__container__card__desc">
-                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                    </div>
-                    <div class="act__container__card__icon">
-                        <div class="@typeButton" @onclick="AnimateHeart">
-                            <span class="material-icons">favorite</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="act__container__card">
-                    <div class="act__container__card__img">
-                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
-                    </div>
-                    <div class="act__container__card__desc">
-                        <p>
-                            Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19
-                        </p>
-                    </div>
-                    <div class="act__container__card__icon">
-                        <div class="@typeButton" @onclick="AnimateHeart">
-                            <span class="material-icons">favorite</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
-        <div class="item">
-            <div class="act__container">
-                <div class="act__container__card" id="kiemtra">
-                    <div class="act__container__card__img">
-                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
-                    </div>
-                    <div class="act__container__card__desc">
-                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                    </div>
-                    <div class="act__container__card__icon">
-                        <div class="@typeButton" @onclick="AnimateHeart">
-                            <span class="material-icons">favorite</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="act__container__card">
-                    <div class="act__container__card__img">
-                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
-                    </div>
-                    <div class="act__container__card__desc">
-                        <p>Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</p>
-                    </div>
-                    <div class="act__container__card__icon">
-                        <div  class="@typeButton" @onclick="AnimateHeart">
-                            <span class="material-icons">favorite</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="act__container__card">
-                    <div class="act__container__card__img">
-                        <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
-                    </div>
-                    <div class="act__container__card__desc">
-                        <p>
-                            Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19
-                        </p>
-                    </div>
-                    <div class="act__container__card__icon">
-                        <div class="@typeButton" @onclick="AnimateHeart" >
-                            <span class="material-icons">favorite</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+}
 
 @code {
 
-    private string typeButton = "heart-line";
-
-    private void AnimateHeart()
+    private class FakeData
     {
-        if (typeButton == "heart")
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Banner { get; set; }
+        public bool IsFav { get; set; }
+    }
+
+    private List<FakeData> fakeData = new();
+
+    private void AnimateHeart(int id)
+    {
+        var item = fakeData.FirstOrDefault(x => x.Id == id);
+        item.IsFav = true;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        fakeData.AddRange(Enumerable.Range(0, 7).Select(x => new FakeData
         {
-            typeButton = "heart-line";
-        }
-        else
-        {
-            typeButton = "heart";
-        }
+            Id = x,
+            Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
+            Banner = "img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg",
+            IsFav = false
+        }));
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

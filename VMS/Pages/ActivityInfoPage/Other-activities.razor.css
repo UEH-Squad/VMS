@@ -115,6 +115,9 @@
 .heart-line span {
   color: transparent !important; }
 
+::deep .owl-carousel {
+  z-index: 0; }
+
 ::deep .owl-nav {
   position: absolute;
   top: 50%;

@@ -10,7 +10,7 @@
         dots: false,
         responsive: {
             0: {
-                items: 1
+                items: 3
             },
         }
     })

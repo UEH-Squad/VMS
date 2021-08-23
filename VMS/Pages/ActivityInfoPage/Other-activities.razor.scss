@@ -167,6 +167,10 @@ $fav-icon: #F14747;
 }
 
 //----------------------Custom Owl Carousel---------------------//
+::deep .owl-carousel {
+    z-index: 0;
+}
+
 ::deep .owl-nav {
     position: absolute;
     top: 50%;

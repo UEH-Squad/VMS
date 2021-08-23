@@ -44,41 +44,6 @@ const setUserLocation = () => {
         return null;
     }
 }
-const showResult = () => {
-    const counters = document.querySelectorAll('.counter');
-    const boxInfo = document.querySelector('.BoxInformation');
-    const boxInfoY = boxInfo.offsetTop;
-
-    const showAnimation = () => {
-        const viewportY = window.pageYOffset + window.innerHeight;
-
-        if (viewportY >= boxInfoY) {
-            counters.forEach(each => IncreaseNumber(each));
-        }
-    }
-    const event = () => {
-        window.addEventListener('scroll', showAnimation);
-    }
-    event();
-}
-
-const IncreaseNumber = (counter) => {
-    const speed = 200;
-    const target = parseInt(counter.dataset.target);
-    const updateCount = () => {
-        const count = +counter.innerText;
-        const increasement = target / speed;
-        if (count < target) {
-            counter.innerText = Math.ceil(count + increasement);
-            setTimeout(updateCount, 200);
-        }
-        else {
-            counter.innerText = target;
-        }
-    }
-
-    updateCount();
-}
 
 const getUserLocation = () => {
     const location = localStorage.getItem('UserLocation');

@@ -9,11 +9,13 @@ namespace VMS.Application.Automapper
         public MappingProfile()
         {
             CreateMap<Activity, ActivityViewModel>()
-                                .ForMember(a => a.Coordinate, a => a
-                                .MapFrom(x => new CoordinateResponse() { Lat = x.Latitude, Long = x.Longitude }));
+                .ForMember(a => a.Coordinate, a => a
+                .MapFrom(x => new Coordinate() { Latitude = x.Latitude, Longitude = x.Longitude }));
             CreateMap<CreateActivityViewModel, Activity>();
             CreateMap<Activity, CreateActivityViewModel>();
             CreateMap<Activity, ViewActivityViewModel>();
+            CreateMap<Area, AreaViewModel>();
+            CreateMap<Activity, UserWithActivityViewModel>();
         }
     }
 }

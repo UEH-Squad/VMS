@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Geolocation;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -6,28 +7,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using Coordinate = VMS.Application.ViewModels.Coordinate;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Index
+    public partial class Index : ComponentBase
     {
         private const int Take = 20;
         private List<ActivityViewModel> activityViewModels;
         private List<ActivityViewModel> filterActivities;
         private List<ActivityViewModel> activities;
-        private CoordinateResponse userLocation;
+        private Coordinate location;
         private bool isLoggedIn;
         private int currentPage;
         private int totalPages;
 
         [Inject]
         private IActivityService ActivityService { get; set; }
+
         [Inject]
         private IIdentityService IdentityService { get; set; }
+
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
+
         [Inject]
-        private IAddressLocationService AddressLocationService { get; set; }
+        private IGeoLocationService AddressLocationService { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -36,11 +41,12 @@ namespace VMS.Pages.Activities
 
         protected async override Task OnInitializedAsync()
         {
-            userLocation = await JsRuntime.InvokeAsync<CoordinateResponse>("vms.GetUserLocation");
-            if (userLocation is null)
+            location = await JsRuntime.InvokeAsync<Coordinate>("vms.GetUserLocation");
+
+            if (location is null)
             {
                 string userAddresses = IdentityService.GetCurrentUserAddress();
-                userLocation = await AddressLocationService.GetCoordinateAsync(userAddresses);
+                location = await AddressLocationService.GetCoordinateAsync(userAddresses);
             }
 
             activityViewModels = await ActivityService.GetAllActivitiesAsync();
@@ -82,7 +88,7 @@ namespace VMS.Pages.Activities
             switch ((string)e.Value)
             {
                 case "Nearest":
-                    filterActivities = filterActivities.OrderBy(a => Distance(userLocation, a.Coordinate)).ToList();
+                    filterActivities = filterActivities.OrderBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
                     GetCurrentPage(1);
                     break;
 
@@ -114,7 +120,7 @@ namespace VMS.Pages.Activities
             return 6371 * c;
         }
 
-        private double ConvertToRadian(double value)
+        private static double ConvertToRadian(double value)
         {
             return (Math.PI / 180) * value;
         }

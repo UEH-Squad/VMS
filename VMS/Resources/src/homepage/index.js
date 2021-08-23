@@ -23,6 +23,7 @@ const filterCarousel = () => {
         }
     })
 }
+
 const logoBanerCarousel = () => {
     $('.logoBaner__carousel').owlCarousel({
         loop: true,
@@ -89,13 +90,13 @@ const getUserLocation = () => {
 
 const setPosition = position => {
     var result = {
-        Lat: position.coords.latitude,
-        Long: position.coords.longitude,
+        Latitude: position.coords.latitude,
+        Longitude: position.coords.longitude,
     }
     localStorage.setItem('UserLocation', JSON.stringify(result));
 }
 
-const increaseNumber1 = () => {
+const increaseNumber = () => {
     const handleCounterUp = el => {
         new Waypoint({
             element: el,
@@ -113,4 +114,4 @@ const increaseNumber1 = () => {
     });
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, setUserLocation, getUserLocation, showResult, increaseNumber1 };
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber };

@@ -48,8 +48,48 @@
     "inputFile": "Pages/ActivitySearchPage/Index.razor.scss"
   },
   {
+    "outputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/AreasPopup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/AreasPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/Signup.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/Signup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Pager.razor.css",
+    "inputFile": "Shared/Pager.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/PageAct.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/PageAct.razor.scss"
+  },
+  {
     "outputFile": "Pages/ActivityInfoPage/Index.razor.css",
     "inputFile": "Pages/ActivityInfoPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/InfoPage.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/InfoPage.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/Rightrail.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/Rightrail.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/PopUpReport.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/PopUpReport.razor.scss"
   },
   {
     "outputFile": "Pages/ActivityInfoPage/Other-activities.razor.css",

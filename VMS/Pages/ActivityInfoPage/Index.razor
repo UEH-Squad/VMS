@@ -1,18 +1,22 @@
 ﻿@attribute [Route(Routes.ActivityInfo)]
 
 <div class="container-lg px-0 layout">
-    <a href="@Routes.ActivitySearch">Quay lại</a>
-    <div class="layout__divider"></div>
+    <div class="toppage">
+        <div class="return">
+            <a href="@Routes.ActivitySearch" class="return-text">&#60;&#60; Quay lại</a>
+        </div>
+        <div><hr class="line-line1"></div>
+    </div>
     <div class="row layout__body">
-        <div class="col-7 flex-grow-1 layout__body__main" style="height: 90px;">
-            Main body
+        <div class="col-7 flex-grow-1 layout__body__main">
+            <InfoPage />
         </div>
         <div class="col-4 layout__body__rightrail">
-            Rightrail
+            <Rightrail></Rightrail>
         </div>
     </div>
     <div class="layout__other-activities">
-        <Other_activities/>
+        Other activities
     </div>
 </div>
 

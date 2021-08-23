@@ -9,10 +9,10 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Create
+    public partial class Create : ComponentBase
     {
         private CreateActivityViewModel activity;
-        private List<Area> areas;
+        private List<AreaViewModel> areas;
         private List<Skill> skills;
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
@@ -23,16 +23,22 @@ namespace VMS.Pages.Activities
 
         [Inject]
         private IIdentityService IdentityService { get; set; }
+
         [Inject]
         private IAreaService AreaService { get; set; }
+
         [Inject]
         private ISkillService SkillService { get; set; }
+
         [Inject]
         private IActivityService ActivityService { get; set; }
+
         [Inject]
         private NavigationManager NavigationManager { get; set; }
+
         [Inject]
         private IUploadService UploadService { get; set; }
+
         [Inject]
         private IAddressService AddressService { get; set; }
 

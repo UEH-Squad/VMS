@@ -6,19 +6,23 @@ using VMS.Common;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Delete
+    public partial class Delete : ComponentBase
     {
         private CreateActivityViewModel activity;
         private string userId;
 
         [Parameter]
         public string ActivityId { get; set; }
+
         [Inject]
         private IIdentityService IdentityService { get; set; }
+
         [Inject]
         private IActivityService ActivityService { get; set; }
+
         [Inject]
         private NavigationManager NavigationManager { get; set; }
+
         [Inject]
         private IUploadService UploadService { get; set; }
 
@@ -27,6 +31,7 @@ namespace VMS.Pages.Activities
             activity = await ActivityService.GetCreateActivityViewModelAsync(int.Parse(ActivityId));
             userId = IdentityService.GetCurrentUserId();
         }
+
         private async Task DeleteActivityAsync()
         {
             if (!string.IsNullOrEmpty(activity.Banner))

@@ -1,0 +1,65 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+.my-featuredAct {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5%;
+
+    .featuredAct__card {
+        position: relative;
+        border-radius: 10px;
+        margin-bottom: 50px;
+        overflow: hidden;
+
+        &:hover .featuredAct__overplay {
+            height: 100%;
+        }
+    }
+
+    .featuredAct__title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        padding: 36px;
+        transition: all 0.3s linear;
+
+        a {
+            color: $white;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 30px;
+            text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s linear;
+            text-decoration: none;
+
+            &:hover {
+                transform: translateY(-10px);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .featuredAct__overplay {
+        width: 100%;
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba($color: $blue, $alpha: 0.5);
+        z-index: -1;
+        transition: all 0.3s linear;
+    }
+
+    .lmtext-5 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+    .lmtext-5 {
+        -webkit-line-clamp: 5;
+    }
+}

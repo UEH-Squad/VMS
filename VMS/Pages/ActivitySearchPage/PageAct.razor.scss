@@ -1,0 +1,103 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+// my-act
+.my-act {
+    .act {
+        border-top: 1px solid #bbb;
+        h3 {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: 400;
+            color: #18A0FB;
+
+            span {
+                color: #64D72F;
+            }
+        }
+
+        .act__item {
+            background-color: $grey;
+            padding: 30px 10px;
+            border-radius: 10px;
+        }
+    }
+
+    .act__content {
+        padding: 0 20px;
+        position: relative;
+
+        a {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: 400;
+            color: #18A0FB;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        h5 {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 0;
+
+            i {
+                color: $green;
+                margin-right: 5px;
+                font-size: 24px;
+            }
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        span {
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+
+    .act__signUp {
+        display: flex;
+
+        i {
+            font-size: 36px;
+            color: #F14747;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        button {
+            background-color: $green;
+            padding: 0px 20px;
+            margin-left: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: $white;
+
+            &:hover {
+                background-color: $green-bold;
+                color: $white;
+            }
+        }
+    }
+}
+
+.lmtext-2, .lmtext-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.lmtext-2 {
+    -webkit-line-clamp: 2;
+}
+
+.lmtext-3 {
+    -webkit-line-clamp: 3;
+}

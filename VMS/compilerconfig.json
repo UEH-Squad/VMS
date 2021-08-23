@@ -92,7 +92,7 @@
     "inputFile": "Pages/ActivityInfoPage/PopUpReport.razor.scss"
   },
   {
-    "outputFile": "Pages/ActivityInfoPage/Other-activities.razor.css",
-    "inputFile": "Pages/ActivityInfoPage/Other-activities.razor.scss"
+    "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
   }
 ]

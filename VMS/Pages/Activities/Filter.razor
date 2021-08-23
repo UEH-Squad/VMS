@@ -1,0 +1,61 @@
+﻿<EditForm Model="filter">
+
+	<div class="alert" style="margin-bottom: -25px;">
+		<input type="checkbox" checked="checked" id="@filter.Virtual" @onchange="@(() => filter.Virtual = !filter.Virtual)" /> Virtual
+		<input type="checkbox" checked="checked" id="@filter.Actual" @onchange="@(() => filter.Actual = !filter.Actual)" /> Actual
+	</div>
+
+	<div class="alert" style="display: flex">
+
+		<InputSelect Value="filter.ProvinceId"
+					 ValueChanged="@(async (int id) => await ProvinceSelectionChanged(id))"
+					 ValueExpression="@(() => filter.ProvinceId)"
+					 class="form-control">
+
+			<option value="0">Tỉnh/Thành phố</option>
+			@if (provinces is not null)
+			{
+				@foreach (var province in provinces)
+				{
+					<option id="@province.Name" value="@province.Id">@province.Name</option>
+				}
+			}
+
+		</InputSelect>
+
+		<InputSelect @bind-Value="filter.DistrictId" class="form-control">
+			<option value="0">Quận/Huyện</option>
+			@if (districts is not null)
+			{
+				@foreach (var district in districts)
+				{
+					<option id="@district.Name" value="@district.Id">@district.Name</option>
+				}
+			}
+		</InputSelect>
+
+		<InputSelect @bind-Value="@filter.OrgId" class="form-control">
+			@if (organizers is not null)
+			{
+				<option value="">Tổ chức</option>
+				@foreach (var org in organizers)
+				{
+					<option value="@org.Id">@org.UserName</option>
+				}
+			}
+		</InputSelect>
+
+		<span @onclick="ShowAreasPopupAsync" class="form-control">Lĩnh vực</span>
+
+		<span @onclick="ShowSkillsPopupAsync" class="form-control">Kỹ năng</span>
+
+		<input type="submit" value="Filter" @onclick="FilterAsync" class="btn btn-primary" />
+
+		<input type="submit" value="Xóa lọc" @onclick="ClearFilter" class="btn btn-light"/>
+
+	</div>
+</EditForm>
+
+@code {
+
+}

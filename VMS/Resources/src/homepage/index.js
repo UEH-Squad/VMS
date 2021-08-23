@@ -23,6 +23,7 @@ const filterCarousel = () => {
         }
     })
 }
+
 const logoBanerCarousel = () => {
     $('.logoBaner__carousel').owlCarousel({
         loop: true,
@@ -36,58 +37,31 @@ const logoBanerCarousel = () => {
     })
 }
 
-const getUserLocation = () => {
+const setUserLocation = () => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(setPosition);
     } else {
         return null;
     }
 }
-const showResult = () => {
-    const counters = document.querySelectorAll('.counter');
-    const boxInfo = document.querySelector('.BoxInformation');
-    const boxInfoY = boxInfo.offsetTop;
 
-    const showAnimation = () => {
-        const viewportY = window.pageYOffset + window.innerHeight;
-
-        if (viewportY >= boxInfoY) {
-            counters.forEach(each => IncreaseNumber(each));
-        }
+const getUserLocation = () => {
+    const location = localStorage.getItem('UserLocation');
+    if (location) {
+        return JSON.parse(location);
     }
-    const event = () => {
-        window.addEventListener('scroll', showAnimation);
-    }
-    event();
+    return null;
 }
 
-const IncreaseNumber = (counter) => {
-    const speed = 200;
-    const target = parseInt(counter.dataset.target);
-    const updateCount = () => {
-        const count = +counter.innerText;
-        const increasement = target / speed;
-        if (count < target) {
-            counter.innerText = Math.ceil(count + increasement);
-            setTimeout(updateCount, 200);
-        }
-        else {
-            counter.innerText = target;
-        }
-    }
-
-    updateCount();
-}
-
-let showPosition = position => {
+const setPosition = position => {
     var result = {
-        Lat: position.coords.latitude,
-        Long: position.coords.longitude,
+        Latitude: position.coords.latitude,
+        Longitude: position.coords.longitude,
     }
-    return result;
+    localStorage.setItem('UserLocation', JSON.stringify(result));
 }
 
-const increaseNumber1 = () => {
+const increaseNumber = () => {
     const handleCounterUp = el => {
         new Waypoint({
             element: el,
@@ -105,4 +79,4 @@ const increaseNumber1 = () => {
     });
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, showResult, increaseNumber1 };
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber };

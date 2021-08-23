@@ -23,5 +23,6 @@ namespace VMS.Application.ViewModels
 
         public List<ActivityAddress> ActivityAddresses { get; set; }
         public List<ActivitySkill> ActivitySkills { get; set; }
+
     }
 }

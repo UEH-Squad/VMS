@@ -104,6 +104,22 @@ namespace VMS.Pages.Activities
             }
         }
 
+        /* source: https://gist.github.com/jammin77/033a332542aa24889452 */
+        private double Distance(CoordinateResponse userPosition, CoordinateResponse activityPosition)
+        {
+            double dLat = ConvertToRadian(userPosition.Lat - activityPosition.Lat);
+            double dLon = ConvertToRadian(userPosition.Long - activityPosition.Long);
+
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                        Math.Cos(ConvertToRadian(userPosition.Lat)) *
+                        Math.Cos(ConvertToRadian(activityPosition.Lat)) *
+                        Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+            double c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+
+            return 6371 * c;
+        }
+
         private static double ConvertToRadian(double value)
         {
             return (Math.PI / 180) * value;

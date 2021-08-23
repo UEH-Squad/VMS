@@ -12,6 +12,12 @@ namespace VMS.Infrastructure.Data.Migrations
                 type: "int",
                 nullable: true);
 
+            migrationBuilder.AddColumn<string>(
+                name: "Icon",
+                table: "Areas",
+                type: "nvarchar(max)",
+                nullable: true);
+
             migrationBuilder.UpdateData(
                 table: "Areas",
                 keyColumn: "Id",
@@ -341,6 +347,10 @@ namespace VMS.Infrastructure.Data.Migrations
             migrationBuilder.DropColumn(
                 name: "ParentSkillId",
                 table: "Skills");
+
+            migrationBuilder.DropColumn(
+                name: "Icon",
+                table: "Areas");
 
             migrationBuilder.UpdateData(
                 table: "Areas",

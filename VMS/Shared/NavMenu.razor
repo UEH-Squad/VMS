@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 fixed-top shadow-sm my-navbar">
+﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(IsFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
     <div class="container-lg p-0 my-navbar-container">
         <div class="d-flex flex-column my-navbar__brand">
             <NavLink href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
@@ -17,24 +17,30 @@
             </button>
         </div>
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
-                <ul class="navbar-nav navbar-list mb-4 mb-xl-0 text-center fw-bold my-collapse__list">
-                    <li class="nav-item">
-                        <a href="@Routes.HomePage" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Routes.ActivitySearch" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Routes.Organizations" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Routes.Map" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</a>
-                    </li>
-                </ul>
-                <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
-                    <LoginDisplay />
-                </ul>
+            <ul class="navbar-nav navbar-list mb-4 mb-xl-0 text-center fw-bold my-collapse__list">
+                <li class="nav-item">
+                    <a href="@Routes.HomePage" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Routes.ActivitySearch" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Routes.Organizations" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Routes.Map" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</a>
+                </li>
+            </ul>
+            <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
+                <LoginDisplay />
+            </ul>
         </div>
-                   
+
     </div>
 </nav>
+
+@code
+{
+    [Parameter]
+    public bool IsFixedTop { get; set; }
+}

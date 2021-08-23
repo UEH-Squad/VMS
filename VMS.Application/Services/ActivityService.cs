@@ -31,6 +31,7 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
+
         public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();

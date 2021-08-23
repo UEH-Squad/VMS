@@ -5,7 +5,7 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Pages.Activities
 {
-    public partial class View
+    public partial class View : ComponentBase
     {
         private ViewActivityViewModel activity;
         private string userId;

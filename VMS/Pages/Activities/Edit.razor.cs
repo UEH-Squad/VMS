@@ -10,7 +10,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Edit
+    public partial class Edit : ComponentBase
     {
         private CreateActivityViewModel activity;
         private string userId;

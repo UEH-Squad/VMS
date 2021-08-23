@@ -11,7 +11,7 @@ using Coordinate = VMS.Application.ViewModels.Coordinate;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Index
+    public partial class Index : ComponentBase
     {
         private const int Take = 20;
         private List<ActivityViewModel> activityViewModels;

@@ -9,7 +9,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Filter
+    public partial class Filter : ComponentBase
     {
         private List<User> organizers;
         private FilterActivityViewModel filter;

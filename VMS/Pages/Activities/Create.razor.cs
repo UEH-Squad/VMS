@@ -9,7 +9,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Create
+    public partial class Create : ComponentBase
     {
         private CreateActivityViewModel activity;
         private List<AreaViewModel> areas;

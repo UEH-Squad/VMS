@@ -8,7 +8,7 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Pages.Activities
 {
-    public partial class AreasPopup
+    public partial class AreasPopup : ComponentBase
     {
         private List<AreaViewModel> areas;
 

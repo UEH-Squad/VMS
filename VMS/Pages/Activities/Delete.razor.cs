@@ -6,7 +6,7 @@ using VMS.Common;
 
 namespace VMS.Pages.Activities
 {
-    public partial class Delete
+    public partial class Delete : ComponentBase
     {
         private CreateActivityViewModel activity;
         private string userId;

@@ -9,7 +9,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.Activities
 {
-    public partial class SkillsPopup
+    public partial class SkillsPopup : ComponentBase
     {
         private List<Skill> skills;
 

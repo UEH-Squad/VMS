@@ -114,7 +114,7 @@ namespace VMS.Pages.ActivitySearchPage
         private async Task ShowSkillsPopup()
         {
             var skillsParameter = new ModalParameters();
-            skillsParameter.Add("choosenSkillsList", Filter.Skills);
+            skillsParameter.Add("ChoosenSkillsList", Filter.Skills);
 
             var options = new ModalOptions()
             {

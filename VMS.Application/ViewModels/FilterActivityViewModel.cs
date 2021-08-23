@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VMS.Domain.Models;
 
 namespace VMS.Application.ViewModels
 {
@@ -11,7 +10,7 @@ namespace VMS.Application.ViewModels
         public int ProvinceId { get; set; }
         public int DistrictId { get; set; }
         public List<int> Areas { get; set; }
-        public List<int> Skills { get; set; }
+        public List<SkillViewModel> Skills { get; set; }
 
         public int AddressPathId
         {

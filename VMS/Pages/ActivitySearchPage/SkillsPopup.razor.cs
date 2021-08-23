@@ -1,9 +1,11 @@
 ﻿using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivitySearchPage
 {
@@ -13,7 +15,9 @@ namespace VMS.Pages.ActivitySearchPage
         private List<int> isShowSubSkills = new();
 
         [Parameter]
-        public List<int> choosenSkillsList { get; set; }
+        public List<SkillViewModel> ChoosenSkillsList { get; set; }
+        [CascadingParameter]
+        private BlazoredModalInstance SkillsModal { get; set; }
         [Inject]
         private ISkillService SkillService { get; set; }
 
@@ -22,15 +26,16 @@ namespace VMS.Pages.ActivitySearchPage
             skills = await SkillService.GetAllSkillsAsync();
         }
 
-        private void ChangeState(int skillId)
+        private void ChangeState(SkillViewModel choosenSkill)
         {
-            if (!choosenSkillsList.Exists(s => s == skillId))
+            SkillViewModel skill = ChoosenSkillsList.Find(s => s.Id == choosenSkill.Id);
+            if (skill is null)
             {
-                choosenSkillsList.Add(skillId);
+                ChoosenSkillsList.Add(choosenSkill);
             }
             else
             {
-                choosenSkillsList.Remove(skillId);
+                ChoosenSkillsList.Remove(choosenSkill);
             }
         }
 
@@ -46,17 +51,14 @@ namespace VMS.Pages.ActivitySearchPage
             }
         }
 
-        //Close and save button
-        [CascadingParameter]
-        private BlazoredModalInstance SkillsModal { get; set; }
-        void CloseModal()
+        private async Task CloseModal()
         {
-            SkillsModal.CloseAsync();
+            await SkillsModal.CloseAsync();
         }
 
-        void SaveModal()
+        private async Task SaveModal()
         {
-            SkillsModal.CloseAsync();
+            await SkillsModal.CloseAsync();
         }
     }
 }

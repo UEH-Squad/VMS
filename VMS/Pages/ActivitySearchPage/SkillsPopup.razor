@@ -15,16 +15,16 @@
 							{
 								@if (skill.SubSkills.Count == 0)
 								{
-									<p @onclick="() => ChangeState(skill.Id)" class="m-0 @(choosenSkillsList.Exists(s => s == skill.Id || s == skill.ParentSkillId) ? "colored-green position-relative" : "")">@skill.Name</p>
-					}
+									<p @onclick="() => ChangeState(skill)" class="m-0 @(ChoosenSkillsList.Exists(s => s.Id == skill.Id) ? "colored-green position-relative" : "")">@skill.Name</p>
+								}
 								else
 								{
-									<p @onclick="() => HandleShowSubSkill(skill.Id)" class="m-0 @(choosenSkillsList.Exists(s => s == skill.Id || s == skill.ParentSkillId) ? "colored-green position-relative" : "")">
+									<p @onclick="() => HandleShowSubSkill(skill.Id)" class="m-0 @(ChoosenSkillsList.Exists(s => s.Id == skill.Id || s.ParentSkillId == skill.Id) || isShowSubSkills.Exists(s => s == skill.Id) ? "colored-green position-relative" : "")">
 										@skill.Name
 										<div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(isShowSubSkills.Exists(s => s == skill.Id) ? "d-block" : "")">
 											@foreach (var subskill in skill.SubSkills)
 											{
-												<p @onclick="() => ChangeState(subskill.Id)" class="sub-popup-item mb-3 @(choosenSkillsList.Exists(s => s == subskill.Id) ? "underlined" : "")">@subskill.Name</p>
+												<p @onclick="() => ChangeState(subskill)" class="sub-popup-item mb-3 @(ChoosenSkillsList.Exists(s => s.Id == subskill.Id) ? "underlined" : "")">@subskill.Name</p>
 											}
 										</div>
 									</p>

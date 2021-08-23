@@ -52,6 +52,10 @@
     "inputFile": "Pages/ActivityInfoPage/Index.razor.scss"
   },
   {
+    "outputFile": "Pages/ActivityInfoPage/InfoPage.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/InfoPage.razor.scss"
+  },
+  {
     "outputFile": "Pages/ActivityInfoPage/Rightrail.razor.css",
     "inputFile": "Pages/ActivityInfoPage/Rightrail.razor.scss"
   },

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Geolocation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -10,15 +12,20 @@ using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
 using VMS.Infrastructure.Data.Context;
+using Coordinate = VMS.Application.ViewModels.Coordinate;
 
 namespace VMS.Application.Services
 {
     public class ActivityService : BaseService, IActivityService
     {
         private readonly IIdentityService _identityService;
-        private readonly IAddressLocationService _addressLocationService;
+        private readonly IGeoLocationService _addressLocationService;
 
-        public ActivityService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService, IAddressLocationService addressLocationService) : base(repository, dbContextFactory, mapper)
+        public ActivityService(IRepository repository,
+                               IDbContextFactory<VmsDbContext> dbContextFactory,
+                               IMapper mapper,
+                               IIdentityService identityService,
+                               IGeoLocationService addressLocationService) : base(repository, dbContextFactory, mapper)
         {
             _identityService = identityService;
             _addressLocationService = addressLocationService;
@@ -55,9 +62,9 @@ namespace VMS.Application.Services
             activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
 
-            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
-            activity.Latitude = coordinateResponse.Lat;
-            activity.Longitude = coordinateResponse.Long;
+            Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
+            activity.Latitude = coordinateResponse.Latitude;
+            activity.Longitude = coordinateResponse.Longitude;
 
             activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
             {
@@ -82,7 +89,7 @@ namespace VMS.Application.Services
 
             Specification<Activity> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                Conditions = new List<Expression<Func<Activity, bool>>>
                 {
                     a => a.Id == activityId
                 },
@@ -118,7 +125,7 @@ namespace VMS.Application.Services
 
             Specification<Activity> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                Conditions = new List<Expression<Func<Activity, bool>>>
                 {
                     a => a.Id == activityId
                 },
@@ -131,16 +138,16 @@ namespace VMS.Application.Services
 
             activity = _mapper.Map(activityViewModel, activity);
 
-            CoordinateResponse coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
-            activity.Latitude = coordinateResponse.Lat;
-            activity.Longitude = coordinateResponse.Long;
+            Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
+            activity.Latitude = coordinateResponse.Latitude;
+            activity.Longitude = coordinateResponse.Longitude;
 
             activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
             {
                 SkillId = s.Id,
                 ActivityId = activity.Id,
                 IsDeleted = false
-            }).ToList() ;
+            }).ToList();
 
             activity.ActivityAddresses = new List<ActivityAddress>()
             {
@@ -191,5 +198,81 @@ namespace VMS.Application.Services
 
             return activityViewModel;
         }
+
+        public async Task<List<UserWithActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false)
+        {
+            await using DbContext dbContext = _dbContextFactory.CreateDbContext();
+            List<Activity> activities;
+
+            if (string.IsNullOrEmpty(userId) && location == null)
+            {
+                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
+                return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+            }
+
+            if (!string.IsNullOrEmpty(userId) && location == null)
+            {
+                int? currentUserDistricts = _identityService.GetCurrentUserWithAddresses()?.UserAddresses
+                    .FirstOrDefault(x => x.AddressPath.Depth == 2)
+                    ?.AddressPathId;
+                if (currentUserDistricts.HasValue)
+                {
+                    activities = await GetRelatedActivitiesForUsersTurnOffLocationAsync(isFeatured, currentUserDistricts, dbContext);
+                    return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+                }
+
+                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
+                return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+            }
+
+            activities = await GetRelatedActivitiesWhenLocationTurnedOnAsync(location, isFeatured, dbContext);
+            return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+        }
+
+        private async Task<List<Activity>> GetRelatedActivitiesWhenLocationTurnedOnAsync(Coordinate location, bool isFeatured, DbContext dbContext)
+        {
+            Specification<Activity> spec = new()
+            {
+                OrderBy = GetOrderByClause(isFeatured)
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
+            activities = activities.OrderByDescending(x => GeoCalculator.GetDistance(location.Latitude, location.Longitude, x.Latitude, x.Longitude, 2, DistanceUnit.Meters))
+                                   .Take(4)
+                                   .ToList();
+            return activities;
+        }
+
+        private async Task<List<Activity>> GetRelatedActivitiesForUsersTurnOffLocationAsync(bool isFeatured, int? currentUserDistricts, DbContext dbContext)
+        {
+            Specification<Activity> spec = new()
+            {
+                Includes = x => x.Include(y => y.ActivityAddresses).ThenInclude(y => y.AddressPath),
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    x => x.ActivityAddresses.Any(y => y.AddressPath.Id == currentUserDistricts)
+                },
+                OrderBy = GetOrderByClause(isFeatured),
+                Take = 4
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
+            return activities;
+        }
+
+        private async Task<List<Activity>> GetRelatedActivitiesForNonUsersTurnOffLocationAsync(bool isFeatured, DbContext dbContext)
+        {
+            Specification<Activity> spec = new()
+            {
+                OrderBy = GetOrderByClause(isFeatured),
+                Take = 4
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
+            return activities;
+        }
+
+        private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured)
+            => isFeatured ? (x => x.OrderByDescending(y => y.MemberQuantity)) : (x => x.OrderByDescending(y => y.Id));
     }
 }

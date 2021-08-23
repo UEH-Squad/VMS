@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Interfaces;
@@ -28,7 +29,7 @@ namespace VMS.Application.Services
 
             Specification<Skill> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<System.Func<Skill, bool>>>()
+                Conditions = new List<Expression<System.Func<Skill, bool>>>()
                 {
                     s => s.ParentSkillId == parentSkillId
                 }

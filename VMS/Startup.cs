@@ -11,7 +11,6 @@ using VMS.Areas.Identity;
 using VMS.Domain.Models;
 using VMS.Infrastructure.Data.Context;
 using VMS.Infrastructure.IoC;
-using Blazored.Modal;
 
 namespace VMS
 {

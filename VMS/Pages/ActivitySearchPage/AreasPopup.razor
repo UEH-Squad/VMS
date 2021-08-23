@@ -1,71 +1,30 @@
 ﻿<div class="modal-backdrop modal-dialog-centered justify-content-center">
-    <div class="my-custom-popup position-relative">
-            <span @onclick="CloseModal" class="material-icons-outlined close-btn">
-                close
-            </span>
-    
-        <h3 class="text-center mt-4 mb-4">Lĩnh Vực</h3>
-        <div class="col-10 mx-auto">
-            <div class="row justify-content-evenly ms-5">
-                    @for (int i = 0; i < 12; i++)
-                    {
-                        int id = i;
-                        <div class="area-item-wrapper d-flex align-items-center mb-3">
-                            <span @onclick=" () => ChangeState(id)" class="material-icons-outlined d-flex align-items-center justify-content-center">
-                                people
-                            </span>
-                            <p @onclick=" () => ChangeState(id)" class="mb-0 ms-2 @(choosenAreasList[id] ? "colored-green" : "")">Cộng đồng @(i+1)</p>
-                        </div>
-                    }
-            </div>
-        </div>
-        <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+	<div class="my-custom-popup position-relative">
+		<span @onclick="CloseModal" class="material-icons-outlined close-btn">
+			close
+		</span>
 
-    </div>
+		<h3 class="text-center mt-4 mb-4">Lĩnh Vực</h3>
+		<div class="col-10 mx-auto">
+			<div class="row justify-content-evenly ms-5">
+				@if (areas is not null)
+				{
+					@foreach (var area in areas)
+					{
+						<div class="area-item-wrapper d-flex align-items-center mb-3">
+							<span @onclick="() => ChangeState(area.Id) " class="material-icons-outlined d-flex align-items-center justify-content-center">
+								@area.Icon
+							</span>
+							<p @onclick="() => ChangeState(area.Id)" class="mb-0 ms-2 @(ChoosenAreasList.Exists(a => a == area.Id) ? "colored-green" : "")">@area.Name</p>
+						</div>
+					}
+				}
+			</div>
+		</div>
+		<div @onclick="CloseModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+
+	</div>
 </div>
 
 @code {
-
-    [Parameter]
-    public bool[] choosenAreasList { get; set; }
-    int numberOfItems = 12;
-
-    //create a curent list incase user click close button but don't save
-    bool[] boolArray = new bool[12];
-    protected override async Task OnInitializedAsync()
-    {
-        for (int a = 0; a < numberOfItems; a++)
-        {
-            boolArray[a] = choosenAreasList[a];
-        }
-    }
-    void ChangeState(int id)
-    {
-        choosenAreasList[id] = !choosenAreasList[id];
-    }
-
-    [CascadingParameter]
-    private BlazoredModalInstance AreasModal { get; set; }
-    void CloseModal()
-    {
-        for (int j = 0; j < numberOfItems; j++)
-        {
-            if (choosenAreasList[j] && boolArray[j] == false)
-            {
-                choosenAreasList[j] = false;
-            }
-            if (choosenAreasList[j] == false && boolArray[j])
-            {
-                choosenAreasList[j] = true;
-            }
-        }
-        AreasModal.CloseAsync();
-
-    }
-
-    void SaveModal()
-    {
-        choosenAreasList = boolArray;
-        AreasModal.CloseAsync();
-    }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -17,13 +18,21 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<Skill>> GetAllSkillsAsync()
+        public async Task<List<SkillViewModel>> GetAllSkillsAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-            return await _repository.GetListAsync<Skill>(dbContext);
+
+            Specification<Skill> specification = new()
+            {
+                Includes = s => s.Include(x => x.SubSkills)
+            };
+
+            List<Skill> skills = await _repository.GetListAsync<Skill>(dbContext);
+
+            return _mapper.Map<List<SkillViewModel>>(skills);
         }
 
-        public async Task<List<Skill>> GetAllSubSkillsAsync(int parentSkillId)
+        public async Task<List<SkillViewModel>> GetAllSubSkillsAsync(int parentSkillId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -35,7 +44,9 @@ namespace VMS.Application.Services
                 }
             };
 
-            return await _repository.GetListAsync(dbContext, specification);
+            List<Skill> skills = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<SkillViewModel>>(skills);
         }
     }
 }

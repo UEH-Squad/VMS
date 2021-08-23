@@ -8,6 +8,7 @@
         public const string ActivitySearch = "/hoat-dong";
         public const string ActivityInfo = "/chi-tiet-hoat-dong";
         public const string Organizations = "/don-vi-to-chuc";
+        public const string OrganizationProfile = "/thong-tin-to-chuc";
         public const string Map = "/ban-do";
 
         public const string User = "/trang-ca-nhan";

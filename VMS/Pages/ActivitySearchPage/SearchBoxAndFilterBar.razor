@@ -3,34 +3,34 @@
 <h3 class="mt-5 mb-4 text-uppercase page-heading">We do it <span>together!</span></h3>
 
 
-<form action="/" method="post" class="my-search-box d-flex mb-5">
-	<input type="text" value=@mySearchValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+<div class="my-search-box d-flex mb-5">
+	<input type="text" value=@searchValue @onchange="UpdateSearchValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
 	<div class="my-search-box__icon-wrapper d-flex align-items-center">
 		<span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
 			close
 		</span>
-		<button type="submit" class="search-btn d-flex align-items-center">
+		<button @onclick="() => SearchAsync()" class="search-btn d-flex align-items-center">
 			<span class="material-icons-outlined">
 				search
 			</span>
 		</button>
 	</div>
-</form>
+</div>
 
 <div class="d-flex align-items-center mb-3">
 	<div class="form-check form-check-inline d-flex align-items-center ps-0 pe-5">
-		<input @onclick="(() => Filter.Virtual = !Filter.Virtual)" class="my-check-box cursor-pointer" type="checkbox" id="virtual" value="virtual">
+		<input @onclick="(() => filter.Virtual = !filter.Virtual)" class="my-check-box cursor-pointer" type="checkbox" id="virtual" value="virtual">
 		<label class="my-check-box-label cursor-pointer" for="virtual">Virtual</label>
 	</div>
 	<div class="form-check form-check-inline d-flex align-items-center p-0">
-		<input @onclick="(() => Filter.Actual = !Filter.Actual)" class="my-check-box cursor-pointer" type="checkbox" id="actual" value="actual">
+		<input @onclick="(() => filter.Actual = !filter.Actual)" class="my-check-box cursor-pointer" type="checkbox" id="actual" value="actual">
 		<label class="my-check-box-label cursor-pointer" for="actual">Actual</label>
 	</div>
 </div>
 
-<form class="filter-bar d-flex justify-content-between mb-5">
+<div class="filter-bar d-flex justify-content-between mb-5">
 	<div class="filter-item filter-item-city position-relative">
-		<div @onclick="ToggleCityDropdown" class="popup-btn @(Filter.ProvinceId != 0 ? "bg-grey" : "")">@cityChoosenValue</div>
+		<div @onclick="ToggleCityDropdown" class="popup-btn @(filter.ProvinceId != 0 ? "bg-grey" : "")">@cityChoosenValue</div>
 		<div class="my-dropdown @(isCityShow ? "d-block" : "")">
 			<ul>
 				@if (provinces is not null)
@@ -48,7 +48,7 @@
 	</div>
 
 	<div class="filter-item filter-item-district position-relative">
-		<div @onclick="ToggleDistrictDropdown" class="popup-btn @(Filter.DistrictId != 0 ? "bg-grey" : "")">@districtChoosenValue</div>
+		<div @onclick="ToggleDistrictDropdown" class="popup-btn @(filter.DistrictId != 0 ? "bg-grey" : "")">@districtChoosenValue</div>
 		<div class="my-dropdown @(isDistrictShow ? "d-block" : "")">
 			<ul>
 				@if (districts is not null)
@@ -67,7 +67,7 @@
 	</div>
 
 	<div class="filter-item filter-item-organization position-relative">
-		<div @onclick="ToggleOrganizationDropdown" class="popup-btn @(!string.IsNullOrEmpty(Filter.OrgId) ? "bg-grey" : "")">@organizationChoosenValue</div>
+		<div @onclick="ToggleOrganizationDropdown" class="popup-btn @(!string.IsNullOrEmpty(filter.OrgId) ? "bg-grey" : "")">@organizationChoosenValue</div>
 		<div class="my-dropdown @(isOrganizationShow ? "d-block" : "")">
 			<ul>
 				@if (organizers is not null)
@@ -85,22 +85,22 @@
 	</div>
 
 	<div class="filter-item position-relative">
-		<div @onclick="ShowAreasPopup" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+		<div @onclick="ShowAreasPopup" class="popup-btn @(filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
 		<span class="material-icons-outlined position-absolute filter-item__icon">
 			expand_more
 		</span>
 	</div>
 
 	<div class="filter-item position-relative">
-		<div @onclick="ShowSkillsPopup" class="popup-btn @(Filter.Skills.Count != 0? "bg-grey" : "")">Kỹ năng</div>
+		<div @onclick="ShowSkillsPopup" class="popup-btn @(filter.Skills.Count != 0? "bg-grey" : "")">Kỹ năng</div>
 		<span class="material-icons-outlined position-absolute filter-item__icon">
 			expand_more
 		</span>
 	</div>
 
-	<button type="submit" class="filter-btn">Lọc</button>
+	<button @onclick="UpdateFilterValue" class="filter-btn">Lọc</button>
 	<button @onclick="ClearFilter" type="button" class="clear-filter-btn">Xóa lọc</button>
-</form>
+</div>
 
 
 <div class="arrange-bar d-flex align-items-center">

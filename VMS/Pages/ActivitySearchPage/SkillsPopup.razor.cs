@@ -13,6 +13,7 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private List<SkillViewModel> skills;
         private List<int> isShowSubSkills = new();
+        private List<SkillViewModel> choosenSkills;
 
         [Parameter]
         public List<SkillViewModel> ChoosenSkillsList { get; set; }
@@ -24,18 +25,20 @@ namespace VMS.Pages.ActivitySearchPage
         protected override async Task OnInitializedAsync()
         {
             skills = await SkillService.GetAllSkillsAsync();
+            choosenSkills = new();
+            choosenSkills.AddRange(ChoosenSkillsList);
         }
 
-        private void ChangeState(SkillViewModel choosenSkill)
+        private void ChangeState(SkillViewModel skill)
         {
-            SkillViewModel skill = ChoosenSkillsList.Find(s => s.Id == choosenSkill.Id);
-            if (skill is null)
+            SkillViewModel skillViewModel = choosenSkills.Find(s => s.Id == skill.Id);
+            if (skillViewModel is null)
             {
-                ChoosenSkillsList.Add(choosenSkill);
+                choosenSkills.Add(skill);
             }
             else
             {
-                ChoosenSkillsList.Remove(choosenSkill);
+                choosenSkills.Remove(skillViewModel);
             }
         }
 
@@ -58,6 +61,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         private async Task SaveModal()
         {
+            ChoosenSkillsList.Clear();
+            ChoosenSkillsList.AddRange(choosenSkills);
             await SkillsModal.CloseAsync();
         }
     }

@@ -15,13 +15,13 @@
 							<span @onclick="() => ChangeState(area.Id) " class="material-icons-outlined d-flex align-items-center justify-content-center">
 								@area.Icon
 							</span>
-							<p @onclick="() => ChangeState(area.Id)" class="mb-0 ms-2 @(ChoosenAreasList.Exists(a => a == area.Id) ? "colored-green" : "")">@area.Name</p>
+							<p @onclick="() => ChangeState(area.Id)" class="mb-0 ms-2 @(choosenAreas.Exists(a => a == area.Id) ? "colored-green" : "")">@area.Name</p>
 						</div>
 					}
 				}
 			</div>
 		</div>
-		<div @onclick="CloseModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+		<div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
 
 	</div>
 </div>

@@ -16,12 +16,20 @@ namespace VMS.Pages.ActivitySearchPage
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
         private List<User> organizers;
+        private FilterActivityViewModel filter;
         private bool isOrganizationShow;
         private bool isCityShow;
         private bool isDistrictShow;
+        private string cityChoosenValue = "Tỉnh/Thành phố";
+        private string districtChoosenValue = "Quận/Huyện";
+        private string organizationChoosenValue = "Tổ chức";
+        private string searchValue;
+
 
         [Parameter]
-        public FilterActivityViewModel Filter { get; set; }
+        public EventCallback<string> SearchValueChanged { get; set; }
+        [Parameter]
+        public EventCallback<FilterActivityViewModel> FilterValueChanged { get; set; }
         [CascadingParameter]
         public IModalService Modal { get; set; }
         [Inject]
@@ -29,15 +37,9 @@ namespace VMS.Pages.ActivitySearchPage
         [Inject]
         private IAddressService AddressService { get; set; }
 
-        string cityChoosenValue = "Tỉnh/Thành phố";
-        string districtChoosenValue = "Quận/Huyện";
-        string organizationChoosenValue = "Tổ chức";
-
-        string mySearchValue = "";
-
         protected override async Task OnInitializedAsync()
         {
-            Filter = new FilterActivityViewModel();
+            filter = new FilterActivityViewModel();
 
             organizers = IdentityService.GetAllOrganizers();
             isOrganizationShow = false;
@@ -45,60 +47,62 @@ namespace VMS.Pages.ActivitySearchPage
             provinces = await AddressService.GetAllProvincesAsync();
         }
 
-        //function for city dropdowns
         private void ToggleCityDropdown()
         {
             isCityShow = !isCityShow;
         }
         private async Task ChooseCityValue(AddressPath addressPath)
         {
-            Filter.ProvinceId = addressPath.Id;
+            filter.ProvinceId = addressPath.Id;
             cityChoosenValue = addressPath.Name;
             ToggleCityDropdown();
 
             districts = await AddressService.GetAllAddressPathsByParentIdAsync(addressPath.Id);
-            Filter.DistrictId = 0;
+            filter.DistrictId = 0;
             districtChoosenValue = "Quận/Huyện";
         }
 
-        //function for district dropdowns
         private void ToggleDistrictDropdown()
         {
             isDistrictShow = !isDistrictShow;
         }
         private void ChooseDistrictValue(AddressPath addressPath)
         {
-            Filter.DistrictId = addressPath.Id;
+            filter.DistrictId = addressPath.Id;
             districtChoosenValue = addressPath.Name;
             ToggleDistrictDropdown();
         }
 
-        //function for organization dropdowns
-        void ToggleOrganizationDropdown()
+        private void ToggleOrganizationDropdown()
         {
             isOrganizationShow = !isOrganizationShow;
         }
-        void ChooseOrganizationValue(User organizer)
+        private void ChooseOrganizationValue(User organizer)
         {
-            Filter.OrgId = organizer.UserName;
+            filter.OrgId = organizer.UserName;
             organizationChoosenValue = organizer.UserName;
             ToggleOrganizationDropdown();
         }
 
-        //Clear search box button
-        void UpdateInstanceValue(ChangeEventArgs e)
+        private async Task UpdateSearchValue(ChangeEventArgs e)
         {
-            mySearchValue = e.Value.ToString();
+            searchValue = (string)e.Value;
+            await SearchAsync();
         }
-        void ClearSearchBox()
+        private async Task SearchAsync()
         {
-            mySearchValue = string.Empty;
+            await SearchValueChanged.InvokeAsync(searchValue);
+        }
+        private void ClearSearchBox()
+        {
+            searchValue = string.Empty;
+            StateHasChanged();
         }
 
         private async Task ShowAreasPopup()
         {
             var parameters = new ModalParameters();
-            parameters.Add("ChoosenAreasList", Filter.Areas);
+            parameters.Add("ChoosenAreasList", filter.Areas);
 
             var options = new ModalOptions()
             {
@@ -110,11 +114,10 @@ namespace VMS.Pages.ActivitySearchPage
             await Modal.Show<AreasPopup>("", parameters, options).Result;
         }
 
-
         private async Task ShowSkillsPopup()
         {
             var skillsParameter = new ModalParameters();
-            skillsParameter.Add("ChoosenSkillsList", Filter.Skills);
+            skillsParameter.Add("ChoosenSkillsList", filter.Skills);
 
             var options = new ModalOptions()
             {
@@ -126,13 +129,17 @@ namespace VMS.Pages.ActivitySearchPage
             await Modal.Show<SkillsPopup>("", skillsParameter, options).Result;
         }
 
-        //clear filter bar
+        private async Task UpdateFilterValue()
+        {
+            await FilterValueChanged.InvokeAsync(filter);
+        }
+
         void ClearFilter()
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
             organizationChoosenValue = "Tổ chức";
-            Filter = new FilterActivityViewModel();
+            filter = new FilterActivityViewModel();
         }
     }
 }

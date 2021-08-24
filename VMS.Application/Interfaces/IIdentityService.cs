@@ -18,5 +18,9 @@ namespace VMS.Application.Interfaces
         string GetCurrentUserAddress();
 
         User GetCurrentUserWithAddresses();
+
+        User GetCurrentUserWithFavorites();
+
+        void HandleFavoriteActivity(int activityId);
     }
 }

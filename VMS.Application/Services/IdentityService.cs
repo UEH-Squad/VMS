@@ -78,5 +78,32 @@ namespace VMS.Application.Services
 
             return string.Empty;
         }
+
+        public User GetCurrentUserWithFavorites()
+        {
+            string currentUserId = GetCurrentUserId();
+            return Task.Run(() => _userManager.Users.Include(x => x.Favorites)
+                                                    .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
+        }
+
+        public void HandleFavoriteActivity(int activityId)
+        {
+            User user = GetCurrentUserWithFavorites();
+            Favorite favorite = user.Favorites.FirstOrDefault(f => f.ActivityId == activityId);
+            if (favorite is null)
+            {
+                user.Favorites.Add(new()
+                { 
+                    UserId = user.Id,
+                    ActivityId = activityId,
+                    CreatedDate = System.DateTime.Now
+                });
+            }
+            else
+            {
+                user.Favorites.Remove(favorite);
+            }
+            Task.Run(() => _userManager.UpdateAsync(user));
+        }
     }
 }

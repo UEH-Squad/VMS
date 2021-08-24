@@ -10,6 +10,7 @@ namespace VMS.Pages.ActivitySearchPage
     public partial class AreasPopup : ComponentBase
     {
         private List<AreaViewModel> areas;
+        private List<int> choosenAreas;
 
         [Parameter]
         public List<int> ChoosenAreasList { get; set; }
@@ -21,22 +22,31 @@ namespace VMS.Pages.ActivitySearchPage
         protected override async Task OnInitializedAsync()
         {
             areas = await AreaService.GetAllAreasAsync();
+            choosenAreas = new();
+            choosenAreas.AddRange(ChoosenAreasList);
         }
 
         private void ChangeState(int id)
         {
-            if (!ChoosenAreasList.Exists(a => a == id))
+            if (!choosenAreas.Exists(a => a == id))
             {
-                ChoosenAreasList.Add(id);
+                choosenAreas.Add(id);
             }
             else
             {
-                ChoosenAreasList.Remove(id);
+                choosenAreas.Remove(id);
             }
         }
 
         private async Task CloseModal()
         {
+            await AreasModal.CloseAsync();
+        }
+
+        private async Task SaveModal()
+        {
+            ChoosenAreasList.Clear();
+            ChoosenAreasList.AddRange(choosenAreas);
             await AreasModal.CloseAsync();
         }
     }

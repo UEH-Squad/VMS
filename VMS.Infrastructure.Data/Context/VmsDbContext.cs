@@ -20,6 +20,7 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<UserAddress> UserAddresses { get; set; }
         public DbSet<UserArea> UserAreas { get; set; }
         public DbSet<UserSkill> UserSkills { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {

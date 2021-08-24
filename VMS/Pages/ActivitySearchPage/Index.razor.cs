@@ -8,5 +8,18 @@ namespace VMS.Pages.ActivitySearchPage
         private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
         private bool[] orderList = new bool[3];
+        private bool isSearch;
+
+        private void FilterChanged(FilterActivityViewModel filter)
+        {
+            this.filter = filter;
+            isSearch = false;
+        }
+
+        private void SearchValueChanged(string searchValue)
+        {
+            this.searchValue = searchValue;
+            isSearch = true;
+        }
     }
 }

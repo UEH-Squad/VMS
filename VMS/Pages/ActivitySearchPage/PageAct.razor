@@ -1,164 +1,220 @@
-﻿@using VMS.Application.Interfaces
+﻿@using Geolocation;
+@using VMS.Application.Interfaces
 @using VMS.Application.ViewModels
 @inject IJSRuntime JsRuntime
+@using Coordinate = VMS.Application.ViewModels.Coordinate;
 
 <section class="my-act">
-	<div class="container">
-		<div class="row">
-			<div class="act col-8 ps-0" id="act">
-				<h3>Có <span>@(activityFiltered is null ? "0" : activityFiltered.Count) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
-				<div class="px-2">
-					<div class="act__page-1">
-						@if (pagedResult is not null && pagedResult.Results.Count != 0)
-						{
-							@foreach (var item in pagedResult.Results)
-							{
-								<div class="act__item row mt-5">
-									<div class="col-4">
-										<img class="w-100" src="img/@item.Banner" alt="">
-									</div>
-									<div class="col-8 act__content">
-										<a href="@Routes.ActivityInfo/@item.Id" class="lmtext-3">@item.Name</a>
-										<h5>
-											<i class="material-icons">public</i>@item.Organizer
-										</h5>
-										<p class="lmtext-2">@item.Description</p>
-										<span>Ngày đăng: @item.PostDate.ToString("dd/MM/yyyy")</span>
-										<AuthorizeView>
-											<Authorized>
-												<div class="act__signUp">
-													<i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
+    <div class="container">
+        <div class="row">
+            <div class="act col-8 ps-0" id="act">
+                <h3>Có <span>@(activities is null ? "0" : activities.Count) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+                <div class="px-2">
+                    <div class="act__page-1">
+                        @if (pagedResult is not null && pagedResult.Results.Count != 0)
+                        {
+                            @foreach (var item in pagedResult.Results)
+                            {
+                                <div class="act__item row mt-5">
+                                    <div class="col-4">
+                                        <img class="w-100" src="img/@item.Banner" alt="">
+                                    </div>
+                                    <div class="col-8 act__content">
+                                        <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-3">@item.Name</a>
+                                        <h5>
+                                            <i class="material-icons">public</i>@item.Organizer
+                                        </h5>
+                                        <p class="lmtext-2">@item.Description</p>
+                                        <span>Ngày đăng: @item.PostDate.ToString("dd/MM/yyyy")</span>
+                                        <AuthorizeView>
+                                            <Authorized>
+                                                <div class="act__signUp">
+                                                    <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
-													<button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
-												</div>
-											</Authorized>
-										</AuthorizeView>
-									</div>
-								</div>
-							}
-						}
-					</div>
-				</div>
-				<a class="goToDivAct d-none " href="#act">go to div act</a>
-			</div>
-			<div class="col-3 ms-auto">
-				<FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
-			</div>
-		</div>
-	</div>
+                                                    <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
+                                                </div>
+                                            </Authorized>
+                                        </AuthorizeView>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <a class="goToDivAct d-none " href="#act">go to div act</a>
+            </div>
+            <div class="col-3 ms-auto">
+                <FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
+            </div>
+        </div>
+    </div>
 </section>
 
 <Pager CurrentPage="@pagedResult.CurrentPage"
-	   PageCount="@pagedResult.PageCount"
-	   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+       PageCount="@pagedResult.PageCount"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 
 @code {
-	private int page = 1;
-	private List<ActivityViewModel> activityViewModels;
-	private List<ActivityViewModel> activityFiltered;
-	private IEnumerable<ActivityViewModel> featuredActivities;
-	private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
+    private int page = 1;
+    private Coordinate location;
+    private List<ActivityViewModel> activities;
+    private List<ActivityViewModel> activityViewModels;
+    private IEnumerable<ActivityViewModel> filteredActivities;
+    private IEnumerable<ActivityViewModel> featuredActivities;
+    private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
 
-	[Parameter]
-	public FilterActivityViewModel Filter { get; set; }
-	[Parameter]
-	public string SearchValue { get; set; }
-	[Parameter]
-	public bool[] OrderList { get; set; }
-	[Inject]
-	private IActivityService ActivityService { get; set; }
-	[Inject]
-	private IIdentityService IdentityService { get; set; }
+    [Parameter]
+    public bool IsSearch { get; set; }
+    [Parameter]
+    public FilterActivityViewModel Filter { get; set; }
+    [Parameter]
+    public string SearchValue { get; set; }
+    [Parameter]
+    public bool[] OrderList { get; set; }
+    [Inject]
+    private IActivityService ActivityService { get; set; }
+    [Inject]
+    private IIdentityService IdentityService { get; set; }
 
-	public abstract class PagedResultBase
-	{
-		public int CurrentPage { get; set; }
-		public int PageCount { get; set; }
-		public int PageSize { get; set; }
-		public int RowCount { get; set; }
-		public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
-		public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
-	}
+    [Inject]
+    private IGeoLocationService AddressLocationService { get; set; }
 
-	public class PagedResult<T> : PagedResultBase where T : class
-	{
-		public List<T> Results { get; set; }
-	}
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
 
-	protected override async Task OnInitializedAsync()
-	{
-		activityViewModels = await ActivityService.GetAllActivitiesAsync();
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public List<T> Results { get; set; }
+    }
 
-		for (int i = 0; i < 4; i++)
-			activityViewModels.AddRange(activityViewModels);
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
+    }
 
-		featuredActivities = activityViewModels.Where(a => a.IsPin);
-	}
+    protected override async Task OnInitializedAsync()
+    {
+        activityViewModels = await ActivityService.GetAllActivitiesAsync();
 
-	protected override void OnParametersSet()
-	{
-		HandleFilterAndSearch();
-	}
+        location = await JsRuntime.InvokeAsync<Coordinate>("vms.GetUserLocation");
 
-	private async Task HandlePageChanged()
-	{
-		pagedResult = GetData();
-		StateHasChanged();
-		await JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
-	}
+        if (location is null)
+        {
+            string userAddresses = IdentityService.GetCurrentUserAddress();
+            location = await AddressLocationService.GetCoordinateAsync(userAddresses);
+        }
 
-	private void HandleFavorite(int id)
-	{
-		var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-		if (clickedItem is not null)
-		{
-			clickedItem.IsFav = !clickedItem.IsFav;
-			IdentityService.HandleFavoriteActivity(id);
-		}
-	}
+        featuredActivities = activityViewModels.Where(a => a.IsPin);
+    }
 
-	private void HandleFilterAndSearch()
-	{
-		activityFiltered = activityViewModels.Where(a => a.Name.ToUpper().Trim().Contains(SearchValue.ToUpper().Trim()))
-												.Where(a => a.IsVirtual == Filter.Virtual || a.IsVirtual == Filter.Actual)
-												.Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == Filter.AddressPathId) || Filter.AddressPathId == 0)
-												.Where(a => a.Organizer.Id == Filter.OrgId || string.IsNullOrEmpty(Filter.OrgId))
-												.Where(a => Filter.Areas.Any(x => x == a.AreaId) || Filter.Areas.Count == 0)
-												.Where(a => Filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id)))
-												.ToList();
+    protected override void OnParametersSet()
+    {
+        if (IsSearch)
+        {
+            HandleSearch();
+        }
+        else
+        {
+            HandleFilter();
+        }
 
-		pagedResult = GetData();
-	}
+        HandleOrder();
 
+        pagedResult = GetData();
+    }
 
-	private PagedResult<ActivityViewModel> GetData()
-	{
-		var result = new PagedResult<ActivityViewModel>();
-		result.CurrentPage = page;
-		result.RowCount = 64;
-		result.PageSize = 20;
-		result.PageCount = result.RowCount / result.PageSize;
-		result.Results = activityFiltered.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetData();
+        StateHasChanged();
+        await JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
 
-		return result;
-	}
+    private void HandleFavorite(int id)
+    {
+        var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (clickedItem is not null)
+        {
+            clickedItem.IsFav = !clickedItem.IsFav;
+            IdentityService.HandleFavoriteActivity(id);
+        }
+    }
 
-	[CascadingParameter]
-	public IModalService Modal { get; set; }
+    private void HandleSearch()
+    {
+        filteredActivities = activityViewModels.Where(a => a.Name.ToUpper().Trim().Contains(SearchValue.ToUpper().Trim()));
+    }
 
-	private void ShowModal(int id)
-	{
-		ModalParameters parameters = new();
-		parameters.Add("ActivityId", id);
+    private void HandleFilter()
+    {
+        filteredActivities = activityViewModels.Where(a => a.IsVirtual == Filter.Virtual || a.IsVirtual == Filter.Actual)
+                                                .Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == Filter.AddressPathId) || Filter.AddressPathId == 0)
+                                                .Where(a => a.Organizer.Id == Filter.OrgId || string.IsNullOrEmpty(Filter.OrgId))
+                                                .Where(a => Filter.Areas.Any(x => x == a.AreaId) || Filter.Areas.Count == 0)
+                                                .Where(a => Filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id)));
+    }
 
-		var options = new ModalOptions()
-		{
-			HideCloseButton = true,
-			DisableBackgroundCancel = true,
-			UseCustomLayout = true,
-		};
+    private void HandleOrder()
+    {
+        if (OrderList[0])
+        {
+            if (OrderList[1])
+            {
+                if (OrderList[2])
+                {
+                    activities = filteredActivities.OrderByDescending(a => a.PostDate)
+                                                    .ThenByDescending(a => a.MemberQuantity)
+                                                    .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
+                }
+                else
+                {
+                    activities = filteredActivities.OrderByDescending(a => a.PostDate)
+                                                    .ThenByDescending(a => a.MemberQuantity).ToList();
+                }
+            }
+        }
 
-		Modal.Show<Signup>("", parameters, options);
-	}
+        if (OrderList[2])
+        {
+            activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
+        }
+    }
+
+    private PagedResult<ActivityViewModel> GetData()
+    {
+        var result = new PagedResult<ActivityViewModel>();
+        result.CurrentPage = page;
+        result.RowCount = 64;
+        result.PageSize = 20;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = activities.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
+
+        return result;
+    }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
+    private void ShowModal(int id)
+    {
+        ModalParameters parameters = new();
+        parameters.Add("ActivityId", id);
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        Modal.Show<Signup>("", parameters, options);
+    }
 
 }

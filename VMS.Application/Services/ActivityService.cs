@@ -49,7 +49,7 @@ namespace VMS.Application.Services
 
             List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
 
-            return activitiesViewModel.OrderByDescending(a => a.PostDate).ToList();
+            return activitiesViewModel.ToList();
         }
 
         public async Task AddActivityAsync(CreateActivityViewModel activityViewModel)

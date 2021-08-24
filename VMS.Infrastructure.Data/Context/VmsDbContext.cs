@@ -52,6 +52,12 @@ namespace VMS.Infrastructure.Data.Context
                 .HasForeignKey(x => x.ParentSkillId)
                 .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
 
+            builder.Entity<Favorite>()
+                .Property(f => f.UserId).IsRequired();
+            builder.Entity<Favorite>()
+                .Property(f => f.ActivityId).IsRequired();
+
+
             // add demo data for skills and requirements
             builder.Entity<Skill>().HasData(
                     new Skill { Id = 1, Name = "Kỹ năng mềm" },

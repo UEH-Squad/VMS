@@ -24,11 +24,15 @@
 										</h5>
 										<p class="lmtext-2">@item.Description</p>
 										<span>Ngày đăng: @item.PostDate.ToString("dd/MM/yyyy")</span>
-										<div class="act__signUp">
-											<i @onclick="@(() => HandleFavorite(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
+										<AuthorizeView>
+											<Authorized>
+												<div class="act__signUp">
+													<i @onclick="@(() => HandleFavorite(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
-											<button @onclick="ShowModal" class="btn">Đăng kí</button>
-										</div>
+													<button @onclick="ShowModal" class="btn">Đăng kí</button>
+												</div>
+											</Authorized>
+										</AuthorizeView>
 									</div>
 								</div>
 							}
@@ -38,7 +42,7 @@
 				<a class="goToDivAct d-none " href="#act">go to div act</a>
 			</div>
 			<div class="col-3 ms-auto">
-				<FeaturedAct></FeaturedAct>
+				<FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
 			</div>
 		</div>
 	</div>
@@ -49,11 +53,11 @@
 	   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 
 @code {
+	private int page = 1;
 	private List<ActivityViewModel> activityViewModels;
 	private List<ActivityViewModel> activityFiltered;
+	private List<ActivityViewModel> featuredActivities;
 	private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
-	private int count = 20;
-	private int page = 1;
 
 	[Parameter]
 	public FilterActivityViewModel Filter { get; set; }
@@ -93,6 +97,14 @@
 	{
 		activityViewModels = await ActivityService.GetAllActivitiesAsync();
 
+		featuredActivities = activityViewModels.Where(a => a.IsPin)
+												.OrderByDescending(a => a.PostDate)
+												.Take(2)
+												.ToList();
+	}
+
+	protected override void OnParametersSet()
+	{
 		HandleFilterAndSearch();
 	}
 
@@ -105,12 +117,12 @@
 
 	private void HandleFavorite(int id)
 	{
-	    var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-	    if (clickedItem is not null)
-	    {
-	        clickedItem.IsFav = !clickedItem.IsFav;
+		var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+		if (clickedItem is not null)
+		{
+			clickedItem.IsFav = !clickedItem.IsFav;
 			IdentityService.HandleFavoriteActivity(id);
-	    }
+		}
 	}
 
 	private void HandleFilterAndSearch()
@@ -130,7 +142,7 @@
 	{
 		var result = new PagedResult<ActivityViewModel>();
 		result.CurrentPage = page;
-		result.RowCount = 100;
+		result.RowCount = 200;
 		result.PageSize = 20;
 		result.PageCount = result.RowCount / result.PageSize;
 		result.Results = activityFiltered.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
@@ -141,7 +153,7 @@
 	[CascadingParameter]
 	public IModalService Modal { get; set; }
 
-	async Task ShowModal()
+	private void ShowModal()
 	{
 		var options = new ModalOptions()
 		{

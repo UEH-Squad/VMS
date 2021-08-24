@@ -7,15 +7,5 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
-
-        private void FilterValueChanged(FilterActivityViewModel filter)
-        {
-            this.filter = filter;
-        }
-
-        private void SearchValueChanged(string searchValue)
-        {
-            this.searchValue = searchValue;
-        }
     }
 }

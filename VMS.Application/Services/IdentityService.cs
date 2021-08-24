@@ -89,7 +89,9 @@ namespace VMS.Application.Services
         public void HandleFavoriteActivity(int activityId)
         {
             User user = GetCurrentUserWithFavorites();
+
             Favorite favorite = user.Favorites.FirstOrDefault(f => f.ActivityId == activityId);
+
             if (favorite is null)
             {
                 user.Favorites.Add(new()
@@ -103,6 +105,7 @@ namespace VMS.Application.Services
             {
                 user.Favorites.Remove(favorite);
             }
+
             Task.Run(() => _userManager.UpdateAsync(user));
         }
     }

@@ -1,7 +1,8 @@
-﻿
+﻿@inject IJSRuntime JsRuntime
+
 <footer class="footer">
 
-    <a href="#" class="btn-back-top">
+    <a @onclick="ScrollToTop" class="btn-back-top">
         <span class="material-icons-outlined btn-back-top-icon">
             expand_less
         </span>
@@ -49,3 +50,11 @@
         
     </div>
 </footer>
+
+@code
+{
+    private async Task ScrollToTop()
+    {
+        await Interop.ScrollToTop(JsRuntime);
+    }
+}

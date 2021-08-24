@@ -130,12 +130,12 @@
         pagedResult = GetData();
     }
 
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetData();
-        StateHasChanged();
-        await JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
-    }
+	private async Task HandlePageChanged()
+	{
+		pagedResult = GetData();
+		StateHasChanged();
+		await Interop.ScrollToTop(JsRuntime);
+	}
 
     private void HandleFavorite(int id)
     {

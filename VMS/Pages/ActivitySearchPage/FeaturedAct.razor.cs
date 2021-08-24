@@ -7,6 +7,6 @@ namespace VMS.Pages.ActivitySearchPage
     public partial class FeaturedAct : ComponentBase
     {
         [Parameter]
-        public List<ActivityViewModel> FeaturedActivities { get; set; }
+        public IEnumerable<ActivityViewModel> FeaturedActivities { get; set; }
     }
 }

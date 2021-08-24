@@ -23,16 +23,20 @@ namespace VMS.Pages.ActivitySearchPage
         private string districtChoosenValue = "Quận/Huyện";
         private string organizationChoosenValue = "Tổ chức";
 
+        [CascadingParameter]
+        public IModalService Modal { get; set; }
+        [Parameter]
+        public bool[] OrderList { get; set; }
         [Parameter]
         public string SearchValue { get; set; }
         [Parameter]
-        public EventCallback<string> SearchValueChanged { get; set; }
-        [Parameter]
         public FilterActivityViewModel Filter { get; set; }
         [Parameter]
+        public EventCallback<bool[]> OrderListChanged { get; set; }
+        [Parameter]
+        public EventCallback<string> SearchValueChanged { get; set; }
+        [Parameter]
         public EventCallback<FilterActivityViewModel> FilterChanged { get; set; }
-        [CascadingParameter]
-        public IModalService Modal { get; set; }
         [Inject]
         private IIdentityService IdentityService { get; set;  }
         [Inject]
@@ -135,12 +139,18 @@ namespace VMS.Pages.ActivitySearchPage
             await FilterChanged.InvokeAsync(Filter);
         }
 
-        void ClearFilter()
+        private void ClearFilter()
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
             organizationChoosenValue = "Tổ chức";
             Filter = new FilterActivityViewModel();
+        }
+
+        private async Task ChangeOrder(ChangeEventArgs e)
+        {
+            OrderList[(int)e.Value] = !OrderList[(int)e.Value];
+            await OrderListChanged.InvokeAsync(OrderList);
         }
     }
 }

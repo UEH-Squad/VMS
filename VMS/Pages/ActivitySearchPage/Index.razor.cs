@@ -7,5 +7,6 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
+        private bool[] orderList = new bool[3];
     }
 }

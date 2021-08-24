@@ -19,8 +19,8 @@ namespace VMS.Application.ViewModels
 
         public FilterActivityViewModel()
         {
-            Virtual = true;
-            Actual = false;
+            Virtual = false;
+            Actual = true;
             Areas = new();
             Skills = new();
         }

@@ -2,12 +2,11 @@
 
 <div class="container-lg px-0 layout">
     <div class="layout__filterbar mb-2">
-        <SearchBoxAndFilterBar @bind-Filter="filter" @bind-SearchValue="searchValue"/>
-        @searchValue
+        <SearchBoxAndFilterBar @bind-Filter="filter" @bind-SearchValue="searchValue" @bind-OrderList="orderList"/>
     </div>
     <div class="layout__divider"></div>
     <div class="layout__body">
-        <PageAct Filter=@filter SearchValue=@searchValue></PageAct>
+        <PageAct Filter=@filter SearchValue=@searchValue OrderList=@orderList></PageAct>
     </div>
 </div>
 

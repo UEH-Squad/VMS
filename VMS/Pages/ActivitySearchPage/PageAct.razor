@@ -15,10 +15,10 @@
 							{
 								<div class="act__item row mt-5">
 									<div class="col-4">
-										<img class="w-100" src="img/act.png" alt="">
+										<img class="w-100" src="img/@item.Banner" alt="">
 									</div>
 									<div class="col-8 act__content">
-										<a href="" class="lmtext-3">@item.Name</a>
+										<a href="@Routes.ActivityInfo/@item.Id" class="lmtext-3">@item.Name</a>
 										<h5>
 											<i class="material-icons">public</i>@item.Organizer
 										</h5>
@@ -27,9 +27,9 @@
 										<AuthorizeView>
 											<Authorized>
 												<div class="act__signUp">
-													<i @onclick="@(() => HandleFavorite(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
+													<i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
-													<button @onclick="ShowModal" class="btn">Đăng kí</button>
+													<button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
 												</div>
 											</Authorized>
 										</AuthorizeView>
@@ -56,27 +56,19 @@
 	private int page = 1;
 	private List<ActivityViewModel> activityViewModels;
 	private List<ActivityViewModel> activityFiltered;
-	private List<ActivityViewModel> featuredActivities;
+	private IEnumerable<ActivityViewModel> featuredActivities;
 	private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
 
 	[Parameter]
 	public FilterActivityViewModel Filter { get; set; }
 	[Parameter]
 	public string SearchValue { get; set; }
+	[Parameter]
+	public bool[] OrderList { get; set; }
 	[Inject]
 	private IActivityService ActivityService { get; set; }
 	[Inject]
 	private IIdentityService IdentityService { get; set; }
-
-	private class FakeData
-	{
-		public int Id { get; set; }
-		public string Title { get; set; }
-		public string Organizer { get; set; }
-		public string ShortDescription { get; set; }
-		public DateTime CreatedDate { get; set; }
-		public bool IsFav { get; set; }
-	}
 
 	public abstract class PagedResultBase
 	{
@@ -97,10 +89,10 @@
 	{
 		activityViewModels = await ActivityService.GetAllActivitiesAsync();
 
-		featuredActivities = activityViewModels.Where(a => a.IsPin)
-												.OrderByDescending(a => a.PostDate)
-												.Take(2)
-												.ToList();
+		for (int i = 0; i < 4; i++)
+			activityViewModels.AddRange(activityViewModels);
+
+		featuredActivities = activityViewModels.Where(a => a.IsPin);
 	}
 
 	protected override void OnParametersSet()
@@ -138,11 +130,12 @@
 		pagedResult = GetData();
 	}
 
+
 	private PagedResult<ActivityViewModel> GetData()
 	{
 		var result = new PagedResult<ActivityViewModel>();
 		result.CurrentPage = page;
-		result.RowCount = 200;
+		result.RowCount = 64;
 		result.PageSize = 20;
 		result.PageCount = result.RowCount / result.PageSize;
 		result.Results = activityFiltered.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
@@ -153,15 +146,19 @@
 	[CascadingParameter]
 	public IModalService Modal { get; set; }
 
-	private void ShowModal()
+	private void ShowModal(int id)
 	{
+		ModalParameters parameters = new();
+		parameters.Add("ActivityId", id);
+
 		var options = new ModalOptions()
 		{
 			HideCloseButton = true,
 			DisableBackgroundCancel = true,
 			UseCustomLayout = true,
 		};
-		Modal.Show<Signup>("", options);
+
+		Modal.Show<Signup>("", parameters, options);
 	}
 
 }

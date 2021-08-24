@@ -94,5 +94,13 @@
   {
     "outputFile": "Pages/Organization-Profile/ActTookPlace.razor.css",
     "inputFile": "Pages/Organization-Profile/ActTookPlace.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization-Profile/ActFavourite.razor.css",
+    "inputFile": "Pages/Organization-Profile/ActFavourite.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization-Profile/ActOrganize.razor.css",
+    "inputFile": "Pages/Organization-Profile/ActOrganize.razor.scss"
   }
 ]

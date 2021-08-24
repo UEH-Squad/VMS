@@ -1,0 +1,72 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+
+.act {
+    h1 {
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 36px;
+        color: #515151;
+        margin-bottom: 42px;
+        margin-top: 70px;
+
+        span {
+            color: #64D72F;
+        }
+    }
+}
+
+.act-container {
+    text-decoration: none;
+}
+
+.act-content {
+    background-color: #F3F3F5;
+    border-radius: 0 0 10px 10px;
+
+    .act-title {
+        padding: 17px 10px 26px 29px;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 30px;
+        color: #18A0FB;
+    }
+}
+
+.lm-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 4;
+}
+
+.img-container {
+
+    .material-icons {
+        color: #FFF;
+        font-size: 24px;
+        right: 5px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .act-img {
+        width: 100%;
+    }
+}
+
+.act-container:hover {
+
+    & > .img-container {
+        background-color: #646464;
+        opacity: .6;
+        border-radius: 10px 10px 0 0;
+    }
+
+    & > .act-content .act-title {
+        color: #0B588C;
+    }
+}

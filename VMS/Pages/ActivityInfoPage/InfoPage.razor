@@ -1,67 +1,62 @@
-﻿@inject IIdentityService IdentityService
-@inject IInfoActivityService InfoActivityService
+﻿@inject IActivityService ActivityService
 
 @using VMS.Application.Interfaces
 @using VMS.Application.ViewModels
 
 @if (activity is not null)
 {
-    foreach (var item in activity)
-    {
-        if (item == activity[10])
-           {<div class="infopage">
-                <div class="infopage-title">
-                    <p class="title__content">
-                        @item.ActivityName
-                    </p>
-                    <div class="title__name">
-                        <span class="material-icons"><span class="earth-icon">public</span></span>
-                        <p class="organization">Tên Đơn vị tổ chức</p>
-                    </div>
-                    <div class="title__date">
-                        <p class="postdate">
-                            Ngày đăng: @item.ActivityPostDate.ToShortDateString()
-                        </p>
-                        <button @onclick="AnimateHeart" class="@typeButton">
-                            <span class="material-icons"><span class="heart-icon">@typeI</span></span>
-                        </button>
-                        <div><hr class="line-line2"></div>
-                    </div>
-                </div>
-                <div class="infopage-activity">
-                    <div class="activity__description">
-                        <p class="content">
-                            @item.ActivityDescription
-                        </p>
-                    </div>
-                    <div class="activity__image">
-                        <img src="./img/ActivityInfoPage/ActivityImage.png" alt="Activity Image">
-                    </div>
-                    <div class="activity__mission">
-                        <p class="mission">Sứ mệnh:</p>
-                        <ul class="misson-list">
-                            @*<li>Góp phần công sức vào công cuộc chống dịch Covid-19 của cả nước</li>
-                            <li>Sứ mệnh: Góp phần công sức vào công cuộc chống dịch Covid-19 của cả nước Mang lại việc làm ý nghĩa để cùng nhau thể hiện tinh thần trách nhiệm, tình yêu với Tổ quốc</li>
-                            <li>Tình nguyện viên được hưởng 120.000 đồng/người/ngày, gồm tiền ăn là 80.000 đồng (theo mức quy định tại Khoản 5 Điều 2 Nghị quyết 16)</li>*@
-                            @item.ActivityMission
-                        </ul>
-                    </div>
-                    <div class="activity__assignment">
-                        <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
-                        <ul class="assignment-list">
-                            @*<li>Hỗ trợ nhập liệu dữ liệu trên máy tính</li>
-                            <li>Hỗ trợ hậu cần (thực phẩm, đồ ăn, thiết bị y tế)</li>
-                            <li>Hỗ trợ tuyên truyền</li>
-                            <li>Hỗ trợ công tác tổng hợp</li>
-                            <li>Tham gia hỗ trợ điều phối</li>*@
-                            @item.ActivityCommission
-                        </ul>
-                    </div>
-                </div>
+    <div class="infopage">
+        <div class="infopage-title">
+            <p class="title__content">
+                @activity.Name
+            </p>
+            <div class="title__name">
+                <span class="material-icons"><span class="earth-icon">public</span></span>
+                <p class="organization">Tên Đơn vị tổ chức</p>
             </div>
-        }
-    }
+            <div class="title__date">
+                <p class="postdate">
+                    Ngày đăng: @activity.PostDate.ToShortDateString()
+                </p>
+                <button @onclick="AnimateHeart" class="@typeButton">
+                    <span class="material-icons"><span class="heart-icon">@typeI</span></span>
+                </button>
+                <div><hr class="line-line2"></div>
+            </div>
+        </div>
+        <div class="infopage-activity">
+            <div class="activity__description">
+                <p class="content">
+                    @activity.Description
+                </p>
+            </div>
+            <div class="activity__image">
+                <img src="./img/ActivityInfoPage/ActivityImage.png" alt="Activity Image">
+            </div>
+            <div class="activity__mission">
+                <p class="mission">Sứ mệnh:</p>
+                <ul class="misson-list">
+                    @*<li>Góp phần công sức vào công cuộc chống dịch Covid-19 của cả nước</li>
+                        <li>Sứ mệnh: Góp phần công sức vào công cuộc chống dịch Covid-19 của cả nước Mang lại việc làm ý nghĩa để cùng nhau thể hiện tinh thần trách nhiệm, tình yêu với Tổ quốc</li>
+                        <li>Tình nguyện viên được hưởng 120.000 đồng/người/ngày, gồm tiền ăn là 80.000 đồng (theo mức quy định tại Khoản 5 Điều 2 Nghị quyết 16)</li>*@
+                    @activity.Mission
+                </ul>
+            </div>
+            <div class="activity__assignment">
+                <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
+                <ul class="assignment-list">
+                    @*<li>Hỗ trợ nhập liệu dữ liệu trên máy tính</li>
+                        <li>Hỗ trợ hậu cần (thực phẩm, đồ ăn, thiết bị y tế)</li>
+                        <li>Hỗ trợ tuyên truyền</li>
+                        <li>Hỗ trợ công tác tổng hợp</li>
+                        <li>Tham gia hỗ trợ điều phối</li>*@
+                    @activity.Commission
+                </ul>
+            </div>
+        </div>
+    </div>
 }
+
 @code {
     private string typeButton = "heart-button1";
     private string typeI = "favorite_border";
@@ -80,10 +75,13 @@
         }
     }
 
-    private List<InfoActivityViewModel> activity;
+    private ViewActivityViewModel activity;
+
+    [Parameter]
+    public string ActivityId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        activity = await InfoActivityService.GetInfoActivity();
+        activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
     }
 }

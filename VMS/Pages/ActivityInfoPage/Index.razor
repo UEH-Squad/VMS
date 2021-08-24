@@ -1,4 +1,4 @@
-﻿@attribute [Route(Routes.ActivityInfo)]
+﻿@attribute [Route(Routes.ActivityInfo + "/{activityid}")]
 
 <div class="container-lg px-0 layout">
     <div class="toppage">
@@ -9,10 +9,10 @@
     </div>
     <div class="row layout__body">
         <div class="col-7 flex-grow-1 layout__body__main">
-            <InfoPage />
+            <InfoPage ActivityId="@ActivityId"/>
         </div>
         <div class="col-4 layout__body__rightrail">
-            <Rightrail />
+            <Rightrail ActivityId="@ActivityId"/>
         </div>
     </div>
     <div class="layout__other-activities my-5">
@@ -21,5 +21,6 @@
 </div>
 
 @code {
-
+    [Parameter]
+    public string ActivityId { get; set; }
 }

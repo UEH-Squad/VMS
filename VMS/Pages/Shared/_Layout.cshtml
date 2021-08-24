@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/site.css" />
+    <link href="~/css/IdentityCss/Layout.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-xl navbar-light bg-white py-0 shadow-sm my-navbar">
@@ -35,8 +37,17 @@
             </div>
         </div>
     </nav>
-    <main class="container flex-grow-1 mt-2">
-        @RenderBody()
+    <main>
+        <div class="container-lg p-0">
+            <div class="row align-items-center my-row">
+                <div class="col-lg-6">Go virluntter<br /> Kham pha cong dong tinh nguyen truc tuyen</div>
+                <div class="col-lg-6 px-5">
+                    <div class="my-content-wrapper">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="lh-lg">

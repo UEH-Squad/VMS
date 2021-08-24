@@ -86,7 +86,7 @@
     {
         pagedResult = GetFakeData();
         StateHasChanged();
-        await JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+        await Interop.ScrollToTop(JsRuntime);
     }
 
     private async Task HandleFav(int id)

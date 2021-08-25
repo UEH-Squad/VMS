@@ -1,5 +1,94 @@
-﻿<h3>Information</h3>
+﻿@inject IJSRuntime JSRuntinme;
+
+<div class="my-information pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-4 text-center information__logo">
+                <div class="information__logo-img">
+                    <img class="w-100" src="img/LogoBaner/KHOA-VIỆN-KTX/BIT.png" alt="">
+                </div>
+                <p class="mb-2">Công nghệ thông tin kinh doanh</p>
+                <span>Tham gia từ năm 2021</span>
+                <a class="information__logo-button">
+                    <i class="material-icons-outlined">add</i>
+                    <span>Tạo hoạt động mới</span>
+                </a>
+            </div>
+            <div class="col-7 ms-auto">
+                <div class="row pb-4 row-1">
+                    <div class="col-7 information__rank d-flex justify-content-evenly align-self-center">
+                        <a class="d-flex align-self-center">#2</a>
+                        <div>
+                            <p class="mb-2 d-flex justify-content-evenly align-self-end">
+                                <span class="information__rank-number">4,5</span>
+                                <i class="material-icons-outlined">
+                                    star
+                                </i>
+                                <i class="material-icons-outlined">
+                                    star
+                                </i>
+                                <i class="material-icons-outlined">
+                                    star
+                                </i>
+                                <i class="material-icons-outlined">
+                                    star
+                                </i>
+                                <i class="material-icons-outlined">
+                                    star
+                                </i>
+                            </p>
+                            <span>15N xếp hạng</span>
+                        </div>
+                    </div>
+                    <div class="col-5 information__contact">
+                        <p class="d-flex align-self-center">
+                            <i class="material-icons-outlined">
+                                email
+                            </i>
+                            <span>Youthbit.ueh@gmail.com</span>
+                        </p>
+                        <p class="d-flex align-self-center">
+                            <i class="material-icons-outlined">
+                                settings_phone
+                            </i>
+                            <span>0849 245 xxx</span>
+                        </p>
+                    </div>
+                
+                </div>
+                <div class="row pt-4">
+                    <div class="col-7 information__fields">
+                        <h3>Lĩnh vực <span>chuyên môn</span></h3>
+                        <div class="owl-carousel owl-theme information__carousel">
+                            <div class="item">
+                                <i class="material-icons">group</i>
+                                <span>Cộng đồng</span>
+                            </div>
+                            <div class="item">
+                                <i class="material-icons">group</i>
+                                <span>Giáo dục</span>
+                            </div>
+                            <div class="item">
+                                <i class="material-icons">group</i>
+                                <span>Thể thao</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5 information__act">
+                        <h3>Số hoạt động <span>đã tạo</span></h3>
+                        <span class="d-flex justify-content-evenly align-self-center">30</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5"></div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
 
 @code {
-
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.InformationCarousel");
+    }
 }

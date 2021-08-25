@@ -11,7 +11,7 @@
                         {
                             @foreach (var item in pagedResult.Results)
                             {
-                                <div class="act__item row mt-5">
+                                <div class="act__item row">
                                     <div class="col-4">
                                         <img class="w-100" src="img/act.png" alt="">
                                     </div>
@@ -25,7 +25,7 @@
                                         <div class="act__signUp">
                                             <i @onclick="@(() => HandleFav(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
-                                            <button @onclick="ShowModal" class="btn">Đăng kí</button>
+                                            <button @onclick="ShowModal" class="btn">Đăng ký</button>
                                         </div>
                                     </div>
                                 </div>

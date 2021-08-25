@@ -37,13 +37,14 @@
 
         span {
             color: $green;
-            font-size: 24px;
+            font-size: 26px;
             line-height: 24px;
         }
 
         .search-btn {
             background-color: transparent;
             border: none;
+            padding:0;
         }
 
         .clear-search-btn {
@@ -85,7 +86,7 @@
         background-color: #18A0FB;
         position: absolute;
         top: 49%;
-        left: 53%;
+        left: 52%;
         transform: translate(-50%, -50%);
         display: none;
     }

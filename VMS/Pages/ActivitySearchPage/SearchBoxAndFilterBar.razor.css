@@ -31,11 +31,12 @@
   margin-left: -60px; }
   .my-search-box__icon-wrapper span {
     color: #64D72F;
-    font-size: 24px;
+    font-size: 26px;
     line-height: 24px; }
   .my-search-box__icon-wrapper .search-btn {
     background-color: transparent;
-    border: none; }
+    border: none;
+    padding: 0; }
   .my-search-box__icon-wrapper .clear-search-btn {
     margin-top: -4px;
     visibility: hidden;
@@ -68,7 +69,7 @@
     background-color: #18A0FB;
     position: absolute;
     top: 49%;
-    left: 53%;
+    left: 52%;
     transform: translate(-50%, -50%);
     display: none; }
   .my-check-box:checked::before {

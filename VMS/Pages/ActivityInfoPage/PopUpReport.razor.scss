@@ -134,13 +134,24 @@
 .dropdown .my-btn {
     width: 100%;
     border: 1px solid $grey-text;
+    padding:14px 0;
 }
 .dropdown-menu {
     width: 100%;
     box-shadow: 5px 5px 10px 10px #dee2e687;
-    font-size:14px;
-    > li {
-        margin:5px 0;
+    font-size: 14px;
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+
+        .dropdown-item--checkbox{
+            margin-right:10px;
+        }
+        label{
+            width:100%;
+        }
     }
 }
 .dropdown-toggle::after {
@@ -153,6 +164,7 @@
 /*-----report description-----*/
 .form-control {
     border: 1px solid $grey-text;
+    font-size:22px;
 }
 /*-----end report description-----*/
 
@@ -160,7 +172,7 @@
 .add-file {
     border-radius: 4px;
     border: 1px solid $grey-text;
-    height: 55px;
+    padding:8px 0;
     display: flex;
 
     .add-file__block {

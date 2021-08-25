@@ -20,12 +20,13 @@
 .act-content {
   background-color: #F3F3F5;
   border-radius: 0 0 10px 10px; }
-  .act-content .act-title {
-    padding: 17px 10px 26px 29px;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 30px;
-    color: #18A0FB; }
+  .act-content .content {
+    padding: 17px 10px 26px 29px; }
+    .act-content .content .act-title {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 30px;
+      color: #18A0FB; }
 
 .lm-text {
   display: -webkit-box;

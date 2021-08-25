@@ -56,7 +56,10 @@
   .act-container:hover > .img-container .act-img {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
-    opacity: .3; }
+    background-color: #F2F2F2;
+    opacity: .6; }
   .act-container:hover > .act-content {
     background-color: #F2F2F2;
     border-radius: 0 0 10px 10px; }
+    .act-container:hover > .act-content .change-color {
+      color: #0B588C; }

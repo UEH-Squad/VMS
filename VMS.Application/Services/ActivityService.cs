@@ -275,5 +275,29 @@ namespace VMS.Application.Services
 
         private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured)
             => isFeatured ? (x => x.OrderByDescending(y => y.MemberQuantity)) : (x => x.OrderByDescending(y => y.Id));
+
+        public async Task<List<OtherActivitiesViewModel>> GetOtherActivities(string orgId)
+        {
+            DbContext context = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                {
+                    a => a.OrgId == orgId
+                },
+            };
+
+            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
+
+            IEnumerable<OtherActivitiesViewModel> infoActivity = activity.Select(x => new OtherActivitiesViewModel
+            {
+                ActivityId = x.Id,
+                ActivityName = x.Name,
+                ActivityBanner = x.Banner,
+            });
+
+            return infoActivity.ToList();
+        }
     }
 }

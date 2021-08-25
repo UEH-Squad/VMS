@@ -19,5 +19,7 @@ namespace VMS.Application.Interfaces
         Task<ViewActivityViewModel> GetViewActivityViewModelAsync(int activityId);
 
         Task<List<UserWithActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false);
+
+        Task<List<OtherActivitiesViewModel>> GetOtherActivities(string orgId);
     }
 }

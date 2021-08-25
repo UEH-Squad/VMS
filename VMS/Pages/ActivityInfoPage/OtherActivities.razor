@@ -1,6 +1,4 @@
-﻿@*@inject IJSRuntime JSRuntinme;*@
-
-@inject IInfoActivityService InfoActivityService
+﻿@inject IJSRuntime JSRuntinme
 @inject IActivityService ActivityService
 
 @using VMS.Application.ViewModels
@@ -16,12 +14,15 @@
         <div class="owl-carousel owl-theme">
             @foreach (var item in otherActivities)
             {
-                @if (item.ActivityId != int.Parse(ActivityId) && item.ActivityOrgId == activity.OrgId)
+                @if (item.ActivityId != int.Parse(ActivityId))
                 {
                     <div class="act__container__card" id="kiemtra">
                         <div class="act__container__card__img">
-                            @*<img src="@item.Banner" alt="photo">*@
                             <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
+                            @*@if (!string.IsNullOrEmpty(item.ActivityBanner))
+                            {
+                                <img src="/img/@item.ActivityBanner" alt="photo"/>
+                            }*@
                         </div>
                         <div class="act__container__card__desc">
                             <p>@item.ActivityName</p>
@@ -67,21 +68,25 @@
     //    }));
     //}
 
-    //protected override async Task OnAfterRenderAsync(bool firstRender)
-    //{
-    //    await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
-    //}
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
+    }
 
     private ViewActivityViewModel activity;
-    private List<InfoActivityViewModel> otherActivities;
+    private List<OtherActivitiesViewModel> otherActivities;
 
     [Parameter]
     public string ActivityId { get; set; }
 
+    [Parameter]
+    public string OrgId { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
-        otherActivities = await InfoActivityService.GetInfoActivity();
+        OrgId = activity.OrgId;
+        otherActivities = await ActivityService.GetOtherActivities(OrgId);
     }
 
 }

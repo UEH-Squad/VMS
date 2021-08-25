@@ -7,8 +7,8 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Application.Interfaces
 {
-    public interface IInfoActivityService
+    public interface IReportService
     {
-        Task<List<InfoActivityViewModel>> GetInfoActivity();
+        Task AddReport(ReportViewModel reportViewModel);
     }
 }

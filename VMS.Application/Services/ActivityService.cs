@@ -181,6 +181,7 @@ namespace VMS.Application.Services
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
                                 .Include(x => x.Area)
+                                .Include(x=> x.Organizer)
             };
 
             Activity activity = await _repository.GetAsync(dbContext, specification);

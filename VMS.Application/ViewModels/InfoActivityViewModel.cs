@@ -20,5 +20,6 @@ namespace VMS.Application.ViewModels
         public string ActivityRequirement { get; set; }
         public string ActivityAddress { get; set; }
         public List<Skill> ActivitySkill { get; set; }
+        public string ActivityOrgId{ get; set; }
     }
 }

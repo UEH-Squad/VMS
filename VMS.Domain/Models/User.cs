@@ -17,6 +17,7 @@ namespace VMS.Domain.Models
         public string Avatar { get; set; }
 
         // For org + seeker
+        public string OrgName { get; set; }
         public string PhoneNumber2 { get; set; }
 
         public string Website { get; set; }

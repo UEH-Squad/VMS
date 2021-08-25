@@ -27,6 +27,7 @@ namespace VMS.Application.ViewModels
         public bool IsApproved { get; set; }
 
         public Area Area { get; set; }
+        public User Organizer { get; set; }
         public ICollection<Skill> Skills { get; set; }
         public ICollection<ActivityImage> ActivityImages { get; set; }
     }

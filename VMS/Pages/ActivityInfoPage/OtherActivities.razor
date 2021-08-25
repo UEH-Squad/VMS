@@ -1,6 +1,12 @@
-﻿@inject IJSRuntime JSRuntinme;
+﻿@*@inject IJSRuntime JSRuntinme;*@
 
-@if (fakeData is not null && fakeData.Count != 0)
+@inject IInfoActivityService InfoActivityService
+@inject IActivityService ActivityService
+
+@using VMS.Application.ViewModels
+@using VMS.Application.Interfaces
+
+@if (otherActivities is not null && otherActivities.Count != 0)
 {
     <section class="other-act">
         <div class="other-act__title">
@@ -8,21 +14,25 @@
             <hr>
         </div>
         <div class="owl-carousel owl-theme">
-            @foreach (var data in fakeData)
+            @foreach (var item in otherActivities)
             {
-                <div class="act__container__card" id="kiemtra">
-                    <div class="act__container__card__img">
-                        <img src="@data.Banner" alt="photo">
-                    </div>
-                    <div class="act__container__card__desc">
-                        <p>@data.Title</p>
-                    </div>
-                    <div class="act__container__card__icon">
-                        <div class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))">
-                            <span class="material-icons">favorite</span>
+                @if (item.ActivityId != int.Parse(ActivityId) && item.ActivityOrgId == activity.OrgId)
+                {
+                    <div class="act__container__card" id="kiemtra">
+                        <div class="act__container__card__img">
+                            @*<img src="@item.Banner" alt="photo">*@
+                            <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
                         </div>
+                        <div class="act__container__card__desc">
+                            <p>@item.ActivityName</p>
+                        </div>
+                        @*<div class="act__container__card__icon">
+                                <div class="@(item.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(item.Id))">
+                                    <span class="material-icons">favorite</span>
+                                </div>
+                            </div>*@
                     </div>
-                </div>
+                }
             }
         </div>
     </section>
@@ -30,35 +40,48 @@
 
 @code {
 
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Banner { get; set; }
-        public bool IsFav { get; set; }
-    }
+    //private class FakeData
+    //{
+    //    public int Id { get; set; }
+    //    public string Title { get; set; }
+    //    public string Banner { get; set; }
+    //    public bool IsFav { get; set; }
+    //}
 
-    private List<FakeData> fakeData = new();
+    //private List<FakeData> fakeData = new();
 
-    private void AnimateHeart(int id)
-    {
-        var item = fakeData.FirstOrDefault(x => x.Id == id);
-        item.IsFav = true;
-    }
+    //private void AnimateHeart(int id)
+    //{
+    //    var item = fakeData.FirstOrDefault(x => x.Id == id);
+    //    item.IsFav = true;
+    //}
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    fakeData.AddRange(Enumerable.Range(0, 7).Select(x => new FakeData
+    //    {
+    //        Id = x,
+    //        Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
+    //        Banner = "img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg",
+    //        IsFav = false
+    //    }));
+    //}
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
+    //}
+
+    private ViewActivityViewModel activity;
+    private List<InfoActivityViewModel> otherActivities;
+
+    [Parameter]
+    public string ActivityId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        fakeData.AddRange(Enumerable.Range(0, 7).Select(x => new FakeData
-        {
-            Id = x,
-            Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
-            Banner = "img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg",
-            IsFav = false
-        }));
+        activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
+        otherActivities = await InfoActivityService.GetInfoActivity();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
-    }
 }

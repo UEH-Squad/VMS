@@ -48,7 +48,8 @@ namespace VMS.Application.Services
                 ActivitySkill = x.ActivitySkills.Select(a => new Skill
                 {
                     Name = a.Skill.Name,
-                }).ToList()
+                }).ToList(),
+                ActivityOrgId = x.OrgId,
             });
 
             return infoActivity.ToList();

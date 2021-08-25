@@ -1,0 +1,141 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.other-act {
+  position: relative; }
+  .other-act__title {
+    margin-bottom: 50px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px; }
+    @media (min-width: 768px) {
+      .other-act__title {
+        font-size: 24px; } }
+    @media (min-width: 1200px) {
+      .other-act__title {
+        font-size: 28px; } }
+    @media (min-width: 1400px) {
+      .other-act__title {
+        font-size: 36px; } }
+    .other-act__title h3 {
+      color: #18A0FB; }
+    .other-act__title span {
+      color: #64D72F; }
+    .other-act__title hr {
+      margin-top: 10px; }
+
+.act__container {
+  display: grid;
+  grid-template-columns: calc(400px * 0.4) calc(400px * 0.4) calc(400px * 0.4);
+  grid-gap: 10px;
+  justify-content: center; }
+  @media (min-width: 768px) {
+    .act__container {
+      grid-template-columns: calc(400px * 0.6) calc(400px * 0.6) calc(400px * 0.6);
+      grid-gap: 10px; } }
+  @media (min-width: 1200px) {
+    .act__container {
+      grid-template-columns: calc(400px * 0.8) calc(400px * 0.8) calc(400px * 0.8);
+      grid-gap: 15px; } }
+  @media (min-width: 1400px) {
+    .act__container {
+      grid-template-columns: 400px 400px 400px;
+      grid-gap: 20px; } }
+  .act__container__card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    transition: all ease 0.2s; }
+    .act__container__card:hover {
+      filter: brightness(80%); }
+    .act__container__card__img {
+      position: relative;
+      width: 100%;
+      height: calc(247px * 0.4); }
+      @media (min-width: 768px) {
+        .act__container__card__img {
+          height: calc(247px * 0.6); } }
+      @media (min-width: 1200px) {
+        .act__container__card__img {
+          height: calc(247px * 0.8); } }
+      @media (min-width: 1400px) {
+        .act__container__card__img {
+          height: 247px; } }
+      .act__container__card__img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0; }
+    .act__container__card__desc {
+      padding: 10px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 8px;
+      color: #18A0FB;
+      max-height: calc(8px * 4 + 19px);
+      overflow: hidden; }
+      @media (min-width: 768px) {
+        .act__container__card__desc {
+          padding: 14px;
+          font-size: 14px;
+          max-height: calc(14px * 4 + 19px); } }
+      @media (min-width: 1200px) {
+        .act__container__card__desc {
+          padding: 16px;
+          font-size: 18px;
+          max-height: calc(18px * 4 + 19px); } }
+      @media (min-width: 1400px) {
+        .act__container__card__desc {
+          padding: 19px;
+          font-size: 24px;
+          max-height: calc(24px * 5 + 19px); } }
+    .act__container__card__icon {
+      align-self: flex-end; }
+      .act__container__card__icon span {
+        padding: 0px 11px 7px 0px;
+        font-size: 16px;
+        color: transparent;
+        -webkit-text-stroke: 2px #F14747; }
+        @media (min-width: 768px) {
+          .act__container__card__icon span {
+            font-size: 18px; } }
+        @media (min-width: 1200px) {
+          .act__container__card__icon span {
+            font-size: 20px; } }
+        @media (min-width: 1400px) {
+          .act__container__card__icon span {
+            font-size: 24px; } }
+
+.heart span {
+  color: #F14747 !important; }
+
+.heart-line span {
+  color: transparent !important; }
+
+::deep .owl-carousel {
+  z-index: 0; }
+
+::deep .owl-nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+  ::deep .owl-nav .owl-prev, ::deep .owl-nav .owl-next:hover {
+    background-color: transparent !important; }
+  ::deep .owl-nav span {
+    font-size: 40px;
+    color: #FFFFFF;
+    transition: all 0.3s linear;
+    border-radius: 100% !important;
+    background-color: #18A0FB !important; }
+    ::deep .owl-nav span:hover {
+      filter: blur(90%); }
+
+::deep .owl-drag {
+  cursor: initial !important; }

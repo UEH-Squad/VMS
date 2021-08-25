@@ -92,6 +92,10 @@
     "inputFile": "Pages/ActivityInfoPage/PopUpReport.razor.scss"
   },
   {
+    "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
+  },
+  {
     "outputFile": "Pages/Organization-Profile/Information.razor.css",
     "inputFile": "Pages/Organization-Profile/Information.razor.scss"
   }

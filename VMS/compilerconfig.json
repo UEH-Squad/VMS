@@ -102,5 +102,9 @@
   {
     "outputFile": "Pages/Organization-Profile/ActOrganize.razor.css",
     "inputFile": "Pages/Organization-Profile/ActOrganize.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
   }
 ]

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace VMS.Pages.ActivityInfoPage
     public partial class PopUpReport : ComponentBase
     {
         private ReportViewModel report;
+        private string message;
+        private string image;
+        private IBrowserFile file;
 
         [Inject] 
         private IReportService ReportService { get; set; }
@@ -19,15 +23,34 @@ namespace VMS.Pages.ActivityInfoPage
         [Inject]
         private IIdentityService IdentityService { get; set; }
 
+        [Inject]
+        private IUploadService UploadService { get; set; }
+
         public PopUpReport()
         {
             report = new ReportViewModel();
         }
+
         private async Task AddReport()
         {
             report.UserId = IdentityService.GetCurrentUserId();
 
             await ReportService.AddReport(report);
+        }
+
+        private async Task OnInputFileChangeAsync(InputFileChangeEventArgs e)
+        {
+            if (e.File.ContentType != "image/jpeg")
+            {
+                message = $"File không đúng định dạng..";
+                this.StateHasChanged();
+            }
+            else
+            {
+                message = "";
+                file = e.File;
+                image = await UploadService.GetDataUriAsync(file);
+            }
         }
     }
 }

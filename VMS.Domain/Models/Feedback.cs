@@ -12,7 +12,8 @@ namespace VMS.Domain.Models
         public string CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
-
+        public string Image { get; set; }
         public virtual User User { get; set; }
+        
     }
 }

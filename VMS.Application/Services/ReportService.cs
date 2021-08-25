@@ -10,7 +10,6 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
-using VMS.GenericRepository;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
@@ -30,6 +29,8 @@ namespace VMS.Application.Services
             Feedback report = _mapper.Map<Feedback>(reportViewModel);
             report.CreatedDate = DateTime.Now;
             report.CreatedBy = report.UserId;
+            report.Content = reportViewModel.DesReport;
+            report.Image = reportViewModel.ImageReport;
 
             await _repository.InsertAsync(dbContext, report);
         }

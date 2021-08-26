@@ -86,12 +86,7 @@ namespace VMS.Application.Services
                                                     .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
         }
 
-        public List<Favorite> GetFavoritesOfCurrentUser()
-        {
-            return GetCurrentUserWithFavorites().Favorites.ToList();
-        }
-
-        public List<Favorite> UpdateFavoritesOfCurrentUser(int activityId)
+        public void HandleFavoriteActivity(int activityId)
         {
             User user = GetCurrentUserWithFavorites();
 
@@ -100,7 +95,7 @@ namespace VMS.Application.Services
             if (favorite is null)
             {
                 user.Favorites.Add(new()
-                {
+                { 
                     UserId = user.Id,
                     ActivityId = activityId,
                     CreatedDate = System.DateTime.Now
@@ -112,8 +107,6 @@ namespace VMS.Application.Services
             }
 
             Task.Run(() => _userManager.UpdateAsync(user));
-
-            return user.Favorites.ToList();
         }
     }
 }

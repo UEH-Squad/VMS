@@ -3,7 +3,6 @@
 @using VMS.Application.ViewModels
 @inject IJSRuntime JsRuntime
 @using Coordinate = VMS.Application.ViewModels.Coordinate;
-@using VMS.Domain.Models
 
 <section class="my-act">
     <div class="container">
@@ -30,7 +29,7 @@
                                         <AuthorizeView>
                                             <Authorized>
                                                 <div class="act__signUp">
-                                                    <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(userFavorites.Exists(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
+                                                    <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
                                                     <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
                                                 </div>
@@ -56,10 +55,11 @@
        OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 
 @code {
-    private List<Favorite> userFavorites;
     private int page = 1;
     private Coordinate location;
     private List<ActivityViewModel> activities;
+    private List<ActivityViewModel> activityViewModels;
+    private IEnumerable<ActivityViewModel> filteredActivities;
     private IEnumerable<ActivityViewModel> featuredActivities;
     private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
 
@@ -71,14 +71,11 @@
     public string SearchValue { get; set; }
     [Parameter]
     public bool[] OrderList { get; set; }
-
-    [CascadingParameter]
-    public IModalService Modal { get; set; }
-
     [Inject]
     private IActivityService ActivityService { get; set; }
     [Inject]
     private IIdentityService IdentityService { get; set; }
+
     [Inject]
     private IGeoLocationService AddressLocationService { get; set; }
 
@@ -104,85 +101,89 @@
 
     protected override async Task OnInitializedAsync()
     {
-        featuredActivities = await ActivityService.GetFeaturedActivitiesAsync();
+        activityViewModels = await ActivityService.GetAllActivitiesAsync();
 
         location = await JsRuntime.InvokeAsync<Coordinate>("vms.GetUserLocation");
+
         if (location is null)
         {
             string userAddresses = IdentityService.GetCurrentUserAddress();
             location = await AddressLocationService.GetCoordinateAsync(userAddresses);
         }
 
-        userFavorites = IdentityService.GetFavoritesOfCurrentUser();
+        featuredActivities = activityViewModels.Where(a => a.IsPin);
     }
 
-    protected override async Task OnParametersSetAsync()
+    protected override void OnParametersSet()
     {
-        activities = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter);
+        if (IsSearch)
+        {
+            HandleSearch();
+        }
+        else
+        {
+            HandleFilter();
+        }
+
         HandleOrder();
+
         pagedResult = GetData();
     }
 
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetData();
-        StateHasChanged();
-        await Interop.ScrollToTop(JsRuntime);
-    }
+	private async Task HandlePageChanged()
+	{
+		pagedResult = GetData();
+		StateHasChanged();
+		await Interop.ScrollToTop(JsRuntime);
+	}
 
     private void HandleFavorite(int id)
     {
-        userFavorites = IdentityService.UpdateFavoritesOfCurrentUser(id);
+        var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (clickedItem is not null)
+        {
+            clickedItem.IsFav = !clickedItem.IsFav;
+            IdentityService.HandleFavoriteActivity(id);
+        }
+    }
+
+    private void HandleSearch()
+    {
+        filteredActivities = activityViewModels.Where(a => a.Name.ToUpper().Trim().Contains(SearchValue.ToUpper().Trim()));
+    }
+
+    private void HandleFilter()
+    {
+        filteredActivities = activityViewModels.Where(a => a.IsVirtual == Filter.Virtual || a.IsVirtual == Filter.Actual)
+                                                .Where(a => a.ActivityAddresses.Any(x => x.AddressPathId == Filter.AddressPathId) || Filter.AddressPathId == 0)
+                                                .Where(a => a.Organizer.Id == Filter.OrgId || string.IsNullOrEmpty(Filter.OrgId))
+                                                .Where(a => Filter.Areas.Any(x => x == a.AreaId) || Filter.Areas.Count == 0)
+                                                .Where(a => Filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id)));
     }
 
     private void HandleOrder()
     {
-        if (OrderList[0] && OrderList[1] && OrderList[2])
-        {
-            activities = activities.OrderByDescending(a => a.PostDate)
-                                        .ThenByDescending(a => a.MemberQuantity)
-                                        .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                        .ToList();
-            return;
-        }
-
-        if (OrderList[0] && OrderList[2])
-        {
-            activities = activities.OrderByDescending(a => a.PostDate)
-                                        .ThenByDescending(a => a.MemberQuantity)
-                                        .ToList();
-            return;
-        }
-
-        if (OrderList[0] && OrderList[1])
-        {
-            activities = activities.OrderByDescending(a => a.PostDate)
-                                        .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                        .ToList();
-            return;
-        }
-
-        if (OrderList[1] && OrderList[2])
-        {
-            activities = activities.OrderByDescending(a => a.MemberQuantity)
-                                        .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                        .ToList();
-            return;
-        }
-
         if (OrderList[0])
         {
-            activities = activities.OrderByDescending(a => a.PostDate).ToList();
+            if (OrderList[1])
+            {
+                if (OrderList[2])
+                {
+                    activities = filteredActivities.OrderByDescending(a => a.PostDate)
+                                                    .ThenByDescending(a => a.MemberQuantity)
+                                                    .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
+                }
+                else
+                {
+                    activities = filteredActivities.OrderByDescending(a => a.PostDate)
+                                                    .ThenByDescending(a => a.MemberQuantity).ToList();
+                }
+            }
         }
 
         if (OrderList[2])
         {
             activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
-        }
-
-        if (OrderList[1])
-        {
-            activities = activities.OrderBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
         }
     }
 
@@ -190,13 +191,16 @@
     {
         var result = new PagedResult<ActivityViewModel>();
         result.CurrentPage = page;
-        result.RowCount = activities.Count;
+        result.RowCount = 64;
         result.PageSize = 20;
         result.PageCount = result.RowCount / result.PageSize;
-        result.Results = activities.Skip((page - 1) * result.PageSize).Take(result.PageSize).ToList();
+        result.Results = activities.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
 
         return result;
     }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
 
     private void ShowModal(int id)
     {

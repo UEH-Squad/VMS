@@ -21,8 +21,6 @@ namespace VMS.Application.Interfaces
 
         User GetCurrentUserWithFavorites();
 
-        List<Favorite> GetFavoritesOfCurrentUser();
-
-        List<Favorite> UpdateFavoritesOfCurrentUser(int activityId);
+        void HandleFavoriteActivity(int activityId);
     }
 }

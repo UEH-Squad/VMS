@@ -18,6 +18,7 @@ namespace VMS.Application.ViewModels
         public string Banner { get; set; }
         public bool IsVirtual { get; set; }
         public bool IsPin { get; set; }
+        public bool IsFav { get; set; }
 
         public Coordinate Coordinate { get; set; }
         public User Organizer { get; set; }

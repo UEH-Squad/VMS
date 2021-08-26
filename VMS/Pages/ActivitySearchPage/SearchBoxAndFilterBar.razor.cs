@@ -147,9 +147,9 @@ namespace VMS.Pages.ActivitySearchPage
             Filter = new FilterActivityViewModel();
         }
 
-        private async Task ChangeOrder(ChangeEventArgs e)
+        private async Task ChangeOrder(int id)
         {
-            OrderList[(int)e.Value] = !OrderList[(int)e.Value];
+            OrderList[id] = !OrderList[id];
             await OrderListChanged.InvokeAsync(OrderList);
         }
     }

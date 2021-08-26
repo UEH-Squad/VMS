@@ -1,29 +1,29 @@
 ﻿<div class="modal-backdrop modal-dialog-centered justify-content-center">
-	<div class="my-custom-popup position-relative">
-		<span @onclick="CloseModal" class="material-icons-outlined close-btn">
-			close
-		</span>
+    <div class="my-custom-popup position-relative">
+        <span @onclick="CloseModal" class="material-icons-outlined close-btn">
+            close
+        </span>
 
-		<h3 class="text-center mt-4 mb-4">Lĩnh Vực</h3>
-		<div class="col-10 mx-auto">
-			<div class="row justify-content-evenly ms-5">
-				@if (areas is not null)
-				{
-					@foreach (var area in areas)
-					{
-						<div class="area-item-wrapper d-flex align-items-center mb-3">
-							<span @onclick="() => ChangeState(area.Id) " class="material-icons-outlined d-flex align-items-center justify-content-center">
-								@area.Icon
-							</span>
-							<p @onclick="() => ChangeState(area.Id)" class="mb-0 ms-2 @(choosenAreas.Exists(a => a == area.Id) ? "colored-green" : "")">@area.Name</p>
-						</div>
-					}
-				}
-			</div>
-		</div>
-		<div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+        <h3 class="text-center mt-4 mb-4">Lĩnh Vực</h3>
+        <div class="col-10 mx-auto">
+            <div class="row justify-content-evenly ms-5">
+                @if (areas is not null)
+                {
+                    @foreach (var area in areas)
+                    {
+                        <div class="area-item-wrapper d-flex align-items-center mb-3">
+                            <span @onclick="() => ChangeState(area.Id) " class="material-icons-outlined d-flex align-items-center justify-content-center">
+                                @area.Icon
+                            </span>
+                            <p @onclick="() => ChangeState(area.Id)" class="mb-0 ms-2 @(choosenAreas.Exists(a => a == area.Id) ? "colored-green" : "")">@area.Name</p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
 
-	</div>
+    </div>
 </div>
 
 @code {

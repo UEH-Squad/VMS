@@ -1,4 +1,5 @@
-﻿@using VMS.Application.Interfaces
+﻿@using Geolocation;
+@using VMS.Application.Interfaces
 @using VMS.Application.ViewModels
 @inject IJSRuntime JsRuntime
 @using Coordinate = VMS.Application.ViewModels.Coordinate;
@@ -31,28 +32,28 @@
                                                 <div class="act__signUp">
                                                     <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(userFavorites.Exists(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
 
-													<button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
-												</div>
-											</Authorized>
-										</AuthorizeView>
-									</div>
-								</div>
-							}
-						}
-					</div>
-				</div>
-				<a class="goToDivAct d-none " href="#act">go to div act</a>
-			</div>
-			<div class="col-3 ms-auto">
-				<FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
-			</div>
-		</div>
-	</div>
+                                                    <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
+                                                </div>
+                                            </Authorized>
+                                        </AuthorizeView>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <a class="goToDivAct d-none " href="#act">go to div act</a>
+            </div>
+            <div class="col-3 ms-auto">
+                <FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
+            </div>
+        </div>
+    </div>
 </section>
 
 <Pager CurrentPage="@pagedResult.CurrentPage"
-	   PageCount="@pagedResult.PageCount"
-	   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+       PageCount="@pagedResult.PageCount"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 
 @code {
     private List<Favorite> userFavorites;
@@ -91,10 +92,10 @@
         public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
     }
 
-	public class PagedResult<T> : PagedResultBase where T : class
-	{
-		public List<T> Results { get; set; }
-	}
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public List<T> Results { get; set; }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -194,22 +195,22 @@
         result.PageCount = result.RowCount / result.PageSize;
         result.Results = activities.Skip((page - 1) * result.PageSize).Take(result.PageSize).ToList();
 
-		return result;
-	}
+        return result;
+    }
 
     private void ShowModal(int id)
     {
         ModalParameters parameters = new();
         parameters.Add("ActivityId", id);
 
-		var options = new ModalOptions()
-		{
-			HideCloseButton = true,
-			DisableBackgroundCancel = true,
-			UseCustomLayout = true,
-		};
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
 
-		Modal.Show<Signup>("", parameters, options);
-	}
+        Modal.Show<Signup>("", parameters, options);
+    }
 
 }

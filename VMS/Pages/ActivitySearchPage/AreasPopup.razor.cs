@@ -38,12 +38,12 @@ namespace VMS.Pages.ActivitySearchPage
             }
         }
 
-        private async Task CloseModal()
+        private async Task CloseModalAsync()
         {
             await AreasModal.CloseAsync();
         }
 
-        private async Task SaveModal()
+        private async Task SaveModalAsync()
         {
             ChoosenAreasList.Clear();
             ChoosenAreasList.AddRange(choosenAreas);

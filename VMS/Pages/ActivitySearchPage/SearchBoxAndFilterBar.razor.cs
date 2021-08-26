@@ -89,7 +89,7 @@ namespace VMS.Pages.ActivitySearchPage
             ToggleOrganizationDropdown();
         }
 
-        private async Task UpdateSearchValue(ChangeEventArgs e)
+        private async Task UpdateSearchValueAsync(ChangeEventArgs e)
         {
             SearchValue = (string)e.Value;
             await SearchAsync();
@@ -104,7 +104,7 @@ namespace VMS.Pages.ActivitySearchPage
             StateHasChanged();
         }
 
-        private async Task ShowAreasPopup()
+        private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
             parameters.Add("ChoosenAreasList", Filter.Areas);
@@ -119,7 +119,7 @@ namespace VMS.Pages.ActivitySearchPage
             await Modal.Show<AreasPopup>("", parameters, options).Result;
         }
 
-        private async Task ShowSkillsPopup()
+        private async Task ShowSkillsPopupAsync()
         {
             var skillsParameter = new ModalParameters();
             skillsParameter.Add("ChoosenSkillsList", Filter.Skills);
@@ -134,7 +134,7 @@ namespace VMS.Pages.ActivitySearchPage
             await Modal.Show<SkillsPopup>("", skillsParameter, options).Result;
         }
 
-        private async Task UpdateFilterValue()
+        private async Task UpdateFilterValueAsync()
         {
             await FilterChanged.InvokeAsync(Filter);
         }
@@ -147,7 +147,7 @@ namespace VMS.Pages.ActivitySearchPage
             Filter = new FilterActivityViewModel();
         }
 
-        private async Task ChangeOrder(int id)
+        private async Task ChangeOrderAsync(int id)
         {
             OrderList[id] = !OrderList[id];
             await OrderListChanged.InvokeAsync(OrderList);

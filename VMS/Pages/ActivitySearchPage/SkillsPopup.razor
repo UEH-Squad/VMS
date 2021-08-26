@@ -1,6 +1,6 @@
 ﻿<div class="modal-backdrop modal-dialog-centered justify-content-center">
     <div class="my-custom-popup position-relative">
-        <span @onclick="CloseModal" class="material-icons-outlined close-btn">
+        <span @onclick="CloseModalAsync" class="material-icons-outlined close-btn">
             close
         </span>
         <h3 class="text-center mt-4 mb-4">Kỹ năng</h3>
@@ -35,7 +35,7 @@
                     }
                 }
             </div>
-            <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+            <div @onclick="SaveModalAsync" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
         </div>
     </div>
 </div>

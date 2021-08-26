@@ -28,14 +28,14 @@ namespace VMS.Pages.ActivitySearchPage
 
         private enum RadioOptions { Commit, TakeTime }
 
-        private async Task ExitModal()
+        private async Task ExitModalAsync()
         {
             await Modal.CloseAsync();
         }
 
         private bool isShowReport = false;
 
-        private async Task ShowReportSuccess()
+        private async Task ShowReportSuccessAsync()
         {
             isShowReport = !isShowReport;
 

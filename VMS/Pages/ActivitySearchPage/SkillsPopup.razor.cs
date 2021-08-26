@@ -54,12 +54,12 @@ namespace VMS.Pages.ActivitySearchPage
             }
         }
 
-        private async Task CloseModal()
+        private async Task CloseModalAsync()
         {
             await SkillsModal.CloseAsync();
         }
 
-        private async Task SaveModal()
+        private async Task SaveModalAsync()
         {
             ChoosenSkillsList.Clear();
             ChoosenSkillsList.AddRange(choosenSkills);

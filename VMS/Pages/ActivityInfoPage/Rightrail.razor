@@ -25,7 +25,12 @@
             <div class="about-infor">
                 <div class="participant">
                     <p class="participant__title titles">Đối tượng tham gia</p>
-                    <p class="participant__content contents">Sinh viên năm 1,2,3</p>
+                    <p class="participant__content contents">
+                        @foreach (var target in activity.ActivityTargets)
+                        {
+                            <div>@target.Target</div>
+                        }
+                    </p>
                 </div>
                 <div class="location">
                     <p class="location__title titles">Địa điểm tham gia</p>
@@ -57,7 +62,7 @@
                 </button>
             </div>
         </div>
-        <button @onclick="@(() => ShowReportPopUp() )" class="report">Báo cáo hoạt động này</button>
+        <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>
     </div>
 }
 
@@ -68,7 +73,6 @@
     {
         var options = new ModalOptions()
         {
-
             HideCloseButton = true,
             DisableBackgroundCancel = true,
             UseCustomLayout = true

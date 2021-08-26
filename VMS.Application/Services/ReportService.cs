@@ -31,6 +31,7 @@ namespace VMS.Application.Services
             report.CreatedBy = report.UserId;
             report.Content = reportViewModel.DesReport;
             report.Image = reportViewModel.ImageReport;
+            report.ActivityId = reportViewModel.ActivityId;
 
             await _repository.InsertAsync(dbContext, report);
         }

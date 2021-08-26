@@ -148,12 +148,12 @@
       .add-file .add-file__block .block-icon-text .file__text {
         font-size: 22px;
         font-weight: 300px; }
-    .add-file .add-file__block .inputfile {
+    ::deep .inputfile {
       opacity: 0;
       overflow: hidden;
       position: absolute;
       z-index: -1; }
-    .add-file .add-file__block .inputfile + label {
+    ::deep .inputfile + label {
       font-size: 24px;
       color: #333;
       display: inline-block;

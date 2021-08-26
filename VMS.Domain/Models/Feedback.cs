@@ -13,7 +13,10 @@ namespace VMS.Domain.Models
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public string Image { get; set; }
+        public int ActivityId { get; set; }
+
         public virtual User User { get; set; }
+        public virtual Activity Activity { get; set; }
         
     }
 }

@@ -26,6 +26,7 @@ namespace VMS.Pages.ActivityInfoPage
         [Inject]
         private IUploadService UploadService { get; set; }
 
+
         public PopUpReport()
         {
             report = new ReportViewModel();
@@ -34,6 +35,11 @@ namespace VMS.Pages.ActivityInfoPage
         private async Task AddReport()
         {
             report.UserId = IdentityService.GetCurrentUserId();
+
+            if (file is not null)
+            {
+                report.ImageReport = await UploadService.SaveImageAsync(file, report.UserId);
+            }
 
             await ReportService.AddReport(report);
         }

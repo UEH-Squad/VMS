@@ -95,14 +95,7 @@
                 </div>
                 <div class="add-file">
                     <div class="add-file__block">
-                        @*<input type="file" name="file" id="file" class="inputfile" />
-                            <label for="file">
-                                <span class="block-icon-text">
-                                    <span class="material-icons my-icon-upload">cloud_upload</span>
-                                    <span class="file__text">Kéo hoặc thả hình ảnh liên quan tại đây</span>
-                                </span>
-                            </label>*@
-                        <InputFile OnChange="OnInputFileChangeAsync"/>
+                        <InputFile OnChange="OnInputFileChangeAsync" id="file" class="inputfile" />
                         @if (!string.IsNullOrEmpty(message))
                         {
                             <span style="color: red">@message</span>
@@ -111,6 +104,12 @@
                         {
                             <img src="@image" />
                         }
+                        <label for="file">
+                            <span class="block-icon-text">
+                                <span class="material-icons my-icon-upload">cloud_upload</span>
+                                <span class="file__text">Kéo hoặc thả hình ảnh liên quan tại đây</span>
+                            </span>
+                        </label>
                     </div>
 
                 </div>

@@ -30,5 +30,6 @@ namespace VMS.Application.ViewModels
         public User Organizer { get; set; }
         public ICollection<Skill> Skills { get; set; }
         public ICollection<ActivityImage> ActivityImages { get; set; }
+        public ICollection<ActivityTarget> ActivityTargets { get; set; }
     }
 }

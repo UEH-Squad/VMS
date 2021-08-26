@@ -1,5 +1,6 @@
 ﻿using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
@@ -12,6 +13,9 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private SignUpActivityViewModel information = new();
 
+        [Required]
+        private RadioOptions choosenRadio;
+
         [Parameter]
         public int ActivityId { get; set; }
         [Parameter]
@@ -21,6 +25,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         [Inject]
         private IIdentityService IdentityService { get; set; }
+
+        private enum RadioOptions { Commit, TakeTime }
 
         private async Task ExitModal()
         {
@@ -51,7 +57,7 @@ namespace VMS.Pages.ActivitySearchPage
                     ActivityId = ActivityId,
                     PhoneNumber = information.PhoneNumber,
                     Desire = information.Desire,
-                    IsCommit = information.IsCommit,
+                    IsCommit = (choosenRadio == RadioOptions.Commit),
                     EnrollTime = System.DateTime.Now,
                     CreatedBy = CurrentUser.Id,
                     CreatedDate = System.DateTime.Now

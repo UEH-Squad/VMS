@@ -3,10 +3,10 @@
 <div class="container">
     <div class="row act">
         <h1>Hoạt động <span>đang diễn ra</span></h1>
-        <div class="owl-carousel owl-theme organize__carousel">
+        <div class="owl-carousel owl-theme organize__carousel position-relative">
             <a class="act-container item">
                 <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
+                    <i @onclick="ShowMenuSuccess" class="material-icons position-absolute">
                         more_horiz
                     </i>
                     <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
@@ -16,6 +16,11 @@
                         <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
                     </div>
                 </div>
+                <ul class="act-menu p-2">
+                    <li class="edit pb-2">Chỉnh sửa</li>
+                    <li class="delete pb-2">Xóa</li>
+                    <li class="close pb-2">Đóng hoạt động</li>
+                </ul>
             </a>
             <a class="act-container item">
                 <div class="img-container position-relative">
@@ -116,5 +121,12 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntinme.InvokeVoidAsync("vms.OrganizeCarousel");
+    }
+
+    bool isShowMenu = false;
+
+    void ShowMenuSuccess()
+    {
+        isShowMenu = !isShowMenu;
     }
 }

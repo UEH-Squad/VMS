@@ -19,6 +19,26 @@
 
 .act-container {
   text-decoration: none; }
+  .act-container ul {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    background-color: #FFF;
+    border-radius: 10px;
+    padding-left: 10px; }
+    .act-container ul li {
+      list-style: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 10px 20px; }
+      .act-container ul li:hover {
+        background-color: #F2F2F2; }
+    .act-container ul .edit {
+      color: #515151; }
+    .act-container ul .delete {
+      color: #F14747; }
+    .act-container ul .close {
+      color: #64D72F; }
 
 .act-content {
   background-color: #F3F3F5;

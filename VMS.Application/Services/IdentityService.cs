@@ -79,41 +79,18 @@ namespace VMS.Application.Services
             return string.Empty;
         }
 
-        public User GetCurrentUserWithFavorites()
+        public User GetCurrentUserWithFavoritesAndRecruitments()
         {
             string currentUserId = GetCurrentUserId();
             return Task.Run(() => _userManager.Users.Include(x => x.Favorites)
+                                                    .Include(x => x.Recruitments)
                                                     .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
         }
 
-        public List<Favorite> GetFavoritesOfCurrentUser()
+        public void UpdateUser(User user)
         {
-            return GetCurrentUserWithFavorites().Favorites.ToList();
-        }
-
-        public List<Favorite> UpdateFavoritesOfCurrentUser(int activityId)
-        {
-            User user = GetCurrentUserWithFavorites();
-
-            Favorite favorite = user.Favorites.FirstOrDefault(f => f.ActivityId == activityId);
-
-            if (favorite is null)
-            {
-                user.Favorites.Add(new()
-                {
-                    UserId = user.Id,
-                    ActivityId = activityId,
-                    CreatedDate = System.DateTime.Now
-                });
-            }
-            else
-            {
-                user.Favorites.Remove(favorite);
-            }
-
             Task.Run(() => _userManager.UpdateAsync(user));
-
-            return user.Favorites.ToList();
         }
+
     }
 }

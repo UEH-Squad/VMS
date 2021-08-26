@@ -1,6 +1,4 @@
-﻿@inject IJSRuntime JSRuntinme
-
-<div class="my-signUp">
+﻿<div class="my-signUp">
     <div class="signUp__report  @(isShowReport ? "d-block" : "d-none") ">
         <div class="signUp__report-content ">
             <div>
@@ -21,55 +19,30 @@
             close
         </i>
         <div class="signUp__form">
-            <form action="">
                 <h1>Đăng kí <span>tham gia</span></h1>
                 <p class="form-text">Họ tên</p>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value=@CurrentUser.FullName>
                 <p class="form-text">Email nhận thông báo</p>
-                <input type="email" class="form-control">
+                <input type="email" class="form-control" value=@CurrentUser.Email>
                 <p class="form-text">Số điện thoại <span>(*)</span></p>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control" @bind="information.PhoneNumber"/>
                 <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
-                <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                <textarea name="" id="" cols="30" rows="3" class="form-control" @bind="information.Desire"></textarea>
                 <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
                 <div class="d-flex align-items-center mb-2">
-                    <input class="input-radio" type="radio" name="radioSignUp">
+                    <input @onclick="(() => information.IsCommit = true)" class="input-radio" type="radio" name="radioSignUp"/>
                     <span>Chắc chắn</span>
                 </div>
                 <div class="d-flex align-items-center">
-                    <input class="input-radio" type="radio" name="radioSignUp">
+                    <input  @onclick="(() => information.IsCommit = false)" class="input-radio" type="radio" name="radioSignUp">
                     <span>Cần xem xét lại thời gian cụ thể</span>
                 </div>
                 <button @onclick="ShowReportSuccess" @onclick:preventDefault class="btn">Đăng ký</button>
-            </form>
         </div>
         <img class="w-100" src="img/formSignUp.png" alt="">
     </div>
-
-
 </div>
 
 
 @code {
-
-    [CascadingParameter]
-    private BlazoredModalInstance Modal { get; set; }
-
-    void ExitModal()
-    {
-        Modal.CloseAsync();
-    }
-
-    bool isShowReport = false;
-
-    void ShowReportSuccess()
-    {
-        isShowReport = !isShowReport;
-        if (isShowReport == false)
-        {
-            Modal.CloseAsync();
-        }
-    }
-
-
 }

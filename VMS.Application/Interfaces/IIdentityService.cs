@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VMS.Domain.Models;
 
 namespace VMS.Application.Interfaces
@@ -19,10 +20,8 @@ namespace VMS.Application.Interfaces
 
         User GetCurrentUserWithAddresses();
 
-        User GetCurrentUserWithFavorites();
+        User GetCurrentUserWithFavoritesAndRecruitments();
 
-        List<Favorite> GetFavoritesOfCurrentUser();
-
-        List<Favorite> UpdateFavoritesOfCurrentUser(int activityId);
+        void UpdateUser(User user);
     }
 }

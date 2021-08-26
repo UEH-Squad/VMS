@@ -13,6 +13,10 @@
             color: #64D72F;
         }
     }
+
+    .owl-carousel {
+        z-index: 0;
+    }
 }
 
 .act-container {
@@ -72,4 +76,45 @@
     & > .act-content .act-title {
         color: #0B588C;
     }
+}
+
+::deep .owl-item {
+    padding: 0 7px;
+}
+
+::deep .owl-carousel {
+    .owl-nav {
+        button.owl-next,
+        button.owl-prev {
+            background: $blue;
+            opacity: .85;
+            position: absolute;
+            border-radius: 100%;
+            top: 23%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                font-size: 40px;
+                margin-bottom: 5px;
+                line-height: 0;
+                color: $white;
+            }
+        }
+
+        .owl-prev {
+            left: 20px;
+        }
+
+        .owl-next {
+            right: 20px;
+        }
+    }
+}
+
+::deep .owl-dots {
+    display: none;
 }

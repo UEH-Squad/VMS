@@ -1,8 +1,10 @@
-﻿<div class="container">
+﻿@inject IJSRuntime JSRuntinme;
+
+<div class="container">
     <div class="row act">
         <h1>Các hoạt động <span>được yêu thích</span></h1>
-        <div class="row">
-            <a class="col-4 act-container">
+        <div class="owl-carousel owl-theme activity__carousel">
+            <a class="act-container item">
                 <div class="img-container">
                     <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
                 </div>
@@ -14,7 +16,7 @@
                     </div>
                 </div>
             </a>
-            <a class="col-4 act-container">
+            <a class="act-container item">
                 <div class="img-container">
                     <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
                 </div>
@@ -26,7 +28,43 @@
                     </div>
                 </div>
             </a>
-            <a class="col-4 act-container">
+            <a class="act-container item">
+                <div class="img-container">
+                    <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
+                </div>
+                <div class="act-content">
+                    <div class="content ps-3">
+                        <h3>Dạy lập trình cho trẻ em vùng cao xã Tân Thanh - Lâm Hà - Lâm Đồng</h3>
+                        <h4 class="change-color">Lập trình viên nhí</h4>
+                        <h5>550 thành viên - 2 tháng trước</h5>
+                    </div>
+                </div>
+            </a>
+            <a class="act-container item">
+                <div class="img-container">
+                    <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
+                </div>
+                <div class="act-content">
+                    <div class="content ps-3">
+                        <h3>Dạy lập trình cho trẻ em vùng cao xã Tân Thanh - Lâm Hà - Lâm Đồng</h3>
+                        <h4 class="change-color">Lập trình viên nhí</h4>
+                        <h5>550 thành viên - 2 tháng trước</h5>
+                    </div>
+                </div>
+            </a>
+            <a class="act-container item">
+                <div class="img-container">
+                    <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
+                </div>
+                <div class="act-content">
+                    <div class="content ps-3">
+                        <h3>Dạy lập trình cho trẻ em vùng cao xã Tân Thanh - Lâm Hà - Lâm Đồng</h3>
+                        <h4 class="change-color">Lập trình viên nhí</h4>
+                        <h5>550 thành viên - 2 tháng trước</h5>
+                    </div>
+                </div>
+            </a>
+            <a class="act-container item">
                 <div class="img-container">
                     <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
                 </div>
@@ -43,5 +81,8 @@
 </div>
 
 @code {
-
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.ActivityCarousel");
+    }
 }

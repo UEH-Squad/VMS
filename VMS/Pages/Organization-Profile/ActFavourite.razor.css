@@ -14,6 +14,9 @@
   .act h1 span {
     color: #64D72F; }
 
+.act .owl-carousel {
+  z-index: 0; }
+
 .act-container {
   text-decoration: none; }
 
@@ -63,3 +66,34 @@
     border-radius: 0 0 10px 10px; }
     .act-container:hover > .act-content .change-color {
       color: #0B588C; }
+
+::deep .owl-item {
+  padding: 0 10px; }
+
+::deep .owl-nav .owl-prev,
+::deep .owl-nav .owl-next {
+  position: absolute;
+  top: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  ::deep .owl-nav .owl-prev span,
+  ::deep .owl-nav .owl-next span {
+    font-size: 45px;
+    color: #FFFFFF;
+    transition: all 0.3s ease; }
+    ::deep .owl-nav .owl-prev span:hover,
+    ::deep .owl-nav .owl-next span:hover {
+      font-size: 55px; }
+  ::deep .owl-nav .owl-prev:hover,
+  ::deep .owl-nav .owl-next:hover {
+    background: none; }
+
+::deep .owl-nav .owl-prev {
+  left: 20px; }
+
+::deep .owl-nav .owl-next {
+  right: 20px; }
+
+::deep .owl-dots {
+  display: none; }

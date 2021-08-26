@@ -1,8 +1,10 @@
-﻿<div class="container">
+﻿@inject IJSRuntime JSRuntinme;
+
+<div class="container">
     <div class="row act">
         <h1>Hoạt động <span>đang diễn ra</span></h1>
-        <div class="row">
-            <a class="col-3 act-container">
+        <div class="owl-carousel owl-theme organize__carousel">
+            <a class="act-container item">
                 <div class="img-container position-relative">
                     <i class="material-icons position-absolute">
                         more_horiz
@@ -15,7 +17,7 @@
                     </div>
                 </div>
             </a>
-            <a class="col-3 act-container">
+            <a class="act-container item">
                 <div class="img-container position-relative">
                     <i class="material-icons position-absolute">
                         more_horiz
@@ -28,7 +30,7 @@
                     </div>
                 </div>
             </a>
-            <a class="col-3 act-container">
+            <a class="act-container item">
                 <div class="img-container position-relative">
                     <i class="material-icons position-absolute">
                         more_horiz
@@ -41,7 +43,59 @@
                     </div>
                 </div>
             </a>
-            <a class="col-3 act-container">
+            <a class="act-container item">
+                <div class="img-container position-relative">
+                    <i class="material-icons position-absolute">
+                        more_horiz
+                    </i>
+                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
+                </div>
+                <div class="act-content">
+                    <div class="content">
+                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
+                    </div>
+                </div>
+            </a>
+            <a class="act-container item">
+                <div class="img-container position-relative">
+                    <i class="material-icons position-absolute">
+                        more_horiz
+                    </i>
+                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
+                </div>
+                <div class="act-content">
+                    <div class="content">
+                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
+                    </div>
+                </div>
+            </a>
+            <a class="act-container item">
+                <div class="img-container position-relative">
+                    <i class="material-icons position-absolute">
+                        more_horiz
+                    </i>
+                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
+                </div>
+                <div class="act-content">
+                    <div class="content">
+                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
+                    </div>
+                </div>
+            </a>
+            <a class="act-container item">
+                <div class="img-container position-relative">
+                    <i class="material-icons position-absolute">
+                        more_horiz
+                    </i>
+                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
+                </div>
+                <div class="act-content">
+                    <div class="content">
+                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
+                    </div>
+                </div>
+            </a>
+            <a class="act-container item">
                 <div class="img-container position-relative">
                     <i class="material-icons position-absolute">
                         more_horiz
@@ -59,5 +113,8 @@
 </div>
 
 @code {
-
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.OrganizeCarousel");
+    }
 }

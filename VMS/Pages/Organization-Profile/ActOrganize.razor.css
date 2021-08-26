@@ -14,6 +14,9 @@
   .act h1 span {
     color: #64D72F; }
 
+.act .owl-carousel {
+  z-index: 0; }
+
 .act-container {
   text-decoration: none; }
 
@@ -53,3 +56,34 @@
 
 .act-container:hover > .act-content .act-title {
   color: #0B588C; }
+
+::deep .owl-item {
+  padding: 0 7px; }
+
+::deep .owl-carousel .owl-nav button.owl-next,
+::deep .owl-carousel .owl-nav button.owl-prev {
+  background: #18A0FB;
+  opacity: .85;
+  position: absolute;
+  border-radius: 100%;
+  top: 23%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  ::deep .owl-carousel .owl-nav button.owl-next span,
+  ::deep .owl-carousel .owl-nav button.owl-prev span {
+    font-size: 40px;
+    margin-bottom: 5px;
+    line-height: 0;
+    color: #FFFFFF; }
+
+::deep .owl-carousel .owl-nav .owl-prev {
+  left: 20px; }
+
+::deep .owl-carousel .owl-nav .owl-next {
+  right: 20px; }
+
+::deep .owl-dots {
+  display: none; }

@@ -31,25 +31,70 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
+        public async Task<List<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            if (isSearch)
+            {
+                return await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext);
+            }
+            else
+            {
+                return await GetAllActivitiesWithFilterAsync(filter, dbContext);
+            }
+        }
 
-        public async Task<List<ActivityViewModel>> GetAllActivitiesAsync()
+        private async Task<List<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext)
+        {
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
+                }
+            };
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+            return _mapper.Map<List<ActivityViewModel>>(activities);
+        }
+
+        private async Task<List<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext)
+        {
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual,
+                    a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
+                    a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
+                    a => filter.Areas.Any(x => x == a.AreaId) || filter.Areas.Count == 0,
+                    //a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id))
+                },
+                Includes = a => a.Include(x => x.ActivitySkills)
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            activities = activities.Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id))).ToList();
+
+            return _mapper.Map<List<ActivityViewModel>>(activities);
+        }
+
+        public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Specification<Activity> specification = new()
             {
-                Includes = a => a.Include(a => a.ActivitySkills)
-                                 .Include(a => a.ActivityAddresses)
-                                    .ThenInclude(a => a.AddressPath)
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.IsPin
+                },
+                Take = 2
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
-
-            List<ActivityViewModel> activitiesViewModel = _mapper.Map<List<ActivityViewModel>>(activities);
-
-            return activitiesViewModel.ToList();
+            return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
         public async Task AddActivityAsync(CreateActivityViewModel activityViewModel)

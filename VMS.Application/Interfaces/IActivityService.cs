@@ -6,7 +6,9 @@ namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<List<ActivityViewModel>> GetAllActivitiesAsync();
+        Task<List<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter);
+
+        Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
 
         Task AddActivityAsync(CreateActivityViewModel activity);
 

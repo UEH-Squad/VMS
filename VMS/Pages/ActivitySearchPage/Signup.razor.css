@@ -21,6 +21,11 @@
     border-radius: 10px;
     background: #FFFFFF;
     overflow-y: scroll; }
+    .my-signUp .signUp__content::-webkit-scrollbar {
+      width: 10px; }
+    .my-signUp .signUp__content::-webkit-scrollbar-thumb {
+      background-color: #B4B4B4;
+      border-radius: 20px; }
     .my-signUp .signUp__content .signUp__exit {
       position: absolute;
       top: 25px;

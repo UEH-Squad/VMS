@@ -61,7 +61,7 @@
 .container {
   position: absolute;
   width: 51%;
-  height: 90%;
+  height: 94%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -71,6 +71,11 @@
   padding: 0 60px 60px 60px;
   font-size: 24px;
   overflow-y: scroll; }
+  .container::-webkit-scrollbar {
+    width: 10px; }
+  .container::-webkit-scrollbar-thumb {
+    background-color: #B4B4B4;
+    border-radius: 20px; }
   .container .icon-close-popup {
     position: absolute;
     top: 20px;

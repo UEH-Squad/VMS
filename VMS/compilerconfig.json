@@ -98,5 +98,9 @@
   {
     "outputFile": "Pages/Organization-Profile/Information.razor.css",
     "inputFile": "Pages/Organization-Profile/Information.razor.scss"
+  },
+  {
+    "outputFile": "Pages/EditOrganizationProfile/EditOrganizationProfile.razor.css",
+    "inputFile": "Pages/EditOrganizationProfile/EditOrganizationProfile.razor.scss"
   }
 ]

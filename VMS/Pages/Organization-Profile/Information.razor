@@ -4,9 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="col-4 text-center information__logo">
-                <div class="information__logo-img">
-                    <img class="w-100" src="img/LogoBaner/KHOA-VIỆN-KTX/BIT.png" alt="">
+                <div class="information__logo-img mx-auto">
+                    <img class="w-100 " src="img/LogoBaner/KHOA-VIỆN-KTX/LOGO KHOA QUẢN TRỊ.png" alt="">
+
                 </div>
+                <label for="myfile" class="d-inline"><span class="material-icons icon-camera">photo_camera</span></label>
+                <InputFile OnChange="ShowNotification" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
                 <p class="mb-2">Công nghệ thông tin kinh doanh</p>
                 <span>Tham gia từ năm 2021</span>
                 <a class="information__logo-button">
@@ -17,24 +20,24 @@
             <div class="col-7 ms-auto">
                 <div class="row pb-4 row-1">
                     <div class="col-7 information__rank d-flex justify-content-evenly align-self-center">
-                        <a class="d-flex align-self-center">#2</a>
+                        <a href="@Routes.EditOrganizationProfile" class="d-flex align-self-center">#2</a>
                         <div>
                             <p class="mb-2 d-flex justify-content-evenly align-self-end">
                                 <span class="information__rank-number">4,5</span>
-                                <i class="material-icons-outlined">
-                                    star
+                                <i class="material-icons">
+                                    star_rate
                                 </i>
-                                <i class="material-icons-outlined">
-                                    star
+                                <i class="material-icons">
+                                    star_rate
                                 </i>
-                                <i class="material-icons-outlined">
-                                    star
+                                <i class="material-icons">
+                                    star_rate
                                 </i>
-                                <i class="material-icons-outlined">
-                                    star
+                                <i class="material-icons">
+                                    star_rate
                                 </i>
-                                <i class="material-icons-outlined">
-                                    star
+                                <i class="material-icons">
+                                    star_rate
                                 </i>
                             </p>
                             <span>15N xếp hạng</span>
@@ -54,7 +57,7 @@
                             <span>0849 245 xxx</span>
                         </p>
                     </div>
-                
+
                 </div>
                 <div class="row pt-4">
                     <div class="col-7 information__fields">
@@ -74,14 +77,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-5 information__act">
+                    <div class="col-5 information__act px-0">
                         <h3>Số hoạt động <span>đã tạo</span></h3>
-                        <span class="d-flex justify-content-evenly align-self-center">30</span>
+                        <div class="d-flex justify-content-evenly align-self-center">
+                            <span class="information__act-number">30</span>
+                        </div>                       
                     </div>
                 </div>
             </div>
-            <div class="col-5"></div>
-            <div class="col-3"></div>
+
+        </div>
+        <div class="  information__notification @(isNotification ? "d-block" : "d-none")">
+            <div class="notification__content mx-auto w-50 row">
+                <div class="notification__img col-4 mx-auto my-5"> <img class="w-100" src="img/LogoBaner/KHOA-VIỆN-KTX/LOGO KHOA QUẢN TRỊ.png" alt=""></div>
+                <div class="notification__btn text-center py-3">
+                    <button @onclick="ShowNotification" class="btn pr-5 btn__cancel px-4">Hủy</button>
+                    <button @onclick="ShowNotification" class="btn btn__save px-4 ms-5">Lưu</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -91,4 +104,10 @@
     {
         await JSRuntinme.InvokeVoidAsync("vms.InformationCarousel");
     }
+    bool isNotification = false;
+    void ShowNotification(){
+
+        isNotification = !isNotification;
+    }
+
 }

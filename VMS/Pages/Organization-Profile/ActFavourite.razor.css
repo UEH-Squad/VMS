@@ -17,6 +17,12 @@
 .act .owl-carousel {
   z-index: 0; }
 
+.act .bottom-line {
+  background-color: #515151;
+  height: 1px;
+  margin-top: 50px;
+  margin-left: auto; }
+
 .act-container {
   text-decoration: none; }
 

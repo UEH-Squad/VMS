@@ -13,9 +13,16 @@
             color: #64D72F;
         }
     }
-    
+
     .owl-carousel {
         z-index: 0;
+    }
+
+    .bottom-line {
+        background-color: #515151;
+        height: 1px;
+        margin-top: 50px;
+        margin-left: auto;
     }
 }
 

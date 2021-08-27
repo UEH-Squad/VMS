@@ -2,120 +2,94 @@
 
 <div class="container">
     <div class="row act">
-        <h1>Hoạt động <span>đang diễn ra</span></h1>
+        <h1>Hoạt động <span>đang diễn ra</span> @pendingId </h1>
         <div class="owl-carousel owl-theme organize__carousel position-relative">
+            @foreach(var item in fakeDatas)
+            { 
             <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i @onclick="ShowMenuSuccess" class="material-icons position-absolute">
+                <div class="img-container position-relative @(item.IsClose ? "overlay" : "")">
+                    <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
                         more_horiz
                     </i>
                     <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
                 </div>
-                <div class="act-content">
+                <div class="act-content @(item.IsClose ? "overlay" : "")">
                     <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
+                        <h3 class="act-title lm-text">@item.Title @item.Id</h3>
                     </div>
                 </div>
-                <ul class="act-menu p-2">
+                <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                     <li class="edit pb-2">Chỉnh sửa</li>
-                    <li class="delete pb-2">Xóa</li>
-                    <li class="close pb-2">Đóng hoạt động</li>
+                    <li @onclick="DeleteConfirm" class="delete pb-2">Xóa</li>
+                    <li @onclick="() => CloseConfirm(item.Id)" class="close pb-2">Đóng hoạt động @item.Id</li>
                 </ul>
             </a>
-            <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="act-container item">
-                <div class="img-container position-relative">
-                    <i class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <div class="content">
-                        <h3 class="act-title lm-text">Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19</h3>
-                    </div>
-                </div>
-            </a>
+            }
+        </div>
+        <div class="col-8 bottom-line"></div>
+    </div>
+</div>
+
+<div class="pop-up @(isDeleteConfirm ? "d-block" : "d-none")">
+    <div class="center-screen ">
+        <div class="pop-up-container border-10">
+            <div class="content">
+                <h3>Bạn có chắc chắn muốn</h3>
+                <h3><span class="color">xóa hoạt động</span> này không?</h3>
+            </div>
+            <div class="pop-up-btn">
+                <div @onclick="DeleteConfirm" class="deny">Hủy</div>
+                <div @onclick="DeleteSuccess" class="accept">Xác nhận</div>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="pop-up @(isCloseConfirm ? "d-block" : "d-none")">
+    <div class="center-screen">
+        <div class="pop-up-container border-10">
+            <div class="content">
+                <h3>Bạn có chắc chắn muốn</h3>
+                <h3><span class="color">đóng hoạt động</span> này không?</h3>
+            </div>
+            <div class="pop-up-btn">
+                <div @onclick="() => CloseConfirm(pendingId)" class="deny">Hủy</div>
+                <div @onclick="CloseSuccess"class="accept">Xác nhận</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pop-up @(isDeleteSuccess ? "d-block" : "d-none")">
+    <div class="center-screen">
+        <div class="pop-up-container border-5">
+            <div @onclick="DeleteSuccess" class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up-content">
+                <h3 class="delete-act">Xoá thành công!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pop-up @(isCloseSuccess ? "d-block" : "d-none")">
+    <div class="center-screen">
+        <div @onclick="CloseSuccess" class="pop-up-container border-5">
+            <div class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up-content">
+                <h3 class="close-act">Đóng hoạt động thành công!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -123,10 +97,78 @@
         await JSRuntinme.InvokeVoidAsync("vms.OrganizeCarousel");
     }
 
+    protected override void OnInitialized()
+    {
+        for(int i=0; i<8; i++)
+        {
+            fakeDatas.Add(new FakeData()
+            {
+                Id = i,
+                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
+                IsMenu = false
+            });
+        }
+    }
+
+    private List<FakeData> fakeDatas = new();
+
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool IsMenu { get; set; }
+        public bool IsClose { get; set; }
+    }
+
     bool isShowMenu = false;
 
-    void ShowMenuSuccess()
+    void ShowMenu(int Id)
     {
-        isShowMenu = !isShowMenu;
+        fakeDatas[Id].IsMenu = !fakeDatas[Id].IsMenu;
     }
+
+    bool isDeleteConfirm = false;
+
+    void DeleteConfirm()
+    {
+        isDeleteConfirm = !isDeleteConfirm;
+        fakeDatas.ForEach(a => a.IsMenu = false);
+    }
+
+    bool isCloseConfirm = false;
+
+    void CloseConfirm(int Id)
+    {
+        isCloseConfirm = !isCloseConfirm;
+        fakeDatas.ForEach(a => a.IsMenu = false);
+        pendingId = Id;
+    }
+
+    bool isDeleteSuccess = false;
+
+    void DeleteSuccess()
+    {
+        isDeleteSuccess = !isDeleteSuccess;
+        if (isDeleteConfirm == true)
+        {
+            isDeleteConfirm = false;
+        }
+    }
+
+    bool isCloseSuccess = false;
+
+    private int pendingId = -1; 
+
+    void CloseSuccess()
+    {
+        isCloseSuccess = !isCloseSuccess;
+        if (isCloseConfirm == true)
+        {
+            isCloseConfirm = false;
+        }
+        fakeDatas[pendingId].IsClose = true;
+        pendingId = fakeDatas.Count-1;
+        fakeDatas = fakeDatas.OrderBy (x => x.IsClose).ToList();
+    }
+
 }

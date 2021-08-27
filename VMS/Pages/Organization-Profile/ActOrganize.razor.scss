@@ -17,6 +17,18 @@
     .owl-carousel {
         z-index: 0;
     }
+
+    .bottom-line {
+        background-color: #515151;
+        height: 1px;
+        margin-top: 50px;
+        margin-left: 12px;
+    }
+}
+
+.overlay {
+    background-color: #F2F2F2;
+    opacity: .2;
 }
 
 .act-container {
@@ -116,6 +128,8 @@
 
 ::deep .owl-carousel {
     .owl-nav {
+        display: block;
+
         button.owl-next,
         button.owl-prev {
             background: $blue;
@@ -149,4 +163,112 @@
 
 ::deep .owl-dots {
     display: none;
+}
+
+.pop-up {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 3;
+
+    .border-10 {
+        border-radius: 10px;
+    }
+
+    .border-5 {
+        border-radius: 5px;
+    }
+
+    .center-screen {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pop-up-container {
+        background-color: #FFF;
+        position: relative;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+    }
+
+    .close-btn {
+        background-color: #C4C4C4;
+        opacity: .5;
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+
+        .material-icons {
+            font-size: 20px;
+            color: #717171;
+        }
+    }
+
+    .pop-up-content {
+        font-size: 36px;
+        line-height: 36px;
+        font-weight: 500;
+        padding: 38px 84px;
+
+        .delete-act {
+            color: #64D72F;
+        }
+
+        .close-act {
+            color: #18A0FB;
+        }
+    }
+
+    .content {
+        font-size: 36px;
+        line-height: 36px;
+        font-weight: 500;
+        padding: 38px 84px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #64D72F;
+
+
+        .color {
+            color: #18A0FB;
+        }
+    }
+
+    .pop-up-btn {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 30px 20px 0;
+        font-weight: 600;
+        font-size: 20px;
+
+        .deny {
+            background-color: #FFF;
+            color: #18A0FB;
+            padding: 0 33px;
+            line-height: 36px;
+            cursor: pointer;
+        }
+
+        .accept {
+            background-color: #18A0FB;
+            color: #FFF;
+            border-radius: 5px;
+            padding: 0 15px;
+            line-height: 36px;
+            cursor: pointer;
+        }
+    }
 }

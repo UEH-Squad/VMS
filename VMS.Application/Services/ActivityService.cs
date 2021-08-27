@@ -53,7 +53,11 @@ namespace VMS.Application.Services
                     a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
                 }
             };
+
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
+
             return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
@@ -75,6 +79,8 @@ namespace VMS.Application.Services
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
             activities = activities.Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id))).ToList();
+
+            activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             return _mapper.Map<List<ActivityViewModel>>(activities);
         }

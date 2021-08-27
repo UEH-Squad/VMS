@@ -16,7 +16,7 @@
                                     <div class="col-8 act__content">
                                         <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-3">@item.Name</a>
                                         <h5>
-                                            <i class="material-icons">public</i>@item.Organizer
+                                            <i class="material-icons">public</i> @item.Organizer?.FullName
                                         </h5>
                                         <p class="lmtext-2">@item.Description</p>
                                         <span>Ngày đăng: @item.PostDate.ToString("dd/MM/yyyy")</span>

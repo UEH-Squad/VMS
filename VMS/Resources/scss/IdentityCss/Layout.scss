@@ -1,13 +1,41 @@
-﻿main {
+﻿@import "../../scss/common/_variables.scss";
+main {
     background-color: #f3f3f5;
+}
+
+.colored-green {
+    color: $green;
+}
+
+.colored-blue {
+    color: $blue;
 }
 
 .my-row {
     height: 80vh;
+
+    h1 {
+        font-size: 70px;
+        font-weight: bold;
+    }
+
+    h5 {
+        font-size: 35px;
+
+        span {
+            font-size: 35px;
+        }
+    }
 }
 
 .my-content-wrapper {
+    border-radius: 10px;
     width: 100%;
-    height: 60vh;
+    min-height: 500px;
     background-color: #fff;
+    background-image: url("/img/login-img.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 60px 40px;
 }

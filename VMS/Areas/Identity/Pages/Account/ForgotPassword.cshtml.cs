@@ -31,8 +31,8 @@ namespace VMS.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng điền email")]
+            [EmailAddress(ErrorMessage = "Email không chính xác")]
             public string Email { get; set; }
         }
 

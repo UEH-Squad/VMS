@@ -32,20 +32,20 @@ namespace VMS.Areas.Identity.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập mật khẩu mới")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
+            [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng xác nhận mật khẩu")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Mật khẩu xác nhận không chính xác")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
         }
 
-        public IActionResult OnGet(string code = null)
+        public IActionResult OnGet(string code = "thanhlam")
         {
             if (code == null)
             {

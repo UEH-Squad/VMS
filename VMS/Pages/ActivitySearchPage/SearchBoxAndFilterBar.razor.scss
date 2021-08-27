@@ -121,18 +121,24 @@
 .popup-btn {
     border-radius: 8px;
     height: 40px;
+    width: 100%;
     border: 1px solid $border-color-bold;
     cursor: pointer;
+    color: #b4b4b4;
     padding-left: 8px;
     padding-right: 30px;
     font-size: 18px;
-    color: #b4b4b4;
+    outline: none;
     line-height: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
+
+    &::placeholder {
+        color: #b4b4b4;
+    }
 }
 
 .my-dropdown {
@@ -172,6 +178,10 @@
             cursor: pointer;
         }
     }
+}
+
+.popup-btn:focus ~ .my-dropdown {
+    display: block;
 }
 
 

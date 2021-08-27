@@ -64,6 +64,8 @@
 
         //Check Is any Sub items selected
         choosenSkillsList[0, 0] = choosenSkillsList[1, 0] = false;
+
+        //let subIndex run from 1 to numberOfSubSkills because numberOfSubSkills is 10, and numberOfExpertise is 8 ( 10 > 8 )
         for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
         {
             if (choosenSkillsList[0, subIndex])
@@ -83,11 +85,39 @@
     //handle change color when click items
     void ChangeStateAndCheckSubPopup(int id)
     {
-        choosenSkillsList[id,0] = !choosenSkillsList[id,0];
+        if (id != 0 && id != 1)
+        {
+            choosenSkillsList[id, 0] = !choosenSkillsList[id, 0];
+            isShowSubSkills = false;
+            isShowExpertise = false;
+            choosenSkillsList[0, 0] = false;
+            choosenSkillsList[1, 0] = false;
+            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
+            {
+                if (choosenSkillsList[0, subIndex])
+                {
+                    choosenSkillsList[0, 0] = true;
+                }
+
+                if (choosenSkillsList[1, subIndex])
+                {
+                    choosenSkillsList[1, 0] = true;
+                }
+            }
+        }
 
         if (id == 0)
         {
             ShowSubSkills();
+            isShowExpertise = false;
+            choosenSkillsList[1, 0] = false;
+            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
+            {
+                if (choosenSkillsList[1, subIndex])
+                {
+                    choosenSkillsList[1, 0] = true;
+                }
+            }
             choosenSkillsList[id,0] = true;
             if ((isThereSelectedSubItem == false) && (isShowSubSkills == false))
             {
@@ -97,6 +127,15 @@
         if (id == 1)
         {
             ShowExpertise();
+            isShowSubSkills = false;
+            choosenSkillsList[0, 0] = false;
+            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
+            {
+                if (choosenSkillsList[0, subIndex])
+                {
+                    choosenSkillsList[0, 0] = true;
+                }
+            }
             choosenSkillsList[id,0] = true;
             if ((isThereSelectedSubItem == false) && (isShowExpertise == false))
             {
@@ -147,8 +186,6 @@
     {
         isShowExpertise = !isShowExpertise;
     }
-
-
 
 
     //Close and save button

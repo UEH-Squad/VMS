@@ -92,12 +92,14 @@
 .popup-btn {
   border-radius: 8px;
   height: 40px;
+  width: 100%;
   border: 1px solid #707070;
   cursor: pointer;
+  color: #b4b4b4;
   padding-left: 8px;
   padding-right: 30px;
   font-size: 18px;
-  color: #b4b4b4;
+  outline: none;
   line-height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -105,6 +107,8 @@
   -webkit-line-clamp: 1;
   /* number of lines to show */
   -webkit-box-orient: vertical; }
+  .popup-btn::placeholder {
+    color: #b4b4b4; }
 
 .my-dropdown {
   padding: 15px 22px;
@@ -135,6 +139,9 @@
       line-height: 24px;
       margin-bottom: 12px;
       cursor: pointer; }
+
+.popup-btn:focus ~ .my-dropdown {
+  display: block; }
 
 .filter-btn {
   color: #fff;

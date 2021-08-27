@@ -26,6 +26,9 @@ namespace VMS.Pages.ActivityInfoPage
         [Inject]
         private IUploadService UploadService { get; set; }
 
+        [Parameter]
+        public string ActivityId { get; set; }
+
 
         public PopUpReport()
         {
@@ -35,6 +38,7 @@ namespace VMS.Pages.ActivityInfoPage
         private async Task AddReport()
         {
             report.UserId = IdentityService.GetCurrentUserId();
+            report.ActivityId = int.Parse(ActivityId);
 
             if (file is not null)
             {

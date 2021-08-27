@@ -71,13 +71,16 @@
     [CascadingParameter] public IModalService Modal { get; set; }
     async Task ShowReportPopUp()
     {
+        ModalParameters parameters = new();
+        parameters.Add("ActivityId", ActivityId);
+
         var options = new ModalOptions()
         {
             HideCloseButton = true,
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        Modal.Show<PopUpReport>("", options);
+        Modal.Show<PopUpReport>("",parameters ,options);
     }
 
     private ViewActivityViewModel activity;

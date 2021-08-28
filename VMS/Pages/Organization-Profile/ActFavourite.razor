@@ -4,84 +4,22 @@
     <div class="row act">
         <h1>Các hoạt động <span>được yêu thích</span></h1>
         <div class="owl-carousel owl-theme activity__carousel">
-            <div class="act-container item">
-                <div class="img-container">
-                    <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
+            @foreach (var item in fakeDatas)
+            {
+                <div class="act-container item">
+                    <div class="img-container">
+                        <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
+                    </div>
+                    <div class="act-content">
+                        <a href="@Routes.ActivityInfo" class="content ps-3">
+                            <h3>@item.Title</h3>
+                            <h4 class="change-color">@item.Topic</h4>
+                            <h5>@item.Count thành viên - @item.CreatedDate</h5>
+                        </a>
+                    </div>
                 </div>
-                <div class="act-content">
-                    <a href="@Routes.ActivityInfo" class="content ps-3">
-                        <h3>Dạy học cho trẻ em mồ côi tại làng trẻ em SOS</h3>
-                        <h4 class="change-color">Nét chữ - nết người</h4>
-                        <h5>550 thành viên - 2 tháng trước</h5>
-                    </a>
-                </div>
+            }
             </div>
-
-            <div class="act-container item">
-                <div class="img-container">
-                    <img src="./img/OrganizationProfile/ActFavourite2.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <a href="@Routes.ActivityInfo" class="content ps-3">
-                        <h3>Dạy lập trình cho trẻ em vùng cao xã Tân Thanh - Lâm Hà - Lâm Đồng</h3>
-                        <h4 class="change-color">Lập trình viên nhí</h4>
-                        <h5>550 thành viên - 2 tháng trước</h5>
-                    </a>
-                </div>
-            </div>
-
-            <div class="act-container item">
-                <div class="img-container">
-                    <img src="./img/OrganizationProfile/ActFavourite3.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <a href="@Routes.ActivityInfo" class="content ps-3">
-                        <h3>Về thăm người cao tuổi tại chùa Phật Quang, quận 10 </h3>
-                        <h4 class="change-color">Chuyến đi yêu thương</h4>
-                        <h5>550 thành viên - 2 tháng trước</h5>
-                    </a>
-                </div>
-            </div>
-
-            <div class="act-container item">
-                <div class="img-container">
-                    <img src="./img/OrganizationProfile/ActFavourite1.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <a href="@Routes.ActivityInfo" class="content ps-3">
-                        <h3>Dạy học cho trẻ em mồ côi tại làng trẻ em SOS</h3>
-                        <h4 class="change-color">Nét chữ - nết người</h4>
-                        <h5>550 thành viên - 2 tháng trước</h5>
-                    </a>
-                </div>
-            </div>
-
-            <div class="act-container item">
-                <div class="img-container">
-                    <img src="./img/OrganizationProfile/ActFavourite2.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <a href="@Routes.ActivityInfo" class="content ps-3">
-                        <h3>Dạy lập trình cho trẻ em vùng cao xã Tân Thanh - Lâm Hà - Lâm Đồng</h3>
-                        <h4 class="change-color">Lập trình viên nhí</h4>
-                        <h5>550 thành viên - 2 tháng trước</h5>
-                    </a>
-                </div>
-            </div>
-
-            <div class="act-container item">
-                <div class="img-container">
-                    <img src="./img/OrganizationProfile/ActFavourite3.png" alt="" class="act-img">
-                </div>
-                <div class="act-content">
-                    <a href="@Routes.ActivityInfo" class="content ps-3">
-                        <h3>Về thăm người cao tuổi tại chùa Phật Quang, quận 10 </h3>
-                        <h4 class="change-color">Chuyến đi yêu thương</h4>
-                        <h5>550 thành viên - 2 tháng trước</h5>
-                    </a>
-                </div>
-            </div>
-        </div>
         <div class="col-8 bottom-line"></div>
     </div>
 </div>
@@ -91,4 +29,32 @@
     {
         await JSRuntinme.InvokeVoidAsync("vms.ActivityCarousel");
     }
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            fakeDatas.Add(new FakeData()
+            {
+                Id = i,
+                Title = "Dạy học cho trẻ em mồ côi tại làng trẻ em SOS",
+                Topic = "Nét chữ - nết người",
+                CreatedDate = DateTime.Now,
+                Count = 550
+            }) ;
+        }
+    }
+
+    private List<FakeData> fakeDatas = new();
+
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Topic { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int Count { get; set; }
+    }
+
+
 }

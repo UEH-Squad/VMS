@@ -31,17 +31,26 @@
 }
 
 .content {
+    padding-right: 10px;
+    text-decoration: none;
+    display: block;
+
+    h3,
+    h4,
+    h5 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
     h3 {
         padding-top: 20px;
         color: $grey-text;
         line-height: 36px;
         font-size: 20px;
         font-weight: 600;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
         -webkit-line-clamp: 2;
     }
 
@@ -50,6 +59,7 @@
         line-height: 36px;
         font-size: 20px;
         font-weight: 600;
+        -webkit-line-clamp: 1;
     }
 
     h5 {
@@ -57,6 +67,7 @@
         font-weight: 400;
         line-height: 36px;
         font-size: 20px;
+        -webkit-line-clamp: 1;
     }
 }
 
@@ -73,13 +84,14 @@
 
 
 .act-container:hover {
-    cursor: pointer;
 
-    & > .img-container .act-img {
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
-        background-color: $white-overlay;
-        opacity: .6;
+    & > .img-container {
+        .act-img {
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+            background-color: $white-overlay;
+            opacity: .6;
+        }
     }
 
     & > .act-content {
@@ -92,8 +104,14 @@
     }
 }
 
-::deep .owl-item {
-    padding: 0 10px;
+::deep .owl-carousel {
+    .owl-nav {
+        display: block;
+    }
+
+    .owl-item {
+        padding: 0 10px;
+    }
 }
 
 ::deep .owl-nav {

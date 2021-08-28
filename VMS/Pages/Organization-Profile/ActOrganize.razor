@@ -6,7 +6,7 @@
         <div class="owl-carousel owl-theme organize__carousel position-relative">
             @foreach(var item in fakeDatas)
             { 
-            <a class="act-container item">
+            <div class="act-container item">
                 <div class="img-container position-relative @(item.IsClose ? "overlay" : "")">
                     <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
                         more_horiz
@@ -14,16 +14,16 @@
                     <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
                 </div>
                 <div class="act-content @(item.IsClose ? "overlay" : "")">
-                    <div class="content">
+                    <a href ="@Routes.ActivityInfo" class="content">
                         <h3 class="act-title lm-text @(item.IsClose ? "none-hover-title" : "hover-title")">@item.Title</h3>
-                    </div>
+                    </a>
                 </div>
                 <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                     <li class="edit pb-2">Chỉnh sửa</li>
                     <li @onclick="DeleteConfirm" class="delete pb-2">Xóa</li>
                     <li @onclick="() => CloseConfirm(item.Id)" class="close pb-2">Đóng hoạt động</li>
                 </ul>
-            </a>
+            </div>
             }
         </div>
         <div class="col-8 bottom-line"></div>
@@ -119,8 +119,6 @@
         public bool IsMenu { get; set; }
         public bool IsClose { get; set; }
     }
-
-    bool isShowMenu = false;
 
     void ShowMenu(int Id)
     {

@@ -82,7 +82,7 @@
             &::-webkit-scrollbar-thumb {
                 background-color: $grey-icon;
                 border-radius: 20px;
-                border:2px solid white;
+                border: 2px solid white;
             }
         }
 
@@ -93,14 +93,18 @@
             padding-left: 20px;
         }
 
-        .input-radio {
+        ::deep .input-radio {
             width: 16px;
             height: 16px;
             line-height: 16px;
             margin-right: 15px;
+
+            ::deep .valid.modified {
+                outline:none;
+            }
         }
 
-        .input-radio ~ span {
+        ::deep .input-radio ~ label {
             font-size: 24px;
             font-weight: 300;
         }

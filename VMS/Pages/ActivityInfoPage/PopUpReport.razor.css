@@ -116,7 +116,10 @@
 .dropdown .my-btn {
   width: 100%;
   border: 1px solid #515151;
-  padding: 14px 0; }
+  height: 70px; }
+  .dropdown .my-btn .my-icon-dropdown {
+    float: right;
+    font-size: 50px; }
 
 .dropdown-menu {
   width: 100%;
@@ -126,7 +129,7 @@
     display: flex;
     align-items: center;
     margin: 5px 0; }
-    .dropdown-menu .dropdown-item .dropdown-item--checkbox {
+    .dropdown-menu .dropdown-item ::deep .dropdown-item--checkbox {
       margin-right: 10px; }
     .dropdown-menu .dropdown-item label {
       width: 100%; }

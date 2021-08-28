@@ -36,14 +36,18 @@
                     <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
                     <InputTextArea @bind-Value="signupModel.YouWant" name="" id="" cols="30" rows="4" class="form-control"></InputTextArea>
                     <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
-                    <div class="d-flex align-items-center mb-2">
-                        <input class="input-radio" type="radio" name="radioSignUp">
-                        <span>Chắc chắn</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <input class="input-radio" type="radio" name="radioSignUp">
-                        <span>Cần xem xét lại thời gian cụ thể</span>
-                    </div>
+                    
+                    <InputRadioGroup Name="radioSignUp" @bind-Value="signupModel.check" >
+                        <div class="d-flex align-items-center mb-2">
+                            <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp"/>
+                            <label for="checksure">Chắc chắn</label>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp"/>
+                            <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
+                        </div>
+                    </InputRadioGroup>
+                    
                     <button @onclick="ShowReportSuccess" @onclick:preventDefault class="btn">Đăng ký</button>
                 </form>
             </div>
@@ -73,15 +77,25 @@
             Modal.CloseAsync();
         }
     }
+
+
     public class SignupModel
     {
         public string Name { get; set; }
         public string Email { get; set; }
         public string NumberPhone { get; set; }
         public string YouWant { get; set; }
+
+        [Required, EnumDataType(typeof(Check))]
+        public Check check { get; set; }
     }
     private SignupModel signupModel = new();
     private void HandleValidSubmit()
     {
     }
+
+    public enum Check { Sure, Notsure };
+  
+
+
 }

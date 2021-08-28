@@ -142,7 +142,11 @@
 .dropdown .my-btn {
     width: 100%;
     border: 1px solid $grey-text;
-    padding:14px 0;
+    height:70px;
+    .my-icon-dropdown{
+        float:right;
+        font-size:50px;
+    }
 }
 .dropdown-menu {
     width: 100%;
@@ -154,7 +158,7 @@
         align-items: center;
         margin: 5px 0;
 
-        .dropdown-item--checkbox {
+        ::deep .dropdown-item--checkbox {
             margin-right: 10px;
         }
 

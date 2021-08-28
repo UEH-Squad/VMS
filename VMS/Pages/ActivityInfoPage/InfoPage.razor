@@ -1,7 +1,9 @@
 ﻿@inject IActivityService ActivityService
+@inject IIdentityService IdentityService
 
 @using VMS.Application.Interfaces
 @using VMS.Application.ViewModels
+@using VMS.Domain.Models
 
 @if (activity is not null)
 {
@@ -18,7 +20,7 @@
                 <p class="postdate">
                     Ngày đăng: @activity.PostDate.ToShortDateString()
                 </p>
-                <button @onclick="AnimateHeart" class="@typeButton">
+                <button @onclick="() => HandleFavorite(int.Parse(ActivityId))" class="@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "heart-button2" : "heart-button1")">
                     <span class="material-icons"><span class="heart-icon">@typeI</span></span>
                 </button>
                 <div><hr class="line-line2"></div>
@@ -54,24 +56,11 @@
 }
 
 @code {
+
+    private User currentUser;
+    private ViewActivityViewModel activity;
     private string typeButton = "heart-button1";
     private string typeI = "favorite_border";
-
-    private void AnimateHeart()
-    {
-        if (typeButton == "heart-button1")
-        {
-            typeButton = "heart-button2";
-            typeI = "favorite";
-        }
-        else
-        {
-            typeButton = "heart-button1";
-            typeI = "favorite_border";
-        }
-    }
-
-    private ViewActivityViewModel activity;
 
     [Parameter]
     public string ActivityId { get; set; }
@@ -79,5 +68,30 @@
     protected override async Task OnInitializedAsync()
     {
         activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
+        currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
     }
+
+    private void HandleFavorite(int id)
+    {
+        Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == id);
+
+        if (favorite is null)
+        {
+            currentUser.Favorites.Add(new()
+            {
+                UserId = currentUser.Id,
+                ActivityId = id,
+                CreatedDate = DateTime.Now
+            });
+            typeI = "favorite";
+        }
+        else
+        {
+            currentUser.Favorites.Remove(favorite);
+            typeI = "favorite_border";
+        }
+
+        IdentityService.UpdateUser(currentUser);
+    }
+
 }

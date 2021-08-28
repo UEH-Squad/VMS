@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210828042248__AddTableFavorite")]
+    partial class _AddTableFavorite
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -601,18 +603,20 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FeedbackId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FeedbackId1")
+                    b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("FeedbackId1");
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ReasonReports");
                 });
@@ -1246,11 +1250,19 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
                 {
-                    b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
-                        .WithMany("ReasonReports")
-                        .HasForeignKey("FeedbackId1");
+                    b.HasOne("VMS.Domain.Models.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Feedback");
+                    b.HasOne("VMS.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
@@ -1369,11 +1381,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Activities");
 
                     b.Navigation("UserAreas");
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
-                {
-                    b.Navigation("ReasonReports");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>

@@ -35,6 +35,16 @@ namespace VMS.Pages.ActivityInfoPage
             report = new ReportViewModel();
         }
 
+        private string[] reason = new string[]
+        {
+            "Hoạt động không có thật",
+            "Hoạt động không không tương thích với nội dung đã đề cập",
+            "Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động",
+            "Nội dung hoạt động không phù hợp",
+            "Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động",
+            "Khác"
+        };
+
         private async Task AddReport()
         {
             report.UserId = IdentityService.GetCurrentUserId();

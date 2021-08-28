@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VMS.Domain.Interfaces;
 
 namespace VMS.Domain.Models
@@ -17,6 +18,6 @@ namespace VMS.Domain.Models
 
         public virtual User User { get; set; }
         public virtual Activity Activity { get; set; }
-        
+        public virtual ICollection<ReasonReport> ReasonReports { get; set; }
     }
 }

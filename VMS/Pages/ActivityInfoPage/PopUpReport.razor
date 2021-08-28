@@ -41,42 +41,15 @@
                 <button class="btn dropdown-toggle my-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Hoạt động không có thật</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Hoạt động không không tương thích với nội dung đã đề cập</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Nội dung hoạt động không phù hợp</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Khác</span>
-                        </div>
-                    </li>
+                    @foreach (var line in reason)
+                    {
+                        <li>
+                            <div class="dropdown-item" href="#">
+                                <input type="checkbox">
+                                <span>@line</span>
+                            </div>
+                        </li>
+                    }
                 </ul>
             </div>
 

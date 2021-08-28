@@ -33,6 +33,12 @@ namespace VMS.Application.Services
             report.Image = reportViewModel.ImageReport;
             report.ActivityId = reportViewModel.ActivityId;
 
+            report.ReasonReports = reportViewModel.Reasons.Select(x => new ReasonReport() 
+            { 
+                Reason = x, 
+                Feedback = report 
+            }).ToList();
+
             await _repository.InsertAsync(dbContext, report);
         }
     }

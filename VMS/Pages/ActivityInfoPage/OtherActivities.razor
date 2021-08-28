@@ -1,8 +1,10 @@
 ﻿@inject IJSRuntime JSRuntinme
 @inject IActivityService ActivityService
+@inject IIdentityService IdentityService
 
 @using VMS.Application.ViewModels
 @using VMS.Application.Interfaces
+@using VMS.Domain.Models
 
 @if (otherActivities is not null && otherActivities.Count != 0)
 {
@@ -27,11 +29,11 @@
                         <div class="act__container__card__desc">
                             <p>@item.ActivityName</p>
                         </div>
-                        @*<div class="act__container__card__icon">
-                                <div class="@(item.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(item.Id))">
-                                    <span class="material-icons">favorite</span>
-                                </div>
-                            </div>*@
+                        <div class="act__container__card__icon">
+                            <div class="@(currentUser.Favorites.Any(f => f.ActivityId == item.ActivityId) ? "heart" : "heart-line")" @onclick="() => HandleFavorite(item.ActivityId)">
+                                <span class="material-icons">favorite</span>
+                            </div>
+                        </div>
                     </div>
                 }
             }
@@ -41,33 +43,6 @@
 
 @code {
 
-    //private class FakeData
-    //{
-    //    public int Id { get; set; }
-    //    public string Title { get; set; }
-    //    public string Banner { get; set; }
-    //    public bool IsFav { get; set; }
-    //}
-
-    //private List<FakeData> fakeData = new();
-
-    //private void AnimateHeart(int id)
-    //{
-    //    var item = fakeData.FirstOrDefault(x => x.Id == id);
-    //    item.IsFav = true;
-    //}
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    fakeData.AddRange(Enumerable.Range(0, 7).Select(x => new FakeData
-    //    {
-    //        Id = x,
-    //        Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
-    //        Banner = "img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg",
-    //        IsFav = false
-    //    }));
-    //}
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
@@ -75,6 +50,7 @@
 
     private ViewActivityViewModel activity;
     private List<OtherActivitiesViewModel> otherActivities;
+    private User currentUser;
 
     [Parameter]
     public string ActivityId { get; set; }
@@ -87,6 +63,28 @@
         activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
         OrgId = activity.OrgId;
         otherActivities = await ActivityService.GetOtherActivities(OrgId);
+        currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+    }
+
+    private void HandleFavorite(int id)
+    {
+        Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == id);
+
+        if (favorite is null)
+        {
+            currentUser.Favorites.Add(new()
+            {
+                UserId = currentUser.Id,
+                ActivityId = id,
+                CreatedDate = DateTime.Now
+            });
+        }
+        else
+        {
+            currentUser.Favorites.Remove(favorite);
+        }
+
+        IdentityService.UpdateUser(currentUser);
     }
 
 }

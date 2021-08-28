@@ -12,5 +12,6 @@ namespace VMS.Application.ViewModels
         public string UserId { get; set; }
         public string ImageReport { get; set; }
         public int ActivityId { get; set; }
+        public List<string> Reasons { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<UserSkill> UserSkills { get; set; }
         public DbSet<ActivityTarget> ActivityTargets { get; set; }
         public DbSet<ReasonReport> ReasonReports { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {

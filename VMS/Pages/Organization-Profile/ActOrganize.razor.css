@@ -25,7 +25,7 @@
 
 .overlay {
   background-color: #F2F2F2;
-  opacity: .2; }
+  opacity: .6; }
 
 .act-container {
   text-decoration: none; }
@@ -33,7 +33,7 @@
     position: absolute;
     top: 20px;
     right: 15px;
-    background-color: #FFF;
+    background-color: #FFFFFF;
     border-radius: 10px;
     padding-left: 10px; }
     .act-container ul li {
@@ -58,19 +58,21 @@
     .act-content .content .act-title {
       font-size: 24px;
       font-weight: 600;
-      line-height: 30px;
+      line-height: 30px; }
+    .act-content .content .hover-title {
       color: #18A0FB; }
-
-.lm-text {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-  -webkit-line-clamp: 4; }
+    .act-content .content .none-hover-title {
+      color: #18A0FB; }
+  .act-content .lm-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 4; }
 
 .img-container .material-icons {
-  color: #FFF;
+  color: #FFFFFF;
   font-size: 24px;
   right: 5px; }
   .img-container .material-icons:hover {
@@ -84,11 +86,8 @@
   opacity: .6;
   border-radius: 10px 10px 0 0; }
 
-.act-container:hover > .act-content .act-title {
+.act-container:hover > .act-content .hover-title {
   color: #0B588C; }
-
-::deep .owl-item {
-  padding: 0 7px; }
 
 ::deep .owl-carousel .owl-nav {
   display: block; }
@@ -115,6 +114,9 @@
   ::deep .owl-carousel .owl-nav .owl-next {
     right: 20px; }
 
+::deep .owl-carousel .owl-item {
+  padding: 0 7px; }
+
 ::deep .owl-dots {
   display: none; }
 
@@ -137,7 +139,7 @@
     justify-content: center;
     align-items: center; }
   .pop-up .pop-up-container {
-    background-color: #FFF;
+    background-color: #FFFFFF;
     position: relative;
     box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
   .pop-up .close-btn {
@@ -183,14 +185,14 @@
     font-weight: 600;
     font-size: 20px; }
     .pop-up .pop-up-btn .deny {
-      background-color: #FFF;
+      background-color: #FFFFFF;
       color: #18A0FB;
       padding: 0 33px;
       line-height: 36px;
       cursor: pointer; }
     .pop-up .pop-up-btn .accept {
       background-color: #18A0FB;
-      color: #FFF;
+      color: #FFFFFF;
       border-radius: 5px;
       padding: 0 15px;
       line-height: 36px;

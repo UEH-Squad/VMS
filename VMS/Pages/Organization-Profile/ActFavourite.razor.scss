@@ -5,35 +5,35 @@
         font-weight: 600;
         font-size: 36px;
         line-height: 36px;
-        color: #515151;
+        color: $grey-text;
         margin-bottom: 42px;
         margin-top: 70px;
 
         span {
-            color: #64D72F;
+            color: $green;
         }
     }
 
     .owl-carousel {
         z-index: 0;
+
+        .act-container {
+            text-decoration: none;
+        }
     }
 
     .bottom-line {
-        background-color: #515151;
+        background-color: $grey-text;
         height: 1px;
         margin-top: 50px;
         margin-left: auto;
     }
 }
 
-.act-container {
-    text-decoration: none;
-}
-
 .content {
     h3 {
         padding-top: 20px;
-        color: #515151;
+        color: $grey-text;
         line-height: 36px;
         font-size: 20px;
         font-weight: 600;
@@ -46,14 +46,14 @@
     }
 
     h4 {
-        color: #18A0FB;
+        color: $blue;
         line-height: 36px;
         font-size: 20px;
         font-weight: 600;
     }
 
     h5 {
-        color: #000;
+        color: $border-color-bold;
         font-weight: 400;
         line-height: 36px;
         font-size: 20px;
@@ -63,13 +63,14 @@
 .img-container {
     overflow: hidden;
     border-radius: 10px;
-    width: 100%
+    width: 100%;
+
+    .act-img {
+        width: 100%;
+        transition: all .5s ease;
+    }
 }
 
-.act-img {
-    width: 100%;
-    transition: all .5s ease;
-}
 
 .act-container:hover {
     cursor: pointer;
@@ -77,16 +78,16 @@
     & > .img-container .act-img {
         -webkit-transform: scale(1.2);
         transform: scale(1.2);
-        background-color: #F2F2F2;
+        background-color: $white-overlay;
         opacity: .6;
     }
 
     & > .act-content {
-        background-color: #F2F2F2;
+        background-color: $white-overlay;
         border-radius: 0 0 10px 10px;
 
         .change-color {
-            color: #0B588C;
+            color: $blue-bold;
         }
     }
 }

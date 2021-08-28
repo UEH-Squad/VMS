@@ -16,15 +16,14 @@
 
 .act .owl-carousel {
   z-index: 0; }
+  .act .owl-carousel .act-container {
+    text-decoration: none; }
 
 .act .bottom-line {
   background-color: #515151;
   height: 1px;
   margin-top: 50px;
   margin-left: auto; }
-
-.act-container {
-  text-decoration: none; }
 
 .content h3 {
   padding-top: 20px;
@@ -46,7 +45,7 @@
   font-weight: 600; }
 
 .content h5 {
-  color: #000;
+  color: #707070;
   font-weight: 400;
   line-height: 36px;
   font-size: 20px; }
@@ -55,10 +54,9 @@
   overflow: hidden;
   border-radius: 10px;
   width: 100%; }
-
-.act-img {
-  width: 100%;
-  transition: all .5s ease; }
+  .img-container .act-img {
+    width: 100%;
+    transition: all .5s ease; }
 
 .act-container:hover {
   cursor: pointer; }

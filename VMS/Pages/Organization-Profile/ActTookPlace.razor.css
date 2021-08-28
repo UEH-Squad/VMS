@@ -1,4 +1,10 @@
-﻿.act h1 {
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.act h1 {
   font-weight: 600;
   font-size: 36px;
   line-height: 36px;

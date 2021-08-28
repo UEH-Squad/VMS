@@ -5,12 +5,12 @@
         font-weight: 600;
         font-size: 36px;
         line-height: 36px;
-        color: #515151;
+        color: $grey-text;
         margin-bottom: 42px;
         margin-top: 70px;
 
         span {
-            color: #64D72F;
+            color: $green;
         }
     }
 
@@ -19,7 +19,7 @@
     }
 
     .bottom-line {
-        background-color: #515151;
+        background-color: $grey-text;
         height: 1px;
         margin-top: 50px;
         margin-left: 12px;
@@ -27,8 +27,8 @@
 }
 
 .overlay {
-    background-color: #F2F2F2;
-    opacity: .2;
+    background-color: $white-overlay;
+    opacity: .6;
 }
 
 .act-container {
@@ -38,7 +38,7 @@
         position: absolute;
         top: 20px;
         right: 15px;
-        background-color: #FFF;
+        background-color: $white;
         border-radius: 10px;
         padding-left: 10px;
 
@@ -49,26 +49,26 @@
             padding: 10px 20px;
 
             &:hover {
-                background-color: #F2F2F2;
+                background-color: $white-overlay;
             }
         }
 
         .edit {
-            color: #515151;
+            color: $grey-text;
         }
 
         .delete {
-            color: #F14747;
+            color: $red;
         }
 
         .close {
-            color: #64D72F;
+            color: $green;
         }
     }
 }
 
 .act-content {
-    background-color: #F3F3F5;
+    background-color: $grey;
     border-radius: 0 0 10px 10px;
 
     .content {
@@ -78,52 +78,54 @@
             font-size: 24px;
             font-weight: 600;
             line-height: 30px;
-            color: #18A0FB;
         }
+
+        .hover-title {
+            color: $blue;
+        }
+
+        .none-hover-title {
+            color: $blue;
+        }
+    }
+
+
+    .lm-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 4;
     }
 }
 
-.lm-text {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    -webkit-line-clamp: 4;
-}
-
 .img-container {
-
-    .material-icons {
-        color: #FFF;
+     .material-icons {
+        color: $white;
         font-size: 24px;
         right: 5px;
 
         &:hover {
             cursor: pointer;
         }
-    }
+     }
 
-    .act-img {
-        width: 100%;
-    }
+     .act-img {
+         width: 100%;
+     }
 }
 
 .act-container:hover {
-
     & > .img-container {
-        background-color: #646464;
+        background-color: $grey-hv;
         opacity: .6;
         border-radius: 10px 10px 0 0;
     }
 
-    & > .act-content .act-title {
-        color: #0B588C;
+    & > .act-content .hover-title {
+        color: $blue-bold;
     }
-}
-
-::deep .owl-item {
-    padding: 0 7px;
 }
 
 ::deep .owl-carousel {
@@ -159,6 +161,10 @@
             right: 20px;
         }
     }
+
+    .owl-item {
+        padding: 0 7px;
+    }
 }
 
 ::deep .owl-dots {
@@ -191,13 +197,13 @@
     }
 
     .pop-up-container {
-        background-color: #FFF;
+        background-color: $white;
         position: relative;
         box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
     }
 
     .close-btn {
-        background-color: #C4C4C4;
+        background-color: $grey-close-bg;
         opacity: .5;
         width: 33px;
         height: 33px;
@@ -209,10 +215,10 @@
         top: 10px;
         right: 12px;
         cursor: pointer;
-
+        
         .material-icons {
             font-size: 20px;
-            color: #717171;
+            color: $grey-close-btn;
         }
     }
 
@@ -223,11 +229,11 @@
         padding: 38px 84px;
 
         .delete-act {
-            color: #64D72F;
+            color: $green;
         }
 
         .close-act {
-            color: #18A0FB;
+            color: $blue;
         }
     }
 
@@ -239,11 +245,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        color: #64D72F;
-
-
+        color: $green;
         .color {
-            color: #18A0FB;
+            color: $blue;
         }
     }
 
@@ -255,16 +259,16 @@
         font-size: 20px;
 
         .deny {
-            background-color: #FFF;
-            color: #18A0FB;
+            background-color: $white;
+            color: $blue;
             padding: 0 33px;
             line-height: 36px;
             cursor: pointer;
         }
 
         .accept {
-            background-color: #18A0FB;
-            color: #FFF;
+            background-color: $blue;
+            color: $white;
             border-radius: 5px;
             padding: 0 15px;
             line-height: 36px;

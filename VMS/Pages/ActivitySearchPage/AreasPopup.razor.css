@@ -56,6 +56,6 @@
     font-size: 20px;
     width: 90px;
     height: 40px;
-    position: absolute;
-    right: 60px;
-    bottom: 30px; }
+    margin-bottom: 10px; }
+    .my-custom-popup .save-btn:hover {
+      background-color: #306C14; }

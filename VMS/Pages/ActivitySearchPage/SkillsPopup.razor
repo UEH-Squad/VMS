@@ -1,6 +1,6 @@
 ﻿@inject IModalService Modal
 <div class="modal-backdrop modal-dialog-centered justify-content-center">
-    <div class="my-custom-popup position-relative">
+    <div class="my-custom-popup position-relative d-flex flex-column justify-content-between align-items-center">
         <span @onclick="CloseModal" class="material-icons-outlined close-btn">
             close
         </span>
@@ -36,9 +36,9 @@
                             </p>
                         </div>
                     }
+            </div>
         </div>
         <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
-    </div>
     </div>
 </div>
 @code {

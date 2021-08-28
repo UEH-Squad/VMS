@@ -56,7 +56,15 @@
         color: #F14747; }
     .my-signUp .signUp__form textarea, .my-signUp .signUp__form input {
       border: 1.5px solid #707070; }
-    .my-signUp .signUp__form .form-control {
+    .my-signUp .signUp__form ::deep textarea {
+      overflow-y: scroll; }
+      .my-signUp .signUp__form ::deep textarea::-webkit-scrollbar {
+        width: 14px; }
+      .my-signUp .signUp__form ::deep textarea::-webkit-scrollbar-thumb {
+        background-color: #B4B4B4;
+        border-radius: 20px;
+        border: 2px solid white; }
+    .my-signUp .signUp__form ::deep .form-control {
       padding: 15px 0;
       margin-bottom: 25px;
       font-size: 24px;

@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JSRuntinme
+@inject ILogger<Single> Logger
 
 <div class="my-signUp">
     <div class="signUp__report  @(isShowReport ? "d-block" : "d-none") ">
@@ -15,38 +16,40 @@
         </div>
 
     </div>
-
+    
     <div class="signUp__content">
-        <i @onclick="ExitModal" class="material-icons-outlined signUp__exit">
-            close
-        </i>
-        <div class="signUp__form">
-            <form action="">
-                <h1>Đăng ký <span>tham gia</span></h1>
-                <p class="form-text">Họ tên</p>
-                <input type="text" class="form-control">
-                <p class="form-text">Email nhận thông báo</p>
-                <input type="email" class="form-control">
-                <p class="form-text">Số điện thoại <span>(*)</span></p>
-                <input type="text" class="form-control">
-                <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
-                <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
-                <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
-                <div class="d-flex align-items-center mb-2">
-                    <input class="input-radio" type="radio" name="radioSignUp">
-                    <span>Chắc chắn</span>
-                </div>
-                <div class="d-flex align-items-center">
-                    <input class="input-radio" type="radio" name="radioSignUp">
-                    <span>Cần xem xét lại thời gian cụ thể</span>
-                </div>
-                <button @onclick="ShowReportSuccess" @onclick:preventDefault class="btn">Đăng ký</button>
-            </form>
-        </div>
-        <img class="w-100" src="img/formSignUp.png" alt="">
+        <EditForm Model="@signupModel" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <i @onclick="ExitModal" class="material-icons-outlined signUp__exit">
+                close
+            </i>
+            <div class="signUp__form">
+                <form action="">
+                    <h1>Đăng ký <span>tham gia</span></h1>
+                    <p class="form-text">Họ tên</p>
+                    <InputText @bind-Value="signupModel.Name" type="text" class="form-control" disabled="true" />
+                    <p class="form-text">Email nhận thông báo</p>
+                    <InputText @bind-Value="signupModel.Email" type="email" class="form-control" disabled="true"/>
+                    <p class="form-text">Số điện thoại <span>(*)</span></p>
+                    <InputText @bind-Value="signupModel.NumberPhone" type="text" class="form-control" />
+                    <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
+                    <InputTextArea @bind-Value="signupModel.YouWant" name="" id="" cols="30" rows="4" class="form-control"></InputTextArea>
+                    <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
+                    <div class="d-flex align-items-center mb-2">
+                        <input class="input-radio" type="radio" name="radioSignUp">
+                        <span>Chắc chắn</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <input class="input-radio" type="radio" name="radioSignUp">
+                        <span>Cần xem xét lại thời gian cụ thể</span>
+                    </div>
+                    <button @onclick="ShowReportSuccess" @onclick:preventDefault class="btn">Đăng ký</button>
+                </form>
+            </div>
+            <img class="w-100" src="img/formSignUp.png" alt="">
+        </EditForm>
     </div>
-
-
 </div>
 
 
@@ -70,6 +73,15 @@
             Modal.CloseAsync();
         }
     }
-
-
+    public class SignupModel
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string NumberPhone { get; set; }
+        public string YouWant { get; set; }
+    }
+    private SignupModel signupModel = new();
+    private void HandleValidSubmit()
+    {
+    }
 }

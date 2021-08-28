@@ -138,9 +138,17 @@
 
 /*-----end reporting reason------*/
 /*-----report description-----*/
-.form-control {
-  border: 1px solid #515151;
-  font-size: 22px; }
+::deep .form-control {
+  border: 1px solid;
+  font-size: 22px;
+  height: 250px;
+  overflow-y: scroll; }
+  ::deep .form-control::-webkit-scrollbar {
+    width: 14px; }
+  ::deep .form-control::-webkit-scrollbar-thumb {
+    background-color: #B4B4B4;
+    border-radius: 20px;
+    border: 2px solid white; }
 
 /*-----end report description-----*/
 /*---attached proof-----*/
@@ -161,11 +169,12 @@
       .add-file .add-file__block .block-icon-text .file__text {
         font-size: 22px;
         font-weight: 300px; }
-    .add-file .add-file__block .inputfile {
+    .add-file .add-file__block ::deep .inputfile {
       opacity: 0;
       overflow: hidden;
       position: absolute;
-      z-index: -1; }
+      z-index: -1;
+      display: none; }
     .add-file .add-file__block .inputfile + label {
       font-size: 24px;
       color: #333;

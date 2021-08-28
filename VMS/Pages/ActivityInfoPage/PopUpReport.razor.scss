@@ -171,9 +171,21 @@
 /*-----end reporting reason------*/
 
 /*-----report description-----*/
-.form-control {
-    border: 1px solid $grey-text;
-    font-size:22px;
+::deep .form-control {
+    border: 1px solid;
+    font-size: 22px;
+    height: 250px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-icon;
+        border-radius: 20px;
+        border:2px solid white;
+    }
 }
 /*-----end report description-----*/
 
@@ -203,11 +215,12 @@
              }
         }
 
-        .inputfile {
+        ::deep .inputfile {
             opacity: 0;
             overflow: hidden;
             position: absolute;
             z-index: -1;
+            display:none;
         }
 
         .inputfile + label {

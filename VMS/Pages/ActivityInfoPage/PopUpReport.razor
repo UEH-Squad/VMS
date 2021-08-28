@@ -1,28 +1,32 @@
 ﻿@inject IJSRuntime JSRuntinme
-    <div class="overlay">
+@inject ILogger<PopUpReport> Logger
 
-        <div class="min-overlay @(isShowReport ? "d-block" : "d-none")">
-            <div class="report-success">
+<div class="overlay">
 
-                <div class="min-overlay--icon">
-                    <span @onclick="ShowModalReportSucess" class="material-icons">
-                        close
-                    </span>
-                </div>
+    <div class="min-overlay @(isShowReport ? "d-block" : "d-none")">
+        <div class="report-success">
 
-                <div class="report-success__text">
-                    <span class="green-text">Bạn đã</span>
-                    <span class="blue-text">báo cáo thành công</span>
-                </div>
-
+            <div class="min-overlay--icon">
+                <span @onclick="ShowModalReportSucess" class="material-icons">
+                    close
+                </span>
             </div>
-        </div>   
 
+            <div class="report-success__text">
+                <span class="green-text">Bạn đã</span>
+                <span class="blue-text">báo cáo thành công</span>
+            </div>
+
+        </div>
+    </div>
+    <EditForm Model="@reportModel" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
         <div class="container @(isShowReport ? "d-none" : "d-block")">
             <div class="icon-close-popup">
                 <span @onclick="CloseModal" class="material-icons">close</span>
             </div>
-            
+
 
             <div class="title-header">
                 <span class="title-header__report">Báo cáo</span>
@@ -81,7 +85,7 @@
                     <h4 class="title-discript__text">Mô tả về báo cáo</h4>
                     <h4 class="title-discript__check check">(*)</h4>
                 </div>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                <InputTextArea @bind-Value="@reportModel.Discript" class="form-control" id="exampleFormControlTextarea1" rows=""></InputTextArea>
             </div>
 
             <div class="attached-proof">
@@ -91,7 +95,7 @@
                 </div>
                 <div class="add-file">
                     <div class="add-file__block">
-                        <input type="file" name="file" id="file" class="inputfile" />
+                        <InputFile type="file" name="file" id="file" class="inputfile" />
                         <label for="file">
                             <span class="block-icon-text">
                                 <span class="material-icons my-icon-upload">cloud_upload</span>
@@ -109,7 +113,8 @@
                 </button>
             </div>
         </div>
-    </div>
+    </EditForm>
+</div>
 
 
 @code {
@@ -128,6 +133,16 @@
         {
             ReportModal.CloseAsync();
         }
+    }
+    public class ReportModel
+    {
+        public string Discript { get; set; }
+        public string FileName { get; set; }
+    }
+    private ReportModel reportModel = new();
+    private void HandleValidSubmit()
+    {
+        
     }
 
 }

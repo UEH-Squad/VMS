@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
-using VMS.Application.Services;
 using VMS.Application.ViewModels;
 
 namespace VMS.Pages.ActivityInfoPage
@@ -29,26 +27,18 @@ namespace VMS.Pages.ActivityInfoPage
         [Parameter]
         public string ActivityId { get; set; }
 
-
         public PopUpReport()
         {
             report = new ReportViewModel();
         }
 
-        private string[] reason = new string[]
-        {
-            "Hoạt động không có thật",
-            "Hoạt động không không tương thích với nội dung đã đề cập",
-            "Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động",
-            "Nội dung hoạt động không phù hợp",
-            "Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động",
-            "Khác"
-        };
+        private List<string> Reason { get; set; } = new List<string>();
 
         private async Task AddReport()
         {
             report.UserId = IdentityService.GetCurrentUserId();
             report.ActivityId = int.Parse(ActivityId);
+            report.Reasons = Reason;
 
             if (file is not null)
             {
@@ -72,5 +62,36 @@ namespace VMS.Pages.ActivityInfoPage
                 image = await UploadService.GetDataUriAsync(file);
             }
         }
+
+        private List<String> ListReason()
+        {
+            List<String> c = new List<String>();
+            c.Add("Hoạt động không có thật");
+            c.Add("Hoạt động không không tương thích với nội dung đã đề cập");
+            c.Add("Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động");
+            c.Add("Nội dung hoạt động không phù hợp");
+            c.Add("Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động");
+            c.Add("Khác");
+            return c;
+        }
+
+        private void CheckboxClicked(string reason, object checkedValue)
+        {
+            if ((bool)checkedValue)
+            {
+                if (!Reason.Contains(reason))
+                {
+                    Reason.Add(reason);
+                }
+            }
+            else
+            {
+                if (Reason.Contains(reason))
+                {
+                    Reason.Remove(reason);
+                }
+            }
+        }
+
     }
 }

@@ -10,7 +10,7 @@ namespace VMS.Domain.Models
     {
         public int Id { get; set; }
         public string Reason { get; set; }
-        public string FeedbackId { get; set; }
+        public int FeedbackId { get; set; }
 
         public virtual Feedback Feedback { get; set; }
     }

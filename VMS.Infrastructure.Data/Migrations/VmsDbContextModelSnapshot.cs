@@ -601,10 +601,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FeedbackId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FeedbackId1")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -612,7 +609,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeedbackId1");
+                    b.HasIndex("FeedbackId");
 
                     b.ToTable("ReasonReports");
                 });
@@ -1248,7 +1245,9 @@ namespace VMS.Infrastructure.Data.Migrations
                 {
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
-                        .HasForeignKey("FeedbackId1");
+                        .HasForeignKey("FeedbackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Feedback");
                 });

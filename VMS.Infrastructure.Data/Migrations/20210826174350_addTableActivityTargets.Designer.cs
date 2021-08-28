@@ -11,7 +11,7 @@ namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
     [Migration("20210826174350_addTableActivityTargetsAndReasonReport")]
-    partial class addTableActivityTargetsAndReasonReport
+    partial class addTableActivityTargets
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

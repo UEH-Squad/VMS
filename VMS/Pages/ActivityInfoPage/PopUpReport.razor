@@ -41,11 +41,11 @@
                 <button class="btn dropdown-toggle my-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    @foreach (var line in reason)
+                    @foreach (var line in ListReason())
                     {
                         <li>
                             <div class="dropdown-item" href="#">
-                                <input type="checkbox">
+                                <input type="checkbox" @onchange="eventArgs => { CheckboxClicked(line, eventArgs.Value); }" />
                                 <span>@line</span>
                             </div>
                         </li>

@@ -18,7 +18,7 @@ namespace VMS.Domain.Models
 
         // For org + seeker
         public string PhoneNumber2 { get; set; }
-
+        public string OrgName { get; set; }
         public string Website { get; set; }
         public string Mission { get; set; }
         public string Introduction { get; set; }

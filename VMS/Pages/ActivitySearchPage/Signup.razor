@@ -18,7 +18,7 @@
     </div>
     
     <div class="signUp__content">
-        <EditForm Model="@signupModel" OnValidSubmit="@HandleValidSubmit">
+        <EditForm Model="@signupModel" OnValidSubmit="@HandleValidSubmit" Context="CurrentEditContext">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <i @onclick="ExitModal" class="material-icons-outlined signUp__exit">
@@ -39,11 +39,13 @@
                     
                     <InputRadioGroup Name="radioSignUp" @bind-Value="signupModel.check" >
                         <div class="d-flex align-items-center mb-2">
-                            <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp"/>
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => signupModel.check)</div> 
+                            <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp" />
                             <label for="checksure">Chắc chắn</label>
                         </div>
                         <div class="d-flex align-items-center">
-                            <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp"/>
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => signupModel.check)</div>
+                            <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" />
                             <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
                         </div>
                     </InputRadioGroup>

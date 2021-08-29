@@ -98,10 +98,10 @@
             height: 16px;
             line-height: 16px;
             margin-right: 15px;
+        }
 
-            ::deep .valid.modified {
-                outline:none;
-            }
+        ::deep .valid.modified:not([type=checkbox]) {
+            outline:none;
         }
 
         ::deep .input-radio ~ label {

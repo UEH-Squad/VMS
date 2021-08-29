@@ -74,8 +74,8 @@
       height: 16px;
       line-height: 16px;
       margin-right: 15px; }
-      .my-signUp .signUp__form ::deep .input-radio ::deep .valid.modified {
-        outline: none; }
+    .my-signUp .signUp__form ::deep .valid.modified:not([type=checkbox]) {
+      outline: none; }
     .my-signUp .signUp__form ::deep .input-radio ~ label {
       font-size: 24px;
       font-weight: 300; }

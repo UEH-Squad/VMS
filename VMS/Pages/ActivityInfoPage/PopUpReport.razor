@@ -1,28 +1,31 @@
 ﻿@inject IJSRuntime JSRuntinme
-    <div class="overlay">
 
-        <div class="min-overlay @(isShowReport ? "d-block" : "d-none")">
-            <div class="report-success">
+<div class="overlay">
 
-                <div class="min-overlay--icon">
-                    <span @onclick="ShowModalReportSucess" class="material-icons">
-                        close
-                    </span>
-                </div>
+    <div class="min-overlay @(isShowReport ? "d-block" : "d-none")">
+        <div class="report-success">
 
-                <div class="report-success__text">
-                    <span class="green-text">Bạn đã</span>
-                    <span class="blue-text">báo cáo thành công</span>
-                </div>
-
+            <div class="min-overlay--icon">
+                <span @onclick="ShowModalReportSucess" class="material-icons">
+                    close
+                </span>
             </div>
-        </div>   
 
+            <div class="report-success__text">
+                <span class="green-text">Bạn đã</span>
+                <span class="blue-text">báo cáo thành công</span>
+            </div>
+
+        </div>
+    </div>
+    <EditForm Model="@reportModel" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
         <div class="container @(isShowReport ? "d-none" : "d-block")">
             <div class="icon-close-popup">
                 <span @onclick="CloseModal" class="material-icons">close</span>
             </div>
-            
+
 
             <div class="title-header">
                 <span class="title-header__report">Báo cáo</span>
@@ -34,43 +37,46 @@
                     <h4 class="title-discript__text">Lý do bạn muốn báo cáo</h4>
                     <h4 class="title-discript__check check">(*)</h4>
                 </div>
-                <button class="btn dropdown-toggle my-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button @onclick="ListReason" class="btn my-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="" aria-expanded="false">
+                    <span class="material-icons-outlined my-icon-dropdown">
+                        arrow_drop_down
+                    </span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="display:@(showListReason ? "block" : "none")">
                     <li>
                         <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Hoạt động không có thật</span>
+                            <InputCheckbox @bind-Value="reportReason.Reason1" type="checkbox" id="checkbox-1" class="dropdown-item--checkbox"/>
+                            <label for="checkbox-1">Hoạt động không có thật</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Hoạt động không không tương thích với nội dung đã đề cập</span>
+                            <InputCheckbox @bind-Value="reportReason.Reason2" type="checkbox" id="checkbox-2" class="dropdown-item--checkbox"/>
+                            <label for="checkbox-2">Hoạt động không không tương thích với nội dung đã đề cập</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động</span>
+                            <InputCheckbox @bind-Value="reportReason.Reason3" type="checkbox" id="checkbox-3" class="dropdown-item--checkbox"/>
+                            <label for="checkbox-3">Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Nội dung hoạt động không phù hợp</span>
+                            <InputCheckbox @bind-Value="reportReason.Reason4" type="checkbox" id="checkbox-4" class="dropdown-item--checkbox"/>
+                            <label for="checkbox-4">Nội dung hoạt động không phù hợp</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động</span>
+                            <InputCheckbox @bind-Value="reportReason.Reason5" type="checkbox" id="checkbox-5" class="dropdown-item--checkbox"/>
+                            <label for="checkbox-5">Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
-                            <input type="checkbox">
-                            <span>Khác</span>
+                            <InputCheckbox @bind-Value="reportReason.Reason6" type="checkbox" id="checkbox-6" class="dropdown-item--checkbox"/>
+                            <label for="checkbox-6">Khác</label>
                         </div>
                     </li>
                 </ul>
@@ -81,7 +87,7 @@
                     <h4 class="title-discript__text">Mô tả về báo cáo</h4>
                     <h4 class="title-discript__check check">(*)</h4>
                 </div>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                <InputTextArea @bind-Value="@reportModel.Discript" @onclick="TextArea" class="form-control" id="exampleFormControlTextarea1" rows=""></InputTextArea>
             </div>
 
             <div class="attached-proof">
@@ -91,7 +97,7 @@
                 </div>
                 <div class="add-file">
                     <div class="add-file__block">
-                        <input type="file" name="file" id="file" class="inputfile" />
+                        <InputFile @onclick="AddFile" type="file" name="file" id="file" class="inputfile" />
                         <label for="file">
                             <span class="block-icon-text">
                                 <span class="material-icons my-icon-upload">cloud_upload</span>
@@ -109,8 +115,8 @@
                 </button>
             </div>
         </div>
-    </div>
-
+    </EditForm>
+</div>
 
 @code {
     [CascadingParameter]
@@ -129,5 +135,37 @@
             ReportModal.CloseAsync();
         }
     }
+    public class ReportModel
+    {
+        public string Discript { get; set; }
+        public string FileName { get; set; }
+    }
+    private ReportModel reportModel = new();
+    private void HandleValidSubmit()
+    {
 
+    }
+    bool showListReason = false;
+    void ListReason()
+    {
+        showListReason = !showListReason;
+    }
+    void TextArea()
+    {
+        showListReason = false;
+    }
+    void AddFile()
+    {
+        showListReason = false;
+    }
+    public class ReportReason
+    {
+        public bool Reason1 { get; set; }
+        public bool Reason2 { get; set; }
+        public bool Reason3 { get; set; }
+        public bool Reason4 { get; set; }
+        public bool Reason5 { get; set; }
+        public bool Reason6 { get; set; }
+    }
+    private ReportReason reportReason = new();
 }

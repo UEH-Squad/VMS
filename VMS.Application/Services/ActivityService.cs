@@ -67,7 +67,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    a => a.IsVirtual == filter.Virtual || a.IsVirtual == filter.Actual,
+                    a => a.IsVirtual == filter.Virtual || a.IsVirtual == !filter.Actual,
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Any(x => x == a.AreaId) || filter.Areas.Count == 0,

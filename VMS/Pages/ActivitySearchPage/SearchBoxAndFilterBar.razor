@@ -19,11 +19,11 @@
 
 <div class="d-flex align-items-center mb-3">
     <div class="form-check form-check-inline d-flex align-items-center ps-0 pe-5">
-        <input @onclick="(() => Filter.Virtual = !Filter.Virtual)" class="my-check-box cursor-pointer" type="checkbox" id="virtual" value="virtual">
+        <input @bind=Filter.Virtual class="my-check-box cursor-pointer" type="checkbox" id="virtual">
         <label class="my-check-box-label cursor-pointer" for="virtual">Virtual</label>
     </div>
     <div class="form-check form-check-inline d-flex align-items-center p-0">
-        <input @onclick="(() => Filter.Actual = !Filter.Actual)" class="my-check-box cursor-pointer" type="checkbox" id="actual" value="actual">
+        <input @bind=Filter.Actual class="my-check-box cursor-pointer" type="checkbox" id="actual" value="actual">
         <label class="my-check-box-label cursor-pointer" for="actual">Actual</label>
     </div>
 </div>

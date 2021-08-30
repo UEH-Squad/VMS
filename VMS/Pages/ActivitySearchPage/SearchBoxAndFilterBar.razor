@@ -67,12 +67,12 @@
     </div>
 
     <div class="filter-item filter-item-organization position-relative">
-        <div @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="popup-btn @(haveOrganizationValue?"bg-grey":"")">@organizationChoosenValue</div>
+        <div @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="popup-btn @(!string.IsNullOrEmpty(Filter.OrgId)?"bg-grey":"")">@organizationChoosenValue</div>
         <div class="my-dropdown" style="display: @(isOrganizationShow ? "block" : "none")">
             <ul>
                 @if (organizers is not null)
                 {
-                    int id = i;
+                    @foreach(var org in organizers)
                     {
                         <li @onmousedown="() => ChooseOrganizationValue(org)">@org.UserName</li>
                     }
@@ -121,159 +121,4 @@
 
 
 @code {
-    bool isCityShow = false;
-    bool haveCityValue = false;
-    bool isDistrictShow = false;
-    bool haveDistrictValue = false;
-    bool isOrganizationShow = false;
-    bool haveOrganizationValue = false;
-    bool haveAreasValue = false;
-    bool haveSkillsValue = false;
-
-    string cityChoosenValue = "Tỉnh/Thành phố";
-    string districtChoosenValue = "Quận/Huyện";
-    string organizationChoosenValue = "Tổ chức";
-
-    string nameCityValue = "Hồ Chí Minh";
-    string nameDistrictValue = "Quận Thủ Đức";
-    string nameOrganizationValue = "Hội đồng đồ ăn xuyên Việt";
-    string mySearchValue = "";
-
-    //function for city dropdowns
-    void ToggleCityDropdown()
-    {
-        isCityShow = !isCityShow;
-    }
-    void CloseCityDropdown()
-    {
-        isCityShow = false;
-    }
-    void ChooseCityValue(int id)
-    {
-        cityChoosenValue = nameCityValue + " " + (id + 1).ToString();
-        haveCityValue = true;
-    }
-
-    //function for district dropdowns
-    void ToggleDistrictDropdown()
-    {
-        isDistrictShow = !isDistrictShow;
-    }
-    void CloseDistrictDropdown()
-    {
-        isDistrictShow = false;
-    }
-    void ChooseDistrictValue(int id)
-    {
-        districtChoosenValue = nameDistrictValue + " " + (id + 1).ToString();
-        haveDistrictValue = true;
-    }
-
-    //function for organization dropdowns
-    void ToggleOrganizationDropdown()
-    {
-        isOrganizationShow = !isOrganizationShow;
-    }
-    void CloseOrganizationDropdown()
-    {
-        isOrganizationShow = false;
-    }
-    void ChooseOrganizationValue(int id)
-    {
-        organizationChoosenValue = nameOrganizationValue + " " + (id + 1).ToString();
-        haveOrganizationValue = true;
-    }
-
-    void CloseDropdown()
-    {
-        isCityShow = false;
-        isDistrictShow = false;
-        isOrganizationShow = false;
-    }
-
-    //Clear search box button
-    void UpdateInstanceValue(ChangeEventArgs e)
-    {
-        mySearchValue = e.Value.ToString();
-    }
-    void ClearSearchBox()
-    {
-        mySearchValue = "";
-    }
-
-    void CheckBackgroundOfAreaAndSkills()
-    {
-        haveAreasValue = false;
-        haveSkillsValue = false;
-        for (int i = 0; i < 12; i++)
-        {
-            if (choosenAreasList[i])
-            {
-                haveAreasValue = true;
-            }
-        }
-
-        for (int i = 0; i < 15; i++)
-        {
-            for (int j = 0; j < 11; j++)
-            {
-                if (choosenSkillsList[i, j])
-                {
-                    haveSkillsValue = true;
-                }
-            }
-        }
-    }
-
-    bool[] choosenAreasList = new bool[12];
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-    async Task ShowAreasPopup()
-    {
-        isCityShow = false;
-        isDistrictShow = false;
-        isOrganizationShow = false;
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        var areasParameter = new ModalParameters();
-        areasParameter.Add("choosenAreasList", choosenAreasList);
-        var areasModal = Modal.Show<AreasPopup>("", areasParameter, options);
-        await areasModal.Result;
-        CheckBackgroundOfAreaAndSkills();
-    }
-
-    bool[,] choosenSkillsList = new bool[15,11];
-
-    async Task ShowSkillsPopup()
-    {
-        isCityShow = false;
-        isDistrictShow = false;
-        isOrganizationShow = false;
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        var skillsParameter = new ModalParameters();
-        skillsParameter.Add("choosenSkillsList", choosenSkillsList);
-        var skillsModal = Modal.Show<SkillsPopup>("", skillsParameter, options);
-        await skillsModal.Result;
-        CheckBackgroundOfAreaAndSkills();
-    }
-
-    //clear filter bar
-    void ClearFilter()
-    {
-        cityChoosenValue = "Tỉnh/Thành phố";
-        districtChoosenValue = "Quận/Huyện";
-        organizationChoosenValue = "Tổ chức";
-        choosenAreasList = new bool[12];
-        choosenSkillsList = new bool[15, 11];
-        haveCityValue = haveDistrictValue = haveOrganizationValue = haveAreasValue = haveSkillsValue = false;
-    }
 }

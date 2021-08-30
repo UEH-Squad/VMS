@@ -11,10 +11,10 @@ namespace VMS.Pages.ActivitySearchPage
 {
     public partial class Signup : ComponentBase
     {
-        private SignUpActivityViewModel information = new();
+        private SignUpActivityViewModel signupModel = new();
 
         [Required]
-        private RadioOptions choosenRadio;
+        private Check check;
 
         [Parameter]
         public int ActivityId { get; set; }
@@ -26,7 +26,7 @@ namespace VMS.Pages.ActivitySearchPage
         [Inject]
         private IIdentityService IdentityService { get; set; }
 
-        private enum RadioOptions { Commit, TakeTime }
+        public enum Check { Sure, Notsure }
 
         private async Task ExitModalAsync()
         {
@@ -55,9 +55,9 @@ namespace VMS.Pages.ActivitySearchPage
                 {
                     UserId = CurrentUser.Id,
                     ActivityId = ActivityId,
-                    PhoneNumber = information.PhoneNumber,
-                    Desire = information.Desire,
-                    IsCommit = (choosenRadio == RadioOptions.Commit),
+                    PhoneNumber = signupModel.PhoneNumber,
+                    Desire = signupModel.Desire,
+                    IsCommit = (check == Check.Sure),
                     EnrollTime = System.DateTime.Now,
                     CreatedBy = CurrentUser.Id,
                     CreatedDate = System.DateTime.Now

@@ -152,5 +152,20 @@ namespace VMS.Pages.ActivitySearchPage
             OrderList[id] = !OrderList[id];
             await OrderListChanged.InvokeAsync(OrderList);
         }
+
+        private void CloseCityDropdown()
+        {
+            isCityShow = false;
+        }
+
+        private void CloseOrganizationDropdown()
+        {
+            isOrganizationShow = false;
+        }
+
+        private void CloseDistrictDropdown()
+        {
+            isDistrictShow = false;
+        }
     }
 }

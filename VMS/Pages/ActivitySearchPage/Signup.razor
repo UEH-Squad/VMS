@@ -15,39 +15,39 @@
     </div>
     
     <div class="signUp__content">
-        <EditForm Model="@signupModel" OnValidSubmit="@HandleValidSubmit" Context="CurrentEditContext">
+        <EditForm Model="@signupModel" OnValidSubmit="@HandleSignUp" Context="CurrentEditContext">
             <DataAnnotationsValidator />
             <ValidationSummary />
-            <i @onclick="ExitModal" class="material-icons-outlined signUp__exit">
+            <i @onclick="ExitModalAsync" class="material-icons-outlined signUp__exit">
                 close
             </i>
             <div class="signUp__form">
                 <form action="">
                     <h1>Đăng ký <span>tham gia</span></h1>
                     <p class="form-text">Họ tên</p>
-                    <InputText @bind-Value="signupModel.Name" type="text" class="form-control" disabled="true" />
+                    <InputText Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
                     <p class="form-text">Email nhận thông báo</p>
-                    <InputText @bind-Value="signupModel.Email" type="email" class="form-control" disabled="true"/>
+                    <InputText Value=@CurrentUser.Email type="email" class="form-control" disabled="true"/>
                     <p class="form-text">Số điện thoại <span>(*)</span></p>
-                    <InputText @bind-Value="signupModel.NumberPhone" type="text" class="form-control" />
+                    <InputText @bind-Value="signupModel.PhoneNumber" type="text" class="form-control" />
                     <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
-                    <InputTextArea @bind-Value="signupModel.YouWant" name="" id="" cols="30" rows="4" class="form-control"></InputTextArea>
+                    <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control"></InputTextArea>
                     <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
                     
-                    <InputRadioGroup Name="radioSignUp" @bind-Value="signupModel.check" >
+                    <InputRadioGroup Name="radioSignUp" @bind-Value="check" >
                         <div class="d-flex align-items-center mb-2">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => signupModel.check)</div> 
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div> 
                             <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp" />
                             <label for="checksure">Chắc chắn</label>
                         </div>
                         <div class="d-flex align-items-center">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => signupModel.check)</div>
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
                             <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" />
                             <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
                         </div>
                     </InputRadioGroup>
                     
-                    <button @onclick="ShowReportSuccess" @onclick:preventDefault class="btn">Đăng ký</button>
+                    <button @onclick="ShowReportSuccessAsync" @onclick:preventDefault class="btn">Đăng ký</button>
                 </form>
             </div>
             <img class="w-100" src="img/formSignUp.png" alt="">
@@ -57,42 +57,6 @@
 
 @code {
 
-    [CascadingParameter]
-    private BlazoredModalInstance Modal { get; set; }
-
-    void ExitModal()
-    {
-        Modal.CloseAsync();
-    }
-
-    bool isShowReport = false;
-
-    void ShowReportSuccess()
-    {
-        isShowReport = !isShowReport;
-        if (isShowReport == false)
-        {
-            Modal.CloseAsync();
-        }
-    }
-
-
-    public class SignupModel
-    {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string NumberPhone { get; set; }
-        public string YouWant { get; set; }
-
-        [Required, EnumDataType(typeof(Check))]
-        public Check check { get; set; }
-    }
-    private SignupModel signupModel = new();
-    private void HandleValidSubmit()
-    {
-    }
-
-    public enum Check { Sure, Notsure };
   
 
 

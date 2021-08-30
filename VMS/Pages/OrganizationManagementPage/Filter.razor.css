@@ -1,0 +1,52 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.org-filter__title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  color: #64D72F; }
+
+.org-filter__act__title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  color: #18A0FB;
+  margin-bottom: 20px; }
+
+.org-filter__act__child {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px; }
+  .org-filter__act__child input {
+    margin-right: 30px; }
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  height: 33px;
+  width: 33px;
+  background-color: #FFFFFF;
+  border: 3px solid #515151;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+input[type="checkbox"]::after {
+  font-family: "Material Icons";
+  content: "\e876";
+  font-size: 33px;
+  font-weight: 600;
+  color: #64D72F;
+  display: none; }
+
+input[type="checkbox"]:hover {
+  background-color: rgba(0, 0, 0, 0.1); }
+
+input[type="checkbox"]:checked:after {
+  display: block; }

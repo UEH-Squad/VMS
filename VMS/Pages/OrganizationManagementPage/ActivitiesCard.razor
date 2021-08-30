@@ -1,0 +1,238 @@
+﻿@inject IJSRuntime JsRuntime
+
+@if (pagedResult != null && pagedResult.Results.Length != 0)
+{
+    @foreach (var item in pagedResult.Results)
+    {
+        <div class="org-card" style="z-index:@(item.RateMethodDropDown ? "10" : "auto")">
+            <div class="org-card__btn-edit btn" @onclick="@(() => DropDownClick(item.Id,"edit"))">
+                <span class="material-icons-outlined">
+                    more_horiz
+                </span>
+                <ul class="org-card__btn-edit__list card-list" style="display:@(item.EditDropDown ? "inline-block" : "none");">
+                    <li class="item-1">Chỉnh sửa</li>
+                    <li class="item-2" @onclick="@(() => DelConfirm(item.Id))">Xóa</li>
+                    <li class="item-3" @onclick="@(() => PopupFunc("closed"))">Đóng hoạt động</li>
+                </ul>
+            </div>
+            <div class="org-card__img">
+                <img src="@item.ImgSrc" alt="photo">
+            </div>
+            <div class="org-card__info">
+                <div class="org-card__info__title">
+                    @item.Title
+                </div>
+                <div class="org-card__info__rate">
+                    <span class="material-icons-outlined" style="color:@(item.Rate >= 1 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rate,1)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rate >= 2 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rate,2)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rate >= 3 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rate,3)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rate >= 4 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rate,4)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rate >= 5 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rate,5)?"_half":"")
+                    </span>
+                </div>
+                <div class="org-card__info__desc">
+                    @item.ShortDescription
+                </div>
+                <div class="org-card__info__date">
+                    Ngày đăng: <span>20/07/2021</span>
+                </div>
+                <div class="org-card__info__joiner">
+                    <div class="org-card__info__joiner__icon">
+                        <span class="material-icons-outlined">
+                            perm_identity
+                        </span>
+                    </div>
+                    <div class="org-card__info__joiner__sum">
+                        @item.Joiner
+                    </div>
+                </div>
+            </div>
+            <div class="org-card__btn-list card-btn">
+                Xem danh sách
+            </div>
+            <div class="org-card__cbb-rate card-btn">
+                <div href="#" class="org-card__cbb-rate__title" @onclick="@(() => DropDownClick(item.Id,"rate"))">Đánh giá</div>
+                <ul class="org-card__cbb-rate__list card-list" style="display:@(item.RateMethodDropDown ? "inline-block" : "none");">
+                    <li>Tình nguyện viên</li>
+                    <li>Đánh giá hoạt động</li>
+                </ul>
+            </div>
+            <div class="org-card__del-confirm confirm" style="display:@(item.IsDelete?"initial":"none")">
+                <div class="close-icon" @onclick="@(() => DelConfirm(item.Id))">
+                    <span class="material-icons-outlined">
+                        close
+                    </span>
+                </div>
+                <div class="content">
+                    Bạn có chắc chắn muốn xóa hoạt động này không?
+                </div>
+                <div class="btn-yes card-btn" @onclick="@(() => DelItem(item.Id))">
+                    Xác nhận
+                </div>
+                <div class="btn-cancel card-btn" @onclick="@(() => DelConfirm(item.Id))">
+                    Hủy
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@popupTemplate
+
+<Pager CurrentPage="@pagedResult.CurrentPage"
+       PageCount="@pagedResult.PageCount"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+
+
+@code {
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string ImgSrc { get; set; }
+        public int Joiner { get; set; }
+        public string ShortDescription { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public bool EditDropDown { get; set; }
+        public bool RateMethodDropDown { get; set; }
+        public double Rate { get; set; }
+        public bool IsDelete{ get; set; }
+    }
+
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+
+    private PagedResult<FakeData> pagedResult;
+    private int count = 20;
+    private int page = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
+
+    private PagedResult<FakeData> GetFakeData()
+    {
+        var result = new PagedResult<FakeData>();
+        result.CurrentPage = page;
+        result.RowCount = 100;
+        result.PageSize = 10;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
+        {
+            Id = x + 1,
+            Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương",
+            ImgSrc = "img/act.png",
+            Joiner = 250,
+            ShortDescription = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
+            CreatedDate = DateTime.Now,
+            EditDropDown = false,
+            RateMethodDropDown = false,
+            Rate = 3.5,
+            IsDelete = false
+        }).ToArray();
+
+        return result;
+    }
+
+    private async Task DropDownClick(int id, string type)
+    {
+        var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (clickedItem is not null)
+        {
+
+            if (type == "edit")
+            {
+                clickedItem.EditDropDown = !clickedItem.EditDropDown;
+                clickedItem.RateMethodDropDown = false;
+            }
+            else
+            {
+                clickedItem.RateMethodDropDown = !clickedItem.RateMethodDropDown;
+                clickedItem.EditDropDown = false;
+            }
+        }
+    }
+
+    private bool HaftStar(double rate, int star)
+    {
+        if (rate - star >= 0.5 && rate - star < 1)
+        {
+            return true;
+        }
+        return false;
+    }
+    private async Task PopupFunc(string type)
+    {
+        switch (type)
+        {
+            case "closed":
+                {
+                    popupTemplate +=
+                    @<div class="org-card__close-succ notify --close">
+                         <div class="close-icon">
+                             <span class="material-icons-outlined">
+                                close
+                             </span>
+                         </div>
+                         <div class="content">Đóng hoạt động thành công!</div>
+                     </div>;
+                    break;
+                }
+            case "deleted":
+                {
+                    popupTemplate +=
+                    @<div class="org-card__close-succ notify --del">
+                        <div class="icon">
+                        <span class="material-icons-outlined">
+                            close
+                        </span>
+                        </div>
+                        <div class="content">Xóa hoạt động thành công!</div>
+                    </div>;
+                    break;
+                }
+        }
+    }
+    private RenderFragment popupTemplate;
+    private async Task DelConfirm(int id)
+    {
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        Item.IsDelete = !Item.IsDelete;
+    }
+    private async Task DelItem(int id)
+    {
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        Item.IsDelete = !Item.IsDelete;
+    }
+
+    }

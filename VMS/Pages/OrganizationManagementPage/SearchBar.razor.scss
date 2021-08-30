@@ -1,0 +1,26 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+//------------------------------SEARCH--------------------------//
+.org-search {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 20px;
+    border-bottom: 2px solid $border-color-bold;
+    margin-bottom: 50px;
+    align-items: center;
+
+    &__input {
+        flex: 19;
+        border: none;
+        text-align: center;
+    }
+
+    &__btn {
+        flex: 1;
+        border-left: 2px solid $border-color-bold;
+        border-radius: 0;
+        color: $blue;
+        justify-self: center;
+    }
+}

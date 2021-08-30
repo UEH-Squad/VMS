@@ -1,0 +1,27 @@
+﻿@attribute [Route(Routes.OrganizationManagement)]
+@inject IJSRuntime JsRuntime
+
+<div class="container-lg px-0 layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="org-title">
+                    Quản lý <span>hoạt động</span>
+                </div>
+            </div>
+            <div class="filter col-3">
+                <VMS.Pages.OrganizationManagementPage.Filter />
+            </div>
+            <div class="activities col-9">
+                <VMS.Pages.OrganizationManagementPage.SearchBar />
+                <VMS.Pages.OrganizationManagementPage.ActivitiesCard />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    
+}

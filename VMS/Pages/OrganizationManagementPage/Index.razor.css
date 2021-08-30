@@ -1,0 +1,17 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.org-title {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  text-align: center;
+  color: #64D72F; }
+  .org-title span {
+    color: #18A0FB; }

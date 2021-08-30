@@ -30,14 +30,14 @@
 
 <form class="filter-bar d-flex justify-content-between mb-5">
     <div class="filter-item filter-item-city position-relative">
-        <div @onclick="ToggleCityDropdown" class="popup-btn @(haveCityValue?"bg-grey":"")">@cityChoosenValue</div>
-        <div class="my-dropdown @(isCityShow ? "d-block" : "")">
+        <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="popup-btn @(haveCityValue?"bg-grey":"")" placeholder="@cityChoosenValue" readonly>
+        <div @onclick:preventDefault class="my-dropdown" style="display: @(isCityShow ? "block" : "none")">
             <ul>
-                @for(int i = 0; i < 10; i++)
-            {
+                @for (int i = 0; i < 10; i++)
+                {
                     int id = i;
-                <li @onclick="() => ChooseCityValue(id)">@nameCityValue @(id + 1)</li>
-            }
+                    <li @onmousedown="() => ChooseCityValue(id)">@nameCityValue @(id + 1)</li>
+                }
             </ul>
         </div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
@@ -46,13 +46,13 @@
     </div>
 
     <div class="filter-item filter-item-district position-relative">
-        <div @onclick="ToggleDistrictDropdown" class="popup-btn @(haveDistrictValue?"bg-grey":"")">@districtChoosenValue</div>
-        <div class="my-dropdown @(isDistrictShow ? "d-block" : "")">
+        <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="popup-btn @(haveDistrictValue?"bg-grey":"")" placeholder="@districtChoosenValue" readonly>
+        <div class="my-dropdown" style="display: @(isDistrictShow ? "block" : "none")">
             <ul>
                 @for (int i = 0; i < 10; i++)
                 {
                     int id = i;
-                    <li @onclick="() => ChooseDistrictValue(id)">@nameDistrictValue @(id + 1)</li>
+                    <li @onmousedown="() => ChooseDistrictValue(id)">@nameDistrictValue @(id + 1)</li>
                 }
             </ul>
         </div>
@@ -62,13 +62,13 @@
     </div>
 
     <div class="filter-item filter-item-organization position-relative">
-        <div @onclick="ToggleOrganizationDropdown" class="popup-btn @(haveOrganizationValue?"bg-grey":"")">@organizationChoosenValue</div>
-        <div class="my-dropdown @(isOrganizationShow ? "d-block" : "")">
+        <input @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="popup-btn @(haveOrganizationValue?"bg-grey":"")" placeholder="@organizationChoosenValue" readonly>
+        <div class="my-dropdown" style="display: @(isOrganizationShow ? "block" : "none")">
             <ul>
                 @for (int i = 0; i < 10; i++)
                 {
                     int id = i;
-                    <li @onclick="() => ChooseOrganizationValue(id)">@nameOrganizationValue @(id + 1)</li>
+                    <li @onmousedown="() => ChooseOrganizationValue(id)">@nameOrganizationValue @(id + 1)</li>
                 }
             </ul>
         </div>
@@ -137,10 +137,13 @@
     {
         isCityShow = !isCityShow;
     }
+    void CloseCityDropdown()
+    {
+        isCityShow = false;
+    }
     void ChooseCityValue(int id)
     {
         cityChoosenValue = nameCityValue + " " + (id + 1).ToString();
-        ToggleCityDropdown();
         haveCityValue = true;
     }
 
@@ -149,22 +152,36 @@
     {
         isDistrictShow = !isDistrictShow;
     }
+    void CloseDistrictDropdown()
+    {
+        isDistrictShow = false;
+    }
     void ChooseDistrictValue(int id)
     {
         districtChoosenValue = nameDistrictValue + " " + (id + 1).ToString();
-        ToggleDistrictDropdown();
         haveDistrictValue = true;
     }
+
     //function for organization dropdowns
     void ToggleOrganizationDropdown()
     {
         isOrganizationShow = !isOrganizationShow;
     }
+    void CloseOrganizationDropdown()
+    {
+        isOrganizationShow = false;
+    }
     void ChooseOrganizationValue(int id)
     {
         organizationChoosenValue = nameOrganizationValue + " " + (id + 1).ToString();
-        ToggleOrganizationDropdown();
         haveOrganizationValue = true;
+    }
+
+    void CloseDropdown()
+    {
+        isCityShow = false;
+        isDistrictShow = false;
+        isOrganizationShow = false;
     }
 
     //Clear search box button
@@ -206,6 +223,9 @@
     [CascadingParameter] public IModalService Modal { get; set; }
     async Task ShowAreasPopup()
     {
+        isCityShow = false;
+        isDistrictShow = false;
+        isOrganizationShow = false;
         var options = new ModalOptions()
         {
             HideCloseButton = true,
@@ -223,6 +243,9 @@
 
     async Task ShowSkillsPopup()
     {
+        isCityShow = false;
+        isDistrictShow = false;
+        isOrganizationShow = false;
         var options = new ModalOptions()
         {
             HideCloseButton = true,

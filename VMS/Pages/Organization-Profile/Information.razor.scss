@@ -3,20 +3,40 @@
 .my-information {
     padding: 50px 0;
 
+    .row-1, .row-2 {
+        display: flex
+    }
+
+    .col-left {
+        width: 55%;
+    }
+
+    .col-right {
+        width: 45%;
+    }
+
     .information__logo {
+
         .information__logo-img {
             position: relative;
-            margin-bottom: 40px;
-            width: 198px;
-            height: 198px;
+            margin-bottom: 20px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid $border-color-bold;
         }
-
-        label {
+        img{
+            width: 90%
         }
 
         .icon-camera {
+            position: absolute;
+            bottom: 35px;
+            right: 15px;
             font-size: 36px;
             color: $grey-icon;
         }
@@ -38,7 +58,7 @@
             background: rgba(100, 215, 47, 0.8);
             color: $white;
             text-decoration: none;
-            margin-top: 30px;
+            margin-top: 20px;
             padding: 20px;
             border-radius: 50px;
             text-align: center;
@@ -65,48 +85,6 @@
         }
     }
 
-    .information__notification {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(196, 196, 196, 0.38);
-
-        .notification__content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            background: $white;
-            border-radius: 10px;
-        }
-
-        .notification__btn {
-            border-top: 1px solid $border-color-bold;
-        }
-
-        button {
-        }
-
-        .btn__cancel {
-            color: $border-color-bold;
-            border-color: $border-color-bold;
-        }
-
-        .btn__save {
-            background-color: $blue;
-            color: $white;
-            transition: all 0.3s linear;
-
-            &:hover {
-                background-color: $blue-hv;
-            }
-        }
-    }
-
-
-
     .row-1 {
         border-bottom: 1px solid $border-color-bold;
     }
@@ -127,7 +105,7 @@
         }
 
         i {
-            margin: auto 5px;
+            margin: auto 2px;
             color: $green;
             font-size: 30px;
         }
@@ -145,10 +123,11 @@
             margin: auto 20px;
         }
 
-        span {
+        a {
             color: $grey-text;
             font-size: 16px;
             font-weight: 400;
+            text-decoration: none;
         }
     }
 
@@ -157,7 +136,7 @@
 
         h3 {
             text-align: center;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 600;
             margin-bottom: 30px;
 
@@ -169,7 +148,7 @@
 
     .information__carousel {
         position: relative;
-        padding: 0 30px;
+        padding-right:30px;
         z-index: 0;
 
         .item {
@@ -197,6 +176,7 @@
             }
 
             span {
+                margin-top: 20px;
                 color: $green;
                 font-weight: 500;
                 display: inline-block;
@@ -241,7 +221,7 @@
     .information__act {
         h3 {
             text-align: center;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 600;
             margin-bottom: 20px;
 

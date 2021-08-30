@@ -1,0 +1,15 @@
+﻿@* Inherits from the original InputText component *@
+@inherits InputText
+@* Bind the oninput event *@
+<textarea @attributes="AdditionalAttributes"
+          class="@CssClass"
+          value="@CurrentValue"
+          maxlength="@MaxLength"
+          rows="@Rows"
+          @oninput="EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString)"></textarea>
+@code{
+    [Parameter]
+    public int MaxLength { get; set; } = 500;
+    [Parameter]
+    public int Rows { get; set; } = 6;
+}

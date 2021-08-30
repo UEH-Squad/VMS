@@ -6,14 +6,29 @@
 /*#endregion */
 .my-information {
   padding: 50px 0; }
+  .my-information .row-1, .my-information .row-2 {
+    display: flex; }
+  .my-information .col-left {
+    width: 55%; }
+  .my-information .col-right {
+    width: 45%; }
   .my-information .information__logo .information__logo-img {
     position: relative;
-    margin-bottom: 40px;
-    width: 198px;
-    height: 198px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    overflow: hidden; }
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #707070; }
+  .my-information .information__logo img {
+    width: 90%; }
   .my-information .information__logo .icon-camera {
+    position: absolute;
+    bottom: 35px;
+    right: 15px;
     font-size: 36px;
     color: #B4B4B4; }
   .my-information .information__logo p {
@@ -29,7 +44,7 @@
     background: rgba(100, 215, 47, 0.8);
     color: #FFFFFF;
     text-decoration: none;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 20px;
     border-radius: 50px;
     text-align: center;
@@ -47,31 +62,6 @@
       color: #FFFFFF;
       font-size: 24px;
       font-weight: 700; }
-  .my-information .information__notification {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(196, 196, 196, 0.38); }
-    .my-information .information__notification .notification__content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #FFFFFF;
-      border-radius: 10px; }
-    .my-information .information__notification .notification__btn {
-      border-top: 1px solid #707070; }
-    .my-information .information__notification .btn__cancel {
-      color: #707070;
-      border-color: #707070; }
-    .my-information .information__notification .btn__save {
-      background-color: #18A0FB;
-      color: #FFFFFF;
-      transition: all 0.3s linear; }
-      .my-information .information__notification .btn__save:hover {
-        background-color: #0B588c; }
   .my-information .row-1 {
     border-bottom: 1px solid #707070; }
   .my-information .information__rank a {
@@ -85,7 +75,7 @@
     font-weight: 700;
     margin-right: 20px; }
   .my-information .information__rank i {
-    margin: auto 5px;
+    margin: auto 2px;
     color: #64D72F;
     font-size: 30px; }
   .my-information .information__rank span {
@@ -95,22 +85,23 @@
   .my-information .information__contact i {
     font-size: 24px;
     margin: auto 20px; }
-  .my-information .information__contact span {
+  .my-information .information__contact a {
     color: #515151;
     font-size: 16px;
-    font-weight: 400; }
+    font-weight: 400;
+    text-decoration: none; }
   .my-information .information__fields {
     border-right: 1px solid #707070; }
     .my-information .information__fields h3 {
       text-align: center;
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 600;
       margin-bottom: 30px; }
       .my-information .information__fields h3 span {
         color: #18A0FB; }
   .my-information .information__carousel {
     position: relative;
-    padding: 0 30px;
+    padding-right: 30px;
     z-index: 0; }
     .my-information .information__carousel .item {
       text-align: center; }
@@ -130,6 +121,7 @@
         line-height: 75px;
         font-size: 30px; }
       .my-information .information__carousel .item span {
+        margin-top: 20px;
         color: #64D72F;
         font-weight: 500;
         display: inline-block;
@@ -155,7 +147,7 @@
       display: none; }
   .my-information .information__act h3 {
     text-align: center;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 600;
     margin-bottom: 20px; }
     .my-information .information__act h3 span {

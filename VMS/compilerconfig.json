@@ -102,5 +102,13 @@
   {
     "outputFile": "Pages/EditOrganizationProfile/EditOrganizationProfile.razor.css",
     "inputFile": "Pages/EditOrganizationProfile/EditOrganizationProfile.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization-Profile/Notification.razor.css",
+    "inputFile": "Pages/Organization-Profile/Notification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/EditOrganizationProfile/UploadImg.razor.css",
+    "inputFile": "Pages/EditOrganizationProfile/UploadImg.razor.scss"
   }
 ]

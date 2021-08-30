@@ -1,2 +1,148 @@
-﻿body {
+﻿@import "../../Resources/scss/common/_variables";
+
+.my-editProfile {
+
+    .editProfile__title {
+        font-size: 48px;
+        font-weight: 600;
+        color: $blue;
+        text-align: center;
+
+        span {
+            color: $green;
+        }
+    }
+
+    hr {
+        width: 80%;
+        color: $border-color-bold;
+        margin: 0 auto;
+    }
+
+    .editProfile__logo {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $border-color-bold;
+    }
+
+    ::deep .valid.modified:not([type=checkbox]) {
+        border: 1px solid $blue;
+        outline: none;
+    }
+
+
+
+    .form-item {
+        margin-bottom: 20px;
+    }
+
+    .form-text {
+        font-size: 24px;
+        font-weight: 500;
+        color: $border-color-bold;
+        margin: auto 0;
+    }
+
+    ::deep .form-input {
+        padding: 10px;
+        font-size: 24px;
+        font-weight: 300;
+        color: $grey-text;
+        border: 1px solid $border-color-bold;
+    }
+
+    .form-field-item {
+        width: 20%;
+        text-align: center;
+
+        &:hover > i {
+            font-size: 50px;
+        }
+
+        &:hover > span {
+            transform: translateY(-5px);
+        }
+
+        i {
+            display: block;
+            background-color: $blue;
+            border-radius: 50%;
+            color: white;
+            margin: 5px auto;
+            transition: all 0.3s linear;
+            width: 88px;
+            height: 88px;
+            line-height: 88px;
+            font-size: 40px;
+        }
+
+        span {
+            color: $green;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s linear;
+            font-size: 20px;
+        }
+
+        .icon-add {
+            background: $green;
+            color: $white;
+            font-size: 50px;
+
+            &:hover {
+                background: $green-bold;
+                font-size: 60px;
+            }
+        }
+    }
+
+    .countWord {
+        color: $border-color-bold;
+    }
+
+    .from__btn {
+        margin: 120px 0;
+
+        .btn {
+            padding: 12px 35px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .from__btn-cancel {
+            background: $white;
+            color: $blue;
+        }
+
+        .from__btn-submit {
+            background: $blue;
+            color: $white;
+
+            &:hover {
+                background: $blue-hv;
+            }
+        }
+    }
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+        
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #C4C4C4;
+        border-radius: 10px;
+        height: 50px;
+
+    }
 }
+
+

@@ -19,9 +19,9 @@
                                 }
                                 else
                                 {
-                                    <p @onclick="() => HandleShowSubSkill(skill.Id)" class="m-0 @(choosenSkills.Exists(s => s.Id == skill.Id || s.ParentSkillId == skill.Id) || isShowSubSkills.Exists(s => s == skill.Id) ? "colored-green position-relative" : "")">
+                                    <p @onclick="() => HandleShowSubSkill(skill.Id)" class="m-0 @(choosenSkills.Exists(s => s.Id == skill.Id || s.ParentSkillId == skill.Id) || showSubSkillsId == skill.Id ? "colored-green position-relative" : "")">
                                         @skill.Name
-                                        <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(isShowSubSkills.Exists(s => s == skill.Id) ? "d-block" : "")">
+                                        <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(showSubSkillsId == skill.Id ? "d-block" : "")">
                                             @foreach (var subskill in skill.SubSkills)
                                             {
                                                 <p @onclick="() => ChangeState(subskill)" class="sub-popup-item mb-3 @(choosenSkills.Exists(s => s.Id == subskill.Id) ? "underlined" : "")">@subskill.Name</p>
@@ -35,8 +35,8 @@
                     }
                 }
             </div>
-            <div @onclick="SaveModalAsync" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
         </div>
+        <div @onclick="SaveModalAsync" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
     </div>
 </div>
 

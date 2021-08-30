@@ -1,19 +1,17 @@
 ﻿using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivitySearchPage
 {
     public partial class SkillsPopup : ComponentBase
     {
         private List<SkillViewModel> skills;
-        private List<int> isShowSubSkills = new();
         private List<SkillViewModel> choosenSkills;
+        private int showSubSkillsId = 0;
 
         [Parameter]
         public List<SkillViewModel> ChoosenSkillsList { get; set; }
@@ -44,15 +42,7 @@ namespace VMS.Pages.ActivitySearchPage
 
         private void HandleShowSubSkill(int skillId)
         {
-            if (!isShowSubSkills.Exists(s => s == skillId))
-            {
-                isShowSubSkills.Clear();
-                isShowSubSkills.Add(skillId);
-            }
-            else
-            {
-                isShowSubSkills.Remove(skillId);
-            }
+            showSubSkillsId = (showSubSkillsId == skillId ? 0 : skillId);
         }
 
         private async Task CloseModalAsync()

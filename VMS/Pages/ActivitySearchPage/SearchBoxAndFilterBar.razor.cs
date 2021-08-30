@@ -56,6 +56,12 @@ namespace VMS.Pages.ActivitySearchPage
         {
             isCityShow = !isCityShow;
         }
+
+        private void CloseCityDropdown()
+        {
+            isCityShow = false;
+        }
+
         private async Task ChooseCityValue(AddressPath addressPath)
         {
             Filter.ProvinceId = addressPath.Id;
@@ -71,6 +77,12 @@ namespace VMS.Pages.ActivitySearchPage
         {
             isDistrictShow = !isDistrictShow;
         }
+
+        private void CloseDistrictDropdown()
+        {
+            isDistrictShow = false;
+        }
+
         private void ChooseDistrictValue(AddressPath addressPath)
         {
             Filter.DistrictId = addressPath.Id;
@@ -82,6 +94,12 @@ namespace VMS.Pages.ActivitySearchPage
         {
             isOrganizationShow = !isOrganizationShow;
         }
+
+        private void CloseOrganizationDropdown()
+        {
+            isOrganizationShow = false;
+        }
+
         private void ChooseOrganizationValue(User organizer)
         {
             Filter.OrgId = organizer.UserName;
@@ -151,21 +169,6 @@ namespace VMS.Pages.ActivitySearchPage
         {
             OrderList[id] = !OrderList[id];
             await OrderListChanged.InvokeAsync(OrderList);
-        }
-
-        private void CloseCityDropdown()
-        {
-            isCityShow = false;
-        }
-
-        private void CloseOrganizationDropdown()
-        {
-            isOrganizationShow = false;
-        }
-
-        private void CloseDistrictDropdown()
-        {
-            isDistrictShow = false;
         }
     }
 }

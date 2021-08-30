@@ -29,7 +29,14 @@
                 </div>
             }
         </div>
-        <div class="col-8 bottom-line"></div>
+        @if (HaveDecor)
+        {
+            <div class="col-8 bottom-line"></div>
+        }
+        else
+        {
+            <div class="col-8 bottom-line  ms-auto"></div>
+        }
     </div>
 </div>
 
@@ -97,6 +104,8 @@
 @code {
     [Parameter]
     public bool HaveControl { get; set; } = false;
+    [Parameter]
+    public bool HaveDecor { get; set; } = true;
     [Parameter]
     public string Title { get; set; }
     [Parameter]

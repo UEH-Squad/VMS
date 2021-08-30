@@ -10,7 +10,8 @@
         dots: false,
         responsive: {
             0: {
-                items: 3
+                items: 3,
+                slideBy: 4
             },
         }
     })

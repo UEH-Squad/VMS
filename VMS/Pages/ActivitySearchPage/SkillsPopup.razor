@@ -1,6 +1,6 @@
 ﻿@inject IModalService Modal
 <div class="modal-backdrop modal-dialog-centered justify-content-center">
-    <div class="my-custom-popup position-relative">
+    <div class="my-custom-popup position-relative d-flex flex-column justify-content-between align-items-center">
         <span @onclick="CloseModal" class="material-icons-outlined close-btn">
             close
         </span>
@@ -36,9 +36,9 @@
                             </p>
                         </div>
                     }
+            </div>
         </div>
         <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
-    </div>
     </div>
 </div>
 @code {
@@ -64,6 +64,8 @@
 
         //Check Is any Sub items selected
         choosenSkillsList[0, 0] = choosenSkillsList[1, 0] = false;
+
+        //let subIndex run from 1 to numberOfSubSkills because numberOfSubSkills is 10, and numberOfExpertise is 8 ( 10 > 8 )
         for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
         {
             if (choosenSkillsList[0, subIndex])
@@ -83,11 +85,39 @@
     //handle change color when click items
     void ChangeStateAndCheckSubPopup(int id)
     {
-        choosenSkillsList[id,0] = !choosenSkillsList[id,0];
+        if (id != 0 && id != 1)
+        {
+            choosenSkillsList[id, 0] = !choosenSkillsList[id, 0];
+            isShowSubSkills = false;
+            isShowExpertise = false;
+            choosenSkillsList[0, 0] = false;
+            choosenSkillsList[1, 0] = false;
+            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
+            {
+                if (choosenSkillsList[0, subIndex])
+                {
+                    choosenSkillsList[0, 0] = true;
+                }
+
+                if (choosenSkillsList[1, subIndex])
+                {
+                    choosenSkillsList[1, 0] = true;
+                }
+            }
+        }
 
         if (id == 0)
         {
             ShowSubSkills();
+            isShowExpertise = false;
+            choosenSkillsList[1, 0] = false;
+            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
+            {
+                if (choosenSkillsList[1, subIndex])
+                {
+                    choosenSkillsList[1, 0] = true;
+                }
+            }
             choosenSkillsList[id,0] = true;
             if ((isThereSelectedSubItem == false) && (isShowSubSkills == false))
             {
@@ -97,6 +127,15 @@
         if (id == 1)
         {
             ShowExpertise();
+            isShowSubSkills = false;
+            choosenSkillsList[0, 0] = false;
+            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
+            {
+                if (choosenSkillsList[0, subIndex])
+                {
+                    choosenSkillsList[0, 0] = true;
+                }
+            }
             choosenSkillsList[id,0] = true;
             if ((isThereSelectedSubItem == false) && (isShowExpertise == false))
             {
@@ -147,8 +186,6 @@
     {
         isShowExpertise = !isShowExpertise;
     }
-
-
 
 
     //Close and save button

@@ -48,9 +48,11 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    transition: all ease 0.2s; }
+    transition: all ease 0.2s;
+    background-color: #F3F3F5;
+    border-radius: 10px; }
     .act__container__card:hover {
-      filter: brightness(80%); }
+      filter: brightness(90%); }
     .act__container__card__img {
       position: relative;
       width: 100%;
@@ -104,10 +106,10 @@
             font-size: 18px; } }
         @media (min-width: 1200px) {
           .act__container__card__icon span {
-            font-size: 20px; } }
+            font-size: 36px; } }
         @media (min-width: 1400px) {
           .act__container__card__icon span {
-            font-size: 24px; } }
+            font-size: 36px; } }
 
 .heart span {
   color: #F14747 !important; }
@@ -120,16 +122,17 @@
 
 ::deep .owl-nav {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  opacity: 0.8; }
   ::deep .owl-nav .owl-prev, ::deep .owl-nav .owl-next:hover {
     background-color: transparent !important; }
   ::deep .owl-nav span {
-    font-size: 40px;
+    font-size: 50px;
     color: #FFFFFF;
     transition: all 0.3s linear;
     border-radius: 100% !important;

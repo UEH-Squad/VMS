@@ -30,7 +30,7 @@
 
 <div class="filter-bar d-flex justify-content-between mb-5">
     <div class="filter-item filter-item-city position-relative">
-        <div @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="popup-btn @(Filter.ProvinceId != 0 ? "bg-grey" : "")"  placeholder="@cityChoosenValue" readonly>@cityChoosenValue</div>
+        <input  @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="popup-btn @(Filter.ProvinceId != 0 ? "bg-grey" : "")"  placeholder="@cityChoosenValue" readonly/>
         <div @onclick:preventDefault class="my-dropdown" style="display: @(isCityShow ? "block" : "none")">
             <ul>
                 @if (provinces is not null)
@@ -48,7 +48,7 @@
     </div>
 
     <div class="filter-item filter-item-district position-relative">
-        <div @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="popup-btn @(Filter.DistrictId != 0 ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly>@districtChoosenValue</div>
+        <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="popup-btn @(Filter.DistrictId != 0 ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly/>
         <div class="my-dropdown" style="display: @(isDistrictShow ? "block" : "none")">
             <ul>
                 @if (districts is not null)
@@ -66,7 +66,7 @@
     </div>
 
     <div class="filter-item filter-item-organization position-relative">
-        <div @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="popup-btn @(!string.IsNullOrEmpty(Filter.OrgId)?"bg-grey":"")" placeholder="@organizationChoosenValue" readonly>@organizationChoosenValue</div>
+        <input @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="popup-btn @(!string.IsNullOrEmpty(Filter.OrgId)?"bg-grey":"")" placeholder="@organizationChoosenValue" readonly/>
         <div class="my-dropdown" style="display: @(isOrganizationShow ? "block" : "none")">
             <ul>
                 @if (organizers is not null)

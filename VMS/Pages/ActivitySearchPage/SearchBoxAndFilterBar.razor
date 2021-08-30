@@ -73,7 +73,7 @@
                 {
                     @foreach(var org in organizers)
                     {
-                        <li @onmousedown="() => ChooseOrganizationValue(org)">@org.UserName</li>
+                        <li @onmousedown="() => ChooseOrganizationValue(org)">@org.FullName</li>
                     }
                 }
             </ul>

@@ -25,11 +25,11 @@
                 <form action="">
                     <h1>Đăng ký <span>tham gia</span></h1>
                     <p class="form-text">Họ tên</p>
-                    <InputText Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
+                    <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
                     <p class="form-text">Email nhận thông báo</p>
-                    <InputText Value=@CurrentUser.Email type="email" class="form-control" disabled="true"/>
+                    <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control" disabled="true"/>
                     <p class="form-text">Số điện thoại <span>(*)</span></p>
-                    <InputText @bind-Value="signupModel.PhoneNumber" type="text" class="form-control" />
+                    <InputText @bind-Value="signupModel.PhoneNumber" type="number" class="form-control" />
                     <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
                     <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control"></InputTextArea>
                     <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>

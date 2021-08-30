@@ -94,5 +94,13 @@
   {
     "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
     "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Activities/CreateEditActivity.razor.css",
+    "inputFile": "Pages/Activities/CreateEditActivity.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Typeahead.razor.css",
+    "inputFile": "Shared/Typeahead.razor.scss"
   }
 ]

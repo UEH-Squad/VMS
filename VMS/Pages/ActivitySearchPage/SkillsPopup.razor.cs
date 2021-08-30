@@ -46,6 +46,7 @@ namespace VMS.Pages.ActivitySearchPage
         {
             if (!isShowSubSkills.Exists(s => s == skillId))
             {
+                isShowSubSkills.Clear();
                 isShowSubSkills.Add(skillId);
             }
             else

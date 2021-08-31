@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using VMS.Application.ViewModels;
+using VMS.Common.Extensions;
 
 namespace VMS.Pages.ActivitySearchPage
 {
@@ -10,14 +11,14 @@ namespace VMS.Pages.ActivitySearchPage
         private bool[] orderList = new bool[3];
         private bool isSearch;
 
-        [Parameter]
-        public string OrderByUrl { get; set; }
-        [Parameter]
-        public string AreaIdByUrl { get; set; }
+        [Inject]
+        NavigationManager NavigationManager { get; set; }
 
         protected override void OnInitialized()
         {
-            switch (OrderByUrl?.ToLower())
+            if (NavigationManager.TryGetQueryString<string>("order", out var orderByUrl))
+
+            switch (orderByUrl?.ToLower())
             {
                 case "newest":
                     orderList[0] = true;
@@ -28,13 +29,13 @@ namespace VMS.Pages.ActivitySearchPage
                     break;
             }
 
-            if (!string.IsNullOrEmpty(AreaIdByUrl))
-            {
-                if (int.TryParse(AreaIdByUrl, out int areaId))
-                {
-                    filter.Areas.Add(areaId);
-                }
-            }
+            //if (!string.IsNullOrEmpty(AreaIdByUrl))
+            //{
+            //    if (int.TryParse(AreaIdByUrl, out int areaId))
+            //    {
+            //        filter.Areas.Add(areaId);
+            //    }
+            //}
         }
 
         private void SearchValueChanged(string searchValue)

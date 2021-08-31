@@ -37,12 +37,6 @@ namespace VMS.Pages.ActivitySearchPage
             }
         }
 
-        private void FilterChanged(FilterActivityViewModel filter)
-        {
-            this.filter = filter;
-            isSearch = false;
-        }
-
         private void SearchValueChanged(string searchValue)
         {
             this.searchValue = searchValue;

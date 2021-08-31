@@ -4,7 +4,7 @@
 {
     <div class="act-container position-relative @(IsFeaturedActivities ? "margin-bt" : "")">
         <div class="act-section margin-10">
-            <a href="@Routes.ActivitySearch" class="act-header">
+            <a href="@Routes.ActivitySearch/@OrderByUrl" class="act-header">
                 <span class="act-header__green">Hoạt động</span>
                 <span class="act-header__blue">@Title</span>
                 <span class="act-header__green">gần bạn</span>
@@ -14,7 +14,7 @@
                 @foreach (var activity in Activities)
                 {
                     <div class="col-lg-3 col-4 padding-10 item-wrapper">
-                        <a href="@Routes.ActivitySearch" class="act-item">
+                        <a href="@Routes.ActivityInfo/@activity.Id" class="act-item">
                             <img src="./img/RelatedActivities/1st-activity.png" alt="Hoạt động tình nguyện" class="act-item--img">
                             <div class="act-item--title">
                                 <p class="m-0 limited-text">@activity.Name</p>
@@ -24,7 +24,7 @@
                 }
             </div>
         </div>
-        <a href="@Routes.ActivitySearch" class="act-more">Nhiều hơn >></a>
+        <a href="@Routes.ActivitySearch/@OrderByUrl" class="act-more">Nhiều hơn >></a>
     </div>
 }
 
@@ -34,6 +34,9 @@
 
     [Parameter]
     public string Title { get; set; }
+
+    [Parameter]
+    public string OrderByUrl { get; set; }
 
     [Parameter]
     public List<UserWithActivityViewModel> Activities { get; set; }

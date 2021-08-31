@@ -10,6 +10,23 @@ namespace VMS.Pages.ActivitySearchPage
         private bool[] orderList = new bool[3];
         private bool isSearch;
 
+        [Parameter]
+        public string OrderByUrl { get; set; }
+
+        protected override void OnInitialized()
+        {
+            switch (OrderByUrl?.ToLower())
+            {
+                case "newest":
+                    orderList[0] = true;
+                    orderList[1] = true;
+                    break;
+                case "hottest":
+                    orderList[2] = true;
+                    break;
+            }
+        }
+
         private void FilterChanged(FilterActivityViewModel filter)
         {
             this.filter = filter;

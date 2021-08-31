@@ -31,11 +31,12 @@
   margin-left: -60px; }
   .my-search-box__icon-wrapper span {
     color: #64D72F;
-    font-size: 24px;
+    font-size: 26px;
     line-height: 24px; }
   .my-search-box__icon-wrapper .search-btn {
     background-color: transparent;
-    border: none; }
+    border: none;
+    padding: 0; }
   .my-search-box__icon-wrapper .clear-search-btn {
     margin-top: -4px;
     visibility: hidden;
@@ -68,7 +69,7 @@
     background-color: #18A0FB;
     position: absolute;
     top: 49%;
-    left: 53%;
+    left: 52%;
     transform: translate(-50%, -50%);
     display: none; }
   .my-check-box:checked::before {
@@ -91,12 +92,14 @@
 .popup-btn {
   border-radius: 8px;
   height: 40px;
+  width: 100%;
   border: 1px solid #707070;
   cursor: pointer;
+  color: #b4b4b4;
   padding-left: 8px;
   padding-right: 30px;
   font-size: 18px;
-  color: #b4b4b4;
+  outline: none;
   line-height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -104,6 +107,8 @@
   -webkit-line-clamp: 1;
   /* number of lines to show */
   -webkit-box-orient: vertical; }
+  .popup-btn::placeholder {
+    color: #b4b4b4; }
 
 .my-dropdown {
   padding: 15px 22px;
@@ -116,7 +121,8 @@
   height: 240px;
   background-color: #fff;
   z-index: 1;
-  display: none; }
+  display: none;
+  width: 100%; }
   .my-dropdown ul {
     overflow-y: scroll;
     list-style: none;
@@ -133,6 +139,9 @@
       line-height: 24px;
       margin-bottom: 12px;
       cursor: pointer; }
+
+.popup-btn:focus ~ .my-dropdown {
+  display: block; }
 
 .filter-btn {
   color: #fff;

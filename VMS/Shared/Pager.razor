@@ -1,36 +1,31 @@
-﻿@*<section class="pagination mb-0 mt-5">
-        <ul class="mb-0">
-            <li class="btn-prev"><span class="material-icons">keyboard_arrow_left</span></li>
-            <li class="numb">1</li>
-            <li class="dots">...</li>
-            <li class="numb">4</li>
-            <li class="numb">5</li>
-            <li class="numb">6</li>
-            <li class="dots">...</li>
-            <li class="numb">10</li>
-            <li class="btn-prev"><span class="material-icons">keyboard_arrow_right</span></li>
-        </ul>
-    </section>*@
-
-@if (PageCount > 1)
+﻿@if (PageCount > 1)
 {
-    var start = CurrentPage - 1;
-    var finish = CurrentPage + 1;
-    bool shouldShowLeftDots = true;
-    bool shouldShowRightDots = true;
+    int start = 2;
+    int finish = PageCount - 1;
+    bool shouldShowLeftDots = false;
+    bool shouldShowRightDots = false;
+    int half = (int)Math.Ceiling(visiblePages / 2d);
 
-    if (start < 3)
+    if (PageCount > visiblePages)
     {
-        start = 2;
-        finish = 4;
-        shouldShowLeftDots = false;
-    }
+        start = CurrentPage - 1;
+        finish = CurrentPage + 1;
+        shouldShowLeftDots = true;
+        shouldShowRightDots = true;
 
-    if (finish > PageCount - 2)
-    {
-        start = PageCount - 3;
-        finish = PageCount - 1;
-        shouldShowRightDots = false;
+        if (CurrentPage < 1 + half)
+        {
+            start = 2;
+            finish = start + (half - 1);
+            shouldShowLeftDots = false;
+        }
+
+        if (CurrentPage > PageCount - half)
+        {
+            finish = PageCount - 1;
+            start = finish - (half - 1);
+            shouldShowRightDots = false;
+        }
     }
 
     var hasPrevious = CurrentPage > 1 && PageCount > 1;
@@ -93,6 +88,10 @@
         </ul>
     </nav>
 }
+else
+{
+    <div class="pagination"></div>
+}
 
 @code {
 
@@ -107,6 +106,8 @@
 
     [Parameter]
     public bool ShowPageNumbers { get; set; } = true;
+
+    private int visiblePages = 5;
 
     private void PagerButtonClicked(int page)
     {

@@ -26,8 +26,13 @@
 }
 
 .overlay {
-    background-color: $white-overlay;
-    opacity: .6;
+    background-color: rgba(100,100,100,.2);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 10px 10px 0 0;
 }
 
 .act-container {
@@ -63,16 +68,33 @@
             color: $green;
         }
     }
+
+    .material-icons {
+        color: $white;
+        font-size: 24px;
+        right: 5px;
+        top: 0;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 .act-content {
     background-color: $grey;
     border-radius: 0 0 10px 10px;
 
-    .content {
+    .content-cl {
+        background-color: rgba(100,100,100,.2);
+    }
+
+    .content-nm,
+    .content-cl {
         padding: 17px 10px 26px 29px;
         text-decoration: none;
         display: block;
+        border-radius: 0 0 10px 10px;
 
         .act-title {
             font-size: 24px;
@@ -80,15 +102,14 @@
             line-height: 30px;
         }
 
-        .hover-title {
+        .title-nm {
             color: $blue;
         }
 
-        .none-hover-title {
-            color: $blue;
+        .title-cl {
+            color: $grey-text;
         }
     }
-
 
     .lm-text {
         display: -webkit-box;
@@ -101,30 +122,24 @@
 }
 
 .img-container {
-     .material-icons {
-        color: $white;
-        font-size: 24px;
-        right: 5px;
-
-        &:hover {
-            cursor: pointer;
-        }
-     }
-
-     .act-img {
-         width: 100%;
-     }
+    .act-img {
+        width: 100%;
+    }
 }
 
 .act-container:hover {
     & > .img-container {
-        background-color: $grey-hv;
         opacity: .6;
-        border-radius: 10px 10px 0 0;
     }
 
-    & > .act-content .hover-title {
-        color: $blue-bold;
+    & > .act-content {
+        .title-nm {
+            color: $blue-bold;
+        }
+
+        .title-cl {
+            color: $blue-bold;
+        }
     }
 }
 
@@ -145,7 +160,7 @@
         opacity: .85;
         position: absolute;
         border-radius: 100%;
-        top: 23%;
+        top: 30%;
         width: 40px;
         height: 40px;
         display: flex;
@@ -221,7 +236,7 @@
         top: 10px;
         right: 12px;
         cursor: pointer;
-        
+
         .material-icons {
             font-size: 20px;
             color: $grey-close-btn;
@@ -252,6 +267,7 @@
         flex-direction: column;
         align-items: center;
         color: $green;
+
         .color {
             color: $blue;
         }

@@ -110,5 +110,9 @@
   {
     "outputFile": "Pages/Organization-Profile/ActPopUp.razor.css",
     "inputFile": "Pages/Organization-Profile/ActPopUp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization-Profile/Act.razor.css",
+    "inputFile": "Pages/Organization-Profile/Act.razor.scss"
   }
 ]

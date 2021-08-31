@@ -1,11 +1,18 @@
-﻿<InputFile OnChange="Find" class="w-100" />
+﻿<InputFile OnChange="Find" class="w-100"  />
 <span class="@(a ? "d-none" : "d-block")">err</span>
 
 
 @code{
     private bool a = true;
-    void Find()
+
+    [Parameter]
+    public IBrowserFile File { get; set; }
+    [Parameter]
+    public EventCallback<IBrowserFile> FileChanged { get; set; }
+
+    async Task Find(InputFileChangeEventArgs e)
     {
+        await FileChanged.InvokeAsync(e.File);
         a = false;
     }
 }

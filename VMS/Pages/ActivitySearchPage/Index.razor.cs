@@ -12,6 +12,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         [Parameter]
         public string OrderByUrl { get; set; }
+        [Parameter]
+        public string AreaIdByUrl { get; set; }
 
         protected override void OnInitialized()
         {
@@ -24,6 +26,14 @@ namespace VMS.Pages.ActivitySearchPage
                 case "hottest":
                     orderList[2] = true;
                     break;
+            }
+
+            if (!string.IsNullOrEmpty(AreaIdByUrl))
+            {
+                if (int.TryParse(AreaIdByUrl, out int areaId))
+                {
+                    filter.Areas.Add(areaId);
+                }
             }
         }
 

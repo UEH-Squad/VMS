@@ -13,10 +13,12 @@
                 @foreach (var area in areas)
                 {
                     <div class="item">
-                        <i class="material-icons">
-                            @area.Icon
-                        </i>
-                        <span>@area.Name</span>
+                        <a href="@Routes.ActivitySearch/area/@area.Id">
+                            <i class="material-icons">
+                                @area.Icon
+                            </i>
+                            <span>@area.Name</span>
+                        </a>
                     </div>
                 }
             </div>

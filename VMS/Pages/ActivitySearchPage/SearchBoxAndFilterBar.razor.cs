@@ -42,8 +42,6 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnInitializedAsync()
         {
-            Filter = new FilterActivityViewModel();
-
             organizers = IdentityService.GetAllOrganizers();
             isOrganizationShow = false;
 

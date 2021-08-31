@@ -100,18 +100,6 @@
     "inputFile": "Pages/Organization-Profile/ActTookPlace.razor.scss"
   },
   {
-    "outputFile": "Pages/Organization-Profile/ActFavourite.razor.css",
-    "inputFile": "Pages/Organization-Profile/ActFavourite.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization-Profile/ActOrganize.razor.css",
-    "inputFile": "Pages/Organization-Profile/ActOrganize.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization-Profile/ActPopUp.razor.css",
-    "inputFile": "Pages/Organization-Profile/ActPopUp.razor.scss"
-  },
-  {
     "outputFile": "Pages/Organization-Profile/Act.razor.css",
     "inputFile": "Pages/Organization-Profile/Act.razor.scss"
   }

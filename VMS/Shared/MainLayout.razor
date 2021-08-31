@@ -1,14 +1,15 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
 
 @inject NavigationManager NavigationManager
 
-<NavMenu IsFixedTop="@isFixedTop"/>
+<NavMenu IsFixedTop="@isFixedTop" />
 
 <main class="flex-grow-1 @(isFixedTop ? "main-layout" : "")">
     @Body
 </main>
 
-<Footer/>
+<Footer />
 
 @code
 {
@@ -18,10 +19,17 @@
     {
         isFixedTop = !NavigationManager.Uri.Contains(Routes.ActivitySearch);
 
-        NavigationManager.LocationChanged += (sender, args) =>
-        {
-            isFixedTop = !args.Location.Contains(Routes.ActivitySearch);
-            StateHasChanged();
-        };
+        NavigationManager.LocationChanged += LocationChanged;
+    }
+
+    void LocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        isFixedTop = !args.Location.Contains(Routes.ActivitySearch);
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        NavigationManager.LocationChanged -= LocationChanged;
     }
 }

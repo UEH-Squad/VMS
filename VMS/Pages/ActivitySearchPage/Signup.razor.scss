@@ -19,6 +19,15 @@
         background: $white;
         overflow-y: scroll;
 
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+
         .signUp__exit {
             position: absolute;
             top: 25px;
@@ -63,20 +72,39 @@
             border: 1.5px solid #707070;
         }
 
-        .form-control {
+        ::deep textarea {
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 14px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $grey-icon;
+                border-radius: 20px;
+                border: 2px solid white;
+            }
+        }
+
+        ::deep .form-control {
             padding: 15px 0;
             margin-bottom: 25px;
             font-size: 24px;
+            padding-left: 20px;
         }
 
-        .input-radio {
+        ::deep .input-radio {
             width: 16px;
             height: 16px;
             line-height: 16px;
             margin-right: 15px;
         }
 
-        .input-radio ~ span {
+        ::deep .valid.modified:not([type=checkbox]) {
+            outline:none;
+        }
+
+        ::deep .input-radio ~ label {
             font-size: 24px;
             font-weight: 300;
         }

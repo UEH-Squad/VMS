@@ -1,19 +1,30 @@
-﻿<InputFile OnChange="Find" class="w-100"  />
-<span class="@(a ? "d-none" : "d-block")">err</span>
+﻿<div class="position-relative @changeFileCss my-uploadImg">
+    <InputFile OnChange="ChangeFile" class="w-100 uploadImg__input  " /> 
+    <div class="d-flex align-items-center">
+        <i class="material-icons">
+            cloud_upload
+        </i>
+        <span class="@(isChangeFile ? "d-block" : "d-none")">Kéo và thả hình ảnh liên quan tại dây</span>
+    </div>
+</div>
+
+
 
 
 @code{
-    private bool a = true;
+    private bool isChangeFile = true;
+    private string changeFileCss = "";
 
     [Parameter]
     public IBrowserFile File { get; set; }
     [Parameter]
     public EventCallback<IBrowserFile> FileChanged { get; set; }
 
-    async Task Find(InputFileChangeEventArgs e)
+    async Task ChangeFile(InputFileChangeEventArgs e)
     {
         await FileChanged.InvokeAsync(e.File);
-        a = false;
+        isChangeFile = false;
+        changeFileCss = "changeFileCss";
     }
 }
 

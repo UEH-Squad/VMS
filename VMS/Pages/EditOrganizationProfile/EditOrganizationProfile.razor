@@ -28,7 +28,11 @@
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực</p>
-                        <div class="col-8 form-field d-flex">
+                        <div class="col-8 form-field d-flex flex-wrap">
+                            <div class="form-field-item">
+                                <i class="material-icons">group</i>
+                                <span>Cộng đồng</span>
+                            </div>
                             <div class="form-field-item">
                                 <i class="material-icons">group</i>
                                 <span>Cộng đồng</span>
@@ -62,7 +66,7 @@
                     </div>
                     <div class="row form-item mb-0">
                         <p class="col-4 form-text">Thay đổi ảnh</p>
-                        <div class="col-8 px-0 test">
+                        <div class="col-8 px-0 ">
                             <UploadImg FileChanged="FileChanged" />
                         </div>
 
@@ -125,7 +129,11 @@
     private void FileChanged(IBrowserFile file)
     {
         this.file = file;
-        isFileChanged = true;
+        if(file != null)
+            {
+                isFileChanged = true;
+            }
+        
     }
 
 

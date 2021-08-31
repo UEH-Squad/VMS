@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="act col-8 ps-0" id="act">
-                <h3>Có <span>@(activities is null ? "0" : activities.Count) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+                <h3>Có <span>@(pagedResult is null ? "0" : pagedResult.RowCount) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
                 <div class="px-2">
                     <div class="act__page-1">
                         @if (pagedResult is not null && pagedResult.Results.Count != 0)

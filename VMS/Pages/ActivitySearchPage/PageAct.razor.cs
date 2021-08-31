@@ -1,6 +1,5 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
-using Geolocation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
@@ -11,7 +10,6 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Domain.Models;
-using Coordinate = VMS.Application.ViewModels.Coordinate;
 
 namespace VMS.Pages.ActivitySearchPage
 {
@@ -20,7 +18,6 @@ namespace VMS.Pages.ActivitySearchPage
         private User currentUser;
         private int page = 1;
         private Coordinate location;
-        private List<ActivityViewModel> activities;
         private IEnumerable<ActivityViewModel> featuredActivities;
         private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
 
@@ -45,21 +42,6 @@ namespace VMS.Pages.ActivitySearchPage
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
 
-        public abstract class PagedResultBase
-        {
-            public int CurrentPage { get; set; }
-            public int PageCount { get; set; }
-            public int PageSize { get; set; }
-            public int RowCount { get; set; }
-            public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
-            public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
-        }
-
-        public class PagedResult<T> : PagedResultBase where T : class
-        {
-            public List<T> Results { get; set; }
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
@@ -81,14 +63,12 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnParametersSetAsync()
         {
-            activities = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter);
-            HandleOrder();
-            pagedResult = GetData();
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, location, page);
         }
 
         private async Task HandlePageChanged()
         {
-            pagedResult = GetData();
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, location, page);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }
@@ -112,69 +92,6 @@ namespace VMS.Pages.ActivitySearchPage
             }
 
             IdentityService.UpdateUser(currentUser);
-        }
-
-        private void HandleOrder()
-        {
-            if (OrderList[0] && OrderList[1] && OrderList[2])
-            {
-                activities = activities.OrderByDescending(a => a.PostDate)
-                                            .ThenByDescending(a => a.MemberQuantity)
-                                            .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                            .ToList();
-                return;
-            }
-
-            if (OrderList[0] && OrderList[2])
-            {
-                activities = activities.OrderByDescending(a => a.PostDate)
-                                            .ThenByDescending(a => a.MemberQuantity)
-                                            .ToList();
-                return;
-            }
-
-            if (OrderList[0] && OrderList[1])
-            {
-                activities = activities.OrderByDescending(a => a.PostDate)
-                                            .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                            .ToList();
-                return;
-            }
-
-            if (OrderList[1] && OrderList[2])
-            {
-                activities = activities.OrderByDescending(a => a.MemberQuantity)
-                                            .ThenBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                            .ToList();
-                return;
-            }
-
-            if (OrderList[0])
-            {
-                activities = activities.OrderByDescending(a => a.PostDate).ToList();
-            }
-
-            if (OrderList[2])
-            {
-                activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
-            }
-
-            if (OrderList[1])
-            {
-                activities = activities.OrderBy(a => GeoCalculator.GetDistance(location.Latitude, location.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
-            }
-        }
-
-        private PagedResult<ActivityViewModel> GetData()
-        {
-            var result = new PagedResult<ActivityViewModel>();
-            result.CurrentPage = page;
-            result.RowCount = activities.Count;
-            result.PageSize = 20;
-            result.PageCount = result.RowCount / result.PageSize;
-            result.Results = activities.Skip((page - 1) * result.PageSize).Take(result.PageSize).ToList();
-
-            return result;
         }
 
         private void ShowModal(int id)

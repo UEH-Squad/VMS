@@ -18,21 +18,7 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<SkillViewModel>> GetAllSkillsAsync()
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Specification<Skill> specification = new()
-            {
-                Includes = s => s.Include(x => x.SubSkills)
-            };
-
-            List<Skill> skills = await _repository.GetListAsync<Skill>(dbContext);
-
-            return _mapper.Map<List<SkillViewModel>>(skills);
-        }
-
-        public async Task<List<SkillViewModel>> GetAllSubSkillsAsync(int parentSkillId)
+        public async Task<List<SkillViewModel>> GetAllSkillsAsync(int? parentSkillId = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -41,7 +27,8 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<System.Func<Skill, bool>>>()
                 {
                     s => s.ParentSkillId == parentSkillId
-                }
+                },
+                Includes = s => s.Include(x => x.SubSkills)
             };
 
             List<Skill> skills = await _repository.GetListAsync(dbContext, specification);

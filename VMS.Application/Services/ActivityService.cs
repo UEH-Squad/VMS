@@ -31,17 +31,33 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        public async Task<List<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter)
+        public async Task<PagedResult<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, bool[] orderList, Coordinate userLocation, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            List<ActivityViewModel> activities;
+
             if (isSearch)
             {
-                return await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext);
+                activities = await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext);
             }
             else
             {
-                return await GetAllActivitiesWithFilterAsync(filter, dbContext);
+                activities = await GetAllActivitiesWithFilterAsync(filter, dbContext);
             }
+
+            activities = GetOrderActivities(orderList, activities, userLocation);
+
+            PagedResult<ActivityViewModel> result = new PagedResult<ActivityViewModel>
+            {
+                CurrentPage = currentPage,
+                RowCount = activities.Count,
+                PageSize = 20
+            };
+            result.PageCount = result.RowCount / result.PageSize;
+            result.Results = activities.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
+
+            return result;
         }
 
         private async Task<List<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext)
@@ -50,7 +66,8 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
+                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
+                    a => a.EndDate >= DateTime.Now
                 }
             };
 
@@ -71,7 +88,7 @@ namespace VMS.Application.Services
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Any(x => x == a.AreaId) || filter.Areas.Count == 0,
-                    //a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id))
+                    a => a.EndDate >= DateTime.Now
                 },
                 Includes = a => a.Include(x => x.ActivitySkills)
             };
@@ -83,6 +100,50 @@ namespace VMS.Application.Services
             activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             return _mapper.Map<List<ActivityViewModel>>(activities);
+        }
+
+        private List<ActivityViewModel> GetOrderActivities(bool[] orderList, List<ActivityViewModel> activities, Coordinate userLocation)
+        {
+            if (orderList[0] && orderList[1] && orderList[2])
+            {
+                return activities = activities.OrderByDescending(a => a.PostDate)
+                                            .ThenByDescending(a => a.MemberQuantity)
+                                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
+                                            .ToList();
+            }
+
+            if (orderList[0] && orderList[2])
+            {
+                return activities = activities.OrderByDescending(a => a.PostDate)
+                                            .ThenByDescending(a => a.MemberQuantity)
+                                            .ToList();
+            }
+
+            if (orderList[0] && orderList[1])
+            {
+                return activities = activities.OrderByDescending(a => a.PostDate)
+                                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
+                                            .ToList();
+            }
+
+            if (orderList[1] && orderList[2])
+            {
+                return activities = activities.OrderByDescending(a => a.MemberQuantity)
+                                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
+                                            .ToList();
+            }
+
+            if (orderList[2])
+            {
+                return activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
+            }
+
+            if (orderList[1])
+            {
+                return activities = activities.OrderBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
+            }
+
+            return activities = activities.OrderByDescending(a => a.PostDate).ToList();
         }
 
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()

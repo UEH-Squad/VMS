@@ -75,7 +75,7 @@
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
-                            <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || isFileChanged ? "d-inline-block": "d-none") ">Hoàn tất</button>
+                            <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file!=null? "d-inline-block": "d-none") ">Hoàn tất</button>
                         </div>
 
                     </div>
@@ -116,7 +116,6 @@
     };
 
     private IBrowserFile file;
-    private bool isFileChanged = false;
 
     private int maxWord = 300;
 
@@ -129,10 +128,6 @@
     private void FileChanged(IBrowserFile file)
     {
         this.file = file;
-        if(file != null)
-            {
-                isFileChanged = true;
-            }
         
     }
 

@@ -1,10 +1,10 @@
 ﻿<div class="position-relative @changeFileCss my-uploadImg">
-    <InputFile OnChange="ChangeFile" class="w-100 uploadImg__input  " /> 
+    <InputFile OnChange="ChangeFile" @onclick='()=> { FileChanged.InvokeAsync(null); changeFileCss="" ;isChangeFile = false; }' class="w-100 uploadImg__input  " /> 
     <div class="d-flex align-items-center">
         <i class="material-icons">
             cloud_upload
         </i>
-        <span class="@(isChangeFile ? "d-block" : "d-none")">Kéo và thả hình ảnh liên quan tại dây</span>
+        <span class="@(isChangeFile ? "d-none" : "d-block")">Kéo và thả hình ảnh liên quan tại dây</span>
     </div>
 </div>
 
@@ -12,7 +12,7 @@
 
 
 @code{
-    private bool isChangeFile = true;
+    private bool isChangeFile = false;
     private string changeFileCss = "";
 
     [Parameter]
@@ -23,7 +23,7 @@
     async Task ChangeFile(InputFileChangeEventArgs e)
     {
         await FileChanged.InvokeAsync(e.File);
-        isChangeFile = false;
+        isChangeFile = true;
         changeFileCss = "changeFileCss";
     }
 }

@@ -43,12 +43,16 @@
     private void AnimateHeart(int id)
     {
         var item = fakeData.FirstOrDefault(x => x.Id == id);
-        item.IsFav = true;
+        if (item is not null)
+            {
+                item.IsFav = !item.IsFav;
+            }
+        
     }
 
     protected override async Task OnInitializedAsync()
     {
-        fakeData.AddRange(Enumerable.Range(0, 7).Select(x => new FakeData
+        fakeData.AddRange(Enumerable.Range(0,7).Select(x => new FakeData
         {
             Id = x,
             Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",

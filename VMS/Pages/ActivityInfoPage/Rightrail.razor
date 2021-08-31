@@ -2,14 +2,17 @@
     <div class="container">
         <div class="inside-the-border">
             <div class="icons">
-                <div class="icon-tooltip">
-                    <div class="icon icon--community">
-                        <span class="material-icons my-icons">
-                            people_outline
-                        </span>
+
+                <div class="icon">
+                    <span class="material-icons my-icons">
+                        people_outline
+                    </span>
+                    <div class="icon-tooltip">
+                        <span class="icon-tooltip--text">Cộng đồng</span>
+                        <div class="icon-tooltip--triangle"></div>
                     </div>
-                    <h5 class="tooltip">Cộng đồng</h5>
                 </div>
+
                 <div class="icon">
                     <span class="material-icons my-icons">
                         add_box
@@ -44,7 +47,7 @@
                 </div>
             </div>
             <div class="btn-sign-up--cover">
-                <button class="btn-sign-up">
+                <button @onclick="@(() =>ShowSignUpPopUp())" class="btn-sign-up">
                     <h3 class="btn-sign-up__text">Đăng ký</h3>
                 </button>
             </div>
@@ -67,6 +70,17 @@
             UseCustomLayout = true
         };
         Modal.Show<PopUpReport>("",options);
+    }
+    async Task ShowSignUpPopUp()
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
     }
 }
 

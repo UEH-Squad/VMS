@@ -16,7 +16,8 @@
   .my-act .act .act__item {
     background-color: #F3F3F5;
     padding: 30px 10px;
-    border-radius: 10px; }
+    border-radius: 10px;
+    margin-top: 30px; }
 
 .my-act .act__content {
   padding: 0 20px;
@@ -28,6 +29,8 @@
     color: #18A0FB;
     text-decoration: none;
     cursor: pointer; }
+    .my-act .act__content a:hover {
+      color: #0B588c; }
   .my-act .act__content h5 {
     display: flex;
     align-items: center;

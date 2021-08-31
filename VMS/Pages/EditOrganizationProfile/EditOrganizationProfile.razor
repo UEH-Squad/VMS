@@ -56,13 +56,14 @@
                                 <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Content)</div>
                                 <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input w-100 mx-0" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
+                                
                             </div>
                             
                         </div>
                         <div class="row form-item mb-0">
                             <p class="col-4 form-text">Thay đổi ảnh</p>
-                            <div class="col-8 px-0">
-                                <UploadImg></UploadImg>
+                            <div class="col-8 px-0 test">
+                                <UploadImg ></UploadImg>
                             </div>                      
                             
 
@@ -117,10 +118,6 @@
             return count ;
         }
 
-        private string borderColor = "";
-        void changeTextarea()
-        {
-            borderColor = "borderColor";
-        }
+
       
     }

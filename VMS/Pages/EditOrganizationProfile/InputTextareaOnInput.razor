@@ -6,7 +6,8 @@
           value="@CurrentValue"
           maxlength="@MaxLength"
           rows="@Rows"
-          @oninput="EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString)"></textarea>
+          @oninput="EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString)">
+</textarea>
 @code{
     [Parameter]
     public int MaxLength { get; set; } = 500;

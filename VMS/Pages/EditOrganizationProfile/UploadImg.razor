@@ -1,28 +1,12 @@
-﻿
-<div class="uploadImg position-relative">
-    <input @onchange="changeFile" type="file" class=" uploadImg__input w-100 @borderColor" id="uploadImg__input"
-           style="@(isValueFile ? "color:#707070" : "color: transparent") " />
+﻿<InputFile OnChange="Find" class="w-100" />
+<span class="@(a ? "d-none" : "d-block")">err</span>
 
 
-    <label for="uploadImg__input" class="d-flex  align-self-center justify-content-center">
-        <i class="material-icons ">cloud_upload</i>
-        <span class="@(isText ? "visible" : "invisible")">Kéo và thả hình ảnh liên quan tại đây</span>
-    </label>
-
-</div>
-
-
-
-@code{ 
-    private bool isValueFile = false;
-    private bool isText = true;
-    private string borderColor = "";
-    void changeFile()
+@code{
+    private bool a = true;
+    void Find()
     {
-        isValueFile = true;
-        isText = false;
-        borderColor = "borderColor";
-
+        a = false;
     }
-
 }
+

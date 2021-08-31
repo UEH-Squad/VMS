@@ -71,7 +71,10 @@
 
 @code {
 
+    private ViewActivityViewModel activity;
+
     [CascadingParameter] public IModalService Modal { get; set; }
+
     async Task ShowReportPopUp()
     {
         ModalParameters parameters = new();
@@ -83,10 +86,20 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
+
         Modal.Show<PopUpReport>("",parameters ,options);
     }
 
-    private ViewActivityViewModel activity;
+    async Task ShowSignUpPopUp()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
+    }
 
     [Parameter]
     public string ActivityId { get; set; }
@@ -95,16 +108,6 @@
     {
         activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
     }
-    async Task ShowSignUpPopUp()
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
-    }
+    
 }
 

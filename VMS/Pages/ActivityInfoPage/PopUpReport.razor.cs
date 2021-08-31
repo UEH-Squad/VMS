@@ -63,7 +63,7 @@ namespace VMS.Pages.ActivityInfoPage
             }
         }
 
-        private List<String> ListReason()
+        private List<String> Reasons()
         {
             List<String> c = new List<String>();
             c.Add("Hoạt động không có thật");

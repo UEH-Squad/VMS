@@ -60,17 +60,26 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var item = fakeData.FirstOrDefault(x => x.Id == id);
-        if (item is not null)
-            {
-                item.IsFav = !item.IsFav;
-            }
-        
+        activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
+        OrgId = activity.OrgId;
+        otherActivities = await ActivityService.GetOtherActivities(OrgId);
+        currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
     }
 
-    protected override async Task OnInitializedAsync()
+    private void HandleFavorite(int id)
     {
-        fakeData.AddRange(Enumerable.Range(0,7).Select(x => new FakeData
+        Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == id);
+
+        if (favorite is null)
+        {
+            currentUser.Favorites.Add(new()
+            {
+                UserId = currentUser.Id,
+                ActivityId = id,
+                CreatedDate = DateTime.Now
+            });
+        }
+        else
         {
             currentUser.Favorites.Remove(favorite);
         }

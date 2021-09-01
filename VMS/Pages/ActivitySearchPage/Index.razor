@@ -2,8 +2,10 @@
 
 <div class="container-lg px-0 layout">
     <div class="layout__filterbar mb-2">
-        @NavigationManager.ToAbsoluteUri(NavigationManager.Uri)
-        <SearchBoxAndFilterBar @bind-Filter="filter" SearchValueChanged="SearchValueChanged" @bind-OrderList="orderList" />
+        <SearchBoxAndFilterBar Filter="filter"
+                               FilterChanged="FilterChanged"
+                               SearchValueChanged="SearchValueChanged"
+                               @bind-OrderList="orderList" />
     </div>
     <div class="layout__divider"></div>
     <div class="layout__body">

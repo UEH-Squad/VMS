@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
 using VMS.Application.ViewModels;
 using VMS.Common.Extensions;
 
@@ -9,39 +10,49 @@ namespace VMS.Pages.ActivitySearchPage
         private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
         private bool[] orderList = new bool[3];
-        private bool isSearch;
+        private bool isSearch = false;
 
         [Inject]
         NavigationManager NavigationManager { get; set; }
 
         protected override void OnInitialized()
         {
-            if (NavigationManager.TryGetQueryString<string>("order", out var orderByUrl))
+            HandleQueryString();
+        }
 
-            switch (orderByUrl?.ToLower())
+        private void HandleQueryString()
+        {
+            if (NavigationManager.TryGetQueryString<bool>("newest", out var isNewest))
             {
-                case "newest":
-                    orderList[0] = true;
-                    orderList[1] = true;
-                    break;
-                case "hottest":
-                    orderList[2] = true;
-                    break;
+                orderList[0] = isNewest;
             }
 
-            //if (!string.IsNullOrEmpty(AreaIdByUrl))
-            //{
-            //    if (int.TryParse(AreaIdByUrl, out int areaId))
-            //    {
-            //        filter.Areas.Add(areaId);
-            //    }
-            //}
+            if (NavigationManager.TryGetQueryString<bool>("nearest", out var isNearest))
+            {
+                orderList[1] = isNearest;
+            }
+
+            if (NavigationManager.TryGetQueryString<bool>("hottest", out var isHottest))
+            {
+                orderList[2] = isHottest;
+            }
+
+            if (NavigationManager.TryGetQueryString<List<int>>("area", out var listAreaId))
+            {
+                filter.Areas.AddRange(listAreaId);
+            }
         }
 
         private void SearchValueChanged(string searchValue)
         {
             this.searchValue = searchValue;
             isSearch = true;
+        }
+
+        private void FilterChanged(FilterActivityViewModel filter)
+        {
+            this.filter = filter;
+            isSearch = false;
         }
     }
 }

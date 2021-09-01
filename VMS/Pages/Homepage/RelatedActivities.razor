@@ -4,7 +4,7 @@
 {
     <div class="act-container position-relative @(IsFeaturedActivities ? "margin-bt" : "")">
         <div class="act-section margin-10">
-            <a href="@Routes.ActivitySearch/@OrderByUrl" class="act-header">
+            <a href="@Routes.ActivitySearch/@QueryString" class="act-header">
                 <span class="act-header__green">Hoạt động</span>
                 <span class="act-header__blue">@Title</span>
                 <span class="act-header__green">gần bạn</span>
@@ -24,7 +24,7 @@
                 }
             </div>
         </div>
-        <a href="@Routes.ActivitySearch/@OrderByUrl" class="act-more">Nhiều hơn >></a>
+        <a href="@Routes.ActivitySearch/@QueryString" class="act-more">Nhiều hơn >></a>
     </div>
 }
 
@@ -36,7 +36,7 @@
     public string Title { get; set; }
 
     [Parameter]
-    public string OrderByUrl { get; set; }
+    public string QueryString { get; set; }
 
     [Parameter]
     public List<UserWithActivityViewModel> Activities { get; set; }

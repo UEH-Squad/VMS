@@ -13,8 +13,8 @@
 
 <section class="my-act">
     <div class="container-lg p-0 position-relative">
-        <VMS.Pages.Homepage.RelatedActivities Title="Mới Nhất" Activities="@newestActivities" OrderByUrl="newest" />
-        <VMS.Pages.Homepage.RelatedActivities Title="Nổi Bật Nhất" Activities="@featuredActivities" IsFeaturedActivities="true" OrderByUrl="hottest" />
+        <VMS.Pages.Homepage.RelatedActivities Title="Mới Nhất" Activities="@newestActivities" QueryString="?newest=true&nearest=true" />
+        <VMS.Pages.Homepage.RelatedActivities Title="Nổi Bật Nhất" Activities="@featuredActivities" IsFeaturedActivities="true" QueryString="?hottest=true&nearest=true" />
     </div>
 </section>
 

@@ -20,8 +20,8 @@
                 <p class="postdate">
                     Ngày đăng: @activity.PostDate.ToShortDateString()
                 </p>
-                <button @onclick="() => HandleFavorite(int.Parse(ActivityId))" class="@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "heart-button2" : "heart-button1")">
-                    <span class="material-icons"><span class="heart-icon">@typeI</span></span>
+                <button @onclick="() => HandleFavorite(int.Parse(ActivityId))" class="@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "heart-button1" : "heart-button2")">
+                    <span class="material-icons"><span class="heart-icon">@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "favorite" : "favorite_border")</span></span>
                 </button>
                 <div><hr class="line-line2"></div>
             </div>
@@ -59,8 +59,6 @@
 
     private User currentUser;
     private ViewActivityViewModel activity;
-    private string typeButton = "heart-button1";
-    private string typeI = "favorite_border";
 
     [Parameter]
     public string ActivityId { get; set; }
@@ -83,12 +81,10 @@
                 ActivityId = id,
                 CreatedDate = DateTime.Now
             });
-            typeI = "favorite";
         }
         else
         {
             currentUser.Favorites.Remove(favorite);
-            typeI = "favorite_border";
         }
 
         IdentityService.UpdateUser(currentUser);

@@ -43,11 +43,6 @@
 
 @code {
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
-    }
-
     private ViewActivityViewModel activity;
     private List<OtherActivitiesViewModel> otherActivities;
     private User currentUser;
@@ -57,6 +52,14 @@
 
     [Parameter]
     public string OrgId { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (otherActivities is not null) 
+        {
+            await JSRuntinme.InvokeVoidAsync("vms.OtherAct", otherActivities.Count());
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {

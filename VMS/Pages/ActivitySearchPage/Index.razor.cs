@@ -10,10 +10,10 @@ namespace VMS.Pages.ActivitySearchPage
         private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
         private bool isSearch = false;
-        private Dictionary<string, bool> orderList = new(new List<KeyValuePair<string, bool>>() {
-            new KeyValuePair<string, bool>("newest", false),
-            new KeyValuePair<string, bool>("nearest", false),
-            new KeyValuePair<string, bool>("hottest", false)
+        private Dictionary<ActOrderBy, bool> orderList = new(new List<KeyValuePair<ActOrderBy, bool>>() {
+            new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Newest, false),
+            new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Nearest, false),
+            new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Hottest, false)
         });
 
         [Inject]
@@ -28,17 +28,17 @@ namespace VMS.Pages.ActivitySearchPage
         {
             if (NavigationManager.TryGetQueryString<bool>("newest", out var isNewest))
             {
-                orderList["newest"] = isNewest;
+                orderList[ActOrderBy.Newest] = isNewest;
             }
 
             if (NavigationManager.TryGetQueryString<bool>("nearest", out var isNearest))
             {
-                orderList["nearest"] = isNearest;
+                orderList[ActOrderBy.Nearest] = isNearest;
             }
 
             if (NavigationManager.TryGetQueryString<bool>("hottest", out var isHottest))
             {
-                orderList["hottest"] = isHottest;
+                orderList[ActOrderBy.Hottest] = isHottest;
             }
 
             if (NavigationManager.TryGetQueryString<List<int>>("area", out var listAreaId))

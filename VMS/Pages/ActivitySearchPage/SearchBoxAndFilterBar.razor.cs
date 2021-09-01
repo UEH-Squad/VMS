@@ -11,6 +11,19 @@ namespace VMS.Pages.ActivitySearchPage
 {
     public partial class SearchBoxAndFilterBar : ComponentBase
     {
+        private class OrderData
+        {
+            public string Name { get; set; }
+            public ActOrderBy OrderBy { get; set; }
+        }
+
+        private List<OrderData> OrderDatas = new()
+        {
+            new OrderData() { Name = "Mới nhất", OrderBy = ActOrderBy.Newest },
+            new OrderData() { Name = "Gần bạn nhất", OrderBy = ActOrderBy.Nearest },
+            new OrderData() { Name = "Nổi bật nhất", OrderBy = ActOrderBy.Hottest }
+        };
+
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
         private List<User> organizers;
@@ -24,13 +37,13 @@ namespace VMS.Pages.ActivitySearchPage
         [CascadingParameter]
         public IModalService Modal { get; set; }
         [Parameter]
-        public Dictionary<string, bool> OrderList { get; set; }
+        public Dictionary<ActOrderBy, bool> OrderList { get; set; }
         [Parameter]
         public string SearchValue { get; set; }
         [Parameter]
         public FilterActivityViewModel Filter { get; set; }
         [Parameter]
-        public EventCallback<Dictionary<string, bool>> OrderListChanged { get; set; }
+        public EventCallback<Dictionary<ActOrderBy, bool>> OrderListChanged { get; set; }
         [Parameter]
         public EventCallback<string> SearchValueChanged { get; set; }
         [Parameter]
@@ -161,7 +174,7 @@ namespace VMS.Pages.ActivitySearchPage
             Filter = new FilterActivityViewModel();
         }
 
-        private async Task ChangeOrderAsync(string key)
+        private async Task ChangeOrderAsync(ActOrderBy key)
         {
             OrderList[key] = !OrderList[key];
             await OrderListChanged.InvokeAsync(OrderList);

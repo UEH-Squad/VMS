@@ -24,7 +24,7 @@ namespace VMS.Pages.ActivitySearchPage
         [Parameter]
         public bool IsSearch { get; set; }
         [Parameter]
-        public Dictionary<string, bool> OrderList { get; set; }
+        public Dictionary<ActOrderBy, bool> OrderList { get; set; }
         [Parameter]
         public string SearchValue { get; set; }
         [Parameter]

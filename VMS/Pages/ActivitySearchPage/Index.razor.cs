@@ -9,8 +9,12 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
-        private bool[] orderList = new bool[3];
         private bool isSearch = false;
+        private Dictionary<string, bool> orderList = new(new List<KeyValuePair<string, bool>>() {
+            new KeyValuePair<string, bool>("newest", false),
+            new KeyValuePair<string, bool>("nearest", false),
+            new KeyValuePair<string, bool>("hottest", false)
+        });
 
         [Inject]
         NavigationManager NavigationManager { get; set; }
@@ -24,17 +28,17 @@ namespace VMS.Pages.ActivitySearchPage
         {
             if (NavigationManager.TryGetQueryString<bool>("newest", out var isNewest))
             {
-                orderList[0] = isNewest;
+                orderList["newest"] = isNewest;
             }
 
             if (NavigationManager.TryGetQueryString<bool>("nearest", out var isNearest))
             {
-                orderList[1] = isNearest;
+                orderList["nearest"] = isNearest;
             }
 
             if (NavigationManager.TryGetQueryString<bool>("hottest", out var isHottest))
             {
-                orderList[2] = isHottest;
+                orderList["hottest"] = isHottest;
             }
 
             if (NavigationManager.TryGetQueryString<List<int>>("area", out var listAreaId))

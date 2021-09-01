@@ -24,19 +24,19 @@ namespace VMS.Pages.ActivitySearchPage
         [CascadingParameter]
         public IModalService Modal { get; set; }
         [Parameter]
-        public bool[] OrderList { get; set; }
+        public Dictionary<string, bool> OrderList { get; set; }
         [Parameter]
         public string SearchValue { get; set; }
         [Parameter]
         public FilterActivityViewModel Filter { get; set; }
         [Parameter]
-        public EventCallback<bool[]> OrderListChanged { get; set; }
+        public EventCallback<Dictionary<string, bool>> OrderListChanged { get; set; }
         [Parameter]
         public EventCallback<string> SearchValueChanged { get; set; }
         [Parameter]
         public EventCallback<FilterActivityViewModel> FilterChanged { get; set; }
         [Inject]
-        private IIdentityService IdentityService { get; set;  }
+        private IIdentityService IdentityService { get; set; }
         [Inject]
         private IAddressService AddressService { get; set; }
 
@@ -161,9 +161,9 @@ namespace VMS.Pages.ActivitySearchPage
             Filter = new FilterActivityViewModel();
         }
 
-        private async Task ChangeOrderAsync(int id)
+        private async Task ChangeOrderAsync(string key)
         {
-            OrderList[id] = !OrderList[id];
+            OrderList[key] = !OrderList[key];
             await OrderListChanged.InvokeAsync(OrderList);
         }
     }

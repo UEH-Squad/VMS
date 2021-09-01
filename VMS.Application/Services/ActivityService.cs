@@ -31,7 +31,7 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        public async Task<PagedResult<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, bool[] orderList, Coordinate userLocation, int currentPage)
+        public async Task<PagedResult<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<string, bool> orderList, Coordinate userLocation, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -102,9 +102,9 @@ namespace VMS.Application.Services
             return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
-        private List<ActivityViewModel> GetOrderActivities(bool[] orderList, List<ActivityViewModel> activities, Coordinate userLocation)
+        private List<ActivityViewModel> GetOrderActivities(Dictionary<string, bool> orderList, List<ActivityViewModel> activities, Coordinate userLocation)
         {
-            if (orderList[0] && orderList[1] && orderList[2])
+            if (orderList["newest"] && orderList["nearest"] && orderList["hottest"])
             {
                 return activities = activities.OrderByDescending(a => a.PostDate)
                                             .ThenByDescending(a => a.MemberQuantity)
@@ -112,33 +112,33 @@ namespace VMS.Application.Services
                                             .ToList();
             }
 
-            if (orderList[0] && orderList[2])
+            if (orderList["newest"] && orderList["hottest"])
             {
                 return activities = activities.OrderByDescending(a => a.PostDate)
                                             .ThenByDescending(a => a.MemberQuantity)
                                             .ToList();
             }
 
-            if (orderList[0] && orderList[1])
+            if (orderList["newest"] && orderList["nearest"])
             {
                 return activities = activities.OrderByDescending(a => a.PostDate)
                                             .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
                                             .ToList();
             }
 
-            if (orderList[1] && orderList[2])
+            if (orderList["hottest"] && orderList["nearest"])
             {
                 return activities = activities.OrderByDescending(a => a.MemberQuantity)
                                             .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
                                             .ToList();
             }
 
-            if (orderList[2])
+            if (orderList["hottest"])
             {
                 return activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
             }
 
-            if (orderList[1])
+            if (orderList["nearest"])
             {
                 return activities = activities.OrderBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
             }

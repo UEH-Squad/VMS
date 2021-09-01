@@ -96,6 +96,14 @@
     "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
   },
   {
+    "outputFile": "Pages/Organization-Profile/ActTookPlace.razor.css",
+    "inputFile": "Pages/Organization-Profile/ActTookPlace.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization-Profile/Act.razor.css",
+    "inputFile": "Pages/Organization-Profile/Act.razor.scss"
+  },
+  {
     "outputFile": "Pages/Organization-Profile/Information.razor.css",
     "inputFile": "Pages/Organization-Profile/Information.razor.scss"
   },

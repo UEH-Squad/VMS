@@ -1,4 +1,4 @@
 ﻿export const smoothScrollTo = (element) => {
-    const body = $(element);
-    body.stop().animate({ scrollTop: 0 }, 500, 'swing');
+    const body = $("html, body");
+    body.stop().animate({ scrollTop: $(element).offset().top }, 500, 'swing');
 }

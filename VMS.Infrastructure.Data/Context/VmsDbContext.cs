@@ -20,6 +20,7 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<UserAddress> UserAddresses { get; set; }
         public DbSet<UserArea> UserAreas { get; set; }
         public DbSet<UserSkill> UserSkills { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {
@@ -50,6 +51,12 @@ namespace VMS.Infrastructure.Data.Context
                 .WithMany(x => x.SubSkills)
                 .HasForeignKey(x => x.ParentSkillId)
                 .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+
+            builder.Entity<Favorite>()
+                .Property(f => f.UserId).IsRequired();
+            builder.Entity<Favorite>()
+                .Property(f => f.ActivityId).IsRequired();
+
 
             // add demo data for skills and requirements
             builder.Entity<Skill>().HasData(

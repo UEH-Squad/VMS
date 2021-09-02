@@ -11,6 +11,7 @@
 
 .btn-back-top {
   position: absolute;
+  cursor: pointer;
   top: 0;
   right: 0px;
   transform: translate(-100%, -50%); }

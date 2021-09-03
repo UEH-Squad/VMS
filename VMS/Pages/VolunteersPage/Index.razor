@@ -1,0 +1,61 @@
+﻿@attribute [Route(Routes.VolunteersPage)]
+
+<div class="container-lg px-0 layout">
+    <div class="title">
+        <div class="main-title">
+            <div>Danh sách <span>tình nguyện viên</span></div>
+        </div>
+        <div class="sub-title">
+            <div class="sub-title--content">Tuyển tình nguyện viên tham gia công tác phòng chống dịch Covid19</div>
+        </div>
+    </div>
+
+    <div class="button-and-searchbox">
+
+        <form action="/" method="post" class="my-search-box d-flex mb-5">
+            <input type="text" value=@mySearchValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+            <div class="my-search-box__icon-wrapper d-flex align-items-center">
+                <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
+                    close
+                </span>
+                <button type="submit" class="search-btn d-flex align-items-center">
+                    <span class="material-icons-outlined">
+                        search
+                    </span>
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <p class="quantity-volunteers">Có tất cả <span>255</span> tình nguyện viên tham gia </p>
+
+    @*<div class="group-card">
+        <div class="my-card">
+            <div class="d-flex">
+                <img class="my-card__avatar" src="./img/act1.png" alt="" />
+                <div class="my-card__info">
+                    <h4 class="my-card__info--name">Bùi Minh Kha</h4>
+                    <h4 class="my-card__info--id">31191025985</h4>
+                </div>
+            </div>
+            <div class="my-card__button">
+                <button class="my-card__button--watchform">Xem đơn đăng ký</button>
+                <button class="my-card__button--delete">Xóa</button>
+            </div>
+        </div>
+    </div>*@
+</div>
+
+@code {
+    string mySearchValue = "";
+    void ClearSearchBox()
+    {
+        mySearchValue = "";
+    }
+    void UpdateInstanceValue(ChangeEventArgs e)
+    {
+        mySearchValue = e.Value.ToString();
+    }
+}

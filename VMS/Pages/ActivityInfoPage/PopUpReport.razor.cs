@@ -63,9 +63,9 @@ namespace VMS.Pages.ActivityInfoPage
             }
         }
 
-        private List<String> Reasons()
+        private List<string> Reasons()
         {
-            List<String> c = new List<String>();
+            List<string> c = new List<string>();
             c.Add("Hoạt động không có thật");
             c.Add("Hoạt động không không tương thích với nội dung đã đề cập");
             c.Add("Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động");

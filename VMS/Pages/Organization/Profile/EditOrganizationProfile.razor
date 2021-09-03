@@ -1,4 +1,4 @@
-﻿@attribute [Route(Routes.EditOrganizationProfile)]
+﻿@attribute [Route(Routes.EditProfile)]
 @using System.ComponentModel.DataAnnotations;
 
 <div class="my-editProfile">
@@ -50,7 +50,7 @@
                                 <span>Thể thao</span>
                             </div>
                             <div class="form-field-item">
-                                <i class="material-icons-outlined icon-add">add</i>
+                                <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
                             </div>
                         </div>
                     </div>
@@ -60,24 +60,19 @@
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Content)</div>
                             <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input w-100 mx-0" />
                             <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
-
                         </div>
-
                     </div>
                     <div class="row form-item mb-0">
                         <p class="col-4 form-text">Thay đổi ảnh</p>
                         <div class="col-8 px-0 ">
                             <UploadImg FileChanged="FileChanged" />
                         </div>
-
-
                     </div>
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
-                            <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file!=null? "d-inline-block": "d-none") ">Hoàn tất</button>
+                            <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
                         </div>
-
                     </div>
                 </EditForm>
             </div>
@@ -85,8 +80,9 @@
     </div>
 </div>
 
+@code {
 
-    @code {
+    [CascadingParameter] public IModalService Modal { get; set; }
 
     public class Organization
     {
@@ -128,8 +124,22 @@
     private void FileChanged(IBrowserFile file)
     {
         this.file = file;
-        
-    }
-
 
     }
+
+    bool[] choosenAreasList = new bool[12];
+    private async Task ShowAreasModal()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        var areasParameter = new ModalParameters();
+        areasParameter.Add("choosenAreasList", choosenAreasList);
+        var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
+        await areasModal.Result;
+    }
+
+}

@@ -1,4 +1,4 @@
-﻿namespace VMS.Pages.Organization_Profile
+﻿namespace VMS.Pages.Organization
 {
     public class FakeData
     {

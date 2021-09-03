@@ -17,7 +17,7 @@ namespace VMS.Pages.ActivitySearchPage
             public ActOrderBy OrderBy { get; set; }
         }
 
-        private List<OrderData> OrderDatas = new()
+        private List<OrderData> orderDatas = new()
         {
             new OrderData() { Name = "Mới nhất", OrderBy = ActOrderBy.Newest },
             new OrderData() { Name = "Gần bạn nhất", OrderBy = ActOrderBy.Nearest },

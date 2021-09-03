@@ -87,15 +87,17 @@ namespace VMS.Application.Services
                     a => a.IsVirtual == filter.Virtual || a.IsVirtual == !filter.Actual,
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
-                    a => filter.Areas.Any(x => x == a.AreaId) || filter.Areas.Count == 0,
+                    a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,
+                    a => a.ActivitySkills.Select(activitySkills => activitySkills.SkillId)
+                                         .Where(actSkillId => filter.Skills.Select(skill => skill.Id)
+                                                                           .Any(skillId => skillId == actSkillId))
+                                         .Count() == filter.Skills.Count(),
                     a => a.EndDate >= DateTime.Now
                 },
                 Includes = a => a.Include(x => x.ActivitySkills)
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
-
-            activities = activities.Where(a => filter.Skills.All(s => a.ActivitySkills.Any(x => x.SkillId == s.Id))).ToList();
 
             activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 

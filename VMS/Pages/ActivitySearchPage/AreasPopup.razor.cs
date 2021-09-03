@@ -1,7 +1,6 @@
 ﻿using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -11,15 +10,10 @@ namespace VMS.Pages.ActivitySearchPage
     public partial class AreasPopup : ComponentBase
     {
         private List<AreaViewModel> areas;
-        private List<int> choosenAreas;
-        private List<AreaViewModel> chosenAreas;
+        private List<AreaViewModel> choosenAreas;
 
         [Parameter]
-        public List<int> ChoosenAreasList { get; set; }
-
-        [Parameter]
-        public List<AreaViewModel> ChosenAreas { get; set; }
-
+        public List<AreaViewModel> ChoosenAreasList { get; set; }
         [CascadingParameter]
         private BlazoredModalInstance AreasModal { get; set; }
 
@@ -30,22 +24,19 @@ namespace VMS.Pages.ActivitySearchPage
         {
             areas = await AreaService.GetAllAreasAsync();
             choosenAreas = new();
-            //choosenAreas.AddRange(ChoosenAreasList);
-            chosenAreas = new();
-            chosenAreas.AddRange(ChosenAreas);
+            choosenAreas.AddRange(ChoosenAreasList);
         }
 
-        private void ChangeState(int id)
+        private void ChangeState(AreaViewModel areaChoosen)
         {
-            if (!choosenAreas.Exists(a => a == id))
+            AreaViewModel area = choosenAreas.Find(a => a.Id == areaChoosen.Id);
+            if (area is null)
             {
-                choosenAreas.Add(id);
-                chosenAreas.Add(areas.First(x => x.Id == id));
+                choosenAreas.Add(areaChoosen);
             }
             else
             {
-                choosenAreas.Remove(id);
-                chosenAreas.Remove(areas.First(x => x.Id == id));
+                choosenAreas.Remove(area);
             }
         }
 
@@ -56,10 +47,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         private async Task SaveModalAsync()
         {
-            //ChoosenAreasList.Clear();
-            //ChoosenAreasList.AddRange(choosenAreas);
-            ChosenAreas.Clear();
-            ChosenAreas.AddRange(chosenAreas);
+            ChoosenAreasList.Clear();
+            ChoosenAreasList.AddRange(choosenAreas);
             await AreasModal.CloseAsync();
         }
     }

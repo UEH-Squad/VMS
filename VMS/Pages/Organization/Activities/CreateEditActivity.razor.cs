@@ -141,7 +141,7 @@ namespace VMS.Pages.Organization.Activities
         private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
-            parameters.Add("ChosenAreas", activity.Areas);
+            parameters.Add("ChoosenAreasList", activity.Areas);
 
             var options = new ModalOptions()
             {

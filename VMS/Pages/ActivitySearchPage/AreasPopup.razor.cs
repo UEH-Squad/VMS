@@ -10,10 +10,10 @@ namespace VMS.Pages.ActivitySearchPage
     public partial class AreasPopup : ComponentBase
     {
         private List<AreaViewModel> areas;
-        private List<int> choosenAreas;
+        private List<AreaViewModel> choosenAreas;
 
         [Parameter]
-        public List<int> ChoosenAreasList { get; set; }
+        public List<AreaViewModel> ChoosenAreasList { get; set; }
         [CascadingParameter]
         private BlazoredModalInstance AreasModal { get; set; }
         [Inject]
@@ -26,15 +26,16 @@ namespace VMS.Pages.ActivitySearchPage
             choosenAreas.AddRange(ChoosenAreasList);
         }
 
-        private void ChangeState(int id)
+        private void ChangeState(AreaViewModel areaChoosen)
         {
-            if (!choosenAreas.Exists(a => a == id))
+            AreaViewModel area = choosenAreas.Find(a => a.Id == areaChoosen.Id);
+            if (area is null)
             {
-                choosenAreas.Add(id);
+                choosenAreas.Add(areaChoosen);
             }
             else
             {
-                choosenAreas.Remove(id);
+                choosenAreas.Remove(area);
             }
         }
 

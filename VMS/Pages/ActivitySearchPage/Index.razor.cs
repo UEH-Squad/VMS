@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Linq;
 using VMS.Application.ViewModels;
 using VMS.Common.Extensions;
 
@@ -43,7 +44,10 @@ namespace VMS.Pages.ActivitySearchPage
 
             if (NavigationManager.TryGetQueryString<List<int>>("area", out var listAreaId))
             {
-                filter.Areas.AddRange(listAreaId);
+                filter.Areas.AddRange(listAreaId.Select(a => new AreaViewModel()
+                {
+                    Id = a
+                }));
             }
         }
 

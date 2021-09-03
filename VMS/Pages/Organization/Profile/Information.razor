@@ -1,0 +1,119 @@
+﻿@inject IJSRuntime JSRuntinme;
+
+<div class="my-information pb-5">
+    <div class="container">
+        <div class="row ">
+            <div class="col-4 text-center information__logo">
+                <div class="information__logo-img mx-auto">
+                    <img  src="img/LogoBaner/KHOA-VIỆN-KTX/BIT.png" alt="">
+                    <label for="myfile" class="d-inline"><span class="material-icons icon-camera">photo_camera</span></label>
+                    <InputFile OnChange="ShowModal" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
+                </div>
+                <p class="mb-2">Công nghệ thông tin kinh doanh</p>
+                <span>Tham gia từ năm 2021</span>
+                <a class="information__logo-button">
+                    <i class="material-icons-outlined">add</i>
+                    <span>Tạo hoạt động mới</span>
+                </a>
+            </div>
+            <div class="col-7 ms-auto my-auto">
+                <div class=" pb-4 row-1">
+                    <div class="col-left information__rank d-flex justify-content-evenly align-self-center">
+                        <a href="@Routes.EditProfile" class="d-flex align-self-center">#2</a>
+                        <div>
+                            <p class="mb-2 d-flex justify-content-evenly align-self-end">
+                                <span class="information__rank-number">4,5</span>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                            </p>
+                            <span>15N xếp hạng</span>
+                        </div>
+                    </div>
+                    <div class="col-right information__contact">
+                        <p class="d-flex align-self-center">
+                            <i class="material-icons-outlined">
+                                email
+                            </i>
+                            <a href="mailto:youthbit.ueh@gmail.com">Youthbit.ueh@gmail.com</a>
+                        </p>
+                        <p class="d-flex align-self-center">
+                            <i class="material-icons-outlined">
+                                settings_phone
+                            </i>
+                            <a href="tel:+0849 245 xxx">0849 245 xxx</a>
+                        </p>
+                    </div>
+
+                </div>
+                <div class="row-2 pt-4">
+                    <div class="col-left information__fields">
+                        <h3>Lĩnh vực <span>chuyên môn</span></h3>
+                        <div class="owl-carousel owl-theme information__carousel">
+                            <div class="item">
+                                <i class="material-icons">group</i>
+                                <span>Cộng đồng</span>
+                            </div>
+                            <div class="item">
+                                <i class="material-icons">group</i>
+                                <span>Giáo dục</span>
+                            </div>
+                            <div class="item">
+                                <i class="material-icons">group</i>
+                                <span>Thể thao</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-right information__act px-0">
+                        <h3>Số hoạt động <span>đã tạo</span></h3>
+                        <div class="d-flex justify-content-evenly align-self-center">
+                            <span class="information__act-number">30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.InformationCarousel");
+    }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
+    async Task ShowModal()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+        Modal.Show<Notification>("", options);
+    }
+
+    bool isNotification = false;
+    void ShowNotification(){
+
+        isNotification = !isNotification;
+    }
+
+
+}

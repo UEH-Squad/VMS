@@ -1,0 +1,145 @@
+﻿@attribute [Route(Routes.EditProfile)]
+@using System.ComponentModel.DataAnnotations;
+
+<div class="my-editProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <h1 class="editProfile__title">Chỉnh sửa <span>thông tin tổ chức</span></h1>
+                <hr />
+                <div class="editProfile__logo mx-auto my-5">
+                    <img class="w-75 " src="img/LogoBaner/KHOA-VIỆN-KTX/BIT.png" alt="">
+                </div>
+                <EditForm Model="@organization" Context="CurrentEditContext" class="editProfile__form">
+                    <div class="row form-item">
+                        <p class="col-4 form-text">Tên tổ chức</p>
+                        <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.FullName)</div>
+                        <InputText @bind-Value="@organization.FullName" class="col-8 form-input" />
+                    </div>
+                    <div class="row form-item">
+                        <p class="col-4 form-text">Gamil</p>
+                        <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Email)</div>
+                        <InputText @bind-Value="@organization.Email" class="col-8 form-input" />
+                    </div>
+                    <div class="row form-item">
+                        <p class="col-4 form-text">Điện thoại</p>
+                        <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Phone)</div>
+                        <InputText @bind-Value="@organization.Phone" class="col-8 form-input" />
+                    </div>
+                    <div class="row form-item">
+                        <p class="col-4 form-text">Lĩnh vực</p>
+                        <div class="col-8 form-field d-flex flex-wrap">
+                            <div class="form-field-item">
+                                <i class="material-icons">group</i>
+                                <span>Cộng đồng</span>
+                            </div>
+                            <div class="form-field-item">
+                                <i class="material-icons">group</i>
+                                <span>Cộng đồng</span>
+                            </div>
+                            <div class="form-field-item">
+                                <i class="material-icons">group</i>
+                                <span>Cộng đồng</span>
+                            </div>
+                            <div class="form-field-item">
+                                <i class="material-icons">group</i>
+                                <span>Giáo dục</span>
+                            </div>
+                            <div class="form-field-item">
+                                <i class="material-icons">group</i>
+                                <span>Thể thao</span>
+                            </div>
+                            <div class="form-field-item">
+                                <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-item">
+                        <p class="col-4 form-text">Tầm nhìn & sứ mệnh</p>
+                        <div class="col-8 position-relative px-0">
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Content)</div>
+                            <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input w-100 mx-0" />
+                            <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
+                        </div>
+                    </div>
+                    <div class="row form-item mb-0">
+                        <p class="col-4 form-text">Thay đổi ảnh</p>
+                        <div class="col-8 px-0 ">
+                            <UploadImg FileChanged="FileChanged" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 ms-auto from__btn">
+                            <button class="btn from__btn-cancel">Hủy</button>
+                            <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    public class Organization
+    {
+        [Required(ErrorMessage = "Tên tổ chức không được để trống")]
+        [MinLength(2, ErrorMessage = "Tên tổ chức tối thiểu 2 kí tự")]
+        [MaxLength(50, ErrorMessage = "Tên tổ chức tối đa 50 kí tự")]
+        public string FullName { get; set; }
+
+        [Required(ErrorMessage = "Email không được để trống")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Số điện thoại không được để trống")]
+        [MinLength(10, ErrorMessage = "Số điện thoại tối thiểu 10 số")]
+        [MaxLength(50, ErrorMessage = "Số điện thoại tối đa 12 số")]
+        public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Tầm nhìn và sứ mệnh không được để trống")]
+        public string Content { get; set; }
+    }
+
+    private Organization organization = new Organization()
+    {
+        FullName = "Công nghệ thông tin kinh doanh",
+        Email = "youth.bit@gmail.com",
+        Phone = "0968790812",
+        Content = "This year in Tokyo, we add to a history with the Olympics that dates back to 1896 when seven members of the Harvard community brought home eight gold medals."
+    };
+
+    private IBrowserFile file;
+
+    private int maxWord = 300;
+
+    private int CountWord()
+    {
+        int count = organization.Content.Length;
+        return count;
+    }
+
+    private void FileChanged(IBrowserFile file)
+    {
+        this.file = file;
+
+    }
+
+    bool[] choosenAreasList = new bool[12];
+    private async Task ShowAreasModal()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        var areasParameter = new ModalParameters();
+        areasParameter.Add("choosenAreasList", choosenAreasList);
+        var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
+        await areasModal.Result;
+    }
+
+}

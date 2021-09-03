@@ -1,11 +1,32 @@
 ﻿@import '../../../Resources/scss/common/_variables';
 
+.error-message {
+    background-color: #E8F5FF;
+    color: #E10B0B;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.title {
+    color: $blue;
+    font-size: 36px;
+    font-weight: 600px;
+
+    span {
+        color: $green;
+    }
+}
+
+.required-asterick {
+    color: red;
+}
+
 ::deep .tox {
     height: 250px !important; // we must use !important here
     z-index: 0;
 }
 
-.blazored-typeahead__input-icon {
+.typeahead__input-icon {
     height: 34px;
     width: 40px;
     display: flex;
@@ -24,7 +45,7 @@
     &:hover {
         background-color: #f5f5f5;
 
-        .blazored-typeahead__down-arrow {
+        .typeahead__down-arrow {
             path {
                 fill: #333333;
             }
@@ -32,8 +53,8 @@
     }
 }
 
-.blazored-typeahead__input-icon--disabled .blazored-typeahead__down-arrow path,
-.blazored-typeahead__input-icon--disabled:hover .blazored-typeahead__down-arrow path {
+.typeahead__input-icon--disabled .typeahead__down-arrow path,
+.typeahead__input-icon--disabled:hover .typeahead__down-arrow path {
     fill: #9c9c9c;
 }
 
@@ -119,7 +140,7 @@
 .add-file {
     border-radius: 4px;
     border: 1px solid $grey-text;
-    height: 55px;
+    height: 36px;
     display: flex;
 
     .add-file__block {
@@ -133,7 +154,7 @@
 
         .block-icon-text {
             display: flex;
-            margin-top: 10px;
+            margin-top: 1px;
 
             .file__text {
                 font-size: 12px;
@@ -186,4 +207,17 @@
         font-weight: 500;
         transition: all 0.3s linear;
     }
+}
+
+.btn-save {
+    background-color: $green;
+    color: $white;
+    font-weight: 600;
+    padding: .75rem 1.25rem;
+}
+
+.btn-cancel {
+    color: $green;
+    font-weight: 600;
+    padding: .75rem 1.25rem;
 }

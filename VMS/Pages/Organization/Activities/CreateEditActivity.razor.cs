@@ -141,7 +141,7 @@ namespace VMS.Pages.Organization.Activities
         private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
-            parameters.Add("ChoosenAreasList", activity.Areas);
+            parameters.Add("ChosenAreas", activity.Areas);
 
             var options = new ModalOptions()
             {
@@ -184,7 +184,7 @@ namespace VMS.Pages.Organization.Activities
             public int DistrictId { get; set; }
             public int WardId { get; set; }
             public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
-            public IList<int> Areas { get; set; } = new List<int>();
+            public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
             public IList<string> Targets { get; set; }
         }
     }

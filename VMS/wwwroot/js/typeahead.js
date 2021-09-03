@@ -2,12 +2,12 @@
 
 var onOutsideClickFunctions = {};
 
-window.blazoredTypeahead = {
-    assemblyname: "Blazored.Typeahead",
+window.typeahead = {
+    assemblyname: "Typeahead",
     setFocus: function (element) {
         if (element && element.focus) element.focus();
     },
-    // No need to remove the event listeners later, the browser will clean this up automagically.
+    // No need to remove the event listeners later, the browser will clean this up auto-magically.
     addKeyDownEventListener: function (element) {
         if (element) {
             element.addEventListener('keydown', function (event) {
@@ -54,12 +54,12 @@ window.blazoredTypeahead = {
             }
         }
 
-        blazoredTypeahead.onOutsideClickClear(searchTextElement); //clean up just in case
+        typeahead.onOutsideClickClear(searchTextElement); //clean up just in case
 
         var func = function (e) {
             var parent = e.target;
             while (parent != null) {
-                if (parent.classList != null && parent.classList.contains('blazored-typeahead')) {
+                if (parent.classList != null && parent.classList.contains('typeahead')) {
                     var hasSearch = parent.contains(searchTextElement); //check if this is the same typeahead parent element
                     if (hasSearch) {
                         return; //we're still in the search so don't fire
@@ -70,7 +70,7 @@ window.blazoredTypeahead = {
 
             dotnetRef.invokeMethodAsync(methodName);
             if (clearOnFire) { //could also add a check to see if the search element is missing on the DOM to force cleaning up the function?
-                blazoredTypeahead.onOutsideClickClear(searchTextElement);
+                typeahead.onOutsideClickClear(searchTextElement);
             }
         };
         onOutsideClickFunctions[bId] = func; //save a reference to the click function

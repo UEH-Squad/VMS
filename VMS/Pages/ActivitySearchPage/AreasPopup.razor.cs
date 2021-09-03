@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -11,11 +12,17 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private List<AreaViewModel> areas;
         private List<int> choosenAreas;
+        private List<AreaViewModel> chosenAreas;
 
         [Parameter]
         public List<int> ChoosenAreasList { get; set; }
+
+        [Parameter]
+        public List<AreaViewModel> ChosenAreas { get; set; }
+
         [CascadingParameter]
         private BlazoredModalInstance AreasModal { get; set; }
+
         [Inject]
         private IAreaService AreaService { get; set; }
 
@@ -23,7 +30,9 @@ namespace VMS.Pages.ActivitySearchPage
         {
             areas = await AreaService.GetAllAreasAsync();
             choosenAreas = new();
-            choosenAreas.AddRange(ChoosenAreasList);
+            //choosenAreas.AddRange(ChoosenAreasList);
+            chosenAreas = new();
+            chosenAreas.AddRange(ChosenAreas);
         }
 
         private void ChangeState(int id)
@@ -31,10 +40,12 @@ namespace VMS.Pages.ActivitySearchPage
             if (!choosenAreas.Exists(a => a == id))
             {
                 choosenAreas.Add(id);
+                chosenAreas.Add(areas.First(x => x.Id == id));
             }
             else
             {
                 choosenAreas.Remove(id);
+                chosenAreas.Remove(areas.First(x => x.Id == id));
             }
         }
 
@@ -45,8 +56,10 @@ namespace VMS.Pages.ActivitySearchPage
 
         private async Task SaveModalAsync()
         {
-            ChoosenAreasList.Clear();
-            ChoosenAreasList.AddRange(choosenAreas);
+            //ChoosenAreasList.Clear();
+            //ChoosenAreasList.AddRange(choosenAreas);
+            ChosenAreas.Clear();
+            ChosenAreas.AddRange(chosenAreas);
             await AreasModal.CloseAsync();
         }
     }

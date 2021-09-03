@@ -365,17 +365,17 @@ namespace VMS.Shared.Components
 
         private string GetSelectedSuggestionClass(TItem item, int index)
         {
-            const string resultClass = "blazored-typeahead__active-item";
+            const string resultClass = "typeahead__active-item";
             TValue value = ConvertMethod(item);
 
             if (Equals(value, Value) || (Values?.Contains(value) ?? false))
             {
                 if (index == SelectedIndex)
                 {
-                    return "blazored-typeahead__selected-item-highlighted";
+                    return "typeahead__selected-item-highlighted";
                 }
 
-                return "blazored-typeahead__selected-item";
+                return "typeahead__selected-item";
             }
 
             if (index == SelectedIndex)
@@ -388,7 +388,7 @@ namespace VMS.Shared.Components
 
         private string GetSelectedSuggestionClass(int index)
         {
-            const string resultClass = "blazored-typeahead__active-item";
+            const string resultClass = "typeahead__active-item";
 
             return index == SelectedIndex ? resultClass : string.Empty;
         }

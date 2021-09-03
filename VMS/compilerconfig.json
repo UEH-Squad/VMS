@@ -96,8 +96,8 @@
     "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
   },
   {
-    "outputFile": "Shared/Typeahead.razor.css",
-    "inputFile": "Shared/Typeahead.razor.scss"
+    "outputFile": "Shared/Components/Typeahead.razor.css",
+    "inputFile": "Shared/Components/Typeahead.razor.scss"
   },
   {
     "outputFile": "Pages/Organization/Activities/CreateEditActivity.razor.css",

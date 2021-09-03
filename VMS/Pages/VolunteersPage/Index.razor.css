@@ -23,8 +23,22 @@
     .title .sub-title .sub-title--content {
       width: 50%; }
 
+.button-and-searchbox {
+  display: grid;
+  grid-template-columns: 80% 20%; }
+  .button-and-searchbox .button-download {
+    background-color: #18A0FB;
+    color: #FFFFFF;
+    border: none;
+    padding: 9px 45px;
+    border-radius: 5px;
+    float: right; }
+    .button-and-searchbox .button-download:hover {
+      background-color: #0B588c; }
+
+/*------SearchBox--------*/
 .my-search-box__input {
-  width: 80%;
+  width: 100%;
   outline: none;
   border: none;
   border-bottom: 1px solid #b4b4b4;
@@ -51,9 +65,74 @@
 .my-search-box__input:not(:placeholder-shown) ~ .my-search-box__icon-wrapper .clear-search-btn {
   visibility: visible; }
 
+/*------EndSearchBox-------*/
 .quantity-volunteers {
   font-size: 16px;
-  font-weight: 400;
   color: #18A0FB; }
   .quantity-volunteers span {
     color: #64D72F; }
+
+.group-card .mycard {
+  display: flex;
+  align-items: center;
+  margin: 10px 0; }
+  .group-card .mycard__info {
+    width: 75%;
+    font-size: 20px;
+    display: grid;
+    grid-template-columns: 10% 55% 35%;
+    padding: 7px;
+    border-radius: 5px; }
+    .group-card .mycard__info--avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%; }
+    .group-card .mycard__info--name, .group-card .mycard__info--mssv {
+      color: #515151;
+      display: flex;
+      align-items: center; }
+  .group-card .mycard__checkbox {
+    width: 5%;
+    display: flex;
+    justify-content: center; }
+    .group-card .mycard__checkbox--my-checkbox {
+      cursor: pointer;
+      border-radius: 5px;
+      width: 35px;
+      height: 35px;
+      margin-right: 5px;
+      vertical-align: top;
+      background-color: #fff;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      border: 2px solid #B4B4B4;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      -webkit-print-color-adjust: exact;
+      position: relative; }
+      .group-card .mycard__checkbox--my-checkbox::before {
+        content: "";
+        width: 22px;
+        height: 9px;
+        border-left: 3px solid #64D72F;
+        border-bottom: 3px solid #64D72F;
+        position: absolute;
+        top: 40%;
+        left: 52%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        display: none; }
+      .group-card .mycard__checkbox--my-checkbox:checked::before {
+        display: block; }
+  .group-card .mycard__button {
+    width: 20%; }
+    .group-card .mycard__button--registration-form {
+      float: right;
+      padding: 9px 29px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      background-color: #64D72F; }
+      .group-card .mycard__button--registration-form:hover {
+        background-color: #306C14; }

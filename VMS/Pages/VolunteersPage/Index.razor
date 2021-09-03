@@ -25,31 +25,48 @@
                 </button>
             </div>
         </form>
-
+        <div>
+            <button class="button-download">Tải danh sách</button>
+        </div>
 
     </div>
 
-    <p class="quantity-volunteers">Có tất cả <span>255</span> tình nguyện viên tham gia </p>
+    <p class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
 
-    @*<div class="group-card">
-        <div class="my-card">
-            <div class="d-flex">
-                <img class="my-card__avatar" src="./img/act1.png" alt="" />
-                <div class="my-card__info">
-                    <h4 class="my-card__info--name">Bùi Minh Kha</h4>
-                    <h4 class="my-card__info--id">31191025985</h4>
-                </div>
+    <div class="group-card">
+        <div class="mycard">
+            <div class="mycard__info" style="@(isCheck?"background-color: rgba(196, 196, 196, 0.3)":"none")">
+                <img class="mycard__info--avatar" src="/img/act1.png" alt="Avatar" />
+                <div class="mycard__info--name">Pham Thi Ngoc Anh</div>
+                <div class="mycard__info--mssv">31191025555</div>
             </div>
-            <div class="my-card__button">
-                <button class="my-card__button--watchform">Xem đơn đăng ký</button>
-                <button class="my-card__button--delete">Xóa</button>
+            <div class="mycard__checkbox">
+                <input @onclick="Check" class="mycard__checkbox--my-checkbox" type="checkbox">
+            </div>       
+            <div class="mycard__button">
+                <button class="mycard__button--registration-form">Xem đơn đăng ký</button>
             </div>
         </div>
-    </div>*@
+        <div class="mycard">
+            <div class="mycard__info">
+                <img class="mycard__info--avatar" src="/img/act1.png" alt="Avatar" />
+                <div class="mycard__info--name">Pham Thi Ngoc Anh</div>
+                <div class="mycard__info--mssv">31191025555</div>
+            </div>
+            <div class="mycard__checkbox">
+                <input class="mycard__checkbox--my-checkbox" type="checkbox"/>
+            </div>
+            <div class="mycard__button">
+                <button class="mycard__button--registration-form">Xem đơn đăng ký</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @code {
     string mySearchValue = "";
+    bool isCheck = false;
+    private int quantity = 255;
     void ClearSearchBox()
     {
         mySearchValue = "";
@@ -58,4 +75,17 @@
     {
         mySearchValue = e.Value.ToString();
     }
+
+    void Check()
+    {
+        isCheck = !isCheck;
+    }
+    private class VirtualData
+    {
+        public int Id { get; set; }
+        public string Avatar { get; set; }
+        public string Name { get; set; }
+        public string Mssv { get; set; }
+    }
+
 }

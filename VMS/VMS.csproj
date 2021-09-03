@@ -47,7 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\src\common\" />
     <Folder Include="wwwroot\img\OrganizationProfile\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>

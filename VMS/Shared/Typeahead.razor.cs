@@ -57,10 +57,24 @@ namespace VMS.Shared
         [Parameter] public bool StopPropagation { get; set; } = false;
         [Parameter] public bool PreventDefault { get; set; } = false;
 
+        [Parameter]
+        public string PlaceHolderText
+        {
+            get
+            {
+                return placeholder;
+            }
+            set
+            {
+                placeholder = Values is not null ? Values.Any() ? "" : value : value;
+            }
+        }
+
+        private string placeholder;
         private bool IsSearching { get; set; } = false;
         private bool IsShowingSuggestions { get; set; } = false;
         private bool IsShowingMask { get; set; } = false;
-        private TItem[] Suggestions { get; set; } = new TItem[0];
+        private TItem[] Suggestions { get; set; } = Array.Empty<TItem>();
         private int SelectedIndex { get; set; }
         private bool ShowHelpTemplate { get; set; } = false;
 
@@ -114,9 +128,11 @@ namespace VMS.Shared
                 throw new InvalidOperationException($"{GetType()} requires a {nameof(ResultTemplate)} parameter.");
             }
 
-            _debounceTimer = new Timer();
-            _debounceTimer.Interval = Debounce;
-            _debounceTimer.AutoReset = false;
+            _debounceTimer = new Timer
+            {
+                Interval = Debounce,
+                AutoReset = false
+            };
             _debounceTimer.Elapsed += Search;
 
             _editContext = CascadedEditContext;

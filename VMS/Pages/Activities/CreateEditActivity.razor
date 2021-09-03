@@ -1,9 +1,5 @@
 ﻿@attribute [Route(Routes.CreateActivity)]
 
-@using VMS.Domain.Models
-
-@inject IJSRuntime JsRuntime
-
 <div class="container-fluid mb-2">
     <div class="row">
         <EditForm Model="activity" class="col-11 col-xl-9 mx-auto mt-2">
@@ -11,16 +7,16 @@
             <h1 class="text-center"><span>Tạo</span> hoạt động</h1>
             <div class="form-group mb-5">
                 <div>Tiêu đề (*)</div>
-                <InputText @bind-Value="activity.Name" class="form-control p-2" placeholder="Nhập tiêu đề" />
+                <InputText @bind-Value="activity.Name" class="form-control" placeholder="Nhập tiêu đề" />
             </div>
             <div class="form-group mb-5">
                 <div>Mô tả (*)</div>
-                <TinyMCE.Blazor.Editor ApiKey="v439hmeezl4njsgskpyy5lvknmkunhs9aj28b01fyjtk7qfv" placeholder="Nhập mô tả" />
+                <TinyMCEEditor @bind-Value="activity.Description" />
             </div>
             <div class="form-group mb-5">
                 <div class="row">
-                    <div class="col-4">Hình thức (*)</div>
-                    <div class="col-5">
+                    <div class="col-3 align-self-center">Hình thức (*)</div>
+                    <div class="col-9">
                         <InputRadioGroup @bind-Value="activity.IsVirtual">
                             <InputRadio Value="true" /> Virtual
                             <InputRadio Value="false" class="ms-5" /> Actual
@@ -30,9 +26,10 @@
             </div>
             <div class="form-group mb-5">
                 <div class="row">
-                    <div class="col-4">Đối tượng tham gia (*)</div>
-                    <div class="col-8">
+                    <div class="col-3 align-self-center">Đối tượng tham gia (*)</div>
+                    <div class="col-9">
                         <Typeahead SearchMethod="SearchTargets"
+                                   PlaceHolderText="Lựa chọn đối tượng tham gia"
                                    @bind-Values="activity.Targets"
                                    EnableDropDown="true"
                                    class="col-5">
@@ -48,24 +45,36 @@
             </div>
             <div class="form-group mb-5">
                 <div class="row">
-                    <div class="col-4">Lĩnh vực (*)</div>
-                    <div class="col-8">
-                        <i class="choose-skills-icon" @onclick="ShowSkillsPopup">Chọn skills</i>
+                    <div class="col-3 align-self-center">Lĩnh vực (*)</div>
+                    <div class="col-9 d-flex">
+                        <div class="item me-5">
+                            <i class="material-icons">
+                                home
+                            </i>
+                            <span>lĩnh vực 1</span>
+                        </div>
+                        <div class="item">
+                            <i class="material-icons" @onclick="ShowAreasPopupAsync">
+                                plus
+                            </i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="form-group mb-5">
                 <div class="row">
-                    <div class="col-4">Địa điểm tham gia (*)</div>
-                    <div class="col-8 d-flex flex-row flex-wrap flex-xl-nowrap">
-                        <div class="filter-item position-relative">
-                            <div @onclick="ToggleCityDropdown" class="popup-btn @(haveCityValue?"bg-grey":"")">@cityChoosenValue</div>
-                            <div class="my-dropdown @(isCityShow ? "d-block" : "")">
+                    <div class="col-3 align-self-center">Địa điểm tham gia (*)</div>
+                    <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap">
+                        <div class="me-2 filter-item filter-item-city position-relative">
+                            <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="popup-btn @(activity.ProvinceId != 0 ? "bg-grey" : "")" placeholder="@cityChoosenValue" readonly />
+                            <div @onclick:preventDefault class="my-dropdown" style="display: @(isCityShow ? "block" : "none")">
                                 <ul>
-                                    @for (int i = 0; i < 10; i++)
+                                    @if (provinces is not null)
                                     {
-                                        int id = i;
-                                        <li @onclick="() => ChooseCityValue(id)">@nameCityValue @(id + 1)</li>
+                                        @foreach (var province in provinces)
+                                        {
+                                            <li @onmousedown="() => ChooseCityValue(province)">@province.Name</li>
+                                        }
                                     }
                                 </ul>
                             </div>
@@ -73,14 +82,16 @@
                                 expand_more
                             </span>
                         </div>
-                        <div class="filter-item position-relative ms-2">
-                            <div @onclick="ToggleCityDropdown" class="popup-btn @(haveCityValue?"bg-grey":"")">@cityChoosenValue</div>
-                            <div class="my-dropdown @(isCityShow ? "d-block" : "")">
+                        <div class="me-2 filter-item filter-item-district position-relative">
+                            <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="popup-btn @(activity.DistrictId != 0 ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly />
+                            <div class="my-dropdown" style="display: @(isDistrictShow ? "block" : "none")">
                                 <ul>
-                                    @for (int i = 0; i < 10; i++)
+                                    @if (districts is not null)
                                     {
-                                        int id = i;
-                                        <li @onclick="() => ChooseCityValue(id)">@nameCityValue @(id + 1)</li>
+                                        @foreach (var district in districts)
+                                        {
+                                            <li @onmousedown="() => ChooseDistrictValue(district)">@district.Name</li>
+                                        }
                                     }
                                 </ul>
                             </div>
@@ -88,14 +99,16 @@
                                 expand_more
                             </span>
                         </div>
-                        <div class="filter-item position-relative ms-2">
-                            <div @onclick="ToggleCityDropdown" class="popup-btn @(haveCityValue?"bg-grey":"")">@cityChoosenValue</div>
-                            <div class="my-dropdown @(isCityShow ? "d-block" : "")">
+                        <div class="me-2 filter-item filter-item-district position-relative">
+                            <input @onclick="ToggleWardDropdown" @onfocusout="CloseWardDropdown" class="popup-btn @(activity.WardId != 0 ? "bg-grey" : "")" placeholder="@wardChoosenValue" readonly />
+                            <div class="my-dropdown" style="display: @(isWardShow ? "block" : "none")">
                                 <ul>
-                                    @for (int i = 0; i < 10; i++)
+                                    @if (wards is not null)
                                     {
-                                        int id = i;
-                                        <li @onclick="() => ChooseCityValue(id)">@nameCityValue @(id + 1)</li>
+                                        @foreach (var ward in wards)
+                                        {
+                                            <li @onmousedown="() => ChooseWardValue(ward)">@ward.Name</li>
+                                        }
                                     }
                                 </ul>
                             </div>
@@ -103,35 +116,36 @@
                                 expand_more
                             </span>
                         </div>
-                        <InputText @bind-Value="activity.Address" class="form-control mt-2 mt-xl-0 ms-xl-2" />
+                        <InputText @bind-Value="activity.Address" class="form-control mt-2 mt-xl-0" />
                     </div>
                 </div>
             </div>
             <div class="form-group mb-5">
                 <div class="row">
-                    <div class="col-4">Thời gian tham gia (*)</div>
-                    <div class="col-8 d-flex flex-row">
-                        <InputDate @bind-Value="activity.StartDate" class="form-control" style="width: 35%;" placeholder="Ngày bắt đầu" />
-                        <InputDate @bind-Value="activity.EndDate" class="form-control ms-2" style="width: 35%;" placeholder="Ngày kết thúc" />
+                    <div class="col-3 align-self-center">Thời gian tham gia (*)</div>
+                    <div class="col-9 d-flex flex-row">
+                        <InputDate @bind-Value="activity.StartDate" @oninput="OnStartDateChanged" class="form-control" style="width: 35%;" placeholder="Ngày bắt đầu" />
+                        <InputDate @bind-Value="activity.EndDate" @oninput="OnEndDateChanged" class="form-control ms-2" style="width: 35%;" placeholder="Ngày kết thúc" />
                     </div>
                 </div>
             </div>
             <div class="form-group mb-5">
                 <div class="row">
-                    <div class="col-4">Kỹ năng (*)</div>
-                    <div class="col-8 position-relative">
-                        <Typeahead SearchMethod="SearchTargets"
-                                   @bind-Values="activity.Targets"
+                    <div class="col-3 align-self-center">Kỹ năng (*)</div>
+                    <div class="col-9 position-relative">
+                        <Typeahead SearchMethod="SearchSkills"
+                                   PlaceHolderText="Lựa chọn kỹ năng"
+                                   @bind-Values="activity.Skills"
                                    class="col-5">
                             <SelectedTemplate Context="target">
-                                @target
+                                @target.Name
                             </SelectedTemplate>
                             <ResultTemplate Context="target">
-                                @target
+                                @target.Name
                             </ResultTemplate>
                         </Typeahead>
                         <div @onclick="ShowSkillsPopup" class="blazored-typeahead__input-icon blazored-typeahead__input-icon--disabled position-absolute">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="blazored-typeahead__down-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="align-self-center blazored-typeahead__down-arrow">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon id="Shape" points="0 0 24 0 24 24 0 24" />
                                     <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" id="Path-94" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) " />
@@ -143,15 +157,15 @@
             </div>
             <div class="form-group mb-5">
                 <div>Yêu cầu (*)</div>
-                <TinyMCE.Blazor.Editor ApiKey="v439hmeezl4njsgskpyy5lvknmkunhs9aj28b01fyjtk7qfv" placeholder="Nhập mô tả" />
+                <TinyMCEEditor @bind-Value="activity.Requirement" />
             </div>
             <div class="form-group mb-5">
                 <div>Sứ mệnh (*)</div>
-                <TinyMCE.Blazor.Editor ApiKey="v439hmeezl4njsgskpyy5lvknmkunhs9aj28b01fyjtk7qfv" placeholder="Nhập mô tả" />
+                <TinyMCEEditor @bind-Value="activity.Mission" />
             </div>
             <div class="form-group mb-5">
                 <div>Các nhiệm vụ tình nguyện sẽ tham gia (*)</div>
-                <TinyMCE.Blazor.Editor ApiKey="v439hmeezl4njsgskpyy5lvknmkunhs9aj28b01fyjtk7qfv" placeholder="Nhập mô tả" />
+                <TinyMCEEditor @bind-Value="activity.Mission" />
             </div>
             <div class="form-group mb-5">
                 <div>Thêm ảnh (*)</div>
@@ -172,62 +186,4 @@
 </div>
 
 @code {
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-
-    private Fake activity = new()
-    {
-        StartDate = DateTime.Now,
-        EndDate = DateTime.Now.AddDays(7)
-    };
-    private bool isCityShow;
-    private bool haveCityValue;
-    string cityChoosenValue = "Tỉnh/Thành phố";
-    string nameCityValue = "Hồ Chí Minh";
-    string nameDistrictValue = "Quận Thủ Đức";
-    private List<string> targets = new()
-    {
-        "Sinh viên năm nhất",
-        "Sinh viên năm hai",
-        "Sinh viên năm ba",
-        "Sinh viên năm tư"
-    };
-
-    void ToggleCityDropdown()
-    {
-        isCityShow = !isCityShow;
-    }
-
-    void ChooseCityValue(int id)
-    {
-        cityChoosenValue = nameCityValue + " " + (id + 1).ToString();
-        ToggleCityDropdown();
-        haveCityValue = true;
-    }
-
-    bool[,] choosenSkillsList = new bool[15, 11];
-
-    async Task ShowSkillsPopup()
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        var skillsParameter = new ModalParameters();
-        skillsParameter.Add("choosenSkillsList", choosenSkillsList);
-        var skillsModal = Modal.Show<VMS.Pages.ActivitySearchPage.SkillsPopup>("", skillsParameter, options);
-        await skillsModal.Result;
-    }
-
-    async Task<IEnumerable<string>> SearchTargets(string searchText)
-    {
-        return await Task.FromResult(targets.Where(x => x.ToLower().Contains(searchText.ToLower())).ToList());
-    }
-
-    private class Fake : Activity
-    {
-        public IList<string> Targets { get; set; }
-    }
 }

@@ -84,7 +84,8 @@
                            autocomplete="off"
                            @attributes="AdditionalAttributes"
                            type="text"
-                           class="blazored-typeahead__input blazored-typeahead__input-multi" />
+                           class="form-control blazored-typeahead__input blazored-typeahead__input-multi"
+                           placeholder="@PlaceHolderText" />
                 </div>
             }
             else
@@ -114,7 +115,8 @@
                        autocomplete="off"
                        @attributes="AdditionalAttributes"
                        type="text"
-                       class="blazored-typeahead__input @(IsShowingMask ? "blazored-typeahead__input-hidden" : null)" />
+                       class="blazored-typeahead__input @(IsShowingMask ? "blazored-typeahead__input-hidden" : null)"
+                       placeholder="@PlaceHolderText" />
             }
         }
 

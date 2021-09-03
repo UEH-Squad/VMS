@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -32,6 +33,26 @@ namespace VMS.Application.Services
             };
 
             List<Skill> skills = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<SkillViewModel>>(skills);
+        }
+
+        public async Task<List<SkillViewModel>> GetAllSkillsByNameAsync(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return new List<SkillViewModel>();
+            }
+
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            List<Skill> skills = await _repository.GetListAsync(dbContext, new Specification<Skill>()
+            {
+                Conditions = new List<Expression<Func<Skill, bool>>>()
+                {
+                    s => s.Name.ToLower().Contains(searchText.ToLower())
+                }
+            });
 
             return _mapper.Map<List<SkillViewModel>>(skills);
         }

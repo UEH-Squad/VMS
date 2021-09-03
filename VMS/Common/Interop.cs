@@ -7,7 +7,7 @@ namespace VMS.Common
     {
         public static ValueTask ScrollToTop(IJSRuntime JsRuntime)
         {
-            return JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+            return JsRuntime.InvokeVoidAsync("vms.SmoothScrollTo", "html, body");
         }
     }
 }

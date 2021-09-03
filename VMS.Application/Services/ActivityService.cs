@@ -78,11 +78,6 @@ namespace VMS.Application.Services
             return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
-        public static Expression<Func<Activity, bool>> FilterBySkills(List<SkillViewModel> skills)
-        {
-            return activity => skills.All(s => activity.ActivitySkills.Any(acs => acs.SkillId == s.Id));
-        }
-
         private async Task<List<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext)
         {
             Specification<Activity> specification = new()

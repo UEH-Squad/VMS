@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using VMS.Common;
 
-namespace VMS.Shared
+namespace VMS.Shared.Components
 {
     public partial class Typeahead<TItem, TValue> : ComponentBase, IDisposable
     {

@@ -10,7 +10,7 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Domain.Models;
 
-namespace VMS.Pages.Activities
+namespace VMS.Pages.Organization.Activities
 {
     public partial class CreateEditActivity : ComponentBase
     {
@@ -47,14 +47,6 @@ namespace VMS.Pages.Activities
             "Sinh viên năm hai",
             "Sinh viên năm ba",
             "Sinh viên năm tư"
-        };
-
-        private readonly Dictionary<string, object> tinyMCEConfig = new()
-        {
-            { "menubar", false },
-            { "statusbar", false },
-            { "plugins", "lists, link, image, media" },
-            { "toolbar", "undo redo | styleselect | bold italic underline strikethrough blockquote forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist" }
         };
 
         protected override async Task OnInitializedAsync()

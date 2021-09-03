@@ -315,7 +315,7 @@
     }
 }
 
-::deep .pagination {
-    color: rebeccapurple !important;
-    justify-content: flex-end !important;
+.pagination-org {
+    display: flex;
+    justify-content: flex-end;
 }

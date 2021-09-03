@@ -4,7 +4,7 @@
 {
     @foreach (var item in pagedResult.Results)
     {
-        <div class="org-card" style="z-index:@(item.RateMethodDropDown ? "10" : "auto")">
+        <div class="org-card" style="z-index:@(item.RateMethodDropDown ? "2" : "auto")">
             <div class="org-card__btn-edit btn" @onclick="@(() => DropDownClick(item.Id,"edit"))">
                 <span class="material-icons-outlined">
                     more_horiz
@@ -88,10 +88,11 @@
 
 @popupTemplate
 
-<Pager CurrentPage="@pagedResult.CurrentPage"
-       PageCount="@pagedResult.PageCount"
-       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
-
+<div class="pagination-org">
+    <Pager CurrentPage="@pagedResult.CurrentPage"
+           PageCount="@pagedResult.PageCount"
+           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+</div>
 
 @code {
     private class FakeData

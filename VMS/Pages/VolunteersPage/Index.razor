@@ -1,91 +1,15 @@
 ﻿@attribute [Route(Routes.VolunteersPage)]
 
 <div class="container-lg px-0 layout">
-    <div class="title">
-        <div class="main-title">
-            <div>Danh sách <span>tình nguyện viên</span></div>
-        </div>
-        <div class="sub-title">
-            <div class="sub-title--content">Tuyển tình nguyện viên tham gia công tác phòng chống dịch Covid19</div>
-        </div>
-    </div>
+    <Title></Title>
 
-    <div class="button-and-searchbox">
-
-        <form action="/" method="post" class="my-search-box d-flex mb-5">
-            <input type="text" value=@mySearchValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
-            <div class="my-search-box__icon-wrapper d-flex align-items-center">
-                <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
-                    close
-                </span>
-                <button type="submit" class="search-btn d-flex align-items-center">
-                    <span class="material-icons-outlined">
-                        search
-                    </span>
-                </button>
-            </div>
-        </form>
-        <div>
-            <button class="button-download">Tải danh sách</button>
-        </div>
-
-    </div>
+    <SearchboxAndButton></SearchboxAndButton>
 
     <p class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
-
-    <div class="group-card">
-        <div class="mycard">
-            <div class="mycard__info" style="@(isCheck?"background-color: rgba(196, 196, 196, 0.3)":"none")">
-                <img class="mycard__info--avatar" src="/img/act1.png" alt="Avatar" />
-                <div class="mycard__info--name">Pham Thi Ngoc Anh</div>
-                <div class="mycard__info--mssv">31191025555</div>
-            </div>
-            <div class="mycard__checkbox">
-                <input @onclick="Check" class="mycard__checkbox--my-checkbox" type="checkbox">
-            </div>       
-            <div class="mycard__button">
-                <button class="mycard__button--registration-form">Xem đơn đăng ký</button>
-            </div>
-        </div>
-        <div class="mycard">
-            <div class="mycard__info">
-                <img class="mycard__info--avatar" src="/img/act1.png" alt="Avatar" />
-                <div class="mycard__info--name">Pham Thi Ngoc Anh</div>
-                <div class="mycard__info--mssv">31191025555</div>
-            </div>
-            <div class="mycard__checkbox">
-                <input class="mycard__checkbox--my-checkbox" type="checkbox"/>
-            </div>
-            <div class="mycard__button">
-                <button class="mycard__button--registration-form">Xem đơn đăng ký</button>
-            </div>
-        </div>
-    </div>
+    
+    <ListCard></ListCard>
 </div>
 
 @code {
-    string mySearchValue = "";
-    bool isCheck = false;
     private int quantity = 255;
-    void ClearSearchBox()
-    {
-        mySearchValue = "";
-    }
-    void UpdateInstanceValue(ChangeEventArgs e)
-    {
-        mySearchValue = e.Value.ToString();
-    }
-
-    void Check()
-    {
-        isCheck = !isCheck;
-    }
-    private class VirtualData
-    {
-        public int Id { get; set; }
-        public string Avatar { get; set; }
-        public string Name { get; set; }
-        public string Mssv { get; set; }
-    }
-
 }

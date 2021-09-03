@@ -1,0 +1,24 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.title {
+  font-weight: 600; }
+  .title .main-title {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    color: #64D72F; }
+    .title .main-title span {
+      color: #18A0FB; }
+  .title .sub-title {
+    line-height: 60px;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #0B588C; }
+    .title .sub-title .sub-title--content {
+      width: 50%; }

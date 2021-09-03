@@ -1,0 +1,49 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.button-and-searchbox {
+  display: grid;
+  grid-template-columns: 80% 20%; }
+  .button-and-searchbox .button-download {
+    background-color: #18A0FB;
+    color: #FFFFFF;
+    border: none;
+    padding: 9px 45px;
+    border-radius: 5px;
+    float: right; }
+    .button-and-searchbox .button-download:hover {
+      background-color: #0B588c; }
+
+/*------SearchBox--------*/
+.my-search-box__input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #b4b4b4;
+  font-size: 18px;
+  color: #18A0FB; }
+  .my-search-box__input::placeholder {
+    color: #64D72F; }
+
+.my-search-box__icon-wrapper {
+  margin-left: -60px; }
+  .my-search-box__icon-wrapper span {
+    color: #64D72F;
+    font-size: 26px;
+    line-height: 24px; }
+  .my-search-box__icon-wrapper .search-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0; }
+  .my-search-box__icon-wrapper .clear-search-btn {
+    margin-top: -4px;
+    visibility: hidden;
+    cursor: pointer; }
+
+.my-search-box__input:not(:placeholder-shown) ~ .my-search-box__icon-wrapper .clear-search-btn {
+  visibility: visible; }
+
+/*------EndSearchBox-------*/

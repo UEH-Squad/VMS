@@ -98,5 +98,17 @@
   {
     "outputFile": "Pages/VolunteersPage/Index.razor.css",
     "inputFile": "Pages/VolunteersPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersPage/Title.razor.css",
+    "inputFile": "Pages/VolunteersPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersPage/SearchboxAndButton.razor.css",
+    "inputFile": "Pages/VolunteersPage/SearchboxAndButton.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersPage/ListCard.razor.css",
+    "inputFile": "Pages/VolunteersPage/ListCard.razor.scss"
   }
 ]

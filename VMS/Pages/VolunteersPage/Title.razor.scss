@@ -1,0 +1,29 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.title {
+    font-weight: 600;
+
+    .main-title {
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        font-size: 36px;
+        color: $green;
+
+        span {
+            color: $blue;
+        }
+    }
+
+    .sub-title {
+        line-height: 60px;
+        display: flex;
+        justify-content: center;
+        font-size: 30px;
+        color: $blue-bold;
+
+        .sub-title--content {
+            width: 50%;
+        }
+    }
+}

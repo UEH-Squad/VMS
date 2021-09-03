@@ -1,0 +1,31 @@
+﻿<div class="button-and-searchbox">
+
+    <form action="/" method="post" class="my-search-box d-flex mb-5">
+        <input type="text" value=@mySearchValue @oninput="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+        <div class="my-search-box__icon-wrapper d-flex align-items-center">
+            <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
+                close
+            </span>
+            <button type="submit" class="search-btn d-flex align-items-center">
+                <span class="material-icons-outlined">
+                    search
+                </span>
+            </button>
+        </div>
+    </form>
+    <div>
+        <button class="button-download">Tải danh sách</button>
+    </div>
+</div>
+
+@code {
+    string mySearchValue = "";
+    void ClearSearchBox()
+    {
+        mySearchValue = "";
+    }
+    void UpdateInstanceValue(ChangeEventArgs e)
+    {
+        mySearchValue = e.Value.ToString();
+    }
+}

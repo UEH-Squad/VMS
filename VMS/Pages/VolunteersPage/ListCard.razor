@@ -1,0 +1,84 @@
+﻿@inject IJSRuntime JsRuntime
+<div class="list-card">
+    @if (pagedResult != null && pagedResult.Results.Length != 0)
+     {
+        @foreach (var item in pagedResult.Results)
+         {
+            <div class="mycard">
+                <div class="mycard__info">
+                    <img class="mycard__info--avatar" src=@item.Avatar alt="Avatar" />
+                    <div class="mycard__info--name-and-mssv">
+                        <a href="#" class="info-name">@item.Name</a>
+                        <div class="info-mssv">@item.Mssv</div>
+                    </div>
+
+                </div>
+                <div class="mycard__checkbox">
+                    <input class="mycard__checkbox--my-checkbox" type="checkbox">
+                </div>
+                <div class="mycard__button">
+                    <button class="mycard__button--registration-form">Xem đơn đăng ký</button>
+                </div>
+            </div>
+         }
+     }
+</div>
+
+<Pager CurrentPage="@pagedResult.CurrentPage"
+       PageCount="@pagedResult.PageCount"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+
+@code {
+
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Avatar { get; set; }
+        public string Name { get; set; }
+        public string Mssv { get; set; }
+    }
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+    private PagedResult<FakeData> pagedResult;
+    private int page = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await Interop.ScrollToTop(JsRuntime);
+    }
+    private PagedResult<FakeData> GetFakeData()
+    {
+        var result = new PagedResult<FakeData>();
+        result.CurrentPage = page;
+        result.RowCount = 100;
+        result.PageSize = 10;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
+        {
+            Id = x + 1,
+            Avatar= "/img/act1.png",
+            Name = "Pham Thi Ngoc Anh",
+            Mssv = "31191025555"
+        }).ToArray();
+
+        return result;
+    }
+}

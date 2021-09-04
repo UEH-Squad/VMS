@@ -94,5 +94,9 @@
   {
     "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
     "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Homepage/Rank.razor.css",
+    "inputFile": "Pages/Homepage/Rank.razor.scss"
   }
 ]

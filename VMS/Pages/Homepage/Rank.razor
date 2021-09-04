@@ -1,0 +1,196 @@
+﻿@inject IJSRuntime JSRuntinme;
+
+<div class="my-rank">
+    <div class="container position-relative">
+        <h1>Đại lộ <span>danh vọng</span></h1>
+        <a @onclick="ShowOrganization" class="rank__link-organization">Tổ chức</a>
+        <a @onclick="ShowPersonal" class="rank__link-students">Sinh viên</a>
+        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-5 @(isShowOrganization ? "d-block" :"d-none") ">
+            <div class="item row">
+                <div class=" col-7  mx-auto py-3 text-center">
+                    <div class="rank__img m-auto pb-3">
+                        <img class="mx-auto" src="./img/BIT.jpg" alt="">
+                    </div>
+                    <p class="rank__name">PHẠM THỊ NGỌC ÁNH</p>
+                    <span class="rank__review">Chiến sĩ năng động</span>
+                    <div class="d-flex justify-content-between px-2 mb-2">
+                        <div class="rank__act">
+                            <p>12</p>
+                            <span>Hoạt động</span>
+                        </div>
+                        <div class="rank__star">
+                            <p>4</p>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons star-noColor">star_rate</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank__img-rank">
+                    <img src="img/rank.png" alt="">
+                </div>
+            </div>
+            <div class="item row">
+                <div class=" col-7  mx-auto py-3 text-center">
+                    <div class="rank__img m-auto pb-3">
+                        <img class="mx-auto" src="./img/KET.jpg" alt="">
+                    </div>
+                    <p class="rank__name">PHẠM THỊ NGỌC ÁNH</p>
+                    <span class="rank__review">Chiến sĩ năng động</span>
+                    <div class="d-flex justify-content-between px-2 mb-2">
+                        <div class="rank__act">
+                            <p>12</p>
+                            <span>Hoạt động</span>
+                        </div>
+                        <div class="rank__star">
+                            <p>4</p>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons star-noColor">star_rate</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank__img-rank">
+                    <img src="img/rank.png" alt="">
+                </div>
+            </div>
+            <div class="item row">
+                <div class=" col-7  mx-auto py-3 text-center">
+                    <div class="rank__img m-auto pb-3">
+                        <img class="mx-auto" src="./img/KinhTe.png" alt="">
+                    </div>
+                    <p class="rank__name">PHẠM THỊ NGỌC ÁNH</p>
+                    <span class="rank__review">Chiến sĩ năng động</span>
+                    <div class="d-flex justify-content-between px-2 mb-2">
+                        <div class="rank__act">
+                            <p>12</p>
+                            <span>Hoạt động</span>
+                        </div>
+                        <div class="rank__star">
+                            <p>4</p>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons star-noColor">star_rate</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank__img-rank">
+                    <img src="img/rank.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-personal px-5  @(isShowOrganization ? "d-none" :"d-block") ">
+
+            <div class="item row">
+                <div class=" col-7  mx-auto py-3 text-center">
+                    <div class="rank__img m-auto pb-3">
+                        <img class="mx-auto" src="./img/RelatedActivities/2nd-activity.png" alt="">
+                    </div>
+                    <p class="rank__name">PHẠM THỊ NGỌC ÁNH</p>
+                    <span class="rank__review">Chiến sĩ năng động</span>
+                    <div class="d-flex justify-content-between px-2 mb-2">
+                        <div class="rank__act">
+                            <p>12</p>
+                            <span>Hoạt động</span>
+                        </div>
+                        <div class="rank__star">
+                            <p>4</p>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons star-noColor">star_rate</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank__img-rank">
+                    <img src="img/rank.png" alt="">
+                </div>
+            </div>
+
+            <div class="item row">
+                <div class=" col-7  mx-auto py-3 text-center">
+                    <div class="rank__img m-auto pb-3">
+                        <img class="mx-auto" src="./img/RelatedActivities/3rd-activity.png" alt="">
+                    </div>
+                    <p class="rank__name">PHẠM THỊ NGỌC ÁNH</p>
+                    <span class="rank__review">Chiến sĩ năng động</span>
+                    <div class="d-flex justify-content-between px-2 mb-2">
+                        <div class="rank__act">
+                            <p>12</p>
+                            <span>Hoạt động</span>
+                        </div>
+                        <div class="rank__star">
+                            <p>4</p>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons star-noColor">star_rate</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank__img-rank">
+                    <img src="img/rank.png" alt="">
+                </div>
+            </div>
+
+            <div class="item row">
+                <div class=" col-7  mx-auto py-3 text-center">
+                    <div class="rank__img m-auto pb-3">
+                        <img class="mx-auto" src="./img/RelatedActivities/4th-activity.png" alt="">
+                    </div>
+                    <p class="rank__name">PHẠM THỊ NGỌC ÁNH</p>
+                    <span class="rank__review">Chiến sĩ năng động</span>
+                    <div class="d-flex justify-content-between px-2 mb-2">
+                        <div class="rank__act">
+                            <p>12</p>
+                            <span>Hoạt động</span>
+                        </div>
+                        <div class="rank__star">
+                            <p>4</p>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons">star_rate</i>
+                            <i class="material-icons star-noColor">star_rate</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank__img-rank">
+                    <img src="img/rank.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <a class="rank__more ">Xem thêm >></a>
+    </div>
+
+</div>
+
+
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.RankCarousel");
+    }
+
+    private bool isShowOrganization = true;
+
+    void ShowOrganization()
+    {
+        isShowOrganization = true;
+    }
+
+    void ShowPersonal()
+    {
+        isShowOrganization = false;
+    }
+}

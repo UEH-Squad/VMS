@@ -5,6 +5,7 @@
 
     .quoteBaner__item {
         padding-bottom: 15px;
+        font-weight: 600;
         color: $green;
 
         @include on('sm') {
@@ -16,6 +17,7 @@
         }
 
         h1 {
+            margin-bottom: 30px;
             font-size: 36px;
             font-weight: 600;
 
@@ -24,11 +26,17 @@
             }
 
             @include on('lg') {
-                font-size: 80px;
+                font-size: 64px;
             }
 
             @include on('xl') {
-                font-size: 96px;
+                font-size: 72px;
+            }
+            i,svg{
+                font-size:100px;
+            }
+            span{
+                margin: 0 15px;
             }
         }
 
@@ -38,15 +46,15 @@
             color: black;
 
             @include on('sm') {
-                font-size: 20px;
+                font-size: 16px;
             }
 
             @include on('lg') {
-                font-size: 30px;
+                font-size: 20px;
             }
 
             @include on('xl') {
-                font-size: 36px;
+                font-size: 24px;
             }
         }
     }

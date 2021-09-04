@@ -47,14 +47,6 @@
     .item {
         text-align: center;
 
-        &:hover > i {
-            font-size: 32px
-        }
-
-        &:hover > span {
-            transform: translateY(-5px);
-        }
-
         i {
             display: block;
             background-color: $blue;
@@ -80,22 +72,17 @@
                 line-height: 80px;
                 font-size: 30px;
             }
+
+            @include on("xxl") {
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                font-size: 45px;
+            }
         }
 
-        span {
-            color: $green;
-            font-weight: 500;
-            display: inline-block;
-            transition: all 0.3s linear;
-            font-size: 16px;
-
-            @include on("sm") {
-                font-size: 20px;
-            }
-
-            @include on("lg") {
-                font-size: 24px;
-            }
+        &:hover > i {
+            font-size: 32px
         }
 
         @include on("sm") {
@@ -107,6 +94,32 @@
         @include on("lg") {
             &:hover > i {
                 font-size: 45px
+            }
+        }
+
+        @include on("xxl") {
+            &:hover > i {
+                font-size: 55px
+            }
+        }
+
+        &:hover > span {
+            transform: translateY(-5px);
+        }
+
+        span {
+            color: $green;
+            font-weight: 400;
+            display: inline-block;
+            transition: all 0.3s linear;
+            font-size: 16px;
+
+            @include on("sm") {
+                font-size: 20px;
+            }
+
+            @include on("lg") {
+                font-size: 24px;
             }
         }
     }
@@ -135,6 +148,11 @@
                 top: -30px;
                 left: 30px;
             }
+
+            @include on("xxl") {
+                top: -20px;
+                left: 30px;
+            }
         }
 
         .owl-next {
@@ -158,6 +176,11 @@
 
             @include on("lg") {
                 top: -30px;
+                right: 30px;
+            }
+
+            @include on("xxl") {
+                top: -20px;
                 right: 30px;
             }
         }

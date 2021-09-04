@@ -5,7 +5,7 @@
 /*#region mixins */
 /*#endregion */
 .my-act .act {
-  border-top: 1px solid #bbb; }
+  border-top: 2px solid #bbb; }
   .my-act .act h3 {
     margin-top: 10px;
     font-size: 24px;
@@ -42,7 +42,7 @@
       margin-right: 5px;
       font-size: 24px; }
   .my-act .act__content p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400; }
   .my-act .act__content span {
     font-size: 14px;
@@ -61,7 +61,9 @@
     margin-left: 20px;
     font-size: 20px;
     font-weight: 600;
-    color: #FFFFFF; }
+    color: #FFFFFF;
+    padding: 10px 15px;
+    border-radius: 5px; }
     .my-act .act__signUp button:hover {
       background-color: #306C14;
       color: #FFFFFF; }

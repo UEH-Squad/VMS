@@ -126,7 +126,7 @@ $fav-icon: #F14747;
 
             @include on('xxl') {
                 padding: 19px;
-                font-size: 24px;
+                font-size: 20px;
                 max-height: calc(24px * 5 + 19px);
             }
         }
@@ -174,7 +174,7 @@ $fav-icon: #F14747;
 
 ::deep .owl-nav {
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%,-50%);
     width: 100%;
@@ -199,4 +199,17 @@ $fav-icon: #F14747;
 
 ::deep .owl-drag {
     cursor: initial !important;
+}
+
+.limited-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 3;
+
+    @include on('sm') {
+        -webkit-line-clamp: 4;
+    }
 }

@@ -7,7 +7,7 @@
         margin-top: 3%;
         font-style: normal;
         font-weight: 500;
-        font-size: 36px;
+        font-size: 24px;
         line-height: 44px;
         color: $blue;
     }
@@ -41,7 +41,6 @@
             display: inline;
             font-style: normal;
             font-weight: normal;
-            font-size: 20px;
             line-height: 30px;
             color: $grey-text;
         }
@@ -87,7 +86,6 @@
     .content {
         font-style: normal;
         font-weight: normal;
-        font-size: 24px;
         line-height: 30px;
         color: $grey-text;
     }
@@ -102,13 +100,13 @@
         margin-top: 8%;
         font-style: normal;
         font-weight: normal;
-        font-size: 24px;
         line-height: 30px;
         color: $grey-text;
 
         .mission {
             margin: 0 auto;
             font-weight: 600;
+            font-size: 18px;
         }
 
         .misson-list {
@@ -120,12 +118,12 @@
         margin-top: 3.5%;
         font-style: normal;
         font-weight: normal;
-        font-size: 24px;
         line-height: 30px;
         color: $grey-text;
 
         .assignment {
             margin: 0 auto;
+            font-size: 18px;
             font-weight: 600;
         }
 

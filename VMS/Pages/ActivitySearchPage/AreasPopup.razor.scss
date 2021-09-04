@@ -1,4 +1,8 @@
 ﻿@import '../../Resources/scss/common/_variables.scss';
+.colored-red {
+    color: #f14747;
+}
+
 .colored-green {
     color: $green;
 }
@@ -9,6 +13,7 @@
 
 .my-custom-popup {
     width: 50%;
+    min-height: 600px;
     background-color: #fff;
     border-radius: 10px;
     z-index: 999;
@@ -17,9 +22,7 @@
         font-size: 48px;
         color: $green;
     }
-    .cover-content {
-        margin:20px 0;
-    }
+
     .close-btn {
         position: absolute;
         top: 25px;
@@ -35,10 +38,21 @@
         cursor: pointer;
     }
 
+    .areas-modal-content {
+        margin: 20px 0;
+        margin-left: 80px;
+
+        &__container {
+            height: 100%;
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+    }
+
+
     .area-item-wrapper {
-        width: 50%;
         cursor: pointer;
-        justify-content:center;
+
         span {
             width: 50px;
             height: 50px;
@@ -71,3 +85,13 @@
 }
 
 
+.covid-item {
+    p {
+        font-weight: 500;
+    }
+
+    span:hover ~ p,
+    p:hover {
+        color: #f14747 !important;
+    }
+}

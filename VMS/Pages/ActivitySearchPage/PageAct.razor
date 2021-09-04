@@ -21,11 +21,13 @@
                                             <i class="material-icons">public</i>@item.Organizer
                                         </h5>
                                         <p class="lmtext-2">@item.ShortDescription</p>
-                                        <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
                                         <div class="act__signUp">
-                                            <i @onclick="@(() => HandleFav(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
+                                            <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                                            <div class="ms-auto d-flex align-items-center">
+                                                <i @onclick="@(() => HandleFav(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
 
-                                            <button @onclick="ShowModal" class="btn">Đăng ký</button>
+                                                <button @onclick="ShowModal" class="btn">Đăng ký</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

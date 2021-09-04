@@ -10,15 +10,20 @@
 .bg-grey {
   background-color: #f3f3f3; }
 
-.page-heading {
-  font-size: 64px;
-  color: #18A0FB;
-  font-weight: 500; }
-  .page-heading span {
-    color: #64D72F; }
+.colored-red {
+  color: #f14747 !important; }
+
+.heading-container {
+  width: fit-content; }
+  .heading-container .page-heading {
+    font-size: 66px;
+    color: #18A0FB;
+    font-weight: 500; }
+    .heading-container .page-heading span {
+      color: #64D72F; }
 
 .my-search-box__input {
-  width: 40%;
+  width: 100%;
   outline: none;
   border: none;
   border-bottom: 1px solid #b4b4b4;
@@ -31,12 +36,13 @@
   margin-left: -60px; }
   .my-search-box__icon-wrapper span {
     color: #64D72F;
-    font-size: 26px;
+    font-size: 30px;
     line-height: 24px; }
   .my-search-box__icon-wrapper .search-btn {
-    background-color: transparent;
+    background-color: #f3f3f5;
+    border-radius: 3px;
     border: none;
-    padding: 0; }
+    padding: 1px 0; }
   .my-search-box__icon-wrapper .clear-search-btn {
     margin-top: -4px;
     visibility: hidden;
@@ -46,16 +52,16 @@
   visibility: visible; }
 
 .my-check-box {
-  border-radius: 50px;
+  border-radius: 5px;
   width: 20px;
   height: 20px;
-  margin-right: 10px;
+  margin-right: 5px;
   vertical-align: top;
   background-color: #fff;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  border: 2px solid #B4B4B4;
+  border: 1px solid #B4B4B4;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -63,22 +69,20 @@
   position: relative; }
   .my-check-box::before {
     content: "";
-    width: 11px;
-    height: 11px;
-    border-radius: 50px;
-    background-color: #18A0FB;
+    width: 13px;
+    height: 7px;
+    border-left: 2px solid #18A0FB;
+    border-bottom: 2px solid #18A0FB;
     position: absolute;
-    top: 49%;
+    top: 40%;
     left: 52%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(-45deg);
     display: none; }
   .my-check-box:checked::before {
     display: block; }
-  .my-check-box:checked {
-    border-color: #18A0FB; }
 
 .my-check-box-label {
-  font-size: 24px;
+  font-size: 20px;
   color: #515151; }
 
 .filter-item {
@@ -90,7 +94,7 @@
     pointer-events: none; }
 
 .popup-btn {
-  border-radius: 8px;
+  border-radius: 10px;
   height: 40px;
   width: 100%;
   border: 1px solid #707070;
@@ -185,7 +189,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  border: 2px solid #B4B4B4;
+  border: 1px solid #B4B4B4;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

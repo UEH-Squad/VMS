@@ -10,7 +10,7 @@
   margin-top: 3%;
   font-style: normal;
   font-weight: 500;
-  font-size: 36px;
+  font-size: 24px;
   line-height: 44px;
   color: #18A0FB; }
 
@@ -34,7 +34,6 @@
   display: inline;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
   line-height: 30px;
   color: #515151; }
 
@@ -70,7 +69,6 @@
   .infopage-activity .content {
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
     line-height: 30px;
     color: #515151; }
   .infopage-activity .activity__image {
@@ -81,23 +79,23 @@
     margin-top: 8%;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
     line-height: 30px;
     color: #515151; }
     .infopage-activity .activity__mission .mission {
       margin: 0 auto;
-      font-weight: 600; }
+      font-weight: 600;
+      font-size: 18px; }
     .infopage-activity .activity__mission .misson-list {
       margin: 0 auto; }
   .infopage-activity .activity__assignment {
     margin-top: 3.5%;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
     line-height: 30px;
     color: #515151; }
     .infopage-activity .activity__assignment .assignment {
       margin: 0 auto;
+      font-size: 18px;
       font-weight: 600; }
     .infopage-activity .activity__assignment .assignment-list {
       margin: 0 auto; }

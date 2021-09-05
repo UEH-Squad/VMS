@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210826084908_AddNewRecruitmentAndUserColumns")]
+    partial class AddNewRecruitmentAndUserColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -432,86 +434,74 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Icon = "people_outline",
                             IsDeleted = false,
                             Name = "Cộng đồng"
                         },
                         new
                         {
                             Id = 2,
-                            Icon = "pan_tool",
-                            IsDeleted = false,
-                            Name = "Hỗ trợ"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Icon = "import_contacts",
-                            IsDeleted = false,
-                            Name = "Giáo dục"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Icon = "format_shapes",
-                            IsDeleted = false,
-                            Name = "Kỹ thuật"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Icon = "local_hospital",
-                            IsDeleted = false,
-                            Name = "Sức khỏe"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Icon = "drive_eta",
-                            IsDeleted = false,
-                            Name = "Phương tiện"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Icon = "wb_sunny",
-                            IsDeleted = false,
-                            Name = "Môi trường"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Icon = "directions_bike",
-                            IsDeleted = false,
-                            Name = "Thể thao"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Icon = "notifications_active",
-                            IsDeleted = false,
-                            Name = "Khẩn cấp"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Icon = "calendar_today",
                             IsDeleted = false,
                             Name = "Sự kiện"
                         },
                         new
                         {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "Hỗ trợ"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "Giáo dục"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "Khẩn cấp"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Name = "Kỹ thuật"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Name = "Sức khỏe"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Name = "Công nghệ"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Name = "Phương tiện"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsDeleted = false,
+                            Name = "Môi trường"
+                        },
+                        new
+                        {
                             Id = 11,
-                            Icon = "home",
                             IsDeleted = false,
                             Name = "Chuyển nhà"
                         },
                         new
                         {
                             Id = 12,
-                            Icon = "computer",
                             IsDeleted = false,
-                            Name = "Công nghệ"
+                            Name = "Thể thao"
                         });
                 });
 
@@ -690,193 +680,216 @@ namespace VMS.Infrastructure.Data.Migrations
                         {
                             Id = 1,
                             IsDeleted = false,
-                            Name = "Kiến thức chuyên ngành"
+                            Name = "Kỹ năng mềm"
                         },
                         new
                         {
                             Id = 2,
                             IsDeleted = false,
-                            Name = "Kỹ năng mềm"
+                            Name = "Kiến thức chuyên ngành"
                         },
                         new
                         {
                             Id = 3,
                             IsDeleted = false,
-                            Name = "Hoạch định tài chính"
+                            Name = "Siêng năng"
                         },
                         new
                         {
                             Id = 4,
                             IsDeleted = false,
-                            Name = "Quản lý thời gian"
+                            Name = "Lập trình"
                         },
                         new
                         {
                             Id = 5,
                             IsDeleted = false,
-                            Name = "Chỉnh sửa/Thiết kế hình ảnh/Video"
+                            Name = "Có phương tiện di chuyển"
                         },
                         new
                         {
                             Id = 6,
                             IsDeleted = false,
-                            Name = "Thể lực tốt"
+                            Name = "Kiên nhẫn"
                         },
                         new
                         {
                             Id = 7,
                             IsDeleted = false,
-                            Name = "Viết Proposal/Kịch bản/Content"
+                            Name = "Thể lực tốt"
                         },
                         new
                         {
                             Id = 8,
                             IsDeleted = false,
-                            Name = "Lập trình"
+                            Name = "Hoạch định tài chính"
                         },
                         new
                         {
                             Id = 9,
                             IsDeleted = false,
-                            Name = "Xây dựng website"
+                            Name = "Nhiệt tình"
                         },
                         new
                         {
                             Id = 10,
                             IsDeleted = false,
-                            Name = "Lái xe"
+                            Name = "Trách nhiệm"
                         },
                         new
                         {
                             Id = 11,
                             IsDeleted = false,
-                            Name = "Luật",
-                            ParentSkillId = 1
+                            Name = "Chỉnh sửa/Thiết kế hình ảnh/video"
                         },
                         new
                         {
                             Id = 12,
                             IsDeleted = false,
-                            Name = "Kế toán/Kiểm toán",
-                            ParentSkillId = 1
+                            Name = "Checklist"
                         },
                         new
                         {
                             Id = 13,
                             IsDeleted = false,
-                            Name = "Marketing",
-                            ParentSkillId = 1
+                            Name = "Xây dựng website"
                         },
                         new
                         {
                             Id = 14,
                             IsDeleted = false,
-                            Name = "Quản trị",
-                            ParentSkillId = 1
+                            Name = "Viết Proposal/kịch bản/content"
                         },
                         new
                         {
                             Id = 15,
                             IsDeleted = false,
-                            Name = "Tài chính",
-                            ParentSkillId = 1
+                            Name = "Lái xe"
                         },
                         new
                         {
                             Id = 16,
                             IsDeleted = false,
-                            Name = "Ngân hàng",
+                            Name = "Làm việc nhóm",
                             ParentSkillId = 1
                         },
                         new
                         {
                             Id = 17,
                             IsDeleted = false,
-                            Name = "Ngoại ngữ",
+                            Name = "Tư duy Logic",
                             ParentSkillId = 1
                         },
                         new
                         {
                             Id = 18,
                             IsDeleted = false,
-                            Name = "Làm việc nhóm",
-                            ParentSkillId = 2
+                            Name = "Xây dựng kế hoạch",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 19,
                             IsDeleted = false,
-                            Name = "Tư duy Logic",
-                            ParentSkillId = 2
+                            Name = "Giao tiếp & Ứng xử",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 20,
                             IsDeleted = false,
-                            Name = "Xây dựng kế hoạch",
-                            ParentSkillId = 2
+                            Name = "Giải quyết vấn đề",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 21,
                             IsDeleted = false,
-                            Name = "Giao tiếp & Ứng xử",
-                            ParentSkillId = 2
+                            Name = "Quản lý thời gian",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 22,
                             IsDeleted = false,
-                            Name = "Giải quyết vấn đề",
-                            ParentSkillId = 2
+                            Name = "Đồng cảm & Sẻ chia",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 23,
                             IsDeleted = false,
-                            Name = "Đồng cảm & Sẻ chia",
-                            ParentSkillId = 2
+                            Name = "Quan sát & Lắng nghe",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 24,
                             IsDeleted = false,
-                            Name = "Quan sát & Lắng nghe",
-                            ParentSkillId = 2
+                            Name = "Tìm kiếm & Xử lý thông tin",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 25,
                             IsDeleted = false,
-                            Name = "Tìm kiếm & Xử lý thông tin",
-                            ParentSkillId = 2
+                            Name = "Kiểm soát cảm xúc",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 26,
                             IsDeleted = false,
-                            Name = "Kiểm soát cảm xúc",
+                            Name = "Luật",
                             ParentSkillId = 2
                         },
                         new
                         {
                             Id = 27,
                             IsDeleted = false,
-                            Name = "Kiên nhẫn",
+                            Name = "Kế toán/Kiểm toán",
                             ParentSkillId = 2
                         },
                         new
                         {
                             Id = 28,
                             IsDeleted = false,
-                            Name = "Chăm chỉ",
+                            Name = "Marketing",
                             ParentSkillId = 2
                         },
                         new
                         {
                             Id = 29,
                             IsDeleted = false,
-                            Name = "Siêng năng",
+                            Name = "Quản trị",
+                            ParentSkillId = 2
+                        },
+                        new
+                        {
+                            Id = 30,
+                            IsDeleted = false,
+                            Name = "Tài chính",
+                            ParentSkillId = 2
+                        },
+                        new
+                        {
+                            Id = 31,
+                            IsDeleted = false,
+                            Name = "Ngân hàng",
+                            ParentSkillId = 2
+                        },
+                        new
+                        {
+                            Id = 32,
+                            IsDeleted = false,
+                            Name = "Ngoại ngữ",
+                            ParentSkillId = 2
+                        },
+                        new
+                        {
+                            Id = 33,
+                            IsDeleted = false,
+                            Name = "Lý luận chính trị",
                             ParentSkillId = 2
                         });
                 });

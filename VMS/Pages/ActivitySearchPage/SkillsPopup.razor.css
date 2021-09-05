@@ -36,8 +36,7 @@
     font-size: 34px;
     cursor: pointer; }
   .my-custom-popup .skill-modal-content {
-    height: 70%;
-    margin-left: 16%; }
+    height: 70%; }
     .my-custom-popup .skill-modal-content__container {
       height: 100%;
       display: grid;
@@ -62,9 +61,9 @@
     font-size: 20px;
     width: 90px;
     height: 40px;
-    position: absolute;
-    right: 60px;
-    bottom: 30px; }
+    margin-bottom: 10px; }
+    .my-custom-popup .save-btn:hover {
+      background-color: #306C14; }
   .my-custom-popup .my-custom-sub-popup {
     top: -100%;
     left: 110%;

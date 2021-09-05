@@ -41,7 +41,6 @@
 
     .skill-modal-content {
         height: 70%;
-        margin-left: 16%;
 
         &__container {
             height: 100%;
@@ -71,9 +70,11 @@
         font-size: 20px;
         width: 90px;
         height: 40px;
-        position: absolute;
-        right: 60px;
-        bottom: 30px;
+        margin-bottom: 10px;
+
+        &:hover {
+            background-color: $green-bold;
+        }
     }
 
     .my-custom-sub-popup {

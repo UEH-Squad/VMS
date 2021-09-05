@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VMS.Domain.Models;
 
 namespace VMS.Application.Interfaces
@@ -18,5 +19,9 @@ namespace VMS.Application.Interfaces
         string GetCurrentUserAddress();
 
         User GetCurrentUserWithAddresses();
+
+        User GetCurrentUserWithFavoritesAndRecruitments();
+
+        void UpdateUser(User user);
     }
 }

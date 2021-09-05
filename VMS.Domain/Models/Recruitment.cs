@@ -7,6 +7,9 @@ namespace VMS.Domain.Models
     {
         public string UserId { get; set; }
         public int ActivityId { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Desire { get; set; }
+        public bool IsCommit { get; set; }
         public DateTime EnrollTime { get; set; }
         public DateTime AcceptTime { get; set; }
 

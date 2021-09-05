@@ -1,4 +1,6 @@
-﻿.typeahead {
+﻿@import '../../Resources/scss/common/_variables';
+
+.typeahead {
     position: relative;
     width: 100%;
     border: 1px solid #bfbfbf;
@@ -122,13 +124,9 @@
         box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
     }
 
-    &:hover {
-        background-color: #f5f5f5;
-
-        .typeahead__down-arrow {
-            path {
-                fill: #333333;
-            }
+    .typeahead__down-arrow {
+        path {
+            fill: #333333;
         }
     }
 }
@@ -188,15 +186,16 @@
 }
 
 .typeahead__results {
+    color: $blue;
     position: absolute;
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
     border: 1px solid #dbdbdb;
+    border-radius: .3rem;
     min-height: 2rem;
     max-height: 30rem;
     overflow-y: auto;
-    right: 17px;
     z-index: 10;
-    width: 35%;
+    width: 100%;
     background: #fff;
 }
 
@@ -211,7 +210,8 @@
 }
 
 .typeahead__selected-item {
-    background-color: #dbdbdb;
+    background-color: $blue;
+    color: $white;
 }
 
 .typeahead__selected-item-highlighted {
@@ -221,10 +221,10 @@
 .typeahead__active-item,
 .typeahead__result:hover,
 .typeahead__result:focus {
-    background-color: #007bff;
+    background-color: $blue;
     border-top: 1px solid #007bff;
     border-bottom: 1px solid #007bff;
-    color: #fff;
+    color: $white;
     cursor: pointer;
 }
 

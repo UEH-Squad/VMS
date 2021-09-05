@@ -102,5 +102,9 @@
   {
     "outputFile": "Pages/Organization/Activities/CreateEditActivity.razor.css",
     "inputFile": "Pages/Organization/Activities/CreateEditActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.css",
+    "inputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.scss"
   }
 ]

@@ -68,57 +68,10 @@
                 <div class="row">
                     <div class="col-3 align-self-center">Địa điểm tham gia <span class="required-asterick">(*)</span></div>
                     <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap">
-                        <div class="me-2 filter-item filter-item-city position-relative">
-                            <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="popup-btn @(activity.ProvinceId != 0 ? "bg-grey" : "")" placeholder="@cityChoosenValue" readonly />
-                            <div @onclick:preventDefault class="my-dropdown" style="display: @(isCityShow ? "block" : "none")">
-                                <ul>
-                                    @if (provinces is not null)
-                                    {
-                                        @foreach (var province in provinces)
-                                        {
-                                            <li @onmousedown="() => ChooseCityValue(province)">@province.Name</li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                            <span class="material-icons-outlined position-absolute filter-item__icon">
-                                expand_more
-                            </span>
-                        </div>
-                        <div class="me-2 filter-item filter-item-district position-relative">
-                            <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="popup-btn @(activity.DistrictId != 0 ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly />
-                            <div class="my-dropdown" style="display: @(isDistrictShow ? "block" : "none")">
-                                <ul>
-                                    @if (districts is not null)
-                                    {
-                                        @foreach (var district in districts)
-                                        {
-                                            <li @onmousedown="() => ChooseDistrictValue(district)">@district.Name</li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                            <span class="material-icons-outlined position-absolute filter-item__icon">
-                                expand_more
-                            </span>
-                        </div>
-                        <div class="me-2 filter-item filter-item-district position-relative">
-                            <input @onclick="ToggleWardDropdown" @onfocusout="CloseWardDropdown" class="popup-btn @(activity.WardId != 0 ? "bg-grey" : "")" placeholder="@wardChoosenValue" readonly />
-                            <div class="my-dropdown" style="display: @(isWardShow ? "block" : "none")">
-                                <ul>
-                                    @if (wards is not null)
-                                    {
-                                        @foreach (var ward in wards)
-                                        {
-                                            <li @onmousedown="() => ChooseWardValue(ward)">@ward.Name</li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                            <span class="material-icons-outlined position-absolute filter-item__icon">
-                                expand_more
-                            </span>
-                        </div>
+                        <CascadingAddressPicker DistrictId="activity.DistrictId" 
+                                                ProvinceId="activity.ProvinceId" 
+                                                WardId="activity.WardId"
+                                                OnAddressChanged="OnAddressChanged" />
                         <InputText @bind-Value="activity.Address" class="form-control mt-2 mt-xl-0" placeholder="Nhập số nhà, tên đường" />
                     </div>
                 </div>
@@ -147,7 +100,7 @@
                                 @target.Name
                             </ResultTemplate>
                         </Typeahead>
-                        <div @onclick="ShowSkillsPopup" class="typeahead__input-icon typeahead__input-icon--disabled position-absolute">
+                        <div @onclick="ShowSkillsPopup" class="typeahead__input-icon position-absolute">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="align-self-center typeahead__down-arrow">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon id="Shape" points="0 0 24 0 24 24 0 24" />

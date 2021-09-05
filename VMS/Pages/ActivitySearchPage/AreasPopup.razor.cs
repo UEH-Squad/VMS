@@ -16,7 +16,6 @@ namespace VMS.Pages.ActivitySearchPage
         public List<AreaViewModel> ChoosenAreasList { get; set; }
         [CascadingParameter]
         private BlazoredModalInstance AreasModal { get; set; }
-
         [Inject]
         private IAreaService AreaService { get; set; }
 

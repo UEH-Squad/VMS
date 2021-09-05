@@ -23,9 +23,9 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Specification<Skill> specification = new()
+            List<Skill> skills = await _repository.GetListAsync(dbContext, new Specification<Skill>()
             {
-                Conditions = new List<Expression<System.Func<Skill, bool>>>()
+                Conditions = new List<Expression<Func<Skill, bool>>>()
                 {
                     s => s.ParentSkillId == parentSkillId
                 },

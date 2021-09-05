@@ -54,7 +54,7 @@ namespace VMS.Application.Services
                 RowCount = activities.Count,
                 PageSize = 20
             };
-            result.PageCount = result.RowCount / result.PageSize;
+            result.PageCount = (int)Math.Ceiling(result.RowCount * 1.0 / result.PageSize);
             result.Results = activities.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
 
             return result;
@@ -91,7 +91,7 @@ namespace VMS.Application.Services
                     a => a.ActivitySkills.Select(activitySkills => activitySkills.SkillId)
                                          .Where(actSkillId => filter.Skills.Select(skill => skill.Id)
                                                                            .Any(skillId => skillId == actSkillId))
-                                         .Count() == filter.Skills.Count(),
+                                         .Count() == filter.Skills.Count,
                     a => a.EndDate >= DateTime.Now
                 },
                 Includes = a => a.Include(x => x.ActivitySkills)
@@ -104,7 +104,7 @@ namespace VMS.Application.Services
             return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
-        private List<ActivityViewModel> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, List<ActivityViewModel> activities, Coordinate userLocation)
+        private static List<ActivityViewModel> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, List<ActivityViewModel> activities, Coordinate userLocation)
         {
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
             {

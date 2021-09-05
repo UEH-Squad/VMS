@@ -30,9 +30,7 @@ namespace VMS.Application.Services
                     s => s.ParentSkillId == parentSkillId
                 },
                 Includes = s => s.Include(x => x.SubSkills)
-            };
-
-            List<Skill> skills = await _repository.GetListAsync(dbContext, specification);
+            });
 
             return _mapper.Map<List<SkillViewModel>>(skills);
         }

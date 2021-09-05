@@ -44,9 +44,14 @@
 <div class="pop-up @(isDeleteConfirm ? "d-block" : "d-none")">
     <div class="center-screen ">
         <div class="pop-up-container border-10">
+            <div @onclick="DeleteConfirm" class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="color">xóa hoạt động</span> này không?</h3>
+                <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
                 <div @onclick="DeleteConfirm" class="deny">Hủy</div>
@@ -59,9 +64,14 @@
 <div class="pop-up @(isCloseConfirm ? "d-block" : "d-none")">
     <div class="center-screen">
         <div class="pop-up-container border-10">
+            <div @onclick="() => CloseConfirm(pendingId)" class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="color">đóng hoạt động</span> này không?</h3>
+                <h3><span class="close-text">đóng hoạt động</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
                 <div @onclick="() => CloseConfirm(pendingId)" class="deny">Hủy</div>
@@ -73,8 +83,8 @@
 
 <div class="pop-up @(isDeleteSuccess ? "d-block" : "d-none")">
     <div class="center-screen">
-        <div class="pop-up-container border-5">
-            <div @onclick="DeleteSuccess" class="close-btn">
+        <div class="pop-up-container border-10">
+            <div @onclick="DeleteSuccess" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
@@ -88,8 +98,8 @@
 
 <div class="pop-up @(isCloseSuccess ? "d-block" : "d-none")">
     <div class="center-screen">
-        <div @onclick="CloseSuccess" class="pop-up-container border-5">
-            <div class="close-btn">
+        <div class="pop-up-container border-10">
+            <div @onclick="CloseSuccess" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>

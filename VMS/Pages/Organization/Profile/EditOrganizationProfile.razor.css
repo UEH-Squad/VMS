@@ -9,19 +9,15 @@
   /* Track */
   /* Handle */ }
   .my-editProfile .editProfile__title {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 600;
     color: #18A0FB;
     text-align: center; }
     .my-editProfile .editProfile__title span {
       color: #64D72F; }
-  .my-editProfile hr {
-    width: 80%;
-    color: #707070;
-    margin: 0 auto; }
   .my-editProfile .editProfile__logo {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -34,13 +30,13 @@
   .my-editProfile .form-item {
     margin-bottom: 20px; }
   .my-editProfile .form-text {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 500;
     color: #707070;
     margin: auto 0; }
   .my-editProfile ::deep .form-input {
     padding: 10px;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 300;
     color: #515151;
     border: 1px solid #707070; }
@@ -58,8 +54,8 @@
       color: white;
       margin: 5px auto;
       transition: all 0.3s linear;
-      width: 88px;
-      height: 88px;
+      width: 83px;
+      height: 83px;
       line-height: 88px;
       font-size: 40px; }
     .my-editProfile .form-field-item span {
@@ -67,21 +63,27 @@
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;
-      font-size: 20px; }
+      font-size: 20px;
+      margin-top: 20px; }
     .my-editProfile .form-field-item .icon-add {
-      background: #64D72F;
+      background: #C4C4C4;
+      opacity: 50%;
       color: #FFFFFF;
       font-size: 70px; }
       .my-editProfile .form-field-item .icon-add:hover {
-        background: #306C14;
+        background: #C4C4C4;
+        opacity: 100%;
         font-size: 80px; }
   .my-editProfile .countWord {
-    color: #707070; }
+    color: #707070;
+    position: absolute;
+    top: 135px;
+    right: 15px; }
   .my-editProfile .from__btn {
-    margin: 120px 0; }
+    margin: 60px 0; }
     .my-editProfile .from__btn .btn {
       padding: 12px 35px;
-      font-size: 24px;
+      font-size: 16px;
       font-weight: 600; }
     .my-editProfile .from__btn .from__btn-cancel {
       background: #FFFFFF;

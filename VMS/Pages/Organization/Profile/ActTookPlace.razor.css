@@ -6,7 +6,7 @@
 /*#endregion */
 .act h1 {
   font-weight: 600;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 36px;
   color: #515151;
   margin-bottom: 42px;
@@ -24,7 +24,7 @@
   align-items: center; }
 
 .act-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 30px;
   color: #18A0FB;

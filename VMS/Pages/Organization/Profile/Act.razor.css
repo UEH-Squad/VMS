@@ -6,7 +6,7 @@
 /*#endregion */
 .act h1 {
   font-weight: 600;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 36px;
   color: #515151;
   margin-bottom: 42px;
@@ -34,17 +34,17 @@
 .act-container ul {
   position: absolute;
   top: 20px;
-  right: 15px;
-  background-color: #FFFFFF;
+  right: 7px;
+  background: #FFFFFF;
   border-radius: 10px;
-  padding-left: 10px; }
+  box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
   .act-container ul li {
     list-style: none;
     font-size: 16px;
     font-weight: 500;
     padding: 10px 20px; }
     .act-container ul li:hover {
-      background-color: #F2F2F2; }
+      background: rgba(24, 160, 251, 0.1); }
   .act-container ul .edit {
     color: #515151; }
   .act-container ul .delete {
@@ -67,13 +67,13 @@
     background-color: rgba(100, 100, 100, 0.2); }
   .act-content .content-nm,
   .act-content .content-cl {
-    padding: 17px 10px 26px 29px;
+    padding: 17px 17px 17px 28px;
     text-decoration: none;
     display: block;
     border-radius: 0 0 10px 10px; }
     .act-content .content-nm .act-title,
     .act-content .content-cl .act-title {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 600;
       line-height: 30px; }
     .act-content .content-nm .title-nm,
@@ -162,8 +162,7 @@
     position: relative;
     box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
   .pop-up .close-btn {
-    background-color: #C4C4C4;
-    opacity: .5;
+    background-color: #c4c4c4;
     width: 33px;
     height: 33px;
     border-radius: 100%;
@@ -177,42 +176,73 @@
     .pop-up .close-btn .material-icons {
       font-size: 20px;
       color: #717171; }
+  .pop-up .close-btn-s {
+    background-color: #c4c4c4;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer; }
+    .pop-up .close-btn-s .material-icons {
+      font-size: 14px;
+      color: #717171; }
   .pop-up .pop-up-content {
-    font-size: 36px;
-    line-height: 36px;
-    font-weight: 500;
-    padding: 38px 84px; }
+    padding: 13px 55px; }
     .pop-up .pop-up-content .delete-act {
+      font-size: 18px;
+      line-height: 36px;
+      font-weight: 500;
+      margin-bottom: 0;
       color: #64D72F; }
     .pop-up .pop-up-content .close-act {
+      font-size: 18px;
+      line-height: 36px;
+      font-weight: 500;
+      margin-bottom: 0;
       color: #18A0FB; }
   .pop-up .content {
-    font-size: 36px;
-    line-height: 36px;
-    font-weight: 500;
-    padding: 38px 84px 20px;
+    padding: 34px 64px 18px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    color: #64D72F; }
-    .pop-up .content .color {
+    align-items: center; }
+    .pop-up .content h3 {
+      font-size: 20px;
+      line-height: 25px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #64D72F; }
+    .pop-up .content .close-text {
       color: #18A0FB; }
+    .pop-up .content .delete-text {
+      color: #F14747; }
   .pop-up .pop-up-btn {
     display: flex;
     justify-content: flex-end;
     padding: 0 30px 20px 0;
-    font-weight: 600;
-    font-size: 20px; }
+    font-weight: 600; }
     .pop-up .pop-up-btn .deny {
       background-color: #FFFFFF;
       color: #18A0FB;
-      padding: 0 33px;
-      line-height: 36px;
-      cursor: pointer; }
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 104px;
+      height: 32px; }
     .pop-up .pop-up-btn .accept {
       background-color: #18A0FB;
       color: #FFFFFF;
       border-radius: 5px;
-      padding: 0 15px;
-      line-height: 36px;
-      cursor: pointer; }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 104px;
+      height: 32px;
+      cursor: pointer;
+      font-size: 18px; }

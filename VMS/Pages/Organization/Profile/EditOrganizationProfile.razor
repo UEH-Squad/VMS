@@ -6,7 +6,6 @@
         <div class="row">
             <div class="col-10 mx-auto">
                 <h1 class="editProfile__title">Chỉnh sửa <span>thông tin tổ chức</span></h1>
-                <hr />
                 <div class="editProfile__logo mx-auto my-5">
                     <img class="w-75 " src="img/LogoBaner/KHOA-VIỆN-KTX/BIT.png" alt="">
                 </div>
@@ -17,7 +16,7 @@
                         <InputText @bind-Value="@organization.FullName" class="col-8 form-input" />
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Gamil</p>
+                        <p class="col-4 form-text">Gmail</p>
                         <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Email)</div>
                         <InputText @bind-Value="@organization.Email" class="col-8 form-input" />
                     </div>

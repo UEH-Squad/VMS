@@ -16,14 +16,13 @@
     .my-editProfile .editProfile__title span {
       color: #64D72F; }
   .my-editProfile .editProfile__logo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #707070; }
+    overflow: hidden; }
+    .my-editProfile .editProfile__logo img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #707070; }
   .my-editProfile ::deep .valid.modified:not([type=checkbox]) {
     border: 1px solid #18A0FB;
     outline: none; }

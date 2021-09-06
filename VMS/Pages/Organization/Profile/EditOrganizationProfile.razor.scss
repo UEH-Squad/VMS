@@ -14,14 +14,14 @@
     }
 
     .editProfile__logo {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
         overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid $border-color-bold;
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid $border-color-bold;
+        }
     }
 
     ::deep .valid.modified:not([type=checkbox]) {

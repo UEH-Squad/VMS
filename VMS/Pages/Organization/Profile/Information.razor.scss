@@ -20,23 +20,19 @@
         .information__logo-img {
             position: relative;
             margin-bottom: 20px;
+            display: inline-block;
+        }
+        img {
             width: 230px;
             height: 230px;
             border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        img {
-            width: 90%
+            object-fit: cover;
         }
 
         .icon-camera {
             position: absolute;
-            bottom: 35px;
-            right: 15px;
+            bottom: 0px;
+            right: 10px;
             font-size: 36px;
             color: $grey-icon;
         }

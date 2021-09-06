@@ -15,19 +15,16 @@
   .my-information .information__logo .information__logo-img {
     position: relative;
     margin-bottom: 20px;
+    display: inline-block; }
+  .my-information .information__logo img {
     width: 230px;
     height: 230px;
     border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-  .my-information .information__logo img {
-    width: 90%; }
+    object-fit: cover; }
   .my-information .information__logo .icon-camera {
     position: absolute;
-    bottom: 35px;
-    right: 15px;
+    bottom: 0px;
+    right: 10px;
     font-size: 36px;
     color: #B4B4B4; }
   .my-information .information__logo p {

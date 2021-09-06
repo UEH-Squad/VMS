@@ -171,10 +171,9 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Activity activity = _mapper.Map<Activity>(activityViewModel);
-            activity.PostDate = DateTime.Now;
-            activity.IsApproved = false;
-            activity.CreatedBy = activity.OrgId;
             activity.CreatedDate = DateTime.Now;
+            activity.IsApproved = true;
+            activity.CreatedBy = activity.OrgId;
 
             Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
             activity.Latitude = coordinateResponse.Latitude;
@@ -218,11 +217,10 @@ namespace VMS.Application.Services
 
             CreateActivityViewModel activityViewModel = _mapper.Map<CreateActivityViewModel>(activity);
 
-            activityViewModel.Skills = activity.ActivitySkills.Select(a => new Skill
+            activityViewModel.Skills = activity.ActivitySkills.Select(a => new SkillViewModel
             {
                 Id = a.SkillId,
-                Name = a.Skill.Name,
-                IsDeleted = a.Skill.IsDeleted
+                Name = a.Skill.Name
             }).ToList();
 
             List<ActivityAddress> activityAddresses = activity.ActivityAddresses.OrderBy(a => a.AddressPath.Depth).ToList();
@@ -252,7 +250,7 @@ namespace VMS.Application.Services
 
             activity = _mapper.Map(activityViewModel, activity);
 
-            Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
+            Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.Address);
             activity.Latitude = coordinateResponse.Latitude;
             activity.Longitude = coordinateResponse.Longitude;
 

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Domain.Models;
+using VMS.Common;
 
 namespace VMS.Pages.Organization.Activities
 {
@@ -20,9 +20,19 @@ namespace VMS.Pages.Organization.Activities
         private IJSRuntime JSRuntime { get; set; }
 
         [Inject]
+        private NavigationManager NavigationManager { get; set; }
+
+        [Inject]
         private ISkillService SkillService { get; set; }
 
-        private readonly Fake activity = new()
+        [Inject]
+        private IActivityService ActivityService { get; set; }
+
+        private IList<string> chosenTargets = new List<string>();
+        private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
+        private bool isErrorMessageShown = false;
+
+        private readonly CreateActivityViewModel activity = new()
         {
             StartDate = DateTime.Now,
             EndDate = DateTime.Now.AddDays(7)
@@ -30,17 +40,19 @@ namespace VMS.Pages.Organization.Activities
 
         private readonly List<string> targets = new()
         {
-            "Sinh viên năm nhất",
-            "Sinh viên năm hai",
-            "Sinh viên năm ba",
+            "Năm nhất",
+            "Năm hai",
+            "Năm ba",
+            "Năm tư",
             "Tất cả mọi đối tượng"
         };
 
-        private void OnAddressChanged(int provinceId, int districtId, int wardId)
+        private async Task OnAddressChanged(int provinceId, int districtId, int wardId, string address)
         {
             activity.ProvinceId = provinceId;
             activity.DistrictId = districtId;
             activity.WardId = wardId;
+            activity.FullAddress = address;
         }
 
         private async Task OnStartDateChanged(ChangeEventArgs args)
@@ -70,9 +82,11 @@ namespace VMS.Pages.Organization.Activities
         private async Task ShowAreasPopupAsync()
         {
             ModalParameters parameters = new();
-            parameters.Add("ChoosenAreasList", activity.Areas);
+            parameters.Add("ChoosenAreasList", choosenAreas);
+            parameters.Add("IsSingleArea", true);
 
             await ShowModalAsync(typeof(ActivitySearchPage.AreasPopup), parameters);
+            activity.AreaId = choosenAreas.FirstOrDefault()?.Id ?? 0;
         }
 
         private async Task ShowSkillsPopup()
@@ -104,15 +118,24 @@ namespace VMS.Pages.Organization.Activities
         {
             return await SkillService.GetAllSkillsByNameAsync(searchText);
         }
-    }
 
-    public class Fake : Activity
-    {
-        public int ProvinceId { get; set; }
-        public int DistrictId { get; set; }
-        public int WardId { get; set; }
-        public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
-        public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
-        public IList<string> Targets { get; set; }
+        private async Task HandleSubmit()
+        {
+            if (!string.IsNullOrWhiteSpace(activity.Address))
+            {
+                activity.FullAddress = $"{activity.Address}, {activity.FullAddress}";
+            }
+
+            activity.Targets = string.Join('|', chosenTargets);
+            isErrorMessageShown = false;
+            //await ActivityService.AddActivityAsync(activity);
+            await ShowModalAsync(typeof(NotificationPopup), new ModalParameters());
+        }
+
+        private async Task HandleInvalidSubmit()
+        {
+            isErrorMessageShown = true;
+            await Interop.ScrollToTop(JSRuntime);
+        }
     }
 }

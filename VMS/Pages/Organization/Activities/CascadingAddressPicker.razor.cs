@@ -22,7 +22,7 @@ namespace VMS.Pages.Organization.Activities
         public int WardId { get; set; }
 
         [Parameter]
-        public Action<int, int, int> OnAddressChanged { get; set; }
+        public Func<int, int, int, string, Task> OnAddressChanged { get; set; }
 
         private string[] defaultValues;
         private bool isCityShow;
@@ -61,7 +61,7 @@ namespace VMS.Pages.Organization.Activities
             districtChoosenValue = defaultValues[1];
             wardChoosenValue = defaultValues[2];
 
-            OnAddressChanged?.Invoke(ProvinceId, DistrictId, WardId);
+            OnAddressChanged?.Invoke(ProvinceId, DistrictId, WardId, cityChoosenValue);
         }
 
         private async Task ChooseDistrictValue(AddressPath addressPath)
@@ -74,7 +74,7 @@ namespace VMS.Pages.Organization.Activities
             WardId = 0;
             wardChoosenValue = defaultValues[2];
 
-            OnAddressChanged?.Invoke(ProvinceId, DistrictId, WardId);
+            OnAddressChanged?.Invoke(ProvinceId, DistrictId, WardId, $"{districtChoosenValue}, {cityChoosenValue}");
         }
 
         private void ChooseWardValue(AddressPath addressPath)
@@ -83,7 +83,7 @@ namespace VMS.Pages.Organization.Activities
             wardChoosenValue = addressPath.Name;
             ToggleWardDropdown();
 
-            OnAddressChanged?.Invoke(ProvinceId, DistrictId, WardId);
+            OnAddressChanged?.Invoke(ProvinceId, DistrictId, WardId, $"{wardChoosenValue}, {districtChoosenValue}, {cityChoosenValue}");
         }
 
         private void ToggleCityDropdown(bool isClose = false) => isCityShow = !isClose && !isCityShow;

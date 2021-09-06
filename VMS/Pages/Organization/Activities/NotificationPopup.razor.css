@@ -1,0 +1,44 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.modal-backdrop {
+  background-color: rgba(196, 196, 196, 0.38); }
+
+.my-custom-popup {
+  width: 45%;
+  background-color: #FFFFFF;
+  padding: 30px 50px;
+  border-radius: 10px;
+  text-align: center; }
+  .my-custom-popup h3 {
+    font-size: 20px;
+    color: #64D72F; }
+    .my-custom-popup h3 span {
+      color: #18A0FB; }
+  .my-custom-popup .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 33px;
+    height: 33px;
+    background-color: #E5E5E5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    cursor: pointer; }
+  .my-custom-popup .my-btn {
+    width: 100%; }
+    .my-custom-popup .my-btn__cancel {
+      color: #18A0FB;
+      font-size: 18px;
+      font-weight: 500; }
+    .my-custom-popup .my-btn__view-activity {
+      background-color: #18A0FB;
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 500; }

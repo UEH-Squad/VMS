@@ -8,11 +8,11 @@
             Hoạt động
         </div>
         <div class="org-filter__act__child">
-            <input type="checkbox" id="hd1">
+            <input @onclick="(async () => { FilterAct.Happenning = !FilterAct.Happenning; await FilterActChanged.InvokeAsync(FilterAct); })" type="checkbox" id="hd1">
             <label for="hd1">Đang diễn ra</label>
         </div>
         <div class="org-filter__act__child">
-            <input type="checkbox" id="hd2">
+            <input @onclick="(async () => { FilterAct.TookPlace = !FilterAct.TookPlace; await FilterActChanged.InvokeAsync(FilterAct); })" type="checkbox" id="hd2">
             <label for="hd2">Đã diễn ra</label>
         </div>
     </div>
@@ -22,15 +22,16 @@
             Hình thức
         </div>
         <div class="org-filter__act__child">
-            <input type="checkbox" id="md1">
+            <input @onclick="(async () => { FilterAct.Virtual = !FilterAct.Virtual; await FilterActChanged.InvokeAsync(FilterAct); })" type="checkbox" id="md1">
             <label for="md1">Virtual</label><br>
         </div>
         <div class="org-filter__act__child">
-            <input type="checkbox" id="md2">
+            <input @onclick="(async () => { FilterAct.Actual = !FilterAct.Actual; await FilterActChanged.InvokeAsync(FilterAct); })" type="checkbox" id="md2">
             <label for="md2">Actual</label><br>
         </div>
     </div>
 </div>
+
 @code {
 
 }

@@ -30,13 +30,18 @@ namespace VMS.Application.Services
             report.CreatedDate = DateTime.Now;
             report.CreatedBy = report.UserId;
             report.Content = reportViewModel.DesReport;
-            report.Image = reportViewModel.ImageReport;
             report.ActivityId = reportViewModel.ActivityId;
 
             report.ReasonReports = reportViewModel.Reasons.Select(x => new ReasonReport() 
             { 
                 Reason = x, 
                 Feedback = report 
+            }).ToList();
+
+            report.ImageReports = reportViewModel.Images.Select(x => new ImageReport()
+            {
+                Image= x,
+                Feedback = report
             }).ToList();
 
             await _repository.InsertAsync(dbContext, report);

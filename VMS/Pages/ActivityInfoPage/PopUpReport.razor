@@ -49,7 +49,7 @@
                     {
                         <li>
                             <div class="dropdown-item" href="#">
-                                <input type="checkbox" @onchange="eventArgs => { CheckboxClicked(line, eventArgs.Value); }" />
+                                <input @onchange="x => { CheckboxClicked(line, x.Value); }" type="checkbox" class="dropdown-item--checkbox" />
                                 <span>@line</span>
                             </div>
                         </li>
@@ -72,21 +72,26 @@
                 </div>
                 <div class="add-file">
                     <div class="add-file__block">
-                        <InputFile @onclick="AddFile" OnChange="OnInputFileChangeAsync" type="file" name="file" id="file" class="inputfile" />
-                        @if (!string.IsNullOrEmpty(message))
-                        {
-                            <span style="color: red">@message</span>
-                        }
-                        @if (!string.IsNullOrEmpty(image))
-                        {
-                            <img src="@image" />
-                        }
+                        <InputFile OnChange="OnInputFile" multiple type="file" name="file" id="file" class="inputfile" />
                         <label for="file">
                             <span class="block-icon-text">
                                 <span class="material-icons my-icon-upload">cloud_upload</span>
                                 <span class="file__text">Kéo hoặc thả hình ảnh liên quan tại đây</span>
                             </span>
                         </label>
+
+                        @foreach (var item in Image)
+                        {
+                            @if (item.EndsWith(".jpg"))
+                            {
+                                <div>@item</div>
+                            }
+                            else
+                            {
+                                <span style="color: red">@message</span>
+                            }
+                        }
+
                     </div>
 
                 </div>

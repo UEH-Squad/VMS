@@ -10,12 +10,7 @@ namespace VMS.Pages.ActivityInfoPage
 {
     public partial class PopUpReport : ComponentBase
     {
-        private ReportViewModel report;
-        private string message;
-        private string image;
-        private IBrowserFile file;
-
-        [Inject] 
+        [Inject]
         private IReportService ReportService { get; set; }
 
         [Inject]
@@ -32,35 +27,21 @@ namespace VMS.Pages.ActivityInfoPage
             report = new ReportViewModel();
         }
 
+        private ReportViewModel report;
+        private string message;
+
         private List<string> Reason { get; set; } = new List<string>();
+
+        private List<string> Image { get; set; } = new List<string>();
 
         private async Task AddReport()
         {
             report.UserId = IdentityService.GetCurrentUserId();
             report.ActivityId = int.Parse(ActivityId);
             report.Reasons = Reason;
-
-            if (file is not null)
-            {
-                report.ImageReport = await UploadService.SaveImageAsync(file, report.UserId);
-            }
+            report.Images = Image;
 
             await ReportService.AddReport(report);
-        }
-
-        private async Task OnInputFileChangeAsync(InputFileChangeEventArgs e)
-        {
-            if (e.File.ContentType != "image/jpeg")
-            {
-                message = $"File không đúng định dạng..";
-                this.StateHasChanged();
-            }
-            else
-            {
-                message = "";
-                file = e.File;
-                image = await UploadService.GetDataUriAsync(file);
-            }
         }
 
         private List<string> Reasons()
@@ -89,6 +70,27 @@ namespace VMS.Pages.ActivityInfoPage
                 if (Reason.Contains(reason))
                 {
                     Reason.Remove(reason);
+                }
+            }
+        }
+
+        async Task OnInputFile(InputFileChangeEventArgs e)
+        {
+            var imageFiles = e.GetMultipleFiles();
+
+            Image.Clear();
+
+            foreach (var file in imageFiles)
+            {
+                if (file.ContentType != "image/jpeg")
+                {
+                    message = $"File không đúng định dạng..";
+                    this.StateHasChanged();
+                }
+                else
+                {
+                    string x = await UploadService.SaveImageAsync(file, IdentityService.GetCurrentUserId());
+                    Image.Add(x);
                 }
             }
         }

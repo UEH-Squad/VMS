@@ -5,7 +5,6 @@
 /*#region mixins */
 /*#endregion */
 .infopage-title .title__content {
-  width: 77%;
   display: block;
   margin-top: 3%;
   font-style: normal;
@@ -18,8 +17,6 @@
   display: flex;
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
-  line-height: 30px;
   color: #515151; }
   .infopage-title .title__name .material-icons {
     line-height: normal; }
@@ -38,7 +35,6 @@
   color: #515151; }
 
 .infopage-title .title__date .heart-button1 {
-  margin-left: 47.5%;
   color: #F14747;
   background: transparent;
   border: none; }
@@ -59,43 +55,43 @@
   font-size: 2.5rem; }
 
 .infopage-title .title__date .line-line2 {
-  width: 79%;
   margin-top: 0px;
   background-color: #B4B4B4;
   border: 2px solid #B4B4B4; }
 
-.infopage-activity {
-  width: 77%; }
-  .infopage-activity .content {
-    font-style: normal;
-    font-weight: normal;
-    line-height: 30px;
-    color: #515151; }
-  .infopage-activity .activity__image {
-    width: 100%;
-    margin-top: 6%;
-    border-radius: 10px; }
-  .infopage-activity .activity__mission {
-    margin-top: 8%;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 30px;
-    color: #515151; }
-    .infopage-activity .activity__mission .mission {
-      margin: 0 auto;
-      font-weight: 600;
-      font-size: 18px; }
-    .infopage-activity .activity__mission .misson-list {
-      margin: 0 auto; }
-  .infopage-activity .activity__assignment {
-    margin-top: 3.5%;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 30px;
-    color: #515151; }
-    .infopage-activity .activity__assignment .assignment {
-      margin: 0 auto;
-      font-size: 18px;
-      font-weight: 600; }
-    .infopage-activity .activity__assignment .assignment-list {
-      margin: 0 auto; }
+.infopage-activity .content {
+  font-style: normal;
+  font-weight: normal;
+  line-height: 30px;
+  color: #515151; }
+
+.infopage-activity .activity__image {
+  width: 100%;
+  margin-top: 6%;
+  border-radius: 10px; }
+
+.infopage-activity .activity__mission {
+  margin-top: 8%;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 30px;
+  color: #515151; }
+  .infopage-activity .activity__mission .mission {
+    margin: 0 auto;
+    font-weight: 600;
+    font-size: 18px; }
+  .infopage-activity .activity__mission .misson-list {
+    margin: 0 auto; }
+
+.infopage-activity .activity__assignment {
+  margin-top: 3.5%;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 30px;
+  color: #515151; }
+  .infopage-activity .activity__assignment .assignment {
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: 600; }
+  .infopage-activity .activity__assignment .assignment-list {
+    margin: 0 auto; }

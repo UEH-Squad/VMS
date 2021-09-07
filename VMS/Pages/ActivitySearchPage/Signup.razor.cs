@@ -46,7 +46,10 @@ namespace VMS.Pages.ActivitySearchPage
                 await Modal.CloseAsync();
             }
         }
-
+        protected override async Task OnInitializedAsync()
+        {
+            CurrentUser = IdentityService.GetCurrentUser();
+        }
         private void HandleSignUp()
         {
             if (!CurrentUser.Recruitments.Any(r => r.ActivityId == ActivityId))

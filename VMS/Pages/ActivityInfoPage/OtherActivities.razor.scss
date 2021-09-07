@@ -8,26 +8,19 @@ $fav-icon: #F14747;
 //---------------Title------------------//
 .other-act {
     position: relative;
+
     &__title {
         margin-bottom: 50px;
         font-style: normal;
         font-weight: 500;
-        font-size: 18px;
-
-        @include on('md') {
-            font-size: 24px;
-        }
-
-        @include on('xl') {
-            font-size: 28px;
-        }
-
-        @include on('xxl') {
-            font-size: 36px;
-        }
 
         h3 {
             color: $blue;
+            font-size: 18px;
+
+            @include on('md') {
+                font-size: 24px;
+            }
         }
 
         span {
@@ -158,11 +151,13 @@ $fav-icon: #F14747;
 //----------------------Favourite onlick------------------------//
 .heart {
     span {
+        cursor: pointer;
         color: $fav-icon !important;
     }
 }
 .heart-line {
     span {
+        cursor: pointer;
         color: transparent !important;
     }
 }

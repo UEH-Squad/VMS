@@ -68,7 +68,7 @@
   justify-content: center;
   align-items: center; }
   .btn-sign-up--cover .btn-sign-up {
-    height: 60px;
+    height: 48px;
     padding: 0 20px;
     border-radius: 4px;
     background-color: #64D72F;
@@ -77,7 +77,7 @@
     display: flex; }
     .btn-sign-up--cover .btn-sign-up .btn-sign-up__text {
       margin: auto;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       color: #fff; }
   .btn-sign-up--cover .btn-sign-up:hover {

@@ -14,7 +14,7 @@
   z-index: 3; }
   .my-signUp .signUp__content {
     position: relative;
-    width: 50%;
+    width: 450px;
     height: 100%;
     margin: auto;
     margin-top: 20px;
@@ -30,26 +30,24 @@
       position: absolute;
       top: 25px;
       right: 25px;
-      height: 46px;
-      width: 46px;
+      height: 40px;
+      width: 40px;
       line-height: 46px;
       border-radius: 50%;
-      text-align: center;
       background-color: rgba(196, 196, 196, 0.5);
       cursor: pointer; }
   .my-signUp .signUp__form {
-    padding: 50px 100px 0 100px; }
+    padding: 50px 40px 0px; }
     .my-signUp .signUp__form h1 {
       text-align: center;
       margin-bottom: 30px;
-      font-size: 48px;
+      font-size: 24px;
       font-weight: 500;
       color: #18A0FB; }
       .my-signUp .signUp__form h1 span {
         color: #64D72F; }
     .my-signUp .signUp__form .form-text {
       margin-bottom: 7px;
-      font-size: 24px;
       font-weight: 500;
       color: #515151; }
       .my-signUp .signUp__form .form-text span {
@@ -64,10 +62,10 @@
         background-color: #B4B4B4;
         border-radius: 20px;
         border: 2px solid white; }
-    .my-signUp .signUp__form ::deep .form-control {
+    .my-signUp .signUp__form ::deep .form-control:not('textarea') {
       padding: 15px 0;
       margin-bottom: 25px;
-      font-size: 24px;
+      height: 36px;
       padding-left: 20px; }
     .my-signUp .signUp__form ::deep .input-radio {
       width: 16px;
@@ -77,15 +75,12 @@
     .my-signUp .signUp__form ::deep .valid.modified:not([type=checkbox]) {
       outline: none; }
     .my-signUp .signUp__form ::deep .input-radio ~ label {
-      font-size: 24px;
       font-weight: 300; }
     .my-signUp .signUp__form button {
       display: block;
-      width: 100%;
-      padding: 20px 0;
-      transform: translateY(45px);
+      padding: 10px 20px;
+      margin: 50px auto 0;
       background: #18A0FB;
-      font-size: 24px;
       font-weight: 700;
       color: #FFFFFF; }
       .my-signUp .signUp__form button:hover {
@@ -115,12 +110,15 @@
       transform: translate(-50%, -50%);
       z-index: 6;
       background: #FFFFFF;
-      width: 45%;
-      padding: 30px 50px;
+      width: 500px;
+      height: 160px;
       border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center; }
       .my-signUp .signUp__report .signUp__report-content h3 {
-        font-size: 36px;
+        font-size: 24px;
         font-weight: 500;
         color: #64D72F; }
         .my-signUp .signUp__report .signUp__report-content h3 span {

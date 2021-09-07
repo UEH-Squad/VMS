@@ -48,11 +48,7 @@ namespace VMS.Pages.Organization.Activities
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
 
-        private CreateActivityViewModel activity = new()
-        {
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(7)
-        };
+        private CreateActivityViewModel activity = new();
 
         private readonly List<string> targets = new()
         {

@@ -5,11 +5,15 @@
 }
 
 .my-custom-popup {
-    width: 45%;
+    width: 90%;
     background-color: $white;
     padding: 30px 50px;
     border-radius: 10px;
     text-align: center;
+
+    @include on('md') {
+        width: 45%;
+    }
 
     h3 {
         font-size: 20px;

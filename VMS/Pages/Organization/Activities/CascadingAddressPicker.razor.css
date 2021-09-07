@@ -31,7 +31,7 @@
   border: 1px solid #ced4da;
   width: 100%;
   cursor: pointer;
-  color: #b4b4b4;
+  color: #515151;
   padding-right: 30px;
   outline: none;
   overflow: hidden;
@@ -70,7 +70,8 @@
       color: #18A0FB;
       line-height: 24px;
       margin-bottom: 12px;
-      cursor: pointer; }
+      cursor: pointer;
+      padding-left: 5px; }
       .my-dropdown ul li:hover, .my-dropdown ul li.item-checked {
         background-color: #18A0FB;
         color: #FFFFFF;

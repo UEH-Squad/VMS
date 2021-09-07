@@ -2,6 +2,7 @@
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace VMS.Pages.Organization.Activities
     {
         [CascadingParameter] public IModalService Modal { get; set; }
 
+        [Parameter] public int ActivityId { get; set; }
+
         [Inject]
         private IJSRuntime JSRuntime { get; set; }
 
@@ -24,16 +27,28 @@ namespace VMS.Pages.Organization.Activities
         private NavigationManager NavigationManager { get; set; }
 
         [Inject]
+        private ILogger<CreateEditActivity> Logger { get; set; }
+
+        [Inject]
+        private IIdentityService IdentityService { get; set; }
+
+        [Inject]
         private ISkillService SkillService { get; set; }
 
         [Inject]
         private IActivityService ActivityService { get; set; }
 
-        private IList<string> chosenTargets = new List<string>();
-        private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
-        private bool isErrorMessageShown = false;
+        [Inject]
+        private IUploadService UploadService { get; set; }
 
-        private readonly CreateActivityViewModel activity = new()
+        private bool isEdit;
+        private bool isLoading;
+        private IList<string> chosenTargets = new List<string>();
+        private readonly IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
+        private bool isErrorMessageShown = false;
+        private IBrowserFile uploadFile;
+
+        private CreateActivityViewModel activity = new()
         {
             StartDate = DateTime.Now,
             EndDate = DateTime.Now.AddDays(7)
@@ -48,17 +63,47 @@ namespace VMS.Pages.Organization.Activities
             "Tất cả mọi đối tượng"
         };
 
-        private async Task OnAddressChanged(int provinceId, int districtId, int wardId, string address)
+        protected override async Task OnInitializedAsync()
         {
-            activity.ProvinceId = provinceId;
-            activity.DistrictId = districtId;
-            activity.WardId = wardId;
-            activity.FullAddress = address;
+            if (ActivityId <= 0)
+            {
+                return;
+            }
+
+            isEdit = true;
+            CreateActivityViewModel activityFromParam = await ActivityService.GetCreateActivityViewModelAsync(ActivityId);
+            if (activityFromParam == null)
+            {
+                NavigationManager.NavigateTo("404");
+            }
+            else
+            {
+                activity = activityFromParam;
+                choosenAreas.Add(new()
+                {
+                    Id = activity.AreaId,
+                    Name = activity.AreaName,
+                    Icon = activity.AreaIcon
+                });
+
+                chosenTargets = chosenTargets.Concat(activity.Targets.Split('|')).ToList();
+            }
         }
 
-        private async Task HandleFileChanged(IBrowserFile file)
+        private async Task OnAddressChanged(int provinceId, string province, int districtId, string district, int wardId, string ward, string fullAddress)
         {
-            activity.Banner = file.Name;
+            activity.ProvinceId = provinceId;
+            activity.Province = province;
+            activity.DistrictId = districtId;
+            activity.District = district;
+            activity.WardId = wardId;
+            activity.Ward = ward;
+            activity.FullAddress = fullAddress;
+        }
+
+        private async Task HandleFileChanged(InputFileChangeEventArgs file)
+        {
+            uploadFile = file.File;
         }
 
         private async Task OnStartDateChanged(ChangeEventArgs args)
@@ -140,13 +185,50 @@ namespace VMS.Pages.Organization.Activities
             }
 
             isErrorMessageShown = false;
-            //await ActivityService.AddActivityAsync(activity);
-            await JSRuntime.InvokeVoidAsync("console.log", activity);
-            await ShowModalAsync(typeof(NotificationPopup), new ModalParameters());
+            isLoading = true;
+            try
+            {
+                string currentUserId = IdentityService.GetCurrentUserId();
+
+                if (ActivityId <= 0)
+                {
+                    if (uploadFile is null)
+                    {
+                        await HandleInvalidSubmit();
+                        return;
+                    }
+
+                    activity.Banner = await UploadService.SaveImageAsync(uploadFile, currentUserId);
+                    await ActivityService.AddActivityAsync(activity);
+                }
+                else
+                {
+                    if (uploadFile is not null)
+                    {
+                        UploadService.RemoveImage(activity.Banner);
+                        activity.Banner = await UploadService.SaveImageAsync(uploadFile, currentUserId);
+                    }
+
+                    await ActivityService.UpdateActivityAsync(activity, activity.Id);
+                }
+
+                isLoading = false;
+
+                var modalParams = new ModalParameters();
+                modalParams.Add("IsEdit", isEdit);
+                modalParams.Add("CTALink", $"{Routes.EditActivity}/{ActivityId}");
+                await ShowModalAsync(typeof(NotificationPopup), modalParams);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("Error occurs when trying to create/edit activity", ex.Message);
+                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+            }
         }
 
         private async Task HandleInvalidSubmit()
         {
+            isLoading = false;
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
         }

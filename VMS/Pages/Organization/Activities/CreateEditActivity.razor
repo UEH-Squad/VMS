@@ -1,4 +1,5 @@
 ﻿@attribute [Route(Routes.CreateActivity)]
+@attribute [Route(Routes.EditActivity + "/{activityId:int}")]
 
 <div class="container-fluid">
     <div class="row">
@@ -9,7 +10,7 @@
                 <div class="text-center error-message">Bạn cần điền tất cả thông tin dưới đây để tạo hoạt động</div>
             }
 
-            <h1 class="text-center my-4 title"><span>Tạo</span> hoạt động</h1>
+            <h1 class="text-center my-4 title"><span>@(isEdit ? "Sửa" : "Tạo")</span> hoạt động</h1>
             <div class="form-group mb-3">
                 <div class="mb-2">Tiêu đề <span class="required-asterick">(*)</span></div>
                 <InputText @bind-Value="activity.Name" class="form-control" placeholder="Nhập tiêu đề" />
@@ -72,8 +73,11 @@
                     <div class="col-3 align-self-center">Địa điểm tham gia <span class="required-asterick">(*)</span></div>
                     <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap">
                         <CascadingAddressPicker DistrictId="activity.DistrictId"
+                                                District="@activity.District"
                                                 ProvinceId="activity.ProvinceId"
+                                                Province="@activity.Province"
                                                 WardId="activity.WardId"
+                                                Ward="@activity.Ward"
                                                 OnAddressChanged="OnAddressChanged" />
                         <InputText @bind-Value="activity.Address" class="form-control ms-xl-2 my-address-textbox" placeholder="Nhập số nhà, tên đường" />
                     </div>
@@ -128,10 +132,10 @@
             </div>
             <div class="form-group mb-4">
                 <div class="mb-2">Thêm ảnh <span class="required-asterick">(*)</span></div>
-                <UploadImg FileChanged="HandleFileChanged" />
+                <UploadImg InputFileChanged="HandleFileChanged" PreviewImgSrc="@activity.Banner" ShowPreview="true" />
             </div>
             <div class="d-flex justify-content-center ">
-                <button type="submit" class="me-5 btn btn-cancel">Thoát</button>
+                <button class="me-5 btn btn-cancel">Thoát</button>
                 <button type="submit" class="btn btn-save">Lưu thay đổi</button>
             </div>
         </EditForm>
@@ -162,5 +166,6 @@
     </div>
 </div>
 
-@code {
-}
+<div class="overlay" style="@(isLoading ? "width:100%;" : "")">
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>

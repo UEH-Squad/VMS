@@ -13,17 +13,6 @@
   color: #707070;
   border: 1px solid #18A0FB; }
 
-::deep .uploadImg__input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 13px 15px;
-  padding-left: 25%;
-  font-size: 20px; }
-
-::deep .uploadImg__input::-webkit-file-upload-button {
-  display: none; }
-
 i {
   color: #707070;
   font-size: 36px;
@@ -32,4 +21,19 @@ i {
 
 span {
   color: #707070;
-  font-size: 20px; }
+  overflow-wrap: anywhere; }
+
+.preview-img {
+  height: 100%;
+  position: absolute;
+  right: 0; }
+
+::deep .uploadImg__input {
+  color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px 15px;
+  padding-left: 25%; }
+  ::deep .uploadImg__input::-webkit-file-upload-button {
+    display: none; }

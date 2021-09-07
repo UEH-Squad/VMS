@@ -7,12 +7,14 @@ namespace VMS.Application.ViewModels
 {
     public class CreateActivityViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 
         public string OrgId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime EndDate { get; set; } = DateTime.Now.AddDays(7);
 
         [Required]
         public string Mission { get; set; }
@@ -39,15 +41,24 @@ namespace VMS.Application.ViewModels
         [RequiredGreaterThanZero]
         public int AreaId { get; set; }
 
+        public string AreaName { get; set; }
+        public string AreaIcon { get; set; }
+
         [RequiredGreaterThanZero]
         public int ProvinceId { get; set; }
+
+        public string Province { get; set; }
 
         [RequiredGreaterThanZero]
         public int DistrictId { get; set; }
 
-        [RequiredGreaterThanZero]
+        public string District { get; set; }
+
         public int WardId { get; set; }
 
+        public string Ward { get; set; }
+
+        [RequiredHasItems]
         public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
     }
 }

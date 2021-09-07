@@ -1,5 +1,123 @@
 ﻿@import '../../../Resources/scss/common/_variables';
 
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    overflow-x: hidden;
+
+    .lds-roller {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        height: 80%;
+    }
+
+    .lds-roller div {
+        animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        transform-origin: 40px 40px;
+    }
+
+    .lds-roller div:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: $blue;
+        margin: -4px 0 0 -4px;
+    }
+
+    .lds-roller div:nth-child(1) {
+        animation-delay: -0.036s;
+    }
+
+    .lds-roller div:nth-child(1):after {
+        top: 63px;
+        left: 63px;
+    }
+
+    .lds-roller div:nth-child(2) {
+        animation-delay: -0.072s;
+    }
+
+    .lds-roller div:nth-child(2):after {
+        top: 68px;
+        left: 56px;
+    }
+
+    .lds-roller div:nth-child(3) {
+        animation-delay: -0.108s;
+    }
+
+    .lds-roller div:nth-child(3):after {
+        top: 71px;
+        left: 48px;
+    }
+
+    .lds-roller div:nth-child(4) {
+        animation-delay: -0.144s;
+    }
+
+    .lds-roller div:nth-child(4):after {
+        top: 72px;
+        left: 40px;
+    }
+
+    .lds-roller div:nth-child(5) {
+        animation-delay: -0.18s;
+    }
+
+    .lds-roller div:nth-child(5):after {
+        top: 71px;
+        left: 32px;
+    }
+
+    .lds-roller div:nth-child(6) {
+        animation-delay: -0.216s;
+    }
+
+    .lds-roller div:nth-child(6):after {
+        top: 68px;
+        left: 24px;
+    }
+
+    .lds-roller div:nth-child(7) {
+        animation-delay: -0.252s;
+    }
+
+    .lds-roller div:nth-child(7):after {
+        top: 63px;
+        left: 17px;
+    }
+
+    .lds-roller div:nth-child(8) {
+        animation-delay: -0.288s;
+    }
+
+    .lds-roller div:nth-child(8):after {
+        top: 56px;
+        left: 12px;
+    }
+
+    @keyframes lds-roller {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
 .error-message {
     background-color: #E8F5FF;
     color: #E10B0B;
@@ -89,47 +207,6 @@
     }
 }
 
-.add-file {
-    border-radius: 4px;
-    border: 1px solid $grey-text;
-    height: 36px;
-    display: flex;
-
-    .add-file__block {
-        margin: auto;
-
-        .my-icon-upload {
-            font-size: 2rem;
-            margin-right: 10px;
-            color: $grey-text;
-        }
-
-        .block-icon-text {
-            display: flex;
-            margin-top: 1px;
-
-            .file__text {
-                font-size: 12px;
-                font-weight: 300px;
-            }
-        }
-
-        .inputfile {
-            opacity: 0;
-            overflow: hidden;
-            position: absolute;
-            z-index: -1;
-        }
-
-        .inputfile + label {
-            font-size: 24px;
-            color: #333;
-            display: inline-block;
-            cursor: pointer;
-        }
-    }
-}
-
 .item {
     text-align: center;
 
@@ -178,26 +255,33 @@
     padding: .75rem 1.25rem;
 }
 
-::deep .tox {
-    height: 250px !important; // we must use !important here
-    z-index: 0;
-}
-
-::deep .typeahead__results {
-    right: 0;
-    width: 100% !important; // we must use !important here
-
-    @include on('lg') {
-        width: 35%;
+::deep {
+    .tox {
+        z-index: 0;
     }
-}
 
-::deep .my-address-textbox {
-    @include on('xl') {
-        width: auto;
+    .typeahead__results {
+        right: 0;
+        // As the div.typeahead__results is lazy-loaded, its styles will override our styles.
+        // To prevent it, we'll have to put !important here.
+        width: 100% !important;
+
+        @include on('md') {
+            width: 30% !important;
+        }
     }
-}
 
-::deep .my-date-picker {
-    
+    input {
+        color: $grey-text;
+
+        &::placeholder {
+            color: $border-color-normal;
+        }
+    }
+
+    .my-address-textbox {
+        @include on('xl') {
+            width: auto;
+        }
+    }
 }

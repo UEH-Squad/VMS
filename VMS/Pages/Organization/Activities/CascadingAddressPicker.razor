@@ -1,11 +1,11 @@
 ﻿<div class="my-cascading-picker">
     <div class="mb-2 mb-xl-0 filter-item filter-item-city position-relative">
-        <input @onclick="() => ToggleCityDropdown()" @onfocusout="() => ToggleCityDropdown(true)" class="form-control popup-btn" placeholder="@cityChoosenValue" readonly />
+        <input @onclick="() => ToggleCityDropdown()" @onfocusout="() => ToggleCityDropdown(true)" class="form-control popup-btn" placeholder="@defaultValues[0]" value="@Province" readonly />
         <div @onclick:preventDefault class="my-dropdown" style="display: @(isCityShow ? "block" : "none")">
             <ul>
                 @foreach (var province in provinces)
                 {
-                    <li @onmousedown="() => ChooseCityValue(province)" class="@(string.Equals(province.Name, cityChoosenValue) ? "item-checked" : "")">@province.Name</li>
+                    <li @onmousedown="() => ChooseCityValue(province)" class="@(string.Equals(province.Name, Province) ? "item-checked" : "")">@province.Name</li>
                 }
             </ul>
         </div>
@@ -14,12 +14,12 @@
         </span>
     </div>
     <div class="mb-2 mb-xl-0 filter-item filter-item-district position-relative">
-        <input @onclick="() => ToggleDistrictDropdown()" @onfocusout="() => ToggleDistrictDropdown(true)" class="form-control popup-btn" placeholder="@districtChoosenValue" readonly />
+        <input @onclick="() => ToggleDistrictDropdown()" @onfocusout="() => ToggleDistrictDropdown(true)" class="form-control popup-btn" placeholder="@defaultValues[1]" value="@District" readonly />
         <div class="my-dropdown" style="display: @(isDistrictShow ? "block" : "none")">
             <ul>
                 @foreach (var district in districts)
                 {
-                    <li @onmousedown="() => ChooseDistrictValue(district)" class="@(string.Equals(district.Name, districtChoosenValue) ? "item-checked" : "")">@district.Name</li>
+                    <li @onmousedown="() => ChooseDistrictValue(district)" class="@(string.Equals(district.Name, District) ? "item-checked" : "")">@district.Name</li>
                 }
             </ul>
         </div>
@@ -28,12 +28,12 @@
         </span>
     </div>
     <div class="mb-2 mb-xl-0 filter-item filter-item-district position-relative">
-        <input @onclick="() => ToggleWardDropdown()" @onfocusout="() => ToggleWardDropdown(true)" class="form-control popup-btn" placeholder="@wardChoosenValue" readonly />
+        <input @onclick="() => ToggleWardDropdown()" @onfocusout="() => ToggleWardDropdown(true)" class="form-control popup-btn" placeholder="@defaultValues[2]" value="@Ward" readonly />
         <div class="my-dropdown" style="display: @(isWardShow ? "block" : "none")">
             <ul>
                 @foreach (var ward in wards)
                 {
-                    <li @onmousedown="() => ChooseWardValue(ward)" class="@(string.Equals(ward.Name, wardChoosenValue) ? "item-checked" : "")">@ward.Name</li>
+                    <li @onmousedown="() => ChooseWardValue(ward)" class="@(string.Equals(ward.Name, Ward) ? "item-checked" : "")">@ward.Name</li>
                 }
             </ul>
         </div>

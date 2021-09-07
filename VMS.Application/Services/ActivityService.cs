@@ -166,7 +166,7 @@ namespace VMS.Application.Services
             return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
-        public async Task AddActivityAsync(CreateActivityViewModel activityViewModel)
+        public async Task<int> AddActivityAsync(CreateActivityViewModel activityViewModel)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -181,7 +181,9 @@ namespace VMS.Application.Services
             activity.ActivitySkills = MapSkills(activityViewModel, activity);
             activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
 
-            await _repository.InsertAsync(dbContext, activity);
+            object[] id = await _repository.InsertAsync(dbContext, activity);
+
+            return Convert.ToInt32(id[0]);
         }
 
         public async Task<CreateActivityViewModel> GetCreateActivityViewModelAsync(int activityId)

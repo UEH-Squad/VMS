@@ -195,7 +195,7 @@ namespace VMS.Pages.Organization.Activities
                     }
 
                     activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
-                    await ActivityService.AddActivityAsync(activity);
+                    ActivityId = await ActivityService.AddActivityAsync(activity);
                 }
                 else
                 {

@@ -10,6 +10,8 @@ namespace VMS.Pages.ActivityInfoPage
 {
     public partial class PopUpReport : ComponentBase
     {
+        private ReportViewModel report;
+
         [Inject]
         private IReportService ReportService { get; set; }
 
@@ -27,12 +29,11 @@ namespace VMS.Pages.ActivityInfoPage
             report = new ReportViewModel();
         }
 
-        private ReportViewModel report;
-        private string message;
-
         private List<string> Reason { get; set; } = new List<string>();
 
         private List<string> Image { get; set; } = new List<string>();
+
+        private IReadOnlyList<IBrowserFile> selectedImages;
 
         private async Task AddReport()
         {
@@ -77,7 +78,7 @@ namespace VMS.Pages.ActivityInfoPage
         async Task OnInputFile(InputFileChangeEventArgs e)
         {
             var imageFiles = e.GetMultipleFiles();
-
+            selectedImages = imageFiles;
             Image.Clear();
 
             foreach (var file in imageFiles)
@@ -89,6 +90,7 @@ namespace VMS.Pages.ActivityInfoPage
                 }
                 else
                 {
+                    message = "";
                     string x = await UploadService.SaveImageAsync(file, IdentityService.GetCurrentUserId());
                     Image.Add(x);
                 }

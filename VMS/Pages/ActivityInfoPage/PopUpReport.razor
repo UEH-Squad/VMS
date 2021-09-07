@@ -79,19 +79,20 @@
                                 <span class="file__text">Kéo hoặc thả hình ảnh liên quan tại đây</span>
                             </span>
                         </label>
-
-                        @foreach (var item in Image)
+                        @if (selectedImages is not null)
                         {
-                            @if (item.EndsWith(".jpg"))
+                            @foreach (var item in selectedImages)
                             {
-                                <div>@item</div>
-                            }
-                            else
-                            {
-                                <span style="color: red">@message</span>
+                                @if (item.ContentType != "image/jpeg")
+                                {
+                                    <div style="color: red">File không đúng định dạng..</div>
+                                }
+                                else
+                                {
+                                    <div>@item.Name</div>
+                                }
                             }
                         }
-
                     </div>
 
                 </div>

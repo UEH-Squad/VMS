@@ -6,7 +6,7 @@
 /*#endregion */
 .my-uploadImg {
   color: transparent;
-  border: 1px solid #707070;
+  border: 1px solid #b4b4b4;
   padding: 10px 15px; }
 
 .changeFileCss {
@@ -29,6 +29,7 @@ span {
   right: 0; }
 
 ::deep .uploadImg__input {
+  border: none;
   color: transparent;
   position: absolute;
   top: 0;

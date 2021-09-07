@@ -97,33 +97,19 @@ namespace VMS.Pages.Organization.Activities
             activity.FullAddress = fullAddress;
         }
 
-        private async Task HandleFileChanged(InputFileChangeEventArgs args)
+        private void HandleFileChanged(InputFileChangeEventArgs args)
         {
             uploadFile = args.File;
         }
 
-        private async Task OnStartDateChanged(ChangeEventArgs args)
+        private void OnStartDateChanged(ChangeEventArgs args)
         {
-            DateTime selectedDate = DateTime.Parse(args.Value.ToString());
-            if (selectedDate <= DateTime.Now)
-            {
-                await JSRuntime.InvokeVoidAsync("alert", "Ngày bắt đầu phải sau ngày hôm nay!");
-                selectedDate = DateTime.Now;
-            }
-
-            activity.StartDate = selectedDate;
+            activity.StartDate = DateTime.Parse(args.Value.ToString());
         }
 
-        private async Task OnEndDateChanged(ChangeEventArgs args)
+        private void OnEndDateChanged(ChangeEventArgs args)
         {
-            DateTime selectedDate = DateTime.Parse(args.Value.ToString());
-            if (selectedDate < activity.StartDate)
-            {
-                await JSRuntime.InvokeVoidAsync("alert", "Ngày kết thúc phải sau ngày bắt đầu!");
-                selectedDate = DateTime.Now.AddDays(7);
-            }
-
-            activity.EndDate = selectedDate;
+            activity.EndDate = DateTime.Parse(args.Value.ToString());
         }
 
         private async Task ShowAreasPopupAsync()

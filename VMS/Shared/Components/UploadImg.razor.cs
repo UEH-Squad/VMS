@@ -12,7 +12,6 @@ namespace VMS.Shared.Components
     /// </summary>
     public partial class UploadImg : ComponentBase
     {
-        [Inject] private ILogger<UploadImg> Logger { get; set; }
         [Inject] private IJSRuntime JS { get; set; }
 
         #region Parameters

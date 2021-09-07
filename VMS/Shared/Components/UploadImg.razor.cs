@@ -55,11 +55,6 @@ namespace VMS.Shared.Components
         private readonly string _fileUploadId = Guid.NewGuid().ToString();
         private ElementReference previewImg;
 
-        private IJSObjectReference _blobUtilModule;
-
-        private readonly string DisposeTimeoutLogTemplate =
-            $"Disposing JSInterop object {nameof(_blobUtilModule)} in {nameof(UploadImg)} component timeout";
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -76,15 +71,13 @@ namespace VMS.Shared.Components
 
             if (firstRender)
             {
-                _blobUtilModule = await JS.InvokeAsync<IJSObjectReference>("import", $"/js/imgPreviewUtil.js");
-
                 if (ShowPreview)
                 {
-                    await _blobUtilModule.InvokeVoidAsync("hookFileUploadEvent", previewImg, _fileUploadId);
+                    await JS.InvokeVoidAsync("vms.HookFileUploadEvent", previewImg, _fileUploadId);
                 }
                 else
                 {
-                    await _blobUtilModule.InvokeVoidAsync("hookFileUploadEvent", null, _fileUploadId);
+                    await JS.InvokeVoidAsync("vms.HhookFileUploadEvent", null, _fileUploadId);
                 }
             }
         }
@@ -96,77 +89,5 @@ namespace VMS.Shared.Components
 
             return InputFileChanged.InvokeAsync(e);
         }
-
-        #region Dispose Pattern implementation
-
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Actual dispose object implementation
-        /// </summary>
-        /// <returns></returns>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                switch (_blobUtilModule)
-                {
-                    case IDisposable disposable:
-                        disposable.Dispose();
-                        break;
-
-                    case IAsyncDisposable asyncDisposable:
-                        {
-                            try
-                            {
-                                asyncDisposable.DisposeAsync().AsTask().RunSynchronously();
-                            }
-                            catch (OperationCanceledException ex)
-                            {
-                                Logger.LogDebug(ex, DisposeTimeoutLogTemplate);
-                            }
-
-                            break;
-                        }
-                }
-            }
-
-            _blobUtilModule = null;
-        }
-
-        /// <summary>
-        /// Actual async dispose object implementation,
-        /// see: https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync#implement-the-async-dispose-pattern
-        /// </summary>
-        /// <returns></returns>
-        protected async virtual ValueTask DisposeAsyncCore()
-        {
-            if (_blobUtilModule != null)
-            {
-                try
-                {
-                    await _blobUtilModule.DisposeAsync().ConfigureAwait(false);
-                }
-                catch (OperationCanceledException ex)
-                {
-                    Logger.LogDebug(ex, DisposeTimeoutLogTemplate);
-                }
-            }
-
-            _blobUtilModule = null;
-        }
-
-        public async ValueTask DisposeAsync()
-        {
-            await DisposeAsyncCore();
-
-            Dispose(disposing: false);
-        }
-
-        #endregion Dispose Pattern implementation
     }
 }

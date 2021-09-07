@@ -45,7 +45,7 @@ window.typeahead = {
             return;
         }
 
-        var bId = "";//get the blazor internal ID to distinguish different components
+        var bId = "";   //get the blazor internal ID to distinguish different components
         for (var clearCount = 0; clearCount < searchTextElement.attributes.length; clearCount++) {
             var a = searchTextElement.attributes[clearCount];
             if (a.name.startsWith('_bl_')) {
@@ -54,26 +54,26 @@ window.typeahead = {
             }
         }
 
-        typeahead.onOutsideClickClear(searchTextElement); //clean up just in case
+        typeahead.onOutsideClickClear(searchTextElement);   //clean up just in case
 
         var func = function (e) {
             var parent = e.target;
             while (parent != null) {
                 if (parent.classList != null && parent.classList.contains('typeahead')) {
-                    var hasSearch = parent.contains(searchTextElement); //check if this is the same typeahead parent element
+                    var hasSearch = parent.contains(searchTextElement);     //check if this is the same typeahead parent element
                     if (hasSearch) {
-                        return; //we're still in the search so don't fire
+                        return;     //we're still in the search so don't fire
                     }
                 }
                 parent = parent.parentNode;
             }
 
             dotnetRef.invokeMethodAsync(methodName);
-            if (clearOnFire) { //could also add a check to see if the search element is missing on the DOM to force cleaning up the function?
+            if (clearOnFire) {      //could also add a check to see if the search element is missing on the DOM to force cleaning up the function?
                 typeahead.onOutsideClickClear(searchTextElement);
             }
         };
-        onOutsideClickFunctions[bId] = func; //save a reference to the click function
+        onOutsideClickFunctions[bId] = func;    //save a reference to the click function
         window.addEventListener("click", func);
     }
 };

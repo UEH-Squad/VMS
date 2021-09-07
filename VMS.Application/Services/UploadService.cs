@@ -14,7 +14,7 @@ namespace VMS.Application.Services
         private const int MaxWidthFile = 2048;
         private const int MaxHeightFile = 2048;
         private const string FormatFile = "image/jpeg";
-        private string path => @$"{_webHostEnvironment.WebRootPath}\";
+        private string Path => @$"{_webHostEnvironment.WebRootPath}\";
 
         public UploadService(IWebHostEnvironment webHostEnvironment)
         {
@@ -37,12 +37,12 @@ namespace VMS.Application.Services
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
             string fileName = @$"img\activities\{DateTime.Now.ToFileTime()}_{userId}.jpg";
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(Path))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(Path);
             }
 
-            using FileStream fileStream = File.Create(@$"{path}\{fileName}");
+            using FileStream fileStream = File.Create(@$"{Path}\{fileName}");
             using Stream stream = file.OpenReadStream(MaxFileSize);
             await stream.CopyToAsync(fileStream);
 
@@ -53,7 +53,7 @@ namespace VMS.Application.Services
         {
             try
             {
-                File.Delete(@$"{path}\{fileName}");
+                File.Delete(@$"{Path}\{fileName}");
             }
             catch (Exception)
             {

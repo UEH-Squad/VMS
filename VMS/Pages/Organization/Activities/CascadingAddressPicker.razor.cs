@@ -12,6 +12,8 @@ namespace VMS.Pages.Organization.Activities
         [Inject]
         private IAddressService AddressService { get; set; }
 
+        #region Parameters
+
         [Parameter]
         public int ProvinceId { get; set; }
 
@@ -33,7 +35,9 @@ namespace VMS.Pages.Organization.Activities
         [Parameter]
         public Func<int, string, int, string, int, string, string, Task> OnAddressChanged { get; set; }
 
-        private string[] defaultValues = new[]
+        #endregion Parameters
+
+        private readonly string[] defaultValues = new[]
         {
             "Tỉnh/Thành phố",
             "Quận/Huyện",

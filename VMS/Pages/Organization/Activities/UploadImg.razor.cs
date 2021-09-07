@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace VMS.Pages.Organization.Activities
 {
     /// <summary>
-    /// ImageUpload component
+    /// UploadImg component
     /// </summary>
     public partial class UploadImg : ComponentBase
     {
         [Inject] private ILogger<UploadImg> Logger { get; set; }
 
-        #region Component Parameters
+        #region Parameters
 
         /// <summary>
         /// Initial prompt text when the whole component shown up
@@ -46,7 +46,7 @@ namespace VMS.Pages.Organization.Activities
         [Parameter]
         public EventCallback<InputFileChangeEventArgs> InputFileChanged { get; set; }
 
-        #endregion Component Parameters
+        #endregion Parameters
 
         private string _prompt;
         private string _previewImgAltText;
@@ -59,7 +59,6 @@ namespace VMS.Pages.Organization.Activities
         private readonly string DisposeTimeoutLogTemplate =
             $"Disposing JSInterop object {nameof(_blobUtilModule)} in {nameof(UploadImg)} component timeout";
 
-        /// <inheritdoc />
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -70,7 +69,6 @@ namespace VMS.Pages.Organization.Activities
             }
         }
 
-        /// <inheritdoc />
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
             await base.OnAfterRenderAsync(firstRender);
@@ -100,7 +98,6 @@ namespace VMS.Pages.Organization.Activities
 
         #region Dispose Pattern implementation
 
-        /// <inheritdoc />
         public void Dispose()
         {
             Dispose(disposing: true);
@@ -162,13 +159,11 @@ namespace VMS.Pages.Organization.Activities
             _blobUtilModule = null;
         }
 
-        /// <inheritdoc />
         public async ValueTask DisposeAsync()
         {
             await DisposeAsyncCore();
 
             Dispose(disposing: false);
-            GC.SuppressFinalize(this);
         }
 
         #endregion Dispose Pattern implementation

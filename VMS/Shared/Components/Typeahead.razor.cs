@@ -20,9 +20,10 @@ namespace VMS.Shared.Components
         private string _searchText = string.Empty;
         private bool _eventsHookedUp = false;
         private ElementReference _searchInput;
-        private ElementReference _mask;
 
         [Inject] private IJSRuntime JSRuntime { get; set; }
+
+        #region Parameters
 
         [CascadingParameter] private EditContext CascadedEditContext { get; set; }
 
@@ -69,6 +70,8 @@ namespace VMS.Shared.Components
                 placeholder = Values is not null ? Values.Any() ? "" : value : value;
             }
         }
+
+        #endregion Parameters
 
         private string placeholder;
         private bool IsSearching { get; set; } = false;
@@ -281,7 +284,7 @@ namespace VMS.Shared.Components
             {
                 Initialize();
             }
-            else if (args.Key == "Enter" && Suggestions.Count() == 1)
+            else if (args.Key == "Enter" && Suggestions.Length == 1)
             {
                 await SelectTheFirstAndOnlySuggestion();
             }
@@ -289,7 +292,7 @@ namespace VMS.Shared.Components
             {
                 await SelectNotFoundPlaceholder();
             }
-            else if (args.Key == "Enter" && SelectedIndex >= 0 && SelectedIndex < Suggestions.Count())
+            else if (args.Key == "Enter" && SelectedIndex >= 0 && SelectedIndex < Suggestions.Length)
             {
                 await SelectResult(Suggestions[SelectedIndex]);
             }

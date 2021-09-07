@@ -23,8 +23,8 @@
     object-fit: cover; }
   .my-information .information__logo .icon-camera {
     position: absolute;
-    bottom: 0px;
-    right: 10px;
+    bottom: 15px;
+    right: -10px;
     font-size: 36px;
     color: #B4B4B4; }
   .my-information .information__logo p {

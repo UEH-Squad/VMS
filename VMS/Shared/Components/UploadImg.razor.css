@@ -5,22 +5,15 @@
 /*#region mixins */
 /*#endregion */
 .my-uploadImg {
-  color: transparent;
   border: 1px solid #b4b4b4;
   padding: 10px 15px; }
 
-.changeFileCss {
-  color: #707070;
-  border: 1px solid #18A0FB; }
-
 i {
-  color: #707070;
   font-size: 36px;
   font-weight: 600;
   margin: 0 5% 0 0; }
 
 span {
-  color: #707070;
   overflow-wrap: anywhere; }
 
 .preview-img {

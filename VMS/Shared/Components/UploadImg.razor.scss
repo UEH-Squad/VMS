@@ -1,25 +1,17 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
 .my-uploadImg {
-    color: transparent;
     border: 1px solid $border-color-normal;
     padding: 10px 15px;
 }
 
-.changeFileCss {
-    color: $border-color-bold;
-    border: 1px solid $blue;
-}
-
 i {
-    color: $border-color-bold;
     font-size: 36px;
     font-weight: 600;
     margin: 0 5% 0 0;
 }
 
 span {
-    color: $border-color-bold;
     overflow-wrap: anywhere;
 }
 

@@ -67,14 +67,14 @@
 }
 
 .typeahead__input-icon {
-    height: 34px;
+    height: 100%;
     width: 40px;
     display: flex;
     border-radius: 0 5px 5px 0;
     padding: .5rem;
     cursor: pointer;
     background: none;
-    top: 2px;
+    top: 0;
     right: 13px;
 
     &:focus {
@@ -141,15 +141,20 @@
     .tox {
         z-index: 0;
     }
+    // As the typeahead is lazy-loaded, its styles will override our styles.
+    // To prevent it, we'll have to put !important somewhere.
+    .typeahead {
+        &__input-multiselect-wrapper {
+            width: 96% !important;
+        }
 
-    .typeahead__results {
-        right: 0;
-        // As the div.typeahead__results is lazy-loaded, its styles will override our styles.
-        // To prevent it, we'll have to put !important here.
-        width: 100% !important;
+        &__results {
+            right: 0;
+            width: 100% !important;
 
-        @include on('md') {
-            width: 30% !important;
+            @include on('md') {
+                width: 30% !important;
+            }
         }
     }
 

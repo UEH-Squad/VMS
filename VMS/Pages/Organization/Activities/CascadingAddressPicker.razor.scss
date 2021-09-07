@@ -1,7 +1,22 @@
 ﻿@import '../../../Resources/scss/common/_variables';
 
+.my-cascading-picker {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include on('sm') {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
 .filter-item {
-    width: 70%;
+    width: 100%;
+
+    @include on('sm') {
+        width: 32%;
+    }
 
     &__icon {
         top: 50%;

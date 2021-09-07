@@ -4,8 +4,20 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.my-cascading-picker {
+  display: flex;
+  flex-direction: column;
+  width: 100%; }
+  @media (min-width: 576px) {
+    .my-cascading-picker {
+      flex-direction: row;
+      justify-content: space-between; } }
+
 .filter-item {
-  width: 70%; }
+  width: 100%; }
+  @media (min-width: 576px) {
+    .filter-item {
+      width: 32%; } }
   .filter-item__icon {
     top: 50%;
     transform: translateY(-50%);

@@ -1,0 +1,28 @@
+﻿<div class="position-relative @changeFileCss my-uploadImg">
+    <InputFile OnChange="ChangeFile" @onclick='()=> { FileChanged.InvokeAsync(null); changeFileCss="" ;isChangeFile = false; }' class="w-100 uploadImg__input  " />
+    <div class="d-flex align-items-center justify-content-center">
+        <i class="material-icons">
+            cloud_upload
+        </i>
+        <span class="@(isChangeFile ? "invisible" : "d-block")">@fileName</span>
+    </div>
+</div>
+
+@code{
+    private bool isChangeFile = false;
+    private string changeFileCss = "";
+    private string fileName = "Kéo và thả hình ảnh liên quan tại đây";
+
+    [Parameter]
+    public IBrowserFile File { get; set; }
+    [Parameter]
+    public EventCallback<IBrowserFile> FileChanged { get; set; }
+
+    async Task ChangeFile(InputFileChangeEventArgs e)
+    {
+        await FileChanged.InvokeAsync(e.File);
+        isChangeFile = true;
+        fileName = e.File.Name;
+        changeFileCss = "changeFileCss";
+    }
+}

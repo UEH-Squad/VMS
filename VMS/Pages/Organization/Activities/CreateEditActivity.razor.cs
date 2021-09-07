@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,11 @@ namespace VMS.Pages.Organization.Activities
             activity.DistrictId = districtId;
             activity.WardId = wardId;
             activity.FullAddress = address;
+        }
+
+        private async Task HandleFileChanged(IBrowserFile file)
+        {
+            activity.Banner = file.Name;
         }
 
         private async Task OnStartDateChanged(ChangeEventArgs args)
@@ -127,8 +133,15 @@ namespace VMS.Pages.Organization.Activities
             }
 
             activity.Targets = string.Join('|', chosenTargets);
+            if (string.IsNullOrWhiteSpace(activity.Targets))
+            {
+                await HandleInvalidSubmit();
+                return;
+            }
+
             isErrorMessageShown = false;
             //await ActivityService.AddActivityAsync(activity);
+            await JSRuntime.InvokeVoidAsync("console.log", activity);
             await ShowModalAsync(typeof(NotificationPopup), new ModalParameters());
         }
 

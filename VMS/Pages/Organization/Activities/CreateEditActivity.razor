@@ -19,16 +19,16 @@
                 <TinyMCEEditor @bind-Value="activity.Description" />
             </div>
             <div class="form-group mb-3">
-                <div class="row">
+                <div class="row my-activity-type-group">
                     <div class="col-3 align-self-center">Hình thức <span class="required-asterick">(*)</span></div>
-                    <div class="col-9">
+                    <div class="col-9 my-auto">
                         <InputCheckbox @bind-Value="activity.IsVirtual" /> Virtual
                         <InputCheckbox @bind-Value="activity.IsActual" class="ms-5" /> Actual
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
-                <div class="row">
+                <div class="row my-form-group">
                     <div class="col-3 align-self-center">Đối tượng tham gia <span class="required-asterick">(*)</span></div>
                     <div class="col-9">
                         <Typeahead SearchMethod="SearchTargets"
@@ -47,9 +47,9 @@
                 </div>
             </div>
             <div class="form-group mb-3">
-                <div class="row">
+                <div class="row my-activity-type-group">
                     <div class="col-3 align-self-center">Lĩnh vực <span class="required-asterick">(*)</span></div>
-                    <div class="col-9 d-flex flex-wrap">
+                    <div class="col-9 d-flex flex-wrap just">
                         @foreach (var item in choosenAreas)
                         {
                             <div class="item me-5">
@@ -60,36 +60,36 @@
                             </div>
                         }
                         <div class="item">
-                            <i class="material-icons" @onclick="ShowAreasPopupAsync">
-                                plus
+                            <i class="material-icons-outlined add-icon" @onclick="ShowAreasPopupAsync">
+                                add
                             </i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
-                <div class="row">
+                <div class="row my-form-group">
                     <div class="col-3 align-self-center">Địa điểm tham gia <span class="required-asterick">(*)</span></div>
                     <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap">
                         <CascadingAddressPicker DistrictId="activity.DistrictId"
                                                 ProvinceId="activity.ProvinceId"
                                                 WardId="activity.WardId"
                                                 OnAddressChanged="OnAddressChanged" />
-                        <InputText @bind-Value="activity.Address" class="form-control mt-2 mt-xl-0" placeholder="Nhập số nhà, tên đường" />
+                        <InputText @bind-Value="activity.Address" class="form-control ms-xl-2 my-address-textbox" placeholder="Nhập số nhà, tên đường" />
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
-                <div class="row">
+                <div class="row my-form-group">
                     <div class="col-3 align-self-center">Thời gian tham gia <span class="required-asterick">(*)</span></div>
-                    <div class="col-9 d-flex flex-row">
-                        <InputDate @bind-Value="activity.StartDate" @oninput="OnStartDateChanged" class="form-control" style="width: 35%;" placeholder="Ngày bắt đầu" />
-                        <InputDate @bind-Value="activity.EndDate" @oninput="OnEndDateChanged" class="form-control ms-2" style="width: 35%;" placeholder="Ngày kết thúc" />
+                    <div class="col-9 d-flex flex-row align-items-center">
+                        Từ <InputDate @bind-Value="activity.StartDate" @oninput="OnStartDateChanged" class="form-control ms-2 me-4 my-date-picker" placeholder="Ngày bắt đầu" />
+                        Đến <InputDate @bind-Value="activity.EndDate" @oninput="OnEndDateChanged" class="form-control ms-2 my-date-picker" placeholder="Ngày kết thúc" />
                     </div>
                 </div>
             </div>
             <div class="form-group mb-3">
-                <div class="row">
+                <div class="row my-form-group">
                     <div class="col-3 align-self-center">Kỹ năng <span class="required-asterick">(*)</span></div>
                     <div class="col-9 position-relative">
                         <Typeahead SearchMethod="SearchSkills"
@@ -128,21 +128,11 @@
             </div>
             <div class="form-group mb-4">
                 <div class="mb-2">Thêm ảnh <span class="required-asterick">(*)</span></div>
-                <div class="add-file">
-                    <div class="add-file__block">
-                        <input type="file" name="file" id="file" class="inputfile" />
-                        <label for="file">
-                            <span class="block-icon-text">
-                                <span class="align-self-center material-icons my-icon-upload">cloud_upload</span>
-                                <span class="align-self-center file__text">Kéo và thả hình ảnh liên quan tại đây</span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
+                <UploadImg FileChanged="HandleFileChanged" />
             </div>
             <div class="d-flex justify-content-center ">
-                <button type="submit" class="me-5 btn btn-save">Lưu thay đổi</button>
-                <button type="submit" class="btn btn-cancel">Thoát</button>
+                <button type="submit" class="me-5 btn btn-cancel">Thoát</button>
+                <button type="submit" class="btn btn-save">Lưu thay đổi</button>
             </div>
         </EditForm>
         <div class="row">

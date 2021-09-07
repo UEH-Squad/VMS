@@ -39,13 +39,23 @@
     background-color: rgba(196, 196, 196, 0.2);
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25); }
     .my-rank ::deep .owl-item .rank__img-rank {
+      width: 15%;
+      transform: translateX(40%);
       position: absolute;
       top: 0;
-      left: 0;
-      width: 15%;
-      transform: translateX(40%); }
+      left: 0; }
       .my-rank ::deep .owl-item .rank__img-rank img {
         width: 70%;
+        margin: 0 auto;
+        transition: all 1s linear; }
+      .my-rank ::deep .owl-item .rank__img-rank span {
+        position: absolute;
+        top: 8%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 45px;
+        font-weight: 600;
+        color: #FFFFFF;
         transition: all 1s linear; }
   .my-rank ::deep .owl-item.active {
     margin: auto 0;
@@ -54,6 +64,8 @@
     box-shadow: 6px 6px 20px 0 rgba(0, 0, 0, 0.25); }
     .my-rank ::deep .owl-item.active .rank__img-rank img {
       width: 100%; }
+    .my-rank ::deep .owl-item.active .rank__img-rank span {
+      font-size: 65px; }
   .my-rank ::deep .owl-nav {
     display: inline-block; }
     .my-rank ::deep .owl-nav .owl-prev span {

@@ -81,7 +81,6 @@ const increaseNumber = () => {
 
 const rankCarousel = () => {
     $('.rank__owlcrousel').owlCarousel({
-        stagePadding:180,
         loop: true,
         margin: 0,
         nav: true,
@@ -90,11 +89,20 @@ const rankCarousel = () => {
         autoplaySpeed: 1500,
         navSpeed: 1500,
         dotsSpeed: 1500,
+        responsiveClass: true,
         responsive: {
             0: {
-                items: 1
+                items: 1,
+                stagePadding: 50,
             },
-
+            1200: {
+                items: 1,
+                stagePadding: 140,
+            },
+            1400: {
+                items: 1,
+                stagePadding: 180,
+            },
         }
     })
 }

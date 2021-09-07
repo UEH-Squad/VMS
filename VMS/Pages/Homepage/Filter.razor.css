@@ -37,6 +37,8 @@
         padding: 0 80px; } }
   .my-filter .item {
     text-align: center; }
+    .my-filter .item a {
+      text-decoration: none; }
     .my-filter .item i {
       display: block;
       background-color: #18A0FB;
@@ -66,18 +68,18 @@
           height: 100px;
           line-height: 100px;
           font-size: 45px; } }
-    .my-filter .item:hover > i {
+    .my-filter .item:hover i {
       font-size: 32px; }
     @media (min-width: 576px) {
-      .my-filter .item:hover > i {
+      .my-filter .item:hover i {
         font-size: 40px; } }
     @media (min-width: 992px) {
-      .my-filter .item:hover > i {
+      .my-filter .item:hover i {
         font-size: 45px; } }
     @media (min-width: 1400px) {
-      .my-filter .item:hover > i {
+      .my-filter .item:hover i {
         font-size: 55px; } }
-    .my-filter .item:hover > span {
+    .my-filter .item:hover span {
       transform: translateY(-5px); }
     .my-filter .item span {
       color: #64D72F;
@@ -91,6 +93,10 @@
       @media (min-width: 992px) {
         .my-filter .item span {
           font-size: 24px; } }
+  .my-filter .item-covid i {
+    background: #F14747; }
+  .my-filter .item-covid .icon-coivd {
+    color: #FFFFFF; }
   .my-filter ::deep .owl-nav .owl-prev {
     position: absolute;
     top: -35px;

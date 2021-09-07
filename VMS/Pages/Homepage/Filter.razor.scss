@@ -46,6 +46,9 @@
 
     .item {
         text-align: center;
+        a{
+            text-decoration: none;
+        }
 
         i {
             display: block;
@@ -81,29 +84,31 @@
             }
         }
 
-        &:hover > i {
+
+
+        &:hover i {
             font-size: 32px
         }
 
         @include on("sm") {
-            &:hover > i {
+            &:hover i {
                 font-size: 40px
             }
         }
 
         @include on("lg") {
-            &:hover > i {
+            &:hover i{
                 font-size: 45px
             }
         }
 
         @include on("xxl") {
-            &:hover > i {
+            &:hover  i {
                 font-size: 55px
             }
         }
 
-        &:hover > span {
+        &:hover span {
             transform: translateY(-5px);
         }
 
@@ -121,6 +126,16 @@
             @include on("lg") {
                 font-size: 24px;
             }
+        }
+    }
+
+    .item-covid {
+        i {
+            background: #F14747;
+        }
+
+        .icon-coivd {
+            color: $white;
         }
     }
 

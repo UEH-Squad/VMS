@@ -1,6 +1,8 @@
 ﻿@attribute [Route(Routes.CreateActivity)]
 @attribute [Route(Routes.EditActivity + "/{activityId:int}")]
 
+@attribute [Authorize]
+
 <div class="container-fluid">
     <div class="row">
         <EditForm Model="activity" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="col-11 col-xl-9 mx-auto">
@@ -10,7 +12,7 @@
                 <div class="text-center error-message">Bạn cần điền tất cả thông tin dưới đây để tạo hoạt động</div>
             }
 
-            <h1 class="text-center my-4 title"><span>@(isEdit ? "Sửa" : "Tạo")</span> hoạt động</h1>
+            <h1 class="text-center my-4 title"><span>@(isEditPage ? "Sửa" : "Tạo")</span> hoạt động</h1>
             <div class="form-group mb-3">
                 <div class="mb-2">Tiêu đề <span class="required-asterick">(*)</span></div>
                 <InputText @bind-Value="activity.Name" class="form-control" placeholder="Nhập tiêu đề" />

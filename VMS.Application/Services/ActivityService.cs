@@ -172,26 +172,14 @@ namespace VMS.Application.Services
 
             Activity activity = _mapper.Map<Activity>(activityViewModel);
             activity.CreatedDate = DateTime.Now;
-            activity.IsApproved = true;
             activity.CreatedBy = activity.OrgId;
+            activity.IsApproved = true;
 
             Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
             activity.Latitude = coordinateResponse.Latitude;
             activity.Longitude = coordinateResponse.Longitude;
-
-            activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
-            {
-                Activity = activity,
-                SkillId = s.Id,
-                IsDeleted = false
-            }).ToList();
-
-            activity.ActivityAddresses = new List<ActivityAddress>()
-            {
-                new() { Activity = activity, AddressPathId = activityViewModel.ProvinceId },
-                new() { Activity = activity, AddressPathId = activityViewModel.DistrictId },
-                new() { Activity = activity, AddressPathId = activityViewModel.WardId }
-            };
+            activity.ActivitySkills = MapSkills(activityViewModel, activity);
+            activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
 
             await _repository.InsertAsync(dbContext, activity);
         }
@@ -271,31 +259,15 @@ namespace VMS.Application.Services
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
             activity = _mapper.Map(activityViewModel, activity);
+            activity.UpdatedBy = activity.OrgId;
+            activity.UpdatedDate = DateTime.Now;
 
             Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.Address);
             activity.Latitude = coordinateResponse.Latitude;
             activity.Longitude = coordinateResponse.Longitude;
 
-            activity.ActivitySkills = activityViewModel.Skills.Select(s => new ActivitySkill
-            {
-                SkillId = s.Id,
-                ActivityId = activity.Id,
-                IsDeleted = false
-            }).ToList();
-
-            activity.ActivityAddresses = new List<ActivityAddress>()
-            {
-                new() { Activity = activity, AddressPathId = activityViewModel.ProvinceId },
-                new() { Activity = activity, AddressPathId = activityViewModel.DistrictId }
-            };
-
-            if (activityViewModel.WardId > 0)
-            {
-                activity.ActivityAddresses.Add(new() { Activity = activity, AddressPathId = activityViewModel.WardId });
-            }
-
-            activity.UpdatedBy = activityViewModel.OrgId;
-            activity.UpdatedDate = DateTime.Now;
+            activity.ActivitySkills = MapSkills(activityViewModel, activity);
+            activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
 
             await _repository.UpdateAsync(dbContext, activity);
         }
@@ -412,5 +384,30 @@ namespace VMS.Application.Services
 
         private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured)
             => isFeatured ? (x => x.OrderByDescending(y => y.MemberQuantity)) : (x => x.OrderByDescending(y => y.Id));
+
+        private static ICollection<ActivitySkill> MapSkills(CreateActivityViewModel activityViewModel, Activity activity)
+        {
+            return activityViewModel.Skills.Select(s => new ActivitySkill
+            {
+                Activity = activity,
+                SkillId = s.Id
+            }).ToList();
+        }
+
+        private static ICollection<ActivityAddress> MapActivityAddresses(CreateActivityViewModel activityViewModel, Activity activity)
+        {
+            List<ActivityAddress> result = new()
+            {
+                new() { Activity = activity, AddressPathId = activityViewModel.ProvinceId },
+                new() { Activity = activity, AddressPathId = activityViewModel.DistrictId }
+            };
+
+            if (activityViewModel.WardId > 0)
+            {
+                result.Add(new() { Activity = activity, AddressPathId = activityViewModel.WardId });
+            }
+
+            return result;
+        }
     }
 }

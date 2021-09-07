@@ -41,7 +41,7 @@ namespace VMS.Pages.Organization.Activities
         [Inject]
         private IUploadService UploadService { get; set; }
 
-        private bool isEdit;
+        private bool isEditPage;
         private bool isLoading;
         private IList<string> chosenTargets = new List<string>();
         private readonly IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
@@ -61,29 +61,29 @@ namespace VMS.Pages.Organization.Activities
 
         protected override async Task OnInitializedAsync()
         {
-            if (ActivityId <= 0)
+            if (NavigationManager.Uri.Contains(Routes.CreateActivity))
             {
                 return;
             }
 
-            isEdit = true;
+            isEditPage = true;
             CreateActivityViewModel activityFromParam = await ActivityService.GetCreateActivityViewModelAsync(ActivityId);
-            if (activityFromParam == null)
+
+            if (activityFromParam == null || !string.Equals(activityFromParam.OrgId, IdentityService.GetCurrentUserId()))
             {
                 NavigationManager.NavigateTo("404");
+                return;
             }
-            else
-            {
-                activity = activityFromParam;
-                choosenAreas.Add(new()
-                {
-                    Id = activity.AreaId,
-                    Name = activity.AreaName,
-                    Icon = activity.AreaIcon
-                });
 
-                chosenTargets = chosenTargets.Concat(activity.Targets.Split('|')).ToList();
-            }
+            activity = activityFromParam;
+            choosenAreas.Add(new()
+            {
+                Id = activity.AreaId,
+                Name = activity.AreaName,
+                Icon = activity.AreaIcon
+            });
+
+            chosenTargets = chosenTargets.Concat(activity.Targets.Split('|')).ToList();
         }
 
         private async Task OnAddressChanged(int provinceId, string province, int districtId, string district, int wardId, string ward, string fullAddress)
@@ -97,9 +97,9 @@ namespace VMS.Pages.Organization.Activities
             activity.FullAddress = fullAddress;
         }
 
-        private async Task HandleFileChanged(InputFileChangeEventArgs file)
+        private async Task HandleFileChanged(InputFileChangeEventArgs args)
         {
-            uploadFile = file.File;
+            uploadFile = args.File;
         }
 
         private async Task OnStartDateChanged(ChangeEventArgs args)
@@ -117,7 +117,7 @@ namespace VMS.Pages.Organization.Activities
         private async Task OnEndDateChanged(ChangeEventArgs args)
         {
             DateTime selectedDate = DateTime.Parse(args.Value.ToString());
-            if (selectedDate < DateTime.Now)
+            if (selectedDate < activity.StartDate)
             {
                 await JSRuntime.InvokeVoidAsync("alert", "Ngày kết thúc phải sau ngày bắt đầu!");
                 selectedDate = DateTime.Now.AddDays(7);
@@ -184,9 +184,9 @@ namespace VMS.Pages.Organization.Activities
             isLoading = true;
             try
             {
-                string currentUserId = IdentityService.GetCurrentUserId();
+                activity.OrgId = IdentityService.GetCurrentUserId();
 
-                if (ActivityId <= 0)
+                if (!isEditPage)
                 {
                     if (uploadFile is null)
                     {
@@ -194,7 +194,7 @@ namespace VMS.Pages.Organization.Activities
                         return;
                     }
 
-                    activity.Banner = await UploadService.SaveImageAsync(uploadFile, currentUserId);
+                    activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
                     await ActivityService.AddActivityAsync(activity);
                 }
                 else
@@ -202,7 +202,7 @@ namespace VMS.Pages.Organization.Activities
                     if (uploadFile is not null)
                     {
                         UploadService.RemoveImage(activity.Banner);
-                        activity.Banner = await UploadService.SaveImageAsync(uploadFile, currentUserId);
+                        activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
                     }
 
                     await ActivityService.UpdateActivityAsync(activity, activity.Id);
@@ -211,7 +211,7 @@ namespace VMS.Pages.Organization.Activities
                 isLoading = false;
 
                 var modalParams = new ModalParameters();
-                modalParams.Add("IsEdit", isEdit);
+                modalParams.Add("IsEdit", isEditPage);
                 modalParams.Add("CTALink", $"{Routes.EditActivity}/{ActivityId}");
                 await ShowModalAsync(typeof(NotificationPopup), modalParams);
             }

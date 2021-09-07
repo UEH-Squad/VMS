@@ -1,4 +1,5 @@
 ﻿@inject IActivityService ActivityService
+@inject IIdentityService IdentityService
 
 @using VMS.Application.Interfaces
 @using VMS.Application.ViewModels
@@ -60,7 +61,7 @@
                 </div>
             </div>
             <div class="btn-sign-up--cover">
-                <button @onclick="@(() =>ShowSignUpPopUp())" class="btn-sign-up">
+                <button @onclick="@(() => ShowSignUpPopUp())" class="btn-sign-up">
                     <h3 class="btn-sign-up__text">Đăng ký</h3>
                 </button>
             </div>
@@ -87,7 +88,10 @@
             UseCustomLayout = true
         };
 
-        Modal.Show<PopUpReport>("",parameters ,options);
+        if (IdentityService.GetCurrentUserId() is not null)
+        {
+            Modal.Show<PopUpReport>("", parameters, options);
+        }
     }
 
     async Task ShowSignUpPopUp()
@@ -98,7 +102,10 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
+        if (IdentityService.GetCurrentUserId() is not null)
+        {
+            Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
+        }
     }
 
     [Parameter]
@@ -108,6 +115,6 @@
     {
         activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
     }
-    
+
 }
 

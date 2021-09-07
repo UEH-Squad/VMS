@@ -22,18 +22,21 @@
                         <div class="act__container__card__img">
                             <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
                             @*@if (!string.IsNullOrEmpty(item.ActivityBanner))
-                            {
-                                <img src="/img/@item.ActivityBanner" alt="photo"/>
-                            }*@
+                                {
+                                    <img src="/img/@item.ActivityBanner" alt="photo"/>
+                                }*@
                         </div>
                         <div class="act__container__card__desc">
                             <p>@item.ActivityName</p>
                         </div>
-                        <div class="act__container__card__icon">
-                            <div class="@(currentUser.Favorites.Any(f => f.ActivityId == item.ActivityId) ? "heart" : "heart-line")" @onclick="() => HandleFavorite(item.ActivityId)">
-                                <span class="material-icons">favorite</span>
+                        @if (currentUser is not null)
+                        {
+                            <div class="act__container__card__icon">
+                                <div class="@(currentUser.Favorites.Any(f => f.ActivityId == item.ActivityId) ? "heart" : "heart-line")" @onclick="() => HandleFavorite(item.ActivityId)">
+                                    <span class="material-icons">favorite</span>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 }
             }
@@ -55,7 +58,7 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (otherActivities is not null) 
+        if (otherActivities is not null)
         {
             await JSRuntinme.InvokeVoidAsync("vms.OtherAct", otherActivities.Count());
         }

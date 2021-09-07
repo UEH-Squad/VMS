@@ -20,9 +20,12 @@
                 <p class="postdate">
                     Ngày đăng: @activity.PostDate.ToShortDateString()
                 </p>
-                <button @onclick="() => HandleFavorite(int.Parse(ActivityId))" class="@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "heart-button1" : "heart-button2")">
-                    <span class="material-icons"><span class="heart-icon">@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "favorite" : "favorite_border")</span></span>
-                </button>
+                @if (currentUser is not null)
+                {
+                    <button @onclick="() => HandleFavorite(int.Parse(ActivityId))" class="@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "heart-button1" : "heart-button2")">
+                        <span class="material-icons"><span class="heart-icon">@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "favorite" : "favorite_border")</span></span>
+                    </button>
+                }
                 <div><hr class="line-line2"></div>
             </div>
         </div>
@@ -35,9 +38,9 @@
             <div class="activity__image">
                 <img src="./img/ActivityInfoPage/ActivityImage.png" alt="Activity Image">
                 @*@if (!string.IsNullOrEmpty(activity.Banner))
-                {
-                    <img src="/img/@activity.Banner" alt="Activity Image"/>
-                }*@
+                    {
+                        <img src="/img/@activity.Banner" alt="Activity Image"/>
+                    }*@
             </div>
             <div class="activity__mission">
                 <p class="mission">Sứ mệnh:</p>

@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace VMS.Pages.Organization.Activities
+namespace VMS.Shared.Components
 {
     /// <summary>
     /// UploadImg component
@@ -13,6 +13,7 @@ namespace VMS.Pages.Organization.Activities
     public partial class UploadImg : ComponentBase
     {
         [Inject] private ILogger<UploadImg> Logger { get; set; }
+        [Inject] private IJSRuntime JS { get; set; }
 
         #region Parameters
 

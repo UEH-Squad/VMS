@@ -262,7 +262,7 @@ namespace VMS.Application.Services
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;
 
-            Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.Address);
+            Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
             activity.Latitude = coordinateResponse.Latitude;
             activity.Longitude = coordinateResponse.Longitude;
 

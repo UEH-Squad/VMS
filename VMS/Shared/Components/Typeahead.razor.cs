@@ -12,6 +12,11 @@ using VMS.Common;
 
 namespace VMS.Shared.Components
 {
+    /// <summary>
+    /// Typeahead component
+    /// </summary>
+    /// <typeparam name="TItem"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
     public partial class Typeahead<TItem, TValue> : ComponentBase, IDisposable
     {
         private EditContext _editContext;

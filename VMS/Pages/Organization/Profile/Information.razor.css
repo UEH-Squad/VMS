@@ -44,7 +44,7 @@
     padding: 20px;
     border-radius: 50px;
     text-align: center;
-    transition: all 0.3s linear; }
+    transition: all 0.2s linear; }
     .my-information .information__logo .information__logo-button:hover {
       background: #64d72f; }
     .my-information .information__logo .information__logo-button i {
@@ -59,7 +59,7 @@
       font-size: 24px;
       font-weight: 700; }
   .my-information .row-1 {
-    border-bottom: 1px solid #707070; }
+    border-bottom: 1px solid rgba(112, 112, 112, 0.5); }
   .my-information .information__rank a {
     color: #64D72F;
     font-size: 40px;
@@ -87,15 +87,17 @@
     font-size: 16px;
     font-weight: 400;
     text-decoration: none; }
-  .my-information .information__fields {
-    border-right: 1px solid #707070; }
-    .my-information .information__fields h3 {
-      text-align: center;
-      font-size: 30px;
-      font-weight: 600;
-      margin-bottom: 30px; }
-      .my-information .information__fields h3 span {
-        color: #18A0FB; }
+  .my-information .information__fields h3 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 30px; }
+    .my-information .information__fields h3 span {
+      color: #18A0FB; }
+  .my-information .line {
+    height: 122px;
+    width: 1px;
+    background-color: rgba(112, 112, 112, 0.5); }
   .my-information .information__carousel {
     position: relative;
     padding-right: 30px;

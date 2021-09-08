@@ -22,6 +22,7 @@
             margin-bottom: 20px;
             display: inline-block;
         }
+
         img {
             width: 230px;
             height: 230px;
@@ -58,7 +59,7 @@
             padding: 20px;
             border-radius: 50px;
             text-align: center;
-            transition: all 0.3s linear;
+            transition: all 0.2s linear;
 
             &:hover {
                 background: rgba(100, 215, 47, 1);
@@ -82,7 +83,7 @@
     }
 
     .row-1 {
-        border-bottom: 1px solid $border-color-bold;
+        border-bottom: 1px solid rgba(112, 112, 112, .5);
     }
 
     .information__rank {
@@ -129,7 +130,6 @@
     }
 
     .information__fields {
-        border-right: 1px solid $border-color-bold;
 
         h3 {
             text-align: center;
@@ -141,6 +141,12 @@
                 color: $blue;
             }
         }
+    }
+
+    .line {
+        height: 122px;
+        width: 1px;
+        background-color: rgba(112, 112, 112, .5);
     }
 
     .information__carousel {

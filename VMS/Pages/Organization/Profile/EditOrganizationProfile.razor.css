@@ -21,8 +21,7 @@
       width: 200px;
       height: 200px;
       border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid #707070; }
+      object-fit: cover; }
   .my-editProfile ::deep .valid.modified:not([type=checkbox]) {
     border: 1px solid #18A0FB;
     outline: none; }
@@ -38,7 +37,7 @@
     font-size: 16px;
     font-weight: 300;
     color: #515151;
-    border: 1px solid #707070;
+    border: 1px solid #D8D8D8;
     border-radius: 5px; }
   .my-editProfile .form-field-item {
     width: 20%;
@@ -88,6 +87,8 @@
     .my-editProfile .from__btn .from__btn-cancel {
       background: #FFFFFF;
       color: #18A0FB; }
+      .my-editProfile .from__btn .from__btn-cancel:hover {
+        border: 1px solid #707070; }
     .my-editProfile .from__btn .from__btn-submit {
       background: #18A0FB;
       color: #FFFFFF; }

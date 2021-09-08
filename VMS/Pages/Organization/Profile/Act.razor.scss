@@ -19,9 +19,17 @@
     }
 
     .bottom-line {
-        background-color: $grey-text;
+        background-color: rgba(112, 112, 112, .5);
         height: 1px;
         margin-top: 50px;
+    }
+
+    .animation {
+        animation: bottom-line 5s linear;
+    }
+
+    .rotate {
+        animation: bottom-line 5s linear;
     }
 }
 
@@ -335,5 +343,14 @@
             cursor: pointer;
             font-size: 18px;
         }
+    }
+}
+
+@keyframes bottom-line {
+    from {
+        width: 0%;
+    }
+    to  {
+        width: 100%;
     }
 }

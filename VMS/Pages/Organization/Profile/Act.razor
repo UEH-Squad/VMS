@@ -30,14 +30,18 @@
             </div>
             }
         </div>
-        @if (HaveDecor)
-        {
-            <div class="col-8 bottom-line"></div>
-        }
-        else
-        {
-            <div class="col-8 bottom-line  ms-auto"></div>
-        }
+            @if (HaveDecor)
+            {
+                <div class="col-8">
+                    <div class="bottom-line animation"></div>
+                </div>
+            }
+            else
+            {
+                <div class="col-8 ms-auto">
+                    <div class="bottom-line animation"></div>
+                </div>
+            }
     </div>
 </div>
 

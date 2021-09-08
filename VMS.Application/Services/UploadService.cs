@@ -55,9 +55,9 @@ namespace VMS.Application.Services
             {
                 File.Delete(@$"{Path}\{fileName}");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                // ignore if delete exceptions
             }
         }
     }

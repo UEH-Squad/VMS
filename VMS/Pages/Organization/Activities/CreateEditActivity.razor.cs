@@ -76,14 +76,13 @@ namespace VMS.Pages.Organization.Activities
             }
 
             activity = activityFromParam;
+            chosenTargets = chosenTargets.Concat(activity.Targets.Split('|')).ToList();
             choosenAreas.Add(new()
             {
                 Id = activity.AreaId,
                 Name = activity.AreaName,
                 Icon = activity.AreaIcon
             });
-
-            chosenTargets = chosenTargets.Concat(activity.Targets.Split('|')).ToList();
         }
 
         private async Task OnAddressChanged(int provinceId, string province, int districtId, string district, int wardId, string ward, string fullAddress)
@@ -160,7 +159,7 @@ namespace VMS.Pages.Organization.Activities
             }
 
             activity.Targets = string.Join('|', chosenTargets);
-            if (string.IsNullOrWhiteSpace(activity.Targets))
+            if (string.IsNullOrWhiteSpace(activity.Targets) || (uploadFile is not null && !uploadFile.ContentType.Contains("image/")))
             {
                 await HandleInvalidSubmit();
                 return;
@@ -187,8 +186,9 @@ namespace VMS.Pages.Organization.Activities
                 {
                     if (uploadFile is not null)
                     {
-                        UploadService.RemoveImage(activity.Banner);
+                        string oldImageName = activity.Banner;
                         activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
+                        UploadService.RemoveImage(oldImageName);
                     }
 
                     await ActivityService.UpdateActivityAsync(activity, activity.Id);
@@ -203,6 +203,7 @@ namespace VMS.Pages.Organization.Activities
             }
             catch (Exception ex)
             {
+                isLoading = false;
                 Logger.LogError("Error occurs when trying to create/edit activity", ex.Message);
                 await JSRuntime.InvokeVoidAsync("alert", ex.Message);
             }

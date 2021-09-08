@@ -76,15 +76,14 @@ namespace VMS.Shared.Components
                 }
                 else
                 {
-                    await JS.InvokeVoidAsync("vms.HhookFileUploadEvent", null, _fileUploadId);
+                    await JS.InvokeVoidAsync("vms.HookFileUploadEvent", null, _fileUploadId);
                 }
             }
         }
 
         private Task OnInputFileChange(InputFileChangeEventArgs e)
         {
-            var fileName = e.File.Name;
-            _previewImgAltText = _prompt = fileName;
+            _previewImgAltText = _prompt = e.File.Name;
 
             return InputFileChanged.InvokeAsync(e);
         }

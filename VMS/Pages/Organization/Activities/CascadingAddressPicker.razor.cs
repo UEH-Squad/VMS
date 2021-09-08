@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Domain.Models;
@@ -56,6 +57,11 @@ namespace VMS.Pages.Organization.Activities
             provinces = await AddressService.GetAllProvincesAsync();
             districts = await AddressService.GetAllAddressPathsByParentIdAsync(ProvinceId);
             wards = await AddressService.GetAllAddressPathsByParentIdAsync(DistrictId);
+
+            // Move HCMC to the head for easy pick-up
+            AddressPath hcmCity = provinces.FirstOrDefault(x => x.Name == "Hồ Chí Minh");
+            provinces.Remove(hcmCity);
+            provinces.Insert(0, hcmCity);
         }
 
         private async Task ChooseCityValue(AddressPath addressPath)

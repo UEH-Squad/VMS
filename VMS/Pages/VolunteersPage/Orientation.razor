@@ -1,14 +1,119 @@
-﻿<div class="container-fluid">
-    <h4 class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
-    <div class="button">
-        <button class="button__text">Xóa nhiều</button>
-    </div>
-    <div class="link">
-        <h4 class="link__text">Xem danh sách xóa</h4>
-    </div>
-     
+﻿<div class="container @(interfaceDel?"d-block":"d-none")">
+    <div class="my-container">
+        <h4 class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
+        <div class="button">
+            <button @onclick="@(() => ShowConfirm("Delete"))" class="button__text button__text--del">Xóa nhiều</button>
+        </div>
+        <div class="link">
+            <h4 @onclick="ChangeInterface" class="link__text link__text--del">Xem danh sách xóa</h4>
+        </div>
+    </div> 
 </div>
 
+<div class="container @(interfaceUndo?"d-block":"d-none")">
+    <div class="my-container">
+        <h4 class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
+        <div class="button">
+            <button @onclick="@(() => ShowConfirm("Undo"))" class="button__text button__text--undo">Chọn lại</button>
+        </div>
+        <div class="link">
+            <h4 @onclick="ChangeInterface" class="link__text link__text--undo">Xem danh sách</h4>
+        </div>
+    </div>    
+</div>
+
+@renderConfirm
+
 @code {
+
     private int quantity = 255;
+    private bool isShowConfirm = false;
+    private bool isShowNotifiSuccess = false;
+    private RenderFragment renderConfirm;
+    public void CloseConfirm() // đóng mở pop up confirm
+    {
+        if (isShowNotifiSuccess == false)
+            isShowConfirm = !isShowConfirm;
+    }
+    public void NotifiSuccess() // ẩn pop up xác nhận, mở pop up thông báo
+    {
+        CloseConfirm();
+        isShowNotifiSuccess = !isShowNotifiSuccess;
+    }
+    public void CloseNotifiSuccess() // xóa thông báo đã xóa/hoàn tác thành công
+    {
+        isShowNotifiSuccess = !isShowNotifiSuccess;
+    }
+    public async Task ShowConfirm(string action)
+    {
+        CloseConfirm();
+        switch (action)
+        {
+            case "Delete":
+                {
+                    renderConfirm =
+                    @<div class="confirm-delete">
+                        <div class="confirm @(isShowConfirm ? "d-block" : "d-none")">
+                            <div @onclick="CloseConfirm" class="close-icon">
+                                <span class="material-icons-outlined"> close </span>
+                            </div>
+                            <div class="content">
+                                Bạn có chắc chắn muốn <br /> <span class="content__del">xóa tình nguyện viên</span> này không?
+                            </div>
+                            <div class="button">
+                                <button @onclick="CloseConfirm" class="button__cancel card-btn"> Hủy </button>
+                                <button @onclick="NotifiSuccess" class="button__yes card-btn"> Xác nhận </button>
+                            </div>
+                        </div>
+
+                        <div class="noti-success @(isShowNotifiSuccess ? "d-block" : "d-none")">
+                            <div @onclick="CloseNotifiSuccess" class="close-icon">
+                                <span class="material-icons-outlined"> close </span>
+                            </div>
+                            <div class="content content--del">
+                                Xoá thành công!
+                            </div>
+                        </div>
+                    </div>;
+                    break;
+                }
+            case "Undo":
+                {
+                    renderConfirm =
+                      @<div class="confirm-undo">
+                            <div class="confirm @(isShowConfirm ? "d-block" : "d-none")">
+                                <div @onclick="CloseConfirm" class="close-icon">
+                                    <span class="material-icons-outlined"> close </span>
+                                </div>
+                                <div class="content">
+                                    Bạn có chắc chắn muốn <br /> <span class="content__undo">chọn lại tình nguyện viên</span> này không?
+                                </div>
+                                <div class="button">
+                                    <button @onclick="CloseConfirm" class="button__cancel card-btn"> Hủy </button>
+                                    <button @onclick="NotifiSuccess" class="button__yes card-btn"> Xác nhận </button>
+                                </div>
+                            </div>
+
+                            <div class="noti-success @(isShowNotifiSuccess ? "d-block" : "d-none")">
+                                <div @onclick="CloseNotifiSuccess" class="close-icon">
+                                    <span class="material-icons-outlined"> close </span>
+                                </div>
+                                <div class="content content--undo">
+                                    Hoàn tác thành công!
+                                </div>
+                            </div>
+                       </div>;
+                    break;
+                }
+        }
+    }
+
+
+    private bool interfaceDel = true; //hien thi mac dinh
+    private bool interfaceUndo = false; // mac dinh ko hien thi
+    public void ChangeInterface()
+    {
+        interfaceDel = !interfaceDel;
+        interfaceUndo = !interfaceUndo;
+    }
 }

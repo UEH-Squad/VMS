@@ -6,7 +6,8 @@
 /*#endregion */
 .button-and-searchbox {
   display: grid;
-  grid-template-columns: 80% 20%; }
+  grid-template-columns: 50% 50%;
+  margin-top: 90px; }
   .button-and-searchbox .button-download {
     background-color: #18A0FB;
     color: #FFFFFF;
@@ -34,10 +35,17 @@
     color: #64D72F;
     font-size: 26px;
     line-height: 24px; }
+  .my-search-box__icon-wrapper #clear-search {
+    background-color: none; }
   .my-search-box__icon-wrapper .search-btn {
     background-color: transparent;
     border: none;
     padding: 0; }
+    .my-search-box__icon-wrapper .search-btn span {
+      background-color: #e5e5e58c;
+      padding: 1px;
+      margin-bottom: 3px;
+      border-radius: 3px; }
   .my-search-box__icon-wrapper .clear-search-btn {
     margin-top: -4px;
     visibility: hidden;

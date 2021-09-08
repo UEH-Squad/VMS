@@ -2,7 +2,8 @@
 
 .button-and-searchbox {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 50% 50%;
+    margin-top:90px;
 
     .button-download {
         background-color: $blue;
@@ -41,10 +42,21 @@
             line-height: 24px;
         }
 
+        #clear-search {
+            background-color: none;
+        }
+
         .search-btn {
             background-color: transparent;
             border: none;
             padding: 0;
+
+            span {
+                background-color: #e5e5e58c;
+                padding: 1px;
+                margin-bottom: 3px;
+                border-radius: 3px;
+            }
         }
 
         .clear-search-btn {

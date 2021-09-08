@@ -110,5 +110,13 @@
   {
     "outputFile": "Pages/VolunteersPage/ListCard.razor.css",
     "inputFile": "Pages/VolunteersPage/ListCard.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersPage/Orentation.razor.css",
+    "inputFile": "Pages/VolunteersPage/Orentation.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersPage/Orientation.razor.css",
+    "inputFile": "Pages/VolunteersPage/Orientation.razor.scss"
   }
 ]

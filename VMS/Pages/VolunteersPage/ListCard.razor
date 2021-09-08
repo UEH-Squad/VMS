@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JsRuntime
+
 <div class="list-card">
     @if (pagedResult != null && pagedResult.Results.Length != 0)
      {
@@ -7,15 +8,17 @@
             <div class="mycard">
                 <div class="mycard__info">
                     <img class="mycard__info--avatar" src=@item.Avatar alt="Avatar" />
-                    <div class="mycard__info--name-and-mssv">
+                    <div class="mycard__info--name-and-mssv" style="font-weight:@(item.IsCheck? 600:"")">
                         <a href="#" class="info-name">@item.Name</a>
                         <div class="info-mssv">@item.Mssv</div>
                     </div>
 
                 </div>
-                <div class="mycard__checkbox">
-                    <input class="mycard__checkbox--my-checkbox" type="checkbox">
-                </div>
+
+                    <div class="mycard__checkbox">
+                        <input @onclick="@(() =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
+                    </div>
+                
                 <div class="mycard__button">
                     <button class="mycard__button--registration-form">Xem đơn đăng ký</button>
                 </div>
@@ -23,10 +26,11 @@
          }
      }
 </div>
-
+<div class="d-flex justify-content-center">
 <Pager CurrentPage="@pagedResult.CurrentPage"
        PageCount="@pagedResult.PageCount"
        OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+</div>
 
 @code {
 
@@ -36,6 +40,7 @@
         public string Avatar { get; set; }
         public string Name { get; set; }
         public string Mssv { get; set; }
+        public bool IsCheck { get; set; }
     }
     public abstract class PagedResultBase
     {
@@ -68,8 +73,8 @@
     {
         var result = new PagedResult<FakeData>();
         result.CurrentPage = page;
-        result.RowCount = 100;
-        result.PageSize = 10;
+        result.RowCount = 200;
+        result.PageSize = 20;
         result.PageCount = result.RowCount / result.PageSize;
         result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
         {
@@ -80,5 +85,13 @@
         }).ToArray();
 
         return result;
+    }
+    private async Task HandleCheck(int id)
+    {
+        var checkItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (checkItem is not null)
+        {
+            checkItem.IsCheck = !checkItem.IsCheck;
+        }
     }
 }

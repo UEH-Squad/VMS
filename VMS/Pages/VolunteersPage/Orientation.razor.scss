@@ -1,0 +1,51 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.container-fluid {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin: 30px 0 20px;
+
+    .quantity-volunteers {
+        width: 50%;
+        font-size: 16px;
+        color: $blue;
+
+        span {
+            color: $green;
+        }
+    }
+
+    .button {
+        width: 30%;
+
+        &__text {
+            float: right;
+            font-size: 16px;
+            color: $white;
+            background-color: #F14747;
+            padding: 8px 25px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 14px;
+
+            &:hover {
+                background-color: #DC3545;
+            }
+        }
+    }
+
+    .link {
+        width: 20%;
+
+        &__text {
+            float: right;
+            color: #F14747;
+            font-size: 20px;
+            margin: auto;
+            cursor:pointer;
+        }
+    }
+}
+
+

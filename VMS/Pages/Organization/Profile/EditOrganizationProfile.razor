@@ -1,5 +1,6 @@
 ﻿@attribute [Route(Routes.EditProfile)]
 @using System.ComponentModel.DataAnnotations;
+@inject IJSRuntime JSRuntinme;
 
 <div class="my-editProfile">
     <div class="container">
@@ -27,30 +28,36 @@
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực</p>
-                        <div class="col-8 form-field d-flex flex-wrap">
-                            <div class="form-field-item">
-                                <i class="material-icons">group</i>
-                                <span>Cộng đồng</span>
+                        <div class="col-8 form-field ">
+                            <div class="d-flex">
+                                <div class=" owl-carousel owl-theme editProfile__carousel">
+                                    <div class="form-field-item item">
+                                        <i class="material-icons">group</i>
+                                        <span>Cộng đồng</span>
+                                    </div>
+                                    <div class="form-field-item item">
+                                        <i class="material-icons">group</i>
+                                        <span>Cộng đồng</span>
+                                    </div>
+                                    <div class="form-field-item icon">
+                                        <i class="material-icons">group</i>
+                                        <span>Cộng đồng</span>
+                                    </div>
+                                    <div class="form-field-item item">
+                                        <i class="material-icons">group</i>
+                                        <span>Giáo dục</span>
+                                    </div>
+                                    <div class="form-field-item item">
+                                        <i class="material-icons">group</i>
+                                        <span>Thể thao</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-field-item ms-auto item-add">
+                                    <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
+                                </div>
                             </div>
-                            <div class="form-field-item">
-                                <i class="material-icons">group</i>
-                                <span>Cộng đồng</span>
-                            </div>
-                            <div class="form-field-item">
-                                <i class="material-icons">group</i>
-                                <span>Cộng đồng</span>
-                            </div>
-                            <div class="form-field-item">
-                                <i class="material-icons">group</i>
-                                <span>Giáo dục</span>
-                            </div>
-                            <div class="form-field-item">
-                                <i class="material-icons">group</i>
-                                <span>Thể thao</span>
-                            </div>
-                            <div class="form-field-item">
-                                <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
-                            </div>
+
                         </div>
                     </div>
                     <div class="row form-item">
@@ -139,6 +146,11 @@
         areasParameter.Add("choosenAreasList", choosenAreasList);
         var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
         await areasModal.Result;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.EditProfileCarousel");
     }
 
 }

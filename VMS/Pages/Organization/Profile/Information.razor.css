@@ -31,16 +31,20 @@
     font-size: 28px;
     font-weight: 600; }
   .my-information .information__logo span {
+    display: block;
+    width: 80%;
+    margin: 20px 0 15px 0;
+    text-align: center;
     color: #18A0FB;
     font-size: 16px;
     font-weight: 600; }
   .my-information .information__logo .information__logo-button {
+    width: 80%;
     position: relative;
     display: block;
     background: rgba(100, 215, 47, 0.8);
     color: #FFFFFF;
     text-decoration: none;
-    margin-top: 20px;
     padding: 20px;
     border-radius: 50px;
     text-align: center;

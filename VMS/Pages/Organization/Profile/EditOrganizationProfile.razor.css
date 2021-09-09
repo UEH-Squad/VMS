@@ -40,7 +40,6 @@
     border: 1px solid #D8D8D8;
     border-radius: 5px; }
   .my-editProfile .form-field-item {
-    width: 20%;
     text-align: center; }
     .my-editProfile .form-field-item:hover > i {
       font-size: 50px; }
@@ -53,17 +52,26 @@
       color: white;
       margin: 5px auto;
       transition: all 0.3s linear;
-      width: 83px;
-      height: 83px;
-      line-height: 88px;
-      font-size: 40px; }
+      width: 73px;
+      height: 73px;
+      line-height: 73px;
+      font-size: 35px; }
+      @media (min-width: 1400px) {
+        .my-editProfile .form-field-item i {
+          width: 83px;
+          height: 83px;
+          line-height: 83px;
+          font-size: 40px; } }
     .my-editProfile .form-field-item span {
       color: #64D72F;
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;
-      font-size: 20px;
+      font-size: 18px;
       margin-top: 20px; }
+      @media (min-width: 1400px) {
+        .my-editProfile .form-field-item span {
+          font-size: 20px; } }
     .my-editProfile .form-field-item .icon-add {
       background: #C4C4C4;
       opacity: 50%;
@@ -73,6 +81,30 @@
         background: #C4C4C4;
         opacity: 100%;
         font-size: 80px; }
+    .my-editProfile .form-field-item.item-add {
+      width: 30%; }
+  .my-editProfile .editProfile__carousel {
+    width: 60%; }
+    .my-editProfile .editProfile__carousel .item {
+      margin: 0 auto; }
+    .my-editProfile .editProfile__carousel ::deep .owl-nav {
+      display: block; }
+      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev {
+        display: none; }
+      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next {
+        position: absolute;
+        top: -15%;
+        right: -20%; }
+        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span {
+          font-size: 80px;
+          color: #18A0FB;
+          transition: all 0.3s linear; }
+          .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span:hover {
+            color: #0B588C; }
+        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next:hover {
+          background: none; }
+    .my-editProfile .editProfile__carousel ::deep .owl-dots {
+      display: none; }
   .my-editProfile .countWord {
     color: #707070;
     position: absolute;

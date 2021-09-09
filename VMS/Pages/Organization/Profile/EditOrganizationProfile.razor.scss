@@ -50,7 +50,6 @@
     }
 
     .form-field-item {
-        width: 20%;
         text-align: center;
 
         &:hover > i {
@@ -68,10 +67,17 @@
             color: white;
             margin: 5px auto;
             transition: all 0.3s linear;
-            width: 83px;
-            height: 83px;
-            line-height: 88px;
-            font-size: 40px;
+            width: 73px;
+            height: 73px;
+            line-height: 73px;
+            font-size: 35px;
+
+            @include on("xxl") {
+                width: 83px;
+                height: 83px;
+                line-height: 83px;
+                font-size: 40px;
+            }
         }
 
         span {
@@ -79,8 +85,12 @@
             font-weight: 500;
             display: inline-block;
             transition: all 0.3s linear;
-            font-size: 20px;
+            font-size: 18px;
             margin-top: 20px;
+
+            @include on("xxl") {
+                font-size: 20px;
+            }
         }
 
         .icon-add {
@@ -94,6 +104,52 @@
                 opacity: 100%;
                 font-size: 80px;
             }
+        }
+
+        &.item-add {
+            width: 30%;
+        }
+    }
+
+    .editProfile__carousel {
+        width: 60%;
+
+        .item {
+            margin: 0 auto;
+        }
+
+
+
+        ::deep .owl-nav {
+            display: block;
+
+            .owl-prev {
+                display: none;
+            }
+
+            .owl-next {
+                position: absolute;
+                top: -15%;
+                right: -20%;
+
+                span {
+                    font-size: 80px;
+                    color: $blue;
+                    transition: all 0.3s linear;
+
+                    &:hover {
+                        color: #0B588C;
+                    }
+                }
+
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+
+        ::deep .owl-dots {
+            display: none;
         }
     }
 

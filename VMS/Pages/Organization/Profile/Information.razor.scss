@@ -44,22 +44,27 @@
         }
 
         span {
+            display: block;
+            width: 80%;
+            margin: 20px 0 15px 0;
+            text-align: center;
             color: $blue;
             font-size: 16px;
             font-weight: 600;
         }
 
         .information__logo-button {
+            width: 80%;
             position: relative;
             display: block;
             background: rgba(100, 215, 47, 0.8);
             color: $white;
             text-decoration: none;
-            margin-top: 20px;
             padding: 20px;
             border-radius: 50px;
             text-align: center;
             transition: all 0.2s linear;
+
 
             &:hover {
                 background: rgba(100, 215, 47, 1);

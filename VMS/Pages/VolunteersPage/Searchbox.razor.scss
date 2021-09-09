@@ -1,32 +1,14 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
-.button-and-searchbox {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin-top:90px;
-
-    .button-download {
-        background-color: $blue;
-        color: $white;
-        border: none;
-        padding: 9px 45px;
-        border-radius: 5px;
-        float: right;
-
-        &:hover {
-            background-color: $blue-hv;
-        }
-    }
-}
 /*------SearchBox--------*/
 .my-search-box {
     &__input {
-        width: 100%;
         outline: none;
         border: none;
         border-bottom: 1px solid $border-color-normal;
         font-size: 18px;
         color: $blue;
+        font-weight:500;
 
         &::placeholder {
             color: $green;

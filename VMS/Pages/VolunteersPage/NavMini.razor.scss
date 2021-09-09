@@ -1,5 +1,18 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
+.button-download {
+    background-color: $blue;
+    color: $white;
+    border: none;
+    padding: 9px 45px;
+    border-radius: 5px;
+    float: right;
+
+    &:hover {
+        background-color: $blue-hv;
+    }
+}
+
 .my-container {
     padding: 0;
     display: flex;

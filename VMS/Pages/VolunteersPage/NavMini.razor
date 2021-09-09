@@ -1,4 +1,11 @@
-﻿<div class="container @(interfaceDel?"d-block":"d-none")">
+﻿
+<Searchbox></Searchbox>
+
+<div>
+    <button class="button-download">Tải danh sách</button>
+</div>
+
+<div class="container @(interfaceDel?"d-block":"d-none")">
     <div class="my-container">
         <h4 class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
         <div class="button">
@@ -25,6 +32,15 @@
 @renderConfirm
 
 @code {
+    string mySearchValue = "";
+    void ClearSearchBox()
+    {
+        mySearchValue = "";
+    }
+    void UpdateInstanceValue(ChangeEventArgs e)
+    {
+        mySearchValue = e.Value.ToString();
+    }
 
     private int quantity = 255;
     private bool isShowConfirm = false;

@@ -19,7 +19,8 @@
     display: flex;
     justify-content: center;
     font-size: 30px;
-    color: #0B588C; }
+    color: #0B588C;
+    margin-bottom: 90px; }
     .title .sub-title--content {
       width: 50%;
       text-align: center; }

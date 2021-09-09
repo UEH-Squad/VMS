@@ -54,10 +54,9 @@
 
         .rank__img-rank {
             width: 15%;
-            transform: translateX(40%);
             position: absolute;
             top: 0;
-            left: 0;
+            left: 5%;
 
 
             img {
@@ -77,6 +76,15 @@
                 transition: all 1s linear;
             }
         }
+
+        .rank__cup {
+            position: absolute;
+            top: 3%;
+            right: 5%;
+            color: $green;
+            font-size: 70px;
+            transition: all 1s linear;
+        }
     }
 
     ::deep .owl-item.active {
@@ -87,7 +95,6 @@
 
         .rank__img-rank {
 
-
             img {
                 width: 100%;
             }
@@ -95,6 +102,10 @@
             span {
                 font-size: 65px;
             }
+        }
+
+        .rank__cup {
+            font-size: 100px;
         }
     }
 

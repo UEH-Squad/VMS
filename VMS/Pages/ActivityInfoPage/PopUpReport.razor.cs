@@ -72,13 +72,13 @@ namespace VMS.Pages.ActivityInfoPage
                 }
             }
         }
-
+        private bool isChangeFile = false;
         async Task OnInputFile(InputFileChangeEventArgs e)
         {
             var imageFiles = e.GetMultipleFiles();
             selectedImages = imageFiles;
             Image.Clear();
-
+            isChangeFile = true;
             foreach (var file in imageFiles)
             {
                 if (file.ContentType != "image/jpeg")

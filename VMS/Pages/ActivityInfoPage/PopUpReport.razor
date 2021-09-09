@@ -70,30 +70,31 @@
                     <h4 class="title-attach__text">Minh chứng đính kèm</h4>
                     <h4 class="title-attach__check check"> (*)</h4>
                 </div>
-                <div class="add-file">
-                    <div class="add-file__block">
+                <div class="add-file position-relative d-flex align-items-center justify-content-center">
                         <InputFile OnChange="OnInputFile" multiple type="file" name="file" id="file" class="inputfile" />
-                        <label for="file">
-                            <span class="block-icon-text">
-                                <span class="material-icons my-icon-upload">cloud_upload</span>
-                                <span class="file__text">Kéo hoặc thả hình ảnh liên quan tại đây</span>
-                            </span>
-                        </label>
-                        @if (selectedImages is not null)
-                        {
-                            @foreach (var item in selectedImages)
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons my-icon-upload">
+                                cloud_upload
+                            </i>
+                            <span class="@(isChangeFile ? "d-none" : "d-block")">Kéo và thả hình ảnh liên quan tại dây</span>
+                        </div>
+                        <p class="m-0">
+                            @if (selectedImages is not null)
                             {
-                                @if (item.ContentType != "image/jpeg")
+                                @foreach (var item in selectedImages)
                                 {
-                                    <div style="color: red">File không đúng định dạng..</div>
-                                }
-                                else
-                                {
-                                    <div>@item.Name</div>
+                                    @if (item.ContentType != "image/jpeg")
+                                    {
+                                        <div style="color: #f14747">File không đúng định dạng..</div>
+                                    }
+                                    else
+                                    {
+                                        @item.Name
+                                        @space
+                                    }
                                 }
                             }
-                        }
-                    </div>
+                        </p>
 
                 </div>
             </div>
@@ -108,7 +109,7 @@
 </div>
 
 @code {
-
+    string space = " ";
     [CascadingParameter]
     private BlazoredModalInstance ReportModal { get; set; }
     void CloseModal()

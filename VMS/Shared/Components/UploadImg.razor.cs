@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
@@ -46,46 +45,55 @@ namespace VMS.Shared.Components
         [Parameter]
         public EventCallback<InputFileChangeEventArgs> InputFileChanged { get; set; }
 
+        [Parameter]
+        public Func<Task> ImageDiscarded { get; set; }
+
         #endregion Parameters
 
-        private string _prompt;
-        private string _previewImgAltText;
+        private string prompt;
+        private string fileName;
+        private string previewImgAltText;
 
-        private readonly string _fileUploadId = Guid.NewGuid().ToString();
+        private readonly string fileUploadId = Guid.NewGuid().ToString();
+        private readonly string imgContainerId = Guid.NewGuid().ToString();
         private ElementReference previewImg;
+        private ElementReference discardBtn;
 
         protected override void OnInitialized()
         {
-            base.OnInitialized();
-
-            if (string.IsNullOrEmpty(_prompt) && !string.IsNullOrEmpty(DefaultPrompt))
+            if (string.IsNullOrEmpty(prompt) && !string.IsNullOrEmpty(DefaultPrompt))
             {
-                _prompt = DefaultPrompt;
+                prompt = DefaultPrompt;
             }
         }
 
         protected async override Task OnAfterRenderAsync(bool firstRender)
         {
-            await base.OnAfterRenderAsync(firstRender);
-
-            if (firstRender)
+            if (ShowPreview)
             {
-                if (ShowPreview)
-                {
-                    await JS.InvokeVoidAsync("vms.HookFileUploadEvent", previewImg, _fileUploadId);
-                }
-                else
-                {
-                    await JS.InvokeVoidAsync("vms.HookFileUploadEvent", null, _fileUploadId);
-                }
+                await JS.InvokeVoidAsync("vms.HookFileUploadEvent", previewImg, fileUploadId, discardBtn, imgContainerId, PreviewImgSrc);
             }
         }
 
-        private Task OnInputFileChange(InputFileChangeEventArgs e)
+        private async Task OnInputFileChange(InputFileChangeEventArgs e)
         {
-            _previewImgAltText = _prompt = e.File.Name;
+            previewImgAltText = e.File.Name;
+            if (ShowPreview)
+            {
+                fileName = previewImgAltText;
+            }
+            else
+            {
+                prompt = previewImgAltText;
+            }
 
-            return InputFileChanged.InvokeAsync(e);
+            await InputFileChanged.InvokeAsync(e);
+        }
+
+        private void OnDiscardImage()
+        {
+            previewImgAltText = fileName = null;
+            ImageDiscarded?.Invoke();
         }
     }
 }

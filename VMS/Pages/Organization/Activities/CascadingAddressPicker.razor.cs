@@ -71,6 +71,7 @@ namespace VMS.Pages.Organization.Activities
             ToggleCityDropdown();
 
             districts = await AddressService.GetAllAddressPathsByParentIdAsync(addressPath.Id);
+            wards.Clear();
             DistrictId = 0;
             WardId = 0;
             District = "";

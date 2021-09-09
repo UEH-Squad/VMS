@@ -1,16 +1,22 @@
 ﻿<div class="position-relative my-uploadImg">
-    <InputFile id="@_fileUploadId"
+    <InputFile id="@fileUploadId"
                OnChange="OnInputFileChange"
                class="w-100 uploadImg__input"
                accept="@AcceptPattern" />
-    <div class="d-flex align-items-center justify-content-center">
-        <i class="material-icons">
-            cloud_upload
-        </i>
-        <span class="d-block">@_prompt</span>
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        <div class="d-flex w-100 justify-content-center align-items-center">
+            <i class="material-icons">
+                cloud_upload
+            </i>
+            <span class="d-block">@prompt</span>
+        </div>
         @if (ShowPreview)
         {
-            <img @ref="previewImg" class="preview-img" src="@PreviewImgSrc" alt="@_previewImgAltText" />
+            <div id="@imgContainerId" class="position-relative flex-column align-items-center @(!string.IsNullOrEmpty(PreviewImgSrc) || !string.IsNullOrEmpty(fileName) ? "d-flex" : "d-none")">
+                <img @ref="previewImg" class="preview-img my-2" src="@PreviewImgSrc" alt="@previewImgAltText" />
+                <i @ref="@discardBtn" class="material-icons-outlined position-absolute mx-0 close-btn" @onclick="OnDiscardImage">close</i>
+            </div>
+            <span class="">@fileName</span>
         }
     </div>
 </div>

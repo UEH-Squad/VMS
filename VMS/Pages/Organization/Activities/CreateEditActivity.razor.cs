@@ -101,6 +101,11 @@ namespace VMS.Pages.Organization.Activities
             uploadFile = args.File;
         }
 
+        private async Task HandleImageDiscarded()
+        {
+            uploadFile = null;
+        }
+
         private void OnStartDateChanged(ChangeEventArgs args)
         {
             activity.StartDate = DateTime.Parse(args.Value.ToString());
@@ -159,7 +164,7 @@ namespace VMS.Pages.Organization.Activities
             }
 
             activity.Targets = string.Join('|', chosenTargets);
-            if (string.IsNullOrWhiteSpace(activity.Targets) || (uploadFile is not null && !uploadFile.ContentType.Contains("image/")))
+            if (string.IsNullOrWhiteSpace(activity.Targets))
             {
                 await HandleInvalidSubmit();
                 return;

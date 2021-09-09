@@ -187,6 +187,7 @@
 
 .typeahead__results {
     color: $blue;
+    font-weight: 500;
     position: absolute;
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
     border: 1px solid #dbdbdb;
@@ -210,8 +211,8 @@
 }
 
 .typeahead__selected-item {
-    background-color: $blue;
-    color: $white;
+    background-color: rgba(24, 160, 251, 0.1);
+    color: $green;
 }
 
 .typeahead__selected-item-highlighted {
@@ -221,10 +222,8 @@
 .typeahead__active-item,
 .typeahead__result:hover,
 .typeahead__result:focus {
-    background-color: $blue;
-    border-top: 1px solid #007bff;
-    border-bottom: 1px solid #007bff;
-    color: $white;
+    background-color: rgba(24, 160, 251, 0.1);
+    color: $green;
     cursor: pointer;
 }
 

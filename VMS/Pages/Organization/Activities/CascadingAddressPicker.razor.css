@@ -68,13 +68,13 @@
       border-radius: 20px; }
     .my-dropdown ul li {
       color: #18A0FB;
+      font-weight: 500;
       line-height: 24px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      padding-left: 5px; }
+      margin-bottom: 10px;
+      cursor: pointer; }
       .my-dropdown ul li:hover, .my-dropdown ul li.item-checked {
-        background-color: #18A0FB;
-        color: #FFFFFF;
+        background-color: rgba(24, 160, 251, 0.1);
+        color: #64D72F;
         cursor: pointer; }
 
 .popup-btn:focus ~ .my-dropdown {

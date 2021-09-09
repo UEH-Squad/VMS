@@ -143,6 +143,7 @@
 
 .typeahead__results {
   color: #18A0FB;
+  font-weight: 500;
   position: absolute;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid #dbdbdb;
@@ -164,8 +165,8 @@
   border-bottom: 1px solid #fff; }
 
 .typeahead__selected-item {
-  background-color: #18A0FB;
-  color: #FFFFFF; }
+  background-color: rgba(24, 160, 251, 0.1);
+  color: #64D72F; }
 
 .typeahead__selected-item-highlighted {
   background-color: #d3e2f2; }
@@ -173,10 +174,8 @@
 .typeahead__active-item,
 .typeahead__result:hover,
 .typeahead__result:focus {
-  background-color: #18A0FB;
-  border-top: 1px solid #007bff;
-  border-bottom: 1px solid #007bff;
-  color: #FFFFFF;
+  background-color: rgba(24, 160, 251, 0.1);
+  color: #64D72F;
   cursor: pointer; }
 
 .typeahead__loader {

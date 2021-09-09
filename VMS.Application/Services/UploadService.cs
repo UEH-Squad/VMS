@@ -34,6 +34,11 @@ namespace VMS.Application.Services
 
         public async Task<string> SaveImageAsync(IBrowserFile file, string userId)
         {
+            if (!file.ContentType.Contains("image/"))
+            {
+                throw new Exception("Invalid file type!");
+            }
+
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
             string fileName = @$"img\activities\{DateTime.Now.ToFileTime()}_{userId}.jpg";
 

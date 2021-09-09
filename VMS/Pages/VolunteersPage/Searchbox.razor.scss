@@ -3,12 +3,13 @@
 /*------SearchBox--------*/
 .my-search-box {
     &__input {
+        width: 100%;
         outline: none;
         border: none;
         border-bottom: 1px solid $border-color-normal;
         font-size: 18px;
         color: $blue;
-        font-weight:500;
+        font-weight: 500;
 
         &::placeholder {
             color: $green;
@@ -16,7 +17,7 @@
     }
 
     &__icon-wrapper {
-        margin-left: -60px;
+        margin-left: -56px;
 
         span {
             color: $green;
@@ -35,7 +36,7 @@
 
             span {
                 background-color: #e5e5e58c;
-                padding: 1px;
+                padding: 2px;
                 margin-bottom: 3px;
                 border-radius: 3px;
             }

@@ -4,6 +4,19 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.search-and-button {
+  display: grid;
+  grid-template-columns: 55% 45%; }
+  .search-and-button .button-download__text {
+    background-color: #18A0FB;
+    color: #FFFFFF;
+    border: none;
+    padding: 9px 45px;
+    border-radius: 5px;
+    float: right; }
+    .search-and-button .button-download__text:hover {
+      background-color: #0B588c; }
+
 .my-container {
   padding: 0;
   display: flex;
@@ -32,7 +45,7 @@
     .my-container .button__text--del {
       background-color: #F14747; }
       .my-container .button__text--del:hover {
-        background-color: #DC3545; }
+        background-color: #ba4242; }
   .my-container .link {
     width: 20%; }
     .my-container .link__text {

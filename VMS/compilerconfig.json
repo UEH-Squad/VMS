@@ -118,5 +118,13 @@
   {
     "outputFile": "Pages/VolunteersPage/Orientation.razor.css",
     "inputFile": "Pages/VolunteersPage/Orientation.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersPage/Searchbox.razor.css",
+    "inputFile": "Pages/VolunteersPage/Searchbox.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersPage/NavMini.razor.css",
+    "inputFile": "Pages/VolunteersPage/NavMini.razor.scss"
   }
 ]

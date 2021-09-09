@@ -1,15 +1,22 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
-.button-download {
-    background-color: $blue;
-    color: $white;
-    border: none;
-    padding: 9px 45px;
-    border-radius: 5px;
-    float: right;
+.search-and-button {
+    display:grid;
+    grid-template-columns:55% 45%;
+    .button-download {
 
-    &:hover {
-        background-color: $blue-hv;
+        &__text {
+            background-color: $blue;
+            color: $white;
+            border: none;
+            padding: 9px 45px;
+            border-radius: 5px;
+            float: right;
+
+            &:hover {
+                background-color: $blue-hv;
+            }
+        }
     }
 }
 
@@ -54,7 +61,7 @@
             background-color: #F14747;
 
             &:hover {
-                background-color: #DC3545;
+                background-color: #ba4242;
             }
         }
     }
@@ -74,7 +81,7 @@
         }
 
         &__text--undo {
-            padding-right:5%;
+            padding-right: 5%;
             color: $blue;
         }
     }

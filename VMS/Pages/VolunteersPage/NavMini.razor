@@ -1,8 +1,8 @@
-﻿
-<Searchbox></Searchbox>
-
-<div>
-    <button class="button-download">Tải danh sách</button>
+﻿<div class="search-and-button">
+    <Searchbox></Searchbox>
+    <div class="button-download @(interfaceDel?"d-block":"d-none")">
+        <button class="button-download__text">Tải danh sách</button>
+    </div>
 </div>
 
 <div class="container @(interfaceDel?"d-block":"d-none")">

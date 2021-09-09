@@ -18,6 +18,7 @@ namespace VMS.Domain.Models
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Mission { get; set; }
+        public string Commission { get; set; }
         public string Requirement { get; set; }
         public bool IsApproved { get; set; }
 

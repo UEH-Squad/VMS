@@ -40,12 +40,10 @@ namespace VMS.Application.Services
             }
 
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
-            string fileName = @$"img\activities\{DateTime.Now.ToFileTime()}_{userId}.jpg";
+            const string imgFolder = @"img\activities";
+            string fileName = @$"{imgFolder}\{DateTime.Now.ToFileTime()}_{userId}.jpg";
 
-            if (!Directory.Exists(Path))
-            {
-                Directory.CreateDirectory(Path);
-            }
+            Directory.CreateDirectory(System.IO.Path.Combine(_webHostEnvironment.WebRootPath, imgFolder));
 
             using FileStream fileStream = File.Create(@$"{Path}\{fileName}");
             using Stream stream = file.OpenReadStream(MaxFileSize);

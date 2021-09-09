@@ -203,7 +203,7 @@ namespace VMS.Pages.Organization.Activities
 
                 var modalParams = new ModalParameters();
                 modalParams.Add("IsEdit", isEditPage);
-                modalParams.Add("CTALink", $"{Routes.EditActivity}/{ActivityId}");
+                modalParams.Add("CTALink", $"{Routes.ActivityInfo}/{ActivityId}");
                 await ShowModalAsync(typeof(NotificationPopup), modalParams);
             }
             catch (Exception ex)

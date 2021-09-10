@@ -12,7 +12,7 @@
                 <ul class="org-card__btn-edit__list card-list" style="display:@(item.EditDropDown ? "inline-block" : "none");">
                     <li class="item-1">Chỉnh sửa</li>
                     <li class="item-2" @onclick="@(() => DelConfirm(item.Id))">Xóa</li>
-                    <li class="item-3" @onclick="@(() => PopupFunc("closed"))">Đóng hoạt động</li>
+                    <li class="item-3" @onclick="@(() => CloseItem(item.Id))">Đóng hoạt động</li>
                 </ul>
             </div>
             <div class="org-card__img">
@@ -201,7 +201,6 @@
             }
         }
     }
-
     private bool HaftStar(double rate, int star)
     {
         if (rate - star >= 0.5 && rate - star < 1)
@@ -253,5 +252,8 @@
         var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
         Item.IsDelete = !Item.IsDelete;
     }
-
+    private async Task CloseItem(int id)
+    {
+        PopupFunc("closed");
+    }
     }

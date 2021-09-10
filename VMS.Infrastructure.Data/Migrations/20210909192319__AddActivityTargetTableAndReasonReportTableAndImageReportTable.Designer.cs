@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210909192319__AddActivityTargetTableAndReasonReportTableAndImageReportTable")]
+    partial class _AddActivityTargetTableAndReasonReportTableAndImageReportTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1265,7 +1267,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.ImageReport", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
-                        .WithMany("ImageReports")
+                        .WithMany()
                         .HasForeignKey("FeedbackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1402,8 +1404,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
                 {
-                    b.Navigation("ImageReports");
-
                     b.Navigation("ReasonReports");
                 });
 

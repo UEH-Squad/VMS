@@ -18,6 +18,7 @@ namespace VMS.Domain.Models
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Mission { get; set; }
+        public string Commission { get; set; }
         public string Requirement { get; set; }
         public bool IsApproved { get; set; }
 
@@ -30,6 +31,7 @@ namespace VMS.Domain.Models
         public string Website { get; set; }
         public string Banner { get; set; }
         public bool IsPin { get; set; }
+        public bool IsClosed { get; set; }
 
         public virtual User Organizer { get; set; }
         public virtual User Approver { get; set; }

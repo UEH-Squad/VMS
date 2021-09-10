@@ -199,6 +199,13 @@
         min-width: 136px;
         background-color: $blue;
 
+        .expand-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(-20%, 25%);
+        }
+
         &__list {
             z-index: 10;
             font-size: 12px;

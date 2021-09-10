@@ -61,6 +61,9 @@
             </div>
             <div class="org-card__cbb-rate card-btn">
                 <div href="#" class="org-card__cbb-rate__title" @onclick="@(() => DropDownClick(item.Id,"rate"))">Đánh giá</div>
+                <span class="material-icons-outlined expand-icon" @onclick="@(() => DropDownClick(item.Id,"rate"))">
+                    expand_more
+                </span>
                 <ul class="org-card__cbb-rate__list card-list" style="display:@(item.RateMethodDropDown ? "inline-block" : "none");">
                     <li>Tình nguyện viên</li>
                     <li>Đánh giá hoạt động</li>
@@ -95,6 +98,8 @@
 </div>
 
 @code {
+    private int PrevItem = -1;
+
     private class FakeData
     {
         public int Id { get; set; }
@@ -140,7 +145,6 @@
         await JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
     }
 
-
     private PagedResult<FakeData> GetFakeData()
     {
         var result = new PagedResult<FakeData>();
@@ -167,19 +171,33 @@
 
     private async Task DropDownClick(int id, string type)
     {
+        if (PrevItem != -1 && PrevItem !=id) DropDownClick(PrevItem, "clear-all");
+        PrevItem = id;
         var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
         if (clickedItem is not null)
         {
+            switch(type)
+            {
+                case "edit":
+                    {
+                        clickedItem.EditDropDown = !clickedItem.EditDropDown;
+                        clickedItem.RateMethodDropDown = false;
 
-            if (type == "edit")
-            {
-                clickedItem.EditDropDown = !clickedItem.EditDropDown;
-                clickedItem.RateMethodDropDown = false;
-            }
-            else
-            {
-                clickedItem.RateMethodDropDown = !clickedItem.RateMethodDropDown;
-                clickedItem.EditDropDown = false;
+                        break;
+                    }
+                case "rate":
+                    {
+                        clickedItem.RateMethodDropDown = !clickedItem.RateMethodDropDown;
+                        clickedItem.EditDropDown = false;
+                        break;
+
+                    }
+                case "clear-all":
+                    {
+                        clickedItem.RateMethodDropDown = false;
+                        clickedItem.EditDropDown = false;
+                        break;
+                    }
             }
         }
     }

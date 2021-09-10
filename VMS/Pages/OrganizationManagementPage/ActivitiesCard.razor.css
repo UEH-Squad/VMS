@@ -148,6 +148,11 @@
   transform: translate(0, -50%);
   min-width: 136px;
   background-color: #18A0FB; }
+  .org-card__cbb-rate .expand-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-20%, 25%); }
   .org-card__cbb-rate__list {
     z-index: 10;
     font-size: 12px;

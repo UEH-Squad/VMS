@@ -9,7 +9,6 @@
 
 .my-custom-popup {
     width: 50%;
-    height: 80%;
     background-color: #fff;
     border-radius: 10px;
     z-index: 999;
@@ -18,7 +17,9 @@
         font-size: 48px;
         color: $green;
     }
-
+    .cover-content {
+        margin:20px 0;
+    }
     .close-btn {
         position: absolute;
         top: 25px;
@@ -61,9 +62,11 @@
         font-size: 20px;
         width: 90px;
         height: 40px;
-        position: absolute;
-        right: 60px;
-        bottom: 30px;
+        margin-bottom: 10px;
+
+        &:hover {
+            background-color: $green-bold;
+        }
     }
 }
 

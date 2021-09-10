@@ -1,21 +1,18 @@
 ﻿<div class="my-featuredAct">
-        <div class="featuredAct__card ">
-            <img class="w-100" src="img/act1.png" alt="">
-            <div class="featuredAct__title">
-                <a class="lmtext-5">Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương</a>
+    @if (FeaturedActivities is not null)
+    {
+        @foreach (var activity in FeaturedActivities)
+        {
+            <div class="featuredAct__card ">
+                <img class="w-100" src="/img/@activity.Banner" alt="">
+                <div class="featuredAct__title">
+                    <a class="lmtext-5" href="@Routes.ActivityInfo/@activity.Id">@activity.Name</a>
+                </div>
                 <div class="featuredAct__overplay"></div>
             </div>
-        </div>
-        <div class="featuredAct__card">
-            <img class="w-100" src="img/act1.png" alt="">
-            <div class="featuredAct__title">
-                <a class="lmtext-5">Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương</a>
-                <div class="featuredAct__overplay"></div>
-            </div>
-
-        </div>
+        }
+    }
 </div>
 
 @code {
-
 }

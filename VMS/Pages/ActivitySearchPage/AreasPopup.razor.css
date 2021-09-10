@@ -12,13 +12,14 @@
 
 .my-custom-popup {
   width: 50%;
-  height: 80%;
   background-color: #fff;
   border-radius: 10px;
   z-index: 999; }
   .my-custom-popup h3 {
     font-size: 48px;
     color: #64D72F; }
+  .my-custom-popup .cover-content {
+    margin: 20px 0; }
   .my-custom-popup .close-btn {
     position: absolute;
     top: 25px;
@@ -56,6 +57,6 @@
     font-size: 20px;
     width: 90px;
     height: 40px;
-    position: absolute;
-    right: 60px;
-    bottom: 30px; }
+    margin-bottom: 10px; }
+    .my-custom-popup .save-btn:hover {
+      background-color: #306C14; }

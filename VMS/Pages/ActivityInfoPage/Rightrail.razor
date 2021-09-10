@@ -61,12 +61,12 @@
                 </div>
             </div>
             <div class="btn-sign-up--cover">
-                <button @onclick="@(() => ShowSignUpPopUp())" class="btn-sign-up">
+                <button @onclick="@(() => ShowSignUpPopUp())" disabled="@((IdentityService.GetCurrentUserId() is not null)?false:true)" class="btn-sign-up">
                     <h3 class="btn-sign-up__text">Đăng ký</h3>
                 </button>
             </div>
         </div>
-        <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>
+        <button @onclick="@(() => ShowReportPopUp())" disabled="@((IdentityService.GetCurrentUserId() is not null)?false:true)" class="report">Báo cáo hoạt động này</button>
     </div>
 }
 
@@ -88,10 +88,7 @@
             UseCustomLayout = true
         };
 
-        if (IdentityService.GetCurrentUserId() is not null)
-        {
-            Modal.Show<PopUpReport>("", parameters, options);
-        }
+        Modal.Show<PopUpReport>("", parameters, options);
     }
 
     async Task ShowSignUpPopUp()
@@ -102,10 +99,8 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        if (IdentityService.GetCurrentUserId() is not null)
-        {
-            Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
-        }
+
+        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
     }
 
     [Parameter]

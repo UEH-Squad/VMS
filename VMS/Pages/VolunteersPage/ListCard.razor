@@ -16,7 +16,7 @@
                 </div>
 
                     <div class="mycard__checkbox">
-                        <input @onclick="@(() =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
+                        <input checked="@item.IsCheck" @onclick="@(() =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
                     </div>
                 
                 <div class="mycard__button">

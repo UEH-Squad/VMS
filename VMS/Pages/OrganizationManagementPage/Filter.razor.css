@@ -28,8 +28,8 @@
 
 input[type="checkbox"] {
   -webkit-appearance: none;
-  height: 33px;
-  width: 33px;
+  height: 28px;
+  width: 28px;
   background-color: #FFFFFF;
   border: 3px solid #515151;
   border-radius: 5px;
@@ -40,7 +40,7 @@ input[type="checkbox"] {
 input[type="checkbox"]::after {
   font-family: "Material Icons";
   content: "\e876";
-  font-size: 33px;
+  font-size: 28px;
   font-weight: 600;
   color: #64D72F;
   display: none; }
@@ -50,3 +50,21 @@ input[type="checkbox"]:hover {
 
 input[type="checkbox"]:checked:after {
   display: block; }
+
+.org-filter__btn {
+  margin-top: 30px;
+  text-align: center; }
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background-color: #64D72F;
+  transition: all 0.25s; }
+
+.btn:hover {
+  filter: brightness(90%); }
+
+.btn:active {
+  transform: translateY(3px); }

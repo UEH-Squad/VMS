@@ -20,7 +20,7 @@
                     </div>
                 
                 <div class="mycard__button">
-                    <button class="mycard__button--registration-form">Xem đơn đăng ký</button>
+                    <button @onclick="@(() =>ShowSignUpPopUp())" class="mycard__button--registration-form">Xem đơn đăng ký</button>
                 </div>
             </div>
          }
@@ -93,5 +93,18 @@
         {
             checkItem.IsCheck = !checkItem.IsCheck;
         }
+    }
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+    async Task ShowSignUpPopUp()
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
     }
 }

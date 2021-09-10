@@ -54,11 +54,11 @@
     public void NotifiSuccess() // ẩn pop up xác nhận, mở pop up thông báo
     {
         CloseConfirm();
-        isShowNotifiSuccess = !isShowNotifiSuccess;
+        isShowNotifiSuccess = true;
     }
     public void CloseNotifiSuccess() // xóa thông báo đã xóa/hoàn tác thành công
     {
-        isShowNotifiSuccess = !isShowNotifiSuccess;
+        isShowNotifiSuccess = false;
     }
     public async Task ShowConfirm(string action)
     {
@@ -129,6 +129,9 @@
     private bool interfaceUndo = false; // mac dinh ko hien thi
     public void ChangeInterface()
     {
+        isShowConfirm = false;
+        isShowNotifiSuccess = false;
+
         interfaceDel = !interfaceDel;
         interfaceUndo = !interfaceUndo;
     }

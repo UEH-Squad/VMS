@@ -1,0 +1,98 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.search-box {
+    display: flex;
+    justify-content: flex-start;
+    border: none;
+    border-bottom: 1px solid $border-color-normal;
+    width: 148%;
+
+    ::deep .search-txt_input {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 110%;
+        box-sizing: border-box;
+        color: $blue;
+
+        &::placeholder {
+            color: $green;
+        }
+    }
+
+    ::deep .search-txt {
+        display: inline-block;
+        margin-right: 3.5%;
+
+        .search-txt_text {
+            width: max-content;
+            margin-bottom: -6%;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 36px;
+            letter-spacing: -0.015em;
+            color: $blue;
+        }
+    }
+
+    ::deep .search-btn_clear {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin-bottom: -1%;
+        margin-left: 1.5%;
+    }
+
+    ::deep .search-btn_search {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin-bottom: -1%;
+        margin-left: 1.5%;
+    }
+
+    #clear {
+        color: $green;
+        font-size: 180%;
+        line-height: 24px;
+    }
+
+    #search {
+        color: $green;
+        background: #F3F3F5;
+        font-size: 180%;
+        line-height: 24px;
+    }
+}
+
+.search-result {
+    margin-top: 2%;
+
+    ::deep .search-result_text-1 {
+        display: inline;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 36px;
+        color: $blue;
+    }
+
+    ::deep .search-result_text-2 {
+        display: inline;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 36px;
+        color: $green;
+    }
+
+    ::deep .search-result_text-3 {
+        display: inline;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 36px;
+        color: $blue;
+    }
+}

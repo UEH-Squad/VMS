@@ -1,0 +1,235 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    background-color: rgba(196, 196, 196, 0.38);
+
+    ::-webkit-scrollbar {
+    }
+}
+
+.popup-comment {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 50%;
+    background-color: $white;
+    border: none;
+    box-shadow: 0px 4px 60px 2px rgba(11, 40, 50, 0.2);
+    border-radius: 10px;
+    flex: none;
+
+    &_icon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: 2%;
+        top: 3%;
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        background: rgba(196, 196, 196, 0.5);
+
+        .material-icons {
+            font-size: 22px;
+            cursor: pointer;
+        }
+    }
+}
+
+
+/*Phần comment của tình nguyện viên*/
+.popup-comment_member {
+    width: 85%;
+    margin: 7.5%;
+    margin-bottom: 0;
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+
+    .name {
+        display: flex;
+        align-items: center;
+        margin-top: 2%;
+        margin-left: 5%;
+
+        .popup-avatar {
+            margin-left: 5%;
+            margin-right: 5%;
+            border-radius: 50%;
+        }
+    }
+
+    .popup-member {
+        .popup-member1 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 5%;
+            margin-bottom: 0;
+        }
+
+        .popup-member2 {
+            font-style: normal;
+            font-weight: normal;
+        }
+    }
+
+    .material-icons {
+        font-size: 24px;
+    }
+
+    .comment {
+        margin-top: 5%;
+        margin-left: 10%;
+        box-sizing: border-box;
+
+        &-input {
+            width: 85%;
+            font-size: 16px;
+        }
+    }
+
+    .button {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5%;
+
+        &-showremind {
+            margin-left: 64%;
+            width: 30%;
+            font-size: 12px;
+            background: $white;
+            color: #707070;
+            border-radius: 10px;
+            border: 1px solid rgba(112, 112, 112, 0.8);
+            padding: 1% 2%;
+            cursor: not-allowed;
+        }
+
+        &-remind {
+            display: flex;
+            justify-content: space-around;
+            margin-left: 61%;
+            margin-top: 2%;
+            margin-bottom: 3%;
+            width: 36%;
+            font-size: 16px;
+            background: $blue;
+            color: $white;
+            border-radius: 5px;
+            border: 1px solid $blue;
+            padding: 1.5% 1%;
+            cursor: pointer;
+        }
+    }
+}
+
+
+/*Phần comment của tổ chức*/
+.popup-comment_organization {
+    width: 85%;
+    margin: 7.5%;
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+
+    .name {
+        display: flex;
+        align-items: center;
+        margin-top: 2%;
+        margin-left: 5%;
+
+        .popup-avatar {
+            margin-left: 5%;
+            margin-right: 5%;
+            border-radius: 50%;
+        }
+    }
+
+    .popup-member {
+        .popup-member1 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 5%;
+            margin-bottom: 0;
+        }
+
+        .popup-member2 {
+            font-style: normal;
+            font-weight: normal;
+        }
+    }
+
+    .material-icons {
+        font-size: 24px;
+    }
+
+    .comment {
+        margin-top: 5%;
+        margin-left: 10%;
+        box-sizing: border-box;
+
+        ::deep .comment-input {
+            border: none;
+            width: 85%;
+            outline: none;
+        }
+    }
+
+    .button {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 5%;
+        margin-bottom: 3%;
+        margin-right: 3%;
+
+        &-cancel {
+            background: $white;
+            color: #707070;
+            border-radius: 5px;
+            border: 1px solid rgba(112, 112, 112, 0.8);
+            padding: 1% 2%;
+            cursor: pointer;
+        }
+
+        &-send {
+            background: $blue;
+            color: $white;
+            border-radius: 5px;
+            border: 1px solid $blue;
+            padding: 1% 2%;
+            cursor: pointer;
+        }
+
+        &-modify {
+            background: $blue;
+            color: $white;
+            border-radius: 5px;
+            border: 1px solid $blue;
+            padding: 1% 2%;
+            cursor: pointer;
+        }
+
+        &-save {
+            margin-left: 4%;
+            margin-right: 3%;
+            background: $blue;
+            color: $white;
+            border-radius: 5px;
+            border: 1px solid $blue;
+            padding: 1% 2%;
+            cursor: pointer;
+        }
+    }
+}

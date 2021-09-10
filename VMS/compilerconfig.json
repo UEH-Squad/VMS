@@ -94,5 +94,29 @@
   {
     "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
     "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/RatingPage.razor.css",
+    "inputFile": "Pages/RatingPage/RatingPage.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/PopUpComment.razor.css",
+    "inputFile": "Pages/RatingPage/PopUpComment.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/SearchBar.razor.css",
+    "inputFile": "Pages/RatingPage/SearchBar.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/PopUpReport.Memberrazor.css",
+    "inputFile": "Pages/RatingPage/PopUpReport.Memberrazor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/PopUpReportMember.razor.css",
+    "inputFile": "Pages/RatingPage/PopUpReportMember.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/FilterBar.razor.css",
+    "inputFile": "Pages/RatingPage/FilterBar.razor.scss"
   }
 ]

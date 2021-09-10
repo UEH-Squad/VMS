@@ -1,0 +1,30 @@
+﻿@using VMS.Application.ViewModels
+<EditForm Model="@rating" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="search-box">
+        <InputText class="search-txt_input" placeholder="Tìm kiếm bằng từ khóa" @bind-Value="@rating.KeyWord"></InputText>
+        <div class="search-txt"><p class="search-txt_text">Covid-19</p></div>
+        <button type="submit" class="search-btn_clear"><span id="clear" class="material-icons">clear</span></button>
+        <button type="submit" class="search-btn_search"><span id ="search" class="material-icons">search</span></button>
+    </div>
+    <div class="search-result">
+        <p class="search-result_text-1">Có</p>
+        <p class="search-result_text-2">20</p>
+        <p class="search-result_text-3">tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
+    </div>
+</EditForm>
+
+
+@code {
+    Rating rating;
+    protected override void OnInitialized()
+    {
+        rating = new Rating();
+    }
+
+    public void Submit()
+    {
+
+    }
+}

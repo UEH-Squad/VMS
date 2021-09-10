@@ -1,0 +1,166 @@
+﻿@using VMS.Application.ViewModels
+
+<div class="overlay">
+    <div class="popup-comment">
+        <div class="popup-comment_icon">
+            <span @onclick="@CloseModal" class="material-icons">
+                close
+            </span>
+        </div>
+        <div class="popup-comment_member">
+            <div class="name">
+                <div class="popup-avatar">
+                    <img src="./img/RatingPage/Ellipse 8.png" alt="avatar">
+                </div>
+                <div class="popup-member">
+                    <p class="popup-member1">Trần Minh Nhật Anh</p>
+                    <div class="popup-member2">
+                        <span style="color: @Color1;" class="material-icons">star_rate</span>
+                        <span style="color: @Color2;" class="material-icons">star_rate</span>
+                        <span style="color: @Color3;" class="material-icons">star_rate</span>
+                        <span style="color: @Color4;" class="material-icons">star_rate</span>
+                        <span style="color: @Color5;" class="material-icons">star_rate</span>
+                    </div>
+                </div>
+            </div>
+
+            @if (1 == 2)
+            {
+                <div class="comment">
+                    <p class="comment-input">@comment.MemberComment</p>
+                </div>
+                <div class="button"></div>
+            }
+
+            @if (1 > 0)
+            {
+                <div class="comment">
+                    <p class="comment-input">@comment.CommentDefault</p>
+                </div>
+                <div class="button">
+                    <button class="button-showremind" style="color: @ColorRemind">Số lần nhắc nhở: @Count lần</button>
+                    <button @onclick="@Remind" class="button-remind">
+                        <span class="material-icons-outlined">notifications</span>
+                        Nhắc nhở nhận xét
+                    </button>
+                </div>
+            }
+
+        </div>
+        <div class="popup-comment_organization">
+            <div class="name">
+                <div class="popup-avatar">
+                    <img src="./img/RatingPage/Ellipse 7.png" alt="avatar">
+                </div>
+                <div class="popup-member">
+                    <p class="popup-member1">Khoa công nghệ thông tin kinh doanh</p>
+                    <div class="popup-member2">
+                        <span style="color: @Color6;" class="material-icons">star_rate</span>
+                        <span style="color: @Color7;" class="material-icons">star_rate</span>
+                        <span style="color: @Color8;" class="material-icons">star_rate</span>
+                        <span style="color: @Color9;" class="material-icons">star_rate</span>
+                        <span style="color: @Color10;" class="material-icons">star_rate</span>
+                    </div>
+                </div>
+            </div>
+            @if (comment.OrganizationComment == "Gửi")
+            {
+                <EditForm Model="@comment" OnInvalidSubmit="@Send">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="comment">
+                        <InputTextArea @bind-Value="@comment.Comment1" class="comment-input" placeholder="@comment.CommentDefault" rows="3" @onchange="@(e => { @comment.Comment1 = e.Value.ToString(); })"></InputTextArea>
+                    </div>
+                    <div class="button">
+                        <button @onclick="@Send" class="button-send">Gửi nhận xét</button>
+                    </div>
+                </EditForm>
+            }
+
+            @if (comment.OrganizationComment == "Sửa")
+            {
+                <EditForm Model="@comment" OnInvalidSubmit="@Modify">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="comment">
+                        <InputTextArea @bind-Value="@comment.Comment1" class="comment-input" rows="3" readonly></InputTextArea>
+                    </div>
+                    <div class="button">
+                        <button @onclick="@Modify" class="button-modify">Sửa</button>
+                    </div>
+                </EditForm>
+            }
+
+            @if (comment.OrganizationComment == "Lưu")
+            {
+                <EditForm Model="@comment" OnInvalidSubmit="@Save">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="comment">
+                        <InputTextArea @bind-Value="@comment.Comment1" class="comment-input" rows="3" @onchange="@(e => { @comment.Comment1 = e.Value.ToString(); })"></InputTextArea>
+                    </div>
+                    <div class="button">
+                        <button @onclick="@Cancel" class="button-cancel">Hủy</button>
+                        <button @onclick="@Save" class="button-save">Lưu</button>
+                    </div>
+                </EditForm>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    string Color1 = "#EDF131";
+    string Color2 = "#EDF131";
+    string Color3 = "#EDF131";
+    string Color4 = "#EDF131";
+    string Color5 = "#EDF131";
+    string Color6 = "#EDF131";
+    string Color7 = "#EDF131";
+    string Color8 = "#EDF131";
+    string Color9 = "#EDF131";
+    string Color10 = "#C4C4C4";
+
+    Rating comment;
+    protected override void OnInitialized()
+    {
+        comment = new Rating();
+    }
+
+    private int Count = 0;
+    private string ColorRemind;
+    public void Remind()
+    {
+        Count = Count + 1;
+        ColorRemind = "#E10B0B";
+    }
+
+    public void Send()
+    {
+        comment.OrganizationComment = "Sửa";
+    }
+
+    public void Modify()
+    {
+        comment.Comment2 = comment.Comment1;
+        comment.OrganizationComment = "Lưu";
+    }
+
+    public void Save()
+    {
+        comment.OrganizationComment = "Sửa";
+    }
+
+    public void Cancel()
+    {
+        comment.Comment1 = comment.Comment2;
+        comment.OrganizationComment = "Sửa";
+    }
+
+    [CascadingParameter]
+    private BlazoredModalInstance CommentModal { get; set; }
+    void CloseModal()
+    {
+        CommentModal.CloseAsync();
+    }
+}

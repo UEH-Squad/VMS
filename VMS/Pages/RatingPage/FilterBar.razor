@@ -1,0 +1,28 @@
+﻿@using VMS.Application.ViewModels
+<EditForm Model="@rating" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="select-form d-flex align-items-center">
+        <div class="select-form-box-1 select-form-box-1-inline d-flex align-items-center">
+            <InputCheckbox class="checkbox-1" id="rated" @bind-Value="@rating.Select6"></InputCheckbox>
+            <label class="label-1" for="rated">Đã đánh giá</label>
+        </div>
+        <div class="select-form-box-2 select-form-box-2-inline d-flex align-items-center">
+            <InputCheckbox class="checkbox-2" id="none-rated" @bind-Value="@rating.Select7"></InputCheckbox>
+            <label class="label-2" for="none-rated">Chưa đánh giá</label>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    Rating rating;
+    protected override void OnInitialized()
+    {
+        rating = new Rating();
+    }
+
+    public void Submit()
+    {
+
+    }
+}

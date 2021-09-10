@@ -13,9 +13,8 @@
   .my-information .col-right {
     width: 45%; }
   .my-information .information__logo .information__logo-img {
-    position: relative;
     margin-bottom: 20px;
-    display: inline-block; }
+    width: 80%; }
   .my-information .information__logo img {
     width: 230px;
     height: 230px;

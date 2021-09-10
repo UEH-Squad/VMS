@@ -22,12 +22,6 @@
   height: 1px;
   margin-top: 50px; }
 
-.act .animation {
-  animation: bottom-line 5s linear; }
-
-.act .rotate {
-  animation: bottom-line 5s linear; }
-
 .overlay {
   background-color: rgba(100, 100, 100, 0.2);
   width: 100%;
@@ -252,9 +246,3 @@
       height: 32px;
       cursor: pointer;
       font-size: 18px; }
-
-@keyframes bottom-line {
-  from {
-    width: 0%; }
-  to {
-    width: 100%; } }

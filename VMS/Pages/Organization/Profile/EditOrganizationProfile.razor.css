@@ -8,6 +8,9 @@
   /* width */
   /* Track */
   /* Handle */ }
+  .my-editProfile ::deep .form-control:focus {
+    border: 1px solid #18A0FB;
+    box-shadow: none; }
   .my-editProfile .editProfile__title {
     font-size: 36px;
     font-weight: 600;

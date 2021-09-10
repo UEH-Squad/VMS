@@ -13,18 +13,27 @@
                 <EditForm Model="@organization" Context="CurrentEditContext" class="editProfile__form">
                     <div class="row form-item">
                         <p class="col-4 form-text">Tên tổ chức</p>
-                        <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.FullName)</div>
-                        <InputText @bind-Value="@organization.FullName" class="col-8 form-input" />
+                        <div class="col-8 px-0">
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.FullName)</div>
+                            <InputText @bind-Value="@organization.FullName" class="form-input form-control" />
+                        </div>
+                      
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Gmail</p>
-                        <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Email)</div>
-                        <InputText @bind-Value="@organization.Email" class="col-8 form-input" />
+                        <div class="col-8 px-0">
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Email)</div>
+                            <InputText @bind-Value="@organization.Email" class="form-input form-control" />
+                        </div>
+                       
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Điện thoại</p>
-                        <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Phone)</div>
-                        <InputText @bind-Value="@organization.Phone" class="col-8 form-input" />
+                        <div class="col-8 px-0">
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Phone)</div>
+                            <InputText @bind-Value="@organization.Phone" class="form-input form-control" />
+                        </div>
+                       
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực</p>
@@ -64,8 +73,11 @@
                         <p class="col-4 form-text">Tầm nhìn & sứ mệnh</p>
                         <div class="col-8 position-relative px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Content)</div>
-                            <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input w-100 mx-0" />
-                            <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
+                            <div class="col-8 px-0 w-100">
+                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input mx-0 form-control" />
+                                <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="row form-item mb-0">

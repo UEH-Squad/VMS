@@ -1,6 +1,10 @@
 ﻿@import "../../../Resources/scss/common/_variables";
 
 .my-editProfile {
+    ::deep .form-control:focus {
+        border: 1px solid $blue;
+        box-shadow: none;
+    }
 
     .editProfile__title {
         font-size: 36px;

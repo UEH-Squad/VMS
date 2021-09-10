@@ -1,13 +1,21 @@
 ﻿@attribute [Route(Routes.VolunteersPage)]
 
+@attribute [Authorize]
+
 <div class="container-lg px-0 layout">
     <Title></Title>
 
-    <NavMini></NavMini>
+    <NavMini OnToggleListType="OnToggleListType" />
     
-    <ListCard></ListCard>
+    <ListCard ShowDeletedList="isDeletedList" />
 </div>
 
 @code {
-    
+    bool isDeletedList = false;
+
+    async Task OnToggleListType()
+    {
+        isDeletedList = !isDeletedList;
+        StateHasChanged();
+    }
 }

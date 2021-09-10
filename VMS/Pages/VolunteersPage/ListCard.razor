@@ -1,10 +1,12 @@
-﻿@inject IJSRuntime JsRuntime
+﻿@using VMS.Domain.Models
+
+@inject IJSRuntime JsRuntime
 
 <div class="list-card">
     @if (pagedResult != null && pagedResult.Results.Length != 0)
-     {
+    {
         @foreach (var item in pagedResult.Results)
-         {
+        {
             <div class="mycard">
                 <div class="mycard__info">
                     <img class="mycard__info--avatar" src=@item.Avatar alt="Avatar" />
@@ -12,27 +14,28 @@
                         <a href="#" class="info-name">@item.Name</a>
                         <div class="info-mssv">@item.Mssv</div>
                     </div>
-
                 </div>
 
-                    <div class="mycard__checkbox">
-                        <input checked="@item.IsCheck" @onclick="@(() =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
-                    </div>
-                
+                <div class="mycard__checkbox">
+                    <input checked="@item.IsCheck" @onclick="@(() =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
+                </div>
+
                 <div class="mycard__button">
-                    <button @onclick="@(() =>ShowSignUpPopUp())" class="mycard__button--registration-form">Xem đơn đăng ký</button>
+                    <button @onclick="@(() =>ShowSignUpPopUp(item.Id))" class="mycard__button--registration-form">Xem đơn đăng ký</button>
                 </div>
             </div>
-         }
-     }
+        }
+    }
 </div>
 <div class="d-flex justify-content-center">
-<Pager CurrentPage="@pagedResult.CurrentPage"
-       PageCount="@pagedResult.PageCount"
-       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+    <Pager CurrentPage="@pagedResult.CurrentPage"
+           PageCount="@pagedResult.PageCount"
+           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 </div>
 
 @code {
+    [Parameter]
+    public bool ShowDeletedList { get; set; }
 
     private class FakeData
     {
@@ -60,16 +63,36 @@
 
     protected override async Task OnInitializedAsync()
     {
-        pagedResult = GetFakeData();
+        pagedResult = GetFakeData(0);
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (ShowDeletedList)
+        {
+            page = 1;
+            pagedResult = GetFakeData(1);
+        }
+        else
+        {
+            page = 1;
+            pagedResult = GetFakeData(0);
+        }
     }
 
     private async Task HandlePageChanged()
     {
-        pagedResult = GetFakeData();
+        pagedResult = GetFakeData(0);
         StateHasChanged();
         await Interop.ScrollToTop(JsRuntime);
     }
-    private PagedResult<FakeData> GetFakeData()
+
+    /// <summary>
+    /// Get fake data
+    /// </summary>
+    /// <param name="type">0 for volunteer list; 1 for deleted one</param>
+    /// <returns></returns>
+    private PagedResult<FakeData> GetFakeData(int type)
     {
         var result = new PagedResult<FakeData>();
         result.CurrentPage = page;
@@ -79,13 +102,14 @@
         result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
         {
             Id = x + 1,
-            Avatar= "/img/act1.png",
-            Name = "Pham Thi Ngoc Anh",
+            Avatar = "/img/act1.png",
+            Name = $"Pham Thi Ngoc Anh {(type == 0 ? "" : "(deleted)")}",
             Mssv = "31191025555"
         }).ToArray();
 
         return result;
     }
+
     private async Task HandleCheck(int id)
     {
         var checkItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
@@ -96,7 +120,7 @@
     }
 
     [CascadingParameter] public IModalService Modal { get; set; }
-    async Task ShowSignUpPopUp()
+    async Task ShowSignUpPopUp(int id)
     {
         var options = new ModalOptions()
         {
@@ -105,6 +129,11 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
+
+        ModalParameters parameters = new();
+        parameters.Add("ActivityId", 0);
+        parameters.Add("CurrentUser", new User());
+
+        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, options);
     }
 }

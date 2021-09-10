@@ -3,9 +3,9 @@
 <div class="my-rank">
     <div class="container position-relative">
         <h1>Đại lộ <span>danh vọng</span></h1>
-        <a  class="rank__link-organization">Tổ chức</a>
-        <a  class="rank__link-students">Sinh viên</a>
-        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-5  ">
+        <a @onclick="showOrg" class="rank__link-organization">Tổ chức</a>
+        <a @onclick="showPer" class="rank__link-students">Sinh viên</a>
+        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-5 @(isShowOrg ? "d-block" : "d-none") ">
             <div class="item row">
                 <div class="rank__img-rank">
                     <img src="img/rank.png" alt="">
@@ -100,7 +100,7 @@
 
             </div>
         </div>
-        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-personal px-5   ">
+        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-personal px-5  @(isShowOrg ? "d-none" : "d-block")  ">
             <div class="item row">
                 <div class="rank__img-rank">
                     <img src="img/rank.png" alt="">
@@ -208,4 +208,13 @@
         await JSRuntinme.InvokeVoidAsync("vms.RankCarousel");
     }
 
+    private bool isShowOrg = true;
+    void showOrg()
+    {
+        isShowOrg = true;
+    }
+    void showPer()
+    {
+        isShowOrg = false;
+    }
 }

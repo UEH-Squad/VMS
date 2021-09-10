@@ -80,7 +80,9 @@ const increaseNumber = () => {
 }
 
 const rankCarousel = () => {
-    $('.rank__owlcrousel').owlCarousel({
+    const carousel = $('.rank__owlcrousel');
+    carousel.owlCarousel('destroy');
+    carousel.owlCarousel({
         loop: true,
         margin: 0,
         nav: true,

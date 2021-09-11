@@ -33,6 +33,7 @@ namespace VMS.Domain.Models
         public string Website { get; set; }
         public string Banner { get; set; }
         public bool IsPin { get; set; }
+        public bool IsClosed { get; set; }
 
         public virtual User Organizer { get; set; }
         public virtual User Approver { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210909192319__AddActivityTargetTableAndReasonReportTableAndImageReportTable")]
+    partial class _AddActivityTargetTableAndReasonReportTableAndImageReportTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,9 +261,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActual")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
@@ -295,14 +294,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Requirement")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Targets")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1268,7 +1267,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.ImageReport", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
-                        .WithMany("ImageReports")
+                        .WithMany()
                         .HasForeignKey("FeedbackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1405,8 +1404,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
                 {
-                    b.Navigation("ImageReports");
-
                     b.Navigation("ReasonReports");
                 });
 

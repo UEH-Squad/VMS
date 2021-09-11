@@ -20,11 +20,10 @@
                 {
                     <div class="act__container__card" id="kiemtra">
                         <div class="act__container__card__img">
-                            <img src="img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg" alt="photo">
-                            @*@if (!string.IsNullOrEmpty(item.ActivityBanner))
-                                {
-                                    <img src="/img/@item.ActivityBanner" alt="photo"/>
-                                }*@
+                            @if (!string.IsNullOrEmpty(item.ActivityBanner))
+                            {
+                                <img src="@item.ActivityBanner" alt="photo" />
+                            }
                         </div>
                         <div class="act__container__card__desc">
                             <p>@item.ActivityName</p>

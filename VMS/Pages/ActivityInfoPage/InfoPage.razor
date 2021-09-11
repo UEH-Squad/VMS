@@ -36,11 +36,10 @@
                 </p>
             </div>
             <div class="activity__image">
-                <img src="./img/ActivityInfoPage/ActivityImage.png" alt="Activity Image">
-                @*@if (!string.IsNullOrEmpty(activity.Banner))
-                    {
-                        <img src="/img/@activity.Banner" alt="Activity Image"/>
-                    }*@
+                @if (!string.IsNullOrEmpty(activity.Banner))
+                {
+                    <img src="@activity.Banner" alt="Activity Image" />
+                }
             </div>
             <div class="activity__mission">
                 <p class="mission">Sứ mệnh:</p>

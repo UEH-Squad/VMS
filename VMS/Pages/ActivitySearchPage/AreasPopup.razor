@@ -19,7 +19,7 @@
                     @foreach (var area in areas)
                     {
                         <div class="area-item-wrapper d-flex align-items-center mb-3">
-                            <span @onclick="() => ChangeState(area) " class="material-icons d-flex align-items-center justify-content-center">
+                            <span @onclick="() => ChangeState(area)" class="material-icons d-flex align-items-center justify-content-center">
                                 @area.Icon
                             </span>
                             <p @onclick="() => ChangeState(area)" class="mb-0 ms-2 @(choosenAreas.Exists(a => a.Id == area.Id) ? "colored-green" : "")">@area.Name</p>

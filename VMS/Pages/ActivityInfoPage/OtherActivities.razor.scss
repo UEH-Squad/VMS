@@ -67,7 +67,13 @@ $fav-icon: #F14747;
         background-color: #F3F3F5;
         border-radius:10px;
         &:hover {
-            filter: brightness(90%);
+            img {
+                opacity: 0.6;
+            }
+
+            p {
+                color: $blue-hv;
+            }
         }
 
         &__img {
@@ -168,17 +174,24 @@ $fav-icon: #F14747;
 }
 
 ::deep .owl-nav {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    opacity:0.8;
-    .owl-prev, .owl-next:hover{
+
+    .owl-prev, .owl-next {
+        position: absolute;
+        top: 40%;
+    }
+
+    .owl-prev {
+        left: 0;
+    }
+
+    .owl-next {
+        right: 0;
+    }
+
+    .owl-prev, .owl-next:hover {
         background-color: transparent !important;
     }
+
     span {
         font-size: 50px;
         color: $white;

@@ -7,7 +7,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(196, 196, 196, 0.38);
-    z-index: 3;
+    z-index: 101;
 
     .signUp__content {
         position: relative;
@@ -125,7 +125,7 @@
         height: 100%;
         width: 100%;
         display: none;
-        z-index: 5;
+        z-index: 102;
         background-color: rgba(196, 196, 196, 0.38);
 
         i {

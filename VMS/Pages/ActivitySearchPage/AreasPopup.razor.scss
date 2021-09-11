@@ -13,7 +13,6 @@
 
 .my-custom-popup {
     width: 50%;
-    min-height: 600px;
     background-color: #fff;
     border-radius: 10px;
     z-index: 999;
@@ -39,7 +38,6 @@
     }
 
     .areas-modal-content {
-        margin: 20px 0;
         margin-left: 80px;
 
         &__container {

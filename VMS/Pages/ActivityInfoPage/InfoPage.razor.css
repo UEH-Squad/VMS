@@ -69,6 +69,8 @@
   width: 100%;
   margin-top: 6%;
   border-radius: 10px; }
+  .infopage-activity .activity__image img {
+    width: 100%; }
 
 .infopage-activity .activity__mission {
   margin-top: 8%;

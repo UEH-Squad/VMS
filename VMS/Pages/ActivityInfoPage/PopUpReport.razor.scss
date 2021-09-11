@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 101;
     background-color: rgba(196, 196, 196, 0.38);
     
 }
@@ -19,16 +19,16 @@
     width: 100%;
     background-color: rgba(196, 196, 196, 0.38);
     display: none;
-    z-index: 3;
+    z-index: 102;
 
     .report-success {
         position: absolute;
         height: 160px;
-        width: 500px
+        width: 500px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        z-index: 4;
+        z-index: 103;
         background-color: white;
         border-radius: 10px;
         font-size: 24px;

@@ -15,7 +15,6 @@
 
 .my-custom-popup {
   width: 50%;
-  min-height: 600px;
   background-color: #fff;
   border-radius: 10px;
   z-index: 999; }
@@ -36,7 +35,6 @@
     font-size: 34px;
     cursor: pointer; }
   .my-custom-popup .areas-modal-content {
-    margin: 20px 0;
     margin-left: 80px; }
     .my-custom-popup .areas-modal-content__container {
       height: 100%;

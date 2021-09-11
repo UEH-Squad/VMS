@@ -11,7 +11,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(196, 196, 196, 0.38);
-  z-index: 3; }
+  z-index: 101; }
   .my-signUp .signUp__content {
     position: relative;
     width: 450px;
@@ -90,7 +90,7 @@
     height: 100%;
     width: 100%;
     display: none;
-    z-index: 5;
+    z-index: 102;
     background-color: rgba(196, 196, 196, 0.38); }
     .my-signUp .signUp__report i {
       position: absolute;

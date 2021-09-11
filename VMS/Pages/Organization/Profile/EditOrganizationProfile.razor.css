@@ -86,6 +86,8 @@
         font-size: 80px; }
     .my-editProfile .form-field-item.item-add {
       width: 30%; }
+  .my-editProfile .owl-carousel {
+    z-index: 0; }
   .my-editProfile .editProfile__carousel {
     width: 60%; }
     .my-editProfile .editProfile__carousel .item {

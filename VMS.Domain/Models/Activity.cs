@@ -29,6 +29,7 @@ namespace VMS.Domain.Models
         public double Longitude { get; set; }
         public string Website { get; set; }
         public string Banner { get; set; }
+        public bool IsPin { get; set; }
 
         public virtual User Organizer { get; set; }
         public virtual User Approver { get; set; }
@@ -36,5 +37,6 @@ namespace VMS.Domain.Models
         public virtual ICollection<ActivitySkill> ActivitySkills { get; set; }
         public virtual ICollection<ActivityAddress> ActivityAddresses { get; set; }
         public virtual ICollection<ActivityImage> ActivityImages { get; set; }
+        public virtual ICollection<Favorite> Favorites { get; set; }
     }
 }

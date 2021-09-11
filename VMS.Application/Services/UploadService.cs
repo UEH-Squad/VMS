@@ -14,6 +14,7 @@ namespace VMS.Application.Services
         private const int MaxWidthFile = 2048;
         private const int MaxHeightFile = 2048;
         private const string FormatFile = "image/jpeg";
+        private string Path => @$"{_webHostEnvironment.WebRootPath}\";
 
         public UploadService(IWebHostEnvironment webHostEnvironment)
         {
@@ -33,12 +34,18 @@ namespace VMS.Application.Services
 
         public async Task<string> SaveImageAsync(IBrowserFile file, string userId)
         {
+            if (!file.ContentType.Contains("image/"))
+            {
+                throw new Exception("Invalid file type!");
+            }
+
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
+            const string imgFolder = @"img\activities";
+            string fileName = @$"{imgFolder}\{DateTime.Now.ToFileTime()}_{userId}.jpg";
 
-            string fileName = $"{DateTime.Now.ToFileTime()}_{userId}.jpg";
-            string pathFile = @$"{_webHostEnvironment.WebRootPath}\img";
+            Directory.CreateDirectory(System.IO.Path.Combine(_webHostEnvironment.WebRootPath, imgFolder));
 
-            using FileStream fileStream = File.Create(@$"{pathFile}\{fileName}");
+            using FileStream fileStream = File.Create(@$"{Path}\{fileName}");
             using Stream stream = file.OpenReadStream(MaxFileSize);
             await stream.CopyToAsync(fileStream);
 
@@ -47,8 +54,14 @@ namespace VMS.Application.Services
 
         public void RemoveImage(string fileName)
         {
-            string path = @$"{_webHostEnvironment.WebRootPath}\img\{fileName}";
-            File.Delete(path);
+            try
+            {
+                File.Delete(@$"{Path}\{fileName}");
+            }
+            catch (Exception ex)
+            {
+                // ignore if delete exceptions
+            }
         }
     }
 }

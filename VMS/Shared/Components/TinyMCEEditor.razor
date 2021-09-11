@@ -1,0 +1,26 @@
+﻿<TinyMCE.Blazor.Editor ApiKey="v439hmeezl4njsgskpyy5lvknmkunhs9aj28b01fyjtk7qfv"
+                       Conf="tinyMCEConfig"
+                       TextChanged="OnValueChanged"
+                       @bind-Value="Value" />
+
+@code
+{
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private readonly Dictionary<string, object> tinyMCEConfig = new()
+    {
+        { "menubar", false },
+        { "statusbar", false },
+        { "plugins", "lists, link, image, media" },
+        { "toolbar", "undo redo | styleselect | bold italic underline strikethrough blockquote forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist" }
+    };
+
+    private Task OnValueChanged()
+    {
+        return ValueChanged.InvokeAsync(Value);
+    }
+}

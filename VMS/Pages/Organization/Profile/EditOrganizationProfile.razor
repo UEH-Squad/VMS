@@ -83,7 +83,7 @@
                     <div class="row form-item mb-0">
                         <p class="col-4 form-text">Thay đổi ảnh</p>
                         <div class="col-8 px-0 ">
-                            <UploadImg FileChanged="FileChanged" />
+                            <UploadImg InputFileChanged="FileChanged" />
                         </div>
                     </div>
                     <div class="row">
@@ -139,9 +139,9 @@
         return count;
     }
 
-    private void FileChanged(IBrowserFile file)
+    private void FileChanged(InputFileChangeEventArgs file)
     {
-        this.file = file;
+        this.file = file.File;
 
     }
 

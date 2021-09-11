@@ -111,8 +111,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         private void ChooseOrganizationValue(User organizer)
         {
-            Filter.OrgId = organizer.UserName;
-            organizationChoosenValue = organizer.UserName;
+            Filter.OrgId = organizer.Id;
+            organizationChoosenValue = organizer.FullName;
             ToggleOrganizationDropdown();
         }
 

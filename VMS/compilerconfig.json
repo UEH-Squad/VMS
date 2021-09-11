@@ -140,10 +140,6 @@
     "inputFile": "Pages/Organization/Profile/Notification.razor.scss"
   },
   {
-    "outputFile": "Pages/Organization/Profile/UploadImg.razor.css",
-    "inputFile": "Pages/Organization/Profile/UploadImg.razor.scss"
-  },
-  {
     "outputFile": "Pages/Organization/Profile/Vision.razor.css",
     "inputFile": "Pages/Organization/Profile/Vision.razor.scss"
   },

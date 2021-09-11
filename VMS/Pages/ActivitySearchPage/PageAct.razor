@@ -11,14 +11,14 @@
                             {
                                 <div class="act__item row">
                                     <div class="col-4">
-                                        <img class="w-100" src="img/@item.Banner" alt="">
+                                        <img class="w-100" src="@item.Banner" alt="">
                                     </div>
                                     <div class="col-8 act__content">
                                         <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-3">@item.Name</a>
                                         <h5>
                                             <i class="material-icons">public</i> @item.Organizer?.FullName
                                         </h5>
-                                        <p class="lmtext-2">@item.Description</p>
+                                        <p class="lmtext-2">@((MarkupString)item.Description)</p>
                                         <span>Ngày đăng: @item.PostDate.ToString("dd/MM/yyyy")</span>
                                         <AuthorizeView>
                                             <Authorized>

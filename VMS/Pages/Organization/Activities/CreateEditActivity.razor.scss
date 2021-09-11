@@ -1,0 +1,174 @@
+﻿@import '../../../Resources/scss/common/_variables';
+
+.error-message {
+    background-color: #E8F5FF;
+    color: #E10B0B;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.title {
+    color: $blue;
+    font-size: 36px;
+    font-weight: 600px;
+
+    span {
+        color: $green;
+    }
+}
+
+.required-asterick {
+    color: red;
+}
+
+.my-activity-type-group {
+    .col-3 {
+        width: 35%;
+
+        @include on('lg') {
+            width: 25%;
+        }
+    }
+
+    .col-9 {
+        width: 65%;
+
+        @include on('lg') {
+            width: 75%;
+        }
+    }
+}
+
+.my-form-group {
+    display: flex;
+    flex-direction: column;
+
+    @include on('lg') {
+        flex-direction: row;
+    }
+
+    .col-3 {
+        margin-bottom: .5rem;
+        width: 100%;
+
+        @include on('lg') {
+            margin-bottom: 0;
+            width: 25%;
+        }
+    }
+
+    .col-9 {
+        width: 100%;
+
+        @include on('lg') {
+            width: 75%;
+        }
+    }
+}
+
+.typeahead__input-icon {
+    height: 100%;
+    width: 40px;
+    display: flex;
+    border-radius: 0 5px 5px 0;
+    padding: .5rem;
+    cursor: pointer;
+    background: none;
+    top: 0;
+    right: 13px;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
+    }
+
+    .typeahead__down-arrow {
+        path {
+            fill: #333333;
+        }
+    }
+}
+
+.item {
+    text-align: center;
+
+    &:hover > i {
+        font-size: 32px
+    }
+
+    &:hover > span {
+        transform: translateY(-5px);
+    }
+
+    i {
+        display: block;
+        background-color: $blue;
+        border-radius: 50%;
+        color: white;
+        margin: 5px auto;
+        transition: all 0.3s linear;
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        font-size: 24px;
+
+        &.add-icon {
+            background-color: $grey-icon;
+        }
+    }
+
+    span {
+        color: $green;
+        font-weight: 500;
+        transition: all 0.3s linear;
+    }
+}
+
+.btn-save {
+    background-color: $green;
+    color: $white;
+    font-weight: 600;
+    padding: .75rem 1.25rem;
+}
+
+.btn-cancel {
+    color: $green;
+    font-weight: 600;
+    padding: .75rem 1.25rem;
+}
+
+::deep {
+    .tox {
+        z-index: 0;
+    }
+    // As the typeahead is lazy-loaded, its styles will override our styles.
+    // To prevent it, we'll have to put !important somewhere.
+    .typeahead {
+        &__input-multiselect-wrapper {
+            width: 96% !important;
+        }
+
+        &__results {
+            right: 0;
+            width: 100% !important;
+
+            @include on('md') {
+                width: 30% !important;
+            }
+        }
+    }
+
+    input {
+        color: $grey-text;
+
+        &::placeholder {
+            color: $border-color-normal;
+        }
+    }
+
+    .my-address-textbox {
+        @include on('xl') {
+            width: auto;
+        }
+    }
+}

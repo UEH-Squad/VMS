@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VMS.Domain.Interfaces;
 
 namespace VMS.Domain.Models
@@ -12,7 +13,11 @@ namespace VMS.Domain.Models
         public string CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
+        public int ActivityId { get; set; }
 
         public virtual User User { get; set; }
+        public virtual Activity Activity { get; set; }
+        public virtual ICollection<ReasonReport> ReasonReports { get; set; }
+        public virtual ICollection<ImageReport> ImageReports { get; set; }
     }
 }

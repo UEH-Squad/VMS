@@ -78,5 +78,19 @@ namespace VMS.Application.Services
 
             return string.Empty;
         }
+
+        public User GetCurrentUserWithFavoritesAndRecruitments()
+        {
+            string currentUserId = GetCurrentUserId();
+            return Task.Run(() => _userManager.Users.Include(x => x.Favorites)
+                                                    .Include(x => x.Recruitments)
+                                                    .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
+        }
+
+        public void UpdateUser(User user)
+        {
+            Task.Run(() => _userManager.UpdateAsync(user));
+        }
+
     }
 }

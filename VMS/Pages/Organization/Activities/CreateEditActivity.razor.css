@@ -1,0 +1,125 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.error-message {
+  background-color: #E8F5FF;
+  color: #E10B0B;
+  font-size: 18px;
+  padding: 5px; }
+
+.title {
+  color: #18A0FB;
+  font-size: 36px;
+  font-weight: 600px; }
+  .title span {
+    color: #64D72F; }
+
+.required-asterick {
+  color: red; }
+
+.my-activity-type-group .col-3 {
+  width: 35%; }
+  @media (min-width: 992px) {
+    .my-activity-type-group .col-3 {
+      width: 25%; } }
+
+.my-activity-type-group .col-9 {
+  width: 65%; }
+  @media (min-width: 992px) {
+    .my-activity-type-group .col-9 {
+      width: 75%; } }
+
+.my-form-group {
+  display: flex;
+  flex-direction: column; }
+  @media (min-width: 992px) {
+    .my-form-group {
+      flex-direction: row; } }
+  .my-form-group .col-3 {
+    margin-bottom: .5rem;
+    width: 100%; }
+    @media (min-width: 992px) {
+      .my-form-group .col-3 {
+        margin-bottom: 0;
+        width: 25%; } }
+  .my-form-group .col-9 {
+    width: 100%; }
+    @media (min-width: 992px) {
+      .my-form-group .col-9 {
+        width: 75%; } }
+
+.typeahead__input-icon {
+  height: 100%;
+  width: 40px;
+  display: flex;
+  border-radius: 0 5px 5px 0;
+  padding: .5rem;
+  cursor: pointer;
+  background: none;
+  top: 0;
+  right: 13px; }
+  .typeahead__input-icon:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
+  .typeahead__input-icon .typeahead__down-arrow path {
+    fill: #333333; }
+
+.item {
+  text-align: center; }
+  .item:hover > i {
+    font-size: 32px; }
+  .item:hover > span {
+    transform: translateY(-5px); }
+  .item i {
+    display: block;
+    background-color: #18A0FB;
+    border-radius: 50%;
+    color: white;
+    margin: 5px auto;
+    transition: all 0.3s linear;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 24px; }
+    .item i.add-icon {
+      background-color: #B4B4B4; }
+  .item span {
+    color: #64D72F;
+    font-weight: 500;
+    transition: all 0.3s linear; }
+
+.btn-save {
+  background-color: #64D72F;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: .75rem 1.25rem; }
+
+.btn-cancel {
+  color: #64D72F;
+  font-weight: 600;
+  padding: .75rem 1.25rem; }
+
+::deep .tox {
+  z-index: 0; }
+
+::deep .typeahead__input-multiselect-wrapper {
+  width: 96% !important; }
+
+::deep .typeahead__results {
+  right: 0;
+  width: 100% !important; }
+  @media (min-width: 768px) {
+    ::deep .typeahead__results {
+      width: 30% !important; } }
+
+::deep input {
+  color: #515151; }
+  ::deep input::placeholder {
+    color: #b4b4b4; }
+
+@media (min-width: 1200px) {
+  ::deep .my-address-textbox {
+    width: auto; } }

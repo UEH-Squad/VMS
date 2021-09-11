@@ -1,13 +1,29 @@
-﻿using Microsoft.JSInterop;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
 namespace VMS.Common
 {
-    public class Interop
+    public static class Interop
     {
-        public static ValueTask ScrollToTop(IJSRuntime JsRuntime)
+        internal static ValueTask ScrollToTop(IJSRuntime JsRuntime)
         {
-            return JsRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+            return JsRuntime.InvokeVoidAsync("vms.SmoothScrollTo", "html, body");
+        }
+
+        internal static ValueTask<object> Focus(IJSRuntime jsRuntime, ElementReference element)
+        {
+            return jsRuntime.InvokeAsync<object>("typeahead.setFocus", element);
+        }
+
+        internal static ValueTask<object> AddKeyDownEventListener(IJSRuntime jsRuntime, ElementReference element)
+        {
+            return jsRuntime.InvokeAsync<object>("typeahead.addKeyDownEventListener", element);
+        }
+
+        internal static ValueTask<object> OnOutsideClick(this IJSRuntime jsRuntime, ElementReference element, object caller, string methodName, bool clearOnFire = false)
+        {
+            return jsRuntime.InvokeAsync<object>("typeahead.onOutsideClick", element, DotNetObjectReference.Create(caller), methodName, clearOnFire);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace VMS.Domain.Models
         public int ActivityId { get; set; }
 
         public string Target { get; set; }
-        
+
         public virtual Activity Activity { get; set; }
     }
 }

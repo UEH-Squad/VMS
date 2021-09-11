@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -17,25 +19,40 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<Skill>> GetAllSkillsAsync()
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-            return await _repository.GetListAsync<Skill>(dbContext);
-        }
-
-        public async Task<List<Skill>> GetAllSubSkillsAsync(int parentSkillId)
+        public async Task<List<SkillViewModel>> GetAllSkillsAsync(int? parentSkillId = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Specification<Skill> specification = new()
+            List<Skill> skills = await _repository.GetListAsync(dbContext, new Specification<Skill>()
             {
-                Conditions = new List<Expression<System.Func<Skill, bool>>>()
+                Conditions = new List<Expression<Func<Skill, bool>>>()
                 {
                     s => s.ParentSkillId == parentSkillId
-                }
-            };
+                },
+                Includes = s => s.Include(x => x.SubSkills)
+            });
 
-            return await _repository.GetListAsync(dbContext, specification);
+            return _mapper.Map<List<SkillViewModel>>(skills);
+        }
+
+        public async Task<List<SkillViewModel>> GetAllSkillsByNameAsync(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return new List<SkillViewModel>();
+            }
+
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            List<Skill> skills = await _repository.GetListAsync(dbContext, new Specification<Skill>()
+            {
+                Conditions = new List<Expression<Func<Skill, bool>>>()
+                {
+                    s => s.Name.ToLower().Contains(searchText.ToLower())
+                }
+            });
+
+            return _mapper.Map<List<SkillViewModel>>(skills);
         }
     }
 }

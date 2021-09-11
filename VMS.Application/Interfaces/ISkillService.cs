@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using VMS.Domain.Models;
+using VMS.Application.ViewModels;
 
 namespace VMS.Application.Interfaces
 {
     public interface ISkillService
     {
-        Task<List<Skill>> GetAllSkillsAsync();
-        Task<List<Skill>> GetAllSubSkillsAsync(int parentSkillId);
+        Task<List<SkillViewModel>> GetAllSkillsAsync(int? parentSkillId = null);
+
+        Task<List<SkillViewModel>> GetAllSkillsByNameAsync(string searchText);
     }
 }

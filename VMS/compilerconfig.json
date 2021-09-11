@@ -1,5 +1,21 @@
 ﻿[
   {
+    "outputFile": "Shared/Components/Pager.razor.css",
+    "inputFile": "Shared/Components/Pager.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/Typeahead.razor.css",
+    "inputFile": "Shared/Components/Typeahead.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/Spinner.razor.css",
+    "inputFile": "Shared/Components/Spinner.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/UploadImg.razor.css",
+    "inputFile": "Shared/Components/UploadImg.razor.scss"
+  },
+  {
     "outputFile": "Shared/MainLayout.razor.css",
     "inputFile": "Shared/MainLayout.razor.scss"
   },
@@ -68,10 +84,6 @@
     "inputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.scss"
   },
   {
-    "outputFile": "Shared/Pager.razor.css",
-    "inputFile": "Shared/Pager.razor.scss"
-  },
-  {
     "outputFile": "Pages/ActivitySearchPage/PageAct.razor.css",
     "inputFile": "Pages/ActivitySearchPage/PageAct.razor.scss"
   },
@@ -96,35 +108,35 @@
     "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
   },
   {
+    "outputFile": "Pages/Organization/Activities/CreateEditActivity.razor.css",
+    "inputFile": "Pages/Organization/Activities/CreateEditActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.css",
+    "inputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Activities/NotificationPopup.razor.css",
+    "inputFile": "Pages/Organization/Activities/NotificationPopup.razor.scss"
+  },
+  {
     "outputFile": "Pages/VolunteersPage/Index.razor.css",
     "inputFile": "Pages/VolunteersPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/VolunteersPage/Title.razor.css",
-    "inputFile": "Pages/VolunteersPage/Title.razor.scss"
-  },
-  {
-    "outputFile": "Pages/VolunteersPage/SearchboxAndButton.razor.css",
-    "inputFile": "Pages/VolunteersPage/SearchboxAndButton.razor.scss"
   },
   {
     "outputFile": "Pages/VolunteersPage/ListCard.razor.css",
     "inputFile": "Pages/VolunteersPage/ListCard.razor.scss"
   },
   {
-    "outputFile": "Pages/VolunteersPage/Orentation.razor.css",
-    "inputFile": "Pages/VolunteersPage/Orentation.razor.scss"
-  },
-  {
-    "outputFile": "Pages/VolunteersPage/Orientation.razor.css",
-    "inputFile": "Pages/VolunteersPage/Orientation.razor.scss"
+    "outputFile": "Pages/VolunteersPage/NavMini.razor.css",
+    "inputFile": "Pages/VolunteersPage/NavMini.razor.scss"
   },
   {
     "outputFile": "Pages/VolunteersPage/Searchbox.razor.css",
     "inputFile": "Pages/VolunteersPage/Searchbox.razor.scss"
   },
   {
-    "outputFile": "Pages/VolunteersPage/NavMini.razor.css",
-    "inputFile": "Pages/VolunteersPage/NavMini.razor.scss"
+    "outputFile": "Pages/VolunteersPage/Title.razor.css",
+    "inputFile": "Pages/VolunteersPage/Title.razor.scss"
   }
 ]

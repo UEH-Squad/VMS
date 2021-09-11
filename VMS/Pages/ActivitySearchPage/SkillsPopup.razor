@@ -1,220 +1,44 @@
-﻿@inject IModalService Modal
-<div class="modal-backdrop modal-dialog-centered justify-content-center">
+﻿<div class="modal-backdrop modal-dialog-centered justify-content-center">
     <div class="my-custom-popup position-relative d-flex flex-column justify-content-between align-items-center">
-        <span @onclick="CloseModal" class="material-icons-outlined close-btn">
+        <span @onclick="CloseModalAsync" class="material-icons-outlined close-btn">
             close
         </span>
         <h3 class="text-center mt-4 mb-4">Kỹ năng</h3>
         <div class="col-10 skill-modal-content">
             <div class=" skill-modal-content__container">
-                    @for (int i = 0; i < 15; i++)
+                @if (skills is not null)
+                {
+                    @foreach (var skill in skills)
                     {
-                        int id = i;
                         <div class="skill-item-wrapper d-flex align-items-center">
-                            <p @onclick=" () => ChangeStateAndCheckSubPopup(id)" class="m-0 @(choosenSkillsList[id,0] ? "colored-green position-relative" : "") ">Kỹ năng mềm @(i+1)
-                            
-                                @if (id == 0)
+                            @if (skill.ParentSkillId is null)
+                            {
+                                @if (skill.SubSkills.Count == 0)
                                 {
-                                    <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(isShowSubSkills ? "d-block" : "")">
-                                        @for (int j = 1; j <= 10; j++)
-                                        {
-                                            int subID = j;
-                                            <p @onclick="() => CheckChoosenSubSkills(subID)" class="sub-popup-item mb-3 @(choosenSkillsList[0, subID] ? "underlined" : "")">Làm việc nhóm @(subID)</p>
-                                        }
-                                    </div>
+                                    <p @onclick="() => ChangeState(skill)" class="m-0 @(choosenSkills.Exists(s => s.Id == skill.Id) ? "colored-green position-relative" : "")">@skill.Name</p>
                                 }
-                                @if (id == 1)
+                                else
                                 {
-                                    <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(isShowExpertise ? "d-block" : "")">
-                                        @for (int j = 1; j <= 8; j++)
-                                        {
-                                            int subID = j;
-                                            <p @onclick="() => CheckChoosenExpertise(subID)" class="sub-popup-item mb-3 @(choosenSkillsList[1, subID] ? "underlined" : "")">Kế toán/ Kiểm toán @(subID)</p>
-                                        }
-                                    </div>
+                                    <p @onclick="() => HandleShowSubSkill(skill.Id)" class="m-0 @(choosenSkills.Exists(s => s.Id == skill.Id || s.ParentSkillId == skill.Id) || showSubSkillsId == skill.Id ? "colored-green position-relative" : "")">
+                                        @skill.Name
+                                        <div @onclick:stopPropagation class="my-custom-sub-popup position-absolute @(showSubSkillsId == skill.Id ? "d-block" : "")">
+                                            @foreach (var subskill in skill.SubSkills)
+                                            {
+                                                <p @onclick="() => ChangeState(subskill)" class="sub-popup-item mb-3 @(choosenSkills.Exists(s => s.Id == subskill.Id) ? "underlined" : "")">@subskill.Name</p>
+                                            }
+                                        </div>
+                                    </p>
                                 }
-                            </p>
+                            }
+
                         </div>
                     }
+                }
             </div>
         </div>
-        <div @onclick="SaveModal" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+        <div @onclick="SaveModalAsync" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
     </div>
 </div>
+
 @code {
-    [Parameter]
-    public bool[,] choosenSkillsList { get; set; }
-    bool isShowExpertise = false;
-    bool isShowSubSkills = false;
-    bool isThereSelectedSubItem = false;
-    int numberOfSkills = 15;
-    int numberOfSubSkills = 10;
-
-    bool[,] boolArraySkills = new bool[15,11];
-    protected override async Task OnInitializedAsync()
-    {
-        //create a curent list when modal open incase user click close button but don't save
-        for (int skillIndex = 0; skillIndex < numberOfSkills; skillIndex++)
-        {
-            for (int subIndex = 0; subIndex <= numberOfSubSkills; subIndex++)
-            {
-                boolArraySkills[skillIndex, subIndex] = choosenSkillsList[skillIndex, subIndex];
-            }
-        }
-
-        //Check Is any Sub items selected
-        choosenSkillsList[0, 0] = choosenSkillsList[1, 0] = false;
-
-        //let subIndex run from 1 to numberOfSubSkills because numberOfSubSkills is 10, and numberOfExpertise is 8 ( 10 > 8 )
-        for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
-        {
-            if (choosenSkillsList[0, subIndex])
-            {
-                choosenSkillsList[0, 0] = true;
-                isThereSelectedSubItem = true;
-            }
-
-            if (choosenSkillsList[1, subIndex])
-            {
-                choosenSkillsList[1, 0] = true;
-                isThereSelectedSubItem = true;
-            }
-        }
-    }
-
-    //handle change color when click items
-    void ChangeStateAndCheckSubPopup(int id)
-    {
-        if (id != 0 && id != 1)
-        {
-            choosenSkillsList[id, 0] = !choosenSkillsList[id, 0];
-            isShowSubSkills = false;
-            isShowExpertise = false;
-            choosenSkillsList[0, 0] = false;
-            choosenSkillsList[1, 0] = false;
-            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
-            {
-                if (choosenSkillsList[0, subIndex])
-                {
-                    choosenSkillsList[0, 0] = true;
-                }
-
-                if (choosenSkillsList[1, subIndex])
-                {
-                    choosenSkillsList[1, 0] = true;
-                }
-            }
-        }
-
-        if (id == 0)
-        {
-            ShowSubSkills();
-            isShowExpertise = false;
-            choosenSkillsList[1, 0] = false;
-            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
-            {
-                if (choosenSkillsList[1, subIndex])
-                {
-                    choosenSkillsList[1, 0] = true;
-                }
-            }
-            choosenSkillsList[id,0] = true;
-            if ((isThereSelectedSubItem == false) && (isShowSubSkills == false))
-            {
-                choosenSkillsList[id, 0] = boolArraySkills[id, 0] = false;
-            }
-        }
-        if (id == 1)
-        {
-            ShowExpertise();
-            isShowSubSkills = false;
-            choosenSkillsList[0, 0] = false;
-            for (int subIndex = 1; subIndex <= numberOfSubSkills; subIndex++)
-            {
-                if (choosenSkillsList[0, subIndex])
-                {
-                    choosenSkillsList[0, 0] = true;
-                }
-            }
-            choosenSkillsList[id,0] = true;
-            if ((isThereSelectedSubItem == false) && (isShowExpertise == false))
-            {
-                choosenSkillsList[id, 0] = boolArraySkills[id, 0] = false;
-            }
-        }
-    }
-
-    //handle underline sub skill popup items
-    void CheckChoosenSubSkills(int id)
-    {
-        choosenSkillsList[0, id] = !choosenSkillsList[0, id];
-        isThereSelectedSubItem = false;
-        for (int j = 1; j <= numberOfSubSkills; j++)
-        {
-            if (choosenSkillsList[0, j])
-            {
-                choosenSkillsList[0, 0] = boolArraySkills[0, 0] = true;
-                isThereSelectedSubItem = true;
-            }
-        }
-    }
-
-    //handle underline expertise popup items
-    void CheckChoosenExpertise(int id)
-    {
-        choosenSkillsList[1, id] = !choosenSkillsList[1, id];
-
-        isThereSelectedSubItem = false;
-        for (int j = 1; j <= 9; j++)
-        {
-            if (choosenSkillsList[1, j])
-            {
-                choosenSkillsList[1, 0] = boolArraySkills[1, 0] = true;
-                isThereSelectedSubItem = true;
-            }
-        }
-    }
-
-    //Show sub popup
-
-    void ShowSubSkills()
-    {
-        isShowSubSkills = !isShowSubSkills;
-    }
-
-    void ShowExpertise()
-    {
-        isShowExpertise = !isShowExpertise;
-    }
-
-
-    //Close and save button
-    [CascadingParameter]
-    private BlazoredModalInstance SkillsModal { get; set; }
-    void CloseModal()
-    {
-        for (int skillIndex = 0; skillIndex < numberOfSkills; skillIndex++)
-        {
-            for (int subIndex = 0; subIndex <= numberOfSubSkills; subIndex++)
-            {
-                if (choosenSkillsList[skillIndex, subIndex] && boolArraySkills[skillIndex, subIndex] == false)
-                {
-                    choosenSkillsList[skillIndex, subIndex] = false;
-                }
-
-                if (choosenSkillsList[skillIndex, subIndex] == false && boolArraySkills[skillIndex, subIndex])
-                {
-                    choosenSkillsList[skillIndex, subIndex] = true;
-                }
-            }
-        }
-        SkillsModal.CloseAsync();
-    }
-
-    void SaveModal()
-    {
-        choosenSkillsList = boolArraySkills;
-        SkillsModal.CloseAsync();
-    }
-
 }

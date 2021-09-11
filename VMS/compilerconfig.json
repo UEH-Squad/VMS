@@ -1,5 +1,21 @@
 ﻿[
   {
+    "outputFile": "Shared/Components/Pager.razor.css",
+    "inputFile": "Shared/Components/Pager.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/Typeahead.razor.css",
+    "inputFile": "Shared/Components/Typeahead.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/Spinner.razor.css",
+    "inputFile": "Shared/Components/Spinner.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/UploadImg.razor.css",
+    "inputFile": "Shared/Components/UploadImg.razor.scss"
+  },
+  {
     "outputFile": "Shared/MainLayout.razor.css",
     "inputFile": "Shared/MainLayout.razor.scss"
   },
@@ -68,10 +84,6 @@
     "inputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.scss"
   },
   {
-    "outputFile": "Shared/Pager.razor.css",
-    "inputFile": "Shared/Pager.razor.scss"
-  },
-  {
     "outputFile": "Pages/ActivitySearchPage/PageAct.razor.css",
     "inputFile": "Pages/ActivitySearchPage/PageAct.razor.scss"
   },
@@ -96,27 +108,35 @@
     "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
   },
   {
-    "outputFile": "Pages/RatingPage/RatingPage.razor.css",
-    "inputFile": "Pages/RatingPage/RatingPage.razor.scss"
+    "outputFile": "Pages/Organization/Activities/CreateEditActivity.razor.css",
+    "inputFile": "Pages/Organization/Activities/CreateEditActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.css",
+    "inputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Activities/NotificationPopup.razor.css",
+    "inputFile": "Pages/Organization/Activities/NotificationPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/FilterBar.razor.css",
+    "inputFile": "Pages/RatingPage/FilterBar.razor.scss"
   },
   {
     "outputFile": "Pages/RatingPage/PopUpComment.razor.css",
     "inputFile": "Pages/RatingPage/PopUpComment.razor.scss"
   },
   {
-    "outputFile": "Pages/RatingPage/SearchBar.razor.css",
-    "inputFile": "Pages/RatingPage/SearchBar.razor.scss"
-  },
-  {
-    "outputFile": "Pages/RatingPage/PopUpReport.Memberrazor.css",
-    "inputFile": "Pages/RatingPage/PopUpReport.Memberrazor.scss"
-  },
-  {
     "outputFile": "Pages/RatingPage/PopUpReportMember.razor.css",
     "inputFile": "Pages/RatingPage/PopUpReportMember.razor.scss"
   },
   {
-    "outputFile": "Pages/RatingPage/FilterBar.razor.css",
-    "inputFile": "Pages/RatingPage/FilterBar.razor.scss"
+    "outputFile": "Pages/RatingPage/RatingPage.razor.css",
+    "inputFile": "Pages/RatingPage/RatingPage.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/SearchBar.razor.css",
+    "inputFile": "Pages/RatingPage/SearchBar.razor.scss"
   }
 ]

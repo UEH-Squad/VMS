@@ -1,8 +1,10 @@
-﻿<AuthorizeView>
+﻿@inject NavigationManager NavigationManager
+
+<AuthorizeView>
     <Authorized>
         <li class="user-section nav-item dflex flex-column align-items-center position-relative">
-            <a href="@Routes.User" class="d-block text-decoration-none user-section__link">
-                <div class="user-avatar-wrapper position-relative">
+            <div class="d-block text-decoration-none user-section__link">
+                <div class="user-avatar-wrapper position-relative" @onclick="OnAvatarClick">
                     <img src="img/hsv.png" alt="user avatar" class="user-avatar">
                 </div>
                 <span class="user-label mt-2 fw-bold">Trang cá nhân</span>
@@ -23,7 +25,7 @@
                         </li>
                     </ul>
                 </div>
-            </a>
+            </div>
         </li>
     </Authorized>
     <NotAuthorized>
@@ -34,3 +36,11 @@
         </li>
     </NotAuthorized>
 </AuthorizeView>
+
+@code
+{
+    private void OnAvatarClick()
+    {
+        NavigationManager.NavigateTo(Routes.User);
+    }
+}

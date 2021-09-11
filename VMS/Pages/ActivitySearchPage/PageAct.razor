@@ -10,8 +10,8 @@
                             @foreach (var item in pagedResult.Results)
                             {
                                 <div class="act__item row">
-                                    <div class="col-4">
-                                        <img class="w-100" src="@item.Banner" alt="">
+                                    <div class="col-4 h-100">
+                                        <img class="w-100 h-100" src="@item.Banner" alt="">
                                     </div>
                                     <div class="col-8 act__content">
                                         <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-3">@item.Name</a>

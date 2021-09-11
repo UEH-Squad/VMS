@@ -6,7 +6,7 @@
 /*#endregion */
 .my-navbar {
   min-height: 85px;
-  z-index: 1; }
+  z-index: 100; }
   @media (min-width: 992px) {
     .my-navbar {
       min-height: 110px; } }

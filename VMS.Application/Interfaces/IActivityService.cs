@@ -10,7 +10,7 @@ namespace VMS.Application.Interfaces
 
         Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
 
-        Task AddActivityAsync(CreateActivityViewModel activity);
+        Task<int> AddActivityAsync(CreateActivityViewModel activity);
 
         Task<CreateActivityViewModel> GetCreateActivityViewModelAsync(int activityId);
 

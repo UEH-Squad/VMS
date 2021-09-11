@@ -14,8 +14,13 @@ namespace VMS.Pages.ActivitySearchPage
 
         [Parameter]
         public List<AreaViewModel> ChoosenAreasList { get; set; }
+
+        [Parameter]
+        public bool IsSingleArea { get; set; }
+
         [CascadingParameter]
         private BlazoredModalInstance AreasModal { get; set; }
+
         [Inject]
         private IAreaService AreaService { get; set; }
 
@@ -28,6 +33,13 @@ namespace VMS.Pages.ActivitySearchPage
 
         private void ChangeState(AreaViewModel areaChoosen)
         {
+            if (IsSingleArea)
+            {
+                choosenAreas.Clear();
+                choosenAreas.Add(areaChoosen);
+                return;
+            }
+
             AreaViewModel area = choosenAreas.Find(a => a.Id == areaChoosen.Id);
             if (area is null)
             {

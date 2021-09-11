@@ -27,7 +27,6 @@ namespace VMS.Domain.Models
 
         public bool IsVirtual { get; set; }
         public bool IsActual { get; set; }
-        public bool IsClosed { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Website { get; set; }

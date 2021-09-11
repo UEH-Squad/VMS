@@ -11,21 +11,8 @@ namespace VMS.Infrastructure.Data.Migrations
                 name: "PostDate",
                 table: "Activities");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Commission",
-                table: "Activities",
-                type: "nvarchar(max)",
-                nullable: true);
-
             migrationBuilder.AddColumn<bool>(
                 name: "IsActual",
-                table: "Activities",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsClosed",
                 table: "Activities",
                 type: "bit",
                 nullable: false,
@@ -41,15 +28,7 @@ namespace VMS.Infrastructure.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Commission",
-                table: "Activities");
-
-            migrationBuilder.DropColumn(
                 name: "IsActual",
-                table: "Activities");
-
-            migrationBuilder.DropColumn(
-                name: "IsClosed",
                 table: "Activities");
 
             migrationBuilder.DropColumn(

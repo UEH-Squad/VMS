@@ -54,3 +54,12 @@
     }
 }
 /*------EndSearchBox-------*/
+
+/*------Text Result-------*/
+.text-result {
+    font-size: 16px;
+    color: $blue;
+    span {
+        color: $green;
+    }
+}

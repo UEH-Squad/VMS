@@ -42,3 +42,9 @@
   visibility: visible; }
 
 /*------EndSearchBox-------*/
+/*------Text Result-------*/
+.text-result {
+  font-size: 16px;
+  color: #18A0FB; }
+  .text-result span {
+    color: #64D72F; }

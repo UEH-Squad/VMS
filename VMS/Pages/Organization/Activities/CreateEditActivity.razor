@@ -1,0 +1,151 @@
+﻿@attribute [Route(Routes.CreateActivity)]
+@attribute [Route(Routes.EditActivity + "/{activityId:int}")]
+
+@attribute [Authorize]
+
+<div class="container-fluid">
+    <div class="row">
+        <EditForm Model="activity" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="col-11 col-xl-9 mx-auto">
+            <DataAnnotationsValidator />
+            @if (isErrorMessageShown)
+            {
+                <div class="text-center error-message">Bạn cần điền tất cả thông tin dưới đây để @(isEditPage ? "sửa" : "tạo") hoạt động</div>
+            }
+
+            <h1 class="text-center my-4 title"><span>@(isEditPage ? "Sửa" : "Tạo")</span> hoạt động</h1>
+            <div class="form-group mb-3">
+                <div class="mb-2">Tiêu đề <span class="required-asterick">(*)</span></div>
+                <InputText @bind-Value="activity.Name" class="form-control" placeholder="Nhập tiêu đề" />
+            </div>
+            <div class="form-group mb-3">
+                <div class="mb-2">Mô tả <span class="required-asterick">(*)</span></div>
+                <TinyMCEEditor @bind-Value="activity.Description" />
+            </div>
+            <div class="form-group mb-3">
+                <div class="row my-activity-type-group">
+                    <div class="col-3 align-self-center">Hình thức <span class="required-asterick">(*)</span></div>
+                    <div class="col-9 my-auto">
+                        <InputCheckbox @bind-Value="activity.IsVirtual" /> Virtual
+                        <InputCheckbox @bind-Value="activity.IsActual" class="ms-5" /> Actual
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="row my-form-group">
+                    <div class="col-3 align-self-center">Đối tượng tham gia <span class="required-asterick">(*)</span></div>
+                    <div class="col-9">
+                        <Typeahead SearchMethod="SearchTargets"
+                                   PlaceHolderText="Lựa chọn đối tượng tham gia"
+                                   @bind-Values="chosenTargets"
+                                   EnableDropDown="true"
+                                   class="col-5">
+                            <SelectedTemplate Context="target">
+                                @target
+                            </SelectedTemplate>
+                            <ResultTemplate Context="target">
+                                @target
+                            </ResultTemplate>
+                        </Typeahead>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="row my-activity-type-group">
+                    <div class="col-3 align-self-center">Lĩnh vực <span class="required-asterick">(*)</span></div>
+                    <div class="col-9 d-flex flex-wrap just">
+                        @foreach (var item in choosenAreas)
+                        {
+                            <div class="item me-5">
+                                <i class="material-icons">
+                                    @item.Icon
+                                </i>
+                                <span>@item.Name</span>
+                            </div>
+                        }
+                        <div class="item">
+                            <i class="material-icons-outlined add-icon" @onclick="ShowAreasPopupAsync">
+                                add
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="row my-form-group">
+                    <div class="col-3 align-self-center">Địa điểm tham gia <span class="required-asterick">(*)</span></div>
+                    <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap">
+                        <CascadingAddressPicker DistrictId="activity.DistrictId"
+                                                District="@activity.District"
+                                                ProvinceId="activity.ProvinceId"
+                                                Province="@activity.Province"
+                                                WardId="activity.WardId"
+                                                Ward="@activity.Ward"
+                                                OnAddressChanged="OnAddressChanged" />
+                        <InputText @bind-Value="activity.Address" class="form-control ms-xl-2 my-address-textbox" placeholder="Nhập số nhà, tên đường" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="row my-form-group">
+                    <div class="col-3 align-self-center">Thời gian diễn ra <span class="required-asterick">(*)</span></div>
+                    <div class="col-9 d-flex flex-row align-items-center">
+                        Từ <InputDate @bind-Value="activity.StartDate" @oninput="OnStartDateChanged" class="form-control ms-2 me-4 my-date-picker" placeholder="Ngày bắt đầu" />
+                        Đến <InputDate @bind-Value="activity.EndDate" @oninput="OnEndDateChanged" class="form-control ms-2 my-date-picker" placeholder="Ngày kết thúc" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="row my-form-group">
+                    <div class="col-3 align-self-center">Kỹ năng <span class="required-asterick">(*)</span></div>
+                    <div class="col-9 position-relative">
+                        <Typeahead SearchMethod="SearchSkills"
+                                   PlaceHolderText="Lựa chọn kỹ năng"
+                                   @bind-Values="activity.Skills"
+                                   class="col-5">
+                            <SelectedTemplate Context="target">
+                                @target.Name
+                            </SelectedTemplate>
+                            <ResultTemplate Context="target">
+                                @target.Name
+                            </ResultTemplate>
+                        </Typeahead>
+                        <div @onclick="ShowSkillsPopup" class="typeahead__input-icon position-absolute">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="align-self-center typeahead__down-arrow">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon id="Shape" points="0 0 24 0 24 24 0 24" />
+                                    <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" id="Path-94" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999) " />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="mb-2">Yêu cầu <span class="required-asterick">(*)</span></div>
+                <TinyMCEEditor @bind-Value="activity.Requirement" />
+            </div>
+            <div class="form-group mb-3">
+                <div class="mb-2">Sứ mệnh <span class="required-asterick">(*)</span></div>
+                <TinyMCEEditor @bind-Value="activity.Mission" />
+            </div>
+            <div class="form-group mb-3">
+                <div class="mb-2">Các nhiệm vụ tình nguyện sẽ tham gia <span class="required-asterick">(*)</span></div>
+                <TinyMCEEditor @bind-Value="activity.Commission" />
+            </div>
+            <div class="form-group mb-4">
+                <div class="mb-2">Thêm ảnh <span class="required-asterick">(*)</span></div>
+                <UploadImg InputFileChanged="HandleFileChanged"
+                           ImageDiscarded="HandleImageDiscarded"
+                           PreviewImgSrc="@activity.Banner"
+                           ShowPreview="true" />
+            </div>
+            <div class="d-flex justify-content-center ">
+                <a href="@Routes.User" class="me-5 btn btn-cancel">Thoát</a>
+                <button type="submit" class="btn btn-save">Lưu thay đổi</button>
+            </div>
+        </EditForm>
+    </div>
+    <SubFooter />
+</div>
+
+<Spinner IsLoading="isLoading" />

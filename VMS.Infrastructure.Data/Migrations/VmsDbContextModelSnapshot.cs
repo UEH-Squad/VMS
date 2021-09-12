@@ -1067,9 +1067,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Mission")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrgName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhoneNumber2")
                         .HasColumnType("nvarchar(max)");
 

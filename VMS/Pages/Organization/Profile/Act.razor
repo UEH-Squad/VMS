@@ -1,33 +1,35 @@
 ﻿@inject IJSRuntime JSRuntinme;
 
+@using VMS.Application.ViewModels
+
 <div class="container">
     <div class="row act">
         <h1>Hoạt động <span>@Title</span></h1>
         <div class="owl-carousel owl-theme organize__carousel position-relative">
             @foreach (var item in Datas)
             {
-            <div class="act-container item position-relative">
-                <div class="img-container position-relative">
-                    <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                    <div class="@(item.IsClose ? "overlay" : "")"></div>
+                <div class="act-container item position-relative">
+                    <div class="img-container position-relative">
+                        <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
+                        <div class="@(item.Isclosed ? "overlay" : "")"></div>
+                    </div>
+                    <div class="act-content">
+                        <a href="@Routes.ActivityInfo" class="@(item.Isclosed ? "content-cl" : "content-nm")">
+                            <h3 class="act-title lm-text @(item.Isclosed ? "title-cl" : "title-nm")">@item.Title</h3>
+                        </a>
+                    </div>
+                    <ul class="act-menu p-2 @(item.ActivityId == showId ? "d-block" : "d-none")">
+                        <li class="edit pb-2">Chỉnh sửa</li>
+                        <li @onclick="DeleteConfirm" class="delete pb-2">Xóa</li>
+                        <li @onclick="() => CloseConfirm(item.ActivityId)" class="close pb-2">Đóng hoạt động</li>
+                    </ul>
+                    @if (HaveControl)
+                    {
+                        <i @onclick="() => ShowMenu(item.ActivityId)" class="material-icons position-absolute @(item.Isclosed ? "d-none" : "")">
+                            more_horiz
+                        </i>
+                    }
                 </div>
-                <div class="act-content">
-                    <a href="@Routes.ActivityInfo" class="@(item.IsClose ? "content-cl" : "content-nm")">
-                        <h3 class="act-title lm-text @(item.IsClose ? "title-cl" : "title-nm")">@item.Title</h3>
-                    </a>
-                </div>
-                <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                    <li class="edit pb-2">Chỉnh sửa</li>
-                    <li @onclick="DeleteConfirm" class="delete pb-2">Xóa</li>
-                    <li @onclick="() => CloseConfirm(item.Id)" class="close pb-2">Đóng hoạt động</li>
-                </ul>
-                @if (HaveControl)
-                {
-                    <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute @(item.IsClose ? "d-none" : "")">
-                        more_horiz
-                    </i>
-                }
-            </div>
             }
         </div>
         @if (HaveDecor)
@@ -110,16 +112,17 @@
     [Parameter]
     public string Title { get; set; }
     [Parameter]
-    public List<FakeData> Datas { get; set; }
+    public List<OrgActViewModel> Datas { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntinme.InvokeVoidAsync("vms.OrganizeCarousel");
     }
 
+    int showId;
     void ShowMenu(int Id)
     {
-        Datas[Id].IsMenu = !Datas[Id].IsMenu;
+        showId = Id;
     }
 
     bool isDeleteConfirm = false;
@@ -127,7 +130,7 @@
     void DeleteConfirm()
     {
         isDeleteConfirm = !isDeleteConfirm;
-        Datas.ForEach(a => a.IsMenu = false);
+        showId = 0;
     }
 
     bool isCloseConfirm = false;
@@ -135,7 +138,7 @@
     void CloseConfirm(int Id)
     {
         isCloseConfirm = !isCloseConfirm;
-        Datas.ForEach(a => a.IsMenu = false);
+        showId = 0;
         pendingId = Id;
     }
 
@@ -161,8 +164,8 @@
         {
             isCloseConfirm = false;
         }
-        Datas[pendingId].IsClose = true;
+        Datas[pendingId].Isclosed = true;
         pendingId = Datas.Count - 1;
-        Datas = Datas.OrderBy(x => x.IsClose).ToList();
+        Datas = Datas.OrderBy(x => x.Isclosed).ToList();
     }
 }

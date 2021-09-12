@@ -1,31 +1,26 @@
-﻿@attribute [Route(Routes.User)]
+﻿@attribute [Route(Routes.Organizations + "/{OrgId}")]
 
-<Information></Information>
-<Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas=@actOrganizes/>
-<Act Title="được yêu thích" HaveDecor="false" Datas=@actFavorites/>
+@using VMS.Application.ViewModels
+@using VMS.Application.Interfaces
+
+<Information OrgId="@OrgId"></Information>
+<Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas="act"/>
+<Act Title="được yêu thích" HaveDecor="false"  Datas="actfavor"/>
 <ActTookPlace></ActTookPlace>
 
 
 @code {
-    private List<FakeData> actOrganizes = new();
-    private List<FakeData> actFavorites = new();
-
-    protected override void OnInitialized()
+    private List<OrgActViewModel> act =new();
+    private List<OrgActViewModel> actfavor = new();
+    private List<OrgActViewModel> actcompleted;
+    [Parameter]
+    public string OrgId { get; set; }
+    [Inject]
+    private IOrganizationService OrganizationService { get; set; }
+    protected async override Task OnInitializedAsync()
     {
-
-        for (int i = 0; i < 8; i++)
-        {
-            actOrganizes.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
-                IsMenu = false
-            });
-            actFavorites.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"
-            });
-        }
+        act = await OrganizationService.GetOrgActs(OrgId);
+        actfavor = await OrganizationService.GetOrgActFavourite(OrgId);
+        actcompleted = await OrganizationService.GetOrgActCompleted(OrgId);
     }
 }

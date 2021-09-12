@@ -10,7 +10,7 @@
                     <InputFile OnChange="ShowModal" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
                 </div>
                 <p class="mb-2">Công nghệ thông tin kinh doanh</p>
-                <span>Tham gia từ năm 2021</span>
+                <span>Tham gia từ năm @org?.CreateDate</span>
                 <a class="information__logo-button">
                     <i class="material-icons-outlined">add</i>
                     <span>Tạo hoạt động mới</span>
@@ -62,24 +62,23 @@
                     <div class="col-left information__fields">
                         <h3>Lĩnh vực <span>chuyên môn</span></h3>
                         <div class="owl-carousel owl-theme information__carousel">
-                            <div class="item">
-                                <i class="material-icons">group</i>
-                                <span>Cộng đồng</span>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons">group</i>
-                                <span>Giáo dục</span>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons">group</i>
-                                <span>Thể thao</span>
-                            </div>
+                            @if (org != null)
+                            {
+                                @foreach (var area in org.UserAreas)
+                                {
+                                    <div class="item">
+                                        <i class="material-icons">@area.Area.Icon</i>
+                                        <span>@area.Area.Name</span>
+                                    </div>
+                                }
+                            }
+
                         </div>
                     </div>
                     <div class="col-right information__act px-0">
                         <h3>Số hoạt động <span>đã tạo</span></h3>
                         <div class="d-flex justify-content-evenly align-self-center">
-                            <span class="information__act-number">30</span>
+                            <span class="information__act-number">@org?.Activities</span>
                         </div>
                     </div>
                 </div>
@@ -114,6 +113,4 @@
 
         isNotification = !isNotification;
     }
-
-
 }

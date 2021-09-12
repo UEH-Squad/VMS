@@ -10,6 +10,12 @@
     <div class="row">
             <section>
                 <form id="account" method="post">
+                    @if (!ModelState.IsValid)
+                        {
+                            <div class="">
+                                <label class="text-danger">Email hoặc mật khẩu không hợp lệ.</label>
+                            </div>
+                        }
                     <div class="form-group mt-4">
                         <div class="position-relative">
                             <input asp-for="Input.Email" class="my-input" placeholder="Tên đăng nhập" />

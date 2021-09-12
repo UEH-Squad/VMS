@@ -51,7 +51,6 @@ namespace VMS.Areas.Identity.Pages.Account
             [Display(Name = "Nhớ tài khoản")]
             public bool RememberMe { get; set; }
         }
-
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
@@ -68,19 +67,25 @@ namespace VMS.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
             if (ModelState.IsValid)
             {
-                return RedirectToPage("./ForgotPasswordConfirmation");
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                if (result.IsNotAllowed)
+                {
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                        user.EmailConfirmed = true;
+                    result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToPage("./ForgotPasswordConfirmation");
+                    }
+                }
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");

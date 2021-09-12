@@ -1,0 +1,9 @@
+﻿<div class="overlay" style="@(IsLoading ? "width:100%;" : "")">
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+
+@code
+{
+    [Parameter]
+    public bool IsLoading { get; set; }
+}

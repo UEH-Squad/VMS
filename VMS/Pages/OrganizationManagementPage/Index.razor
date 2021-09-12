@@ -11,18 +11,15 @@
                 </div>
             </div>
             <div class="col-6">
-                <VMS.Pages.OrganizationManagementPage.SearchBar />
-            </div>
-            <div class="filter col-3">
-                <VMS.Pages.OrganizationManagementPage.Filter @bind-FilterAct="filter" />
+                <SearchBar />
             </div>
             <div class="activities col-9">
-                <VMS.Pages.OrganizationManagementPage.ActivitiesCard />
+                <ActivitiesCard />
             </div>
             <div class="filter col-1">
             </div>
             <div class="filter col-2">
-                <VMS.Pages.OrganizationManagementPage.Filter />
+                <Filter @bind-FilterAct="filter"/>
             </div>
         </div>
     </div>

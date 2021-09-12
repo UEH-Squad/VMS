@@ -10,7 +10,7 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
-        private bool isSearch = false;
+        private bool isSearch = true;
         private Dictionary<ActOrderBy, bool> orderList = new(new List<KeyValuePair<ActOrderBy, bool>>() {
             new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Newest, false),
             new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Nearest, false),

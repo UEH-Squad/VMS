@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
+using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<PagedResult<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage);
+        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage);
 
         Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
 

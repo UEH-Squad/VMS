@@ -10,6 +10,7 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Domain.Models;
+using VMS.GenericRepository;
 
 namespace VMS.Pages.ActivitySearchPage
 {
@@ -19,7 +20,7 @@ namespace VMS.Pages.ActivitySearchPage
         private int page = 1;
         private Coordinate location;
         private IEnumerable<ActivityViewModel> featuredActivities;
-        private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
+        private PaginatedList<ActivityViewModel> pagedResult = new(new(), 0, 1, 1);
 
         [Parameter]
         public bool IsSearch { get; set; }

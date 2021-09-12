@@ -31,56 +31,44 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        public async Task<PagedResult<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage)
+        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            List<ActivityViewModel> activities;
-
             if (isSearch)
             {
-                activities = await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext);
+                return await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, orderList, userLocation, currentPage);
             }
             else
             {
-                activities = await GetAllActivitiesWithFilterAsync(filter, dbContext);
+              return await GetAllActivitiesWithFilterAsync(filter, dbContext, orderList, userLocation, currentPage);
             }
-
-            activities = GetOrderActivities(orderList, activities, userLocation);
-
-            PagedResult<ActivityViewModel> result = new PagedResult<ActivityViewModel>
-            {
-                CurrentPage = currentPage,
-                RowCount = activities.Count,
-                PageSize = 20
-            };
-            result.PageCount = (int)Math.Ceiling(result.RowCount * 1.0 / result.PageSize);
-            result.Results = activities.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize).ToList();
-
-            return result;
         }
 
-        private async Task<List<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage)
         {
-            Specification<Activity> specification = new()
+            PaginationSpecification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
                     a => a.EndDate >= DateTime.Now
-                }
+                },
+                PageIndex = currentPage,
+                PageSize = 20,
+                OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
-            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+            PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
+            activities.Items.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
-            return _mapper.Map<List<ActivityViewModel>>(activities);
+            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
         }
 
-        private async Task<List<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage)
         {
-            Specification<Activity> specification = new()
+            PaginationSpecification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
@@ -94,58 +82,17 @@ namespace VMS.Application.Services
                                          .Count() == filter.Skills.Count,
                     a => a.EndDate >= DateTime.Now
                 },
-                Includes = a => a.Include(x => x.ActivitySkills)
+                Includes = a => a.Include(x => x.ActivitySkills),
+                PageIndex = currentPage,
+                PageSize = 20,
+                OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
-            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+            PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            activities.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
+            activities.Items.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
-            return _mapper.Map<List<ActivityViewModel>>(activities);
-        }
-
-        private static List<ActivityViewModel> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, List<ActivityViewModel> activities, Coordinate userLocation)
-        {
-            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
-            {
-                return activities = activities.OrderByDescending(a => a.PostDate)
-                                            .ThenByDescending(a => a.MemberQuantity)
-                                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                            .ToList();
-            }
-
-            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Hottest])
-            {
-                return activities = activities.OrderByDescending(a => a.PostDate)
-                                            .ThenByDescending(a => a.MemberQuantity)
-                                            .ToList();
-            }
-
-            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest])
-            {
-                return activities = activities.OrderByDescending(a => a.PostDate)
-                                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                            .ToList();
-            }
-
-            if (orderList[ActOrderBy.Hottest] && orderList[ActOrderBy.Nearest])
-            {
-                return activities = activities.OrderByDescending(a => a.MemberQuantity)
-                                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
-                                            .ToList();
-            }
-
-            if (orderList[ActOrderBy.Hottest])
-            {
-                return activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
-            }
-
-            if (orderList[ActOrderBy.Nearest])
-            {
-                return activities = activities.OrderBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
-            }
-
-            return activities = activities.OrderByDescending(a => a.PostDate).ToList();
+            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
         }
 
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()
@@ -410,6 +357,46 @@ namespace VMS.Application.Services
             }
 
             return result;
+        }
+
+        private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
+        {
+            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
+            {
+                return x => x.OrderByDescending(a => a.Id)
+                            .ThenByDescending(a => a.MemberQuantity)
+                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Latitude, a.Longitude, 2, DistanceUnit.Meters));
+            }
+
+            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Hottest])
+            {
+                return x => x.OrderByDescending(a => a.Id)
+                            .ThenByDescending(a => a.MemberQuantity);
+            }
+
+            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest])
+            {
+                return x => x.OrderByDescending(a => a.Id)
+                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Latitude, a.Longitude, 2, DistanceUnit.Meters));
+            }
+
+            if (orderList[ActOrderBy.Hottest] && orderList[ActOrderBy.Nearest])
+            {
+                return x => x.OrderByDescending(a => a.MemberQuantity)
+                                            .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Latitude, a.Longitude, 2, DistanceUnit.Meters));
+            }
+
+            if (orderList[ActOrderBy.Hottest])
+            {
+                return x => x.OrderByDescending(a => a.MemberQuantity);
+            }
+
+            if (orderList[ActOrderBy.Nearest])
+            {
+                return x => x.OrderBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Latitude, a.Longitude, 2, DistanceUnit.Meters));
+            }
+
+            return x => x.OrderByDescending(a => a.Id);
         }
     }
 }

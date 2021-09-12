@@ -1,7 +1,7 @@
 ﻿@import '_variables';
 .my-navbar {
     min-height: 85px;
-    z-index: 1;
+    z-index: 100;
 
     @include on('lg') {
         min-height: 110px;

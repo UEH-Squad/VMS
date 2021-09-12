@@ -19,6 +19,13 @@
 
         #endregion Main
 
+        #region Activity
+
+        public const string CreateActivity = "/tao-hoat-dong";
+        public const string EditActivity = "/sua-hoat-dong";
+
+        #endregion Activity
+
         #region Topic
 
         public const string Topic = "/chu-de";

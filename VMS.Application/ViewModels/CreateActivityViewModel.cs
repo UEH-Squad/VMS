@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using VMS.Domain.Models;
+using VMS.Common.CustomValidations;
 
 namespace VMS.Application.ViewModels
 {
     public class CreateActivityViewModel
     {
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
         public string OrgId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
+        public DateTime EndDate { get; set; } = DateTime.Now.AddDays(7);
+
+        [Required]
         public string Mission { get; set; }
+
+        [Required]
+        public string Commission { get; set; }
+
         public bool IsVirtual { get; set; }
-        public string Website { get; set; }
+        public bool IsActual { get; set; }
+
         public string Banner { get; set; }
+
+        public string Address { get; set; }
         public string FullAddress { get; set; }
 
         [Required]
@@ -22,24 +36,29 @@ namespace VMS.Application.ViewModels
         [Required]
         public string Description { get; set; }
 
-        [Required]
-        public string Address { get; set; }
+        public string Targets { get; set; }
 
-        [Required]
+        [RequiredGreaterThanZero]
         public int AreaId { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        public string AreaName { get; set; }
+        public string AreaIcon { get; set; }
 
-        [Range(1, 11371, ErrorMessage = "Invalid Address")]
+        [RequiredGreaterThanZero]
         public int ProvinceId { get; set; }
 
-        [Range(1, 11371, ErrorMessage = "Invalid Address")]
+        public string Province { get; set; }
+
+        [RequiredGreaterThanZero]
         public int DistrictId { get; set; }
 
-        [Range(1, 11371, ErrorMessage = "Invalid Address")]
+        public string District { get; set; }
+
         public int WardId { get; set; }
 
-        public ICollection<Skill> Skills { get; set; }
+        public string Ward { get; set; }
+
+        [RequiredHasItems]
+        public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
     }
 }

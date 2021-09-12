@@ -53,7 +53,8 @@
   display: flex;
   flex-direction: row;
   padding: 20px 18px;
-  height: 260px; }
+  height: 260px;
+  background-color: #F3F3F5; }
 
 .org-card__img {
   flex: 1;
@@ -130,10 +131,9 @@
     .org-card__btn-edit__list li {
       z-index: 10000;
       list-style: none;
-      padding: 0 5px;
-      border-radius: 5px; }
+      padding: 0 10px; }
     .org-card__btn-edit__list li:hover {
-      background-color: rgba(0, 0, 0, 0.1); }
+      background: rgba(24, 160, 251, 0.1); }
 
 .org-card__btn-list {
   position: absolute;
@@ -148,6 +148,11 @@
   transform: translate(0, -50%);
   min-width: 136px;
   background-color: #18A0FB; }
+  .org-card__cbb-rate .expand-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-20%, 25%); }
   .org-card__cbb-rate__list {
     z-index: 10;
     font-size: 12px;
@@ -156,10 +161,9 @@
     animation: dropDown 0.2s ease backwards; }
     .org-card__cbb-rate__list li {
       list-style: none;
-      padding: 0 5px;
-      border-radius: 5px; }
+      padding: 0 10px; }
     .org-card__cbb-rate__list li:hover {
-      background-color: rgba(0, 0, 0, 0.1); }
+      background: rgba(24, 160, 251, 0.1); }
 
 .close-icon {
   position: absolute;
@@ -171,25 +175,33 @@
   user-select: none; }
   .close-icon span {
     font-size: 16px;
-    background-color: #DBDBDB;
+    background: rgba(196, 196, 196, 0.5);
     padding: 5px;
     border-radius: 100%; }
+
+.popup-container {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.01); }
 
 .notify {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(0%, -50%);
+  transform: translate(-80%, -50%);
   padding: 0 50px;
   min-width: 267px;
   min-height: 67px;
   background-color: white;
   box-shadow: 0px 4px 60px 2px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  animation: pop-up 2s linear forwards; }
+  border-radius: 5px; }
   .notify .content {
     text-align: center;
     font-family: Montserrat;
@@ -205,9 +217,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-80%, -50%);
   padding: 20px 50px;
-  width: 350px;
+  width: 380px;
   min-height: 67px;
   background-color: white;
   box-shadow: 0px 4px 60px 2px rgba(0, 0, 0, 0.25);
@@ -219,7 +231,12 @@
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    color: #64D72F; }
+    .confirm .content.--del span {
+      color: red; }
+    .confirm .content.--close span {
+      color: #18A0FB; }
   .confirm .btn-yes, .confirm .btn-cancel {
     position: relative;
     display: inline-block; }

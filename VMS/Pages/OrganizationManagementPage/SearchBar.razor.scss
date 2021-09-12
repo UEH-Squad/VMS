@@ -1,26 +1,65 @@
-﻿@import "../../Resources/scss/common/_variables";
+﻿@import '../../Resources/scss/common/_variables';
 
-//------------------------------SEARCH--------------------------//
-.org-search {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    padding: 5px 20px;
-    border-bottom: 2px solid $border-color-bold;
-    margin-bottom: 50px;
-    align-items: center;
-
+/*------SearchBox--------*/
+.my-search-box {
     &__input {
-        flex: 19;
+        width: 100%;
+        outline: none;
         border: none;
-        text-align: center;
+        border-bottom: 1px solid $border-color-normal;
+        font-size: 18px;
+        color: $blue;
+        font-weight: 500;
+
+        &::placeholder {
+            color: $green;
+        }
     }
 
-    &__btn {
-        flex: 1;
-        border-left: 2px solid $border-color-bold;
-        border-radius: 0;
-        color: $blue;
-        justify-self: center;
+    &__icon-wrapper {
+        margin-left: -56px;
+
+        span {
+            color: $green;
+            font-size: 26px;
+            line-height: 24px;
+        }
+
+        #clear-search {
+            background-color: none;
+        }
+
+        .search-btn {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+
+            span {
+                background-color: #e5e5e58c;
+                padding: 2px;
+                margin-bottom: 3px;
+                border-radius: 3px;
+            }
+        }
+
+        .clear-search-btn {
+            margin-top: -4px;
+            visibility: hidden;
+            cursor: pointer;
+        }
+    }
+
+    &__input:not(:placeholder-shown) ~ &__icon-wrapper .clear-search-btn {
+        visibility: visible;
+    }
+}
+/*------EndSearchBox-------*/
+
+/*------Text Result-------*/
+.text-result {
+    font-size: 16px;
+    color: $blue;
+    span {
+        color: $green;
     }
 }

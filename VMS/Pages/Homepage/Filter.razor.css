@@ -93,10 +93,11 @@
       @media (min-width: 992px) {
         .my-filter .item span {
           font-size: 24px; } }
-  .my-filter .item-covid i {
+  .my-filter .item-covid .icon-covid {
+    color: #FFFFFF;
     background: #F14747; }
-  .my-filter .item-covid .icon-coivd {
-    color: #FFFFFF; }
+  .my-filter .item-covid span {
+    color: #F14747; }
   .my-filter ::deep .owl-nav .owl-prev {
     position: absolute;
     top: -35px;

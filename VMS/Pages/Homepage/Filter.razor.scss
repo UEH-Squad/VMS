@@ -46,7 +46,8 @@
 
     .item {
         text-align: center;
-        a{
+
+        a {
             text-decoration: none;
         }
 
@@ -97,13 +98,13 @@
         }
 
         @include on("lg") {
-            &:hover i{
+            &:hover i {
                 font-size: 45px
             }
         }
 
         @include on("xxl") {
-            &:hover  i {
+            &:hover i {
                 font-size: 55px
             }
         }
@@ -130,12 +131,14 @@
     }
 
     .item-covid {
-        i {
+
+        .icon-covid {
+            color: $white;
             background: #F14747;
         }
 
-        .icon-coivd {
-            color: $white;
+        span {
+            color: #F14747;
         }
     }
 

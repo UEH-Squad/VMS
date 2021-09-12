@@ -1,10 +1,10 @@
 ﻿@import '_variables';
 .my-navbar {
-    min-height: 85px;
-    z-index: 1;
+    min-height: 75px;
+    z-index: 100;
 
     @include on('lg') {
-        min-height: 110px;
+        min-height: 90px;
     }
 
     &-container {
@@ -29,16 +29,17 @@
             @include on('md') {
                 width: 150px;
                 height: 40px;
-                font-size: 18px;
+                font-size: 16px;
                 margin-right: 15px;
             }
 
             @include on('lg') {
                 width: 200px;
                 height: 60px;
-                font-size: 24px;
+                font-size: 20px;
                 margin-right: 0;
             }
+
         }
 
         .my-login-btn, .my-register-btn {
@@ -65,12 +66,11 @@
         }
 
         .brand__ueh {
-            height: 40px;
-            margin-bottom: -7px;
-            margin-left: -16px;
+            height: 20px;
+            margin-bottom: 4px;
 
             @include on('lg') {
-                height: 3.4rem;
+              height: 26px;
             }
         }
 
@@ -78,7 +78,7 @@
             height: 16px;
 
             @include on('lg') {
-                height: 28px;
+                height: 22px;
             }
         }
     }
@@ -128,7 +128,7 @@
     right: 15px;
     min-width: 220px;
     width: 40vw;
-    
+
 
     @include on('xl') {
         position: unset;
@@ -140,7 +140,6 @@
 
     &__list {
         width: auto;
-
         /*@include on('xl') {
             margin-left: 6%;
         }
@@ -154,9 +153,10 @@
         font-size: 16px;
         color: $blue;
         display: block;
+        font-weight: 500;
 
         @include on('xl') {
-            font-size: 22px;
+            font-size: 18px;
 
             &:before {
                 content: "";
@@ -175,7 +175,7 @@
         }
 
         @include on('xxl') {
-            font-size: 24px;
+            font-size: 20px;
         }
 
         &:hover {

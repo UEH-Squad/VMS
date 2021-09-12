@@ -18,25 +18,43 @@
 
         h1 {
             margin-bottom: 30px;
-            font-size: 36px;
-            font-weight: 600;
 
-            @include on('sm') {
-                font-size: 54px;
+            svg {
+                font-size: 36px;
+
+                @include on('sm') {
+                    font-size: 54px;
+                }
+
+                @include on('lg') {
+                    font-size: 64px;
+                }
+
+                @include on('xl') {
+                    font-size: 80px;
+                }
+
+                @include on('xxl') {
+                    font-size: 100px;
+                }
             }
 
-            @include on('lg') {
-                font-size: 64px;
-            }
-
-            @include on('xl') {
-                font-size: 72px;
-            }
-            i,svg{
-                font-size:100px;
-            }
-            span{
+            span {
                 margin: 0 15px;
+                font-weight: 500;
+                font-size: 36px;
+
+                @include on('sm') {
+                    font-size: 42px;
+                }
+
+                @include on('md') {
+                    font-size: 54px;
+                }
+
+                @include on('xl') {
+                    font-size: 72px;
+                }
             }
         }
 

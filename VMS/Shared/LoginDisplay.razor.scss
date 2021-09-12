@@ -28,7 +28,7 @@
 
 .login-btn {
     background-color: $blue;
-    width: 150px;
+    width: 137px;
     height: 45px;
 
     &:hover {
@@ -36,14 +36,15 @@
     }
 
     @include on('xl') {
-        width: 200px;
-        height: 60px;
-        font-size: 22px;
+        width: 147px;
+        height: 50px;
+        font-size: 18px;
         line-height: 60px;
     }
 
     @include on('xxl') {
-        font-size: 24px;
+        font-size: 20px;
+
     }
 }
 
@@ -59,8 +60,8 @@
             margin: 0 auto;
 
             @include on('xl') {
-                width: 65px;
-                height: 65px;
+                width: 60px;
+                height: 60px;
             }
         }
 

@@ -10,24 +10,22 @@
     z-index: 0; }
   .my-rank h1 {
     color: #18A0FB;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 500; }
     .my-rank h1 span {
       color: #64D72F; }
   .my-rank .rank__link-organization {
     display: inline-block;
-    margin: 20px 100px 20px 0;
-    color: #18A0FB;
-    font-size: 30px;
-    font-weight: 500;
-    text-decoration: none; }
+    margin: 10px 100px 10px 0;
+    color: #707070;
+    font-size: 26px;
+    font-weight: 500; }
     .my-rank .rank__link-organization:hover {
       color: #0B588c; }
   .my-rank .rank__link-students {
     color: #64D72F;
-    font-size: 30px;
-    font-weight: 500;
-    text-decoration: none; }
+    font-size: 26px;
+    font-weight: 500; }
     .my-rank .rank__link-students:hover {
       color: #306C14; }
   .my-rank ::deep .owl-stage {
@@ -39,29 +37,29 @@
     background-color: rgba(196, 196, 196, 0.2);
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25); }
     .my-rank ::deep .owl-item .rank__img-rank {
-      width: 15%;
+      width: 12%;
       position: absolute;
       top: 0;
-      left: 5%; }
+      left: 7%; }
       .my-rank ::deep .owl-item .rank__img-rank img {
         width: 70%;
         margin: 0 auto;
         transition: all 1s linear; }
       .my-rank ::deep .owl-item .rank__img-rank span {
         position: absolute;
-        top: 8%;
+        top: 0%;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 45px;
+        font-size: 35px;
         font-weight: 600;
         color: #FFFFFF;
         transition: all 1s linear; }
     .my-rank ::deep .owl-item .rank__cup {
       position: absolute;
       top: 3%;
-      right: 5%;
+      right: 7%;
       color: #64D72F;
-      font-size: 70px;
+      font-size: 60px;
       transition: all 1s linear; }
   .my-rank ::deep .owl-item.active {
     margin: auto 0;
@@ -71,9 +69,9 @@
     .my-rank ::deep .owl-item.active .rank__img-rank img {
       width: 100%; }
     .my-rank ::deep .owl-item.active .rank__img-rank span {
-      font-size: 65px; }
+      font-size: 55px; }
     .my-rank ::deep .owl-item.active .rank__cup {
-      font-size: 100px; }
+      font-size: 80px; }
   .my-rank ::deep .owl-nav {
     display: inline-block; }
     .my-rank ::deep .owl-nav .owl-prev span {
@@ -95,6 +93,7 @@
       .my-rank ::deep .owl-nav .owl-next span:hover {
         color: #0B588c; }
   .my-rank ::deep .owl-dots {
+    transform: translateY(-100%);
     display: block; }
     .my-rank ::deep .owl-dots span {
       background-color: #C4C4C4; }
@@ -108,38 +107,38 @@
   .my-rank .rank__img {
     overflow: hidden; }
     .my-rank .rank__img img {
-      width: 200px;
-      height: 200px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       object-fit: cover; }
   .my-rank .rank__name {
     margin: 0;
     color: #64D72F;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 600; }
   .my-rank .rank__review {
     margin: 15px 0;
     display: inline-block;
-    background-color: rgba(237, 241, 49, 0.45);
+    background-image: linear-gradient(to top, rgba(237, 241, 49, 0.45), rgba(255, 255, 255, 0.45));
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
     padding: 10px 40px;
     border-radius: 10px;
     color: #515151;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600; }
   .my-rank .rank__act p {
     margin-bottom: 0;
     color: #18A0FB;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600; }
   .my-rank .rank__act span {
     color: #64D72F;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500; }
   .my-rank .rank__star p {
     margin-bottom: 5px;
     color: #18A0FB;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600; }
   .my-rank .rank__star i {
     color: #EDF131;

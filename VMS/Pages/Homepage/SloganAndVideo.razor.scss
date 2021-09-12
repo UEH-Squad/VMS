@@ -53,7 +53,7 @@
 @include on('sm') {
     .video-header {
         &__note {
-            height: 55px;
+            height: 40px;
 
             &__text {
                 height: 40px;
@@ -73,7 +73,7 @@
 @include on('lg') {
     .video-header {
         &__note {
-            height: 65px;
+            height: 45px;
 
             &__text {
                 width: 100%;
@@ -93,7 +93,7 @@
 @include on('xl') {
     .video-header {
         &__note {
-            height: 65px;
+            height: 50px;
 
             &__text {
                 width: 100%;
@@ -113,7 +113,7 @@
 @include on('xxl') {
     .video-header {
         &__note {
-            height: 65px;
+            height: 55px;
 
             &__text {
                 width: 100%;

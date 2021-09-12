@@ -3,8 +3,8 @@
 <div class="my-rank">
     <div class="container position-relative">
         <h1>Đại lộ <span>danh vọng</span></h1>
-        <a @onclick="showOrg" class="rank__link-organization">Tổ chức</a>
-        <a @onclick="showPer" class="rank__link-students">Sinh viên</a>
+        <span @onclick="showOrg" class="rank__link-organization">Tổ chức</span>
+        <span @onclick="showPer" class="rank__link-students">Sinh viên</span>
         <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-5">
             @foreach (var item in organizations)
             {

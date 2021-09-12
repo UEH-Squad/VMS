@@ -292,9 +292,9 @@ namespace VMS.Application.Services
                     a => a.Id == activityId
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
+                                .Include(x => x.ActivityAddresses).ThenInclude(s => s.AddressPath)
                                 .Include(x => x.Area)
                                 .Include(x => x.Organizer)
-                                .Include(x => x.ActivityTargets)
             };
 
             Activity activity = await _repository.GetAsync(dbContext, specification);
@@ -308,6 +308,12 @@ namespace VMS.Application.Services
                 Id = a.SkillId,
                 Name = a.Skill.Name,
                 IsDeleted = a.Skill.IsDeleted
+            }).ToList();
+
+            activityViewModel.AddressPaths = activity.ActivityAddresses.Select(a => new AddressPath
+            {
+                Id = a.AddressPathId,
+                Name = a.AddressPath.Name
             }).ToList();
 
             return activityViewModel;

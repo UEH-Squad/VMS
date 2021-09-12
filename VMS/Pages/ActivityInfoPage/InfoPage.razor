@@ -32,7 +32,7 @@
         <div class="infopage-activity">
             <div class="activity__description">
                 <p class="content">
-                    @activity.Description
+                    @((MarkupString)activity.Description)
                 </p>
             </div>
             <div class="activity__image">
@@ -44,13 +44,13 @@
             <div class="activity__mission">
                 <p class="mission">Sứ mệnh:</p>
                 <ul class="misson-list">
-                    @activity.Mission
+                    @((MarkupString)activity.Mission)
                 </ul>
             </div>
             <div class="activity__assignment">
                 <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
                 <ul class="assignment-list">
-                    @activity.Commission
+                    @((MarkupString)activity.Commission)
                 </ul>
             </div>
         </div>

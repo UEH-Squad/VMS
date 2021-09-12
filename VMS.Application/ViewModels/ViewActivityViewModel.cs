@@ -25,10 +25,12 @@ namespace VMS.Application.ViewModels
         public string Website { get; set; }
         public string Banner { get; set; }
         public bool IsApproved { get; set; }
+        public string Targets { get; set; }
 
         public Area Area { get; set; }
         public User Organizer { get; set; }
         public ICollection<Skill> Skills { get; set; }
+        public ICollection<AddressPath> AddressPaths { get; set; }
         public ICollection<ActivityImage> ActivityImages { get; set; }
         public ICollection<ActivityTarget> ActivityTargets { get; set; }
     }

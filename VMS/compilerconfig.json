@@ -118,5 +118,25 @@
   {
     "outputFile": "Pages/Organization/Activities/NotificationPopup.razor.css",
     "inputFile": "Pages/Organization/Activities/NotificationPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/Act.razor.css",
+    "inputFile": "Pages/Organization/Profile/Act.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/ActTookPlace.razor.css",
+    "inputFile": "Pages/Organization/Profile/ActTookPlace.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/EditOrganizationProfile.razor.css",
+    "inputFile": "Pages/Organization/Profile/EditOrganizationProfile.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/Information.razor.css",
+    "inputFile": "Pages/Organization/Profile/Information.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/Notification.razor.css",
+    "inputFile": "Pages/Organization/Profile/Notification.razor.scss"
   }
 ]

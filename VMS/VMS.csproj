@@ -48,6 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\activities\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

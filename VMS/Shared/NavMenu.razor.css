@@ -120,7 +120,7 @@
     font-size: 16px;
     color: #18A0FB;
     display: block;
-    font-weight: 600; }
+    font-weight: 500; }
     @media (min-width: 1200px) {
       .my-collapse__list__link {
         font-size: 18px; }
@@ -130,7 +130,7 @@
           left: 0;
           right: 0;
           height: 5px;
-          top: 71px;
+          top: 84px;
           background-color: #0B588C;
           display: none; }
         .my-collapse__list__link:hover.my-collapse__list__link::before {

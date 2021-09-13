@@ -3,11 +3,8 @@
 <div class="my-rank">
     <div class="container position-relative">
         <h1>Đại lộ <span>danh vọng</span></h1>
-        <p class="rank__link d-flex align-items-center">
-            <span @onclick="showOrg" class="rank__link-organization @(isShowOrg ? "cssShowOrg": "" )">Tổ chức</span>
-            <span @onclick="showPer" class="rank__link-students @(isShowPer  ? "cssShowPer": "" )">Sinh viên</span>
-        </p>
-        
+        <span @onclick="showOrg" class="rank__link-organization">Tổ chức</span>
+        <span @onclick="showPer" class="rank__link-students">Sinh viên</span>
         <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-5">
             @foreach (var item in organizations)
             {
@@ -94,22 +91,13 @@
         await JSRuntinme.InvokeVoidAsync("vms.RankCarousel");
     }
 
-    private bool isShowOrg = true;
-    private bool isShowPer = false;
-
     void showOrg()
     {
         organizations = GetData(0).ToList();
-        isShowOrg = true;
-        isShowPer = false;
     }
 
     void showPer()
     {
         organizations = GetData(1).ToList();
-        isShowOrg = false;
-        isShowPer = true;
     }
-
-
 }

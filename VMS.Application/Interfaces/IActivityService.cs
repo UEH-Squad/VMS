@@ -7,7 +7,7 @@ namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage);
+        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null);
 
         Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
 

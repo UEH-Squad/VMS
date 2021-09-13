@@ -64,12 +64,12 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnParametersSetAsync()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, location, page);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page, OrderList, location);
         }
 
         private async Task HandlePageChanged()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, location, page);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page, OrderList, location);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

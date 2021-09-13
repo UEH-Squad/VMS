@@ -19,6 +19,8 @@ namespace VMS.Application.ViewModels
         public bool IsVirtual { get; set; }
         public bool IsPin { get; set; }
         public double Rate { get; set; }
+        public bool IsClosed { get; set; }
+        public bool IsDeleted { get; set; }
 
         public Coordinate Coordinate { get; set; }
         public User Organizer { get; set; }

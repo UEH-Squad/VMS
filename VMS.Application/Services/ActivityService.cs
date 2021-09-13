@@ -31,28 +31,28 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage)
+        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             if (isSearch)
             {
-                return await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, orderList, userLocation, currentPage);
+                return await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, currentPage, orderList, userLocation);
             }
             else
             {
-              return await GetAllActivitiesWithFilterAsync(filter, dbContext, orderList, userLocation, currentPage);
+                return await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation);
             }
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
         {
             PaginationSpecification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
-                    a => a.EndDate >= DateTime.Now
+                    GetFilterByDate(),
+                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
                 },
                 PageIndex = currentPage,
                 PageSize = 20,
@@ -66,12 +66,13 @@ namespace VMS.Application.Services
             return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
         {
             PaginationSpecification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
+                    GetFilterByDate(filter.TookPlace, filter.Happenning),
                     a => a.IsVirtual == filter.Virtual || a.IsVirtual == !filter.Actual,
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
@@ -79,8 +80,7 @@ namespace VMS.Application.Services
                     a => a.ActivitySkills.Select(activitySkills => activitySkills.SkillId)
                                          .Where(actSkillId => filter.Skills.Select(skill => skill.Id)
                                                                            .Any(skillId => skillId == actSkillId))
-                                         .Count() == filter.Skills.Count,
-                    a => a.EndDate >= DateTime.Now
+                                         .Count() == filter.Skills.Count
                 },
                 Includes = a => a.Include(x => x.ActivitySkills),
                 PageIndex = currentPage,
@@ -361,6 +361,11 @@ namespace VMS.Application.Services
 
         private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
         {
+            if (orderList == null || userLocation == null)
+            {
+                return x => x.OrderByDescending(a => a.Id);
+            } 
+
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
             {
                 return x => x.OrderByDescending(a => a.Id)
@@ -397,6 +402,21 @@ namespace VMS.Application.Services
             }
 
             return x => x.OrderByDescending(a => a.Id);
+        }
+
+        private static Expression<Func<Activity, bool>> GetFilterByDate(bool isTookPlace = false, bool isHappenning = false)
+        {
+            if (isTookPlace && isHappenning)
+            {
+                return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
+            }
+
+            if (isTookPlace)
+            {
+                return x => x.EndDate < DateTime.Now;
+            }
+
+            return x => x.EndDate >= DateTime.Now;
         }
     }
 }

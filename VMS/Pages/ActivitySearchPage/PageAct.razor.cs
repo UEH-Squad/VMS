@@ -2,6 +2,7 @@
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Extensions;
 using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivitySearchPage
@@ -17,7 +19,7 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private User currentUser;
         private int page = 1;
-        private Coordinate location;
+        private Coordinate userCoordinate;
         private IEnumerable<ActivityViewModel> featuredActivities;
         private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
 
@@ -51,11 +53,12 @@ namespace VMS.Pages.ActivitySearchPage
         {
             featuredActivities = await ActivityService.GetFeaturedActivitiesAsync();
 
-            location = await JsRuntime.InvokeAsync<Coordinate>("vms.GetUserLocation");
-            if (location is null)
+            var userLocation = await JsRuntime.InvokeAsync<CoordinateJs>("vms.GetUserLocation");
+            userCoordinate = userLocation.ToCoordinate();
+            if (userCoordinate is null)
             {
                 string userAddresses = IdentityService.GetCurrentUserAddress();
-                location = await AddressLocationService.GetCoordinateAsync(userAddresses);
+                userCoordinate = await AddressLocationService.GetCoordinateAsync(userAddresses);
             }
 
             currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
@@ -63,12 +66,12 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnParametersSetAsync()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, location, page);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, userCoordinate, page);
         }
 
         private async Task HandlePageChanged()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, location, page);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, userCoordinate, page);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

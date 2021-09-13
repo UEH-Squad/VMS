@@ -29,6 +29,8 @@ namespace VMS.Domain.Models
         public bool IsVirtual { get; set; }
         public bool IsActual { get; set; }
         public Point Location { get; set; }
+
+        // leave Latitude and Longitude here for easy testing
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Website { get; set; }

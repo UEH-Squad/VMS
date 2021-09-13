@@ -10,24 +10,37 @@
     z-index: 0; }
   .my-rank h1 {
     color: #18A0FB;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 500; }
     .my-rank h1 span {
       color: #64D72F; }
+  .my-rank .rank__link {
+    height: 50px; }
   .my-rank .rank__link-organization {
     display: inline-block;
-    margin: 10px 100px 10px 0;
-    color: #707070;
+    margin-right: 100px;
+    color: #18A0FB;
     font-size: 26px;
-    font-weight: 500; }
+    font-weight: 500;
+    width: 130px; }
     .my-rank .rank__link-organization:hover {
-      color: #0B588c; }
+      color: #0B588c;
+      font-size: 30px; }
   .my-rank .rank__link-students {
     color: #64D72F;
     font-size: 26px;
     font-weight: 500; }
     .my-rank .rank__link-students:hover {
-      color: #306C14; }
+      color: #306C14;
+      font-size: 30px; }
+  .my-rank .cssShowOrg {
+    border-bottom: 1px solid #0B588c;
+    color: #0B588c !important;
+    font-size: 30px !important; }
+  .my-rank .cssShowPer {
+    border-bottom: 1px solid #306C14;
+    color: #306C14;
+    font-size: 30px; }
   .my-rank ::deep .owl-stage {
     padding-top: 20px;
     padding-bottom: 20px; }
@@ -119,7 +132,7 @@
   .my-rank .rank__review {
     margin: 15px 0;
     display: inline-block;
-    background-image: linear-gradient(to top, rgba(237, 241, 49, 0.45), rgba(255, 255, 255, 0.45));
+    background-image: linear-gradient(to top, rgba(237, 241, 49, 0.6), rgba(255, 255, 255, 0.6));
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
     padding: 10px 40px;
     border-radius: 10px;

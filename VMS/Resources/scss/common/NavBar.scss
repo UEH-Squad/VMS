@@ -153,7 +153,7 @@
         font-size: 16px;
         color: $blue;
         display: block;
-        font-weight: 500;
+        font-weight: 600;
 
         @include on('xl') {
             font-size: 18px;
@@ -164,7 +164,7 @@
                 left: 0;
                 right: 0;
                 height: 5px;
-                top: 84px;
+                top: 71px;
                 background-color: $blue-bold;
                 display: none;
             }

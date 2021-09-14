@@ -1,7 +1,5 @@
 ﻿@attribute [Authorize]
 
-@inject IJSRuntime JSRuntinme
-
 <div class="overlay">
 
     <div class="min-overlay @(isShowReport ? "d-block" : "d-none")">
@@ -107,37 +105,3 @@
         </div>
     </EditForm>
 </div>
-
-@code {
-    string space = " ";
-    [CascadingParameter]
-    private BlazoredModalInstance ReportModal { get; set; }
-    void CloseModal()
-    {
-        ReportModal.CloseAsync();
-    }
-
-    bool isShowReport = false;
-    void ShowModalReportSucess()
-    {
-        isShowReport = !isShowReport;
-        if (isShowReport == false)
-        {
-            ReportModal.CloseAsync();
-        }
-    }
-    bool showListReason = false;
-    void ListReason()
-    {
-        showListReason = !showListReason;
-    }
-    void TextArea()
-    {
-        showListReason = false;
-    }
-    void AddFile()
-    {
-        showListReason = false;
-    }
-
-}

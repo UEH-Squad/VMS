@@ -1,12 +1,4 @@
-﻿@inject IJSRuntime JSRuntinme
-@inject IActivityService ActivityService
-@inject IIdentityService IdentityService
-
-@using VMS.Application.ViewModels
-@using VMS.Application.Interfaces
-@using VMS.Domain.Models
-
-@if (otherActivities is not null && otherActivities.Count != 0)
+﻿@if (otherActivities is not null && otherActivities.Count != 0)
 {
     <section class="other-act">
         <div class="other-act__title">
@@ -41,55 +33,4 @@
             }
         </div>
     </section>
-}
-
-@code {
-
-    private ViewActivityViewModel activity;
-    private List<OtherActivitiesViewModel> otherActivities;
-    private User currentUser;
-
-    [Parameter]
-    public string ActivityId { get; set; }
-
-    [Parameter]
-    public string OrgId { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (otherActivities is not null)
-        {
-            await JSRuntinme.InvokeVoidAsync("vms.OtherAct", otherActivities.Count());
-        }
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
-        OrgId = activity.OrgId;
-        otherActivities = await ActivityService.GetOtherActivities(OrgId);
-        currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
-    }
-
-    private void HandleFavorite(int id)
-    {
-        Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == id);
-
-        if (favorite is null)
-        {
-            currentUser.Favorites.Add(new()
-            {
-                UserId = currentUser.Id,
-                ActivityId = id,
-                CreatedDate = DateTime.Now
-            });
-        }
-        else
-        {
-            currentUser.Favorites.Remove(favorite);
-        }
-
-        IdentityService.UpdateUser(currentUser);
-    }
-
 }

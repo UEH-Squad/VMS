@@ -1,8 +1,6 @@
-﻿@inject IActivityService ActivityService
-@inject IIdentityService IdentityService
+﻿@using VMS.Application.Interfaces
 
-@using VMS.Application.Interfaces
-@using VMS.Application.ViewModels
+@inject IIdentityService IdentityService
 
 @if (activity is not null)
 {
@@ -53,9 +51,9 @@
                     <h3 class="skill__content contents">
                         @foreach (var skill in activity.Skills)
                         {
-                            skills.Add(skill.Name);
+                            Skills.Add(skill.Name);
                         }
-                        @string.Join(", ", skills)
+                        @string.Join(", ", Skills)
                     </h3>
                 </div>
                 <div class="request">
@@ -74,48 +72,3 @@
         <button @onclick="@(() => ShowReportPopUp())" disabled="@(!(IdentityService.GetCurrentUserId() is not null))" class="report">Báo cáo hoạt động này</button>
     </div>
 }
-
-@code {
-
-    private ViewActivityViewModel activity;
-    private List<string> skills { get; set; } = new List<string>();
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-
-    async Task ShowReportPopUp()
-    {
-        ModalParameters parameters = new();
-        parameters.Add("ActivityId", ActivityId);
-
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-
-        Modal.Show<PopUpReport>("", parameters, options);
-    }
-
-    async Task ShowSignUpPopUp()
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-
-        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
-    }
-
-    [Parameter]
-    public string ActivityId { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
-    }
-
-}
-

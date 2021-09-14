@@ -1,5 +1,8 @@
 ﻿@inject IJSRuntime JsRuntime
 
+<div class="row">
+    <div class="text-result mb-5">Có <span>@SumResult</span> hoạt động tương ứng với kết quả tìm kiếm của bạn.</div>
+</div>
 @if (pagedResult != null && pagedResult.Results.Length != 0)
 {
     @foreach (var item in pagedResult.Results)
@@ -141,6 +144,7 @@
 
 @code {
     private int PrevItem = -1;
+    private int SumResult = 100;
 
     private class FakeData
     {
@@ -257,47 +261,47 @@
         }
         return false;
     }
-//----------Popup and Confirm------------//
-private async Task DelConfirm(int id)
-{
-    var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-    if (Item.IsDelete != 0) Item.IsDelete = 0;
-    else Item.IsDelete = 1;
-}
-
-private async Task DelItem(int id)
-{
-    var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-    if (Item.PopupDel == true)
+    //----------Popup and Confirm------------//
+    private async Task DelConfirm(int id)
     {
-        Item.PopupDel = false;
-        Item.IsDelete = -1;
-    }
-    else
-    {
-        Item.PopupDel = true;
-        Item.IsDelete = 1;
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.IsDelete != 0) Item.IsDelete = 0;
+        else Item.IsDelete = 1;
     }
 
-}
-private async Task CloseConfirm(int id)
-{
-    var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-    if (Item.IsClose != 0) Item.IsClose = 0;
-    else Item.IsClose = 1;
-}
-private async Task CloseItem(int id)
-{
-    var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-    if (Item.PopupClose == true)
+    private async Task DelItem(int id)
     {
-        Item.PopupClose = false;
-        Item.IsClose = -1;
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.PopupDel == true)
+        {
+            Item.PopupDel = false;
+            Item.IsDelete = -1;
+        }
+        else
+        {
+            Item.PopupDel = true;
+            Item.IsDelete = 1;
+        }
+
     }
-    else
+    private async Task CloseConfirm(int id)
     {
-        Item.PopupClose = true;
-        Item.IsClose = 1;
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.IsClose != 0) Item.IsClose = 0;
+        else Item.IsClose = 1;
     }
-}
+    private async Task CloseItem(int id)
+    {
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.PopupClose == true)
+        {
+            Item.PopupClose = false;
+            Item.IsClose = -1;
+        }
+        else
+        {
+            Item.PopupClose = true;
+            Item.IsClose = 1;
+        }
+    }
 }

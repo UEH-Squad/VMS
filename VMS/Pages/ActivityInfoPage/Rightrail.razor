@@ -2,7 +2,7 @@
 
 @inject IIdentityService IdentityService
 
-@if (activity is not null)
+@if (Activity is { } activity)
 {
     <div class="container">
         <div class="inside-the-border">
@@ -28,39 +28,31 @@
                 <div class="participant">
                     <p class="participant__title titles">Đối tượng tham gia</p>
                     <p class="participant__content contents">
-                        @string.Join(", ", activity.Targets.Split('|'))
+                        @if (!string.IsNullOrEmpty(activity.Targets))
+                        {
+                            @string.Join(", ", activity.Targets.Split('|'))
+                        }
                     </p>
                 </div>
                 <div class="location">
                     <p class="location__title titles">Địa điểm tham gia</p>
                     <p class="location__content contents">
                         @activity.Address
-                        @foreach (var address in activity.AddressPaths.Reverse())
-                        {
-                            <text>, </text>
-                            @address.Name
-                        }
                     </p>
                 </div>
                 <div class="time">
                     <h3 class="time__title titles">Thời gian tham gia</h3>
-                    <h3 class="time__content contents">Từ @activity.StartDate.ToShortDateString() đến @activity.EndDate.ToShortDateString()</h3>
+                    <h3 class="time__content contents">Từ @activity.StartDate đến @activity.EndDate</h3>
                 </div>
                 <div class="skill">
                     <h3 class="skill__title titles">Kỹ năng</h3>
                     <h3 class="skill__content contents">
-                        @foreach (var skill in activity.Skills)
-                        {
-                            Skills.Add(skill.Name);
-                        }
-                        @string.Join(", ", Skills)
+                        @string.Join(", ", activity.Skills.Select(x => x.Name))
                     </h3>
                 </div>
                 <div class="request">
                     <h3 class="request__title titles">Yêu cầu khi tham gia</h3>
-                    <ul>
-                        @((MarkupString)activity.Requirement)
-                    </ul>
+                    @((MarkupString)activity.Requirement)
                 </div>
             </div>
             <div class="btn-sign-up--cover">

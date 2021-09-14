@@ -23,6 +23,6 @@ namespace VMS.Application.Interfaces
 
         Task<List<UserWithActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false);
 
-        Task<List<OtherActivitiesViewModel>> GetOtherActivities(string orgId);
+        Task<List<ViewActivityViewModel>> GetOtherActivities(string orgId, int[] excludedActitivyIds);
     }
 }

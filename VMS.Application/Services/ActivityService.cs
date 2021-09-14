@@ -347,28 +347,26 @@ namespace VMS.Application.Services
             return _mapper.Map<List<UserWithActivityViewModel>>(activities);
         }
 
-        public async Task<List<OtherActivitiesViewModel>> GetOtherActivities(string orgId)
+        public async Task<List<ViewActivityViewModel>> GetOtherActivities(string orgId, int[] excludedActitivyIds)
         {
+            if (string.IsNullOrEmpty(orgId))
+            {
+                return new List<ViewActivityViewModel>();
+            }
+
             DbContext context = _dbContextFactory.CreateDbContext();
 
-            Specification<Activity> specification = new()
+            List<Activity> activity = await _repository.GetListAsync(context, new Specification<Activity>()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                Conditions = new List<Expression<Func<Activity, bool>>>
                 {
-                    a => a.OrgId == orgId
+                    a => !excludedActitivyIds.Contains(a.Id),
+                    a => a.OrgId == orgId,
+                    a => a.EndDate >= DateTime.Now
                 },
-            };
-
-            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
-
-            IEnumerable<OtherActivitiesViewModel> infoActivity = activity.Select(x => new OtherActivitiesViewModel
-            {
-                ActivityId = x.Id,
-                ActivityName = x.Name,
-                ActivityBanner = x.Banner,
             });
 
-            return infoActivity.ToList();
+            return _mapper.Map<List<ViewActivityViewModel>>(activity);
         }
 
         private async Task<List<Activity>> GetRelatedActivitiesWhenLocationTurnedOnAsync(Coordinate location, bool isFeatured, DbContext dbContext)

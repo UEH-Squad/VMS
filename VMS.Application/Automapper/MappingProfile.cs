@@ -11,7 +11,10 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, ActivityViewModel>();
             CreateMap<CreateActivityViewModel, Activity>();
             CreateMap<Activity, CreateActivityViewModel>();
-            CreateMap<Activity, ViewActivityViewModel>();
+            CreateMap<Activity, ViewActivityViewModel>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.ToString("dd/MM/yyyy")));
             CreateMap<Area, AreaViewModel>();
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();

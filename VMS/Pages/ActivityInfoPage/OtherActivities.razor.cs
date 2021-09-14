@@ -12,12 +12,11 @@ namespace VMS.Pages.ActivityInfoPage
 {
     public partial class OtherActivities : ComponentBase
     {
-        private ViewActivityViewModel activity;
-        private List<OtherActivitiesViewModel> otherActivities;
+        private List<ViewActivityViewModel> otherActivities;
         private User currentUser;
 
         [Parameter]
-        public string ActivityId { get; set; }
+        public int ActivityId { get; set; }
 
         [Parameter]
         public string OrgId { get; set; }
@@ -31,20 +30,22 @@ namespace VMS.Pages.ActivityInfoPage
         [Inject]
         public IIdentityService IdentityService { get; set; }
 
+        protected override void OnInitialized()
+        {
+            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            otherActivities = await ActivityService.GetOtherActivities(OrgId, new[] { ActivityId });
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (otherActivities is not null)
             {
                 await JSRuntinme.InvokeVoidAsync("vms.OtherAct", otherActivities.Count);
             }
-        }
-
-        protected override async Task OnInitializedAsync()
-        {
-            activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
-            OrgId = activity.OrgId;
-            otherActivities = await ActivityService.GetOtherActivities(OrgId);
-            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
         }
 
         private void HandleFavorite(int id)

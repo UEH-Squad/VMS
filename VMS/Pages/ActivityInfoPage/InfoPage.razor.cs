@@ -11,21 +11,22 @@ namespace VMS.Pages.ActivityInfoPage
     public partial class InfoPage : ComponentBase
     {
         private User currentUser;
-        private ViewActivityViewModel activity;
+        private bool isFav;
 
         [Parameter]
-        public string ActivityId { get; set; }
-
-        [Inject]
-        private IActivityService ActivityService { get; set; }
+        public ViewActivityViewModel Activity { get; set; }
 
         [Inject]
         private IIdentityService IdentityService { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
             currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+        }
+
+        protected override void OnParametersSet()
+        {
+            isFav = currentUser.Favorites.Any(f => f.ActivityId == Activity.Id);
         }
 
         private void HandleFavorite(int id)
@@ -47,6 +48,7 @@ namespace VMS.Pages.ActivityInfoPage
             }
 
             IdentityService.UpdateUser(currentUser);
+            isFav = !isFav;
         }
     }
 }

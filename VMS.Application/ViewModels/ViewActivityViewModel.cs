@@ -9,12 +9,13 @@ namespace VMS.Application.ViewModels
 {
     public class ViewActivityViewModel
     {
+        public int Id { get; set; }
         public string OrgId { get; set; }
         public string Name { get; set; }
         public int AreaId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime PostDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string CreatedDate { get; set; }
+        public string EndDate { get; set; }
         public string Address { get; set; }
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
@@ -29,9 +30,9 @@ namespace VMS.Application.ViewModels
 
         public Area Area { get; set; }
         public User Organizer { get; set; }
-        public ICollection<Skill> Skills { get; set; }
-        public ICollection<AddressPath> AddressPaths { get; set; }
-        public ICollection<ActivityImage> ActivityImages { get; set; }
-        public ICollection<ActivityTarget> ActivityTargets { get; set; }
+        public IList<Skill> Skills { get; set; } = new List<Skill>();
+        public IList<AddressPath> AddressPaths { get; set; } = new List<AddressPath>();
+        public List<ActivityImage> ActivityImages { get; set; } = new List<ActivityImage>();
+        public List<ActivityTarget> ActivityTargets { get; set; } = new List<ActivityTarget>();
     }
 }

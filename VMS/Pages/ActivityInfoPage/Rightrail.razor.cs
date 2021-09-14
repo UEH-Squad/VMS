@@ -1,35 +1,30 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using VMS.Application.Interfaces;
+using System.Linq;
 using VMS.Application.ViewModels;
 
 namespace VMS.Pages.ActivityInfoPage
 {
     public partial class Rightrail : ComponentBase
     {
-        private ViewActivityViewModel activity;
-        private List<string> Skills { get; set; } = new List<string>();
-
         [CascadingParameter] public IModalService Modal { get; set; }
 
         [Parameter]
-        public string ActivityId { get; set; }
+        public ViewActivityViewModel Activity { get; set; }
 
-        [Inject]
-        public IActivityService ActivityService { get; set; }
-
-        protected override async Task OnInitializedAsync()
+        protected override void OnParametersSet()
         {
-            activity = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActivityId));
+            string fullAddress = Activity.AddressPaths.Reverse().Aggregate("", (acc, next) => acc + ", " + next.Name);
+            Activity.Address = !string.IsNullOrEmpty(Activity.Address)
+                ? $"{Activity.Address}{fullAddress}"
+                : fullAddress.Trim(',', ' ');
         }
 
         private void ShowReportPopUp()
         {
             ModalParameters parameters = new();
-            parameters.Add("ActivityId", ActivityId);
+            parameters.Add("ActivityId", Activity.Id);
 
             ModalOptions options = new()
             {

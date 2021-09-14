@@ -20,7 +20,7 @@ namespace VMS.Pages.ActivityInfoPage
         private BlazoredModalInstance ReportModal { get; set; }
 
         [Parameter]
-        public string ActivityId { get; set; }
+        public int ActivityId { get; set; }
 
         [Inject]
         private IReportService ReportService { get; set; }
@@ -42,7 +42,7 @@ namespace VMS.Pages.ActivityInfoPage
         private async Task AddReport()
         {
             report.UserId = IdentityService.GetCurrentUserId();
-            report.ActivityId = int.Parse(ActivityId);
+            report.ActivityId = ActivityId;
             report.Reasons = Reason;
             report.Images = Image;
 

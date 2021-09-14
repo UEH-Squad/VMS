@@ -1,4 +1,4 @@
-﻿@if (activity is not null)
+﻿@if (Activity is { } activity)
 {
     <div class="infopage">
         <div class="infopage-title">
@@ -7,16 +7,17 @@
             </p>
             <div class="title__name">
                 <span class="material-icons"><span class="earth-icon">public</span></span>
-                <p class="organization">@activity.Organizer.FullName</p>
+                @*TODO: Show org's name instead of its username*@
+                <p class="organization">@activity.Organizer?.UserName</p>
             </div>
             <div class="title__date">
                 <p class="postdate">
-                    Ngày đăng: @activity.PostDate.ToShortDateString()
+                    Ngày đăng: @activity.CreatedDate
                 </p>
                 @if (currentUser is not null)
                 {
-                    <button @onclick="() => HandleFavorite(int.Parse(ActivityId))" class="@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "heart-button1" : "heart-button2")">
-                        <span class="material-icons"><span class="heart-icon">@(currentUser.Favorites.Any(f => f.ActivityId == int.Parse(ActivityId)) ? "favorite" : "favorite_border")</span></span>
+                    <button @onclick="() => HandleFavorite(activity.Id)" class="@(isFav ? "heart-button1" : "heart-button2")">
+                        <span class="material-icons"><span class="heart-icon">@(isFav ? "favorite" : "favorite_border")</span></span>
                     </button>
                 }
                 <div><hr class="line-line2"></div>
@@ -28,23 +29,23 @@
                     @((MarkupString)activity.Description)
                 </p>
             </div>
-            <div class="activity__image">
-                @if (!string.IsNullOrEmpty(activity.Banner))
-                {
-                    <img src="@activity.Banner" alt="Activity Image" />
-                }
-            </div>
+            @if (!string.IsNullOrEmpty(activity.Banner))
+            {
+                <img src="@activity.Banner" class="activity__image" alt="Activity Image" />
+            }
             <div class="activity__mission">
                 <p class="mission">Sứ mệnh:</p>
-                <ul class="misson-list">
-                    @((MarkupString)activity.Mission)
-                </ul>
+                @*<ul class="misson-list">
+                    
+                </ul>*@
+                @((MarkupString)activity.Mission)
             </div>
             <div class="activity__assignment">
                 <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
-                <ul class="assignment-list">
-                    @((MarkupString)activity.Commission)
-                </ul>
+                @*<ul class="assignment-list">
+                    
+                </ul>*@
+                @((MarkupString)activity.Commission)
             </div>
         </div>
     </div>

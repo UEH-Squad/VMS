@@ -8,28 +8,25 @@
         <div class="owl-carousel owl-theme">
             @foreach (var item in otherActivities)
             {
-                @if (item.ActivityId != int.Parse(ActivityId))
-                {
-                    <div class="act__container__card" id="kiemtra">
-                        <div class="act__container__card__img">
-                            @if (!string.IsNullOrEmpty(item.ActivityBanner))
-                            {
-                                <img src="@item.ActivityBanner" alt="photo" />
-                            }
-                        </div>
-                        <div class="act__container__card__desc">
-                            <p>@item.ActivityName</p>
-                        </div>
-                        @if (currentUser is not null)
+                <div class="act__container__card" id="kiemtra">
+                    <div class="act__container__card__img">
+                        @if (!string.IsNullOrEmpty(item.Banner))
                         {
-                            <div class="act__container__card__icon">
-                                <div class="@(currentUser.Favorites.Any(f => f.ActivityId == item.ActivityId) ? "heart" : "heart-line")" @onclick="() => HandleFavorite(item.ActivityId)">
-                                    <span class="material-icons">favorite</span>
-                                </div>
-                            </div>
+                            <img src="@item.Banner" alt="photo" />
                         }
                     </div>
-                }
+                    <div class="act__container__card__desc">
+                        <p>@item.Name</p>
+                    </div>
+                    @if (currentUser is not null)
+                    {
+                        <div class="act__container__card__icon">
+                            <div class="@(currentUser.Favorites.Any(f => f.ActivityId == item.Id) ? "heart" : "heart-line")" @onclick="() => HandleFavorite(item.Id)">
+                                <span class="material-icons">favorite</span>
+                            </div>
+                        </div>
+                    }
+                </div>
             }
         </div>
     </section>

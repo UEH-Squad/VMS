@@ -39,13 +39,9 @@ namespace VMS.Pages.ActivitySearchPage
         [Parameter]
         public Dictionary<ActOrderBy, bool> OrderList { get; set; }
         [Parameter]
-        public string SearchValue { get; set; }
-        [Parameter]
         public FilterActivityViewModel Filter { get; set; }
         [Parameter]
         public EventCallback<Dictionary<ActOrderBy, bool>> OrderListChanged { get; set; }
-        [Parameter]
-        public EventCallback<string> SearchValueChanged { get; set; }
         [Parameter]
         public EventCallback<FilterActivityViewModel> FilterChanged { get; set; }
         [Inject]
@@ -114,19 +110,6 @@ namespace VMS.Pages.ActivitySearchPage
             Filter.OrgId = organizer.Id;
             organizationChoosenValue = organizer.FullName;
             ToggleOrganizationDropdown();
-        }
-
-        private void UpdateSearchValueAsync(ChangeEventArgs e)
-        {
-            SearchValue = (string)e.Value;
-        }
-        private async Task SearchAsync()
-        {
-            await SearchValueChanged.InvokeAsync(SearchValue);
-        }
-        private void ClearSearchBox()
-        {
-            SearchValue = string.Empty;
         }
 
         private async Task ShowAreasPopupAsync()

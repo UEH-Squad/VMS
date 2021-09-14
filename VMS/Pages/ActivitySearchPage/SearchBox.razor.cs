@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using VMS.Application.Interfaces;
-using VMS.Application.ViewModels;
-using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivitySearchPage
 {

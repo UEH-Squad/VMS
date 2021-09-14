@@ -67,21 +67,30 @@ namespace VMS.Pages.OrganizationManagementPage
 
         private void ChangeDeleteState(int id)
         {
-            rateId = 0;
-            dropdownId = 0;
-            confirmCloseId = 0;
-            confirmDeleteId = id;
-
+            if (confirmDeleteId == id)
+            {
+                // handle delete 
+                ResetState();
+                popupDelete = id;
+            }
+            else
+            {
+                confirmDeleteId = id;
+            }
         }
 
         private void ChangeCloseState(int id)
         {
-            rateId = 0;
-            dropdownId = 0;
-            confirmCloseId = id;
-            confirmDeleteId = 0;
-            popupClose = 0;
-            popupDelete = 0;
+            if (confirmCloseId == id)
+            {
+                // handle close 
+                ResetState();
+                popupDelete = id;
+            }
+            else
+            {
+                confirmCloseId = id;
+            }
         }
     }
 }

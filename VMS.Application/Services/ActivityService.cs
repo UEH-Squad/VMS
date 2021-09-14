@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Geolocation;
 using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,6 @@ using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
 using VMS.Infrastructure.Data.Context;
-using Coordinate = VMS.Application.ViewModels.Coordinate;
 
 namespace VMS.Application.Services
 {
@@ -90,9 +89,42 @@ namespace VMS.Application.Services
 
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            activities.Items.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
+        private List<ActivityViewModel> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, List<ActivityViewModel> activities, Coordinate coordinate)
+        {
+            Point userLocation = _geometryFactory.CreatePoint(coordinate);
+            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
+            {
+                return activities = activities.OrderByDescending(a => a.PostDate)
+                                            .ThenByDescending(a => a.MemberQuantity)
+                                            .ToList();
+            }
 
             return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+        }
+
+            if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest])
+            {
+                return activities = activities.OrderByDescending(a => a.PostDate)
+                                            .ToList();
+            }
+
+            if (orderList[ActOrderBy.Hottest] && orderList[ActOrderBy.Nearest])
+            {
+                return activities = activities.OrderByDescending(a => a.MemberQuantity)
+                                            .ToList();
+            }
+
+            if (orderList[ActOrderBy.Hottest])
+            {
+                return activities = activities.OrderByDescending(a => a.MemberQuantity).ToList();
+            }
+
+            if (orderList[ActOrderBy.Nearest])
+            {
+                return activities = activities.ToList();
+            }
+
+            return activities = activities.OrderByDescending(a => a.PostDate).ToList();
         }
 
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()
@@ -123,8 +155,9 @@ namespace VMS.Application.Services
             activity.IsApproved = true;
 
             Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
-            activity.Latitude = coordinateResponse.Latitude;
-            activity.Longitude = coordinateResponse.Longitude;
+            activity.Location = _geometryFactory.CreatePoint(coordinateResponse);
+            activity.Latitude = coordinateResponse.Y;
+            activity.Longitude = coordinateResponse.X;
             activity.ActivitySkills = MapSkills(activityViewModel, activity);
             activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
 
@@ -212,8 +245,9 @@ namespace VMS.Application.Services
             activity.UpdatedDate = DateTime.Now;
 
             Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
-            activity.Latitude = coordinateResponse.Latitude;
-            activity.Longitude = coordinateResponse.Longitude;
+            activity.Location = _geometryFactory.CreatePoint(coordinateResponse);
+            activity.Latitude = coordinateResponse.Y;
+            activity.Longitude = coordinateResponse.X;
 
             activity.ActivitySkills = MapSkills(activityViewModel, activity);
             activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
@@ -272,8 +306,7 @@ namespace VMS.Application.Services
             if (!string.IsNullOrEmpty(userId) && location == null)
             {
                 int? currentUserDistricts = _identityService.GetCurrentUserWithAddresses()?.UserAddresses
-                    .FirstOrDefault(x => x.AddressPath.Depth == 2)
-                    ?.AddressPathId;
+                                                            .FirstOrDefault(x => x.AddressPath.Depth == 2)?.AddressPathId;
                 if (currentUserDistricts.HasValue)
                 {
                     activities = await GetRelatedActivitiesForUsersTurnOffLocationAsync(isFeatured, currentUserDistricts, dbContext);
@@ -292,13 +325,16 @@ namespace VMS.Application.Services
         {
             Specification<Activity> spec = new()
             {
-                OrderBy = GetOrderByClause(isFeatured)
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    x => x.EndDate >= DateTime.Now
+                },
+                OrderBy = GetOrderByClause(isFeatured, location),
+                Take = 4
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
-            activities = activities.OrderByDescending(x => GeoCalculator.GetDistance(location.Latitude, location.Longitude, x.Latitude, x.Longitude, 2, DistanceUnit.Meters))
-                                   .Take(4)
-                                   .ToList();
+
             return activities;
         }
 
@@ -309,9 +345,10 @@ namespace VMS.Application.Services
                 Includes = x => x.Include(y => y.ActivityAddresses).ThenInclude(y => y.AddressPath),
                 Conditions = new List<Expression<Func<Activity, bool>>>
                 {
-                    x => x.ActivityAddresses.Any(y => y.AddressPath.Id == currentUserDistricts)
+                    x => x.ActivityAddresses.Any(y => y.AddressPath.Id == currentUserDistricts),
+                    x => x.EndDate >= DateTime.Now
                 },
-                OrderBy = GetOrderByClause(isFeatured),
+                OrderBy = GetOrderByClause(isFeatured, null),
                 Take = 4
             };
 
@@ -323,7 +360,11 @@ namespace VMS.Application.Services
         {
             Specification<Activity> spec = new()
             {
-                OrderBy = GetOrderByClause(isFeatured),
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    x => x.EndDate >= DateTime.Now
+                },
+                OrderBy = GetOrderByClause(isFeatured, null),
                 Take = 4
             };
 
@@ -331,8 +372,24 @@ namespace VMS.Application.Services
             return activities;
         }
 
-        private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured)
-            => isFeatured ? (x => x.OrderByDescending(y => y.MemberQuantity)) : (x => x.OrderByDescending(y => y.Id));
+        private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured, Coordinate coordinate)
+        {
+            Point userLocation = _geometryFactory.CreatePoint(coordinate);
+            Func<IQueryable<Activity>, IOrderedQueryable<Activity>> result = isFeatured
+                ? (x => x.OrderByDescending(y => y.MemberQuantity))
+                : (x => x.OrderByDescending(y => y.CreatedDate));
+
+            if (coordinate is not null)
+            {
+                result = isFeatured
+                    ? (x => x.OrderBy(y => y.Location.Distance(userLocation))
+                             .ThenByDescending(y => y.MemberQuantity))
+                    : (x => x.OrderBy(y => y.Location.Distance(userLocation))
+                             .ThenByDescending(y => y.CreatedDate));
+            }
+
+            return result;
+        }
 
         private static ICollection<ActivitySkill> MapSkills(CreateActivityViewModel activityViewModel, Activity activity)
         {

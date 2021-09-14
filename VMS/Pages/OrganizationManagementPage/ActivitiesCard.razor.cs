@@ -9,6 +9,12 @@ namespace VMS.Pages.OrganizationManagementPage
 {
     public partial class ActivitiesCard : ComponentBase
     {
+        private int rateId;
+        private int dropdownId;
+        private int confirmDeleteId;
+        private int confirmCloseId;
+        private int popupDelete;
+        private int popupClose;
         private PaginatedList<ActivityViewModel> data = new(new(), 0, 1, 1);
 
         [Parameter]
@@ -31,6 +37,27 @@ namespace VMS.Pages.OrganizationManagementPage
             data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
+        }
+
+        private void ChangeRateState(int id)
+        {
+            rateId = (rateId == id ? 0 : id);
+            dropdownId = 0;
+            confirmCloseId = 0;
+            confirmDeleteId = 0;
+        }
+
+        private void ChangeDropdownState(int id)
+        {
+            dropdownId = (dropdownId == id ? 0 : id);
+            rateId = 0;
+            confirmCloseId = 0;
+            confirmDeleteId = 0;
+        }
+
+        private void ChangeConfirmDeleteState(int id)
+        {
+
         }
     }
 }

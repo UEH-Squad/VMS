@@ -7,23 +7,23 @@
 {
     @foreach (var item in data.Items)
     {
-        <div class="org-card" style="z-index:@(item.RateMethodDropDown ? "2" : "auto"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(item.IsClosed? 0.75 : 1)">
-            <div class="org-card__btn-edit btn" @onclick="@(() => DropDownClick(item.Id,"edit"))">
+        <div class="org-card" style="z-index:@(item.Id == rateId ? "2" : "auto"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(item.IsClosed? 0.75 : 1)">
+            <div class="org-card__btn-edit btn" @onclick="ChangeDropdownState(item.Id)">
                 <span class="material-icons-outlined">
                     more_horiz
                 </span>
-                <ul class="org-card__btn-edit__list card-list" style="display:@(item.EditDropDown ? "inline-block" : "none");">
+                <ul class="org-card__btn-edit__list card-list" style="display:@(item.Id == dropdownId ? "inline-block" : "none");">
                     <li class="item-1">Chỉnh sửa</li>
                     <li class="item-2" @onclick="@(() => DelConfirm(item.Id))">Xóa</li>
                     <li class="item-3" @onclick="@(() => CloseConfirm(item.Id))">Đóng hoạt động</li>
                 </ul>
             </div>
             <div class="org-card__img">
-                <img src="@item.ImgSrc" alt="photo">
+                <img src="@item.Banner" alt="photo">
             </div>
             <div class="org-card__info">
                 <div class="org-card__info__title">
-                    @item.Title
+                    @item.Name
                 </div>
                 <div class="org-card__info__rate">
                     <span class="material-icons-outlined" style="color:@(item.Rate >= 1 ? "#EDF131" : "#B4B4B4")">
@@ -43,10 +43,10 @@
                     </span>
                 </div>
                 <div class="org-card__info__desc">
-                    @item.ShortDescription
+                    @item.Description
                 </div>
                 <div class="org-card__info__date">
-                    Ngày đăng: <span>20/07/2021</span>
+                    Ngày đăng: <span>@item.CreatedDate</span>
                 </div>
                 <div class="org-card__info__joiner">
                     <div class="org-card__info__joiner__icon">
@@ -55,7 +55,7 @@
                         </span>
                     </div>
                     <div class="org-card__info__joiner__sum">
-                        @item.Joiner
+                        @item.MemberQuantity
                     </div>
                 </div>
             </div>
@@ -63,19 +63,19 @@
                 Xem danh sách
             </div>
             <div class="org-card__cbb-rate card-btn">
-                <div href="#" class="org-card__cbb-rate__title" @onclick="@(() => DropDownClick(item.Id,"rate"))">Đánh giá</div>
-                <span class="material-icons-outlined expand-icon" @onclick="@(() => DropDownClick(item.Id,"rate"))">
+                <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
+                <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
                     expand_more
                 </span>
-                <ul class="org-card__cbb-rate__list card-list" style="display:@(item.RateMethodDropDown ? "inline-block" : "none");">
+                <ul class="org-card__cbb-rate__list card-list" style="display:@(item.Id == rateId ? "inline-block" : "none");">
                     <li>Tình nguyện viên</li>
                     <li>Đánh giá hoạt động</li>
                 </ul>
             </div>
             @*--------------------Confirm------------------- *@
-            <div class="popup-container" style="display:@(item.IsDeleted ? "initial" : "none")">
+            <div class="popup-container" style="display:@(item.Id == confirmDeleteId ? "initial" : "none")">
                 <div class="org-card__del-confirm confirm">
-                    <div class="close-icon" @onclick="() => DelConfirm(item.Id)">
+                    <div class="close-icon" @onclick="() => ChangeConfirmDeleteState(item.Id)">
                         <span class="material-icons-outlined">
                             close
                         </span>
@@ -112,7 +112,7 @@
                 </div>
             </div>
             @*-----------------Popup--------------*@
-            <div class="popup-container" style="display:@(item.PopupClose?"initial":"none")">
+            <div class="popup-container" style="display:@(item.Id == popupClose ? "initial" : "none")">
                 <div class="org-card__close-succ notify --close">
                     <div class="close-icon">
                         <span class="material-icons-outlined" @onclick="() => CloseItem(item.Id)">
@@ -122,7 +122,7 @@
                     <div class="content">Đóng hoạt động thành công!</div>
                 </div>
             </div>
-            <div class="popup-container" style="display:@(item.PopupDel?"initial":"none")">
+            <div class="popup-container" style="display:@(item.Id == popupDelete ? "initial" : "none")">
                 <div class="org-card__del-succ notify --del">
                     <div class="close-icon" @onclick="@(()=> DelItem(item.Id))">
                         <span class="material-icons-outlined">

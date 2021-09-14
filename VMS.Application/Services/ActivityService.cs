@@ -33,14 +33,23 @@ namespace VMS.Application.Services
         public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginatedList<ActivityViewModel> paginatedList;
             if (isSearch)
             {
-                return await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, currentPage, orderList, userLocation);
+                paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, currentPage, orderList, userLocation);
             }
             else
             {
-                return await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation);
+                paginatedList = await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation);
             }
+
+            foreach (var item in paginatedList.Items)
+            {
+                item.Rate = await GetRateOfActivity(dbContext, item.Id);
+            }
+
+            return paginatedList;
         }
 
         private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
@@ -389,7 +398,7 @@ namespace VMS.Application.Services
             if (orderList == null || userLocation == null)
             {
                 return x => x.OrderByDescending(a => a.Id);
-            } 
+            }
 
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
             {
@@ -442,6 +451,42 @@ namespace VMS.Application.Services
             }
 
             return x => x.EndDate >= DateTime.Now;
+        }
+
+        private async Task<double> GetRateOfActivity(DbContext dbContext, int activityId)
+        {
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>
+                {
+                    a => a.ActivityId == activityId
+                },
+                Includes = a => a.Include(x => x.RecruitmentRatings)
+            };
+
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank));
+        }
+
+        public async Task CloseOrDeleteActivity(int activityId, bool isClose = false, bool isDelete = false)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.Id == activityId
+                }
+            };
+
+            Activity activity = await _repository.GetAsync(dbContext, specification);
+
+            activity.IsClosed = isClose;
+            activity.IsDeleted = isDelete;
+
+            await _repository.UpdateAsync(dbContext, activity);
         }
     }
 }

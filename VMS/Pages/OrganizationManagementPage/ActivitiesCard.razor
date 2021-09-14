@@ -12,8 +12,8 @@
                 </span>
                 <ul class="org-card__btn-edit__list card-list" style="display:@(item.Id == dropdownId ? "inline-block" : "none");">
                     <li class="item-1">Chỉnh sửa</li>
-                    <li class="item-2" @onclick="@(() => ChangeDeleteState(item))">Xóa</li>
-                    <li class="item-3" @onclick="@(() => ChangeCloseState(item))">Đóng hoạt động</li>
+                    <li class="item-2" @onclick="@(() => ChangeDeleteStateAsync(item))">Xóa</li>
+                    <li class="item-3" @onclick="@(() => ChangeCloseStateAsync(item))">Đóng hoạt động</li>
                 </ul>
             </div>
             <div class="org-card__img">
@@ -82,7 +82,7 @@
                         Bạn có chắc chắn muốn<br />
                         <span>xóa hoạt động</span> này không?
                     </div>
-                    <div class="btn-yes card-btn" @onclick="() => ChangeDeleteState(item)">
+                    <div class="btn-yes card-btn" @onclick="() => ChangeDeleteStateAsync(item)">
                         Xác nhận
                     </div>
                     <div class="btn-cancel card-btn" @onclick="() => ResetState()">
@@ -101,7 +101,7 @@
                         Bạn có chắc chắn muốn<br />
                         <span>đóng hoạt động</span> này không?
                     </div>
-                    <div class="btn-yes card-btn" @onclick="@(() => ChangeCloseState(item))">
+                    <div class="btn-yes card-btn" @onclick="@(() => ChangeCloseStateAsync(item))">
                         Xác nhận
                     </div>
                     <div class="btn-cancel card-btn" @onclick="@(() => ResetState())">

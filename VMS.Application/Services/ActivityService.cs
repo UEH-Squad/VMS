@@ -35,6 +35,7 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             PaginatedList<ActivityViewModel> paginatedList;
+
             if (isSearch)
             {
                 paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, currentPage, orderList, userLocation);
@@ -81,7 +82,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     GetFilterByDate(filter.TookPlace, filter.Happenning),
-                    a => a.IsVirtual == filter.Virtual || a.IsVirtual == !filter.Actual,
+                    a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual,
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,
@@ -91,7 +92,6 @@ namespace VMS.Application.Services
                                          .Count() == filter.Skills.Count,
                     a => !a.IsDeleted
                 },
-                Includes = a => a.Include(x => x.ActivitySkills),
                 PageIndex = currentPage,
                 PageSize = 20,
                 OrderBy = GetOrderActivities(orderList, userLocation)

@@ -68,14 +68,14 @@ namespace VMS.Pages.OrganizationManagementPage
             dropdownId = (dropdownId == id ? 0 : id);
         }
 
-        private void ChangeDeleteState(ActivityViewModel activity)
+        private async Task ChangeDeleteStateAsync(ActivityViewModel activity)
         {
             if (confirmDeleteId == activity.Id)
             {
-                ActivityService.CloseOrDeleteActivity(activity.Id, !activity.IsDeleted, activity.IsClosed);
+                await ActivityService.CloseOrDeleteActivity(activity.Id, !activity.IsDeleted, activity.IsClosed);
                 ResetState();
                 popupDelete = activity.Id;
-                HandlePageChanged();
+                await HandlePageChanged();
             }
             else
             {
@@ -83,14 +83,14 @@ namespace VMS.Pages.OrganizationManagementPage
             }
         }
 
-        private void ChangeCloseState(ActivityViewModel activity)
+        private async Task ChangeCloseStateAsync(ActivityViewModel activity)
         {
             if (confirmCloseId == activity.Id)
             {
-                ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
+                await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
                 ResetState();
-                popupDelete = activity.Id;
-                HandlePageChanged();
+                popupClose = activity.Id;
+                await HandlePageChanged();
             }
             else
             {

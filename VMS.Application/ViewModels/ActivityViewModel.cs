@@ -24,9 +24,5 @@ namespace VMS.Application.ViewModels
         public bool IsDeleted { get; set; }
 
         public User Organizer { get; set; }
-
-        public List<ActivityAddress> ActivityAddresses { get; set; }
-        public List<ActivitySkill> ActivitySkills { get; set; }
-
     }
 }

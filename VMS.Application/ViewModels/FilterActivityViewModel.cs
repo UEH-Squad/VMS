@@ -21,8 +21,8 @@ namespace VMS.Application.ViewModels
 
         public FilterActivityViewModel()
         {
-            Virtual = false;
-            Actual = false;
+            Virtual = true;
+            Actual = true;
             Happenning = false;
             TookPlace = false;
             Areas = new();

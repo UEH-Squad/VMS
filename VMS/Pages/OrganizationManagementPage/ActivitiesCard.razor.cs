@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -15,6 +16,7 @@ namespace VMS.Pages.OrganizationManagementPage
         private int confirmCloseId;
         private int popupDelete;
         private int popupClose;
+        private int page = 1;
         private PaginatedList<ActivityViewModel> data = new(new(), 0, 1, 1);
 
         [Parameter]
@@ -26,6 +28,8 @@ namespace VMS.Pages.OrganizationManagementPage
 
         [Inject]
         private IActivityService ActivityService { get; set; }
+        [Inject]
+        private IJSRuntime JsRuntime { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -39,25 +43,45 @@ namespace VMS.Pages.OrganizationManagementPage
             await Interop.ScrollToTop(JsRuntime);
         }
 
+        private void ResetState()
+        {
+            rateId = 0;
+            dropdownId = 0;
+            confirmCloseId = 0;
+            confirmDeleteId = 0;
+            popupClose = 0;
+            popupDelete = 0;
+        }
+
         private void ChangeRateState(int id)
         {
             rateId = (rateId == id ? 0 : id);
             dropdownId = 0;
-            confirmCloseId = 0;
-            confirmDeleteId = 0;
-        }
+    }
 
         private void ChangeDropdownState(int id)
         {
-            dropdownId = (dropdownId == id ? 0 : id);
             rateId = 0;
-            confirmCloseId = 0;
-            confirmDeleteId = 0;
+            dropdownId = (dropdownId == id ? 0 : id);
         }
 
-        private void ChangeConfirmDeleteState(int id)
+        private void ChangeDeleteState(int id)
         {
+            rateId = 0;
+            dropdownId = 0;
+            confirmCloseId = 0;
+            confirmDeleteId = id;
 
+        }
+
+        private void ChangeCloseState(int id)
+        {
+            rateId = 0;
+            dropdownId = 0;
+            confirmCloseId = id;
+            confirmDeleteId = 0;
+            popupClose = 0;
+            popupDelete = 0;
         }
     }
 }

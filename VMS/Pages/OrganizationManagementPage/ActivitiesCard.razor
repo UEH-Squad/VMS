@@ -1,21 +1,19 @@
-﻿@inject IJSRuntime JsRuntime
-
-<div class="row">
+﻿<div class="row">
     <div class="text-result mb-5">Có <span>@SumResult</span> hoạt động tương ứng với kết quả tìm kiếm của bạn.</div>
 </div>
-@if (pagedResult != null && pagedResult.Results.Length != 0)
+@if (data != null && data.TotalItems != 0)
 {
     @foreach (var item in data.Items)
     {
         <div class="org-card" style="z-index:@(item.Id == rateId ? "2" : "auto"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(item.IsClosed? 0.75 : 1)">
-            <div class="org-card__btn-edit btn" @onclick="ChangeDropdownState(item.Id)">
+            <div class="org-card__btn-edit btn" @onclick="() => ChangeDropdownState(item.Id)">
                 <span class="material-icons-outlined">
                     more_horiz
                 </span>
                 <ul class="org-card__btn-edit__list card-list" style="display:@(item.Id == dropdownId ? "inline-block" : "none");">
                     <li class="item-1">Chỉnh sửa</li>
-                    <li class="item-2" @onclick="@(() => DelConfirm(item.Id))">Xóa</li>
-                    <li class="item-3" @onclick="@(() => CloseConfirm(item.Id))">Đóng hoạt động</li>
+                    <li class="item-2" @onclick="@(() => ChangeDeleteState(item.Id))">Xóa</li>
+                    <li class="item-3" @onclick="@(() => ChangeCloseState(item.Id))">Đóng hoạt động</li>
                 </ul>
             </div>
             <div class="org-card__img">
@@ -23,7 +21,7 @@
             </div>
             <div class="org-card__info">
                 <div class="org-card__info__title">
-                    @item.Name
+                    <a href="@Routes.ActivityInfo/@item.Id">@item.Name</a>
                 </div>
                 <div class="org-card__info__rate">
                     <span class="material-icons-outlined" style="color:@(item.Rate >= 1 ? "#EDF131" : "#B4B4B4")">
@@ -75,7 +73,7 @@
             @*--------------------Confirm------------------- *@
             <div class="popup-container" style="display:@(item.Id == confirmDeleteId ? "initial" : "none")">
                 <div class="org-card__del-confirm confirm">
-                    <div class="close-icon" @onclick="() => ChangeConfirmDeleteState(item.Id)">
+                    <div class="close-icon" @onclick="() => ChangeDeleteState(item.Id)">
                         <span class="material-icons-outlined">
                             close
                         </span>
@@ -84,17 +82,17 @@
                         Bạn có chắc chắn muốn<br />
                         <span>xóa hoạt động</span> này không?
                     </div>
-                    <div class="btn-yes card-btn" @onclick="() => DelItem(item.Id)">
+                    <div class="btn-yes card-btn" @onclick="() => ChangeDeleteState(item.Id)">
                         Xác nhận
                     </div>
-                    <div class="btn-cancel card-btn" @onclick="() => DelConfirm(item.Id)">
+                    <div class="btn-cancel card-btn" @onclick="() => ChangeDeleteState(item.Id)">
                         Hủy
                     </div>
                 </div>
             </div>
-            <div class="popup-container" style="display:@(!item.IsClosed ? "initial" : "none")">
-                <div class="org-card__close-confirm confirm" style="display:@(!item.IsClosed ? "initial" : "none")">
-                    <div class="close-icon" @onclick="@(() => CloseConfirm(item.Id))">
+            <div class="popup-container" style="display:@(item.Id == confirmCloseId ? "initial" : "none")">
+                <div class="org-card__close-confirm confirm" style="display:@(item.Id == confirmCloseId ? "initial" : "none")">
+                    <div class="close-icon" @onclick="@(() => ChangeCloseState(item.Id))">
                         <span class="material-icons-outlined">
                             close
                         </span>
@@ -103,10 +101,10 @@
                         Bạn có chắc chắn muốn<br />
                         <span>đóng hoạt động</span> này không?
                     </div>
-                    <div class="btn-yes card-btn" @onclick="@(() => CloseItem(item.Id))">
+                    <div class="btn-yes card-btn" @onclick="@(() => ChangeCloseState(item.Id))">
                         Xác nhận
                     </div>
-                    <div class="btn-cancel card-btn" @onclick="@(() => CloseConfirm(item.Id))">
+                    <div class="btn-cancel card-btn" @onclick="@(() => ChangeCloseState(item.Id))">
                         Hủy
                     </div>
                 </div>
@@ -115,7 +113,7 @@
             <div class="popup-container" style="display:@(item.Id == popupClose ? "initial" : "none")">
                 <div class="org-card__close-succ notify --close">
                     <div class="close-icon">
-                        <span class="material-icons-outlined" @onclick="() => CloseItem(item.Id)">
+                        <span class="material-icons-outlined" @onclick="() => ChangeCloseState(item.Id)">
                             close
                         </span>
                     </div>
@@ -124,7 +122,7 @@
             </div>
             <div class="popup-container" style="display:@(item.Id == popupDelete ? "initial" : "none")">
                 <div class="org-card__del-succ notify --del">
-                    <div class="close-icon" @onclick="@(()=> DelItem(item.Id))">
+                    <div class="close-icon" @onclick="@(()=> ChangeDeleteState(item.Id))">
                         <span class="material-icons-outlined">
                             close
                         </span>
@@ -138,7 +136,7 @@
 
 <div class="pagination-org">
     <Pager CurrentPage="@data.PageIndex"
-           PageCount="@data.PageSize"
+           PageCount="@data.TotalPages"
            OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 </div>
 
@@ -146,74 +144,38 @@
     private int PrevItem = -1;
     private int SumResult = 100;
 
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string ImgSrc { get; set; }
-        public int Joiner { get; set; }
-        public string ShortDescription { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool EditDropDown { get; set; }
-        public bool RateMethodDropDown { get; set; }
-        public double Rate { get; set; }
-        public int IsDelete { get; set; }
-        public bool PopupDel { get; set; }
-        public int IsClose { get; set; }
-        public bool PopupClose { get; set; }
-    }
+    //private async Task DropDownClick(int id, string type)
+    //{
+    //    if (PrevItem != -1 && PrevItem != id) DropDownClick(PrevItem, "clear-all");
+    //    PrevItem = id;
+    //    var clickedItem = data.Items.FirstOrDefault(x => x.Id == id);
+    //    //if (clickedItem is not null)
+    //    //{
+    //    //    switch(type)
+    //    //    {
+    //    //        case "edit":
+    //    //            {
+    //    //                clickedItem.EditDropDown = !clickedItem.EditDropDown;
+    //    //                clickedItem.RateMethodDropDown = false;
 
-    public abstract class PagedResultBase
-    {
-        public int CurrentPage { get; set; }
-        public int PageCount { get; set; }
-        public int PageSize { get; set; }
-        public int RowCount { get; set; }
-        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
-        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
-    }
+    //    //                break;
+    //    //            }
+    //    //        case "rate":
+    //    //            {
+    //    //                clickedItem.RateMethodDropDown = !clickedItem.RateMethodDropDown;
+    //    //                clickedItem.EditDropDown = false;
+    //    //                break;
 
-    public class PagedResult<T> : PagedResultBase where T : class
-    {
-        public T[] Results { get; set; }
-    }
-
-    private PagedResult<FakeData> pagedResult;
-    private int count = 20;
-    private int page = 1;
-
-    private async Task DropDownClick(int id, string type)
-    {
-        if (PrevItem != -1 && PrevItem != id) DropDownClick(PrevItem, "clear-all");
-        PrevItem = id;
-        var clickedItem = data.Items.FirstOrDefault(x => x.Id == id);
-        //if (clickedItem is not null)
-        //{
-        //    switch(type)
-        //    {
-        //        case "edit":
-        //            {
-        //                clickedItem.EditDropDown = !clickedItem.EditDropDown;
-        //                clickedItem.RateMethodDropDown = false;
-
-        //                break;
-        //            }
-        //        case "rate":
-        //            {
-        //                clickedItem.RateMethodDropDown = !clickedItem.RateMethodDropDown;
-        //                clickedItem.EditDropDown = false;
-        //                break;
-
-        //            }
-        //        case "clear-all":
-        //            {
-        //                clickedItem.RateMethodDropDown = false;
-        //                clickedItem.EditDropDown = false;
-        //                break;
-        //            }
-        //    }
-        //}
-    }
+    //    //            }
+    //    //        case "clear-all":
+    //    //            {
+    //    //                clickedItem.RateMethodDropDown = false;
+    //    //                clickedItem.EditDropDown = false;
+    //    //                break;
+    //    //            }
+    //    //    }
+    //    //}
+    //}
     private bool HaftStar(double rate, int star)
     {
         if (rate - star >= 0.5 && rate - star < 1)
@@ -221,48 +183,5 @@
             return true;
         }
         return false;
-    }
-    //----------Popup and Confirm------------//
-    private async Task DelConfirm(int id)
-    {
-        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (Item.IsDelete != 0) Item.IsDelete = 0;
-        else Item.IsDelete = 1;
-    }
-
-    private async Task DelItem(int id)
-    {
-        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (Item.PopupDel == true)
-        {
-            Item.PopupDel = false;
-            Item.IsDelete = -1;
-        }
-        else
-        {
-            Item.PopupDel = true;
-            Item.IsDelete = 1;
-        }
-
-    }
-    private async Task CloseConfirm(int id)
-    {
-        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (Item.IsClose != 0) Item.IsClose = 0;
-        else Item.IsClose = 1;
-    }
-    private async Task CloseItem(int id)
-    {
-        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (Item.PopupClose == true)
-        {
-            Item.PopupClose = false;
-            Item.IsClose = -1;
-        }
-        else
-        {
-            Item.PopupClose = true;
-            Item.IsClose = 1;
-        }
     }
 }

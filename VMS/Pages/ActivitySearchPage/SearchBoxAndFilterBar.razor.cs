@@ -116,10 +116,9 @@ namespace VMS.Pages.ActivitySearchPage
             ToggleOrganizationDropdown();
         }
 
-        private async Task UpdateSearchValueAsync(ChangeEventArgs e)
+        private void UpdateSearchValueAsync(ChangeEventArgs e)
         {
             SearchValue = (string)e.Value;
-            await SearchAsync();
         }
         private async Task SearchAsync()
         {
@@ -128,7 +127,6 @@ namespace VMS.Pages.ActivitySearchPage
         private void ClearSearchBox()
         {
             SearchValue = string.Empty;
-            StateHasChanged();
         }
 
         private async Task ShowAreasPopupAsync()

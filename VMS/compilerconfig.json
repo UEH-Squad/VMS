@@ -118,5 +118,9 @@
   {
     "outputFile": "Pages/Organization/Activities/NotificationPopup.razor.css",
     "inputFile": "Pages/Organization/Activities/NotificationPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/SearchBox.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/SearchBox.razor.scss"
   }
 ]

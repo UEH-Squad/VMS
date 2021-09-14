@@ -22,32 +22,6 @@
     .heading-container .page-heading span {
       color: #64D72F; }
 
-.my-search-box {
-  border-bottom: 1px solid #b4b4b4; }
-  .my-search-box__input {
-    flex: 1;
-    outline: none;
-    border: none;
-    font-size: 18px;
-    color: #18A0FB; }
-    .my-search-box__input::placeholder {
-      color: #64D72F; }
-  .my-search-box__icon-wrapper span {
-    color: #64D72F;
-    font-size: 30px;
-    line-height: 24px; }
-  .my-search-box__icon-wrapper .search-btn {
-    background-color: #f3f3f5;
-    border-radius: 3px;
-    border: none;
-    padding: 4px; }
-  .my-search-box__icon-wrapper .clear-search-btn {
-    margin-top: -4px;
-    visibility: hidden;
-    cursor: pointer; }
-  .my-search-box__input:not(:placeholder-shown) ~ .my-search-box__icon-wrapper .clear-search-btn {
-    visibility: visible; }
-
 .my-check-box {
   border-radius: 5px;
   width: 20px;

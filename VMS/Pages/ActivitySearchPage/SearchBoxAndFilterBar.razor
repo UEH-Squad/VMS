@@ -4,19 +4,7 @@
 <div class="heading-container">
 
 <h3 class="mt-5 mb-4 text-uppercase page-heading">We do it <span>together!</span></h3>
-<div class="my-search-box d-flex mb-5 justify-content-between">
-    <input type="text" value=@SearchValue @onchange="UpdateSearchValueAsync" @onkeyup="SearchAsync" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
-    <div class="my-search-box__icon-wrapper d-flex align-items-center">
-        <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
-            close
-        </span>
-        <button @onclick="() => SearchAsync()" class="search-btn d-flex align-items-center">
-            <span class="material-icons-outlined">
-                search
-            </span>
-        </button>
-    </div>
-</div>
+<SearchBox SearchValue="SearchValue" />
 </div>
 <div class="d-flex align-items-center mb-3">
     <div class="form-check form-check-inline d-flex align-items-center ps-0 pe-5">

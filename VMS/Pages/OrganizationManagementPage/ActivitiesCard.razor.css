@@ -105,7 +105,8 @@
       color: #64D72F;
       display: inline-block; }
       .org-card__info__joiner__icon span {
-        transform: translateY(25%); }
+        transform: translateY(25%);
+        font-size: 24px; }
     .org-card__info__joiner__sum {
       display: inline-block; }
 

@@ -1,0 +1,44 @@
+﻿<div>
+    <h3 class="text-center my-5">Tìm kiếm <span>Đơn vị tổ chức</span></h3>
+</div>
+@* search box component *@
+
+
+<p class="my-4">Lọc tổ chức</p>
+
+<div class="filter-bar d-flex justify-content-between mb-5">
+    <div class="d-flex" style="width: 40%;">
+        <div class="filter-item position-relative me-3">
+            <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+            <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
+                <ul>
+                    @if (levels is not null)
+                    {
+                        @foreach (var level in levels)
+                        {
+                            <li @onmousedown="() => ChooseLevelValue(level)">@level.Name</li>
+                        }
+                    }
+                </ul>
+            </div>
+            <span class="material-icons-outlined position-absolute filter-item__icon">
+                expand_more
+            </span>
+        </div>
+
+        <div class="filter-item position-relative">
+            <div @onclick="ShowAreasPopupAsync" class="popup-btn @(areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+            <span class="material-icons-outlined position-absolute filter-item__icon">
+                expand_more
+            </span>
+        </div>
+    </div>
+    <div class="d-flex">
+        <button @onclick="UpdateFilterValueAsync" class="filter-btn me-3">Lọc</button>
+        <button @onclick="ClearFilter" type="button" class="clear-filter-btn">Xóa lọc</button>
+    </div>
+</div>
+@code {
+
+    
+}

@@ -11,7 +11,7 @@
         public const string Map = "/ban-do";
 
         public const string User = "/trang-ca-nhan";
-
+        public const string SearchOrganizer = "/tim-kiem-don-vi-to-chuc";
         #endregion Main
 
         #region Activity

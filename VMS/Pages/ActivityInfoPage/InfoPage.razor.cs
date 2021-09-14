@@ -26,7 +26,10 @@ namespace VMS.Pages.ActivityInfoPage
 
         protected override void OnParametersSet()
         {
-            isFav = currentUser.Favorites.Any(f => f.ActivityId == Activity.Id);
+            if (currentUser is not null)
+            {
+                isFav = currentUser.Favorites.Any(f => f.ActivityId == Activity.Id);
+            }
         }
 
         private void HandleFavorite(int id)

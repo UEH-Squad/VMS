@@ -166,12 +166,13 @@ namespace VMS.Pages.ActivitySearchPage
             await FilterChanged.InvokeAsync(Filter);
         }
 
-        private void ClearFilter()
+        private async Task ClearFilter()
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
             organizationChoosenValue = "Tổ chức";
             Filter = new FilterActivityViewModel();
+            await FilterChanged.InvokeAsync(Filter);
         }
 
         private async Task ChangeOrderAsync(ActOrderBy key)

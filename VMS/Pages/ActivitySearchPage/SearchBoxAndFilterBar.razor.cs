@@ -119,7 +119,10 @@ namespace VMS.Pages.ActivitySearchPage
         private async Task UpdateSearchValueAsync(ChangeEventArgs e)
         {
             SearchValue = (string)e.Value;
-            await SearchAsync();
+            if (!string.IsNullOrEmpty(SearchValue))
+            {
+                await SearchAsync();
+            }
         }
         private async Task SearchAsync()
         {

@@ -17,7 +17,13 @@
         }
 
         &:hover .featuredAct__overplay {
-            height: 50%;
+            height: 100%;
+        }
+
+        img {
+            height: 500px;
+            object-fit: cover;
+            object-position: center;
         }
     }
 

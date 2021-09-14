@@ -17,7 +17,11 @@
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px; }
     .my-featuredAct .featuredAct__card:hover .featuredAct__overplay {
-      height: 50%; }
+      height: 100%; }
+    .my-featuredAct .featuredAct__card img {
+      height: 500px;
+      object-fit: cover;
+      object-position: center; }
   .my-featuredAct .featuredAct__title {
     position: absolute;
     top: 0;

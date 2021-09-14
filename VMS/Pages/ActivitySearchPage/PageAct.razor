@@ -19,7 +19,7 @@
                                             <i class="material-icons">public</i> @item.Organizer?.FullName
                                         </h5>
                                         <p class="lmtext-2">@((MarkupString)item.Description)</p>
-                                        <span>Ngày đăng: @item.PostDate.ToString("dd/MM/yyyy")</span>
+                                        <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
                                         <AuthorizeView>
                                             <Authorized>
                                                 <div class="act__signUp">

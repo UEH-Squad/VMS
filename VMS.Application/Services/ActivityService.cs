@@ -108,7 +108,7 @@ namespace VMS.Application.Services
         {
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
             {
-                return activities = activities.OrderByDescending(a => a.PostDate)
+                return activities = activities.OrderByDescending(a => a.CreatedDate)
                                             .ThenByDescending(a => a.MemberQuantity)
                                             .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
                                             .ToList();
@@ -116,14 +116,14 @@ namespace VMS.Application.Services
 
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Hottest])
             {
-                return activities = activities.OrderByDescending(a => a.PostDate)
+                return activities = activities.OrderByDescending(a => a.CreatedDate)
                                             .ThenByDescending(a => a.MemberQuantity)
                                             .ToList();
             }
 
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest])
             {
-                return activities = activities.OrderByDescending(a => a.PostDate)
+                return activities = activities.OrderByDescending(a => a.CreatedDate)
                                             .ThenBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters))
                                             .ToList();
             }
@@ -145,7 +145,7 @@ namespace VMS.Application.Services
                 return activities = activities.OrderBy(a => GeoCalculator.GetDistance(userLocation.Latitude, userLocation.Longitude, a.Coordinate.Latitude, a.Coordinate.Longitude, 2, DistanceUnit.Meters)).ToList();
             }
 
-            return activities = activities.OrderByDescending(a => a.PostDate).ToList();
+            return activities = activities.OrderByDescending(a => a.CreatedDate).ToList();
         }
 
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()

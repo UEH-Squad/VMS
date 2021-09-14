@@ -1,135 +1,138 @@
 ﻿@inject IJSRuntime JsRuntime
 
-@if (data != null && data.TotalItems != 0)
+<div class="row">
+    <div class="text-result mb-5">Có <span>@SumResult</span> hoạt động tương ứng với kết quả tìm kiếm của bạn.</div>
+</div>
+@if (pagedResult != null && pagedResult.Results.Length != 0)
 {
     @foreach (var item in data.Items)
     {
-        <div class="org-card" style="z-index:@(item.IsVirtual ? "2" : "auto"); display:@(item.IsDeleted? "none" : "flex"); opacity: @(item.IsClosed? 0.75 :1)">
-            <div class="org-card__btn-edit btn" @onclick="@(() => DropDownClick(item.Id,"edit"))">
-                <span class="material-icons-outlined">
-                    more_horiz
+<div class="org-card" style="z-index:@(item.RateMethodDropDown ? "2" : "auto"); display:@(item.IsDelete == -1? "none" : "flex"); opacity: @(item.IsClose == -1? 0.75 :1)">
+    <div class="org-card__btn-edit btn" @onclick="@(() => DropDownClick(item.Id,"edit"))">
+        <span class="material-icons-outlined">
+            more_horiz
+        </span>
+        <ul class="org-card__btn-edit__list card-list" style="display:@(item.EditDropDown ? "inline-block" : "none");">
+            <li class="item-1">Chỉnh sửa</li>
+            <li class="item-2" @onclick="@(() => DelConfirm(item.Id))">Xóa</li>
+            <li class="item-3" @onclick="@(() => CloseConfirm(item.Id))">Đóng hoạt động</li>
+        </ul>
+    </div>
+    <div class="org-card__img">
+        <img src="@item.ImgSrc" alt="photo">
+    </div>
+    <div class="org-card__info">
+        <div class="org-card__info__title">
+            @item.Title
+        </div>
+        <div class="org-card__info__rate">
+            <span class="material-icons-outlined" style="color:@(item.Rate >= 1 ? "#EDF131" : "#B4B4B4")">
+                star@(HaftStar(item.Rate,1)?"_half":"")
+            </span>
+            <span class="material-icons-outlined" style="color:@(item.Rate >= 2 ? "#EDF131" : "#B4B4B4")">
+                star@(HaftStar(item.Rate,2)?"_half":"")
+            </span>
+            <span class="material-icons-outlined" style="color:@(item.Rate >= 3 ? "#EDF131" : "#B4B4B4")">
+                star@(HaftStar(item.Rate,3)?"_half":"")
+            </span>
+            <span class="material-icons-outlined" style="color:@(item.Rate >= 4 ? "#EDF131" : "#B4B4B4")">
+                star@(HaftStar(item.Rate,4)?"_half":"")
+            </span>
+            <span class="material-icons-outlined" style="color:@(item.Rate >= 5 ? "#EDF131" : "#B4B4B4")">
+                star@(HaftStar(item.Rate,5)?"_half":"")
+            </span>
+        </div>
+        <div class="org-card__info__desc">
+            @item.ShortDescription
+        </div>
+        <div class="org-card__info__date">
+            Ngày đăng: <span>20/07/2021</span>
+        </div>
+        <div class="org-card__info__joiner">
+            <div class="org-card__info__joiner__icon">
+                <span class="material-icons">
+                    person
                 </span>
-                <ul class="org-card__btn-edit__list card-list" style="display:@(item.IsVirtual ? "inline-block" : "none");">
-                    <li class="item-1">Chỉnh sửa</li>
-                    <li class="item-2" @onclick="@(() => DelConfirm(item.Id))">Xóa</li>
-                    <li class="item-3" @onclick="@(() => CloseConfirm(item.Id))">Đóng hoạt động</li>
-                </ul>
             </div>
-            <div class="org-card__img">
-                <img src="@item.Banner" alt="photo">
-            </div>
-            <div class="org-card__info">
-                <div class="org-card__info__title">
-                    @item.Name
-                </div>
-                <div class="org-card__info__rate">
-                    <span class="material-icons-outlined" style="color:@(item.Rate >= 1 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rate,1)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rate >= 2 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rate,2)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rate >= 3 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rate,3)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rate >= 4 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rate,4)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rate >= 5 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rate,5)?"_half":"")
-                    </span>
-                </div>
-                <div class="org-card__info__desc">
-                    @item.Description
-                </div>
-                <div class="org-card__info__date">
-                    Ngày đăng: <span>20/07/2021</span>
-                </div>
-                <div class="org-card__info__joiner">
-                    <div class="org-card__info__joiner__icon">
-                        <span class="material-icons-outlined">
-                            perm_identity
-                        </span>
-                    </div>
-                    <div class="org-card__info__joiner__sum">
-                        @item.MemberQuantity
-                    </div>
-                </div>
-            </div>
-            <div class="org-card__btn-list card-btn">
-                Xem danh sách
-            </div>
-            <div class="org-card__cbb-rate card-btn">
-                <div href="#" class="org-card__cbb-rate__title" @onclick="@(() => DropDownClick(item.Id,"rate"))">Đánh giá</div>
-                <span class="material-icons-outlined expand-icon" @onclick="@(() => DropDownClick(item.Id,"rate"))">
-                    expand_more
-                </span>
-                <ul class="org-card__cbb-rate__list card-list" style="display:@(item.IsVirtual ? "inline-block" : "none");">
-                    <li>Tình nguyện viên</li>
-                    <li>Đánh giá hoạt động</li>
-                </ul>
-            </div>
-            @*--------------------Confirm------------------- *@
-            <div class="popup-container" style="display:@(item.IsDeleted ?"initial":"none")">
-                <div class="org-card__del-confirm confirm">
-                    <div class="close-icon" @onclick="@(() => DelConfirm(item.Id))">
-                        <span class="material-icons-outlined">
-                            close
-                        </span>
-                    </div>
-                    <div class="content --del">
-                        Bạn có chắc chắn muốn<br />
-                        <span>xóa hoạt động</span> này không?
-                    </div>
-                    <div class="btn-yes card-btn" @onclick="@(() => DelItem(item.Id))">
-                        Xác nhận
-                    </div>
-                    <div class="btn-cancel card-btn" @onclick="@(() => DelConfirm(item.Id))">
-                        Hủy
-                    </div>
-                </div>
-            </div>
-            <div class="popup-container" style="display:@(item.IsClosed?"initial":"none")">
-                <div class="org-card__close-confirm confirm" style="display:@(item.IsClosed?"initial":"none")">
-                    <div class="close-icon" @onclick="@(() => CloseConfirm(item.Id))">
-                        <span class="material-icons-outlined">
-                            close
-                        </span>
-                    </div>
-                    <div class="content --close">
-                        Bạn có chắc chắn muốn<br />
-                        <span>đóng hoạt động</span> này không?
-                    </div>
-                    <div class="btn-yes card-btn" @onclick="@(() => CloseItem(item.Id))">
-                        Xác nhận
-                    </div>
-                    <div class="btn-cancel card-btn" @onclick="@(() => CloseConfirm(item.Id))">
-                        Hủy
-                    </div>
-                </div>
-            </div>
-            @*-----------------Popup--------------*@
-            <div class="popup-container" style="display:@(item.IsVirtual?"initial":"none")">
-                <div class="org-card__close-succ notify --close">
-                    <div class="close-icon">
-                        <span class="material-icons-outlined" @onclick="@(()=> CloseItem(item.Id))">
-                            close
-                        </span>
-                    </div>
-                    <div class="content">Đóng hoạt động thành công!</div>
-                </div>
-            </div>
-            <div class="popup-container" style="display:@(item.IsVirtual?"initial":"none")">
-                <div class="org-card__del-succ notify --del">
-                    <div class="close-icon" @onclick="@(()=> DelItem(item.Id))">
-                        <span class="material-icons-outlined">
-                            close
-                        </span>
-                    </div>
-                    <div class="content">Xóa hoạt động thành công!</div>
-                </div>
+            <div class="org-card__info__joiner__sum">
+                @item.Joiner
             </div>
         </div>
+    </div>
+    <div class="org-card__btn-list card-btn">
+        Xem danh sách
+    </div>
+    <div class="org-card__cbb-rate card-btn">
+        <div href="#" class="org-card__cbb-rate__title" @onclick="@(() => DropDownClick(item.Id,"rate"))">Đánh giá</div>
+        <span class="material-icons-outlined expand-icon" @onclick="@(() => DropDownClick(item.Id,"rate"))">
+            expand_more
+        </span>
+        <ul class="org-card__cbb-rate__list card-list" style="display:@(item.RateMethodDropDown ? "inline-block" : "none");">
+            <li>Tình nguyện viên</li>
+            <li>Đánh giá hoạt động</li>
+        </ul>
+    </div>
+    @*--------------------Confirm------------------- *@
+    <div class="popup-container" style="display:@(item.IsDelete == 0?"initial":"none")">
+        <div class="org-card__del-confirm confirm">
+            <div class="close-icon" @onclick="@(() => DelConfirm(item.Id))">
+                <span class="material-icons-outlined">
+                    close
+                </span>
+            </div>
+            <div class="content --del">
+                Bạn có chắc chắn muốn<br />
+                <span>xóa hoạt động</span> này không?
+            </div>
+            <div class="btn-yes card-btn" @onclick="@(() => DelItem(item.Id))">
+                Xác nhận
+            </div>
+            <div class="btn-cancel card-btn" @onclick="@(() => DelConfirm(item.Id))">
+                Hủy
+            </div>
+        </div>
+    </div>
+    <div class="popup-container" style="display:@(item.IsClose == 0?"initial":"none")">
+        <div class="org-card__close-confirm confirm" style="display:@(item.IsClose == 0?"initial":"none")">
+            <div class="close-icon" @onclick="@(() => CloseConfirm(item.Id))">
+                <span class="material-icons-outlined">
+                    close
+                </span>
+            </div>
+            <div class="content --close">
+                Bạn có chắc chắn muốn<br />
+                <span>đóng hoạt động</span> này không?
+            </div>
+            <div class="btn-yes card-btn" @onclick="@(() => CloseItem(item.Id))">
+                Xác nhận
+            </div>
+            <div class="btn-cancel card-btn" @onclick="@(() => CloseConfirm(item.Id))">
+                Hủy
+            </div>
+        </div>
+    </div>
+    @*-----------------Popup--------------*@
+    <div class="popup-container" style="display:@(item.PopupClose?"initial":"none")">
+        <div class="org-card__close-succ notify --close">
+            <div class="close-icon">
+                <span class="material-icons-outlined" @onclick="@(()=> CloseItem(item.Id))">
+                    close
+                </span>
+            </div>
+            <div class="content">Đóng hoạt động thành công!</div>
+        </div>
+    </div>
+    <div class="popup-container" style="display:@(item.PopupDel?"initial":"none")">
+        <div class="org-card__del-succ notify --del">
+            <div class="close-icon" @onclick="@(()=> DelItem(item.Id))">
+                <span class="material-icons-outlined">
+                    close
+                </span>
+            </div>
+            <div class="content">Xóa hoạt động thành công!</div>
+        </div>
+    </div>
+</div>
     }
 }
 
@@ -141,6 +144,42 @@
 
 @code {
     private int PrevItem = -1;
+    private int SumResult = 100;
+
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string ImgSrc { get; set; }
+        public int Joiner { get; set; }
+        public string ShortDescription { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public bool EditDropDown { get; set; }
+        public bool RateMethodDropDown { get; set; }
+        public double Rate { get; set; }
+        public int IsDelete{ get; set; }
+        public bool PopupDel { get; set; }
+        public int IsClose { get; set; }
+        public bool PopupClose { get; set; }
+    }
+
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+
+    private PagedResult<FakeData> pagedResult;
+    private int count = 20;
     private int page = 1;
 
     private async Task DropDownClick(int id, string type)
@@ -186,43 +225,44 @@
     //----------Popup and Confirm------------//
     private async Task DelConfirm(int id)
     {
-        var Item = data.Items.FirstOrDefault(x => x.Id == id);
-        Item.IsDeleted = true;
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.IsDelete != 0) Item.IsDelete = 0;
+        else Item.IsDelete = 1;
     }
 
     private async Task DelItem(int id)
     {
-        var Item = data.Items.FirstOrDefault(x => x.Id == id);
-        //if (Item.PopupDel == true)
-        //{
-        //    Item.PopupDel = false;
-        //    Item.IsDelete = -1;
-        //}
-        //else
-        //{
-        //    Item.PopupDel = true;
-        //    Item.IsDelete = 1;
-        //}
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.PopupDel == true)
+        {
+            Item.PopupDel = false;
+            Item.IsDelete = -1;
+        }
+        else
+        {
+            Item.PopupDel = true;
+            Item.IsDelete = 1;
+        }
 
     }
     private async Task CloseConfirm(int id)
     {
-    //    var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-    //    if (Item.IsClose != 0) Item.IsClose = 0;
-    //    else Item.IsClose = 1;
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.IsClose != 0) Item.IsClose = 0;
+        else Item.IsClose = 1;
     }
     private async Task CloseItem(int id)
     {
-        //var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        //if (Item.PopupClose == true)
-        //{
-        //    Item.PopupClose = false;
-        //    Item.IsClose = -1;
-        //}
-        //else
-        //{
-        //    Item.PopupClose = true;
-        //    Item.IsClose = 1;
-        //}
+        var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (Item.PopupClose == true)
+        {
+            Item.PopupClose = false;
+            Item.IsClose = -1;
+        }
+        else
+        {
+            Item.PopupClose = true;
+            Item.IsClose = 1;
+        }
     }
 }

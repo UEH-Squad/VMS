@@ -36,11 +36,14 @@ namespace VMS.Pages.OrganizationManagementPage
             data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page);
         }
 
-        private async Task HandlePageChanged()
+        private async Task HandlePageChanged(bool isPaging = false)
         {
             data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page);
             StateHasChanged();
-            await Interop.ScrollToTop(JsRuntime);
+            if (isPaging)
+            {
+                await Interop.ScrollToTop(JsRuntime);
+            }
         }
 
         private void ResetState()
@@ -65,31 +68,33 @@ namespace VMS.Pages.OrganizationManagementPage
             dropdownId = (dropdownId == id ? 0 : id);
         }
 
-        private void ChangeDeleteState(int id)
+        private void ChangeDeleteState(ActivityViewModel activity)
         {
-            if (confirmDeleteId == id)
+            if (confirmDeleteId == activity.Id)
             {
-                // handle delete 
+                ActivityService.CloseOrDeleteActivity(activity.Id, !activity.IsDeleted, activity.IsClosed);
                 ResetState();
-                popupDelete = id;
+                popupDelete = activity.Id;
+                HandlePageChanged();
             }
             else
             {
-                confirmDeleteId = id;
+                confirmDeleteId = activity.Id;
             }
         }
 
-        private void ChangeCloseState(int id)
+        private void ChangeCloseState(ActivityViewModel activity)
         {
-            if (confirmCloseId == id)
+            if (confirmCloseId == activity.Id)
             {
-                // handle close 
+                ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
                 ResetState();
-                popupDelete = id;
+                popupDelete = activity.Id;
+                HandlePageChanged();
             }
             else
             {
-                confirmCloseId = id;
+                confirmCloseId = activity.Id;
             }
         }
     }

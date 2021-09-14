@@ -59,7 +59,8 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     GetFilterByDate(),
-                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
+                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
+                    a => !a.IsDeleted
                 },
                 PageIndex = currentPage,
                 PageSize = 20,
@@ -87,7 +88,8 @@ namespace VMS.Application.Services
                     a => a.ActivitySkills.Select(activitySkills => activitySkills.SkillId)
                                          .Where(actSkillId => filter.Skills.Select(skill => skill.Id)
                                                                            .Any(skillId => skillId == actSkillId))
-                                         .Count() == filter.Skills.Count
+                                         .Count() == filter.Skills.Count,
+                    a => !a.IsDeleted
                 },
                 Includes = a => a.Include(x => x.ActivitySkills),
                 PageIndex = currentPage,
@@ -469,7 +471,7 @@ namespace VMS.Application.Services
             return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank));
         }
 
-        public async Task CloseOrDeleteActivity(int activityId, bool isClose = false, bool isDelete = false)
+        public async Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 

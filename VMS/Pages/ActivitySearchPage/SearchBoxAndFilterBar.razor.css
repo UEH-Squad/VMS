@@ -13,15 +13,6 @@
 .colored-red {
   color: #f14747 !important; }
 
-.heading-container {
-  width: fit-content; }
-  .heading-container .page-heading {
-    font-size: 66px;
-    color: #18A0FB;
-    font-weight: 500; }
-    .heading-container .page-heading span {
-      color: #64D72F; }
-
 .my-check-box {
   border-radius: 5px;
   width: 20px;

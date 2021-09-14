@@ -42,7 +42,7 @@
       grid-template-columns: auto auto; }
   .my-custom-popup .area-item-wrapper {
     cursor: pointer; }
-    .my-custom-popup .area-item-wrapper span {
+    .my-custom-popup .area-item-wrapper div {
       width: 50px;
       height: 50px;
       background-color: #18A0FB;

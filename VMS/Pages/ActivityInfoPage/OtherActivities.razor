@@ -17,11 +17,6 @@
                     <div class="act__container__card__desc">
                         <p class="limited-text">@data.Title</p>
                     </div>
-                    <div class="act__container__card__icon">
-                        <div class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))">
-                            <span class="material-icons">favorite</span>
-                        </div>
-                    </div>
                 </div>
             }
         </div>
@@ -39,16 +34,6 @@
     }
 
     private List<FakeData> fakeData = new();
-
-    private void AnimateHeart(int id)
-    {
-        var item = fakeData.FirstOrDefault(x => x.Id == id);
-        if (item is not null)
-            {
-                item.IsFav = !item.IsFav;
-            }
-        
-    }
 
     protected override async Task OnInitializedAsync()
     {

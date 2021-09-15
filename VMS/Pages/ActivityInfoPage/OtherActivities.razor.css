@@ -121,7 +121,7 @@
 
 ::deep .owl-nav .owl-prev, ::deep .owl-nav .owl-next {
   position: absolute;
-  top: 40%; }
+  top: 25%; }
 
 ::deep .owl-nav .owl-prev {
   left: 0; }

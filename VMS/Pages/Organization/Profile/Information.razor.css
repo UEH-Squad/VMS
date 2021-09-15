@@ -142,7 +142,7 @@
           color: #18A0FB;
           transition: all 0.3s linear; }
           .my-information .information__carousel ::deep .owl-nav .owl-next span:hover {
-            color: #0B588C; }
+            color: #0B588c; }
         .my-information .information__carousel ::deep .owl-nav .owl-next:hover {
           background: none; }
     .my-information .information__carousel ::deep .owl-dots {

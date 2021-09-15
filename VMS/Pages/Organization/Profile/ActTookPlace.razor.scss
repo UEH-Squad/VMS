@@ -84,14 +84,14 @@
 
     & > .img-container {
         .act-img {
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
         }
     }
 
     & > .act-content {
         .act-title {
-        color: #0B588C;
+            color: $blue-bold;
         }
     }
 }

@@ -146,7 +146,7 @@
                     transition: all 0.3s linear;
 
                     &:hover {
-                        color: #0B588C;
+                        color: $blue-hv;
                     }
                 }
 
@@ -182,7 +182,7 @@
             color: $blue;
 
             &:hover {
-                border: 1px solid #707070;
+                border: 1px solid $blue;
             }
         }
 
@@ -204,7 +204,7 @@
     }
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        background: #C4C4C4;
+        background: $grey-close-bg;
         border-radius: 10px;
         height: 50px;
     }

@@ -18,6 +18,7 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
             CreateMap<CreateOrgProfileViewModel, User>();
+            CreateMap<User, CreateOrgProfileViewModel>();
         }
     }
 }

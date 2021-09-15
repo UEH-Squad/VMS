@@ -8,12 +8,12 @@
                 <div class="editProfile__logo text-center my-5">
                     <img src="img/RelatedActivities/2nd-activity.png" alt="">
                 </div>
-                <EditForm Model="@organization" Context="CurrentEditContext" class="editProfile__form">
+                <EditForm Model="org" Context="CurrentEditContext" OnValidSubmit="HandleSubmit" class="editProfile__form">
                     <div class="row form-item">
                         <p class="col-4 form-text">Tên tổ chức</p>
                         <div class="col-8 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.FullName)</div>
-                            <InputText @bind-Value="@organization.FullName" class="form-input form-control" />
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => org.UserName)</div>
+                            <InputText @bind-Value="@org.UserName" class="form-input form-control" />
                         </div>
                       
                     </div>
@@ -70,9 +70,9 @@
                     <div class="row form-item">
                         <p class="col-4 form-text">Tầm nhìn & sứ mệnh</p>
                         <div class="col-8 position-relative px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Content)</div>
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => org.Mission)</div>
                             <div class="col-8 px-0 w-100">
-                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input mx-0 form-control" />
+                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
                             

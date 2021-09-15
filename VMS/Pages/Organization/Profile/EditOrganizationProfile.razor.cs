@@ -8,6 +8,10 @@ using Microsoft.JSInterop;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components.Forms;
 using Blazored.Modal;
+using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
+using Microsoft.Extensions.Logging;
+using VMS.Pages.Organization.Activities;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -17,6 +21,43 @@ namespace VMS.Pages.Organization.Profile
 
         [Inject]
         private IJSRuntime JSRuntinme { get; set; }
+
+        [Inject]
+        private IIdentityService IdentityService { get; set; }
+
+        [Inject]
+        private IOrgService OrgService { get; set; }
+
+        [Inject]
+        private ILogger<EditOrganizationProfile> Logger { get; set; }
+
+        private bool isErrorMessageShown = false;
+        private bool isLoading;
+
+        private CreateOrgProfileViewModel org = new();
+
+        protected override async Task OnInitializedAsync()
+        {
+            org = await OrgService.GetCreateOrgProfileViewModelAsync(IdentityService.GetCurrentUserId());
+        }
+
+        private async Task HandleSubmit()
+        {
+            isErrorMessageShown = false;
+            try
+            {
+                isLoading = false;
+
+                var modalParams = new ModalParameters();
+                await ShowAreasModal(typeof(NotificationPopup), modalParams);
+            }
+            catch (Exception ex)
+            {
+                isLoading = false;
+                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+            }
+        }
 
         public class Organization
         {
@@ -62,7 +103,7 @@ namespace VMS.Pages.Organization.Profile
         }
 
         bool[] choosenAreasList = new bool[12];
-        private async Task ShowAreasModal()
+        private async Task ShowAreasModal(Type type, ModalParameters parameters)
         {
             var options = new ModalOptions()
             {

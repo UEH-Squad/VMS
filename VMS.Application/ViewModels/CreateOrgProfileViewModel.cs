@@ -8,5 +8,7 @@ namespace VMS.Application.ViewModels
 {
     public class CreateOrgProfileViewModel
     {
+        public string UserName { get; set; }
+        public string Mission { get; set; }
     }
 }

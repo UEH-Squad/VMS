@@ -3,10 +3,9 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="search-box">
-        <InputText class="search-txt_input" placeholder="Tìm kiếm bằng từ khóa" @bind-Value="@rating.KeyWord"></InputText>
-        <div class="search-txt"><p class="search-txt_text">Covid-19</p></div>
-        <button type="submit" class="search-btn_clear"><span id="clear" class="material-icons">clear</span></button>
-        <button type="submit" class="search-btn_search"><span id ="search" class="material-icons">search</span></button>
+        <InputText class="search-txt_input" placeholder="Tìm kiếm bằng từ khóa" @bind-Value="@rating.KeyWord" @oninput="@ShowCloseButton"></InputText>
+        <button @onclick="@ClearKeyWord" class="search-btn_clear @Display"><span id="clear" class="material-icons">clear</span></button>
+        <button @onclick="@Submit" class="search-btn_search"><span id="search" class="material-icons">search</span></button>
     </div>
     <div class="search-result">
         <p class="search-result_text-1">Có</p>
@@ -27,4 +26,17 @@
     {
 
     }
+
+    string Display = "invisible";
+    public void ClearKeyWord()
+    {
+        rating.KeyWord = "";
+        Display = "invisible";
+    }
+
+    void ShowCloseButton()
+    {
+        Display = "visible";
+    }
+
 }

@@ -138,5 +138,21 @@
   {
     "outputFile": "Pages/RatingPage/SearchBar.razor.css",
     "inputFile": "Pages/RatingPage/SearchBar.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/Title.razor.css",
+    "inputFile": "Pages/RatingPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/MemberList.razor.css",
+    "inputFile": "Pages/RatingPage/MemberList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/Stars.razor.css",
+    "inputFile": "Pages/RatingPage/Stars.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/FilterRatingAll.razor.css",
+    "inputFile": "Pages/RatingPage/FilterRatingAll.razor.scss"
   }
 ]

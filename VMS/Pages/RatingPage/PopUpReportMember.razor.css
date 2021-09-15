@@ -61,9 +61,9 @@
 .container {
   position: absolute;
   width: 51%;
-  height: 94%;
+  height: 80%;
   left: 50%;
-  top: 50%;
+  top: 58%;
   transform: translate(-50%, -50%);
   color: #515151;
   background-color: #FFFFFF;

@@ -4,25 +4,44 @@
     <ValidationSummary />
     <div class="select-form d-flex align-items-center">
         <div class="select-form-box-1 select-form-box-1-inline d-flex align-items-center">
-            <InputCheckbox class="checkbox-1" id="rated" @bind-Value="@rating.Select6"></InputCheckbox>
+            <InputCheckbox class="checkbox-1" id="rated" @bind-Value="@rating.Select6" @onclick="@ShowRatedList"></InputCheckbox>
             <label class="label-1" for="rated">Đã đánh giá</label>
         </div>
         <div class="select-form-box-2 select-form-box-2-inline d-flex align-items-center">
-            <InputCheckbox class="checkbox-2" id="none-rated" @bind-Value="@rating.Select7"></InputCheckbox>
+            <InputCheckbox class="checkbox-2" id="none-rated" @bind-Value="@rating.Select7" @onclick="@NotShowRatedList"></InputCheckbox>
             <label class="label-2" for="none-rated">Chưa đánh giá</label>
         </div>
     </div>
 </EditForm>
 
 @code {
+    [Parameter]
+    public Func<Task> OnToggleListType1 { get; set; }
+
+    [Parameter]
+    public Func<Task> OnToggleListType2 { get; set; }
+
     Rating rating;
     protected override void OnInitialized()
     {
         rating = new Rating();
     }
 
-    public void Submit()
-    {
+    void Submit() {
 
+    }
+
+    public void ShowRatedList()
+    {
+        rating.Select6 = true;
+        rating.Select7 = false;
+        OnToggleListType1?.Invoke();
+    }
+
+    public void NotShowRatedList()
+    {
+        rating.Select7 = true;
+        rating.Select6 = false;
+        OnToggleListType2?.Invoke();
     }
 }

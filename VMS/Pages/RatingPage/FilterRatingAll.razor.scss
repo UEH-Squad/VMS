@@ -1,0 +1,104 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.filter {
+    margin-top: 25%;
+    text-align: center;
+
+    .filter-txt {
+        text-align: end;
+        font-weight: 500;
+        font-size: 20px;
+
+        .txt1 {
+            display: inline;
+            color: $blue;
+        }
+
+        .txt2 {
+            display: inline;
+            color: $green;
+        }
+    }
+
+    .filter-line {
+        margin-top: 3%;
+
+        .line {
+            background-color: $border-color-bold;
+            border: 1px solid $border-color-bold;
+            margin: 0;
+            width: 120%;
+            margin-left: -20%;
+        }
+    }
+
+    ::deep .filter-checkbox {
+        display: flex;
+        flex-direction: column;
+
+        &_container {
+            display: flex;
+            flex-direction: row;
+            width: 75%;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 18.5%;
+        }
+
+        &_check {
+            position: relative;
+            margin-left: -12%;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: $white;
+            border: 2px solid $blue;
+            appearance: none;
+            cursor: pointer;
+
+            &::before {
+                position: absolute;
+                content: "";
+                width: 11px;
+                height: 11px;
+                border-radius: 50%;
+                background-color: $blue;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: none;
+            }
+
+            &:checked::before {
+                display: block;
+            }
+
+            &:checked {
+                border-color: $blue;
+            }
+        }
+
+        &_txt {
+            font-size: 20px;
+            line-height: 36px;
+            cursor: pointer;
+        }
+    }
+
+    .filter-submit {
+        width: 75%;
+        color: $white;
+        background-color: $green;
+        font-weight: 500;
+        font-size: 18px;
+        padding: 4% 0;
+        border: none;
+        border-radius: 10px;
+        margin-top: 22%;
+
+        &:hover {
+            background-color: $green-bold;
+            opacity: 78%;
+        }
+    }
+}

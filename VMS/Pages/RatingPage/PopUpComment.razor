@@ -24,15 +24,21 @@
                 </div>
             </div>
 
-            @if (1 == 2)
+            @if (comment.MemberComment is not null)
             {
-                <div class="comment">
+                <div class="comment mb-5">
                     <p class="comment-input">@comment.MemberComment</p>
                 </div>
-                <div class="button"></div>
+                <div class="button">
+                    <button class="button-showremind d-none" style="color: @ColorRemind">Số lần nhắc nhở: @Count lần</button>
+                    <button @onclick="@Remind" class="button-remind d-none">
+                        <span class="material-icons-outlined">notifications</span>
+                        Nhắc nhở nhận xét
+                    </button>
+                </div>
             }
 
-            @if (1 > 0)
+            @if (comment.MemberComment is null)
             {
                 <div class="comment">
                     <p class="comment-input">@comment.CommentDefault</p>

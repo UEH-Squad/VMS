@@ -18,16 +18,25 @@
 
 .popup-comment {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     box-sizing: border-box;
     width: 50%;
+    height: 78%;
+    top: 59%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: $white;
-    border: none;
     box-shadow: 0px 4px 60px 2px rgba(11, 40, 50, 0.2);
     border-radius: 10px;
-    flex: none;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-icon;
+        border-radius: 20px;
+    }
 
     &_icon {
         position: absolute;
@@ -51,9 +60,7 @@
 
 /*Phần comment của tình nguyện viên*/
 .popup-comment_member {
-    width: 85%;
     margin: 7.5%;
-    margin-bottom: 0;
     border: 1px solid #D8D8D8;
     border-radius: 10px;
 
@@ -61,7 +68,6 @@
         display: flex;
         align-items: center;
         margin-top: 2%;
-        margin-left: 5%;
 
         .popup-avatar {
             margin-left: 5%;
@@ -91,7 +97,7 @@
 
     .comment {
         margin-top: 5%;
-        margin-left: 10%;
+        margin-left: 5%;
         box-sizing: border-box;
 
         &-input {
@@ -138,7 +144,6 @@
 
 /*Phần comment của tổ chức*/
 .popup-comment_organization {
-    width: 85%;
     margin: 7.5%;
     border: 1px solid #D8D8D8;
     border-radius: 10px;
@@ -147,7 +152,6 @@
         display: flex;
         align-items: center;
         margin-top: 2%;
-        margin-left: 5%;
 
         .popup-avatar {
             margin-left: 5%;
@@ -177,7 +181,7 @@
 
     .comment {
         margin-top: 5%;
-        margin-left: 10%;
+        margin-left: 5%;
         box-sizing: border-box;
 
         ::deep .comment-input {

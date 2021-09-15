@@ -1,0 +1,125 @@
+﻿@using VMS.Application.ViewModels
+
+<EditForm Model="@rating" OnValidSubmit="@Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="filter">
+        <div class="filter-txt">
+            <p class="txt1">
+                Đánh giá
+            </p>
+            <p class="txt2">
+                tất cả
+            </p>
+        </div>
+        <div class="filter-line">
+            <hr class="line">
+        </div>
+        <div class="filter-checkbox">
+            <span class="filter-checkbox_container">
+                <InputCheckbox @bind-Value="@rating.Select1" id="filter-checkbox_1" class="filter-checkbox_check" @onclick="@Change1"></InputCheckbox>
+                <label for="filter-checkbox_1" class="filter-checkbox_txt">1 sao</label>
+            </span>
+            <span class="filter-checkbox_container">
+                <InputCheckbox @bind-Value="@rating.Select2" id="filter-checkbox_2" class="filter-checkbox_check" @onclick="@Change2"></InputCheckbox>
+                <label for="filter-checkbox_2" class="filter-checkbox_txt">2 sao</label>
+            </span>
+            <span class="filter-checkbox_container">
+                <InputCheckbox @bind-Value="@rating.Select3" id="filter-checkbox_3" class="filter-checkbox_check" @onclick="@Change3"></InputCheckbox>
+                <label for="filter-checkbox_3" class="filter-checkbox_txt">3 sao</label>
+            </span>
+            <span class="filter-checkbox_container">
+                <InputCheckbox @bind-Value="@rating.Select4" id="filter-checkbox_4" class="filter-checkbox_check" @onclick="@Change4"></InputCheckbox>
+                <label for="filter-checkbox_4" class="filter-checkbox_txt">4 sao</label>
+            </span>
+            <span class="filter-checkbox_container">
+                <InputCheckbox @bind-Value="@rating.Select5" id="filter-checkbox_5" class="filter-checkbox_check" @onclick="@Change5"></InputCheckbox>
+                <label for="filter-checkbox_5" class="filter-checkbox_txt">5 sao</label>
+            </span>
+        </div>
+        <button @onclick="@Submit" class="filter-submit">Đánh giá</button>
+    </div>
+
+</EditForm>
+
+@code {
+    Rating rating;
+    protected override void OnInitialized()
+    {
+        rating = new Rating();
+    }
+
+    [Parameter]
+    public Func<Task> OnToggleColor1 { get; set; }
+
+    public void Submit()
+    {
+        if (rating.Select1 == true)
+        {
+            OnToggleColor1.Invoke();
+        }
+        if (rating.Select2 == true)
+        {
+
+        }
+        if (rating.Select3 == true)
+        {
+
+        }
+        if (rating.Select4 == true)
+        {
+
+        }
+        if (rating.Select5 == true)
+        {
+
+        }
+
+    }
+
+    void Change1()
+    {
+        rating.Select1 = true;
+        rating.Select2 = false;
+        rating.Select3 = false;
+        rating.Select4 = false;
+        rating.Select5 = false;
+    }
+
+    void Change2()
+    {
+        rating.Select2 = true;
+        rating.Select1 = false;
+        rating.Select3 = false;
+        rating.Select4 = false;
+        rating.Select5 = false;
+    }
+
+    void Change3()
+    {
+        rating.Select3 = true;
+        rating.Select1 = false;
+        rating.Select2 = false;
+        rating.Select4 = false;
+        rating.Select5 = false;
+    }
+
+    void Change4()
+    {
+        rating.Select4 = true;
+        rating.Select1 = false;
+        rating.Select2 = false;
+        rating.Select3 = false;
+        rating.Select5 = false;
+    }
+
+    void Change5()
+    {
+        rating.Select5 = true;
+        rating.Select1 = false;
+        rating.Select2 = false;
+        rating.Select3 = false;
+        rating.Select4 = false;
+    }
+
+}

@@ -1,102 +1,130 @@
 ﻿<div class="member-star">
-    <button @onclick="@ChangeColor1" class="member-star1"><span style="color: @color1;" id="member-star1" class="material-icons">star_rate</span></button>
-    <button @onclick="@ChangeColor2" class="member-star2"><span style="color: @color2;" id="member-star2" class="material-icons">star_rate</span></button>
-    <button @onclick="@ChangeColor3" class="member-star3"><span style="color: @color3;" id="member-star3" class="material-icons">star_rate</span></button>
-    <button @onclick="@ChangeColor4" class="member-star4"><span style="color: @color4;" id="member-star4" class="material-icons">star_rate</span></button>
-    <button @onclick="@ChangeColor5" class="member-star5"><span style="color: @color5;" id="member-star5" class="material-icons">star_rate</span></button>
+    <button @onclick="@Rate1Star" class="member-star1"><span style="color: @Color1;" id="member-star1" class="material-icons">star_rate</span></button>
+    <button @onclick="@Rate2Star" class="member-star2"><span style="color: @Color2;" id="member-star2" class="material-icons">star_rate</span></button>
+    <button @onclick="@Rate3Star" class="member-star3"><span style="color: @Color3;" id="member-star3" class="material-icons">star_rate</span></button>
+    <button @onclick="@Rate4Star" class="member-star4"><span style="color: @Color4;" id="member-star4" class="material-icons">star_rate</span></button>
+    <button @onclick="@Rate5Star" class="member-star5"><span style="color: @Color5;" id="member-star5" class="material-icons">star_rate</span></button>
     <div class="member-star_tooltip">Một sao là 20% số điểm của mình đó...</div>
+    @if(ShowYellowStars is false)
+    {
+        <div>False rồi nè</div>
+    }
 </div>
 
 @code {
-    string color1 = "#C4C4C4";
-    string color2 = "#C4C4C4";
-    string color3 = "#C4C4C4";
-    string color4 = "#C4C4C4";
-    string color5 = "#C4C4C4";
+    [Parameter]
+    public bool ShowYellowStars { get; set; } = false;
 
-    private void ChangeColor1()
+    [Parameter]
+    public Func<Task> OnShowYellowStars { get; set; }
+
+    [Parameter]
+    public Func<Task> NoneShowYellowStars { get; set; }
+
+    // #C4C4C4 is a grey color and #EDF131 is a yellow color
+    string Color1 = "#C4C4C4";
+    string Color2 = "#C4C4C4";
+    string Color3 = "#C4C4C4";
+    string Color4 = "#C4C4C4";
+    string Color5 = "#C4C4C4";
+    bool showYellowStars = false;
+
+    public void Rate1Star()
     {
-        if(color1 == "#C4C4C4")
+        if(Color1 == "#C4C4C4")
         {
-            color1 = "#EDF131";
+            Color1 = "#EDF131";
+            ShowYellowStars = true;
+            OnShowYellowStars?.Invoke();
+
         }
         else
         {
-            color1 = "#C4C4C4";
+            Color1 = "#C4C4C4";
+            Color2 = "#C4C4C4";
+            Color3 = "#C4C4C4";
+            Color4 = "#C4C4C4";
+            Color5 = "#C4C4C4";
+            ShowYellowStars = false;
+            NoneShowYellowStars?.Invoke();
         }
     }
 
-    private void ChangeColor2()
+    public void Rate2Star()
     {
-        if (color2 == "#C4C4C4")
+        if (Color2 == "#C4C4C4")
         {
-            color1 = "#EDF131";
-            color2 = "#EDF131";
+            Color1 = "#EDF131";
+            Color2 = "#EDF131";
+            ShowYellowStars = true;
         }
         else
         {
-            color1 = "#C4C4C4";
-            color2 = "#C4C4C4";
-            color3 = "#C4C4C4";
-            color4 = "#C4C4C4";
-            color5 = "#C4C4C4";
+            Color1 = "#C4C4C4";
+            Color2 = "#C4C4C4";
+            Color3 = "#C4C4C4";
+            Color4 = "#C4C4C4";
+            Color5 = "#C4C4C4";
         }
     }
 
-    private void ChangeColor3()
+    public void Rate3Star()
     {
-        if (color3 == "#C4C4C4")
+        if (Color3 == "#C4C4C4")
         {
-            color1 = "#EDF131";
-            color2 = "#EDF131";
-            color3 = "#EDF131";
+            Color1 = "#EDF131";
+            Color2 = "#EDF131";
+            Color3 = "#EDF131";
+            ShowYellowStars = true;
         }
         else
         {
-            color1 = "#C4C4C4";
-            color2 = "#C4C4C4";
-            color3 = "#C4C4C4";
-            color4 = "#C4C4C4";
-            color5 = "#C4C4C4";
+            Color1 = "#C4C4C4";
+            Color2 = "#C4C4C4";
+            Color3 = "#C4C4C4";
+            Color4 = "#C4C4C4";
+            Color5 = "#C4C4C4";
         }
     }
 
-    private void ChangeColor4()
+    public void Rate4Star()
     {
-        if (color4 == "#C4C4C4")
+        if (Color4 == "#C4C4C4")
         {
-            color1 = "#EDF131";
-            color2 = "#EDF131";
-            color3 = "#EDF131";
-            color4 = "#EDF131";
+            Color1 = "#EDF131";
+            Color2 = "#EDF131";
+            Color3 = "#EDF131";
+            Color4 = "#EDF131";
+            ShowYellowStars = true;
         }
         else
         {
-            color1 = "#C4C4C4";
-            color2 = "#C4C4C4";
-            color3 = "#C4C4C4";
-            color4 = "#C4C4C4";
-            color5 = "#C4C4C4";
+            Color1 = "#C4C4C4";
+            Color2 = "#C4C4C4";
+            Color3 = "#C4C4C4";
+            Color4 = "#C4C4C4";
+            Color5 = "#C4C4C4";
         }
     }
 
-    private void ChangeColor5()
+    public void Rate5Star()
     {
-        if (color5 == "#C4C4C4")
+        if (Color5 == "#C4C4C4")
         {
-            color1 = "#EDF131";
-            color2 = "#EDF131";
-            color3 = "#EDF131";
-            color4 = "#EDF131";
-            color5 = "#EDF131";
+            Color1 = "#EDF131";
+            Color2 = "#EDF131";
+            Color3 = "#EDF131";
+            Color4 = "#EDF131";
+            Color5 = "#EDF131";
+            ShowYellowStars = true;
         }
         else
         {
-            color1 = "#C4C4C4";
-            color2 = "#C4C4C4";
-            color3 = "#C4C4C4";
-            color4 = "#C4C4C4";
-            color5 = "#C4C4C4";
+            Color1 = "#C4C4C4";
+            Color2 = "#C4C4C4";
+            Color3 = "#C4C4C4";
+            Color4 = "#C4C4C4";
+            Color5 = "#C4C4C4";
         }
     }
 }

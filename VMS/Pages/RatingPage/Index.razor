@@ -8,13 +8,15 @@
         <FilterBar OnToggleListType1="OnToggleListType1" OnToggleListType2="OnToggleListType2" />
     </div>
     <div class="body-page">
-        <MemberList ShowRatedList="isRatedList1" />
-        <FilterRatingAll OnToggleColor1="OnToggleColor1"/>
+        <MemberList ShowRatedList="isRatedList1" StarRating="starRating" />
+        <FilterRatingAll OnToggleColor1="OnToggleColor1" @bind-StarRating="starRating"/>
     </div>
 </div>
 
 @code {
     bool isRatedList1 = false;
+
+    int starRating;
 
     async Task OnToggleListType1()
     {

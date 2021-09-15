@@ -16,33 +16,27 @@
             <hr class="line">
         </div>
         <div class="filter-checkbox">
-            <span class="filter-checkbox_container">
-                <InputCheckbox @bind-Value="@rating.Select1" id="filter-checkbox_1" class="filter-checkbox_check" @onclick="@Change1"></InputCheckbox>
-                <label for="filter-checkbox_1" class="filter-checkbox_txt">1 sao</label>
-            </span>
-            <span class="filter-checkbox_container">
-                <InputCheckbox @bind-Value="@rating.Select2" id="filter-checkbox_2" class="filter-checkbox_check" @onclick="@Change2"></InputCheckbox>
-                <label for="filter-checkbox_2" class="filter-checkbox_txt">2 sao</label>
-            </span>
-            <span class="filter-checkbox_container">
-                <InputCheckbox @bind-Value="@rating.Select3" id="filter-checkbox_3" class="filter-checkbox_check" @onclick="@Change3"></InputCheckbox>
-                <label for="filter-checkbox_3" class="filter-checkbox_txt">3 sao</label>
-            </span>
-            <span class="filter-checkbox_container">
-                <InputCheckbox @bind-Value="@rating.Select4" id="filter-checkbox_4" class="filter-checkbox_check" @onclick="@Change4"></InputCheckbox>
-                <label for="filter-checkbox_4" class="filter-checkbox_txt">4 sao</label>
-            </span>
-            <span class="filter-checkbox_container">
-                <InputCheckbox @bind-Value="@rating.Select5" id="filter-checkbox_5" class="filter-checkbox_check" @onclick="@Change5"></InputCheckbox>
-                <label for="filter-checkbox_5" class="filter-checkbox_txt">5 sao</label>
-            </span>
+
+            @for (int i = 1; i < 6; i++)
+            {
+                int star = i;
+                <span class="filter-checkbox_container">
+                    <input type="radio" @onchange="() => StarRating = star" id="filter-checkbox_1" class="filter-checkbox_check" name="starrating" />
+                    <label for="filter-checkbox_1" class="filter-checkbox_txt">@star sao</label>
+                </span>
+            }
         </div>
-        <button @onclick="@Submit" class="filter-submit">Đánh giá</button>
+        <button @onclick="() => SubmitRating()" class="filter-submit">Đánh giá</button>
     </div>
 
 </EditForm>
 
 @code {
+    [Parameter]
+    public int StarRating { get; set; }
+    [Parameter]
+    public EventCallback<int> StarRatingChanged { get; set; }
+
     Rating rating;
     protected override void OnInitialized()
     {
@@ -122,4 +116,8 @@
         rating.Select4 = false;
     }
 
+    private void SubmitRating()
+    {
+        StarRatingChanged.InvokeAsync(StarRating);
+    }
 }

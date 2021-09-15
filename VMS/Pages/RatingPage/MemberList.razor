@@ -17,6 +17,7 @@
                             <div>False rồi nè</div>
                         }
                     </div>
+                    @item.StarStyle
                     <Stars OnShowYellowStars="OnShowYellowStars" NoneShowYellowStars="NoneShowYellowStars"/>
                     <div class="member-comment">
                         @*Pop-up để comment*@
@@ -44,6 +45,8 @@
 </div>
 
 @code {
+    [Parameter]
+    public int StarRating { get; set; }
     [Parameter]
     public bool ShowRatedList { get; set; }
     bool isRatedList2;
@@ -120,6 +123,14 @@
         {
             page = 1;
             pagedResult = GetFakeData(0);
+        }
+
+        if (StarRating != 0)
+        {
+            foreach(var item in pagedResult.Results)
+            {
+                item.StarStyle = StarRating;
+            }
         }
     }
 

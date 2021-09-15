@@ -33,7 +33,6 @@ namespace VMS.Pages.Organization.Profile
         [Inject]
         private ILogger<EditOrganizationProfile> Logger { get; set; }
 
-        private bool isErrorMessageShown = false;
         private bool isLoading;
         private string OrgId;
         private int count;
@@ -48,7 +47,6 @@ namespace VMS.Pages.Organization.Profile
         private async Task HandleSubmit()
         {
             Logger.LogInformation("HandleValidSubmit called");
-            isErrorMessageShown = false;
             isLoading = true;
 
             try
@@ -59,6 +57,7 @@ namespace VMS.Pages.Organization.Profile
             catch (Exception ex)
             {
                 isLoading = false;
+                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
                 await JSRuntime.InvokeVoidAsync("alert", ex.Message);
             }
         }
@@ -66,30 +65,18 @@ namespace VMS.Pages.Organization.Profile
         private async Task HandleInvalidSubmit()
         {
             isLoading = false;
-            isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
         }
 
         private int maxWord = 300;
         private int CountWord()
         {
-            if(!string.IsNullOrWhiteSpace(org.Mission))
+            if (!string.IsNullOrWhiteSpace(org.Mission))
             {
                 count = org.Mission.Length;
             }
             return count;
         }
-
-        public class Organization
-        {
-            [Required(ErrorMessage = "Email không được để trống")]
-            public string Email { get; set; }
-        }
-
-        private Organization organization = new Organization()
-        {
-            Email = "youth.bit@gmail.com",
-        };
 
         private IBrowserFile file;
 

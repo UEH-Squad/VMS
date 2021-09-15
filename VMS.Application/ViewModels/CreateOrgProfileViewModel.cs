@@ -23,5 +23,9 @@ namespace VMS.Application.ViewModels
         [MaxLength(20, ErrorMessage = "Số điện thoại tối đa 12 số")]
         public string PhoneNumber2 { get; set; }
 
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+        public string Email { get; set; }
+
     }
 }

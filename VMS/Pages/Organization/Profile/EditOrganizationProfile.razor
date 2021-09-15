@@ -22,7 +22,8 @@
                     <div class="row form-item">
                         <p class="col-4 form-text">Gmail</p>
                         <div class="col-8 px-0">
-                            <InputText @bind-Value="@organization.Email" class="form-input form-control" />
+                            <InputText @bind-Value="@org.Email" class="form-input form-control" />
+                            <ValidationMessage For="() => org.Email" />
                         </div>
 
                     </div>
@@ -74,6 +75,7 @@
                             <div class="col-8 px-0 w-100">
                                 <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
+                                <ValidationMessage For="() => org.Mission" />
                             </div>
 
                         </div>
@@ -97,6 +99,7 @@
 </div>
 
 <Spinner IsLoading="isLoading" />
+
 @code {
 
 }

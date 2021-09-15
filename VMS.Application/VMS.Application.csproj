@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="Geolocation" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using VMS.Common;
 using VMS.Domain.Models;
 
 namespace VMS.Areas.Identity.Pages.Account
@@ -79,6 +80,12 @@ namespace VMS.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    // TODO: This is just a cheat, will refactor later.
+                    User currentUser = await _userManager.FindByNameAsync(user.UserName);
+                    _ = user.UserName.ToLower().Contains("org")
+                        ? await _userManager.AddToRoleAsync(currentUser, Role.Organization.ToString())
+                        : await _userManager.AddToRoleAsync(currentUser, Role.User.ToString());
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

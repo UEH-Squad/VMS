@@ -29,6 +29,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="TinyMCE.Blazor" Version="0.0.7" />
+    <PackageReference Include="Toolbelt.Blazor.HeadElement" Version="6.0.0" />
   </ItemGroup>
 
     <ItemGroup>

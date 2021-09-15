@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 using VMS.Areas.Identity;
 using VMS.Domain.Models;
 using VMS.Infrastructure.Data.Context;
@@ -43,6 +44,7 @@ namespace VMS
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddBlazoredModal();
+            services.AddHeadElementHelper();
 
             // Custom registrations
             DependencyContainer.RegisterServices(services, Configuration);

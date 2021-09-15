@@ -9,20 +9,24 @@
                 </div>
                 <span class="user-label mt-2 fw-bold">Trang cá nhân</span>
                 <div class="dropdown">
-                    
-                        <span class="material-icons-outlined user-section__dropdown-icon" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            arrow_drop_down
-                        </span>
-
+                    <span class="material-icons-outlined user-section__dropdown-icon" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        arrow_drop_down
+                    </span>
                     <ul class="dropdown-menu user-section__list list-unstyled bg-white">
-                        <li class="text-center">
-                            <a href="@Routes.User" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
-                        </li>
-                        <li class="text-center">
-                            <form method="post" action="@Routes.LogOut">
-                                <button type="submit" class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
-                            </form>
-                        </li>
+                        @if (context.User.IsInRole(Role.User.ToString()))
+                        {
+                            <li class="text-center">
+                                <a href="@Routes.User" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
+                            </li>
+                            <li class="text-center">
+                                <form method="post" action="@Routes.LogOut">
+                                    <button type="submit" class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                        }
                     </ul>
                 </div>
             </div>

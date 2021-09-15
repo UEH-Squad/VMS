@@ -9,26 +9,30 @@
                     <img src="img/RelatedActivities/2nd-activity.png" alt="">
                 </div>
                 <EditForm Model="org" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="editProfile__form">
+                    <DataAnnotationsValidator />
+
                     <div class="row form-item">
                         <p class="col-4 form-text">Tên tổ chức</p>
                         <div class="col-8 px-0">
                             <InputText @bind-Value="@org.UserName" class="form-input form-control" />
+                            <ValidationMessage For="() => org.UserName" />
                         </div>
-                      
+
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Gmail</p>
                         <div class="col-8 px-0">
                             <InputText @bind-Value="@organization.Email" class="form-input form-control" />
                         </div>
-                       
+
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Điện thoại</p>
                         <div class="col-8 px-0">
-                            <InputText @bind-Value="@organization.Phone" class="form-input form-control" />
+                            <InputText @bind-Value="@org.PhoneNumber2" class="form-input form-control" />
+                            <ValidationMessage For="() => org.PhoneNumber2" />
                         </div>
-                       
+
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực</p>
@@ -71,13 +75,13 @@
                                 <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="row form-item mb-0">
                         <p class="col-4 form-text">Thay đổi ảnh</p>
                         <div class="col-8 px-0 ">
-                            <UploadImg InputFileChanged="FileChanged" ShowPreview="true"/>
+                            <UploadImg InputFileChanged="FileChanged" ShowPreview="true" />
                         </div>
                     </div>
                     <div class="row">

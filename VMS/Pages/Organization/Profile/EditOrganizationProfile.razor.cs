@@ -12,6 +12,8 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.Extensions.Logging;
 using VMS.Pages.Organization.Activities;
+using VMS.Common;
+using VMS.Domain.Models;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -20,7 +22,7 @@ namespace VMS.Pages.Organization.Profile
         [CascadingParameter] public IModalService Modal { get; set; }
 
         [Inject]
-        private IJSRuntime JSRuntinme { get; set; }
+        private IJSRuntime JSRuntime { get; set; }
 
         [Inject]
         private IIdentityService IdentityService { get; set; }
@@ -33,30 +35,38 @@ namespace VMS.Pages.Organization.Profile
 
         private bool isErrorMessageShown = false;
         private bool isLoading;
+        private string OrgId;
 
         private CreateOrgProfileViewModel org = new();
 
         protected override async Task OnInitializedAsync()
         {
-            org = await OrgService.GetCreateOrgProfileViewModelAsync(IdentityService.GetCurrentUserId());
+            OrgId = IdentityService.GetCurrentUserId();
+            org = await OrgService.GetCreateOrgProfileViewModelAsync(OrgId);
         }
-
         private async Task HandleSubmit()
         {
             isErrorMessageShown = false;
+            isLoading = true;
+
             try
             {
+                await OrgService.UpdateOrgProfile(org, OrgId);
                 isLoading = false;
-
-                var modalParams = new ModalParameters();
-                await ShowAreasModal(typeof(NotificationPopup), modalParams);
             }
             catch (Exception ex)
             {
                 isLoading = false;
-                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                Logger.LogError("Error occurs when trying to create/edit activity", ex.Message);
                 await JSRuntime.InvokeVoidAsync("alert", ex.Message);
             }
+        }
+
+        private async Task HandleInvalidSubmit()
+        {
+            isLoading = false;
+            isErrorMessageShown = true;
+            await Interop.ScrollToTop(JSRuntime);
         }
 
         public class Organization
@@ -103,7 +113,7 @@ namespace VMS.Pages.Organization.Profile
         }
 
         bool[] choosenAreasList = new bool[12];
-        private async Task ShowAreasModal(Type type, ModalParameters parameters)
+        private async Task ShowAreasModal()
         {
             var options = new ModalOptions()
             {
@@ -119,7 +129,7 @@ namespace VMS.Pages.Organization.Profile
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await JSRuntinme.InvokeVoidAsync("vms.EditProfileCarousel");
+            await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
         }
     }
 }

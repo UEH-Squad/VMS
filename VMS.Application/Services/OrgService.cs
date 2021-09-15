@@ -43,5 +43,22 @@ namespace VMS.Application.Services
 
             return orgProfileViewModel;
         }
+
+        public async Task UpdateOrgProfile(CreateOrgProfileViewModel orgProfileViewModel, string orgId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            User org = await _repository.GetAsync(dbContext, new Specification<User>()
+            {
+                Conditions = new List<Expression<Func<User, bool>>>
+                {
+                    a => a.Id == orgId
+                },
+            });
+
+            org = _mapper.Map(orgProfileViewModel, org);
+
+            await _repository.UpdateAsync(dbContext, org);
+        }
     }
 }

@@ -8,11 +8,10 @@
                 <div class="editProfile__logo text-center my-5">
                     <img src="img/RelatedActivities/2nd-activity.png" alt="">
                 </div>
-                <EditForm Model="org" Context="CurrentEditContext" OnValidSubmit="HandleSubmit" class="editProfile__form">
+                <EditForm Model="org" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="editProfile__form">
                     <div class="row form-item">
                         <p class="col-4 form-text">Tên tổ chức</p>
                         <div class="col-8 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => org.UserName)</div>
                             <InputText @bind-Value="@org.UserName" class="form-input form-control" />
                         </div>
                       
@@ -20,7 +19,6 @@
                     <div class="row form-item">
                         <p class="col-4 form-text">Gmail</p>
                         <div class="col-8 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Email)</div>
                             <InputText @bind-Value="@organization.Email" class="form-input form-control" />
                         </div>
                        
@@ -28,7 +26,6 @@
                     <div class="row form-item">
                         <p class="col-4 form-text">Điện thoại</p>
                         <div class="col-8 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Phone)</div>
                             <InputText @bind-Value="@organization.Phone" class="form-input form-control" />
                         </div>
                        
@@ -70,7 +67,6 @@
                     <div class="row form-item">
                         <p class="col-4 form-text">Tầm nhìn & sứ mệnh</p>
                         <div class="col-8 position-relative px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => org.Mission)</div>
                             <div class="col-8 px-0 w-100">
                                 <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
@@ -87,7 +83,7 @@
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
-                            <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
+                            <button type="submit" class="btn from__btn-submit ms-5 ">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -96,6 +92,7 @@
     </div>
 </div>
 
+<Spinner IsLoading="isLoading" />
 @code {
 
 }

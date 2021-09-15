@@ -10,5 +10,6 @@ namespace VMS.Application.Interfaces
     public interface IOrgService
     {
         Task<CreateOrgProfileViewModel> GetCreateOrgProfileViewModelAsync(string orgId);
+        Task UpdateOrgProfile(CreateOrgProfileViewModel orgProfileViewModel, string orgId);
     }
 }

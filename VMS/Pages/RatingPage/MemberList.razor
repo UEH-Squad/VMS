@@ -18,7 +18,7 @@
                         }
                     </div>
                     @item.StarStyle
-                    <Stars StarRating="@item.StarStyle" OnShowYellowStars="OnShowYellowStars" NoneShowYellowStars="NoneShowYellowStars"/>
+                    <Stars @bind-StarRating="item.StarStyle" OnShowYellowStars="OnShowYellowStars" NoneShowYellowStars="NoneShowYellowStars"/>
                     <div class="member-comment">
                         @*Pop-up để comment*@
                         <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">

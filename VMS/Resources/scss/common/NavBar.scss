@@ -66,11 +66,11 @@
         }
 
         .brand__ueh {
-            height: 20px;
+            height: 16px;
             margin-bottom: 4px;
 
             @include on('lg') {
-              height: 26px;
+              height: 20px;
             }
         }
 
@@ -78,7 +78,7 @@
             height: 16px;
 
             @include on('lg') {
-                height: 22px;
+                height: 18px;
             }
         }
     }
@@ -156,7 +156,7 @@
         font-weight: 600;
 
         @include on('xl') {
-            font-size: 18px;
+            font-size: 20px;
 
             &:before {
                 content: "";
@@ -174,9 +174,7 @@
             }
         }
 
-        @include on('xxl') {
-            font-size: 20px;
-        }
+
 
         &:hover {
             color: $blue-bold;

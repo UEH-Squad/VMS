@@ -38,9 +38,9 @@
         font-size: 44px; } }
     @media (min-width: 1200px) {
       .btn-back-top .btn-back-top-icon {
-        width: 80px;
-        height: 80px;
-        line-height: 80px;
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
         font-size: 64px; } }
 
 .footer__logo {

@@ -38,14 +38,11 @@
     @include on('xl') {
         width: 147px;
         height: 50px;
-        font-size: 18px;
+        font-size: 20px;
         line-height: 60px;
     }
 
-    @include on('xxl') {
-        font-size: 20px;
-
-    }
+  
 }
 
 .user-section {
@@ -60,8 +57,8 @@
             margin: 0 auto;
 
             @include on('xl') {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
             }
         }
 
@@ -103,7 +100,7 @@
         transform: translateY(-50%);
         right: -62%;
         color: $blue;
-        font-size: 40px;
+        font-size: 35px;
         cursor: pointer;
         display: none;
 

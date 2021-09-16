@@ -10,7 +10,7 @@
     z-index: 0; }
   .my-rank h1 {
     color: #18A0FB;
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 500; }
     .my-rank h1 span {
       color: #64D72F; }
@@ -50,10 +50,10 @@
     background-color: rgba(196, 196, 196, 0.2);
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25); }
     .my-rank ::deep .owl-item .rank__img-rank {
-      width: 12%;
+      width: 9%;
       position: absolute;
       top: 0;
-      left: 7%; }
+      left: 10%; }
       .my-rank ::deep .owl-item .rank__img-rank img {
         width: 70%;
         margin: 0 auto;
@@ -63,16 +63,16 @@
         top: 0%;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 35px;
+        font-size: 26px;
         font-weight: 600;
         color: #FFFFFF;
         transition: all 1s linear; }
     .my-rank ::deep .owl-item .rank__cup {
       position: absolute;
       top: 3%;
-      right: 7%;
+      right: 10%;
       color: #64D72F;
-      font-size: 60px;
+      font-size: 45px;
       transition: all 1s linear; }
   .my-rank ::deep .owl-item.active {
     margin: auto 0;
@@ -82,14 +82,14 @@
     .my-rank ::deep .owl-item.active .rank__img-rank img {
       width: 100%; }
     .my-rank ::deep .owl-item.active .rank__img-rank span {
-      font-size: 55px; }
+      font-size: 41px; }
     .my-rank ::deep .owl-item.active .rank__cup {
-      font-size: 80px; }
+      font-size: 60px; }
   .my-rank ::deep .owl-nav {
     display: inline-block; }
     .my-rank ::deep .owl-nav .owl-prev span {
       position: absolute;
-      top: 27%;
+      top: 25%;
       left: 0;
       font-size: 100px;
       color: #18A0FB;
@@ -98,7 +98,7 @@
         color: #0B588c; }
     .my-rank ::deep .owl-nav .owl-next span {
       position: absolute;
-      top: 27%;
+      top: 25%;
       right: 0;
       font-size: 100px;
       color: #18A0FB;
@@ -106,10 +106,12 @@
       .my-rank ::deep .owl-nav .owl-next span:hover {
         color: #0B588c; }
   .my-rank ::deep .owl-dots {
-    transform: translateY(-100%);
+    transform: translateY(-50%);
     display: block; }
     .my-rank ::deep .owl-dots span {
-      background-color: #C4C4C4; }
+      background-color: #C4C4C4;
+      width: 8px;
+      height: 8px; }
       .my-rank ::deep .owl-dots span:hover {
         background-color: #18A0FB; }
     .my-rank ::deep .owl-dots .owl-dot.active > span {
@@ -120,42 +122,42 @@
   .my-rank .rank__img {
     overflow: hidden; }
     .my-rank .rank__img img {
-      width: 180px;
-      height: 180px;
+      width: 135px;
+      height: 135px;
       border-radius: 50%;
       object-fit: cover; }
   .my-rank .rank__name {
     margin: 0;
     color: #64D72F;
-    font-size: 30px;
+    font-size: 23px;
     font-weight: 600; }
   .my-rank .rank__review {
-    margin: 15px 0;
+    margin: 12px 0;
     display: inline-block;
     background-image: linear-gradient(to top, rgba(237, 241, 49, 0.6), rgba(255, 255, 255, 0.6));
     box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
     padding: 10px 40px;
     border-radius: 10px;
     color: #515151;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600; }
   .my-rank .rank__act p {
     margin-bottom: 0;
     color: #18A0FB;
-    font-size: 30px;
+    font-size: 23px;
     font-weight: 600; }
   .my-rank .rank__act span {
     color: #64D72F;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500; }
   .my-rank .rank__star p {
     margin-bottom: 5px;
     color: #18A0FB;
-    font-size: 30px;
+    font-size: 23px;
     font-weight: 600; }
   .my-rank .rank__star i {
     color: #EDF131;
-    font-size: 24px; }
+    font-size: 18px; }
   .my-rank .rank__star .star-noColor {
     color: #B4B4B4; }
   .my-rank .rank__more {
@@ -164,7 +166,7 @@
     bottom: 20px;
     right: 0;
     color: #64D72F;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
     text-decoration: none;
     z-index: 10; }

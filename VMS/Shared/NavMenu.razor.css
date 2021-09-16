@@ -57,16 +57,16 @@
       height: 50%;
       display: block; }
     .my-navbar__brand .brand__ueh {
-      height: 20px;
+      height: 16px;
       margin-bottom: 4px; }
       @media (min-width: 992px) {
         .my-navbar__brand .brand__ueh {
-          height: 26px; } }
+          height: 20px; } }
     .my-navbar__brand .brand__govirlunteer {
       height: 16px; }
       @media (min-width: 992px) {
         .my-navbar__brand .brand__govirlunteer {
-          height: 22px; } }
+          height: 18px; } }
   .my-navbar__hamburger-wrapper {
     position: relative; }
     @media (min-width: 1200px) {
@@ -123,7 +123,7 @@
     font-weight: 600; }
     @media (min-width: 1200px) {
       .my-collapse__list__link {
-        font-size: 18px; }
+        font-size: 20px; }
         .my-collapse__list__link:before {
           content: "";
           position: absolute;
@@ -135,9 +135,6 @@
           display: none; }
         .my-collapse__list__link:hover.my-collapse__list__link::before {
           display: block; } }
-    @media (min-width: 1400px) {
-      .my-collapse__list__link {
-        font-size: 20px; } }
     .my-collapse__list__link:hover {
       color: #0B588C; }
   .my-collapse .my-collapse__login-area {

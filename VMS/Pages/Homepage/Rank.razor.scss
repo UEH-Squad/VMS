@@ -9,7 +9,7 @@
 
     h1 {
         color: $blue;
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 500;
 
         span {
@@ -70,10 +70,10 @@
         box-shadow: 0px 4px 4px 0 rgba($color: #000000, $alpha: 0.25);
 
         .rank__img-rank {
-            width: 12%;
+            width: 9%;
             position: absolute;
             top: 0;
-            left: 7%;
+            left: 10%;
 
 
             img {
@@ -87,7 +87,7 @@
                 top: 0%;
                 left: 50%;
                 transform: translateX(-50%);
-                font-size: 35px;
+                font-size: 26px;
                 font-weight: 600;
                 color: $white;
                 transition: all 1s linear;
@@ -97,9 +97,9 @@
         .rank__cup {
             position: absolute;
             top: 3%;
-            right: 7%;
+            right: 10%;
             color: $green;
-            font-size: 60px;
+            font-size: 45px;
             transition: all 1s linear;
         }
     }
@@ -117,12 +117,12 @@
             }
 
             span {
-                font-size: 55px;
+                font-size: 41px;
             }
         }
 
         .rank__cup {
-            font-size: 80px;
+            font-size: 60px;
         }
     }
 
@@ -132,7 +132,7 @@
         .owl-prev {
             span {
                 position: absolute;
-                top: 27%;
+                top: 25%;
                 left: 0;
                 font-size: 100px;
                 color: $blue;
@@ -147,7 +147,7 @@
         .owl-next {
             span {
                 position: absolute;
-                top: 27%;
+                top: 25%;
                 right: 0;
                 font-size: 100px;
                 color: $blue;
@@ -162,12 +162,13 @@
 
 
     ::deep .owl-dots {
-        transform: translateY(-100%);
+        transform: translateY(-50%);
         display: block;
 
         span {
             background-color: #C4C4C4;
-
+            width:8px;
+            height:8px;
             &:hover {
                 background-color: $blue;
             }
@@ -188,8 +189,8 @@
 
 
         img {
-            width: 180px;
-            height: 180px;
+            width: 135px;
+            height: 135px;
             border-radius: 50%;
             object-fit: cover;
         }
@@ -198,19 +199,19 @@
     .rank__name {
         margin: 0;
         color: $green;
-        font-size: 30px;
+        font-size: 23px;
         font-weight: 600;
     }
 
     .rank__review {
-        margin: 15px 0;
+        margin: 12px 0;
         display: inline-block;
         background-image: linear-gradient(to top, rgba(#EDF131,0.6),rgba(#FFFFFF,0.6));
         box-shadow: 0px 4px 4px 0 rgba($color: #000000, $alpha: 0.25);
         padding: 10px 40px;
         border-radius: 10px;
         color: $grey-text;
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 600;
     }
 
@@ -218,13 +219,13 @@
         p {
             margin-bottom: 0;
             color: $blue;
-            font-size: 30px;
+            font-size: 23px;
             font-weight: 600;
         }
 
         span {
             color: $green;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 500;
         }
     }
@@ -233,13 +234,13 @@
         p {
             margin-bottom: 5px;
             color: $blue;
-            font-size: 30px;
+            font-size: 23px;
             font-weight: 600;
         }
 
         i {
             color: #EDF131;
-            font-size: 24px;
+            font-size: 18px;
         }
 
         .star-noColor {
@@ -253,7 +254,7 @@
         bottom: 20px;
         right: 0;
         color: $green;
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 400;
         text-decoration: none;
         z-index: 10;

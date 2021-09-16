@@ -129,12 +129,20 @@
     color: $white;
     font-weight: 600;
     padding: .75rem 1.25rem;
+
+    &:hover {
+        background-color: $green-bold;
+    }
 }
 
 .btn-cancel {
     color: $green;
     font-weight: 600;
     padding: .75rem 1.25rem;
+
+    &:hover {
+        color: $green-bold;
+    }
 }
 
 ::deep {
@@ -169,6 +177,42 @@
     .my-address-textbox {
         @include on('xl') {
             width: auto;
+        }
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .my-radio-box {
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        vertical-align: baseline;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 2px solid $grey-icon;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid $green;
+            border-bottom: 2px solid $green;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
         }
     }
 }

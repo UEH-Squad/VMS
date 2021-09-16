@@ -61,6 +61,7 @@ namespace VMS.Pages.Organization.Activities
 
         protected override async Task OnInitializedAsync()
         {
+            isLoading = true;
             if (NavigationManager.Uri.Contains(Routes.CreateActivity))
             {
                 return;
@@ -83,6 +84,15 @@ namespace VMS.Pages.Organization.Activities
                 Name = activity.AreaName,
                 Icon = activity.AreaIcon
             });
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+                isLoading = false;
+
+            }
         }
 
         private async Task OnAddressChanged(int provinceId, string province, int districtId, string district, int wardId, string ward, string fullAddress)
@@ -163,8 +173,9 @@ namespace VMS.Pages.Organization.Activities
                 activity.FullAddress = $"{activity.Address}, {activity.FullAddress}";
             }
 
+            bool isActivityTypeChosen = !(activity.IsActual ^ activity.IsActual) && (activity.IsActual || activity.IsVirtual);
             activity.Targets = string.Join('|', chosenTargets);
-            if (string.IsNullOrWhiteSpace(activity.Targets))
+            if (!isActivityTypeChosen || string.IsNullOrWhiteSpace(activity.Targets))
             {
                 await HandleInvalidSubmit();
                 return;
@@ -175,6 +186,7 @@ namespace VMS.Pages.Organization.Activities
             try
             {
                 activity.OrgId = IdentityService.GetCurrentUserId();
+                RenderFragment title;
 
                 if (!isEditPage)
                 {
@@ -186,6 +198,7 @@ namespace VMS.Pages.Organization.Activities
 
                     activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
                     ActivityId = await ActivityService.AddActivityAsync(activity);
+                    title = succeededCreateTitle;
                 }
                 else
                 {
@@ -197,13 +210,15 @@ namespace VMS.Pages.Organization.Activities
                     }
 
                     await ActivityService.UpdateActivityAsync(activity, activity.Id);
+                    title = succeededEditTitle;
                 }
 
                 isLoading = false;
-
                 var modalParams = new ModalParameters();
-                modalParams.Add("IsEdit", isEditPage);
+                modalParams.Add("Title", title);
+                modalParams.Add("CTAText", "Xem hoạt động");
                 modalParams.Add("CTALink", $"{Routes.ActivityInfo}/{ActivityId}");
+                modalParams.Add("CancelText", "Đóng");
                 await ShowModalAsync(typeof(NotificationPopup), modalParams);
             }
             catch (Exception ex)
@@ -219,6 +234,16 @@ namespace VMS.Pages.Organization.Activities
             isLoading = false;
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
+        }
+
+        private async Task HandleCancel()
+        {
+            var modalParams = new ModalParameters();
+            modalParams.Add("Title", cancelTitle);
+            modalParams.Add("CTAText", "Chắc chắn");
+            modalParams.Add("CTALink", $"{Routes.User}");
+            modalParams.Add("CancelText", "Hủy");
+            await ShowModalAsync(typeof(NotificationPopup), modalParams);
         }
     }
 }

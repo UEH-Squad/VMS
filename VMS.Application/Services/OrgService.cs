@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
@@ -32,6 +33,7 @@ namespace VMS.Application.Services
                 {
                     a => a.Id == orgId
                 },
+                Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
             });
 
             if (org is null)
@@ -40,6 +42,13 @@ namespace VMS.Application.Services
             }
 
             CreateOrgProfileViewModel orgProfileViewModel = _mapper.Map<CreateOrgProfileViewModel>(org);
+
+            orgProfileViewModel.Areas = org.UserAreas.Select(a => new AreaViewModel
+            {
+                Id = a.AreaId,
+                Name = a.Area.Name,
+                Icon = a.Area.Icon
+            }).ToList();
 
             return orgProfileViewModel;
         }
@@ -54,11 +63,23 @@ namespace VMS.Application.Services
                 {
                     a => a.Id == orgId
                 },
+                Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
             });
 
             org = _mapper.Map(orgProfileViewModel, org);
 
+            org.UserAreas = MapAreas(orgProfileViewModel, org);
+
             await _repository.UpdateAsync(dbContext, org);
+        }
+
+        private static ICollection<UserArea> MapAreas(CreateOrgProfileViewModel orgProfileViewModel, User org)
+        {
+            return orgProfileViewModel.Areas.Select(s => new UserArea
+            {
+                User = org,
+                AreaId = s.Id
+            }).ToList();
         }
     }
 }

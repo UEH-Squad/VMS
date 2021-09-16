@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VMS.Common.CustomValidations;
 
 namespace VMS.Application.ViewModels
 {
@@ -28,6 +29,9 @@ namespace VMS.Application.ViewModels
         public string Email { get; set; }
 
         public string Avatar { get; set; }
+
+        [RequiredHasItems]
+        public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
 
     }
 }

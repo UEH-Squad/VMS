@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Blazored.Modal.Services;
@@ -11,9 +10,7 @@ using Blazored.Modal;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.Extensions.Logging;
-using VMS.Pages.Organization.Activities;
 using VMS.Common;
-using VMS.Domain.Models;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -41,6 +38,8 @@ namespace VMS.Pages.Organization.Profile
         private string OrgId;
         private int count;
         private IBrowserFile uploadFile;
+        private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
+
 
         private CreateOrgProfileViewModel org = new();
 
@@ -48,6 +47,7 @@ namespace VMS.Pages.Organization.Profile
         {
             OrgId = IdentityService.GetCurrentUserId();
             org = await OrgService.GetCreateOrgProfileViewModelAsync(OrgId);
+            choosenAreas = org.Areas;
         }
 
         private int maxWord = 300;
@@ -69,6 +69,28 @@ namespace VMS.Pages.Organization.Profile
         private async Task HandleImageDiscarded()
         {
             uploadFile = null;
+        }
+
+        private async Task ShowAreasModal()
+        {
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+            var areasParameter = new ModalParameters();
+            areasParameter.Add("choosenAreasList", choosenAreas);
+            var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
+            await areasModal.Result;
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (choosenAreas.Count > 3)
+            {
+                await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
+            }
         }
 
         private async Task HandleSubmit()
@@ -102,27 +124,5 @@ namespace VMS.Pages.Organization.Profile
             await Interop.ScrollToTop(JSRuntime);
         }
 
-        private List<AreaViewModel> areas = new List<AreaViewModel>();
-        private async Task ShowAreasModal()
-        {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-            var areasParameter = new ModalParameters();
-            areasParameter.Add("choosenAreasList", areas);
-            var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
-            await areasModal.Result;
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (areas.Count > 3)
-            {
-                await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
-            }
-        }
     }
 }

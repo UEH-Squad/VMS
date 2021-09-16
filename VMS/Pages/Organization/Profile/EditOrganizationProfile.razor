@@ -43,26 +43,13 @@
                         <div class="col-8 form-field ">
                             <div class="d-flex">
                                 <div class=" owl-carousel owl-theme editProfile__carousel">
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Cộng đồng</span>
-                                    </div>
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Cộng đồng</span>
-                                    </div>
-                                    <div class="form-field-item icon">
-                                        <i class="material-icons">group</i>
-                                        <span>Cộng đồng</span>
-                                    </div>
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Giáo dục</span>
-                                    </div>
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Thể thao</span>
-                                    </div>
+                                    @foreach (var item in areas)
+                                    {
+                                        <div class="form-field-item item">
+                                            <i class="material-icons">@item.Icon</i>
+                                            <span>@item.Name</span>
+                                        </div>
+                                    }
                                 </div>
 
                                 <div class="form-field-item ms-auto item-add">

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using NetTopologySuite.Geometries;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
-using VMS.Application.ViewModels;
 
 namespace VMS.Application.Services
 {
@@ -37,7 +37,7 @@ namespace VMS.Application.Services
                 try
                 {
                     dynamic position = deserialized["items"][0]["position"];
-                    return new Coordinate() { Latitude = position["lat"], Longitude = position["lng"] };
+                    return new Coordinate() { X = position["lng"], Y = position["lat"] };
                 }
                 catch (Exception)
                 {

@@ -50,8 +50,8 @@
                                             <span>@item.Name</span>
                                         </div>
                                     }
+                                    <ValidationMessage For="() => org.Areas" />
                                 </div>
-                                <ValidationMessage For="() => org.Areas" />
 
                                 <div class="form-field-item ms-auto item-add">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
-                            <button class="btn from__btn-cancel">Hủy</button>
+                            <a href="@Routes.HomePage" class="btn from__btn-cancel">Hủy</a>
                             <button type="submit" class="btn from__btn-submit ms-5 ">Hoàn tất</button>
                         </div>
                     </div>

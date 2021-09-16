@@ -82,23 +82,59 @@
         display: block; } }
   .user-section__list {
     margin: 10px auto 0;
-    width: 230px;
+    width: 420px;
+    height: 350px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25); }
-    .user-section__list__profile {
-      font-size: 24px;
-      color: #64D72F;
-      display: block; }
-    .user-section__list__logout {
-      font-size: 24px;
-      color: #18A0FB;
-      border: none;
-      width: 100%; }
-    .user-section__list li:nth-child(1):hover .user-section__list__profile {
-      color: #306C14; }
-    .user-section__list li:nth-child(2):hover .user-section__list__logout {
-      color: #0B588C; }
   @media (min-width: 1200px) {
     .user-section {
       margin-left: 60px; } }
+  .user-section hr {
+    height: 1px;
+    background-color: #707070; }
+
+.user-info .user-img {
+  width: 70px;
+  height: 70px; }
+
+.user-info h3 {
+  color: #515151;
+  font-size: 18px;
+  font-weight: 500; }
+
+.user-info h4 {
+  color: #515151;
+  font-size: 16px;
+  font-weight: 400; }
+
+.edit a {
+  border-radius: 50px;
+  border: solid 1px #18A0FB; }
+  .edit a h4 {
+    font-size: 16px;
+    font-weight: 300;
+    color: #0B588c; }
+
+.pass a,
+.history a,
+.manage a {
+  color: #515151;
+  font-size: 16px;
+  font-weight: 300; }
+
+.pass span,
+.history span,
+.manage span {
+  font-size: 24px;
+  color: #515151; }
+
+.user-logout {
+  margin-top: 20px; }
+  .user-logout span {
+    font-size: 24px;
+    color: #515151; }
+  .user-logout h4 {
+    font-size: 16px;
+    font-weight: 300;
+    color: #515151; }

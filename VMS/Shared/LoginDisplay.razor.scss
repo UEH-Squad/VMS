@@ -113,35 +113,87 @@
 
     &__list {
         margin: 10px auto 0;
-        width: 230px;
+        width: 420px;
+        height: 350px;
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-
-        &__profile {
-            font-size: 24px;
-            color: $green;
-            display: block;
-        }
-
-        &__logout {
-            font-size: 24px;
-            color: $blue;
-            border: none;
-            width: 100%;
-        }
-
-        & li:nth-child(1):hover &__profile {
-            color: $green-bold;
-        }
-
-        & li:nth-child(2):hover &__logout {
-            color: $blue-bold;
-        }
     }
 
     @include on('xl') {
         margin-left: 60px;      
     }
+
+    hr {
+        height: 1px;
+        background-color: $border-color-bold;
+    }
 }
+
+.user-info {
+
+    .user-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    h3 {
+        color: $grey-text;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    h4 {
+        color: $grey-text;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
+.edit {
+
+    a {
+        border-radius: 50px;
+        border: solid 1px $blue;
+
+        h4 {
+            font-size: 16px;
+            font-weight: 300;
+            color: $blue-hv;
+        }
+    }
+}
+
+.pass,
+.history,
+.manage {
+    a {
+        color: $grey-text;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+    span {
+        font-size: 24px;
+        color: $grey-text;
+    }
+}
+
+
+
+.user-logout {
+    margin-top: 20px;
+
+    span {
+        font-size: 24px;
+        color: $grey-text;
+    }
+
+    h4 {
+        font-size: 16px;
+        font-weight: 300;
+        color: $grey-text;
+    }
+}
+
 

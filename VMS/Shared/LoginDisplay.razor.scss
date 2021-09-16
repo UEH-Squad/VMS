@@ -8,10 +8,10 @@
 .my-notifications {
     @include profile-icon-mobile;
     top: -52px;
+
     @include on('lg') {
         top: -61px;
     }
-
 }
 
 .my-person {
@@ -76,7 +76,7 @@
 
         &:hover .user-label {
             color: $green-bold;
-        }        
+        }
     }
 
     .dropdown {
@@ -92,7 +92,6 @@
         border: 0;
         padding: 0;
         transition: all 0.2s ease-in;
-        
     }
 
 
@@ -121,12 +120,13 @@
     }
 
     @include on('xl') {
-        margin-left: 60px;      
+        margin-left: 60px;
     }
 
     hr {
         height: 1px;
         background-color: $border-color-bold;
+        margin: 20px 0;
     }
 }
 
@@ -165,14 +165,13 @@
 
     &:hover {
 
-        &>a {
+        & > a {
             border-color: $blue-hv;
 
             h4 {
                 color: $blue-hv;
             }
         }
-
     }
 }
 
@@ -185,48 +184,31 @@
         font-weight: 300;
     }
 
-    span {
-        font-size: 24px;
-        color: $grey-text;
-    }
-
     &:hover {
         background-color: rgba(24,160,251,.1);
     }
 }
 
+form {
+    width: 100%;
 
+    &:hover {
+        background-color: rgba(24,160,251,.1);
+    }
 
-.user-logout {
-    margin-top: 20px;
+    button {
+        border: none;
+        background: none;
 
-    form {
-        width: 100%;
-
-        &:hover {
-            background-color: rgba(24,160,251,.1);
-
-            & > button {
-                background-color: rgba(24,160,251,.1);
-            }
+        span {
+            font-size: 24px;
+            color: $grey-text;
         }
 
-        button {
-            border: none;
-            background: none;
-
-            span {
-                font-size: 24px;
-                color: $grey-text;
-            }
-
-            h4 {
-                font-size: 16px;
-                font-weight: 300;
-                color: $grey-text;
-            }
+        h4 {
+            font-size: 16px;
+            font-weight: 300;
+            color: $grey-text;
         }
     }
 }
-
-

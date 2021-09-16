@@ -82,7 +82,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     GetFilterByDate(filter.TookPlace, filter.Happenning),
-                    a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual,
+                    a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual || !filter.Virtual && !filter.Actual,
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,

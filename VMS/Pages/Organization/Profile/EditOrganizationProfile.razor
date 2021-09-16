@@ -6,7 +6,10 @@
             <div class="col-10 mx-auto">
                 <h1 class="editProfile__title my-3">Chỉnh sửa <span>thông tin tổ chức</span></h1>
                 <div class="editProfile__logo text-center my-5">
-                    <img src="img/RelatedActivities/2nd-activity.png" alt="">
+                    @if (!string.IsNullOrEmpty(org.Avatar))
+                    {
+                        <img src="@org.Avatar" alt="">
+                    }
                 </div>
                 <EditForm Model="org" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="editProfile__form">
                     <DataAnnotationsValidator />
@@ -83,7 +86,10 @@
                     <div class="row form-item mb-0">
                         <p class="col-4 form-text">Thay đổi ảnh</p>
                         <div class="col-8 px-0 ">
-                            <UploadImg InputFileChanged="FileChanged" ShowPreview="true" />
+                            <UploadImg InputFileChanged="HandleFileChanged"
+                                       ImageDiscarded="HandleImageDiscarded"
+                                       PreviewImgSrc="@org.Avatar"
+                                       ShowPreview="@isPreview" />
                         </div>
                     </div>
                     <div class="row">

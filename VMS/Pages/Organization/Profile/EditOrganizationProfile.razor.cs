@@ -31,11 +31,16 @@ namespace VMS.Pages.Organization.Profile
         private IOrgService OrgService { get; set; }
 
         [Inject]
+        private IUploadService UploadService { get; set; }
+
+        [Inject]
         private ILogger<EditOrganizationProfile> Logger { get; set; }
 
         private bool isLoading;
+        private bool isPreview;
         private string OrgId;
         private int count;
+        private IBrowserFile uploadFile;
 
         private CreateOrgProfileViewModel org = new();
 
@@ -44,13 +49,42 @@ namespace VMS.Pages.Organization.Profile
             OrgId = IdentityService.GetCurrentUserId();
             org = await OrgService.GetCreateOrgProfileViewModelAsync(OrgId);
         }
+
+        private int maxWord = 300;
+        private int CountWord()
+        {
+            if (!string.IsNullOrWhiteSpace(org.Mission))
+            {
+                count = org.Mission.Length;
+            }
+            return count;
+        }
+
+        private void HandleFileChanged(InputFileChangeEventArgs args)
+        {
+            uploadFile = args.File;
+            isPreview = true;
+        }
+
+        private async Task HandleImageDiscarded()
+        {
+            uploadFile = null;
+        }
+
         private async Task HandleSubmit()
         {
             Logger.LogInformation("HandleValidSubmit called");
             isLoading = true;
+            isPreview = false;
 
             try
             {
+                if (uploadFile is not null)
+                {
+                    string oldImageName = org.Avatar;
+                    org.Avatar = await UploadService.SaveImageAsync(uploadFile, OrgId);
+                    UploadService.RemoveImage(oldImageName);
+                }
                 await OrgService.UpdateOrgProfile(org, OrgId);
                 isLoading = false;
             }
@@ -66,24 +100,6 @@ namespace VMS.Pages.Organization.Profile
         {
             isLoading = false;
             await Interop.ScrollToTop(JSRuntime);
-        }
-
-        private int maxWord = 300;
-        private int CountWord()
-        {
-            if (!string.IsNullOrWhiteSpace(org.Mission))
-            {
-                count = org.Mission.Length;
-            }
-            return count;
-        }
-
-        private IBrowserFile file;
-
-        private void FileChanged(InputFileChangeEventArgs file)
-        {
-            this.file = file.File;
-
         }
 
         bool[] choosenAreasList = new bool[12];

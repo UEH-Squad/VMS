@@ -27,5 +27,7 @@ namespace VMS.Application.ViewModels
         [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
 
+        public string Avatar { get; set; }
+
     }
 }

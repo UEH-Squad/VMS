@@ -28,7 +28,9 @@ const organizeCarousel = () => {
 }
 
 const editProfileCarousel = () => {
-    $('.editProfile__carousel').owlCarousel({
+    const carousel = $('.editProfile__carousel');
+    carousel.owlCarousel('destroy');
+    carousel.owlCarousel({
         loop: true,
         margin: 0,
         nav: true,

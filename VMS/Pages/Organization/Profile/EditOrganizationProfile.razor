@@ -1,5 +1,6 @@
 ﻿@attribute [Route(Routes.EditProfile)]
 @using System.ComponentModel.DataAnnotations;
+@using VMS.Application.ViewModels;
 @inject IJSRuntime JSRuntinme;
 
 <div class="my-editProfile">
@@ -17,7 +18,7 @@
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.FullName)</div>
                             <InputText @bind-Value="@organization.FullName" class="form-input form-control" />
                         </div>
-                      
+
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Gmail</p>
@@ -25,7 +26,7 @@
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Email)</div>
                             <InputText @bind-Value="@organization.Email" class="form-input form-control" />
                         </div>
-                       
+
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Điện thoại</p>
@@ -33,33 +34,20 @@
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Phone)</div>
                             <InputText @bind-Value="@organization.Phone" class="form-input form-control" />
                         </div>
-                       
+
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực</p>
                         <div class="col-8 form-field ">
                             <div class="d-flex">
                                 <div class=" owl-carousel owl-theme editProfile__carousel">
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Cộng đồng</span>
-                                    </div>
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Cộng đồng</span>
-                                    </div>
-                                    <div class="form-field-item icon">
-                                        <i class="material-icons">group</i>
-                                        <span>Cộng đồng</span>
-                                    </div>
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Giáo dục</span>
-                                    </div>
-                                    <div class="form-field-item item">
-                                        <i class="material-icons">group</i>
-                                        <span>Thể thao</span>
-                                    </div>
+                                    @foreach (var item in areas)
+                                    {
+                                        <div class="form-field-item item">
+                                            <i class="material-icons">@item.Icon</i>
+                                            <span>@item.Name</span>
+                                        </div>
+                                    }
                                 </div>
 
                                 <div class="form-field-item ms-auto item-add">
@@ -77,13 +65,13 @@
                                 <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="row form-item mb-0">
                         <p class="col-4 form-text">Thay đổi ảnh</p>
                         <div class="col-8 px-0 ">
-                            <UploadImg InputFileChanged="FileChanged" ShowPreview="true"/>
+                            <UploadImg InputFileChanged="FileChanged" ShowPreview="true" />
                         </div>
                     </div>
                     <div class="row">
@@ -145,7 +133,7 @@
 
     }
 
-    bool[] choosenAreasList = new bool[12];
+    private List<AreaViewModel> areas = new List<AreaViewModel>();
     private async Task ShowAreasModal()
     {
         var options = new ModalOptions()
@@ -155,14 +143,17 @@
             UseCustomLayout = true
         };
         var areasParameter = new ModalParameters();
-        areasParameter.Add("choosenAreasList", choosenAreasList);
+        areasParameter.Add("choosenAreasList", areas);
         var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
         await areasModal.Result;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntinme.InvokeVoidAsync("vms.EditProfileCarousel");
+        if (areas.Count > 3)
+        {
+            await JSRuntinme.InvokeVoidAsync("vms.EditProfileCarousel");
+        }
     }
 
 }

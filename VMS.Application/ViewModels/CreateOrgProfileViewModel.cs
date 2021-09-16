@@ -30,7 +30,7 @@ namespace VMS.Application.ViewModels
 
         public string Avatar { get; set; }
 
-        [RequiredHasItems]
+        [RequiredHasItems(ErrorMessage ="Phải có ít nhất 1 lĩnh vực")]
         public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
 
     }

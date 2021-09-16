@@ -114,6 +114,11 @@
   .edit a h4 {
     font-size: 16px;
     font-weight: 300;
+    color: #18A0FB; }
+
+.edit:hover > a {
+  border-color: #0B588c; }
+  .edit:hover > a h4 {
     color: #0B588c; }
 
 .pass a,
@@ -129,12 +134,26 @@
   font-size: 24px;
   color: #515151; }
 
+.pass:hover,
+.history:hover,
+.manage:hover {
+  background-color: rgba(24, 160, 251, 0.1); }
+
 .user-logout {
   margin-top: 20px; }
-  .user-logout span {
-    font-size: 24px;
-    color: #515151; }
-  .user-logout h4 {
-    font-size: 16px;
-    font-weight: 300;
-    color: #515151; }
+  .user-logout form {
+    width: 100%; }
+    .user-logout form:hover {
+      background-color: rgba(24, 160, 251, 0.1); }
+      .user-logout form:hover > button {
+        background-color: rgba(24, 160, 251, 0.1); }
+    .user-logout form button {
+      border: none;
+      background: none; }
+      .user-logout form button span {
+        font-size: 24px;
+        color: #515151; }
+      .user-logout form button h4 {
+        font-size: 16px;
+        font-weight: 300;
+        color: #515151; }

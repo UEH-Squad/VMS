@@ -159,8 +159,20 @@
         h4 {
             font-size: 16px;
             font-weight: 300;
-            color: $blue-hv;
+            color: $blue;
         }
+    }
+
+    &:hover {
+
+        &>a {
+            border-color: $blue-hv;
+
+            h4 {
+                color: $blue-hv;
+            }
+        }
+
     }
 }
 
@@ -177,6 +189,10 @@
         font-size: 24px;
         color: $grey-text;
     }
+
+    &:hover {
+        background-color: rgba(24,160,251,.1);
+    }
 }
 
 
@@ -184,15 +200,32 @@
 .user-logout {
     margin-top: 20px;
 
-    span {
-        font-size: 24px;
-        color: $grey-text;
-    }
+    form {
+        width: 100%;
 
-    h4 {
-        font-size: 16px;
-        font-weight: 300;
-        color: $grey-text;
+        &:hover {
+            background-color: rgba(24,160,251,.1);
+
+            & > button {
+                background-color: rgba(24,160,251,.1);
+            }
+        }
+
+        button {
+            border: none;
+            background: none;
+
+            span {
+                font-size: 24px;
+                color: $grey-text;
+            }
+
+            h4 {
+                font-size: 16px;
+                font-weight: 300;
+                color: $grey-text;
+            }
+        }
     }
 }
 

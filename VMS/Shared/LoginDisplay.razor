@@ -24,23 +24,23 @@
                                     </div>
                                 </a>
                             </li>
-                            <hr class="mx-3 my-4" />
-                            <li class="edit">
+                            <hr class="mx-3 mt-4 mb-3" />
+                            <li class="edit mb-3">
                                 <a href="" class="d-flex justify-content-center align-items-center text-decoration-none mx-3">
                                     <h4 class="py-2 mb-0">Chinh sua thong tin ca nhan</h4>
                                 </a>
                             </li>
-                            <li class="pass mt-4 mb-2">
+                            <li class="pass py-2 mx-3">
                                 <a href="" class="text-decoration-none mx-3">
                                     Doi mat khau
                                 </a>
                             </li>
-                            <li class="history">
+                            <li class="history py-2 mx-3">
                                 <a href="" class="text-decoration-none mx-3">
                                     Lich su hoat dong
                                 </a>
                             </li>
-                            <hr class="mx-3 mt-4" />
+                            <hr class="mx-3 mt-3" />
                         }
                         else
                         {
@@ -69,13 +69,15 @@
                             </li>
                             <hr class="mx-3 mt-3" />
                         }
-                        <li class="user-logout">
-                            <a href="@Routes.LogOut" class="d-flex text-decoration-none justify-content-center align-items-center">
-                                <span class="material-icons">
-                                    exit_to_app
-                                </span>
-                                <h4 class="mb-0 ps-3">Dang xuat</h4>
-                            </a>
+                        <li class="user-logout d-flex justify-content-center">
+                            <form method="post" action="@Routes.LogOut" class="d-flex justify-content-center align-items-center">
+                                <button type="submit" class="d-flex text-decoration-none justify-content-center align-items-center">
+                                    <span class="material-icons">
+                                        exit_to_app
+                                    </span>
+                                    <h4 class="mb-0 ps-3">Dang xuat</h4>
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>

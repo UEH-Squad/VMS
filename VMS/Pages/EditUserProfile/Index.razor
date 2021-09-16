@@ -15,77 +15,85 @@
                     <DataAnnotationsValidator />
                     <ValidationSummary />
                     <div class="row form-item">
-                        <p class="col-4 form-text">Họ và tên</p>
-                        <div class="col-8 px-0">
-                            <InputText @bind-Value="@user.FullName" class="form-input form-control" disabled="true" />
+                        <p class="col-3 form-text">Họ và tên</p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.FullName" class="form-control" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Khóa</p>
-                        <div class="col-8 px-0">
-                            <InputText @bind-Value="@user.SchoolYear" class="form-input form-control" disabled="true" />
+                        <p class="col-3 form-text">Khóa</p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.SchoolYear" class="form-control" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Lớp</p>
-                        <div class="col-8 px-0">
+                        <p class="col-3 form-text">Lớp</p>
+                        <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Class)</div>
-                            <InputText @bind-Value="@user.Class" class="form-input form-control" />
+                            <InputText @bind-Value="@user.Class" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row form-item">
                         @*KHOAN DỪNG KHOẢNG CHỪNG 2S*@
-                        <p class="col-4 form-text">Khoa</p>
-                        <div class="col-8 px-0">
+                        <p class="col-3 form-text">Khoa</p>
+                        <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Department)</div>
-                            <InputText @bind-Value="@user.Department" class="form-input form-control" />
+                            <InputText @bind-Value="@user.Department" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Mã số sinh viên</p>
-                        <div class="col-8 px-0">
-                            <InputText @bind-Value="@user.IdStudent" class="form-input form-control" disabled="true" />
+                        <p class="col-3 form-text">Mã số sinh viên</p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.IdStudent" class="form-control" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Ngày sinh</p>
-                        <div class="col-8 px-0">
+                        <p class="col-3 form-text">Ngày sinh</p>
+                        <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Birthday)</div>
-                            <InputText @bind-Value="@user.Birthday" class="form-input form-control" />
+                            <InputText @bind-Value="@user.Birthday" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Email UEH</p>
-                        <div class="col-8 px-0">
-                            <InputText @bind-Value="@user.EmailUEH" class="form-input form-control" disabled="true" />
+                        <p class="col-3 form-text">Email UEH</p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.EmailUEH" class="form-control" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Email nhận thông báo</p>
-                        <div class="col-8 px-0">
+                        <p class="col-3 form-text">Email nhận thông báo</p>
+                        <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.EmailGetNoti)</div>
-                            <InputText @bind-Value="@user.EmailGetNoti" class="form-input form-control" />
+                            <InputText @bind-Value="@user.EmailGetNoti" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Điện thoại</p>
-                        <div class="col-8 px-0">
+                        <p class="col-3 form-text">Điện thoại</p>
+                        <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Phone)</div>
-                            <InputText @bind-Value="@user.Phone" class="form-input form-control" />
+                            <InputText @bind-Value="@user.Phone" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Lĩnh vực</p>
-                        <div class="col-8 form-field ">
+                        <p class="col-3 form-text">Địa chỉ</p>
+                        <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap">
+                            <VMS.Pages.Organization.Activities.CascadingAddressPicker/>
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Address)</div>
+                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" placeholder="Nhập số nhà, tên đường" />
+                        </div>
+                    </div>
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Lĩnh vực</p>
+                        <div class="col-9 form-field ">
                             <div class="d-flex">
                                 <div class=" owl-carousel owl-theme editProfile__carousel">
                                     @foreach (var item in areas)
@@ -105,18 +113,18 @@
                         </div>
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Châm ngôn</p>
-                        <div class="col-8 position-relative px-0">
+                        <p class="col-3 form-text">Châm ngôn</p>
+                        <div class="col-9 position-relative px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Maxim)</div>
                             <div class="col-8 px-0 w-100">
-                                <InputTextArea MaxLength="@maxWord" @bind-Value="user.Maxim" class="form-input mx-0 form-control" />
+                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="user.Maxim" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-8 ms-auto from__btn">
+                        <div class="col-9 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
                             <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
                         </div>
@@ -154,7 +162,7 @@
 
         public string Maxim { get; set; }
 
-
+        public string Address { get; set; }
     }
 
     private User user = new User()

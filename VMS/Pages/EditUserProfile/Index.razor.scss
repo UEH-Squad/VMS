@@ -34,7 +34,7 @@
     }
 
     .form-item {
-        margin-bottom: 20px;
+        margin-bottom:40px;
     }
 
     .form-text {
@@ -49,7 +49,7 @@
         font-size: 16px;
         font-weight: 300;
         color: $grey-text;
-        border: 1px solid $grey-input;
+        border: 1px solid #D8D8D8;
         border-radius: 5px;
     }
 
@@ -98,13 +98,13 @@
         }
 
         .icon-add {
-            background: $grey-close-bg;
+            background: #C4C4C4;
             opacity: 50%;
             color: $white;
             font-size: 70px;
 
             &:hover {
-                background: $grey-close-bg;
+                background: #C4C4C4;
                 opacity: 100%;
                 font-size: 80px;
             }
@@ -204,7 +204,7 @@
     }
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        background: $grey-close-bg;
+        background: #C4C4C4;
         border-radius: 10px;
         height: 50px;
     }

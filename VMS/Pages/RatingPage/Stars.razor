@@ -1,17 +1,29 @@
 ﻿<div class="member-star">
-    <button @onclick="@Rate1Star" class="member-star1"><span style="color: @Color1;" id="member-star1" class="material-icons">star_rate</span></button>
-    <button @onclick="@Rate2Star" class="member-star2"><span style="color: @Color2;" id="member-star2" class="material-icons">star_rate</span></button>
-    <button @onclick="@Rate3Star" class="member-star3"><span style="color: @Color3;" id="member-star3" class="material-icons">star_rate</span></button>
-    <button @onclick="@Rate4Star" class="member-star4"><span style="color: @Color4;" id="member-star4" class="material-icons">star_rate</span></button>
-    <button @onclick="@Rate5Star" class="member-star5"><span style="color: @Color5;" id="member-star5" class="material-icons">star_rate</span></button>
-    <div class="member-star_tooltip">Một sao là 20% số điểm của mình đó...</div>
-    @if(ShowYellowStars is false)
+    @for (int i = 1; i < 6; i++)
     {
-        <div>False rồi nè</div>
+        int id = i;
+        <button class="member-star_button">
+            <span @onclick="() =>  { starTemp = id; star = id;}"
+                  @onmouseout="() => star = starTemp"
+                  @onmouseover="() => star = id"
+                  style="@(id <= star? "color: #EDF131" : "#C4C4C4")" id="member-star_icon" class="material-icons">
+                star_rate
+            </span>
+        </button>
     }
+    <div class="member-star_tooltip">Một sao là 20% số điểm của mình đó...</div>
+    @StarRating
 </div>
 
 @code {
+
+    int starTemp;
+    int star;
+    bool showYellowStars = false;
+
+    [Parameter]
+    public int StarRating { get; set; }
+
     [Parameter]
     public bool ShowYellowStars { get; set; } = false;
 
@@ -21,110 +33,4 @@
     [Parameter]
     public Func<Task> NoneShowYellowStars { get; set; }
 
-    // #C4C4C4 is a grey color and #EDF131 is a yellow color
-    string Color1 = "#C4C4C4";
-    string Color2 = "#C4C4C4";
-    string Color3 = "#C4C4C4";
-    string Color4 = "#C4C4C4";
-    string Color5 = "#C4C4C4";
-    bool showYellowStars = false;
-
-    public void Rate1Star()
-    {
-        if(Color1 == "#C4C4C4")
-        {
-            Color1 = "#EDF131";
-            ShowYellowStars = true;
-            OnShowYellowStars?.Invoke();
-
-        }
-        else
-        {
-            Color1 = "#C4C4C4";
-            Color2 = "#C4C4C4";
-            Color3 = "#C4C4C4";
-            Color4 = "#C4C4C4";
-            Color5 = "#C4C4C4";
-            ShowYellowStars = false;
-            NoneShowYellowStars?.Invoke();
-        }
-    }
-
-    public void Rate2Star()
-    {
-        if (Color2 == "#C4C4C4")
-        {
-            Color1 = "#EDF131";
-            Color2 = "#EDF131";
-            ShowYellowStars = true;
-        }
-        else
-        {
-            Color1 = "#C4C4C4";
-            Color2 = "#C4C4C4";
-            Color3 = "#C4C4C4";
-            Color4 = "#C4C4C4";
-            Color5 = "#C4C4C4";
-        }
-    }
-
-    public void Rate3Star()
-    {
-        if (Color3 == "#C4C4C4")
-        {
-            Color1 = "#EDF131";
-            Color2 = "#EDF131";
-            Color3 = "#EDF131";
-            ShowYellowStars = true;
-        }
-        else
-        {
-            Color1 = "#C4C4C4";
-            Color2 = "#C4C4C4";
-            Color3 = "#C4C4C4";
-            Color4 = "#C4C4C4";
-            Color5 = "#C4C4C4";
-        }
-    }
-
-    public void Rate4Star()
-    {
-        if (Color4 == "#C4C4C4")
-        {
-            Color1 = "#EDF131";
-            Color2 = "#EDF131";
-            Color3 = "#EDF131";
-            Color4 = "#EDF131";
-            ShowYellowStars = true;
-        }
-        else
-        {
-            Color1 = "#C4C4C4";
-            Color2 = "#C4C4C4";
-            Color3 = "#C4C4C4";
-            Color4 = "#C4C4C4";
-            Color5 = "#C4C4C4";
-        }
-    }
-
-    public void Rate5Star()
-    {
-        if (Color5 == "#C4C4C4")
-        {
-            Color1 = "#EDF131";
-            Color2 = "#EDF131";
-            Color3 = "#EDF131";
-            Color4 = "#EDF131";
-            Color5 = "#EDF131";
-            ShowYellowStars = true;
-        }
-        else
-        {
-            Color1 = "#C4C4C4";
-            Color2 = "#C4C4C4";
-            Color3 = "#C4C4C4";
-            Color4 = "#C4C4C4";
-            Color5 = "#C4C4C4";
-        }
-    }
 }

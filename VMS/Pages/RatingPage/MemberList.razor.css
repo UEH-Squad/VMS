@@ -7,7 +7,7 @@
 .container-member {
   display: flex;
   flex-direction: column;
-  width: 71%;
+  width: 75%;
   margin-top: 4%; }
   .container-member .container {
     display: flex;

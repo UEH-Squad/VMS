@@ -102,7 +102,7 @@ namespace VMS.Pages.Organization.Profile
             await Interop.ScrollToTop(JSRuntime);
         }
 
-        bool[] choosenAreasList = new bool[12];
+        private List<AreaViewModel> areas = new List<AreaViewModel>();
         private async Task ShowAreasModal()
         {
             var options = new ModalOptions()
@@ -112,14 +112,17 @@ namespace VMS.Pages.Organization.Profile
                 UseCustomLayout = true
             };
             var areasParameter = new ModalParameters();
-            areasParameter.Add("choosenAreasList", choosenAreasList);
+            areasParameter.Add("choosenAreasList", areas);
             var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
             await areasModal.Result;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
+            if (areas.Count > 3)
+            {
+                await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
+            }
         }
     }
 }

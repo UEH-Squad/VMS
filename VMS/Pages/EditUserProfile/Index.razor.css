@@ -29,13 +29,13 @@
     border: 1px solid #18A0FB;
     outline: none; }
   .my-editProfile .form-item {
-    margin-bottom: 20px; }
+    margin-bottom: 40px; }
   .my-editProfile .form-text {
     font-size: 16px;
     font-weight: 500;
     color: #707070;
     margin: auto 0; }
-  .my-editProfile ::deep .form-input {
+  .my-editProfile ::deep .form-control {
     padding: 10px;
     font-size: 16px;
     font-weight: 300;

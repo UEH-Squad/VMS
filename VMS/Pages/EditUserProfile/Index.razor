@@ -85,12 +85,13 @@
 
                     <div class="row form-item">
                         <p class="col-3 form-text">Địa chỉ</p>
-                        <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap">
-                            <VMS.Pages.Organization.Activities.CascadingAddressPicker/>
+                        <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap" style="padding:0">
+                            <VMS.Pages.Organization.Activities.CascadingAddressPicker />
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Address)</div>
-                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" placeholder="Nhập số nhà, tên đường" />
+                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" style="width:auto" placeholder="Nhập số nhà, tên đường" />
                         </div>
                     </div>
+
                     <div class="row form-item">
                         <p class="col-3 form-text">Lĩnh vực</p>
                         <div class="col-9 form-field ">
@@ -112,6 +113,7 @@
 
                         </div>
                     </div>
+
                     <div class="row form-item">
                         <p class="col-3 form-text">Châm ngôn</p>
                         <div class="col-9 position-relative px-0">
@@ -123,6 +125,13 @@
                         </div>
                     </div>
 
+                    <div class="row form-item"> //để mai tính
+                        <p class="col-3 form-text">Kỹ năng</p>
+                        <div class="col-9 px-0">
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Phone)</div>
+                            <InputText @bind-Value="@user.Phone" class="form-control" />
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-9 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>

@@ -66,29 +66,6 @@
     }
 }
 
-.typeahead__input-icon {
-    height: 100%;
-    width: 40px;
-    display: flex;
-    border-radius: 0 5px 5px 0;
-    padding: .5rem;
-    cursor: pointer;
-    background: none;
-    top: 0;
-    right: 13px;
-
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
-    }
-
-    .typeahead__down-arrow {
-        path {
-            fill: #333333;
-        }
-    }
-}
-
 .item {
     text-align: center;
 
@@ -152,10 +129,6 @@
     // As the typeahead is lazy-loaded, its styles will override our styles.
     // To prevent it, we'll have to put !important somewhere.
     .typeahead {
-        &__input-multiselect-wrapper {
-            width: 96% !important;
-        }
-
         &__results {
             right: 0;
             width: 100% !important;

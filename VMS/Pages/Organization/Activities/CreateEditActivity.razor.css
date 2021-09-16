@@ -51,22 +51,6 @@
       .my-form-group .col-9 {
         width: 75%; } }
 
-.typeahead__input-icon {
-  height: 100%;
-  width: 40px;
-  display: flex;
-  border-radius: 0 5px 5px 0;
-  padding: .5rem;
-  cursor: pointer;
-  background: none;
-  top: 0;
-  right: 13px; }
-  .typeahead__input-icon:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
-  .typeahead__input-icon .typeahead__down-arrow path {
-    fill: #333333; }
-
 .item {
   text-align: center; }
   .item:hover > i {
@@ -108,9 +92,6 @@
 
 ::deep .tox {
   z-index: 0; }
-
-::deep .typeahead__input-multiselect-wrapper {
-  width: 96% !important; }
 
 ::deep .typeahead__results {
   right: 0;

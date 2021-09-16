@@ -142,6 +142,7 @@ namespace VMS.Pages.Organization.Activities
             parameters.Add("ChoosenSkillsList", activity.Skills);
 
             await ShowModalAsync(typeof(ActivitySearchPage.SkillsPopup), parameters);
+            StateHasChanged();
         }
 
         private async Task ShowModalAsync(Type type, ModalParameters parameters)

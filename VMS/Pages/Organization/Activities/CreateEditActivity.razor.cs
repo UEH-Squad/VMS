@@ -91,7 +91,6 @@ namespace VMS.Pages.Organization.Activities
             if (firstRender)
             {
                 isLoading = false;
-
             }
         }
 

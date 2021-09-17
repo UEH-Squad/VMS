@@ -38,11 +38,10 @@
                     </div>
 
                     <div class="row form-item">
-                        @*KHOAN DỪNG KHOẢNG CHỪNG 2S*@
                         <p class="col-3 form-text">Khoa</p>
                         <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Department)</div>
-                            <InputText @bind-Value="@user.Department" class="form-control" />
+                            
                         </div>
                     </div>
 
@@ -93,6 +92,7 @@
                         </div>
                     </div>
 
+                    @*Carousel lĩnh vực*@
                     <div class="row form-item">
                         <p class="col-3 form-text">Lĩnh vực</p>
                         <div class="col-9 form-field ">
@@ -116,22 +116,13 @@
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Châm ngôn</p>
-                        <div class="col-9 position-relative px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Maxim)</div>
-                            <div class="col-8 px-0 w-100">
-                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="user.Maxim" class="form-input mx-0 form-control" />
-                                <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row form-item">
                         <p class="col-3 form-text">Kỹ năng</p>
                         <div class="col-9 px-0 position-relative">
                             <Typeahead SearchMethod="SearchSkills"
                                        PlaceHolderText="Lựa chọn kỹ năng"
                                        @bind-Values="user.Skills"
+                                       EnablePopup="true"
+                                       ShowPopUp="ShowSkillsPopup"
                                        class="col-5">
                                 <SelectedTemplate Context="target">
                                     @target.Name
@@ -151,6 +142,17 @@
                         </div>
                     </div>
 
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Châm ngôn</p>
+                        <div class="col-9 position-relative px-0">
+                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Maxim)</div>
+                            <div class="col-8 px-0 w-100">
+                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="user.Maxim" class="form-input mx-0 form-control" />
+                                <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="row">
                         <div class="col-9 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
@@ -266,4 +268,7 @@
 
         await Modal.Show(type, "", parameters, options).Result;
     }
+
+    private bool isDepartmentShow =false;
+    private void ToggleDepartmentDropdown(bool isClose = false) => isDepartmentShow =!isClose && !isDepartmentShow;
 }

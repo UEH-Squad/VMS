@@ -7,7 +7,8 @@
 .my-editProfile {
   /* width */
   /* Track */
-  /* Handle */ }
+  /* Handle */
+  /* form-item search and choose skill*/ }
   .my-editProfile ::deep .form-control:focus {
     border: 1px solid #18A0FB;
     box-shadow: none; }
@@ -36,7 +37,6 @@
     color: #707070;
     margin: auto 0; }
   .my-editProfile ::deep .form-control {
-    padding: 10px;
     font-size: 16px;
     font-weight: 300;
     color: #515151;
@@ -137,3 +137,18 @@
     background: #C4C4C4;
     border-radius: 10px;
     height: 50px; }
+  .my-editProfile .typeahead__input-icon {
+    height: 100%;
+    width: 40px;
+    display: flex;
+    border-radius: 0 5px 5px 0;
+    padding: .5rem;
+    cursor: pointer;
+    background: none;
+    top: 0;
+    right: 13px; }
+    .my-editProfile .typeahead__input-icon:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
+    .my-editProfile .typeahead__input-icon .typeahead__down-arrow path {
+      fill: #333333; }

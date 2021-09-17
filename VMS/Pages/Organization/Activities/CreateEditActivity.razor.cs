@@ -173,7 +173,7 @@ namespace VMS.Pages.Organization.Activities
                 activity.FullAddress = $"{activity.Address}, {activity.FullAddress}";
             }
 
-            bool isActivityTypeChosen = !(activity.IsActual ^ activity.IsActual) && (activity.IsActual || activity.IsVirtual);
+            bool isActivityTypeChosen = activity.IsActual || activity.IsVirtual;
             activity.Targets = string.Join('|', chosenTargets);
             if (!isActivityTypeChosen || string.IsNullOrWhiteSpace(activity.Targets))
             {

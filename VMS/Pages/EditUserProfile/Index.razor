@@ -40,8 +40,16 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Khoa</p>
                         <div class="col-9 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Department)</div>
-                            
+                            <div class="dropdown">
+                                <input class="form-control" placeholder="@departmentChoosenValue" data-bs-toggle="dropdown"/>
+                                <ul class="dropdown-menu">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                        int id = i;
+                                        <li @onclick="()=>ChooseDepartmentValue(id)">@nameDepartmentValue @id</li>
+                                    }
+                                </ul>   
+                            </div>
                         </div>
                     </div>
 
@@ -269,6 +277,12 @@
         await Modal.Show(type, "", parameters, options).Result;
     }
 
-    private bool isDepartmentShow =false;
-    private void ToggleDepartmentDropdown(bool isClose = false) => isDepartmentShow =!isClose && !isDepartmentShow;
+    private string departmentChoosenValue = "Lựa chọn Khoa";
+
+    private string nameDepartmentValue = "Khoa Công nghệ thông tin Kinh doanh";
+
+    void ChooseDepartmentValue(int id)
+    {
+        departmentChoosenValue = nameDepartmentValue + " " + (id).ToString();
+    }
 }

@@ -411,5 +411,59 @@ namespace VMS.Application.Services
 
             return result;
         }
+
+        public async Task<List<ActivityViewModel>> GetOrgActs(string Id, string type)
+        {
+            DbContext context = _dbContextFactory.CreateDbContext();
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                {
+                    a => a.OrgId == Id,
+                    type != "ended"? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now,
+                    a => a.StartDate <= DateTime.Now
+                },
+                Includes = activities => activities.Include(x => x.Favorites)
+            };
+
+            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
+
+            IEnumerable<ActivityViewModel> activityViewModels = activity.Select(x => new ActivityViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Banner = x.Banner,
+                IsClosed = x.IsClosed,
+                Favorites = x.Favorites,
+                MemberQuantity = x.MemberQuantity,
+                ActivityAddresses = x.ActivityAddresses,
+                Rating = GetActRating(x.Id)
+            });
+            switch (type)
+            {
+                case "curent": return activityViewModels.ToList(); break;
+                case "favorite": return activityViewModels.OrderByDescending(a => a.Favorites.Count).Take(8).ToList(); break;
+                case "ended": return activityViewModels.OrderByDescending(a=> a.EndDate).Take(4).ToList(); break;
+                default: return null; break;
+            }
+        }
+
+        private float GetActRating(int id)
+        {
+            double QuantityRating = 0;
+            double SumRating = 0; 
+            List<Recruitment> recruitments = new List<Recruitment>().Where(a => a.ActivityId == id).ToList();
+            foreach(var rcm in recruitments)
+            {
+                var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
+                if (item != null)
+                {
+                    QuantityRating = QuantityRating + 1;
+                    SumRating = SumRating + item.Rank;
+                }
+            }
+            if (QuantityRating != 0) return (float)Math.Round(SumRating / QuantityRating, 1);
+            else return 5;
+        }
     }
 }

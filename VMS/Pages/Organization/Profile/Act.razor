@@ -10,22 +10,22 @@
             {
                 <div class="act-container item position-relative">
                     <div class="img-container position-relative">
-                        <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                        <div class="@(item.Isclosed ? "overlay" : "")"></div>
+                        <img src="@item.Banner" alt="" class="act-img">
+                        <div class="@(item.IsClosed ? "overlay" : "")"></div>
                     </div>
                     <div class="act-content">
-                        <a href="@Routes.ActivityInfo" class="@(item.Isclosed ? "content-cl" : "content-nm")">
-                            <h3 class="act-title lm-text @(item.Isclosed ? "title-cl" : "title-nm")">@item.Title</h3>
+                        <a href="@Routes.ActivityInfo" class="@(item.IsClosed ? "content-cl" : "content-nm")">
+                            <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item.Name</h3>
                         </a>
                     </div>
-                    <ul class="act-menu p-2 @(item.ActivityId == showId ? "d-block" : "d-none")">
+                    <ul class="act-menu p-2 @(item.Id == showId ? "d-block" : "d-none")">
                         <li class="edit pb-2">Chỉnh sửa</li>
                         <li @onclick="DeleteConfirm" class="delete pb-2">Xóa</li>
-                        <li @onclick="() => CloseConfirm(item.ActivityId)" class="close pb-2">Đóng hoạt động</li>
+                        <li @onclick="() => CloseConfirm(item.Id)" class="close pb-2">Đóng hoạt động</li>
                     </ul>
                     @if (HaveControl)
                     {
-                        <i @onclick="() => ShowMenu(item.ActivityId)" class="material-icons position-absolute @(item.Isclosed ? "d-none" : "")">
+                        <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute @(item.IsClosed ? "d-none" : "")">
                             more_horiz
                         </i>
                     }
@@ -112,7 +112,7 @@
     [Parameter]
     public string Title { get; set; }
     [Parameter]
-    public List<OrgActViewModel> Datas { get; set; }
+    public List<ActivityViewModel> Datas { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -164,8 +164,8 @@
         {
             isCloseConfirm = false;
         }
-        Datas[pendingId].Isclosed = true;
+        Datas[pendingId].IsClosed = true;
         pendingId = Datas.Count - 1;
-        Datas = Datas.OrderBy(x => x.Isclosed).ToList();
+        Datas = Datas.OrderBy(x => x.IsClosed).ToList();
     }
 }

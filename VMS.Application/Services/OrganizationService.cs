@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,108 +15,66 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-        public class OrganizationService : BaseService, IOrganizationService
+    public class OrganizationService : IOrganizationService
+    {
+        private readonly UserManager<User> _userManager;
+        public OrganizationService(UserManager<User> userManager)
         {
-        public OrganizationService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
-        {
+            _userManager = userManager;
         }
 
-        public async Task<OrgViewModel> GetOrgAsync(string id)
+        private User FindUserById(string userId)
         {
-            using DbContext dbContext = _dbContextFactory.CreateDbContext();
-            Specification<User> GetOrgSpec = new()
-            {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<User, bool>>>
-                {
-                    a => a.Id == id
-                },
-                Includes = user => user.Include(x => x.UserAreas).ThenInclude(x=>x.Area).Include(x => x.Activities)
-            };
-            User Gets = await _repository.GetAsync(dbContext,GetOrgSpec);
-            var GetOrg =  new OrgViewModel
-            {
-                UserAreas = Gets.UserAreas,
-                ActivitiesNum = Gets.Activities.Count,
-                CreateDate = Gets.CreatedDate.Year,
-                Avatar = Gets.Avatar
-            };
-            return GetOrg;
+            return Task.Run(() => _userManager.FindByIdAsync(userId)).Result;
         }
-
-        public async Task<List<OrgActViewModel>> GetOrgActs(string Id)
+        private async Task<User> GetOrganizer(string orgId)
         {
-            DbContext context = _dbContextFactory.CreateDbContext();
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
-                {
-                    a => a.OrgId == Id,
-                    a=> a.EndDate >= DateTime.Now
-                },
-            };
-
-            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
-
-            IEnumerable<OrgActViewModel> orgActViewModels = activity.Select(x => new OrgActViewModel
-            {
-                ActivityId = x.Id,
-                ActivityName = x.Name,
-                ActivityBanner = x.Banner,
-                Isclosed = x.IsClosed
-            });
-
-            return orgActViewModels.ToList();
+            var user = FindUserById(orgId);
+            bool orgRole = Task.Run(() => _userManager.IsInRoleAsync(user, "Organizer")).Result;
+            if (orgRole == true) return user;
+            else return null;
         }
-
-        public async Task<List<OrgActViewModel>> GetOrgActFavourite(string Id)
+        public User GetOrg(string orgId)
         {
-            DbContext context = _dbContextFactory.CreateDbContext();
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
-                {
-                    a => a.OrgId == Id,
-                    a=> a.EndDate >= DateTime.Now
-                },
-                Includes = activities => activities.Include(x => x.Favorites)
-            };
-
-            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
-
-            List<OrgActViewModel> orgActViewModels = activity.Select(x => new OrgActViewModel
-            {
-                ActivityId = x.Id,
-                ActivityName = x.Name,
-                ActivityBanner = x.Banner,
-                Favorites = x.Favorites,
-                Isclosed = x.IsClosed
-            }).ToList();
-
-            return orgActViewModels.OrderByDescending(a => a.Favorites.Count).Take(8).ToList();
+            if (GetOrganizer(orgId) != null)
+                return Task.Run(() => _userManager.Users.Include(x => x.UserAreas).ThenInclude(x => x.Area)
+                                                   .Include(x => x.Activities)
+                                                   .Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
+                                                   .SingleOrDefaultAsync(x => x.Id == orgId)).Result;
+            else return null;
         }
-
-        public async Task<List<OrgActViewModel>> GetOrgActCompleted(string Id)
+        public  OrgRatingViewModel GetOrgRating(string Id)
         {
-            DbContext context = _dbContextFactory.CreateDbContext();
-            Specification<Activity> specification = new()
+            User org = GetOrg(Id);
+            List<Recruitment> recruitments = org.Recruitments.ToList();
+            double QuantityRating = 0;
+            double SumRating = 0;
+            foreach(var rcm in recruitments)
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
+                if(item != null)
                 {
-                    a => a.OrgId == Id,
-                    a=> a.EndDate < DateTime.Now
-                },
-            };
-
-            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
-
-            List<OrgActViewModel> orgActViewModels = activity.Select(x => new OrgActViewModel
+                    QuantityRating = QuantityRating + 1;
+                    SumRating = SumRating + item.Rank;
+                }
+            }
+            OrgRatingViewModel orgRatingViewModels = new OrgRatingViewModel();
+            orgRatingViewModels.FullName = org.FullName;
+            orgRatingViewModels.Avatar = org.Avatar;
+            orgRatingViewModels.CreatedDate = org.CreatedDate;
+            orgRatingViewModels.Activities = org.Activities;
+            orgRatingViewModels.Mission = org.Mission;
+            orgRatingViewModels.UserAreas = org.UserAreas;
+            orgRatingViewModels.Email = org.Email;
+            orgRatingViewModels.PhoneNumber = org.PhoneNumber;
+            orgRatingViewModels.QuantityRating = QuantityRating;
+            if (QuantityRating != 0)
             {
-                ActivityId = x.Id,
-                ActivityName = x.Name,
-                ActivityBanner = x.Banner,
-                EndDate = x.EndDate
-            }).ToList();
-            return orgActViewModels.OrderByDescending(a => a.EndDate).ToList();
+                orgRatingViewModels.AverageRating = (float)Math.Round(SumRating / QuantityRating, 1);
+            }
+            else orgRatingViewModels.AverageRating = 5;
+
+            return orgRatingViewModels; 
         }
     }
 }

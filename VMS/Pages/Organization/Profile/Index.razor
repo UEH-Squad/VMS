@@ -1,26 +1,24 @@
-﻿@attribute [Route(Routes.Organizations + "/{OrgId}")]
+﻿@attribute [Route(Routes.Organizations + "/{UserId}")]
 
 @using VMS.Application.ViewModels
 @using VMS.Application.Interfaces
 
-<Information OrgId="@OrgId"></Information>
-<Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas="act"/>
-<Act Title="được yêu thích" HaveDecor="false"  Datas="actfavor"/>
-<ActTookPlace></ActTookPlace>
+<Information UserId="@UserId"></Information>
+<Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas="actCurent"/>
+<Act Title="được yêu thích" HaveDecor="false"  Datas="actFavorite"/>
+<ActTookPlace UserId="@UserId"></ActTookPlace>
 
 
 @code {
-    private List<OrgActViewModel> act =new();
-    private List<OrgActViewModel> actfavor = new();
-    private List<OrgActViewModel> actcompleted;
+    private List<ActivityViewModel> actCurent = new();
+    private List<ActivityViewModel> actFavorite = new();
     [Parameter]
-    public string OrgId { get; set; }
+    public string UserId { get; set; }
     [Inject]
-    private IOrganizationService OrganizationService { get; set; }
+    private IActivityService ActivityService { get; set; }
     protected async override Task OnInitializedAsync()
     {
-        act = await OrganizationService.GetOrgActs(OrgId);
-        actfavor = await OrganizationService.GetOrgActFavourite(OrgId);
-        actcompleted = await OrganizationService.GetOrgActCompleted(OrgId);
+        actCurent = await ActivityService.GetOrgActs(UserId, "curent");
+        actFavorite = await ActivityService.GetOrgActs(UserId, "favorite");
     }
 }

@@ -11,6 +11,7 @@ namespace VMS.Application.ViewModels
         public string Name { get; set; }
         public DateTime PostDate { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public int MemberQuantity { get; set; }
@@ -18,12 +19,15 @@ namespace VMS.Application.ViewModels
         public string Banner { get; set; }
         public bool IsVirtual { get; set; }
         public bool IsPin { get; set; }
+        public bool IsClosed { get; set; }
+        public float Rating { get; set; }
 
         public Coordinate Coordinate { get; set; }
         public User Organizer { get; set; }
 
-        public List<ActivityAddress> ActivityAddresses { get; set; }
+        public ICollection<ActivityAddress> ActivityAddresses { get; set; }
         public List<ActivitySkill> ActivitySkills { get; set; }
+        public ICollection<Favorite> Favorites { get; set; }
 
     }
 }

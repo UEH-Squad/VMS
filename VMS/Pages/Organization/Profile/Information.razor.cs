@@ -1,22 +1,20 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using VMS.Application.ViewModels;
 using VMS.Application.Interfaces;
 using Microsoft.AspNetCore.Components;
-using VMS.Application.Services;
+using VMS.Application.ViewModels;
 
 namespace VMS.Pages.Organization.Profile
 {
     public partial class Information : ComponentBase
     {
-        private OrgViewModel org;
+        private OrgRatingViewModel org;
         [Parameter]
-        public string OrgId { get; set; }
+        public string UserId { get; set; }
         [Inject]
         private IOrganizationService OrganizationService { get; set; }
-        protected async override Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            org = await OrganizationService.GetOrgAsync(OrgId);
+            org = OrganizationService.GetOrgRating(UserId);
         }
     }
 

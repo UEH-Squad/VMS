@@ -37,6 +37,7 @@ namespace VMS.Pages.Organization.Profile
         private bool isPreview;
         private string OrgId;
         private int count;
+        private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
 
@@ -96,6 +97,7 @@ namespace VMS.Pages.Organization.Profile
         private async Task HandleSubmit()
         {
             Logger.LogInformation("HandleValidSubmit called");
+            isErrorMessageShown = false;
             isLoading = true;
             isPreview = false;
 
@@ -121,6 +123,7 @@ namespace VMS.Pages.Organization.Profile
         private async Task HandleInvalidSubmit()
         {
             isLoading = false;
+            isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
         }
 

@@ -22,6 +22,7 @@ const organizeCarousel = () => {
             0: {
                 items: 4,
                 slideBy: 4,
+                mouseDrag: false
             }
         }
     })

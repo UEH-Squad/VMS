@@ -7,9 +7,9 @@
 {
     @foreach (var item in pagedResult.Results)
     {
-<div class="org-card" style="z-index:@(item.RateMethodDropDown || item.PopupZIndex? "2" : "1"); display:@(item.IsDelete == -1? "none" : "flex"); opacity: @(item.IsClose == -1 ? 0.75 :1)">
-    <div class="org-card__btn-edit btn" @onclick="@(() => DropDownClick(item.Id,"edit"))">
-        <span class="material-icons-outlined" >
+<div class="org-card" style="z-index:@(item.PopupZIndex? "2" : "1"); display:@(item.IsDelete? "none" : "flex"); opacity: @(item.IsClose? 0.75 :1)">
+    <div class="org-card__btn-edit btn" >
+        <span class="material-icons-outlined" @onclick="@(() => DropDownClick(item.Id,"edit"))">
             more_horiz
         </span>
         <ul class="org-card__btn-edit__list card-list" style="display:@(item.EditDropDown ? "inline-block" : "none");">
@@ -73,7 +73,7 @@
         </ul>
     </div>
     @*--------------------Confirm------------------- *@
-    <div class="popup-container" style="display:@(item.IsDelete == 0?"initial":"none")">
+    <div class="popup-container" style="display:@(item.DelConfirm?"initial":"none")">
         <div class="org-card__del-confirm confirm">
             <div class="close-icon" @onclick="@(() => DelConfirm(item.Id))">
                 <span class="material-icons-outlined">
@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-    <div class="popup-container" style="display:@(item.IsClose == 0 || item.IsClose == -2?"initial":"none")">
+    <div class="popup-container" style="display:@(item.CloseConfirm?"initial":"none")">
         <div class="org-card__close-confirm confirm">
             <div class="close-icon" @onclick="@(() => CloseConfirm(item.Id))">
                 <span class="material-icons-outlined">
@@ -156,10 +156,12 @@
         public DateTime CreatedDate { get; set; }
         public bool EditDropDown { get; set; }
         public bool RateMethodDropDown { get; set; }
+        public bool DelConfirm { get; set; }
+        public bool CloseConfirm { get; set; }
         public double Rate { get; set; }
-        public int IsDelete{ get; set; }
+        public bool IsDelete{ get; set; }
         public bool PopupDel { get; set; }
-        public int IsClose { get; set; }
+        public bool IsClose { get; set; }
         public bool PopupClose { get; set; }
         public bool PopupZIndex { get; set; }
     }
@@ -213,9 +215,11 @@
             EditDropDown = false,
             RateMethodDropDown = false,
             Rate = 3.5,
-            IsDelete = 1,
+            DelConfirm = false,
+            CloseConfirm = false,
+            IsDelete = false,
             PopupDel = false,
-            IsClose = 1,
+            IsClose = false,
             PopupClose = false,
             PopupZIndex = false
         }).ToArray();
@@ -236,13 +240,14 @@
                     {
                         clickedItem.EditDropDown = !clickedItem.EditDropDown;
                         clickedItem.RateMethodDropDown = false;
-
+                        clickedItem.PopupZIndex = false;
                         break;
                     }
                 case "rate":
                     {
                         clickedItem.RateMethodDropDown = !clickedItem.RateMethodDropDown;
                         clickedItem.EditDropDown = false;
+                        clickedItem.PopupZIndex = !clickedItem.PopupZIndex;
                         break;
 
                     }
@@ -250,6 +255,7 @@
                     {
                         clickedItem.RateMethodDropDown = false;
                         clickedItem.EditDropDown = false;
+                        clickedItem.PopupZIndex = false;
                         break;
                     }
             }
@@ -268,16 +274,8 @@
     private async Task DelConfirm(int id)
     {
         var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (Item.IsDelete != 0)
-        {
-            Item.IsDelete = 0;
-            Item.PopupZIndex = true;
-        }
-        else
-        {
-            Item.PopupZIndex = false;
-            Item.IsDelete = 1;
-        }
+        Item.DelConfirm = !Item.DelConfirm;
+        Item.PopupZIndex = !Item.PopupZIndex;
     }
 
     private async Task DelItem(int id)
@@ -285,65 +283,28 @@
         var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
         if (Item.PopupDel == true)
         {
-            Item.PopupDel = false;
-            Item.IsDelete = -1;
+            Item.IsDelete = true;
+            Item.PopupZIndex = !Item.PopupZIndex;
         }
-        else
-        {
-            Item.PopupDel = true;
-            Item.IsDelete = 1;
-            Item.PopupZIndex = true;
-        }
+        else Item.DelConfirm = !Item.DelConfirm;
+        Item.PopupDel = !Item.PopupDel;
 
     }
     private async Task CloseConfirm(int id)
     {
         var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        switch (Item.IsClose)
-        {
-            //In case card was closed
-            case -1:
-                {
-                    Item.IsClose = -2;
-                    Item.PopupZIndex = true;
-                    break;
-                }
-            case -2:
-                {
-                    Item.IsClose = -1;
-                    Item.PopupZIndex = false;
-                    break;
-
-                }
-            //In case card is availeble
-            case 0:
-                {
-                    Item.IsClose = 1;
-                    Item.PopupZIndex = false;
-                    break;
-                }
-            case 1:
-                {
-                    Item.IsClose = 0;
-                    Item.PopupZIndex = true;
-                    break;
-                }
-        }
+        Item.CloseConfirm = !Item.CloseConfirm;
+        Item.PopupZIndex = !Item.PopupZIndex;
     }
     private async Task CloseItem(int id)
     {
         var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
         if (Item.PopupClose == true)
         {
-            Item.PopupClose = false;
-            Item.IsClose = -1;
-            Item.PopupZIndex = false;
+            Item.IsClose = true;
+            Item.PopupZIndex = !Item.PopupZIndex;
         }
-        else
-        {
-            Item.PopupClose = true;
-            Item.IsClose = 1;
-            Item.PopupZIndex = true;
-        }
+        else Item.CloseConfirm = !Item.CloseConfirm;
+        Item.PopupClose = !Item.PopupClose;
     }
 }

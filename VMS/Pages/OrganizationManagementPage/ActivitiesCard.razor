@@ -7,15 +7,15 @@
 {
     @foreach (var item in pagedResult.Results)
     {
-<div class="org-card" style="z-index:@(item.PopupZIndex? "2" : "1"); display:@(item.IsDelete? "none" : "flex"); opacity: @(item.IsClose? 0.75 :1)">
+<div class="org-card" style="z-index:@(item.PopupZIndex? "2" : "1"); display:@(item.IsDelete? "none" : "flex"); opacity: @(item.IsClose==false || item.PopupClose || item.PopupDel || item.DelConfirm || item.CloseConfirm? 1:0.75)">
     <div class="org-card__btn-edit btn" >
         <span class="material-icons-outlined" @onclick="@(() => DropDownClick(item.Id,"edit"))">
             more_horiz
         </span>
         <ul class="org-card__btn-edit__list card-list" style="display:@(item.EditDropDown ? "inline-block" : "none");">
             <li class="item-1">Chỉnh sửa</li>
-            <li class="item-2" @onclick="@(() => DelConfirm(item.Id))">Xóa</li>
-            <li class="item-3" @onclick="@(() => CloseConfirm(item.Id))">Đóng hoạt động</li>
+            <li class="item-2" @onclick="@(() => { DropDownClick(item.Id, "edit"); DelConfirm(item.Id);})">Xóa</li>
+            <li class="item-3" @onclick="@(() => { DropDownClick(item.Id, "edit"); CloseConfirm(item.Id);})">Đóng hoạt động</li>
         </ul>
     </div>
     <div class="org-card__img">

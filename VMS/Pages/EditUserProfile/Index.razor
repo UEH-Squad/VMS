@@ -41,14 +41,15 @@
                         <p class="col-3 form-text">Khoa</p>
                         <div class="col-9 px-0">
                             <div class="dropdown">
-                                <input class="form-control" placeholder="@departmentChoosenValue" data-bs-toggle="dropdown"/>
+                                <span class="material-icons-outlined"> arrow_drop_down </span>
+                                <input class="form-control my-form-department" readonly="readonly" placeholder="@departmentChoosenValue" data-bs-toggle="dropdown" />
                                 <ul class="dropdown-menu">
                                     @for (int i = 1; i <= 10; i++)
                                     {
                                         int id = i;
                                         <li @onclick="()=>ChooseDepartmentValue(id)">@nameDepartmentValue @id</li>
                                     }
-                                </ul>   
+                                </ul>
                             </div>
                         </div>
                     </div>

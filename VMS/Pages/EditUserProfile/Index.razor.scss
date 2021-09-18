@@ -38,6 +38,16 @@
 
         .dropdown {
 
+            .material-icons-outlined {
+                position: absolute;
+                top: 8px;
+                right: 10px;
+            }
+
+            .my-form-department {
+                background: #fff !important;
+            }
+
             &-menu {
                 height: 200px;
                 overflow-y: scroll;
@@ -47,6 +57,7 @@
                 box-shadow: 0px 10px 20px 2px rgba(4, 20, 69, 0.1);
 
                 li {
+                    cursor: default;
                     margin-top: 20px;
                     font-size: 16px;
                     font-weight: 300;
@@ -54,198 +65,198 @@
                 }
             }
         }
-    }
 
-    .form-text {
-        font-size: 16px;
-        font-weight: 500;
-        color: $border-color-bold;
-        margin: auto 0;
-    }
-
-    ::deep .form-control {
-        font-size: 16px;
-        font-weight: 300;
-        color: $grey-text;
-        border: 1px solid #D8D8D8;
-        border-radius: 5px;
-    }
-
-    .form-field-item {
-        text-align: center;
-
-        &:hover > i {
-            font-size: 50px;
-        }
-
-        &:hover > span {
-            transform: translateY(-5px);
-        }
-
-        i {
-            display: block;
-            background-color: $blue;
-            border-radius: 50%;
-            color: white;
-            margin: 5px auto;
-            transition: all 0.3s linear;
-            width: 73px;
-            height: 73px;
-            line-height: 73px;
-            font-size: 35px;
-
-            @include on("xxl") {
-                width: 83px;
-                height: 83px;
-                line-height: 83px;
-                font-size: 40px;
-            }
-        }
-
-        span {
-            color: $green;
+        .form-text {
+            font-size: 16px;
             font-weight: 500;
-            display: inline-block;
-            transition: all 0.3s linear;
-            font-size: 18px;
-            margin-top: 20px;
-
-            @include on("xxl") {
-                font-size: 20px;
-            }
+            color: $border-color-bold;
+            margin: auto 0;
         }
 
-        .icon-add {
-            background: #C4C4C4;
-            opacity: 50%;
-            color: $white;
-            font-size: 70px;
-
-            &:hover {
-                background: #C4C4C4;
-                opacity: 100%;
-                font-size: 80px;
-            }
+        ::deep .form-control {
+            font-size: 16px;
+            font-weight: 300;
+            color: $grey-text;
+            border: 1px solid #D8D8D8;
+            border-radius: 5px;
         }
 
-        &.item-add {
-            width: 30%;
-        }
-    }
+        .form-field-item {
+            text-align: center;
 
-    .owl-carousel {
-        z-index: 0;
-    }
-
-    .editProfile__carousel {
-        width: 60%;
-
-        .item {
-            margin: 0 auto;
-        }
-
-
-
-        ::deep .owl-nav {
-            display: block;
-
-            .owl-prev {
-                display: none;
+            &:hover > i {
+                font-size: 50px;
             }
 
-            .owl-next {
-                position: absolute;
-                top: -15%;
-                right: -20%;
+            &:hover > span {
+                transform: translateY(-5px);
+            }
 
-                span {
-                    font-size: 80px;
-                    color: $blue;
-                    transition: all 0.3s linear;
+            i {
+                display: block;
+                background-color: $blue;
+                border-radius: 50%;
+                color: white;
+                margin: 5px auto;
+                transition: all 0.3s linear;
+                width: 73px;
+                height: 73px;
+                line-height: 73px;
+                font-size: 35px;
 
-                    &:hover {
-                        color: $blue-hv;
-                    }
+                @include on("xxl") {
+                    width: 83px;
+                    height: 83px;
+                    line-height: 83px;
+                    font-size: 40px;
                 }
+            }
+
+            span {
+                color: $green;
+                font-weight: 500;
+                display: inline-block;
+                transition: all 0.3s linear;
+                font-size: 18px;
+                margin-top: 20px;
+
+                @include on("xxl") {
+                    font-size: 20px;
+                }
+            }
+
+            .icon-add {
+                background: #C4C4C4;
+                opacity: 50%;
+                color: $white;
+                font-size: 70px;
 
                 &:hover {
-                    background: none;
+                    background: #C4C4C4;
+                    opacity: 100%;
+                    font-size: 80px;
+                }
+            }
+
+            &.item-add {
+                width: 30%;
+            }
+        }
+
+        .owl-carousel {
+            z-index: 0;
+        }
+
+        .editProfile__carousel {
+            width: 60%;
+
+            .item {
+                margin: 0 auto;
+            }
+
+
+
+            ::deep .owl-nav {
+                display: block;
+
+                .owl-prev {
+                    display: none;
+                }
+
+                .owl-next {
+                    position: absolute;
+                    top: -15%;
+                    right: -20%;
+
+                    span {
+                        font-size: 80px;
+                        color: $blue;
+                        transition: all 0.3s linear;
+
+                        &:hover {
+                            color: $blue-hv;
+                        }
+                    }
+
+                    &:hover {
+                        background: none;
+                    }
+                }
+            }
+
+            ::deep .owl-dots {
+                display: none;
+            }
+        }
+
+        .countWord {
+            color: $border-color-bold;
+            position: absolute;
+            top: 135px;
+            right: 15px;
+        }
+
+        .from__btn {
+            margin: 60px 0;
+
+            .btn {
+                padding: 12px 35px;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .from__btn-cancel {
+                background: $white;
+                color: $blue;
+
+                &:hover {
+                    border: 1px solid $blue;
+                }
+            }
+
+            .from__btn-submit {
+                background: $blue;
+                color: $white;
+
+                &:hover {
+                    background: $blue-hv;
                 }
             }
         }
-
-        ::deep .owl-dots {
-            display: none;
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
-    }
-
-    .countWord {
-        color: $border-color-bold;
-        position: absolute;
-        top: 135px;
-        right: 15px;
-    }
-
-    .from__btn {
-        margin: 60px 0;
-
-        .btn {
-            padding: 12px 35px;
-            font-size: 16px;
-            font-weight: 600;
+        /* Track */
+        ::-webkit-scrollbar-track {
         }
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #C4C4C4;
+            border-radius: 10px;
+            height: 50px;
+        }
+        /* form-item search and choose skill*/
+        .typeahead__input-icon {
+            height: 100%;
+            width: 40px;
+            display: flex;
+            border-radius: 0 5px 5px 0;
+            padding: .5rem;
+            cursor: pointer;
+            background: none;
+            top: 0;
+            right: 13px;
 
-        .from__btn-cancel {
-            background: $white;
-            color: $blue;
-
-            &:hover {
-                border: 1px solid $blue;
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
             }
-        }
 
-        .from__btn-submit {
-            background: $blue;
-            color: $white;
-
-            &:hover {
-                background: $blue-hv;
-            }
-        }
-    }
-    /* width */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-    /* Track */
-    ::-webkit-scrollbar-track {
-    }
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: #C4C4C4;
-        border-radius: 10px;
-        height: 50px;
-    }
-    /* form-item search and choose skill*/
-    .typeahead__input-icon {
-        height: 100%;
-        width: 40px;
-        display: flex;
-        border-radius: 0 5px 5px 0;
-        padding: .5rem;
-        cursor: pointer;
-        background: none;
-        top: 0;
-        right: 13px;
-
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
-        }
-
-        .typeahead__down-arrow {
-            path {
-                fill: #333333;
+            .typeahead__down-arrow {
+                path {
+                    fill: #333333;
+                }
             }
         }
     }

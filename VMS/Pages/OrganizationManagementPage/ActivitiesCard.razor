@@ -7,9 +7,9 @@
 {
     @foreach (var item in pagedResult.Results)
     {
-<div class="org-card" style="z-index:@(item.RateMethodDropDown ? "2" : "auto"); display:@(item.IsDelete == -1? "none" : "flex"); opacity: @(item.IsClose == -1? 0.75 :1)">
+<div class="org-card" style="z-index:@(item.RateMethodDropDown || item.PopupZIndex? "2" : "1"); display:@(item.IsDelete == -1? "none" : "flex"); opacity: @(item.IsClose == -1 ? 0.75 :1)">
     <div class="org-card__btn-edit btn" @onclick="@(() => DropDownClick(item.Id,"edit"))">
-        <span class="material-icons-outlined">
+        <span class="material-icons-outlined" >
             more_horiz
         </span>
         <ul class="org-card__btn-edit__list card-list" style="display:@(item.EditDropDown ? "inline-block" : "none");">
@@ -92,8 +92,8 @@
             </div>
         </div>
     </div>
-    <div class="popup-container" style="display:@(item.IsClose == 0?"initial":"none")">
-        <div class="org-card__close-confirm confirm" style="display:@(item.IsClose == 0?"initial":"none")">
+    <div class="popup-container" style="display:@(item.IsClose == 0 || item.IsClose == -2?"initial":"none")">
+        <div class="org-card__close-confirm confirm">
             <div class="close-icon" @onclick="@(() => CloseConfirm(item.Id))">
                 <span class="material-icons-outlined">
                     close
@@ -161,6 +161,7 @@
         public bool PopupDel { get; set; }
         public int IsClose { get; set; }
         public bool PopupClose { get; set; }
+        public bool PopupZIndex { get; set; }
     }
 
     public abstract class PagedResultBase
@@ -215,7 +216,8 @@
             IsDelete = 1,
             PopupDel = false,
             IsClose = 1,
-            PopupClose = false
+            PopupClose = false,
+            PopupZIndex = false
         }).ToArray();
 
         return result;
@@ -261,12 +263,21 @@
         }
         return false;
     }
+
     //----------Popup and Confirm------------//
     private async Task DelConfirm(int id)
     {
         var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (Item.IsDelete != 0) Item.IsDelete = 0;
-        else Item.IsDelete = 1;
+        if (Item.IsDelete != 0)
+        {
+            Item.IsDelete = 0;
+            Item.PopupZIndex = true;
+        }
+        else
+        {
+            Item.PopupZIndex = false;
+            Item.IsDelete = 1;
+        }
     }
 
     private async Task DelItem(int id)
@@ -281,14 +292,43 @@
         {
             Item.PopupDel = true;
             Item.IsDelete = 1;
+            Item.PopupZIndex = true;
         }
 
     }
     private async Task CloseConfirm(int id)
     {
         var Item = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (Item.IsClose != 0) Item.IsClose = 0;
-        else Item.IsClose = 1;
+        switch (Item.IsClose)
+        {
+            //In case card was closed
+            case -1:
+                {
+                    Item.IsClose = -2;
+                    Item.PopupZIndex = true;
+                    break;
+                }
+            case -2:
+                {
+                    Item.IsClose = -1;
+                    Item.PopupZIndex = false;
+                    break;
+
+                }
+            //In case card is availeble
+            case 0:
+                {
+                    Item.IsClose = 1;
+                    Item.PopupZIndex = false;
+                    break;
+                }
+            case 1:
+                {
+                    Item.IsClose = 0;
+                    Item.PopupZIndex = true;
+                    break;
+                }
+        }
     }
     private async Task CloseItem(int id)
     {
@@ -297,11 +337,13 @@
         {
             Item.PopupClose = false;
             Item.IsClose = -1;
+            Item.PopupZIndex = false;
         }
         else
         {
             Item.PopupClose = true;
             Item.IsClose = 1;
+            Item.PopupZIndex = true;
         }
     }
 }

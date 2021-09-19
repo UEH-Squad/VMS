@@ -126,5 +126,9 @@
   {
     "outputFile": "Pages/Organization/SearchOrganizer/SearchResult.razor.css",
     "inputFile": "Pages/Organization/SearchOrganizer/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/SearchOrganizer/Index.razor.css",
+    "inputFile": "Pages/Organization/SearchOrganizer/Index.razor.scss"
   }
 ]

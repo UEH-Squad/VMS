@@ -1,5 +1,112 @@
-﻿<h3>SearchResult</h3>
+﻿@inject IJSRuntime JsRuntime
+<section class="my-container mb-5">
+    <h3 class="result-heading mt-4 mb-3">Có <span>@(pagedResult is null ? "0" : pagedResult.RowCount) tổ chức</span> ứng với kết quả tìm kiếm của bạn</h3>
+    @if (pagedResult != null && pagedResult.Results.Length != 0)
+    {
+        @foreach (var item in pagedResult.Results)
+        {
+            <div class="org-item d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img class="org-item__img me-4" src="/img/act.png" alt="Alternate Text" />
+                    <div class="org-item__name-group ms-5">
+                        <a class="org-item__name" href="#">@item.OrganizationName</a>
+                        <p>@item.Level</p>
+                    </div>
+                </div>
+                <div class="org-item__rate-group d-flex align-items-center me-5">
+                    <span class="me-4">#@item.Rank</span>
+                    <div>
+                        <p class="m-0 d-flex align-items-center">
+                            @item.StarNumber
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                isYellow = false;
+                                isHalf = false;
+                                @if (i <= item.StarNumber)
+                                {
+                                    isYellow = true;
+                                }
+                                @if ((item.StarNumber % 1) != 0 && (i == Math.Ceiling(item.StarNumber / 1)))
+                                {
+                                    isHalf = true;
+                                    isYellow = true;
+                                }
+                                <span class="material-icons org-item__rate-group-star ms-2 @(isYellow ? "yellow-colored" : "")">
+                                    star@(isHalf ? "_half" : "")
+                                </span>
+                            }
+                        </p>
+                        <p class="m-0">
+                            @item.RateNumber xếp hạng
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</section>
 
+<Pager CurrentPage="@pagedResult.CurrentPage"
+       PageCount="@pagedResult.PageCount"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 @code {
+    private bool isYellow;
+    private bool isHalf;
 
+    private class FakeData
+    {
+        public string OrganizationName { get; set; }
+        public string Level { get; set; }
+        public int Rank { get; set; }
+        public double StarNumber { get; set; }
+        public int RateNumber { get; set; }
+    }
+
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+    private PagedResult<FakeData> pagedResult;
+    private int page = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await Interop.ScrollToTop(JsRuntime);
+    }
+
+    private PagedResult<FakeData> GetFakeData()
+    {
+        var result = new PagedResult<FakeData>();
+        result.CurrentPage = page;
+        result.RowCount = 200;
+        result.PageSize = 20;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
+        {
+            OrganizationName = "Khoa CNTT kinh doanh - BIT",
+            Level = "Khoa/Viện/KTX",
+            Rank = 2,
+            StarNumber = 2.5,
+            RateNumber = 15000,
+        }).ToArray();
+
+        return result;
+    }
 }

@@ -20,6 +20,7 @@
         color: white;
         font-weight: 700;
         transition: all 0.3s linear;
+        cursor: pointer;
     }
 
     .btn-prev span:hover, .btn-next span:hover {
@@ -33,6 +34,7 @@
         border-radius: 50%;
         text-align: center;
         transition: all 0.3s linear;
+        cursor: pointer;
     }
 
     .numb.active, .numb:hover {

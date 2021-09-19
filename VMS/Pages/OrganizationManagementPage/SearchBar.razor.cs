@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 
 namespace VMS.Pages.OrganizationManagementPage
@@ -11,9 +12,17 @@ namespace VMS.Pages.OrganizationManagementPage
         [Parameter]
         public EventCallback<string> SearchValueChanged { get; set; }
 
-        private void UpdateSearchValueAsync(ChangeEventArgs e)
+        private void UpdateSearchValue(ChangeEventArgs e)
         {
             SearchValue = (string)e.Value;
+        }
+
+        private async Task OnKeyDownAsync(KeyboardEventArgs e)
+        {
+            if (e.Code == "Enter" || e.Code == "NumpadEnter")
+            {
+                await SearchAsync();
+            }
         }
 
         private async Task SearchAsync()

@@ -24,13 +24,13 @@
 .login-btn {
   background-color: #18A0FB;
   width: 137px;
-  height: 45px; }
+  height: 40px; }
   .login-btn:hover {
     background-color: #0B588C; }
   @media (min-width: 1200px) {
     .login-btn {
       width: 147px;
-      height: 50px;
+      height: 45px;
       font-size: 20px;
       line-height: 60px; } }
 

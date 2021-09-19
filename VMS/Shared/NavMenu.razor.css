@@ -9,7 +9,7 @@
   z-index: 100; }
   @media (min-width: 992px) {
     .my-navbar {
-      min-height: 90px; } }
+      min-height: 80px; } }
   @media (min-width: 1200px) {
     .my-navbar-container {
       position: relative; } }
@@ -63,10 +63,10 @@
         .my-navbar__brand .brand__ueh {
           height: 20px; } }
     .my-navbar__brand .brand__govirlunteer {
-      height: 16px; }
+      height: 18px; }
       @media (min-width: 992px) {
         .my-navbar__brand .brand__govirlunteer {
-          height: 18px; } }
+          height: 20px; } }
   .my-navbar__hamburger-wrapper {
     position: relative; }
     @media (min-width: 1200px) {

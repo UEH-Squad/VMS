@@ -4,7 +4,7 @@
     z-index: 100;
 
     @include on('lg') {
-        min-height: 90px;
+        min-height: 80px;
     }
 
     &-container {
@@ -75,10 +75,10 @@
         }
 
         .brand__govirlunteer {
-            height: 16px;
+            height: 18px;
 
             @include on('lg') {
-                height: 18px;
+                height: 20px;
             }
         }
     }

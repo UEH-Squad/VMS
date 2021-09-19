@@ -55,23 +55,14 @@
     .video-header__note__text {
       width: 100%;
       height: auto;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 22px; } }
 
 @media (min-width: 1200px) {
   .video-header__note {
-    height: 50px; }
+    height: 40px; }
     .video-header__note__text {
       width: 100%;
       height: auto;
-      font-size: 24px;
-      line-height: 22px; } }
-
-@media (min-width: 1400px) {
-  .video-header__note {
-    height: 55px; }
-    .video-header__note__text {
-      width: 100%;
-      height: auto;
-      font-size: 24px;
+      font-size: 20px;
       line-height: 22px; } }

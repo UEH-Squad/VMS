@@ -78,7 +78,7 @@
             &__text {
                 width: 100%;
                 height: auto;
-                font-size: 20px;
+                font-size: 18px;
                 line-height: 22px;
             }
         }
@@ -93,12 +93,12 @@
 @include on('xl') {
     .video-header {
         &__note {
-            height: 50px;
+            height: 40px;
 
             &__text {
                 width: 100%;
                 height: auto;
-                font-size: 24px;
+                font-size: 20px;
                 line-height: 22px;
             }
         }
@@ -110,18 +110,3 @@
 //---------------BREAKPOINT 1400PX------------------//
 //------------------------------------------------//
 
-@include on('xxl') {
-    .video-header {
-        &__note {
-            height: 55px;
-
-            &__text {
-                width: 100%;
-                height: auto;
-                font-size: 24px;
-                line-height: 22px;
-            }
-        }
-
-    }
-}

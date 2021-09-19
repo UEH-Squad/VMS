@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using VMS.Application.ViewModels;
+﻿using NetTopologySuite.Geometries;
+using System.Threading.Tasks;
 
 namespace VMS.Application.Interfaces
 {

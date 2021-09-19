@@ -29,7 +29,8 @@ namespace VMS
         {
             services.AddDbContextFactory<VmsDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    x => x.UseNetTopologySuite()));
             services.AddScoped(x => x.GetRequiredService<IDbContextFactory<VmsDbContext>>().CreateDbContext());
             services.AddDefaultIdentity<User>(options =>
             {

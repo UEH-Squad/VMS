@@ -1,7 +1,7 @@
 ﻿
 <div class="search-box-cover">
     <form action="/" method="post" class="my-search-box d-flex mb-3">
-        <input type="text" value=@mySearchValue @onchange="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+        <input type="text" value=@SearchValue @onchange="UpdateSearchValueAsync"  @onkeyup="SearchAsync" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
         <div class="my-search-box__icon-wrapper d-flex align-items-center">
             <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
                 close
@@ -16,13 +16,4 @@
 </div>
 
 @code {
-    private string mySearchValue = "";
-    private async Task ClearSearchBox()
-    {
-        mySearchValue = "";
-    }
-    private async Task UpdateInstanceValue(ChangeEventArgs e)
-    {
-        mySearchValue = e.Value.ToString();
-    }
 }

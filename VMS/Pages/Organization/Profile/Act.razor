@@ -18,7 +18,7 @@
                     </div>
                     <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                         <li class="edit pb-2">Chỉnh sửa</li>
-                        <li @onclick="DeleteConfirm" class="delete pb-2">Xóa</li>
+                        <li @onclick="(() => ShowModal())" class="delete pb-2">Xóa</li>
                         <li @onclick="CloseConfirm" class="close pb-2">Đóng hoạt động</li>
                     </ul>
                     @if (HaveControl)
@@ -126,6 +126,7 @@
     [Parameter] public bool HaveDecor { get; set; } = true;
     [Parameter] public string Title { get; set; }
     [Parameter] public List<FakeData> Datas { get; set; }
+    [CascadingParameter] public IModalService Modal { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -180,5 +181,18 @@
 
         isCloseSuccess = !isCloseSuccess;
         Datas[pendingId].IsClose = true;
+    }
+
+    private void ShowModal()
+    {
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        Modal.Show<DeleteConfirm>("", options);
     }
 }

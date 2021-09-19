@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NetTopologySuite.Geometries;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
 

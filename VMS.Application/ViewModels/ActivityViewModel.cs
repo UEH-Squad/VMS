@@ -22,7 +22,6 @@ namespace VMS.Application.ViewModels
         public bool IsClosed { get; set; }
         public float Rating { get; set; }
 
-        public Coordinate Coordinate { get; set; }
         public User Organizer { get; set; }
 
         public ICollection<ActivityAddress> ActivityAddresses { get; set; }

@@ -36,7 +36,7 @@ namespace VMS.Pages.OrganizationManagementPage
             data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page);
         }
 
-        private async Task HandlePageChanged(bool isPaging = false)
+        private async Task HandlePageChangedAsync(bool isPaging = false)
         {
             data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page);
             StateHasChanged();
@@ -75,7 +75,7 @@ namespace VMS.Pages.OrganizationManagementPage
                 await ActivityService.CloseOrDeleteActivity(activity.Id, !activity.IsDeleted, activity.IsClosed);
                 ResetState();
                 popupDelete = activity.Id;
-                await HandlePageChanged();
+                await HandlePageChangedAsync();
             }
             else
             {
@@ -90,12 +90,17 @@ namespace VMS.Pages.OrganizationManagementPage
                 await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
                 ResetState();
                 popupClose = activity.Id;
-                await HandlePageChanged();
+                await HandlePageChangedAsync();
             }
             else
             {
                 confirmCloseId = activity.Id;
             }
+        }
+
+        private bool CheckForZIndex(int id)
+        {
+            return id == confirmCloseId || id == confirmDeleteId || id == popupClose || id == popupDelete;
         }
     }
 }

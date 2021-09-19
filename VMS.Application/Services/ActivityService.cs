@@ -452,7 +452,12 @@ namespace VMS.Application.Services
                 return x => x.EndDate < DateTime.Now;
             }
 
-            return x => x.EndDate >= DateTime.Now;
+            if (isHappenning)
+            {
+                return x => x.EndDate >= DateTime.Now;
+            }
+
+            return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
         }
 
         private async Task<double> GetRateOfActivity(DbContext dbContext, int activityId)

@@ -5,15 +5,15 @@
 {
     @foreach (var item in data.Items)
     {
-        <div class="org-card" style="z-index:@(item.Id == rateId ? "2" : "auto"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(item.IsClosed? 0.75 : 1)">
+        <div class="org-card" style="z-index:@(CheckForZIndex(item.Id) ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || CheckForZIndex(item.Id) ? 1 : 0.75)">
             <div class="org-card__btn-edit btn" @onclick="() => ChangeDropdownState(item.Id)">
                 <span class="material-icons-outlined">
                     more_horiz
                 </span>
                 <ul class="org-card__btn-edit__list card-list" style="display:@(item.Id == dropdownId ? "inline-block" : "none");">
                     <li class="item-1">Chỉnh sửa</li>
-                    <li class="item-2" @onclick="@(() => ChangeDeleteStateAsync(item))">Xóa</li>
-                    <li class="item-3" @onclick="@(() => ChangeCloseStateAsync(item))">Đóng hoạt động</li>
+                    <li class="item-2" @onclick="@(async () => await ChangeDeleteStateAsync(item))">Xóa</li>
+                    <li class="item-3" @onclick="@(async () => await ChangeCloseStateAsync(item))">@(!item.IsClosed ? "Đóng" : "Mở") hoạt động</li>
                 </ul>
             </div>
             <div class="org-card__img">
@@ -82,7 +82,7 @@
                         Bạn có chắc chắn muốn<br />
                         <span>xóa hoạt động</span> này không?
                     </div>
-                    <div class="btn-yes card-btn" @onclick="() => ChangeDeleteStateAsync(item)">
+                    <div class="btn-yes card-btn" @onclick="(async () => await ChangeDeleteStateAsync(item))">
                         Xác nhận
                     </div>
                     <div class="btn-cancel card-btn" @onclick="() => ResetState()">
@@ -99,9 +99,9 @@
                     </div>
                     <div class="content --close">
                         Bạn có chắc chắn muốn<br />
-                        <span>đóng hoạt động</span> này không?
+                        <span>@(!item.IsClosed ? "đóng" : "mở") hoạt động</span> này không?
                     </div>
-                    <div class="btn-yes card-btn" @onclick="@(() => ChangeCloseStateAsync(item))">
+                    <div class="btn-yes card-btn" @onclick="@(async () => await ChangeCloseStateAsync(item))">
                         Xác nhận
                     </div>
                     <div class="btn-cancel card-btn" @onclick="@(() => ResetState())">
@@ -117,7 +117,7 @@
                             close
                         </span>
                     </div>
-                    <div class="content">Đóng hoạt động thành công!</div>
+                    <div class="content">@(item.IsClosed ? "Đóng" : "Mở") hoạt động thành công!</div>
                 </div>
             </div>
             <div class="popup-container" style="display:@(item.Id == popupDelete ? "initial" : "none")">
@@ -137,7 +137,7 @@
 <div class="pagination-org">
     <Pager CurrentPage="@data.PageIndex"
            PageCount="@data.TotalPages"
-           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(true); })" />
+           OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(true); })" />
 </div>
 
 @code {

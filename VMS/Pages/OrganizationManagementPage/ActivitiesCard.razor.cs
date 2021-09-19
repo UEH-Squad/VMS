@@ -100,7 +100,7 @@ namespace VMS.Pages.OrganizationManagementPage
 
         private bool CheckForZIndex(int id)
         {
-            return id == confirmCloseId || id == confirmDeleteId || id == popupClose || id == popupDelete;
+            return id == dropdownId || id == rateId || id == confirmCloseId || id == confirmDeleteId || id == popupClose || id == popupDelete;
         }
     }
 }

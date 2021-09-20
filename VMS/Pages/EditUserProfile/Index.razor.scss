@@ -80,7 +80,9 @@
             border: 1px solid #D8D8D8;
             border-radius: 5px;
         }
-
+        ::deep .typeahead__input-multi {
+            border:none;
+        }
         .form-field-item {
             text-align: center;
 

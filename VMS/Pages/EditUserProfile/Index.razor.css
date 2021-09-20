@@ -64,6 +64,8 @@
     color: #515151;
     border: 1px solid #D8D8D8;
     border-radius: 5px; }
+  .my-editProfile .form-item ::deep .typeahead__input-multi {
+    border: none; }
   .my-editProfile .form-item .form-field-item {
     text-align: center; }
     .my-editProfile .form-item .form-field-item:hover > i {

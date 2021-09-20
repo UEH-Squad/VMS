@@ -140,6 +140,14 @@
     "inputFile": "Pages/Organization/Profile/Notification.razor.scss"
   },
   {
+    "outputFile": "Pages/Homepage/Rank.razor.css",
+    "inputFile": "Pages/Homepage/Rank.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivitySearchPage/SearchBox.razor.css",
+    "inputFile": "Pages/ActivitySearchPage/SearchBox.razor.scss"
+  },
+  {
     "outputFile": "Pages/Organization/Profile/Vision.razor.css",
     "inputFile": "Pages/Organization/Profile/Vision.razor.scss"
   },

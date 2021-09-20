@@ -22,6 +22,7 @@ const organizeCarousel = () => {
             0: {
                 items: 4,
                 slideBy: 4,
+                mouseDrag: false
             }
         }
     })
@@ -43,4 +44,16 @@ const editProfileCarousel = () => {
     })
 }
 
-export default { informationCarousel, organizeCarousel, editProfileCarousel };
+const addOutsideClickMenuHandler = (dotnetHelper, methodName) => {
+    window.addEventListener("click", (e) => {
+        if (!$(e.target).hasClass('d-block')) {
+            const elementToHide = document.querySelector("ul[class*='d-block']");
+            if (elementToHide) {
+                elementToHide.classList.remove('d-block');
+                dotnetHelper.invokeMethodAsync(methodName);
+            }
+        }
+    });
+}
+
+export default { informationCarousel, organizeCarousel, editProfileCarousel, addOutsideClickMenuHandler };

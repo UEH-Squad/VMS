@@ -9,20 +9,19 @@ body {
 
 .inside-the-border {
     float:right;
-    width: 113%;
+    width: 100%;
     border-radius: 10px;
     border: 1px solid #C4C4C4
 }
 /* ------icons------- */
 .icons {
     display: flex;
-    float: right;
+    justify-content: end;
     margin: 25px 25px 0 0;
-    position: relative;
 
     .icon {
-        width: 60px;
-        height: 60px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         background-color: #18A0FB;
         display: flex;
@@ -33,43 +32,36 @@ body {
             color: white;
             font-size: 25px;
         }
-        &:hover .icon-tooltip{
-            display:block;
+
+        &:hover .icon-tooltip {
+            display: block;
         }
     }
 
     .icon-tooltip {
-        display:none;
+        display: none;
+        min-width: max-content;
         position: absolute;
-        top: -37px;
-        left: -8px;
-
-        &--text {
-            padding: 5px 10px;
-            font-size: 12px;
-            background-color: #E1FFD2;
-        }
-
-        &--triangle {
-            margin-left: auto;
-            margin-right: auto;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 15px solid #E1FFD2;
-        }
+        top: -60%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 2px 10px;
+        font-size: 12px;
+        background-color: #fff;
+        border-radius: 10px;
+        border-bottom-right-radius: 3px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25%);
     }
 }
 /* -----end icons----- */
 
 /* -----about-infor----- */
 .about-infor {
-    margin: 120px 30px 0 30px;
+    padding-left: 30px;
 
     .titles {
         padding:10px 0;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 500;
         line-height: 30px;
         color:$blue;
@@ -78,7 +70,6 @@ body {
     .contents {
         color:$grey-text;
         margin-left: 25px;
-        font-size: 24px;
         font-weight: 300;
     }
 }
@@ -92,17 +83,17 @@ body {
     align-items:center;
 
     .btn-sign-up {
-        width: 200px;
-        height: 60px;
+        height: 48px;
+        padding: 0 20px;
         border-radius: 4px;
         background-color: #64D72F;
-        margin: 50px 0;
+        margin: 0 auto 30px;
         border: none;
         display: flex;
 
         .btn-sign-up__text {
             margin: auto;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #fff;
         }
@@ -119,7 +110,7 @@ body {
 .report {
     float: right;
     color: #F14747;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
     margin-top: 10px;
     background-color:unset;

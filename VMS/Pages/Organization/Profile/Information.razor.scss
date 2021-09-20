@@ -1,0 +1,253 @@
+﻿@import "../../../Resources/scss/common/_variables";
+
+.my-information {
+    padding: 50px 0;
+
+    .row-1, .row-2 {
+        display: flex
+    }
+
+    .col-left {
+        width: 55%;
+    }
+
+    .col-right {
+        width: 45%;
+    }
+
+    .information__logo {
+
+        .information__logo-img {
+            margin-bottom: 20px;
+            width: 80%;
+        }
+
+        img {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .icon-camera {
+            position: absolute;
+            bottom: 15px;
+            right: -10px;
+            font-size: 36px;
+            color: $grey-icon;
+        }
+
+        p {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        span {
+            display: block;
+            width: 80%;
+            margin: 20px 0 15px 0;
+            text-align: center;
+            color: $blue;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .information__logo-button {
+            width: 80%;
+            position: relative;
+            display: block;
+            background: rgba(100, 215, 47, 0.8);
+            color: $white;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 50px;
+            text-align: center;
+            transition: all 0.2s linear;
+
+
+            &:hover {
+                background: rgba(100, 215, 47, 1);
+            }
+
+            i {
+                position: absolute;
+                top: 50%;
+                left: 5%;
+                transform: translateY(-50%);
+                font-size: 40px;
+                font-weight: 600;
+            }
+
+            span {
+                color: $white;
+                font-size: 24px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .row-1 {
+        border-bottom: 1px solid rgba(112, 112, 112, .5);
+    }
+
+    .information__rank {
+        a {
+            color: $green;
+            font-size: 40px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .information__rank-number {
+            color: $border-color-bold;
+            font-size: 24px;
+            font-weight: 700;
+            margin-right: 20px;
+        }
+
+        i {
+            margin: auto 2px;
+            color: $green;
+            font-size: 30px;
+        }
+
+        span {
+            color: $border-color-bold;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    .information__contact {
+        i {
+            font-size: 24px;
+            margin: auto 20px;
+            color: $border-color-bold;
+        }
+
+        a {
+            color: $grey-text;
+            font-size: 16px;
+            font-weight: 400;
+            text-decoration: none;
+        }
+    }
+
+    .information__fields {
+
+        h3 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 30px;
+
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    .line {
+        height: 122px;
+        width: 1px;
+        background-color: rgba(112, 112, 112, .5);
+    }
+
+    .information__carousel {
+        position: relative;
+        padding-right: 30px;
+        z-index: 0;
+
+        .item {
+            text-align: center;
+
+            &:hover > i {
+                font-size: 45px;
+            }
+
+            &:hover > span {
+                transform: translateY(-5px);
+            }
+
+            i {
+                display: block;
+                background-color: $blue;
+                border-radius: 50%;
+                color: white;
+                margin: 5px auto;
+                transition: all 0.3s linear;
+                width: 75px;
+                height: 75px;
+                line-height: 75px;
+                font-size: 30px;
+            }
+
+            span {
+                margin-top: 20px;
+                color: $green;
+                font-weight: 500;
+                display: inline-block;
+                transition: all 0.3s linear;
+                font-size: 20px;
+            }
+        }
+
+        ::deep .owl-nav {
+            display: block;
+
+            .owl-prev {
+                display: none;
+            }
+
+            .owl-next {
+                position: absolute;
+                top: -32px;
+                right: 0;
+
+                span {
+                    font-size: 80px;
+                    color: $blue;
+                    transition: all 0.3s linear;
+
+                    &:hover {
+                        color: $blue-hv;
+                    }
+                }
+
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+
+        ::deep .owl-dots {
+            display: none;
+        }
+    }
+
+    .information__act {
+        h3 {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 20px;
+
+            span {
+                font-size: 30px;
+                color: $blue;
+            }
+        }
+
+        .information__act-number {
+            width: 145px;
+            height: 145px;
+            line-height: 145px;
+            border: 1px solid $border-color-bold;
+            border-radius: 50%;
+            text-align: center;
+            color: $blue;
+            font-size: 60px;
+            font-weight: 700;
+        }
+    }
+}

@@ -54,7 +54,7 @@ namespace VMS.Pages.ActivitySearchPage
         private void SearchValueChanged(string searchValue)
         {
             this.searchValue = searchValue;
-            isSearch = true;
+            isSearch = !string.IsNullOrEmpty(searchValue);
         }
 
         private void FilterChanged(FilterActivityViewModel filter)

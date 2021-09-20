@@ -11,3 +11,4 @@ export const SetUserLocation = () => homepage.setUserLocation();
 export const GetUserLocation = () => homepage.getUserLocation();
 export const IncreaseNumber = () => homepage.increaseNumber();
 export const OtherAct = () => activitiespage.otherAct();
+export const RankCarousel = () => homepage.rankCarousel();

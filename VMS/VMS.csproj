@@ -49,6 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\OrganizationProfile\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 

@@ -1,0 +1,98 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.act {
+    h1 {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 36px;
+        color: $grey-text;
+        margin-bottom: 42px;
+        margin-top: 70px;
+
+        span {
+            color: $green;
+        }
+    }
+
+    &-container {
+        display: flex;
+    }
+}
+
+.act-content {
+    border: solid 1px $grey-icon;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.act-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    min-height: 88.8px;
+    color: $blue;
+    text-decoration: none;
+    cursor: pointer;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 3;
+}
+
+.act-ranking {
+    .material-icons {
+    color: $yellow-star;
+    font-size: 20px;
+    }
+}
+
+.act-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+
+    .act-participant,
+    .act-location {
+        display: flex;
+        align-items: center;
+        color: $grey-text;
+        font-size: 16px;
+        line-height: 30px;
+
+        .material-icons {
+            color: $green;
+        }
+    }
+}
+
+.img-container {
+    overflow: hidden;
+    border-radius: 100%;
+    width: 210px;
+    height: 210px;
+}
+
+.act-img {
+    width: 100%;
+    transition: all .5s ease;
+}
+
+.act-container:hover {
+    cursor: pointer;
+
+    & > .img-container {
+        .act-img {
+            -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+    }
+
+    & > .act-content {
+        .act-title {
+            color: $blue-bold;
+        }
+    }
+}

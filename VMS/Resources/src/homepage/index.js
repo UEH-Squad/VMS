@@ -79,4 +79,34 @@ const increaseNumber = () => {
     });
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber };
+const rankCarousel = () => {
+    const carousel = $('.rank__owlcrousel');
+    carousel.owlCarousel('destroy');
+    carousel.owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplaySpeed: 1500,
+        navSpeed: 1500,
+        dotsSpeed: 1500,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                stagePadding: 50,
+            },
+            1200: {
+                items: 1,
+                stagePadding: 140,
+            },
+            1400: {
+                items: 1,
+                stagePadding: 180,
+            },
+        }
+    })
+}
+
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber, rankCarousel };

@@ -15,7 +15,6 @@
 
 .my-custom-popup {
   width: 50%;
-  height: 80%;
   background-color: #fff;
   border-radius: 10px;
   z-index: 999; }
@@ -36,7 +35,7 @@
     font-size: 34px;
     cursor: pointer; }
   .my-custom-popup .skill-modal-content {
-    height: 70%; }
+    /*height: 70%;*/ }
     .my-custom-popup .skill-modal-content__container {
       height: 100%;
       display: grid;

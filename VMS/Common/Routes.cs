@@ -11,7 +11,12 @@
         public const string Map = "/ban-do";
         public const string RatingPage = "/danh-gia-tinh-nguyen-vien";
 
+        #region Org + User profile
+
         public const string User = "/trang-ca-nhan";
+        public const string EditProfile = "/chinh-sua-thong-tin";
+
+        #endregion Org + User profile
 
         #endregion Main
 

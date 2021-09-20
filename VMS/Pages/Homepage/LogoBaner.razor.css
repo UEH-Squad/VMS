@@ -9,18 +9,18 @@
   .my-logoBaner h1 {
     text-align: center;
     margin: 30px 0;
-    color: #18A0FB;
+    color: #707070;
     font-size: 13px;
     font-weight: 500; }
     @media (min-width: 576px) {
       .my-logoBaner h1 {
         margin: 40px 0;
-        font-size: 20px;
+        font-size: 24px;
         font-weight: 600; } }
     @media (min-width: 992px) {
       .my-logoBaner h1 {
         margin: 50px 0;
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 600; } }
   .my-logoBaner .container {
     padding: 0; }

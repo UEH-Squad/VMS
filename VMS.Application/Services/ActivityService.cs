@@ -108,21 +108,21 @@ namespace VMS.Application.Services
             Point userLocation = _geometryFactory.CreatePoint(coordinate);
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
             {
-                return activities = activities.OrderByDescending(a => a.PostDate)
+                return activities = activities.OrderByDescending(a => a.CreatedDate)
                                             .ThenByDescending(a => a.MemberQuantity)
                                             .ToList();
             }
 
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Hottest])
             {
-                return activities = activities.OrderByDescending(a => a.PostDate)
+                return activities = activities.OrderByDescending(a => a.CreatedDate)
                                             .ThenByDescending(a => a.MemberQuantity)
                                             .ToList();
             }
 
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest])
             {
-                return activities = activities.OrderByDescending(a => a.PostDate)
+                return activities = activities.OrderByDescending(a => a.CreatedDate)
                                             .ToList();
             }
 
@@ -142,7 +142,7 @@ namespace VMS.Application.Services
                 return activities = activities.ToList();
             }
 
-            return activities = activities.OrderByDescending(a => a.PostDate).ToList();
+            return activities = activities.OrderByDescending(a => a.CreatedDate).ToList();
         }
 
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()

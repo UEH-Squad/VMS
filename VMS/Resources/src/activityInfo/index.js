@@ -12,7 +12,11 @@
         responsive: {
             0: {
                 items: 3,
-                slideBy: 4
+                slideBy: 3,
+            },
+            1200: {
+                items: 4,
+                slideBy: 3,
             },
         }
     })

@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 101;
     background-color: rgba(196, 196, 196, 0.38);
     
 }
@@ -19,19 +19,19 @@
     width: 100%;
     background-color: rgba(196, 196, 196, 0.38);
     display: none;
-    z-index: 3;
+    z-index: 102;
 
     .report-success {
         position: absolute;
         height: 160px;
-        width: 675px;
+        width: 500px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        z-index: 4;
+        z-index: 103;
         background-color: white;
         border-radius: 10px;
-        font-size: 36px;
+        font-size: 24px;
         font-weight: 500;
         letter-spacing: 1px;
         display: flex;
@@ -110,6 +110,10 @@
         margin-top: 45px;
         display: flex;
         font-weight: 500;
+
+        h4 {
+            font-size: 16px;
+        }
     }
 
     .check {
@@ -119,7 +123,7 @@
 }
 /*----title Báo cáo hoạt động----*/
 .title-header {
-    font-size: 46px;
+    font-size: 24px;
     font-weight: 500;
     display: flex;
     justify-content: center;
@@ -141,10 +145,9 @@
 .dropdown .my-btn {
     width: 100%;
     border: 1px solid $grey-text;
-    height:70px;
+    height:36px;
     .my-icon-dropdown{
         float:right;
-        font-size:50px;
     }
 }
 .dropdown-menu {
@@ -176,7 +179,6 @@
 /*-----report description-----*/
 ::deep .form-control {
     border: 1px solid;
-    font-size: 22px;
     height: 250px;
     overflow-y: scroll;
 

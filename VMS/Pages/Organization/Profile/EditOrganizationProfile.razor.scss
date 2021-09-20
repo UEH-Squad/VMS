@@ -6,6 +6,17 @@
         box-shadow: none;
     }
 
+    .error-message {
+        color: $error;
+        background-color: $blue-background;
+        font-weight: 300;
+        font-size: 18px;
+    }
+
+    .required-asterick{
+        color: $error;
+    }
+
     .editProfile__title {
         font-size: 36px;
         font-weight: 600;

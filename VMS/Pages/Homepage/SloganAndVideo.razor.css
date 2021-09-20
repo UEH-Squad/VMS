@@ -42,7 +42,7 @@
 
 @media (min-width: 576px) {
   .video-header__note {
-    height: 55px; }
+    height: 40px; }
     .video-header__note__text {
       height: 40px;
       width: 360px;
@@ -51,27 +51,18 @@
 
 @media (min-width: 992px) {
   .video-header__note {
-    height: 65px; }
+    height: 45px; }
     .video-header__note__text {
       width: 100%;
       height: auto;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 22px; } }
 
 @media (min-width: 1200px) {
   .video-header__note {
-    height: 65px; }
+    height: 40px; }
     .video-header__note__text {
       width: 100%;
       height: auto;
-      font-size: 24px;
-      line-height: 22px; } }
-
-@media (min-width: 1400px) {
-  .video-header__note {
-    height: 65px; }
-    .video-header__note__text {
-      width: 100%;
-      height: auto;
-      font-size: 24px;
+      font-size: 20px;
       line-height: 22px; } }

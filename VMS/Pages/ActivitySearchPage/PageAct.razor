@@ -10,7 +10,7 @@
                             @foreach (var item in pagedResult.Items)
                             {
                                 <div class="act__item row">
-                                    <div class="col-4">
+                                    <div class="col-4 d-flex align-items-center">
                                         <img class="w-100" src="@item.Banner" alt="">
                                     </div>
                                     <div class="col-8 act__content">
@@ -18,17 +18,19 @@
                                         <h5>
                                             <i class="material-icons">public</i> @item.Organizer?.FullName
                                         </h5>
-                                        <p class="lmtext-2">@((MarkupString)item.Description)</p>
-                                        <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
-                                        <AuthorizeView>
-                                            <Authorized>
-                                                <div class="act__signUp">
-                                                    <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(currentUser.Favorites.Any(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
+                                        <p class="lmtext-2 act__content-description">@((MarkupString)item.Description)</p>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <span class="align-self-start">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                                            <AuthorizeView>
+                                                <Authorized>
+                                                    <div class="act__signUp d-flex align-items-center">
+                                                        <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(currentUser.Favorites.Any(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
 
-                                                    <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
-                                                </div>
-                                            </Authorized>
-                                        </AuthorizeView>
+                                                        <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
+                                                    </div>
+                                                </Authorized>
+                                            </AuthorizeView>
+                                        </div>
                                     </div>
                                 </div>
                             }

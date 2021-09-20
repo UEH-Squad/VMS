@@ -39,13 +39,9 @@ namespace VMS.Pages.ActivitySearchPage
         [Parameter]
         public Dictionary<ActOrderBy, bool> OrderList { get; set; }
         [Parameter]
-        public string SearchValue { get; set; }
-        [Parameter]
         public FilterActivityViewModel Filter { get; set; }
         [Parameter]
         public EventCallback<Dictionary<ActOrderBy, bool>> OrderListChanged { get; set; }
-        [Parameter]
-        public EventCallback<string> SearchValueChanged { get; set; }
         [Parameter]
         public EventCallback<FilterActivityViewModel> FilterChanged { get; set; }
         [Inject]
@@ -116,19 +112,6 @@ namespace VMS.Pages.ActivitySearchPage
             ToggleOrganizationDropdown();
         }
 
-        private void UpdateSearchValueAsync(ChangeEventArgs e)
-        {
-            SearchValue = (string)e.Value;
-        }
-        private async Task SearchAsync()
-        {
-            await SearchValueChanged.InvokeAsync(SearchValue);
-        }
-        private void ClearSearchBox()
-        {
-            SearchValue = string.Empty;
-        }
-
         private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
@@ -164,12 +147,13 @@ namespace VMS.Pages.ActivitySearchPage
             await FilterChanged.InvokeAsync(Filter);
         }
 
-        private void ClearFilter()
+        private async Task ClearFilter()
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
             organizationChoosenValue = "Tổ chức";
             Filter = new FilterActivityViewModel();
+            await FilterChanged.InvokeAsync(Filter);
         }
 
         private async Task ChangeOrderAsync(ActOrderBy key)

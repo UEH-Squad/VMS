@@ -8,70 +8,22 @@
     background-color: #f3f3f3;
 }
 
-.page-heading {
-    font-size: 64px;
-    color: $blue;
-    font-weight: 500;
-    span {
-        color: $green;
-    }
+.colored-red {
+    color: #f14747 !important;
 }
-
-//Search box
-.my-search-box {
-    &__input {
-        width: 40%;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid $border-color-normal;
-        font-size: 18px;
-        color: $blue;
-
-        &::placeholder {
-            color: $green;
-        }
-    }
-
-    &__icon-wrapper {
-        margin-left: -60px;
-
-        span {
-            color: $green;
-            font-size: 26px;
-            line-height: 24px;
-        }
-
-        .search-btn {
-            background-color: transparent;
-            border: none;
-            padding:0;
-        }
-
-        .clear-search-btn {
-            margin-top: -4px;
-            visibility: hidden;
-            cursor: pointer;
-        }
-    }
-
-    &__input:not(:placeholder-shown) ~ &__icon-wrapper .clear-search-btn {
-        visibility: visible;
-    }
-}
-//End searchbox
 
 //Check box Vir/actual
 .my-check-box {
-    border-radius: 50px;
+    border-radius: 5px;
     width: 20px;
     height: 20px;
-    margin-right: 10px;
+    margin-right: 5px;
     vertical-align: top;
     background-color: #fff;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    border: 2px solid $grey-icon;
+    border: 1px solid $grey-icon;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -80,28 +32,33 @@
 
     &::before {
         content: "";
-        width: 11px;
-        height: 11px;
-        border-radius: 50px;
-        background-color: #18A0FB;
+        width: 13px;
+        height: 7px;
+        border-left: 2px solid $blue;
+        border-bottom: 2px solid $blue;
         position: absolute;
-        top: 49%;
+        top: 40%;
         left: 52%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) rotate( -45deg );
         display: none;
     }
 
     &:checked::before {
         display: block;
     }
+}
 
-    &:checked {
-        border-color: $blue;
+.form-check:nth-child(3) {
+    .my-check-box {
+        &::before {
+            border-left: 2px solid #f14747;
+            border-bottom: 2px solid #f14747;
+        }
     }
 }
 
 .my-check-box-label {
-    font-size: 24px;
+    font-size: 20px;
     color: $grey-text;
 }
 //End check box Vir/actual
@@ -119,7 +76,7 @@
 }
 
 .popup-btn {
-    border-radius: 8px;
+    border-radius: 10px;
     height: 40px;
     width: 100%;
     border: 1px solid $border-color-bold;
@@ -227,7 +184,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
-        border: 2px solid $grey-icon;
+        border: 1px solid $grey-icon;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;

@@ -82,7 +82,7 @@
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
-                            <button @onclick="EditConfirm"type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
+                            <button @onclick="EditConfirm" type="submit" class="btn from__btn-submit ms-5 ">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -130,21 +130,4 @@
 
 @code {
 
-    bool isEditConfirm = false;
-
-    void EditConfirm()
-    {
-        isEditConfirm = !isEditConfirm;
-    }
-
-    bool isEditSuccess = false;
-
-    void EditSuccess()
-    {
-        isEditSuccess = !isEditSuccess;
-        if (isEditConfirm == true)
-        {
-            isEditConfirm = false;
-        }
-    }
 }

@@ -40,7 +40,8 @@ namespace VMS.Pages.Organization.Profile
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
-
+        private bool isEditConfirm = false;
+        private bool isEditSuccess = false;
 
         private CreateOrgProfileViewModel org = new();
 
@@ -91,6 +92,20 @@ namespace VMS.Pages.Organization.Profile
             if (choosenAreas.Count > 3)
             {
                 await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
+            }
+        }
+
+        void EditConfirm()
+        {
+            isEditConfirm = !isEditConfirm;
+        }
+
+        void EditSuccess()
+        {
+            isEditSuccess = !isEditSuccess;
+            if (isEditConfirm == true)
+            {
+                isEditConfirm = false;
             }
         }
 

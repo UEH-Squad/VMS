@@ -146,5 +146,13 @@
   {
     "outputFile": "Pages/ActivitySearchPage/SearchBox.razor.css",
     "inputFile": "Pages/ActivitySearchPage/SearchBox.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/Vision.razor.css",
+    "inputFile": "Pages/Organization/Profile/Vision.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/Mission.razor.css",
+    "inputFile": "Pages/Organization/Profile/Mission.razor.scss"
   }
 ]

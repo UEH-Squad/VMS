@@ -1,1 +1,14 @@
-﻿
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.heading-container {
+  width: fit-content; }
+  .heading-container .page-heading {
+    font-size: 66px;
+    color: #18A0FB;
+    font-weight: 500; }
+    .heading-container .page-heading span {
+      color: #64D72F; }

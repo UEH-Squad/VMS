@@ -6,8 +6,8 @@
 /*#endregion */
 .footer {
   position: relative;
-  padding: 60px 0;
-  border-top: 1px solid #707070; }
+  padding-top: 30px;
+  border-top: 1px solid rgba(51, 51, 51, 0.5); }
 
 .btn-back-top {
   position: absolute;
@@ -38,9 +38,9 @@
         font-size: 44px; } }
     @media (min-width: 1200px) {
       .btn-back-top .btn-back-top-icon {
-        width: 80px;
-        height: 80px;
-        line-height: 80px;
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
         font-size: 64px; } }
 
 .footer__logo {
@@ -49,21 +49,22 @@
     width: 100%; }
   .footer__logo .footer__logo-ueh-hsv {
     display: flex;
-    align-items: flex-end;
-    margin: 20px 0; }
+    align-items: center;
+    margin: 10px 0; }
     @media (min-width: 992px) {
       .footer__logo .footer__logo-ueh-hsv {
-        margin: 30px 0; } }
+        margin: 15px 0; } }
     @media (min-width: 1200px) {
       .footer__logo .footer__logo-ueh-hsv {
-        margin: 50px 0; } }
+        margin: 20px 0; } }
   .footer__logo .footer__logo-ueh {
-    width: 60%; }
+    width: 52%; }
   .footer__logo .footer__logo-hsv {
-    width: 20%;
-    margin: auto; }
+    width: 15%;
+    margin-left: 20px; }
   .footer__logo p {
-    font-size: 8px; }
+    font-size: 8px;
+    font-weight: 400; }
     @media (min-width: 576px) {
       .footer__logo p {
         font-size: 12px; } }
@@ -73,11 +74,11 @@
 
 .footer__contact {
   padding: 0;
-  padding-top: 25px; }
+  padding-top: 10px; }
   .footer__contact h6 {
     margin-bottom: 20px;
     font-size: 8px;
-    font-weight: 400;
+    font-weight: 300;
     color: #515151; }
     @media (min-width: 576px) {
       .footer__contact h6 {
@@ -93,10 +94,12 @@
       text-decoration: none; }
   .footer__contact .contact__name {
     font-weight: 700; }
+  .footer__contact .contact__contribute {
+    font-weight: 400; }
 
 .footer__right {
   padding: 0;
-  padding-top: 25px;
+  padding-top: 10px;
   text-align: right; }
   .footer__right h6 {
     margin-bottom: 20px;

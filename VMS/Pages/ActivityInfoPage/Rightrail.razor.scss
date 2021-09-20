@@ -66,12 +66,6 @@ body {
         line-height: 30px;
         color:$blue;
     }
-
-    .contents {
-        color:$grey-text;
-        margin-left: 25px;
-        font-weight: 300;
-    }
 }
 
 /* ------end about-infor------- */
@@ -117,3 +111,11 @@ body {
     border:none;    
 }
 /* ------end report-----*/
+
+::deep {
+    li {
+        color: $grey-text;
+        margin-left: 25px;
+        font-weight: 300;
+    }
+}

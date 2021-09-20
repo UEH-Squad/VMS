@@ -34,6 +34,13 @@ namespace VMS.Pages.ActivityInfoPage
 
         private void HandleFavorite(int id)
         {
+            if (currentUser is null)
+            {
+                // TODO: Show login pop-up or edit info pop-up
+
+                return;
+            }
+
             Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == id);
 
             if (favorite is null)

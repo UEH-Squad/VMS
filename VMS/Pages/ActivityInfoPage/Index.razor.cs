@@ -7,7 +7,8 @@ namespace VMS.Pages.ActivityInfoPage
 {
     public partial class Index : ComponentBase
     {
-        ViewActivityViewModel activity = new();
+        ViewActivityViewModel activity;
+        bool isLoading;
 
         [Parameter]
         public int ActivityId { get; set; }
@@ -17,7 +18,9 @@ namespace VMS.Pages.ActivityInfoPage
 
         protected override async Task OnInitializedAsync()
         {
+            isLoading = true;
             activity = await ActivityService.GetViewActivityViewModelAsync(ActivityId);
+            isLoading = false;
         }
     }
 }

@@ -32,7 +32,5 @@ namespace VMS.Application.ViewModels
         public User Organizer { get; set; }
         public IList<Skill> Skills { get; set; } = new List<Skill>();
         public IList<AddressPath> AddressPaths { get; set; } = new List<AddressPath>();
-        public List<ActivityImage> ActivityImages { get; set; } = new List<ActivityImage>();
-        public List<ActivityTarget> ActivityTargets { get; set; } = new List<ActivityTarget>();
     }
 }

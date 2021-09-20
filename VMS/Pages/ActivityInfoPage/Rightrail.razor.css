@@ -56,10 +56,6 @@
     font-weight: 500;
     line-height: 30px;
     color: #18A0FB; }
-  .about-infor .contents {
-    color: #515151;
-    margin-left: 25px;
-    font-weight: 300; }
 
 /* ------end about-infor------- */
 /* -----button sign up------ */
@@ -96,3 +92,7 @@
   border: none; }
 
 /* ------end report-----*/
+::deep li {
+  color: #515151;
+  margin-left: 25px;
+  font-weight: 300; }

@@ -7,9 +7,6 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Geolocation" Version="1.2.1" />
-    <PackageReference Include="MailKit" Version="2.15.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
-    <PackageReference Include="MimeKit" Version="2.15.0" />
   </ItemGroup>
 
   <ItemGroup>

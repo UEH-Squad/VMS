@@ -1,55 +1,59 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
-using MailKit.Security;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using VMS.Application.Services;
+using VMS.Application.Interfaces;
 
-namespace Album.Mail
+namespace VMS.Application.Services
 {
-    // SendMailService
-    public class SendMailService : IEmailSender
+    public class MailService : IMailService
     {
-        private readonly MailSettings mailSettings;
+        private readonly string systemName;
+        private readonly string systemEmail;
+        private readonly string systemEmailPassword;
+        private readonly string systemHost;
+        private readonly int systemPort;
 
-        private readonly ILogger<SendMailService> logger;
-        public SendMailService(IOptions<MailSettings> _mailSettings, ILogger<SendMailService> _logger)
+        private readonly IConfiguration _configuration;
+
+        public MailService(IConfiguration configuration)
         {
-            mailSettings = _mailSettings.Value;
-            logger = _logger;
-            logger.LogInformation("Create SendMailService");
+            _configuration = configuration;
+
+            systemName = _configuration.GetValue<string>("MailSettings:DisplayName");
+            systemEmail = _configuration.GetValue<string>("MailSettings:Email");
+            systemEmailPassword = _configuration.GetValue<string>("MailSettings:Password");
+            systemHost = _configuration.GetValue<string>("MailSettings:Host");
+            systemPort = _configuration.GetValue<int>("MailSettings:Port");
         }
 
-        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        public async Task SendLoginConfirmEmail(string userEmail, string callbackUrl)
         {
-            var message = new MimeMessage();
-            message.Sender = new MailboxAddress(mailSettings.DisplayName, mailSettings.Mail);
-            message.From.Add(new MailboxAddress(mailSettings.DisplayName, mailSettings.Mail));
-            message.To.Add(MailboxAddress.Parse(email));
-            message.Subject = subject;
-
-            var builder = new BodyBuilder();
-            builder.HtmlBody = htmlMessage;
-            message.Body = builder.ToMessageBody();
-
-            // using SmtpClient of MailKit
-            using var smtp = new MailKit.Net.Smtp.SmtpClient();
-
-            try
+            MailMessage mailMessage = new(systemEmail, userEmail)
             {
-                smtp.Connect(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
-                smtp.Authenticate(mailSettings.Mail, mailSettings.Password);
-                await smtp.SendAsync(message);
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex.Message);
-            }
-            smtp.Disconnect(true);
+                Sender = new MailAddress(systemEmail, systemName),
+                Subject = "GoVirlunteer - Xác nhận tài khoản",
+                Body = "Vui lòng xác nhận tài khoản GoVirlunteer của bạn bằng cách click vào <a href=" + callbackUrl + ">đây</a>.",
+                IsBodyHtml = true
+            };
 
-            logger.LogInformation("Send mail to: " + email);
+            await SendEmail(mailMessage);
+        }
+
+        private async Task SendEmail(MailMessage message)
+        {
+            using SmtpClient smtpClient = new(systemHost, systemPort)
+            {
+                Credentials = new NetworkCredential()
+                {
+                    UserName = systemEmail,
+                    Password = systemEmailPassword
+                },
+                EnableSsl = true
+            };
+
+            await smtpClient.SendMailAsync(message);
+            message.Dispose();
         }
     }
 }

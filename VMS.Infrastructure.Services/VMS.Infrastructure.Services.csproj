@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="2.15.0" />
-    <PackageReference Include="MimeKit" Version="2.15.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\VMS.Common\VMS.Common.csproj" />
     <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
   </ItemGroup>

@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Threading.Tasks;
+using VMS.Application.Interfaces;
+using VMS.Common;
 using VMS.Domain.Models;
 
 namespace VMS.Areas.Identity.Pages.Account
@@ -18,14 +21,17 @@ namespace VMS.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IMailService _mailService;
 
-        public LoginModel(SignInManager<User> signInManager, 
+        public LoginModel(SignInManager<User> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IMailService mailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _mailService = mailService;
         }
 
         [BindProperty]
@@ -40,7 +46,7 @@ namespace VMS.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(AllowEmptyStrings = false , ErrorMessage = "Vui lòng điền tên đăng nhập")]
+            [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng điền tên đăng nhập")]
             [EmailAddress(ErrorMessage = "Tên đăng nhập không chính xác")]
             public string Email { get; set; }
 
@@ -51,6 +57,7 @@ namespace VMS.Areas.Identity.Pages.Account
             [Display(Name = "Nhớ tài khoản")]
             public bool RememberMe { get; set; }
         }
+
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
@@ -63,14 +70,13 @@ namespace VMS.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             ReturnUrl = returnUrl;
         }
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -78,27 +84,27 @@ namespace VMS.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.IsNotAllowed)
                 {
-                    var user = await _userManager.FindByEmailAsync(Input.Email);
-                        user.EmailConfirmed = true;
-                    result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                    if (result.Succeeded)
+                    User user = await _userManager.FindByEmailAsync(Input.Email);
+
+                    if (!user.EmailConfirmed)
                     {
-                        return RedirectToPage("./ForgotPasswordConfirmation");
+                        string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        string callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.User },
+                            protocol: Request.Scheme);
+
+                        await _mailService.SendLoginConfirmEmail(user.Email, callbackUrl);
+
+                        return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
                     }
                 }
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
                 }
                 else
                 {

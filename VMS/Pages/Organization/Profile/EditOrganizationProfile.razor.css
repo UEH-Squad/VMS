@@ -1,0 +1,239 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-editProfile {
+  /* width */
+  /* Track */
+  /* Handle */ }
+  .my-editProfile ::deep .form-control:focus {
+    border: 1px solid #18A0FB;
+    box-shadow: none; }
+  .my-editProfile .editProfile__title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #18A0FB;
+    text-align: center; }
+    .my-editProfile .editProfile__title span {
+      color: #64D72F; }
+  .my-editProfile .editProfile__logo {
+    overflow: hidden; }
+    .my-editProfile .editProfile__logo img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover; }
+  .my-editProfile ::deep .valid.modified:not([type=checkbox]) {
+    border: 1px solid #18A0FB;
+    outline: none; }
+  .my-editProfile .form-item {
+    margin-bottom: 20px; }
+  .my-editProfile .form-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #707070;
+    margin: auto 0; }
+  .my-editProfile ::deep .form-input {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #515151;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px; }
+  .my-editProfile .form-field-item {
+    text-align: center; }
+    .my-editProfile .form-field-item:hover > i {
+      font-size: 50px; }
+    .my-editProfile .form-field-item:hover > span {
+      transform: translateY(-5px); }
+    .my-editProfile .form-field-item i {
+      display: block;
+      background-color: #18A0FB;
+      border-radius: 50%;
+      color: white;
+      margin: 5px auto;
+      transition: all 0.3s linear;
+      width: 73px;
+      height: 73px;
+      line-height: 73px;
+      font-size: 35px; }
+      @media (min-width: 1400px) {
+        .my-editProfile .form-field-item i {
+          width: 83px;
+          height: 83px;
+          line-height: 83px;
+          font-size: 40px; } }
+    .my-editProfile .form-field-item span {
+      color: #64D72F;
+      font-weight: 500;
+      display: inline-block;
+      transition: all 0.3s linear;
+      font-size: 18px;
+      margin-top: 20px; }
+      @media (min-width: 1400px) {
+        .my-editProfile .form-field-item span {
+          font-size: 20px; } }
+    .my-editProfile .form-field-item .icon-add {
+      background: #C4C4C4;
+      opacity: 50%;
+      color: #FFFFFF;
+      font-size: 70px; }
+      .my-editProfile .form-field-item .icon-add:hover {
+        background: #C4C4C4;
+        opacity: 100%;
+        font-size: 80px; }
+    .my-editProfile .form-field-item.item-add {
+      width: 30%; }
+  .my-editProfile .owl-carousel {
+    z-index: 0; }
+  .my-editProfile .editProfile__carousel {
+    width: 60%; }
+    .my-editProfile .editProfile__carousel .item {
+      margin: 0 auto; }
+    .my-editProfile .editProfile__carousel ::deep .owl-nav {
+      display: block; }
+      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev {
+        display: none; }
+      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next {
+        position: absolute;
+        top: -15%;
+        right: -20%; }
+        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span {
+          font-size: 80px;
+          color: #18A0FB;
+          transition: all 0.3s linear; }
+          .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span:hover {
+            color: #0B588c; }
+        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next:hover {
+          background: none; }
+    .my-editProfile .editProfile__carousel ::deep .owl-dots {
+      display: none; }
+  .my-editProfile .countWord {
+    color: #707070;
+    position: absolute;
+    top: 135px;
+    right: 15px; }
+  .my-editProfile .from__btn {
+    margin: 60px 0; }
+    .my-editProfile .from__btn .btn {
+      padding: 12px 35px;
+      font-size: 16px;
+      font-weight: 600; }
+    .my-editProfile .from__btn .from__btn-cancel {
+      background: #FFFFFF;
+      color: #18A0FB; }
+      .my-editProfile .from__btn .from__btn-cancel:hover {
+        border: 1px solid #18A0FB; }
+    .my-editProfile .from__btn .from__btn-submit {
+      background: #18A0FB;
+      color: #FFFFFF; }
+      .my-editProfile .from__btn .from__btn-submit:hover {
+        background: #0B588c; }
+  .my-editProfile ::-webkit-scrollbar {
+    width: 10px; }
+  .my-editProfile ::-webkit-scrollbar-thumb {
+    background: #C4C4C4;
+    border-radius: 10px;
+    height: 50px; }
+
+.pop-up {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(196, 196, 196, 0.38);
+  z-index: 3; }
+  .pop-up .border-10 {
+    border-radius: 10px; }
+  .pop-up .border-5 {
+    border-radius: 5px; }
+  .pop-up .center-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .pop-up .pop-up-container {
+    background-color: #FFFFFF;
+    position: relative;
+    box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
+  .pop-up .close-btn {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    .pop-up .close-btn .material-icons {
+      font-size: 20px;
+      color: #717171; }
+  .pop-up .close-btn-s {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    .pop-up .close-btn-s .material-icons {
+      font-size: 14px;
+      color: #717171; }
+  .pop-up .pop-up-content {
+    padding: 13px 55px; }
+    .pop-up .pop-up-content .edit-success {
+      font-size: 18px;
+      line-height: 36px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #18A0FB; }
+  .pop-up .content {
+    padding: 34px 64px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .pop-up .content h3 {
+      font-size: 20px;
+      line-height: 25px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #64D72F; }
+    .pop-up .content .edit-text {
+      color: #18A0FB; }
+  .pop-up .pop-up-btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 30px 20px 0;
+    font-weight: 600; }
+    .pop-up .pop-up-btn .deny {
+      background-color: #FFFFFF;
+      color: #18A0FB;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 104px;
+      height: 32px; }
+    .pop-up .pop-up-btn .accept {
+      background-color: #18A0FB;
+      color: #FFFFFF;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 104px;
+      height: 32px;
+      cursor: pointer;
+      font-size: 18px; }

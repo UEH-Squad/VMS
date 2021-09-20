@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NetTopologySuite.Geometries;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
 
@@ -6,9 +7,11 @@ namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<List<ActivityViewModel>> GetAllActivitiesAsync();
+        Task<PagedResult<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int currentPage);
 
-        Task AddActivityAsync(CreateActivityViewModel activity);
+        Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
+
+        Task<int> AddActivityAsync(CreateActivityViewModel activity);
 
         Task<CreateActivityViewModel> GetCreateActivityViewModelAsync(int activityId);
 

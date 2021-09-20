@@ -14,7 +14,6 @@
 
 .my-custom-popup {
     width: 50%;
-    height: 80%;
     background-color: #fff;
     border-radius: 10px;
     z-index: 999;
@@ -40,8 +39,7 @@
     }
 
     .skill-modal-content {
-        height: 70%;
-        margin-left: 16%;
+        /*height: 70%;*/
 
         &__container {
             height: 100%;

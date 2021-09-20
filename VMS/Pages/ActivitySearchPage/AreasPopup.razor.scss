@@ -1,4 +1,8 @@
 ﻿@import '../../Resources/scss/common/_variables.scss';
+.colored-red {
+    color: #f14747;
+}
+
 .colored-green {
     color: $green;
 }
@@ -17,9 +21,7 @@
         font-size: 48px;
         color: $green;
     }
-    .cover-content {
-        margin:20px 0;
-    }
+
     .close-btn {
         position: absolute;
         top: 25px;
@@ -35,11 +37,21 @@
         cursor: pointer;
     }
 
+    .areas-modal-content {
+        margin-left: 80px;
+
+        &__container {
+            height: 100%;
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+    }
+
+
     .area-item-wrapper {
-        width: 50%;
         cursor: pointer;
-        justify-content:center;
-        span {
+
+        div {
             width: 50px;
             height: 50px;
             background-color: $blue;
@@ -71,3 +83,13 @@
 }
 
 
+.covid-item {
+    p {
+        font-weight: 500;
+    }
+
+    span:hover ~ p,
+    p:hover {
+        color: #f14747 !important;
+    }
+}

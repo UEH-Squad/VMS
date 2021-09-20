@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VMS.Common;
 using VMS.Domain.Models;
 
 namespace VMS.Areas.Identity.Pages.Account
@@ -67,12 +68,19 @@ namespace VMS.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                User user = new() { UserName = Input.Email, Email = Input.Email };
+                bool isOrg = Input.Email.ToLower().Contains("org");
+                User user = new() { UserName = Input.Email, Email = Input.Email, EmailConfirmed = isOrg };
                 IdentityResult result = await _userManager.CreateAsync(user, Input.Password);
-            
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    // TODO: This is just a cheat, will refactor later.
+                    User currentUser = await _userManager.FindByNameAsync(user.UserName);
+                    _ = user.UserName.ToLower().Contains("org")
+                        ? await _userManager.AddToRoleAsync(currentUser, Role.Organization.ToString())
+                        : await _userManager.AddToRoleAsync(currentUser, Role.User.ToString());
 
                     return RedirectToPage("Login", new { returnUrl });
                 }

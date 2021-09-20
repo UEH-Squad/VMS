@@ -93,7 +93,7 @@ namespace VMS.Areas.Identity.Pages.Account
                         string callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",
                             pageHandler: null,
-                            values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.User },
+                            values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.EditProfile },
                             protocol: Request.Scheme);
 
                         await _mailService.SendLoginConfirmEmail(user.Email, callbackUrl);
@@ -101,6 +101,7 @@ namespace VMS.Areas.Identity.Pages.Account
                         return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
                     }
                 }
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");

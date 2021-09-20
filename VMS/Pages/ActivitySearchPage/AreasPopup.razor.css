@@ -4,6 +4,9 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.colored-red {
+  color: #f14747; }
+
 .colored-green {
   color: #64D72F; }
 
@@ -18,8 +21,6 @@
   .my-custom-popup h3 {
     font-size: 48px;
     color: #64D72F; }
-  .my-custom-popup .cover-content {
-    margin: 20px 0; }
   .my-custom-popup .close-btn {
     position: absolute;
     top: 25px;
@@ -33,11 +34,15 @@
     justify-content: center;
     font-size: 34px;
     cursor: pointer; }
+  .my-custom-popup .areas-modal-content {
+    margin-left: 80px; }
+    .my-custom-popup .areas-modal-content__container {
+      height: 100%;
+      display: grid;
+      grid-template-columns: auto auto; }
   .my-custom-popup .area-item-wrapper {
-    width: 50%;
-    cursor: pointer;
-    justify-content: center; }
-    .my-custom-popup .area-item-wrapper span {
+    cursor: pointer; }
+    .my-custom-popup .area-item-wrapper div {
       width: 50px;
       height: 50px;
       background-color: #18A0FB;
@@ -61,3 +66,10 @@
     margin-bottom: 10px; }
     .my-custom-popup .save-btn:hover {
       background-color: #306C14; }
+
+.covid-item p {
+  font-weight: 500; }
+
+.covid-item span:hover ~ p,
+.covid-item p:hover {
+  color: #f14747 !important; }

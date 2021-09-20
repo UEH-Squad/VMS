@@ -1,31 +1,35 @@
-﻿@inject IJSRuntime JsRuntime
-
-<section class="my-act">
+﻿<section class="my-act">
     <div class="container">
         <div class="row">
             <div class="act col-8 ps-0" id="act">
-            <h3>Có <span>@count hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+                <h3>Có <span>@(pagedResult is null ? "0" : pagedResult.RowCount) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
                 <div class="px-2">
                     <div class="act__page-1">
-                        @if (pagedResult != null && pagedResult.Results.Length != 0)
+                        @if (pagedResult is not null && pagedResult.Results.Count != 0)
                         {
                             @foreach (var item in pagedResult.Results)
                             {
                                 <div class="act__item row">
-                                    <div class="col-4">
-                                        <img class="w-100" src="img/act.png" alt="">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <img class="w-100" src="@item.Banner" alt="">
                                     </div>
                                     <div class="col-8 act__content">
-                                        <a href="" class="lmtext-3">@item.Title</a>
+                                        <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-3">@item.Name</a>
                                         <h5>
-                                            <i class="material-icons">public</i>@item.Organizer
+                                            <i class="material-icons">public</i> @item.Organizer?.FullName
                                         </h5>
-                                        <p class="lmtext-2">@item.ShortDescription</p>
-                                        <span>Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
-                                        <div class="act__signUp">
-                                            <i @onclick="@(() => HandleFav(item.Id))" class="material-icons">@(item.IsFav ? "favorite" : "favorite_border")</i>
+                                        <p class="lmtext-2 act__content-description">@((MarkupString)item.Description)</p>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <span class="align-self-start">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                                            <AuthorizeView>
+                                                <Authorized>
+                                                    <div class="act__signUp d-flex align-items-center">
+                                                        <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(currentUser.Favorites.Any(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
 
-                                            <button @onclick="ShowModal" class="btn">Đăng ký</button>
+                                                        <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng kí</button>
+                                                    </div>
+                                                </Authorized>
+                                            </AuthorizeView>
                                         </div>
                                     </div>
                                 </div>
@@ -33,10 +37,10 @@
                         }
                     </div>
                 </div>
-        <a class="goToDivAct d-none " href="#act">go to div act</a>
-            </div>   
+                <a class="goToDivAct d-none " href="#act">go to div act</a>
+            </div>
             <div class="col-3 ms-auto">
-                <FeaturedAct></FeaturedAct>
+                <FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
             </div>
         </div>
     </div>
@@ -47,89 +51,4 @@
        OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 
 @code {
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Organizer { get; set; }
-        public string ShortDescription { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool IsFav { get; set; }
-    }
-
-    public abstract class PagedResultBase
-    {
-        public int CurrentPage { get; set; }
-        public int PageCount { get; set; }
-        public int PageSize { get; set; }
-        public int RowCount { get; set; }
-        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
-        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
-    }
-
-    public class PagedResult<T> : PagedResultBase where T : class
-    {
-        public T[] Results { get; set; }
-    }
-
-    private PagedResult<FakeData> pagedResult;
-    private int count = 20;
-    private int page = 1;
-
-    protected override async Task OnInitializedAsync()
-    {
-        pagedResult = GetFakeData();
-    }
-
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetFakeData();
-        StateHasChanged();
-        await Interop.ScrollToTop(JsRuntime);
-    }
-
-    private async Task HandleFav(int id)
-    {
-        var clickedItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (clickedItem is not null)
-        {
-            clickedItem.IsFav = !clickedItem.IsFav;
-        }
-    }
-
-    private PagedResult<FakeData> GetFakeData()
-    {
-        var result = new PagedResult<FakeData>();
-        result.CurrentPage = page;
-        result.RowCount = 100;
-        result.PageSize = 10;
-        result.PageCount = result.RowCount / result.PageSize;
-        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
-        {
-            Id = x + 1,
-            Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương",
-            Organizer = "Tên đơn vị tổ chức",
-            ShortDescription = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
-            CreatedDate = DateTime.Now,
-            IsFav = false
-        }).ToArray();
-
-        return result;
-    }
-
-    [CascadingParameter]
-    public IModalService Modal { get; set; }
-
-    async Task ShowModal()
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-        Modal.Show<Signup>("", options);
-    }
-
 }

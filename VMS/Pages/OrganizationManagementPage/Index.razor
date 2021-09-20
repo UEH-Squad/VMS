@@ -1,5 +1,5 @@
 ﻿@attribute [Route(Routes.OrganizationManagement)]
-@inject IJSRuntime JsRuntime
+@attribute [Authorize(Roles = "Organizer")]
 
 <div class="container-lg px-0 layout">
     <div class="container">
@@ -10,15 +10,15 @@
                 </div>
             </div>
             <div class="col-6">
-                <VMS.Pages.OrganizationManagementPage.SearchBar />
+                <SearchBar SearchValueChanged="SearchValueChanged"/>
             </div>
             <div class="activities col-9">
-                <VMS.Pages.OrganizationManagementPage.ActivitiesCard />
+                <ActivitiesCard SearchValue=@searchValue IsSearch=@isSearch Filter=@filter/>
             </div>
             <div class="filter col-1">
             </div>
             <div class="filter col-2">
-                <VMS.Pages.OrganizationManagementPage.Filter />
+                <Filter FilterAct=@filter FilterActChanged="FilterChanged"/>
             </div>
         </div>
     </div>
@@ -26,6 +26,4 @@
 
 
 @code {
-
-    
 }

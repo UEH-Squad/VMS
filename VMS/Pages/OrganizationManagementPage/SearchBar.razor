@@ -1,28 +1,16 @@
-﻿
-<div class="search-box-cover">
-    <form action="/" method="post" class="my-search-box d-flex mb-3">
-        <input type="text" value=@mySearchValue @onchange="UpdateInstanceValue" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
-        <div class="my-search-box__icon-wrapper d-flex align-items-center">
-            <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
-                close
+﻿<div class="my-search-box d-flex mb-4 justify-content-between">
+    <input type="text" value=@SearchValue @onchange="UpdateSearchValue" @onkeyup="OnKeyDownAsync" class="my-search-box__input" placeholder="Tìm kiếm bằng từ khóa" />
+    <div class="my-search-box__icon-wrapper d-flex align-items-center">
+        <span @onclick="ClearSearchBox" class="material-icons-outlined clear-search-btn">
+            close
+        </span>
+        <button @onclick="async () => await SearchAsync()" class="search-btn d-flex align-items-center">
+            <span class="material-icons-outlined">
+                search
             </span>
-            <button type="submit" class="search-btn d-flex align-items-center">
-                <span class="material-icons-outlined">
-                    search
-                </span>
-            </button>
-        </div>
-    </form>
+        </button>
+    </div>
 </div>
 
 @code {
-    private string mySearchValue = "";
-    private async Task ClearSearchBox()
-    {
-        mySearchValue = "";
-    }
-    private async Task UpdateInstanceValue(ChangeEventArgs e)
-    {
-        mySearchValue = e.Value.ToString();
-    }
 }

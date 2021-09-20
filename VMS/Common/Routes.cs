@@ -9,8 +9,14 @@
         public const string ActivityInfo = "/chi-tiet-hoat-dong";
         public const string Organizations = "/don-vi-to-chuc";
         public const string Map = "/ban-do";
-        public const string VolunteersPage = "/danh-sach-tinh-nguyen-vien";
+
+        #region Org + User profile
+
         public const string User = "/trang-ca-nhan";
+        public const string EditProfile = "/chinh-sua-thong-tin";
+        public const string VolunteersPage = "/danh-sach-tinh-nguyen-vien";
+
+        #endregion Org + User profile
 
         #endregion Main
 

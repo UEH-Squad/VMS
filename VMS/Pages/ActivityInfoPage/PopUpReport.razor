@@ -96,16 +96,13 @@
                     <h4 class="title-attach__check check"> (*)</h4>
                 </div>
                 <div class="add-file">
-                    <div class="add-file__block">
-                        <InputFile @onclick="AddFile" type="file" name="file" id="file" class="inputfile" />
-                        <label for="file">
-                            <span class="block-icon-text">
-                                <span class="material-icons my-icon-upload">cloud_upload</span>
-                                <span class="file__text">Kéo hoặc thả hình ảnh liên quan tại đây</span>
-                            </span>
-                        </label>
-                    </div>
-
+                    <InputFile @onclick="AddFile" type="file" name="file" id="file" class="inputfile" />
+                    <label class="d-flex align-items-center justify-content-center" for="file">
+                        <span class="block-icon-text">
+                            <span class="material-icons my-icon-upload">cloud_upload</span>
+                            <span class="file__text d-flex align-items-center">Kéo hoặc thả hình ảnh liên quan tại đây</span>
+                        </span>
+                    </label>
                 </div>
             </div>
 

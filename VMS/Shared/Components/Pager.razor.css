@@ -20,6 +20,7 @@
     text-align: center;
     color: white;
     font-weight: 700;
+    font-size: 30px;
     transition: all 0.3s linear; }
   .pagination .btn-prev span:hover, .pagination .btn-next span:hover {
     background: #0B588c; }

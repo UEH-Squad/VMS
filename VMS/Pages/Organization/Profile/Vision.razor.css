@@ -1,0 +1,17 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.vision h3 {
+  font-weight: 600;
+  color: #FFFFFF;
+  font-size: 72px;
+  top: 25%; }
+
+.vision p {
+  font-weight: 500;
+  color: #FFFFFF;
+  font-size: 36px;
+  top: 50%; }

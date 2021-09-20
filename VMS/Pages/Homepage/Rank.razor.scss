@@ -1,0 +1,267 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+
+.my-rank {
+    padding-top: 50px;
+
+    .owl-carousel {
+        z-index: 0;
+    }
+
+    h1 {
+        color: $blue;
+        font-size: 30px;
+        font-weight: 500;
+        text-align: center;
+
+        span {
+            color: $green;
+        }
+    }
+
+    .rank__link {
+        height: 50px;
+    }
+
+    .rank__link-organization {
+        display: inline-block;
+        margin-right: 100px;
+        color: $blue;
+        font-size: 26px;
+        font-weight: 500;
+        width: 130px;
+
+        &:hover {
+            color: $blue-hv;
+            font-size: 30px;
+        }
+    }
+
+    .rank__link-students {
+        color: $green;
+        font-size: 26px;
+        font-weight: 500;
+
+        &:hover {
+            color: $green-bold;
+            font-size: 30px;
+        }
+    }
+
+    .cssShowOrg {
+        border-bottom: 1px solid $blue-hv;
+        color: $blue-hv !important;
+        font-size: 30px !important;
+    }
+
+    .cssShowPer {
+        border-bottom: 1px solid $green-bold;
+        color: $green-bold;
+        font-size: 30px;
+    }
+
+    ::deep .owl-stage {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    ::deep .owl-item {
+        transform: scaleY(0.9);
+        transition: all 1s linear;
+        background-color: rgba($color: #C4C4C4, $alpha: 0.2);
+        box-shadow: 0px 4px 4px 0 rgba($color: #000000, $alpha: 0.25);
+
+        .rank__img-rank {
+            width: 9%;
+            position: absolute;
+            top: 0;
+            left: 10%;
+
+
+            img {
+                width: 70%;
+                margin: 0 auto;
+                transition: all 1s linear;
+            }
+
+            span {
+                position: absolute;
+                top: 0%;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 26px;
+                font-weight: 600;
+                color: $white;
+                transition: all 1s linear;
+            }
+        }
+
+        .rank__cup {
+            position: absolute;
+            top: 3%;
+            right: 10%;
+            color: $green;
+            font-size: 45px;
+            transition: all 1s linear;
+        }
+    }
+
+    ::deep .owl-item.active {
+        margin: auto 0;
+        transform: scaleY(1);
+        background-color: $white;
+        box-shadow: 6px 6px 20px 0 rgba($color: #000000, $alpha: 0.25);
+
+        .rank__img-rank {
+
+            img {
+                width: 100%;
+            }
+
+            span {
+                font-size: 41px;
+            }
+        }
+
+        .rank__cup {
+            font-size: 60px;
+        }
+    }
+
+    ::deep .owl-nav {
+        display: inline-block;
+
+        .owl-prev {
+            span {
+                position: absolute;
+                top: 25%;
+                left: 0;
+                font-size: 100px;
+                color: $blue;
+                transition: all 0.3s linear;
+
+                &:hover {
+                    color: $blue-hv;
+                }
+            }
+        }
+
+        .owl-next {
+            span {
+                position: absolute;
+                top: 25%;
+                right: 0;
+                font-size: 100px;
+                color: $blue;
+                transition: all 0.3s linear;
+
+                &:hover {
+                    color: $blue-hv;
+                }
+            }
+        }
+    }
+
+
+    ::deep .owl-dots {
+        transform: translateY(-50%);
+        display: block;
+
+        span {
+            background-color: #C4C4C4;
+            width:8px;
+            height:8px;
+            &:hover {
+                background-color: $blue;
+            }
+        }
+
+        .owl-dot.active > span {
+            background-color: $blue;
+            width: 20px;
+        }
+    }
+
+    .item {
+        position: relative;
+    }
+
+    .rank__img {
+        overflow: hidden;
+
+
+        img {
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    .rank__name {
+        margin: 0;
+        color: $green;
+        font-size: 23px;
+        font-weight: 600;
+    }
+
+    .rank__review {
+        margin: 12px 0;
+        display: inline-block;
+        background-image: linear-gradient(to top, rgba(#EDF131,0.6),rgba(#FFFFFF,0.6));
+        box-shadow: 0px 4px 4px 0 rgba($color: #000000, $alpha: 0.25);
+        padding: 10px 40px;
+        border-radius: 10px;
+        color: $grey-text;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .rank__act {
+        p {
+            margin-bottom: 0;
+            color: $blue;
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        span {
+            color: $green;
+            font-size: 15px;
+            font-weight: 500;
+        }
+    }
+
+    .rank__star {
+        p {
+            margin-bottom: 5px;
+            color: $blue;
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        i {
+            color: #EDF131;
+            font-size: 18px;
+        }
+
+        .star-noColor {
+            color: $grey-icon;
+        }
+    }
+
+    .rank__more {
+        display: inline-block;
+        position: absolute;
+        bottom: 20px;
+        right: 0;
+        color: $green;
+        font-size: 18px;
+        font-weight: 400;
+        text-decoration: none;
+        z-index: 10;
+
+        &:hover {
+            color: $green-bold;
+        }
+    }
+}

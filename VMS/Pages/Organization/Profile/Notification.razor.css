@@ -1,0 +1,44 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(196, 196, 196, 0.38);
+  z-index: 3; }
+  .my-notification .notification__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    border-radius: 10px;
+    width: 35%;
+    box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
+  .my-notification .notification__img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .my-notification .notification__btn {
+    border-top: 1px solid #707070; }
+  .my-notification .btn__cancel {
+    color: #707070;
+    border-color: #707070;
+    font-weight: 700; }
+  .my-notification .btn__save {
+    background-color: #18A0FB;
+    color: #FFFFFF;
+    font-weight: 700;
+    transition: all 0.3s linear; }
+    .my-notification .btn__save:hover {
+      background-color: #0B588c; }

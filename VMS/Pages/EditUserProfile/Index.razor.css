@@ -39,7 +39,8 @@
     top: 8px;
     right: 10px; }
   .my-editProfile .form-item .dropdown .my-form-department {
-    background: #fff !important; }
+    background: #fff !important;
+    cursor: pointer; }
   .my-editProfile .form-item .dropdown-menu {
     height: 200px;
     overflow-y: scroll;
@@ -48,7 +49,7 @@
     background: #fff;
     box-shadow: 0px 10px 20px 2px rgba(4, 20, 69, 0.1); }
     .my-editProfile .form-item .dropdown-menu li {
-      cursor: default;
+      cursor: pointer;
       margin-top: 20px;
       font-size: 16px;
       font-weight: 300;
@@ -58,12 +59,16 @@
     font-weight: 500;
     color: #707070;
     margin: auto 0; }
+    .my-editProfile .form-item .form-text span {
+      color: red; }
   .my-editProfile .form-item ::deep .form-control {
     font-size: 16px;
     font-weight: 300;
     color: #515151;
     border: 1px solid #D8D8D8;
     border-radius: 5px; }
+  .my-editProfile .form-item ::deep .form-control--disable {
+    background-color: #F3F3F3 !important; }
   .my-editProfile .form-item ::deep .typeahead__input-multi {
     border: none; }
   .my-editProfile .form-item .form-field-item {
@@ -100,6 +105,7 @@
         .my-editProfile .form-item .form-field-item span {
           font-size: 20px; } }
     .my-editProfile .form-item .form-field-item .icon-add {
+      cursor: pointer;
       background: #C4C4C4;
       opacity: 50%;
       color: #FFFFFF;
@@ -139,22 +145,6 @@
     position: absolute;
     top: 135px;
     right: 15px; }
-  .my-editProfile .form-item .from__btn {
-    margin: 60px 0; }
-    .my-editProfile .form-item .from__btn .btn {
-      padding: 12px 35px;
-      font-size: 16px;
-      font-weight: 600; }
-    .my-editProfile .form-item .from__btn .from__btn-cancel {
-      background: #FFFFFF;
-      color: #18A0FB; }
-      .my-editProfile .form-item .from__btn .from__btn-cancel:hover {
-        border: 1px solid #18A0FB; }
-    .my-editProfile .form-item .from__btn .from__btn-submit {
-      background: #18A0FB;
-      color: #FFFFFF; }
-      .my-editProfile .form-item .from__btn .from__btn-submit:hover {
-        background: #0B588c; }
   .my-editProfile .form-item ::-webkit-scrollbar {
     width: 10px; }
   .my-editProfile .form-item ::-webkit-scrollbar-thumb {
@@ -176,3 +166,20 @@
       box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
     .my-editProfile .form-item .typeahead__input-icon .typeahead__down-arrow path {
       fill: #333333; }
+
+.from__btn {
+  margin: 60px 0; }
+  .from__btn .btn {
+    padding: 12px 35px;
+    font-size: 16px;
+    font-weight: 600; }
+  .from__btn .from__btn-cancel {
+    background: #FFFFFF;
+    color: #18A0FB; }
+    .from__btn .from__btn-cancel:hover {
+      border: 1px solid #18A0FB; }
+  .from__btn .from__btn-submit {
+    background: #18A0FB;
+    color: #FFFFFF; }
+    .from__btn .from__btn-submit:hover {
+      background: #0B588c; }

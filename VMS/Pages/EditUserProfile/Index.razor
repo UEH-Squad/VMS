@@ -16,21 +16,21 @@
                     <DataAnnotationsValidator />
                     <ValidationSummary />
                     <div class="row form-item">
-                        <p class="col-3 form-text">Họ và tên</p>
+                        <p class="col-3 form-text">Họ và tên <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@user.FullName" class="form-control" disabled="true" />
+                            <InputText @bind-Value="@user.FullName" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Khóa</p>
+                        <p class="col-3 form-text">Khóa <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@user.SchoolYear" class="form-control" disabled="true" />
+                            <InputText @bind-Value="@user.SchoolYear" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Lớp</p>
+                        <p class="col-3 form-text">Lớp <span>(*)</span></p>
                         <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Class)</div>
                             <InputText @bind-Value="@user.Class" class="form-control" />
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Khoa</p>
+                        <p class="col-3 form-text">Khoa <span>(*)</span></p>
                         <div class="col-9 px-0">
                             <div class="dropdown">
                                 <span class="material-icons-outlined"> arrow_drop_down </span>
@@ -55,14 +55,14 @@
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Mã số sinh viên</p>
+                        <p class="col-3 form-text">Mã số sinh viên <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@user.IdStudent" class="form-control" disabled="true" />
+                            <InputText @bind-Value="@user.IdStudent" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Ngày sinh</p>
+                        <p class="col-3 form-text">Ngày sinh <span>(*)</span></p>
                         <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Birthday)</div>
                             <InputText @bind-Value="@user.Birthday" class="form-control" />
@@ -70,14 +70,14 @@
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Email UEH</p>
+                        <p class="col-3 form-text">Email UEH <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@user.EmailUEH" class="form-control" disabled="true" />
+                            <InputText @bind-Value="@user.EmailUEH" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Email nhận thông báo</p>
+                        <p class="col-3 form-text">Email nhận thông báo <span>(*)</span></p>
                         <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.EmailGetNoti)</div>
                             <InputText @bind-Value="@user.EmailGetNoti" class="form-control" />
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Điện thoại</p>
+                        <p class="col-3 form-text">Điện thoại <span>(*)</span></p>
                         <div class="col-9 px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Phone)</div>
                             <InputText @bind-Value="@user.Phone" class="form-control" />
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Địa chỉ</p>
+                        <p class="col-3 form-text">Địa chỉ <span>(*)</span></p>
                         <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap" style="padding:0">
                             <VMS.Pages.Organization.Activities.CascadingAddressPicker />
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Address)</div>
@@ -103,7 +103,7 @@
 
                     @*Carousel lĩnh vực*@
                     <div class="row form-item">
-                        <p class="col-3 form-text">Lĩnh vực</p>
+                        <p class="col-3 form-text">Lĩnh vực <span>(*)</span></p>
                         <div class="col-9 form-field ">
                             <div class="d-flex">
                                 <div class=" owl-carousel owl-theme editProfile__carousel">
@@ -125,7 +125,7 @@
                     </div>
 
                     <div class="row form-item">
-                        <p class="col-3 form-text">Kỹ năng</p>
+                        <p class="col-3 form-text">Kỹ năng <span>(*)</span></p>
                         <div class="col-9 px-0 position-relative">
                             <Typeahead SearchMethod="SearchSkills"
                                        PlaceHolderText="Lựa chọn kỹ năng"
@@ -163,9 +163,9 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-9 ms-auto from__btn">
+                        <div class="col-8 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
-                            <button type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
+                            <button @onclick="@(()=> ShowConfirmPopUp())" type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -218,7 +218,7 @@
         Phone = "0968790812",
         Birthday = "24/07/2001",
         EmailGetNoti = "buiminhkha24072001@gmail.com",
-        Maxim = "Cos lafm thif mowis cos awn."
+        Maxim = "Nợ mẹ một nàng dâu."
     };
 
     private IBrowserFile file;
@@ -285,5 +285,18 @@
     void ChooseDepartmentValue(int id)
     {
         departmentChoosenValue = nameDepartmentValue + " " + (id).ToString();
+    }
+
+
+    async Task ShowConfirmPopUp()
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<ConfirmNotification>("", options);
     }
 }

@@ -46,6 +46,7 @@
 
             .my-form-department {
                 background: #fff !important;
+                cursor: pointer;
             }
 
             &-menu {
@@ -57,7 +58,7 @@
                 box-shadow: 0px 10px 20px 2px rgba(4, 20, 69, 0.1);
 
                 li {
-                    cursor: default;
+                    cursor: pointer;
                     margin-top: 20px;
                     font-size: 16px;
                     font-weight: 300;
@@ -71,6 +72,10 @@
             font-weight: 500;
             color: $border-color-bold;
             margin: auto 0;
+
+            span {
+                color: red;
+            }
         }
 
         ::deep .form-control {
@@ -80,9 +85,15 @@
             border: 1px solid #D8D8D8;
             border-radius: 5px;
         }
-        ::deep .typeahead__input-multi {
-            border:none;
+
+        ::deep .form-control--disable {
+            background-color: #F3F3F3 !important;
         }
+
+        ::deep .typeahead__input-multi {
+            border: none;
+        }
+
         .form-field-item {
             text-align: center;
 
@@ -128,6 +139,7 @@
             }
 
             .icon-add {
+                cursor: pointer;
                 background: #C4C4C4;
                 opacity: 50%;
                 color: $white;
@@ -197,34 +209,6 @@
             top: 135px;
             right: 15px;
         }
-
-        .from__btn {
-            margin: 60px 0;
-
-            .btn {
-                padding: 12px 35px;
-                font-size: 16px;
-                font-weight: 600;
-            }
-
-            .from__btn-cancel {
-                background: $white;
-                color: $blue;
-
-                &:hover {
-                    border: 1px solid $blue;
-                }
-            }
-
-            .from__btn-submit {
-                background: $blue;
-                color: $white;
-
-                &:hover {
-                    background: $blue-hv;
-                }
-            }
-        }
         /* width */
         ::-webkit-scrollbar {
             width: 10px;
@@ -260,6 +244,34 @@
                     fill: #333333;
                 }
             }
+        }
+    }
+}
+
+.from__btn {
+    margin: 60px 0;
+
+    .btn {
+        padding: 12px 35px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .from__btn-cancel {
+        background: $white;
+        color: $blue;
+
+        &:hover {
+            border: 1px solid $blue;
+        }
+    }
+
+    .from__btn-submit {
+        background: $blue;
+        color: $white;
+
+        &:hover {
+            background: $blue-hv;
         }
     }
 }

@@ -158,5 +158,9 @@
   {
     "outputFile": "Pages/EditUserProfile/Index.razor.css",
     "inputFile": "Pages/EditUserProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/EditUserProfile/ConfirmNotification.razor.css",
+    "inputFile": "Pages/EditUserProfile/ConfirmNotification.razor.scss"
   }
 ]

@@ -2,8 +2,9 @@
 
 .footer {
     position: relative;
-    padding: 60px 0;
-    border-top: 1px solid #707070;
+    padding-top: 30px;
+    border-top: 1px solid rgba(51, 51, 51, 0.5);
+    ;
 }
 .btn-back-top {
     position: absolute;
@@ -37,9 +38,9 @@
         }
 
         @include on("xl") {
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
             font-size: 64px;
         }
     }
@@ -54,29 +55,30 @@
 
     .footer__logo-ueh-hsv {
         display: flex;
-        align-items: flex-end;
-        margin: 20px 0;
+        align-items: center;
+        margin: 10px 0;
 
         @include on("lg") {
-            margin: 30px 0;
+            margin: 15px 0;
         }
 
         @include on("xl") {
-            margin: 50px 0;
+            margin: 20px 0;
         }
     }
 
     .footer__logo-ueh {
-        width: 60%;
+        width: 52%;
     }
 
     .footer__logo-hsv {
-        width: 20%;
-        margin: auto;
+        width: 15%;
+        margin-left: 20px;
     }
 
     p {
         font-size: 8px;
+        font-weight: 400;
 
         @include on("sm") {
             font-size: 12px;
@@ -89,12 +91,12 @@
 }
 .footer__contact {
     padding: 0;
-    padding-top: 25px;
+    padding-top: 10px;
 
     h6 {
         margin-bottom: 20px;
         font-size: 8px;
-        font-weight: 400;
+        font-weight: 300;
         color: $grey-text;
 
         @include on("sm") {
@@ -118,10 +120,14 @@
     .contact__name {
         font-weight: 700;
     }
+
+    .contact__contribute{
+        font-weight: 400;
+    }
 }
 .footer__right {
     padding: 0;
-    padding-top: 25px;
+    padding-top: 10px;
     text-align: right;
 
     h6 {

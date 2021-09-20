@@ -10,7 +10,7 @@
 
 <VMS.Pages.Homepage.SloganAndVideo />
 <VMS.Pages.Homepage.Filter />
-
+<VMS.Pages.Homepage.Rank />
 <section class="my-act">
     <div class="container-lg p-0 position-relative">
         <VMS.Pages.Homepage.RelatedActivities Title="Mới Nhất" Activities="@newestActivities" QueryString="?newest=true&nearest=true" />
@@ -33,9 +33,9 @@
     protected override async Task OnInitializedAsync()
     {
         User user = IdentityService.GetCurrentUser();
-        Coordinate location = await JsRuntime.InvokeAsync<Coordinate>("vms.GetUserLocation");
-
-        newestActivities = await UserWithActService.GetRelatedActivities(user?.Id, location);
-        featuredActivities = await UserWithActService.GetRelatedActivities(user?.Id, location, true);
+        var location = await JsRuntime.InvokeAsync<CoordinateJs>("vms.GetUserLocation");
+        var userLocation = location.ToCoordinate();
+        newestActivities = await UserWithActService.GetRelatedActivities(user?.Id, userLocation);
+        featuredActivities = await UserWithActService.GetRelatedActivities(user?.Id, userLocation, true);
     }
 }

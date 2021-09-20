@@ -10,8 +10,14 @@
         public const string Organizations = "/don-vi-to-chuc";
         public const string Map = "/ban-do";
 
+        #region Org + User profile
+
         public const string User = "/trang-ca-nhan";
+        public const string EditProfile = "/chinh-sua-thong-tin";
         public const string EditUserProfile = "/chinh-sua-thong-tin-ca-nhan";
+
+        #endregion Org + User profile
+
         #endregion Main
 
         #region Activity

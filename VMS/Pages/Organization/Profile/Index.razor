@@ -1,0 +1,33 @@
+﻿@attribute [Route(Routes.User)]
+
+<Information></Information>
+<Vision></Vision>
+<Mission></Mission>
+<Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas=@actOrganizes/>
+<Act Title="được yêu thích" HaveDecor="false" Datas=@actFavorites/>
+<ActTookPlace></ActTookPlace>
+
+
+@code {
+    private List<FakeData> actOrganizes = new();
+    private List<FakeData> actFavorites = new();
+
+    protected override void OnInitialized()
+    {
+
+        for (int i = 0; i < 8; i++)
+        {
+            actOrganizes.Add(new FakeData()
+            {
+                Id = i,
+                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
+                IsMenu = false
+            });
+            actFavorites.Add(new FakeData()
+            {
+                Id = i,
+                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"
+            });
+        }
+    }
+}

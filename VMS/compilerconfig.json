@@ -118,5 +118,37 @@
   {
     "outputFile": "Pages/Organization/Activities/NotificationPopup.razor.css",
     "inputFile": "Pages/Organization/Activities/NotificationPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/Notification.razor.css",
+    "inputFile": "Pages/UserProflie/Notification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/Profile.razor.css",
+    "inputFile": "Pages/UserProflie/Profile.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/UserProfile.razor.css",
+    "inputFile": "Pages/UserProflie/UserProfile.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/ActOnGoing.razor.css",
+    "inputFile": "Pages/UserProflie/ActOnGoing.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/Schedule.razor.css",
+    "inputFile": "Pages/UserProflie/Schedule.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/UserAct.razor.css",
+    "inputFile": "Pages/UserProflie/UserAct.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/Report.razor.css",
+    "inputFile": "Pages/UserProflie/Report.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/Appellation.razor.css",
+    "inputFile": "Pages/UserProflie/Appellation.razor.scss"
   }
 ]

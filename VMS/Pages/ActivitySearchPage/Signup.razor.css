@@ -28,8 +28,8 @@
       border-radius: 20px; }
     .my-signUp .signUp__content .signUp__exit {
       position: absolute;
-      top: 25px;
-      right: 25px;
+      top: 5px;
+      right: 5px;
       height: 46px;
       width: 46px;
       line-height: 46px;

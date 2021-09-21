@@ -1,0 +1,27 @@
+﻿<div class="my-appellation" >
+    <div class="appellation__content mx-auto text-center py-4">
+        <div>
+            <i @onclick="CloseAppellation" class="material-icons-outlined icon-exitModal">
+                close
+            </i>
+        </div>
+        <h3>Danh hiệu</h3>
+        <p>Chiến sĩ xuất sắc</p>
+        <p>Chiến sĩ năng động</p>
+        <p>Chiến sĩ vì tình chị em</p>
+        <p>Chiến sĩ mùa hè xanh</p>
+    </div>
+
+</div>
+
+@code {
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; }
+
+
+    private async Task CloseAppellation()
+    {
+
+        await Modal.CloseAsync();
+    }
+}

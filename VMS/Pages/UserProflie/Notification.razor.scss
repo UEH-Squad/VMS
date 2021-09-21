@@ -1,0 +1,56 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+.my-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 3;
+
+    .notification__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background: $white;
+        border-radius: 10px;
+        width: 35%;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+    }
+
+    .notification__img {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .notification__btn {
+        border-top: 1px solid $border-color-bold;
+    }
+
+    button {
+    }
+
+    .btn__cancel {
+        color: $border-color-bold;
+        border-color: $border-color-bold;
+        font-weight: 700;
+    }
+
+    .btn__save {
+        background-color: $blue;
+        color: $white;
+        font-weight: 700;
+        transition: all 0.3s linear;
+
+        &:hover {
+            background-color: $blue-hv;
+        }
+    }
+}

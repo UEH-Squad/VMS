@@ -1,0 +1,70 @@
+﻿@inject IJSRuntime JSRuntinme;
+
+<div class="my-actOnGoing">
+    <div class="container">
+        <div class="act">
+            <h3>Hoạt động<span> đang diễn ra</span></h3>
+            <div class="owl-carousel owl-theme act__carousel">
+                @foreach (var item in fakeDatas)
+            {
+                <div class="item mx-2">
+                    <div class="act__img">
+                        <img src="./img/RelatedActivities/2nd-activity.png" alt="" class="w-100">
+                    </div>
+                    <div class="act__content p-4">
+                        <p class="m-0">@item.Title </p>
+                    </div>
+                </div>
+            }
+            </div>
+            
+        </div>
+        @*<div class="act__report ">
+            <button @onclick="() => ShowModal()" class=" ms-auto">Report</button>
+        </div>*@
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.ActCarousel");
+    }
+
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            fakeDatas.Add(new FakeData()
+            {
+                Id = i,
+                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
+            });
+        }
+    }
+
+    private List<FakeData> fakeDatas = new();
+
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+    }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
+    private void ShowModal()
+    {
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        Modal.Show<Report>("", options);
+    }
+}

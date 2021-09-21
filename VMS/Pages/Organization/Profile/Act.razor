@@ -18,8 +18,8 @@
                     </div>
                     <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                         <li class="edit pb-2">Chỉnh sửa</li>
-                        <li @onclick="(() => ShowModal())" class="delete pb-2">Xóa</li>
-                        <li @onclick="CloseConfirm" class="close pb-2">Đóng hoạt động</li>
+                        <li @onclick="(() => ShowDeleteModal())" class="delete pb-2">Xóa</li>
+                        <li @onclick="(() => ShowCloseModal())" class="close pb-2">Đóng hoạt động</li>
                     </ul>
                     @if (HaveControl)
                     {
@@ -183,7 +183,7 @@
         Datas[pendingId].IsClose = true;
     }
 
-    private void ShowModal()
+    private void ShowDeleteModal()
     {
 
         var options = new ModalOptions()
@@ -194,5 +194,26 @@
         };
 
         Modal.Show<DeleteConfirm>("", options);
+    }
+
+    private void ShowCloseModal(int pendingId = -1)
+    {
+        ModalParameters parameters = new();
+        parameters.Add("isClosed", isClosed);
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        if (isClosed)
+        {
+            Datas[pendingId].IsClose = true;
+        }
+
+        Modal.Show<CloseConfirm>("",parameters, options);
+
     }
 }

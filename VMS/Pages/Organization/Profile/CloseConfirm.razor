@@ -1,7 +1,6 @@
-﻿
-<div class="pop-up">
+﻿<div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-block" : "d-none")">
+        <div class="pop-up-container border-10 @(isCloseConfirm ? "d-block" : "d-none")">
             <div @onclick="CloseModal" class="close-btn">
                 <span class="material-icons">
                     close
@@ -9,42 +8,43 @@
             </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
+                <h3><span class="close-text">đóng hoạt động</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
                 <div @onclick="CloseModal" class="deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="accept">Xác nhận</div>
+                <div @onclick="CloseSuccess" class="accept">Xác nhận</div>
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-none" : "d-block")">
+        <div class="pop-up-container border-10 @(isCloseConfirm ? "d-none" : "d-block")">
             <div @onclick="CloseModal" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <div class="pop-up-content">
-                <h3 class="delete-act">Xoá thành công!</h3>
+                <h3 class="close-act">Đóng hoạt động thành công!</h3>
             </div>
         </div>
     </div>
 </div>
 
 @code {
+    bool isCloseConfirm = true;
+    bool isCloseSuccess;
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
-
-    bool isConfirmDelete = true;
-    bool isDeleteSuccess;
 
     private async Task CloseModal()
     {
         await Modal.CloseAsync();
     }
 
-    void DeleteSuccess()
+    void CloseSuccess()
     {
-        isConfirmDelete = !isConfirmDelete;
-    }
+        //isCloseConfirm = !isCloseConfirm;
 
+        //Datas[pendingId].IsClose = true;
+    }
 }

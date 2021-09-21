@@ -154,5 +154,9 @@
   {
     "outputFile": "Pages/Organization/Profile/Mission.razor.css",
     "inputFile": "Pages/Organization/Profile/Mission.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/CloseConfirm.razor.css",
+    "inputFile": "Pages/Organization/Profile/CloseConfirm.razor.scss"
   }
 ]

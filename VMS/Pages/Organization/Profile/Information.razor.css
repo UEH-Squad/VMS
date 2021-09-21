@@ -13,42 +13,41 @@
   .my-information .col-right {
     width: 45%; }
   .my-information .information__logo .information__logo-img {
-    position: relative;
     margin-bottom: 20px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #707070; }
+    width: 80%; }
   .my-information .information__logo img {
-    width: 90%; }
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    object-fit: cover; }
   .my-information .information__logo .icon-camera {
     position: absolute;
-    bottom: 35px;
-    right: 15px;
+    bottom: 15px;
+    right: -10px;
     font-size: 36px;
     color: #B4B4B4; }
   .my-information .information__logo p {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600; }
   .my-information .information__logo span {
+    display: block;
+    width: 80%;
+    margin: 20px 0 15px 0;
+    text-align: center;
     color: #18A0FB;
     font-size: 16px;
     font-weight: 600; }
   .my-information .information__logo .information__logo-button {
+    width: 80%;
     position: relative;
     display: block;
     background: rgba(100, 215, 47, 0.8);
     color: #FFFFFF;
     text-decoration: none;
-    margin-top: 20px;
     padding: 20px;
     border-radius: 50px;
     text-align: center;
-    transition: all 0.3s linear; }
+    transition: all 0.2s linear; }
     .my-information .information__logo .information__logo-button:hover {
       background: #64d72f; }
     .my-information .information__logo .information__logo-button i {
@@ -63,7 +62,7 @@
       font-size: 24px;
       font-weight: 700; }
   .my-information .row-1 {
-    border-bottom: 1px solid #707070; }
+    border-bottom: 1px solid rgba(112, 112, 112, 0.5); }
   .my-information .information__rank a {
     color: #64D72F;
     font-size: 40px;
@@ -84,21 +83,24 @@
     font-weight: 500; }
   .my-information .information__contact i {
     font-size: 24px;
-    margin: auto 20px; }
+    margin: auto 20px;
+    color: #707070; }
   .my-information .information__contact a {
     color: #515151;
     font-size: 16px;
     font-weight: 400;
     text-decoration: none; }
-  .my-information .information__fields {
-    border-right: 1px solid #707070; }
-    .my-information .information__fields h3 {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 30px; }
-      .my-information .information__fields h3 span {
-        color: #18A0FB; }
+  .my-information .information__fields h3 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 30px; }
+    .my-information .information__fields h3 span {
+      color: #18A0FB; }
+  .my-information .line {
+    height: 122px;
+    width: 1px;
+    background-color: rgba(112, 112, 112, 0.5); }
   .my-information .information__carousel {
     position: relative;
     padding-right: 30px;
@@ -140,14 +142,14 @@
           color: #18A0FB;
           transition: all 0.3s linear; }
           .my-information .information__carousel ::deep .owl-nav .owl-next span:hover {
-            color: #0B588C; }
+            color: #0B588c; }
         .my-information .information__carousel ::deep .owl-nav .owl-next:hover {
           background: none; }
     .my-information .information__carousel ::deep .owl-dots {
       display: none; }
   .my-information .information__act h3 {
     text-align: center;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 600;
     margin-bottom: 20px; }
     .my-information .information__act h3 span {

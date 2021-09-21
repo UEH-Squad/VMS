@@ -4,7 +4,7 @@
         @foreach (var activity in FeaturedActivities)
         {
             <div class="featuredAct__card ">
-                <img class="w-100" src="/img/@activity.Banner" alt="">
+                <img class="w-100" src="@activity.Banner" alt="">
                 <div class="featuredAct__title">
                     <a class="lmtext-5" href="@Routes.ActivityInfo/@activity.Id">@activity.Name</a>
                 </div>

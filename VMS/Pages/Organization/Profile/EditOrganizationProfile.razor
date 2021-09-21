@@ -81,31 +81,30 @@
                     </div>
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
-                            <button class="btn from__btn-cancel">Hủy</button>
-                            <button @onclick="EditConfirm" type="submit" class="btn from__btn-submit ms-5 ">Hoàn tất</button>
+                            <a href="@Routes.HomePage" class="btn from__btn-cancel">Hủy</a>
+                            <a @onclick="EditConfirm" class="btn from__btn-submit ms-5 ">Hoàn tất</a>
+                        </div>
+                    </div>
+                    <div class="pop-up @(isEditConfirm ? "d-block" : "d-none")">
+                        <div class="center-screen ">
+                            <div class="pop-up-container border-10">
+                                <div @onclick="EditConfirm" class="close-btn">
+                                    <span class="material-icons">
+                                        close
+                                    </span>
+                                </div>
+                                <div class="content">
+                                    <h3>Bạn có chắc chắn muốn</h3>
+                                    <h3><span class="edit-text">chỉnh sửa thông tin</span> này không</h3>
+                                </div>
+                                <div class="pop-up-btn">
+                                    <div @onclick="EditConfirm" class="deny">Hủy</div>
+                                    <button type="submit" @onclick="EditSuccess" class="accept">Xác nhận</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </EditForm>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pop-up @(isEditConfirm ? "d-block" : "d-none")">
-    <div class="center-screen ">
-        <div class="pop-up-container border-10">
-            <div @onclick="EditConfirm" class="close-btn">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="content">
-                <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="edit-text">chỉnh sửa thông tin</span> này không</h3>
-            </div>
-            <div class="pop-up-btn">
-                <div @onclick="EditConfirm" class="deny">Hủy</div>
-                <div @onclick="EditSuccess" class="accept">Xác nhận</div>
             </div>
         </div>
     </div>

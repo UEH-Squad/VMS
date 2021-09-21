@@ -40,10 +40,9 @@ namespace VMS.Pages.Organization.Profile
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
+        private CreateOrgProfileViewModel org = new();
         private bool isEditConfirm = false;
         private bool isEditSuccess = false;
-
-        private CreateOrgProfileViewModel org = new();
 
         protected override async Task OnInitializedAsync()
         {

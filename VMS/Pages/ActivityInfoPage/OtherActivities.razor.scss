@@ -66,6 +66,7 @@ $fav-icon: #F14747;
         transition: all ease 0.2s;
         background-color: #F3F3F5;
         border-radius:10px;
+        text-decoration: none;
         &:hover {
             img {
                 opacity: 0.6;
@@ -132,10 +133,11 @@ $fav-icon: #F14747;
         }
 
         &__icon {
-            align-self: flex-end;
+            position: absolute;
+            top: 10px;
+            right: 10px;
 
             span {
-                padding: 0px 11px 7px 0px;
                 font-size: 16px;
                 color: transparent;
                 -webkit-text-stroke: 2px $fav-icon;

@@ -21,7 +21,7 @@
     <EditForm Model="@reportModel" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        <div class="container @(isShowReport ? "d-none" : "d-block")">
+        <div class="my-container @(isShowReport ? "d-none" : "d-block")">
             <div class="icon-close-popup">
                 <span @onclick="CloseModal" class="material-icons">close</span>
             </div>
@@ -45,37 +45,49 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="display:@(showListReason ? "block" : "none")">
                     <li>
                         <div class="dropdown-item" href="#">
+                            <div>
                             <InputCheckbox @bind-Value="reportReason.Reason1" type="checkbox" id="checkbox-1" class="dropdown-item--checkbox"/>
+                            </div>
                             <label for="checkbox-1">Hoạt động không có thật</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
+                            <div>
                             <InputCheckbox @bind-Value="reportReason.Reason2" type="checkbox" id="checkbox-2" class="dropdown-item--checkbox"/>
+                            </div>
                             <label for="checkbox-2">Hoạt động không không tương thích với nội dung đã đề cập</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
+                            <div>
                             <InputCheckbox @bind-Value="reportReason.Reason3" type="checkbox" id="checkbox-3" class="dropdown-item--checkbox"/>
+                            </div>
                             <label for="checkbox-3">Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
+                            <div>
                             <InputCheckbox @bind-Value="reportReason.Reason4" type="checkbox" id="checkbox-4" class="dropdown-item--checkbox"/>
+                            </div>
                             <label for="checkbox-4">Nội dung hoạt động không phù hợp</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
+                            <div>
                             <InputCheckbox @bind-Value="reportReason.Reason5" type="checkbox" id="checkbox-5" class="dropdown-item--checkbox"/>
+                            </div>
                             <label for="checkbox-5">Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động</label>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown-item" href="#">
+                            <div>
                             <InputCheckbox @bind-Value="reportReason.Reason6" type="checkbox" id="checkbox-6" class="dropdown-item--checkbox"/>
+                            </div>
                             <label for="checkbox-6">Khác</label>
                         </div>
                     </li>
@@ -83,7 +95,7 @@
             </div>
 
             <div class="report-description mb-3">
-                <div class="title title-discript">
+                <div class="title title-discript mt-4">
                     <h4 class="title-discript__text">Mô tả về báo cáo</h4>
                     <h4 class="title-discript__check check">(*)</h4>
                 </div>
@@ -91,7 +103,7 @@
             </div>
 
             <div class="attached-proof">
-                <div class="title title-attach">
+                <div class="title title-attach mt-4">
                     <h4 class="title-attach__text">Minh chứng đính kèm</h4>
                     <h4 class="title-attach__check check"> (*)</h4>
                 </div>
@@ -106,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="btn-accept">
+            <div class="btn-accept mt-4">
                 <button @onclick="ShowModalReportSucess" type="submit" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                     Báo cáo hoạt động
                 </button>

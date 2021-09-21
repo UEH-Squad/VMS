@@ -25,13 +25,13 @@
                 <form action="">
                     <h1>Đơn <span>đăng ký</span></h1>
                     <p class="form-text">Họ tên <span>(*)</span></p>
-                    <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
+                    <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control mb-3" disabled="true" />
                     <p class="form-text">Email nhận thông báo <span>(*)</span></p>
-                    <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control" disabled="true"/>
+                    <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control mb-3" disabled="true"/>
                     <p class="form-text">Số điện thoại <span>(*)</span></p>
-                    <InputText @bind-Value="signupModel.PhoneNumber" type="number" class="form-control" />
+                    <InputText @bind-Value="signupModel.PhoneNumber" type="number" class="form-control mb-3" />
                     <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
-                    <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control"></InputTextArea>
+                    <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3"></InputTextArea>
                     <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
                     
                     <InputRadioGroup Name="radioSignUp" @bind-Value="check" >

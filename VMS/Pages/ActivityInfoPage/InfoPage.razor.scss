@@ -34,6 +34,8 @@
 
     .title__date {
 
+        border-bottom: 2px solid $border-color-normal;
+
         .postdate {
             display: inline;
             font-style: normal;
@@ -65,12 +67,6 @@
 
         .heart-icon {
             font-size: 2.5rem;
-        }
-
-        .line-line2 {
-            margin-top: 0px;
-            background-color: $grey-icon;
-            border: 2px solid $grey-icon;
         }
     }
 }

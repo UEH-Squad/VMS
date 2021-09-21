@@ -1,4 +1,4 @@
-﻿<div class="my-notification @(isNotification ? "d-block" : "d-none") ">
+﻿<div class="my-notification">
     <div class="notification__content mx-auto">
         <div class="notification__img  mx-auto"> <img class="w-75" src="img/LogoBaner/KHOA-VIỆN-KTX/LOGO KHOA QUẢN TRỊ.png" alt=""></div>
         <div class="notification__btn text-center py-4">
@@ -10,10 +10,13 @@
 
 @code {
 
-    bool isNotification = true;
-    void CloseNotification()
+    [CascadingParameter]
+    private BlazoredModalInstance Modal { get; set; }
+
+
+    private async Task CloseNotification()
     {
 
-        isNotification = !isNotification;
+        await Modal.CloseAsync();
     }
 }

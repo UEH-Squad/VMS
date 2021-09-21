@@ -3,10 +3,10 @@
 <div class="container">
     <div class="row act">
         <h1>Hoạt động <span>@Title</span></h1>
-        <div class="owl-carousel owl-theme organize__carousel position-relative">
+        <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex") position-relative">
             @foreach (var item in Datas)
             {
-                <div class="act-container item position-relative">
+                <div class="@(Datas.Count >4 ? "" : "w-25 mx-2") act-container item position-relative">
                     <div class="img-container position-relative">
                         <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
                         <div class="@(item.IsClose ? "overlay" : "")"></div>

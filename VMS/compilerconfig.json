@@ -158,5 +158,13 @@
   {
     "outputFile": "Pages/Organization/Profile/CloseConfirm.razor.css",
     "inputFile": "Pages/Organization/Profile/CloseConfirm.razor.scss"
-  }
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/EditConfirm.razor.css",
+    "inputFile": "Pages/Organization/Profile/EditConfirm.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/CloseSuccess.razor.css",
+    "inputFile": "Pages/Organization/Profile/CloseSuccess.razor.scss"
+  },
 ]

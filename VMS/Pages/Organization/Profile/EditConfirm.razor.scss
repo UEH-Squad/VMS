@@ -1,2 +1,135 @@
-﻿body {
+﻿@import "../../../Resources/scss/common/_variables";
+
+.pop-up {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 3;
+
+    .border-10 {
+        border-radius: 10px;
+    }
+
+    .border-5 {
+        border-radius: 5px;
+    }
+
+    .center-screen {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pop-up-container {
+        background-color: $white;
+        position: relative;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+    }
+
+    .close-btn {
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 20px;
+            color: $grey-close-btn;
+        }
+    }
+
+    .close-btn-s {
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 14px;
+            color: $grey-close-btn;
+        }
+    }
+
+
+    .pop-up-content {
+        padding: 13px 55px;
+
+        .edit-success {
+            font-size: 18px;
+            line-height: 36px;
+            font-weight: 500;
+            margin-bottom: 0;
+            color: $blue;
+        }
+    }
+
+    .content {
+        padding: 34px 64px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            font-size: 20px;
+            line-height: 25px;
+            font-weight: 500;
+            margin-bottom: 0;
+            color: $green;
+        }
+
+        .edit-text {
+            color: $blue;
+        }
+    }
+
+    .pop-up-btn {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 30px 20px 0;
+        font-weight: 600;
+
+        .deny {
+            background-color: $white;
+            color: $blue;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 104px;
+            height: 32px;
+        }
+
+        .accept {
+            background-color: $blue;
+            color: $white;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 104px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    }
 }

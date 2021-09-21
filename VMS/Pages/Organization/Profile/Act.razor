@@ -19,7 +19,7 @@
                     <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                         <li class="edit pb-2">Chỉnh sửa</li>
                         <li @onclick="(() => ShowDeleteModal())" class="delete pb-2">Xóa</li>
-                        <li @onclick="(() => ShowCloseModal())" class="close pb-2">Đóng hoạt động</li>
+                        <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">Đóng hoạt động</li>
                     </ul>
                     @if (HaveControl)
                     {
@@ -45,82 +45,9 @@
     </div>
 </div>
 
-<div class="pop-up @(isDeleteConfirm ? "d-block" : "d-none")">
-    <div class="center-screen ">
-        <div class="pop-up-container border-10">
-            <div @onclick="DeleteConfirm" class="close-btn">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="content">
-                <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
-            </div>
-            <div class="pop-up-btn">
-                <div @onclick="DeleteConfirm" class="deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="accept">Xác nhận</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pop-up @(isCloseConfirm ? "d-block" : "d-none")">
-    <div class="center-screen">
-        <div class="pop-up-container border-10">
-            <div @onclick="CloseConfirm" class="close-btn">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="content">
-                <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="close-text">đóng hoạt động</span> này không?</h3>
-            </div>
-            <div class="pop-up-btn">
-                <div @onclick="CloseConfirm" class="deny">Hủy</div>
-                <div @onclick="CloseSuccess" class="accept">Xác nhận</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pop-up @(isDeleteSuccess ? "d-block" : "d-none")">
-    <div class="center-screen">
-        <div class="pop-up-container border-10">
-            <div @onclick="DeleteSuccess" class="close-btn-s">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="pop-up-content">
-                <h3 class="delete-act">Xoá thành công!</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pop-up @(isCloseSuccess ? "d-block" : "d-none")">
-    <div class="center-screen">
-        <div class="pop-up-container border-10">
-            <div @onclick="CloseSuccess" class="close-btn-s">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="pop-up-content">
-                <h3 class="close-act">Đóng hoạt động thành công!</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
 @code {
     int pendingId = -1;
-    bool isDeleteConfirm;
-    bool isCloseConfirm;
-    bool isDeleteSuccess;
-    bool isCloseSuccess;
+    bool isLoading;
 
     [Parameter] public bool HaveControl { get; set; } = false;
     [Parameter] public bool HaveDecor { get; set; } = true;
@@ -150,39 +77,6 @@
         return InvokeAsync(StateHasChanged);
     }
 
-    void DeleteConfirm()
-    {
-        isDeleteConfirm = !isDeleteConfirm;
-        Datas.ForEach(a => a.IsMenu = false);
-    }
-
-    void CloseConfirm()
-    {
-        isCloseConfirm = !isCloseConfirm;
-        Datas.ForEach(a => a.IsMenu = false);
-    }
-
-    void DeleteSuccess()
-    {
-        if (isDeleteConfirm == true)
-        {
-            isDeleteConfirm = false;
-        }
-
-        isDeleteSuccess = !isDeleteSuccess;
-    }
-
-    void CloseSuccess()
-    {
-        if (isCloseConfirm == true)
-        {
-            isCloseConfirm = false;
-        }
-
-        isCloseSuccess = !isCloseSuccess;
-        Datas[pendingId].IsClose = true;
-    }
-
     private void ShowDeleteModal()
     {
 
@@ -196,10 +90,8 @@
         Modal.Show<DeleteConfirm>("", options);
     }
 
-    private void ShowCloseModal(int pendingId = -1)
+    private async Task ShowCloseModal(int pendingId = -1)
     {
-        ModalParameters parameters = new();
-        parameters.Add("isClosed", isClosed);
 
         var options = new ModalOptions()
         {
@@ -208,12 +100,13 @@
             UseCustomLayout = true,
         };
 
-        if (isClosed)
+        var result = await Modal.Show<CloseConfirm>("", options).Result;
+
+        if ((bool)result.Data)
         {
             Datas[pendingId].IsClose = true;
+            Modal.Show<CloseSuccess>("", options);
         }
-
-        Modal.Show<CloseConfirm>("",parameters, options);
 
     }
 }

@@ -37,7 +37,16 @@
                             }
                         </p>
                         <p class="m-0">
-                            @item.RateNumber xếp hạng
+                            @if (item.RateNumber >= 1000)
+                            {
+                                var a = Math.Round((double)item.RateNumber / 1000, 1, MidpointRounding.ToZero);
+                                @(a + "N")
+                            }
+                            else
+                            {
+                                @item.RateNumber
+                            }
+                            xếp hạng
                         </p>
                     </div>
                 </div>
@@ -104,7 +113,7 @@
             Level = "Khoa/Viện/KTX",
             Rank = 2,
             StarNumber = 2.5,
-            RateNumber = 15000,
+            RateNumber = 15500,
         }).ToArray();
 
         return result;

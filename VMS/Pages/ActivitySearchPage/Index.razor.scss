@@ -1,3 +1,14 @@
-﻿.layout__divider {
-    
+﻿@import "../../Resources/scss/common/_variables.scss";
+.heading-container {
+    width: fit-content;
+
+    .page-heading {
+        font-size: 66px;
+        color: $blue;
+        font-weight: 500;
+
+        span {
+            color: $green;
+        }
+    }
 }

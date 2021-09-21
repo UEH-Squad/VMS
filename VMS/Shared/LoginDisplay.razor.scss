@@ -28,23 +28,21 @@
 
 .login-btn {
     background-color: $blue;
-    width: 150px;
-    height: 45px;
+    width: 137px;
+    height: 40px;
 
     &:hover {
         background-color: $blue-bold;
     }
 
     @include on('xl') {
-        width: 200px;
-        height: 60px;
-        font-size: 22px;
+        width: 147px;
+        height: 45px;
+        font-size: 20px;
         line-height: 60px;
     }
 
-    @include on('xxl') {
-        font-size: 24px;
-    }
+  
 }
 
 .user-section {
@@ -59,8 +57,8 @@
             margin: 0 auto;
 
             @include on('xl') {
-                width: 65px;
-                height: 65px;
+                width: 50px;
+                height: 50px;
             }
         }
 
@@ -101,7 +99,7 @@
         transform: translateY(-50%);
         right: -62%;
         color: $blue;
-        font-size: 40px;
+        font-size: 35px;
         cursor: pointer;
         display: none;
 

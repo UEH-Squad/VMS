@@ -1,0 +1,21 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.mission {
+    hr {
+        width: 70%;
+        background-color: $border-color-bold;
+        opacity: 50%;
+    }
+
+    h3 {
+        color: $grey-text;
+        font-weight: 600;
+        font-size: 60px;
+    }
+
+    p {
+        color: $grey-text;
+        font-weight: 400;
+        font-size: 30px;
+    }
+}

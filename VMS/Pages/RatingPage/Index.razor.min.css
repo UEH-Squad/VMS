@@ -1,1 +1,1 @@
-﻿.rating-page{margin-top:2%;margin-left:72px;margin-right:72px;z-index:0;}.header-page{display:flex;justify-content:space-between;}.body-page{display:flex;justify-content:space-between;}.pagination-container{display:flex;justify-content:center;margin-bottom:3%;}
+﻿.rating-page{margin-top:2%;margin-left:72px;margin-right:72px;z-index:0;}.header-page{display:flex;justify-content:space-between;}.header-page ::deep .search-box{width:53%;}.body-page{display:flex;justify-content:space-between;}

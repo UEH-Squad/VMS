@@ -5,7 +5,7 @@
 /*#region mixins */
 /*#endregion */
 .filter {
-  margin-top: 25%;
+  margin-top: 4%;
   text-align: center; }
   .filter .filter-txt {
     text-align: end;
@@ -31,7 +31,7 @@
     .filter ::deep .filter-checkbox_container {
       display: flex;
       flex-direction: row;
-      width: 75%;
+      width: 68%;
       align-items: center;
       justify-content: space-between;
       margin-top: 18.5%; }
@@ -73,7 +73,8 @@
     padding: 4% 0;
     border: none;
     border-radius: 10px;
-    margin-top: 22%; }
+    margin-top: 22%;
+    margin-left: -58px; }
     .filter .filter-submit:hover {
       background-color: #306C14;
       opacity: 78%; }

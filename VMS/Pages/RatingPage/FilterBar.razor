@@ -1,47 +1,30 @@
-﻿@using VMS.Application.ViewModels
-<EditForm Model="@rating" OnValidSubmit="@Submit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="select-form d-flex align-items-center">
-        <div class="select-form-box-1 select-form-box-1-inline d-flex align-items-center">
-            <InputCheckbox class="checkbox-1" id="rated" @bind-Value="@rating.Select6" @onclick="@ShowRatedList"></InputCheckbox>
-            <label class="label-1" for="rated">Đã đánh giá</label>
-        </div>
-        <div class="select-form-box-2 select-form-box-2-inline d-flex align-items-center">
-            <InputCheckbox class="checkbox-2" id="none-rated" @bind-Value="@rating.Select7" @onclick="@NotShowRatedList"></InputCheckbox>
-            <label class="label-2" for="none-rated">Chưa đánh giá</label>
-        </div>
+﻿<div class="select-form d-flex align-items-start">
+    <div class="select-form-box-1 select-form-box-1-inline d-flex align-items-center">
+        <input type="radio" class="checkbox-1" id="rated" name="option" @onclick="() => SubmitRating1()" />
+        <label class="label-1" for="rated">Đã đánh giá</label>
     </div>
-</EditForm>
+    <div class="select-form-box-2 select-form-box-2-inline d-flex align-items-center">
+        <input type="radio" class="checkbox-2" id="none-rated" name="option" @onclick="() => SubmitRating2()" />
+        <label class="label-2" for="none-rated">Chưa đánh giá</label>
+    </div>
+</div>
 
 @code {
     [Parameter]
-    public Func<Task> OnToggleListType1 { get; set; }
-
+    public int ShowRating { get; set; }
     [Parameter]
-    public Func<Task> OnToggleListType2 { get; set; }
+    public EventCallback<int> ShowRatingChanged { get; set; }
 
-    Rating rating;
-    protected override void OnInitialized()
+    private void SubmitRating1()
     {
-        rating = new Rating();
+        ShowRating = 1;
+        ShowRatingChanged.InvokeAsync(ShowRating);
     }
 
-    void Submit() {
-
-    }
-
-    public void ShowRatedList()
+    private void SubmitRating2()
     {
-        rating.Select6 = true;
-        rating.Select7 = false;
-        OnToggleListType1?.Invoke();
+        ShowRating = 0;
+        ShowRatingChanged.InvokeAsync(ShowRating);
     }
 
-    public void NotShowRatedList()
-    {
-        rating.Select7 = true;
-        rating.Select6 = false;
-        OnToggleListType2?.Invoke();
-    }
 }

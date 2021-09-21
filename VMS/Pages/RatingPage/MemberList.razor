@@ -12,13 +12,10 @@
                     <div class="member-name">
                         <p class="member-name1">@item.MemberName</p>
                         <p class="member-name2">@item.ShortDescription</p>
-                        @if (isRatedList2 is false)
-                        {
-                            <div>False rồi nè</div>
-                        }
-                    </div>
-                    @item.StarStyle
-                    <Stars @bind-StarRating="item.StarStyle" OnShowYellowStars="OnShowYellowStars" NoneShowYellowStars="NoneShowYellowStars"/>
+                    </div> 
+                    @*@bind-ShowRating ="item.RatingList"*@
+                    @item.RatingList
+                    <Stars @bind-StarRating="item.StarStyle" />
                     <div class="member-comment">
                         @*Pop-up để comment*@
                         <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
@@ -49,34 +46,15 @@
     public int StarRating { get; set; }
 
     [Parameter]
-    public bool ShowRatedList { get; set; }
-    bool isRatedList2;
-
-    async Task OnShowYellowStars()
-    {
-        if(isRatedList2 == false)
-        {
-            isRatedList2 = true;
-            StateHasChanged();
-        }
-    }
-
-    async Task NoneShowYellowStars()
-    {
-        if (isRatedList2 == true)
-        {
-            isRatedList2 = false;
-            StateHasChanged();
-        }
-    }
+    public int ShowRating { get; set; }
 
     /****Pagination****/
     private class FakeData
     {
         public int StarStyle { get; set; }
+        public int RatingList { get; set; }
         public string Avatar { get; set; }
         public string MemberName { get; set; }
-        public string State { get; set; }
         public string ShortDescription { get; set; }
     }
 
@@ -105,27 +83,6 @@
 
     protected override void OnParametersSet()
     {
-        if (ShowRatedList is true && isRatedList2 is true)
-        {
-            page = 1;
-            pagedResult = GetFakeData(1);
-        }
-        if (ShowRatedList is false && isRatedList2 is false)
-        {
-            page = 1;
-            pagedResult = GetFakeData(0);
-        }
-        if (ShowRatedList is false && isRatedList2 is false)
-        {
-            page = 1;
-            pagedResult = GetFakeData(0);
-        }
-        if (ShowRatedList is false || isRatedList2 is false)
-        {
-            page = 1;
-            pagedResult = GetFakeData(0);
-        }
-
         if (StarRating != 0)
         {
             foreach(var item in pagedResult.Results)
@@ -133,22 +90,29 @@
                 item.StarStyle = StarRating;
             }
         }
+
+        if (ShowRating == 1)
+        {
+            foreach (var item in pagedResult.Results)
+            {
+                item.RatingList = ShowRating;
+            }
+        }
+
+        if (ShowRating == 0)
+        {
+            foreach (var item in pagedResult.Results)
+            {
+                item.RatingList = ShowRating;
+            }
+        }
     }
 
     private async Task HandlePageChanged()
     {
-        if (pagedResult == GetFakeData(0))
-        {
-            pagedResult = GetFakeData(0);
-            StateHasChanged();
-            await Interop.ScrollToTop(JsRuntime);
-        }
-        if (pagedResult == GetFakeData(1))
-        {
-            pagedResult = GetFakeData(1);
-            StateHasChanged();
-            await Interop.ScrollToTop(JsRuntime);
-        }
+        pagedResult = GetFakeData(0);
+        StateHasChanged();
+        await Interop.ScrollToTop(JsRuntime);
     }
 
     /// <summary>
@@ -166,7 +130,7 @@
         result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
         {
             Avatar = "./img/RatingPage/Ellipse 28.png",
-            MemberName = "Phạm Thị Ngọc Ánh",
+            MemberName = $"Pham Thi Ngoc Anh {(type == 0 ? "" : "(rated)")}",
             ShortDescription = "Thành viên vàng trong làng tình nguyện",
         }).ToArray();
 

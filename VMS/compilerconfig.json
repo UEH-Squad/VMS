@@ -190,5 +190,9 @@
   {
     "outputFile": "Pages/RatingPage/FilterRatingAll.razor.css",
     "inputFile": "Pages/RatingPage/FilterRatingAll.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/Index.razor.css",
+    "inputFile": "Pages/RatingPage/Index.razor.scss"
   }
 ]

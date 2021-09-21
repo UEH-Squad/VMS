@@ -1,11 +1,11 @@
 ﻿@using VMS.Application.ViewModels
-<EditForm Model="@rating" OnValidSubmit="@Submit">
+<EditForm Model="@rating" OnValidSubmit="@Search">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="search-box">
-        <InputText class="search-txt_input" placeholder="Tìm kiếm bằng từ khóa" @bind-Value="@rating.KeyWord" @oninput="@ShowCloseButton"></InputText>
-        <button @onclick="@ClearKeyWord" class="search-btn_clear @Display"><span id="clear" class="material-icons">clear</span></button>
-        <button @onclick="@Submit" class="search-btn_search"><span id="search" class="material-icons">search</span></button>
+        <InputText class="search-txt_input" placeholder="Tìm kiếm bằng từ khóa" @bind-Value="@rating.KeyWord" @oninput="@ShowCloseButton" @oninvalid="@ClearKeyWord"></InputText>
+        <button @onclick="@ClearKeyWord" class="search-btn_clear @display"><span id="clear" class="material-icons">clear</span></button>
+        <button @onclick="@Search" class="search-btn_search"><span id="search" class="material-icons">search</span></button>
     </div>
     <div class="search-result">
         <p class="search-result_text-1">Có</p>
@@ -22,21 +22,21 @@
         rating = new Rating();
     }
 
-    public void Submit()
+    private void Search()
     {
 
     }
 
-    string Display = "invisible";
-    public void ClearKeyWord()
+    string display = "invisible";
+    private void ClearKeyWord()
     {
         rating.KeyWord = "";
-        Display = "invisible";
+        display = "invisible";
     }
 
-    void ShowCloseButton()
+    private void ShowCloseButton()
     {
-        Display = "visible";
+        display = "visible";
     }
 
 }

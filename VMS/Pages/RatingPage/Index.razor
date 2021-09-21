@@ -4,34 +4,17 @@
 <div class="rating-page">
     <Title />
     <div class="header-page">
-        <SearchBar />
-        <FilterBar OnToggleListType1="OnToggleListType1" OnToggleListType2="OnToggleListType2" />
+        @*<SearchBar />*@
+        <div class="search-box"><VMS.Pages.ActivitySearchPage.SearchBox /></div>
+        <FilterBar @bind-ShowRating="showRating" />
     </div>
     <div class="body-page">
-        <MemberList ShowRatedList="isRatedList1" StarRating="starRating" />
-        <FilterRatingAll OnToggleColor1="OnToggleColor1" @bind-StarRating="starRating"/>
+        <MemberList StarRating="starRating" ShowRating="showRating"/>
+        <FilterRatingAll @bind-StarRating="starRating" />
     </div>
 </div>
 
 @code {
-    bool isRatedList1 = false;
-
+    int showRating;
     int starRating;
-
-    async Task OnToggleListType1()
-    {
-        isRatedList1 = true;
-        StateHasChanged();
-    }
-
-    async Task OnToggleListType2()
-    {
-        isRatedList1 = false;
-        StateHasChanged();
-    }
-
-    async Task OnToggleColor1()
-    {
-        
-    }
 }

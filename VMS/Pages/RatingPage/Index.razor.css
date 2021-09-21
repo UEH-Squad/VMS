@@ -13,12 +13,9 @@
 .header-page {
   display: flex;
   justify-content: space-between; }
+  .header-page ::deep .search-box {
+    width: 53%; }
 
 .body-page {
   display: flex;
   justify-content: space-between; }
-
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3%; }

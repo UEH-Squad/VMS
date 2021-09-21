@@ -1,7 +1,7 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
 .filter {
-    margin-top: 25%;
+    margin-top: 4%;
     text-align: center;
 
     .filter-txt {
@@ -39,7 +39,7 @@
         &_container {
             display: flex;
             flex-direction: row;
-            width: 75%;
+            width: 68%;
             align-items: center;
             justify-content: space-between;
             margin-top: 18.5%;
@@ -95,6 +95,7 @@
         border: none;
         border-radius: 10px;
         margin-top: 22%;
+        margin-left: -58px;
 
         &:hover {
             background-color: $green-bold;

@@ -6,11 +6,18 @@
 <Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas=@actOrganizes/>
 <Act Title="được yêu thích" HaveDecor="false" Datas=@actFavorites/>
 <ActTookPlace></ActTookPlace>
+<h3>User</h3>
+<Act Title="đang diễn ra " HaveDecor="true" Datas=@actUser />
+<Act Title="được yêu thích " HaveDecor="false"  HaveHeart="true" Datas=@actUser />
+<Act Title="đã tham gia  "  OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas=@actUserJoined />
+
 
 
 @code {
     private List<FakeData> actOrganizes = new();
     private List<FakeData> actFavorites = new();
+    private List<FakeData> actUser = new();
+    private List<FakeData> actUserJoined = new();
 
     protected override void OnInitialized()
     {
@@ -23,7 +30,23 @@
                 Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
                 IsMenu = false
             });
+
             actFavorites.Add(new FakeData()
+            {
+                Id = i,
+                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"
+            });
+
+            actUser.Add(new FakeData()
+            {
+                Id = i,
+                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"
+            });
+        }
+        for (int i = 0; i < 4; i++)
+        {
+
+            actUserJoined.Add(new FakeData()
             {
                 Id = i,
                 Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"

@@ -40,10 +40,10 @@
                         <p class="col-4 form-text">Lĩnh vực</p>
                         <div class="col-8 form-field ">
                             <div class="d-flex">
-                                <div class=" owl-carousel owl-theme editProfile__carousel">
+                                <div class="@(areas.Count>3 ?"owl-carousel owl-theme editProfile__carousel" :"d-flex editProfile__NoCarousel") ">
                                     @foreach (var item in areas)
                                     {
-                                        <div class="form-field-item item">
+                                        <div class="form-field-item item @(areas.Count>3 ?"" :"item-NoCaroesel ")">
                                             <i class="material-icons">@item.Icon</i>
                                             <span>@item.Name</span>
                                         </div>

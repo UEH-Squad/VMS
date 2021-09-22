@@ -7,38 +7,54 @@
                 <div class="proflie__logo-img py-3">
                     <div class=" text-center d-inline-block position-relative">
                         <img src="img/RelatedActivities/2nd-activity.png" alt="">
-                        <label for="myfile" class="d-inline">
+                        <label for="myfile" class="@(IsUser ? "d-inline" : "d-none" ) ">
                             <svg class="icon-camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z" /><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1a.5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0z" /></g></svg>
                         </label>
                         <InputFile OnChange="ShowModalUpAvata" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
                     </div>
                 </div>
                 <p class="m-0 ">Trần Minh Nhật Anh</p>
-                <button  @onclick="() => ShowModalAppellation()" class="profile__type d-inline-block btn mx-auto mt-1 mb-5">Chiến sĩ hạng đồng</button>
-                <div class="d-flex align-items-center justify-content-end profile__rank">
+                @if (IsUser)
+                {
+                    <button @onclick="() => ShowModalAppellation()" class="profile__type d-inline-block btn mx-auto mt-1 mb-5">Chiến sĩ hạng đồng</button>
+                }
+                else
+                {
+                    <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-5">Chiến sĩ hạng đồng</span>
+                }
+
+            <div class="d-flex align-items-center justify-content-end profile__rank">
+                @if (IsUser)
+                {
                     <a href="" class="d-flex align-self-center">#4</a>
-                    <div>
-                        <p class="mb-2 d-flex justify-content-evenly align-self-end">
-                            <span class="profile__rank-number">4,5</span>
-                            <i class="material-icons">
-                                star_rate
-                            </i>
-                            <i class="material-icons">
-                                star_rate
-                            </i>
-                            <i class="material-icons">
-                                star_rate
-                            </i>
-                            <i class="material-icons">
-                                star_rate
-                            </i>
-                            <i class="material-icons icon-noColor">
-                                star_rate
-                            </i>
-                        </p>
-                        <span class="text-start">15N xếp hạng</span>
-                    </div>
+                }
+                else
+                {
+                    <a class="d-flex align-self-center">#4</a>
+                }
+
+                <div>
+                    <p class="mb-2 d-flex justify-content-evenly align-self-end">
+                        <span class="profile__rank-number">4,5</span>
+                        <i class="material-icons">
+                            star_rate
+                        </i>
+                        <i class="material-icons">
+                            star_rate
+                        </i>
+                        <i class="material-icons">
+                            star_rate
+                        </i>
+                        <i class="material-icons">
+                            star_rate
+                        </i>
+                        <i class="material-icons icon-noColor">
+                            star_rate
+                        </i>
+                    </p>
+                    <span class="text-start">15N xếp hạng</span>
                 </div>
+            </div>
             </div>
             <div class="col-4 profile__contact ms-auto">
                 <h3 class="text-center mb-3">Thông tin cá nhân</h3>
@@ -98,6 +114,7 @@
 </div>
 
 @code {
+    [Parameter] public bool IsUser { get; set; } = true;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

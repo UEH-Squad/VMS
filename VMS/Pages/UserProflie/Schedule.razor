@@ -1,40 +1,45 @@
-﻿<div class="my-schedule my-5">
-    <div class="container">
-        <div class="row schedule">
-            <div class="col-6 schedule__calendar">
+﻿@if (IsUser)
+{
+    <div class="my-schedule my-5">
+        <div class="container">
+            <div class="row schedule">
+                <div class="col-6 schedule__calendar">
 
-            </div>
-            <div class="col-6 schedule__act">
-                <h3 class="text-center pb-2 mb-5">Hoạt động <span> trong ngày của bạn</span></h3>
-                <div class="schedule__act-items px-3">
-                    @foreach (var item in fakeDatas)
-                    {
-                        <div class="schedule__act-item py-3 px-4 mb-4">
-                            <h6>Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19 </h6>
-                            <div class="d-flex align-items-center mt-3">
-                                <div class="d-flex align-items-center me-5">
-                                    <span class="material-icons schedule__act-icon me-3">
-                                        public
-                                    </span>
-                                    <span class="schedule__act-text">Đội công tác viên</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="material-icons schedule__act-icon me-3">
-                                        where_to_vote
-                                    </span>
-                                    <span class="schedule__act-text">TP. Hồ Chí Minh</span>
+                </div>
+                <div class="col-6 schedule__act">
+                    <h3 class="text-center pb-2 mb-5">Hoạt động <span> trong ngày của bạn</span></h3>
+                    <div class="schedule__act-items px-3">
+                        @foreach (var item in fakeDatas)
+                        {
+                            <div class="schedule__act-item py-3 px-4 mb-4">
+                                <h6>Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19 </h6>
+                                <div class="d-flex align-items-center mt-3">
+                                    <div class="d-flex align-items-center me-5">
+                                        <span class="material-icons schedule__act-icon me-3">
+                                            public
+                                        </span>
+                                        <span class="schedule__act-text">Đội công tác viên</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="material-icons schedule__act-icon me-3">
+                                            location_on
+                                        </span>
+                                        <span class="schedule__act-text">TP. Hồ Chí Minh</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
+
                 </div>
-            
             </div>
         </div>
     </div>
-</div>
+}
+
 
 @code {
+    [Parameter] public bool IsUser { get; set; } = true;
     protected override void OnInitialized()
     {
         for (int i = 0; i < 4; i++)
@@ -44,7 +49,7 @@
                 Id = i,
                 Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
                 Org = "Đội công tác viên",
-                Address= "TP. Hồ Chí Minh"
+                Address = "TP. Hồ Chí Minh"
 
             });
         }

@@ -34,6 +34,11 @@
   border-radius: 10px; }
   .my-profile .profile__logo .profile__type:hover {
     background: linear-gradient(to top, rgba(237, 241, 49, 0.35) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
+  .my-profile .profile__logo .profile__type:focus {
+    box-shadow: none; }
+
+.my-profile .profile__logo .profile__type-notHover:hover {
+  background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
 
 .my-profile .profile__rank a {
   margin-right: 50px;

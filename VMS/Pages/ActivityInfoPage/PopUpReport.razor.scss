@@ -74,7 +74,7 @@
     color: $grey-text;
     background-color: white;
     border-radius: 10px;
-    padding: 0 60px 60px 60px;
+    padding: 0 60px 30px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -126,11 +126,9 @@
     justify-content: center;
     margin-top: 30px;
     margin-bottom: 20px;
-    letter-spacing: 2px;
 
     .title-header__report {
         color: $green;
-        margin-right: 14px;
     }
 
     .title-header__activity {
@@ -149,8 +147,11 @@
     }
 }
 .dropdown-menu {
-    width: 100%;
+    width: 101%;
     box-shadow: 5px 5px 10px 10px #dee2e687;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
 
     .dropdown-item {
         display: flex;

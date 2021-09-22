@@ -112,5 +112,17 @@ namespace VMS.Pages.ActivitySearchPage
 
             Modal.Show<Signup>("", parameters, options);
         }
+        private void ShowRequireSignup()
+        {
+
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+
+            Modal.Show<VMS.Shared.Components.RequireSignup>("", options);
+        }
     }
 }

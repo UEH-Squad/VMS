@@ -67,9 +67,6 @@
     .my-custom-popup .save-btn:hover {
       background-color: #306C14; }
 
-.covid-item p {
-  font-weight: 500; }
-
 .covid-item span:hover ~ p,
 .covid-item p:hover {
   color: #f14747 !important; }

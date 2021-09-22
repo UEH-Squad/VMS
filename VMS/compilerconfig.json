@@ -154,5 +154,9 @@
   {
     "outputFile": "Pages/Organization/Profile/Mission.razor.css",
     "inputFile": "Pages/Organization/Profile/Mission.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/RequireSignup.razor.css",
+    "inputFile": "Shared/Components/RequireSignup.razor.scss"
   }
 ]

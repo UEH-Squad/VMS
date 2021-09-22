@@ -11,13 +11,9 @@
 
     .signUp__content {
         position: relative;
-        width: 450px;
-        height: 100%;
-        margin: auto;
-        margin-top: 20px;
+        width: 950px;
         border-radius: 10px;
         background: $white;
-        overflow-y: scroll;
 
         &::-webkit-scrollbar {
             width: 10px;
@@ -42,7 +38,7 @@
     }
 
     .signUp__form {
-        padding: 50px 40px 0px;
+        padding: 50px 50px 20px;
 
         h1 {
             text-align: center;
@@ -112,7 +108,7 @@
 
         button {
             display: block;
-            padding: 10px 20px;
+            padding: 5px 20px;
             margin: 50px auto 0;
             background: #18A0FB;
             font-weight: 700;
@@ -126,6 +122,9 @@
     }
 
     .signUp__report {
+        position: fixed;
+        top: 0;
+        left: 0;
         height: 100%;
         width: 100%;
         display: none;

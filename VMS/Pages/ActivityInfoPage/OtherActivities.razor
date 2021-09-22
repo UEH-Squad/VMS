@@ -18,9 +18,9 @@
                         <p class="limited-text">@data.Title</p>
                     </div>
                     <div class="act__container__card__icon">
-                        <div class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))" @onclick:stopPropagation="true">
+                        <a class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))" @onclick:preventDefault @onclick:stopPropagation>
                             <span class="material-icons">favorite</span>
-                        </div>
+                        </a>
                     </div>
                 </a>
             }

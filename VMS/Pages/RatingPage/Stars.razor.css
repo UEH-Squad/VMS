@@ -6,7 +6,7 @@
 /*#endregion */
 .member-star {
   position: relative;
-  margin-left: 7%; }
+  margin-left: 10%; }
   .member-star_button {
     background-color: #FFFFFF;
     border: none;
@@ -27,7 +27,7 @@
     font-size: 12px;
     line-height: 10px;
     letter-spacing: -0.015em;
-    top: -45%;
+    top: -95%;
     right: 75%;
     padding: 5%;
     background: #FFFFFF;

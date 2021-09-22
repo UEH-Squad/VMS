@@ -67,16 +67,15 @@
 
 .container {
     position: absolute;
-    width: 51%;
+    width: 41.67%;
     height: 80%;
     left: 50%;
-    top: 58%;
+    top: 57%;
     transform: translate(-50%, -50%);
     color: $grey-text;
     background-color: $white;
     border-radius: 10px;
-    padding: 0 60px 60px 60px;
-    font-size: 24px;
+    padding: 0 70px 40px 70px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -107,7 +106,6 @@
     }
 
     .title {
-        margin-top: 45px;
         display: flex;
         font-weight: 500;
     }
@@ -119,7 +117,7 @@
 }
 /*----title Báo cáo hoạt động----*/
 .title-header {
-    font-size: 46px;
+    font-size: 24px;
     font-weight: 500;
     display: flex;
     justify-content: center;
@@ -138,14 +136,50 @@
 /*----end title Báo cáo hoạt động----*/
 
 /*-----reporting reason------*/
+.title-reason {
+    margin-top: 8%;
+
+    .title-discript__text {
+        font-size: 16px;
+    }
+
+    .title-discript__check {
+        font-size: 16px;
+    }
+}
+
+.title-discript {
+    margin-top: 6%;
+
+    .title-discript__text {
+        font-size: 16px;
+    }
+
+    .title-discript__check {
+        font-size: 16px;
+    }
+}
+
+.title-attach {
+    margin-top: 6%;
+
+    .title-attach__text {
+        font-size: 16px;
+    }
+
+    .title-attach__check {
+        font-size: 16px;
+    }
+}
+
 .dropdown .my-btn {
     width: 100%;
     border: 1px solid $grey-text;
-    height: 70px;
+    height: 36px;
 
     .my-icon-dropdown {
         float: right;
-        font-size: 50px;
+        font-size: 26px;
     }
 }
 
@@ -153,11 +187,13 @@
     width: 100%;
     box-shadow: 5px 5px 10px 10px #dee2e687;
     font-size: 14px;
+    border-radius: 10px;
 
     .dropdown-item {
         display: flex;
         align-items: center;
         margin: 5px 0;
+        padding-left: 5%;
 
         ::deep .dropdown-item--checkbox {
             margin-right: 10px;
@@ -179,8 +215,8 @@
 /*-----report description-----*/
 ::deep .form-control {
     border: 1px solid;
-    font-size: 22px;
-    height: 250px;
+    font-size: 16px;
+    height: 150px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -199,25 +235,25 @@
 .add-file {
     border-radius: 4px;
     border: 1px solid $grey-text;
-    padding: 8px 0;
+    padding: 9px 0;
     display: flex;
 
     .add-file__block {
+        display: flex;
         margin: auto;
 
 
         .my-icon-upload {
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-right: 10px;
             color: $grey-text;
         }
 
         .block-icon-text {
             display: flex;
-            margin-top: 10px;
 
             .file__text {
-                font-size: 22px;
+                font-size: 16px;
                 font-weight: 300px;
             }
         }
@@ -231,7 +267,6 @@
         }
 
         .inputfile + label {
-            font-size: 24px;
             color: #333;
             display: inline-block;
             cursor: pointer;
@@ -244,17 +279,17 @@
 /*button report*/
 .btn-accept {
     display: flex;
-    margin-top: 70px;
+    margin-top: 10%;
 
     .btn {
         margin: auto;
         background-color: $green;
-        color: #fff;
-        font-size: 24px;
-        border: none;
-        width: 280px;
-        height: 62px;
+        color: $white;
+        font-size: 16px;
+        width: 46%;
+        height: 54px;
         font-weight: 600;
+        border-radius: 5px;
     }
 
     .btn:hover {

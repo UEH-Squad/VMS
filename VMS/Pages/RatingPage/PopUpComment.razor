@@ -24,10 +24,10 @@
                 </div>
             </div>
 
-            @if (comment.MemberComment is not null)
+            @if (commentModal.MemberComment is not null)
             {
                 <div class="comment mb-5">
-                    <p class="comment-input">@comment.MemberComment</p>
+                    <p class="comment-input">@commentModal.MemberComment</p>
                 </div>
                 <div class="button">
                     <button class="button-showremind d-none" style="color: @ColorRemind">Số lần nhắc nhở: @Count lần</button>
@@ -38,10 +38,10 @@
                 </div>
             }
 
-            @if (comment.MemberComment is null)
+            @if (commentModal.MemberComment is null)
             {
                 <div class="comment">
-                    <p class="comment-input">@comment.CommentDefault</p>
+                    <p class="comment-input">@commentModal.CommentDefault</p>
                 </div>
                 <div class="button">
                     <button class="button-showremind" style="color: @ColorRemind">Số lần nhắc nhở: @Count lần</button>
@@ -69,13 +69,13 @@
                     </div>
                 </div>
             </div>
-            @if (comment.OrganizationComment == "Gửi")
+            @if (commentModal.OrganizationComment == "Send")
             {
-                <EditForm Model="@comment" OnInvalidSubmit="@Send">
+                <EditForm Model="@commentModal" OnInvalidSubmit="@Send">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
                     <div class="comment">
-                        <InputTextArea @bind-Value="@comment.Comment1" class="comment-input" placeholder="@comment.CommentDefault" rows="3" @onchange="@(e => { @comment.Comment1 = e.Value.ToString(); })"></InputTextArea>
+                        <InputTextArea @bind-Value="@commentModal.Comment1" class="comment-input" placeholder="@commentModal.CommentDefault" rows="3" @onchange="@(e => { @commentModal.Comment1 = e.Value.ToString(); })"></InputTextArea>
                     </div>
                     <div class="button">
                         <button @onclick="@Send" class="button-send">Gửi nhận xét</button>
@@ -83,13 +83,13 @@
                 </EditForm>
             }
 
-            @if (comment.OrganizationComment == "Sửa")
+            @if (commentModal.OrganizationComment == "Modify")
             {
-                <EditForm Model="@comment" OnInvalidSubmit="@Modify">
+                <EditForm Model="@commentModal" OnInvalidSubmit="@Modify">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
                     <div class="comment">
-                        <InputTextArea @bind-Value="@comment.Comment1" class="comment-input" rows="3" readonly></InputTextArea>
+                        <InputTextArea @bind-Value="@commentModal.Comment1" class="comment-input" rows="3" readonly></InputTextArea>
                     </div>
                     <div class="button">
                         <button @onclick="@Modify" class="button-modify">Sửa</button>
@@ -97,13 +97,13 @@
                 </EditForm>
             }
 
-            @if (comment.OrganizationComment == "Lưu")
+            @if (commentModal.OrganizationComment == "Save")
             {
-                <EditForm Model="@comment" OnInvalidSubmit="@Save">
+                <EditForm Model="@commentModal" OnInvalidSubmit="@Save">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
                     <div class="comment">
-                        <InputTextArea @bind-Value="@comment.Comment1" class="comment-input" rows="3" @onchange="@(e => { @comment.Comment1 = e.Value.ToString(); })"></InputTextArea>
+                        <InputTextArea @bind-Value="@commentModal.Comment1" class="comment-input" rows="3" @onchange="@(e => { @commentModal.Comment1 = e.Value.ToString(); })"></InputTextArea>
                     </div>
                     <div class="button">
                         <button @onclick="@Cancel" class="button-cancel">Hủy</button>
@@ -127,40 +127,41 @@
     string Color9 = "#EDF131";
     string Color10 = "#C4C4C4";
 
-    Rating comment;
+    Rating commentModal;
     protected override void OnInitialized()
     {
-        comment = new Rating();
+        commentModal = new Rating();
     }
 
-    private int Count = 0;
-    private string ColorRemind;
-    public void Remind()
+    int Count = 0;
+    string ColorRemind;
+
+    private void Remind()
     {
         Count = Count + 1;
         ColorRemind = "#E10B0B";
     }
 
-    public void Send()
+    private void Send()
     {
-        comment.OrganizationComment = "Sửa";
+        commentModal.OrganizationComment = "Modify";
     }
 
-    public void Modify()
+    private void Modify()
     {
-        comment.Comment2 = comment.Comment1;
-        comment.OrganizationComment = "Lưu";
+        commentModal.Comment2 = commentModal.Comment1;
+        commentModal.OrganizationComment = "Save";
     }
 
-    public void Save()
+    private void Save()
     {
-        comment.OrganizationComment = "Sửa";
+        commentModal.OrganizationComment = "Modify";
     }
 
-    public void Cancel()
+    private void Cancel()
     {
-        comment.Comment1 = comment.Comment2;
-        comment.OrganizationComment = "Sửa";
+        commentModal.Comment1 = commentModal.Comment2;
+        commentModal.OrganizationComment = "Modify";
     }
 
     [CascadingParameter]

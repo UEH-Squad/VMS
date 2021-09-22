@@ -13,8 +13,6 @@
                         <p class="member-name1">@item.MemberName</p>
                         <p class="member-name2">@item.ShortDescription</p>
                     </div> 
-                    @*@bind-ShowRating ="item.RatingList"*@
-                    @item.RatingList
                     <Stars @bind-StarRating="item.StarStyle" />
                     <div class="member-comment">
                         @*Pop-up để comment*@
@@ -44,9 +42,6 @@
 @code {
     [Parameter]
     public int StarRating { get; set; }
-
-    [Parameter]
-    public int ShowRating { get; set; }
 
     /****Pagination****/
     private class FakeData
@@ -78,7 +73,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        pagedResult = GetFakeData(0);
+        pagedResult = GetFakeData();
     }
 
     protected override void OnParametersSet()
@@ -90,27 +85,11 @@
                 item.StarStyle = StarRating;
             }
         }
-
-        if (ShowRating == 1)
-        {
-            foreach (var item in pagedResult.Results)
-            {
-                item.RatingList = ShowRating;
-            }
-        }
-
-        if (ShowRating == 0)
-        {
-            foreach (var item in pagedResult.Results)
-            {
-                item.RatingList = ShowRating;
-            }
-        }
     }
 
     private async Task HandlePageChanged()
     {
-        pagedResult = GetFakeData(0);
+        pagedResult = GetFakeData();
         StateHasChanged();
         await Interop.ScrollToTop(JsRuntime);
     }
@@ -120,7 +99,7 @@
     /// </summary>
     /// <param name="type">0 for volunteer list; 1 for rated one</param>
     /// <returns></returns>
-    private PagedResult<FakeData> GetFakeData(int type)
+    private PagedResult<FakeData> GetFakeData()
     {
         var result = new PagedResult<FakeData>();
         result.CurrentPage = page;
@@ -130,7 +109,7 @@
         result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
         {
             Avatar = "./img/RatingPage/Ellipse 28.png",
-            MemberName = $"Pham Thi Ngoc Anh {(type == 0 ? "" : "(rated)")}",
+            MemberName = "Phạm Thị Ngọc Ánh",
             ShortDescription = "Thành viên vàng trong làng tình nguyện",
         }).ToArray();
 

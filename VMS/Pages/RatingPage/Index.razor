@@ -4,17 +4,18 @@
 <div class="rating-page">
     <Title />
     <div class="header-page">
-        @*<SearchBar />*@
-        <div class="search-box"><VMS.Pages.ActivitySearchPage.SearchBox /></div>
-        <FilterBar @bind-ShowRating="showRating" />
+        <div class="search-box">
+            <VMS.Pages.ActivitySearchPage.SearchBox />
+            <SearchResult />
+        </div>
+        <FilterBar />
     </div>
     <div class="body-page">
-        <MemberList StarRating="starRating" ShowRating="showRating"/>
+        <MemberList StarRating="starRating" />
         <FilterRatingAll @bind-StarRating="starRating" />
     </div>
 </div>
 
 @code {
-    int showRating;
     int starRating;
 }

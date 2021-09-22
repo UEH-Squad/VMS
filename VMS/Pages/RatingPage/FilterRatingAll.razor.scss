@@ -1,7 +1,7 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
 .filter {
-    margin-top: 4%;
+    margin-top: 3%;
     text-align: center;
 
     .filter-txt {
@@ -32,7 +32,7 @@
         }
     }
 
-    ::deep .filter-checkbox {
+    .filter-checkbox {
         display: flex;
         flex-direction: column;
 
@@ -86,7 +86,7 @@
     }
 
     .filter-submit {
-        width: 75%;
+        width: 88%;
         color: $white;
         background-color: $green;
         font-weight: 500;

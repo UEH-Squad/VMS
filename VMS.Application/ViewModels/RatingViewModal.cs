@@ -11,7 +11,7 @@ namespace VMS.Application.ViewModels
         public string Comment2 { get; set; }
         public string CommentDefault { get; set; } = "Chưa nhận xét";
         public string MemberComment { get; set; } = "Tuyệt vời tuyệt vời quá mệt quá quá mệt Tuyệt vời tuyệt vời quá mệt quá quá mệtTuyệt vời tuyệt vời quá mệt quá quá mệtTuyệt vời tuyệt vời quá mệt quá quá mệt";
-        public string OrganizationComment { get; set; } = "Gửi";
+        public string OrganizationComment { get; set; } = "Send";
         public bool Select1 { get; set; }
         public bool Select2 { get; set; }
         public bool Select3 { get; set; }

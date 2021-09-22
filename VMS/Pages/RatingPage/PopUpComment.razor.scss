@@ -11,9 +11,6 @@
     justify-content: center;
     z-index: 2;
     background-color: rgba(196, 196, 196, 0.38);
-
-    ::-webkit-scrollbar {
-    }
 }
 
 .popup-comment {
@@ -21,7 +18,7 @@
     box-sizing: border-box;
     width: 50%;
     height: 78%;
-    top: 59%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: $white;

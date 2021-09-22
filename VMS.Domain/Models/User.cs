@@ -29,6 +29,7 @@ namespace VMS.Domain.Models
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsDeleted { get; set; }
+        public int Rank { get; set; }
 
         public virtual ICollection<UserAddress> UserAddresses { get; set; }
         public virtual ICollection<UserSkill> UserSkills { get; set; }

@@ -6,7 +6,7 @@
 <Information UserId="@UserId"></Information>
 <Vision></Vision>
 <Mission></Mission>
-<Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas="actCurent"/>
+<Act  Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas="actCurent"/>
 <Act Title="được yêu thích" HaveDecor="false"  Datas="actFavorite"/>
 <ActTookPlace UserId="@UserId"></ActTookPlace>
 
@@ -14,6 +14,8 @@
 @code {
     private List<ActivityViewModel> actCurent = new();
     private List<ActivityViewModel> actFavorite = new();
+    [Parameter]
+    public bool Owner { get; set; }
     [Parameter]
     public string UserId { get; set; }
     [Inject]

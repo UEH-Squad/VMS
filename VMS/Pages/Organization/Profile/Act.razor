@@ -18,10 +18,10 @@
                             <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item.Name</h3>
                         </a>
                     </div>
-                    <ul class="act-menu p-2 @(item.Id == showId ? "d-block" : "d-none")">
+                    <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                         <li class="edit pb-2">Chỉnh sửa</li>
                         <li @onclick="(() => ShowModal())"  class="delete pb-2">Xóa</li>
-                        <li @onclick="() => CloseConfirm(item.Id)" class="close pb-2">Đóng hoạt động</li>
+                        <li @onclick="CloseConfirm" class="close pb-2">Đóng hoạt động</li>
                     </ul>
                     @if (HaveControl)
                     {
@@ -155,7 +155,7 @@
     void DeleteConfirm()
     {
         isDeleteConfirm = !isDeleteConfirm;
-        showId = 0;
+        Datas.ForEach(a => a.IsMenu = false);
     }
 
     void CloseConfirm()
@@ -182,7 +182,7 @@
         }
 
         isCloseSuccess = !isCloseSuccess;
-        Datas[pendingId].IsClose = true;
+        Datas[pendingId].IsClosed = true;
     }
 
     private void ShowModal()

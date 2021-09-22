@@ -67,6 +67,7 @@ namespace VMS.Application.Services
             orgRatingViewModels.UserAreas = org.UserAreas;
             orgRatingViewModels.Email = org.Email;
             orgRatingViewModels.PhoneNumber = org.PhoneNumber;
+            orgRatingViewModels.RankRating = org.Rank;
             orgRatingViewModels.QuantityRating = QuantityRating;
             if (QuantityRating != 0)
             {

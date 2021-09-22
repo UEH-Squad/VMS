@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Components.Web;
 using System.Threading.Tasks;
 
-namespace VMS.Pages.OrganizationManagementPage
+namespace VMS.Pages.ActivitySearchPage
 {
-    public partial class SearchBar : ComponentBase
+    public partial class SearchBox
     {
         [Parameter]
         public string SearchValue { get; set; }
@@ -17,7 +17,7 @@ namespace VMS.Pages.OrganizationManagementPage
             SearchValue = (string)e.Value;
         }
 
-        private async Task OnKeyDownAsync(KeyboardEventArgs e)
+        private async Task OnKeyUpAsync(KeyboardEventArgs e)
         {
             if (e.Code == "Enter" || e.Code == "NumpadEnter")
             {

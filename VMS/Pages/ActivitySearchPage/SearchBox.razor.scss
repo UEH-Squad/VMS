@@ -1,15 +1,14 @@
-﻿@import '../../Resources/scss/common/_variables';
+﻿@import '../../Resources/scss/common/_variables.scss';
 
-/*------SearchBox--------*/
 .my-search-box {
+    border-bottom: 1px solid $border-color-normal;
+
     &__input {
-        width: 100%;
+        flex: 1;
         outline: none;
         border: none;
-        border-bottom: 1px solid $border-color-normal;
         font-size: 18px;
         color: $blue;
-        font-weight: 500;
 
         &::placeholder {
             color: $green;
@@ -17,29 +16,18 @@
     }
 
     &__icon-wrapper {
-        margin-left: -56px;
 
         span {
             color: $green;
-            font-size: 26px;
+            font-size: 30px;
             line-height: 24px;
         }
 
-        #clear-search {
-            background-color: none;
-        }
-
         .search-btn {
-            background-color: transparent;
+            background-color: #f3f3f5;
+            border-radius: 3px;
             border: none;
-            padding: 0;
-
-            span {
-                background-color: #e5e5e58c;
-                padding: 2px;
-                margin-bottom: 3px;
-                border-radius: 3px;
-            }
+            padding: 4px;
         }
 
         .clear-search-btn {
@@ -53,5 +41,3 @@
         visibility: visible;
     }
 }
-/*------EndSearchBox-------*/
-

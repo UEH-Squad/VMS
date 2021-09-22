@@ -30,9 +30,10 @@
         border: 1px solid #C4C4C4;
         border-radius: 5px;
 
-        &:hover{
+        &:hover {
             border-color: $blue;
         }
+
         h6 {
             font-size: 20px;
             font-weight: 600;
@@ -53,5 +54,17 @@
         font-size: 16px;
         font-weight: 600;
         color: #515151;
+    }
+
+    .lmtext-2 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+    .lmtext-2 {
+        -webkit-line-clamp: 2;
     }
 }

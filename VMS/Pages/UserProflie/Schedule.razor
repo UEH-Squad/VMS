@@ -12,19 +12,19 @@
                         @foreach (var item in fakeDatas)
                         {
                             <div class="schedule__act-item py-3 px-4 mb-4">
-                                <h6>Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19 </h6>
+                                <h6 class="lmtext-2">@item.Title </h6>
                                 <div class="d-flex align-items-center mt-3">
                                     <div class="d-flex align-items-center me-5">
                                         <span class="material-icons schedule__act-icon me-3">
                                             public
                                         </span>
-                                        <span class="schedule__act-text">Đội công tác viên</span>
+                                        <span class="schedule__act-text">@item.Org</span>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <span class="material-icons schedule__act-icon me-3">
                                             location_on
                                         </span>
-                                        <span class="schedule__act-text">TP. Hồ Chí Minh</span>
+                                        <span class="schedule__act-text">@item.Address</span>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
             fakeDatas.Add(new FakeData()
             {
                 Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
+                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19 Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19 ",
                 Org = "Đội công tác viên",
                 Address = "TP. Hồ Chí Minh"
 

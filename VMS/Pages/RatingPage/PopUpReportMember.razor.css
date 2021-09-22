@@ -25,8 +25,8 @@
   z-index: 3; }
   .min-overlay .report-success {
     position: absolute;
-    height: 160px;
-    width: 675px;
+    height: 100px;
+    width: 30%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -41,10 +41,10 @@
     align-items: center; }
     .min-overlay .report-success .min-overlay--icon {
       position: absolute;
-      top: 25px;
-      right: 25px;
-      width: 33px;
-      height: 33px;
+      top: 15px;
+      right: 15px;
+      width: 25px;
+      height: 25px;
       background-color: #E5E5E5;
       border-radius: 50%;
       display: flex;
@@ -54,9 +54,13 @@
       .min-overlay .report-success .min-overlay--icon .material-icons {
         font-size: 22px; }
     .min-overlay .report-success .green-text {
-      color: #64D72F; }
+      color: #64D72F;
+      font-weight: 500;
+      font-size: 20px; }
     .min-overlay .report-success .blue-text {
-      color: #18A0FB; }
+      color: #18A0FB;
+      font-weight: 500;
+      font-size: 20px; }
 
 .container {
   position: absolute;

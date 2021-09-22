@@ -22,8 +22,8 @@
 
     .report-success {
         position: absolute;
-        height: 160px;
-        width: 675px;
+        height: 100px;
+        width: 30%;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -39,10 +39,10 @@
 
         .min-overlay--icon {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 33px;
-            height: 33px;
+            top: 15px;
+            right: 15px;
+            width: 25px;
+            height: 25px;
             background-color: $grey-bg;
             border-radius: 50%;
             display: flex;
@@ -57,10 +57,14 @@
 
         .green-text {
             color: $green;
+            font-weight: 500;
+            font-size: 20px;
         }
 
         .blue-text {
             color: $blue;
+            font-weight: 500;
+            font-size: 20px;
         }
     }
 }

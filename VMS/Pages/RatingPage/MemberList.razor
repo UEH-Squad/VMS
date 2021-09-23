@@ -1,41 +1,44 @@
 ﻿@inject IJSRuntime JsRuntime
-<div class="container-member">
-    @if (pagedResult != null && pagedResult.Results.Length != 0)
-    {
-        @foreach (var item in pagedResult.Results)
+<div class="container__list-result">
+    <SearchResult />
+    <div class="container-member">
+        @if (pagedResult != null && pagedResult.Results.Length != 0)
         {
-            <div class="container">
-                <div class="container-avatar">
-                    <img src="@item.Avatar" alt="Avatar" class="member-avatar">
-                </div>
-                <div class="member">
-                    <div class="member-name">
-                        <p class="member-name1">@item.MemberName</p>
-                        <p class="member-name2">@item.ShortDescription</p>
-                    </div> 
-                    <Stars @bind-StarRating="item.StarStyle" />
-                    <div class="member-comment">
-                        @*Pop-up để comment*@
-                        <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
-                            <span id="member-comment_icon" class="material-icons">comment</span>
-                        </button>
-                        <div class="member-comment_tooltip">Bạn có điều  gì muốn gửi gắm đến mình hong!</div>
+            @foreach (var item in pagedResult.Results)
+            {
+                <div class="container">
+                    <div class="container-avatar">
+                        <img src="@item.Avatar" alt="Avatar" class="member-avatar">
                     </div>
-                    <div class="member-report">
-                        @*Pop-up để report*@
-                        <button @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
-                            <span id="member-report_icon" class="material-icons">report_problem</span>
-                        </button>
-                        <div class="member-report_tooltip">Báo cáo xấu nếu mình vi phạm nhé!</div>
+                    <div class="member">
+                        <div class="member-name">
+                            <p class="member-name1">@item.MemberName</p>
+                            <p class="member-name2">@item.ShortDescription</p>
+                        </div>
+                        <Stars @bind-StarRating="item.StarStyle" />
+                        <div class="member-comment">
+                            @*Pop-up để comment*@
+                            <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
+                                <span id="member-comment_icon" class="material-icons">comment</span>
+                            </button>
+                            <div class="member-comment_tooltip">Bạn có điều  gì muốn gửi gắm đến mình hong!</div>
+                        </div>
+                        <div class="member-report">
+                            @*Pop-up để report*@
+                            <button @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
+                                <span id="member-report_icon" class="material-icons">report_problem</span>
+                            </button>
+                            <div class="member-report_tooltip">Báo cáo xấu nếu mình vi phạm nhé!</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-    }
-    <div class="pagination-container">
-        <Pager CurrentPage="@pagedResult.CurrentPage"
-               PageCount="@pagedResult.PageCount"
-               OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+        <div class="pagination-container">
+            <Pager CurrentPage="@pagedResult.CurrentPage"
+                   PageCount="@pagedResult.PageCount"
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+        </div>
     </div>
 </div>
 
@@ -80,7 +83,7 @@
     {
         if (StarRating != 0)
         {
-            foreach(var item in pagedResult.Results)
+            foreach (var item in pagedResult.Results)
             {
                 item.StarStyle = StarRating;
             }

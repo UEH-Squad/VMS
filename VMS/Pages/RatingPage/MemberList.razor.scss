@@ -1,22 +1,25 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
-.container-member {
-    display: flex;
-    flex-direction: column;
+.container__list-result {
     width: 75%;
-    margin-top: 4%;
 
-    .container {
+    .container-member {
         display: flex;
-        flex-direction: row;
-        margin-bottom: 3%;
-        padding: 0;
-    }
+        flex-direction: column;
+        margin-top: 4%;
 
-    .pagination-container {
-        margin-left: 42%;
-        margin-bottom: 5%;
-        margin-top: 2%;
+        .container {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 3%;
+            padding: 0;
+        }
+
+        .pagination-container {
+            margin-left: 42%;
+            margin-bottom: 5%;
+            margin-top: 2%;
+        }
     }
 }
 

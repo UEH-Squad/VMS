@@ -34,7 +34,6 @@ namespace VMS.Pages.Organization.Profile
         private ILogger<EditOrganizationProfile> Logger { get; set; }
 
         private bool isLoading;
-        private bool isPreview;
         private string OrgId;
         private int count;
         private bool isErrorMessageShown = false;
@@ -64,7 +63,6 @@ namespace VMS.Pages.Organization.Profile
         private void HandleFileChanged(InputFileChangeEventArgs args)
         {
             uploadFile = args.File;
-            isPreview = true;
         }
 
         private async Task HandleImageDiscarded()
@@ -94,12 +92,12 @@ namespace VMS.Pages.Organization.Profile
             }
         }
 
-        void EditConfirm()
+        private void EditConfirm()
         {
             isEditConfirm = !isEditConfirm;
         }
 
-        void EditSuccess()
+        private void EditSuccess()
         {
             isEditSuccess = !isEditSuccess;
             if (isEditConfirm == true)
@@ -110,27 +108,30 @@ namespace VMS.Pages.Organization.Profile
 
         private async Task HandleSubmit()
         {
-            Logger.LogInformation("HandleValidSubmit called");
-            isErrorMessageShown = false;
-            isLoading = true;
-            isPreview = false;
+            isEditConfirm = !isEditConfirm;
+            if (isEditSuccess)
+            {
+                Logger.LogInformation("HandleValidSubmit called");
+                isErrorMessageShown = false;
+                isLoading = true;
 
-            try
-            {
-                if (uploadFile is not null)
+                try
                 {
-                    string oldImageName = org.Avatar;
-                    org.Avatar = await UploadService.SaveImageAsync(uploadFile, OrgId);
-                    UploadService.RemoveImage(oldImageName);
+                    if (uploadFile is not null)
+                    {
+                        string oldImageName = org.Avatar;
+                        org.Avatar = await UploadService.SaveImageAsync(uploadFile, OrgId);
+                        UploadService.RemoveImage(oldImageName);
+                    }
+                    await OrgService.UpdateOrgProfile(org, OrgId);
+                    isLoading = false;
                 }
-                await OrgService.UpdateOrgProfile(org, OrgId);
-                isLoading = false;
-            }
-            catch (Exception ex)
-            {
-                isLoading = false;
-                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
-                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+                catch (Exception ex)
+                {
+                    isLoading = false;
+                    Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                    await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+                }
             }
         }
 

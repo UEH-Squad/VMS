@@ -16,14 +16,14 @@
 
 @code {
 
-    int star;
+    double star;
     bool showYellowStars = false;
 
     [Parameter]
-    public int StarRating { get; set; }
+    public double StarRating { get; set; }
 
     [Parameter]
-    public EventCallback<int> StarRatingChanged { get; set; }
+    public EventCallback<double> StarRatingChanged { get; set; }
 
     [Parameter]
     public bool ShowYellowStars { get; set; } = false;

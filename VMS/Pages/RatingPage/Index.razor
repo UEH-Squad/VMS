@@ -1,5 +1,5 @@
-﻿@attribute [Route(Routes.RatingPage)]
-@inject IJSRuntime JsRuntime
+﻿@attribute [Route(Routes.RatingPage + "/{activityId:int}")]
+@attribute [Authorize(Roles = "Organization")]
 
 <div class="rating-page">
     <Title />
@@ -17,5 +17,4 @@
 </div>
 
 @code {
-    int starRating;
 }

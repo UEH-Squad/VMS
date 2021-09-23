@@ -1,4 +1,6 @@
 ﻿@inject IJSRuntime JsRuntime
+<div class="container__list-result">
+    <SearchResult />
 <div class="container-member">
     @if (recruitments != null && recruitments.TotalItems != 0)
     {
@@ -38,6 +40,7 @@
                OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
     </div>
 </div>
+</div>
 
 @code {
     [Parameter]
@@ -76,7 +79,7 @@
         pagedResult = GetFakeData();
         if (StarRating != 0)
         {
-            foreach(var item in pagedResult.Results)
+            foreach (var item in pagedResult.Results)
             {
                 item.StarStyle = StarRating;
             }

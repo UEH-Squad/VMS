@@ -4,20 +4,21 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.container-member {
-  display: flex;
-  flex-direction: column;
-  width: 75%;
-  margin-top: 4%; }
-  .container-member .container {
+.container__list-result {
+  width: 75%; }
+  .container__list-result .container-member {
     display: flex;
-    flex-direction: row;
-    margin-bottom: 3%;
-    padding: 0; }
-  .container-member .pagination-container {
-    margin-left: 42%;
-    margin-bottom: 5%;
-    margin-top: 2%; }
+    flex-direction: column;
+    margin-top: 4%; }
+    .container__list-result .container-member .container {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 3%;
+      padding: 0; }
+    .container__list-result .container-member .pagination-container {
+      margin-left: 42%;
+      margin-bottom: 5%;
+      margin-top: 2%; }
 
 .member {
   display: flex;

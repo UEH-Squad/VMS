@@ -19,5 +19,11 @@ namespace VMS.Pages.RatingPage
         {
             recruitments = await RecruitmentService.GetAllRecruitmentsAsync(ActivityId, page);
         }
+
+        private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment)
+        {
+            recruitment.Rating = rating;
+            await RecruitmentService.UpdateRatingAsync(recruitment.Id, rating.Value);
+        }
     }
 }

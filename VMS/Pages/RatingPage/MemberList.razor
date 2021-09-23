@@ -1,45 +1,45 @@
 ﻿@inject IJSRuntime JsRuntime
 <div class="container__list-result">
     <SearchResult />
-<div class="container-member">
-    @if (recruitments != null && recruitments.TotalItems != 0)
-    {
-        @foreach (var item in recruitments.Items)
+    <div class="container-member">
+        @if (recruitments != null && recruitments.TotalItems != 0)
         {
-            <div class="container">
-                <div class="container-avatar">
-                    <img src="@item.User.Avatar" alt="Avatar" class="member-avatar">
-                </div>
-                <div class="member">
-                    <div class="member-name">
-                        <p class="member-name1">@item.User.FullName</p>
-                        <p class="member-name2">@item.User.Introduction</p>
-                    </div> 
-                    <Stars @bind-StarRating="item.Rating" />
-                    <div class="member-comment">
-                        @*Pop-up để comment*@
-                        <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
-                            <span id="member-comment_icon" class="material-icons">comment</span>
-                        </button>
-                        <div class="member-comment_tooltip">Bạn có điều  gì muốn gửi gắm đến mình hong!</div>
+            @foreach (var item in recruitments.Items)
+            {
+                <div class="container">
+                    <div class="container-avatar">
+                        <img src="@item.User.Avatar" alt="Avatar" class="member-avatar">
                     </div>
-                    <div class="member-report">
-                        @*Pop-up để report*@
-                        <button @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
-                            <span id="member-report_icon" class="material-icons">report_problem</span>
-                        </button>
-                        <div class="member-report_tooltip">Báo cáo xấu nếu mình vi phạm nhé!</div>
+                    <div class="member">
+                        <div class="member-name">
+                            <p class="member-name1">@item.User.FullName</p>
+                            <p class="member-name2">@item.User.Introduction</p>
+                        </div>
+                        <Stars StarRating="item.Rating" StarRatingChanged="(e) => UpdateRatingAsync(e, item)"/>
+                        <div class="member-comment">
+                            @*Pop-up để comment*@
+                            <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
+                                <span id="member-comment_icon" class="material-icons">comment</span>
+                            </button>
+                            <div class="member-comment_tooltip">Bạn có điều  gì muốn gửi gắm đến mình hong!</div>
+                        </div>
+                        <div class="member-report">
+                            @*Pop-up để report*@
+                            <button @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
+                                <span id="member-report_icon" class="material-icons">report_problem</span>
+                            </button>
+                            <div class="member-report_tooltip">Báo cáo xấu nếu mình vi phạm nhé!</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-    }
-    <div class="pagination-container">
-        <Pager CurrentPage="@recruitments.PageIndex"
-               PageCount="@recruitments.TotalPages"
-               OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+        <div class="pagination-container">
+            <Pager CurrentPage="@recruitments.PageIndex"
+                   PageCount="@recruitments.TotalPages"
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+        </div>
     </div>
-</div>
 </div>
 
 @code {
@@ -106,11 +106,11 @@
         result.PageSize = 20;
         result.PageCount = result.RowCount / result.PageSize;
         result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
-        {
-            Avatar = "./img/RatingPage/Ellipse 28.png",
-            MemberName = "Phạm Thị Ngọc Ánh",
-            ShortDescription = "Thành viên vàng trong làng tình nguyện",
-        }).ToArray();
+            {
+                Avatar = "./img/RatingPage/Ellipse 28.png",
+                MemberName = "Phạm Thị Ngọc Ánh",
+                ShortDescription = "Thành viên vàng trong làng tình nguyện",
+            }).ToArray();
 
         return result;
     }
@@ -119,12 +119,12 @@
     async Task ShowCommentPopUp()
     {
         var options = new ModalOptions()
-        {
+            {
 
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
         Modal1.Show<PopUpComment>("", options);
     }
 
@@ -132,12 +132,12 @@
     async Task ShowReportPopUp()
     {
         var options = new ModalOptions()
-        {
+            {
 
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
         Modal2.Show<PopUpReportMember>("", options);
     }
 

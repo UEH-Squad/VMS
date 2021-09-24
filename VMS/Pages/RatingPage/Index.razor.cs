@@ -8,6 +8,8 @@ namespace VMS.Pages.RatingPage
 {
     public partial class Index : ComponentBase
     {
+        private bool? isRated;
+        private string searchValue;
         private int starRating;
         private string currentUserId;
         private ViewActivityViewModel activity;
@@ -31,6 +33,18 @@ namespace VMS.Pages.RatingPage
             {
                 NavigationManager.NavigateTo(Routes.Organizations + "/" + currentUserId);
             }
+        }
+
+        private void IsRatedChanged(bool? value)
+        {
+            isRated = value;
+            searchValue = string.Empty;
+        }
+
+        private void SearchValueChanged(string value)
+        {
+            searchValue = value;
+            isRated = null;
         }
     }
 }

@@ -1,28 +1,20 @@
 ﻿<div class="select-form d-flex align-items-start">
     <div class="select-form-box-1 select-form-box-1-inline d-flex align-items-center">
-        <input type="radio" class="checkbox-1" id="rated" name="option" @onclick="() => SubmitRating1()" />
+        <input type="radio" class="checkbox-1" id="rated" name="option" @onclick="async () => await RadioButtonChanged(true)" />
         <label class="label-1" for="rated">Đã đánh giá</label>
     </div>
     <div class="select-form-box-2 select-form-box-2-inline d-flex align-items-center">
-        <input type="radio" class="checkbox-2" id="none-rated" name="option" @onclick="() => SubmitRating2()" />
+        <input type="radio" class="checkbox-2" id="none-rated" name="option" @onclick="async () => await RadioButtonChanged(false)" />
         <label class="label-2" for="none-rated">Chưa đánh giá</label>
     </div>
 </div>
 
 @code {
     [Parameter]
-    public int ShowRating { get; set; }
-    [Parameter]
-    public EventCallback<int> ShowRatingChanged { get; set; }
+    public EventCallback<bool?> IsRatedChanged { get; set; }
 
-    private void SubmitRating1()
+    private async Task RadioButtonChanged(bool value)
     {
-
+        await IsRatedChanged.InvokeAsync(value);
     }
-
-    private void SubmitRating2()
-    {
-       
-    }
-
 }

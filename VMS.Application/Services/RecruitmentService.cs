@@ -23,7 +23,7 @@ namespace VMS.Application.Services
             _identityService = identityService;
         }
 
-        public async Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage)
+        public async Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage, string searchValue, bool? isRated)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -39,19 +39,37 @@ namespace VMS.Application.Services
                 PageSize = 20,
             };
 
+            if (isRated.HasValue)
+            {
+                if (isRated.Value)
+                {
+                    specification.Conditions.Add(r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport));
+                }
+                else
+                {
+                    specification.Conditions.Add(r => !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport));
+                }
+            }
+            
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                specification.Conditions.Add(r => r.User.FullName.ToLower().Contains(searchValue.ToLower()));
+            }
+
             PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
 
             PaginatedList<RecruitmentViewModel> paginatedList = new(
                 recruitments.Items.Select(x => new RecruitmentViewModel()
                 {
                     Id = x.Id,
-                    Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Rank,
+                    Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating && !z.IsReport)?.Rank,
                     User = _identityService.FindUserById(x.UserId)
                 }).ToList(),
                 recruitments.TotalItems,
                 currentPage,
                 recruitments.PageSize
             );
+
             return paginatedList;
         }
 

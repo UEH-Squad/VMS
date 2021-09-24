@@ -5,12 +5,12 @@
     <Title />
     <div class="header-page">
         <div class="search-box">
-            <VMS.Pages.ActivitySearchPage.SearchBox />
+            <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="SearchValueChanged"/>
         </div>
-        <FilterBar />
+        <FilterBar IsRatedChanged="IsRatedChanged"/>
     </div>
     <div class="body-page">
-        <MemberList ActivityId=@ActivityId StarRating="starRating" />
+        <MemberList ActivityId=@ActivityId StarRating=@starRating SearchValue=@searchValue IsRated=@isRated />
         <FilterRatingAll @bind-StarRating="starRating" />
     </div>
 </div>

@@ -11,6 +11,8 @@ namespace VMS.Pages.RatingPage
         private PaginatedList<RecruitmentViewModel> recruitments = new(new(), 0, 1, 1);
 
         [Parameter] public int ActivityId { get; set; }
+        [Parameter] public bool? IsRated { get; set; }
+        [Parameter] public string SearchValue { get; set; }
 
         [Inject]
         private IRecruitmentService RecruitmentService { get; set; }
@@ -22,7 +24,7 @@ namespace VMS.Pages.RatingPage
                 await UpdateRatingAsync(StarRating);
                 StarRating = 0;
             }
-            recruitments = await RecruitmentService.GetAllRecruitmentsAsync(ActivityId, page);
+            recruitments = await RecruitmentService.GetAllRecruitmentsAsync(ActivityId, page, SearchValue, IsRated);
         }
 
         private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment = null)

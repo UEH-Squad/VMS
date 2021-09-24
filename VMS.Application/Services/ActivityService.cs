@@ -462,7 +462,6 @@ namespace VMS.Application.Services
 
         private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
         {
-            var total = recruitments.Where(a => a.RecruitmentRatings.Any(x => !x.IsOrgRating && !x.IsReport)).Count();
             return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
                     /recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
         }

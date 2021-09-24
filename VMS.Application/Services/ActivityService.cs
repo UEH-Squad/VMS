@@ -443,7 +443,8 @@ namespace VMS.Application.Services
                 {
                     a => a.OrgId == Id,
                     type != "ended"? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now,
-                    a => a.StartDate <= DateTime.Now
+                    a => a.StartDate <= DateTime.Now,
+                    a => a.IsDeleted == false
                 },
                 Includes = activities => activities.Include(x => x.Favorites)
             };
@@ -463,10 +464,10 @@ namespace VMS.Application.Services
             });
             switch (type)
             {
-                case "curent": return activityViewModels.ToList(); break;
-                case "favorite": return activityViewModels.OrderByDescending(a => a.Favorites.Count).Take(8).ToList(); break;
-                case "ended": return activityViewModels.OrderByDescending(a=> a.EndDate).Take(4).ToList(); break;
-                default: return null; break;
+                case "curent": return activityViewModels.ToList(); 
+                case "favorite": return activityViewModels.OrderByDescending(a => a.Favorites.Count).Take(8).ToList(); 
+                case "ended": return activityViewModels.OrderByDescending(a=> a.EndDate).Take(4).ToList();
+                default: return null; 
             }
         }
 
@@ -486,6 +487,26 @@ namespace VMS.Application.Services
             }
             if (QuantityRating != 0) return (float)Math.Round(SumRating / QuantityRating, 1);
             else return 5;
+        }
+
+        public async Task UpdateStatusActAsync(int activityId, string status)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    a => a.Id == activityId
+                }
+            };
+            Activity activity = await _repository.GetAsync(dbContext, specification);
+            activity.UpdatedDate = DateTime.Now;
+            if(status == "closed")
+            activity.IsClosed = true;
+            if (status == "deleted")
+            activity.IsDeleted = true;
+            await _repository.UpdateAsync(dbContext, activity);
         }
     }
 }

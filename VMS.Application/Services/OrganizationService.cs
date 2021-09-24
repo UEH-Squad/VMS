@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -15,10 +15,14 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public class OrganizationService : IOrganizationService
+    public class OrganizationService : BaseService,IOrganizationService
     {
         private readonly UserManager<User> _userManager;
-        public OrganizationService(UserManager<User> userManager)
+        public OrganizationService(UserManager<User> userManager, 
+                                   IRepository repository,
+                                   IDbContextFactory<VmsDbContext> dbContextFactory,
+                                   IMapper mapper,
+                                   IIdentityService identityService) : base(repository, dbContextFactory, mapper)
         {
             _userManager = userManager;
         }
@@ -43,7 +47,7 @@ namespace VMS.Application.Services
                                                    .SingleOrDefaultAsync(x => x.Id == orgId)).Result;
             else return null;
         }
-        public  OrgRatingViewModel GetOrgRating(string Id)
+        public  UserViewModel GetOrgRating(string Id)
         {
             User org = GetOrg(Id);
             List<Recruitment> recruitments = org.Recruitments.ToList();
@@ -58,7 +62,7 @@ namespace VMS.Application.Services
                     SumRating = SumRating + item.Rank;
                 }
             }
-            OrgRatingViewModel orgRatingViewModels = new OrgRatingViewModel();
+            UserViewModel orgRatingViewModels = new UserViewModel();
             orgRatingViewModels.FullName = org.FullName;
             orgRatingViewModels.Avatar = org.Avatar;
             orgRatingViewModels.CreatedDate = org.CreatedDate;
@@ -76,6 +80,27 @@ namespace VMS.Application.Services
             else orgRatingViewModels.AverageRating = 5;
 
             return orgRatingViewModels; 
+        }
+
+        public async Task UpdateUserAsync(UpdateUserViewModel userViewModel, string userId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<User> specification = new()
+            {
+                Conditions = new List<Expression<Func<User, bool>>>
+                {
+                    a => a.Id == userId
+                },
+                Includes = a => a.Include(x => x.Activities)
+            };
+
+            User user = await _repository.GetAsync(dbContext, specification);
+            user.UpdatedBy = userId;
+            user.UpdatedDate = DateTime.Now;
+            user.Avatar = userViewModel.Avatar;
+
+            await _repository.UpdateAsync(dbContext, user);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@inject IJSRuntime JS;
 
-@using VMS.Application.ViewModels
+@using VMS.Application.ViewModels;
+@using VMS.Application.Interfaces;
 
 <div class="container">
     <div class="row act">
@@ -8,19 +9,21 @@
         <div class="owl-carousel owl-theme organize__carousel position-relative">
             @foreach (var item in Datas)
             {
-                <div class="act-container item position-relative">
-                    <div class="img-container position-relative">
-                        <img src="@item.Banner" alt="" class="act-img">
-                        <div class="@(item.IsClosed ? "overlay" : "")"></div>
-                    </div>
-                    <div class="act-content">
-                        <a href="@Routes.ActivityInfo" class="@(item.IsClosed ? "content-cl" : "content-nm")">
-                            <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item.Name</h3>
-                        </a>
-                    </div>
+            <div class="act-container item position-relative">
+                <div class="img-container position-relative">
+                    <img src="@item.Banner" alt="" class="act-img">
+                    <div class="@(item.IsClosed ? "overlay" : "")"></div>
+                </div>
+                <div class="act-content">
+                    <a href="@Routes.ActivityInfo" class="@(item.IsClosed ? "content-cl" : "content-nm")">
+                        <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item.Name</h3>
+                    </a>
+                </div>
+                @if (Owner == true)
+                {
                     <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                         <li class="edit pb-2">Chỉnh sửa</li>
-                        <li @onclick="(() => ShowModal())"  class="delete pb-2">Xóa</li>
+                        <li @onclick="(() => ShowModal())" class="delete pb-2">Xóa</li>
                         <li @onclick="CloseConfirm" class="close pb-2">Đóng hoạt động</li>
                     </ul>
                     @if (HaveControl)
@@ -29,7 +32,9 @@
                             more_horiz
                         </i>
                     }
-                </div>
+                }
+
+            </div>
             }
         </div>
         @if (HaveDecor)
@@ -127,8 +132,12 @@
     [Parameter] public bool HaveControl { get; set; } = false;
     [Parameter] public bool HaveDecor { get; set; } = true;
     [Parameter] public string Title { get; set; }
+    [Parameter] public bool Owner { get; set; }
+    [Parameter] public string UserId { get; set; }
     [Parameter] public List<ActivityViewModel> Datas { get; set; }
     [CascadingParameter] public IModalService Modal { get; set; }
+    [Inject]
+    private IActivityService ActivityService { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -174,7 +183,7 @@
         isDeleteSuccess = !isDeleteSuccess;
     }
 
-    void CloseSuccess()
+    private async Task CloseSuccess()
     {
         if (isCloseConfirm == true)
         {
@@ -182,12 +191,15 @@
         }
 
         isCloseSuccess = !isCloseSuccess;
-        Datas[pendingId].IsClosed = true;
+        await ActivityService.UpdateStatusActAsync(pendingId, "closed");
+        var act = Datas.Find(a => a.Id == pendingId);
+        act.IsClosed = true;
     }
 
     private void ShowModal()
     {
-
+        var parameters = new ModalParameters();
+        parameters.Add("id", pendingId);
         var options = new ModalOptions()
         {
             HideCloseButton = true,
@@ -195,6 +207,6 @@
             UseCustomLayout = true,
         };
 
-        Modal.Show<DeleteConfirm>("", options);
+        Modal.Show<DeleteConfirm>("",parameters, options);
     }
 }

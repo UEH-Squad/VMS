@@ -4,7 +4,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Application.ViewModels
 {
-    public class OrgRatingViewModel
+    public class UserViewModel
     {
         public string FullName { get; set; }
         public string Avatar { get; set; }

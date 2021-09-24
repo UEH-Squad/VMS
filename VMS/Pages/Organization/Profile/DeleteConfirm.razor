@@ -1,4 +1,6 @@
-﻿
+﻿@using VMS.Application.Interfaces;
+@using VMS.Application.ViewModels;
+
 <div class="pop-up">
     <div class="center-screen">
         <div class="pop-up-container border-10 @(isConfirmDelete ? "d-block" : "d-none")">
@@ -33,17 +35,20 @@
 @code {
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
+    [Parameter] public int id { get; set; }
 
     bool isConfirmDelete = true;
-    bool isDeleteSuccess;
+    [Inject]
+    private IActivityService ActivityService { get; set; }
 
     private async Task CloseModal()
     {
         await Modal.CloseAsync();
     }
 
-    void DeleteSuccess()
+    private async Task DeleteSuccess()
     {
+        await ActivityService.UpdateStatusActAsync(id, "deleted");
         isConfirmDelete = !isConfirmDelete;
     }
 

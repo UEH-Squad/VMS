@@ -3,10 +3,10 @@
 @using VMS.Application.ViewModels
 @using VMS.Application.Interfaces
 
-<Information UserId="@UserId"></Information>
+<Information UserId="@UserId" Owner="@Owner"></Information>
 <Vision></Vision>
 <Mission></Mission>
-<Act  Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas="actCurent"/>
+<Act  Title="đang diễn ra" Owner="@Owner" HaveControl="true" HaveDecor="true" UserId="@UserId" Datas="actCurent"/>
 <Act Title="được yêu thích" HaveDecor="false"  Datas="actFavorite"/>
 <ActTookPlace UserId="@UserId"></ActTookPlace>
 
@@ -14,15 +14,21 @@
 @code {
     private List<ActivityViewModel> actCurent = new();
     private List<ActivityViewModel> actFavorite = new();
-    [Parameter]
-    public bool Owner { get; set; }
+    public bool Owner;
     [Parameter]
     public string UserId { get; set; }
     [Inject]
     private IActivityService ActivityService { get; set; }
+    [Inject]
+    private IIdentityService IdentityService { get; set; }
     protected async override Task OnInitializedAsync()
     {
         actCurent = await ActivityService.GetOrgActs(UserId, "curent");
         actFavorite = await ActivityService.GetOrgActs(UserId, "favorite");
+        if (!string.Equals(UserId, IdentityService.GetCurrentUserId()))
+        {
+            Owner = false;
+        }
+        else Owner = true;
     }
 }

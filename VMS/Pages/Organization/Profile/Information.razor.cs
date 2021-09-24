@@ -1,59 +1,63 @@
-﻿using System.Threading.Tasks;
-using VMS.Application.Interfaces;
+﻿using VMS.Application.Interfaces;
 using Microsoft.AspNetCore.Components;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components.Forms;
-using VMS.Application.Services;
+using Blazored.Modal.Services;
+using System.Threading.Tasks;
 using Blazored.Modal;
 
 namespace VMS.Pages.Organization.Profile
 {
     public partial class Information : ComponentBase
     {
-        private string message;
-        private string avatar;
-        private IBrowserFile file;
-        private OrgRatingViewModel org;
-        [Parameter]
-        public bool Owner { get; set; }
+        private UserViewModel org;
         [Parameter]
         public string UserId { get; set; }
+        [Parameter]
+        public bool Owner { get; set; }
         [Inject]
         private IOrganizationService OrganizationService { get; set; }
-         [Inject]
-        protected IUploadService UploadService { get; set; }
-        [Inject]
-        private IIdentityService IdentityService { get; set; }
         protected override void OnInitialized()
         {
             org = OrganizationService.GetOrgRating(UserId);
-            if (!string.Equals(UserId, IdentityService.GetCurrentUserId()))
-            {
-                Owner = false;
-            }
-            else Owner = true;
         }
+        public string avatar;
+        public IBrowserFile file;
+        [Inject]
+        protected IUploadService UploadService { get; set; }
+        [CascadingParameter]
+        public IModalService Modal { get; set; }
 
-        private async Task OnInputFileChangeAsync(InputFileChangeEventArgs e)
+        async Task ShowModal(InputFileChangeEventArgs e)
         {
+            if (e.File.ContentType == "image/jpeg")
+            {
+                file = e.File;
+                avatar = await UploadService.GetDataUriAsync(file);
+            }
+            var parameters = new ModalParameters();
+            parameters.Add("avatar", avatar);
             var options = new ModalOptions()
             {
                 HideCloseButton = true,
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true,
             };
-            Modal.Show<Notification>("", options);
-            if (e.File.ContentType != "image/jpeg")
+           var result = await Modal.Show<Notification>("", parameters, options).Result;
+            if ((bool)result.Data)
             {
-                message = $"File không đúng định dạng..";
-                this.StateHasChanged();
+                org.Avatar = avatar;
             }
-            else
+
+        }
+
+        private bool HaftStar(double rate, int star)
+        {
+            if (rate - star >= 0 && rate - star < 0.5)
             {
-                message = "";
-                file = e.File;
-                avatar = await UploadService.GetDataUriAsync(file);
+                return true;
             }
+            return false;
         }
     }
 

@@ -15,7 +15,7 @@
                             <p class="member-name1">@item.User.FullName</p>
                             <p class="member-name2">@item.User.Introduction</p>
                         </div>
-                        <Stars StarRating="item.Rating" StarRatingChanged="(e) => UpdateRatingAsync(e, item)"/>
+                        <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)"/>
                         <div class="member-comment">
                             @*Pop-up để comment*@
                             <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
@@ -73,18 +73,6 @@
 
     private PagedResult<FakeData> pagedResult;
     private int page = 1;
-
-    protected override void OnParametersSet()
-    {
-        pagedResult = GetFakeData();
-        if (StarRating != 0)
-        {
-            foreach (var item in pagedResult.Results)
-            {
-                item.StarStyle = StarRating;
-            }
-        }
-    }
 
     private async Task HandlePageChanged()
     {

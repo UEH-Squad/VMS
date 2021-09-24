@@ -8,22 +8,30 @@ namespace VMS.Pages.RatingPage
 {
     public partial class MemberList : ComponentBase
     {
-        private PaginatedList<RecruitmentViewModel> recruitments = new(new(), 0, 1, 1); 
+        private PaginatedList<RecruitmentViewModel> recruitments = new(new(), 0, 1, 1);
 
         [Parameter] public int ActivityId { get; set; }
 
         [Inject]
         private IRecruitmentService RecruitmentService { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
+            if (StarRating != 0)
+            {
+                await UpdateRatingAsync(StarRating);
+                StarRating = 0;
+            }
             recruitments = await RecruitmentService.GetAllRecruitmentsAsync(ActivityId, page);
         }
 
-        private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment)
+        private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment = null)
         {
-            recruitment.Rating = rating;
-            await RecruitmentService.UpdateRatingAsync(rating.Value, recruitment.Id);
+            await RecruitmentService.UpdateRatingAsync(rating.Value, recruitment?.Id);
+            if (recruitment != null)
+            {
+                recruitment.Rating = rating;
+            }
         }
     }
 }

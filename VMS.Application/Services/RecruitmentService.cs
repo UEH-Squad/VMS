@@ -86,9 +86,10 @@ namespace VMS.Application.Services
                 {
                     recruitmentRating.Rank = rank;
                 }
+                await _repository.UpdateAsync(dbContext, recruitment);
             }
 
-            await _repository.UpdateAsync(dbContext, recruitments);
+            //await _repository.UpdateAsync(dbContext, recruitments);
         }
     }
 }

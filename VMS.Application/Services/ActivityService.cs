@@ -446,7 +446,7 @@ namespace VMS.Application.Services
                     a => a.StartDate <= DateTime.Now,
                     a => a.IsDeleted == false
                 },
-                Includes = activities => activities/*.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)*/
+                Includes = activities => activities.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
                                                     .Include(x => x.Favorites)                             
             };
 
@@ -462,7 +462,7 @@ namespace VMS.Application.Services
                 MemberQuantity = x.MemberQuantity,
                 ActivityAddresses = x.ActivityAddresses,
                 EndDate = x.EndDate,
-                //Rating = GetRateOfActivity(x.Recruitments)
+                Rating = GetRateOfActivity(x.Recruitments)
             });
             return type switch
             {

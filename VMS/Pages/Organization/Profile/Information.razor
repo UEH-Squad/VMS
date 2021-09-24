@@ -35,26 +35,27 @@
                         <a href="@Routes.EditProfile" class="d-flex align-self-center">
                             #@org?.Rank @*There will be processing code in another place*@
                         </a>
-                        <div class="org-card__info__rate">
-                            <span class="material-icons-outlined" style="color:@(org.AverageRating >= 0 ? "#EDF131" : "#B4B4B4")">
-                                star@(HaftStar(org.AverageRating,0)?"_half":"")
-                            </span>
-                            <span class="material-icons-outlined" style="color:@(org.AverageRating >= 1 ? "#EDF131" : "#B4B4B4")">
-                                star@(HaftStar(org.AverageRating,1)?"_half":"")
-                            </span>
-                            <span class="material-icons-outlined" style="color:@(org.AverageRating >= 2 ? "#EDF131" : "#B4B4B4")">
-                                star@(HaftStar(org.AverageRating, 2)?"_half":"")
-                            </span>
-                            <span class="material-icons-outlined" style="color:@(org.AverageRating >= 3 ? "#EDF131" : "#B4B4B4")">
-                                star@(HaftStar(org.AverageRating, 3)?"_half":"")
-                            </span>
-                            <span class="material-icons-outlined" style="color:@(org.AverageRating >= 4 ? "#EDF131" : "#B4B4B4")">
-                                star@(HaftStar(org.AverageRating, 4)?"_half":"")
-                            </span>
-                            <br />
+                        <div>
+                            <p class="mb-2 d-flex justify-content-evenly align-self-end">
+                                <span class="information__rank-number">@org?.AverageRating</span>
+                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 0 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(org.AverageRating,0)?"_half":"")
+                                </i>
+                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 1 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(org.AverageRating,1)?"_half":"")
+                                </i>
+                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 2 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(org.AverageRating, 2)?"_half":"")
+                                </i>
+                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 3 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(org.AverageRating, 3)?"_half":"")
+                                </i>
+                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 4 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(org.AverageRating, 4)?"_half":"")
+                                </i>
+                            </p>
                             <span>@org.QuantityRating xếp hạng</span>
                         </div>
-                        
                     </div>
                     <div class="col-right information__contact">
                         <p class="d-flex align-self-center">

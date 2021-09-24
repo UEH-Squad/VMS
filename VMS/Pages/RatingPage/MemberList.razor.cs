@@ -23,7 +23,7 @@ namespace VMS.Pages.RatingPage
         private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment)
         {
             recruitment.Rating = rating;
-            await RecruitmentService.UpdateRatingAsync(recruitment.Id, rating.Value);
+            await RecruitmentService.UpdateRatingAsync(rating.Value, recruitment.Id);
         }
     }
 }

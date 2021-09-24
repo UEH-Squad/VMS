@@ -7,6 +7,6 @@ namespace VMS.Application.Interfaces
     public interface IRecruitmentService
     {
         Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage);
-        Task UpdateRatingAsync(int recruitmentId, double rating);
+        Task UpdateRatingAsync(double rank, int? recruitmentId = null);
     }
 }

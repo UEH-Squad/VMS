@@ -55,37 +55,40 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        public async Task UpdateRatingAsync(int recruitmentId, double rank)
+        public async Task UpdateRatingAsync(double rank, int? recruitmentId = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Specification<Recruitment> specification = new()
             {
-                Conditions = new List<Expression<Func<Recruitment, bool>>>()
-                {
-                    r => r.Id == recruitmentId
-                },
                 Includes = r => r.Include(x => x.RecruitmentRatings)
             };
 
-            Recruitment recruitment = await _repository.GetAsync(dbContext, specification);
-
-            RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating);
-
-            if (recruitmentRating is null)
+            if (recruitmentId.HasValue)
             {
-                recruitment.RecruitmentRatings.Add(new()
+                specification.Conditions.Add(r => r.Id == recruitmentId.Value);
+            }
+
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            foreach (var recruitment in recruitments)
+            {
+                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating);
+                if (recruitmentRating is null)
                 {
-                    Rank = rank,
-                    IsOrgRating = true
-                });
-            }
-            else
-            {
-                recruitmentRating.Rank = rank;
+                    recruitment.RecruitmentRatings.Add(new()
+                    {
+                        Rank = rank,
+                        IsOrgRating = true
+                    });
+                }
+                else
+                {
+                    recruitmentRating.Rank = rank;
+                }
             }
 
-            await _repository.UpdateAsync(dbContext, recruitment);
+            await _repository.UpdateAsync(dbContext, recruitments);
         }
     }
 }

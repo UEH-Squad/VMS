@@ -442,11 +442,12 @@ namespace VMS.Application.Services
                 Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
                 {
                     a => a.OrgId == Id,
-                    type != "ended"? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now,
+                    type == "favorite"? a => a.MemberQuantity !=0 : (type != "ended"? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now),
                     a => a.StartDate <= DateTime.Now,
                     a => a.IsDeleted == false
                 },
-                Includes = activities => activities.Include(x => x.Favorites)
+                Includes = activities => activities/*.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)*/
+                                                    .Include(x => x.Favorites)                             
             };
 
             List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
@@ -457,36 +458,25 @@ namespace VMS.Application.Services
                 Name = x.Name,
                 Banner = x.Banner,
                 IsClosed = x.IsClosed,
-                Favorites = x.Favorites,
+                Favorite = x.Favorites.Count,
                 MemberQuantity = x.MemberQuantity,
                 ActivityAddresses = x.ActivityAddresses,
-                Rating = GetActRating(x.Id)
+                EndDate = x.EndDate,
+                //Rating = GetRateOfActivity(x.Recruitments)
             });
-            switch (type)
+            return type switch
             {
-                case "curent": return activityViewModels.ToList(); 
-                case "favorite": return activityViewModels.OrderByDescending(a => a.Favorites.Count).Take(8).ToList(); 
-                case "ended": return activityViewModels.OrderByDescending(a=> a.EndDate).Take(4).ToList();
-                default: return null; 
-            }
+                "curent" => activityViewModels.ToList(),
+                "favorite" => activityViewModels.OrderByDescending(a => a.Favorite).Take(8).ToList(),
+                "ended" => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
+                _ => null
+            };
         }
 
-        private float GetActRating(int id)
+        private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
         {
-            double QuantityRating = 0;
-            double SumRating = 0; 
-            List<Recruitment> recruitments = new List<Recruitment>().Where(a => a.ActivityId == id).ToList();
-            foreach(var rcm in recruitments)
-            {
-                var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
-                if (item != null)
-                {
-                    QuantityRating = QuantityRating + 1;
-                    SumRating = SumRating + item.Rank;
-                }
-            }
-            if (QuantityRating != 0) return (float)Math.Round(SumRating / QuantityRating, 1);
-            else return 5;
+            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
+                    / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
         }
 
         public async Task UpdateStatusActAsync(int activityId, string status)

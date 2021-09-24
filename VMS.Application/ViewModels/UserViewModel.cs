@@ -16,6 +16,7 @@ namespace VMS.Application.ViewModels
         public string PhoneNumber { get; set; }
         public float AverageRating { get; set; }
        public double QuantityRating { get; set; }
-       public double RankRating { get; set; }
+       public double Rank { get; set; }
+        public string Introduction { get; set; }
     }
 }

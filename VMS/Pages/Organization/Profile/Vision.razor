@@ -1,30 +1,8 @@
 ﻿<div class="vision d-flex justify-content-center position-relative">
     <img class="w-100" src="./img/OrganizationProfile/Vision.png" alt="" />
-    @foreach (var item in fakeDatas)
-    {
-        <h3 class="position-absolute text-center">@item.Name</h3>
-        <p class="position-absolute w-75 text-center">@item.Content</p>
-    }
+        <h3 class="position-absolute text-center">@org?.FullName</h3>
+        <p class="position-absolute w-75 text-center">@org?.Introduction</p>
 </div>
 
 @code {
-    protected override void OnInitialized()
-    {
-        for (int i = 0; i < 1; i++)
-        {
-            fakeDatas.Add(new FakeData()
-            {
-                Name = "Công nghệ thông tin kinh doanh",
-                Content = "This year in Tokyo, we add to a history with the Olympics that dates back to 1896 when seven members of the Harvard community brought home eight gold medals.",
-            });
-        }
-    }
-
-    private List<FakeData> fakeDatas = new();
-
-    private class FakeData
-    {
-        public string Name { get; set; }
-        public string Content { get; set; }
-    }
 }

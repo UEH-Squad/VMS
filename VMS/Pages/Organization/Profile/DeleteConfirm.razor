@@ -35,20 +35,17 @@
 @code {
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
-    [Parameter] public int id { get; set; }
 
     bool isConfirmDelete = true;
-    [Inject]
-    private IActivityService ActivityService { get; set; }
+    bool isDeleteSuccess;
 
     private async Task CloseModal()
     {
         await Modal.CloseAsync();
     }
 
-    private async Task DeleteSuccess()
+    void DeleteSuccess()
     {
-        await ActivityService.UpdateStatusActAsync(id, "deleted");
         isConfirmDelete = !isConfirmDelete;
     }
 

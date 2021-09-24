@@ -14,20 +14,20 @@
                             <div class="act-ctn col-9 ms-auto ps-4 pe-3 my-2">
                                 <a href="" class="act-title">@item?.Name</a>
                                 <div class="act-ranking  my-3 lh-1">
-                                    <span class="material-icons-outlined" style="color:@(item.Rating >= 0 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 0) ? "_half" : "")
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 0 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating,0)?"_half":"")
                                     </span>
-                                    <span class="material-icons-outlined" style="color:@(item.Rating >= 1 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 1) ? "_half" : "")
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 1 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating,1)?"_half":"")
                                     </span>
-                                    <span class="material-icons-outlined" style="color:@(item.Rating >= 2 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 2) ? "_half" : "")
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 2 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating, 2)?"_half":"")
                                     </span>
-                                    <span class="material-icons-outlined" style="color:@(item.Rating >= 3 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 3) ? "_half" : "")
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 3 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating, 3)?"_half":"")
                                     </span>
-                                    <span class="material-icons-outlined" style="color:@(item.Rating >= 4 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 4) ? "_half" : "")
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 4 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating, 4)?"_half":"")
                                     </span>
                                 </div>
                                 <div class="act-footer">

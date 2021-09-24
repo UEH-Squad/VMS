@@ -38,7 +38,7 @@ namespace VMS.Application.Services
             if (orgRole == true) return user;
             else return null;
         }
-        public User GetOrg(string orgId)
+        private User GetOrg(string orgId)
         {
             if (GetOrganizer(orgId) != null)
                 return Task.Run(() => _userManager.Users.Include(x => x.UserAreas).ThenInclude(x => x.Area)
@@ -47,9 +47,11 @@ namespace VMS.Application.Services
                                                    .SingleOrDefaultAsync(x => x.Id == orgId)).Result;
             else return null;
         }
-        public  UserViewModel GetOrgRating(string Id)
+        public  UserViewModel GetOrgFull(string Id)
         {
             User org = GetOrg(Id);
+            UserViewModel orgRatingViewModels = new UserViewModel();
+            orgRatingViewModels = _mapper.Map<UserViewModel>(org);
             List<Recruitment> recruitments = org.Recruitments.ToList();
             double QuantityRating = 0;
             double SumRating = 0;
@@ -62,16 +64,6 @@ namespace VMS.Application.Services
                     SumRating = SumRating + item.Rank;
                 }
             }
-            UserViewModel orgRatingViewModels = new UserViewModel();
-            orgRatingViewModels.FullName = org.FullName;
-            orgRatingViewModels.Avatar = org.Avatar;
-            orgRatingViewModels.CreatedDate = org.CreatedDate;
-            orgRatingViewModels.Activities = org.Activities;
-            orgRatingViewModels.Mission = org.Mission;
-            orgRatingViewModels.UserAreas = org.UserAreas;
-            orgRatingViewModels.Email = org.Email;
-            orgRatingViewModels.PhoneNumber = org.PhoneNumber;
-            orgRatingViewModels.RankRating = org.Rank;
             orgRatingViewModels.QuantityRating = QuantityRating;
             if (QuantityRating != 0)
             {

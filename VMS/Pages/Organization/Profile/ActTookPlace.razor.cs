@@ -18,9 +18,9 @@ namespace VMS.Pages.Organization.Profile
             actEnded = await ActivityService.GetOrgActs(UserId, "ended");
         }
 
-        private bool HaftStar(float rate, int star)
+        private bool HaftStar(double rate, int star)
         {
-            if (rate - star >= 0 && rate - star < 0.5)
+            if (rate - star > 0 && rate - star <= 0.5)
             {
                 return true;
             }

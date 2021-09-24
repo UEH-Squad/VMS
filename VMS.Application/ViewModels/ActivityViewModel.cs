@@ -20,14 +20,13 @@ namespace VMS.Application.ViewModels
         public bool IsVirtual { get; set; }
         public bool IsPin { get; set; }
         public bool IsClosed { get; set; }
-        public float Rating { get; set; }
+        public double Rating { get; set; }
         public bool IsMenu { get; set; }
         public bool IsDeleted { get; set; }
         public User Organizer { get; set; }
-
+        public int Favorite { get; set; }
         public ICollection<ActivityAddress> ActivityAddresses { get; set; }
         public List<ActivitySkill> ActivitySkills { get; set; }
-        public ICollection<Favorite> Favorites { get; set; }
 
     }
 }

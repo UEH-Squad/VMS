@@ -7,8 +7,7 @@ namespace VMS.Application.Interfaces
 {
     public interface IOrganizationService
     {
-        User GetOrg(string orgId);
-        UserViewModel GetOrgRating(string Id);
+        UserViewModel GetOrgFull(string Id);
         Task UpdateUserAsync(UpdateUserViewModel userViewModel, string userId);
     }
 }

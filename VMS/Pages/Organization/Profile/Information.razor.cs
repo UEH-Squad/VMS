@@ -19,7 +19,7 @@ namespace VMS.Pages.Organization.Profile
         private IOrganizationService OrganizationService { get; set; }
         protected override void OnInitialized()
         {
-            org = OrganizationService.GetOrgRating(UserId);
+            org = OrganizationService.GetOrgFull(UserId);
         }
         public string avatar;
         public IBrowserFile file;
@@ -53,7 +53,7 @@ namespace VMS.Pages.Organization.Profile
 
         private bool HaftStar(double rate, int star)
         {
-            if (rate - star >= 0 && rate - star < 0.5)
+            if (rate - star >= 0 && rate - star <= 0.5)
             {
                 return true;
             }

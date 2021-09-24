@@ -32,29 +32,13 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
                     r => r.ActivityId == activityId,
-                    r => r.AcceptTime > r.EnrollTime
+                    r => r.AcceptTime > r.EnrollTime,
+                    GetConditionFromSearchValueAndFilter(searchValue, isRated)
                 },
                 Includes = r => r.Include(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 20,
             };
-
-            if (isRated.HasValue)
-            {
-                if (isRated.Value)
-                {
-                    specification.Conditions.Add(r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport));
-                }
-                else
-                {
-                    specification.Conditions.Add(r => !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport));
-                }
-            }
-            
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                specification.Conditions.Add(r => r.User.FullName.ToLower().Contains(searchValue.ToLower()));
-            }
 
             PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
 
@@ -108,6 +92,28 @@ namespace VMS.Application.Services
             }
 
             //await _repository.UpdateAsync(dbContext, recruitments);
+        }
+
+        private static Expression<Func<Recruitment, bool>> GetConditionFromSearchValueAndFilter(string searchValue, bool? isRated)
+        {
+            if (isRated.HasValue)
+            {
+                if (isRated.Value)
+                {
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport);
+                }
+                else
+                {
+                    return r => !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                return r => r.User.FullName.ToLower().Contains(searchValue.ToLower());
+            }
+
+            return r => true;
         }
     }
 }

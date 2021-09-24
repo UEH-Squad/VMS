@@ -23,21 +23,18 @@
                         <div class="col-8 px-0">
                             <InputText @bind-Value="@org.UserName" class="form-input form-control" />
                         </div>
-
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Gmail <span class="required-asterick">(*)</span></p>
                         <div class="col-8 px-0">
                             <InputText @bind-Value="@org.Email" class="form-input form-control" />
                         </div>
-
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Điện thoại <span class="required-asterick">(*)</span></p>
                         <div class="col-8 px-0">
                             <InputText @bind-Value="@org.PhoneNumber2" class="form-input form-control" />
                         </div>
-
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực <span class="required-asterick">(*)</span></p>
@@ -52,12 +49,10 @@
                                         </div>
                                     }
                                 </div>
-
                                 <div class="form-field-item ms-auto item-add">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row form-item">
@@ -67,7 +62,6 @@
                                 <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
-
                         </div>
                     </div>
                     <div class="row form-item mb-0">

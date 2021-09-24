@@ -8,5 +8,6 @@ namespace VMS.Application.Interfaces
     {
         Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage, string searchValue, bool? isRated);
         Task UpdateRatingAsync(double rank, int? recruitmentId = null);
+        Task<double> GetRatingByIdAsync(int recruimentId, bool isOrgRating = false);
     }
 }

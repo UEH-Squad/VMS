@@ -57,6 +57,25 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
+        public async Task<double> GetRatingByIdAsync(int recruimentId, bool isOrgRating = false)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<RecruitmentRating> specification = new()
+            {
+                Conditions = new List<Expression<Func<RecruitmentRating, bool>>>()
+                {
+                    r => r.RecruitmentId == recruimentId,
+                    r => r.IsOrgRating == isOrgRating,
+                    r => !r.IsReport
+                }
+            };
+
+            RecruitmentRating recruitmentRating = await _repository.GetAsync(dbContext, specification);
+
+            return (recruitmentRating is null ? 0 : recruitmentRating.Rank);
+        }
+
         public async Task UpdateRatingAsync(double rank, int? recruitmentId = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -75,7 +94,7 @@ namespace VMS.Application.Services
 
             foreach (var recruitment in recruitments)
             {
-                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating);
+                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating && !x.IsReport);
                 if (recruitmentRating is null)
                 {
                     recruitment.RecruitmentRatings.Add(new()

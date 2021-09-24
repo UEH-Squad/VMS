@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Domain.Models;
 
 namespace VMS.Pages.RatingPage
 {
@@ -11,7 +12,7 @@ namespace VMS.Pages.RatingPage
         private bool? isRated;
         private string searchValue;
         private int starRating;
-        private string currentUserId;
+        private User currentUser;
         private ViewActivityViewModel activity;
 
         [Parameter] public int ActivityId { get; set; }
@@ -25,13 +26,13 @@ namespace VMS.Pages.RatingPage
 
         protected override async Task OnInitializedAsync()
         {
-            currentUserId = IdentityService.GetCurrentUserId();
+            currentUser = IdentityService.GetCurrentUser();
             
             activity = await ActivityService.GetViewActivityViewModelAsync(ActivityId);
 
-            if (activity.OrgId != currentUserId)
+            if (activity.OrgId != currentUser.Id)
             {
-                NavigationManager.NavigateTo(Routes.Organizations + "/" + currentUserId);
+                NavigationManager.NavigateTo(Routes.Organizations + "/" + currentUser.Id);
             }
         }
 

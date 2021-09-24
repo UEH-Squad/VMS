@@ -10,16 +10,12 @@
         <div class="popup-comment_member">
             <div class="name">
                 <div class="popup-avatar">
-                    <img src="./img/RatingPage/Ellipse 8.png" alt="avatar">
+                    <img src="@Member.Avatar" alt="avatar">
                 </div>
                 <div class="popup-member">
-                    <p class="popup-member1">Trần Minh Nhật Anh</p>
+                    <p class="popup-member1">@Member.FullName</p>
                     <div class="popup-member2">
-                        <span style="color: @Color1;" class="material-icons">star_rate</span>
-                        <span style="color: @Color2;" class="material-icons">star_rate</span>
-                        <span style="color: @Color3;" class="material-icons">star_rate</span>
-                        <span style="color: @Color4;" class="material-icons">star_rate</span>
-                        <span style="color: @Color5;" class="material-icons">star_rate</span>
+                        <VMS.Shared.Components.Star Rating=@userRating />
                     </div>
                 </div>
             </div>
@@ -56,16 +52,12 @@
         <div class="popup-comment_organization">
             <div class="name">
                 <div class="popup-avatar">
-                    <img src="./img/RatingPage/Ellipse 7.png" alt="avatar">
+                    <img src="@Organizer.Avatar" alt="avatar">
                 </div>
                 <div class="popup-member">
-                    <p class="popup-member1">Khoa công nghệ thông tin kinh doanh</p>
+                    <p class="popup-member1">@Organizer.FullName</p>
                     <div class="popup-member2">
-                        <span style="color: @Color6;" class="material-icons">star_rate</span>
-                        <span style="color: @Color7;" class="material-icons">star_rate</span>
-                        <span style="color: @Color8;" class="material-icons">star_rate</span>
-                        <span style="color: @Color9;" class="material-icons">star_rate</span>
-                        <span style="color: @Color10;" class="material-icons">star_rate</span>
+                        <VMS.Shared.Components.Star Rating=@OrgRating />
                     </div>
                 </div>
             </div>
@@ -116,16 +108,6 @@
 </div>
 
 @code {
-    string Color1 = "#EDF131";
-    string Color2 = "#EDF131";
-    string Color3 = "#EDF131";
-    string Color4 = "#EDF131";
-    string Color5 = "#EDF131";
-    string Color6 = "#EDF131";
-    string Color7 = "#EDF131";
-    string Color8 = "#EDF131";
-    string Color9 = "#EDF131";
-    string Color10 = "#C4C4C4";
 
     Rating commentModal;
     protected override void OnInitialized()

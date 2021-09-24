@@ -1,4 +1,5 @@
-﻿@inject IJSRuntime JsRuntime
+﻿@using VMS.Domain.Models
+@inject IJSRuntime JsRuntime
 <div class="container__list-result">
     <SearchResult />
     <div class="container-member">
@@ -18,7 +19,7 @@
                         <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)"/>
                         <div class="member-comment">
                             @*Pop-up để comment*@
-                            <button @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
+                            <button @onclick="@(async () => await ShowCommentPopUpAsync(item))" id="popup-comment_icon">
                                 <span id="member-comment_icon" class="material-icons">comment</span>
                             </button>
                             <div class="member-comment_tooltip">Bạn có điều  gì muốn gửi gắm đến mình hong!</div>
@@ -103,22 +104,12 @@
         return result;
     }
 
-    [CascadingParameter] public IModalService Modal1 { get; set; }
-    async Task ShowCommentPopUp()
-    {
-        var options = new ModalOptions()
-            {
-
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-        Modal1.Show<PopUpComment>("", options);
-    }
 
     [CascadingParameter] public IModalService Modal2 { get; set; }
     async Task ShowReportPopUp()
     {
+
+
         var options = new ModalOptions()
             {
 

@@ -45,11 +45,6 @@ namespace VMS.Application.Services
                 paginatedList = await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation);
             }
 
-            foreach (var item in paginatedList.Items)
-            {
-                item.Rate = await GetRateOfActivity(dbContext, item.Id);
-            }
-
             return paginatedList;
         }
 
@@ -92,6 +87,7 @@ namespace VMS.Application.Services
                                          .Count() == filter.Skills.Count,
                     a => !a.IsDeleted
                 },
+                Includes = a => a.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 20,
                 OrderBy = GetOrderActivities(orderList, userLocation)
@@ -101,7 +97,11 @@ namespace VMS.Application.Services
 
             activities.Items.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
-            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+            var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+
+            paginatedList.Items.ForEach(a => a.Rate = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
+
+            return paginatedList;
         }
 
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()
@@ -460,20 +460,11 @@ namespace VMS.Application.Services
             return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
         }
 
-        private async Task<double> GetRateOfActivity(DbContext dbContext, int activityId)
+        private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
         {
-            Specification<Recruitment> specification = new()
-            {
-                Conditions = new List<Expression<Func<Recruitment, bool>>>
-                {
-                    a => a.ActivityId == activityId
-                },
-                Includes = a => a.Include(x => x.RecruitmentRatings)
-            };
-
-            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
-
-            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank));
+            var total = recruitments.Where(a => a.RecruitmentRatings.Any(x => !x.IsOrgRating && !x.IsReport)).Count();
+            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
+                    /recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
         }
 
         public async Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false)

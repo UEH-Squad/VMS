@@ -16,5 +16,7 @@ namespace VMS.Domain.Models
         public virtual User User { get; set; }
         public virtual Activity Activity { get; set; }
         public ICollection<RecruitmentRating> RecruitmentRatings { get; set; }
+        public virtual ICollection<ReasonReport> ReasonReports { get; set; }
+        public virtual ICollection<ImageReport> ImageReports { get; set; }
     }
 }

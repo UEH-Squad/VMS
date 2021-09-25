@@ -17,7 +17,7 @@ namespace VMS.Application.ViewModels
         public string Mission { get; set; }
 
         [Required]
-        public string PhoneNumber2 { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         public string Email { get; set; }

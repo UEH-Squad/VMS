@@ -17,6 +17,7 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
             CreateMap<PaginatedList<Recruitment>, PaginatedList<RecruitmentViewModel>>();
+            CreateMap<RecruitmentRating, RecruitmentRatingViewModel>();
         }
     }
 }

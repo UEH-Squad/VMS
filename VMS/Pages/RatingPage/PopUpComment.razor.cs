@@ -1,25 +1,34 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
 using VMS.Domain.Models;
 
 namespace VMS.Pages.RatingPage
 {
     public partial class PopUpComment : ComponentBase
     {
-        private double userRating;
-
-        [Parameter] public User Organizer { get; set; }
-        [Parameter] public User Member {  get; set; }
-        [Parameter] public double OrgRating {  get; set; }
+        [Parameter] public User UserBottom { get; set; }
+        [Parameter] public User UserTop {  get; set; }
+        [Parameter] public RecruitmentRatingViewModel RecruitmentRatingTop { get; set; }
+        [Parameter] public RecruitmentRatingViewModel RecruitmentRatingBottom { get; set; }
         [Parameter] public int RecruitmentId {  get; set; }
 
         [Inject]
         private IRecruitmentService RecruitmentService { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnParametersSet()
         {
-            userRating = await RecruitmentService.GetRatingByIdAsync(RecruitmentId);
+            if (RecruitmentRatingTop is null)
+            {
+                RecruitmentRatingTop = new();
+            }
+
+            if (RecruitmentRatingBottom is null)
+            {
+                RecruitmentRatingBottom = new();
+            }
         }
     }
 }

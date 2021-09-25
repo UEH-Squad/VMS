@@ -10,34 +10,20 @@
         <div class="popup-comment_member">
             <div class="name">
                 <div class="popup-avatar">
-                    <img src="@Member.Avatar" alt="avatar">
+                    <img src="@UserTop.Avatar" alt="avatar">
                 </div>
                 <div class="popup-member">
-                    <p class="popup-member1">@Member.FullName</p>
+                    <p class="popup-member1">@UserTop.FullName</p>
                     <div class="popup-member2">
-                        <VMS.Shared.Components.Star Rating=@userRating />
+                        <VMS.Shared.Components.Star Rating=@RecruitmentRatingTop.Rank />
                     </div>
                 </div>
             </div>
 
-            @if (commentModal.MemberComment is not null)
+            @if (string.IsNullOrEmpty(RecruitmentRatingTop.Comment))
             {
                 <div class="comment mb-5">
-                    <p class="comment-input">@commentModal.MemberComment</p>
-                </div>
-                <div class="button">
-                    <button class="button-showremind d-none" style="color: @ColorRemind">Số lần nhắc nhở: @Count lần</button>
-                    <button @onclick="@Remind" class="button-remind d-none">
-                        <span class="material-icons-outlined">notifications</span>
-                        Nhắc nhở nhận xét
-                    </button>
-                </div>
-            }
-
-            @if (commentModal.MemberComment is null)
-            {
-                <div class="comment">
-                    <p class="comment-input">@commentModal.CommentDefault</p>
+                    <p class="comment-input">Chưa nhận xét </p>
                 </div>
                 <div class="button">
                     <button class="button-showremind" style="color: @ColorRemind">Số lần nhắc nhở: @Count lần</button>
@@ -47,62 +33,34 @@
                     </button>
                 </div>
             }
+            else
+            {
+                <div class="comment mb-5">
+                    <p class="comment-input">@RecruitmentRatingTop.Comment </p>
+                </div>
+            }
 
         </div>
         <div class="popup-comment_organization">
             <div class="name">
                 <div class="popup-avatar">
-                    <img src="@Organizer.Avatar" alt="avatar">
+                    <img src="@UserBottom.Avatar" alt="avatar">
                 </div>
                 <div class="popup-member">
-                    <p class="popup-member1">@Organizer.FullName</p>
+                    <p class="popup-member1">@UserBottom.FullName</p>
                     <div class="popup-member2">
-                        <VMS.Shared.Components.Star Rating=@OrgRating />
+                        <VMS.Shared.Components.Star Rating=@RecruitmentRatingBottom.Rank />
                     </div>
                 </div>
             </div>
-            @if (commentModal.OrganizationComment == "Send")
-            {
-                <EditForm Model="@commentModal" OnInvalidSubmit="@Send">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <div class="comment">
-                        <InputTextArea @bind-Value="@commentModal.Comment1" class="comment-input" placeholder="@commentModal.CommentDefault" rows="3" @onchange="@(e => { @commentModal.Comment1 = e.Value.ToString(); })"></InputTextArea>
-                    </div>
-                    <div class="button">
-                        <button @onclick="@Send" class="button-send">Gửi nhận xét</button>
-                    </div>
-                </EditForm>
-            }
-
-            @if (commentModal.OrganizationComment == "Modify")
-            {
-                <EditForm Model="@commentModal" OnInvalidSubmit="@Modify">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <div class="comment">
-                        <InputTextArea @bind-Value="@commentModal.Comment1" class="comment-input" rows="3" readonly></InputTextArea>
-                    </div>
-                    <div class="button">
-                        <button @onclick="@Modify" class="button-modify">Sửa</button>
-                    </div>
-                </EditForm>
-            }
-
-            @if (commentModal.OrganizationComment == "Save")
-            {
-                <EditForm Model="@commentModal" OnInvalidSubmit="@Save">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <div class="comment">
-                        <InputTextArea @bind-Value="@commentModal.Comment1" class="comment-input" rows="3" @onchange="@(e => { @commentModal.Comment1 = e.Value.ToString(); })"></InputTextArea>
-                    </div>
-                    <div class="button">
-                        <button @onclick="@Cancel" class="button-cancel">Hủy</button>
-                        <button @onclick="@Save" class="button-save">Lưu</button>
-                    </div>
-                </EditForm>
-            }
+            <EditForm Model="@RecruitmentRatingBottom" OnInvalidSubmit="@Send">
+                <div class="comment">
+                    <InputTextArea @bind-Value="@RecruitmentRatingBottom.Comment" class="comment-input" placeholder="@(string.IsNullOrEmpty(RecruitmentRatingBottom.Comment) ? "Chưa nhận xét" : "")" rows="3" />
+                </div>
+                <div class="button">
+                    <button @onclick="@Send" class="button-send">Gửi nhận xét</button>
+                </div>
+            </EditForm>
         </div>
     </div>
 </div>

@@ -50,9 +50,10 @@ namespace VMS.Pages.RatingPage
         private async Task ShowCommentPopUpAsync(RecruitmentViewModel recruitment)
         {
             var parameters = new ModalParameters();
-            parameters.Add("Organizer", Organizer);
-            parameters.Add("Member", recruitment.User);
-            parameters.Add("OrgRating", recruitment.Rating);
+            parameters.Add("UserBottom", Organizer);
+            parameters.Add("UserTop", recruitment.User);
+            parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
+            parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
             parameters.Add("RecruitmentId", recruitment.Id);
 
             var options = new ModalOptions()

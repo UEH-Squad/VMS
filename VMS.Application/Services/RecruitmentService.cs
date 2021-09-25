@@ -47,7 +47,8 @@ namespace VMS.Application.Services
                 {
                     Id = x.Id,
                     Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating && !z.IsReport)?.Rank,
-                    User = _identityService.FindUserById(x.UserId)
+                    User = _identityService.FindUserById(x.UserId),
+                    RecruitmentRatings = _mapper.Map<List<RecruitmentRatingViewModel>>(x.RecruitmentRatings)
                 }).ToList(),
                 recruitments.TotalItems,
                 currentPage,
@@ -57,7 +58,7 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        public async Task<double> GetRatingByIdAsync(int recruimentId, bool isOrgRating = false)
+        public async Task<List<RecruitmentRatingViewModel>> GetRecruitmentRatingByIdAsync(int recruimentId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -66,14 +67,13 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<RecruitmentRating, bool>>>()
                 {
                     r => r.RecruitmentId == recruimentId,
-                    r => r.IsOrgRating == isOrgRating,
                     r => !r.IsReport
                 }
             };
 
-            RecruitmentRating recruitmentRating = await _repository.GetAsync(dbContext, specification);
+            var recruitmentRatings = await _repository.GetListAsync(dbContext, specification);
 
-            return (recruitmentRating is null ? 0 : recruitmentRating.Rank);
+            return _mapper.Map<List<RecruitmentRatingViewModel>>(recruitmentRatings);
         }
 
         public async Task UpdateRatingAsync(double rank, int? recruitmentId = null)

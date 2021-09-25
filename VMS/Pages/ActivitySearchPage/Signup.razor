@@ -18,15 +18,15 @@
         <EditForm Model="@signupModel" OnValidSubmit="@HandleSignUp" Context="CurrentEditContext">
             <DataAnnotationsValidator />
             <ValidationSummary />
-            <i @onclick="ExitModalAsync" class="material-icons-outlined signUp__exit">
+            <i @onclick="ExitModalAsync" class="material-icons-outlined signUp__exit d-flex align-items-center justify-content-center">
                 close
             </i>
             <div class="signUp__form">
                 <form action="">
-                    <h1>Đăng ký <span>tham gia</span></h1>
-                    <p class="form-text">Họ tên</p>
+                    <h1>Đơn <span>đăng ký</span></h1>
+                    <p class="form-text">Họ tên <span>(*)</span></p>
                     <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
-                    <p class="form-text">Email nhận thông báo</p>
+                    <p class="form-text">Email nhận thông báo <span>(*)</span></p>
                     <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control" disabled="true"/>
                     <p class="form-text">Số điện thoại <span>(*)</span></p>
                     <InputText @bind-Value="signupModel.PhoneNumber" type="number" class="form-control" />

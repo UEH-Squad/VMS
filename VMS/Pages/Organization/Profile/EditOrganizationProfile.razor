@@ -1,4 +1,5 @@
 ﻿@attribute [Route(Routes.EditProfile)]
+@attribute [Authorize(Roles = "Organization")]
 
 <div class="my-editProfile">
     <div class="container">

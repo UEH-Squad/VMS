@@ -1,5 +1,38 @@
-﻿<h3>Filter</h3>
-
+﻿<div class="filter-container">
+    <div class="act-title">
+        Lọc hoạt động
+    </div>
+    <form class="act-filter d-flex" action="" method="get">
+        <div>
+            <select class="act-filter__select">
+                <option selected>Học kỳ</option>
+                <option>Học kỳ đầu</option>
+                <option>Học kỳ giữa</option>
+                <option>Học kỳ cuối</option>
+            </select>
+            <select class="act-filter__select">
+                <option selected>Học kỳ</option>
+                <option>Học kỳ đầu</option>
+                <option>Học kỳ giữa</option>
+                <option>Học kỳ cuối</option>
+            </select>
+        </div>
+        <div class="d-flex">
+            <div class="act-filter__radio">
+                <input type="radio" id="rate" name="fav_language" value="rate">
+                <label for="rate">Chưa đánh giá</label><br>
+            </div>
+            <div class="act-filter__radio">
+                <input type="radio" id="rated" name="fav_language" value="rated">
+                <label for="rated">Đã đánh giá</label><br>
+            </div>
+        </div>
+        <div>
+            <button class="act-filter__btn">Lọc</button>
+            <button class="act-filter__btn --del">Xóa lọc</button>
+        </div>
+    </form>
+</div>
 @code {
 
 }

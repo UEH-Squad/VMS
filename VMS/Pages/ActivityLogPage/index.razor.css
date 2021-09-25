@@ -1,1 +1,14 @@
-﻿
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.org-title {
+  margin-top: 60px;
+  font-weight: 600;
+  font-size: 36px;
+  color: #64D72F;
+  text-align: center; }
+  .org-title span {
+    color: #18A0FB; }

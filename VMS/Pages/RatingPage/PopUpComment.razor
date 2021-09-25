@@ -53,12 +53,12 @@
                     </div>
                 </div>
             </div>
-            <EditForm Model="@RecruitmentRatingBottom" OnInvalidSubmit="@Send">
+            <EditForm Model="@RecruitmentRatingBottom" OnValidSubmit="UpdateCommentAsync">
                 <div class="comment">
                     <InputTextArea @bind-Value="@RecruitmentRatingBottom.Comment" class="comment-input" placeholder="@(string.IsNullOrEmpty(RecruitmentRatingBottom.Comment) ? "Chưa nhận xét" : "")" rows="3" />
                 </div>
                 <div class="button">
-                    <button @onclick="@Send" class="button-send">Gửi nhận xét</button>
+                    <button class="button-send">@(string.IsNullOrEmpty(RecruitmentRatingBottom.Comment) ? "Gửi nhận xét" : "Sửa")</button>
                 </div>
             </EditForm>
         </div>

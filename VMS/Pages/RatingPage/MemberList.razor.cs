@@ -34,12 +34,13 @@ namespace VMS.Pages.RatingPage
                 await UpdateRatingAsync(StarRating);
                 StarRating = 0;
             }
+
             recruitments = await RecruitmentService.GetAllRecruitmentsAsync(ActivityId, page, SearchValue, IsRated);
         }
 
         private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment = null)
         {
-            await RecruitmentService.UpdateRatingAsync(rating.Value, recruitment?.Id);
+            await RecruitmentService.UpdateRatingAndCommentAsync(rating.Value, string.Empty, recruitment?.Id);
             if (recruitment != null)
             {
                 recruitment.Rating = rating;
@@ -52,8 +53,8 @@ namespace VMS.Pages.RatingPage
             var parameters = new ModalParameters();
             parameters.Add("UserBottom", Organizer);
             parameters.Add("UserTop", recruitment.User);
-            parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
-            parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
+            parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
+            parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
             parameters.Add("RecruitmentId", recruitment.Id);
 
             var options = new ModalOptions()

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -29,6 +28,11 @@ namespace VMS.Pages.RatingPage
             {
                 RecruitmentRatingBottom = new();
             }
+        }
+
+        private async Task UpdateCommentAsync()
+        {
+            await RecruitmentService.UpdateRatingAndCommentAsync(RecruitmentRatingBottom.Rank, RecruitmentRatingBottom.Comment, RecruitmentId);
         }
     }
 }

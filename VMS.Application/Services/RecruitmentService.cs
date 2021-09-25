@@ -58,25 +58,7 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        public async Task<List<RecruitmentRatingViewModel>> GetRecruitmentRatingByIdAsync(int recruimentId)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Specification<RecruitmentRating> specification = new()
-            {
-                Conditions = new List<Expression<Func<RecruitmentRating, bool>>>()
-                {
-                    r => r.RecruitmentId == recruimentId,
-                    r => !r.IsReport
-                }
-            };
-
-            var recruitmentRatings = await _repository.GetListAsync(dbContext, specification);
-
-            return _mapper.Map<List<RecruitmentRatingViewModel>>(recruitmentRatings);
-        }
-
-        public async Task UpdateRatingAsync(double rank, int? recruitmentId = null)
+        public async Task UpdateRatingAndCommentAsync(double rank, string comment, int? recruitmentId = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -95,18 +77,22 @@ namespace VMS.Application.Services
             foreach (var recruitment in recruitments)
             {
                 RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating && !x.IsReport);
+
                 if (recruitmentRating is null)
                 {
                     recruitment.RecruitmentRatings.Add(new()
                     {
                         Rank = rank,
+                        Comment = comment,
                         IsOrgRating = true
                     });
                 }
                 else
                 {
                     recruitmentRating.Rank = rank;
+                    recruitmentRating.Comment = (string.IsNullOrEmpty(comment) ? recruitmentRating.Comment : comment);
                 }
+
                 await _repository.UpdateAsync(dbContext, recruitment);
             }
 
@@ -119,11 +105,11 @@ namespace VMS.Application.Services
             {
                 if (isRated.Value)
                 {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport);
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank != 0);
                 }
                 else
                 {
-                    return r => !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport);
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank == 0) || !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport);
                 }
             }
 

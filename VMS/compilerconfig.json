@@ -198,5 +198,25 @@
   {
     "outputFile": "Pages/RatingPage/SearchResult.razor.css",
     "inputFile": "Pages/RatingPage/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/index.razor.css",
+    "inputFile": "Pages/ActivityLogPage/index.razor.sass"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/index.razor.css",
+    "inputFile": "Pages/ActivityLogPage/index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/ActivityCard.razor.css",
+    "inputFile": "Pages/ActivityLogPage/ActivityCard.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/Filter.razor.css",
+    "inputFile": "Pages/ActivityLogPage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/Search.razor.css",
+    "inputFile": "Pages/ActivityLogPage/Search.razor.scss"
   }
 ]

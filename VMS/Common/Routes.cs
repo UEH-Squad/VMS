@@ -10,6 +10,7 @@
         public const string Organizations = "/don-vi-to-chuc";
         public const string Map = "/ban-do";
         public const string RatingPage = "/danh-gia-tinh-nguyen-vien";
+        public const string ActivityLogPage = "/lich-su-hoat-dong";
 
         #region Org + User profile
 

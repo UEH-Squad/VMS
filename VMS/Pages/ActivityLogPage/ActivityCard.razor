@@ -18,7 +18,9 @@
                         <p class="member-name1">@item.ActName</p>
                     </div>
                     <div class="activity__content__icon d-flex">
-                        @*<Stars @bind-StarRating="item.StarStyle" />*@
+                        <div class="stars-rating">
+                            <VMS.Pages.RatingPage.Stars />
+                        </div>
                         <div class="org-pic d-flex">
                             <div class="org-pic__icon d-flex">
                                 <span class="material-icons-outlined">
@@ -140,7 +142,7 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        //Modal1.Show<PopUpComment>("", options);
+        Modal1.Show<VMS.Pages.RatingPage.PopUpComment>("", options);
     }
 
     [CascadingParameter] public IModalService Modal2 { get; set; }
@@ -153,11 +155,7 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        //Modal2.Show<PopUpReportMember>("", options);
+        Modal2.Show<VMS.Pages.RatingPage.PopUpReportMember>("", options);
     }
-
-}
-
-@code {
 
 }

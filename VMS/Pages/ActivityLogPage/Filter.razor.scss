@@ -49,22 +49,93 @@
     }
 
     &__radio {
-        & + & {
-            margin-left: 40px;
+        width: 40%;
+        justify-content: center;
+
+        &-1 {
+            width: 50%;
         }
 
-        label {
+        &-2 {
+            width: 30%;
+        }
+
+        .radio-1 {
+            position: relative;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            background-color: $white;
+            border: 2px solid $blue;
+            appearance: none;
+            cursor: pointer;
+
+            &::before {
+                position: absolute;
+                content: "";
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background-color: $blue;
+                top: 51.5%;
+                left: 51%;
+                transform: translate(-50%, -50%);
+                display: none;
+            }
+
+            &:checked::before {
+                display: block;
+            }
+
+            &:checked {
+                border-color: $blue;
+            }
+        }
+
+        .radio-2 {
+            position: relative;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            background-color: $white;
+            border: 2px solid $blue;
+            appearance: none;
+            cursor: pointer;
+
+            &::before {
+                position: absolute;
+                content: "";
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background-color: $blue;
+                top: 51.5%;
+                left: 51%;
+                transform: translate(-50%, -50%);
+                display: none;
+            }
+
+            &:checked::before {
+                display: block;
+            }
+
+            &:checked {
+                border-color: $blue;
+            }
+        }
+
+        .label-1 {
+            margin-left: 5%;
             font-size: 16px;
             color: #707070;
+            cursor: pointer;
         }
 
-        input[type=radio] {
-            border: 1px solid #B8B8B8 !important;
-        }
-
-        input[type=radio]:checked {
-            background: $blue !important;
-            border: 1px solid $blue !important;
+        .label-2 {
+            margin-left: 5%;
+            font-size: 16px;
+            color: #707070;
+            cursor: pointer;
         }
     }
 

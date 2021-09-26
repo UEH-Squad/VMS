@@ -40,6 +40,12 @@
     color: #18A0FB; }
   .activity__content__icon {
     justify-content: space-between; }
+    .activity__content__icon .stars-rating ::deep .member-star {
+      margin-left: 0%; }
+      .activity__content__icon .stars-rating ::deep .member-star_button {
+        background-color: transparent; }
+      .activity__content__icon .stars-rating ::deep .member-star_tooltip {
+        display: none; }
     .activity__content__icon .org-pic {
       align-items: center; }
       .activity__content__icon .org-pic__icon {

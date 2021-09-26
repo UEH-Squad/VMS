@@ -43,11 +43,27 @@
 
         &__icon {
             justify-content: space-between;
+
+            .stars-rating {
+                ::deep .member-star {
+                    margin-left: 0%;
+
+                    &_button{
+                        background-color: transparent;
+                    }
+
+                    &_tooltip {
+                        display: none;
+                    }
+                }
+            }
+
             .org-pic {
                 align-items: center;
 
                 &__icon {
                     align-items: center;
+
                     span {
                         color: $green;
                         font-size: 24px;

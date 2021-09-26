@@ -40,16 +40,71 @@
     .act-filter__select option:hover {
       background-color: transparent;
       color: #18A0FB; }
-  .act-filter__radio + .act-filter__radio {
-    margin-left: 40px; }
-  .act-filter__radio label {
-    font-size: 16px;
-    color: #707070; }
-  .act-filter__radio input[type=radio] {
-    border: 1px solid #B8B8B8 !important; }
-  .act-filter__radio input[type=radio]:checked {
-    background: #18A0FB !important;
-    border: 1px solid #18A0FB !important; }
+  .act-filter__radio {
+    width: 40%;
+    justify-content: center; }
+    .act-filter__radio-1 {
+      width: 50%; }
+    .act-filter__radio-2 {
+      width: 30%; }
+    .act-filter__radio .radio-1 {
+      position: relative;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      background-color: #FFFFFF;
+      border: 2px solid #18A0FB;
+      appearance: none;
+      cursor: pointer; }
+      .act-filter__radio .radio-1::before {
+        position: absolute;
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background-color: #18A0FB;
+        top: 51.5%;
+        left: 51%;
+        transform: translate(-50%, -50%);
+        display: none; }
+      .act-filter__radio .radio-1:checked::before {
+        display: block; }
+      .act-filter__radio .radio-1:checked {
+        border-color: #18A0FB; }
+    .act-filter__radio .radio-2 {
+      position: relative;
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      background-color: #FFFFFF;
+      border: 2px solid #18A0FB;
+      appearance: none;
+      cursor: pointer; }
+      .act-filter__radio .radio-2::before {
+        position: absolute;
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background-color: #18A0FB;
+        top: 51.5%;
+        left: 51%;
+        transform: translate(-50%, -50%);
+        display: none; }
+      .act-filter__radio .radio-2:checked::before {
+        display: block; }
+      .act-filter__radio .radio-2:checked {
+        border-color: #18A0FB; }
+    .act-filter__radio .label-1 {
+      margin-left: 5%;
+      font-size: 16px;
+      color: #707070;
+      cursor: pointer; }
+    .act-filter__radio .label-2 {
+      margin-left: 5%;
+      font-size: 16px;
+      color: #707070;
+      cursor: pointer; }
   .act-filter__btn {
     padding: 5px 10px;
     background-color: #64D72F;

@@ -33,6 +33,7 @@
         &:hover {
             color: $blue-hv;
             font-size: 30px;
+            cursor: pointer;
         }
     }
 
@@ -44,6 +45,7 @@
         &:hover {
             color: $green-bold;
             font-size: 30px;
+            cursor: pointer;
         }
     }
 
@@ -168,8 +170,9 @@
 
         span {
             background-color: #C4C4C4;
-            width:8px;
-            height:8px;
+            width: 8px;
+            height: 8px;
+
             &:hover {
                 background-color: $blue;
             }

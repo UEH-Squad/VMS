@@ -14,6 +14,7 @@
 
         public const string User = "/trang-ca-nhan";
         public const string EditProfile = "/chinh-sua-thong-tin";
+        public const string VolunteersListPage = "/danh-sach-tinh-nguyen-vien";
 
         #endregion Org + User profile
 

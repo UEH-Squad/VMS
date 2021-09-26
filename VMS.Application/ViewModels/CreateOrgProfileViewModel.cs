@@ -11,19 +11,21 @@ namespace VMS.Application.ViewModels
     public class CreateOrgProfileViewModel
     {
         [Required]
-        public string UserName { get; set; }
-
-        [Required]
-        public string Mission { get; set; }
-
-        [Required]
-        public string PhoneNumber { get; set; }
+        public string FullName { get; set; }
 
         [Required]
         public string Email { get; set; }
 
+        [Required]
+        public string PhoneNumber { get; set; }
+           
         [RequiredHasItems]
         public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
+
+        [Required]
+        public string Mission { get; set; }
+
+        public string Banner { get; set; }
 
         public string Avatar { get; set; }
     }

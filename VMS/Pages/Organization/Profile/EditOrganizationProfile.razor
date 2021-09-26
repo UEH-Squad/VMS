@@ -22,7 +22,7 @@
                     <div class="row form-item">
                         <p class="col-4 form-text">Tên tổ chức <span class="required-asterick">(*)</span></p>
                         <div class="col-8 px-0">
-                            <InputText @bind-Value="@org.UserName" class="form-input form-control" />
+                            <InputText @bind-Value="@org.FullName" class="form-input form-control" />
                         </div>
                     </div>
                     <div class="row form-item">
@@ -70,7 +70,7 @@
                         <div class="col-8 px-0 ">
                             <UploadImg InputFileChanged="HandleFileChanged"
                                        ImageDiscarded="HandleImageDiscarded"
-                                       PreviewImgSrc="@org.Avatar"
+                                       PreviewImgSrc="@org.Banner"
                                        ShowPreview="true" />
                         </div>
                     </div>

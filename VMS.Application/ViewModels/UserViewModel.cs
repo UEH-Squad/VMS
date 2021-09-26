@@ -18,5 +18,6 @@ namespace VMS.Application.ViewModels
        public double QuantityRating { get; set; }
        public double Rank { get; set; }
         public string Introduction { get; set; }
+        public string Banner { get; set; }
     }
 }

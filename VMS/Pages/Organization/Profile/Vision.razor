@@ -1,7 +1,10 @@
 ﻿<div class="vision d-flex justify-content-center position-relative">
+    @if(@org.Banner == null){
     <img class="w-100" src="./img/OrganizationProfile/Vision.png" alt="" />
-        <h3 class="position-absolute text-center">@org?.FullName</h3>
-        <p class="position-absolute w-75 text-center">@org?.Introduction</p>
+    }
+    else{<img class="w-100" src="@org?.Banner" alt="" />}
+    <h3 class="position-absolute text-center">@org?.FullName</h3>
+    <p class="position-absolute w-75 text-center">@org?.Introduction</p>
 </div>
 
 @code {

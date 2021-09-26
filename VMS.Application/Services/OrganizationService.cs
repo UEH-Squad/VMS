@@ -60,8 +60,8 @@ namespace VMS.Application.Services
                 var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
                 if(item != null)
                 {
-                    QuantityRating = QuantityRating + 1;
-                    SumRating = SumRating + item.Rank;
+                    QuantityRating++;
+                    SumRating += item.Rank;
                 }
             }
             orgRatingViewModels.QuantityRating = QuantityRating;

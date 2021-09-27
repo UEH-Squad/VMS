@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -27,51 +28,50 @@ namespace VMS.Application.Services
             _userManager = userManager;
         }
 
-        private User FindUserById(string userId)
+        private async Task<User> CheckRoleOrg(string orgId)
         {
-            return Task.Run(() => _userManager.FindByIdAsync(userId)).Result;
-        }
-        private async Task<User> GetOrganizer(string orgId)
-        {
-            var user = FindUserById(orgId);
-            bool orgRole = Task.Run(() => _userManager.IsInRoleAsync(user, "Organizer")).Result;
+            var user = Task.Run(() => _userManager.FindByIdAsync(orgId)).Result;
+            bool orgRole = Task.Run(() => _userManager.IsInRoleAsync(user, Role.Organization.ToString())).Result;
             if (orgRole == true) return user;
-            else return null;
-        }
-        private User GetOrg(string orgId)
-        {
-            if (GetOrganizer(orgId) != null)
-                return Task.Run(() => _userManager.Users.Include(x => x.UserAreas).ThenInclude(x => x.Area)
-                                                   .Include(x => x.Activities)
-                                                   .Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
-                                                   .SingleOrDefaultAsync(x => x.Id == orgId)).Result;
             else return null;
         }
         public  UserViewModel GetOrgFull(string id)
         {
-            User org = GetOrg(id);
-            UserViewModel orgRatingViewModels = new();
-            orgRatingViewModels = _mapper.Map<UserViewModel>(org);
-            List<Recruitment> recruitments = org.Recruitments.ToList();
-            double quantityRating = 0;
-            double sumRating = 0;
-            foreach(var rcm in recruitments)
+            User org;
+            if (CheckRoleOrg(id) != null)
             {
-                var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
-                if(item != null)
+                org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas).ThenInclude(x => x.Area)
+                                                    .Include(x => x.Activities)
+                                                    .Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
+                                                    .SingleOrDefaultAsync(x => x.Id == id)).Result;
+                UserViewModel orgRatingViewModels = new();
+                orgRatingViewModels = _mapper.Map<UserViewModel>(org);
+                List<Recruitment> recruitments = org.Recruitments.ToList();
+                double quantityRating = 0;
+                double sumRating = 0;
+                foreach (var rcm in recruitments)
                 {
-                    quantityRating++;
-                    sumRating += item.Rank;
+                    var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
+                    if (item != null)
+                    {
+                        quantityRating++;
+                        sumRating += item.Rank;
+                    }
                 }
-            }
-            orgRatingViewModels.QuantityRating = quantityRating;
-            if (quantityRating != 0)
-            {
-                orgRatingViewModels.AverageRating = (float)Math.Round(sumRating / quantityRating, 1);
-            }
-            else orgRatingViewModels.AverageRating = 5;
+                orgRatingViewModels.QuantityRating = quantityRating;
+                if (quantityRating != 0)
+                {
+                    orgRatingViewModels.AverageRating = (float)Math.Round(sumRating / quantityRating, 1);
+                }
+                else orgRatingViewModels.AverageRating = 5;
 
-            return orgRatingViewModels; 
+                return orgRatingViewModels;
+            }
+            else
+            {
+                return null;
+            }   
+           
         }
 
         public async Task UpdateUserAsync(UpdateUserViewModel userViewModel, string userId)

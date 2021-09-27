@@ -24,6 +24,7 @@ namespace VMS.Application.ViewModels
         public bool IsMenu { get; set; }
         public User Organizer { get; set; }
         public int Favorites { get; set; }
+        public string Province { get; set; }
         public ICollection<ActivityAddress> ActivityAddresses { get; set; }
         public List<ActivitySkill> ActivitySkills { get; set; }
 

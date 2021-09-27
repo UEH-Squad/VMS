@@ -450,7 +450,8 @@ namespace VMS.Application.Services
                     a => a.IsDeleted == false
                 },
                 Includes = activities => activities.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
-                                                    .Include(x => x.Favorites)                             
+                                                    .Include(x => x.Favorites)
+                                                    .Include(x=>x.ActivityAddresses).ThenInclude(x=> x.AddressPath)
             };
 
             List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
@@ -463,7 +464,7 @@ namespace VMS.Application.Services
                 IsClosed = x.IsClosed,
                 Favorites = x.Favorites.Count,
                 MemberQuantity = x.MemberQuantity,
-                ActivityAddresses = x.ActivityAddresses,
+               Province = GetActProvince(x.ActivityAddresses),
                 EndDate = x.EndDate,
                 Rating = GetRateOfActivity(x.Recruitments)
             });
@@ -475,7 +476,18 @@ namespace VMS.Application.Services
                 _ => null
             };
         }
-
+        private static string GetActProvince(ICollection<ActivityAddress> activityAddresses)
+        {
+            ActivityAddress address = activityAddresses.Where(a => a.AddressPath.Depth == 1).FirstOrDefault();
+            if (address != null)
+            {
+                return address.AddressPath.Name;
+            }
+            else
+            {
+                return "Hồ Chí Minh"; 
+            }
+        }
         private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
         {
             return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))

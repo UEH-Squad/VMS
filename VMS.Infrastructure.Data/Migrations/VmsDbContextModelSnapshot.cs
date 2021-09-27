@@ -50,21 +50,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "aa4856e2-1c52-41bb-924b-d1f183086516",
+                            ConcurrencyStamp = "94fa6164-162f-4746-971e-777e9ac704f6",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "516b6390-0b6d-47ea-9faf-65b653137d5d",
+                            ConcurrencyStamp = "e01c8442-8909-44ee-bf11-492141554a34",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "b388361a-26c3-4588-ba25-239dab4ef23a",
+                            ConcurrencyStamp = "96ea313b-4aaa-4034-a949-ae740638150a",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -1067,9 +1067,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Banner")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
@@ -1323,7 +1320,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany("Recruitments")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1418,8 +1415,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("ActivitySkills");
 
                     b.Navigation("Favorites");
-
-                    b.Navigation("Recruitments");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>

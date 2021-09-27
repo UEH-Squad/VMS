@@ -17,7 +17,6 @@ namespace VMS.Application.Services
     public class OrgService : BaseService, IOrgService
     {
         public OrgService(IRepository repository,
-                          IIdentityService identityService,
                           IDbContextFactory<VmsDbContext> dbContextFactory,
                           IMapper mapper) : base(repository, dbContextFactory, mapper)
         {

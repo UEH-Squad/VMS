@@ -6,8 +6,6 @@
         <div class="owl-carousel owl-theme organize__carousel position-relative">
             @foreach (var item in Datas)
             {
-                if (item.IsDeleted == false)
-                {
                     <div class="act-container item position-relative">
                         <div class="img-container position-relative">
                             <img src="@item.Banner" alt="" class="act-img">
@@ -34,7 +32,6 @@
                         }
 
                     </div>
-                }
             }
         </div>
         @if (HaveDecor)

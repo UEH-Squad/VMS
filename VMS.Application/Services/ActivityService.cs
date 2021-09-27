@@ -15,6 +15,9 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
+    public enum StatusAct{
+        current, favor, ended
+    }
     public class ActivityService : BaseService, IActivityService
     {
         private readonly IIdentityService _identityService;
@@ -434,15 +437,15 @@ namespace VMS.Application.Services
             return result;
         }
 
-        public async Task<List<ActivityViewModel>> GetOrgActs(string Id, string type)
+        public async Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status)
         {
             DbContext context = _dbContextFactory.CreateDbContext();
             Specification<Activity> specification = new()
             {
                 Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
                 {
-                    a => a.OrgId == Id,
-                    type == "favorite"? a => a.MemberQuantity !=0 : (type != "ended"? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now),
+                    a => a.OrgId == id,
+                    status == StatusAct.favor? a => a.Favorites.Count >=0 : (status != StatusAct.ended ? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now),
                     a => a.StartDate <= DateTime.Now,
                     a => a.IsDeleted == false
                 },
@@ -458,17 +461,17 @@ namespace VMS.Application.Services
                 Name = x.Name,
                 Banner = x.Banner,
                 IsClosed = x.IsClosed,
-                Favorite = x.Favorites.Count,
+                Favorites = x.Favorites.Count,
                 MemberQuantity = x.MemberQuantity,
                 ActivityAddresses = x.ActivityAddresses,
                 EndDate = x.EndDate,
                 Rating = GetRateOfActivity(x.Recruitments)
             });
-            return type switch
+            return status switch
             {
-                "curent" => activityViewModels.ToList(),
-                "favorite" => activityViewModels.OrderByDescending(a => a.Favorite).Take(8).ToList(),
-                "ended" => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
+               StatusAct.current => activityViewModels.ToList(),
+               StatusAct.favor => activityViewModels.OrderByDescending(a => a.Favorites).Take(8).ToList(),
+               StatusAct.ended => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
                 _ => null
             };
         }
@@ -479,7 +482,7 @@ namespace VMS.Application.Services
                     / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
         }
 
-        public async Task UpdateStatusActAsync(int activityId, string status)
+        public async Task UpdateStatusActAsync(int activityId, bool close, bool delete)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -492,10 +495,20 @@ namespace VMS.Application.Services
             };
             Activity activity = await _repository.GetAsync(dbContext, specification);
             activity.UpdatedDate = DateTime.Now;
-            if(status == "closed")
-            activity.IsClosed = true;
-            if (status == "deleted")
-            activity.IsDeleted = true;
+            if(close == true)
+            { 
+                activity.IsClosed = true; 
+            }
+            else 
+            { 
+                activity.IsClosed = false;
+            }
+
+            if (delete == true)
+            {
+                activity.IsDeleted = true;
+            }
+           
             await _repository.UpdateAsync(dbContext, activity);
         }
     }

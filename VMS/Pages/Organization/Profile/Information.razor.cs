@@ -10,17 +10,10 @@ namespace VMS.Pages.Organization.Profile
 {
     public partial class Information : ComponentBase
     {
-        private UserViewModel org;
         [Parameter]
-        public string UserId { get; set; }
+        public UserViewModel Org { get; set; }
         [Parameter]
         public bool Owner { get; set; }
-        [Inject]
-        private IOrganizationService OrganizationService { get; set; }
-        protected override void OnInitialized()
-        {
-            org = OrganizationService.GetOrgFull(UserId);
-        }
         public string avatar;
         public IBrowserFile file;
         [Inject]
@@ -46,7 +39,7 @@ namespace VMS.Pages.Organization.Profile
            var result = await Modal.Show<Notification>("", parameters, options).Result;
             if ((bool)result.Data)
             {
-                org.Avatar = avatar;
+                Org.Avatar = avatar;
             }
 
         }

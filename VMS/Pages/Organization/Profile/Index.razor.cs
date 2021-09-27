@@ -2,30 +2,34 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Application.Services;
 using VMS.Application.ViewModels;
 
 namespace VMS.Pages.Organization.Profile
 {
     public partial class Index : ComponentBase
     {
-        private List<ActivityViewModel> actCurent = new();
+        private UserViewModel org;
+        private List<ActivityViewModel> actCurrent = new();
         private List<ActivityViewModel> actFavorite = new();
-        public bool Owner;
+        private List<ActivityViewModel> actEnded;
+        public bool owner;
         [Parameter]
         public string UserId { get; set; }
+        [Inject]
+        private IOrganizationService OrganizationService { get; set; }
         [Inject]
         private IActivityService ActivityService { get; set; }
         [Inject]
         private IIdentityService IdentityService { get; set; }
         protected async override Task OnInitializedAsync()
         {
-            actCurent = await ActivityService.GetOrgActs(UserId, "curent");
-            actFavorite = await ActivityService.GetOrgActs(UserId, "favorite");
-            if (!string.Equals(UserId, IdentityService.GetCurrentUserId()))
-            {
-                Owner = false;
-            }
-            else Owner = true;
+            org = OrganizationService.GetOrgFull(UserId);
+            org = OrganizationService.GetOrgFull(UserId);
+            actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.current);
+            actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.favor);
+            actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.ended);
+            _ = !string.Equals(UserId, IdentityService.GetCurrentUserId()) ? owner = false : owner = true;
         }
     }
 }

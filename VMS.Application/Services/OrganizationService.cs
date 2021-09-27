@@ -47,27 +47,27 @@ namespace VMS.Application.Services
                                                    .SingleOrDefaultAsync(x => x.Id == orgId)).Result;
             else return null;
         }
-        public  UserViewModel GetOrgFull(string Id)
+        public  UserViewModel GetOrgFull(string id)
         {
-            User org = GetOrg(Id);
-            UserViewModel orgRatingViewModels = new UserViewModel();
+            User org = GetOrg(id);
+            UserViewModel orgRatingViewModels = new();
             orgRatingViewModels = _mapper.Map<UserViewModel>(org);
             List<Recruitment> recruitments = org.Recruitments.ToList();
-            double QuantityRating = 0;
-            double SumRating = 0;
+            double quantityRating = 0;
+            double sumRating = 0;
             foreach(var rcm in recruitments)
             {
                 var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
                 if(item != null)
                 {
-                    QuantityRating++;
-                    SumRating += item.Rank;
+                    quantityRating++;
+                    sumRating += item.Rank;
                 }
             }
-            orgRatingViewModels.QuantityRating = QuantityRating;
-            if (QuantityRating != 0)
+            orgRatingViewModels.QuantityRating = quantityRating;
+            if (quantityRating != 0)
             {
-                orgRatingViewModels.AverageRating = (float)Math.Round(SumRating / QuantityRating, 1);
+                orgRatingViewModels.AverageRating = (float)Math.Round(sumRating / quantityRating, 1);
             }
             else orgRatingViewModels.AverageRating = 5;
 

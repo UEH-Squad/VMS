@@ -8,7 +8,7 @@
             <div class="col-5 text-center information__logo">
                 <div class="information__logo-img">
                     <div class=" text-center d-inline-block position-relative">
-                        <img src="@org?.Avatar" alt="">
+                        <img src="@Org?.Avatar" alt="">
                         @if (Owner == true)
                         {
                             <label for="myfile" class="d-inline">
@@ -19,8 +19,8 @@
                     </div>
                 </div>
 
-                <p class="m-0 text-start">@org?.FullName</p>
-                <span>Tham gia từ năm @org?.CreatedDate.Year</span>
+                <p class="m-0 text-start">@Org?.FullName</p>
+                <span>Tham gia từ năm @Org?.CreatedDate.Year</span>
                 @if (Owner == true)
                 {
                     <a class="information__logo-button">
@@ -33,28 +33,28 @@
                 <div class=" pb-4 row-1">
                     <div class="col-left information__rank d-flex justify-content-evenly align-self-center">
                         <a href="@Routes.EditProfile" class="d-flex align-self-center">
-                            #@org?.Rank @*There will be processing code in another place*@
+                            #@Org?.Rank @*There will be processing code in another place*@
                         </a>
                         <div>
                             <p class="mb-2 d-flex justify-content-evenly align-self-end">
-                                <span class="information__rank-number">@org?.AverageRating</span>
-                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 0 ? "#EDF131" : "#B4B4B4")">
-                                    star@(HaftStar(org.AverageRating,0)?"_half":"")
+                                <span class="information__rank-number">@Org?.AverageRating</span>
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 0 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating,0)?"_half":"")
                                 </i>
-                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 1 ? "#EDF131" : "#B4B4B4")">
-                                    star@(HaftStar(org.AverageRating,1)?"_half":"")
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 1 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating,1)?"_half":"")
                                 </i>
-                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 2 ? "#EDF131" : "#B4B4B4")">
-                                    star@(HaftStar(org.AverageRating, 2)?"_half":"")
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 2 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating, 2)?"_half":"")
                                 </i>
-                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 3 ? "#EDF131" : "#B4B4B4")">
-                                    star@(HaftStar(org.AverageRating, 3)?"_half":"")
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 3 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating, 3)?"_half":"")
                                 </i>
-                                <i class="material-icons-outlined" style="color:@(org.AverageRating > 4 ? "#EDF131" : "#B4B4B4")">
-                                    star@(HaftStar(org.AverageRating, 4)?"_half":"")
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 4 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating, 4)?"_half":"")
                                 </i>
                             </p>
-                            <span>@org.QuantityRating xếp hạng</span>
+                            <span>@Org.QuantityRating xếp hạng</span>
                         </div>
                     </div>
                     <div class="col-right information__contact">
@@ -62,13 +62,13 @@
                             <i class="material-icons">
                                 email
                             </i>
-                            <a href="mailto:@org?.Email">@org?.Email</a>
+                            <a href="mailto:@Org?.Email">@Org?.Email</a>
                         </p>
                         <p class="d-flex align-self-center">
                             <i class="material-icons">
                                 contact_phone
                             </i>
-                            <a href="tel:@org?.PhoneNumber">@org?.PhoneNumber</a>
+                            <a href="tel:@Org?.PhoneNumber">@Org?.PhoneNumber</a>
                         </p>
                     </div>
 
@@ -77,9 +77,9 @@
                     <div class="col-left information__fields">
                         <h3>Lĩnh vực <span>chuyên môn</span></h3>
                         <div class="owl-carousel owl-theme information__carousel">
-                            @if (org != null)
+                            @if (Org != null)
                             {
-                                @foreach (var area in org.UserAreas)
+                                @foreach (var area in Org.UserAreas)
                                 {
                                     <div class="item">
                                         <i class="material-icons">@area.Area.Icon</i>
@@ -94,7 +94,7 @@
                     <div class="col-right information__act px-0">
                         <h3>Số hoạt động <span>đã tạo</span></h3>
                         <div class="d-flex justify-content-evenly align-self-center">
-                            <span class="information__act-number">@org?.Activities.Count</span>
+                            <span class="information__act-number">@Org?.Activities.Count</span>
                         </div>
                     </div>
                 </div>

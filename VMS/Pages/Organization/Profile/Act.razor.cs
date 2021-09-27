@@ -1,7 +1,6 @@
 using VMS.Application.Interfaces;
 using Microsoft.AspNetCore.Components;
 using VMS.Application.ViewModels;
-using Blazored.Modal.Services;
 using System.Threading.Tasks;
 using Blazored.Modal;
 using System.Collections.Generic;
@@ -21,9 +20,7 @@ namespace VMS.Pages.Organization.Profile
         [Parameter] public bool HaveDecor { get; set; } = true;
         [Parameter] public string Title { get; set; }
         [Parameter] public bool Owner { get; set; }
-        [Parameter] public string UserId { get; set; }
         [Parameter] public List<ActivityViewModel> Datas { get; set; }
-        [CascadingParameter] public IModalService Modal { get; set; }
         [Inject]
         private IActivityService ActivityService { get; set; }
 
@@ -39,7 +36,7 @@ namespace VMS.Pages.Organization.Profile
         void ShowMenu(int id)
         {
             pendingId = id;
-            Datas.ForEach(a => a.IsMenu = a.Id == pendingId ? !a.IsMenu : false);
+            Datas.ForEach(a => a.IsMenu = a.Id == pendingId && !a.IsMenu);
         }
 
         [JSInvokable]
@@ -68,9 +65,10 @@ namespace VMS.Pages.Organization.Profile
                 isDeleteConfirm = false;
             }
             isDeleteSuccess = !isDeleteSuccess;
-            await ActivityService.UpdateStatusActAsync(pendingId, "deleted");
+            bool delete = true;
+            await ActivityService.UpdateStatusActAsync(pendingId, false ,delete);
             var act = Datas.Find(a => a.Id == pendingId);
-            act.IsDeleted = true;
+            Datas.Remove(act);
         }
 
         private async Task CloseSuccess()
@@ -81,21 +79,10 @@ namespace VMS.Pages.Organization.Profile
             }
 
             isCloseSuccess = !isCloseSuccess;
-            await ActivityService.UpdateStatusActAsync(pendingId, "closed");
+            bool close = true;
+            await ActivityService.UpdateStatusActAsync(pendingId, close, false);
             var act = Datas.Find(a => a.Id == pendingId);
             act.IsClosed = true;
-        }
-
-        private void ShowModal()
-        {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-
-            Modal.Show<DeleteConfirm>("", options);
         }
     }
 }

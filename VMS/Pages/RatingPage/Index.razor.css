@@ -1,0 +1,21 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.rating-page {
+  margin-top: 2%;
+  margin-left: 72px;
+  margin-right: 72px;
+  z-index: 0; }
+
+.header-page {
+  display: flex;
+  justify-content: space-between; }
+  .header-page ::deep .search-box {
+    width: 53%; }
+
+.body-page {
+  display: flex;
+  justify-content: space-between; }

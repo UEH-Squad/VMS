@@ -67,16 +67,15 @@ namespace VMS.Application.Services
                                            AddressPath parentAddressPath,
                                            Division addressPathResponse)
         {
-            string addressPathName = Regex.Replace(addressPathResponse.Name, $@"^({pattern})\s\W*", "", RegexOptions.IgnoreCase);
-            if (Regex.IsMatch(addressPathName, @"^\d"))
-            {
-                addressPathName = $"{addressPathResponse.DivisionType.ToTitleCase()} {addressPathName}";
-            }
+            int depth = divisionDepth.FirstOrDefault(x => x.Value.Contains(addressPathResponse.DivisionType.ToTitleCase())).Key;
+            string addressPathName = depth == 1
+                ? Regex.Replace(addressPathResponse.Name, $@"^({pattern})\s\W*", "", RegexOptions.IgnoreCase)
+                : $"{addressPathResponse.Name}";
 
             AddressPath addressPath = new()
             {
                 Name = addressPathName,
-                Depth = divisionDepth.FirstOrDefault(x => x.Value.Contains(addressPathResponse.DivisionType.ToTitleCase())).Key,
+                Depth = depth,
                 PreviousPath = parentAddressPath
             };
 

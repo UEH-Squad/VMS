@@ -15,8 +15,8 @@ namespace VMS.Application.Automapper
             CreateMap<Area, AreaViewModel>();
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
-            CreateMap<CreateOrgProfileViewModel, User>();
-            CreateMap<User, CreateOrgProfileViewModel>();
+            CreateMap<CreateUserProfileViewModel, User>();
+            CreateMap<User, CreateUserProfileViewModel>();
         }
     }
 }

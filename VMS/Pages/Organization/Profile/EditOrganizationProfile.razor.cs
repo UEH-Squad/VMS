@@ -25,7 +25,7 @@ namespace VMS.Pages.Organization.Profile
         private IIdentityService IdentityService { get; set; }
 
         [Inject]
-        private IOrgService OrgService { get; set; }
+        private IUserService UserService { get; set; }
 
         [Inject]
         private IUploadService UploadService { get; set; }
@@ -39,14 +39,14 @@ namespace VMS.Pages.Organization.Profile
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
-        private CreateOrgProfileViewModel org = new();
+        private CreateUserProfileViewModel org = new();
         private bool isEditConfirm = false;
         private bool isEditSuccess = false;
 
         protected override async Task OnInitializedAsync()
         {
             OrgId = IdentityService.GetCurrentUserId();
-            org = await OrgService.GetCreateOrgProfileViewModelAsync(OrgId);
+            org = await UserService.GetCreateUserProfileViewModelAsync(OrgId);
             choosenAreas = org.Areas;
         }
 
@@ -129,7 +129,7 @@ namespace VMS.Pages.Organization.Profile
                         org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId);
                         UploadService.RemoveImage(oldImageName);
                     }
-                    await OrgService.UpdateOrgProfile(org, OrgId);
+                    await UserService.UpdateUserProfile(org, OrgId);
                     isLoading = false;
                 }
                 catch (Exception ex)

@@ -8,7 +8,7 @@ using VMS.Common.CustomValidations;
 
 namespace VMS.Application.ViewModels
 {
-    public class CreateOrgProfileViewModel
+    public class CreateUserProfileViewModel
     {
         [Required]
         public string FullName { get; set; }

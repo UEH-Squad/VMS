@@ -1,4 +1,6 @@
-﻿namespace VMS.Domain.Models
+﻿using System.Collections.Generic;
+
+namespace VMS.Domain.Models
 {
     public class RecruitmentRating : DeleteEntity<int>
     {
@@ -10,5 +12,7 @@
         public bool IsOrgRating { get; set; }
 
         public virtual Recruitment Recruitment { get; set; }
+        public virtual ICollection<ReasonReport> ReasonReports { get; set; }
+        public virtual ICollection<ImageReport> ImageReports { get; set; }
     }
 }

@@ -2,83 +2,83 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Đăng nhập";
 }
+<div class="col-12 p-0">
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+    <h3 class="text-center login-heading">@ViewData["Title"]</h3>
+    <div class="row">
+            <section>
+                <form id="account" method="post">
+                    <div class="form-group mt-4">
+                        <div class="position-relative">
+                            <input asp-for="Input.Email" class="my-input" placeholder="Tên đăng nhập" />
+                            <span class="material-icons error-icon">
+                                error
+                            </span>
                         </div>
-                    </form>
-                }
-            }
-        </section>
+                        <span asp-validation-for="Input.Email" class="text-danger d-block mt-2"></span>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <div class="position-relative">
+                            <input asp-for="Input.Password" class="my-input" type="password" placeholder="Mật khẩu" />
+                            <span class="material-icons show-password-icon">
+                                visibility_off
+                            </span>
+                            <span class="material-icons error-icon">
+                                error
+                            </span>
+                        </div>
+                        <span asp-validation-for="Input.Password" class="text-danger d-block mt-2"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe" class="mt-4 d-flex align-items-center" style="cursor:pointer;">
+                                <input asp-for="Input.RememberMe" class="remember-checkbox"/>
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <p class="text-end">
+                        <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu?</a>
+                    </p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary form-login-btn">Đăng nhập</button>
+                    </div>
+                </form>
+            </section>
     </div>
 </div>
+@section Styles {
+    <link href="@Url.Content("~/css/IdentityCss/Login.css")" rel="stylesheet" type="text/css"/>
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        const visibilityIcon = document.querySelector(".show-password-icon");
+        const password = document.querySelector("input[type='password']");
+
+        password.addEventListener('input', () => {
+            if (password.value) {
+                visibilityIcon.style.display = 'block';
+            }
+            else {
+                visibilityIcon.style.display = 'none';
+            }
+        })
+
+        visibilityIcon.addEventListener('click', () => {
+            if (password.getAttribute('type') === 'password') {
+                password.setAttribute('type', 'text');
+                visibilityIcon.innerHTML = 'visibility';
+            }
+            else {
+                password.setAttribute('type', 'password');
+                visibilityIcon.innerHTML = 'visibility_off';
+            }
+        })
+    </script>
 }

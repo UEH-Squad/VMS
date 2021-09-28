@@ -5,11 +5,15 @@
     <div class="container">
         <div class="row">
             <div class="col-10 mx-auto">
+                @if (isErrorMessageShown)
+                {
+                    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
+                }
                 <h1 class="editProfile__title my-3">Chỉnh sửa <span>thông tin cá nhân</span></h1>
                 <div class="editProfile__logo text-center my-5">
                     <img src="img/RelatedActivities/2nd-activity.png" alt="">
                 </div>
-                <EditForm Model="@user" Context="CurrentEditContext" class="editProfile__form">
+                <EditForm Model="@user" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="editProfile__form">
                     <DataAnnotationsValidator />
 
                     <div class="row form-item">
@@ -22,15 +26,14 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Khóa <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@user.SchoolYear" class="form-control form-control--disable" disabled="true" />
+                            <InputText @bind-Value="@users.SchoolYear" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
                         <p class="col-3 form-text">Lớp <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Class)</div>
-                            <InputText @bind-Value="@user.Class" class="form-control" />
+                            <InputText @bind-Value="@users.Class" class="form-control" />
                         </div>
                     </div>
 
@@ -54,38 +57,35 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Mã số sinh viên <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@user.IdStudent" class="form-control form-control--disable" disabled="true" />
+                            <InputText @bind-Value="@user.StudentId" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
                         <p class="col-3 form-text">Ngày sinh <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Birthday)</div>
-                            <InputText @bind-Value="@user.Birthday" class="form-control" />
+                            <InputDate @bind-Value="@user.Birthday" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row form-item">
                         <p class="col-3 form-text">Email UEH <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@user.EmailUEH" class="form-control form-control--disable" disabled="true" />
+                            <InputText @bind-Value="@user.UserName" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
                         <p class="col-3 form-text">Email nhận thông báo <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.EmailGetNoti)</div>
-                            <InputText @bind-Value="@user.EmailGetNoti" class="form-control" />
+                            <InputText @bind-Value="@user.Email" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row form-item">
                         <p class="col-3 form-text">Điện thoại <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Phone)</div>
-                            <InputText @bind-Value="@user.Phone" class="form-control" />
+                            <InputText @bind-Value="@user.PhoneNumber" class="form-control" />
                         </div>
                     </div>
 
@@ -93,18 +93,16 @@
                         <p class="col-3 form-text">Địa chỉ <span>(*)</span></p>
                         <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap" style="padding:0">
                             <VMS.Pages.Organization.Activities.CascadingAddressPicker />
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Address)</div>
-                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" style="width:auto" placeholder="Nhập số nhà, tên đường" />
+                            <InputText @bind-Value="@users.Address" class="form-control ms-xl-2 my-address-textbox" style="width:auto" placeholder="Nhập số nhà, tên đường" />
                         </div>
                     </div>
 
-                    @*Carousel lĩnh vực*@
                     <div class="row form-item">
                         <p class="col-3 form-text">Lĩnh vực <span>(*)</span></p>
                         <div class="col-9 form-field ">
                             <div class="d-flex">
                                 <div class=" owl-carousel owl-theme editProfile__carousel">
-                                    @foreach (var item in areas)
+                                    @foreach (var item in choosenAreas)
                                     {
                                         <div class="form-field-item item">
                                             <i class="material-icons">@item.Icon</i>
@@ -112,7 +110,6 @@
                                         </div>
                                     }
                                 </div>
-
                                 <div class="form-field-item ms-auto item-add">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
                                 </div>
@@ -126,7 +123,7 @@
                         <div class="col-9 px-0 position-relative">
                             <Typeahead SearchMethod="SearchSkills"
                                        PlaceHolderText="Lựa chọn kỹ năng"
-                                       @bind-Values="user.Skills"
+                                       @bind-Values="users.Skills"
                                        EnablePopup="true"
                                        ShowPopUp="ShowSkillsPopup"
                                        class="col-5">
@@ -151,9 +148,8 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Châm ngôn</p>
                         <div class="col-9 position-relative px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => user.Maxim)</div>
                             <div class="col-8 px-0 w-100">
-                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="user.Maxim" class="form-input mx-0 form-control" />
+                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="users.Maxim" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
                         </div>
@@ -162,7 +158,7 @@
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <button class="btn from__btn-cancel">Hủy</button>
-                            <button @onclick="@(()=> ShowConfirmPopUp())" type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
+                            <button type="submit" class="btn from__btn-submit ms-5 ">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -170,6 +166,8 @@
         </div>
     </div>
 </div>
+
+<Spinner IsLoading="isLoading" />
 
 @code {
    

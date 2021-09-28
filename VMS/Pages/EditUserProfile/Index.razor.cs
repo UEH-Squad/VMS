@@ -2,94 +2,52 @@
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Application.Services;
 using VMS.Application.ViewModels;
+using VMS.Common;
 using VMS.Common.CustomValidations;
 
 namespace VMS.Pages.EditUserProfile
 {
     public partial class Index
     {
-
-        [Inject] private ISkillService SkillService { get; set; }
-
-        [Inject] private IJSRuntime JSRuntinme { get; set; }
-
         [CascadingParameter] public IModalService Modal { get; set; }
 
-        private async Task<IEnumerable<SkillViewModel>> SearchSkills(string searchText)
+        [Inject]
+        private ISkillService SkillService { get; set; }
+
+        [Inject]
+        private IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        private IIdentityService IdentityService { get; set; }
+
+        [Inject]
+        private IUserService UserService { get; set; }
+
+        [Inject]
+        private ILogger<Index> Logger { get; set; }
+
+        private bool isLoading;
+        private string UserId;
+        private bool isErrorMessageShown = false;
+        private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
+        private CreateUserProfileViewModel user = new();
+
+        protected override async Task OnInitializedAsync()
         {
-            return await SkillService.GetAllSkillsByNameAsync(searchText);
+            UserId = IdentityService.GetCurrentUserId();
+            user = await UserService.GetCreateUserProfileViewModelAsync(UserId);
+            choosenAreas = user.Areas;
         }
 
-        
-
-
-        public class User
-        {
-
-            public string FullName { get; set; }
-
-            public string SchoolYear { get; set; }
-
-            public string Class { get; set; }
-
-            public string Department { get; set; }
-
-            public string IdStudent { get; set; }
-
-            public string Birthday { get; set; }
-
-            public string EmailUEH { get; set; }
-
-            public string EmailGetNoti { get; set; }
-
-            public string Phone { get; set; }
-
-            public string Maxim { get; set; }
-
-            public string Address { get; set; }
-
-            [RequiredHasItems]
-            public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
-        }
-
-        private User user = new User()
-        {
-            FullName = "Minh Kha Bui",
-            SchoolYear = "K45",
-            IdStudent = "31191025985",
-            EmailUEH = "youth.bit@gmail.com",
-
-            Class = "ST001",
-            Phone = "0968790812",
-            Birthday = "24/07/2001",
-            EmailGetNoti = "buiminhkha24072001@gmail.com",
-            Maxim = "Nợ mẹ một nàng dâu."
-        };
-
-        private IBrowserFile file;
-
-        private int maxWord = 300;
-
-        private int CountWord()
-        {
-            int count = user.Maxim.Length;
-            return count;
-        }
-
-        private void FileChanged(InputFileChangeEventArgs file)
-        {
-            this.file = file.File;
-
-        }
-
-        private List<AreaViewModel> areas = new List<AreaViewModel>();
         private async Task ShowAreasModal()
         {
             var options = new ModalOptions()
@@ -99,22 +57,101 @@ namespace VMS.Pages.EditUserProfile
                 UseCustomLayout = true
             };
             var areasParameter = new ModalParameters();
-            areasParameter.Add("choosenAreasList", areas);
+            areasParameter.Add("choosenAreasList", choosenAreas);
             var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
             await areasModal.Result;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (areas.Count > 3)
+            if (choosenAreas.Count > 3)
             {
-                await JSRuntinme.InvokeVoidAsync("vms.EditProfileCarousel");
+                await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
             }
         }
+
+        private async Task HandleSubmit()
+        {
+            Logger.LogInformation("HandleValidSubmit called");
+            isErrorMessageShown = false;
+            isLoading = true;
+
+            try
+            {
+                await UserService.UpdateUserProfile(user, UserId);
+                isLoading = false;
+            }
+            catch (Exception ex)
+            {
+                isLoading = false;
+                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+            }
+        }
+
+        private async Task HandleInvalidSubmit()
+        {
+            isLoading = false;
+            isErrorMessageShown = true;
+            await Interop.ScrollToTop(JSRuntime);
+        }
+
+        private async Task<IEnumerable<SkillViewModel>> SearchSkills(string searchText)
+        {
+            return await SkillService.GetAllSkillsByNameAsync(searchText);
+        }
+
+        public class User
+        {
+            public string SchoolYear { get; set; }
+
+            public string Class { get; set; }
+
+            public string Department { get; set; }
+
+            public string Birthday { get; set; }
+
+            public string EmailUEH { get; set; }
+
+            public string EmailGetNoti { get; set; }
+
+            public string Maxim { get; set; }
+
+            public string Address { get; set; }
+
+            [RequiredHasItems]
+            public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
+        }
+
+        private User users = new User()
+        {
+            SchoolYear = "K45",
+
+            Class = "ST001",
+            Birthday = "24/07/2001",
+            Maxim = "Nợ mẹ một nàng dâu."
+        };
+
+        private IBrowserFile file;
+
+        private int maxWord = 300;
+
+        private int CountWord()
+        {
+            int count = users.Maxim.Length;
+            return count;
+        }
+
+        private void FileChanged(InputFileChangeEventArgs file)
+        {
+            this.file = file.File;
+
+        }
+
         private async Task ShowSkillsPopup()
         {
             var parameters = new ModalParameters();
-            parameters.Add("ChoosenSkillsList", user.Skills);
+            parameters.Add("ChoosenSkillsList", users.Skills);
 
             await ShowModalAsync(typeof(ActivitySearchPage.SkillsPopup), parameters);
         }

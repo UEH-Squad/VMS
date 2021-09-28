@@ -25,8 +25,15 @@ namespace VMS.Application.ViewModels
         [Required]
         public string Mission { get; set; }
 
+        [Required]
+        public string UserName { get; set; }
+
+        public DateTime Birthday { get; set; }
+
         public string Banner { get; set; }
 
         public string Avatar { get; set; }
+        
+        public string StudentId { get; set; }
     }
 }

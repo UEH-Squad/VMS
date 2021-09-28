@@ -1,0 +1,48 @@
+﻿<div class="filter">
+    <div class="filter-txt">
+        <p class="txt1">
+            Đánh giá
+        </p>
+        <p class="txt2">
+            tất cả
+        </p>
+    </div>
+    <div class="filter-line">
+        <hr class="line">
+    </div>
+    <div class="filter-checkbox">
+        <span class="filter-checkbox_container">
+            <input type="radio" @onchange="() => StarRating = 1" id="filter-checkbox_1" class="filter-checkbox_check" name="starrating" />
+            <label for="filter-checkbox_1" class="filter-checkbox_txt">1 sao</label>
+        </span>
+        <span class="filter-checkbox_container">
+            <input type="radio" @onchange="() => StarRating = 2" id="filter-checkbox_2" class="filter-checkbox_check" name="starrating" />
+            <label for="filter-checkbox_2" class="filter-checkbox_txt">2 sao</label>
+        </span>
+        <span class="filter-checkbox_container">
+            <input type="radio" @onchange="() => StarRating = 3" id="filter-checkbox_3" class="filter-checkbox_check" name="starrating" />
+            <label for="filter-checkbox_3" class="filter-checkbox_txt">3 sao</label>
+        </span>
+        <span class="filter-checkbox_container">
+            <input type="radio" @onchange="() => StarRating = 4" id="filter-checkbox_4" class="filter-checkbox_check" name="starrating" />
+            <label for="filter-checkbox_4" class="filter-checkbox_txt">4 sao</label>
+        </span>
+        <span class="filter-checkbox_container">
+            <input type="radio" @onchange="() => StarRating = 5" id="filter-checkbox_5" class="filter-checkbox_check" name="starrating" />
+            <label for="filter-checkbox_5" class="filter-checkbox_txt">5 sao</label>
+        </span>
+    </div>
+    <button @onclick="() => SubmitRating()" class="filter-submit">Đánh giá</button>
+</div>
+
+@code {
+    [Parameter]
+    public int StarRating { get; set; }
+    [Parameter]
+    public EventCallback<int> StarRatingChanged { get; set; }
+
+    private void SubmitRating()
+    {
+        StarRatingChanged.InvokeAsync(StarRating);
+    }
+}

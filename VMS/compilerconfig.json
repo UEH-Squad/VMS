@@ -154,5 +154,69 @@
   {
     "outputFile": "Pages/Organization/Profile/Mission.razor.css",
     "inputFile": "Pages/Organization/Profile/Mission.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/FilterBar.razor.css",
+    "inputFile": "Pages/RatingPage/FilterBar.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/PopUpComment.razor.css",
+    "inputFile": "Pages/RatingPage/PopUpComment.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/PopUpReportMember.razor.css",
+    "inputFile": "Pages/RatingPage/PopUpReportMember.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/RatingPage.razor.css",
+    "inputFile": "Pages/RatingPage/RatingPage.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/SearchBar.razor.css",
+    "inputFile": "Pages/RatingPage/SearchBar.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/Title.razor.css",
+    "inputFile": "Pages/RatingPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/MemberList.razor.css",
+    "inputFile": "Pages/RatingPage/MemberList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/Stars.razor.css",
+    "inputFile": "Pages/RatingPage/Stars.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/FilterRatingAll.razor.css",
+    "inputFile": "Pages/RatingPage/FilterRatingAll.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/Index.razor.css",
+    "inputFile": "Pages/RatingPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/RatingPage/SearchResult.razor.css",
+    "inputFile": "Pages/RatingPage/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/EditUserProfile/Index.razor.css",
+    "inputFile": "Pages/EditUserProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/EditUserProfile/ConfirmNotification.razor.css",
+    "inputFile": "Pages/EditUserProfile/ConfirmNotification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/SearchOrganizer/SearchAndFilter.razor.css",
+    "inputFile": "Pages/Organization/SearchOrganizer/SearchAndFilter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/SearchOrganizer/SearchResult.razor.css",
+    "inputFile": "Pages/Organization/SearchOrganizer/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/SearchOrganizer/Index.razor.css",
+    "inputFile": "Pages/Organization/SearchOrganizer/Index.razor.scss"
   }
 ]

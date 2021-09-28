@@ -11,9 +11,6 @@
   border-radius: 5px; }
   .typeahead.valid.modified {
     outline: none !important; }
-  .typeahead.invalid {
-    outline: none !important;
-    border: 1px solid red; }
   .typeahead:focus-within {
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
 
@@ -37,9 +34,6 @@
 .typeahead__input-hidden {
   display: none; }
 
-.invalid {
-  border-color: red !important; }
-
 .typeahead__input-mask-wrapper {
   display: flex;
   width: 100%; }
@@ -49,15 +43,6 @@
   flex-direction: row;
   width: 100%;
   flex-wrap: wrap; }
-
-.typeahead__input-mask-wrapper--disabled {
-  background-color: #e9ecef;
-  cursor: not-allowed;
-  border-radius: 5px 0 0 5px;
-  color: grey;
-  min-height: 40px; }
-  .typeahead__input-mask-wrapper--disabled:focus {
-    border: none; }
 
 .typeahead__input-mask {
   display: flex;
@@ -95,15 +80,6 @@
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
   .typeahead__input-icon .typeahead__down-arrow path {
     fill: #333333; }
-
-.typeahead__input-icon--disabled,
-.typeahead__input-icon--disabled:hover {
-  background-color: #e9ecef;
-  cursor: not-allowed; }
-
-.typeahead__input-icon--disabled .typeahead__down-arrow path,
-.typeahead__input-icon--disabled:hover .typeahead__down-arrow path {
-  fill: #9c9c9c; }
 
 .typeahead__multi-value {
   background-color: #dbdbdb;

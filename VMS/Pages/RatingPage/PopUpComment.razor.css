@@ -1,0 +1,179 @@
+﻿@charset "UTF-8";
+/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background-color: rgba(196, 196, 196, 0.38); }
+
+.popup-comment {
+  position: absolute;
+  box-sizing: border-box;
+  width: 50%;
+  height: 78%;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 60px 2px rgba(11, 40, 50, 0.2);
+  border-radius: 10px;
+  overflow-y: scroll; }
+  .popup-comment::-webkit-scrollbar {
+    width: 10px; }
+  .popup-comment::-webkit-scrollbar-thumb {
+    background-color: #B4B4B4;
+    border-radius: 20px; }
+  .popup-comment_icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 2%;
+    top: 3%;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: rgba(196, 196, 196, 0.5); }
+    .popup-comment_icon .material-icons {
+      font-size: 22px;
+      cursor: pointer; }
+
+/*Phần comment của tình nguyện viên*/
+.popup-comment_member {
+  margin: 7.5%;
+  border: 1px solid #D8D8D8;
+  border-radius: 10px; }
+  .popup-comment_member .name {
+    display: flex;
+    align-items: center;
+    margin-top: 2%; }
+    .popup-comment_member .name .popup-avatar {
+      margin-left: 5%;
+      margin-right: 5%;
+      border-radius: 50%; }
+  .popup-comment_member .popup-member .popup-member1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 5%;
+    margin-bottom: 0; }
+  .popup-comment_member .popup-member .popup-member2 {
+    font-style: normal;
+    font-weight: normal; }
+  .popup-comment_member .material-icons {
+    font-size: 24px; }
+  .popup-comment_member .comment {
+    margin-top: 5%;
+    margin-left: 5%;
+    box-sizing: border-box; }
+    .popup-comment_member .comment-input {
+      width: 85%;
+      font-size: 16px; }
+  .popup-comment_member .button {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%; }
+    .popup-comment_member .button-showremind {
+      margin-left: 64%;
+      width: 30%;
+      font-size: 12px;
+      background: #FFFFFF;
+      color: #707070;
+      border-radius: 10px;
+      border: 1px solid rgba(112, 112, 112, 0.8);
+      padding: 1% 2%;
+      cursor: not-allowed; }
+    .popup-comment_member .button-remind {
+      display: flex;
+      justify-content: space-around;
+      margin-left: 61%;
+      margin-top: 2%;
+      margin-bottom: 3%;
+      width: 36%;
+      font-size: 16px;
+      background: #18A0FB;
+      color: #FFFFFF;
+      border-radius: 5px;
+      border: 1px solid #18A0FB;
+      padding: 1.5% 1%;
+      cursor: pointer; }
+
+/*Phần comment của tổ chức*/
+.popup-comment_organization {
+  margin: 7.5%;
+  border: 1px solid #D8D8D8;
+  border-radius: 10px; }
+  .popup-comment_organization .name {
+    display: flex;
+    align-items: center;
+    margin-top: 2%; }
+    .popup-comment_organization .name .popup-avatar {
+      margin-left: 5%;
+      margin-right: 5%;
+      border-radius: 50%; }
+  .popup-comment_organization .popup-member .popup-member1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 5%;
+    margin-bottom: 0; }
+  .popup-comment_organization .popup-member .popup-member2 {
+    font-style: normal;
+    font-weight: normal; }
+  .popup-comment_organization .material-icons {
+    font-size: 24px; }
+  .popup-comment_organization .comment {
+    margin-top: 5%;
+    margin-left: 5%;
+    box-sizing: border-box; }
+    .popup-comment_organization .comment ::deep .comment-input {
+      border: none;
+      width: 85%;
+      outline: none; }
+  .popup-comment_organization .button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    margin-right: 3%; }
+    .popup-comment_organization .button-cancel {
+      background: #FFFFFF;
+      color: #707070;
+      border-radius: 5px;
+      border: 1px solid rgba(112, 112, 112, 0.8);
+      padding: 1% 2%;
+      cursor: pointer; }
+    .popup-comment_organization .button-send {
+      background: #18A0FB;
+      color: #FFFFFF;
+      border-radius: 5px;
+      border: 1px solid #18A0FB;
+      padding: 1% 2%;
+      cursor: pointer; }
+    .popup-comment_organization .button-modify {
+      background: #18A0FB;
+      color: #FFFFFF;
+      border-radius: 5px;
+      border: 1px solid #18A0FB;
+      padding: 1% 2%;
+      cursor: pointer; }
+    .popup-comment_organization .button-save {
+      margin-left: 4%;
+      margin-right: 3%;
+      background: #18A0FB;
+      color: #FFFFFF;
+      border-radius: 5px;
+      border: 1px solid #18A0FB;
+      padding: 1% 2%;
+      cursor: pointer; }

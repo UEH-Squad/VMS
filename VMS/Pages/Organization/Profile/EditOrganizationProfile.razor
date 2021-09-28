@@ -76,8 +76,15 @@
                     </div>
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
-                            <button class="btn from__btn-cancel">Hủy</button>
-                            <button @onclick="(() => ShowEditModal())"type="submit" class="btn from__btn-submit ms-5 @(CurrentEditContext.IsModified() || file != null ? "d-inline-block" : "d-none") ">Hoàn tất</button>
+                            <a href="@Routes.User" class="btn from__btn-cancel text-decoration-none">Hủy</a>
+                            @if (CurrentEditContext.IsModified() || file != null)
+                            {
+                                <button @onclick="(() => ShowEditModal())" type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn ">Hoàn tất</button>
+                            }
+                            else
+                            {
+                                <div class="btn from__btn-submit ms-5 d-inline-block cursor">Hoàn tất</div>
+                            }
                         </div>
                     </div>
                 </EditForm>

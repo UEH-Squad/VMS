@@ -131,10 +131,14 @@
       .my-editProfile .from__btn .from__btn-cancel:hover {
         border: 1px solid #18A0FB; }
     .my-editProfile .from__btn .from__btn-submit {
-      background: #18A0FB;
+      background: #C4C4C4;
       color: #FFFFFF; }
-      .my-editProfile .from__btn .from__btn-submit:hover {
+    .my-editProfile .from__btn .blue-btn {
+      background: #18A0FB; }
+      .my-editProfile .from__btn .blue-btn:hover {
         background: #0B588c; }
+    .my-editProfile .from__btn .cursor {
+      cursor: context-menu; }
   .my-editProfile ::-webkit-scrollbar {
     width: 10px; }
   .my-editProfile ::-webkit-scrollbar-thumb {

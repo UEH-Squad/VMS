@@ -117,6 +117,7 @@
 
     .editProfile__NoCarousel {
         width: 70%;
+
         .item-NoCaroesel {
             width: 30%;
         }
@@ -194,12 +195,20 @@
         }
 
         .from__btn-submit {
-            background: $blue;
+            background: #C4C4C4;
             color: $white;
+        }
+
+        .blue-btn {
+            background: $blue;
 
             &:hover {
                 background: $blue-hv;
             }
+        }
+
+        .cursor {
+            cursor: context-menu;
         }
     }
     /* width */

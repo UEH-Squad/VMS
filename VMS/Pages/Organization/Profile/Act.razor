@@ -19,11 +19,18 @@
                     <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                         <li class="edit pb-2">Chỉnh sửa</li>
                         <li @onclick="(() => ShowDeleteModal())" class="delete pb-2">Xóa</li>
-                        <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">Đóng hoạt động</li>
+                        @if (item.IsClose)
+                        {
+                            <li @onclick="(() => OpenAct(item.Id))" class="close pb-2">Mở hoạt động</li>
+                        }
+                        else
+                        {
+                            <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">Đóng hoạt động</li>
+                        }
                     </ul>
                     @if (HaveControl)
                     {
-                        <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute @(item.IsClose ? "d-none" : "")">
+                        <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
                             more_horiz
                         </i>
                     }
@@ -58,7 +65,8 @@
             }
         }
 
-        @if (HaveLinkAll) {
+        @if (HaveLinkAll)
+        {
             <div class="act__linkAll text-end">
                 <a>Xem tất cả >>></a>
             </div>
@@ -136,5 +144,10 @@
             Modal.Show<CloseSuccess>("", options);
         }
 
+    }
+
+    void OpenAct(int pendingId)
+    {
+        Datas[pendingId].IsClose = !Datas[pendingId].IsClose;
     }
 }

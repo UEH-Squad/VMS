@@ -1,0 +1,42 @@
+﻿@using VMS.Application.ViewModels
+<EditForm Model="@rating" OnValidSubmit="@Search">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="search-box">
+        <InputText class="search-txt_input" placeholder="Tìm kiếm bằng từ khóa" @bind-Value="@rating.KeyWord" @oninput="@ShowCloseButton" @oninvalid="@ClearKeyWord"></InputText>
+        <button @onclick="@ClearKeyWord" class="search-btn_clear @display"><span id="clear" class="material-icons">clear</span></button>
+        <button @onclick="@Search" class="search-btn_search"><span id="search" class="material-icons">search</span></button>
+    </div>
+    <div class="search-result">
+        <p class="search-result_text-1">Có</p>
+        <p class="search-result_text-2">20</p>
+        <p class="search-result_text-3">tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
+    </div>
+</EditForm>
+
+
+@code {
+    Rating rating;
+    protected override void OnInitialized()
+    {
+        rating = new Rating();
+    }
+
+    private void Search()
+    {
+
+    }
+
+    string display = "invisible";
+    private void ClearKeyWord()
+    {
+        rating.KeyWord = "";
+        display = "invisible";
+    }
+
+    private void ShowCloseButton()
+    {
+        display = "visible";
+    }
+
+}

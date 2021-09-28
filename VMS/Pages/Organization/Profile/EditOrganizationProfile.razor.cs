@@ -108,7 +108,7 @@ namespace VMS.Pages.Organization.Profile
 
         private async Task HandleSubmit()
         {
-            if (uploadFile is null)
+            if (uploadFile is null && org.Banner is null)
             {
                 await HandleInvalidSubmit();
                 return;

@@ -43,6 +43,7 @@ namespace VMS.Shared.Components
         [Parameter] public Func<string, Task<IEnumerable<TItem>>> SearchMethod { get; set; }
         [Parameter] public Func<TItem, TValue> ConvertMethod { get; set; }
         [Parameter] public Func<string, Task<TItem>> AddItemOnEmptyResultMethod { get; set; }
+        [Parameter] public Func<Task> ShowPopUp { get; set; }
 
         [Parameter] public RenderFragment<string> NotFoundTemplate { get; set; }
         [Parameter] public RenderFragment HelpTemplate { get; set; }
@@ -55,8 +56,8 @@ namespace VMS.Shared.Components
         [Parameter] public int MinimumLength { get; set; } = 1;
         [Parameter] public int Debounce { get; set; } = 300;
         [Parameter] public int MaximumSuggestions { get; set; } = 10;
-        [Parameter] public bool Disabled { get; set; } = false;
         [Parameter] public bool EnableDropDown { get; set; } = false;
+        [Parameter] public bool EnablePopup { get; set; } = false;
         [Parameter] public bool ShowDropDownOnFocus { get; set; } = false;
         [Parameter] public bool DisableClear { get; set; } = false;
 
@@ -151,7 +152,7 @@ namespace VMS.Shared.Components
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if ((firstRender && !Disabled) || (!_eventsHookedUp && !Disabled))
+            if (firstRender || (!_eventsHookedUp))
             {
                 await Interop.AddKeyDownEventListener(JSRuntime, _searchInput);
                 _eventsHookedUp = true;
@@ -205,6 +206,11 @@ namespace VMS.Shared.Components
             await Task.Delay(250); // Possible race condition here.
             await Interop.Focus(JSRuntime, _searchInput);
             await HookOutsideClick();
+        }
+
+        private void HandleShowPopUp()
+        {
+            ShowPopUp?.Invoke();
         }
 
         private async Task HandleKeyUpOnShowDropDown(KeyboardEventArgs args)

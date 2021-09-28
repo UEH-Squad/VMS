@@ -21,7 +21,8 @@
     color: white;
     font-weight: 700;
     font-size: 30px;
-    transition: all 0.3s linear; }
+    transition: all 0.3s linear;
+    cursor: pointer; }
   .pagination .btn-prev span:hover, .pagination .btn-next span:hover {
     background: #0B588c; }
   .pagination .numb {
@@ -30,7 +31,8 @@
     line-height: 40px;
     border-radius: 50%;
     text-align: center;
-    transition: all 0.3s linear; }
+    transition: all 0.3s linear;
+    cursor: pointer; }
   .pagination .numb.active, .pagination .numb:hover {
     background: #18A0FB;
     color: #FFFFFF; }

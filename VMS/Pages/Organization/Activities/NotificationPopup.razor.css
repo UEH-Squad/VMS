@@ -15,12 +15,7 @@
   text-align: center; }
   @media (min-width: 768px) {
     .my-custom-popup {
-      width: 45%; } }
-  .my-custom-popup h3 {
-    font-size: 20px;
-    color: #64D72F; }
-    .my-custom-popup h3 span {
-      color: #18A0FB; }
+      width: 35%; } }
   .my-custom-popup .close-btn {
     position: absolute;
     top: 5px;
@@ -40,8 +35,18 @@
       color: #18A0FB;
       font-size: 18px;
       font-weight: 500; }
+      .my-custom-popup .my-btn__cancel:hover {
+        color: #0B588C; }
     .my-custom-popup .my-btn__view-activity {
       background-color: #18A0FB;
       color: #FFFFFF;
       font-size: 18px;
       font-weight: 500; }
+      .my-custom-popup .my-btn__view-activity:hover {
+        background-color: #0B588C; }
+
+::deep h3 {
+  font-size: 20px;
+  color: #64D72F; }
+  ::deep h3 span {
+    color: #18A0FB; }

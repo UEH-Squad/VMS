@@ -4,7 +4,7 @@
 <div class="my-notification @(isNotification ? "d-block" : "d-none") ">
     <div class="notification__content mx-auto">
         <div class="notification__img  mx-auto">
-            <img class="w-75" src="@avatar" alt="">
+            <img class="w-75" src="@Avatar" alt="">
         </div>
         <div class="notification__btn text-center py-4">
             <button @onclick="CloseNotification" class="btn pr-5 btn__cancel px-4">Hủy</button>
@@ -16,7 +16,7 @@
 @code {
     bool isNotification = true;
     [Parameter]
-    public string avatar { get; set; }
+    public string Avatar { get; set; }
 
     bool isconfirm = false;
 
@@ -32,17 +32,17 @@
 
     private async Task HandleSubmit()
     {
-        user.id = IdentityService.GetCurrentUserId();
+        user.Id = IdentityService.GetCurrentUserId();
 
-        if (avatar is null)
+        if (Avatar is null)
         {
             return;
         }
         else
         {
-            user.Avatar = avatar;
+            user.Avatar = Avatar;
             isconfirm = true;
-            await OrganizationService.UpdateUserAsync(user, user.id);
+            await OrganizationService.UpdateUserAsync(user, user.Id);
         }
         await CloseNotification();
     }

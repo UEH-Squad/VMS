@@ -8,7 +8,7 @@ namespace VMS.Application.ViewModels
 {
     public class UpdateUserViewModel
     {
-        public string id { get; set; }
+        public string Id { get; set; }
         public string Avatar { get; set; }
     }
 }

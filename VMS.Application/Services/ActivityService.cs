@@ -15,9 +15,6 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public enum StatusAct{
-        current, favor, ended
-    }
     public class ActivityService : BaseService, IActivityService
     {
         private readonly IIdentityService _identityService;
@@ -445,7 +442,7 @@ namespace VMS.Application.Services
                 Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
                 {
                     a => a.OrgId == id,
-                    status == StatusAct.favor? a => a.Favorites.Count >=0 : (status != StatusAct.ended ? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now),
+                    status == StatusAct.Favor? a => a.Favorites.Count >=0 : (status != StatusAct.Ended ? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now),
                     a => a.StartDate <= DateTime.Now,
                     a => a.IsDeleted == false
                 },
@@ -470,9 +467,9 @@ namespace VMS.Application.Services
             });
             return status switch
             {
-               StatusAct.current => activityViewModels.ToList(),
-               StatusAct.favor => activityViewModels.OrderByDescending(a => a.Favorites).Take(8).ToList(),
-               StatusAct.ended => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
+               StatusAct.Current => activityViewModels.ToList(),
+               StatusAct.Favor => activityViewModels.OrderByDescending(a => a.Favorites).Take(8).ToList(),
+               StatusAct.Ended => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
                 _ => null
             };
         }

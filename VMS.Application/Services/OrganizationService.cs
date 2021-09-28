@@ -22,18 +22,20 @@ namespace VMS.Application.Services
         public OrganizationService(UserManager<User> userManager, 
                                    IRepository repository,
                                    IDbContextFactory<VmsDbContext> dbContextFactory,
-                                   IMapper mapper,
-                                   IIdentityService identityService) : base(repository, dbContextFactory, mapper)
+                                   IMapper mapper ) : base(repository, dbContextFactory, mapper)
         {
             _userManager = userManager;
         }
 
-        private async Task<User> CheckRoleOrg(string orgId)
+        private Task<User> CheckRoleOrg(string orgId)
         {
             var user = Task.Run(() => _userManager.FindByIdAsync(orgId)).Result;
             bool orgRole = Task.Run(() => _userManager.IsInRoleAsync(user, Role.Organization.ToString())).Result;
-            if (orgRole == true) return user;
-            else return null;
+            return Task.FromResult(orgRole switch
+            {
+                true => user,
+                _ => null
+            });
         }
         public  UserViewModel GetOrgFull(string id)
         {
@@ -63,7 +65,10 @@ namespace VMS.Application.Services
                 {
                     orgRatingViewModels.AverageRating = (float)Math.Round(sumRating / quantityRating, 1);
                 }
-                else orgRatingViewModels.AverageRating = 5;
+                else
+                { 
+                    orgRatingViewModels.AverageRating = 5; 
+                }
 
                 return orgRatingViewModels;
             }

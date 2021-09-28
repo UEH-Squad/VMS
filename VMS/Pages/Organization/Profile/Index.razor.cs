@@ -26,9 +26,9 @@ namespace VMS.Pages.Organization.Profile
         {
             org = OrganizationService.GetOrgFull(UserId);
             org = OrganizationService.GetOrgFull(UserId);
-            actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.current);
-            actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.favor);
-            actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.ended);
+            actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
+            actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);
+            actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.Ended);
             _ = !string.Equals(UserId, IdentityService.GetCurrentUserId()) ? owner = false : owner = true;
         }
     }

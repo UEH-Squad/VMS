@@ -1,0 +1,87 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+
+::deep .select-form-box-1 {
+    margin-left: -48%;
+    width: 87%;
+
+    .checkbox-1 {
+        position: relative;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: $white;
+        border: 2px solid $blue;
+        appearance: none;
+        cursor: pointer;
+
+        &::before {
+            position: absolute;
+            content: "";
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: $blue;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+
+        &:checked {
+            border-color: $blue;
+        }
+    }
+
+    .label-1 {
+        margin-left: 10%;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
+
+::deep .select-form-box-2 {
+    margin-left: 20%;
+    width: 75%;
+
+    .checkbox-2 {
+        position: relative;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: $white;
+        border: 2px solid $blue;
+        appearance: none;
+        cursor: pointer;
+
+        &::before {
+            position: absolute;
+            content: "";
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: $blue;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+
+        &:checked {
+            border-color: $blue;
+        }
+    }
+
+    .label-2 {
+        margin-left: 8%;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}

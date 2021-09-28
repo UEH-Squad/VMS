@@ -12,7 +12,7 @@ main {
 }
 
 .my-row {
-    height: 80vh;
+    height: 650px;
 
     h1 {
         font-size: 70px;
@@ -38,4 +38,166 @@ main {
     background-size: contain;
     background-position: center;
     padding: 60px 40px;
+}
+
+.footer {
+    position: relative;
+    padding-top: 30px;
+    border-top: 1px solid rgba(51, 51, 51, 0.5);
+    ;
+}
+
+.btn-back-top {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0px;
+    transform: translate(-100%, -50%);
+
+    .btn-back-top-icon {
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 50%;
+        font-size: 16px;
+        color: $white;
+        background: $green;
+
+        @include on("sm") {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 24px;
+        }
+
+        @include on("lg") {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 44px;
+        }
+
+        @include on("xl") {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            font-size: 64px;
+        }
+    }
+}
+
+//Footer
+.footer__logo {
+    padding: 0;
+
+    .footer__logo-govirlunteer {
+        width: 100%;
+    }
+
+    .footer__logo-ueh-hsv {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+
+        @include on("lg") {
+            margin: 15px 0;
+        }
+
+        @include on("xl") {
+            margin: 20px 0;
+        }
+    }
+
+    .footer__logo-ueh {
+        width: 52%;
+    }
+
+    .footer__logo-hsv {
+        width: 15%;
+        margin-left: 20px;
+    }
+
+    p {
+        font-size: 8px;
+        font-weight: 400;
+
+        @include on("sm") {
+            font-size: 12px;
+        }
+
+        @include on("xl") {
+            font-size: 15px;
+        }
+    }
+}
+
+.footer__contact {
+    padding: 0;
+    padding-top: 10px;
+
+    h6 {
+        margin-bottom: 20px;
+        font-size: 8px;
+        font-weight: 300;
+        color: $grey-text;
+
+        @include on("sm") {
+            font-size: 12px;
+        }
+
+        @include on("xl") {
+            font-size: 16px;
+        }
+
+        @include on("xxl") {
+            font-size: 18px;
+        }
+
+        a {
+            color: $grey-text;
+            text-decoration: none;
+        }
+    }
+
+    .contact__name {
+        font-weight: 700;
+    }
+
+    .contact__contribute {
+        font-weight: 400;
+    }
+}
+
+.footer__right {
+    padding: 0;
+    padding-top: 10px;
+    text-align: right;
+
+    h6 {
+        margin-bottom: 20px;
+        font-size: 7px;
+        font-weight: 400;
+        color: $grey-text;
+
+        @include on("sm") {
+            margin-bottom: 25px;
+            font-size: 12px;
+        }
+
+        @include on("xl") {
+            margin-bottom: 33px;
+            font-size: 16px;
+        }
+
+        @include on("xxl") {
+            margin-bottom: 35px;
+            font-size: 18px;
+        }
+
+        a {
+            color: $grey-text;
+            text-decoration: none;
+        }
+    }
 }

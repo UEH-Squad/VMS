@@ -1,0 +1,17 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.vision {
+    h3 {
+        font-weight: 600;
+        color: $white;
+        font-size: 72px;
+        top: 25%;
+    }
+
+    p {
+        font-weight: 500;
+        color: $white;
+        font-size: 36px;
+        top: 50%;
+    }
+}

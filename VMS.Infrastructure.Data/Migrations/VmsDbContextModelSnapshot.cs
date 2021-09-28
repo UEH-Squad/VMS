@@ -45,6 +45,29 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
+                            ConcurrencyStamp = "9805fbb4-1308-48bd-8ffa-44f09aa83536",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
+                            ConcurrencyStamp = "8a7d66e7-4848-4d51-b159-b0caa59a1113",
+                            Name = "Organization",
+                            NormalizedName = "Organization"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
+                            ConcurrencyStamp = "0ef877ce-8196-455d-9373-8cbffb074d99",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -621,15 +644,20 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RecruitmentRatingId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
+
+                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ImageReports");
                 });
@@ -641,15 +669,20 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RecruitmentRatingId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
+
+                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ReasonReports");
                 });
@@ -1044,6 +1077,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Banner")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
@@ -1274,10 +1310,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                        .WithMany("ImageReports")
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1285,10 +1327,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                        .WithMany("ReasonReports")
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
@@ -1417,6 +1465,13 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.Navigation("RecruitmentRatings");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.RecruitmentRating", b =>
+                {
+                    b.Navigation("ImageReports");
+
+                    b.Navigation("ReasonReports");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Skill", b =>

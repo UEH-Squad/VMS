@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using VMS.Common;
 using VMS.Domain.Models;
 
 namespace VMS.Infrastructure.Data.Context
@@ -60,6 +62,30 @@ namespace VMS.Infrastructure.Data.Context
             builder.Entity<Favorite>()
                 .Property(f => f.ActivityId).IsRequired();
 
+            builder.Entity<ImageReport>()
+                .HasOne(e => e.RecruitmentRating)
+                .WithMany(e => e.ImageReports)
+                .HasForeignKey(e => e.RecruitmentRatingId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ImageReport>()
+                .HasOne(e => e.Feedback)
+                .WithMany(e => e.ImageReports)
+                .HasForeignKey(e => e.FeedbackId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ReasonReport>()
+                .HasOne(e => e.RecruitmentRating)
+                .WithMany(e => e.ReasonReports)
+                .HasForeignKey(e => e.RecruitmentRatingId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ReasonReport>()
+                .HasOne(e => e.Feedback)
+                .WithMany(e => e.ReasonReports)
+                .HasForeignKey(e => e.FeedbackId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.Entity<Skill>().HasData(
                     new Skill { Id = 1, Name = "Kiến thức chuyên ngành" },
                     new Skill { Id = 2, Name = "Kỹ năng mềm" },
@@ -108,6 +134,27 @@ namespace VMS.Infrastructure.Data.Context
                     new Area { Id = 11, Name = "Chuyển nhà", Icon = "home" },
                     new Area { Id = 12, Name = "Công nghệ", Icon = "computer" }
             );
+
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
+                Name = Role.Admin.ToString(),
+                NormalizedName = Role.Admin.ToString()
+            });
+
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
+                Name = Role.Organization.ToString(),
+                NormalizedName = Role.Organization.ToString()
+            });
+
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
+                Name = Role.User.ToString(),
+                NormalizedName = Role.User.ToString()
+            });
         }
     }
 }

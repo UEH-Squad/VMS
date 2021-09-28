@@ -40,15 +40,15 @@ namespace VMS.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(AllowEmptyStrings = false , ErrorMessage = "Vui lòng điền tên đăng nhập")]
+            [EmailAddress(ErrorMessage = "Tên đăng nhập không chính xác")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng điền mật khẩu")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Nhớ tài khoản")]
             public bool RememberMe { get; set; }
         }
 
@@ -77,6 +77,7 @@ namespace VMS.Areas.Identity.Pages.Account
         
             if (ModelState.IsValid)
             {
+                return RedirectToPage("./ForgotPasswordConfirmation");
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);

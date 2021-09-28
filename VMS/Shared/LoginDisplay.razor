@@ -9,18 +9,62 @@
                 </div>
                 <span class="user-label mt-2 fw-bold">Trang cá nhân</span>
                 <div class="dropdown">
-                    
-                        <span class="material-icons-outlined user-section__dropdown-icon" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            arrow_drop_down
-                        </span>
-
+                    <span class="material-icons-outlined user-section__dropdown-icon" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        arrow_drop_down
+                    </span>
                     <ul class="dropdown-menu user-section__list list-unstyled bg-white">
-                        <li class="text-center">
-                            <a href="@Routes.User" class="px-3 pt-3 pb-2 text-decoration-none fw-bold user-section__list__profile">Trang cá nhân</a>
+                        <li class="user-info">
+                            <a href="@Routes.User" class="d-flex px-3 pt-4 text-decoration-none align-items-center">
+                                <img src="./img/HamburgerMenu/AvaUser.png" class="user-img" />
+                                <div class="d-flex flex-column text-start ps-3">
+                                    <h3 class="py-1 mb-0">Công nghệ thông tin kinh doanh</h3>
+                                    <h4 class="py-1 mb-0">Đơn vị tổ chức Govirlunteer</h4>
+                                </div>
+                            </a>
                         </li>
-                        <li class="text-center">
-                            <form method="post" action="@Routes.LogOut">
-                                <button type="submit" class="px-3 pt-2 pb-3 bg-white text-decoration-none fw-bold user-section__list__logout">Đăng xuất</button>
+                        @if (context.User.IsInRole(Role.User.ToString()))
+                        {
+                            <hr class="mx-3 my-20" />
+                            <li class="edit pt-1 pb-2">
+                                <a href="" class="d-flex justify-content-center align-items-center text-decoration-none mx-3">
+                                    <h4 class="py-2 mb-0">Chỉnh sửa thông tin cá nhân</h4>
+                                </a>
+                            </li>
+                            <li class="pass py-2 mx-3">
+                                <a href="" class="text-decoration-none mx-3">
+                                    Đổi mật khẩu
+                                </a>
+                            </li>
+                            <li class="history py-2 mx-3">
+                                <a href="" class="text-decoration-none mx-3">
+                                    Lịch sử hoạt động
+                                </a>
+                            </li>
+                            <hr class="mx-3 my-14" />
+                        }
+                        else
+                        {
+                            <hr class="mx-3 my-4" />
+                            <li class="edit pt-2 pb-3">
+                                <a href="" class="d-flex justify-content-center align-items-center text-decoration-none mx-3">
+                                    <h4 class="py-2 mb-0">Chỉnh sửa thông tin tổ chức</h4>
+                                </a>
+                            </li>
+                            <li class="manage d-flex justify-content-between py-2 my-1 mx-3">
+                                <a href="" class="text-decoration-none mx-3">
+                                    Quản lý hoạt động
+                                </a>
+                            </li>
+                            <hr class="mx-3 mt-4" />
+                        }
+                        <li class="user-logout d-flex justify-content-center">
+                            <form method="post" action="@Routes.LogOut" class="d-flex justify-content-center align-items-center py-2 mx-3">
+                                <button type="submit" class="d-flex text-decoration-none justify-content-center align-items-center">
+                                    <span class="material-icons">
+                                        exit_to_app
+                                    </span>
+                                    <h4 class="mb-0 ps-3">Đăng xuất</h4>
+                                </button>
                             </form>
                         </li>
                     </ul>
@@ -43,4 +87,6 @@
     {
         NavigationManager.NavigateTo(Routes.User);
     }
+
+
 }

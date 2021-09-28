@@ -12,16 +12,7 @@
     text-align: center;
 
     @include on('md') {
-        width: 45%;
-    }
-
-    h3 {
-        font-size: 20px;
-        color: $green;
-
-        span {
-            color: $blue;
-        }
+        width: 35%;
     }
 
     .close-btn {
@@ -46,6 +37,10 @@
             color: $blue;
             font-size: 18px;
             font-weight: 500;
+
+            &:hover {
+                color: $blue-bold;
+            }
         }
 
         &__view-activity {
@@ -53,6 +48,21 @@
             color: $white;
             font-size: 18px;
             font-weight: 500;
+
+            &:hover {
+                background-color: $blue-bold;
+            }
+        }
+    }
+}
+
+::deep {
+    h3 {
+        font-size: 20px;
+        color: $green;
+
+        span {
+            color: $blue;
         }
     }
 }

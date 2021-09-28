@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row schedule">
                 <div class="col-6 schedule__calendar">
-
+                    <Calendar @bind-Value="@value" />
                 </div>
                 <div class="col-6 schedule__act">
                     <h3 class="text-center pb-2 mb-5">Hoạt động <span> trong ngày của bạn</span></h3>
@@ -39,6 +39,8 @@
 
 
 @code {
+    DateTime value;
+
     [Parameter] public bool IsUser { get; set; } = true;
     protected override void OnInitialized()
     {

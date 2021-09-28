@@ -24,6 +24,10 @@
     "inputFile": "Shared/LoginDisplay.razor.scss"
   },
   {
+    "outputFile": "Shared/Components/Calendar.razor.css",
+    "inputFile": "Shared/Components/Calendar.razor.scss"
+  },
+  {
     "outputFile": "Pages/Index.razor.css",
     "inputFile": "Pages/Index.razor.scss"
   },

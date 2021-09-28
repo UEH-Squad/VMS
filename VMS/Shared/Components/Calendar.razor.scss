@@ -1,0 +1,101 @@
+﻿@import '../../Resources/scss/common/_variables';
+
+.calendar-header {
+    border-bottom: 1px solid #ebeef5;
+}
+
+.current-month {
+    color: $blue;
+    font-weight: 600;
+
+    &__text {
+        color: $green;
+    }
+}
+
+input[type=date] {
+    border-radius: 5px;
+    height: 30px;
+    border: 1px solid $green;
+}
+
+.calendar-button-group {
+    .navigate-icon {
+        color: $blue;
+        cursor: pointer;
+        font-size: 2rem;
+    }
+
+    .btn {
+        @include green-btn;
+        font-weight: 600;
+    }
+}
+
+.calendar-table {
+    color: $grey-text;
+    font-weight: 600;
+    table-layout: fixed;
+    width: 99%;
+
+    thead {
+        th {
+            padding: 12px 0;
+            color: $blue;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+
+    &:not(.is-range) {
+        td.next {
+            color: #7A7585;
+            font-weight: 500;
+        }
+
+        td.prev {
+            color: #7A7585;
+            font-weight: 500;
+        }
+    }
+
+    td {
+        vertical-align: top;
+        transition: background-color .2s ease;
+        cursor: pointer;
+    }
+
+    td.is-today {
+        color: #409eff;
+        width: 33%;
+    }
+
+    td.is-selected {
+        color: $white;
+
+        .calendar-day {
+            background-color: #76A9FF;
+            border-radius: 50%;
+        }
+    }
+
+    .calendar-day {
+        box-sizing: border-box;
+        height: 50px;
+        margin: auto;
+        width: 50px;
+        padding: 8px;
+
+        &:hover {
+            cursor: pointer;
+            color: #606266;
+            background-color: #f2f8fe;
+            border-radius: 50%;
+        }
+
+        .dot-icon {
+            font-size: .5rem;
+            color: $green;
+        }
+    }
+}

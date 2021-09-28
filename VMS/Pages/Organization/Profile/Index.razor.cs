@@ -12,7 +12,7 @@ namespace VMS.Pages.Organization.Profile
         private UserViewModel org;
         private List<ActivityViewModel> actCurrent = new();
         private List<ActivityViewModel> actFavorite = new();
-        private List<ActivityViewModel> actEnded;
+        private List<ActivityViewModel> actEnded = new();
         public bool owner;
         [Parameter]
         public string UserId { get; set; }
@@ -24,7 +24,6 @@ namespace VMS.Pages.Organization.Profile
         private IIdentityService IdentityService { get; set; }
         protected async override Task OnInitializedAsync()
         {
-            org = OrganizationService.GetOrgFull(UserId);
             org = OrganizationService.GetOrgFull(UserId);
             actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
             actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);

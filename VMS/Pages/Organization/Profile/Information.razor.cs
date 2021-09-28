@@ -10,6 +10,8 @@ namespace VMS.Pages.Organization.Profile
 {
     public partial class Information : ComponentBase
     {
+        [Parameter] 
+        public string UserId { get; set; }
         [Parameter]
         public UserViewModel Org { get; set; }
         [Parameter]
@@ -26,7 +28,7 @@ namespace VMS.Pages.Organization.Profile
             if (e.File.ContentType == "image/jpeg")
             {
                 file = e.File;
-                avatar = await UploadService.GetDataUriAsync(file);
+                avatar = await UploadService.SaveImageAsync(file, UserId);//this code will save image to ./img/activities, need to improve later
             }
             var parameters = new ModalParameters();
             parameters.Add("avatar", avatar);
@@ -44,7 +46,7 @@ namespace VMS.Pages.Organization.Profile
 
         }
 
-        private bool HaftStar(double rate, int star)
+        private static bool HaftStar(double rate, int star)
         {
             if (rate - star > 0 && rate - star <= 0.5)
             {

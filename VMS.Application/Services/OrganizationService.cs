@@ -27,11 +27,11 @@ namespace VMS.Application.Services
             _userManager = userManager;
         }
 
-        private Task<User> CheckRoleOrg(string orgId)
+        private User CheckRoleOrg(string orgId)
         {
             var user = Task.Run(() => _userManager.FindByIdAsync(orgId)).Result;
             bool orgRole = Task.Run(() => _userManager.IsInRoleAsync(user, Role.Organization.ToString())).Result;
-            return Task.FromResult(orgRole switch
+            return (orgRole switch
             {
                 true => user,
                 _ => null
@@ -79,7 +79,7 @@ namespace VMS.Application.Services
            
         }
 
-        public async Task UpdateUserAsync(UpdateUserViewModel userViewModel, string userId)
+        public async Task UpdateUserAsync(UpdateUserViewModel updateUserViewModel, string userId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -95,7 +95,7 @@ namespace VMS.Application.Services
             User user = await _repository.GetAsync(dbContext, specification);
             user.UpdatedBy = userId;
             user.UpdatedDate = DateTime.Now;
-            user.Avatar = userViewModel.Avatar;
+            user.Avatar = updateUserViewModel.Avatar;
 
             await _repository.UpdateAsync(dbContext, user);
         }

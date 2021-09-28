@@ -18,7 +18,7 @@
     [Parameter]
     public string Avatar { get; set; }
 
-    bool isconfirm = false;
+    bool isConfirm = false;
 
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
@@ -41,7 +41,7 @@
         else
         {
             user.Avatar = Avatar;
-            isconfirm = true;
+            isConfirm = true;
             await OrganizationService.UpdateUserAsync(user, user.Id);
         }
         await CloseNotification();
@@ -49,6 +49,6 @@
 
     async Task CloseNotification()
     {
-        await Modal.CloseAsync(ModalResult.Ok<bool>(isconfirm));
+        await Modal.CloseAsync(ModalResult.Ok<bool>(isConfirm));
     }
 }

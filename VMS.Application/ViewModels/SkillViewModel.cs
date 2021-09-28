@@ -9,5 +9,9 @@ namespace VMS.Application.ViewModels
         public string Name { get; set; }
         public string Icon { get; set; }
         public List<SkillViewModel> SubSkills { get; set; }
+
+        public override bool Equals(object obj) => obj != null && obj is SkillViewModel obj2 && Name == obj2.Name;
+
+        public override int GetHashCode() => Id;
     }
 }

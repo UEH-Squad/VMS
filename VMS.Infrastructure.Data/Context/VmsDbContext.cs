@@ -62,6 +62,30 @@ namespace VMS.Infrastructure.Data.Context
             builder.Entity<Favorite>()
                 .Property(f => f.ActivityId).IsRequired();
 
+            builder.Entity<ImageReport>()
+                .HasOne(e => e.RecruitmentRating)
+                .WithMany(e => e.ImageReports)
+                .HasForeignKey(e => e.RecruitmentRatingId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ImageReport>()
+                .HasOne(e => e.Feedback)
+                .WithMany(e => e.ImageReports)
+                .HasForeignKey(e => e.FeedbackId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ReasonReport>()
+                .HasOne(e => e.RecruitmentRating)
+                .WithMany(e => e.ReasonReports)
+                .HasForeignKey(e => e.RecruitmentRatingId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ReasonReport>()
+                .HasOne(e => e.Feedback)
+                .WithMany(e => e.ReasonReports)
+                .HasForeignKey(e => e.FeedbackId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.Entity<Skill>().HasData(
                     new Skill { Id = 1, Name = "Kiến thức chuyên ngành" },
                     new Skill { Id = 2, Name = "Kỹ năng mềm" },

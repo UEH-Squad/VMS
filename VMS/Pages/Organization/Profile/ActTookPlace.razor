@@ -2,71 +2,50 @@
     <div class="row act">
         <h1>Hoạt động <span>đã diễn ra</span></h1>
         <div class="row pb-5">
-            @foreach (var item in fakeDatas)
+            @if (ActEnded != null)
             {
-                <div class="col-6 act-container position-relative pb-5">
-                    <div class="img-container position-absolute">
-                        <img src="./img/OrganizationProfile/ActTookPlace.png" alt="" class="act-img">
-                    </div>
-                    <div class="act-content col-10 ms-auto mt-1 mb-2">
-                        <div class="act-ctn col-9 ms-auto ps-4 pe-3 my-2">
-                            <a href="" class="act-title">@item.Title</a>
-                            <div class="act-ranking my-3 lh-1">
-                                <i class="material-icons act-rate">
-                                    star_rate
-                                </i>
-                                <i class="material-icons act-rate">
-                                    star_rate
-                                </i>
-                                <i class="material-icons act-rate">
-                                    star_rate
-                                </i>
-                                <i class="material-icons act-rate">
-                                    star_rate
-                                </i>
-                                <i class="material-icons act-rate">
-                                    star_rate
-                                </i>
-                            </div>
-                            <div class="act-footer">
-                                <h5 class="act-participant">
-                                    <i class="material-icons pe-1">person</i> @item.Count
-                                </h5>
-                                <h5 class="act-location">
-                                    <i class="material-icons pe-1">location_on</i> @item.Location
-                                </h5>
+                @foreach (var item in ActEnded)
+                {
+                    <div class="col-6 act-container position-relative pb-5">
+                        <div class="img-container position-absolute">
+                            <img src="./img/OrganizationProfile/ActTookPlace.png" alt="" class="act-img">
+                        </div>
+                        <div class="act-content col-10 ms-auto mt-1 mb-2">
+                            <div class="act-ctn col-9 ms-auto ps-4 pe-3 my-2">
+                                <a href="" class="act-title">@item?.Name</a>
+                                <div class="act-ranking  my-3 lh-1">
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 0 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating,0)?"_half":"")
+                                    </span>
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 1 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating,1)?"_half":"")
+                                    </span>
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 2 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating, 2)?"_half":"")
+                                    </span>
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 3 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating, 3)?"_half":"")
+                                    </span>
+                                    <span class="material-icons-outlined" style="color:@(item.Rating > 4 ? "#EDF131" : "#B4B4B4")">
+                                        star@(HaftStar(item.Rating, 4)?"_half":"")
+                                    </span>
+                                </div>
+                                <div class="act-footer">
+                                    <h5 class="act-participant">
+                                        <i class="material-icons pe-1">person</i> @item?.MemberQuantity
+                                    </h5>
+                                    <h5 class="act-location">
+                                        <i class="material-icons pe-1">location_on</i>@item?.Province
+                                    </h5>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>
 </div>
 
 @code {
-
-    protected override void OnInitialized()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            fakeDatas.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
-                Count = 250,
-                Location = "TP. Hồ Chí Minh"
-            }) ;
-        }
-    }
-
-    private List<FakeData> fakeDatas = new();
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public int Count { get; set; }
-        public string Location { get; set; }
-    }
 }

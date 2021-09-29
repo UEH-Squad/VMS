@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210929065811_AddIsPinnedColumnToArea")]
+    partial class AddIsPinnedColumnToArea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "b570dc94-02de-4b89-a784-c31e717fd426",
+                            ConcurrencyStamp = "677e5ef0-c044-4152-9419-b7cce8caf5ac",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "6edfdf6c-9964-4561-8d6a-8357f129e946",
+                            ConcurrencyStamp = "0cdf4825-02cb-4228-91f5-de8ffb4ee954",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "d67b0ad0-be0c-4068-9550-6a33fb1ac4f3",
+                            ConcurrencyStamp = "4fba7759-a424-46c3-8708-61cb60d5a54a",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -583,14 +585,6 @@ namespace VMS.Infrastructure.Data.Migrations
                             IsDeleted = false,
                             IsPinned = false,
                             Name = "Công nghệ"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Icon = "coronavirus",
-                            IsDeleted = false,
-                            IsPinned = true,
-                            Name = "COVID-19"
                         });
                 });
 

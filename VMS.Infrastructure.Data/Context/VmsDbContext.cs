@@ -132,7 +132,8 @@ namespace VMS.Infrastructure.Data.Context
                     new Area { Id = 9, Name = "Khẩn cấp", Icon = "notifications_active" },
                     new Area { Id = 10, Name = "Sự kiện", Icon = "calendar_today" },
                     new Area { Id = 11, Name = "Chuyển nhà", Icon = "home" },
-                    new Area { Id = 12, Name = "Công nghệ", Icon = "computer" }
+                    new Area { Id = 12, Name = "Công nghệ", Icon = "computer" },
+                    new Area { Id = 13, Name = "COVID-19", Icon = "coronavirus", IsPinned = true }
             );
 
             builder.Entity<IdentityRole>().HasData(new IdentityRole

@@ -57,6 +57,8 @@ namespace VMS.Application.ViewModels
         public int WardId { get; set; }
 
         public string Ward { get; set; }
+        public bool IsDelete { get; set; }
+        public bool IsClosed { get; set; }
 
         [RequiredHasItems]
         public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();

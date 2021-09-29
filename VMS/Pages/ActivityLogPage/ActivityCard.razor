@@ -119,7 +119,7 @@
     {
         var result = new PagedResult<FakeData>();
         result.CurrentPage = page;
-        result.RowCount = 200;
+        result.RowCount = 80;
         result.PageSize = 8;
         result.PageCount = result.RowCount / result.PageSize;
         result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData

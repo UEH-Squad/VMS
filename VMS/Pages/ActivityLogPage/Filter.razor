@@ -3,19 +3,33 @@
         Lọc hoạt động
     </div>
     <form class="act-filter d-flex" action="" method="get">
-        <div>
-            <select class="act-filter__select">
-                <option selected>Học kỳ</option>
-                <option>Học kỳ đầu</option>
-                <option>Học kỳ giữa</option>
-                <option>Học kỳ cuối</option>
-            </select>
-            <select class="act-filter__select">
-                <option selected>Học kỳ</option>
-                <option>Học kỳ đầu</option>
-                <option>Học kỳ giữa</option>
-                <option>Học kỳ cuối</option>
-            </select>
+        <div class="select-filter">
+            <div class="select-container">
+                <div class="act-filter__select" @onclick="Showlist1">
+                    <span class="act-filter__select-default">@SelectDefault1</span>
+                    <span class="act-filter__select-icon">
+                        <span class="material-icons-outlined">expand_more</span>
+                    </span>
+                </div>
+                <div class="act-filter__list @Display1">
+                    <span class="act-filter__list-item">@List1Select1</span>
+                    <span class="act-filter__list-item">@List1Select2</span>
+                    <span class="act-filter__list-item">@List1Select3</span>
+                </div>
+            </div>
+            <div class="select-container">
+                <div class="act-filter__select" @onclick="Showlist2">
+                    <span class="act-filter__select-default">@SelectDefault2</span>
+                    <span class="act-filter__select-icon">
+                        <span class="material-icons-outlined">expand_more</span>
+                    </span>
+                </div>
+                <div class="act-filter__list @Display2">
+                    <span class="act-filter__list-item">@List2Select1</span>
+                    <span class="act-filter__list-item">@List2Select2</span>
+                    <span class="act-filter__list-item">@List2Select3</span>
+                </div>
+            </div>
         </div>
         <div class="act-filter__radio d-flex">
             <div class="act-filter__radio-1 d-flex align-items-center">
@@ -28,11 +42,46 @@
             </div>
         </div>
         <div>
-            <button class="act-filter__btn">Lọc</button>
+            <button class="act-filter__btn --filter">Lọc</button>
             <button class="act-filter__btn --del">Xóa lọc</button>
         </div>
     </form>
 </div>
 @code {
+    string SelectDefault1 = "Học kỳ";
+    string SelectDefault2 = "Đơn vị";
 
+    string List1Select1 = "Học kỳ đầu";
+    string List1Select2 = "Học kỳ giữa";
+    string List1Select3 = "Học kỳ cuối";
+
+    string List2Select1 = "Khoa kế toán";
+    string List2Select2 = "Khoa kinh tế";
+    string List2Select3 = "Khoa quản trị";
+
+    string Display1 = "d-none";
+    string Display2 = "d-none";
+
+    private void Showlist1()
+    {
+        if (Display1 == "d-none")
+        {
+            Display1 = "d-flex";
+        }
+        else
+        {
+            Display1 = "d-none";
+        }
+    }
+    private void Showlist2()
+    {
+        if (Display2 == "d-none")
+        {
+            Display2 = "d-flex";
+        }
+        else
+        {
+            Display2 = "d-none";
+        }
+    }
 }

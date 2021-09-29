@@ -34,6 +34,7 @@ namespace VMS.Application.Services
                 },
                 Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
                                  .Include(x => x.UserSkills).ThenInclude(s => s.Skill)
+                                 .Include(x => x.Faculty)
             });
 
             if (user is null)
@@ -43,6 +44,7 @@ namespace VMS.Application.Services
 
             CreateUserProfileViewModel userProfileViewModel = _mapper.Map<CreateUserProfileViewModel>(user);
 
+            userProfileViewModel.FacultyName = user.Faculty.Name;
             userProfileViewModel.Areas = user.UserAreas.Select(a => new AreaViewModel
             {
                 Id = a.AreaId,

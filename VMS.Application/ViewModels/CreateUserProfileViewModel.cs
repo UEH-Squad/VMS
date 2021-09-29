@@ -22,11 +22,17 @@ namespace VMS.Application.ViewModels
         [RequiredHasItems]
         public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
 
-        
+
+        [RequiredGreaterThanZero]
+        public int FacultyId { get; set; }
+
+        public string FacultyName { get; set; }
         public DateTime Birthday { get; set; }
         public string Banner { get; set; }
         public string Avatar { get; set; }       
         public string StudentId { get; set; }
         public string Introduction { get; set; }
+        public string Class { get; set; }
+        public string Course { get; set; }
     }
 }

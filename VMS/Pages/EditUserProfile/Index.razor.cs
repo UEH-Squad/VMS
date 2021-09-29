@@ -35,18 +35,28 @@ namespace VMS.Pages.EditUserProfile
         [Inject]
         private ISkillService SkillService { get; set; }
 
+        [Inject]
+        private IFacultyService FacultyService { get; set; }
+
         private bool isLoading;
         private string UserId;
         private int count;
         private bool isErrorMessageShown = false;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
+        private List<FacultyViewModel> faculties = new();
         private CreateUserProfileViewModel user = new();
 
         protected override async Task OnInitializedAsync()
         {
             UserId = IdentityService.GetCurrentUserId();
             user = await UserService.GetCreateUserProfileViewModelAsync(UserId);
+            faculties = await FacultyService.GetAllFacultiesAsync();
             choosenAreas = user.Areas;
+
+            if(string.IsNullOrEmpty(user.FacultyName))
+            {
+                user.FacultyName = "Lựa chọn Khoa";
+            }
         }
 
         private async Task ShowAreasModal()
@@ -94,6 +104,11 @@ namespace VMS.Pages.EditUserProfile
             }
             return count;
         }
+
+        private void ChangeFacultyValue()
+        {
+        }
+
         private async Task HandleSubmit()
         {
             Logger.LogInformation("HandleValidSubmit called");
@@ -122,20 +137,11 @@ namespace VMS.Pages.EditUserProfile
 
         public class User
         {
-            public string SchoolYear { get; set; }
-
-            public string Class { get; set; }
-
-            public string Department { get; set; }
-
             public string Address { get; set; }
         }
 
         private User users = new User()
         {
-            SchoolYear = "K45",
-
-            Class = "ST001",
         };
 
         private async Task ShowModalAsync(Type type, ModalParameters parameters)
@@ -148,15 +154,6 @@ namespace VMS.Pages.EditUserProfile
             };
 
             await Modal.Show(type, "", parameters, options).Result;
-        }
-
-        private string departmentChoosenValue = "Lựa chọn Khoa";
-
-        private string nameDepartmentValue = "Khoa Công nghệ thông tin Kinh doanh";
-
-        void ChooseDepartmentValue(int id)
-        {
-            departmentChoosenValue = nameDepartmentValue + " " + (id).ToString();
         }
 
         async Task ShowConfirmPopUp()

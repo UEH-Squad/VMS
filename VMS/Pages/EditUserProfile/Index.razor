@@ -11,7 +11,10 @@
                 }
                 <h1 class="editProfile__title my-3">Chỉnh sửa <span>thông tin cá nhân</span></h1>
                 <div class="editProfile__logo text-center my-5">
-                    <img src="img/RelatedActivities/2nd-activity.png" alt="">
+                    @if (!string.IsNullOrEmpty(user.Avatar))
+                    {
+                        <img src="@user.Avatar" alt="">
+                    }
                 </div>
                 <EditForm Model="@user" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="editProfile__form">
                     <DataAnnotationsValidator />
@@ -26,14 +29,14 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Khóa <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@users.SchoolYear" class="form-control form-control--disable" disabled="true" />
+                            <InputText @bind-Value="@user.Course" class="form-control form-control--disable" disabled="true" />
                         </div>
                     </div>
 
                     <div class="row form-item">
                         <p class="col-3 form-text">Lớp <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputText @bind-Value="@users.Class" class="form-control" />
+                            <InputText @bind-Value="@user.Class" class="form-control" />
                         </div>
                     </div>
 
@@ -42,12 +45,11 @@
                         <div class="col-9 px-0">
                             <div class="dropdown">
                                 <span class="material-icons-outlined"> arrow_drop_down </span>
-                                <input class="form-control my-form-department" readonly="readonly" placeholder="@departmentChoosenValue" data-bs-toggle="dropdown" />
+                                <input class="form-control my-form-department" readonly="readonly" placeholder="@user.FacultyName" data-bs-toggle="dropdown" />
                                 <ul class="dropdown-menu">
-                                    @for (int i = 1; i <= 10; i++)
+                                    @foreach(var item in faculties)
                                     {
-                                        int id = i;
-                                        <li @onclick="()=>ChooseDepartmentValue(id)">@nameDepartmentValue @id</li>
+                                        <li>@item.Name</li>
                                     }
                                 </ul>
                             </div>

@@ -218,5 +218,25 @@
   {
     "outputFile": "Pages/Organization/SearchOrganizer/Index.razor.css",
     "inputFile": "Pages/Organization/SearchOrganizer/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersListPage/NavMini.razor.css",
+    "inputFile": "Pages/VolunteersListPage/NavMini.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersListPage/Title.razor.css",
+    "inputFile": "Pages/VolunteersListPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersListPage/Listcard.razor.css",
+    "inputFile": "Pages/VolunteersListPage/Listcard.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersListPage/ConfirmDelList.razor.css",
+    "inputFile": "Pages/VolunteersListPage/ConfirmDelList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/VolunteersListPage/ConfirmUndoList.razor.css",
+    "inputFile": "Pages/VolunteersListPage/ConfirmUndoList.razor.scss"
   }
 ]

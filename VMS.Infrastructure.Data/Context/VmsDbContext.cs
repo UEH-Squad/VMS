@@ -121,20 +121,22 @@ namespace VMS.Infrastructure.Data.Context
                 );
 
             builder.Entity<Area>().HasData(
-                    new Area { Id = 1, Name = "Cộng đồng", Icon = "people_outline" },
-                    new Area { Id = 2, Name = "Hỗ trợ", Icon = "pan_tool" },
-                    new Area { Id = 3, Name = "Giáo dục", Icon = "import_contacts" },
-                    new Area { Id = 4, Name = "Kỹ thuật", Icon = "format_shapes" },
-                    new Area { Id = 5, Name = "Sức khỏe", Icon = "local_hospital" },
-                    new Area { Id = 6, Name = "Phương tiện", Icon = "drive_eta" },
-                    new Area { Id = 7, Name = "Môi trường", Icon = "wb_sunny" },
-                    new Area { Id = 8, Name = "Thể thao", Icon = "directions_bike" },
-                    new Area { Id = 9, Name = "Khẩn cấp", Icon = "notifications_active" },
-                    new Area { Id = 10, Name = "Sự kiện", Icon = "calendar_today" },
-                    new Area { Id = 11, Name = "Chuyển nhà", Icon = "home" },
-                    new Area { Id = 12, Name = "Công nghệ", Icon = "computer" },
-                    new Area { Id = 13, Name = "COVID-19", Icon = "coronavirus", IsPinned = true }
+                    new Area { Id = 1, Name = "Cộng đồng", Icon = "people_outline", Color = "#18A0FB" },
+                    new Area { Id = 2, Name = "Hỗ trợ", Icon = "pan_tool", Color = "#18A0FB" },
+                    new Area { Id = 3, Name = "Giáo dục", Icon = "import_contacts", Color = "#18A0FB" },
+                    new Area { Id = 4, Name = "Kỹ thuật", Icon = "format_shapes", Color = "#18A0FB" },
+                    new Area { Id = 5, Name = "Sức khỏe", Icon = "local_hospital", Color = "#18A0FB" },
+                    new Area { Id = 6, Name = "Phương tiện", Icon = "drive_eta", Color = "#18A0FB" },
+                    new Area { Id = 7, Name = "Môi trường", Icon = "wb_sunny", Color = "#18A0FB" },
+                    new Area { Id = 8, Name = "Thể thao", Icon = "directions_bike", Color = "#18A0FB" },
+                    new Area { Id = 9, Name = "Khẩn cấp", Icon = "notifications_active", Color = "#18A0FB" },
+                    new Area { Id = 10, Name = "Sự kiện", Icon = "calendar_today", Color = "#18A0FB" },
+                    new Area { Id = 11, Name = "Chuyển nhà", Icon = "home", Color = "#18A0FB" },
+                    new Area { Id = 12, Name = "Công nghệ", Icon = "computer", Color = "#18A0FB" },
+                    new Area { Id = 13, Name = "COVID-19", Icon = "coronavirus", IsPinned = true, Color = "#F14747" }
             );
+
+            builder.Entity<Area>().Property(x => x.Color).HasDefaultValue("#18A0FB");
 
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {

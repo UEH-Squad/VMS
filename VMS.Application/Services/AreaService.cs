@@ -28,7 +28,7 @@ namespace VMS.Application.Services
 
             if (isPinned)
             {
-                return _mapper.Map<List<AreaViewModel>>(areas.Where(x => x.IsPinned));
+                return _mapper.Map<List<AreaViewModel>>(areas.Where(x => x.IsPinned).Take(4));
             }
             else
             {

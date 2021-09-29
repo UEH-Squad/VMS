@@ -23,7 +23,7 @@
                 {
                     <input @onclick="(() => ChangeStatePinnedArea(area))" class="my-check-box cursor-pointer" type="checkbox" id="@area.Icon">
                 }
-                <label class="my-check-box-label d-flex align-items-center cursor-pointer colored-red" for="@area.Icon">
+                <label class="my-check-box-label d-flex align-items-center cursor-pointer" style="color: @area.Color" for="@area.Icon">
                     @area.Name
                     <span class="material-icons-outlined">
                         @area.Icon

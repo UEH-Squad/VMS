@@ -12,12 +12,12 @@
             <div class="owl-carousel owl-theme filter__carousel">
                 @foreach (var area in areas)
                 {
-                    <div class="item @(area.IsPinned ? "item-covid" : "")">
+                    <div class="item">
                         <a href="@Routes.ActivitySearch?area=@area.Id">
-                            <i class="material-icons @(area.IsPinned ? "icon-covid" : "")">
+                            <i class="material-icons" style="background-color: @area.Color">
                                 @area.Icon
                             </i>
-                            <span>@area.Name</span>
+                            <span style="@(area.IsPinned ? $"color: {area.Color}" : "")">@area.Name</span>
                         </a>
                     </div>
                 }

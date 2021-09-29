@@ -11,11 +11,11 @@
                 {
                     @foreach (var area in areas)
                     {
-                        <div class="area-item-wrapper d-flex align-items-center mb-2 @(area.IsPinned ? "covid-item" : "")">
-                            <div @onclick="() => ChangeState(area)" class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center"  style="@(area.IsPinned ? "background-color: #f14747" : "")">
+                        <div class="area-item-wrapper d-flex align-items-center mb-2">
+                            <div @onclick="() => ChangeState(area)" class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center"  style="background-color: @area.Color">
                                 @area.Icon
                             </div>
-                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-2 @(choosenAreas.Exists(a => a.Id == area.Id) ? (area.IsPinned ? "colored-red" : "colored-green") : "")">@area.Name</p>
+                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-2" style="@(choosenAreas.Exists(a => a.Id == area.Id) ? "color: #64D72F" : (area.IsPinned ? $"color: {area.Color}" : ""))">@area.Name</p>
                         </div>
                     }
                 }

@@ -72,7 +72,7 @@ namespace VMS.Pages.OrganizationManagementPage
         {
             if (confirmDeleteId == activity.Id)
             {
-                await ActivityService.CloseOrDeleteActivity(activity.Id, !activity.IsDeleted, activity.IsClosed);
+                await ActivityService.UpdateStatusActAsync(activity.Id, activity.IsClosed, !activity.IsDeleted);
                 ResetState();
                 popupDelete = activity.Id;
                 await HandlePageChangedAsync();

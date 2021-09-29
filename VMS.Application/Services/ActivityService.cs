@@ -67,7 +67,11 @@ namespace VMS.Application.Services
 
             activities.Items.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
-            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+            var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+
+            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
+
+            return paginatedList;
         }
 
         private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
@@ -99,7 +103,7 @@ namespace VMS.Application.Services
 
             var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
 
-            paginatedList.Items.ForEach(a => a.Rate = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
+            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
 
             return paginatedList;
         }
@@ -393,6 +397,94 @@ namespace VMS.Application.Services
             return result;
         }
 
+        public async Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status)
+        {
+            DbContext context = _dbContextFactory.CreateDbContext();
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                {
+                    a => a.OrgId == id,
+                    status == StatusAct.Favor? a => a.Favorites.Count >=0 : (status != StatusAct.Ended ? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now),
+                    a => a.StartDate <= DateTime.Now,
+                    a => a.IsDeleted == false
+                },
+                Includes = activities => activities.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
+                                                    .Include(x => x.Favorites)
+                                                    .Include(x=>x.ActivityAddresses).ThenInclude(x=> x.AddressPath)
+            };
+
+            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
+
+            IEnumerable<ActivityViewModel> activityViewModels = activity.Select(x => new ActivityViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Banner = x.Banner,
+                IsClosed = x.IsClosed,
+                Favorites = x.Favorites.Count,
+                MemberQuantity = x.MemberQuantity,
+                Province = GetActProvince(x.ActivityAddresses),
+                EndDate = x.EndDate,
+                Rating = GetRateOfActivity(x.Recruitments)
+            });
+            return status switch
+            {
+               StatusAct.Current => activityViewModels.ToList(),
+               StatusAct.Favor => activityViewModels.OrderByDescending(a => a.Favorites).Take(8).ToList(),
+               StatusAct.Ended => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
+                _ => null
+            };
+        }
+        private static string GetActProvince(ICollection<ActivityAddress> activityAddresses)
+        {
+            ActivityAddress address = activityAddresses.Where(a => a.AddressPath.Depth == 1).FirstOrDefault();
+            if (address != null)
+            {
+                return address.AddressPath.Name;
+            }
+            else
+            {
+                return "Hồ Chí Minh"; 
+            }
+        }
+
+        private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
+        {
+            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
+                    / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
+        }
+
+        public async Task UpdateStatusActAsync(int activityId, bool close, bool delete)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    a => a.Id == activityId
+                }
+            };
+            Activity activity = await _repository.GetAsync(dbContext, specification);
+            activity.UpdatedDate = DateTime.Now;
+            if(close == true)
+            { 
+                activity.IsClosed = true; 
+            }
+            else 
+            { 
+                activity.IsClosed = false;
+            }
+
+            if (delete == true)
+            {
+                activity.IsDeleted = true;
+            }
+           
+            await _repository.UpdateAsync(dbContext, activity);
+        }
+
         private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate coordinate)
         {
             Point userLocation = _geometryFactory.CreatePoint(coordinate);
@@ -458,12 +550,6 @@ namespace VMS.Application.Services
             }
 
             return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
-        }
-
-        private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
-        {
-            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
-                    /recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
         }
 
         public async Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false)

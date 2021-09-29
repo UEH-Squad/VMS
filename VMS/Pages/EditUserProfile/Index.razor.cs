@@ -37,6 +37,7 @@ namespace VMS.Pages.EditUserProfile
 
         private bool isLoading;
         private string UserId;
+        private int count;
         private bool isErrorMessageShown = false;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private CreateUserProfileViewModel user = new();
@@ -84,6 +85,15 @@ namespace VMS.Pages.EditUserProfile
             return await SkillService.GetAllSkillsByNameAsync(searchText);
         }
 
+        private int maxWord = 300;
+        private int CountWord()
+        {
+            if (!string.IsNullOrWhiteSpace(user.Introduction))
+            {
+                count = user.Introduction.Length;
+            }
+            return count;
+        }
         private async Task HandleSubmit()
         {
             Logger.LogInformation("HandleValidSubmit called");
@@ -118,12 +128,7 @@ namespace VMS.Pages.EditUserProfile
 
             public string Department { get; set; }
 
-            public string Maxim { get; set; }
-
             public string Address { get; set; }
-
-            [RequiredHasItems]
-            public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
         }
 
         private User users = new User()
@@ -131,16 +136,7 @@ namespace VMS.Pages.EditUserProfile
             SchoolYear = "K45",
 
             Class = "ST001",
-            Maxim = "Nợ mẹ một nàng dâu."
         };
-
-        private int maxWord = 300;
-
-        private int CountWord()
-        {
-            int count = users.Maxim.Length;
-            return count;
-        }
 
         private async Task ShowModalAsync(Type type, ModalParameters parameters)
         {

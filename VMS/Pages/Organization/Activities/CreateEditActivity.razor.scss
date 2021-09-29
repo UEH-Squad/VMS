@@ -84,13 +84,20 @@
         color: white;
         margin: 5px auto;
         transition: all 0.3s linear;
-        width: 45px;
-        height: 45px;
-        line-height: 45px;
-        font-size: 24px;
+        width: 73px;
+        height: 73px;
+        line-height: 73px;
+        font-size: 35px;
 
         &.add-icon {
-            background-color: $grey-icon;
+            background-color: $grey-close-bg;
+            font-size: 70px;
+            opacity: .5;
+
+            &:hover {
+                background-color: $grey-icon;
+                cursor: pointer;
+            }
         }
     }
 
@@ -124,6 +131,7 @@
 
 ::deep {
     .tox {
+        border-radius: 5px;
         z-index: 0;
     }
     // As the typeahead is lazy-loaded, its styles will override our styles.

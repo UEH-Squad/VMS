@@ -18,9 +18,6 @@ namespace VMS.Application.ViewModels
 
         [Required]
         public string PhoneNumber { get; set; }
-           
-        [RequiredHasItems]
-        public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
 
         [Required]
         public string Mission { get; set; }
@@ -28,6 +25,14 @@ namespace VMS.Application.ViewModels
         [Required]
         public string UserName { get; set; }
 
+
+        [RequiredHasItems]
+        public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
+
+        [RequiredHasItems]
+        public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();
+
+        
         public DateTime Birthday { get; set; }
 
         public string Banner { get; set; }

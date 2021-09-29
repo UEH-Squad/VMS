@@ -21,9 +21,6 @@ namespace VMS.Pages.EditUserProfile
         [CascadingParameter] public IModalService Modal { get; set; }
 
         [Inject]
-        private ISkillService SkillService { get; set; }
-
-        [Inject]
         private IJSRuntime JSRuntime { get; set; }
 
         [Inject]
@@ -34,6 +31,9 @@ namespace VMS.Pages.EditUserProfile
 
         [Inject]
         private ILogger<Index> Logger { get; set; }
+
+        [Inject]
+        private ISkillService SkillService { get; set; }
 
         private bool isLoading;
         private string UserId;
@@ -70,6 +70,20 @@ namespace VMS.Pages.EditUserProfile
             }
         }
 
+        private async Task ShowSkillsPopup()
+        {
+            var parameters = new ModalParameters();
+            parameters.Add("ChoosenSkillsList", user.Skills);
+
+            await ShowModalAsync(typeof(ActivitySearchPage.SkillsPopup), parameters);
+            StateHasChanged();
+        }
+
+        private async Task<IEnumerable<SkillViewModel>> SearchSkills(string searchText)
+        {
+            return await SkillService.GetAllSkillsByNameAsync(searchText);
+        }
+
         private async Task HandleSubmit()
         {
             Logger.LogInformation("HandleValidSubmit called");
@@ -96,11 +110,6 @@ namespace VMS.Pages.EditUserProfile
             await Interop.ScrollToTop(JSRuntime);
         }
 
-        private async Task<IEnumerable<SkillViewModel>> SearchSkills(string searchText)
-        {
-            return await SkillService.GetAllSkillsByNameAsync(searchText);
-        }
-
         public class User
         {
             public string SchoolYear { get; set; }
@@ -108,12 +117,6 @@ namespace VMS.Pages.EditUserProfile
             public string Class { get; set; }
 
             public string Department { get; set; }
-
-            public string Birthday { get; set; }
-
-            public string EmailUEH { get; set; }
-
-            public string EmailGetNoti { get; set; }
 
             public string Maxim { get; set; }
 
@@ -128,11 +131,8 @@ namespace VMS.Pages.EditUserProfile
             SchoolYear = "K45",
 
             Class = "ST001",
-            Birthday = "24/07/2001",
             Maxim = "Nợ mẹ một nàng dâu."
         };
-
-        private IBrowserFile file;
 
         private int maxWord = 300;
 
@@ -142,19 +142,6 @@ namespace VMS.Pages.EditUserProfile
             return count;
         }
 
-        private void FileChanged(InputFileChangeEventArgs file)
-        {
-            this.file = file.File;
-
-        }
-
-        private async Task ShowSkillsPopup()
-        {
-            var parameters = new ModalParameters();
-            parameters.Add("ChoosenSkillsList", users.Skills);
-
-            await ShowModalAsync(typeof(ActivitySearchPage.SkillsPopup), parameters);
-        }
         private async Task ShowModalAsync(Type type, ModalParameters parameters)
         {
             ModalOptions options = new()
@@ -175,7 +162,6 @@ namespace VMS.Pages.EditUserProfile
         {
             departmentChoosenValue = nameDepartmentValue + " " + (id).ToString();
         }
-
 
         async Task ShowConfirmPopUp()
         {

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,6 +33,7 @@ namespace VMS.Application.Services
                     a => a.Id == userId
                 },
                 Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
+                                 .Include(x => x.UserSkills).ThenInclude(s => s.Skill)
             });
 
             if (user is null)
@@ -49,6 +50,12 @@ namespace VMS.Application.Services
                 Icon = a.Area.Icon
             }).ToList();
 
+            userProfileViewModel.Skills = user.UserSkills.Select(a => new SkillViewModel
+            {
+                Id = a.SkillId,
+                Name = a.Skill.Name
+            }).ToList();
+
             return userProfileViewModel;
         }
 
@@ -63,11 +70,13 @@ namespace VMS.Application.Services
                     a => a.Id == userId
                 },
                 Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
+                                 .Include(x => x.UserSkills).ThenInclude(s => s.Skill)
             });
 
             user = _mapper.Map(userProfileViewModel, user);
 
             user.UserAreas = MapAreas(userProfileViewModel, user);
+            user.UserSkills = MapSkills(userProfileViewModel, user);
 
             await _repository.UpdateAsync(dbContext, user);
         }
@@ -78,6 +87,15 @@ namespace VMS.Application.Services
             {
                 User = user,
                 AreaId = s.Id
+            }).ToList();
+        }
+
+        private static ICollection<UserSkill> MapSkills(CreateUserProfileViewModel userProfileViewModel, User user)
+        {
+            return userProfileViewModel.Skills.Select(s => new UserSkill
+            {
+                User = user,
+                SkillId = s.Id
             }).ToList();
         }
     }

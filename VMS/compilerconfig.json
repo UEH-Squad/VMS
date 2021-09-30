@@ -220,12 +220,8 @@
     "inputFile": "Pages/Organization/SearchOrganizer/Index.razor.scss"
   },
   {
-    "outputFile": "Pages/ActivityLogPage/index.razor.css",
-    "inputFile": "Pages/ActivityLogPage/index.razor.sass"
-  },
-  {
-    "outputFile": "Pages/ActivityLogPage/index.razor.css",
-    "inputFile": "Pages/ActivityLogPage/index.razor.scss"
+    "outputFile": "Pages/ActivityLogPage/Index.razor.css",
+    "inputFile": "Pages/ActivityLogPage/Index.razor.sass"
   },
   {
     "outputFile": "Pages/ActivityLogPage/ActivityCard.razor.css",
@@ -234,9 +230,5 @@
   {
     "outputFile": "Pages/ActivityLogPage/Filter.razor.css",
     "inputFile": "Pages/ActivityLogPage/Filter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityLogPage/Search.razor.css",
-    "inputFile": "Pages/ActivityLogPage/Search.razor.scss"
   }
 ]

@@ -16,6 +16,10 @@ namespace VMS.Domain.Models
         public string Address { get; set; }
         public string FullAddress { get; set; }
         public string Avatar { get; set; }
+        public string Class { get; set; }
+        public string Course { get; set; }
+        public int? FacultyId { get; set; }
+
 
         // For org + seeker
         public string PhoneNumber2 { get; set; }
@@ -32,6 +36,7 @@ namespace VMS.Domain.Models
         public bool IsDeleted { get; set; }
         public int Rank { get; set; }
 
+        public virtual Faculty Faculty { get; set; }
         public virtual ICollection<UserAddress> UserAddresses { get; set; }
         public virtual ICollection<UserSkill> UserSkills { get; set; }
         public virtual ICollection<UserArea> UserAreas { get; set; }

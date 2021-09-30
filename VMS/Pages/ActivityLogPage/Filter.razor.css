@@ -5,7 +5,7 @@
 /*#region mixins */
 /*#endregion */
 .filter-container {
-  padding: 39px;
+  padding: 3% 3% 5% 3%;
   border: 1px solid #C4C4C4;
   border-radius: 10px;
   margin-top: 40px;
@@ -22,13 +22,14 @@
   .act-filter .select-filter {
     display: flex;
     justify-content: space-between;
-    width: 40%; }
-  .act-filter .select-container {
-    position: relative; }
+    width: 45%; }
+    .act-filter .select-filter .select-container {
+      position: relative;
+      width: 45%; }
   .act-filter__select {
     border: 1px solid #B4B4B4;
-    width: 200px;
-    height: 40px;
+    width: 100%;
+    height: 37px;
     background: #FFFFFF;
     border-radius: 5px;
     cursor: pointer;
@@ -37,23 +38,22 @@
     justify-content: space-between;
     font-size: 16px; }
     .act-filter__select-default {
-      font-weight: normal;
+      font-weight: 400;
       color: #B4B4B4;
       margin-left: 5%; }
-    .act-filter__select-icon {
+    .act-filter__select #act-filter__select-icon {
       pointer-events: none; }
   .act-filter__list {
     position: absolute;
     background-color: #FFFFFF;
     border-radius: 10px;
     top: 120%;
-    height: 158px;
+    height: 157px;
     left: 0;
     right: 0;
-    display: flex;
     flex-direction: column;
     box-shadow: 0px 4px 10px rgba(11, 50, 60, 0.2);
-    padding: 15%;
+    padding: 10% 15%;
     z-index: 1;
     overflow-y: scroll; }
     .act-filter__list::-webkit-scrollbar {
@@ -66,17 +66,17 @@
       font-weight: 500;
       text-align: center;
       background-color: #FFFFFF;
-      padding: 3%;
+      padding: 4%;
       cursor: pointer; }
     .act-filter__list-item:hover {
       color: #18A0FB; }
   .act-filter__radio {
-    width: 35%;
-    justify-content: space-between; }
+    width: 33%;
+    justify-content: space-around; }
     .act-filter__radio-1 {
       width: 45%; }
     .act-filter__radio-2 {
-      width: 45%; }
+      width: 40%; }
     .act-filter__radio .radio-1 {
       position: relative;
       border-radius: 50%;
@@ -137,6 +137,10 @@
       font-weight: normal;
       color: #707070;
       cursor: pointer; }
+  .act-filter__btn-container {
+    width: 16%;
+    display: flex;
+    justify-content: space-between; }
   .act-filter__btn {
     padding: 3px 25px;
     background-color: #64D72F;
@@ -147,7 +151,7 @@
     .act-filter__btn.--filter:hover {
       background-color: #306C14; }
     .act-filter__btn.--del {
-      padding-right: 0;
+      padding: 0;
       color: #B4B4B4;
       background-color: transparent; }
     .act-filter__btn.--del:hover {

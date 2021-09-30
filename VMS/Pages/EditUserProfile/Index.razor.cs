@@ -90,6 +90,18 @@ namespace VMS.Pages.EditUserProfile
             return await SkillService.GetAllSkillsByNameAsync(searchText);
         }
 
+        private async Task ShowModalAsync(Type type, ModalParameters parameters)
+        {
+            ModalOptions options = new()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+
+            await Modal.Show(type, "", parameters, options).Result;
+        }
+
         private int maxWord = 300;
         private int CountWord()
         {
@@ -100,8 +112,24 @@ namespace VMS.Pages.EditUserProfile
             return count;
         }
 
+        private async Task OnAddressChanged(int provinceId, string province, int districtId, string district, int wardId, string ward, string fullAddress)
+        {
+            user.ProvinceId = provinceId;
+            user.Province = province;
+            user.DistrictId = districtId;
+            user.District = district;
+            user.WardId = wardId;
+            user.Ward = ward;
+            user.FullAddress = fullAddress;
+        }
+
         private async Task HandleSubmit()
         {
+            if (!string.IsNullOrWhiteSpace(user.Address))
+            {
+                user.FullAddress = $"{user.Address}, {user.FullAddress}";
+            }
+
             Logger.LogInformation("HandleValidSubmit called");
             isErrorMessageShown = false;
             isLoading = true;
@@ -124,27 +152,6 @@ namespace VMS.Pages.EditUserProfile
             isLoading = false;
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
-        }
-
-        public class User
-        {
-            public string Address { get; set; }
-        }
-
-        private User users = new User()
-        {
-        };
-
-        private async Task ShowModalAsync(Type type, ModalParameters parameters)
-        {
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show(type, "", parameters, options).Result;
         }
 
         async Task ShowConfirmPopUp()

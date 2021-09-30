@@ -26,6 +26,21 @@ namespace VMS.Application.ViewModels
         [RequiredGreaterThanZero]
         public int? FacultyId { get; set; }
 
+
+        [RequiredGreaterThanZero]
+        public int ProvinceId { get; set; }
+        public string Province { get; set; }
+
+        [RequiredGreaterThanZero]
+        public int DistrictId { get; set; }
+        public string District { get; set; }
+
+        public int WardId { get; set; }
+        public string Ward { get; set; }
+
+        public string Address { get; set; }
+        public string FullAddress { get; set; }
+
         public DateTime Birthday { get; set; }
         public string Banner { get; set; }
         public string Avatar { get; set; }       

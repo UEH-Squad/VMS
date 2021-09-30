@@ -94,8 +94,14 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Địa chỉ <span>(*)</span></p>
                         <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap" style="padding:0">
-                            <VMS.Pages.Organization.Activities.CascadingAddressPicker />
-                            <InputText @bind-Value="@users.Address" class="form-control ms-xl-2 my-address-textbox" style="width:auto" placeholder="Nhập số nhà, tên đường" />
+                            <VMS.Pages.Organization.Activities.CascadingAddressPicker DistrictId="@user.DistrictId"
+                                                                                      District="@user.District"
+                                                                                      ProvinceId="user.ProvinceId"
+                                                                                      Province="@user.Province"
+                                                                                      WardId="@user.WardId"
+                                                                                      Ward="@user.Ward"
+                                                                                      OnAddressChanged="OnAddressChanged"/>
+                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" style="width:auto" placeholder="Nhập số nhà, tên đường" />
                         </div>
                     </div>
 

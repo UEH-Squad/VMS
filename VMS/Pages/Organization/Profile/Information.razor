@@ -1,5 +1,7 @@
 ﻿@inject IJSRuntime JSRuntinme;
 
+@using VMS.Application.Interfaces;
+
 <div class="my-information pb-5">
     <div class="container">
         <div class="row ">
@@ -13,37 +15,43 @@
                         <InputFile OnChange="ShowModal" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
                     </div>
                 </div>
-                <p class="m-0 text-start">Công nghệ thông tin kinh doanh</p>
-                <span>Tham gia từ năm 2021</span>
-                <a class="information__logo-button">
-                    <i class="material-icons-outlined">add</i>
-                    <span class="my-0 mx-auto">Tạo hoạt động mới</span>
-                </a>
+
+                <p class="m-0 text-start">@Org?.FullName</p>
+                <span>Tham gia từ năm @Org?.CreatedDate.Year</span>
+                @if (Owner == true)
+                {
+                    <a class="information__logo-button">
+                        <i class="material-icons-outlined">add</i>
+                        <span class="my-0 mx-auto">Tạo hoạt động mới</span>
+                    </a>
+                }
             </div>
             <div class="col-7 ms-auto my-auto">
                 <div class=" pb-4 row-1">
                     <div class="col-left information__rank d-flex justify-content-evenly align-self-center">
-                        <a href="@Routes.EditProfile" class="d-flex align-self-center">#2</a>
+                        <a href="@Routes.EditProfile" class="d-flex align-self-center">
+                            #@Org?.Rank @*There will be processing code in another place*@
+                        </a>
                         <div>
                             <p class="mb-2 d-flex justify-content-evenly align-self-end">
-                                <span class="information__rank-number">4,5</span>
-                                <i class="material-icons">
-                                    star_rate
+                                <span class="information__rank-number">@Org?.AverageRating</span>
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 0 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating,0)?"_half":"")
                                 </i>
-                                <i class="material-icons">
-                                    star_rate
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 1 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating,1)?"_half":"")
                                 </i>
-                                <i class="material-icons">
-                                    star_rate
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 2 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating, 2)?"_half":"")
                                 </i>
-                                <i class="material-icons">
-                                    star_rate
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 3 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating, 3)?"_half":"")
                                 </i>
-                                <i class="material-icons">
-                                    star_rate
+                                <i class="material-icons-outlined" style="color:@(Org.AverageRating > 4 ? "#EDF131" : "#B4B4B4")">
+                                    star@(HaftStar(Org.AverageRating, 4)?"_half":"")
                                 </i>
                             </p>
-                            <span>15N xếp hạng</span>
+                            <span>@Org.QuantityRating xếp hạng</span>
                         </div>
                     </div>
                     <div class="col-right information__contact">
@@ -51,13 +59,13 @@
                             <i class="material-icons">
                                 email
                             </i>
-                            <a href="mailto:youthbit.ueh@gmail.com">Youthbit.ueh@gmail.com</a>
+                            <a href="mailto:@Org?.Email">@Org?.Email</a>
                         </p>
                         <p class="d-flex align-self-center">
                             <i class="material-icons">
                                 contact_phone
                             </i>
-                            <a href="tel:+0849 245 xxx">0849 245 xxx</a>
+                            <a href="tel:@Org?.PhoneNumber">@Org?.PhoneNumber</a>
                         </p>
                     </div>
 
@@ -66,25 +74,24 @@
                     <div class="col-left information__fields">
                         <h3>Lĩnh vực <span>chuyên môn</span></h3>
                         <div class="owl-carousel owl-theme information__carousel">
-                            <div class="item">
-                                <i class="material-icons">group</i>
-                                <span>Cộng đồng</span>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons">group</i>
-                                <span>Giáo dục</span>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons">group</i>
-                                <span>Thể thao</span>
-                            </div>
+                            @if (Org != null)
+                            {
+                                @foreach (var area in Org.UserAreas)
+                                {
+                                    <div class="item">
+                                        <i class="material-icons">@area.Area.Icon</i>
+                                        <span>@area.Area.Name</span>
+                                    </div>
+                                }
+                            }
+
                         </div>
                     </div>
                     <div class="line mx-2"></div>
                     <div class="col-right information__act px-0">
                         <h3>Số hoạt động <span>đã tạo</span></h3>
                         <div class="d-flex justify-content-evenly align-self-center">
-                            <span class="information__act-number">30</span>
+                            <span class="information__act-number">@Org?.Activities.Count</span>
                         </div>
                     </div>
                 </div>
@@ -99,27 +106,5 @@
     {
         await JSRuntinme.InvokeVoidAsync("vms.InformationCarousel");
     }
-
-    [CascadingParameter]
-    public IModalService Modal { get; set; }
-
-    async Task ShowModal()
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-        Modal.Show<Notification>("", options);
-    }
-
-    bool isNotification = false;
-    void ShowNotification()
-    {
-
-        isNotification = !isNotification;
-    }
-
-
+   
 }

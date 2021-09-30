@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210922033740_AddRankCoumnToOrg")]
+    partial class AddRankCoumnToOrg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "5586e289-aadd-4126-9885-4eb6c59f1897",
+                            ConcurrencyStamp = "94fa6164-162f-4746-971e-777e9ac704f6",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "66ef1a6e-bd66-4e51-ac9d-8e5e6e82b419",
+                            ConcurrencyStamp = "e01c8442-8909-44ee-bf11-492141554a34",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "0cc6be32-9169-4606-b692-760f7777d64c",
+                            ConcurrencyStamp = "96ea313b-4aaa-4034-a949-ae740638150a",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -571,98 +573,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Khoa Luật"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Khoa Kế toán"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Khoa Kinh tế"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Khoa Khoa học xã hội"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Khoa Ngân hàng"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Khoa Ngoại ngữ"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Khoa Quản lý nhà nước"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Khoa Quản trị"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Khoa Tài chính"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Khoa Tài chính công"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Khoa Công nghệ thông tin kinh doanh"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Khoa Kinh doanh quốc tế - Marketing"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Khoa Toán - Thống kê"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Viện Du lịch"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Viện Đào tạo quốc tế"
-                        });
-                });
-
             modelBuilder.Entity("VMS.Domain.Models.Favorite", b =>
                 {
                     b.Property<int>("Id")
@@ -736,20 +646,15 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RecruitmentRatingId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
-
-                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ImageReports");
                 });
@@ -761,20 +666,15 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RecruitmentRatingId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
-
-                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ReasonReports");
                 });
@@ -1169,26 +1069,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Banner")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Class")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Course")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FullAddress")
                         .HasColumnType("nvarchar(max)");
@@ -1225,8 +1113,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("FacultyId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -1416,16 +1302,10 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
-                        .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1433,22 +1313,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
-                        .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany("Recruitments")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1534,16 +1408,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.User", b =>
-                {
-                    b.HasOne("VMS.Domain.Models.Faculty", "Faculty")
-                        .WithMany("Users")
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Faculty");
-                });
-
             modelBuilder.Entity("VMS.Domain.Models.Activity", b =>
                 {
                     b.Navigation("ActivityAddresses");
@@ -1553,8 +1417,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("ActivitySkills");
 
                     b.Navigation("Favorites");
-
-                    b.Navigation("Recruitments");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
@@ -1573,11 +1435,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("UserAreas");
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
-                {
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
                 {
                     b.Navigation("ImageReports");
@@ -1588,13 +1445,6 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.Navigation("RecruitmentRatings");
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.RecruitmentRating", b =>
-                {
-                    b.Navigation("ImageReports");
-
-                    b.Navigation("ReasonReports");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Skill", b =>

@@ -1,4 +1,4 @@
-﻿@import "../../../Resources/scss/common/_variables";
+﻿@import "../../Resources/scss/common/_variables";
 
 .pop-up {
     position: fixed;
@@ -11,6 +11,10 @@
 
     .border-10 {
         border-radius: 10px;
+    }
+
+    .border-5 {
+        border-radius: 5px;
     }
 
     .center-screen {
@@ -74,7 +78,15 @@
             line-height: 36px;
             font-weight: 500;
             margin-bottom: 0;
-            color: $green;
+            color: $blue;
+        }
+
+        .close-act {
+            font-size: 18px;
+            line-height: 36px;
+            font-weight: 500;
+            margin-bottom: 0;
+            color: $blue;
         }
     }
 
@@ -92,8 +104,12 @@
             color: $green;
         }
 
+        .close-text {
+            color: $blue;
+        }
+
         .delete-text {
-            color: $red;
+            color: $blue;
         }
     }
 
@@ -113,7 +129,6 @@
             align-items: center;
             width: 104px;
             height: 32px;
-            font-weight: 600;
         }
 
         .accept {
@@ -127,7 +142,6 @@
             height: 32px;
             cursor: pointer;
             font-size: 18px;
-            font-weight: 600;
         }
     }
 }

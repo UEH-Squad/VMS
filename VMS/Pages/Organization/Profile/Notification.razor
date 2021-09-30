@@ -1,22 +1,54 @@
-﻿<div class="my-notification">
+﻿@using VMS.Application.ViewModels;
+@using VMS.Application.Interfaces;
+
+<div class="my-notification @(isNotification ? "d-block" : "d-none") ">
     <div class="notification__content mx-auto">
-        <div class="notification__img  mx-auto"> <img class="w-75" src="img/LogoBaner/KHOA-VIỆN-KTX/LOGO KHOA QUẢN TRỊ.png" alt=""></div>
-        <div class="text-center py-4">
-            <button @onclick="CloseNotification"  class="btn pr-5 btn__cancel px-4">Hủy</button>
-            <button @onclick="CloseNotification"  class="btn btn__save px-4 ms-5">Lưu</button>
+        <div class="notification__img  mx-auto">
+            <img class="w-75" src="@Avatar" alt="">
+        </div>
+        <div class="notification__btn text-center py-4">
+            <button @onclick="CloseNotification" class="btn pr-5 btn__cancel px-4">Hủy</button>
+            <button @onclick="HandleSubmit" class="btn btn__save px-4 ms-5">Lưu</button>
         </div>
     </div>
 </div>
 
 @code {
+    bool isNotification = true;
+    [Parameter]
+    public string Avatar { get; set; }
+
+    bool isConfirm = false;
 
     [CascadingParameter]
-    private BlazoredModalInstance Modal { get; set; }
+    public BlazoredModalInstance Modal { get; set; }
 
+    private UpdateUserViewModel user = new();
 
-    private async Task CloseNotification()
+    [Inject]
+    private IIdentityService IdentityService { get; set; }
+    [Inject]
+    private IOrganizationService OrganizationService { get; set; }
+
+    private async Task HandleSubmit()
     {
+        user.Id = IdentityService.GetCurrentUserId();
 
-        await Modal.CloseAsync();
+        if (Avatar is null)
+        {
+            return;
+        }
+        else
+        {
+            user.Avatar = Avatar;
+            isConfirm = true;
+            await OrganizationService.UpdateUserAsync(user, user.Id);
+        }
+        await CloseNotification();
+    }
+
+    async Task CloseNotification()
+    {
+        await Modal.CloseAsync(ModalResult.Ok<bool>(isConfirm));
     }
 }

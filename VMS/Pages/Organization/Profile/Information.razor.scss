@@ -35,6 +35,7 @@
             right: -10px;
             font-size: 36px;
             color: $grey-icon;
+            cursor: pointer;
         }
 
         p {
@@ -45,7 +46,7 @@
         span {
             display: block;
             width: 80%;
-            margin: 20px 0 15px 0;
+            margin: 15px 0 20px 0;
             text-align: center;
             color: $blue;
             font-size: 16px;
@@ -59,11 +60,11 @@
             background: rgba(100, 215, 47, 0.8);
             color: $white;
             text-decoration: none;
-            padding: 20px;
+            padding: 9px;
             border-radius: 50px;
             text-align: center;
             transition: all 0.2s linear;
-
+            cursor: pointer;
 
             &:hover {
                 background: rgba(100, 215, 47, 1);
@@ -238,14 +239,14 @@
         }
 
         .information__act-number {
-            width: 145px;
-            height: 145px;
-            line-height: 145px;
+            width: 115px;
+            height: 115px;
+            line-height: 115px;
             border: 1px solid $border-color-bold;
             border-radius: 50%;
             text-align: center;
             color: $blue;
-            font-size: 60px;
+            font-size: 50px;
             font-weight: 700;
         }
     }

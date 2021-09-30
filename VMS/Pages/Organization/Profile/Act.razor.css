@@ -37,20 +37,25 @@
   right: 7px;
   background: #FFFFFF;
   border-radius: 10px;
-  box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
-  .act-container ul li {
+  box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
+  width: 190.5px; }
+  .act-container ul li, .act-container ul a {
     list-style: none;
     font-size: 16px;
     font-weight: 500;
-    padding: 10px 20px; }
-    .act-container ul li:hover {
+    padding: 10px 20px;
+    display: block; }
+    .act-container ul li:hover, .act-container ul a:hover {
       background: rgba(24, 160, 251, 0.1); }
   .act-container ul .edit {
-    color: #515151; }
+    color: #515151;
+    cursor: pointer; }
   .act-container ul .delete {
-    color: #F14747; }
+    color: #F14747;
+    cursor: pointer; }
   .act-container ul .close {
-    color: #64D72F; }
+    color: #64D72F;
+    cursor: pointer; }
 
 .act-container .material-icons {
   color: #FFFFFF;
@@ -175,3 +180,13 @@
     .act__linkAll a:hover {
       color: #306C14;
       cursor: pointer; }
+
+.favorite {
+  right: 10px;
+  top: 10px; }
+  .favorite .material-icons {
+    font-size: 30px; }
+  .favorite .isfav {
+    color: #BE2222; }
+  .favorite .nonefav {
+    color: #FFFFFF; }

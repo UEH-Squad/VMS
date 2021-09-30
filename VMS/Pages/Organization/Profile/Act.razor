@@ -17,16 +17,9 @@
                         </a>
                     </div>
                     <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                        <li class="edit pb-2">Chỉnh sửa</li>
+                        <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
                         <li @onclick="(() => ShowDeleteModal())" class="delete pb-2">Xóa</li>
-                        @if (item.IsClose)
-                        {
-                            <li @onclick="(() => OpenAct(item.Id))" class="close pb-2">Mở hoạt động</li>
-                        }
-                        else
-                        {
-                            <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">Đóng hoạt động</li>
-                        }
+                        <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">@(item.IsClose ? "Mở hoạt động" : "Đóng hoạt động")</li>
                     </ul>
                     @if (HaveControl)
                     {
@@ -42,11 +35,15 @@
                             favorite
                         </span>
                     }
+
+                    @if (HaveFav)
+                    {
+                        <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
+                            <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
+                        </a>
+                    }
                 </div>
             }
-
-
-
 
         </div>
         @if (HaveBorder)
@@ -79,9 +76,10 @@
 
 @code {
     int pendingId = -1;
-    bool isLoading;
+    bool isOpen = false;
 
     [Parameter] public bool HaveControl { get; set; } = false;
+    [Parameter] public bool HaveFav { get; set; } = false;
     [Parameter] public bool HaveDecor { get; set; } = true;
     [Parameter] public string Title { get; set; }
     [Parameter] public bool HaveHeart { get; set; } = false;
@@ -106,6 +104,11 @@
         Datas.ForEach(a => a.IsMenu = a.Id == pendingId ? !a.IsMenu : false);
     }
 
+    private void AnimateHeart(int pendingId = -1)
+    {
+        Datas[pendingId].IsFav = !Datas[pendingId].IsFav;
+    }
+
     [JSInvokable]
     public Task HideMenuInterop()
     {
@@ -128,6 +131,8 @@
 
     private async Task ShowCloseModal(int pendingId = -1)
     {
+        var modalParams = new ModalParameters();
+        modalParams.Add("IsOpened", isOpen);
 
         var options = new ModalOptions()
         {
@@ -136,18 +141,14 @@
             UseCustomLayout = true,
         };
 
-        var result = await Modal.Show<CloseConfirm>("", options).Result;
+        var result = await Modal.Show<CloseConfirm>("", modalParams, options).Result;
 
         if ((bool)result.Data)
         {
-            Datas[pendingId].IsClose = true;
-            Modal.Show<CloseSuccess>("", options);
+            Datas[pendingId].IsClose = !Datas[pendingId].IsClose;
+            isOpen = !isOpen;
+            Modal.Show<CloseSuccess>("", modalParams, options);
         }
 
-    }
-
-    void OpenAct(int pendingId)
-    {
-        Datas[pendingId].IsClose = !Datas[pendingId].IsClose;
     }
 }

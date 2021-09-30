@@ -85,7 +85,8 @@
         opacity: 100%;
         font-size: 80px; }
     .my-editProfile .form-field-item.item-add {
-      width: 30%; }
+      width: 30%;
+      cursor: pointer; }
   .my-editProfile .editProfile__NoCarousel {
     width: 70%; }
     .my-editProfile .editProfile__NoCarousel .item-NoCaroesel {

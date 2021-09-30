@@ -8,7 +8,7 @@
             </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="close-text">đóng hoạt động</span> này không?</h3>
+                <h3><span class="close-text">@(IsOpened ? "mở hoạt động" : "đóng hoạt động")</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
                 <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
@@ -21,6 +21,9 @@
 @code {
     bool isCloseConfirm = true;
     bool isCloseSuccess;
+
+    [Parameter]
+    public bool IsOpened { get; set; }
 
     [Parameter]
     public bool IsClosed { get; set; }

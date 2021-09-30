@@ -44,7 +44,6 @@ namespace VMS.Application.Services
 
             CreateUserProfileViewModel userProfileViewModel = _mapper.Map<CreateUserProfileViewModel>(user);
 
-            userProfileViewModel.FacultyName = user.Faculty.Name;
             userProfileViewModel.Areas = user.UserAreas.Select(a => new AreaViewModel
             {
                 Id = a.AreaId,

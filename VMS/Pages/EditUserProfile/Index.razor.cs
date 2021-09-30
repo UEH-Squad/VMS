@@ -52,11 +52,6 @@ namespace VMS.Pages.EditUserProfile
             user = await UserService.GetCreateUserProfileViewModelAsync(UserId);
             faculties = await FacultyService.GetAllFacultiesAsync();
             choosenAreas = user.Areas;
-
-            if(string.IsNullOrEmpty(user.FacultyName))
-            {
-                user.FacultyName = "Lựa chọn Khoa";
-            }
         }
 
         private async Task ShowAreasModal()
@@ -103,10 +98,6 @@ namespace VMS.Pages.EditUserProfile
                 count = user.Introduction.Length;
             }
             return count;
-        }
-
-        private void ChangeFacultyValue()
-        {
         }
 
         private async Task HandleSubmit()

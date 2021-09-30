@@ -24,9 +24,8 @@ namespace VMS.Application.ViewModels
 
 
         [RequiredGreaterThanZero]
-        public int FacultyId { get; set; }
+        public int? FacultyId { get; set; }
 
-        public string FacultyName { get; set; }
         public DateTime Birthday { get; set; }
         public string Banner { get; set; }
         public string Avatar { get; set; }       

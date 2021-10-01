@@ -58,7 +58,7 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        public async Task UpdateRatingAndCommentAsync(double rank, string comment, int? recruitmentId = null)
+        public async Task UpdateRatingAndCommentAsync(double? rank, string comment, int? recruitmentId = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -82,15 +82,15 @@ namespace VMS.Application.Services
                 {
                     recruitment.RecruitmentRatings.Add(new()
                     {
-                        Rank = rank,
+                        Rank = rank ?? 0,
                         Comment = comment,
                         IsOrgRating = true
                     });
                 }
                 else
                 {
-                    recruitmentRating.Rank = rank;
-                    recruitmentRating.Comment = (string.IsNullOrEmpty(comment) ? recruitmentRating.Comment : comment);
+                    recruitmentRating.Rank = rank ?? recruitmentRating.Rank;
+                    recruitmentRating.Comment = (rank.HasValue ? recruitmentRating.Comment : comment);
                 }
 
                 await _repository.UpdateAsync(dbContext, recruitment);

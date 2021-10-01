@@ -8,6 +8,6 @@ namespace VMS.Application.Interfaces
     public interface IRecruitmentService
     {
         Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage, string searchValue, bool? isRated);
-        Task UpdateRatingAndCommentAsync(double rank, string comment, int? recruitmentId = null);
+        Task UpdateRatingAndCommentAsync(double? rank, string comment, int? recruitmentId = null);
     }
 }

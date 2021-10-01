@@ -3,7 +3,7 @@
 <div class="overlay">
     <div class="popup-comment">
         <div class="popup-comment_icon">
-            <span @onclick="@CloseModal" class="material-icons">
+            <span @onclick="(async () => await CloseModalAsync())" class="material-icons">
                 close
             </span>
         </div>
@@ -53,12 +53,19 @@
                     </div>
                 </div>
             </div>
-            <EditForm Model="@RecruitmentRatingBottom" OnValidSubmit="UpdateCommentAsync">
+            <EditForm Model="@RecruitmentRatingBottom" OnSubmit="UpdateCommentAsync" Context="CurrentContext">
                 <div class="comment">
-                    <InputTextArea @bind-Value="@RecruitmentRatingBottom.Comment" class="comment-input" placeholder="@(string.IsNullOrEmpty(RecruitmentRatingBottom.Comment) ? "Chưa nhận xét" : "")" rows="3" />
+                    @if (isReadonly)
+                    {
+                        <InputTextArea readonly @bind-Value="@RecruitmentRatingBottom.Comment" class="comment-input" placeholder="@(string.IsNullOrEmpty(RecruitmentRatingBottom.Comment) ? "Chưa nhận xét" : "")" rows="3" />
+                    }
+                    else
+                    {
+                        <InputTextArea @bind-Value="@RecruitmentRatingBottom.Comment" class="comment-input" placeholder="@(string.IsNullOrEmpty(RecruitmentRatingBottom.Comment) ? "Chưa nhận xét" : "")" rows="3" />
+                    }
                 </div>
                 <div class="button">
-                    <button class="button-send">@(string.IsNullOrEmpty(RecruitmentRatingBottom.Comment) ? "Gửi nhận xét" : "Sửa")</button>
+                    <button class="button-send">@(isReadonly ? "Sửa" : (isEmpty ? "Gửi nhận xét" : "Lưu"))</button>
                 </div>
             </EditForm>
         </div>
@@ -66,13 +73,6 @@
 </div>
 
 @code {
-
-    Rating commentModal;
-    protected override void OnInitialized()
-    {
-        commentModal = new Rating();
-    }
-
     int Count = 0;
     string ColorRemind;
 
@@ -80,34 +80,5 @@
     {
         Count = Count + 1;
         ColorRemind = "#E10B0B";
-    }
-
-    private void Send()
-    {
-        commentModal.OrganizationComment = "Modify";
-    }
-
-    private void Modify()
-    {
-        commentModal.Comment2 = commentModal.Comment1;
-        commentModal.OrganizationComment = "Save";
-    }
-
-    private void Save()
-    {
-        commentModal.OrganizationComment = "Modify";
-    }
-
-    private void Cancel()
-    {
-        commentModal.Comment1 = commentModal.Comment2;
-        commentModal.OrganizationComment = "Modify";
-    }
-
-    [CascadingParameter]
-    private BlazoredModalInstance CommentModal { get; set; }
-    void CloseModal()
-    {
-        CommentModal.CloseAsync();
     }
 }

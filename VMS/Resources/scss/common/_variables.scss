@@ -19,18 +19,10 @@ $red: #F14747;
 $grey-close-bg: #C4C4C4;
 $grey-close-btn: #717171;
 $grey-input: #D8D8D8;
+$blue-less: #489ED7;
 /*#endregion */
-
-
 /*#region breakpoints */
-
-$breakpoints: ( 
-    'sm': ( min-width: 576px ),
-    'md': ( min-width: 768px ),
-    'lg': ( min-width: 992px ),
-    'xl': ( min-width: 1200px ),
-    'xxl': ( min-width: 1400px ),
-) !default;
+$breakpoints: ( 'sm': ( min-width: 576px ), 'md': ( min-width: 768px ), 'lg': ( min-width: 992px ), 'xl': ( min-width: 1200px ), 'xxl': ( min-width: 1400px ), ) !default;
 
 /*#endregion */
 

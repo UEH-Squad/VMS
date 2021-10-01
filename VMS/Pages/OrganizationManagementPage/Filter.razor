@@ -4,27 +4,28 @@
     </div>
     <div class="org-filter__act">
         <div class="org-filter__act__child">
-            <input @onclick="(() => FilterAct.Happenning = !FilterAct.Happenning)" type="checkbox" id="hd1">
+            <input @bind="FilterAct.Happenning" type="checkbox" id="hd1">
             <label for="hd1">Đang diễn ra</label>
         </div>
         <div class="org-filter__act__child">
-            <input @onclick="(() => FilterAct.TookPlace = !FilterAct.TookPlace)" type="checkbox" id="hd2">
+            <input @bind="FilterAct.TookPlace" type="checkbox" id="hd2">
             <label for="hd2">Đã diễn ra</label>
         </div>
     </div>
     <hr>
     <div class="org-filter__act">
         <div class="org-filter__act__child">
-            <input @onclick="(() => FilterAct.Virtual = !FilterAct.Virtual)" type="checkbox" id="md1">
+            <input @bind="FilterAct.Virtual" type="checkbox" id="md1">
             <label for="md1">Virtual</label><br>
         </div>
         <div class="org-filter__act__child">
-            <input @onclick="(() => FilterAct.Actual = !FilterAct.Actual)" type="checkbox" id="md2">
+            <input @bind="FilterAct.Actual" type="checkbox" id="md2">
             <label for="md2">Actual</label><br>
         </div>
     </div>
     <div class="org-filter__btn">
         <div class="btn" @onclick="(async() => await OnClickFilterAsync())">Lọc</div>
+        <div class="btn-clear" @onclick="(() => ClearFilter())">Xóa lọc</div>
     </div>
 </div>
 

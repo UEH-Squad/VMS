@@ -92,9 +92,16 @@
             font-family: Montserrat;
             font-style: normal;
             font-weight: 600;
-            font-size: 21px;
-            color: $blue;
+            font-size: 20px;
             margin-bottom: 5px;
+
+            a {
+                color: $blue;
+                text-decoration: none;
+            }
+            a:hover {
+                color: $blue-hv;
+            }
         }
 
         &__rate {
@@ -189,7 +196,7 @@
     &__btn-list {
         position: absolute;
         bottom: 0;
-        left: 50%;
+        left: 55%;
         transform: translate(-5%,-50%);
     }
 
@@ -223,6 +230,37 @@
             li:hover {
                 background: rgba(24, 160, 251, 0.1);
             }
+        }
+    }
+
+    &__noti {
+        position: absolute;
+        bottom: 0;
+        left: 75%;
+        transform: translate(0,-50%);
+        padding: 5px 15px;
+        font-weight: 400;
+        font-size: 14px;
+        color: $red;
+        text-indent: 5px;
+    }
+
+    &__member {
+        position: absolute;
+        bottom: 0;
+        left: 37%;
+        transform: translate(0,-50%);
+        padding: 5px 15px;
+        text-indent: 5px;
+
+        &__text {
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        &__icon {
+            font-size: 24px;
+            color: $green
         }
     }
 }
@@ -351,10 +389,26 @@
 }
 /*------Text Result-------*/
 .text-result {
-    font-size: 16px;
+    font-size: 24px;
     color: $blue;
 
     span {
         color: $green;
     }
+}
+
+.lmtext-2, .lmtext-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.lmtext-2 {
+    -webkit-line-clamp: 2;
+}
+
+.lmtext-3 {
+    -webkit-line-clamp: 3;
 }

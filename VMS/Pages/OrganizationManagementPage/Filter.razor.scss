@@ -62,7 +62,7 @@ input[type="checkbox"]::after {
     content: "\e876";
     font-size: 18px;
     font-weight: 600;
-    color: $green;
+    color: $blue;
     display: none;
 }
 
@@ -76,11 +76,15 @@ input[type="checkbox"]:checked:after {
 .org-filter__btn{
     margin-top: 30px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .btn {
-    padding: 10px 20px;
-    border-radius: 15px;
+    padding: 8px 17px;
+    border-radius: 10px;
     font-weight: 500;
+    font-size: 18px;
     color: $white;
     background-color: $green;
     transition: all 0.25s;
@@ -90,4 +94,14 @@ input[type="checkbox"]:checked:after {
 }
 .btn:active{
     transform: translateY(3px);
+}
+
+.btn-clear {
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    color: $grey-icon;
+    background-color: #fff;
 }

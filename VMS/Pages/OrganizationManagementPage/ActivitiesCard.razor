@@ -13,14 +13,14 @@
                 <ul class="org-card__btn-edit__list card-list" style="display:@(item.Id == dropdownId ? "inline-block" : "none");">
                     <li class="item-1">Chỉnh sửa</li>
                     <li class="item-2" @onclick="@(async () => await ChangeDeleteStateAsync(item))">Xóa</li>
-                    <li class="item-3" @onclick="@(async () => await ChangeCloseStateAsync(item))">@(!item.IsClosed ? "Đóng" : "Mở") hoạt động</li>
+                    <li class="item-3 @(item.StartDate <= DateTime.Now ? "d-none" : "")" @onclick="@(async () => await ChangeCloseStateAsync(item))">@(!item.IsClosed ? "Đóng" : "Mở") hoạt động</li>
                 </ul>
             </div>
             <div class="org-card__img">
                 <img src="@item.Banner" alt="photo">
             </div>
             <div class="org-card__info">
-                <div class="org-card__info__title">
+                <div class="lmtext-2 org-card__info__title">
                     <a href="@Routes.ActivityInfo/@item.Id">@item.Name</a>
                 </div>
                 <div class="org-card__info__rate">
@@ -40,50 +40,43 @@
                         star@(HaftStar(item.Rating,5)?"_half":"")
                     </span>
                 </div>
-                <div class="org-card__info__desc">
+                <div class="lmtext-2 org-card__info__desc">
                     @((MarkupString)item.Description)
                 </div>
                 <div class="org-card__info__date">
-                    Ngày đăng: <span>@item.CreatedDate</span>
-                </div>
-                <div class="org-card__info__joiner">
-                    <div class="org-card__info__joiner__icon">
-                        <span class="material-icons">
-                            person
-                        </span>
-                    </div>
-                    <div class="org-card__info__joiner__sum">
-                        @item.MemberQuantity
-                    </div>
+                    Ngày đăng: <span>@item.CreatedDate.ToString("dd/MM/yyyy")</span>
                 </div>
             </div>
             <div class="org-card__btn-list card-btn">
                 Xem danh sách
             </div>
-            @if (item.IsClosed || item.StartDate <= DateTime.Now)
+            <div class="org-card__member d-flex align-items-center">
+                <span class="org-card__member__icon material-icons">
+                    person
+                </span>
+                <span class="org-card__member__text">400</span>
+            </div>
+            @if ((item.IsClosed || item.StartDate <= DateTime.Now) && (item.EndDate >= DateTime.Now))
             {
-                <div class="org-card__cbb-rate d-flex align-items-center cursor-pointer" style="background: none; color: #E10B0B">
+                <div class="org-card__noti d-flex align-items-center">
                     <span class="material-icons-outlined">
                         error
                     </span>
-                    Đã đóng đăng ký
+                    <i>Đã đóng đăng ký</i>
                 </div>
             }
-            else
+            @if (item.EndDate < DateTime.Now)
             {
-                @if (item.EndDate < DateTime.Now)
-                {
-                    <div class="org-card__cbb-rate card-btn">
-                        <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
-                        <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
-                            expand_more
-                        </span>
-                        <ul class="org-card__cbb-rate__list card-list" style="display:@(item.Id == rateId ? "inline-block" : "none");">
-                            <li>Tình nguyện viên</li>
-                            <li>Đánh giá hoạt động</li>
-                        </ul>
-                    </div>
-                }
+                <div class="org-card__cbb-rate card-btn">
+                    <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
+                    <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
+                        expand_more
+                    </span>
+                    <ul class="org-card__cbb-rate__list card-list" style="display:@(item.Id == rateId ? "inline-block" : "none");">
+                        <li>Tình nguyện viên</li>
+                        <li>Đánh giá hoạt động</li>
+                    </ul>
+                </div>
             }
 
             @*--------------------Confirm------------------- *@

@@ -6,6 +6,7 @@ namespace VMS.Pages.OrganizationManagementPage
 {
     public partial class Index : ComponentBase
     {
+        private string orgId;
         private FilterActivityViewModel filter = new();
         private string searchValue = string.Empty;
         private bool isSearch = false;
@@ -15,7 +16,8 @@ namespace VMS.Pages.OrganizationManagementPage
 
         protected override void OnInitialized()
         {
-            filter.OrgId = IdentityService.GetCurrentUserId();
+            orgId = IdentityService.GetCurrentUserId();
+            filter.OrgId = orgId;
         }
 
         private void SearchValueChanged(string searchValue)

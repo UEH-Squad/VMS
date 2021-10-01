@@ -73,9 +73,13 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
-    font-size: 21px;
-    color: #18A0FB;
+    font-size: 20px;
     margin-bottom: 5px; }
+    .org-card__info__title a {
+      color: #18A0FB;
+      text-decoration: none; }
+    .org-card__info__title a:hover {
+      color: #0B588c; }
   .org-card__info__rate {
     display: inline-block;
     color: yellow;
@@ -140,7 +144,7 @@
 .org-card__btn-list {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 55%;
   transform: translate(-5%, -50%); }
 
 .org-card__cbb-rate {
@@ -166,6 +170,31 @@
       padding: 0 10px; }
     .org-card__cbb-rate__list li:hover {
       background: rgba(24, 160, 251, 0.1); }
+
+.org-card__noti {
+  position: absolute;
+  bottom: 0;
+  left: 75%;
+  transform: translate(0, -50%);
+  padding: 5px 15px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #F14747;
+  text-indent: 5px; }
+
+.org-card__member {
+  position: absolute;
+  bottom: 0;
+  left: 37%;
+  transform: translate(0, -50%);
+  padding: 5px 15px;
+  text-indent: 5px; }
+  .org-card__member__text {
+    font-weight: 400;
+    font-size: 16px; }
+  .org-card__member__icon {
+    font-size: 24px;
+    color: #64D72F; }
 
 .close-icon {
   position: absolute;
@@ -257,7 +286,20 @@
 
 /*------Text Result-------*/
 .text-result {
-  font-size: 16px;
+  font-size: 24px;
   color: #18A0FB; }
   .text-result span {
     color: #64D72F; }
+
+.lmtext-2, .lmtext-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; }
+
+.lmtext-2 {
+  -webkit-line-clamp: 2; }
+
+.lmtext-3 {
+  -webkit-line-clamp: 3; }

@@ -7,6 +7,8 @@ namespace VMS.Pages.OrganizationManagementPage
     public partial class Filter : ComponentBase
     {
         [Parameter]
+        public string OrgId { get; set; }
+        [Parameter]
         public FilterActivityViewModel FilterAct { get; set; }
         [Parameter]
         public EventCallback<FilterActivityViewModel> FilterActChanged { get; set; } 
@@ -14,6 +16,13 @@ namespace VMS.Pages.OrganizationManagementPage
         private async Task OnClickFilterAsync()
         {
             await FilterActChanged.InvokeAsync(FilterAct);
-        } 
+        }
+
+        private async Task ClearFilter()
+        {
+            FilterAct = new();
+            FilterAct.OrgId = OrgId;
+            await OnClickFilterAsync();
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace VMS.Application.Services
 
             if (isSearch)
             {
-                paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, currentPage, orderList, userLocation);
+                paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation);
             }
             else
             {
@@ -48,16 +48,18 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, string orgId, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
         {
             PaginationSpecification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     GetFilterByDate(),
+                    (!string.IsNullOrEmpty(orgId) ? a => a.OrgId == orgId : a => true),
                     a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
                     a => !a.IsDeleted
                 },
+                Includes = a => a.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 20,
                 OrderBy = GetOrderActivities(orderList, userLocation)

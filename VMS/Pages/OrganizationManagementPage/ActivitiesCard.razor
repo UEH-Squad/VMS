@@ -60,16 +60,32 @@
             <div class="org-card__btn-list card-btn">
                 Xem danh sách
             </div>
-            <div class="org-card__cbb-rate card-btn">
-                <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
-                <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
-                    expand_more
-                </span>
-                <ul class="org-card__cbb-rate__list card-list" style="display:@(item.Id == rateId ? "inline-block" : "none");">
-                    <li>Tình nguyện viên</li>
-                    <li>Đánh giá hoạt động</li>
-                </ul>
-            </div>
+            @if (item.IsClosed || item.StartDate <= DateTime.Now)
+            {
+                <div class="org-card__cbb-rate d-flex align-items-center cursor-pointer" style="background: none; color: #E10B0B">
+                    <span class="material-icons-outlined">
+                        error
+                    </span>
+                    Đã đóng đăng ký
+                </div>
+            }
+            else
+            {
+                @if (item.EndDate < DateTime.Now)
+                {
+                    <div class="org-card__cbb-rate card-btn">
+                        <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
+                        <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
+                            expand_more
+                        </span>
+                        <ul class="org-card__cbb-rate__list card-list" style="display:@(item.Id == rateId ? "inline-block" : "none");">
+                            <li>Tình nguyện viên</li>
+                            <li>Đánh giá hoạt động</li>
+                        </ul>
+                    </div>
+                }
+            }
+
             @*--------------------Confirm------------------- *@
             <div class="popup-container" style="display:@(item.Id == confirmDeleteId ? "initial" : "none")">
                 <div class="org-card__del-confirm confirm">

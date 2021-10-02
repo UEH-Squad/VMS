@@ -12,6 +12,7 @@ namespace VMS.Pages.ActivityInfoPage
     {
         readonly List<string> targets = new();
         User currentUser;
+        bool isAlreadySignedUp;
 
         [CascadingParameter] public IModalService Modal { get; set; }
 
@@ -20,7 +21,11 @@ namespace VMS.Pages.ActivityInfoPage
 
         protected override void OnInitialized()
         {
-            currentUser = IdentityService.GetCurrentUser();
+            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+            if (currentUser is not null)
+            {
+                isAlreadySignedUp = currentUser.Recruitments.Any(x => x.UserId == currentUser.Id);
+            }
         }
 
         protected override void OnParametersSet()
@@ -35,13 +40,24 @@ namespace VMS.Pages.ActivityInfoPage
             }
         }
 
+        private bool HasValidUser()
+        {
+            // TODO: Check user profile
+
+            return true;
+        }
+
         private void ShowReportPopUp()
         {
             if (currentUser is null)
             {
-                // TODO: Show login pop-up or edit info pop-up
-
+                // TODO: Show login pop-up
                 return;
+            }
+
+            if (!HasValidUser())
+            {
+                // TODO: Show edit profile pop-up and redirect user to edit org profile page
             }
 
             ModalParameters parameters = new();
@@ -61,11 +77,17 @@ namespace VMS.Pages.ActivityInfoPage
         {
             if (currentUser is null)
             {
-                // TODO: Show login pop-up or edit info pop-up
-
+                // TODO: Show login pop-up
                 return;
             }
 
+            if (!HasValidUser())
+            {
+                // TODO: Show edit profile pop-up and redirect user to edit org profile page
+            }
+
+            ModalParameters parameters = new();
+            parameters.Add("ActivityId", Activity.Id);
             ModalOptions options = new()
             {
                 HideCloseButton = true,
@@ -73,7 +95,7 @@ namespace VMS.Pages.ActivityInfoPage
                 UseCustomLayout = true
             };
 
-            Modal.Show<ActivitySearchPage.Signup>("", options);
+            Modal.Show<ActivitySearchPage.Signup>("", parameters, options);
         }
     }
 }

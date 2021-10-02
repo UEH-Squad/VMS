@@ -12,7 +12,7 @@
                     <div class="@(item.IsClosed ? "overlay" : "")"></div>
                 </div>
                 <div class="act-content @(OverridesImg ? "position-absolute act-content-overrides ":"" )">
-                    <a href="@Routes.ActivityInfo" class="@(item.IsClosed ? "content-cl" : "content-nm")">
+                    <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm")">
                         <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
                     </a>
                 </div>

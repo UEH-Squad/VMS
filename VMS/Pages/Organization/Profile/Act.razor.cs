@@ -6,7 +6,6 @@ using Blazored.Modal;
 using System.Collections.Generic;
 using Microsoft.JSInterop;
 using Blazored.Modal.Services;
-using VMS.Application.Services;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -49,7 +48,8 @@ namespace VMS.Pages.Organization.Profile
         {
             string userId = IdentityService.GetCurrentUserId();
             await ActivityService.UpdateActFavorAsync(id, userId);
-            Datas[id-2].IsFav = !Datas[id-2].IsFav;
+            var act = Datas.Find(a => a.Id == id);
+            act.IsFav = !act.IsFav;
         }
 
         [JSInvokable]
@@ -80,12 +80,14 @@ namespace VMS.Pages.Organization.Profile
 
         private async Task ShowCloseModal(int id)
         {
+            var act = Datas.Find(a => a.Id == id);
+            
             var modalParams = new ModalParameters();
-            modalParams.Add("IsClosed", Datas[id-2].IsClosed);
+            modalParams.Add("IsClosed",act.IsClosed);
 
             var parameters = new ModalParameters();
             parameters.Add("ActId", id);
-            parameters.Add("IsClosed", Datas[id-2].IsClosed);
+            parameters.Add("IsClosed", act.IsClosed);
 
             var options = new ModalOptions()
             {
@@ -97,7 +99,7 @@ namespace VMS.Pages.Organization.Profile
 
             if ((bool)result.Data)
             {
-                Datas[id-2].IsClosed = !Datas[id-2].IsClosed;
+                act.IsClosed = !act.IsClosed;
                 Modal.Show<CloseSuccess>("", modalParams, options);
             }
         }

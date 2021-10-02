@@ -452,7 +452,7 @@ namespace VMS.Application.Services
             };
 
             List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
-
+            string currentId = _identityService.GetCurrentUserId();
             IEnumerable<ActivityViewModel> activityViewModels = activity.Select(x => new ActivityViewModel
             {
                 Id = x.Id,
@@ -463,7 +463,8 @@ namespace VMS.Application.Services
                 MemberQuantity = x.MemberQuantity,
                Province = GetActProvince(x.ActivityAddresses),
                 EndDate = x.EndDate,
-                Rating = GetRateOfActivity(x.Recruitments)
+                Rating = GetRateOfActivity(x.Recruitments),
+                IsFav = GetActFavor(x.Id,currentId,x.Favorites)
             });
             return status switch
             {
@@ -472,6 +473,19 @@ namespace VMS.Application.Services
                StatusAct.Ended => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
                 _ => null
             };
+        }
+
+        private static bool GetActFavor(int actId, string userId, ICollection<Favorite> favorites)
+        {
+            Favorite favorite = favorites.Where(a => a.ActivityId == actId && a.UserId == userId).FirstOrDefault();
+            if (favorite != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         private static string GetActProvince(ICollection<ActivityAddress> activityAddresses)
         {
@@ -519,6 +533,33 @@ namespace VMS.Application.Services
             }
            
             await _repository.UpdateAsync(dbContext, activity);
+        }
+
+        public async Task UpdateActFavorAsync(int activityId, string userId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Favorite> specification = new()
+            {
+                Conditions = new List<Expression<Func<Favorite, bool>>>
+                {
+                    a => a.ActivityId == activityId,
+                    a => a.UserId == userId
+                }
+            };
+            Favorite favorite = await _repository.GetAsync(dbContext, specification);
+            if(favorite ==null)
+            {
+                Favorite fav = new();
+                fav.ActivityId = activityId;
+                fav.UserId = userId;
+                fav.CreatedDate = DateTime.Now;
+                await _repository.InsertAsync(dbContext, fav);
+            }
+            else
+            {
+                await _repository.DeleteAsync(dbContext, favorite);
+            }
         }
     }
 }

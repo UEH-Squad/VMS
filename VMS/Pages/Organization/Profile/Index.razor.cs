@@ -9,11 +9,14 @@ namespace VMS.Pages.Organization.Profile
 {
     public partial class Index : ComponentBase
     {
-        private UserViewModel org;
+        private UserViewModel org =new();
         private List<ActivityViewModel> actCurrent = new();
         private List<ActivityViewModel> actFavorite = new();
         private List<ActivityViewModel> actEnded = new();
         public bool owner;
+        public bool haveControl;
+        public bool haveFav;
+        public bool haveLogin;
         [Parameter]
         public string UserId { get; set; }
         [Inject]
@@ -28,7 +31,27 @@ namespace VMS.Pages.Organization.Profile
             actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
             actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);
             actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.Ended);
-            _ = !string.Equals(UserId, IdentityService.GetCurrentUserId()) ? owner = false : owner = true;
+
+            if (IdentityService.GetCurrentUserId() != null)
+            {
+               if(IdentityService.GetCurrentUserId() == UserId)
+                {
+                    haveFav = false;
+                    haveControl = true;
+                }
+                else
+                {
+                    haveFav = true;
+                    haveControl = false;
+                }
+                haveLogin = true;
+            }
+            else
+            {
+                haveFav = true;
+                haveLogin = false;
+                haveControl = false;
+            }
         }
     }
 }

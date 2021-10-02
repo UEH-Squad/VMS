@@ -1,56 +1,14 @@
 ﻿@attribute [Route(Routes.Organizations + "/{UserId}")]
 
-<Information></Information>
-<Vision></Vision>
-<Mission></Mission>
-<Act Title="đang diễn ra" HaveControl="true" HaveDecor="true" Datas=@actOrganizes/>
-<Act Title="được yêu thích" HaveDecor="false" HaveFav="true" Datas=@actFavorites/>
-<ActTookPlace></ActTookPlace>
-<h3>User</h3>
+<Information Org="org" UserId="@UserId" HaveControl="haveControl"></Information>
+<Vision Org="org"></Vision>
+<Mission Org="org"></Mission>
+<Act Title="đang diễn ra" HaveDecor="true" HaveControl="haveControl" HaveFav="haveFav" HaveLogin="haveLogin"  Datas="actCurrent" />
+<Act Title="được yêu thích" HaveDecor="false" HaveFav="haveFav" HaveLogin="haveLogin" Datas="actFavorite" />
+<ActTookPlace ActEnded="actEnded"></ActTookPlace>
+
+@*<h3>User</h3>
 <Act Title="đang diễn ra " HaveDecor="true" Datas=@actUser />
-<Act Title="được yêu thích " HaveDecor="false"  HaveHeart="true" Datas=@actUser />
-<Act Title="đã tham gia  "  OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas=@actUserJoined />
+<Act Title="được yêu thích " HaveDecor="false" HaveHeart="true" Datas=@actUser />
+<Act Title="đã tham gia  " OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas=@actUserJoined />*@
 
-
-
-@code {
-    private List<FakeData> actOrganizes = new();
-    private List<FakeData> actFavorites = new();
-    private List<FakeData> actUser = new();
-    private List<FakeData> actUserJoined = new();
-
-    protected override void OnInitialized()
-    {
-
-        for (int i = 0; i < 8; i++)
-        {
-            actOrganizes.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
-                IsMenu = false
-            });
-
-            actFavorites.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"
-            });
-
-            actUser.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"
-            });
-        }
-        for (int i = 0; i < 4; i++)
-        {
-
-            actUserJoined.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19"
-            });
-        }
-    }
-}

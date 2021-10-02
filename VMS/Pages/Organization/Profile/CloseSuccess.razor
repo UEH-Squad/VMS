@@ -7,7 +7,7 @@
                 </span>
             </div>
             <div class="pop-up-content">
-                <h3 class="@(IsOpened ? "open-act" : "close-act")">@(IsOpened ? "Mở hoạt động thành công!" : "Đóng hoạt động thành công!")</h3>
+                <h3 class="@(IsClosed ? "open-act" : "close-act")">@(IsClosed ? "Mở hoạt động thành công!" : "Đóng hoạt động thành công!")</h3>
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
     public BlazoredModalInstance Modal { get; set; }
 
     [Parameter]
-    public bool IsOpened { get; set; }
+    public bool IsClosed { get; set; }
 
     private async Task CloseModal()
     {

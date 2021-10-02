@@ -12,7 +12,7 @@ namespace VMS.Pages.Organization.Profile
 {
     public partial class Act : ComponentBase
     {
-        bool isOpen = false;
+        readonly int id = -1;
 
         [Parameter] public bool HaveControl { get; set; }
         [Parameter] public bool HaveFav { get; set; }
@@ -49,7 +49,7 @@ namespace VMS.Pages.Organization.Profile
         {
             string userId = IdentityService.GetCurrentUserId();
             await ActivityService.UpdateActFavorAsync(id, userId);
-            Datas[id].IsFav = !Datas[id].IsFav;
+            Datas[id-2].IsFav = !Datas[id-2].IsFav;
         }
 
         [JSInvokable]
@@ -81,10 +81,11 @@ namespace VMS.Pages.Organization.Profile
         private async Task ShowCloseModal(int id)
         {
             var modalParams = new ModalParameters();
-            modalParams.Add("IsOpened", isOpen);
+            modalParams.Add("IsClosed", Datas[id-2].IsClosed);
 
             var parameters = new ModalParameters();
             parameters.Add("ActId", id);
+            parameters.Add("IsClosed", Datas[id-2].IsClosed);
 
             var options = new ModalOptions()
             {
@@ -96,51 +97,23 @@ namespace VMS.Pages.Organization.Profile
 
             if ((bool)result.Data)
             {
-                Datas[id].IsClosed = !Datas[id].IsClosed;
-                isOpen = !isOpen;
+                Datas[id-2].IsClosed = !Datas[id-2].IsClosed;
                 Modal.Show<CloseSuccess>("", modalParams, options);
             }
-        } 
+        }
 
-            //--------------------------------------
+        private void ShowLoginRequire()
+        {
 
-        //    void DeleteConfirm()
-        //{
-        //    isDeleteConfirm = !isDeleteConfirm;
-        //    Datas.ForEach(a => a.IsMenu = false);
-        //}
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
 
-        //void CloseConfirm()
-        //{
-        //    isCloseConfirm = !isCloseConfirm;
-        //    Datas.ForEach(a => a.IsMenu = false);
-        //}
+            Modal.Show<LoginRequire>("", options);
+        }
 
-        //private async Task DeleteSuccess()
-        //{
-        //    if (isDeleteConfirm == true)
-        //    {
-        //        isDeleteConfirm = false;
-        //    }
-        //    isDeleteSuccess = !isDeleteSuccess;
-        //    bool delete = true;
-        //    await ActivityService.UpdateStatusActAsync(pendingId, false ,delete);
-        //    var act = Datas.Find(a => a.Id == pendingId);
-        //    Datas.Remove(act);
-        //}
-
-        //private async Task CloseSuccess()
-        //{
-        //    if (isCloseConfirm == true)
-        //    {
-        //        isCloseConfirm = false;
-        //    }
-
-        //    isCloseSuccess = !isCloseSuccess;
-        //    bool close = true;
-        //    await ActivityService.UpdateStatusActAsync(pendingId, close, false);
-        //    var act = Datas.Find(a => a.Id == pendingId);
-        //    act.IsClosed = true;
-        //}
     }
 }

@@ -35,6 +35,7 @@
                             favorite
                         </span>
                     }
+                    @* Phần này của Bằng e không đụng tới *@
 
                 @if (HaveFav)
                 {
@@ -45,7 +46,7 @@
                         </a>
                     }
                     else
-                    { <a class="position-absolute favorite">
+                    { <a class="position-absolute favorite" @onclick="(() => ShowLoginRequire())">
                             <span class="material-icons nonefav">favorite_border</span>
                        </a>
                     }

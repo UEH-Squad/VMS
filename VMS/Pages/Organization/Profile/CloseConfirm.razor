@@ -45,12 +45,13 @@
     {
         if(IsClosed == true)
         {
-            await ActivityService.UpdateStatusActAsync(ActId, !IsClosed, false);
+            await ActivityService.UpdateStatusActAsync(ActId, false, false);
         }
         else
         {
-            await ActivityService.UpdateStatusActAsync(ActId, IsClosed, false);
+            await ActivityService.UpdateStatusActAsync(ActId, true, false);
         }
+        IsClosed = !IsClosed;
         isCloseSuccess = true;
         await CloseModal();
     }

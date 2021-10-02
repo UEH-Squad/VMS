@@ -2,7 +2,7 @@
 
 <div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(isDeleteSuccess ? "d-block" : "d-none")">
+        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-block" : "d-none")">
             <div @onclick="CloseModal" class="close-btn">
                 <span class="material-icons">
                     close
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(isDeleteSuccess ? "d-none" : "d-block")">
+        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-none" : "d-block")">
             <div @onclick="CloseModal" class="close-btn-s">
                 <span class="material-icons">
                     close
@@ -49,9 +49,9 @@
 
     private async Task DeleteSuccess()
     {
-        isDeleteSuccess = true;
         bool delete = true;
         await ActivityService.UpdateStatusActAsync(ActId, false ,delete);
+        isDeleteSuccess = true;
         await CloseModal();
     }
 

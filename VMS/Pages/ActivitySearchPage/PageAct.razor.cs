@@ -12,6 +12,7 @@ using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Common.Extensions;
 using VMS.Domain.Models;
+using VMS.GenericRepository;
 
 namespace VMS.Pages.ActivitySearchPage
 {
@@ -21,7 +22,7 @@ namespace VMS.Pages.ActivitySearchPage
         private int page = 1;
         private Coordinate userCoordinate;
         private IEnumerable<ActivityViewModel> featuredActivities;
-        private PagedResult<ActivityViewModel> pagedResult = new() { Results = new() };
+        private PaginatedList<ActivityViewModel> pagedResult = new(new(), 0, 1, 1);
 
         [Parameter]
         public bool IsSearch { get; set; }
@@ -66,12 +67,12 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnParametersSetAsync()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, userCoordinate, page);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page, OrderList, userCoordinate);
         }
 
         private async Task HandlePageChanged()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, OrderList, userCoordinate, page);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page, OrderList, userCoordinate);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

@@ -20,6 +20,7 @@ namespace VMS.Application.ViewModels
         public bool IsVirtual { get; set; }
         public bool IsPin { get; set; }
         public bool IsClosed { get; set; }
+        public bool IsDeleted { get; set; }
         public double Rating { get; set; }
         public bool IsMenu { get; set; }
         public User Organizer { get; set; }

@@ -29,6 +29,7 @@ const organizeCarousel = () => {
 }
 
 const editProfileCarousel = () => {
+    
     const carousel = $('.editProfile__carousel');
     carousel.owlCarousel('destroy');
     carousel.owlCarousel({
@@ -36,10 +37,12 @@ const editProfileCarousel = () => {
         margin: 0,
         nav: true,
         responsive: {
+
             0: {
-                items: 3,
+                items: 4,
                 slideBy: 1,
-            }
+            },
+
         }
     })
 }

@@ -40,20 +40,28 @@
                         <p class="col-4 form-text">Lĩnh vực</p>
                         <div class="col-8 form-field ">
                             <div class="d-flex">
-                                <div class="@(areas.Count>3 ?"owl-carousel owl-theme editProfile__carousel" :"d-flex editProfile__NoCarousel") ">
+                                @if (areas.Count <5)
+                                {
+                                    width = areas.Count*20;
+                                    classWidth = "w-" + width;
+                                }
+                               
+                                <div class="@(areas.Count>4 ?"owl-carousel owl-theme editProfile__carousel w-80" :"d-flex editProfile__NoCarousel ") @classWidth ">
                                     @foreach (var item in areas)
                                     {
-                                        <div class="form-field-item item @(areas.Count>3 ?"" :"item-NoCaroesel ")">
+                                        <div class="form-field-item item @(areas.Count>4 ?"" :"item-NoCaroesel mx-auto")">
                                             <i class="material-icons">@item.Icon</i>
                                             <span>@item.Name</span>
                                         </div>
                                     }
                                 </div>
 
-                                <div class="form-field-item ms-auto item-add">
+                                <div class="form-field-item  item-add ">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
                                 </div>
                             </div>
+                            
+
 
                         </div>
                     </div>
@@ -141,6 +149,7 @@
     }
 
     private List<AreaViewModel> areas = new List<AreaViewModel>();
+
     private async Task ShowAreasModal()
     {
         var options = new ModalOptions()
@@ -157,7 +166,7 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (areas.Count > 3)
+        if (areas.Count > 4)
         {
             await JSRuntinme.InvokeVoidAsync("vms.EditProfileCarousel");
         }
@@ -175,5 +184,10 @@
 
         Modal.Show<EditConfirm>("", options);
     }
+
+    private int width;
+    private string classWidth="";
+
+
 
 }

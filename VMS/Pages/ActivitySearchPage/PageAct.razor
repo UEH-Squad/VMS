@@ -16,9 +16,11 @@
                                     <div class="col-8 act__content d-flex flex-column justify-content-between">
                                         <div>
                                             <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-2">@item.Name</a>
-                                            <h5>
-                                                <i class="material-icons">public</i> @item.Organizer?.FullName
-                                            </h5>
+                                            <a href="@Routes.Organizations/@item.OrgId">
+                                                <h5 class="org-name">
+                                                    <i class="material-icons">public</i> @item.Organizer?.FullName
+                                                </h5>
+                                            </a>
                                             <p class="lmtext-2 act__content-description">@((MarkupString)item.Description)</p>
                                             <span class="align-self-start">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
                                         </div>

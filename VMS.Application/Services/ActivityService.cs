@@ -433,5 +433,133 @@ namespace VMS.Application.Services
 
             return result;
         }
+
+        public async Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status)
+        {
+            DbContext context = _dbContextFactory.CreateDbContext();
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                {
+                    a => a.OrgId == id,
+                    status == StatusAct.Favor? a => a.Favorites.Count >=0 : (status != StatusAct.Ended ? a=> a.EndDate >= DateTime.Now : a => a.EndDate < DateTime.Now),
+                    a => a.StartDate <= DateTime.Now,
+                    a => a.IsDeleted == false
+                },
+                Includes = activities => activities.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
+                                                    .Include(x => x.Favorites)
+                                                    .Include(x=>x.ActivityAddresses).ThenInclude(x=> x.AddressPath)
+            };
+
+            List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
+            string currentId = _identityService.GetCurrentUserId();
+            IEnumerable<ActivityViewModel> activityViewModels = activity.Select(x => new ActivityViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Banner = x.Banner,
+                IsClosed = x.IsClosed,
+                Favorites = x.Favorites.Count,
+                MemberQuantity = x.MemberQuantity,
+               Province = GetActProvince(x.ActivityAddresses),
+                EndDate = x.EndDate,
+                Rating = GetRateOfActivity(x.Recruitments),
+                IsFav = GetActFavor(x.Id,currentId,x.Favorites)
+            });
+            return status switch
+            {
+               StatusAct.Current => activityViewModels.ToList(),
+               StatusAct.Favor => activityViewModels.OrderByDescending(a => a.Favorites).Take(8).ToList(),
+               StatusAct.Ended => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
+                _ => null
+            };
+        }
+
+        private static bool GetActFavor(int actId, string userId, ICollection<Favorite> favorites)
+        {
+            Favorite favorite = favorites.Where(a => a.ActivityId == actId && a.UserId == userId).FirstOrDefault();
+            if (favorite != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private static string GetActProvince(ICollection<ActivityAddress> activityAddresses)
+        {
+            ActivityAddress address = activityAddresses.Where(a => a.AddressPath.Depth == 1).FirstOrDefault();
+            if (address != null)
+            {
+                return address.AddressPath.Name;
+            }
+            else
+            {
+                return "Hồ Chí Minh"; 
+            }
+        }
+        private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
+        {
+            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
+                    / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
+        }
+
+        public async Task UpdateStatusActAsync(int activityId, bool close, bool delete)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    a => a.Id == activityId
+                }
+            };
+            Activity activity = await _repository.GetAsync(dbContext, specification);
+            activity.UpdatedDate = DateTime.Now;
+            if(close == true)
+            { 
+                activity.IsClosed = true; 
+            }
+            else 
+            { 
+                activity.IsClosed = false;
+            }
+
+            if (delete == true)
+            {
+                activity.IsDeleted = true;
+            }
+           
+            await _repository.UpdateAsync(dbContext, activity);
+        }
+
+        public async Task UpdateActFavorAsync(int activityId, string userId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Favorite> specification = new()
+            {
+                Conditions = new List<Expression<Func<Favorite, bool>>>
+                {
+                    a => a.ActivityId == activityId,
+                    a => a.UserId == userId
+                }
+            };
+            Favorite favorite = await _repository.GetAsync(dbContext, specification);
+            if(favorite ==null)
+            {
+                Favorite fav = new();
+                fav.ActivityId = activityId;
+                fav.UserId = userId;
+                fav.CreatedDate = DateTime.Now;
+                await _repository.InsertAsync(dbContext, fav);
+            }
+            else
+            {
+                await _repository.DeleteAsync(dbContext, favorite);
+            }
+        }
     }
 }

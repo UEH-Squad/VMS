@@ -1,29 +1,9 @@
 ﻿<div class="mission d-flex flex-column align-items-center justify-content-center">
     <hr class="my-5" />
     <h3 class="mb-5 text-center">Tầm nhìn và sứ mệnh</h3>
-    @foreach (var item in fakeDatas)
-    {
-        <p class="text-center w-75">@item.Content</p>
-    }    
+        <p class="text-center w-75">@Org?.Mission</p>  
     <hr class="mt-5" />
 </div>
 
 @code {
-    protected override void OnInitialized()
-    {
-        for (int i = 0; i < 1; i++)
-        {
-            fakeDatas.Add(new FakeData()
-            {
-                Content = "BIT mong muốn trở thành một trong những Đơn vị tổ chức hoạt động tình nguyện dành cho sinh viên đáng tin cậy tại Đh Kinh tế TP.HCM.BIT luôn hướng đến sứ mệnh phát triển giáo dục giữa đức và tài. Qua đó, BIT mang tới cho sinh viên cơ hội tạo ra tương lai tươi sáng cho sự nghiệp của chính mình hihihih.",
-            });
-        }
-    }
-
-    private List<FakeData> fakeDatas = new();
-
-    private class FakeData
-    {
-        public string Content { get; set; }
-    }
 }

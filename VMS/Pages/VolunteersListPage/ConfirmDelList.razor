@@ -1,8 +1,6 @@
-﻿@using VMS.Application.Interfaces
-
-<div class="pop-up">
+﻿<div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-block" : "d-none")">
+        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-block" : "d-none")">
             <div @onclick="CloseModal" class="close-btn">
                 <span class="material-icons">
                     close
@@ -18,41 +16,34 @@
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-none" : "d-block")">
+        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-none" : "d-block")">
             <div @onclick="CloseModal" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <div class="pop-up-content">
-                <h3 class="delete-act">Xoá thành công!</h3>
+                <h3 class="delete-act">Xóa thành công!</h3>
             </div>
         </div>
     </div>
 </div>
 
 @code {
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
-    [Parameter]
-    public int ActId { get; set; }
 
+    bool isConfirmDelete = true;
     bool isDeleteSuccess;
-
-    [Inject]
-    private IActivityService ActivityService { get; set; }
 
     private async Task CloseModal()
     {
-        await Modal.CloseAsync(ModalResult.Ok<bool>(isDeleteSuccess));
+        await Modal.CloseAsync();
     }
 
-    private async Task DeleteSuccess()
+    void DeleteSuccess()
     {
-        bool delete = true;
-        await ActivityService.UpdateStatusActAsync(ActId, false ,delete);
-        isDeleteSuccess = true;
-        await CloseModal();
+        isConfirmDelete = !isConfirmDelete;
     }
-
 }

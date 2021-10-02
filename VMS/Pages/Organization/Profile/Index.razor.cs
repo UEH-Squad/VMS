@@ -25,6 +25,8 @@ namespace VMS.Pages.Organization.Profile
         private IActivityService ActivityService { get; set; }
         [Inject]
         private IIdentityService IdentityService { get; set; }
+        [Inject]
+        NavigationManager NavigationManager { get; set; }
         protected async override Task OnInitializedAsync()
         {
             if (string.IsNullOrEmpty(UserId))
@@ -33,6 +35,11 @@ namespace VMS.Pages.Organization.Profile
             }
 
             org = OrganizationService.GetOrgFull(UserId);
+            if (CheckInforUser(org)==false)
+            {
+                NavigationManager.NavigateTo("/chinh-sua-thong-tin");
+            }
+
             actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
             actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);
             actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.Ended);
@@ -43,6 +50,7 @@ namespace VMS.Pages.Organization.Profile
                 {
                     haveFav = false;
                     haveControl = true;
+                    
                 }
                 else
                 {
@@ -57,6 +65,16 @@ namespace VMS.Pages.Organization.Profile
                 haveLogin = false;
                 haveControl = false;
             }
+        }
+
+        private static bool CheckInforUser( UserViewModel org)
+        {
+            if( string.IsNullOrEmpty(org.FullName) || string.IsNullOrEmpty(org.Email) || string.IsNullOrEmpty(org.PhoneNumber)||
+                string.IsNullOrEmpty(org.Mission) || string.IsNullOrEmpty(org.Banner) || org.UserAreas.Count == 0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

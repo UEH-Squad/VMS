@@ -1,0 +1,107 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+//------------------------------FILTER---------------------------//
+.org-filter {
+    &__title {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        color: $blue;
+        border-bottom: 1px solid rgba(112, 112, 112, 0.5);
+        margin-bottom: 20px;
+
+        span {
+            color: $green
+        }
+    }
+
+    hr {
+        background-color: rgba(112, 112, 112, 0.5);
+        opacity: 1;
+    }
+
+    &__act {
+        &__title {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            color: $blue;
+            margin-bottom: 20px
+        }
+
+        &__child {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 20px;
+
+            input {
+                margin-right: 15px;
+            }
+        }
+    }
+}
+
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background-color: $white;
+    border: 1px solid $grey-icon;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="checkbox"]::after {
+    font-family: "Material Icons";
+    content: "\e876";
+    font-size: 18px;
+    font-weight: 600;
+    color: $blue;
+    display: none;
+}
+
+input[type="checkbox"]:hover{
+    background-color: rgba(0,0,0,0.1);
+}
+input[type="checkbox"]:checked:after {
+    display:block;
+}
+
+.org-filter__btn{
+    margin-top: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn {
+    padding: 8px 17px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    color: $white;
+    background-color: $green;
+    transition: all 0.25s;
+}
+.btn:hover{
+    filter: brightness(90%);
+}
+.btn:active{
+    transform: translateY(3px);
+}
+
+.btn-clear {
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    color: $grey-icon;
+    background-color: #fff;
+}

@@ -100,7 +100,8 @@ namespace VMS.GenericRepository
             {
                 foreach (Expression<Func<T, bool>> conditon in specification.Conditions)
                 {
-                    countSource = source.Where(conditon);
+                    countSource = countSource.Where(conditon);
+
                 }
             }
 

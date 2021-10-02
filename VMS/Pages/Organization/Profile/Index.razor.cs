@@ -27,6 +27,11 @@ namespace VMS.Pages.Organization.Profile
         private IIdentityService IdentityService { get; set; }
         protected async override Task OnInitializedAsync()
         {
+            if (string.IsNullOrEmpty(UserId))
+            {
+                UserId = IdentityService.GetCurrentUserId();
+            }
+
             org = OrganizationService.GetOrgFull(UserId);
             actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
             actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);

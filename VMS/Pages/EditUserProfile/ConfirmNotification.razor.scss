@@ -66,6 +66,7 @@
         .material-icons {
             font-size: 14px;
             color: $grey-close-btn;
+            line-height: 0;
         }
     }
 
@@ -73,15 +74,7 @@
     .pop-up-content {
         padding: 13px 55px;
 
-        .delete-act {
-            font-size: 18px;
-            line-height: 36px;
-            font-weight: 500;
-            margin-bottom: 0;
-            color: $blue;
-        }
-
-        .close-act {
+        .edit-success {
             font-size: 18px;
             line-height: 36px;
             font-weight: 500;

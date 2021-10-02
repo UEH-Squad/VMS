@@ -84,7 +84,7 @@ namespace VMS.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
 
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    //return RedirectToPage("./ForgotPasswordConfirmation");
                 }
                 if (result.RequiresTwoFactor)
                 {

@@ -31,7 +31,7 @@
 
                     @if (HaveHeart)
                     {
-                        <span class="material-icons-outlined icon-favorite position-absolute">
+                        <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
                             favorite
                         </span>
                     }
@@ -150,5 +150,18 @@
             Modal.Show<CloseSuccess>("", modalParams, options);
         }
 
+    }
+
+    private void ShowLoginRequire()
+    {
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        Modal.Show<LoginRequire>("", options);
     }
 }

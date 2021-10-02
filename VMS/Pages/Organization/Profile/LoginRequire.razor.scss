@@ -43,39 +43,7 @@
         .material-icons {
             font-size: 20px;
             color: $grey-close-btn;
-        }
-    }
-
-    .close-btn-s {
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        cursor: pointer;
-        background: rgba(196, 196, 196, .5);
-
-        .material-icons {
-            font-size: 14px;
-            color: $grey-close-btn;
             line-height: 0;
-        }
-    }
-
-
-    .pop-up-content {
-        padding: 13px 55px;
-
-        .delete-act {
-            font-size: 18px;
-            line-height: 36px;
-            font-weight: 500;
-            margin-bottom: 0;
-            color: $green;
         }
     }
 
@@ -91,10 +59,6 @@
             font-weight: 500;
             margin-bottom: 0;
             color: $green;
-        }
-
-        .delete-text {
-            color: $red;
         }
     }
 

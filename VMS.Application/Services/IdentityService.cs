@@ -56,7 +56,7 @@ namespace VMS.Application.Services
 
         public List<User> GetAllOrganizers()
         {
-            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync("Organizer")).Result;
+            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync(Common.Role.Organization.ToString())).Result;
         }
 
         public string GetCurrentUserAddress()

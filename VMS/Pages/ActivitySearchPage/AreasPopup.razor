@@ -4,27 +4,27 @@
             close
         </span>
 
-        <h3 class="text-center mt-4 mb-3">Lĩnh vực</h3>
+        <h3 class="text-center mt-4 mb-4">Lĩnh vực</h3>
         <div class="col-10 areas-modal-content">
             <div class="areas-modal-content__container">
-                <div class="area-item-wrapper d-flex align-items-center mb-2 covid-item">
+                <div class="area-item-wrapper d-flex align-items-center mb-4 covid-item">
                     <div class="d-flex align-items-center justify-content-center" style="background-color: #f14747" ;>
                         <span class="material-icons-outlined">
                             coronavirus
                         </span>
                     </div>
 
-                            <p @onclick=" () => ChangeCovid()" class="mb-0 ms-2 @(isCovidChoosen ? "colored-red" : "")">COVID-19</p>
+                            <p @onclick=" () => ChangeCovid()" class="mb-0 ms-3 @(isCovidChoosen ? "colored-red" : "")">COVID-19</p>
                         </div>
                 @if (areas is not null)
                 {
                     @foreach (var area in areas)
                     {
-                        <div class="area-item-wrapper d-flex align-items-center mb-2">
+                        <div class="area-item-wrapper d-flex align-items-center mb-4">
                             <div @onclick="() => ChangeState(area)" class="material-icons d-flex align-items-center justify-content-center">
                                 @area.Icon
                             </div>
-                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-2 @(choosenAreas.Exists(a => a.Id == area.Id) ? "colored-green" : "")">@area.Name</p>
+                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-3 @(choosenAreas.Exists(a => a.Id == area.Id) ? "colored-green" : "")">@area.Name</p>
                         </div>
                     }
                 }

@@ -28,6 +28,7 @@
     color: #B4B4B4;
     cursor: pointer; }
   .my-information .information__logo p {
+    width: 80%;
     font-size: 28px;
     font-weight: 600; }
   .my-information .information__logo span {
@@ -153,7 +154,8 @@
     text-align: center;
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    margin-top: -36px; }
     .my-information .information__act h3 span {
       color: #18A0FB; }
   .my-information .information__act .information__act-number {

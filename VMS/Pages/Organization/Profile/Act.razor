@@ -29,12 +29,12 @@
                 }
 
 
-                @if (HaveHeart)
-                {
-                    <span class="material-icons-outlined icon-favorite position-absolute">
-                        favorite
-                    </span>
-                }
+                    @if (HaveHeart)
+                    {
+                        <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
+                            favorite
+                        </span>
+                    }
 
                 @if (HaveFav)
                 {

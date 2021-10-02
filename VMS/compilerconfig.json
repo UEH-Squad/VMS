@@ -254,5 +254,13 @@
   {
     "outputFile": "Shared/Components/RequireSignup.razor.css",
     "inputFile": "Shared/Components/RequireSignup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/LoginRequire.razor.css",
+    "inputFile": "Pages/Organization/Profile/LoginRequire.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/DeleteConfirm.razor.css",
+    "inputFile": "Pages/Organization/Profile/DeleteConfirm.razor.scss"
   }
 ]

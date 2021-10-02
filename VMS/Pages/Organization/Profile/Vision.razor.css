@@ -4,14 +4,19 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.vision .act-img {
+  max-height: 630px;
+  object-fit: cover;
+  object-position: center; }
+
 .vision h3 {
   font-weight: 600;
   color: #FFFFFF;
   font-size: 72px;
-  top: 25%; }
+  top: 15%; }
 
 .vision p {
   font-weight: 500;
   color: #FFFFFF;
   font-size: 36px;
-  top: 50%; }
+  bottom: 15%; }

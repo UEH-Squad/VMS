@@ -14,8 +14,6 @@
   z-index: 3; }
   .pop-up .border-10 {
     border-radius: 10px; }
-  .pop-up .border-5 {
-    border-radius: 5px; }
   .pop-up .center-screen {
     width: 100%;
     height: 100%;
@@ -55,7 +53,8 @@
     background: rgba(196, 196, 196, 0.5); }
     .pop-up .close-btn-s .material-icons {
       font-size: 14px;
-      color: #717171; }
+      color: #717171;
+      line-height: 0; }
   .pop-up .pop-up-content {
     padding: 13px 55px; }
     .pop-up .pop-up-content .delete-act {
@@ -64,12 +63,6 @@
       font-weight: 500;
       margin-bottom: 0;
       color: #64D72F; }
-    .pop-up .pop-up-content .close-act {
-      font-size: 18px;
-      line-height: 36px;
-      font-weight: 500;
-      margin-bottom: 0;
-      color: #18A0FB; }
   .pop-up .content {
     padding: 34px 64px 18px;
     display: flex;
@@ -81,8 +74,6 @@
       font-weight: 500;
       margin-bottom: 0;
       color: #64D72F; }
-    .pop-up .content .close-text {
-      color: #18A0FB; }
     .pop-up .content .delete-text {
       color: #F14747; }
   .pop-up .pop-up-btn {
@@ -99,7 +90,8 @@
       justify-content: center;
       align-items: center;
       width: 104px;
-      height: 32px; }
+      height: 32px;
+      font-weight: 600; }
     .pop-up .pop-up-btn .accept {
       background-color: #18A0FB;
       color: #FFFFFF;
@@ -110,4 +102,5 @@
       width: 104px;
       height: 32px;
       cursor: pointer;
-      font-size: 18px; }
+      font-size: 18px;
+      font-weight: 600; }

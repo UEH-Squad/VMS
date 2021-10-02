@@ -50,21 +50,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "5586e289-aadd-4126-9885-4eb6c59f1897",
+                            ConcurrencyStamp = "445034e8-bea2-4693-803e-811277f3a2de",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "66ef1a6e-bd66-4e51-ac9d-8e5e6e82b419",
+                            ConcurrencyStamp = "d2ac63c5-f33e-4602-8a3b-b050359cbb08",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "0cc6be32-9169-4606-b692-760f7777d64c",
+                            ConcurrencyStamp = "5b73e236-a1fa-484e-95fc-0311f1c3a683",
                             Name = "User",
                             NormalizedName = "User"
                         });

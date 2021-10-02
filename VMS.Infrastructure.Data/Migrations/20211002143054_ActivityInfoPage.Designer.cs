@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    [Migration("20210826174350_addTableActivityTargetsAndReasonReport")]
-    partial class addTableActivityTargets
+    [Migration("20211002143054_ActivityInfoPage")]
+    partial class ActivityInfoPage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +47,29 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
+                            ConcurrencyStamp = "445034e8-bea2-4693-803e-811277f3a2de",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
+                            ConcurrencyStamp = "d2ac63c5-f33e-4602-8a3b-b050359cbb08",
+                            Name = "Organization",
+                            NormalizedName = "Organization"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
+                            ConcurrencyStamp = "5b73e236-a1fa-484e-95fc-0311f1c3a683",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -261,10 +285,19 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActual")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPin")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsVirtual")
@@ -272,6 +305,9 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
+
+                    b.Property<Point>("Location")
+                        .HasColumnType("geography");
 
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
@@ -288,14 +324,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("PostDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Requirement")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Targets")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -454,75 +490,205 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Icon = "people_outline",
                             IsDeleted = false,
                             Name = "Cộng đồng"
                         },
                         new
                         {
                             Id = 2,
-                            IsDeleted = false,
-                            Name = "Sự kiện"
-                        },
-                        new
-                        {
-                            Id = 3,
+                            Icon = "pan_tool",
                             IsDeleted = false,
                             Name = "Hỗ trợ"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
+                            Icon = "import_contacts",
                             IsDeleted = false,
                             Name = "Giáo dục"
                         },
                         new
                         {
-                            Id = 5,
-                            IsDeleted = false,
-                            Name = "Khẩn cấp"
-                        },
-                        new
-                        {
-                            Id = 6,
+                            Id = 4,
+                            Icon = "format_shapes",
                             IsDeleted = false,
                             Name = "Kỹ thuật"
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 5,
+                            Icon = "local_hospital",
                             IsDeleted = false,
                             Name = "Sức khỏe"
                         },
                         new
                         {
-                            Id = 8,
-                            IsDeleted = false,
-                            Name = "Công nghệ"
-                        },
-                        new
-                        {
-                            Id = 9,
+                            Id = 6,
+                            Icon = "drive_eta",
                             IsDeleted = false,
                             Name = "Phương tiện"
                         },
                         new
                         {
-                            Id = 10,
+                            Id = 7,
+                            Icon = "wb_sunny",
                             IsDeleted = false,
                             Name = "Môi trường"
                         },
                         new
                         {
+                            Id = 8,
+                            Icon = "directions_bike",
+                            IsDeleted = false,
+                            Name = "Thể thao"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Icon = "notifications_active",
+                            IsDeleted = false,
+                            Name = "Khẩn cấp"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Icon = "calendar_today",
+                            IsDeleted = false,
+                            Name = "Sự kiện"
+                        },
+                        new
+                        {
                             Id = 11,
+                            Icon = "home",
                             IsDeleted = false,
                             Name = "Chuyển nhà"
                         },
                         new
                         {
                             Id = 12,
+                            Icon = "computer",
                             IsDeleted = false,
-                            Name = "Thể thao"
+                            Name = "Công nghệ"
                         });
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Faculties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Khoa Luật"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Khoa Kế toán"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Khoa Kinh tế"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Khoa Khoa học xã hội"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Khoa Ngân hàng"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Khoa Ngoại ngữ"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Khoa Quản lý nhà nước"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Khoa Quản trị"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Khoa Tài chính"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Khoa Tài chính công"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Khoa Công nghệ thông tin kinh doanh"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Khoa Kinh doanh quốc tế - Marketing"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Khoa Toán - Thống kê"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Viện Du lịch"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Viện Đào tạo quốc tế"
+                        });
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Favorites");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
@@ -543,9 +709,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsProcessed")
                         .HasColumnType("bit");
@@ -568,6 +731,31 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("Feedbacks");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.ImageReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("FeedbackId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RecruitmentRatingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeedbackId");
+
+                    b.HasIndex("RecruitmentRatingId");
+
+                    b.ToTable("ImageReports");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
                 {
                     b.Property<int>("Id")
@@ -575,20 +763,20 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActivityId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("RecruitmentRatingId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActivityId");
+                    b.HasIndex("FeedbackId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ReasonReports");
                 });
@@ -612,11 +800,20 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Desire")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("EnrollTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsCommit")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -698,216 +895,193 @@ namespace VMS.Infrastructure.Data.Migrations
                         {
                             Id = 1,
                             IsDeleted = false,
-                            Name = "Kỹ năng mềm"
+                            Name = "Kiến thức chuyên ngành"
                         },
                         new
                         {
                             Id = 2,
                             IsDeleted = false,
-                            Name = "Kiến thức chuyên ngành"
+                            Name = "Kỹ năng mềm"
                         },
                         new
                         {
                             Id = 3,
                             IsDeleted = false,
-                            Name = "Siêng năng"
+                            Name = "Hoạch định tài chính"
                         },
                         new
                         {
                             Id = 4,
                             IsDeleted = false,
-                            Name = "Lập trình"
+                            Name = "Quản lý thời gian"
                         },
                         new
                         {
                             Id = 5,
                             IsDeleted = false,
-                            Name = "Có phương tiện di chuyển"
+                            Name = "Chỉnh sửa/Thiết kế hình ảnh/Video"
                         },
                         new
                         {
                             Id = 6,
                             IsDeleted = false,
-                            Name = "Kiên nhẫn"
+                            Name = "Thể lực tốt"
                         },
                         new
                         {
                             Id = 7,
                             IsDeleted = false,
-                            Name = "Thể lực tốt"
+                            Name = "Viết Proposal/Kịch bản/Content"
                         },
                         new
                         {
                             Id = 8,
                             IsDeleted = false,
-                            Name = "Hoạch định tài chính"
+                            Name = "Lập trình"
                         },
                         new
                         {
                             Id = 9,
                             IsDeleted = false,
-                            Name = "Nhiệt tình"
+                            Name = "Xây dựng website"
                         },
                         new
                         {
                             Id = 10,
                             IsDeleted = false,
-                            Name = "Trách nhiệm"
+                            Name = "Lái xe"
                         },
                         new
                         {
                             Id = 11,
                             IsDeleted = false,
-                            Name = "Chỉnh sửa/Thiết kế hình ảnh/video"
+                            Name = "Luật",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 12,
                             IsDeleted = false,
-                            Name = "Checklist"
+                            Name = "Kế toán/Kiểm toán",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 13,
                             IsDeleted = false,
-                            Name = "Xây dựng website"
+                            Name = "Marketing",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 14,
                             IsDeleted = false,
-                            Name = "Viết Proposal/kịch bản/content"
+                            Name = "Quản trị",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 15,
                             IsDeleted = false,
-                            Name = "Lái xe"
+                            Name = "Tài chính",
+                            ParentSkillId = 1
                         },
                         new
                         {
                             Id = 16,
                             IsDeleted = false,
-                            Name = "Làm việc nhóm",
+                            Name = "Ngân hàng",
                             ParentSkillId = 1
                         },
                         new
                         {
                             Id = 17,
                             IsDeleted = false,
-                            Name = "Tư duy Logic",
+                            Name = "Ngoại ngữ",
                             ParentSkillId = 1
                         },
                         new
                         {
                             Id = 18,
                             IsDeleted = false,
-                            Name = "Xây dựng kế hoạch",
-                            ParentSkillId = 1
+                            Name = "Làm việc nhóm",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 19,
                             IsDeleted = false,
-                            Name = "Giao tiếp & Ứng xử",
-                            ParentSkillId = 1
+                            Name = "Tư duy Logic",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 20,
                             IsDeleted = false,
-                            Name = "Giải quyết vấn đề",
-                            ParentSkillId = 1
+                            Name = "Xây dựng kế hoạch",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 21,
                             IsDeleted = false,
-                            Name = "Quản lý thời gian",
-                            ParentSkillId = 1
+                            Name = "Giao tiếp & Ứng xử",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 22,
                             IsDeleted = false,
-                            Name = "Đồng cảm & Sẻ chia",
-                            ParentSkillId = 1
+                            Name = "Giải quyết vấn đề",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 23,
                             IsDeleted = false,
-                            Name = "Quan sát & Lắng nghe",
-                            ParentSkillId = 1
+                            Name = "Đồng cảm & Sẻ chia",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 24,
                             IsDeleted = false,
-                            Name = "Tìm kiếm & Xử lý thông tin",
-                            ParentSkillId = 1
+                            Name = "Quan sát & Lắng nghe",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 25,
                             IsDeleted = false,
-                            Name = "Kiểm soát cảm xúc",
-                            ParentSkillId = 1
+                            Name = "Tìm kiếm & Xử lý thông tin",
+                            ParentSkillId = 2
                         },
                         new
                         {
                             Id = 26,
                             IsDeleted = false,
-                            Name = "Luật",
+                            Name = "Kiểm soát cảm xúc",
                             ParentSkillId = 2
                         },
                         new
                         {
                             Id = 27,
                             IsDeleted = false,
-                            Name = "Kế toán/Kiểm toán",
+                            Name = "Kiên nhẫn",
                             ParentSkillId = 2
                         },
                         new
                         {
                             Id = 28,
                             IsDeleted = false,
-                            Name = "Marketing",
+                            Name = "Chăm chỉ",
                             ParentSkillId = 2
                         },
                         new
                         {
                             Id = 29,
                             IsDeleted = false,
-                            Name = "Quản trị",
-                            ParentSkillId = 2
-                        },
-                        new
-                        {
-                            Id = 30,
-                            IsDeleted = false,
-                            Name = "Tài chính",
-                            ParentSkillId = 2
-                        },
-                        new
-                        {
-                            Id = 31,
-                            IsDeleted = false,
-                            Name = "Ngân hàng",
-                            ParentSkillId = 2
-                        },
-                        new
-                        {
-                            Id = 32,
-                            IsDeleted = false,
-                            Name = "Ngoại ngữ",
-                            ParentSkillId = 2
-                        },
-                        new
-                        {
-                            Id = 33,
-                            IsDeleted = false,
-                            Name = "Lý luận chính trị",
+                            Name = "Siêng năng",
                             ParentSkillId = 2
                         });
                 });
@@ -997,8 +1171,17 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Banner")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Course")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1006,7 +1189,13 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FullAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
@@ -1021,11 +1210,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Mission")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrgName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhoneNumber2")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
 
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(max)");
@@ -1038,6 +1227,8 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("FacultyId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -1186,6 +1377,25 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("PreviousPath");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.Favorite", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.Activity", "Activity")
+                        .WithMany("Favorites")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VMS.Domain.Models.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
@@ -1203,27 +1413,44 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.ImageReport", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
+                        .WithMany("ImageReports")
+                        .HasForeignKey("FeedbackId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                        .WithMany("ImageReports")
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
                 {
-                    b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
+                        .WithMany("ReasonReports")
+                        .HasForeignKey("FeedbackId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                        .WithMany("ReasonReports")
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Activity");
+                    b.Navigation("Feedback");
 
-                    b.Navigation("User");
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany()
+                        .WithMany("Recruitments")
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1309,6 +1536,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.User", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.Faculty", "Faculty")
+                        .WithMany("Users")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Faculty");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.Activity", b =>
                 {
                     b.Navigation("ActivityAddresses");
@@ -1318,6 +1555,10 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("ActivitySkills");
 
                     b.Navigation("ActivityTargets");
+
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Recruitments");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
@@ -1336,9 +1577,28 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("UserAreas");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
+                {
+                    b.Navigation("ImageReports");
+
+                    b.Navigation("ReasonReports");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.Navigation("RecruitmentRatings");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.RecruitmentRating", b =>
+                {
+                    b.Navigation("ImageReports");
+
+                    b.Navigation("ReasonReports");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Skill", b =>
@@ -1355,6 +1615,8 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Activities");
 
                     b.Navigation("ActivityApprovals");
+
+                    b.Navigation("Favorites");
 
                     b.Navigation("Feedbacks");
 

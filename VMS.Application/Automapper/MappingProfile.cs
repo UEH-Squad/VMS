@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using VMS.Application.ViewModels;
 using VMS.Domain.Models;
+using VMS.GenericRepository;
 
 namespace VMS.Application.Automapper
 {
@@ -18,7 +19,9 @@ namespace VMS.Application.Automapper
             CreateMap<Area, AreaViewModel>();
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
-            CreateMap<ReportViewModel,Feedback >();
+            CreateMap<User, UserViewModel>();
+            CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
+            CreateMap<ReportViewModel, Feedback>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@import "../../../Resources/scss/common/_variables";
+﻿@import "../../Resources/scss/common/_variables";
 
 .pop-up {
     position: fixed;
@@ -78,7 +78,7 @@
             line-height: 36px;
             font-weight: 500;
             margin-bottom: 0;
-            color: $green;
+            color: $blue;
         }
 
         .close-act {
@@ -109,7 +109,7 @@
         }
 
         .delete-text {
-            color: $red;
+            color: $blue;
         }
     }
 

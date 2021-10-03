@@ -1,12 +1,16 @@
 ﻿@attribute [Route(Routes.Organizations + "/{UserId}")]
+@attribute [Route(Routes.Organizations)]
 
-<Information Org="org" UserId="@UserId" Owner="@owner"></Information>
+
+<Information Org="org" UserId="@UserId" HaveControl="haveControl"></Information>
 <Vision Org="org"></Vision>
 <Mission Org="org"></Mission>
-<Act Title="đang diễn ra" Owner="@owner" HaveControl="true" HaveDecor="true" Datas="actCurrent" />
-<Act Title="được yêu thích" HaveDecor="false" Datas="actFavorite" />
+<Act Title="đang diễn ra" HaveDecor="true" HaveControl="haveControl" HaveFav="haveFav" HaveLogin="haveLogin" Datas="actCurrent" />
+<Act Title="được yêu thích" HaveDecor="false" HaveFav="haveFav" HaveLogin="haveLogin" Datas="actFavorite" />
 <ActTookPlace ActEnded="actEnded"></ActTookPlace>
 
-@code {
+@*<h3>User</h3>
+    <Act Title="đang diễn ra " HaveDecor="true" Datas=@actUser />
+    <Act Title="được yêu thích " HaveDecor="false" HaveHeart="true" Datas=@actUser />
+    <Act Title="đã tham gia  " OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas=@actUserJoined />*@
 
-}

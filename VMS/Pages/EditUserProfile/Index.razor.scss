@@ -7,6 +7,7 @@
     }
 
     .editProfile__title {
+        margin-top: 50px;
         font-size: 36px;
         font-weight: 600;
         color: $blue;
@@ -29,7 +30,6 @@
     }
 
     ::deep .valid.modified:not([type=checkbox]) {
-        border: 1px solid $blue;
         outline: none;
     }
 
@@ -42,6 +42,7 @@
                 position: absolute;
                 top: 8px;
                 right: 10px;
+                pointer-events: none;
             }
 
             .my-form-department {
@@ -86,12 +87,34 @@
             border-radius: 5px;
         }
 
+        ::deep .form-control-maxim {
+            padding: 10px;
+        }
+
         ::deep .form-control--disable {
             background-color: #F3F3F3 !important;
         }
 
         ::deep .typeahead__input-multi {
             border: none;
+        }
+
+        .form-field {
+            .w-20 {
+                width: 20%;
+            }
+
+            .w-40 {
+                width: 40%;
+            }
+
+            .w-60 {
+                width: 60%;
+            }
+
+            .w-80 {
+                width: 80%;
+            }
         }
 
         .form-field-item {
@@ -139,21 +162,27 @@
             }
 
             .icon-add {
-                cursor: pointer;
-                background: #C4C4C4;
+                background: $grey-close-bg;
                 opacity: 50%;
                 color: $white;
                 font-size: 70px;
 
                 &:hover {
-                    background: #C4C4C4;
+                    background: $grey-close-bg;
                     opacity: 100%;
                     font-size: 80px;
                 }
             }
 
             &.item-add {
-                width: 30%;
+                width: 20%;
+                cursor: pointer;
+            }
+        }
+
+        .editProfile__NoCarousel {
+
+            .item-NoCaroesel {
             }
         }
 
@@ -161,8 +190,10 @@
             z-index: 0;
         }
 
+
         .editProfile__carousel {
-            width: 60%;
+            width: 80%;
+            padding-right: 50px;
 
             .item {
                 margin: 0 auto;
@@ -180,7 +211,7 @@
                 .owl-next {
                     position: absolute;
                     top: -15%;
-                    right: -20%;
+                    right: 0%;
 
                     span {
                         font-size: 80px;
@@ -249,7 +280,7 @@
 }
 
 .from__btn {
-    margin: 60px 0;
+    margin: 20px 0 60px;
 
     .btn {
         padding: 12px 35px;
@@ -267,11 +298,19 @@
     }
 
     .from__btn-submit {
-        background: $blue;
+        background: #C4C4C4;
         color: $white;
+    }
+
+    .blue-btn {
+        background: $blue;
 
         &:hover {
             background: $blue-hv;
         }
+    }
+
+    .cursor {
+        cursor: context-menu;
     }
 }

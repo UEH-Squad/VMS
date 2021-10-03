@@ -1,5 +1,4 @@
-﻿
-<div class="pop-up">
+﻿<div class="pop-up">
     <div class="center-screen">
         <div class="pop-up-container border-10 @(isConfirmDelete ? "d-block" : "d-none")">
             <div @onclick="CloseModal" class="close-btn">
@@ -9,11 +8,11 @@
             </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="delete-text">xóa tình nguyện viên</span> này không?</h3>
+                <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
-                <div @onclick="CloseModal" class="deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="accept">Xác nhận</div>
+                <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
+                <div @onclick="DeleteSuccess" class="btn accept px-0">Xác nhận</div>
             </div>
         </div>
 

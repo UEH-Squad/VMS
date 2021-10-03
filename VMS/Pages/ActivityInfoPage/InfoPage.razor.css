@@ -27,37 +27,29 @@
     display: inline;
     color: #515151; }
 
-.infopage-title .title__date .postdate {
-  display: inline;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 30px;
-  color: #515151; }
-
-.infopage-title .title__date .heart-button1 {
-  color: #F14747;
-  background: transparent;
-  border: none; }
-
-.infopage-title .title__date .heart-button1:hover {
-  cursor: pointer; }
-
-.infopage-title .title__date .heart-button2 {
-  margin-left: 47.5%;
-  color: #F14747;
-  background: transparent;
-  border: none; }
-
-.infopage-title .title__date .heart-button2:hover {
-  cursor: pointer; }
-
-.infopage-title .title__date .heart-icon {
-  font-size: 2.5rem; }
-
-.infopage-title .title__date .line-line2 {
-  margin-top: 0px;
-  background-color: #B4B4B4;
-  border: 2px solid #B4B4B4; }
+.infopage-title .title__date {
+  border-bottom: 2px solid #b4b4b4; }
+  .infopage-title .title__date .postdate {
+    display: inline;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 30px;
+    color: #515151; }
+  .infopage-title .title__date .heart-button1 {
+    color: #F14747;
+    background: transparent;
+    border: none; }
+  .infopage-title .title__date .heart-button1:hover {
+    cursor: pointer; }
+  .infopage-title .title__date .heart-button2 {
+    margin-left: 47.5%;
+    color: #F14747;
+    background: transparent;
+    border: none; }
+  .infopage-title .title__date .heart-button2:hover {
+    cursor: pointer; }
+  .infopage-title .title__date .heart-icon {
+    font-size: 2.5rem; }
 
 .infopage-activity .content {
   font-style: normal;
@@ -100,3 +92,5 @@
     font-weight: 600; }
   .infopage-activity .activity__assignment .assignment-list {
     margin: 0 auto; }
+  .org-name{
+    text-decoration: none;}

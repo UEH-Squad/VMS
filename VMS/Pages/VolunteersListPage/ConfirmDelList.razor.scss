@@ -13,10 +13,6 @@
         border-radius: 10px;
     }
 
-    .border-5 {
-        border-radius: 5px;
-    }
-
     .center-screen {
         width: 100%;
         height: 100%;
@@ -80,14 +76,6 @@
             margin-bottom: 0;
             color: $green;
         }
-
-        .close-act {
-            font-size: 18px;
-            line-height: 36px;
-            font-weight: 500;
-            margin-bottom: 0;
-            color: $blue;
-        }
     }
 
     .content {
@@ -102,10 +90,6 @@
             font-weight: 500;
             margin-bottom: 0;
             color: $green;
-        }
-
-        .close-text {
-            color: $blue;
         }
 
         .delete-text {
@@ -129,6 +113,7 @@
             align-items: center;
             width: 104px;
             height: 32px;
+            font-weight: 600;
         }
 
         .accept {
@@ -142,6 +127,7 @@
             height: 32px;
             cursor: pointer;
             font-size: 18px;
+            font-weight: 600;
         }
     }
 }

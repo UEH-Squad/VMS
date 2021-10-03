@@ -6,6 +6,7 @@
 /*#endregion */
 .my-uploadImg {
   border: 1px solid #b4b4b4;
+  border-radius: 5px;
   padding: 10px 15px; }
 
 i {

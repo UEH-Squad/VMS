@@ -65,7 +65,9 @@
 
 .act-img {
   width: 100%;
-  transition: all .5s ease; }
+  transition: all .5s ease;
+  object-fit: cover;
+  object-position: center; }
 
 .act-container:hover {
   cursor: pointer; }

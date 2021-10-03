@@ -46,6 +46,5 @@ namespace VMS.Domain.Models
         public virtual ICollection<ActivityImage> ActivityImages { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<Recruitment> Recruitments { get; set; }
-
     }
 }

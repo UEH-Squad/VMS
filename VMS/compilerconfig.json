@@ -254,5 +254,29 @@
   {
     "outputFile": "Pages/OrganizationManagementPage/SearchBar.razor.css",
     "inputFile": "Pages/OrganizationManagementPage/SearchBar.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/CloseConfirm.razor.css",
+    "inputFile": "Pages/Organization/Profile/CloseConfirm.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/EditConfirm.razor.css",
+    "inputFile": "Pages/Organization/Profile/EditConfirm.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/CloseSuccess.razor.css",
+    "inputFile": "Pages/Organization/Profile/CloseSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Shared/Components/RequireSignup.razor.css",
+    "inputFile": "Shared/Components/RequireSignup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/LoginRequire.razor.css",
+    "inputFile": "Pages/Organization/Profile/LoginRequire.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/DeleteConfirm.razor.css",
+    "inputFile": "Pages/Organization/Profile/DeleteConfirm.razor.scss"
   }
 ]

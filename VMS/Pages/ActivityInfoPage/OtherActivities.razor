@@ -10,14 +10,19 @@
         <div class="owl-carousel owl-theme">
             @foreach (var data in fakeData)
             {
-                <div class="act__container__card" id="kiemtra">
+                <a href="" class="act__container__card position-relative" id="kiemtra">
                     <div class="act__container__card__img">
                         <img src="@data.Banner" alt="photo">
                     </div>
                     <div class="act__container__card__desc">
                         <p class="limited-text">@data.Title</p>
                     </div>
-                </div>
+                    <div class="act__container__card__icon">
+                        <a class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))" @onclick:preventDefault @onclick:stopPropagation>
+                            <span class="material-icons">favorite</span>
+                        </a>
+                    </div>
+                </a>
             }
         </div>
     </section>
@@ -49,5 +54,15 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
+    }
+
+    private void AnimateHeart(int id)
+    {
+        var item = fakeData.FirstOrDefault(x => x.Id == id);
+        if (item is not null)
+        {
+            item.IsFav = !item.IsFav;
+        }
+
     }
 }

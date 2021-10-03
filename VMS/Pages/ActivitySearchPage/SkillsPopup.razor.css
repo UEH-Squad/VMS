@@ -65,7 +65,7 @@
       background-color: #306C14; }
   .my-custom-popup .my-custom-sub-popup {
     top: -100%;
-    left: 110%;
+    left: 100%;
     background-color: white;
     box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
     padding: 15px 25px 0;
@@ -78,3 +78,8 @@
       color: #64D72F; }
       .my-custom-popup .my-custom-sub-popup .sub-popup-item:hover {
         text-decoration: underline; }
+
+.skill-item-wrapper > p:hover {
+  position: relative; }
+  .skill-item-wrapper > p:hover .my-custom-sub-popup {
+    display: block; }

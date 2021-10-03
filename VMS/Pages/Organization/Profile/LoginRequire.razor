@@ -1,0 +1,28 @@
+﻿<div class="pop-up">
+    <div class="center-screen">
+        <div class="pop-up-container border-10">
+            <div @onclick="CloseModal" class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="content">
+                <h3>Đăng nhập để tiếp tục!</h3>
+            </div>
+            <div class="pop-up-btn">
+                <div @onclick="CloseModal" class="btn deny">Hủy</div>
+                <a href="@Routes.LogIn" class="btn text-decoration-none accept px-0">Xác nhận</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+    }
+}

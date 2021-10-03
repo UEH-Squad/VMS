@@ -4,6 +4,6 @@ namespace VMS.Application.Interfaces
 {
     public interface IMailService
     {
-        Task SendLoginConfirmEmail(string userEmail, string callbackUrl);
+        Task SendConfirmEmail(string userEmail, string callbackUrl);
     }
 }

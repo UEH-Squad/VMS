@@ -45,7 +45,7 @@ namespace VMS.Areas.Identity.Pages.Account
             public string Code { get; set; }
         }
 
-        public IActionResult OnGet(string code = "thanhlam")
+        public IActionResult OnGet(string code, string email)
         {
             if (code == null)
             {
@@ -55,27 +55,28 @@ namespace VMS.Areas.Identity.Pages.Account
             {
                 Input = new InputModel
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    Code = code,
+                    Email = email
                 };
                 return Page();
             }
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(InputModel inputModel)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var user = await _userManager.FindByEmailAsync(Input.Email);
+            var user = await _userManager.FindByEmailAsync(inputModel.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
+            var result = await _userManager.ResetPasswordAsync(user, inputModel.Code, inputModel.Password);
             if (result.Succeeded)
             {
                 return RedirectToPage("./ResetPasswordConfirmation");

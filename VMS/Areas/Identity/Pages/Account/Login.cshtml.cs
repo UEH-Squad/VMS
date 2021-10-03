@@ -76,7 +76,6 @@ namespace VMS.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -96,12 +95,11 @@ namespace VMS.Areas.Identity.Pages.Account
                             values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.EditProfile },
                             protocol: Request.Scheme);
 
-                        await _mailService.SendLoginConfirmEmail(user.Email, callbackUrl);
+                        await _mailService.SendConfirmEmail(user.Email, callbackUrl);
 
                         return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
                     }
                 }
-                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");

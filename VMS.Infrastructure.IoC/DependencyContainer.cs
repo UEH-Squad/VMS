@@ -57,6 +57,7 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IAddressService, AddressService>();
             services.AddTransient<IGeoLocationService, GeoLocationService>();
             services.AddTransient<IMailService, MailService>();
+            services.AddTransient<IResetPasswordService, ResetPasswordService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

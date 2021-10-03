@@ -27,7 +27,7 @@ namespace VMS.Application.Services
             systemPort = _configuration.GetValue<int>("MailSettings:Port");
         }
 
-        public async Task SendLoginConfirmEmail(string userEmail, string callbackUrl)
+        public async Task SendConfirmEmail(string userEmail, string callbackUrl)
         {
             MailMessage mailMessage = new(systemEmail, userEmail)
             {

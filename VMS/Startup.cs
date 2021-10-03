@@ -40,7 +40,8 @@ namespace VMS
                 options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<VmsDbContext>();
+                .AddEntityFrameworkStores<VmsDbContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromHours(1));
 

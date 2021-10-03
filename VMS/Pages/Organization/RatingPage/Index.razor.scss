@@ -1,0 +1,23 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.rating-page {
+    margin-top: 2%;
+    margin-left: 72px;
+    margin-right: 72px;
+    z-index: 0;
+}
+
+.header-page {
+    display: flex;
+    justify-content: space-between;
+
+    ::deep .search-box {
+        width: 53%;
+    }
+}
+
+
+.body-page {
+    display: flex;
+    justify-content: space-between;
+}

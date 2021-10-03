@@ -70,7 +70,7 @@
                         <div class="col-8 position-relative px-0">
                             <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Content)</div>
                             <div class="col-8 px-0 w-100">
-                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input mx-0 form-control" />
+                                <InputLimitedTextArea MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
 

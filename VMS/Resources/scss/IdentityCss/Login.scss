@@ -1,26 +1,19 @@
 ﻿@import "../common/_variables.scss";
 .login-heading {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 600;
     color: $blue;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    input[type="password"] {
-        -webkit-text-stroke-width: 0.2em;
-        letter-spacing: 0.3em;
-    }
-}
 
 .my-input {
     width: 100%;
-    height: 60px;
+    height: 36px;
     padding: 0 15px;
     outline: none;
     color: #515151;
     border: 1px solid #c4c4c4;
     border-radius: 5px;
-    font-size: 20px;
 
     &::placeholder {
         color: #b4b4b4;
@@ -43,7 +36,7 @@
 }
 
 .show-password-icon {
-    font-size: 28px;
+    font-size: 20px;
     position: absolute;
     right: 15px;
     top: 50%;
@@ -54,7 +47,7 @@
 }
 
 .error-icon {
-    font-size: 28px;
+    font-size: 20px;
     color: #e10b0b;
     position: absolute;
     right: 15px;
@@ -74,7 +67,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    border: 2px solid $grey-icon;
+    border: 1px solid $grey-icon;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -85,19 +78,14 @@
         content: "";
         width: 9px;
         height: 5px;
-        border-left: 2px solid #fff;
-        border-bottom: 2px solid #fff;
+        border-left: 2px solid $blue;
+        border-bottom: 2px solid $blue;
         position: absolute;
         top: 40%;
         left: 52%;
         transform: translate(-50%, -50%) rotate( -45deg );
         display: none;
     }
-
-    &:checked {
-        background-color: $blue;
-    }
-
     &:checked::before {
         display: block;
     }
@@ -105,7 +93,6 @@
 
 #forgot-password {
     text-decoration: none;
-    font-size: 20px;
     color: $blue;
 
     &:hover {
@@ -115,11 +102,10 @@
 
 .form-login-btn {
     width: 100%;
-    height: 60px;
     border: none;
     border-radius: 5px;
     background-color: $blue;
-    font-size: 24px;
+    font-size: 20px;
 
     &:hover {
         background-color: $blue-hv;

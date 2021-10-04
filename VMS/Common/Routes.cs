@@ -10,6 +10,8 @@
         public const string Map = "/ban-do";
         public const string OrganizerSearch = "/don-vi-to-chuc";
 
+        #endregion Main
+
         #region Org + User profile
 
         public const string UserProfile = "/ho-so-ca-nhan";
@@ -21,8 +23,6 @@
         public const string Rating = "/quan-ly-tinh-nguyen-vien/danh-gia";
 
         #endregion Org + User profile
-
-        #endregion Main
 
         #region Activity
 

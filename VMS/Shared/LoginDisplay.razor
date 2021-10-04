@@ -1,4 +1,10 @@
-﻿@inject NavigationManager NavigationManager
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Http;
+@using VMS.Domain.Models
+
+@inject NavigationManager NavigationManager
+@inject UserManager<User> _userManager;
+@inject IHttpContextAccessor _httpContext;
 
 <AuthorizeView>
     <Authorized>
@@ -16,7 +22,7 @@
                         @if (context.User.IsInRole(Role.User.ToString()))
                         {
                             <li class="user-info">
-                                <a href="@Routes.User" class="d-flex px-3 pt-4 text-decoration-none align-items-center">
+                                <a href="@profileUrl" class="d-flex px-3 pt-4 text-decoration-none align-items-center">
                                     <img src="./img/HamburgerMenu/AvaUser.png" class="user-img" />
                                     <div class="d-flex flex-column text-start ps-3">
                                         <h3 class="py-1 mb-0">Công nghệ thông tin kinh doanh</h3>
@@ -45,7 +51,7 @@
                         else
                         {
                             <li class="user-info">
-                                <a href="@Routes.Organizations" class="d-flex px-3 pt-4 text-decoration-none align-items-center">
+                                <a href="@profileUrl" class="d-flex px-3 pt-4 text-decoration-none align-items-center">
                                     <img src="./img/HamburgerMenu/AvaUser.png" class="user-img" />
                                     <div class="d-flex flex-column text-start ps-3">
                                         <h3 class="py-1 mb-0">Công nghệ thông tin kinh doanh</h3>
@@ -55,7 +61,7 @@
                             </li>
                             <hr class="mx-3 my-4" />
                             <li class="edit pt-2 pb-3">
-                                <a href="@Routes.EditProfile" class="d-flex justify-content-center align-items-center text-decoration-none mx-3">
+                                <a href="@Routes.EditOrgProfile" class="d-flex justify-content-center align-items-center text-decoration-none mx-3">
                                     <h4 class="py-2 mb-0">Chỉnh sửa thông tin tổ chức</h4>
                                 </a>
                             </li>
@@ -92,10 +98,22 @@
 
 @code
 {
-    private void OnAvatarClick()
+    string profileUrl;
+
+    [CascadingParameter]
+    public string UserId { get; set; }
+
+    protected override void OnParametersSet()
     {
-        NavigationManager.NavigateTo(Routes.User);
+        base.OnParametersSet();
+
+        profileUrl = (_httpContext.HttpContext.User.IsInRole(Role.Organization.ToString())
+            ? Routes.OrgProfile
+            : Routes.UserProfile) + $"/{UserId}";
     }
 
-
+    private void OnAvatarClick()
+    {
+        NavigationManager.NavigateTo(profileUrl);
+    }
 }

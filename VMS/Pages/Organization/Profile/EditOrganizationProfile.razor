@@ -1,4 +1,4 @@
-﻿@attribute [Route(Routes.EditProfile)]
+﻿@attribute [Route(Routes.EditOrgProfile)]
 @attribute [Authorize(Roles = "Organization")]
 
 <div class="my-editProfile">
@@ -67,7 +67,7 @@
                         <p class="col-4 form-text">Tầm nhìn & sứ mệnh <span class="required-asterick">(*)</span></p>
                         <div class="col-8 position-relative px-0">
                             <div class="col-8 px-0 w-100">
-                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
+                                <InputLimitedTextArea MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
-                            <a href="@Routes.User" class="btn from__btn-cancel text-decoration-none">Hủy</a>
+                            <a href="@Routes.OrgProfile" class="btn from__btn-cancel text-decoration-none">Hủy</a>
                             <button type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn">Hoàn tất</button>
                         </div>
                     </div>

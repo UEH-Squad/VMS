@@ -1,0 +1,304 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    background-color: rgba(196, 196, 196, 0.38);
+}
+
+.min-overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(196, 196, 196, 0.38);
+    display: none;
+    z-index: 3;
+
+    .report-success {
+        position: absolute;
+        height: 100px;
+        width: 30%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+        background-color: $white;
+        border-radius: 10px;
+        font-size: 36px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .min-overlay--icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 25px;
+            height: 25px;
+            background-color: $grey-bg;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            .material-icons {
+                font-size: 22px;
+            }
+        }
+
+        .green-text {
+            color: $green;
+            font-weight: 500;
+            font-size: 20px;
+        }
+
+        .blue-text {
+            color: $blue;
+            font-weight: 500;
+            font-size: 20px;
+        }
+    }
+}
+
+.container {
+    position: absolute;
+    width: 41.67%;
+    height: 80%;
+    left: 50%;
+    top: 57%;
+    transform: translate(-50%, -50%);
+    color: $grey-text;
+    background-color: $white;
+    border-radius: 10px;
+    padding: 0 70px 40px 70px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-icon;
+        border-radius: 20px;
+    }
+
+
+    .icon-close-popup {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        display: flex;
+        background-color: $grey-bg;
+        cursor: pointer;
+
+        .material-icons {
+            margin: auto;
+            font-size: 22px;
+        }
+    }
+
+    .title {
+        display: flex;
+        font-weight: 500;
+    }
+
+    .check {
+        color: red;
+        margin-left: 5px;
+    }
+}
+/*----title Báo cáo hoạt động----*/
+.title-header {
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    letter-spacing: 2px;
+
+    .title-header__report {
+        color: $green;
+        margin-right: 14px;
+    }
+
+    .title-header__activity {
+        color: $blue;
+    }
+}
+/*----end title Báo cáo hoạt động----*/
+
+/*-----reporting reason------*/
+.title-reason {
+    margin-top: 8%;
+
+    .title-discript__text {
+        font-size: 16px;
+    }
+
+    .title-discript__check {
+        font-size: 16px;
+    }
+}
+
+.title-discript {
+    margin-top: 6%;
+
+    .title-discript__text {
+        font-size: 16px;
+    }
+
+    .title-discript__check {
+        font-size: 16px;
+    }
+}
+
+.title-attach {
+    margin-top: 6%;
+
+    .title-attach__text {
+        font-size: 16px;
+    }
+
+    .title-attach__check {
+        font-size: 16px;
+    }
+}
+
+.dropdown .my-btn {
+    width: 100%;
+    border: 1px solid $grey-text;
+    height: 36px;
+
+    .my-icon-dropdown {
+        float: right;
+        font-size: 26px;
+    }
+}
+
+.dropdown-menu {
+    width: 100%;
+    box-shadow: 5px 5px 10px 10px #dee2e687;
+    font-size: 14px;
+    border-radius: 10px;
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+        padding-left: 5%;
+
+        ::deep .dropdown-item--checkbox {
+            margin-right: 10px;
+        }
+
+        label {
+            width: 100%;
+        }
+    }
+}
+
+.dropdown-toggle::after {
+    margin: 15px;
+    float: right;
+    font-size: 35px;
+}
+/*-----end reporting reason------*/
+
+/*-----report description-----*/
+::deep .form-control {
+    border: 1px solid;
+    font-size: 16px;
+    height: 150px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-icon;
+        border-radius: 20px;
+        border: 2px solid white;
+    }
+}
+/*-----end report description-----*/
+
+/*---attached proof-----*/
+.add-file {
+    border-radius: 4px;
+    border: 1px solid $grey-text;
+    padding: 9px 0;
+    display: flex;
+
+    .add-file__block {
+        display: flex;
+        margin: auto;
+
+
+        .my-icon-upload {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: $grey-text;
+        }
+
+        .block-icon-text {
+            display: flex;
+
+            .file__text {
+                font-size: 16px;
+                font-weight: 300px;
+            }
+        }
+
+        ::deep .inputfile {
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+            display: none;
+        }
+
+        .inputfile + label {
+            color: #333;
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+}
+/*----end attached proof----*/
+
+
+/*button report*/
+.btn-accept {
+    display: flex;
+    margin-top: 10%;
+
+    .btn {
+        margin: auto;
+        background-color: $green;
+        color: $white;
+        font-size: 16px;
+        width: 46%;
+        height: 54px;
+        font-weight: 600;
+        border-radius: 5px;
+    }
+
+    .btn:hover {
+        background-color: $green-bold;
+    }
+}
+/*end button report*/
+

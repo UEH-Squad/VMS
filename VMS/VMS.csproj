@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\lib\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Resources\package-lock.json" />
     <Content Remove="Resources\package.json" />
   </ItemGroup>
@@ -49,8 +56,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Admin\" />
+    <Folder Include="wwwroot\img\activities\" />
     <Folder Include="wwwroot\img\OrganizationProfile\" />
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>

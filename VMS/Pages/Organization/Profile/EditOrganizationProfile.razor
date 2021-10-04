@@ -1,90 +1,90 @@
-﻿@attribute [Route(Routes.EditProfile)]
-@using System.ComponentModel.DataAnnotations;
-@using VMS.Application.ViewModels;
-@inject IJSRuntime JSRuntinme;
+﻿@attribute [Route(Routes.EditOrgProfile)]
+@attribute [Authorize(Roles = "Organization")]
 
 <div class="my-editProfile">
     <div class="container">
         <div class="row">
             <div class="col-10 mx-auto">
+                @if (isErrorMessageShown)
+                {
+                    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
+                }
                 <h1 class="editProfile__title mt-4 mb-3">Chỉnh sửa <span>thông tin tổ chức</span></h1>
                 <div class="editProfile__logo text-center my-5">
-                    <img src="img/RelatedActivities/2nd-activity.png" alt="">
+                    @if (!string.IsNullOrEmpty(org.Avatar))
+                    {
+                        <img src="@org.Avatar" alt="">
+                    }
                 </div>
-                <EditForm Model="@organization" Context="CurrentEditContext" class="editProfile__form">
-                    <div class="row form-item">
-                        <p class="col-4 form-text">Tên tổ chức</p>
-                        <div class="col-8 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.FullName)</div>
-                            <InputText @bind-Value="@organization.FullName" class="form-input form-control" />
-                        </div>
+                <EditForm Model="org" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="editProfile__form">
+                    <DataAnnotationsValidator />
 
+                    <div class="row form-item">
+                        <p class="col-4 form-text">Tên tổ chức <span class="required-asterick">(*)</span></p>
+                        <div class="col-8 px-0">
+                            <InputText @bind-Value="@org.FullName" class="form-input form-control" />
+                        </div>
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Gmail</p>
+                        <p class="col-4 form-text">Gmail <span class="required-asterick">(*)</span></p>
                         <div class="col-8 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Email)</div>
-                            <InputText @bind-Value="@organization.Email" class="form-input form-control" />
+                            <InputText @bind-Value="@org.Email" class="form-input form-control" />
                         </div>
-
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Điện thoại</p>
+                        <p class="col-4 form-text">Điện thoại <span class="required-asterick">(*)</span></p>
                         <div class="col-8 px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Phone)</div>
-                            <InputText @bind-Value="@organization.Phone" class="form-input form-control" />
+                            <InputText @bind-Value="@org.PhoneNumber" class="form-input form-control" />
                         </div>
-
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Lĩnh vực</p>
+                        <p class="col-4 form-text">Lĩnh vực <span class="required-asterick">(*)</span></p>
                         <div class="col-8 form-field ">
                             <div class="d-flex">
-                                <div class="@(areas.Count>3 ?"owl-carousel owl-theme editProfile__carousel" :"d-flex editProfile__NoCarousel") ">
-                                    @foreach (var item in areas)
+                                @if (choosenAreas.Count < 5)
+                                {
+                                    width = choosenAreas.Count * 20;
+                                    classWidth = "w-" + width;
+                                }
+
+                                <div class="@(choosenAreas.Count>4 ?"owl-carousel owl-theme editProfile__carousel w-80" :"d-flex editProfile__NoCarousel ") @classWidth ">
+                                    @foreach (var item in choosenAreas)
                                     {
-                                        <div class="form-field-item item @(areas.Count>3 ?"" :"item-NoCaroesel ")">
+                                        <div class="form-field-item item @(choosenAreas.Count>4 ?"" :"item-NoCaroesel mx-auto")">
                                             <i class="material-icons">@item.Icon</i>
                                             <span>@item.Name</span>
                                         </div>
                                     }
                                 </div>
 
-                                <div class="form-field-item ms-auto item-add">
+                                <div class="form-field-item  item-add ">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Tầm nhìn & sứ mệnh</p>
+                        <p class="col-4 form-text">Tầm nhìn & sứ mệnh <span class="required-asterick">(*)</span></p>
                         <div class="col-8 position-relative px-0">
-                            <div class="d-none">@CurrentEditContext.FieldCssClass(() => organization.Content)</div>
                             <div class="col-8 px-0 w-100">
-                                <InputTextareaOnInput MaxLength="@maxWord" @bind-Value="organization.Content" class="form-input mx-0 form-control" />
+                                <InputLimitedTextArea MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
-
                         </div>
                     </div>
                     <div class="row form-item mb-0">
-                        <p class="col-4 form-text">Thay đổi ảnh</p>
+                        <p class="col-4 form-text">Thay đổi ảnh bìa <span class="required-asterick">(*)</span></p>
                         <div class="col-8 px-0 ">
-                            <UploadImg InputFileChanged="FileChanged" ShowPreview="true" />
+                            <UploadImg InputFileChanged="HandleFileChanged"
+                                       ImageDiscarded="HandleImageDiscarded"
+                                       PreviewImgSrc="@org.Banner"
+                                       ShowPreview="true" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
-                            <a href="@Routes.User" class="btn from__btn-cancel text-decoration-none">Hủy</a>
-                            @if (CurrentEditContext.IsModified() || file != null)
-                            {
-                                <button @onclick="(() => ShowEditModal())" type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn ">Hoàn tất</button>
-                            }
-                            else
-                            {
-                                <div class="btn from__btn-submit ms-5 d-inline-block cursor">Hoàn tất</div>
-                            }
+                            <a href="@Routes.OrgProfile" class="btn from__btn-cancel text-decoration-none">Hủy</a>
+                            <button type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -93,87 +93,8 @@
     </div>
 </div>
 
+<Spinner IsLoading="isLoading" />
+
 @code {
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-
-    public class Organization
-    {
-        [Required(ErrorMessage = "Tên tổ chức không được để trống")]
-        [MinLength(2, ErrorMessage = "Tên tổ chức tối thiểu 2 kí tự")]
-        [MaxLength(50, ErrorMessage = "Tên tổ chức tối đa 50 kí tự")]
-        public string FullName { get; set; }
-
-        [Required(ErrorMessage = "Email không được để trống")]
-        public string Email { get; set; }
-
-        [Required(ErrorMessage = "Số điện thoại không được để trống")]
-        [MinLength(10, ErrorMessage = "Số điện thoại tối thiểu 10 số")]
-        [MaxLength(50, ErrorMessage = "Số điện thoại tối đa 12 số")]
-        public string Phone { get; set; }
-
-        [Required(ErrorMessage = "Tầm nhìn và sứ mệnh không được để trống")]
-        public string Content { get; set; }
-    }
-
-    private Organization organization = new Organization()
-    {
-        FullName = "Công nghệ thông tin kinh doanh",
-        Email = "youth.bit@gmail.com",
-        Phone = "0968790812",
-        Content = "This year in Tokyo, we add to a history with the Olympics that dates back to 1896 when seven members of the Harvard community brought home eight gold medals."
-    };
-
-    private IBrowserFile file;
-
-    private int maxWord = 300;
-
-    private int CountWord()
-    {
-        int count = organization.Content.Length;
-        return count;
-    }
-
-    private void FileChanged(InputFileChangeEventArgs file)
-    {
-        this.file = file.File;
-
-    }
-
-    private List<AreaViewModel> areas = new List<AreaViewModel>();
-    private async Task ShowAreasModal()
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        var areasParameter = new ModalParameters();
-        areasParameter.Add("choosenAreasList", areas);
-        var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
-        await areasModal.Result;
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (areas.Count > 3)
-        {
-            await JSRuntinme.InvokeVoidAsync("vms.EditProfileCarousel");
-        }
-    }
-
-    private void ShowEditModal()
-    {
-
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show<EditConfirm>("", options);
-    }
 
 }

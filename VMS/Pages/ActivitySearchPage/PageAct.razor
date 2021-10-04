@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="act col-8 ps-0" id="act">
-                <h3>Có <span>@(pagedResult is null ? "0" : pagedResult.RowCount) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+                <h3>Có <span>@(pagedResult is null ? "0" : pagedResult.TotalItems) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
                 <div class="px-2">
                     <div class="act__page-1">
-                        @if (pagedResult is not null && pagedResult.Results.Count != 0)
+                        @if (pagedResult is not null && pagedResult.TotalItems != 0)
                         {
-                            @foreach (var item in pagedResult.Results)
+                            @foreach (var item in pagedResult.Items)
                             {
                                 <div class="act__item row">
                                     <div class="col-4 h-100 d-flex align-items-center p-0 ps-2">
@@ -16,9 +16,11 @@
                                     <div class="col-8 act__content d-flex flex-column justify-content-between px-2">
                                         <div>
                                             <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-2">@item.Name</a>
-                                            <h5>
-                                                <i class="material-icons">public</i> @item.Organizer?.FullName
-                                            </h5>
+                                            <a href="@Routes.OrgProfile/@item.OrgId">
+                                                <h5 class="org-name">
+                                                    <i class="material-icons">public</i> @item.Organizer?.FullName
+                                                </h5>
+                                            </a>
                                             <p class="lmtext-2 act__content-description">@((MarkupString)item.Description)</p>
                                             <span class="align-self-start">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
                                         </div>
@@ -51,8 +53,8 @@
     </div>
 </section>
 
-<Pager CurrentPage="@pagedResult.CurrentPage"
-       PageCount="@pagedResult.PageCount"
+<Pager CurrentPage="@pagedResult.PageIndex"
+       PageCount="@pagedResult.TotalPages"
        OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
 
 @code {

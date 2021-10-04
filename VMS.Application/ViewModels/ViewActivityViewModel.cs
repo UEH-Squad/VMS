@@ -13,7 +13,6 @@ namespace VMS.Application.ViewModels
         public string Name { get; set; }
         public int AreaId { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime PostDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Address { get; set; }
         public int MemberQuantity { get; set; }

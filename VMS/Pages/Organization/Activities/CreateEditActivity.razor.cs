@@ -241,7 +241,7 @@ namespace VMS.Pages.Organization.Activities
             var modalParams = new ModalParameters();
             modalParams.Add("Title", cancelTitle);
             modalParams.Add("CTAText", "Chắc chắn");
-            modalParams.Add("CTALink", $"{Routes.User}");
+            modalParams.Add("CTALink", $"{Routes.UserProfile}");
             modalParams.Add("CancelText", "Hủy");
             await ShowModalAsync(typeof(NotificationPopup), modalParams);
         }

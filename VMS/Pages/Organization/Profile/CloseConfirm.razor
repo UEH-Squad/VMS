@@ -1,4 +1,6 @@
-﻿<div class="pop-up">
+﻿@using VMS.Application.Interfaces
+
+<div class="pop-up">
     <div class="center-screen">
         <div class="pop-up-container border-10 @(isCloseConfirm ? "d-block" : "d-none")">
             <div @onclick="CloseModal" class="close-btn">
@@ -8,7 +10,7 @@
             </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="close-text">@(IsOpened ? "mở hoạt động" : "đóng hoạt động")</span> này không?</h3>
+                <h3><span class="close-text">@(IsClosed ? "mở hoạt động" : "đóng hoạt động")</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
                 <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
@@ -20,25 +22,37 @@
 
 @code {
     bool isCloseConfirm = true;
-    bool isCloseSuccess;
+    bool isCloseSuccess = false;
 
     [Parameter]
-    public bool IsOpened { get; set; }
+    public int ActId { get; set; }
 
     [Parameter]
     public bool IsClosed { get; set; }
 
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
+    [Inject]
+    private IActivityService ActivityService { get; set; }
+
 
     private async Task CloseModal()
     {
-        await Modal.CloseAsync(ModalResult.Ok(IsClosed));
+        await Modal.CloseAsync(ModalResult.Ok(isCloseSuccess));
     }
 
-    async Task CloseSuccess()
+    private async Task CloseSuccess()
     {
-        IsClosed = true;
+        if(IsClosed == true)
+        {
+            await ActivityService.UpdateStatusActAsync(ActId, false, false);
+        }
+        else
+        {
+            await ActivityService.UpdateStatusActAsync(ActId, true, false);
+        }
+        IsClosed = !IsClosed;
+        isCloseSuccess = true;
         await CloseModal();
     }
 }

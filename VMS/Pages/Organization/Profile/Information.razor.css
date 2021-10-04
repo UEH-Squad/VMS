@@ -28,6 +28,7 @@
     color: #B4B4B4;
     cursor: pointer; }
   .my-information .information__logo p {
+    width: 80%;
     font-size: 28px;
     font-weight: 600; }
   .my-information .information__logo span {

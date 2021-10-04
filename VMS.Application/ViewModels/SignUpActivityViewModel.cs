@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using VMS.Common.CustomValidations;
 
 namespace VMS.Application.ViewModels
 {
@@ -9,7 +10,7 @@ namespace VMS.Application.ViewModels
         public string ActivityId { get; set; }
 
         [Required]
-        [MaxLength(11)]
+        [IsValidPhoneNumber]
         public string PhoneNumber { get; set; }
 
         [Required]

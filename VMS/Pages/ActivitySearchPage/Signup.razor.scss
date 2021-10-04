@@ -38,7 +38,7 @@
     }
 
     .signUp__form {
-        padding: 50px 50px 20px;
+        padding: 50px;
 
         h1 {
             text-align: center;
@@ -88,7 +88,7 @@
         }
 
         ::deep input:disabled {
-            background-color: #d8d8d8;
+            background-color: rgba($color: #C4C4C4, $alpha: 0.5);
         }
 
         ::deep .input-radio {

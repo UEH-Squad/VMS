@@ -15,7 +15,7 @@
                         <img src="@data.Banner" alt="photo">
                     </div>
                     <div class="act__container__card__desc">
-                        <p class="limited-text">@data.Title</p>
+                        <p class="limited-text m-0">@data.Title</p>
                     </div>
                     <div class="act__container__card__icon">
                         <a class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))" @onclick:preventDefault @onclick:stopPropagation>

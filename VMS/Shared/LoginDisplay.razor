@@ -1,4 +1,10 @@
-﻿@inject NavigationManager NavigationManager
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Http;
+@using VMS.Domain.Models
+
+@inject NavigationManager NavigationManager
+@inject UserManager<User> _userManager;
+@inject IHttpContextAccessor _httpContext;
 
 <AuthorizeView>
     <Authorized>
@@ -94,8 +100,10 @@
 {
     private void OnAvatarClick()
     {
-        NavigationManager.NavigateTo(Routes.User);
+        string redirectUrl = _httpContext.HttpContext.User.IsInRole(Role.Organization.ToString())
+            ? Routes.Organizations
+            : Routes.User;
+
+        NavigationManager.NavigateTo(redirectUrl);
     }
-
-
 }

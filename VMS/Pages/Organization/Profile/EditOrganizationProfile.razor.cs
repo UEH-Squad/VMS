@@ -33,6 +33,8 @@ namespace VMS.Pages.Organization.Profile
         [Inject]
         private ILogger<EditOrganizationProfile> Logger { get; set; }
 
+        private int width;
+        private string classWidth = "";
         private bool isLoading;
         private string OrgId;
         private int count;
@@ -40,8 +42,6 @@ namespace VMS.Pages.Organization.Profile
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private CreateUserProfileViewModel org = new();
-        private bool isEditConfirm = false;
-        private bool isEditSuccess = false;
 
         protected override async Task OnInitializedAsync()
         {
@@ -92,20 +92,6 @@ namespace VMS.Pages.Organization.Profile
             }
         }
 
-        private void EditConfirm()
-        {
-            isEditConfirm = !isEditConfirm;
-        }
-
-        private void EditSuccess()
-        {
-            isEditSuccess = !isEditSuccess;
-            if (isEditConfirm == true)
-            {
-                isEditConfirm = false;
-            }
-        }
-
         private async Task HandleSubmit()
         {
             if (uploadFile is null && org.Banner is null)
@@ -114,31 +100,28 @@ namespace VMS.Pages.Organization.Profile
                 return;
             }
 
-            isEditConfirm = !isEditConfirm;
-            if (isEditSuccess)
+            Logger.LogInformation("HandleValidSubmit called");
+            isErrorMessageShown = false;
+            isLoading = true;
+
+            try
             {
-                Logger.LogInformation("HandleValidSubmit called");
-                isErrorMessageShown = false;
-                isLoading = true;
-               
-                try
+                if (uploadFile is not null)
                 {
-                    if (uploadFile is not null)
-                    {
-                        string oldImageName = org.Banner;
-                        org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId);
-                        UploadService.RemoveImage(oldImageName);
-                    }
-                    await UserService.UpdateUserProfile(org, OrgId);
-                    isLoading = false;
+                    string oldImageName = org.Banner;
+                    org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId);
+                    UploadService.RemoveImage(oldImageName);
                 }
-                catch (Exception ex)
-                {
-                    isLoading = false;
-                    Logger.LogError("Error occurs when trying to edit profile", ex.Message);
-                    await JSRuntime.InvokeVoidAsync("alert", ex.Message);
-                }
+                await UserService.UpdateUserProfile(org, OrgId);
+                isLoading = false;
             }
+            catch (Exception ex)
+            {
+                isLoading = false;
+                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+            }
+
         }
 
         private async Task HandleInvalidSubmit()

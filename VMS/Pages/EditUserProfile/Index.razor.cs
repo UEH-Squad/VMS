@@ -38,6 +38,8 @@ namespace VMS.Pages.EditUserProfile
         [Inject]
         private IFacultyService FacultyService { get; set; }
 
+        private int width;
+        private string classWidth = "";
         private bool isLoading;
         private string UserId;
         private int count;

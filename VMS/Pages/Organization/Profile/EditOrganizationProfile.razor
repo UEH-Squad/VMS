@@ -41,16 +41,16 @@
                         <p class="col-4 form-text">Lĩnh vực <span class="required-asterick">(*)</span></p>
                         <div class="col-8 form-field ">
                             <div class="d-flex">
-                                @if (areas.Count <5)
+                                @if (choosenAreas.Count < 5)
                                 {
-                                    width = areas.Count*20;
+                                    width = choosenAreas.Count * 20;
                                     classWidth = "w-" + width;
                                 }
-                               
-                                <div class="@(areas.Count>4 ?"owl-carousel owl-theme editProfile__carousel w-80" :"d-flex editProfile__NoCarousel ") @classWidth ">
-                                    @foreach (var item in areas)
+
+                                <div class="@(choosenAreas.Count>4 ?"owl-carousel owl-theme editProfile__carousel w-80" :"d-flex editProfile__NoCarousel ") @classWidth ">
+                                    @foreach (var item in choosenAreas)
                                     {
-                                        <div class="form-field-item item @(areas.Count>4 ?"" :"item-NoCaroesel mx-auto")">
+                                        <div class="form-field-item item @(choosenAreas.Count>4 ?"" :"item-NoCaroesel mx-auto")">
                                             <i class="material-icons">@item.Icon</i>
                                             <span>@item.Name</span>
                                         </div>
@@ -84,14 +84,7 @@
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <a href="@Routes.User" class="btn from__btn-cancel text-decoration-none">Hủy</a>
-                            @if (CurrentEditContext.IsModified() || file != null)
-                            {
-                                <button @onclick="(() => ShowEditModal())" type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn ">Hoàn tất</button>
-                            }
-                            else
-                            {
-                                <div class="btn from__btn-submit ms-5 d-inline-block cursor">Hoàn tất</div>
-                            }
+                            <button type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -99,6 +92,8 @@
         </div>
     </div>
 </div>
+
+<Spinner IsLoading="isLoading" />
 
 @code {
 

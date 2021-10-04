@@ -11,6 +11,13 @@
   .my-editProfile ::deep .form-control:focus {
     border: 1px solid #18A0FB;
     box-shadow: none; }
+  .my-editProfile .error-message {
+    color: #E10B0B;
+    background-color: #E8F5FF;
+    font-weight: 300;
+    font-size: 18px; }
+  .my-editProfile .required-asterick {
+    color: #E10B0B; }
   .my-editProfile .editProfile__title {
     font-size: 36px;
     font-weight: 600;

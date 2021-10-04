@@ -156,18 +156,6 @@
     "inputFile": "Pages/Organization/Profile/Mission.razor.scss"
   },
   {
-    "outputFile": "Pages/Organization/SearchOrganizer/SearchAndFilter.razor.css",
-    "inputFile": "Pages/Organization/SearchOrganizer/SearchAndFilter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/SearchOrganizer/SearchResult.razor.css",
-    "inputFile": "Pages/Organization/SearchOrganizer/SearchResult.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/SearchOrganizer/Index.razor.css",
-    "inputFile": "Pages/Organization/SearchOrganizer/Index.razor.scss"
-  },
-  {
     "outputFile": "Pages/Organization/Profile/CloseConfirm.razor.css",
     "inputFile": "Pages/Organization/Profile/CloseConfirm.razor.scss"
   },
@@ -270,5 +258,17 @@
   {
     "outputFile": "Pages/Volunteer/EditUserProfile/Index.razor.css",
     "inputFile": "Pages/Volunteer/EditUserProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchOrganizer/Index.razor.css",
+    "inputFile": "Pages/SearchOrganizer/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchOrganizer/SearchAndFilter.razor.css",
+    "inputFile": "Pages/SearchOrganizer/SearchAndFilter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchOrganizer/SearchResult.razor.css",
+    "inputFile": "Pages/SearchOrganizer/SearchResult.razor.scss"
   }
 ]

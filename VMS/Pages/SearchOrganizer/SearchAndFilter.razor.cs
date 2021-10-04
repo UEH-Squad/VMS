@@ -7,7 +7,7 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Domain.Models;
 
-namespace VMS.Pages.Organization.SearchOrganizer
+namespace VMS.Pages.SearchOrganizer
 {
     public partial class SearchAndFilter
     {

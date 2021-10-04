@@ -55,16 +55,11 @@
     background: rgba(196, 196, 196, 0.5); }
     .pop-up .close-btn-s .material-icons {
       font-size: 14px;
-      color: #717171; }
+      color: #717171;
+      line-height: 0; }
   .pop-up .pop-up-content {
     padding: 13px 55px; }
-    .pop-up .pop-up-content .delete-act {
-      font-size: 18px;
-      line-height: 36px;
-      font-weight: 500;
-      margin-bottom: 0;
-      color: #18A0FB; }
-    .pop-up .pop-up-content .close-act {
+    .pop-up .pop-up-content .edit-success {
       font-size: 18px;
       line-height: 36px;
       font-weight: 500;

@@ -25,14 +25,16 @@
     bottom: 15px;
     right: -10px;
     font-size: 36px;
-    color: #B4B4B4; }
+    color: #B4B4B4;
+    cursor: pointer; }
   .my-information .information__logo p {
+    width: 80%;
     font-size: 28px;
     font-weight: 600; }
   .my-information .information__logo span {
     display: block;
     width: 80%;
-    margin: 20px 0 15px 0;
+    margin: 15px 0 20px 0;
     text-align: center;
     color: #18A0FB;
     font-size: 16px;
@@ -44,10 +46,11 @@
     background: rgba(100, 215, 47, 0.8);
     color: #FFFFFF;
     text-decoration: none;
-    padding: 20px;
+    padding: 9px;
     border-radius: 50px;
     text-align: center;
-    transition: all 0.2s linear; }
+    transition: all 0.2s linear;
+    cursor: pointer; }
     .my-information .information__logo .information__logo-button:hover {
       background: #64d72f; }
     .my-information .information__logo .information__logo-button i {
@@ -92,7 +95,7 @@
     text-decoration: none; }
   .my-information .information__fields h3 {
     text-align: center;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
     margin-bottom: 30px; }
     .my-information .information__fields h3 span {
@@ -128,7 +131,7 @@
         font-weight: 500;
         display: inline-block;
         transition: all 0.3s linear;
-        font-size: 20px; }
+        font-size: 18px; }
     .my-information .information__carousel ::deep .owl-nav {
       display: block; }
       .my-information .information__carousel ::deep .owl-nav .owl-prev {
@@ -149,19 +152,19 @@
       display: none; }
   .my-information .information__act h3 {
     text-align: center;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    margin-top: -36px; }
     .my-information .information__act h3 span {
-      font-size: 30px;
       color: #18A0FB; }
   .my-information .information__act .information__act-number {
-    width: 145px;
-    height: 145px;
-    line-height: 145px;
+    width: 115px;
+    height: 115px;
+    line-height: 115px;
     border: 1px solid #707070;
     border-radius: 50%;
     text-align: center;
     color: #18A0FB;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 700; }

@@ -112,6 +112,8 @@
         color: #0B588C; }
       .my-navbar .my-collapse .nav-link:hover {
         color: #0B588C; }
+      .my-navbar .my-collapse .nav-link.active::before {
+        display: block; }
     .my-navbar .my-collapse__list {
       width: auto;
       /*@include on('xl') {

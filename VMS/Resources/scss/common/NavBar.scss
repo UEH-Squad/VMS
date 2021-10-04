@@ -146,6 +146,9 @@
             &:hover{
                 color: $blue-bold;
             }
+            &.active::before{
+               display: block;
+            }
         }
 
         &__list {

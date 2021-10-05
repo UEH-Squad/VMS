@@ -9,7 +9,7 @@ namespace VMS.Application.ViewModels
 
         public string ActivityId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Số điện thoại không được để trống!")]
         [IsValidPhoneNumber]
         public string PhoneNumber { get; set; }
 

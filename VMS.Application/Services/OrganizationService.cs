@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Common;
+using VMS.Common.Enums;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -29,14 +29,20 @@ namespace VMS.Application.Services
 
         private User CheckRoleOrg(string orgId)
         {
-            var user = Task.Run(() => _userManager.FindByIdAsync(orgId)).Result;
+            User user = Task.Run(() => _userManager.FindByIdAsync(orgId)).Result;
+            if (user is null)
+            {
+                return null;
+            }
+
             bool orgRole = Task.Run(() => _userManager.IsInRoleAsync(user, Role.Organization.ToString())).Result;
-            return (orgRole switch
+            return orgRole switch
             {
                 true => user,
                 _ => null
-            });
+            };
         }
+
         public UserViewModel GetOrgFull(string id)
         {
             User org;

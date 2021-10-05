@@ -44,7 +44,7 @@
                         <p class="col-3 form-text">Khoa <span>(*)</span></p>
                         <div class="col-9 px-0">
                             <div class="dropdown">
-                      
+
                                 <span class="material-icons-outlined"> arrow_drop_down </span>
                                 <InputSelect class="form-control my-form-department" @bind-Value="@user.FacultyId">
                                     <option value="" disabled selected hidden>Lựa chọn Khoa</option>
@@ -165,8 +165,8 @@
 
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
-                            <a href="@Routes.UserProfile" class="btn from__btn-cancel text-decoration-none">Hủy</a>
-                            <div class="btn from__btn-submit ms-5 d-inline-block cursor">Hoàn tất</div>
+                            <a href="@($"{Routes.OrgProfile}/{user.Id}")" class="btn from__btn-cancel text-decoration-none">Hủy</a>
+                            <button type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -178,5 +178,5 @@
 <Spinner IsLoading="isLoading" />
 
 @code {
-   
+    RenderFragment succeededCreateTitle =@<h3><span>Chỉnh sửa thông tin thành công!</span></h3>;
 }

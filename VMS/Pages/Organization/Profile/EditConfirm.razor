@@ -1,6 +1,6 @@
 ﻿<div class="pop-up">
     <div class="center-screen ">
-        <div class="pop-up-container border-10  @(isConfirmEdit ? "d-block" : "d-none")">
+        <div class="pop-up-container border-10">
             <div @onclick="CloseModal" class="close-btn">
                 <span class="material-icons">
                     close
@@ -15,34 +15,20 @@
                 <button type="submit" @onclick="EditSuccess" class="btn accept px-0">Xác nhận</button>
             </div>
         </div>
-
-        <div class="pop-up-container border-10 @(isConfirmEdit ? "d-none" : "d-block")">
-            <a href="@Routes.UserProfile" class="text-decoration-none close-btn-s">
-                <span class="material-icons">
-                    close
-                </span>
-            </a>
-            <div class="pop-up-content">
-                <h3 class="edit-success">Chỉnh sửa thông tin thành công!</h3>
-            </div>
-        </div>
     </div>
 </div>
 
 @code {
-    bool isConfirmEdit = true;
-    bool isEditSuccess;
-
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
 
     private async Task CloseModal()
     {
-        await Modal.CloseAsync();
+        await Modal.CancelAsync();
     }
 
-    void EditSuccess()
+    async Task EditSuccess()
     {
-        isConfirmEdit = !isConfirmEdit;
+        await Modal.CloseAsync(ModalResult.Ok<bool>(true));
     }
 }

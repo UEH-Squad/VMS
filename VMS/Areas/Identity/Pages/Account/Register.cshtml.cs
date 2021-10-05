@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using VMS.Common;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Areas.Identity.Pages.Account

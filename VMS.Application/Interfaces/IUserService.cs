@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using VMS.Application.ViewModels;
 
 namespace VMS.Application.Interfaces
 {
     public interface IUserService
     {
-        Task<CreateUserProfileViewModel> GetCreateUserProfileViewModelAsync(string userId);
+        Task<CreateUserProfileViewModel> GetUserProfileViewModelAsync(string userId);
+
+        Task<CreateOrgProfileViewModel> GetOrgProfileViewModelAsync(string userId);
+
         Task UpdateUserProfile(CreateUserProfileViewModel userProfileViewModel, string userId);
+
+        Task UpdateOrgProfile(CreateOrgProfileViewModel orgProfileViewModel, string userId);
     }
 }

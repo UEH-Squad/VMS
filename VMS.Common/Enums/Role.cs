@@ -1,4 +1,4 @@
-﻿namespace VMS.Common
+﻿namespace VMS.Common.Enums
 {
     public enum Role
     {

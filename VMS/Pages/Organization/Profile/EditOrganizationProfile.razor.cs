@@ -41,12 +41,12 @@ namespace VMS.Pages.Organization.Profile
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
-        private CreateUserProfileViewModel org = new();
+        private CreateOrgProfileViewModel org = new();
 
         protected override async Task OnInitializedAsync()
         {
             OrgId = IdentityService.GetCurrentUserId();
-            org = await UserService.GetCreateUserProfileViewModelAsync(OrgId);
+            org = await UserService.GetOrgProfileViewModelAsync(OrgId);
             choosenAreas = org.Areas;
         }
 
@@ -100,28 +100,45 @@ namespace VMS.Pages.Organization.Profile
                 return;
             }
 
-            Logger.LogInformation("HandleValidSubmit called");
-            isErrorMessageShown = false;
-            isLoading = true;
-
-            try
+            ModalOptions options = new()
             {
-                if (uploadFile is not null)
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+
+            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", options);
+            ModalResult result = await editConfirmModal.Result;
+            if (!result.Cancelled)
+            {
+                Logger.LogInformation("HandleValidSubmit called");
+                isErrorMessageShown = false;
+                isLoading = true;
+
+                try
                 {
-                    string oldImageName = org.Banner;
-                    org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId);
-                    UploadService.RemoveImage(oldImageName);
-                }
-                await UserService.UpdateUserProfile(org, OrgId);
-                isLoading = false;
-            }
-            catch (Exception ex)
-            {
-                isLoading = false;
-                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
-                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
-            }
+                    if (uploadFile is not null)
+                    {
+                        string oldImageName = org.Banner;
+                        org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId);
+                        UploadService.RemoveImage(oldImageName);
+                    }
 
+                    await UserService.UpdateOrgProfile(org, OrgId);
+
+                    ModalParameters modalParams = new();
+                    modalParams.Add("Title", succeededCreateTitle);
+                    await Modal.Show<Activities.NotificationPopup>("", modalParams, options).Result;
+
+                    isLoading = false;
+                }
+                catch (Exception ex)
+                {
+                    isLoading = false;
+                    Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                    await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+                }
+            }
         }
 
         private async Task HandleInvalidSubmit()

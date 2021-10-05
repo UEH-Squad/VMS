@@ -51,7 +51,7 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         protected override async Task OnInitializedAsync()
         {
             UserId = IdentityService.GetCurrentUserId();
-            user = await UserService.GetCreateUserProfileViewModelAsync(UserId);
+            user = await UserService.GetUserProfileViewModelAsync(UserId);
             faculties = await FacultyService.GetAllFacultiesAsync();
             choosenAreas = user.Areas;
         }

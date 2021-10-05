@@ -106,7 +106,10 @@
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntinme.InvokeVoidAsync("vms.InformationCarousel");
+        if (firstRender)
+        {
+            await JSRuntinme.InvokeVoidAsync("vms.InformationCarousel");
+        }
     }
-   
+
 }

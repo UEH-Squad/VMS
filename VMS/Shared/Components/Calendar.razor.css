@@ -9,7 +9,8 @@
 
 .current-month {
   color: #18A0FB;
-  font-weight: 600; }
+  font-weight: 600;
+  font-size: 30px; }
   .current-month__text {
     color: #64D72F; }
 

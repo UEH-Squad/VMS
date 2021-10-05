@@ -1,7 +1,7 @@
 ﻿<div class="text-center h4 mb-2 current-month">Lịch <span class="current-month__text">tình nguyện</span></div>
 <div class="calendar">
     <div class="d-flex flex-column align-items-center pb-2 calendar-header">
-        <input type="date" @bind-value="@Value" class="form-control w-50 mb-2" />
+        <input type="date" @bind-value="@Value" class="form-control w-50 mt-5 mb-4" />
         <div class="d-flex align-items-center calendar-button-group m-auto w-100">
             <div class="flex-grow-1 current-month">Tháng <span class="current-month__text">9/2021</span></div>
             <span class="material-icons navigate-icon" @onclick="e => OnChangeMonth(-1)">

@@ -30,17 +30,16 @@ namespace VMS.Application.ViewModels
 
     public class CreateUserProfileViewModel : UserProfileViewModel
     {
-        [RequiredGreaterThanZero]
-        public int? FacultyId { get; set; }
+        [RequiredGreaterThanZero] public int? FacultyId { get; set; }
+        [Required] public string Class { get; set; }
+        public string Course { get; set; }
 
         [RequiredGreaterThanZero]
         public int ProvinceId { get; set; }
-
         public string Province { get; set; }
 
         [RequiredGreaterThanZero]
         public int DistrictId { get; set; }
-
         public string District { get; set; }
 
         public int WardId { get; set; }
@@ -52,8 +51,6 @@ namespace VMS.Application.ViewModels
         public DateTime Birthday { get; set; }
         public string StudentId { get; set; }
         public string Introduction { get; set; }
-        public string Class { get; set; }
-        public string Course { get; set; }
 
         [RequiredHasItems]
         public IList<SkillViewModel> Skills { get; set; } = new List<SkillViewModel>();

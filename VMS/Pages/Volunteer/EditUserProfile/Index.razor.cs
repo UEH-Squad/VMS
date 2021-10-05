@@ -1,7 +1,6 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
@@ -13,6 +12,7 @@ using VMS.Application.Services;
 using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Common.CustomValidations;
+using VMS.Pages.Organization.Profile;
 
 namespace VMS.Pages.Volunteer.EditUserProfile
 {
@@ -127,25 +127,42 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task HandleSubmit()
         {
-            if (!string.IsNullOrWhiteSpace(user.Address))
+            ModalOptions options = new()
             {
-                user.FullAddress = $"{user.Address}, {user.FullAddress}";
-            }
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
 
-            Logger.LogInformation("HandleValidSubmit called");
-            isErrorMessageShown = false;
-            isLoading = true;
+            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", options);
+            ModalResult result = await editConfirmModal.Result;
+            if (!result.Cancelled)
+            {
+                if (!string.IsNullOrWhiteSpace(user.Address))
+                {
+                    user.FullAddress = $"{user.Address}, {user.FullAddress}";
+                }
 
-            try
-            {
-                await UserService.UpdateUserProfile(user, UserId);
-                isLoading = false;
-            }
-            catch (Exception ex)
-            {
-                isLoading = false;
-                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
-                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+                Logger.LogInformation("HandleValidSubmit called");
+                isErrorMessageShown = false;
+                isLoading = true;
+
+                try
+                {
+                    await UserService.UpdateUserProfile(user, UserId);
+
+                    ModalParameters modalParams = new();
+                    modalParams.Add("Title", succeededCreateTitle);
+                    await Modal.Show<Organization.Activities.NotificationPopup>("", modalParams, options).Result;
+
+                    isLoading = false;
+                }
+                catch (Exception ex)
+                {
+                    isLoading = false;
+                    Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                    await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+                }
             }
         }
 
@@ -156,16 +173,5 @@ namespace VMS.Pages.Volunteer.EditUserProfile
             await Interop.ScrollToTop(JSRuntime);
         }
 
-        async Task ShowConfirmPopUp()
-        {
-            var options = new ModalOptions()
-            {
-
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-            Modal.Show<ConfirmNotification>("", options);
-        }
     }
 }

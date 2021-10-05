@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Blazored.Modal.Services;
 using System.Threading.Tasks;
 using Blazored.Modal;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -26,7 +27,7 @@ namespace VMS.Pages.Organization.Profile
             if (e.File.ContentType == "image/jpeg")
             {
                 file = e.File;
-                avatar = await UploadService.SaveImageAsync(file, UserId);//this code will save image to ./img/activities, need to improve later
+                avatar = await UploadService.SaveImageAsync(file, UserId, ImgFolder.Avatar);
             }
             var parameters = new ModalParameters();
             parameters.Add("avatar", avatar);

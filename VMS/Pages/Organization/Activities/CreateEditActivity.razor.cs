@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Organization.Activities
 {
@@ -196,7 +197,7 @@ namespace VMS.Pages.Organization.Activities
                         return;
                     }
 
-                    activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
+                    activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId, ImgFolder.Activities);
                     ActivityId = await ActivityService.AddActivityAsync(activity);
                     title = succeededCreateTitle;
                 }
@@ -205,7 +206,7 @@ namespace VMS.Pages.Organization.Activities
                     if (uploadFile is not null)
                     {
                         string oldImageName = activity.Banner;
-                        activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
+                        activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId, ImgFolder.Activities);
                         UploadService.RemoveImage(oldImageName);
                     }
 

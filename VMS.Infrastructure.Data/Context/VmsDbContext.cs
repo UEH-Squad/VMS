@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using VMS.Common;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Infrastructure.Data.Context

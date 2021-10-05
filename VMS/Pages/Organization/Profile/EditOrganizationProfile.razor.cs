@@ -11,6 +11,7 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.Extensions.Logging;
 using VMS.Common;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -120,7 +121,7 @@ namespace VMS.Pages.Organization.Profile
                     if (uploadFile is not null)
                     {
                         string oldImageName = org.Banner;
-                        org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId);
+                        org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId, ImgFolder.Banner);
                         UploadService.RemoveImage(oldImageName);
                     }
 

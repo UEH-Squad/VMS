@@ -6,6 +6,13 @@
         box-shadow: none;
     }
 
+    .error-message {
+        color: $error;
+        background-color: $blue-background;
+        font-weight: 300;
+        font-size: 18px;
+    }
+
     .editProfile__title {
         margin-top: 50px;
         font-size: 36px;

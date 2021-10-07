@@ -8,6 +8,12 @@
   border: 1px solid #18A0FB;
   box-shadow: none; }
 
+.my-editProfile .error-message {
+  color: #E10B0B;
+  background-color: #E8F5FF;
+  font-weight: 300;
+  font-size: 18px; }
+
 .my-editProfile .editProfile__title {
   margin-top: 50px;
   font-size: 36px;

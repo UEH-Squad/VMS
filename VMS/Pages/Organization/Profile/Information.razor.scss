@@ -36,6 +36,10 @@
             font-size: 36px;
             color: $grey-icon;
             cursor: pointer;
+
+            &:hover {
+                color: $grey-close-btn
+            }
         }
 
         p {
@@ -155,7 +159,7 @@
         background-color: rgba(112, 112, 112, .5);
     }
 
-    .information__carousel {
+    .information__carousel, .information__NoCarousel {
         position: relative;
         padding-right: 30px;
         z-index: 0;

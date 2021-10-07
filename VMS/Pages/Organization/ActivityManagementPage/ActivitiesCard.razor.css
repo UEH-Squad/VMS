@@ -23,7 +23,7 @@
     opacity: 0; } }
 
 .card-btn {
-  padding: 5px 15px;
+  padding: 6px 15px;
   background-color: #64D72F;
   color: white;
   border-radius: 5px;
@@ -34,6 +34,8 @@
   font-style: normal;
   font-weight: 600;
   font-size: 16px; }
+  .card-btn:hover {
+    background-color: #306C14; }
 
 .card-list {
   position: absolute;
@@ -72,7 +74,7 @@
   .org-card__info__title {
     font-family: Montserrat;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 20px;
     margin-bottom: 5px; }
     .org-card__info__title a {
@@ -84,13 +86,15 @@
     display: inline-block;
     color: yellow;
     margin-bottom: 5px; }
-  .org-card__info__desc {
+  ::deep .org-card__info__desc {
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     color: #515151;
     margin-bottom: 10px; }
+    ::deep .org-card__info__desc p {
+      margin-bottom: 0; }
   .org-card__info__date {
     font-family: Montserrat;
     font-style: normal;
@@ -144,13 +148,13 @@
 .org-card__btn-list {
   position: absolute;
   bottom: 0;
-  left: 55%;
+  left: 59%;
   transform: translate(-5%, -50%); }
 
 .org-card__cbb-rate {
   position: absolute;
   bottom: 0;
-  left: 75%;
+  left: 78%;
   transform: translate(0, -50%);
   min-width: 136px;
   background-color: #18A0FB; }

@@ -62,39 +62,27 @@ const setPosition = position => {
 }
 
 const increaseNumber = () => {
-    //const handleCounterUp = el => {
-    //    new Waypoint({
-    //        element: document.querySelector('.playCounter'),
-    //        handler: function () {              
-    //            counterUp(el);
-    //            this.destroy();
-    //        },
-    //        offset: 'bottom-in-view',
-    //    });
-    //};
-
     $(document).ready(() => {
-        const numbers = document.querySelectorAll('.counter');
-        const nub1 = numbers[0].innerHTML;
-        const nub2 = numbers[1].innerHTML;
-        const nub3 = numbers[2].innerHTML;
-        const nub4 = numbers[3].innerHTML;
-        for (let i = 0; i < numbers.length; i++) {
-            numbers[i].innerHTML = 0;
+        const els = document.querySelectorAll('.counter');
+        const numbers = [];
+        for (let i = 0; i < els.length; i++) {
+            numbers.push(els[i].innerHTML);
+            els[i].innerHTML = 0;
         }
         const observer = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting === true) {
-                numbers[0].innerHTML = nub1;
-                numbers[1].innerHTML = nub2;
-                numbers[2].innerHTML = nub3;
-                numbers[3].innerHTML = nub4;
-                const els = document.querySelectorAll('.counter');
+                for (let i = 0; i < els.length; i++) {
+                    els[i].innerHTML = numbers[i];
+                }
                 [].forEach.call(els, counterUp);
             }
         }, { threshold: [1] });
         observer.observe(document.querySelector(".my-quoteBaner"));
-        
+
     });
+
+
+
 }
 
 const rankCarousel = () => {

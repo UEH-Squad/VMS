@@ -90,7 +90,7 @@ input[type="checkbox"]:checked:after {
     transition: all 0.25s;
 }
 .btn:hover{
-    filter: brightness(90%);
+    //filter: brightness(90%);
 }
 .btn:active{
     transform: translateY(3px);

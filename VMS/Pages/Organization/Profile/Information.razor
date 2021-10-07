@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-                <p class="m-0 text-start">@Org?.FullName</p>
+                <p class="m-0">@Org?.FullName</p>
                 <span>Tham gia từ năm @Org?.CreatedDate.Year</span>
                 @if (HaveControl)
                 {
@@ -75,12 +75,12 @@
                 <div class="row-2 pt-4 align-items-center">
                     <div class="col-left information__fields">
                         <h3>Lĩnh vực <span>chuyên môn</span></h3>
-                        <div class="owl-carousel owl-theme information__carousel">
+                        <div class=" @(Org.UserAreas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex information__NoCarousel pe-0 ") ">
                             @if (Org != null)
                             {
                                 @foreach (var area in Org.UserAreas)
                                 {
-                                    <div class="item">
+                                    <div class="item mx-auto">
                                         <i class="material-icons">@area.Area.Icon</i>
                                         <span>@area.Area.Name</span>
                                     </div>

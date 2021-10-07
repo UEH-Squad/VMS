@@ -76,9 +76,6 @@ input[type="checkbox"]:checked:after {
   background-color: #64D72F;
   transition: all 0.25s; }
 
-.btn:hover {
-  filter: brightness(90%); }
-
 .btn:active {
   transform: translateY(3px); }
 

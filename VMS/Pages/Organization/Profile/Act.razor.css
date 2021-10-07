@@ -135,6 +135,7 @@
 .img-container .act-img {
   width: 100%;
   max-height: 269px;
+  min-height: 269px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px 10px 0 0; }

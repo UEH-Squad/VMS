@@ -11,7 +11,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(196, 196, 196, 0.38);
-  z-index: 3; }
+  z-index: 120; }
   .my-notification .notification__content {
     position: absolute;
     top: 50%;

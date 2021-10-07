@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using System;
@@ -146,6 +147,9 @@ namespace VMS.Application.Services
 
             object[] id = await _repository.InsertAsync(dbContext, activity);
 
+            // Use Hangfire to auto close activity when activity is started
+            BackgroundJob.Schedule(() => CloseActivityAsync(Convert.ToInt32(id[0])), activity.StartDate - DateTime.Now);
+
             return Convert.ToInt32(id[0]);
         }
 
@@ -234,6 +238,15 @@ namespace VMS.Application.Services
 
             activity.ActivitySkills = MapSkills(activityViewModel, activity);
             activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
+
+            // Check if any update on Start Date (to extend Register time..v.v)
+            if (activity.StartDate > DateTime.Now)
+            {
+                activity.IsClosed = false;
+            }
+
+            // Use Hangfire to auto close activity when activity is started
+            BackgroundJob.Schedule(() => CloseActivityAsync(activityId), activity.StartDate - DateTime.Now);
 
             await _repository.UpdateAsync(dbContext, activity);
         }
@@ -471,36 +484,6 @@ namespace VMS.Application.Services
                     / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
         }
 
-        public async Task UpdateStatusActAsync(int activityId, bool close, bool delete)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    a => a.Id == activityId
-                }
-            };
-            Activity activity = await _repository.GetAsync(dbContext, specification);
-            activity.UpdatedDate = DateTime.Now;
-            if(close == true)
-            { 
-                activity.IsClosed = true; 
-            }
-            else 
-            { 
-                activity.IsClosed = false;
-            }
-
-            if (delete == true)
-            {
-                activity.IsDeleted = true;
-            }
-           
-            await _repository.UpdateAsync(dbContext, activity);
-        }
-
         private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate coordinate)
         {
             Point userLocation = _geometryFactory.CreatePoint(coordinate);
@@ -568,7 +551,7 @@ namespace VMS.Application.Services
             return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
         }
 
-        public async Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false)
+        public async Task CloseOrDeleteActivity(int activityId, bool isClose = false, bool isDelete = false)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -600,7 +583,9 @@ namespace VMS.Application.Services
                     a => a.UserId == userId
                 }
             };
+
             Favorite favorite = await _repository.GetAsync(dbContext, specification);
+
             if(favorite ==null)
             {
                 Favorite fav = new();
@@ -612,6 +597,20 @@ namespace VMS.Application.Services
             else
             {
                 await _repository.DeleteAsync(dbContext, favorite);
+            }
+        }
+
+        public async Task CloseActivityAsync(int activityId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, activityId);
+
+            if (DateTime.Now >= activity.StartDate)
+            {
+                activity.IsClosed = true;
+
+                await _repository.UpdateAsync(dbContext, activity);
             }
         }
     }

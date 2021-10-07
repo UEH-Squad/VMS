@@ -1,4 +1,5 @@
 using Blazored.Modal;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +44,10 @@ namespace VMS
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddBlazoredModal();
+
+            // Hangfire
+            GlobalConfiguration.Configuration
+                .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"));
 
             // Custom registrations
             DependencyContainer.RegisterServices(services, Configuration);

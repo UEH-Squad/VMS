@@ -275,7 +275,7 @@ namespace VMS.Application.Services
             return activityViewModel;
         }
 
-        public async Task<List<UserWithActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false)
+        public async Task<List<ActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false)
         {
             await using DbContext dbContext = _dbContextFactory.CreateDbContext();
             List<Activity> activities;
@@ -283,7 +283,7 @@ namespace VMS.Application.Services
             if (string.IsNullOrEmpty(userId) && location == null)
             {
                 activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
-                return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+                return _mapper.Map<List<ActivityViewModel>>(activities);
             }
 
             if (!string.IsNullOrEmpty(userId) && location == null)
@@ -293,15 +293,15 @@ namespace VMS.Application.Services
                 if (currentUserDistricts.HasValue)
                 {
                     activities = await GetRelatedActivitiesForUsersTurnOffLocationAsync(isFeatured, currentUserDistricts, dbContext);
-                    return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+                    return _mapper.Map<List<ActivityViewModel>>(activities);
                 }
 
                 activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
-                return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+                return _mapper.Map<List<ActivityViewModel>>(activities);
             }
 
             activities = await GetRelatedActivitiesWhenLocationTurnedOnAsync(location, isFeatured, dbContext);
-            return _mapper.Map<List<UserWithActivityViewModel>>(activities);
+            return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
         private async Task<List<Activity>> GetRelatedActivitiesWhenLocationTurnedOnAsync(Coordinate location, bool isFeatured, DbContext dbContext)

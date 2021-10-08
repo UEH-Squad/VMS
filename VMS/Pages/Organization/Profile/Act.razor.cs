@@ -25,6 +25,9 @@ namespace VMS.Pages.Organization.Profile
         [CascadingParameter] public IModalService Modal { get; set; }
         [Parameter] public bool Owner { get; set; }
         [Parameter] public List<ActivityViewModel> Datas { get; set; }
+        [Parameter] public string QueryString { get; set; }
+        [Parameter] public bool IsHomepage { get; set; } = true;
+
         [Inject]
         private IActivityService ActivityService { get; set; }
         [Inject]

@@ -3,58 +3,62 @@
 <div class="container">
     <div class="row act">
         <h1>Hoạt động <span>@Title</span></h1>
-        <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
-            @foreach (var item in Datas)
-            {
-            <div class="@(Datas.Count >4 ? "" : "w-25 mx-2") act-container item position-relative">
-                <div class="img-container position-relative">
-                    <img src="@item?.Banner" alt="" class="act-img">
-                    <div class="@(item.IsClosed ? "overlay" : "")"></div>
-                </div>
-                <div class="act-content @(OverridesImg ? "position-absolute act-content-overrides ":"" )">
-                    <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm")">
-                        <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
-                    </a>
-                </div>
-                <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                    <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
-                    <li @onclick="(() => ShowDeleteModal(item.Id))" class="delete pb-2">Xóa</li>
-                    <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
-                </ul>
-                @if (HaveControl)
+        @if (Datas is not null)
+        {
+            <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
+                @foreach (var item in Datas)
                 {
-                    <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
-                        more_horiz
-                    </i>
-                }
+                    <div class="@(Datas.Count >4 ? "" : "w-25 mx-2") act-container item position-relative">
+                        <div class="img-container position-relative">
+                            <img src="@item?.Banner" alt="" class="act-img">
+                            <div class="@(item.IsClosed ? "overlay" : "")"></div>
+                        </div>
+                        <div class="act-content @(OverridesImg ? "position-absolute act-content-overrides ":"" )">
+                            <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm")">
+                                <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
+                            </a>
+                        </div>
+                        <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
+                            <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                            <li @onclick="(() => ShowDeleteModal(item.Id))" class="delete pb-2">Xóa</li>
+                            <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+                        </ul>
+                        @if (HaveControl)
+                        {
+                            <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
+                                more_horiz
+                            </i>
+                        }
 
 
-                    @if (HaveHeart)
-                    {
-                        <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
-                            favorite
-                        </span>
-                    }
-                    @* Phần này của Bằng e không đụng tới *@
+                        @if (HaveHeart)
+                        {
+                            <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
+                                favorite
+                            </span>
+                        }
+                        @* Phần này của Bằng e không đụng tới *@
 
-                @if (HaveFav)
-                {
-                    @if (HaveLogin)
-                    {
-                        <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
-                            <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
-                        </a>
-                    }
-                    else
-                    { <a class="position-absolute favorite" @onclick="(() => ShowLoginRequire())">
-                            <span class="material-icons nonefav">favorite_border</span>
-                       </a>
-                    }
+                        @if (HaveFav)
+                        {
+                            @if (HaveLogin)
+                            {
+                                <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
+                                    <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="position-absolute favorite" @onclick="(() => ShowLoginRequire())">
+                                    <span class="material-icons nonefav">favorite_border</span>
+                                </a>
+                            }
+                        }
+                    </div>
                 }
             </div>
-            }
+        }
 
-        </div>
         @if (HaveBorder)
         {
             @if (HaveDecor)

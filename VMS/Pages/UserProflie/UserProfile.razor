@@ -79,10 +79,10 @@
                 </div>
                 <div class="profile__filter text-center">
                     <h3>Lĩnh vực</h3>
-                    <div class=" @(fakeDatas.Count>3 ? "owl-carousel owl-theme profile__carousel" : "profile__NoCarousel")  ">
+                    <div class=" @(fakeDatas.Count>3 ? "owl-carousel owl-theme profile__carousel" : "profile__NoCarousel pe-0")  ">
                         @foreach (var item in fakeDatas)
                         {
-                            <div class="item ">
+                            <div class="item mx-auto">
                                 <i class="material-icons">@item.IconName</i>
                                 <span>@item.Filter</span>
                             </div>

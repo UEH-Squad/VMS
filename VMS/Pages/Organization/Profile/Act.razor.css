@@ -130,7 +130,9 @@
   .act-content-overrides .content-nm .act-title, .act-content-overrides .content-cl .act-title {
     color: #FFFFFF;
     font-size: 24px;
-    font-weight: 400; }
+    font-weight: 400;
+    height: 162px;
+    width: 100%; }
 
 .img-container .act-img {
   width: 100%;

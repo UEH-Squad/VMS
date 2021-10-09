@@ -27,6 +27,8 @@ namespace VMS.Pages.Organization.Profile
         [Parameter] public List<ActivityViewModel> Datas { get; set; }
         [Parameter] public string QueryString { get; set; }
         [Parameter] public bool IsHomepage { get; set; } = true;
+        [Parameter] public bool IsOrgProfile { get; set; } = true;
+
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -66,6 +68,7 @@ namespace VMS.Pages.Organization.Profile
         {
             var parameters = new ModalParameters();
             parameters.Add("ActId", id);
+            parameters.Add("IsOrgProfile", IsOrgProfile);
             var options = new ModalOptions()
             {
                 HideCloseButton = true,

@@ -89,8 +89,8 @@ input[type="checkbox"]:checked:after {
     background-color: $green;
     transition: all 0.25s;
 }
-.btn:hover{
-    //filter: brightness(90%);
+.btn:hover {
+    background-color: $green-bold;
 }
 .btn:active{
     transform: translateY(3px);
@@ -102,6 +102,6 @@ input[type="checkbox"]:checked:after {
     cursor: pointer;
     font-weight: 500;
     font-size: 16px;
-    color: $grey-icon;
+    color: $border-color-bold;
     background-color: #fff;
 }

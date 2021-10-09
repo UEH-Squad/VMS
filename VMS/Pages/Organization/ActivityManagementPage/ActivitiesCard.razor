@@ -12,8 +12,8 @@
                 </span>
                 <ul class="org-card__btn-edit__list card-list" style="display:@(item.Id == dropdownId ? "inline-block" : "none");">
                     <li class="item-1">Chỉnh sửa</li>
-                    <li class="item-2" @onclick="@(async () => await ChangeDeleteStateAsync(item))">Xóa</li>
-                    <li class="item-3 @(item.StartDate <= DateTime.Now ? "d-none" : "")" @onclick="@(async () => await ChangeCloseStateAsync(item))">@(!item.IsClosed ? "Đóng" : "Mở") hoạt động</li>
+                    <li class="item-2" @onclick="(() => ShowDeleteModal(item.Id))">Xóa</li>
+                    <li class="item-3 @(item.StartDate <= DateTime.Now ? "d-none" : "")" @onclick="(() => ShowCloseModal(item.Id))">@(!item.IsClosed ? "Đóng" : "Mở") hoạt động</li>
                 </ul>
             </div>
             <div class="org-card__img">

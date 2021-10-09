@@ -14,7 +14,14 @@
             </div>
             <div class="pop-up-btn">
                 <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="btn accept px-0">Xác nhận</div>
+                @if (IsOrgProfile)
+                {
+                    <div @onclick="DeleteSuccess" class="btn accept px-0">Xác nhận</div>
+                }
+                else
+                {
+                    <div @onclick="DeleteManage" class="btn accept px-0">Xác nhận</div>
+                }
             </div>
         </div>
 
@@ -36,6 +43,8 @@
     public BlazoredModalInstance Modal { get; set; }
     [Parameter]
     public int ActId { get; set; }
+    [Parameter]
+    public bool IsOrgProfile { get; set; }
 
     bool isDeleteSuccess;
 
@@ -50,7 +59,13 @@
     private async Task DeleteSuccess()
     {
         bool delete = true;
-        await ActivityService.UpdateStatusActAsync(ActId, false ,delete);
+        await ActivityService.UpdateStatusActAsync(ActId, false, delete);
+        isDeleteSuccess = true;
+        await CloseModal();
+    }
+
+    private async Task DeleteManage()
+    {
         isDeleteSuccess = true;
         await CloseModal();
     }

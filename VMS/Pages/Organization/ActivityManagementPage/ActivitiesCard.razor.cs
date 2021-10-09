@@ -5,6 +5,8 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.GenericRepository;
+using Blazored.Modal.Services;
+using Blazored.Modal;
 
 namespace VMS.Pages.Organization.ActivityManagementPage
 {
@@ -25,6 +27,11 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         public bool IsSearch { get; set; } = false;
         [Parameter]
         public string SearchValue { get; set; } = "";
+        [Parameter] 
+        public bool IsOrgProfile { get; set; } = false;
+        [CascadingParameter] 
+        public IModalService Modal { get; set; }
+
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -101,6 +108,46 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         private bool CheckForZIndex(int id)
         {
             return id == dropdownId || id == rateId || id == confirmCloseId || id == confirmDeleteId || id == popupClose || id == popupDelete;
+        }
+
+        private async Task ShowDeleteModal(int id)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add("IsOrgProfile", IsOrgProfile);
+            parameters.Add("ActId", id);
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
+            var result = await Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", parameters, options).Result;
+        }
+        private async Task ShowCloseModal(int id)
+        {
+            var act = data.Items.Find(a => a.Id == id);
+
+            var modalParams = new ModalParameters();
+            modalParams.Add("IsClosed", act.IsClosed);
+
+            var parameters = new ModalParameters();
+            parameters.Add("ActId", id);
+            parameters.Add("IsClosed", act.IsClosed);
+            parameters.Add("IsOrgProfile", IsOrgProfile);
+
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
+            var result = await Modal.Show(typeof(Pages.Organization.Profile.CloseConfirm), "", parameters, options).Result;
+
+            if ((bool)result.Data)
+            {
+                act.IsClosed = !act.IsClosed;
+                Modal.Show(typeof(Pages.Organization.Profile.CloseSuccess), "", modalParams, options);
+            }
         }
     }
 }

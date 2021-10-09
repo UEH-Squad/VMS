@@ -28,11 +28,9 @@ namespace VMS.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
 
             [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập mật khẩu mới")]
+            [StringLength(30, MinimumLength = 8, ErrorMessage = "Mật khẩu phải có ít nhất 8 ký tự")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -41,7 +39,10 @@ namespace VMS.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "Mật khẩu xác nhận không chính xác")]
             public string ConfirmPassword { get; set; }
-
+            
+            [Required]
+            [EmailAddress]
+            public string Email { get; set; }
             public string Code { get; set; }
         }
 
@@ -61,32 +62,23 @@ namespace VMS.Areas.Identity.Pages.Account
                 return Page();
             }
         }
-
-        public async Task<IActionResult> OnPostAsync(InputModel inputModel)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            var user = await _userManager.FindByEmailAsync(inputModel.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToPage("./ResetPasswordConfirmation");
-            }
-
-            var result = await _userManager.ResetPasswordAsync(user, inputModel.Code, inputModel.Password);
+            var user = await _userManager.FindByEmailAsync(Input.Email);
+            var result = await _userManager.ResetPasswordAsync(user, Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(Input.Code)), Input.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ResetPasswordConfirmation");
+                return Page();
             }
-
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
             return Page();
-        }
+            }
     }
 }

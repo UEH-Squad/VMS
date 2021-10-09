@@ -37,6 +37,10 @@ namespace VMS
             services.AddScoped(x => x.GetRequiredService<IDbContextFactory<VmsDbContext>>().CreateDbContext());
             services.AddDefaultIdentity<User>(options =>
             {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
                 options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddRoles<IdentityRole>()

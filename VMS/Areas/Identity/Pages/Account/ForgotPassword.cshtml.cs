@@ -60,7 +60,7 @@ namespace VMS.Areas.Identity.Pages.Account
                 string callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
-                    values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.ResetPassword },
+                    values: new { area = "Identity", email = user.Email, code, returnUrl = Routes.ResetPassword },
                     protocol: Request.Scheme);
 
                 await _mailService.SendConfirmEmail(user.Email, callbackUrl);

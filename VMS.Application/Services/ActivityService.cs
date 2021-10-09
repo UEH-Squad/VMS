@@ -227,6 +227,12 @@ namespace VMS.Application.Services
 
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
+            if (activity.StartDate != activityViewModel.StartDate)
+            {
+                // Use Hangfire to auto close activity when activity is started
+                BackgroundJob.Schedule(() => CloseActivityAsync(activityId), activityViewModel.StartDate - DateTime.Now);
+            }
+
             activity = _mapper.Map(activityViewModel, activity);
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;
@@ -244,9 +250,6 @@ namespace VMS.Application.Services
             {
                 activity.IsClosed = false;
             }
-
-            // Use Hangfire to auto close activity when activity is started
-            BackgroundJob.Schedule(() => CloseActivityAsync(activityId), activity.StartDate - DateTime.Now);
 
             await _repository.UpdateAsync(dbContext, activity);
         }

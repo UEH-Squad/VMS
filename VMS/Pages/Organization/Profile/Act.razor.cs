@@ -64,35 +64,30 @@ namespace VMS.Pages.Organization.Profile
             return InvokeAsync(StateHasChanged);
         }
 
-        private async Task ShowDeleteModal( int id)
+        private async Task ShowDeleteModalAsync(int id)
         {
-            var parameters = new ModalParameters();
-            parameters.Add("ActId", id);
-            parameters.Add("IsOrgProfile", IsOrgProfile);
             var options = new ModalOptions()
             {
                 HideCloseButton = true,
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true,
             };
-            var result = await Modal.Show<DeleteConfirm>("", parameters, options).Result;
+
+            var result = await Modal.Show<DeleteConfirm>("", options).Result;
 
             if ((bool)result.Data)
             {
                 var act = Datas.Find(a => a.Id == id);
-                 Datas.Remove(act);
+                await ActivityService.UpdateStatusActAsync(id, act.IsClosed, true);
+                Datas.Remove(act);
             }
         }
 
-        private async Task ShowCloseModal(int id)
+        private async Task ShowCloseModalAsync(int id)
         {
             var act = Datas.Find(a => a.Id == id);
-            
-            var modalParams = new ModalParameters();
-            modalParams.Add("IsClosed",act.IsClosed);
 
             var parameters = new ModalParameters();
-            parameters.Add("ActId", id);
             parameters.Add("IsClosed", act.IsClosed);
 
             var options = new ModalOptions()
@@ -101,12 +96,14 @@ namespace VMS.Pages.Organization.Profile
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true,
             };
-            var result = await Modal.Show<CloseConfirm>("", parameters, options).Result;
+
+            var result = await Modal.Show<CloseConfirm>("", options).Result;
 
             if ((bool)result.Data)
             {
+                await ActivityService.UpdateStatusActAsync(id, !act.IsClosed, act.IsDeleted);
                 act.IsClosed = !act.IsClosed;
-                Modal.Show<CloseSuccess>("", modalParams, options);
+                Modal.Show<CloseSuccess>("", parameters, options);
             }
         }
 

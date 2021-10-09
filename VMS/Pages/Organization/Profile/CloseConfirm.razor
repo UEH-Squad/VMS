@@ -3,7 +3,7 @@
 <div class="pop-up">
     <div class="center-screen">
         <div class="pop-up-container border-10 @(isCloseConfirm ? "d-block" : "d-none")">
-            <div @onclick="CloseModal" class="close-btn">
+            <div @onclick="CloseModalAsync" class="close-btn">
                 <span class="material-icons">
                     close
                 </span>
@@ -13,71 +13,32 @@
                 <h3><span class="close-text">@(IsClosed ? "mở" : "đóng") hoạt động</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
-                <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
-                @if (IsOrgProfile)
-                {
-                    <div @onclick="CloseSuccess" class="btn px-0 accept ">Xác nhận</div>
-                }
-                else
-                {
-                    <div @onclick="CloseManage" class="btn px-0 accept ">Xác nhận</div>
-                }
+                <div @onclick="CloseModalAsync" class="btn px-0 deny">Hủy</div>
+                <div @onclick="CloseSuccessAsync" class="btn px-0 accept ">Xác nhận</div>
             </div>
         </div>
     </div>
 </div>
 
 @code {
-    bool isCloseConfirm = true;
-    bool isCloseSuccess = false;
-
-    [Parameter]
-    public int ActId { get; set; }
+    private bool isCloseConfirm = true;
+    private bool isCloseSuccess = false;
 
     [Parameter]
     public bool IsClosed { get; set; }
 
-    [Parameter]
-    public bool IsOrgProfile { get; set; }
-
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
-    [Inject]
-    private IActivityService ActivityService { get; set; }
 
 
-    private async Task CloseModal()
+    private async Task CloseModalAsync()
     {
         await Modal.CloseAsync(ModalResult.Ok(isCloseSuccess));
     }
 
-    private async Task CloseSuccess()
+    private async Task CloseSuccessAsync()
     {
-        if(IsClosed == true)
-        {
-            await ActivityService.UpdateStatusActAsync(ActId, false, false);
-        }
-        else
-        {
-            await ActivityService.UpdateStatusActAsync(ActId, true, false);
-        }
-        IsClosed = !IsClosed;
         isCloseSuccess = true;
-        await CloseModal();
-    }
-
-    private async Task CloseManage()
-    {
-        if (IsClosed == true)
-        {
-            await ActivityService.UpdateStatusActAsync(ActId, false, false);
-        }
-        else
-        {
-            await ActivityService.UpdateStatusActAsync(ActId, true, false);
-        }
-        IsClosed = !IsClosed;
-        isCloseSuccess = true;
-        await CloseModal();
+        await CloseModalAsync();
     }
 }

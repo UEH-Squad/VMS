@@ -65,6 +65,8 @@
       padding-left: 20px; }
     .my-signUp .signUp__form ::deep input:disabled {
       background-color: rgba(196, 196, 196, 0.5); }
+    .my-signUp .signUp__form ::deep textarea:disabled {
+      background-color: rgba(196, 196, 196, 0.5); }
     .my-signUp .signUp__form ::deep .input-radio {
       width: 16px;
       height: 16px;

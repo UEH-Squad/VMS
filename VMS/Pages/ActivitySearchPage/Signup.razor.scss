@@ -91,6 +91,10 @@
             background-color: rgba($color: #C4C4C4, $alpha: 0.5);
         }
 
+        ::deep textarea:disabled {
+            background-color: rgba($color: #C4C4C4, $alpha: 0.5);
+        }
+
         ::deep .input-radio {
             width: 16px;
             height: 16px;

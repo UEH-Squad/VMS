@@ -30,7 +30,14 @@
                         <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control mb-3" disabled="true" />
                         <p class="form-text">Số điện thoại <span>(*)</span></p>
                         <ValidationMessage For="@(() => signupModel.PhoneNumber)" />
-                        <InputText @bind-Value=@signupModel.PhoneNumber class="form-control mb-3" />
+                        @if (IsReadOnly)
+                        {
+                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control mb-3" disabled="true" />
+                        }
+                        else
+                        {
+                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control mb-3" />
+                        }
 
                         <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
 
@@ -49,11 +56,21 @@
                     </div>
                     <div class="col-6">
                         <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
-                        <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3"></InputTextArea>
+                        @if (IsReadOnly)
+                        {
+                            <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3" disabled="true"></InputTextArea>
+                        }
+                        else
+                        {
+                            <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3"></InputTextArea>
+                        }
                         <img class="w-100" src="img/formSignUp.png" alt="">
                     </div>
                 </div>
-                <button type="submit" class="btn">Đăng ký</button>
+                @if (!IsReadOnly)
+                {
+                    <button type="submit" class="btn">Đăng ký</button>
+                }
             </div>
         </EditForm>
     </div>

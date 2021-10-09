@@ -21,6 +21,8 @@ namespace VMS.Pages.ActivitySearchPage
         [Parameter]
         public int ActivityId { get; set; }
         [Parameter]
+        public bool IsReadOnly { get; set; } = false;
+        [Parameter]
         public User CurrentUser { get; set; }
         [CascadingParameter]
         private BlazoredModalInstance Modal { get; set; }

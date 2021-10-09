@@ -68,16 +68,6 @@ namespace VMS.Pages.Organization.ActivityManagementPage
             }
         }
 
-        private void ResetState()
-        {
-            rateId = 0;
-            dropdownId = 0;
-            confirmCloseId = 0;
-            confirmDeleteId = 0;
-            popupClose = 0;
-            popupDelete = 0;
-        }
-
         private void ChangeRateState(int id)
         {
             rateId = (rateId == id ? 0 : id);
@@ -90,65 +80,32 @@ namespace VMS.Pages.Organization.ActivityManagementPage
             dropdownId = (dropdownId == id ? 0 : id);
         }
 
-        private async Task ChangeDeleteStateAsync(ActivityViewModel activity)
-        {
-            if (confirmDeleteId == activity.Id)
-            {
-                await ActivityService.UpdateStatusActAsync(activity.Id, activity.IsClosed, !activity.IsDeleted);
-                ResetState();
-                popupDelete = activity.Id;
-                await HandlePageChangedAsync();
-            }
-            else
-            {
-                confirmDeleteId = activity.Id;
-            }
-        }
-
-        private async Task ChangeCloseStateAsync(ActivityViewModel activity)
-        {
-            if (confirmCloseId == activity.Id)
-            {
-                await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
-                ResetState();
-                popupClose = activity.Id;
-                await HandlePageChangedAsync();
-            }
-            else
-            {
-                confirmCloseId = activity.Id;
-            }
-        }
-
         private bool CheckForZIndex(int id)
         {
-            return id == dropdownId || id == rateId || id == confirmCloseId || id == confirmDeleteId || id == popupClose || id == popupDelete;
+            return id == dropdownId || id == rateId;
         }
 
-        private async Task ShowDeleteModal(int id)
+        private async Task ShowDeleteModalAsync(ActivityViewModel activity)
         {
-            var parameters = new ModalParameters();
-            parameters.Add("IsOrgProfile", IsOrgProfile);
-            parameters.Add("ActId", id);
             var options = new ModalOptions()
             {
                 HideCloseButton = true,
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true,
             };
-            var result = await Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", parameters, options).Result;
+
+            var result = await Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", options).Result;
+
+            if ((bool)result.Data)
+            {
+                await ActivityService.CloseOrDeleteActivity(activity.Id, !activity.IsDeleted, activity.IsClosed);
+                await HandlePageChangedAsync();
+            }
         }
-        private async Task ShowCloseModal(int id)
+        private async Task ShowCloseModalAsync(ActivityViewModel activity)
         {
-            var act = data.Items.Find(a => a.Id == id);
-
-            var modalParams = new ModalParameters();
-            modalParams.Add("IsClosed", act.IsClosed);
-
             var parameters = new ModalParameters();
-            parameters.Add("ActId", id);
-            parameters.Add("IsClosed", act.IsClosed);
-            parameters.Add("IsOrgProfile", IsOrgProfile);
+            parameters.Add("IsClosed", activity.IsClosed);
 
             var options = new ModalOptions()
             {
@@ -156,12 +113,14 @@ namespace VMS.Pages.Organization.ActivityManagementPage
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true,
             };
+
             var result = await Modal.Show(typeof(Pages.Organization.Profile.CloseConfirm), "", parameters, options).Result;
 
             if ((bool)result.Data)
             {
-                act.IsClosed = !act.IsClosed;
-                Modal.Show(typeof(Pages.Organization.Profile.CloseSuccess), "", modalParams, options);
+                await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
+                activity.IsClosed = !activity.IsClosed;
+                Modal.Show(typeof(Pages.Organization.Profile.CloseSuccess), "", parameters, options);
             }
         }
     }

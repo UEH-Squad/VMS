@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@inject IJSRuntime JS;
+
+<div class="row">
     <div class="text-result mb-5">Có <span>@data?.TotalItems</span> hoạt động tương ứng với kết quả tìm kiếm của bạn.</div>
 </div>
 @if (data != null && data.TotalItems != 0)
@@ -6,7 +8,7 @@
     @foreach (var item in data.Items)
     {
         <div class="org-card" style="z-index:@(CheckForZIndex(item.Id) ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || CheckForZIndex(item.Id) ? 1 : 0.75)">
-            <div class="org-card__btn-edit btn" @onclick="() => ChangeDropdownState(item.Id)">
+            <div class="org-card__btn-edit btn" @onclick="() => ShowMenu(item.Id)">
                 <span class="material-icons-outlined">
                     more_horiz
                 </span>
@@ -16,6 +18,11 @@
                     <li class="item-3 @(item.StartDate <= DateTime.Now ? "d-none" : "")" @onclick="(() => ShowCloseModal(item.Id))">@(!item.IsClosed ? "Đóng" : "Mở") hoạt động</li>
                 </ul>
             </div>
+            <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
+                <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                <li @onclick="(() => ShowDeleteModal(item.Id))" class="delete pb-2">Xóa</li>
+                <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+            </ul>
             <div class="org-card__img">
                 <img src="@item.Banner" alt="photo">
             </div>

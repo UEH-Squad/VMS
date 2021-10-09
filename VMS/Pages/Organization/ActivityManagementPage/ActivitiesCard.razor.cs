@@ -27,9 +27,9 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         public bool IsSearch { get; set; } = false;
         [Parameter]
         public string SearchValue { get; set; } = "";
-        [Parameter] 
+        [Parameter]
         public bool IsOrgProfile { get; set; } = false;
-        [CascadingParameter] 
+        [CascadingParameter]
         public IModalService Modal { get; set; }
 
 
@@ -37,6 +37,21 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         private IActivityService ActivityService { get; set; }
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await JS.InvokeVoidAsync("vms.AddOutsideClickMenuHandler", DotNetObjectReference.Create(this), nameof(HideMenuInterop));
+        }
+        [JSInvokable]
+        public Task HideMenuInterop()
+        {
+            data.Items.ForEach(a => a.IsMenu = false);
+            return InvokeAsync(StateHasChanged);
+        }
+
+        void ShowMenu(int id)
+        {
+            data.Items.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
+        }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -67,7 +82,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         {
             rateId = (rateId == id ? 0 : id);
             dropdownId = 0;
-    }
+        }
 
         private void ChangeDropdownState(int id)
         {

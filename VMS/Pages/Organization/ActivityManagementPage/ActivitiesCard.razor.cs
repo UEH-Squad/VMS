@@ -14,10 +14,6 @@ namespace VMS.Pages.Organization.ActivityManagementPage
     {
         private int rateId;
         private int dropdownId;
-        private int confirmDeleteId;
-        private int confirmCloseId;
-        private int popupDelete;
-        private int popupClose;
         private int page = 1;
         private PaginatedList<ActivityViewModel> data = new(new(), 0, 1, 1);
 

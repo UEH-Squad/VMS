@@ -123,13 +123,20 @@
   .org-card__footer__btn {
     width: fit-content; }
 
-.org-card ul {
+.org-card .act-menu {
   top: 20px;
   right: 7px;
+  width: fit-content; }
+
+.org-card .rate-menu {
+  top: 34px;
+  right: -95px;
+  width: max-content; }
+
+.org-card ul {
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
-  width: 213px;
   z-index: 1; }
   .org-card ul li, .org-card ul a {
     list-style: none;

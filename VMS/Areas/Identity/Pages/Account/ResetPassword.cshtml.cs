@@ -30,7 +30,7 @@ namespace VMS.Areas.Identity.Pages.Account
         {
 
             [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập mật khẩu mới")]
-            [StringLength(30, MinimumLength = 8, ErrorMessage = "Mật khẩu phải có ít nhất 8 ký tự")]
+            [StringLength(30, MinimumLength = 4, ErrorMessage = "Mật khẩu phải có ít nhất 4 ký tự")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

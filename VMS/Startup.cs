@@ -35,15 +35,16 @@ namespace VMS
                     Configuration.GetConnectionString("DefaultConnection"),
                     x => x.UseNetTopologySuite()));
             services.AddScoped(x => x.GetRequiredService<IDbContextFactory<VmsDbContext>>().CreateDbContext());
-            services.AddDefaultIdentity<User>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 4;
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 0;
                 options.SignIn.RequireConfirmedEmail = true;
             })
-                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<VmsDbContext>()
                 .AddDefaultTokenProviders();
 

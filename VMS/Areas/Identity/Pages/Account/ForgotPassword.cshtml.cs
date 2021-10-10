@@ -20,13 +20,11 @@ namespace VMS.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private readonly IEmailSender _emailSender;
         private readonly IMailService _mailService;
 
-        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender, IMailService mailService)
+        public ForgotPasswordModel(UserManager<User> userManager, IMailService mailService)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
             _mailService = mailService;
         }
 

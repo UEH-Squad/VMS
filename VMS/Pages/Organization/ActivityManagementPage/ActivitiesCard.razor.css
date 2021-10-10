@@ -23,7 +23,6 @@
     opacity: 0; } }
 
 .card-btn {
-  padding: 6px 15px;
   background-color: #64D72F;
   color: white;
   border-radius: 5px;
@@ -57,7 +56,8 @@
   padding: 20px 18px;
   height: 267px;
   margin-bottom: 15px;
-  background-color: #F3F3F5; }
+  background-color: #F3F3F5;
+  border-radius: 10px; }
 
 .org-card__img {
   aspect-ratio: calc(267/188);
@@ -118,51 +118,58 @@
     .org-card__info__joiner__sum {
       display: inline-block; }
 
-.org-card__btn-edit {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer; }
-  .org-card__btn-edit__list {
-    display: none;
-    width: 600%;
-    transform: translate(-100%, 18%);
-    font-weight: 500;
+.org-card__footer {
+  bottom: 0; }
+  .org-card__footer__btn {
+    width: fit-content; }
+
+.org-card ul {
+  top: 20px;
+  right: 7px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
+  width: 213px;
+  z-index: 1; }
+  .org-card ul li, .org-card ul a {
+    list-style: none;
     font-size: 16px;
-    line-height: 36px;
-    text-align: start;
-    animation: dropDown 0.2s ease backwards; }
-    .org-card__btn-edit__list .item-1 {
-      color: #515151; }
-    .org-card__btn-edit__list .item-2 {
-      color: red; }
-    .org-card__btn-edit__list .item-3 {
-      color: #64D72F; }
-    .org-card__btn-edit__list li {
-      z-index: 10000;
-      list-style: none;
-      padding: 0 10px; }
-    .org-card__btn-edit__list li:hover {
+    font-weight: 500;
+    padding: 10px 20px;
+    display: block; }
+    .org-card ul li:hover, .org-card ul a:hover {
       background: rgba(24, 160, 251, 0.1); }
+  .org-card ul .edit {
+    color: #515151;
+    cursor: pointer; }
+  .org-card ul .delete {
+    color: #F14747;
+    cursor: pointer; }
+  .org-card ul .close {
+    color: #64D72F;
+    cursor: pointer; }
+
+.org-card .org-card__member {
+  margin-right: 62px; }
+  .org-card .org-card__member .material-icons {
+    color: #64D72F; }
+
+.org-card .material-icons {
+  color: #515151;
+  font-size: 24px;
+  right: 10px;
+  top: 2px; }
+  .org-card .material-icons:hover {
+    cursor: pointer; }
 
 .org-card__btn-list {
-  position: absolute;
-  bottom: 0;
-  left: 59%;
-  transform: translate(-5%, -50%); }
+  width: 157px; }
 
 .org-card__cbb-rate {
-  position: absolute;
-  bottom: 0;
-  left: 75%;
-  transform: translate(0, -50%);
-  min-width: 136px;
+  width: 120px;
   background-color: #18A0FB; }
-  .org-card__cbb-rate .expand-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-20%, 25%); }
+  .org-card__cbb-rate:hover {
+    background-color: #0B588C; }
   .org-card__cbb-rate__list {
     z-index: 10;
     font-size: 12px;
@@ -176,23 +183,16 @@
       background: rgba(24, 160, 251, 0.1); }
 
 .org-card__noti {
-  position: absolute;
-  bottom: 0;
-  left: 78%;
-  transform: translate(0, -50%);
   padding: 5px 15px;
   font-weight: 400;
   font-size: 14px;
   color: #E10B0B;
-  text-indent: 5px; }
+  text-indent: 5px;
+  bottom: 5px;
+  right: 0; }
 
 .org-card__member {
-  position: absolute;
-  bottom: 0;
-  left: 37%;
-  transform: translate(0, -50%);
-  padding: 5px 15px;
-  text-indent: 5px; }
+  width: fit-content; }
   .org-card__member__text {
     font-weight: 400;
     font-size: 16px; }

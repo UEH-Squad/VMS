@@ -8,25 +8,18 @@
     @foreach (var item in data.Items)
     {
         <div class="org-card" style="z-index:@(CheckForZIndex(item.Id) ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || CheckForZIndex(item.Id) ? 1 : 0.75)">
-            <div class="org-card__btn-edit btn" @onclick="() => ShowMenu(item.Id)">
-                <span class="material-icons-outlined">
-                    more_horiz
-                </span>
-                <ul class="org-card__btn-edit__list card-list" style="display:@(item.Id == dropdownId ? "inline-block" : "none");">
-                    <li class="item-1"><a href="@Routes.EditActivity/@item.Id">Chỉnh sửa</a></li>
-                    <li class="item-2" @onclick="(() => ShowDeleteModalAsync(item))">Xóa</li>
-                    <li class="item-3 @(item.StartDate <= DateTime.Now ? "d-none" : "")" @onclick="(() => ShowCloseModalAsync(item))">@(!item.IsClosed ? "Đóng" : "Mở") hoạt động</li>
-                </ul>
-            </div>
-            <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
-                <li @onclick="(() => ShowDeleteModal(item.Id))" class="delete pb-2">Xóa</li>
-                <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+            <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
+                more_horiz
+            </i>
+            <ul class="act-menu p-2 position-absolute @(item.IsMenu ? "d-block" : "d-none")">
+                <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                <li @onclick="(() => ShowDeleteModalAsync(item))" class="delete pb-2">Xóa</li>
+                <li @onclick="(() => ShowCloseModalAsync(item))" class="close pb-2 @(item.StartDate <= DateTime.Now ? "d-none" : "")">@(item.IsClosed ? "Mở" : "Đóng") hoạt động</li>
             </ul>
             <div class="org-card__img">
                 <img src="@item.Banner" alt="photo">
             </div>
-            <div class="org-card__info">
+            <div class="org-card__info position-relative">
                 <div class="lmtext-2 org-card__info__title">
                     <a href="@Routes.ActivityInfo/@item.Id">@item.Name</a>
                 </div>
@@ -50,41 +43,43 @@
                 <div class="lmtext-2 org-card__info__desc">
                     @((MarkupString)item.Description)
                 </div>
-                <div class="org-card__info__date ">
+                <div class="org-card__info__date">
                     Ngày đăng: <span>@item.CreatedDate.ToString("dd/MM/yyyy")</span>
                 </div>
-            </div>
-            <div class="org-card__btn-list card-btn">
-                Xem danh sách
-            </div>
-            <div class="org-card__member d-flex align-items-center">
-                <span class="org-card__member__icon material-icons">
-                    person
-                </span>
-                <span class="org-card__member__text">400</span>
-            </div>
-            @if ((item.IsClosed || item.StartDate <= DateTime.Now) && (item.EndDate >= DateTime.Now))
-            {
-                <div class="org-card__noti d-flex align-items-center">
-                    <span class="material-icons-outlined">
-                        error
-                    </span>
-                    <i>Đã đóng đăng ký</i>
+                <div class="org-card__footer w-100 d-flex position-absolute">
+                    <div class="org-card__member py-1 d-flex px-0">
+                        <span class="org-card__member__icon material-icons me-1">
+                            person
+                        </span>
+                        <span class="org-card__member__text">400</span>
+                    </div>
+                    <div class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
+                        Xem danh sách
+                    </div>
+                    @if (item.EndDate < DateTime.Now)
+                    {
+                        <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1">
+                            <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
+                            <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
+                                expand_more
+                            </span>
+                            <ul class="org-card__cbb-rate__list card-list" style="display:@(item.Id == rateId ? "inline-block" : "none");">
+                                <li>Tình nguyện viên</li>
+                                <li>Đánh giá hoạt động</li>
+                            </ul>
+                        </div>
+                    }
                 </div>
-            }
-            @if (item.EndDate < DateTime.Now)
-            {
-                <div class="org-card__cbb-rate card-btn">
-                    <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
-                    <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
-                        expand_more
-                    </span>
-                    <ul class="org-card__cbb-rate__list card-list" style="display:@(item.Id == rateId ? "inline-block" : "none");">
-                        <li>Tình nguyện viên</li>
-                        <li>Đánh giá hoạt động</li>
-                    </ul>
-                </div>
-            }
+            </div>
+                @if ((item.IsClosed || item.StartDate <= DateTime.Now) && (item.EndDate >= DateTime.Now))
+                {
+                    <div class="org-card__noti d-flex align-items-center position-absolute">
+                        <span class="material-icons-outlined">
+                            error
+                        </span>
+                        <i>Đã đóng đăng ký</i>
+                    </div>
+                }
         </div>
     }
 }

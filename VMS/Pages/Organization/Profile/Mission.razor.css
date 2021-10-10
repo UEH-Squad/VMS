@@ -7,7 +7,8 @@
 .mission hr {
   width: 70%;
   background-color: #707070;
-  opacity: 50%; }
+  opacity: 50%;
+  margin-top: 50px; }
 
 .mission h3 {
   color: #515151;

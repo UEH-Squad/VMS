@@ -6,8 +6,7 @@
         font-size: 30px;
         line-height: 36px;
         color: $grey-text;
-        margin-bottom: 42px;
-        margin-top: 70px;
+        margin: 50px 0;
 
         span {
             color: $green;
@@ -101,6 +100,10 @@
     background-color: $grey;
     border-radius: 0 0 10px 10px;
     min-height: 162px;
+
+    a {
+        min-height: 162px;
+    }
 
     .content-cl {
         background-color: rgba(100,100,100,.2);

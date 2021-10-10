@@ -9,8 +9,7 @@
   font-size: 30px;
   line-height: 36px;
   color: #515151;
-  margin-bottom: 42px;
-  margin-top: 70px; }
+  margin: 50px 0; }
   .act h1 span {
     color: #64D72F; }
 
@@ -77,6 +76,8 @@
   background-color: #F3F3F5;
   border-radius: 0 0 10px 10px;
   min-height: 162px; }
+  .act-content a {
+    min-height: 162px; }
   .act-content .content-cl {
     background-color: rgba(100, 100, 100, 0.2); }
   .act-content .content-nm,

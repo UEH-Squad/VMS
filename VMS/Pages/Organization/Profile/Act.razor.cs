@@ -97,7 +97,7 @@ namespace VMS.Pages.Organization.Profile
                 UseCustomLayout = true,
             };
 
-            var result = await Modal.Show<CloseConfirm>("", options).Result;
+            var result = await Modal.Show<CloseConfirm>("",parameters, options).Result;
 
             if ((bool)result.Data)
             {

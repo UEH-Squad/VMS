@@ -1,62 +1,65 @@
 ﻿@inject IJSRuntime JSRuntinme;
 
-<div class="my-profile py-5">
+<div class="my-profile">
     <div class="container">
-        <div class="row">
-            <div class="col-3 text-center profile__logo">
-                <div class="proflie__logo-img py-3">
-                    <div class=" text-center d-inline-block position-relative">
-                        <img src="img/RelatedActivities/2nd-activity.png" alt="">
-                        <label for="myfile" class="@(IsUser ? "d-inline" : "d-none" ) ">
-                            <svg class="icon-camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z" /><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1a.5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0z" /></g></svg>
-                        </label>
-                        <InputFile OnChange="ShowModalUpAvata" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
+        <div class="d-flex justify-content-between  py-5">
+            <div class="text-center profile__logo">
+                <div class="">
+                    <div class="proflie__logo-img py-3">
+                        <div class=" text-center d-inline-block position-relative">
+                            <img src="img/RelatedActivities/2nd-activity.png" alt="">
+                            <label for="myfile" class="@(IsUser ? "d-inline" : "d-none" ) ">
+                                <svg class="icon-camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z" /><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1a.5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0z" /></g></svg>
+                            </label>
+                            <InputFile OnChange="ShowModalUpAvata" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
+                        </div>
                     </div>
-                </div>
-                <p class="m-0 ">Trần Minh Nhật Anh</p>
-                @if (IsUser)
-                {
-                    <button @onclick="() => ShowModalAppellation()" class="profile__type d-inline-block btn mx-auto mt-1 mb-5">Chiến sĩ hạng đồng</button>
-                }
-                else
-                {
-                    <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-5">Chiến sĩ hạng đồng</span>
-                }
+                    <p class="m-0 ">Trần Minh Nhật Anh</p>
+                    @if (IsUser)
+                    {
+                        <button @onclick="() => ShowModalAppellation()" class="profile__type d-inline-block btn mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</button>
+                    }
+                    else
+                    {
+                        <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</span>
+                    }
 
-            <div class="d-flex align-items-center profile__rank">
-                @if (IsUser)
-                {
-                    <a href="" class="d-flex align-self-center">#4</a>
-                }
-                else
-                {
-                    <a class="d-flex align-self-center">#4</a>
-                }
+                    <div class="d-flex align-items-center profile__rank">
+                        @if (IsUser)
+                        {
+                            <a href="" class="d-flex align-self-center me-3">#4</a>
+                        }
+                        else
+                        {
+                            <a class="d-flex align-self-center me-3">#4</a>
+                        }
 
-                <div>
-                    <p class="mb-2 d-flex justify-content-evenly align-self-end">
-                        <span class="profile__rank-number">4,5</span>
-                        <i class="material-icons">
-                            star_rate
-                        </i>
-                        <i class="material-icons">
-                            star_rate
-                        </i>
-                        <i class="material-icons">
-                            star_rate
-                        </i>
-                        <i class="material-icons">
-                            star_rate
-                        </i>
-                        <i class="material-icons icon-noColor">
-                            star_rate
-                        </i>
-                    </p>
-                    <span class="text-start">15N xếp hạng</span>
+                        <div>
+                            <p class="mb-2 d-flex justify-content-evenly align-self-end">
+                                <span class="profile__rank-number me-1">4,5</span>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons">
+                                    star_rate
+                                </i>
+                                <i class="material-icons icon-noColor">
+                                    star_rate
+                                </i>
+                            </p>
+                            <span class="text-start">15N xếp hạng</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            </div>
-            <div class="col-4 profile__contact ms-auto">
+            <div class="profile__contact ">
                 <h3 class="text-center mb-3">Thông tin cá nhân</h3>
                 <div class="profile__contact-content pb-4 mb-4 ">
                     <div class="row align-items-center">
@@ -79,10 +82,10 @@
                 </div>
                 <div class="profile__filter text-center">
                     <h3>Lĩnh vực</h3>
-                    <div class=" @(fakeDatas.Count>3 ? "owl-carousel owl-theme profile__carousel" : "profile__NoCarousel pe-0")  ">
+                    <div class=" @(fakeDatas.Count>3 ? "owl-carousel owl-theme profile__carousel" : " profile__NoCarousel pe-0 d-flex justify-content-center")  ">
                         @foreach (var item in fakeDatas)
                         {
-                            <div class="item mx-auto">
+                            <div class="item @(fakeDatas.Count>3 ? "" : "mx-2")">
                                 <i class="material-icons">@item.IconName</i>
                                 <span>@item.Filter</span>
                             </div>
@@ -92,24 +95,27 @@
 
                 </div>
             </div>
-            <div class="col-4 profile__skills text-center pt-3">
-                <h3 class="mb-4">Kĩ Năng</h3>
-                <div class=" mx-auto profile__content px-5">
-                    <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
-                    <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
-                    <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
-                    <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
-                    <p class="profile__skill">Kiến thức chuyên ngành</p>
-                    <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
-                    <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
-                    <p class="profile__skill">Kiến thức chuyên ngành</p>
-                    <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
-                    <p class="profile__skill">Kiến thức chuyên ngành</p>
 
+            <div class=" profile__skills">
+                <div class="profile__skills-content pt-3 pb-4 pb-xxl-5">
+                    <h3 class="mb-4 text-center">Kĩ Năng</h3>
+                    <div class=" mx-auto profile__content ">
+                        <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
+                        <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
+                        <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
+                        <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
+                        <p class="profile__skill">Kiến thức chuyên ngành</p>
+                        <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
+                        <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
+                        <p class="profile__skill">Kiến thức chuyên ngành</p>
+
+                    </div>
                 </div>
+
             </div>
+                
         </div>
-        <p class="profile__dictum text-center py-4 px-5 my-5">Đổi mới sáng tạo, tôi sẽ quyết tâm thực hiện chiến dịch tình nguyện, cống hiến sức trẻ trong bối cảnh dịch bênh hoành hành khó định. </p>
+        <p class="profile__dictum text-center py-4 px-5 mb-5">Đổi mới sáng tạo, tôi sẽ quyết tâm thực hiện chiến dịch tình nguyện, cống hiến sức trẻ trong bối cảnh dịch bênh hoành hành khó định. </p>
     </div>
 </div>
 

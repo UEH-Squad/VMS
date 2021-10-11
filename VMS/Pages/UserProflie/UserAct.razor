@@ -55,16 +55,4 @@
     [CascadingParameter]
     public IModalService Modal { get; set; }
 
-    private void ShowModal()
-    {
-
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show<Report>("", options);
-    }
 }

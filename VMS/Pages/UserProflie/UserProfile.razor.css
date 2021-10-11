@@ -4,44 +4,46 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-profile .profile__logo .profile__logo-img {
-  margin-bottom: 20px; }
-
-.my-profile .profile__logo img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover; }
-
-.my-profile .profile__logo .icon-camera {
-  position: absolute;
-  bottom: 15px;
-  right: -25px;
-  font-size: 36px;
-  color: #B4B4B4; }
-
-.my-profile .profile__logo p {
-  font-size: 24px;
-  font-weight: 600; }
-
-.my-profile .profile__logo .profile__type {
-  background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%);
-  border-radius: 10px;
-  padding: 10px 20px;
-  color: #515151;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 10px; }
-  .my-profile .profile__logo .profile__type:hover {
-    background: linear-gradient(to top, rgba(237, 241, 49, 0.35) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
-  .my-profile .profile__logo .profile__type:focus {
-    box-shadow: none; }
-
-.my-profile .profile__logo .profile__type-notHover:hover {
-  background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
+.my-profile .profile__logo {
+  width: 25%; }
+  @media (min-width: 1400px) {
+    .my-profile .profile__logo {
+      width: 25%; } }
+  .my-profile .profile__logo .profile__logo-img {
+    margin-bottom: 20px; }
+  .my-profile .profile__logo img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover; }
+  .my-profile .profile__logo .icon-camera {
+    position: absolute;
+    bottom: 15px;
+    right: -25px;
+    font-size: 36px;
+    color: #B4B4B4;
+    cursor: pointer; }
+    .my-profile .profile__logo .icon-camera:hover {
+      color: #717171; }
+  .my-profile .profile__logo p {
+    font-size: 24px;
+    font-weight: 600; }
+  .my-profile .profile__logo .profile__type {
+    background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%);
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: #515151;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px; }
+    .my-profile .profile__logo .profile__type:hover {
+      background: linear-gradient(to top, rgba(237, 241, 49, 0.35) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
+    .my-profile .profile__logo .profile__type:focus {
+      box-shadow: none; }
+  .my-profile .profile__logo .profile__type-notHover:hover {
+    background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
 
 .my-profile .profile__rank a {
-  margin-right: 50px;
   color: #64D72F;
   font-size: 40px;
   font-weight: 600;
@@ -50,8 +52,7 @@
 .my-profile .profile__rank .profile__rank-number {
   color: #707070;
   font-size: 24px;
-  font-weight: 700;
-  margin-right: 20px; }
+  font-weight: 700; }
 
 .my-profile .profile__rank i {
   margin: auto 2px;
@@ -62,31 +63,32 @@
   color: #D8D8D8; }
 
 .my-profile .profile__rank span {
+  display: block;
   color: #707070;
   font-size: 20px;
   font-weight: 500; }
 
-.my-profile .profile__contact h3 {
-  font-size: 30px;
-  font-weight: 600;
-  color: #18A0FB; }
-
-.my-profile .profile__contact .profile__contact-content {
-  border-bottom: 1px solid rgba(112, 112, 112, 0.5); }
-
-.my-profile .profile__contact .profile__contact-icon {
-  font-size: 24px;
-  color: #B4B4B4; }
-
-.my-profile .profile__contact .profile__contact-text {
-  font-size: 20px;
-  font-weight: 400;
-  color: #515151; }
-
-.my-profile .profile__NoCarousel {
-  display: flex; }
-  .my-profile .profile__NoCarousel .item {
-    width: 33.33%; }
+.my-profile .profile__contact {
+  width: 28%; }
+  @media (min-width: 1400px) {
+    .my-profile .profile__contact {
+      width: 28%; } }
+  .my-profile .profile__contact h3 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #18A0FB; }
+  .my-profile .profile__contact .profile__contact-content {
+    border-bottom: 1px solid rgba(112, 112, 112, 0.5); }
+  .my-profile .profile__contact .profile__contact-icon {
+    font-size: 24px;
+    color: #B4B4B4; }
+  .my-profile .profile__contact .profile__contact-text {
+    font-size: 18px;
+    font-weight: 400;
+    color: #515151; }
+    @media (min-width: 1400px) {
+      .my-profile .profile__contact .profile__contact-text {
+        font-size: 20px; } }
 
 .my-profile .profile__carousel, .my-profile .profile__NoCarousel {
   position: relative;
@@ -95,7 +97,7 @@
   .my-profile .profile__carousel .item, .my-profile .profile__NoCarousel .item {
     text-align: center; }
     .my-profile .profile__carousel .item:hover > i, .my-profile .profile__NoCarousel .item:hover > i {
-      font-size: 45px; }
+      font-size: 40px; }
     .my-profile .profile__carousel .item:hover > span, .my-profile .profile__NoCarousel .item:hover > span {
       transform: translateY(-5px); }
     .my-profile .profile__carousel .item i, .my-profile .profile__NoCarousel .item i {
@@ -105,25 +107,37 @@
       color: white;
       margin: 5px auto;
       transition: all 0.3s linear;
-      width: 88px;
-      height: 88px;
-      line-height: 88px;
-      font-size: 40px; }
+      width: 65px;
+      height: 65px;
+      line-height: 65px;
+      font-size: 30px; }
+      @media (min-width: 1400px) {
+        .my-profile .profile__carousel .item i, .my-profile .profile__NoCarousel .item i {
+          width: 70px;
+          height: 70px;
+          line-height: 70px;
+          font-size: 32px; } }
     .my-profile .profile__carousel .item span, .my-profile .profile__NoCarousel .item span {
-      margin-top: 20px;
+      margin-top: 10px;
       color: #64D72F;
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;
-      font-size: 20px; }
+      font-size: 14px; }
+      @media (min-width: 1400px) {
+        .my-profile .profile__carousel .item span, .my-profile .profile__NoCarousel .item span {
+          font-size: 16px; } }
   .my-profile .profile__carousel ::deep .owl-nav, .my-profile .profile__NoCarousel ::deep .owl-nav {
     display: block; }
     .my-profile .profile__carousel ::deep .owl-nav .owl-prev, .my-profile .profile__NoCarousel ::deep .owl-nav .owl-prev {
       display: none; }
     .my-profile .profile__carousel ::deep .owl-nav .owl-next, .my-profile .profile__NoCarousel ::deep .owl-nav .owl-next {
       position: absolute;
-      top: -26px;
+      top: -32px;
       right: 0; }
+      @media (min-width: 1400px) {
+        .my-profile .profile__carousel ::deep .owl-nav .owl-next, .my-profile .profile__NoCarousel ::deep .owl-nav .owl-next {
+          top: -32px; } }
       .my-profile .profile__carousel ::deep .owl-nav .owl-next span, .my-profile .profile__NoCarousel ::deep .owl-nav .owl-next span {
         font-size: 80px;
         color: #18A0FB;
@@ -136,14 +150,24 @@
     display: none; }
 
 .my-profile .profile__skills {
-  border: 1px solid rgba(112, 112, 112, 0.5);
-  border-radius: 10px; }
+  width: 32%; }
+  @media (min-width: 1400px) {
+    .my-profile .profile__skills {
+      width: 32%; } }
+  .my-profile .profile__skills .profile__skills-content {
+    border: 1px solid rgba(112, 112, 112, 0.5);
+    border-radius: 10px; }
   .my-profile .profile__skills .profile__content {
-    width: 99%;
-    height: 445px;
-    overflow-y: scroll; }
+    width: 98%;
+    height: 305px;
+    overflow-y: scroll;
+    padding-left: 45px;
+    padding-right: 45px; }
+    @media (min-width: 1400px) {
+      .my-profile .profile__skills .profile__content {
+        height: 323px; } }
     .my-profile .profile__skills .profile__content::-webkit-scrollbar {
-      width: 7px;
+      width: 3px;
       margin-right: 20px; }
     .my-profile .profile__skills .profile__content::-webkit-scrollbar-thumb {
       background-color: #B4B4B4;
@@ -153,16 +177,19 @@
     font-weight: 600;
     color: #18A0FB; }
   .my-profile .profile__skills .profile__skill {
-    margin: 0;
-    padding: 13px 0;
-    font-size: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    font-size: 14px;
     font-weight: 500;
     color: #515151;
     border-bottom: 1px solid rgba(112, 112, 112, 0.5); }
     .my-profile .profile__skills .profile__skill:last-child {
-      border: none; }
-    .my-profile .profile__skills .profile__skill:first-child {
-      padding-top: 0; }
+      border: none;
+      margin-bottom: 0px;
+      padding-bottom: 0px; }
+    @media (min-width: 1400px) {
+      .my-profile .profile__skills .profile__skill {
+        font-size: 16px; } }
 
 .my-profile .profile__dictum {
   font-size: 24px;

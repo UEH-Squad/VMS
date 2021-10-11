@@ -12,16 +12,20 @@
         height: auto;
     }
 }
+
 @keyframes pop-up {
     0% {
         opacity: 0;
     }
+
     10% {
         opacity: 1;
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -29,7 +33,6 @@
 
 
 .card-btn {
-    padding: 6px 15px;
     background-color: $green;
     color: white;
     border-radius: 5px;
@@ -69,6 +72,7 @@
     height: 267px;
     margin-bottom: 15px;
     background-color: $grey;
+    border-radius: 10px;
 }
 
 //----------------------CARD IMG--------------------//
@@ -103,6 +107,7 @@
                 color: $blue;
                 text-decoration: none;
             }
+
             a:hover {
                 color: $blue-hv;
             }
@@ -114,7 +119,7 @@
             margin-bottom: 5px;
         }
 
-       ::deep &__desc {
+        ::deep &__desc {
             font-family: Montserrat;
             font-style: normal;
             font-weight: normal;
@@ -122,7 +127,7 @@
             color: $grey-text;
             margin-bottom: 10px;
 
-            p{
+            p {
                 margin-bottom: 0;
             }
         }
@@ -147,7 +152,8 @@
             &__icon {
                 color: $green;
                 display: inline-block;
-                span{
+
+                span {
                     transform: translateY(25%);
                     font-size: 24px;
                 }
@@ -158,69 +164,91 @@
             }
         }
     }
+
+    &__footer {
+        bottom: 0;
+        &__btn {
+            width: fit-content;
+        }
+    }
 }
 //---------------------CARD BTN--------------------//
 .org-card {
-    &__btn-edit {
-        position: absolute;
-        top: 0;
-        right: 0;
-        cursor: pointer;
+    .act-menu {
+        top: 20px;
+        right: 7px;
+        width: fit-content;
+    }
 
-        &__list {
-            display: none;
-            width: 600%;
-            transform: translate(-100%,18%);
-            font-weight: 500;
+    .rate-menu {
+        top: 34px;
+        right: -95px;
+        width: max-content;
+    }
+
+    ul {
+        background: $white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+        z-index: 1;
+
+        li, a {
+            list-style: none;
             font-size: 16px;
-            line-height: 36px;
-            text-align: start;
-            animation: dropDown 0.2s ease backwards;
+            font-weight: 500;
+            padding: 10px 20px;
+            display: block;
 
-            .item-1 {
-                color: $grey-text;
-            }
-
-            .item-2 {
-                color: red;
-            }
-
-            .item-3 {
-                color: $green;
-            }
-
-            li {
-                z-index: 10000;
-                list-style: none;
-                padding: 0 10px;
-            }
-
-            li:hover {
+            &:hover {
                 background: rgba(24, 160, 251, 0.1);
             }
+        }
+
+        .edit {
+            color: $grey-text;
+            cursor: pointer;
+        }
+
+        .delete {
+            color: $red;
+            cursor: pointer;
+        }
+
+        .close {
+            color: $green;
+            cursor: pointer;
+        }
+    }
+
+    .org-card__member {
+        margin-right: 62px;
+
+        .material-icons, {
+            color: $green;
+        }
+    }
+
+    .material-icons, {
+        color: $grey-text;
+        font-size: 24px;
+        right: 10px;
+        top: 2px;
+
+        &:hover {
+            cursor: pointer;
         }
     }
 
     &__btn-list {
-        position: absolute;
-        bottom: 0;
-        left: 59%;
-        transform: translate(-5%,-50%);
+        width: 157px;
     }
 
     &__cbb-rate {
-        position: absolute;
-        bottom: 0;
-        left: 75%;
-        transform: translate(0,-50%);
-        min-width: 136px;
+        width: 120px;
         background-color: $blue;
 
-        .expand-icon {
-            position: absolute;
-            top: 0;
-            right: 0;
-            transform: translate(-20%, 25%);
+        &:hover {
+            background-color: $blue-bold;
         }
 
         &__list {
@@ -242,24 +270,17 @@
     }
 
     &__noti {
-        position: absolute;
-        bottom: 0;
-        left: 78%;
-        transform: translate(0,-50%);
         padding: 5px 15px;
         font-weight: 400;
         font-size: 14px;
         color: $red-warning;
         text-indent: 5px;
+        bottom: 5px;
+        right: 0;
     }
 
     &__member {
-        position: absolute;
-        bottom: 0;
-        left: 37%;
-        transform: translate(0,-50%);
-        padding: 5px 15px;
-        text-indent: 5px;
+        width: fit-content;
 
         &__text {
             font-weight: 400;
@@ -272,6 +293,7 @@
         }
     }
 }
+
 
 //-------------------------CARD NOTIFICATION----------------------//
 //------------Reuse Icon-------------//
@@ -301,6 +323,7 @@
     z-index: 1000;
     background-color: rgba(0,0,0,0.01);
 }
+
 .notify {
     display: flex;
     justify-content: center;

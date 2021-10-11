@@ -100,6 +100,10 @@
     border-radius: 0 0 10px 10px;
     min-height: 162px;
 
+    a {
+        min-height: 162px;
+    }
+
     .content-cl {
         background-color: rgba(100,100,100,.2);
     }

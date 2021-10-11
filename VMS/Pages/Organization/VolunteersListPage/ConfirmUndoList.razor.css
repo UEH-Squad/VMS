@@ -58,7 +58,7 @@
       color: #717171; }
   .pop-up .pop-up-content {
     padding: 13px 55px; }
-    .pop-up .pop-up-content .delete-act {
+    .pop-up .pop-up-content .undo-act {
       font-size: 18px;
       line-height: 36px;
       font-weight: 500;
@@ -83,7 +83,7 @@
       color: #64D72F; }
     .pop-up .content .close-text {
       color: #18A0FB; }
-    .pop-up .content .delete-text {
+    .pop-up .content .undo-text {
       color: #18A0FB; }
   .pop-up .pop-up-btn {
     display: flex;

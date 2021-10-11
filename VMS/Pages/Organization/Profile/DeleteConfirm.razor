@@ -3,7 +3,7 @@
 <div class="pop-up">
     <div class="center-screen">
         <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-block" : "d-none")">
-            <div @onclick="CloseModal" class="close-btn">
+            <div @onclick="CloseModalAsync" class="close-btn">
                 <span class="material-icons">
                     close
                 </span>
@@ -13,13 +13,13 @@
                 <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
-                <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="btn accept px-0">Xác nhận</div>
+                <div @onclick="CloseModalAsync" class="btn px-0 deny">Hủy</div>
+                <div @onclick="DeleteSuccessAsync" class="btn accept px-0">Xác nhận</div>
             </div>
         </div>
 
         <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-none" : "d-block")">
-            <div @onclick="CloseModal" class="close-btn-s">
+            <div @onclick="CloseModalAsync" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
@@ -32,27 +32,22 @@
 </div>
 
 @code {
+
+    private bool isDeleteSuccess;
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
-    [Parameter]
-    public int ActId { get; set; }
-
-    bool isDeleteSuccess;
 
     [Inject]
     private IActivityService ActivityService { get; set; }
 
-    private async Task CloseModal()
+    private async Task CloseModalAsync()
     {
         await Modal.CloseAsync(ModalResult.Ok<bool>(isDeleteSuccess));
     }
 
-    private async Task DeleteSuccess()
+    private async Task DeleteSuccessAsync()
     {
-        bool delete = true;
-        await ActivityService.UpdateStatusActAsync(ActId, false ,delete);
         isDeleteSuccess = true;
-        await CloseModal();
     }
-
 }

@@ -18,3 +18,4 @@ export const OrganizeCarousel = () => organizationProfile.organizeCarousel();
 export const RankCarousel = () => homepage.rankCarousel();
 export const EditProfileCarousel = () => organizationProfile.editProfileCarousel();
 export const AddOutsideClickMenuHandler = (dotnetHelper, methodName) => organizationProfile.addOutsideClickMenuHandler(dotnetHelper, methodName);
+

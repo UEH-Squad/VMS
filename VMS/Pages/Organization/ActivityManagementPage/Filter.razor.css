@@ -76,6 +76,9 @@ input[type="checkbox"]:checked:after {
   background-color: #64D72F;
   transition: all 0.25s; }
 
+.btn:hover {
+  background-color: #306C14; }
+
 .btn:active {
   transform: translateY(3px); }
 
@@ -85,5 +88,5 @@ input[type="checkbox"]:checked:after {
   cursor: pointer;
   font-weight: 500;
   font-size: 16px;
-  color: #B4B4B4;
+  color: #707070;
   background-color: #fff; }

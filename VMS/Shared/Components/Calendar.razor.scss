@@ -24,6 +24,9 @@ input[type=date] {
 .btn {
     @include green-btn;
     font-weight: 600;
+    &:hover{
+        background-color: $green-bold;
+    }
 }
 
 .calendar-button-group {
@@ -31,6 +34,10 @@ input[type=date] {
         color: $blue;
         cursor: pointer;
         font-size: 2rem;
+
+        &:hover {
+            color: $blue-bold;
+        }
     }
 }
 

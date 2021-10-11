@@ -1,7 +1,7 @@
 ﻿@import "../../Resources/scss/common/_variables";
 
 .schedule__act {
-    cursor: pointer;
+
     h3 {
         font-size: 30px;
         font-weight: 600;
@@ -28,6 +28,7 @@
 
 
     &-item {
+        cursor: pointer;
         border: 1px solid #C4C4C4;
         border-radius: 5px;
 

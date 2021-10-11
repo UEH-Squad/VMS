@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row act">
-        <h1>Hoạt động <span>@Title</span></h1>
+        <h1 class="mb-5">Hoạt động <span>@Title</span></h1>
         @if (Datas is not null)
         {
             <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
@@ -64,13 +64,13 @@
             @if (HaveDecor)
             {
                 <div class="col-8">
-                    <div class="bottom-line act"></div>
+                    <hr class="bottom-line my-5" />
                 </div>
             }
             else
             {
                 <div class="col-8 ms-auto">
-                    <div class="bottom-line"></div>
+                    <hr class="bottom-line  my-5" />
                 </div>
             }
         }

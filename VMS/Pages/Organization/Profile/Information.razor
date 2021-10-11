@@ -3,7 +3,7 @@
 <div class="my-information pb-5">
     <div class="container">
         <div class="row ">
-            <div class="col-5 text-center information__logo">
+            <div class="col-4 text-center information__logo">
                 <div class="information__logo-img">
                     <div class=" text-center d-inline-block position-relative">
                         <img src="@Org?.Avatar" alt="Avartar đơn vị">
@@ -19,17 +19,17 @@
                 </div>
 
                 <p class="m-0">@Org?.FullName</p>
-                <span>Tham gia từ năm @Org?.CreatedDate.Year</span>
+                <span class="information__tilte mx-auto my-3">Tổ chức hoàn hảo</span>
                 @if (HaveControl)
                 {
-                    <a href="@Routes.CreateActivity" class="information__logo-button">
+                    <a href="@Routes.CreateActivity" class="information__logo-button mx-auto d-flex align-items-center justify-content-center">
                         <i class="material-icons-outlined">add</i>
-                        <span class="my-0 mx-auto">Tạo hoạt động mới</span>
+                        <span class="ms-2">Tạo hoạt động mới</span>
                     </a>
                 }
             </div>
-            <div class="col-7 ms-auto my-auto">
-                <div class=" pb-4 row-1">
+            <div class="col-8">
+                <div class="row-1 d-flex align-items-center">
                     <div class="col-left information__rank d-flex justify-content-evenly align-self-center">
                         <a href="@Routes.EditOrgProfile" class="d-flex align-self-center">
                             #@Org?.Rank @*There will be processing code in another place*@
@@ -63,7 +63,7 @@
                             </i>
                             <a href="mailto:@Org?.Email">@Org?.Email</a>
                         </p>
-                        <p class="d-flex align-self-center">
+                        <p class="d-flex align-self-center mb-0">
                             <i class="material-icons">
                                 contact_phone
                             </i>
@@ -72,15 +72,16 @@
                     </div>
 
                 </div>
-                <div class="row-2 pt-4 align-items-center">
+                <div class="information__line"></div>
+                <div class="row-2 d-flex align-items-start">
                     <div class="col-left information__fields">
-                        <h3>Lĩnh vực <span>chuyên môn</span></h3>
-                        <div class=" @(Org.UserAreas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex information__NoCarousel pe-0 ") ">
+                        <h3 class="mb-4 pb-2">Lĩnh vực <span>chuyên môn</span></h3>
+                        <div class=" @(Org.UserAreas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex justify-content-center information__NoCarousel px-0 ") ">
                             @if (Org != null)
                             {
                                 @foreach (var area in Org.UserAreas)
                                 {
-                                    <div class="item mx-auto">
+                                    <div class="item  @(Org.UserAreas.Count>3 ?"" :"mx-3")">
                                         <i class="material-icons">@area.Area.Icon</i>
                                         <span>@area.Area.Name</span>
                                     </div>
@@ -91,7 +92,7 @@
                     </div>
                     <div class="line mx-2"></div>
                     <div class="col-right information__act px-0">
-                        <h3>Số hoạt động <span>đã tạo</span></h3>
+                        <h3 class=" mb-4 pb-2">Số hoạt động <span>đã tạo</span></h3>
                         <div class="d-flex justify-content-evenly align-self-center">
                             <span class="information__act-number">@Org?.Activities.Count</span>
                         </div>

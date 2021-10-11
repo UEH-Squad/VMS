@@ -6,8 +6,6 @@
         font-size: 30px;
         line-height: 36px;
         color: $grey-text;
-        margin-bottom: 42px;
-        margin-top: 70px;
 
         span {
             color: $green;
@@ -19,9 +17,9 @@
     }
 
     .bottom-line {
-        background-color: rgba(70, 70, 70, 0.5);
+        background-color: #707070;
+        opacity: 50%;
         height: 1px;
-        margin-top: 50px;
     }
 }
 
@@ -244,7 +242,6 @@
     display: none;
 }
 .act__linkAll {
-    margin-top: 50px;
 
     a {
         font-weight: 600;

@@ -21,17 +21,18 @@
     }
 
     .notification__img {
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
         overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border-bottom: 1px solid $border-color-bold;
+
+        img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
     }
 
-    button {
-    }
 
     .btn__cancel {
         color: $border-color-bold;

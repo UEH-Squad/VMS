@@ -13,7 +13,7 @@
         font-size: 18px;
     }
 
-    .required-asterick{
+    .required-asterick {
         color: $error;
     }
 
@@ -86,7 +86,11 @@
         text-align: center;
 
         &:hover > i {
-            font-size: 50px;
+            font-size: 40px;
+
+            @include on("xxl") {
+                font-size: 45px;
+            }
         }
 
         &:hover > span {
@@ -103,13 +107,13 @@
             width: 73px;
             height: 73px;
             line-height: 73px;
-            font-size: 35px;
+            font-size: 30px;
 
             @include on("xxl") {
                 width: 83px;
                 height: 83px;
                 line-height: 83px;
-                font-size: 40px;
+                font-size: 35px;
             }
         }
 
@@ -130,12 +134,12 @@
             background: $grey-close-bg;
             opacity: 50%;
             color: $white;
-            font-size: 70px;
+            font-size: 60px;
 
             &:hover {
                 background: $grey-close-bg;
                 opacity: 100%;
-                font-size: 80px;
+                font-size: 70px;
             }
         }
 

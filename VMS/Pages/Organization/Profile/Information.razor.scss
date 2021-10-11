@@ -3,10 +3,6 @@
 .my-information {
     padding: 50px 0;
 
-    .row-1, .row-2 {
-        display: flex
-    }
-
     .col-left {
         width: 55%;
     }
@@ -16,10 +12,8 @@
     }
 
     .information__logo {
-
         .information__logo-img {
             margin-bottom: 20px;
-            width: 80%;
         }
 
         img {
@@ -32,7 +26,7 @@
         .icon-camera {
             position: absolute;
             bottom: 15px;
-            right: -10px;
+            right: -25px;
             font-size: 36px;
             color: $grey-icon;
             cursor: pointer;
@@ -43,29 +37,32 @@
         }
 
         p {
-            width: 80%;
             font-size: 28px;
             font-weight: 600;
         }
 
-        span {
-            display: block;
-            width: 80%;
-            margin: 15px 0 20px 0;
-            text-align: center;
-            color: $blue;
+        .information__tilte {
+            display: inline-block;
+            background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%);
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: #515151;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background: linear-gradient(to top, rgba(237, 241, 49, 0.35) 43.23%, rgba(255, 255, 255, 0.45) 100%);
+            }
         }
 
         .information__logo-button {
-            width: 80%;
-            position: relative;
-            display: block;
+            width: 85%;
             background: rgba(100, 215, 47, 0.8);
             color: $white;
             text-decoration: none;
-            padding: 9px;
+            padding: 3px 20px;
             border-radius: 50px;
             text-align: center;
             transition: all 0.2s linear;
@@ -76,24 +73,24 @@
             }
 
             i {
-                position: absolute;
-                top: 50%;
-                left: 5%;
-                transform: translateY(-50%);
-                font-size: 40px;
+                font-size: 32px;
                 font-weight: 600;
             }
 
             span {
                 color: $white;
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: 700;
             }
         }
     }
 
-    .row-1 {
-        border-bottom: 1px solid rgba(112, 112, 112, .5);
+
+    .information__line {
+        background: rgba(112, 112, 112, .5);
+        height: 1px;
+        width: 90%;
+        margin: 40px auto;
     }
 
     .information__rank {
@@ -145,7 +142,7 @@
             text-align: center;
             font-size: 24px;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin: 0;
 
             span {
                 color: $blue;
@@ -154,14 +151,16 @@
     }
 
     .line {
-        height: 122px;
+        height: 120px;
         width: 1px;
+        margin: auto 0;
         background-color: rgba(112, 112, 112, .5);
     }
 
     .information__carousel, .information__NoCarousel {
         position: relative;
-        padding-right: 30px;
+        padding-right: 60px;
+        padding-left: 30px;
         z-index: 0;
 
         .item {
@@ -182,19 +181,29 @@
                 color: white;
                 margin: 5px auto;
                 transition: all 0.3s linear;
-                width: 75px;
-                height: 75px;
-                line-height: 75px;
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
                 font-size: 30px;
+
+                @include on("xxl") {
+                    width: 75px;
+                    height: 75px;
+                    line-height: 75px;
+                }
             }
 
             span {
-                margin-top: 20px;
+                margin-top: 10px;
                 color: $green;
                 font-weight: 500;
                 display: inline-block;
                 transition: all 0.3s linear;
-                font-size: 18px;
+                font-size: 16px;
+
+                @include on("xxl") {
+                    font-size: 18px;
+                }
             }
         }
 
@@ -208,7 +217,7 @@
             .owl-next {
                 position: absolute;
                 top: -32px;
-                right: 0;
+                right: 30px;
 
                 span {
                     font-size: 80px;
@@ -236,8 +245,7 @@
             text-align: center;
             font-size: 24px;
             font-weight: 600;
-            margin-bottom: 20px;
-            margin-top: -36px;
+            margin: 0;
 
             span {
                 color: $blue;

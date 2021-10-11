@@ -8,9 +8,7 @@
   font-weight: 600;
   font-size: 30px;
   line-height: 36px;
-  color: #515151;
-  margin-bottom: 42px;
-  margin-top: 70px; }
+  color: #515151; }
   .act h1 span {
     color: #64D72F; }
 
@@ -18,9 +16,9 @@
   z-index: 0; }
 
 .act .bottom-line {
-  background-color: rgba(70, 70, 70, 0.5);
-  height: 1px;
-  margin-top: 50px; }
+  background-color: #707070;
+  opacity: 50%;
+  height: 1px; }
 
 .overlay {
   background-color: rgba(100, 100, 100, 0.2);
@@ -179,15 +177,13 @@
 ::deep .owl-dots {
   display: none; }
 
-.act__linkAll {
-  margin-top: 50px; }
-  .act__linkAll a {
-    font-weight: 600;
-    font-size: 24px;
-    color: #64D72F; }
-    .act__linkAll a:hover {
-      color: #306C14;
-      cursor: pointer; }
+.act__linkAll a {
+  font-weight: 600;
+  font-size: 24px;
+  color: #64D72F; }
+  .act__linkAll a:hover {
+    color: #306C14;
+    cursor: pointer; }
 
 .favorite {
   right: 10px;

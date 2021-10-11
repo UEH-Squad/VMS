@@ -94,7 +94,7 @@ const rankCarousel = () => {
         nav: true,
         autoplay: true,
         autoplayTimeout: 5000,
-        autoplaySpeed: 1500,
+        autoplaySpeed: 5000,
         navSpeed: 1500,
         dotsSpeed: 1500,
         responsiveClass: true,
@@ -105,11 +105,11 @@ const rankCarousel = () => {
             },
             1200: {
                 items: 1,
-                stagePadding: 140,
+                stagePadding: 135,
             },
             1400: {
                 items: 1,
-                stagePadding: 180,
+                stagePadding: 160,
             },
         }
     })

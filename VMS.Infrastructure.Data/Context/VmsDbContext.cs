@@ -136,9 +136,10 @@ namespace VMS.Infrastructure.Data.Context
                     new Area { Id = 12, Name = "Công nghệ", Icon = "computer" }
             );
 
+            const string ADMIN_ROLE_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e570";
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
-                Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
+                Id = ADMIN_ROLE_ID,
                 Name = Role.Admin.ToString(),
                 NormalizedName = Role.Admin.ToString()
             });
@@ -155,6 +156,28 @@ namespace VMS.Infrastructure.Data.Context
                 Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
                 Name = Role.User.ToString(),
                 NormalizedName = Role.User.ToString()
+            });
+
+            // seed admin account
+            const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
+
+            PasswordHasher<User> hasher = new();
+            builder.Entity<User>().HasData(new User
+            {
+                Id = ADMIN_ID,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "hsv.ueh@ueh.edu.vn",
+                NormalizedEmail = "hsv.ueh@ueh.edu.vn",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                SecurityStamp = string.Empty
+            });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = ADMIN_ROLE_ID,
+                UserId = ADMIN_ID
             });
 
             builder.Entity<Faculty>()

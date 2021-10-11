@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<AdminHeader />
+
+<main class="container-fluid flex-grow-1">
+    <div class="row">
+        <AdminSidebar />
+
+        <div class="col-9 flex-grow-1">
+            @Body
+        </div>
+    </div>
+</main>
+
+<Footer />
+
+@code {
+
+}

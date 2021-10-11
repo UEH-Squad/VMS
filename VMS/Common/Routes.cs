@@ -39,5 +39,11 @@
         public const string Manage = "Identity/Account/Manage";
 
         #endregion Identity
+
+        #region Admin
+
+        public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
+
+        #endregion Admin
     }
 }

@@ -1,0 +1,86 @@
+﻿@page "/admin/dang-nhap"
+
+@using VMS.Areas.Identity.Pages.Admin
+
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+<div class="col-12 p-0">
+    <h3 class="text-center login-heading">@ViewData["Title"]</h3>
+    <div class="row">
+        <section>
+            <form id="account" method="post">
+                <div class="form-group mt-4">
+                    <div class="position-relative">
+                        <input asp-for="Input.UserName" class="my-input" placeholder="Tên đăng nhập" />
+                        <span class="material-icons error-icon">
+                            error
+                        </span>
+                    </div>
+                    <span asp-validation-for="Input.UserName" class="text-danger d-block mt-2"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <div class="position-relative">
+                        <input asp-for="Input.Password" class="my-input" type="password" placeholder="Mật khẩu" />
+                        <span class="material-icons show-password-icon">
+                            visibility_off
+                        </span>
+                        <span class="material-icons error-icon">
+                            error
+                        </span>
+                    </div>
+                    <span asp-validation-for="Input.Password" class="text-danger d-block mt-2"></span>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe" class="mt-4 d-flex align-items-center" style="cursor:pointer;">
+                            <input asp-for="Input.RememberMe" class="remember-checkbox" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <p class="text-end">
+                    <a id="forgot-password" asp-page="./ForgotPassword">Quên mật khẩu?</a>
+                </p>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary form-login-btn">Đăng nhập</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+@section Styles {
+    <link href="@Url.Content("~/css/IdentityCss/Login.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const visibilityIcon = document.querySelector(".show-password-icon");
+        const password = document.querySelector("input[type='password']");
+
+        password.addEventListener('input', () => {
+            if (password.value) {
+                visibilityIcon.style.display = 'block';
+            }
+            else {
+                visibilityIcon.style.display = 'none';
+            }
+        })
+
+        visibilityIcon.addEventListener('click', () => {
+            if (password.getAttribute('type') === 'password') {
+                password.setAttribute('type', 'text');
+                visibilityIcon.innerHTML = 'visibility';
+            }
+            else {
+                password.setAttribute('type', 'password');
+                visibilityIcon.innerHTML = 'visibility_off';
+            }
+        })
+    </script>
+}

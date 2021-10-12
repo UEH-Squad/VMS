@@ -308,6 +308,30 @@
     "inputFile": "Pages/SearchOrganizer/SearchResult.razor.scss"
   },
   {
+    "outputFile": "Shared/Components/RequireSignup.razor.css",
+    "inputFile": "Shared/Components/RequireSignup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/LoginRequire.razor.css",
+    "inputFile": "Pages/Organization/Profile/LoginRequire.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/DeleteConfirm.razor.css",
+    "inputFile": "Pages/Organization/Profile/DeleteConfirm.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/Index.razor.css",
+    "inputFile": "Pages/ActivityLogPage/Index.razor.sass"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/ActivityCard.razor.css",
+    "inputFile": "Pages/ActivityLogPage/ActivityCard.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/Filter.razor.css",
+    "inputFile": "Pages/ActivityLogPage/Filter.razor.scss"
+  },
+  {
     "outputFile": "Pages/Organization/Profile/Appellation.razor.css",
     "inputFile": "Pages/Organization/Profile/Appellation.razor.scss"
   }

@@ -36,7 +36,12 @@ namespace VMS.Pages.Organization.Profile
 
         protected override async Task OnParametersSetAsync()
         {
-            await base.OnParametersSetAsync();
+            if (string.IsNullOrEmpty(CurrentUserId) && string.IsNullOrEmpty(UserId))
+            {
+                NavigationManager.NavigateTo(Routes.LogIn, true);
+            }
+
+            UserId = string.IsNullOrEmpty(UserId) ? CurrentUserId : UserId;
 
             org = OrganizationService.GetOrgFull(UserId);
             bool isUserOrg = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);

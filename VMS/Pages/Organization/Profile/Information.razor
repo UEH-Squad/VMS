@@ -76,14 +76,14 @@
                 <div class="row-2 d-flex align-items-start">
                     <div class="col-left information__fields">
                         <h3 class="mb-4 pb-2">Lĩnh vực <span>chuyên môn</span></h3>
-                        <div class=" @(Org.UserAreas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex justify-content-center information__NoCarousel px-0 ") ">
+                        <div class=" @(Org.Areas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex justify-content-center information__NoCarousel px-0 ") ">
                             @if (Org != null)
                             {
-                                @foreach (var area in Org.UserAreas)
+                                @foreach (var area in Org.Areas)
                                 {
-                                    <div class="item  @(Org.UserAreas.Count>3 ?"" :"mx-3")">
-                                        <i class="material-icons">@area.Area.Icon</i>
-                                        <span>@area.Area.Name</span>
+                                    <div class="item  @(Org.Areas.Count>3 ?"" :"mx-3")">
+                                        <i class="material-icons">@area.Icon</i>
+                                        <span>@area.Name</span>
                                     </div>
                                 }
                             }

@@ -1,4 +1,5 @@
-﻿@attribute [Route(Routes.UserProfile)]
+﻿@attribute [Route(Routes.UserProfile + "/{UserId}")]
+@attribute [Route(Routes.UserProfile)]
 
 <UserProfile IsUser="true"></UserProfile>
 <UserAct></UserAct>

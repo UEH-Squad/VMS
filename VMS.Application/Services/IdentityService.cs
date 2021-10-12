@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
 using VMS.Common.Enums;
 using VMS.Domain.Models;
 
@@ -93,5 +94,9 @@ namespace VMS.Application.Services
             Task.Run(() => _userManager.UpdateAsync(user));
         }
 
+        public async Task<UserViewModel> GetUserViewModelAsync(string userId)
+        {
+            return null;
+        }
     }
 }

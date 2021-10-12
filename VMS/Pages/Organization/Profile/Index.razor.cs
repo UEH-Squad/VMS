@@ -79,6 +79,6 @@ namespace VMS.Pages.Organization.Profile
                                                                  && !string.IsNullOrEmpty(org.PhoneNumber)
                                                                  && !string.IsNullOrEmpty(org.Mission)
                                                                  && !string.IsNullOrEmpty(org.Banner)
-                                                                 && org.UserAreas.Count != 0;
+                                                                 && org.Areas.Count != 0;
     }
 }

@@ -1,6 +1,7 @@
 ﻿import { smoothScrollTo, hookFileUploadEvent } from './common';
 import homepage from './homepage';
 import activitiespage from './activityInfo';
+import userProfile from './userProfile';
 import organizationProfile from './organizationProfile';
 
 export const SmoothScrollTo = (element) => smoothScrollTo(element);
@@ -12,6 +13,8 @@ export const SetUserLocation = () => homepage.setUserLocation();
 export const GetUserLocation = () => homepage.getUserLocation();
 export const IncreaseNumber = () => homepage.increaseNumber();
 export const OtherAct = () => activitiespage.otherAct();
+export const ProfileCarousel = () => userProfile.profileCarousel();
+export const ActCarousel = () => userProfile.actCarousel();
 export const ShowResult = () => homepage.showResult();
 export const InformationCarousel = () => organizationProfile.informationCarousel();
 export const OrganizeCarousel = () => organizationProfile.organizeCarousel();

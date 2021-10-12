@@ -16,13 +16,13 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public class OrganizationService : BaseService,IOrganizationService
+    public class OrganizationService : BaseService, IOrganizationService
     {
         private readonly UserManager<User> _userManager;
-        public OrganizationService(UserManager<User> userManager, 
+        public OrganizationService(UserManager<User> userManager,
                                    IRepository repository,
                                    IDbContextFactory<VmsDbContext> dbContextFactory,
-                                   IMapper mapper ) : base(repository, dbContextFactory, mapper)
+                                   IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
             _userManager = userManager;
         }
@@ -37,15 +37,17 @@ namespace VMS.Application.Services
                 _ => null
             });
         }
-        public  UserViewModel GetOrgFull(string id)
+        public UserViewModel GetOrgFull(string id)
         {
             User org;
             if (CheckRoleOrg(id) != null)
             {
-                org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas).ThenInclude(x => x.Area)
-                                                    .Include(x => x.Activities)
-                                                    .Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
-                                                    .SingleOrDefaultAsync(x => x.Id == id)).Result;
+                org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas)
+                                                       .ThenInclude(x => x.Area)
+                                                       .Include(x => x.Activities)
+                                                       .Include(x => x.Recruitments)
+                                                       .ThenInclude(x => x.RecruitmentRatings)
+                                                       .SingleOrDefaultAsync(x => x.Id == id)).Result;
                 UserViewModel orgRatingViewModels = new();
                 orgRatingViewModels = _mapper.Map<UserViewModel>(org);
                 List<Recruitment> recruitments = org.Recruitments.ToList();
@@ -66,8 +68,8 @@ namespace VMS.Application.Services
                     orgRatingViewModels.AverageRating = (float)Math.Round(sumRating / quantityRating, 1);
                 }
                 else
-                { 
-                    orgRatingViewModels.AverageRating = 5; 
+                {
+                    orgRatingViewModels.AverageRating = 5;
                 }
 
                 return orgRatingViewModels;
@@ -75,8 +77,8 @@ namespace VMS.Application.Services
             else
             {
                 return null;
-            }   
-           
+            }
+
         }
 
         public async Task UpdateUserAsync(UpdateUserViewModel updateUserViewModel, string userId)

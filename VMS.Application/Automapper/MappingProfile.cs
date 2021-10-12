@@ -17,6 +17,9 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
             CreateMap<User, UserViewModel>();
+            CreateMap<CreateUserProfileViewModel, User>();
+            CreateMap<User, CreateUserProfileViewModel>();
+            CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
         }
     }

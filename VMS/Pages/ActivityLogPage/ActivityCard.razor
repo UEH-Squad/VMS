@@ -142,7 +142,7 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        Modal1.Show<VMS.Pages.RatingPage.PopUpComment>("", options);
+        Modal1.Show<VMS.Pages.Organization.RatingPage.PopUpComment>("", options);
     }
 
     [CascadingParameter] public IModalService Modal2 { get; set; }
@@ -155,7 +155,7 @@
             DisableBackgroundCancel = true,
             UseCustomLayout = true
         };
-        Modal2.Show<VMS.Pages.RatingPage.PopUpReportMember>("", options);
+        Modal2.Show<VMS.Pages.Organization.RatingPage.PopUpReportMember>("", options);
     }
 
 }

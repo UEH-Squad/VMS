@@ -25,10 +25,10 @@
                     <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-4   py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
                 </li>
                 <li class="nav-item"> 
-                    <NavLink href="@Routes.Organizations" class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
+                    <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a href="@Routes.Map" class="text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</a>
+                    <NavLink href="@Routes.UserProfile" class="nav-link text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
                 </li>
             </ul>
             <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
@@ -41,6 +41,8 @@
 
 @code
 {
+    string userProfileUrl;
+
     [Parameter]
     public bool IsFixedTop { get; set; }
 }

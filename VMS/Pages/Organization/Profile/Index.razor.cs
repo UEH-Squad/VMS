@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.Services;
 using VMS.Application.ViewModels;
+using VMS.Common;
 
 namespace VMS.Pages.Organization.Profile
 {
     public partial class Index : ComponentBase
     {
-        private UserViewModel org =new();
+        private UserViewModel org = new();
         private List<ActivityViewModel> actCurrent = new();
         private List<ActivityViewModel> actFavorite = new();
         private List<ActivityViewModel> actEnded = new();
@@ -17,64 +18,67 @@ namespace VMS.Pages.Organization.Profile
         public bool haveControl;
         public bool haveFav;
         public bool haveLogin;
+        
         [Parameter]
         public string UserId { get; set; }
+
+        [CascadingParameter]
+        public string CurrentUserId { get; set; }
+
         [Inject]
         private IOrganizationService OrganizationService { get; set; }
+        
         [Inject]
         private IActivityService ActivityService { get; set; }
-        [Inject]
-        private IIdentityService IdentityService { get; set; }
+        
         [Inject]
         NavigationManager NavigationManager { get; set; }
-        protected async override Task OnInitializedAsync()
+
+        protected override async Task OnParametersSetAsync()
         {
-            if (string.IsNullOrEmpty(UserId))
-            {
-                UserId = IdentityService.GetCurrentUserId();
-            }
+            await base.OnParametersSetAsync();
 
             org = OrganizationService.GetOrgFull(UserId);
-            if (CheckInforUser(org)==false)
+            bool isUserOrg = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);
+
+            if (isUserOrg)
             {
-                NavigationManager.NavigateTo("/chinh-sua-thong-tin");
+                if (!CheckInforUser(org))
+                {
+                    NavigationManager.NavigateTo(Routes.EditOrgProfile);
+                }
+
+                haveFav = false;
+                haveControl = true;
             }
 
             actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
             actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);
             actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.Ended);
 
-            if (IdentityService.GetCurrentUserId() != null)
+            if (string.IsNullOrEmpty(CurrentUserId))
             {
-               if(IdentityService.GetCurrentUserId() == UserId)
-                {
-                    haveFav = false;
-                    haveControl = true;
-                    
-                }
-                else
-                {
-                    haveFav = true;
-                    haveControl = false;
-                }
-                haveLogin = true;
-            }
-            else
-            {
+                // anonymous user
                 haveFav = true;
                 haveLogin = false;
                 haveControl = false;
+                return;
             }
+
+            if (!isUserOrg)
+            {
+                haveFav = true;
+                haveControl = false;
+            }
+
+            haveLogin = true;
         }
 
-        private static bool CheckInforUser( UserViewModel org)
-        {
-            if( string.IsNullOrEmpty(org.FullName) || string.IsNullOrEmpty(org.Email) || string.IsNullOrEmpty(org.PhoneNumber)||
-                string.IsNullOrEmpty(org.Mission) || string.IsNullOrEmpty(org.Banner) || org.UserAreas.Count == 0)
-            {
-                return false;
-            }
-            return true;
-        }
+        private static bool CheckInforUser(UserViewModel org) => !string.IsNullOrEmpty(org.FullName)
+                                                                 && !string.IsNullOrEmpty(org.Email)
+                                                                 && !string.IsNullOrEmpty(org.PhoneNumber)
+                                                                 && !string.IsNullOrEmpty(org.Mission)
+                                                                 && !string.IsNullOrEmpty(org.Banner)
+                                                                 && org.UserAreas.Count != 0;
     }
 }

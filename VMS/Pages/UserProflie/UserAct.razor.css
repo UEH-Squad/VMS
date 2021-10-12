@@ -1,0 +1,26 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.act h3 {
+  font-weight: 600;
+  font-size: 30px;
+  color: #515151; }
+  .act h3 span {
+    color: #64D72F; }
+
+.act .item {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #F3F3F5; }
+
+.act__img img {
+  height: 260px;
+  object-fit: cover; }
+
+.act__content p {
+  font-weight: 400;
+  font-size: 20px;
+  color: #18A0FB; }

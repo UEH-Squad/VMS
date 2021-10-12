@@ -23,8 +23,7 @@
 
     .report-success {
         position: absolute;
-        height: 160px;
-        width: 500px;
+        padding: 40px 75px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -40,8 +39,8 @@
 
         .min-overlay--icon {
             position: absolute;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             width: 33px;
             height: 33px;
             background-color: $grey-bg;
@@ -66,17 +65,16 @@
     }
 }
 
-.container {
+.my-container {
+    width: 600px;
     position: absolute;
-    width: 51%;
-    height: 94%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     color: $grey-text;
     background-color: white;
     border-radius: 10px;
-    padding: 0 60px 60px 60px;
+    padding: 0 60px 30px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -107,7 +105,6 @@
     }
 
     .title {
-        margin-top: 45px;
         display: flex;
         font-weight: 500;
 
@@ -128,11 +125,10 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
-    letter-spacing: 2px;
+    margin-bottom: 20px;
 
     .title-header__report {
         color: $green;
-        margin-right: 14px;
     }
 
     .title-header__activity {
@@ -151,14 +147,16 @@
     }
 }
 .dropdown-menu {
-    width: 100%;
+    width: 101%;
     box-shadow: 5px 5px 10px 10px #dee2e687;
-    font-size: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
 
     .dropdown-item {
         display: flex;
-        align-items: center;
         margin: 5px 0;
+        white-space: unset;
 
         ::deep .dropdown-item--checkbox {
             margin-right: 10px;
@@ -179,7 +177,7 @@
 /*-----report description-----*/
 ::deep .form-control {
     border: 1px solid;
-    height: 250px;
+    height: 100px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -242,11 +240,8 @@
         margin: auto;
         background-color: $green;
         color: #fff;
-        font-size: 24px;
         border: none;
-        width: 280px;
-        height: 62px;
-        font-weight: 600;
+        font-weight: 500;
     }
     .btn:hover{
         background-color:$green-bold;

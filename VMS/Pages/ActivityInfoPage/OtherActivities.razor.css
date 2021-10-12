@@ -44,7 +44,8 @@
     flex-direction: column;
     transition: all ease 0.2s;
     background-color: #F3F3F5;
-    border-radius: 10px; }
+    border-radius: 10px;
+    text-decoration: none; }
     .act__container__card:hover img {
       opacity: 0.6; }
     .act__container__card:hover p {
@@ -92,12 +93,13 @@
           font-size: 20px;
           max-height: calc(24px * 5 + 19px); } }
     .act__container__card__icon {
-      align-self: flex-end; }
+      position: absolute;
+      top: 10px;
+      right: 10px; }
       .act__container__card__icon span {
-        padding: 0px 11px 7px 0px;
         font-size: 16px;
         color: transparent;
-        -webkit-text-stroke: 2px #F14747; }
+        -webkit-text-stroke: 2px #fff; }
         @media (min-width: 768px) {
           .act__container__card__icon span {
             font-size: 18px; } }
@@ -110,7 +112,7 @@
 
 .heart span {
   cursor: pointer;
-  color: #F14747 !important; }
+  color: #fff !important; }
 
 .heart-line span {
   cursor: pointer;

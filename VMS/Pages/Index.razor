@@ -27,7 +27,10 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
+        if (firstRender)
+        {
+            await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
+        }
     }
 
     protected override async Task OnInitializedAsync()

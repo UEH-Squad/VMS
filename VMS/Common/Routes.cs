@@ -7,21 +7,22 @@
         public const string HomePage = "/";
         public const string ActivitySearch = "/hoat-dong";
         public const string ActivityInfo = "/chi-tiet-hoat-dong";
-        public const string Organizations = "/don-vi-to-chuc";
         public const string Map = "/ban-do";
-        public const string RatingPage = "/danh-gia-tinh-nguyen-vien";
-        public const string SearchOrganizer = "/tim-kiem-don-vi-to-chuc";
+        public const string OrganizerSearch = "/don-vi-to-chuc";
+
+        #endregion Main
 
         #region Org + User profile
 
-        public const string User = "/trang-ca-nhan";
-        public const string EditProfile = "/chinh-sua-thong-tin";
-        public const string EditUserProfile = "/chinh-sua-thong-tin-ca-nhan";
-        public const string VolunteersListPage = "/danh-sach-tinh-nguyen-vien";
+        public const string UserProfile = "/ho-so-ca-nhan";
+        public const string OrgProfile = "/ho-so-to-chuc";
+        public const string EditOrgProfile = "/chinh-sua-ho-so-to-chuc";
+        public const string EditUserProfile = "/chinh-sua-ho-so-ca-nhan";
+        public const string VolunteersList = "/quan-ly-tinh-nguyen-vien";
+        public const string ActivityManagement = "/quan-ly-hoat-dong";
+        public const string Rating = "/quan-ly-tinh-nguyen-vien/danh-gia";
 
         #endregion Org + User profile
-
-        #endregion Main
 
         #region Activity
 
@@ -29,15 +30,6 @@
         public const string EditActivity = "/sua-hoat-dong";
 
         #endregion Activity
-
-        #region Topic
-
-        public const string Topic = "/chu-de";
-        public const string CreateTopic = "/chu-de/them";
-        public const string EditTopic = "/chu-de/sua";
-        public const string DeleteTopic = "/chu-de/xoa";
-
-        #endregion Topic
 
         #region Identity
 

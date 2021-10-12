@@ -25,21 +25,21 @@
                 <div class="row">
                     <div class="col-6">
                         <p class="form-text">Họ tên <span>(*)</span></p>
-                        <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control mb-3" disabled="true" />
-                        <p class="form-text">Email nhận thông báo <span>(*)</span></p>
-                        <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control mb-3" disabled="true" />
-                        <p class="form-text">Số điện thoại <span>(*)</span></p>
-                        <ValidationMessage For="@(() => signupModel.PhoneNumber)" />
+                        <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
+                        <p class="form-text mt-3">Email nhận thông báo <span>(*)</span></p>
+                        <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control" disabled="true" />
+                        <p class="form-text mt-3">Số điện thoại <span>(*)</span></p>
                         @if (IsReadOnly)
                         {
-                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control mb-3" disabled="true" />
+                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control" disabled="true" />
                         }
                         else
                         {
-                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control mb-3" />
+                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control" />
                         }
+                        <ValidationMessage For="@(() => signupModel.PhoneNumber)" />
 
-                        <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
+                        <p class="form-text mt-3">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
 
                         <InputRadioGroup Name="radioSignUp" @bind-Value="check">
                             <div class="d-flex align-items-center mb-2">

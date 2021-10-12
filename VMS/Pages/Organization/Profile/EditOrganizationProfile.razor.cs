@@ -34,6 +34,9 @@ namespace VMS.Pages.Organization.Profile
         [Inject]
         private ILogger<EditOrganizationProfile> Logger { get; set; }
 
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
+
         private int width;
         private string classWidth = "";
         private bool isLoading;
@@ -43,6 +46,7 @@ namespace VMS.Pages.Organization.Profile
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private CreateOrgProfileViewModel org = new();
+        [CascadingParameter] public string UserId { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -85,12 +89,11 @@ namespace VMS.Pages.Organization.Profile
             await areasModal.Result;
         }
 
+
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (choosenAreas.Count > 3)
-            {
-                await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
-            }
+            await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel", choosenAreas.Count);
         }
 
         private async Task HandleSubmit()
@@ -130,6 +133,7 @@ namespace VMS.Pages.Organization.Profile
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
                     await Modal.Show<Activities.NotificationPopup>("", modalParams, options).Result;
+                    NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
 
                     isLoading = false;
                 }

@@ -94,9 +94,10 @@ const rankCarousel = () => {
         nav: true,
         autoplay: true,
         autoplayTimeout: 5000,
-        autoplaySpeed: 5000,
-        navSpeed: 1500,
-        dotsSpeed: 1500,
+        autoplaySpeed: 2000,
+        autoplayHoverPause: true,
+        navSpeed: 2000,
+        dotsSpeed: 2000,
         responsiveClass: true,
         responsive: {
             0: {

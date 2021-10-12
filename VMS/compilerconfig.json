@@ -270,5 +270,9 @@
   {
     "outputFile": "Pages/SearchOrganizer/SearchResult.razor.css",
     "inputFile": "Pages/SearchOrganizer/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/Appellation.razor.css",
+    "inputFile": "Pages/Organization/Profile/Appellation.razor.scss"
   }
 ]

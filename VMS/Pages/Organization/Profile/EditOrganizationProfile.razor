@@ -44,13 +44,12 @@
                                 @if (choosenAreas.Count < 5)
                                 {
                                     width = choosenAreas.Count * 20;
-                                    classWidth = "w-" + width;
+                                    classWidth = "w-" + width + " editProfile__Nocarousel d-flex";
                                 }
-
-                                <div class="@(choosenAreas.Count>4 ?"owl-carousel owl-theme editProfile__carousel w-80" :"d-flex editProfile__NoCarousel ") @classWidth ">
+                                <div class=" owl-carousel owl-theme editProfile__carousel @(choosenAreas.Count>4 ?"w-80 ":classWidth) ">
                                     @foreach (var item in choosenAreas)
                                     {
-                                        <div class="form-field-item item @(choosenAreas.Count>4 ?"" :"item-NoCaroesel mx-auto")">
+                                        <div class="form-field-item item mx-auto">
                                             <i class="material-icons">@item.Icon</i>
                                             <span>@item.Name</span>
                                         </div>

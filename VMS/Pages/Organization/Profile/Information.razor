@@ -19,7 +19,7 @@
                 </div>
 
                 <p class="m-0">@Org?.FullName</p>
-                <span class="information__tilte mx-auto my-3">Tổ chức hoàn hảo</span>
+                <span @onclick="ShowModalAppellation" class="information__tilte mx-auto my-3">Tổ chức hoàn hảo</span>
                 @if (HaveControl)
                 {
                     <a href="@Routes.CreateActivity" class="information__logo-button mx-auto d-flex align-items-center justify-content-center">

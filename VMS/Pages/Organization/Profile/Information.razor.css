@@ -154,7 +154,8 @@
           color: #18A0FB;
           transition: all 0.3s linear; }
           .my-information .information__carousel ::deep .owl-nav .owl-next span:hover, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span:hover {
-            color: #0B588c; }
+            color: #0B588c;
+            opacity: 0.73; }
         .my-information .information__carousel ::deep .owl-nav .owl-next:hover, .my-information .information__NoCarousel ::deep .owl-nav .owl-next:hover {
           background: none; }
     .my-information .information__carousel ::deep .owl-dots, .my-information .information__NoCarousel ::deep .owl-dots {

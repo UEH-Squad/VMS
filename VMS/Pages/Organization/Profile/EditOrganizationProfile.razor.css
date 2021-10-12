@@ -108,14 +108,24 @@
   .my-editProfile .owl-carousel {
     z-index: 0; }
   .my-editProfile .editProfile__carousel {
-    width: 80%;
-    padding-right: 50px; }
+    width: 80%; }
     .my-editProfile .editProfile__carousel .item {
       margin: 0 auto; }
     .my-editProfile .editProfile__carousel ::deep .owl-nav {
       display: block; }
       .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev {
-        display: none; }
+        position: absolute;
+        top: -15%;
+        left: 0%; }
+        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev span {
+          font-size: 80px;
+          color: #18A0FB;
+          transition: all 0.3s linear; }
+          .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev span:hover {
+            color: #0B588c;
+            opacity: 0.73; }
+        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev:hover {
+          background: none; }
       .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next {
         position: absolute;
         top: -15%;
@@ -130,6 +140,8 @@
           background: none; }
     .my-editProfile .editProfile__carousel ::deep .owl-dots {
       display: none; }
+  .my-editProfile ::deep .owl-carousel.owl-loading {
+    opacity: 1; }
   .my-editProfile .countWord {
     color: #707070;
     position: absolute;

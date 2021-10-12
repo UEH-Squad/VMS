@@ -157,7 +157,10 @@
     cursor: pointer; }
 
 .org-card .org-card__member {
-  margin-right: 62px; }
+  margin-right: 50px; }
+  @media (min-width: 1400px) {
+    .org-card .org-card__member {
+      margin-right: 62px; } }
   .org-card .org-card__member .material-icons {
     color: #64D72F; }
 

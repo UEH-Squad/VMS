@@ -63,7 +63,8 @@
       color: #18A0FB;
       transition: all 0.3s linear; }
       .my-logoBaner ::deep .owl-nav .owl-prev span:hover {
-        color: #0B588C; }
+        color: #0B588C;
+        opacity: 0.73; }
     .my-logoBaner ::deep .owl-nav .owl-prev:hover {
       background: none; }
     @media (min-width: 576px) {
@@ -83,7 +84,8 @@
       color: #18A0FB;
       transition: all 0.3s linear; }
       .my-logoBaner ::deep .owl-nav .owl-next span:hover {
-        color: #0B588C; }
+        color: #0B588C;
+        opacity: 0.73; }
     .my-logoBaner ::deep .owl-nav .owl-next:hover {
       background: none; }
     @media (min-width: 576px) {

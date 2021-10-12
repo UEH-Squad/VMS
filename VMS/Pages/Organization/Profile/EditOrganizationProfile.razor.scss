@@ -149,11 +149,6 @@
         }
     }
 
-    .editProfile__NoCarousel {
-
-        .item-NoCaroesel {
-        }
-    }
 
     .owl-carousel {
         z-index: 0;
@@ -162,19 +157,33 @@
 
     .editProfile__carousel {
         width: 80%;
-        padding-right: 50px;
 
         .item {
             margin: 0 auto;
         }
 
-
-
         ::deep .owl-nav {
             display: block;
 
             .owl-prev {
-                display: none;
+                position: absolute;
+                top: -15%;
+                left: 0%;
+
+                span {
+                    font-size: 80px;
+                    color: $blue;
+                    transition: all 0.3s linear;
+
+                    &:hover {
+                        color: $blue-hv;
+                        opacity: 0.73;
+                    }
+                }
+
+                &:hover {
+                    background: none;
+                }
             }
 
             .owl-next {
@@ -202,6 +211,11 @@
             display: none;
         }
     }
+
+    ::deep .owl-carousel.owl-loading {
+        opacity: 1;
+    }
+
 
     .countWord {
         color: $border-color-bold;

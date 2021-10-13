@@ -56,7 +56,7 @@ namespace VMS.Application.Services
 
                 CalculateTotalAndRankRating(org.Activities, out int totalRating, out double totalRank);
                 orgViewModel.QuantityRating = totalRating;
-                orgViewModel.AverageRating = (totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5);
+                orgViewModel.AverageRating = totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5;
 
                 return orgViewModel;
             }

@@ -1,4 +1,5 @@
-﻿    using AutoMapper;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -16,10 +18,13 @@ namespace VMS.Application.Services
 {
     public class UserService : BaseService, IUserService
     {
+        private readonly UserManager<User> _userManager;
         public UserService(IRepository repository,
                            IDbContextFactory<VmsDbContext> dbContextFactory,
-                           IMapper mapper) : base(repository, dbContextFactory, mapper)
+                           IMapper mapper,
+                           UserManager<User> userManager) : base(repository, dbContextFactory, mapper)
         {
+            _userManager = userManager;
         }
 
         public async Task<CreateOrgProfileViewModel> GetOrgProfileViewModelAsync(string userId)
@@ -166,6 +171,59 @@ namespace VMS.Application.Services
             }
 
             return result;
+        }
+
+        private User FindUserById(string userId)
+        {
+            return Task.Run(() => _userManager.Users.Include(x => x.UserAreas)
+                                                    .ThenInclude(x => x.Area)
+                                                    .Include(x => x.UserSkills)
+                                                    .ThenInclude(x => x.Skill)
+                                                    .Include(x => x.Recruitments)
+                                                    .ThenInclude(x => x.RecruitmentRatings)
+                                                    .FirstOrDefault(x => x.Id == userId)).Result;
+        }
+
+        private static void CalculateTotalAndRankRating(ICollection<Recruitment> recruitments, out int totalRating, out double totalRank)
+        {
+            var recruitmentRatings = recruitments.SelectMany(x => x.RecruitmentRatings)
+                                                    .Where(x => x.IsOrgRating && !x.IsReport);
+            totalRating = recruitmentRatings.Count();
+            totalRank = recruitmentRatings.Sum(x => x.Rank);
+        }
+
+        private bool IsInRole(User user, Role role)
+        {
+            return Task.Run(() => _userManager.IsInRoleAsync(user, role.ToString())).Result;
+        }
+
+        public UserViewModel GetUserViewModel(string userId)
+        {
+            User user = FindUserById(userId);
+
+            if (IsInRole(user, Role.User))
+            {
+                UserViewModel userViewModel = _mapper.Map<UserViewModel>(user);
+
+                CalculateTotalAndRankRating(user.Recruitments, out int totalRating, out double totalRank);
+                userViewModel.QuantityRating = totalRating;
+                userViewModel.AverageRating = totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5;
+
+                return userViewModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void UpdateUserAvatar(string userId, string avatar)
+        {
+            User user = FindUserById(userId);
+
+            user.Avatar = avatar;
+
+            Task.Run(() => _userManager.UpdateAsync(user));
         }
     }
 }

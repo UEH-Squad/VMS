@@ -93,10 +93,5 @@ namespace VMS.Application.Services
         {
             Task.Run(() => _userManager.UpdateAsync(user));
         }
-
-        public async Task<UserViewModel> GetUserViewModelAsync(string userId)
-        {
-            return null;
-        }
     }
 }

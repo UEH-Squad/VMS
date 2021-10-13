@@ -44,6 +44,12 @@ namespace VMS.Pages.Organization.Profile
             UserId = string.IsNullOrEmpty(UserId) ? CurrentUserId : UserId;
 
             org = OrganizationService.GetOrgFull(UserId);
+
+            if (org == null)
+            {
+                NavigationManager.NavigateTo(Routes.HomePage, true);
+            }
+
             bool isUserOrg = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);
 
             if (isUserOrg)
@@ -84,6 +90,7 @@ namespace VMS.Pages.Organization.Profile
                                                                  && !string.IsNullOrEmpty(org.PhoneNumber)
                                                                  && !string.IsNullOrEmpty(org.Mission)
                                                                  && !string.IsNullOrEmpty(org.Banner)
+                                                                 && !string.IsNullOrEmpty(org.Avatar)
                                                                  && org.Areas.Count != 0;
     }
 }

@@ -57,6 +57,8 @@
 
   <ItemGroup>
     <Folder Include="Pages\Admin\" />
+    <Folder Include="wwwroot\img\activities\" />
+    <Folder Include="wwwroot\img\Avatar\" />
     <Folder Include="wwwroot\img\OrganizationProfile\" />
   </ItemGroup>
 

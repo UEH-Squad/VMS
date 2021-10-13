@@ -17,9 +17,19 @@ namespace VMS.Application.ViewModels
         public double Rank { get; set; }
         public string Introduction { get; set; }
         public string Banner { get; set; }
+        public string StudentId { get; set; }
+        public string Class { get; set; }
+        public string Course { get; set; }
 
         public List<AreaViewModel> Areas { get; set; }
         public List<Activity> Activities { get; set; }
         public List<SkillViewModel> Skills {  get; set; }
+
+        public UserViewModel()
+        {
+            Areas = new();
+            Activities = new();
+            Skills = new();
+        }
     }
 }

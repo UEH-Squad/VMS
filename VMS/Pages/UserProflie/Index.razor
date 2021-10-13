@@ -1,7 +1,7 @@
 ﻿@attribute [Route(Routes.UserProfile + "/{UserId}")]
 @attribute [Route(Routes.UserProfile)]
 
-<UserProfile IsUser="true"></UserProfile>
+<UserProfile IsUser="@isUser" User="user"/>
 <UserAct></UserAct>
 
 <Schedule IsUser="true"></Schedule>

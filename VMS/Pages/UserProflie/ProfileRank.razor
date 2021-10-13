@@ -1,16 +1,16 @@
 ﻿<div class="d-flex align-items-center profile__rank">
     @if (IsUser)
     {
-        <a href="" class="d-flex align-self-center me-3">#4</a>
+        <a href="" class="d-flex align-self-center me-3">#@Rank</a>
     }
     else
     {
-        <a class="d-flex align-self-center me-3">#4</a>
+        <a class="d-flex align-self-center me-3">#@Rank</a>
     }
 
     <div>
         <p class="mb-2 d-flex justify-content-evenly align-self-end">
-            <span class="profile__rank-number me-1">4,5</span>
+            <span class="profile__rank-number me-1">@Stars</span>
             <i class="material-icons">
                 star_rate
             </i>
@@ -27,15 +27,15 @@
                 star_rate
             </i>
         </p>
-        <span class="text-start">15N xếp hạng</span>
+        <span class="text-start">@TotalRating xếp hạng</span>
     </div>
 </div>
 
 @code {
 
     [Parameter] public bool IsUser { get; set; } = true;
-    [Parameter] public int Rank { get; set; } =0;
-    [Parameter] public int TotalRating { get; set; } =0;
-    [Parameter] public int Stars { get; set; } =0;
+    [Parameter] public int Rank { get; set; } = 0;
+    [Parameter] public int TotalRating { get; set; } = 0;
+    [Parameter] public double Stars { get; set; } = 0;
 
 }

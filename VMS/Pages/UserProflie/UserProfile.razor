@@ -27,7 +27,7 @@
                         <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</span>
                     }
 
-                    <ProfileRank Rank="1" TotalRating="10" Stars="5" IsUser="true"></ProfileRank>
+                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser"/>
 
                 </div>
             </div>

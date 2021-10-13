@@ -32,19 +32,13 @@ namespace VMS.Application.Services
             return Task.Run(() => _userManager.IsInRoleAsync(org, role.ToString())).Result;
         }
 
-        private static void CalculateTotalAndRankRating(ICollection<Recruitment> recruitments, out int totalRating, out double totalRank)
+        private static void CalculateTotalAndRankRating(ICollection<Activity> activities, out int totalRating, out double totalRank)
         {
-            totalRating = 0;
-            totalRank = 0;
-            foreach(var recruitment in recruitments)
-            {
-                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(r => !r.IsOrgRating && !r.IsReport);
-                if (recruitmentRating is not null)
-                {
-                    totalRating++;
-                    totalRank += recruitmentRating.Rank;
-                }
-            }
+            var recruitmentRatings = activities.SelectMany(x => x.Recruitments)
+                                                    .SelectMany(x => x.RecruitmentRatings)
+                                                    .Where(x => !x.IsOrgRating && !x.IsReport);
+            totalRating = recruitmentRatings.Count();
+            totalRank = recruitmentRatings.Sum(x => x.Rank);
         }
 
         public UserViewModel GetOrgFull(string id)
@@ -52,15 +46,15 @@ namespace VMS.Application.Services
             User org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas)
                                                        .ThenInclude(x => x.Area)
                                                        .Include(x => x.Activities)
-                                                       .Include(x => x.Recruitments)
+                                                       .ThenInclude(x => x.Recruitments)
                                                        .ThenInclude(x => x.RecruitmentRatings)
-                                                       .SingleOrDefaultAsync(x => x.Id == id)).Result;
+                                                       .FirstOrDefault(x => x.Id == id)).Result;
 
             if (IsInRole(org, Role.Organization))
             {
                 UserViewModel orgViewModel = _mapper.Map<UserViewModel>(org);
 
-                CalculateTotalAndRankRating(org.Recruitments, out int totalRating, out double totalRank);
+                CalculateTotalAndRankRating(org.Activities, out int totalRating, out double totalRank);
                 orgViewModel.QuantityRating = totalRating;
                 orgViewModel.AverageRating = (totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5);
 

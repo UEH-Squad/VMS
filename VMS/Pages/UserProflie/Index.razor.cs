@@ -8,23 +8,19 @@ namespace VMS.Pages.UserProflie
     public partial class Index : ComponentBase
     {
         [Parameter] public string UserId { get; set; }
+        [CascadingParameter] public string CurrentUserId { get; set; }
 
         [Inject] private IIdentityService IdentityService { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            if (string.IsNullOrEmpty(UserId))
+            if (string.IsNullOrEmpty(UserId) && string.IsNullOrEmpty(CurrentUserId))
             {
-                UserId = IdentityService.GetCurrentUserId();
-
-                if (string.IsNullOrEmpty(UserId))
-                {
-                    NavigationManager.NavigateTo(Routes.LogIn);
-                }
+                NavigationManager.NavigateTo(Routes.LogIn, true);
             }
 
-            
+            UserId = string.IsNullOrEmpty(UserId) ? CurrentUserId : UserId;
         }
     }
 }

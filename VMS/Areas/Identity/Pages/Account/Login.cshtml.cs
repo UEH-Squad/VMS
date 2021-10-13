@@ -92,7 +92,7 @@ namespace VMS.Areas.Identity.Pages.Account
                         string callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",
                             pageHandler: null,
-                            values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.EditProfile },
+                            values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.EditUserProfile },
                             protocol: Request.Scheme);
 
                         await _mailService.SendConfirmEmail(user.Email, callbackUrl);

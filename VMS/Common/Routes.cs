@@ -25,8 +25,6 @@
 
         #endregion Org + User profile
         public const string ResetPassword = "/reset-password";
-        #endregion Main
-
         #region Activity
 
         public const string CreateActivity = "/tao-hoat-dong";

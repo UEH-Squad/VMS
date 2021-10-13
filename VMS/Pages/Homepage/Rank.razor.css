@@ -26,14 +26,16 @@
     width: 130px; }
     .my-rank .rank__link-organization:hover {
       color: #0B588c;
-      font-size: 30px; }
+      font-size: 30px;
+      cursor: pointer; }
   .my-rank .rank__link-students {
     color: #64D72F;
     font-size: 26px;
     font-weight: 500; }
     .my-rank .rank__link-students:hover {
       color: #306C14;
-      font-size: 30px; }
+      font-size: 30px;
+      cursor: pointer; }
   .my-rank .cssShowOrg {
     border-bottom: 1px solid #0B588c;
     color: #0B588c !important;

@@ -1,0 +1,61 @@
+﻿@using VMS.Domain.Models
+@inject IJSRuntime JsRuntime
+<div class="container__list-result">
+    <SearchResult />
+    <div class="container-member">
+        @if (recruitments != null && recruitments.TotalItems != 0)
+        {
+            @foreach (var item in recruitments.Items)
+            {
+                <div class="container">
+                    <div class="container-avatar">
+                        <img src="@item.User.Avatar" alt="Avatar" class="member-avatar">
+                    </div>
+                    <div class="member">
+                        <div class="member-name">
+                            <p class="member-name1">@item.User.FullName</p>
+                            <p class="member-name2">@item.User.Introduction</p>
+                        </div>
+                        <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)"/>
+                        <div class="member-comment">
+                            @*Pop-up để comment*@
+                            <button @onclick="@(async () => await ShowCommentPopUpAsync(item))" id="popup-comment_icon">
+                                <span id="member-comment_icon" class="material-icons">comment</span>
+                            </button>
+                            <div class="member-comment_tooltip">Bạn có điều  gì muốn gửi gắm đến mình hong!</div>
+                        </div>
+                        <div class="member-report">
+                            @*Pop-up để report*@
+                            <button @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
+                                <span id="member-report_icon" class="material-icons">report_problem</span>
+                            </button>
+                            <div class="member-report_tooltip">Báo cáo xấu nếu mình vi phạm nhé!</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <div class="pagination-container">
+            <Pager CurrentPage="@recruitments.PageIndex"
+                   PageCount="@recruitments.TotalPages"
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter] public IModalService Modal2 { get; set; }
+    async Task ShowReportPopUp()
+    {
+        var options = new ModalOptions()
+            {
+
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+        Modal2.Show<PopUpReportMember>("", options);
+    }
+
+}

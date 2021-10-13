@@ -11,12 +11,6 @@
                         Cộng đồng
                     </span>
                 </div>
-
-                <div class="icon">
-                    <span class="material-icons my-icons">
-                        add_box
-                    </span>
-                </div>
             </div>
 
             <div class="about-infor">
@@ -46,9 +40,19 @@
                 </div>
             </div>
             <div class="btn-sign-up--cover">
-                <button @onclick="@(() =>ShowSignUpPopUp())" class="btn-sign-up">
-                    <h3 class="btn-sign-up__text">Đăng ký</h3>
-                </button>
+                <AuthorizeView>
+                    <Authorized>
+                        <button @onclick="@(() =>ShowSignUpPopUp())" class="btn-sign-up">
+                            <h3 class="btn-sign-up__text">Đăng ký</h3>
+                        </button>
+                    </Authorized>
+                    <NotAuthorized>
+                        <button @onclick="@(() =>ShowRequireSignup())" class="btn-sign-up">
+                            <h3 class="btn-sign-up__text">Đăng ký</h3>
+                        </button>
+                    </NotAuthorized>
+                </AuthorizeView>
+                
             </div>
         </div>
         <button @onclick="@(() =>ShowReportPopUp() )" class="report">Báo cáo hoạt động này</button>
@@ -80,6 +84,19 @@
             UseCustomLayout = true
         };
         Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
+    }
+
+    private void ShowRequireSignup()
+    {
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+
+        Modal.Show<VMS.Shared.Components.RequireSignup>("", options);
     }
 }
 

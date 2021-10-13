@@ -64,12 +64,17 @@
     color: white;
     margin: 5px auto;
     transition: all 0.3s linear;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    font-size: 24px; }
+    width: 73px;
+    height: 73px;
+    line-height: 73px;
+    font-size: 35px; }
     .item i.add-icon {
-      background-color: #B4B4B4; }
+      background-color: #C4C4C4;
+      font-size: 70px;
+      opacity: .5; }
+      .item i.add-icon:hover {
+        background-color: #B4B4B4;
+        cursor: pointer; }
   .item span {
     color: #64D72F;
     font-weight: 500;
@@ -91,6 +96,7 @@
     color: #306C14; }
 
 ::deep .tox {
+  border-radius: 5px;
   z-index: 0; }
 
 ::deep .typeahead__results {

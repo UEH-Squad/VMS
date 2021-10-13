@@ -60,10 +60,7 @@ namespace VMS.Pages.UserProflie
                 NavigationManager.NavigateTo(Routes.EditUserProfile, true);
             }
 
-            if (!string.IsNullOrEmpty(CurrentUserId))
-            {
-                isLoggedIn = true;
-            }
+            isLoggedIn = !string.IsNullOrEmpty(CurrentUserId);
         }
 
         private static bool IsValidProfile(UserViewModel user)

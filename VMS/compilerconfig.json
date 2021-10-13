@@ -278,5 +278,21 @@
   {
     "outputFile": "Shared/AdminHeader.razor.css",
     "inputFile": "Shared/AdminHeader.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/SearchResult.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/RatingList.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/RatingList.razor.scss"
   }
 ]

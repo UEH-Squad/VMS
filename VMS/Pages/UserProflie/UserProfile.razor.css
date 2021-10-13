@@ -43,31 +43,6 @@
   .my-profile .profile__logo .profile__type-notHover:hover {
     background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
 
-.my-profile .profile__rank a {
-  color: #64D72F;
-  font-size: 40px;
-  font-weight: 600;
-  text-decoration: none; }
-
-.my-profile .profile__rank .profile__rank-number {
-  color: #707070;
-  font-size: 24px;
-  font-weight: 700; }
-
-.my-profile .profile__rank i {
-  margin: auto 2px;
-  color: #EDF131;
-  font-size: 30px; }
-
-.my-profile .profile__rank .icon-noColor {
-  color: #D8D8D8; }
-
-.my-profile .profile__rank span {
-  display: block;
-  color: #707070;
-  font-size: 20px;
-  font-weight: 500; }
-
 .my-profile .profile__contact {
   width: 28%; }
   @media (min-width: 1400px) {

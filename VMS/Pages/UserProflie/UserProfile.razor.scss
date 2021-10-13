@@ -59,40 +59,7 @@
             background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%);
         }
     }
-
-    .profile__rank {
-        a {
-            color: $green;
-            font-size: 40px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .profile__rank-number {
-            color: $border-color-bold;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        i {
-            margin: auto 2px;
-            color: #EDF131;
-            font-size: 30px;
-        }
-
-        .icon-noColor {
-            color: #D8D8D8;
-        }
-
-        span {
-            display: block;
-            color: $border-color-bold;
-            font-size: 20px;
-            font-weight: 500;
-        }
-    }
-
-
+  
     .profile__contact {
         width: 28%;
 

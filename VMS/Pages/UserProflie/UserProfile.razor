@@ -27,38 +27,7 @@
                         <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</span>
                     }
 
-                    <div class="d-flex align-items-center profile__rank">
-                        @if (IsUser)
-                        {
-                            <a href="" class="d-flex align-self-center me-3">#@User.Rank</a>
-                        }
-                        else
-                        {
-                            <a href="" class="d-flex align-self-center me-3">#@User.Rank</a>
-                        }
-
-                        <div>
-                            <p class="mb-2 d-flex justify-content-evenly align-self-end">
-                                <span class="profile__rank-number me-1">@User.AverageRating</span>
-                                <i class="material-icons">
-                                    star_rate
-                                </i>
-                                <i class="material-icons">
-                                    star_rate
-                                </i>
-                                <i class="material-icons">
-                                    star_rate
-                                </i>
-                                <i class="material-icons">
-                                    star_rate
-                                </i>
-                                <i class="material-icons icon-noColor">
-                                    star_rate
-                                </i>
-                            </p>
-                            <span class="text-start">@User.QuantityRating xếp hạng</span>
-                        </div>
-                    </div>
+                    <ProfileRank Rank="1" TotalRating="10" Stars="5" IsUser="true"></ProfileRank>
 
                 </div>
             </div>

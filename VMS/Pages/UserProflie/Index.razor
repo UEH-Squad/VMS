@@ -2,9 +2,15 @@
 @attribute [Route(Routes.UserProfile)]
 
 <UserProfile IsUser="@isUser" User="user"/>
-<UserAct></UserAct>
+
+<VMS.Pages.Organization.Profile.Act Title="đang diễn ra" HaveDecor="false" Datas="currentActivities" />
+
+<VMS.Pages.Organization.Profile.Act Title="yêu thích" HaveDecor="true" HaveFav="true" HaveLogin="@isLoggedIn" Datas="favoriteActivities" />
+
+<VMS.Pages.Organization.Profile.Act Title="đã tham gia" OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas="endedActivities" />
 
 <Schedule IsUser="true"></Schedule>
+
 @code {
 
 }

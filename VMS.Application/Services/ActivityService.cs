@@ -614,5 +614,32 @@ namespace VMS.Application.Services
                 await _repository.DeleteAsync(dbContext, favorite);
             }
         }
+
+        public async Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    GetConditionByStatusAct(userId, statusAct)
+                }
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<ActivityViewModel>>(activities);
+        }
+
+        private static Expression<Func<Activity, bool>> GetConditionByStatusAct(string userId, StatusAct statusAct)
+        {
+            return statusAct switch
+            {
+                StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
+                StatusAct.Ended => x => x.EndDate < DateTime.Now && x.Recruitments.Any(x => x.UserId == userId && x.AcceptTime >= x.EnrollTime),
+                _ => x => x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now && x.Recruitments.Any(x => x.UserId == userId && x.AcceptTime >= x.EnrollTime),
+            };
+        }
     }
 }

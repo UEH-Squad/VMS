@@ -24,9 +24,15 @@ namespace VMS.Application.Interfaces
         Task<ViewActivityViewModel> GetViewActivityViewModelAsync(int activityId);
 
         Task<List<ActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false);
+
         Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status);
+
         Task UpdateStatusActAsync(int activityId, bool close, bool delete);
+
         Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false);
+
         Task UpdateActFavorAsync(int activityId, string userId);
+
+        Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct);
     }
 }

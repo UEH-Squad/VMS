@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Microsoft\**" />
-    <Content Remove="Microsoft\**" />
-    <EmbeddedResource Remove="Microsoft\**" />
-    <None Remove="Microsoft\**" />
+    <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\lib\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,8 +56,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Admin\" />
+    <Folder Include="wwwroot\img\activities\" />
     <Folder Include="wwwroot\img\OrganizationProfile\" />
-    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>

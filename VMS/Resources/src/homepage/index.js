@@ -64,8 +64,8 @@ const setPosition = position => {
 const increaseNumber = () => {
     const handleCounterUp = el => {
         new Waypoint({
-            element: el,
-            handler: function () {
+            element: document.querySelector('.playCounter'),
+            handler: function () {              
                 counterUp(el);
                 this.destroy();
             },

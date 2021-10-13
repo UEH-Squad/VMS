@@ -3,196 +3,79 @@
 <div class="container">
     <div class="row act">
         <h1>Hoạt động <span>@Title</span></h1>
-        <div class="owl-carousel owl-theme organize__carousel position-relative">
+        <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
             @foreach (var item in Datas)
             {
-                <div class="act-container item position-relative">
-                    <div class="img-container position-relative">
-                        <img src="./img/OrganizationProfile/ActOrganize.png" alt="" class="act-img">
-                        <div class="@(item.IsClose ? "overlay" : "")"></div>
-                    </div>
-                    <div class="act-content">
-                        <a href="@Routes.ActivityInfo" class="@(item.IsClose ? "content-cl" : "content-nm")">
-                            <h3 class="act-title lm-text @(item.IsClose ? "title-cl" : "title-nm")">@item.Title</h3>
-                        </a>
-                    </div>
-                    <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                        <li class="edit pb-2">Chỉnh sửa</li>
-                        <li @onclick="(() => ShowModal())" class="delete pb-2">Xóa</li>
-                        <li @onclick="CloseConfirm" class="close pb-2">Đóng hoạt động</li>
-                    </ul>
-                    @if (HaveControl)
+            <div class="@(Datas.Count >4 ? "" : "w-25 mx-2") act-container item position-relative">
+                <div class="img-container position-relative">
+                    <img src="@item?.Banner" alt="" class="act-img">
+                    <div class="@(item.IsClosed ? "overlay" : "")"></div>
+                </div>
+                <div class="act-content @(OverridesImg ? "position-absolute act-content-overrides ":"" )">
+                    <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm")">
+                        <h3 class="act-title lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
+                    </a>
+                </div>
+                <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
+                    <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                    <li @onclick="(() => ShowDeleteModal(item.Id))" class="delete pb-2">Xóa</li>
+                    <li @onclick="(() => ShowCloseModal(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+                </ul>
+                @if (HaveControl)
+                {
+                    <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
+                        more_horiz
+                    </i>
+                }
+
+
+                    @if (HaveHeart)
                     {
-                        <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute @(item.IsClose ? "d-none" : "")">
-                            more_horiz
-                        </i>
+                        <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
+                            favorite
+                        </span>
                     }
+                    @* Phần này của Bằng e không đụng tới *@
+
+                @if (HaveFav)
+                {
+                    @if (HaveLogin)
+                    {
+                        <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
+                            <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
+                        </a>
+                    }
+                    else
+                    { <a class="position-absolute favorite" @onclick="(() => ShowLoginRequire())">
+                            <span class="material-icons nonefav">favorite_border</span>
+                       </a>
+                    }
+                }
+            </div>
+            }
+
+        </div>
+        @if (HaveBorder)
+        {
+            @if (HaveDecor)
+            {
+                <div class="col-8">
+                    <div class="bottom-line act"></div>
                 </div>
             }
-        </div>
-        @if (HaveDecor)
-        {
-            <div class="col-8">
-                <div class="bottom-line"></div>
-            </div>
+            else
+            {
+                <div class="col-8 ms-auto">
+                    <div class="bottom-line"></div>
+                </div>
+            }
         }
-        else
+
+        @if (HaveLinkAll)
         {
-            <div class="col-8 ms-auto">
-                <div class="bottom-line"></div>
+            <div class="act__linkAll text-end">
+                <a>Xem tất cả >>></a>
             </div>
         }
     </div>
 </div>
-
-<div class="pop-up @(isDeleteConfirm ? "d-block" : "d-none")">
-    <div class="center-screen ">
-        <div class="pop-up-container border-10">
-            <div @onclick="DeleteConfirm" class="close-btn">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="content">
-                <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
-            </div>
-            <div class="pop-up-btn">
-                <div @onclick="DeleteConfirm" class="deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="accept">Xác nhận</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pop-up @(isCloseConfirm ? "d-block" : "d-none")">
-    <div class="center-screen">
-        <div class="pop-up-container border-10">
-            <div @onclick="CloseConfirm" class="close-btn">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="content">
-                <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="close-text">đóng hoạt động</span> này không?</h3>
-            </div>
-            <div class="pop-up-btn">
-                <div @onclick="CloseConfirm" class="deny">Hủy</div>
-                <div @onclick="CloseSuccess" class="accept">Xác nhận</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pop-up @(isDeleteSuccess ? "d-block" : "d-none")">
-    <div class="center-screen">
-        <div class="pop-up-container border-10">
-            <div @onclick="DeleteSuccess" class="close-btn-s">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="pop-up-content">
-                <h3 class="delete-act">Xoá thành công!</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pop-up @(isCloseSuccess ? "d-block" : "d-none")">
-    <div class="center-screen">
-        <div class="pop-up-container border-10">
-            <div @onclick="CloseSuccess" class="close-btn-s">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div class="pop-up-content">
-                <h3 class="close-act">Đóng hoạt động thành công!</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
-@code {
-    int pendingId = -1;
-    bool isDeleteConfirm;
-    bool isCloseConfirm;
-    bool isDeleteSuccess;
-    bool isCloseSuccess;
-
-    [Parameter] public bool HaveControl { get; set; } = false;
-    [Parameter] public bool HaveDecor { get; set; } = true;
-    [Parameter] public string Title { get; set; }
-    [Parameter] public List<FakeData> Datas { get; set; }
-    [CascadingParameter] public IModalService Modal { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender && Datas.Count > 0)
-        {
-            await JS.InvokeVoidAsync("vms.OrganizeCarousel");
-            await JS.InvokeVoidAsync("vms.AddOutsideClickMenuHandler", DotNetObjectReference.Create(this), nameof(HideMenuInterop));
-        }
-    }
-
-    void ShowMenu(int id)
-    {
-        pendingId = id;
-        Datas.ForEach(a => a.IsMenu = a.Id == pendingId ? !a.IsMenu : false);
-    }
-
-    [JSInvokable]
-    public Task HideMenuInterop()
-    {
-        Datas.ForEach(a => a.IsMenu = false);
-        return InvokeAsync(StateHasChanged);
-    }
-
-    void DeleteConfirm()
-    {
-        isDeleteConfirm = !isDeleteConfirm;
-        Datas.ForEach(a => a.IsMenu = false);
-    }
-
-    void CloseConfirm()
-    {
-        isCloseConfirm = !isCloseConfirm;
-        Datas.ForEach(a => a.IsMenu = false);
-    }
-
-    void DeleteSuccess()
-    {
-        if (isDeleteConfirm == true)
-        {
-            isDeleteConfirm = false;
-        }
-
-        isDeleteSuccess = !isDeleteSuccess;
-    }
-
-    void CloseSuccess()
-    {
-        if (isCloseConfirm == true)
-        {
-            isCloseConfirm = false;
-        }
-
-        isCloseSuccess = !isCloseSuccess;
-        Datas[pendingId].IsClose = true;
-    }
-
-    private void ShowModal()
-    {
-
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show<DeleteConfirm>("", options);
-    }
-}

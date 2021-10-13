@@ -6,18 +6,12 @@
         text-decoration: none;
         font-style: normal;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 30px;
         color: $green;
     }
 
     .return-text:hover {
         color: $green-bold;
-    }
-
-    .line-line1 {
-        margin-top: 0px;
-        background-color: $grey-icon;
-        border: 1px solid $grey-icon;
     }
 }

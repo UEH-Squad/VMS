@@ -1,0 +1,65 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.search-and-button {
+  display: grid;
+  grid-template-columns: 55% 45%; }
+  .search-and-button .button-download {
+    margin-top: 15px; }
+    .search-and-button .button-download__text {
+      display: flex;
+      color: #18A0FB;
+      background: none;
+      border: none;
+      padding: 0 12px;
+      float: right;
+      font-weight: 500; }
+      .search-and-button .button-download__text:hover {
+        color: #0B588c; }
+      .search-and-button .button-download__text .material-icons {
+        margin-right: 5px;
+        font-size: 24px; }
+
+.my-container {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin: 15px 0 20px; }
+  .my-container .quantity-volunteers {
+    width: 50%;
+    font-size: 18px;
+    color: #18A0FB; }
+    .my-container .quantity-volunteers span {
+      color: #64D72F; }
+  .my-container .button {
+    width: 30%; }
+    .my-container .button__text {
+      float: right;
+      font-size: 16px;
+      color: #FFFFFF;
+      padding: 8px 25px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 7px; }
+    .my-container .button__text--undo {
+      background-color: #18A0FB; }
+      .my-container .button__text--undo:hover {
+        background-color: #0B588c; }
+    .my-container .button__text--del {
+      background-color: #C4C4C4; }
+      .my-container .button__text--del:hover {
+        background-color: #F14747; }
+  .my-container .link {
+    width: 20%; }
+    .my-container .link__text {
+      float: right;
+      font-size: 20px;
+      margin: auto;
+      cursor: pointer; }
+    .my-container .link__text--del {
+      color: #F14747; }
+    .my-container .link__text--undo {
+      color: #18A0FB; }

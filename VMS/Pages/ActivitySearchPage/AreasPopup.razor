@@ -4,18 +4,18 @@
             close
         </span>
 
-        <h3 class="text-center mt-4 mb-3">Lĩnh vực</h3>
+        <h3 class="text-center mt-4 mb-4">Lĩnh vực</h3>
         <div class="col-10 areas-modal-content">
             <div class="areas-modal-content__container">
                 @if (areas is not null)
                 {
                     @foreach (var area in areas)
                     {
-                        <div class="area-item-wrapper d-flex align-items-center mb-2">
+                        <div class="area-item-wrapper d-flex align-items-center mb-4">
                             <div @onclick="() => ChangeState(area)" class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center"  style="background-color: @area.Color">
                                 @area.Icon
                             </div>
-                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-2" style="@(choosenAreas.Exists(a => a.Id == area.Id) ? "color: #64D72F" : (area.IsPinned ? $"color: {area.Color}" : ""))">@area.Name</p>
+                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-3" style="@(choosenAreas.Exists(a => a.Id == area.Id) ? "color: #64D72F" : (area.IsPinned ? $"color: {area.Color}" : ""))">@area.Name</p>
                         </div>
                     }
                 }

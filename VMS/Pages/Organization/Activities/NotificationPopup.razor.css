@@ -10,12 +10,12 @@
 .my-custom-popup {
   width: 90%;
   background-color: #FFFFFF;
-  padding: 30px 50px;
+  padding: 30px 40px;
   border-radius: 10px;
   text-align: center; }
   @media (min-width: 768px) {
     .my-custom-popup {
-      width: 35%; } }
+      width: 30%; } }
   .my-custom-popup .close-btn {
     position: absolute;
     top: 5px;
@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 34px;
+    font-size: 25px;
     cursor: pointer; }
   .my-custom-popup .my-btn {
     width: 100%; }
@@ -47,6 +47,7 @@
 
 ::deep h3 {
   font-size: 20px;
-  color: #64D72F; }
+  color: #64D72F;
+  margin: 0; }
   ::deep h3 span {
     color: #18A0FB; }

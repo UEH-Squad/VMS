@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Common.Enums;
 
 namespace VMS.Application.Services
 {
@@ -14,7 +15,6 @@ namespace VMS.Application.Services
         private const int MaxWidthFile = 2048;
         private const int MaxHeightFile = 2048;
         private const string FormatFile = "image/jpeg";
-        private string Path => @$"{_webHostEnvironment.WebRootPath}\";
 
         public UploadService(IWebHostEnvironment webHostEnvironment)
         {
@@ -32,7 +32,7 @@ namespace VMS.Application.Services
             return $"data:image/jpeg;base64,{Convert.ToBase64String(memoryStream.ToArray())}";
         }
 
-        public async Task<string> SaveImageAsync(IBrowserFile file, string userId)
+        public async Task<string> SaveImageAsync(IBrowserFile file, string userId, ImgFolder imgFolder)
         {
             if (!file.ContentType.Contains("image/"))
             {
@@ -40,12 +40,12 @@ namespace VMS.Application.Services
             }
 
             file = await file.RequestImageFileAsync(FormatFile, MaxWidthFile, MaxHeightFile);
-            const string imgFolder = @"img\activities";
-            string fileName = @$"{imgFolder}\{DateTime.Now.ToFileTime()}_{userId}.jpg";
+            string folder = @$"img\{imgFolder}";
+            string fileName = @$"{folder}\{DateTime.Now.ToFileTime()}_{userId}.jpg";
 
-            Directory.CreateDirectory(System.IO.Path.Combine(_webHostEnvironment.WebRootPath, imgFolder));
+            Directory.CreateDirectory(Path.Combine(_webHostEnvironment.WebRootPath, folder));
 
-            using FileStream fileStream = File.Create(@$"{Path}\{fileName}");
+            using FileStream fileStream = File.Create(Path.Combine(_webHostEnvironment.WebRootPath, fileName));
             using Stream stream = file.OpenReadStream(MaxFileSize);
             await stream.CopyToAsync(fileStream);
 
@@ -56,7 +56,7 @@ namespace VMS.Application.Services
         {
             try
             {
-                File.Delete(@$"{Path}\{fileName}");
+                File.Delete(Path.Combine(_webHostEnvironment.WebRootPath, fileName));
             }
             catch (Exception ex)
             {

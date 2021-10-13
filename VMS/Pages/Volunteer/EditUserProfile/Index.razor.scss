@@ -1,0 +1,323 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.my-editProfile {
+    ::deep .form-control:focus {
+        border: 1px solid $blue;
+        box-shadow: none;
+    }
+
+    .error-message {
+        color: $error;
+        background-color: $blue-background;
+        font-weight: 300;
+        font-size: 18px;
+    }
+
+    .editProfile__title {
+        margin-top: 50px;
+        font-size: 36px;
+        font-weight: 600;
+        color: $blue;
+        text-align: center;
+
+        span {
+            color: $green;
+        }
+    }
+
+    .editProfile__logo {
+        overflow: hidden;
+
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    ::deep .valid.modified:not([type=checkbox]) {
+        outline: none;
+    }
+
+    .form-item {
+        margin-bottom: 40px;
+
+        .dropdown {
+
+            .material-icons-outlined {
+                position: absolute;
+                top: 8px;
+                right: 10px;
+                pointer-events: none;
+            }
+
+            .my-form-department {
+                background: #fff !important;
+                cursor: pointer;
+            }
+
+            &-menu {
+                height: 200px;
+                overflow-y: scroll;
+                width: 100%;
+                padding-left: 12px;
+                background: #fff;
+                box-shadow: 0px 10px 20px 2px rgba(4, 20, 69, 0.1);
+
+                li {
+                    cursor: pointer;
+                    margin-top: 20px;
+                    font-size: 16px;
+                    font-weight: 300;
+                    color: #515151;
+                }
+            }
+        }
+
+        .form-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: $border-color-bold;
+            margin: auto 0;
+
+            span {
+                color: red;
+            }
+        }
+
+        ::deep .form-control {
+            font-size: 16px;
+            font-weight: 300;
+            color: $grey-text;
+            border: 1px solid #D8D8D8;
+            border-radius: 5px;
+        }
+
+        ::deep .form-control-maxim {
+            padding: 10px;
+        }
+
+        ::deep .form-control--disable {
+            background-color: #F3F3F3 !important;
+        }
+
+        ::deep .typeahead__input-multi {
+            border: none;
+        }
+
+        .form-field {
+            .w-20 {
+                width: 20%;
+            }
+
+            .w-40 {
+                width: 40%;
+            }
+
+            .w-60 {
+                width: 60%;
+            }
+
+            .w-80 {
+                width: 80%;
+            }
+        }
+
+        .form-field-item {
+            text-align: center;
+
+            &:hover > i {
+                font-size: 50px;
+            }
+
+            &:hover > span {
+                transform: translateY(-5px);
+            }
+
+            i {
+                display: block;
+                background-color: $blue;
+                border-radius: 50%;
+                color: white;
+                margin: 5px auto;
+                transition: all 0.3s linear;
+                width: 73px;
+                height: 73px;
+                line-height: 73px;
+                font-size: 35px;
+
+                @include on("xxl") {
+                    width: 83px;
+                    height: 83px;
+                    line-height: 83px;
+                    font-size: 40px;
+                }
+            }
+
+            span {
+                color: $green;
+                font-weight: 500;
+                display: inline-block;
+                transition: all 0.3s linear;
+                font-size: 18px;
+                margin-top: 20px;
+
+                @include on("xxl") {
+                    font-size: 20px;
+                }
+            }
+
+            .icon-add {
+                background: $grey-close-bg;
+                opacity: 50%;
+                color: $white;
+                font-size: 70px;
+
+                &:hover {
+                    background: $grey-close-bg;
+                    opacity: 100%;
+                    font-size: 80px;
+                }
+            }
+
+            &.item-add {
+                width: 20%;
+                cursor: pointer;
+            }
+        }
+
+        .editProfile__NoCarousel {
+
+            .item-NoCaroesel {
+            }
+        }
+
+        .owl-carousel {
+            z-index: 0;
+        }
+
+
+        .editProfile__carousel {
+            width: 80%;
+            padding-right: 50px;
+
+            .item {
+                margin: 0 auto;
+            }
+
+
+
+            ::deep .owl-nav {
+                display: block;
+
+                .owl-prev {
+                    display: none;
+                }
+
+                .owl-next {
+                    position: absolute;
+                    top: -15%;
+                    right: 0%;
+
+                    span {
+                        font-size: 80px;
+                        color: $blue;
+                        transition: all 0.3s linear;
+
+                        &:hover {
+                            color: $blue-hv;
+                        }
+                    }
+
+                    &:hover {
+                        background: none;
+                    }
+                }
+            }
+
+            ::deep .owl-dots {
+                display: none;
+            }
+        }
+
+        .countWord {
+            color: $border-color-bold;
+            position: absolute;
+            top: 135px;
+            right: 15px;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        /* Track */
+        ::-webkit-scrollbar-track {
+        }
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #C4C4C4;
+            border-radius: 10px;
+            height: 50px;
+        }
+        /* form-item search and choose skill*/
+        .typeahead__input-icon {
+            height: 100%;
+            width: 40px;
+            display: flex;
+            border-radius: 0 5px 5px 0;
+            padding: .5rem;
+            cursor: pointer;
+            background: none;
+            top: 0;
+            right: 13px;
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
+            }
+
+            .typeahead__down-arrow {
+                path {
+                    fill: #333333;
+                }
+            }
+        }
+    }
+}
+
+.from__btn {
+    margin: 20px 0 60px;
+
+    .btn {
+        padding: 12px 35px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .from__btn-cancel {
+        background: $white;
+        color: $blue;
+
+        &:hover {
+            border: 1px solid $blue;
+        }
+    }
+
+    .from__btn-submit {
+        background: #C4C4C4;
+        color: $white;
+    }
+
+    .blue-btn {
+        background: $blue;
+
+        &:hover {
+            background: $blue-hv;
+        }
+    }
+
+    .cursor {
+        cursor: context-menu;
+    }
+}

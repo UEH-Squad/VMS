@@ -1,0 +1,182 @@
+﻿@attribute [Route(Routes.EditUserProfile)]
+@attribute [Authorize(Roles = "User")]
+
+<div class="my-editProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-10 mx-auto">
+                @if (isErrorMessageShown)
+                {
+                    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
+                }
+                <h1 class="editProfile__title my-3">Chỉnh sửa <span>thông tin cá nhân</span></h1>
+                <div class="editProfile__logo text-center my-5">
+                    @if (!string.IsNullOrEmpty(user.Avatar))
+                    {
+                        <img src="@user.Avatar" alt="">
+                    }
+                </div>
+                <EditForm Model="@user" OnValidSubmit="HandleSubmit" OnInvalidSubmit="HandleInvalidSubmit" class="editProfile__form">
+                    <DataAnnotationsValidator />
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Họ và tên <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.FullName" class="form-control form-control--disable" disabled="true" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Khóa <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.Course" class="form-control form-control--disable" disabled="true" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Lớp <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.Class" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Khoa <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <div class="dropdown">
+
+                                <span class="material-icons-outlined"> arrow_drop_down </span>
+                                <InputSelect class="form-control my-form-department" @bind-Value="@user.FacultyId">
+                                    <option value="" disabled selected hidden>Lựa chọn Khoa</option>
+                                    @foreach (var item in faculties)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Mã số sinh viên <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.StudentId" class="form-control form-control--disable" disabled="true" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Ngày sinh <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputDate @bind-Value="@user.Birthday" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Email UEH <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.UserName" class="form-control form-control--disable" disabled="true" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Email nhận thông báo <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.Email" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Điện thoại <span>(*)</span></p>
+                        <div class="col-9 px-0">
+                            <InputText @bind-Value="@user.PhoneNumber" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Địa chỉ <span>(*)</span></p>
+                        <div class="col-9 d-flex flex-row flex-wrap flex-xl-nowrap" style="padding:0">
+                            <VMS.Pages.Organization.Activities.CascadingAddressPicker DistrictId="@user.DistrictId"
+                                                                                      District="@user.District"
+                                                                                      ProvinceId="user.ProvinceId"
+                                                                                      Province="@user.Province"
+                                                                                      WardId="@user.WardId"
+                                                                                      Ward="@user.Ward"
+                                                                                      OnAddressChanged="OnAddressChanged"/>
+                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" style="width:auto" placeholder="Nhập số nhà, tên đường" />
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Lĩnh vực <span>(*)</span></p>
+                        <div class="col-9 form-field ">
+                            <div class="d-flex">
+                                @if (choosenAreas.Count < 5)
+                                {
+                                    width = choosenAreas.Count * 20;
+                                    classWidth = "w-" + width;
+                                }
+
+                                <div class="@(choosenAreas.Count>4 ?"owl-carousel owl-theme editProfile__carousel w-80" :"d-flex editProfile__NoCarousel ") @classWidth ">
+                                    @foreach (var item in choosenAreas)
+                                    {
+                                        <div class="form-field-item item @(choosenAreas.Count>4 ?"" :"item-NoCaroesel mx-auto")">
+                                            <i class="material-icons">@item.Icon</i>
+                                            <span>@item.Name</span>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="form-field-item  item-add ">
+                                    <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Kỹ năng <span>(*)</span></p>
+                        <div class="col-9 position-relative p-0">
+                            <Typeahead SearchMethod="SearchSkills"
+                                       PlaceHolderText="Lựa chọn kỹ năng"
+                                       @bind-Values="user.Skills"
+                                       EnablePopup="true"
+                                       ShowPopUp="ShowSkillsPopup"
+                                       class="col-5">
+                                <SelectedTemplate Context="target">
+                                    @target.Name
+                                </SelectedTemplate>
+                                <ResultTemplate Context="target">
+                                    @target.Name
+                                </ResultTemplate>
+                            </Typeahead>
+                        </div>
+                    </div>
+
+                    <div class="row form-item">
+                        <p class="col-3 form-text">Châm ngôn</p>
+                        <div class="col-9 position-relative px-0">
+                            <div class="col-8 px-0 w-100">
+                                <InputLimitedTextArea MaxLength="@maxWord" @bind-Value="user.Introduction" class="form-input mx-0 form-control form-control-maxim" />
+                                <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8 ms-auto from__btn">
+                            <a href="@($"{Routes.OrgProfile}/{user.Id}")" class="btn from__btn-cancel text-decoration-none">Hủy</a>
+                            <button type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn">Hoàn tất</button>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+<Spinner IsLoading="isLoading" />
+
+@code {
+    RenderFragment succeededCreateTitle =@<h3><span>Chỉnh sửa thông tin thành công!</span></h3>;
+}

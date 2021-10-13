@@ -1,0 +1,102 @@
+﻿@inject IJSRuntime JS;
+
+<div class="row">
+    <div class="text-result mb-5">Có <span>@data?.TotalItems</span> hoạt động tương ứng với kết quả tìm kiếm của bạn.</div>
+</div>
+@if (data != null && data.TotalItems != 0)
+{
+    @foreach (var item in data.Items)
+    {
+        <div class="org-card" style="z-index:@(CheckForZIndex(item.Id) ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || CheckForZIndex(item.Id) ? 1 : 0.75)">
+            <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
+                more_horiz
+            </i>
+            <ul class="act-menu p-2 position-absolute @(item.IsMenu ? "d-block" : "d-none")">
+                <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                <li @onclick="(() => ShowDeleteModalAsync(item))" class="delete pb-2">Xóa</li>
+                <li @onclick="(() => ShowCloseModalAsync(item))" class="close pb-2 @(item.StartDate <= DateTime.Now ? "d-none" : "")">@(item.IsClosed ? "Mở" : "Đóng") hoạt động</li>
+            </ul>
+            <div class="org-card__img">
+                <img src="@item.Banner" alt="photo">
+            </div>
+            <div class="org-card__info position-relative">
+                <div class="lmtext-2 org-card__info__title">
+                    <a href="@Routes.ActivityInfo/@item.Id">@item.Name</a>
+                </div>
+                <div class="org-card__info__rate">
+                    <span class="material-icons-outlined" style="color:@(item.Rating >= 1 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rating,1)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rating >= 2 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rating,2)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rating >= 3 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rating,3)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rating >= 4 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rating,4)?"_half":"")
+                    </span>
+                    <span class="material-icons-outlined" style="color:@(item.Rating >= 5 ? "#EDF131" : "#B4B4B4")">
+                        star@(HaftStar(item.Rating,5)?"_half":"")
+                    </span>
+                </div>
+                <div class="lmtext-2 org-card__info__desc">
+                    @((MarkupString)item.Description)
+                </div>
+                <div class="org-card__info__date">
+                    Ngày đăng: <span>@item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="org-card__footer w-100 d-flex position-absolute">
+                    <div class="org-card__member py-1 d-flex px-0">
+                        <span class="org-card__member__icon material-icons me-1 pe-none">
+                            person
+                        </span>
+                        <span class="org-card__member__text">400</span>
+                    </div>
+                    <div class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
+                        Xem danh sách
+                    </div>
+                    @if (item.EndDate < DateTime.Now)
+                    {
+                        <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1 position-relative">
+                            <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
+                            <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
+                                expand_more
+                            </span>
+                            <ul class="rate-menu org-card__cbb-rate__list card-list position-absolute" style="display:@(item.Id == rateId ? "inline-block" : "none");">
+                                <li>Tình nguyện viên</li>
+                                <li>Xem đánh giá hoạt động</li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+                @if ((item.IsClosed || item.StartDate <= DateTime.Now) && (item.EndDate >= DateTime.Now))
+                {
+                    <div class="org-card__noti d-flex align-items-center position-absolute">
+                        <span class="material-icons-outlined">
+                            error
+                        </span>
+                        <i>Đã đóng đăng ký</i>
+                    </div>
+                }
+        </div>
+    }
+}
+
+<div class="pagination-org">
+    <Pager CurrentPage="@data.PageIndex"
+           PageCount="@data.TotalPages"
+           OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(true); })" />
+</div>
+
+@code {
+    private bool HaftStar(double rate, int star)
+    {
+        if (rate - star >= 0.5 && rate - star < 1)
+        {
+            return true;
+        }
+        return false;
+    }
+}

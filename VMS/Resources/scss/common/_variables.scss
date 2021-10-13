@@ -2,6 +2,7 @@
 
 $blue: #18A0FB;
 $blue-bold: #0B588C;
+$blue-background: #E8F5FF;
 $white: #FFFFFF;
 $green: #64D72F;
 $green-bold: #306C14;
@@ -16,21 +17,15 @@ $border-color-normal: #b4b4b4;
 $yellow-star: #EDF131;
 $white-overlay: #F2F2F2;
 $red: #F14747;
+$error: #E10B0B;
 $grey-close-bg: #C4C4C4;
 $grey-close-btn: #717171;
 $grey-input: #D8D8D8;
+$blue-less: #489ED7;
+$red-warning: #E10B0B;
 /*#endregion */
-
-
 /*#region breakpoints */
-
-$breakpoints: ( 
-    'sm': ( min-width: 576px ),
-    'md': ( min-width: 768px ),
-    'lg': ( min-width: 992px ),
-    'xl': ( min-width: 1200px ),
-    'xxl': ( min-width: 1400px ),
-) !default;
+$breakpoints: ( 'sm': ( min-width: 576px ), 'md': ( min-width: 768px ), 'lg': ( min-width: 992px ), 'xl': ( min-width: 1200px ), 'xxl': ( min-width: 1400px ), ) !default;
 
 /*#endregion */
 

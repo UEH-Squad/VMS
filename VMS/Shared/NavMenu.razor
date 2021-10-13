@@ -19,16 +19,16 @@
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
             <ul class="navbar-nav navbar-list mb-4 mb-xl-0 text-center fw-bold my-collapse__list">
                 <li class="nav-item">
-                    <a href="@Routes.HomePage" class="text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</a>
+                    <NavLink href="@Routes.HomePage" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a href="@Routes.ActivitySearch" class="text-decoration-none mx-4   py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</a>
+                    <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-4   py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
                 </li>
                 <li class="nav-item"> 
-                    <a href="@Routes.Organizations" class="text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</a>
+                    <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a href="@Routes.ActivityInfo" class="text-decoration-none   mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</a>
+                    <NavLink href="@Routes.UserProfile" class="nav-link text-decoration-none mx-3 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
                 </li>
             </ul>
             <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
@@ -41,6 +41,8 @@
 
 @code
 {
+    string userProfileUrl;
+
     [Parameter]
     public bool IsFixedTop { get; set; }
 }

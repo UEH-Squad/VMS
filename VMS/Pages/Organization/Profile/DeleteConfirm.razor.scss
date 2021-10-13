@@ -7,7 +7,7 @@
     bottom: 0;
     left: 0;
     background-color: rgba(196, 196, 196, 0.38);
-    z-index: 3;
+    z-index: 120;
 
     .border-10 {
         border-radius: 10px;
@@ -62,6 +62,7 @@
         .material-icons {
             font-size: 14px;
             color: $grey-close-btn;
+            line-height: 0;
         }
     }
 

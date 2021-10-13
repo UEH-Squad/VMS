@@ -50,21 +50,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "4f1a0f74-1bc9-4b66-9d58-7ff03ff47aea",
+                            ConcurrencyStamp = "5586e289-aadd-4126-9885-4eb6c59f1897",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "8275a3f8-0527-42cf-a8db-ede17e5491c2",
+                            ConcurrencyStamp = "66ef1a6e-bd66-4e51-ac9d-8e5e6e82b419",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "b90d6988-c38a-4017-8576-054742b29049",
+                            ConcurrencyStamp = "0cc6be32-9169-4606-b692-760f7777d64c",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -612,6 +612,98 @@ namespace VMS.Infrastructure.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Faculties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Khoa Luật"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Khoa Kế toán"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Khoa Kinh tế"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Khoa Khoa học xã hội"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Khoa Ngân hàng"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Khoa Ngoại ngữ"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Khoa Quản lý nhà nước"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Khoa Quản trị"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Khoa Tài chính"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Khoa Tài chính công"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Khoa Công nghệ thông tin kinh doanh"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Khoa Kinh doanh quốc tế - Marketing"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Khoa Toán - Thống kê"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Viện Du lịch"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Viện Đào tạo quốc tế"
+                        });
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.Favorite", b =>
                 {
                     b.Property<int>("Id")
@@ -1124,11 +1216,20 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Course")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FullAddress")
                         .HasColumnType("nvarchar(max)");
@@ -1151,6 +1252,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("PhoneNumber2")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
+
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(max)");
 
@@ -1162,6 +1266,8 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("FacultyId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -1383,7 +1489,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany()
+                        .WithMany("Recruitments")
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1469,6 +1575,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.User", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.Faculty", "Faculty")
+                        .WithMany("Users")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Faculty");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.Activity", b =>
                 {
                     b.Navigation("ActivityAddresses");
@@ -1478,6 +1594,8 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("ActivitySkills");
 
                     b.Navigation("Favorites");
+
+                    b.Navigation("Recruitments");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
@@ -1494,6 +1612,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Activities");
 
                     b.Navigation("UserAreas");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>

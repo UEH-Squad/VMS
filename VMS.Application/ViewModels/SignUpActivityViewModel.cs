@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using VMS.Common.CustomValidations;
 
 namespace VMS.Application.ViewModels
 {
@@ -8,8 +9,8 @@ namespace VMS.Application.ViewModels
 
         public string ActivityId { get; set; }
 
-        [Required]
-        [MaxLength(11)]
+        [Required(ErrorMessage = "Số điện thoại không được để trống!")]
+        [IsValidPhoneNumber]
         public string PhoneNumber { get; set; }
 
         [Required]

@@ -75,23 +75,23 @@
       font-weight: 600;
       font-size: 8px;
       color: #18A0FB;
-      max-height: calc(8px * 4 + 19px);
+      height: 160px;
       overflow: hidden; }
       @media (min-width: 768px) {
         .act__container__card__desc {
           padding: 14px;
           font-size: 14px;
-          max-height: calc(14px * 4 + 19px); } }
+          height: 160px; } }
       @media (min-width: 1200px) {
         .act__container__card__desc {
           padding: 16px;
           font-size: 18px;
-          max-height: calc(18px * 4 + 19px); } }
+          height: 160px; } }
       @media (min-width: 1400px) {
         .act__container__card__desc {
           padding: 19px;
           font-size: 20px;
-          max-height: calc(24px * 5 + 19px); } }
+          height: 160px; } }
     .act__container__card__icon {
       position: absolute;
       top: 10px;

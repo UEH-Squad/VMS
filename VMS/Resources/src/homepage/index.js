@@ -62,21 +62,27 @@ const setPosition = position => {
 }
 
 const increaseNumber = () => {
-    const handleCounterUp = el => {
-        new Waypoint({
-            element: el,
-            handler: function () {
-                counterUp(el);
-                this.destroy();
-            },
-            offset: 'bottom-in-view',
-        });
-    };
-
     $(document).ready(() => {
         const els = document.querySelectorAll('.counter');
-        [].forEach.call(els, handleCounterUp);
+        const numbers = [];
+        for (let i = 0; i < els.length; i++) {
+            numbers.push(els[i].innerHTML);
+            els[i].innerHTML = 0;
+        }
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting === true) {
+                for (let i = 0; i < els.length; i++) {
+                    els[i].innerHTML = numbers[i];
+                }
+                [].forEach.call(els, counterUp);
+            }
+        }, { threshold: [1] });
+        observer.observe(document.querySelector(".my-quoteBaner"));
+
     });
+
+
+
 }
 
 const rankCarousel = () => {
@@ -88,9 +94,10 @@ const rankCarousel = () => {
         nav: true,
         autoplay: true,
         autoplayTimeout: 5000,
-        autoplaySpeed: 1500,
-        navSpeed: 1500,
-        dotsSpeed: 1500,
+        autoplaySpeed: 2000,
+        autoplayHoverPause: true,
+        navSpeed: 2000,
+        dotsSpeed: 2000,
         responsiveClass: true,
         responsive: {
             0: {
@@ -99,11 +106,11 @@ const rankCarousel = () => {
             },
             1200: {
                 items: 1,
-                stagePadding: 140,
+                stagePadding: 135,
             },
             1400: {
                 items: 1,
-                stagePadding: 180,
+                stagePadding: 160,
             },
         }
     })

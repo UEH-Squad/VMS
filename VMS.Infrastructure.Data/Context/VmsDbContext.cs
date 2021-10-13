@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using VMS.Common;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Infrastructure.Data.Context
@@ -26,6 +26,7 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<ActivityTarget> ActivityTargets { get; set; }
         public DbSet<ReasonReport> ReasonReports { get; set; }
         public DbSet<ImageReport> ImageReports { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {
@@ -158,6 +159,30 @@ namespace VMS.Infrastructure.Data.Context
                 Name = Role.User.ToString(),
                 NormalizedName = Role.User.ToString()
             });
+
+            builder.Entity<Faculty>()
+                .HasMany(e => e.Users)
+                .WithOne(e => e.Faculty)
+                .HasForeignKey(e => e.FacultyId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.Entity<Faculty>().HasData(
+                    new Faculty { Id = 1, Name = "Khoa Luật" },
+                    new Faculty { Id = 2, Name = "Khoa Kế toán" },
+                    new Faculty { Id = 3, Name = "Khoa Kinh tế" },
+                    new Faculty { Id = 4, Name = "Khoa Khoa học xã hội" },
+                    new Faculty { Id = 5, Name = "Khoa Ngân hàng" },
+                    new Faculty { Id = 6, Name = "Khoa Ngoại ngữ" },
+                    new Faculty { Id = 7, Name = "Khoa Quản lý nhà nước" },
+                    new Faculty { Id = 8, Name = "Khoa Quản trị" },
+                    new Faculty { Id = 9, Name = "Khoa Tài chính" },
+                    new Faculty { Id = 10, Name = "Khoa Tài chính công" },
+                    new Faculty { Id = 11, Name = "Khoa Công nghệ thông tin kinh doanh" },
+                    new Faculty { Id = 12, Name = "Khoa Kinh doanh quốc tế - Marketing" },
+                    new Faculty { Id = 13, Name = "Khoa Toán - Thống kê" },
+                    new Faculty { Id = 14, Name = "Viện Du lịch" },
+                    new Faculty { Id = 15, Name = "Viện Đào tạo quốc tế" }
+                );
         }
     }
 }

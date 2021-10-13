@@ -1,0 +1,50 @@
+﻿
+<div class="pop-up">
+    <div class="center-screen">
+        <div class="pop-up-container border-10 @(isConfirmEdit ? "d-block" : "d-none")">
+            <div @onclick="CloseModal" class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="content">
+                <h3>Bạn có chắc chắn muốn</h3>
+                <h3><span class="edit-text">chỉnh sửa thông tin</span> này không?</h3>
+            </div>
+            <div class="pop-up-btn">
+                <div @onclick="CloseModal" class="deny">Hủy</div>
+                <div @onclick="EditSuccess" class="accept">Xác nhận</div>
+            </div>
+        </div>
+
+        <div class="pop-up-container border-10 @(isConfirmEdit ? "d-none" : "d-block")">
+            <a href="#" @onclick="CloseModal" class="text-decoration-none close-btn-s">
+                <span class="material-icons">
+                    close
+                </span>
+            </a>
+            <div class="pop-up-content">
+                <h3 class="edit-success">Chỉnh sửa thông tin thành công!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    bool isConfirmEdit = true;
+    bool isEditSuccess;
+
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+    }
+
+    void EditSuccess()
+    {
+        isConfirmEdit = !isConfirmEdit;
+    }
+
+}

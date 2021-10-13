@@ -7,7 +7,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(196, 196, 196, 0.38);
-    z-index: 3;
+    z-index: 120;
 
     .notification__content {
         position: absolute;
@@ -21,21 +21,18 @@
     }
 
     .notification__img {
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
         overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border-bottom: 1px solid $border-color-bold;
+
+        img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
     }
 
-    .notification__btn {
-        border-top: 1px solid $border-color-bold;
-    }
-
-    button {
-    }
 
     .btn__cancel {
         color: $border-color-bold;

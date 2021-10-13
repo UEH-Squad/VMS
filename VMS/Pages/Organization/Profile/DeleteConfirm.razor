@@ -1,7 +1,9 @@
-﻿<div class="pop-up">
+﻿@using VMS.Application.Interfaces
+
+<div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-block" : "d-none")">
-            <div @onclick="CloseModal" class="close-btn">
+        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="close-btn">
                 <span class="material-icons">
                     close
                 </span>
@@ -11,13 +13,13 @@
                 <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
-                <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="btn accept px-0">Xác nhận</div>
+                <div @onclick="CloseModalAsync" class="btn px-0 deny">Hủy</div>
+                <div @onclick="DeleteSuccessAsync" class="btn accept px-0">Xác nhận</div>
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-none" : "d-block")">
-            <div @onclick="CloseModal" class="close-btn-s">
+        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-none" : "d-block")">
+            <div @onclick="CloseModalAsync" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
@@ -30,20 +32,22 @@
 </div>
 
 @code {
+
+    private bool isDeleteSuccess;
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
 
-    bool isConfirmDelete = true;
-    bool isDeleteSuccess;
+    [Inject]
+    private IActivityService ActivityService { get; set; }
 
-    private async Task CloseModal()
+    private async Task CloseModalAsync()
     {
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok<bool>(isDeleteSuccess));
     }
 
-    void DeleteSuccess()
+    private async Task DeleteSuccessAsync()
     {
-        isConfirmDelete = !isConfirmDelete;
+        isDeleteSuccess = true;
     }
-
 }

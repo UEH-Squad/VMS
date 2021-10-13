@@ -11,7 +11,7 @@
   bottom: 0;
   left: 0;
   background-color: rgba(196, 196, 196, 0.38);
-  z-index: 3; }
+  z-index: 120; }
   .pop-up .border-10 {
     border-radius: 10px; }
   .pop-up .center-screen {
@@ -38,7 +38,8 @@
     background: rgba(196, 196, 196, 0.5); }
     .pop-up .close-btn-s .material-icons {
       font-size: 14px;
-      color: #717171; }
+      color: #717171;
+      line-height: 0; }
   .pop-up .pop-up-content {
     padding: 13px 55px; }
     .pop-up .pop-up-content .close-act {
@@ -47,3 +48,9 @@
       font-weight: 500;
       margin-bottom: 0;
       color: #18A0FB; }
+    .pop-up .pop-up-content .open-act {
+      font-size: 18px;
+      line-height: 36px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #64D72F; }

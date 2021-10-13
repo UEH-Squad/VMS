@@ -1,0 +1,29 @@
+﻿@attribute [Route(Routes.ActivityManagement)]
+@attribute [Authorize(Roles = "Organization")]
+
+<div class="container-lg px-0 layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="org-title">
+                    Quản lý <span>hoạt động</span>
+                </div>
+            </div>
+            <div class="col-6">
+                <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="SearchValueChanged"/>
+            </div>
+            <div class="activities col-9">
+                <ActivitiesCard SearchValue=@searchValue IsSearch=@isSearch Filter=@filter/>
+            </div>
+            <div class="filter col-1">
+            </div>
+            <div class="filter col-2">
+                <Filter FilterAct=@filter FilterActChanged="FilterChanged" OrgId=@orgId />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+}

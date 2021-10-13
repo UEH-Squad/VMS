@@ -1,0 +1,96 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.search-and-button {
+    display: grid;
+    grid-template-columns: 55% 45%;
+
+    .button-download {
+
+        margin-top:15px;
+        &__text {
+           
+            display:flex;
+            color: $blue;
+            background: none;
+            border: none;
+            padding: 0 12px;
+            float: right;
+            font-weight:500;
+
+            &:hover {
+                color: $blue-hv;
+            }
+
+            .material-icons {
+                margin-right:5px;
+                font-size:24px;
+            }
+        }
+    }
+}
+
+.my-container {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin: 15px 0 20px;
+
+    .quantity-volunteers {
+        width: 50%;
+        font-size: 18px;
+        color: $blue;
+
+        span {
+            color: $green;
+        }
+    }
+
+    .button {
+        width: 30%;
+
+        &__text {
+            float: right;
+            font-size: 16px;
+            color: $white;
+            padding: 8px 25px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 7px;
+        }
+
+        &__text--undo {
+            background-color: $blue;
+
+            &:hover {
+                background-color: $blue-hv;
+            }
+        }
+
+        &__text--del {
+            background-color:$grey-close-bg;
+
+            &:hover {
+                background-color: $red;
+            }
+        }
+    }
+
+    .link {
+        width: 20%;
+
+        &__text {
+            float: right;
+            font-size: 20px;
+            margin: auto;
+            cursor: pointer;
+        }
+
+        &__text--del {
+            color: #F14747;
+        }
+
+        &__text--undo {
+            color: $blue;
+        }
+    }
+}

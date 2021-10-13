@@ -1,0 +1,449 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+//============BASE=========//
+@keyframes dropDown {
+    0% {
+        opacity: 0;
+        height: 0;
+    }
+
+    100% {
+        opacity: 1;
+        height: auto;
+    }
+}
+
+@keyframes pop-up {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.card-btn {
+    background-color: $green;
+    color: white;
+    border-radius: 5px;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+
+    &:hover {
+        background-color: $green-bold;
+    }
+}
+
+.card-list {
+    position: absolute;
+    transform: translate(-35%,1%);
+    width: 135%;
+    padding: 10px 15px;
+    background-color: white;
+    color: $blue;
+    box-shadow: 0px 4px 60px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+}
+
+//----------------------CARD FORMAT-------------------//
+.org-card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 20px 18px;
+    height: 267px;
+    margin-bottom: 15px;
+    background-color: $grey;
+    border-radius: 10px;
+}
+
+//----------------------CARD IMG--------------------//
+.org-card {
+    &__img {
+        aspect-ratio: calc(267/188);
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+//-------------------CARD INFO----------------------//
+.org-card {
+    &__info {
+        flex: 3;
+        padding-left: 40px;
+
+        &__title {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            margin-bottom: 5px;
+
+            a {
+                color: $blue;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: $blue-hv;
+            }
+        }
+
+        &__rate {
+            display: inline-block;
+            color: yellow;
+            margin-bottom: 5px;
+        }
+
+        ::deep &__desc {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            color: $grey-text;
+            margin-bottom: 10px;
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+        &__date {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            color: $grey-text;
+            margin-bottom: 10px;
+        }
+
+        &__joiner {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            color: $grey-text;
+            color: $grey-text;
+
+            &__icon {
+                color: $green;
+                display: inline-block;
+
+                span {
+                    transform: translateY(25%);
+                    font-size: 24px;
+                }
+            }
+
+            &__sum {
+                display: inline-block;
+            }
+        }
+    }
+
+    &__footer {
+        bottom: 0;
+        &__btn {
+            width: fit-content;
+        }
+    }
+}
+//---------------------CARD BTN--------------------//
+.org-card {
+    .act-menu {
+        top: 20px;
+        right: 7px;
+        width: fit-content;
+    }
+
+    .rate-menu {
+        top: 34px;
+        right: -95px;
+        width: max-content;
+    }
+
+    ul {
+        background: $white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+        z-index: 1;
+
+        li, a {
+            list-style: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 20px;
+            display: block;
+
+            &:hover {
+                background: rgba(24, 160, 251, 0.1);
+            }
+        }
+
+        .edit {
+            color: $grey-text;
+            cursor: pointer;
+        }
+
+        .delete {
+            color: $red;
+            cursor: pointer;
+        }
+
+        .close {
+            color: $green;
+            cursor: pointer;
+        }
+    }
+
+    .org-card__member {
+        margin-right: 50px;
+
+        @include on("xxl") {
+            margin-right: 62px;
+        }
+
+        .material-icons, {
+            color: $green;
+        }
+    }
+
+    .material-icons, {
+        color: $grey-text;
+        font-size: 24px;
+        right: 10px;
+        top: 2px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__btn-list {
+        width: 157px;
+    }
+
+    &__cbb-rate {
+        width: 120px;
+        background-color: $blue;
+
+        &:hover {
+            background-color: $blue-bold;
+        }
+
+        &__list {
+            z-index: 10;
+            font-size: 12px;
+            line-height: 28px;
+            display: none;
+            animation: dropDown 0.2s ease backwards;
+
+            li {
+                list-style: none;
+                padding: 0 10px;
+            }
+
+            li:hover {
+                background: rgba(24, 160, 251, 0.1);
+            }
+        }
+    }
+
+    &__noti {
+        padding: 5px 15px;
+        font-weight: 400;
+        font-size: 14px;
+        color: $red-warning;
+        text-indent: 5px;
+        bottom: 5px;
+        right: 0;
+    }
+
+    &__member {
+        width: fit-content;
+
+        &__text {
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        &__icon {
+            font-size: 24px;
+            color: $green
+        }
+    }
+}
+
+
+//-------------------------CARD NOTIFICATION----------------------//
+//------------Reuse Icon-------------//
+.close-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-20%,20%);
+    color: $grey-text;
+    cursor: pointer;
+    user-select: none;
+
+    span {
+        font-size: 16px;
+        background: rgba(196, 196, 196, 0.5);
+        padding: 5px;
+        border-radius: 100%;
+    }
+}
+//----------Main-----------//
+.popup-container {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0.01);
+}
+
+.notify {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%,-50%);
+    padding: 0 50px;
+    min-width: 267px;
+    min-height: 67px;
+    background-color: white;
+    box-shadow: 0px 4px 60px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+
+    .content {
+        text-align: center;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+    }
+
+    &.--del {
+        .content {
+            color: $green;
+        }
+    }
+
+    &.--close {
+        .content {
+            color: $blue;
+        }
+    }
+}
+
+.confirm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%,-50%);
+    padding: 20px 50px;
+    width: 380px;
+    min-height: 67px;
+    background-color: white;
+    box-shadow: 0px 4px 60px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+
+    .content {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: $green;
+
+        &.--del {
+            span {
+                color: red;
+            }
+        }
+
+        &.--close {
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    .btn-yes, .btn-cancel {
+        position: relative;
+        display: inline-block;
+    }
+
+    .btn-cancel {
+        background-color: transparent;
+        color: $blue;
+        float: right;
+        margin-right: 10px;
+    }
+
+    .btn-yes {
+        float: right;
+    }
+}
+/*------Pager-------*/
+.pagination-org {
+    display: flex;
+    justify-content: flex-end;
+}
+/*------Text Result-------*/
+.text-result {
+    font-size: 24px;
+    color: $blue;
+
+    span {
+        color: $green;
+    }
+}
+
+.lmtext-2, .lmtext-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.lmtext-2 {
+    -webkit-line-clamp: 2;
+}
+
+.lmtext-3 {
+    -webkit-line-clamp: 3;
+}

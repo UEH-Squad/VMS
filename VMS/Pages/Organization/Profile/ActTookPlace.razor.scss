@@ -6,8 +6,6 @@
         font-size: 30px;
         line-height: 36px;
         color: $grey-text;
-        margin-bottom: 42px;
-        margin-top: 70px;
 
         span {
             color: $green;
@@ -78,6 +76,8 @@
 .act-img {
     width: 100%;
     transition: all .5s ease;
+    object-fit: cover;
+    object-position: center;
 }
 
 .act-container:hover {

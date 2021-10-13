@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Application.Services
@@ -56,7 +57,7 @@ namespace VMS.Application.Services
 
         public List<User> GetAllOrganizers()
         {
-            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync("Organizer")).Result;
+            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync(Role.Organization.ToString())).Result;
         }
 
         public string GetCurrentUserAddress()

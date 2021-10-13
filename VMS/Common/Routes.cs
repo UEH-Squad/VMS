@@ -43,6 +43,7 @@
         #region Admin
 
         public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
+        public const string AdminResolveReport = "/admin/quan-ly-bao-cao";
 
         #endregion Admin
     }

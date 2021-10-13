@@ -334,5 +334,9 @@
   {
     "outputFile": "Pages/Organization/Profile/Appellation.razor.css",
     "inputFile": "Pages/Organization/Profile/Appellation.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/ProfileRank.razor.css",
+    "inputFile": "Pages/UserProflie/ProfileRank.razor.scss"
   }
 ]

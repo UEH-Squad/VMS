@@ -221,6 +221,8 @@
 
     .rank__review {
         display: inline-block;
+        //-webkit-background-clip: text;
+        //-webkit-text-fill-color: transparent;
         background: linear-gradient(180deg, rgba(252, 255, 129, 0.568399) -20.51%, rgba(252, 255, 129, 0) -20.5%, rgba(252, 255, 129, 0.0290694) -20.49%, rgba(252, 255, 129, 0.0988999) -20.48%, #FCFF81 46.98%, #FCFF81 74.36%);
         padding: 2px 40px;
         border-radius: 5px;

@@ -38,7 +38,7 @@
         }
 
         .profile__type {
-            background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%);
+            background: linear-gradient(180deg, rgba(252, 255, 129, 0.568399) -20.51%, rgba(252, 255, 129, 0) -20.5%, rgba(252, 255, 129, 0.0290694) -20.49%, rgba(252, 255, 129, 0.0988999) -20.48%, #FCFF81 46.98%, #FCFF81 74.36%);
             border-radius: 10px;
             padding: 10px 20px;
             color: #515151;
@@ -47,7 +47,7 @@
             border-radius: 10px;
 
             &:hover {
-                background: linear-gradient(to top, rgba(237, 241, 49, 0.35) 43.23%, rgba(255, 255, 255, 0.45) 100%);
+                background: linear-gradient(180deg, rgba(252, 255, 129, 0.568399) 0%, rgba(252, 255, 129, 0) 0%, rgba(252, 255, 129, 0.0290694) 0%, rgba(252, 255, 129, 0.0988999) 0%, #FCFF81 80%, #FCFF81 100%);
             }
 
             &:focus {
@@ -56,10 +56,10 @@
         }
 
         .profile__type-notHover:hover {
-            background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%);
+            background: linear-gradient(180deg, rgba(252, 255, 129, 0.568399) -20.51%, rgba(252, 255, 129, 0) -20.5%, rgba(252, 255, 129, 0.0290694) -20.49%, rgba(252, 255, 129, 0.0988999) -20.48%, #FCFF81 46.98%, #FCFF81 74.36%);
         }
     }
-  
+
     .profile__contact {
         width: 28%;
 

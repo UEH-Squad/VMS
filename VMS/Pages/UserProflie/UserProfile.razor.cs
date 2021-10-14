@@ -12,6 +12,8 @@ namespace VMS.Pages.UserProflie
 {
     public partial class UserProfile : ComponentBase
     {
+        private string appellation = "Chiến sĩ hạng đồng";
+
         [Parameter] public bool IsUser { get; set; } = false;
         [Parameter] public UserViewModel User { get; set; } = new();
         [CascadingParameter] public IModalService Modal { get; set; }
@@ -56,6 +58,23 @@ namespace VMS.Pages.UserProflie
             catch (Exception)
             {
                 return;
+            }
+        }
+
+        private async Task ShowModalAppellationAsync()
+        {
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
+
+            var result = await Modal.Show<Appellation>("", options).Result;
+
+            if (!string.IsNullOrEmpty(Convert.ToString(result.Data)))
+            {
+                appellation = Convert.ToString(result.Data);
             }
         }
     }

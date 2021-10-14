@@ -20,7 +20,7 @@
                     <p class="m-0 ">@User.FullName</p>
                     @if (IsUser)
                     {
-                        <button @onclick="() => ShowModalAppellation()" class="profile__type d-inline-block btn mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</button>
+                        <button @onclick="ShowModalAppellationAsync" class="profile__type d-inline-block btn mx-auto mt-1 mb-4">@appellation</button>
                     }
                     else
                     {
@@ -87,57 +87,4 @@
 </div>
 
 @code {
-
-
-
-
-
-    async Task ShowModalAppellation()
-    {
-        var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-        Modal.Show<Appellation>("", options);
-    }
-
-
-
-    bool isNotification = false;
-    void ShowNotification()
-
-    {
-
-        isNotification = !isNotification;
-    }
-
-
-
-    protected override void OnInitialized()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            fakeDatas.Add(new FakeData()
-                {
-                    Id = i,
-                    IconName = "group",
-                    Filter = "Cộng đồng"
-                });
-        }
-    }
-
-    private List<FakeData> fakeDatas = new();
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string IconName { get; set; }
-        public string Filter { get; set; }
-    }
-
-
-
-
 }

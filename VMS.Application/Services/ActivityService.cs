@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -615,7 +616,7 @@ namespace VMS.Application.Services
             }
         }
 
-        public async Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct)
+        public async Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime = new())
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -623,7 +624,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    GetConditionByStatusAct(userId, statusAct)
+                    GetConditionByStatusAct(userId, statusAct, dateTime)
                 }
             };
 
@@ -632,13 +633,13 @@ namespace VMS.Application.Services
             return _mapper.Map<List<ActivityViewModel>>(activities);
         }
 
-        private static Expression<Func<Activity, bool>> GetConditionByStatusAct(string userId, StatusAct statusAct)
+        private static Expression<Func<Activity, bool>> GetConditionByStatusAct(string userId, StatusAct statusAct, DateTime dateTime)
         {
             return statusAct switch
             {
                 StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
                 StatusAct.Ended => x => x.EndDate < DateTime.Now && x.Recruitments.Any(x => x.UserId == userId && x.AcceptTime >= x.EnrollTime),
-                _ => x => x.StartDate <= DateTime.Now && x.EndDate >= DateTime.Now && x.Recruitments.Any(x => x.UserId == userId && x.AcceptTime >= x.EnrollTime),
+                _ => x => x.StartDate <= dateTime && x.EndDate >= dateTime && x.Recruitments.Any(x => x.UserId == userId && x.AcceptTime >= x.EnrollTime),
             };
         }
     }

@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
-using VMS.Application.Services;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Organization.Profile
 {

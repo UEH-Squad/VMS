@@ -1,4 +1,4 @@
-﻿namespace VMS.Application.Services
+﻿namespace VMS.Common.Enums
 {
     public enum StatusAct{
         Current, 

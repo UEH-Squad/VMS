@@ -14,6 +14,7 @@ namespace VMS.Application.Interfaces
         Task UpdateOrgProfile(CreateOrgProfileViewModel orgProfileViewModel, string userId);
 
         UserViewModel GetUserViewModel(string userId);
+
         void UpdateUserAvatar(string userId, string avatar);
     }
 }

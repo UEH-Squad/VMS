@@ -1,8 +1,10 @@
 ﻿using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Services;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
@@ -33,6 +35,6 @@ namespace VMS.Application.Interfaces
 
         Task UpdateActFavorAsync(int activityId, string userId);
 
-        Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct);
+        Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime = new());
     }
 }

@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+using Microsoft.AspNetCore.Components;
 using VMS.Common;
 using VMS.Application.ViewModels;
 using VMS.Application.Interfaces;
 using System.Threading.Tasks;
-using VMS.Application.Services;
 using System.Collections.Generic;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.UserProflie
 {
@@ -29,7 +30,7 @@ namespace VMS.Pages.UserProflie
 
         private async Task GetAllActivities()
         {
-            currentActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Current);
+            currentActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Current, DateTime.Now);
 
             favoriteActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Favor);
             favoriteActivities.ForEach(a => a.IsFav = true);

@@ -107,7 +107,8 @@
       width: 30% !important; } }
 
 ::deep input {
-  color: #515151; }
+  color: #515151;
+  font-size: 1rem; }
   ::deep input::placeholder {
     color: #b4b4b4; }
 
@@ -144,3 +145,9 @@
     display: none; }
   ::deep .my-radio-box:checked::before {
     display: block; }
+  ::deep .my-radio-box:hover {
+    background: #F3F3F5; }
+
+::deep .my-date-picker {
+  border-radius: 5px;
+  height: 38px; }

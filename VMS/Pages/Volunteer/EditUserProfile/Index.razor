@@ -67,7 +67,10 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Ngày sinh <span>(*)</span></p>
                         <div class="col-9 px-0">
-                            <InputDate @bind-Value="@user.Birthday" class="form-control" />
+                            <AntDesign.DatePicker @bind-Value="@user.Birthday"
+                                                  DefaultValue="DateTime.Now.AddYears(-18)"
+                                                  ClassName="form-control my-date-picker"
+                                                  Format="dd/MM/yyyy" />
                         </div>
                     </div>
 

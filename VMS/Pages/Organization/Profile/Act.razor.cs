@@ -58,7 +58,7 @@ namespace VMS.Pages.Organization.Profile
             string userId = IdentityService.GetCurrentUserId();
             await ActivityService.UpdateActFavorAsync(id, userId);
             var act = Datas.Find(a => a.Id == id);
-            act.IsFav = !act.IsFav;
+            Datas.Remove(act);
         }
 
         [JSInvokable]

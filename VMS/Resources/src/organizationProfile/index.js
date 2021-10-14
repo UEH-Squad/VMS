@@ -17,7 +17,7 @@ const organizeCarousel = () => {
     const carousel = $('.organize__carousel');
    // carousel.owlCarousel('destroy');
     $('.organize__carousel').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 0,
         nav: true,
         responsive: {

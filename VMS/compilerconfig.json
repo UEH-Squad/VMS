@@ -282,5 +282,9 @@
   {
     "outputFile": "Pages/Admin/OrgamizationManagement/Index.razor.css",
     "inputFile": "Pages/Admin/OrgamizationManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.css",
+    "inputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.scss"
   }
 ]

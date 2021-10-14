@@ -44,6 +44,7 @@
 
         public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
         public const string AdminOrganizationManagement = "/admin/quan-ly-to-chuc";
+        public const string AdminVolunteerManagement = "/admin/quan-ly-ca-nhan";
 
         #endregion Admin
     }

@@ -24,7 +24,7 @@ namespace VMS.Pages.Organization.Profile
 
         async Task ShowModal(InputFileChangeEventArgs e)
         {
-            if (e.File.ContentType == "image/jpeg")
+            if (e.File.ContentType == "image/jpeg"|| e.File.ContentType == "image/png")
             {
                 file = e.File;
                 avatar = await UploadService.SaveImageAsync(file, UserId, ImgFolder.Avatar);
@@ -44,7 +44,16 @@ namespace VMS.Pages.Organization.Profile
             }
 
         }
-
+        async Task ShowModalAppellation()
+        {
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
+            Modal.Show<Appellation>("", options);
+        }
         private static bool HaftStar(double rate, int star)
         {
             if (rate - star > 0 && rate - star <= 0.5)

@@ -174,13 +174,22 @@
 }
 //---------------------CARD BTN--------------------//
 .org-card {
-    ul {
+    .act-menu {
         top: 20px;
         right: 7px;
+        width: fit-content;
+    }
+
+    .rate-menu {
+        top: 34px;
+        right: -95px;
+        width: max-content;
+    }
+
+    ul {
         background: $white;
         border-radius: 10px;
         box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
-        width: 213px;
         z-index: 1;
 
         li, a {
@@ -212,7 +221,11 @@
     }
 
     .org-card__member {
-        margin-right: 62px;
+        margin-right: 50px;
+
+        @include on("xxl") {
+            margin-right: 62px;
+        }
 
         .material-icons, {
             color: $green;

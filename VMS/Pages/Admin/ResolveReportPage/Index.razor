@@ -3,74 +3,40 @@
 @attribute [Route(Routes.AdminResolveReport)]
 @attribute [Authorize(Roles = "Admin")]
 
-    <div class="wrapper">
+<div class="dropdown">
+    <span class="material-icons-outlined"> arrow_drop_down </span>
+    <input readonly="readonly" placeholder="@valueTypeReport" data-bs-toggle="dropdown" />
+    <ul class="dropdown-menu">
+        <li @onclick="() => ChooseValueType(1)">Báo cáo tổ chức</li>
+        <li @onclick="() => ChooseValueType(2)">Báo cáo tình nguyện viên</li>
+    </ul>
+</div>
 
-        <div class="come-back">
-            <a href="#" class="come-back--text">&#60;&#60; Quay lại</a>
-        </div>
+<div class="dropdown">
+    <span class="material-icons-outlined"> arrow_drop_down </span>
+    <input readonly="readonly" placeholder="@valueStatus" data-bs-toggle="dropdown" />
+    <ul class="dropdown-menu">
+        <li>Đã ghim</li>
+        <li>Đang xử lý</li>
+        <li>Hoàn tất xử lý</li>
+        <li>Đã đóng</li>
+    </ul>
+</div>
 
-        <div class="general-info">
-            <div class="general-info__item general-info__who">Được báo cáo bởi: <a>Bùi Minh Kha</a></div>
-            <div class="general-info__item general-info__activity">Hoạt động: <a>Tuyển tình nguyện viên tham gia phòng chống covid-19</a></div>
-            <div class="general-info__item general-info__date">Ngày báo cáo: 20/02/2020</div>
-        </div>
+@code {
 
-        <div class="form-report">
+    private string valueTypeReport = "Loại báo báo";
+    private string valueStatus = "Trạng thái";
 
-            <div class="dropdown form-report__more">
-                <span class="material-icons-outlined"  id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> more_horiz </span>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item dropdown-pin" href="#">Ghim báo cáo</a></li>
-                    <li><a class="dropdown-item dropdown-close" href="#">Đóng báo cáo</a></li>
-                    <li><a class="dropdown-item dropdown-delete" href="#">Xóa</a></li>
-                </ul>
-            </div>
-            <h1 class="form-report__title">Báo cáo&nbsp;<span>hoạt động</span></h1>
-
-            <div class="form-report__reason mb-3">
-                <h6 class="form-report__reason--text">Lý do báo cáo <span>(*)</span></h6>
-                <textarea rows="2" disabled="true">
-                    02. Yêu Một Người Gian Dối - Như Việt
-                    03. Yêu Một Người Tổn Thương - Nhật Phong
-                    04. Người Lạ Từng Thương - Thương Võ
-                </textarea>
-            </div>
-
-            <div class="form-report__discript mb-3">
-                <h6 class="form-report__discript--text">Mô tả về báo cáo <span>(*)</span></h6>
-                <textarea rows="4" disabled="true">
-                    01. Đừng Hẹn Kiếp Sau - Đình Dũng
-                    02. Yêu Một Người Gian Dối - Như Việt
-                    03. Yêu Một Người Tổn Thương - Nhật Phong
-                    04. Người Lạ Từng Thương - Thương Võ
-                    05. Câu Hẹn Câu Thề - Đình Dũng
-                    06. Sầu Tương Tư - Nhật Phong
-                    07. Tình Anh - Đình Dũng
-                    08. Lệ Duyên Tình - KICM ft. Long Nón Lá
-                    09. Tránh Duyên - Đình Dũng
-                </textarea>
-            </div>
-
-            <div class="form-report__proof">
-                <h6 class="form-report__proof--text">Minh chứng đính kèm <span>(*)</span></h6>
-                <div class="d-flex justify-content-between">
-                    <img class="form-report__proof--item" src="./img/act.png" alt="Ảnh mô tả báo cáo" />
-                    <img class="form-report__proof--item" src="./img/act1.png" alt="Ảnh mô tả báo cáo" />
-                    <img class="form-report__proof--item" src="./img/act2.png" alt="Ảnh mô tả báo cáo" />
-
-                </div>
-            </div>
-
-        </div>
-
-        <div class="action-button d-flex justify-content-center mb-3">
-            <button class="action-button__processing">Đang xử lý</button>
-            <button class="action-button__complete-processing">Hoàn tất xử lý</button>
-        </div>
-
-    </div>
-
-
-    @code {
-
+    private async Task ChooseValueType(int id)
+    {
+        if (id == 1)
+        {
+            valueTypeReport = "Báo cáo tổ chức";
+        }
+        else
+        {
+            valueTypeReport = "Báo cáo tình nguyện viên";
+        }
     }
+}

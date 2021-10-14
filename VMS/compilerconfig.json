@@ -278,5 +278,9 @@
   {
     "outputFile": "Shared/AdminHeader.razor.css",
     "inputFile": "Shared/AdminHeader.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrgamizationManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/OrgamizationManagement/Index.razor.scss"
   }
 ]

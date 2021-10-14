@@ -1,15 +1,15 @@
-﻿<div>
+﻿<div class="@(HaveSearchBox ? "d-block" : "d-none")">
     <h3 class="text-center my-5">Tìm kiếm <span>Đơn vị tổ chức</span></h3>
 </div>
 @* search box component *@
-<div class="col-lg-8">
+<div class="col-lg-8 @(HaveSearchBox ? "d-block" : "d-none")">
     <VMS.Pages.ActivitySearchPage.SearchBox />
 </div>
 
-<p class="mb-4 mt-5">Lọc tổ chức</p>
+<p class="mt-5 @(HaveSearchBox ? "d-block" : "d-none")">Lọc tổ chức</p>
 
-<div class="filter-bar d-flex justify-content-between mb-5">
-    <div class="d-flex" style="width: 40%;">
+<div class="filter-bar d-flex @(IsLongDistanceFilter?"justify-content-between":"") my-4">
+    <div class="d-flex me-3" style="width: 40%;">
         <div class="filter-item position-relative me-3">
             <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
             <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
@@ -41,6 +41,9 @@
     </div>
 </div>
 @code {
+    [Parameter]
+    public bool HaveSearchBox { get; set; }
 
-    
+    [Parameter]
+    public bool IsLongDistanceFilter { get; set; }
 }

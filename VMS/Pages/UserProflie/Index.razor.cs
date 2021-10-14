@@ -11,7 +11,7 @@ namespace VMS.Pages.UserProflie
 {
     public partial class Index : ComponentBase
     {
-        private bool isUser, isLoggedIn = false;
+        private bool isUser = false;
         private UserViewModel user;
         private List<ActivityViewModel> currentActivities, favoriteActivities, endedActivities = new();
 
@@ -60,8 +60,6 @@ namespace VMS.Pages.UserProflie
             {
                 NavigationManager.NavigateTo(Routes.EditUserProfile, true);
             }
-
-            isLoggedIn = !string.IsNullOrEmpty(CurrentUserId);
         }
 
         private static bool IsValidProfile(UserViewModel user)

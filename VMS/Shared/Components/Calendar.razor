@@ -2,7 +2,7 @@
 <div class="calendar">
     <div class="d-flex flex-column align-items-center pb-2 calendar-header">
         <div class="d-flex my-4 justify-content-center">
-            <input type="date" @bind-value="@Value" class="form-control w-50" />
+            <AntDesign.DatePicker @bind-Value="@Value" Format="dd/MM/yyyy" AllowClear="false" ClassName="form-control w-50 my-date-picker" />
             <button type="button" class="btn btn-sm ms-3" @onclick="e => OnChangeMonth(0)">
                 <span>@Today</span>
             </button>
@@ -11,7 +11,7 @@
             <span class="material-icons navigate-icon" @onclick="e => OnChangeMonth(-1)">
                 navigate_before
             </span>
-            <div class="current-month">Tháng <span class="current-month__text">9/2021</span></div>
+            <div class="current-month">Tháng <span class="current-month__text">@Value.Month/@Value.Year</span></div>
             <span class="material-icons navigate-icon" @onclick="e => OnChangeMonth(1)">
                 navigate_next
             </span>

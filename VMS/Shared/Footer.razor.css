@@ -24,6 +24,8 @@
     font-size: 16px;
     color: #FFFFFF;
     background: #64D72F; }
+    .btn-back-top .btn-back-top-icon:hover {
+      background: #306C14; }
     @media (min-width: 576px) {
       .btn-back-top .btn-back-top-icon {
         width: 40px;

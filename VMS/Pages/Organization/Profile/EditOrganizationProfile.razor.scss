@@ -84,6 +84,7 @@
 
     .form-field-item {
         text-align: center;
+        width: 20%;
 
         &:hover > i {
             font-size: 40px;
@@ -147,73 +148,6 @@
             width: 20%;
             cursor: pointer;
         }
-    }
-
-
-    .owl-carousel {
-        z-index: 0;
-    }
-
-
-    .editProfile__carousel {
-        width: 80%;
-
-        .item {
-            margin: 0 auto;
-        }
-
-        ::deep .owl-nav {
-            display: block;
-
-            .owl-prev {
-                position: absolute;
-                top: -15%;
-                left: 0%;
-
-                span {
-                    font-size: 80px;
-                    color: $blue;
-                    transition: all 0.3s linear;
-
-                    &:hover {
-                        color: $blue-hv;
-                        opacity: 0.73;
-                    }
-                }
-
-                &:hover {
-                    background: none;
-                }
-            }
-
-            .owl-next {
-                position: absolute;
-                top: -15%;
-                right: 0%;
-
-                span {
-                    font-size: 80px;
-                    color: $blue;
-                    transition: all 0.3s linear;
-
-                    &:hover {
-                        color: $blue-hv;
-                    }
-                }
-
-                &:hover {
-                    background: none;
-                }
-            }
-        }
-
-        ::deep .owl-dots {
-            display: none;
-        }
-    }
-
-    ::deep .owl-carousel.owl-loading {
-        opacity: 1;
     }
 
 

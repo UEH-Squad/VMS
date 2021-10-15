@@ -1,13 +1,15 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
 .search-result {
+    margin-top: 1.8%;
+    margin-bottom: 1.8%;
 
     .search-result_text-1 {
         display: inline;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
-        line-height: 36px;
+        font-size: 18px;
+        line-height: 30px;
         color: $blue;
     }
 
@@ -15,8 +17,8 @@
         display: inline;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
-        line-height: 36px;
+        font-size: 18px;
+        line-height: 30px;
         color: $green;
     }
 
@@ -24,8 +26,8 @@
         display: inline;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
-        line-height: 36px;
+        font-size: 18px;
+        line-height: 30px;
         color: $blue;
     }
 }

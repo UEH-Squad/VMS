@@ -1,24 +1,66 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
-/*Phần đánh giá*/
-.container {
-    display: flex;
-    background-color: fuchsia;
+.card {
+    background: $white;
+    border: 0.8px solid $grey-input;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 3% 3%;
+    margin-bottom: 4%;
+}
 
-    ::deep .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
+//.....................................................................//
+//-----------------------Đánh giá của thành viên-----------------------//
+.card-member {
+
+    &_name {
         display: flex;
-        align-items: normal;
-        justify-content: normal;
-        z-index: unset;
-        background-color: none;
+
+        .name {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 2%;
+
+            &-member {
+                margin: 0;
+            }
+        }
+    }
+
+    &_comment {
+        margin: 2% 5%;
     }
 }
+//----------------End------------------//
+
+
+//..................................................................//
+//-----------------------Đánh giá của tổ chức-----------------------//
+.card-organization {
+
+    &_name {
+        display: flex;
+
+        .name {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 2%;
+
+            &-organization {
+                margin: 0;
+            }
+        }
+    }
+
+    &_comment {
+        margin: 2% 5%;
+    }
+}
+//--------------End----------------//
+
 
 
 /*::deep .popup-comment {*/

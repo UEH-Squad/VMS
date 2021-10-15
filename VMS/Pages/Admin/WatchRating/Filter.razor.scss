@@ -1,0 +1,190 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-title {
+        &_1 {
+            display: inline;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 36px;
+            color: $green;
+        }
+
+        &_2 {
+            display: inline;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 36px;
+            color: $blue;
+        }
+    }
+
+    &-radio {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-divider {
+        width: 90%;
+        background-color: $grey-icon;
+        border: 0.5px solid rgba(112, 112, 112, 0.5);
+    }
+
+    &-checkbox {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-btn {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+//---------------CSS for Radio button-------------//
+.container-radio_choise {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .radio-btn {
+        position: relative;
+        margin-left: -12%;
+        border-radius: 50%;
+        width: 13px;
+        height: 13px;
+        background-color: $white;
+        border: 2px solid $blue;
+        appearance: none;
+        cursor: pointer;
+
+        &::before {
+            position: absolute;
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: $blue;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+
+        &:checked {
+            border-color: $blue;
+        }
+    }
+
+    label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 36px;
+        color: $grey-text;
+        cursor: pointer;
+        margin-left: 6%;
+    }
+}
+//----------------------------//
+
+
+//---------------CSS for Checkbox button-------------//
+.container-checkbox_choise {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    #checkbox-btn_1, #checkbox-btn_2, #checkbox-btn_3, #checkbox-btn_4, #checkbox-btn_5 {
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        vertical-align: top;
+        background-color: $white;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 1px solid $grey-icon;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 6px;
+            border-left: 2px solid $blue;
+            border-bottom: 2px solid $blue;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+    }
+
+    label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 36px;
+        color: #000000;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+}
+//----------------------------//
+
+
+//---------------CSS for Filter and Delete button-------------//
+.container-btn {
+    &_filter {
+        text-align: center;
+        padding: 6px 30px;
+        border: none;
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 20px;
+        color: $white;
+        background-color: $green;
+        transition: all 0.25s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $green-bold;
+        }
+    }
+
+    &_delete {
+        margin-left: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 20px;
+        color: $border-color-normal;
+        background-color: $white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+//----------------------------//

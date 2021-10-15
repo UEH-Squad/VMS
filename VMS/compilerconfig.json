@@ -294,5 +294,9 @@
   {
     "outputFile": "Pages/Admin/WatchRating/RatingList.razor.css",
     "inputFile": "Pages/Admin/WatchRating/RatingList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Filter.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Filter.razor.scss"
   }
 ]

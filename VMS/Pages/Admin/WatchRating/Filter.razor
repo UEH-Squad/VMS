@@ -1,0 +1,34 @@
+﻿<div class="container">
+    <div class="container-title">
+        <p class="container-title_1">Xem </p>
+        <p class="container-title_2">đánh giá</p>
+    </div>
+    <div class="container-radio">
+        <div class="container-radio_choise">
+            <input class="radio-btn" id="radio-btn_1" type="radio" name="radio"/>
+            <label for="radio-btn_1">Tình nguyện viên</label>
+        </div>
+        <div class="container-radio_choise">
+            <input class="radio-btn" id="radio-btn_2" type="radio" name="radio"/>
+            <label for="radio-btn_2">Tổ chức</label>
+        </div>
+    </div>
+    <div class="container-divider"></div>
+    <div class="container-checkbox">
+        @for (int i = 1; i <= 5; i++)
+        {
+            <div class="container-checkbox_choise">
+                <input id="checkbox-btn_@i" type="checkbox" />
+                <label for="checkbox-btn_@i">@i sao</label>
+            </div>
+        }
+    </div>
+    <div class="container-btn">
+        <button class="container-btn_filter">Lọc</button>
+        <button class="container-btn_delete">Xóa lọc</button>
+    </div>
+</div>
+
+@code {
+
+}

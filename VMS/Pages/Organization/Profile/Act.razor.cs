@@ -6,6 +6,7 @@ using Blazored.Modal;
 using System.Collections.Generic;
 using Microsoft.JSInterop;
 using Blazored.Modal.Services;
+using VMS.Common;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -28,12 +29,15 @@ namespace VMS.Pages.Organization.Profile
         [Parameter] public string QueryString { get; set; }
         [Parameter] public bool IsHomepage { get; set; } = true;
         [Parameter] public bool IsOrgProfile { get; set; } = true;
+        [CascadingParameter] public string UserId { get; set; }
 
 
         [Inject]
         private IActivityService ActivityService { get; set; }
         [Inject]
         private IIdentityService IdentityService { get; set; }
+        [Inject]
+        private NavigationManager NavigationManager{ get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -79,7 +83,8 @@ namespace VMS.Pages.Organization.Profile
             {
                 var act = Datas.Find(a => a.Id == id);
                 await ActivityService.UpdateStatusActAsync(id, act.IsClosed, true);
-                Datas.Remove(act);
+                //Datas.Remove(act);
+                NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
             }
         }
 

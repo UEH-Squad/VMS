@@ -3,40 +3,11 @@
 @attribute [Route(Routes.AdminResolveReport)]
 @attribute [Authorize(Roles = "Admin")]
 
-<div class="dropdown">
-    <span class="material-icons-outlined"> arrow_drop_down </span>
-    <input readonly="readonly" placeholder="@valueTypeReport" data-bs-toggle="dropdown" />
-    <ul class="dropdown-menu">
-        <li @onclick="() => ChooseValueType(1)">Báo cáo tổ chức</li>
-        <li @onclick="() => ChooseValueType(2)">Báo cáo tình nguyện viên</li>
-    </ul>
-</div>
+    <div>
+        <Filter></Filter>
+    </div>
 
-<div class="dropdown">
-    <span class="material-icons-outlined"> arrow_drop_down </span>
-    <input readonly="readonly" placeholder="@valueStatus" data-bs-toggle="dropdown" />
-    <ul class="dropdown-menu">
-        <li>Đã ghim</li>
-        <li>Đang xử lý</li>
-        <li>Hoàn tất xử lý</li>
-        <li>Đã đóng</li>
-    </ul>
-</div>
 
-@code {
 
-    private string valueTypeReport = "Loại báo báo";
-    private string valueStatus = "Trạng thái";
-
-    private async Task ChooseValueType(int id)
-    {
-        if (id == 1)
-        {
-            valueTypeReport = "Báo cáo tổ chức";
-        }
-        else
-        {
-            valueTypeReport = "Báo cáo tình nguyện viên";
-        }
+    @code {
     }
-}

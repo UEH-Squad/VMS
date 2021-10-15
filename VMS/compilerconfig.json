@@ -282,5 +282,9 @@
   {
     "outputFile": "Pages/Admin/ResolveReportPage/Index.razor.css",
     "inputFile": "Pages/Admin/ResolveReportPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Filter.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Filter.razor.scss"
   }
 ]

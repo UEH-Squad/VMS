@@ -1,0 +1,176 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.my-act {
+    border-left: solid 1px;
+}
+
+.act {
+    border-top: 2px solid $border-color-normal;
+
+    h3 {
+        margin-top: 10px;
+        font-size: 24px;
+        font-weight: 400;
+        color: #18A0FB;
+
+        span {
+            color: #64D72F;
+        }
+    }
+
+    .act__item {
+        background-color: $grey;
+        padding: 10px 0px;
+        border-radius: 10px;
+        margin-top: 30px;
+        height: 285px;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.act__content {
+    position: relative;
+
+
+    .material-icons {
+        font-size: 24px;
+    }
+
+    &__icon {
+        top: -8px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    ul {
+        top: 15px;
+        right: 10px;
+        background: $white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+
+        li {
+            list-style: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 20px;
+            display: block;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(24, 160, 251, 0.1);
+            }
+
+            &:nth-of-type(1) {
+                color: $grey-text;
+            }
+
+            &:nth-of-type(2) {
+                color: $blue;
+            }
+
+            &:nth-of-type(3) {
+                color: $red;
+            }
+        }
+    }
+
+    a {
+        font-size: 24px;
+        font-weight: 600;
+        color: $blue;
+        cursor: pointer;
+        //word-spacing: -2px;
+
+        &:hover {
+            color: $blue-hv;
+        }
+    }
+
+    .star {
+        .material-icons {
+            color: $yellow-star;
+        }
+    }
+
+    h5 {
+        font-size: 14px;
+        font-weight: 600;
+
+        i {
+            color: $green;
+            margin-right: 5px;
+        }
+
+        .material-icons-outlined {
+            color: $red-warning;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    span {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    ::deep &-description > * {
+        margin: 0;
+    }
+}
+
+.lmtext-2, .lmtext-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.lmtext-2 {
+    -webkit-line-clamp: 2;
+}
+
+.lmtext-3 {
+    -webkit-line-clamp: 3;
+}
+
+.act-footer {
+    &__warn {
+        color: $red-warning;
+    }
+
+    &__btn {
+        button {
+            margin-left: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: $white;
+            padding: 5px 15px;
+            border-radius: 5px;
+        }
+
+        &-green {
+            background-color: $green;
+
+            &:hover {
+                background-color: $green-bold;
+            }
+        }
+
+        &-blue {
+            background-color: $blue;
+
+            &:hover {
+                background-color: $blue-bold;
+            }
+        }
+    }
+}

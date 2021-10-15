@@ -1,0 +1,315 @@
+﻿<section class="row justify-content-center">
+    <div class="act-filter col-10 px-0">
+        <div class="d-flex mb-4">
+            <div class="act-filter__type d-flex justify-content-center">
+                <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                    <input type="checkbox" id="md1" class="d-flex justify-content-center align-items-center me-2">
+                    <label for="md1">Virtual</label>
+                </div>
+                <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                    <input type="checkbox" id="md2" class="d-flex justify-content-center align-items-center me-2">
+                    <label for="md2">Actual</label>
+                </div>
+                <div class="act-filter__type__child d-flex justify-content-center align-items-center">
+                    <input type="checkbox" id="md3" class="d-flex justify-content-center align-items-center me-2">
+                    <label for="md3" class="act-filter__type__child--red d-flex justify-content-center align-items-center">
+                        COVID-19
+                        <span class="material-icons-outlined">
+                            coronavirus
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterCity ? "bg-grey" : "")" placeholder="@cityChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isCityShow ? "block" : "none")">
+                    <ul>
+                        @if (provinces is not null)
+                        {
+                            @foreach (var province in provinces)
+                            {
+                                <li @onmousedown="() => ChooseCityValue(province.Name)">@province.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterDistrict ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isDistrictShow ? "block" : "none")">
+                    <ul>
+                        @if (districts is not null)
+                        {
+                            @foreach (var province in districts)
+                            {
+                                <li @onmousedown="() => ChooseDistrictValue(province.Name)">@province.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <div @onclick="ShowAreasPopupAsync" class="filter-item__btn">Lĩnh vực</div>
+                <span class="material-icons-outlined position-absolute">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <div @onclick="ShowSkillsPopupAsync" class="filter-item__btn">Kỹ năng</div>
+                <span class="material-icons-outlined position-absolute">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleHierarchyDropdown" @onfocusout="CloseHierarchyDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterHierarchy ? "bg-grey" : "")" placeholder="@hierarchyChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isHierarchyShow ? "block" : "none")">
+                    <ul>
+                        @if (hierarchys is not null)
+                        {
+                            @foreach (var hierarchy in hierarchys)
+                            {
+                                <li @onmousedown="() => ChooseDistrictValue(hierarchy.Name)">@hierarchy.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterOrganization ? "bg-grey" : "")" placeholder="@organizationChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isOrganizationShow ? "block" : "none")">
+                    <ul>
+                        @if (organizations is not null)
+                        {
+                            @foreach (var organization in organizations)
+                            {
+                                <li @onmousedown="() => ChooseOrganizationValue(organization.Name)">@organization.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleActTypeDropdown" @onfocusout="CloseActTypeDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterActType ? "bg-grey" : "")" placeholder="@acttypeChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isActTypeShow ? "block" : "none")">
+                    <ul>
+                        @if (acttypes is not null)
+                        {
+                            @foreach (var acttype in acttypes)
+                            {
+                                <li @onmousedown="() => ChooseActTypeValue(acttype.Name)">@acttype.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input type="month" class="filter-item__btn pe-0"/>
+            </div>
+        </div>
+
+
+        <div class="act-filter__btn d-flex justify-content-start align-items-center mb-4 text-center">
+            <button class="btn act-filter__btn--green px-4 py-1 me-3">Lọc</button>
+            <button class="act-filter__btn--clear">Xóa lọc</button>
+        </div>
+    </div>
+</section>
+
+@code {
+
+    private bool isOrganizationShow;
+    private bool isCityShow;
+    private bool isDistrictShow;
+    private bool isHierarchyShow;
+    private bool isActTypeShow;
+    private bool isFilterDistrict;
+    private bool isFilterActType;
+    private bool isFilterCity;
+    private bool isFilterHierarchy;
+    private bool isFilterOrganization;
+    private string cityChoosenValue = "Tỉnh/Thành phố";
+    private string districtChoosenValue = "Quận/Huyện";
+    private string organizationChoosenValue = "Tổ chức";
+    private string hierarchyChoosenValue = "Cấp";
+    private string acttypeChoosenValue = "Loại hoạt động";
+    private string dateChoosenValue = "Tháng, năm";
+
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            provinces.Add(new FakeData()
+            {
+                Name = "TP.HCM",
+            });
+
+            districts.Add(new FakeData()
+            {
+                Name = "Quận 6",
+            });
+
+            hierarchys.Add(new FakeData()
+            {
+                Name = "Khoa",
+            });
+
+            organizations.Add(new FakeData()
+            {
+                Name = "Tinh nguyen",
+            });
+
+            acttypes.Add(new FakeData()
+            {
+                Name = "Dang dien ra",
+            });
+        }
+
+    }
+    private List<FakeData> provinces = new();
+    private List<FakeData> districts = new();
+    private List<FakeData> hierarchys = new();
+    private List<FakeData> organizations = new();
+    private List<FakeData> acttypes = new();
+
+    private class FakeData
+    {
+        public string Name { get; set; }
+    }
+
+    private void ToggleCityDropdown()
+    {
+        isCityShow = !isCityShow;
+    }
+
+    private void CloseCityDropdown()
+    {
+        isCityShow = false;
+    }
+
+    private void ToggleDistrictDropdown()
+    {
+        isDistrictShow = !isDistrictShow;
+    }
+
+    private void CloseDistrictDropdown()
+    {
+        isDistrictShow = false;
+    }
+
+    private void ToggleOrganizationDropdown()
+    {
+        isOrganizationShow = !isOrganizationShow;
+    }
+
+    private void CloseOrganizationDropdown()
+    {
+        isOrganizationShow = false;
+    }
+
+    private void ToggleHierarchyDropdown()
+    {
+        isHierarchyShow = !isHierarchyShow;
+    }
+
+    private void CloseHierarchyDropdown()
+    {
+        isHierarchyShow = false;
+    }
+
+    private void ToggleActTypeDropdown()
+    {
+        isActTypeShow = !isActTypeShow;
+    }
+
+    private void CloseActTypeDropdown()
+    {
+        isActTypeShow = false;
+    }
+
+    void ChooseCityValue(string name)
+    {
+        cityChoosenValue = name;
+        isFilterCity = true;
+    }
+
+    void ChooseDistrictValue(string name)
+    {
+        districtChoosenValue = name;
+        isFilterDistrict = true;
+    }
+
+    void ChooseHierarchyValue(string name)
+    {
+        hierarchyChoosenValue = name;
+        isFilterHierarchy = true;
+    }
+
+    void ChooseOrganizationValue(string name)
+    {
+        organizationChoosenValue = name;
+        isFilterOrganization = true;
+    }
+
+    void ChooseActTypeValue(string name)
+    {
+        acttypeChoosenValue = name;
+        isFilterActType = true;
+    }
+
+    private async Task ShowAreasPopupAsync()
+    {
+        var parameters = new ModalParameters();
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+
+        await Modal.Show(typeof(Pages.ActivitySearchPage.AreasPopup),"", parameters, options).Result;
+    }
+
+    private async Task ShowSkillsPopupAsync()
+    {
+        var skillsParameter = new ModalParameters();
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+
+        await Modal.Show(typeof(Pages.ActivitySearchPage.SkillsPopup), "", skillsParameter, options).Result;
+    }
+}

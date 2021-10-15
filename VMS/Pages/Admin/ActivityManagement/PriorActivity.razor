@@ -1,0 +1,73 @@
+﻿<div class="pop-up">
+    <div class="d-flex justify-content-center align-items-center w-100 h-100">
+        <div class="pop-up-container position-relative border-10 d-flex align-items-center flex-column">
+            <div @onclick="CloseModal" class="close-btn position-absolute d-flex justify-content-center align-items-center">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up__title text-center pt-4 pb-2">
+                <h3 class="fw-medium mb-0">Hoạt động ưu tiên <span> đã đạt giới hạn</span></h3>
+            </div>
+            <div class="pop-up__subtitle text-center mb-4">
+                <h4 class="fw-medium lh-1">
+                    Vui lòng gỡ ưu tiên ít nhất một hoạt động
+                </h4>
+                <h4 class="fw-medium lh-1">
+                    để tiếp tục thao tác này
+                </h4>
+            </div>
+            @foreach (var item in fakeDatas)
+            {
+                <div class="d-flex justify-content-center align-items-center w-75 pb-3">
+                    <input type="checkbox" id="act" class="d-flex justify-content-center align-items-center me-4 flex-shrink-0">
+                    <label for="act">
+                        <div class="pop-up__act p-2">
+                            <div class="pop-up__act__title px-1 pt-1 lm-text">@item.Title</div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <h5 class="pop-up__act__org d-flex align-items-center mb-0">
+                                    <i class="material-icons me-1">public</i> @item.Name
+                                </h5>
+                                <h5 class="fw-normal mb-0">Ngày đăng: 13/10/2021</h5>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            }
+            <div class="pop-up__btn d-flex mb-3">
+                <div @onclick="CloseModal" class="btn py-0 px-3 d-flex justify-content-center align-items-center pop-up__btn pop-up__btn--deny">Hủy</div>
+                <div class="btn py-0 px-2 pop-up__btn--accept d-flex justify-content-center align-items-center pop-up__btn">Gỡ ưu tiên</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+    }
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            fakeDatas.Add(new FakeData()
+            {
+                Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid - 19 tại địaaa phương",
+                Name = "Công nghệ thông tin kinh doanh",
+            });
+        }
+
+    }
+    private List<FakeData> fakeDatas = new();
+
+    private class FakeData
+    {
+        public string Title { get; set; }
+        public string Name { get; set; }
+    }
+}

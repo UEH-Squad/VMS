@@ -286,5 +286,9 @@
   {
     "outputFile": "Pages/Admin/ResolveReportPage/Filter.razor.css",
     "inputFile": "Pages/Admin/ResolveReportPage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.scss"
   }
 ]

@@ -1,0 +1,13 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.quantity-report {
+  font-size: 18px;
+  padding: 15px 0;
+  font-weight: 400;
+  color: #18A0FB; }
+  .quantity-report span {
+    color: #64D72F; }

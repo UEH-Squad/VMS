@@ -34,15 +34,18 @@ namespace VMS.Pages.Organization.Profile
         [Inject]
         private ILogger<EditOrganizationProfile> Logger { get; set; }
 
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
+
         private int width;
         private string classWidth = "";
-        private bool isLoading;
         private string OrgId;
         private int count;
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private CreateOrgProfileViewModel org = new();
+        [CascadingParameter] public string UserId { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -85,12 +88,11 @@ namespace VMS.Pages.Organization.Profile
             await areasModal.Result;
         }
 
+
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (choosenAreas.Count > 3)
-            {
-                await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
-            }
+            await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel", choosenAreas.Count);
         }
 
         private async Task HandleSubmit()
@@ -114,7 +116,6 @@ namespace VMS.Pages.Organization.Profile
             {
                 Logger.LogInformation("HandleValidSubmit called");
                 isErrorMessageShown = false;
-                isLoading = true;
 
                 try
                 {
@@ -130,12 +131,10 @@ namespace VMS.Pages.Organization.Profile
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
                     await Modal.Show<Activities.NotificationPopup>("", modalParams, options).Result;
-
-                    isLoading = false;
+                    NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
                 }
                 catch (Exception ex)
                 {
-                    isLoading = false;
                     Logger.LogError("Error occurs when trying to edit profile", ex.Message);
                     await JSRuntime.InvokeVoidAsync("alert", ex.Message);
                 }
@@ -144,7 +143,6 @@ namespace VMS.Pages.Organization.Profile
 
         private async Task HandleInvalidSubmit()
         {
-            isLoading = false;
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
         }

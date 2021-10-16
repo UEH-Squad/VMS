@@ -1,0 +1,71 @@
+﻿<div class="text-center h4 mb-2 current-month">Lịch <span class="current-month__text">tình nguyện</span></div>
+<div class="calendar">
+    <div class="d-flex flex-column align-items-center pb-2 calendar-header">
+        <div class="d-flex my-4 justify-content-center">
+            <AntDesign.DatePicker @bind-Value="@Value" Format="dd/MM/yyyy" AllowClear="false" ClassName="form-control w-50 my-date-picker" />
+            <button type="button" class="btn btn-sm ms-3" @onclick="e => OnChangeMonth(0)">
+                <span>@Today</span>
+            </button>
+        </div>
+        <div class="d-flex align-items-center calendar-button-group m-auto w-100 justify-content-between">
+            <span class="material-icons navigate-icon" @onclick="e => OnChangeMonth(-1)">
+                navigate_before
+            </span>
+            <div class="current-month">Tháng <span class="current-month__text">@Value.Month/@Value.Year</span></div>
+            <span class="material-icons navigate-icon" @onclick="e => OnChangeMonth(1)">
+                navigate_next
+            </span>
+        </div>
+    </div>
+    <div class="calendar-body">
+        <table cellspacing="0" cellpadding="0" class="calendar-table">
+            <thead>
+                <tr>
+                    @foreach (var w in WeekLists)
+                    {
+                        <th>@w</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (var week = StartDate; week < EndDate; week = week.AddDays(7))
+                {
+                    <tr class="calendar-table-row">
+                        @for (var index = 0; index < 7; index++)
+                        {
+                            @RenderCell(new CalendarCell { Value = week.AddDays(index), CurrentValue = Value })
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    record CalendarCell
+    {
+        public DateTime Value { get; init; }
+        public DateTime CurrentValue { get; init; }
+    }
+
+    private string GetCalendarCellString(CalendarCell item) => CssBuilder.Default()
+        .AddClass("prev", item.Value.Month < item.CurrentValue.Month)
+        .AddClass("next", item.Value.Month > item.CurrentValue.Month)
+        .AddClass("current", item.Value.Month == item.CurrentValue.Month)
+        .AddClass("is-selected", item.Value.Ticks == item.CurrentValue.Ticks)
+        .AddClass("is-today", item.Value.Ticks == DateTime.Today.Ticks)
+        .Build();
+
+    RenderFragment<CalendarCell> RenderCell => item =>
+    @<td class="@GetCalendarCellString(item)" @onclick="@OnCellClickCallback(item.Value)">
+        <div class="calendar-day d-flex align-items-center justify-content-center my-1">
+            <div class="text-center d-flex flex-column">
+                @item.Value.Day
+                <span class="material-icons dot-icon">
+                    fiber_manual_record
+                </span>
+            </div>
+        </div>
+    </td>;
+}

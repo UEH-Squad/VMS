@@ -1,0 +1,161 @@
+﻿@inject IJSRuntime JsRuntime
+
+<div class="container__list-result">
+    @*<SearchResult />*@
+    <div class="container-member">
+        @if (pagedResult != null && pagedResult.Results.Length != 0)
+        {
+            @foreach (var item in pagedResult.Results)
+            {
+        <div class="activity-row d-flex">
+            <div class="activity-space"></div>
+            <div class="activity-container">
+                <div class="activity__img">
+                    <img src="@item.Avatar" alt="Avatar">
+                </div>
+                <div class="activity__content">
+                    <div class="activity__content__title">
+                        <p class="member-name1">@item.ActName</p>
+                    </div>
+                    <div class="activity__content__icon d-flex">
+                        <div class="stars-rating">
+                            <VMS.Pages.Organization.RatingPage.Stars />
+                        </div>
+                        <div class="org-pic d-flex">
+                            <div class="org-pic__icon d-flex">
+                                <span class="material-icons-outlined">
+                                    public
+                                </span>
+                            </div>
+                            <div class="org-pic__name">
+                                @item.OrgName
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity__icon d-flex">
+                    <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
+                        @*Pop-up để report*@
+                        <span id="member-report_icon" class="material-icons">report_problem</span>
+                    </button>
+                    <button class="activity__icon__comment" @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
+                        @*Pop-up để comment*@
+                        <span id="member-comment_icon" class="material-icons">comment</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+            }
+        }
+        <div class="pagination-container d-flex">
+            <Pager CurrentPage="@pagedResult.CurrentPage"
+                   PageCount="@pagedResult.PageCount"
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int StarRating { get; set; }
+
+    /****Pagination****/
+    private class FakeData
+    {
+        public int StarStyle { get; set; }
+        public int RatingList { get; set; }
+        public string Avatar { get; set; }
+        public string ActName { get; set; }
+        public string OrgName { get; set; }
+    }
+
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+
+    private PagedResult<FakeData> pagedResult;
+    private int page = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (StarRating != 0)
+        {
+            foreach (var item in pagedResult.Results)
+            {
+                item.StarStyle = StarRating;
+            }
+        }
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await Interop.ScrollToTop(JsRuntime);
+    }
+
+    /// <summary>
+    /// Get fake data
+    /// </summary>
+    /// <param name="type">0 for volunteer list; 1 for rated one</param>
+    /// <returns></returns>
+    private PagedResult<FakeData> GetFakeData()
+    {
+        var result = new PagedResult<FakeData>();
+        result.CurrentPage = page;
+        result.RowCount = 80;
+        result.PageSize = 8;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
+        {
+            Avatar = "./img/act.png",
+            ActName = "Tình nguyện viên tham gia công tác phòng, chống dịch covid-19",
+            OrgName = "Đội cộng tác viên",
+        }).ToArray();
+
+        return result;
+    }
+
+    [CascadingParameter] public IModalService Modal1 { get; set; }
+    async Task ShowCommentPopUp()
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal1.Show<VMS.Pages.Organization.RatingPage.PopUpComment>("", options);
+    }
+
+    [CascadingParameter] public IModalService Modal2 { get; set; }
+    async Task ShowReportPopUp()
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal2.Show<VMS.Pages.Organization.RatingPage.PopUpReportMember>("", options);
+    }
+
+}

@@ -40,25 +40,17 @@
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực <span class="required-asterick">(*)</span></p>
                         <div class="col-8 form-field ">
-                            <div class="d-flex">
-                                @if (choosenAreas.Count < 5)
-                                {
-                                    width = choosenAreas.Count * 20;
-                                    classWidth = "w-" + width + " editProfile__Nocarousel d-flex";
-                                }
-                                <div class=" owl-carousel owl-theme editProfile__carousel @(choosenAreas.Count>4 ?"w-80 ":classWidth) ">
-                                    @foreach (var item in choosenAreas)
-                                    {
-                                        <div class="form-field-item item mx-auto">
-                                            <i class="material-icons">@item.Icon</i>
-                                            <span>@item.Name</span>
-                                        </div>
-                                    }
-                                </div>
-
-                                <div class="form-field-item  item-add ">
+                            <div class="d-flex flex-wrap">
+                                <div class="form-field-item mx-auto item-add ">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
                                 </div>
+                                @foreach (var item in choosenAreas)
+                                {
+                                    <div class="form-field-item ">
+                                        <i class="material-icons">@item.Icon</i>
+                                        <span>@item.Name</span>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -91,8 +83,6 @@
         </div>
     </div>
 </div>
-
-<Spinner IsLoading="isLoading" />
 
 @code {
     RenderFragment succeededCreateTitle =@<h3><span>Lưu thành công!</span></h3>;

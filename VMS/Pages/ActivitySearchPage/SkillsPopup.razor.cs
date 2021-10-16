@@ -29,7 +29,13 @@ namespace VMS.Pages.ActivitySearchPage
 
         private void ChangeState(SkillViewModel skill)
         {
+            if (skill.SubSkills.Count == 0)
+            {
+                showSubSkillsId = 0;
+            }
+
             SkillViewModel skillViewModel = choosenSkills.Find(s => s.Id == skill.Id);
+
             if (skillViewModel is null)
             {
                 choosenSkills.Add(skill);

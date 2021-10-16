@@ -30,7 +30,7 @@ namespace VMS.Application.ViewModels
 
     public class CreateUserProfileViewModel : UserProfileViewModel
     {
-        [RequiredGreaterThanZero] public int? FacultyId { get; set; }
+        [RequiredGreaterThanZero] public string? FacultyId { get; set; }
         [Required] public string Class { get; set; }
         public string Course { get; set; }
 

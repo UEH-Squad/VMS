@@ -39,7 +39,6 @@ namespace VMS.Pages.Organization.Profile
 
         private int width;
         private string classWidth = "";
-        private bool isLoading;
         private string OrgId;
         private int count;
         private bool isErrorMessageShown = false;
@@ -117,7 +116,6 @@ namespace VMS.Pages.Organization.Profile
             {
                 Logger.LogInformation("HandleValidSubmit called");
                 isErrorMessageShown = false;
-                isLoading = true;
 
                 try
                 {
@@ -134,12 +132,9 @@ namespace VMS.Pages.Organization.Profile
                     modalParams.Add("Title", succeededCreateTitle);
                     await Modal.Show<Activities.NotificationPopup>("", modalParams, options).Result;
                     NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
-
-                    isLoading = false;
                 }
                 catch (Exception ex)
                 {
-                    isLoading = false;
                     Logger.LogError("Error occurs when trying to edit profile", ex.Message);
                     await JSRuntime.InvokeVoidAsync("alert", ex.Message);
                 }
@@ -148,7 +143,6 @@ namespace VMS.Pages.Organization.Profile
 
         private async Task HandleInvalidSubmit()
         {
-            isLoading = false;
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
         }

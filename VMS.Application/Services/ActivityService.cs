@@ -314,7 +314,7 @@ namespace VMS.Application.Services
                     x => x.EndDate >= DateTime.Now
                 },
                 OrderBy = GetOrderByClause(isFeatured, location),
-                Take = 4
+                Take = 8
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
@@ -333,7 +333,7 @@ namespace VMS.Application.Services
                     x => x.EndDate >= DateTime.Now
                 },
                 OrderBy = GetOrderByClause(isFeatured, null),
-                Take = 4
+                Take = 8
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
@@ -349,7 +349,7 @@ namespace VMS.Application.Services
                     x => x.EndDate >= DateTime.Now
                 },
                 OrderBy = GetOrderByClause(isFeatured, null),
-                Take = 4
+                Take = 8
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, spec);

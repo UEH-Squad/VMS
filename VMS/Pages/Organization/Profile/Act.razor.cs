@@ -30,7 +30,8 @@ namespace VMS.Pages.Organization.Profile
         [Parameter] public bool IsHomepage { get; set; } = true;
         [Parameter] public bool IsOrgProfile { get; set; } = true;
         [CascadingParameter] public string UserId { get; set; }
-
+        [Parameter] public bool IsUser { get; set; } = true;
+        [Parameter] public string TitleLinkALl { get; set; }
 
         [Inject]
         private IActivityService ActivityService { get; set; }

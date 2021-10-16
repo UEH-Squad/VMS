@@ -81,36 +81,41 @@ namespace VMS.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.IsNotAllowed)
+                User user = await _userManager.FindByEmailAsync(Input.Email);
+                bool isCorrectPassword = await _userManager.CheckPasswordAsync(user, Input.Password);
+                if (isCorrectPassword)
                 {
-                    User user = await _userManager.FindByEmailAsync(Input.Email);
-
-                    if (!user.EmailConfirmed)
+                    if (result.IsNotAllowed)
                     {
-                        string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                        string callbackUrl = Url.Page(
-                            "/Account/ConfirmEmail",
-                            pageHandler: null,
-                            values: new { area = "Identity", userId = user.Id, code, returnUrl = Routes.EditUserProfile },
-                            protocol: Request.Scheme);
+                        if (!user.EmailConfirmed)
+                        {
+                            string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                            string callbackUrl = Url.Page(
+                                "/Account/ConfirmEmail",
+                                pageHandler: null,
+                                values: new { area = "Identity", userId = user.Id, code, returnUrl = await _userManager.IsInRoleAsync(user, "User") ? Routes.EditUserProfile : Routes.EditOrgProfile },
+                                protocol: Request.Scheme);
 
-                        await _mailService.SendConfirmEmail(user.Email, callbackUrl);
+                            await _mailService.SendConfirmEmail(user.Email, callbackUrl);
 
-                        return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
+                            return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
+                        }
+                    }
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+
+                        return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
                     }
                 }
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-
-                    return LocalRedirect(returnUrl);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
             }
             // If we got this far, something failed, redisplay form
             return Page();

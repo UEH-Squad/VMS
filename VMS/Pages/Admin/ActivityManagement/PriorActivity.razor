@@ -1,6 +1,6 @@
 ﻿<div class="pop-up">
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
-        <div class="pop-up-container position-relative border-10 d-flex align-items-center flex-column">
+        <div class="pop-up-container pop-up-container--large position-relative border-10 d-flex align-items-center flex-column @(isSuccess ? "d-block" : "d-none")">
             <div @onclick="CloseModal" class="close-btn position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
@@ -36,15 +36,32 @@
             }
             <div class="pop-up__btn d-flex mb-3">
                 <div @onclick="CloseModal" class="btn py-0 px-3 d-flex justify-content-center align-items-center pop-up__btn pop-up__btn--deny">Hủy</div>
-                <div class="btn py-0 px-2 pop-up__btn--accept d-flex justify-content-center align-items-center pop-up__btn">Gỡ ưu tiên</div>
+                <div @onclick="Success" class="btn py-0 px-2 pop-up__btn--accept d-flex justify-content-center align-items-center pop-up__btn">Gỡ ưu tiên</div>
+            </div>
+
+        </div>
+        <div class="pop-up-container pop-up-container--small position-relative border-10 d-flex align-items-center flex-column @(isSuccess ? "d-none" : "d-block")">
+            <div @onclick="CloseModal" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up-content text-center my-4 mx-5">
+                <h3 class="mb-0 fw-medium">Bạn đã <span> gỡ ưu tiên hoạt động</span></h3>
+                <h3 class="mb-0 fw-medium">thành công</h3>
             </div>
         </div>
     </div>
 </div>
 
 @code {
+    private bool isSuccess = true;
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
+
+    [Parameter]
+    public bool IsClosed { get; set; }
 
     private async Task CloseModal()
     {
@@ -70,4 +87,10 @@
         public string Title { get; set; }
         public string Name { get; set; }
     }
+
+    private async Task Success()
+    {
+        isSuccess = !isSuccess;
+    }
+}
 }

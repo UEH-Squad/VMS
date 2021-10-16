@@ -81,7 +81,7 @@
                         {
                             @foreach (var hierarchy in hierarchys)
                             {
-                                <li @onmousedown="() => ChooseDistrictValue(hierarchy.Name)">@hierarchy.Name</li>
+                                <li @onmousedown="() => ChooseHierarchyValue(hierarchy.Name)">@hierarchy.Name</li>
                             }
                         }
                     </ul>

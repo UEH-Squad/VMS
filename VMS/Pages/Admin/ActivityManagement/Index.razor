@@ -2,11 +2,10 @@
 
 @attribute [Route(Routes.AdminActivityManagement)]
 @attribute [Authorize(Roles = "Admin")]
-Page quản lý hoạt động
 <ActivityFilter />
-<ActList EditRequirement="true" />
-<ActList CloseAct="true" />
-<ActList ButtonPreview="true" />
+<ActList IsHappening="true" Closed="false"/>
+<ActList IsHappening="true" Closed="true" />
+<ActList Happened="true" IsHappening="false"/>
 
 
 @code {

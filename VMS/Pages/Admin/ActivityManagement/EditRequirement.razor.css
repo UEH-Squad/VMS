@@ -50,4 +50,17 @@
   width: 100% !important; }
 
 ::deep input {
-  color: #515151; }
+  color: #515151;
+  border: solid 1px #b4b4b4; }
+
+::deep .form-input {
+  overflow-y: scroll; }
+
+::deep textarea {
+  overflow-y: scroll; }
+  ::deep textarea::-webkit-scrollbar {
+    width: 14px; }
+  ::deep textarea::-webkit-scrollbar-thumb {
+    background-color: #B4B4B4;
+    border-radius: 20px;
+    border: 2px solid white; }

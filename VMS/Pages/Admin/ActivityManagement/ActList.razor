@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime JS;
+@using VMS.GenericRepository;
 
 <section class="my-act row justify-content-center">
     <div class="act col-10 px-0" id="act">
@@ -8,14 +9,21 @@
                 @foreach (var item in fakeDatas)
                 {
                     <div class="act__item row">
-                        <div class="col-4 h-100 d-flex align-items-center p-0 ps-2">
+                        <div class="col-4 h-100 d-flex align-items-center pe-0 ps-3 py-2">
                             <img class="w-100" src="./img/activities/132780410759551427_71b3c892-eaa9-4471-b865-e809f12932b7.jpg" alt="">
                         </div>
                         <div class="col-8 act__content d-flex flex-column justify-content-between px-2">
                             <ul class="position-absolute act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                                <li @onclick="() => ShowActPrivorModal(item.Id)" class="edit pb-2 text-decoration-none">Ưu tiên hoạt động</li>
-                                <li @onclick="() => ShowEditModal(item.Id)" class="pb-2">Chỉnh sửa hoạt động</li>
-                                <li @onclick="() => ShowDeleteModal(item.Id)"class="delete pb-2">Xóa</li>
+                                @if (IsHappening)
+                                {
+                                    <li @onclick="() => ShowActPrivorModal(item.Id)" class="edit pb-2 text-decoration-none">Ưu tiên hoạt động</li>
+                                    <a href="@Routes.EditActivity" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
+                                    <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
+                                }
+                                @if (Happened)
+                                {
+                                    <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
+                                }
                             </ul>
                             <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute act__content__icon">
                                 more_horiz
@@ -51,52 +59,47 @@
                                         person
                                     </i> 250
                                 </h5>
-                                @if (EditRequirement)
-                                {
-                                    <div class="act-footer__btn d-flex align-items-center">
-                                        <button class="btn act-footer__btn-blue">Yêu cầu chỉnh sửa</button>
-                                    </div>
-                                }
-                                @if (CloseAct)
-                                {
-
-                                    <div class="d-flex">
-                                        <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
-                                            <i class="material-icons-outlined fst-normal">
-                                                error
-                                            </i> Đã đóng đăng ký
-                                        </h5>
+                                <div class="d-flex">
+                                    @if (IsHappening)
+                                    {
+                                        @if (Closed)
+                                        {
+                                            <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
+                                                <i class="material-icons-outlined fst-normal">
+                                                    error
+                                                </i> Đã đóng đăng ký
+                                            </h5>
+                                        }
                                         <div class="act-footer__btn d-flex align-items-center">
-                                            <button class="btn act-footer__btn-blue">Yêu cầu chỉnh sửa</button>
+                                            <button @onclick="() => ShowEditModal(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
                                         </div>
-                                    </div>
-                                }
-
-                                @if (ButtonPreview)
-                                {
-                                    <div class="d-flex">
+                                    }
+                                    @if (Happened)
+                                    {
                                         <div class="act-footer__btn d-flex align-items-center">
-                                            <button class="btn act-footer__btn-green ">Xem danh sách</button>
+                                            <a class="btn text-decoration-none act-footer__btn--green">Xem danh sách</a>
                                         </div>
                                         <div class="act-footer__btn d-flex align-items-center">
-                                            <button class="btn act-footer__btn-blue">Xem đánh giá</button>
+                                            <a class="btn text-decoration-none act-footer__btn--blue">Xem đánh giá</a>
                                         </div>
-                                    </div>
-                                }
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 }
             </div>
         </div>
-        <a class="goToDivAct d-none " href="#act">go to div act</a>
+        <div class="pagination-org">
+        </div>
     </div>
 </section>
 
 @code {
-    [Parameter] public bool ButtonPreview { get; set; } = false;
-    [Parameter] public bool EditRequirement { get; set; } = false;
-    [Parameter] public bool CloseAct { get; set; } = false;
+
+    [Parameter] public bool Closed { get; set; } = false;
+    [Parameter] public bool IsHappening { get; set; } = false;
+    [Parameter] public bool Happened { get; set; } = false;
     [CascadingParameter] public IModalService Modal { get; set; }
 
     protected override void OnInitialized()
@@ -120,13 +123,15 @@
     {
         public string Title { get; set; }
         public string Name { get; set; }
+        public bool IsClosed { get; set; }
         public string Content { get; set; }
         public int Person { get; set; }
         public int Id { get; set; }
         public bool IsMenu { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public DateTime CreatedDate { get; set; }
+
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -160,6 +165,7 @@
 
     private async Task ShowActPrivorModal(int id)
     {
+
         var options = new ModalOptions()
         {
             HideCloseButton = true,
@@ -167,7 +173,7 @@
             UseCustomLayout = true,
         };
 
-        Modal.Show<PriorActivity>("", options);
+        var result = Modal.Show<PriorActivity>("", options).Result;
     }
 
     private async Task ShowDeleteModal(int id)
@@ -179,6 +185,6 @@
             UseCustomLayout = true,
         };
 
-        Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm),"", options);
+        Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", options);
     }
 }

@@ -1,7 +1,7 @@
 ﻿<div class="pop-up">
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
         <div class="pop-up-container position-relative border-10">
-            <div class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
+            <div @onclick="CloseModal" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
                 </span>
@@ -15,5 +15,11 @@
 </div>
 
 @code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
 
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+    }
 }

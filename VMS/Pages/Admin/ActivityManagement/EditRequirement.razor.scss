@@ -72,5 +72,24 @@
 
     input {
         color: $grey-text;
+        border: solid 1px $border-color-normal;
+    }
+
+    .form-input {
+        overflow-y: scroll;
+    }
+}
+
+::deep textarea {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-icon;
+        border-radius: 20px;
+        border: 2px solid white;
     }
 }

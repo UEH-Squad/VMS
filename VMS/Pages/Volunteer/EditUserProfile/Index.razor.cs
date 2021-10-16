@@ -43,6 +43,7 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         private string UserId;
         private int count;
         private bool isErrorMessageShown = false;
+        private string departmentChoosenValue = "";
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private List<FacultyViewModel> faculties = new();
         private CreateUserProfileViewModel user = new();
@@ -165,6 +166,11 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         {
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
+        }
+
+        private void ChooseDepartmentValue(FacultyViewModel st)
+        {
+            departmentChoosenValue = st.Name;
         }
 
     }

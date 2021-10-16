@@ -9,8 +9,7 @@
   text-align: center; }
   .my-quoteBaner .quoteBaner__item {
     padding-bottom: 15px;
-    font-weight: 600;
-    color: #64D72F; }
+    font-weight: 600; }
     @media (min-width: 576px) {
       .my-quoteBaner .quoteBaner__item {
         padding-bottom: 30px; } }
@@ -18,9 +17,11 @@
       .my-quoteBaner .quoteBaner__item {
         padding-bottom: 30px; } }
     .my-quoteBaner .quoteBaner__item h1 {
-      margin-bottom: 30px; }
+      margin-bottom: 30px;
+      color: #64D72F; }
       .my-quoteBaner .quoteBaner__item h1 svg {
-        font-size: 36px; }
+        font-size: 36px;
+        color: #64D72F; }
         @media (min-width: 576px) {
           .my-quoteBaner .quoteBaner__item h1 svg {
             font-size: 54px; } }
@@ -36,7 +37,8 @@
       .my-quoteBaner .quoteBaner__item h1 span {
         margin: 0 15px;
         font-weight: 500;
-        font-size: 36px; }
+        font-size: 36px;
+        color: #64D72F; }
         @media (min-width: 576px) {
           .my-quoteBaner .quoteBaner__item h1 span {
             font-size: 42px; } }

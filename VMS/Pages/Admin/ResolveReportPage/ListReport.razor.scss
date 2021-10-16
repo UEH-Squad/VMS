@@ -1,11 +1,98 @@
 ﻿@import "../../../Resources/scss/common/_variables.scss";
 
 .quantity-report {
-    font-size:18px;
-    padding:15px 0;
-    font-weight:400;
-    color:$blue;
+    font-size: 18px;
+    padding: 15px 0;
+    font-weight: 400;
+    color: $blue;
+
     span {
-        color:$green;
+        color: $green;
+    }
+}
+
+.list-card {
+    padding-bottom: 50px;
+
+    .item {
+        margin: 15px 0;
+
+        .list-reason {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .info-item:first-child {
+            width: 80%;
+        }
+
+        .info-item:nth-child(2) {
+            width: 20%;
+        }
+
+        .info-item {
+            p {
+                margin: 0;
+                font-style: oblique;
+                font-weight:300;
+            }
+
+            &__who, &__activity {
+                a {
+                    text-decoration:none;
+                    color:unset;
+                }
+            }
+
+            &__time {
+                float: right;
+            }
+
+            &__status {
+                float: right;
+
+                &--admin {
+                    color: $green;
+                }
+
+                &--pin, &--complete {
+                    position: relative;
+                    margin-left: 4px;
+
+                    .material-icons {
+                        font-size: 24px;
+                        cursor: pointer;
+                    }
+
+                    &:hover .icon-tooltip {
+                        display: block;
+                    }
+                }
+
+                &--pin {
+                    color: $grey-icon;
+                }
+
+                &--complete {
+                    color: $green;
+                }
+
+                .icon-tooltip {
+                    display: none;
+                    min-width: max-content;
+                    position: absolute;
+                    top: -80%;
+                    left: 100%;
+                    transform: translateX(-100%);
+                    padding: 2px 10px;
+                    font-size: 12px;
+                    background-color: #fff;
+                    border-radius: 10px;
+                    border-bottom-right-radius: 3px;
+                    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25%);
+                    color: $grey-text;
+                }
+            }
+        }
     }
 }

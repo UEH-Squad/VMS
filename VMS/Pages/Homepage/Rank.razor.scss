@@ -1,7 +1,14 @@
 ﻿@import '../../Resources/scss/common/_variables.scss';
 
 .my-rank {
-    padding-top: 50px;
+
+    .rank__content {
+        width: 70%;
+
+        @include on("xxl") {
+            width: 75%;
+        }
+    }
 
     .owl-carousel {
         z-index: 0;
@@ -19,6 +26,8 @@
     }
 
     .rank__link {
+        margin-top: 10px;
+        margin-bottom: 40px;
         height: 50px;
     }
 
@@ -76,11 +85,15 @@
             width: 9%;
             position: absolute;
             top: 0;
-            left: 10%;
+            left: 5%;
+
+            &.w-nmb10 {
+                width: 10%;
+            }
 
 
             img {
-                width: 70%;
+                width: 80%;
                 margin: 0 auto;
                 transition: all 1s linear;
             }
@@ -90,20 +103,19 @@
                 top: 0%;
                 left: 50%;
                 transform: translateX(-50%);
-                font-size: 26px;
+                font-size: 45px;
                 font-weight: 600;
                 color: $white;
                 transition: all 1s linear;
-            }
-        }
 
-        .rank__cup {
-            position: absolute;
-            top: 3%;
-            right: 10%;
-            color: $green;
-            font-size: 45px;
-            transition: all 1s linear;
+                @include on("xxl") {
+                    font-size: 50px;
+                }
+
+                &.position-top {
+                    top: 8%;
+                }
+            }
         }
     }
 
@@ -120,12 +132,12 @@
             }
 
             span {
-                font-size: 41px;
-            }
-        }
+                font-size: 50px;
 
-        .rank__cup {
-            font-size: 60px;
+                @include on("xxl") {
+                    font-size: 60px;
+                }
+            }
         }
     }
 
@@ -193,8 +205,8 @@
 
 
         img {
-            width: 135px;
-            height: 135px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
         }
@@ -203,48 +215,49 @@
     .rank__name {
         margin: 0;
         color: $green;
-        font-size: 23px;
+        font-size: 24px;
         font-weight: 600;
     }
 
     .rank__review {
-        margin: 12px 0;
         display: inline-block;
-        background-image: linear-gradient(to top, rgba(#EDF131,0.6),rgba(#FFFFFF,0.6));
-        box-shadow: 0px 4px 4px 0 rgba($color: #000000, $alpha: 0.25);
-        padding: 10px 40px;
-        border-radius: 10px;
+        //-webkit-background-clip: text;
+        //-webkit-text-fill-color: transparent;
+        background: linear-gradient(180deg, rgba(252, 255, 129, 0.568399) -20.51%, rgba(252, 255, 129, 0) -20.5%, rgba(252, 255, 129, 0.0290694) -20.49%, rgba(252, 255, 129, 0.0988999) -20.48%, #FCFF81 46.98%, #FCFF81 74.36%);
+        padding: 2px 40px;
+        border-radius: 5px;
         color: $grey-text;
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 20px;
+        font-weight: 500;
     }
 
-    .rank__act {
+    .rank__act, .rank__class {
         p {
             margin-bottom: 0;
             color: $blue;
-            font-size: 23px;
+            font-size: 34px;
             font-weight: 600;
         }
 
         span {
             color: $green;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 500;
         }
     }
 
     .rank__star {
         p {
-            margin-bottom: 5px;
+            margin: 0;
             color: $blue;
-            font-size: 23px;
+            font-size: 34px;
             font-weight: 600;
         }
 
         i {
             color: #EDF131;
-            font-size: 18px;
+            font-size: 20px;
+            margin: 0 3px;
         }
 
         .star-noColor {

@@ -40,7 +40,6 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private int width;
         private string classWidth = "";
-        private bool isLoading;
         private string UserId;
         private int count;
         private bool isErrorMessageShown = false;
@@ -145,7 +144,6 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
                 Logger.LogInformation("HandleValidSubmit called");
                 isErrorMessageShown = false;
-                isLoading = true;
 
                 try
                 {
@@ -154,12 +152,9 @@ namespace VMS.Pages.Volunteer.EditUserProfile
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
                     await Modal.Show<Organization.Activities.NotificationPopup>("", modalParams, options).Result;
-
-                    isLoading = false;
                 }
                 catch (Exception ex)
                 {
-                    isLoading = false;
                     Logger.LogError("Error occurs when trying to edit profile", ex.Message);
                     await JSRuntime.InvokeVoidAsync("alert", ex.Message);
                 }
@@ -168,7 +163,6 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task HandleInvalidSubmit()
         {
-            isLoading = false;
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
         }

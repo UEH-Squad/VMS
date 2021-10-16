@@ -149,6 +149,7 @@
 
     input {
         color: $grey-text;
+        font-size: 1rem;
 
         &::placeholder {
             color: $border-color-normal;
@@ -195,5 +196,14 @@
         &:checked::before {
             display: block;
         }
+
+        &:hover {
+            background: $grey;
+        }
+    }
+
+    .my-date-picker {
+        border-radius: 5px;
+        height: 38px;
     }
 }

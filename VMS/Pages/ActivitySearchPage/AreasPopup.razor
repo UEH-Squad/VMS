@@ -11,7 +11,7 @@
                 {
                     @foreach (var area in areas)
                     {
-                        <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <div class="area-item-wrapper d-flex align-items-center mb-2">
                             <div @onclick="() => ChangeState(area)" class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center"  style="background-color: @area.Color">
                                 @area.Icon
                             </div>

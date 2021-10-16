@@ -6,7 +6,6 @@
     .quoteBaner__item {
         padding-bottom: 15px;
         font-weight: 600;
-        color: $green;
 
         @include on('sm') {
             padding-bottom: 30px;
@@ -18,9 +17,11 @@
 
         h1 {
             margin-bottom: 30px;
+            color: $green;
 
             svg {
                 font-size: 36px;
+                color: $green;
 
                 @include on('sm') {
                     font-size: 54px;
@@ -43,6 +44,7 @@
                 margin: 0 15px;
                 font-weight: 500;
                 font-size: 36px;
+                color: $green;
 
                 @include on('sm') {
                     font-size: 42px;

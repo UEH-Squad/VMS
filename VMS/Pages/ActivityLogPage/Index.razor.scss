@@ -1,11 +1,14 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 .org-title {
     margin-top: 60px;
+    margin-bottom: 20px;
     font-weight: 600;
     font-size: 36px;
     color: $green;
     text-align: center;
+
     span{
         color: $blue;
     }
 }
+

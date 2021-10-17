@@ -4,96 +4,131 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.wrapper {
-  padding: 50px 100px; }
-  .wrapper .come-back {
-    border-bottom: 1px solid #D8D8D8; }
-    .wrapper .come-back--text {
-      text-decoration: none;
-      color: #64D72F;
-      font-weight: 500; }
-  .wrapper .general-info__item {
-    margin: 10px 0; }
-  .wrapper .general-info__who {
-    margin-top: 20px;
+.wrapper .come-back {
+  border-bottom: 1px solid #D8D8D8;
+  margin-bottom: 20px; }
+  .wrapper .come-back--text {
+    text-decoration: none;
+    color: #64D72F;
     font-weight: 500; }
-  .wrapper .general-info a {
-    cursor: pointer; }
-  .wrapper .form-report {
-    margin-top: 20px;
-    padding: 40px;
-    border: 1px solid #D8D8D8;
-    border-radius: 15px;
-    font-size: 30px;
-    font-weight: 600; }
-    .wrapper .form-report__more {
-      position: relative; }
-      .wrapper .form-report__more .material-icons-outlined {
-        position: absolute;
-        bottom: 5px;
-        right: -20px;
+
+.wrapper .general-info__item {
+  margin: 10px 0; }
+
+.wrapper .general-info__status .status-item {
+  display: flex;
+  align-items: center; }
+
+.wrapper .general-info__status--pin span, .wrapper .general-info__status--pin svg, .wrapper .general-info__status--cancel span, .wrapper .general-info__status--cancel svg, .wrapper .general-info__status--processing span, .wrapper .general-info__status--processing svg, .wrapper .general-info__status--complete span, .wrapper .general-info__status--complete svg {
+  font-size: 24px;
+  margin-right: 5px; }
+
+.wrapper .general-info__status--pin p, .wrapper .general-info__status--cancel p, .wrapper .general-info__status--processing p, .wrapper .general-info__status--complete p {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0; }
+
+.wrapper .general-info__status--pin {
+  color: #F14747; }
+
+.wrapper .general-info__status--cancel {
+  color: #B4B4B4; }
+
+.wrapper .general-info__status--complete {
+  color: #64D72F; }
+
+.wrapper .general-info__status--processing {
+  color: #18A0FB; }
+  .wrapper .general-info__status--processing svg {
+    width: 24px;
+    height: 24px; }
+
+.wrapper .general-info__who {
+  font-weight: 500; }
+
+.wrapper .general-info__activity, .wrapper .general-info__date {
+  font-style: oblique; }
+
+.wrapper .general-info a {
+  cursor: pointer; }
+
+.wrapper .form-report {
+  margin-top: 20px;
+  padding: 40px;
+  border: 1px solid #D8D8D8;
+  border-radius: 15px;
+  font-size: 30px;
+  font-weight: 600; }
+  .wrapper .form-report__more {
+    position: relative; }
+    .wrapper .form-report__more .material-icons-outlined {
+      position: absolute;
+      bottom: 5px;
+      right: -20px;
+      cursor: pointer; }
+    .wrapper .form-report__more .dropdown-menu {
+      box-shadow: 3px 3px 7px 7px #dee2e687;
+      border: 1px solid white; }
+      .wrapper .form-report__more .dropdown-menu .dropdown-item {
+        font-weight: 500;
         cursor: pointer; }
-      .wrapper .form-report__more .dropdown-menu {
-        box-shadow: 3px 3px 7px 7px #dee2e687;
-        border: 1px solid white; }
-        .wrapper .form-report__more .dropdown-menu .dropdown-item {
-          font-weight: 500; }
-        .wrapper .form-report__more .dropdown-menu .dropdown-close {
-          color: #18A0FB; }
-        .wrapper .form-report__more .dropdown-menu .dropdown-delete {
-          color: #F14747; }
-    .wrapper .form-report__title {
-      display: flex;
-      justify-content: center;
-      color: #64D72F; }
-      .wrapper .form-report__title span {
-        color: #18A0FB; }
-    .wrapper .form-report__reason--text, .wrapper .form-report__discript--text, .wrapper .form-report__proof--text {
-      font-size: 18px; }
-      .wrapper .form-report__reason--text span, .wrapper .form-report__discript--text span, .wrapper .form-report__proof--text span {
+      .wrapper .form-report__more .dropdown-menu .dropdown-pin {
         color: #F14747; }
-    .wrapper .form-report__reason textarea, .wrapper .form-report__discript textarea, .wrapper .form-report__proof textarea {
-      width: 100%;
-      border: 1px solid #D8D8D8;
-      border-radius: 5px;
-      font-size: 18px;
-      color: #515151;
-      padding: 10px 10px 10px 15px;
-      overflow-y: scroll; }
-      .wrapper .form-report__reason textarea::-webkit-scrollbar, .wrapper .form-report__discript textarea::-webkit-scrollbar, .wrapper .form-report__proof textarea::-webkit-scrollbar {
-        width: 20px; }
-      .wrapper .form-report__reason textarea::-webkit-scrollbar-thumb, .wrapper .form-report__discript textarea::-webkit-scrollbar-thumb, .wrapper .form-report__proof textarea::-webkit-scrollbar-thumb {
-        background-color: #B4B4B4;
-        border-radius: 10px;
-        border: 5px solid #fafafa; }
-    .wrapper .form-report__proof--item {
-      height: 150px;
-      width: 150px;
-      object-fit: cover;
-      border-radius: 10px; }
-      @media (min-width: 1200px) {
-        .wrapper .form-report__proof--item {
-          height: 190px;
-          width: 190px; } }
-      @media (min-width: 1400px) {
-        .wrapper .form-report__proof--item {
-          height: 240px;
-          width: 240px; } }
-  .wrapper .action-button {
-    margin-top: 40px; }
-    .wrapper .action-button__processing, .wrapper .action-button__complete-processing {
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 5px;
-      border: 1px solid transparent; }
-    .wrapper .action-button__processing {
-      margin-right: 10px;
-      color: #64D72F;
-      background: none; }
-      .wrapper .action-button__processing:hover {
-        border: 1px solid #64D72F; }
-    .wrapper .action-button__complete-processing {
-      color: #FFFFFF;
-      background: #64D72F; }
-      .wrapper .action-button__complete-processing:hover {
-        background: #306C14; }
+      .wrapper .form-report__more .dropdown-menu .dropdown-close {
+        color: #B4B4B4; }
+  .wrapper .form-report__title {
+    display: flex;
+    justify-content: center;
+    color: #64D72F; }
+    .wrapper .form-report__title span {
+      color: #18A0FB; }
+  .wrapper .form-report__reason--text, .wrapper .form-report__discript--text, .wrapper .form-report__proof--text {
+    font-size: 18px; }
+    .wrapper .form-report__reason--text span, .wrapper .form-report__discript--text span, .wrapper .form-report__proof--text span {
+      color: #F14747; }
+  .wrapper .form-report__reason textarea, .wrapper .form-report__discript textarea, .wrapper .form-report__proof textarea {
+    width: 100%;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #515151;
+    padding: 10px 10px 10px 15px;
+    overflow-y: scroll; }
+    .wrapper .form-report__reason textarea::-webkit-scrollbar, .wrapper .form-report__discript textarea::-webkit-scrollbar, .wrapper .form-report__proof textarea::-webkit-scrollbar {
+      width: 20px; }
+    .wrapper .form-report__reason textarea::-webkit-scrollbar-thumb, .wrapper .form-report__discript textarea::-webkit-scrollbar-thumb, .wrapper .form-report__proof textarea::-webkit-scrollbar-thumb {
+      background-color: #B4B4B4;
+      border-radius: 10px;
+      border: 5px solid #fafafa; }
+  .wrapper .form-report__proof--item {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 10px; }
+    @media (min-width: 1200px) {
+      .wrapper .form-report__proof--item {
+        height: 220px;
+        width: 220px; } }
+    @media (min-width: 1400px) {
+      .wrapper .form-report__proof--item {
+        height: 240px;
+        width: 240px; } }
+
+.wrapper .action-button {
+  margin-top: 40px; }
+  .wrapper .action-button__processing, .wrapper .action-button__complete-processing {
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid transparent; }
+  .wrapper .action-button__processing {
+    margin-right: 10px;
+    color: #64D72F;
+    background: none; }
+    .wrapper .action-button__processing:hover {
+      border: 1px solid #64D72F; }
+  .wrapper .action-button__complete-processing {
+    color: #FFFFFF;
+    background: #64D72F; }
+    .wrapper .action-button__complete-processing:hover {
+      background: #306C14; }

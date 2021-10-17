@@ -362,5 +362,17 @@
   {
     "outputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.css",
     "inputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Notification.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Notification.razor.scss"
   }
 ]

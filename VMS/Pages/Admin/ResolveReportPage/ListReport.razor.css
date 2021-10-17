@@ -13,41 +13,65 @@
     color: #64D72F; }
 
 .list-card {
-  padding-bottom: 50px; }
+  margin-bottom: 50px;
+  border-radius: 10px;
+  border: 1px solid #B4B4B4; }
+  .list-card .item:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px; }
+  .list-card .item:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; }
   .list-card .item {
-    margin: 15px 0; }
+    padding: 15px; }
     .list-card .item .list-reason {
       font-size: 16px;
-      font-weight: 600; }
+      font-weight: 600;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
     .list-card .item .info-item:first-child {
-      width: 80%; }
+      width: 70%; }
     .list-card .item .info-item:nth-child(2) {
-      width: 20%; }
+      width: 30%; }
     .list-card .item .info-item p {
       margin: 0;
       font-style: oblique;
       font-weight: 300; }
     .list-card .item .info-item__who a, .list-card .item .info-item__activity a {
       text-decoration: none;
-      color: unset; }
+      color: unset;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
     .list-card .item .info-item__time {
       float: right; }
     .list-card .item .info-item__status {
       float: right; }
       .list-card .item .info-item__status--admin {
-        color: #64D72F; }
-      .list-card .item .info-item__status--pin, .list-card .item .info-item__status--complete {
+        color: #64D72F;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+      .list-card .item .info-item__status--pin, .list-card .item .info-item__status--complete, .list-card .item .info-item__status--closed, .list-card .item .info-item__status--processing {
         position: relative;
         margin-left: 4px; }
-        .list-card .item .info-item__status--pin .material-icons, .list-card .item .info-item__status--complete .material-icons {
+        .list-card .item .info-item__status--pin .material-icons, .list-card .item .info-item__status--complete .material-icons, .list-card .item .info-item__status--closed .material-icons, .list-card .item .info-item__status--processing .material-icons {
           font-size: 24px;
           cursor: pointer; }
-        .list-card .item .info-item__status--pin:hover .icon-tooltip, .list-card .item .info-item__status--complete:hover .icon-tooltip {
+        .list-card .item .info-item__status--pin:hover .icon-tooltip, .list-card .item .info-item__status--complete:hover .icon-tooltip, .list-card .item .info-item__status--closed:hover .icon-tooltip, .list-card .item .info-item__status--processing:hover .icon-tooltip {
           display: block; }
       .list-card .item .info-item__status--pin {
         color: #B4B4B4; }
       .list-card .item .info-item__status--complete {
         color: #64D72F; }
+      .list-card .item .info-item__status--closed {
+        color: #B4B4B4; }
+      .list-card .item .info-item__status--processing {
+        color: #18A0FB; }
+        .list-card .item .info-item__status--processing svg {
+          width: 24px;
+          height: 24px; }
       .list-card .item .info-item__status .icon-tooltip {
         display: none;
         min-width: max-content;

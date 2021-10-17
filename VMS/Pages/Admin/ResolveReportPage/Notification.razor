@@ -1,0 +1,40 @@
+﻿@inject IJSRuntime JsRuntime
+
+<div class="pop-up">
+    <div class="center-screen">
+        <div class="pop-up-container border-10">
+            <div @onclick="CloseModal" class="close-btn-s">
+                <span class="material-icons"> close </span>
+            </div>
+            <div class="pop-up-content">
+                <h3 class="delete-act">
+                    Bạn @(TypeNotification==2?"đang ":" đã ")
+                    @switch (TypeNotification)
+                    {
+                        case 1:<span>ghim báo cáo</span>; break;
+                        case 2:<span>xử lý báo cáo</span>; break;
+                        case 3:<span>hoàn tất xử lý</span>; break;
+                    }
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    [Parameter]
+    public int TypeNotification { get; set; }
+
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+        ScrollToTop();
+    }
+    private async Task ScrollToTop()
+    {
+        await Interop.ScrollToTop(JsRuntime);
+    }
+}

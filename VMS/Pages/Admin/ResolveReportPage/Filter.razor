@@ -17,21 +17,26 @@
             <li @onclick="() => ChooseValueStatus(1)" style="color: #F14747">Đã ghim</li>
             <li @onclick="() => ChooseValueStatus(2)">Đang xử lý</li>
             <li @onclick="() => ChooseValueStatus(3)" style="color: #64D72F">Hoàn tất xử lý</li>
-            <li @onclick="() => ChooseValueStatus(4)"style="color: unset">Đã đóng</li>
+            <li @onclick="() => ChooseValueStatus(4)" style="color: unset">Đã đóng</li>
         </ul>
     </div>
 
     <div class="item">
         <input type="month" placeholder="Tháng, năm" />
     </div>
-    
-    <button class="filter-btn">Lọc</button>
+
+    <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
 
     <button @onclick="ClearFilter" type="button" class="clear-filter-btn">Xóa lọc</button>
 </div>
 
 
 @code {
+    [Parameter]
+    public string Status { get; set; }
+
+    [Parameter]
+    public EventCallback<string> StatusChanged { get; set; }
 
     private string valueTypeReport = "Loại báo báo";
     private string valueStatus = "Trạng thái";
@@ -60,14 +65,28 @@
             case 2: valueStatus = "Đang xử lý"; break;
             case 3: valueStatus = "Hoàn tất xử lý"; break;
             case 4: valueStatus = "Đã đóng"; break;
-            default:break;
+            default: break;
         }
     }
-    private void ClearFilter()
+    private async Task ClearFilter()
     {
         valueStatus = "Trạng thái";
         valueTypeReport = "Loại báo cáo";
         haveStatus = false;
         haveType = false;
+        await StatusChanged.InvokeAsync("");
+    }
+    private async Task UpdateFilterValueAsync()
+    {
+        string tmp = "";
+        switch (valueStatus)
+        {
+            case "Đã ghim": tmp = "pinned";break;
+            case "Đang xử lý":tmp = "processing";break;
+            case "Hoàn tất xử lý":tmp = "complete"; break;
+            case "Đã đóng": tmp = "closed"; break;
+            default:break;
+        }
+        await StatusChanged.InvokeAsync(tmp);
     }
 }

@@ -12,35 +12,53 @@
 }
 
 .list-card {
-    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    border: 1px solid $grey-icon;
+
+    .item:first-child {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .item:last-child {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 
     .item {
-        margin: 15px 0;
+        padding: 15px;
 
         .list-reason {
             font-size: 16px;
             font-weight: 600;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
         .info-item:first-child {
-            width: 80%;
+            width: 70%;
         }
 
         .info-item:nth-child(2) {
-            width: 20%;
+            width: 30%;
         }
 
         .info-item {
             p {
                 margin: 0;
                 font-style: oblique;
-                font-weight:300;
+                font-weight: 300;
             }
 
             &__who, &__activity {
                 a {
-                    text-decoration:none;
-                    color:unset;
+                    text-decoration: none;
+                    color: unset;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
             }
 
@@ -53,9 +71,12 @@
 
                 &--admin {
                     color: $green;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
 
-                &--pin, &--complete {
+                &--pin, &--complete, &--closed, &--processing {
                     position: relative;
                     margin-left: 4px;
 
@@ -75,6 +96,19 @@
 
                 &--complete {
                     color: $green;
+                }
+
+                &--closed {
+                    color: $grey-icon;
+                }
+
+                &--processing {
+                    color: $blue;
+
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
                 }
 
                 .icon-tooltip {

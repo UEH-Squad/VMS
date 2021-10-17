@@ -4,6 +4,7 @@
 
     .come-back {
         border-bottom: 1px solid $grey-input;
+        margin-bottom: 20px;
 
         &--text {
             text-decoration: none;
@@ -18,9 +19,48 @@
             margin: 10px 0;
         }
 
+        &__status {
+            .status-item {
+                display: flex;
+                align-items: center;
+            }
+
+            &--pin, &--cancel, &--processing, &--complete {
+                span,svg {
+                    font-size: 24px;
+                    margin-right: 5px;
+                }
+
+                p {
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin: 0;
+                }
+            }
+            &--pin {
+                color:$red;
+            }
+            &--cancel {
+                color:$grey-icon;
+            }
+            &--complete {
+                color:$green;
+            }
+            &--processing {
+                color:$blue;
+                svg {
+                    width:24px;
+                    height:24px;
+                }
+            }
+        }
+
         &__who {
-            margin-top: 20px;
             font-weight: 500;
+        }
+
+        &__activity, &__date {
+            font-style: oblique;
         }
 
         a {
@@ -52,14 +92,15 @@
 
                 .dropdown-item {
                     font-weight: 500;
+                    cursor: pointer;
+                }
+
+                .dropdown-pin {
+                    color: $red;
                 }
 
                 .dropdown-close {
-                    color: $blue;
-                }
-
-                .dropdown-delete {
-                    color: $red;
+                    color: $grey-icon;
                 }
             }
         }
@@ -112,8 +153,8 @@
             border-radius: 10px;
 
             @include on('xl') {
-                height: 190px;
-                width: 190px;
+                height: 220px;
+                width: 220px;
             }
 
             @include on('xxl') {

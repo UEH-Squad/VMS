@@ -1,5 +1,4 @@
 ﻿
-
 <div class="wrapper">
 
     <div class="come-back">
@@ -7,6 +6,40 @@
     </div>
 
     <div class="general-info">
+        <div class="general-info__item general-info__status @(action==""?"d-none":"")">
+            @switch (action)
+            {
+                case "Đã ghim báo cáo":
+                    <div class=" status-item general-info__status--pin">
+                        <span class="material-icons"> push_pin </span>
+                        <p>@action</p>
+                    </div>
+
+                    break;
+                case "Đã đóng báo cáo":
+                    <div class=" status-item general-info__status--cancel">
+                        <span class="material-icons"> cancel </span>
+                        <p>@action</p>
+                    </div>
+                    break;
+                case "Đang xử lý báo cáo":
+                    <div class=" status-item general-info__status--processing">
+                        <svg class="material-icons">
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                            <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2m0 2c-4.42 0-8 3.58-8 8s3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8m0 1c3.87 0 7 3.13 7 7s-3.13 7-7 7c-1.93 0-3.68-.78-4.95-2.05L12 12V5z" fill="currentColor" />
+                        </svg>
+                        <p>@action</p>
+                    </div>
+                    break;
+                case "Hoàn tất xử lý báo cáo":
+                    <div class=" status-item general-info__status--complete">
+                        <span class="material-icons"> check_circle </span>
+                        <p>@action</p>
+                    </div>
+                    break;
+                default: break;
+            }
+        </div>
         <div class="general-info__item general-info__who">Được báo cáo bởi: <a>Bùi Minh Kha</a></div>
         <div class="general-info__item general-info__activity">Hoạt động: <a>Tuyển tình nguyện viên tham gia phòng chống covid-19</a></div>
         <div class="general-info__item general-info__date">Ngày báo cáo: 20/02/2020</div>
@@ -17,9 +50,10 @@
         <div class="dropdown form-report__more">
             <span class="material-icons-outlined" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> more_horiz </span>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item dropdown-pin" href="#">Ghim báo cáo</a></li>
-                <li><a class="dropdown-item dropdown-close" href="#">Đóng báo cáo</a></li>
-                <li><a class="dropdown-item dropdown-delete" href="#">Xóa</a></li>
+                <li @onclick="() => ShowNotification(1)" class="dropdown-item dropdown-pin">Ghim báo cáo</li>
+
+                <li @onclick="() => ShowConfirm(0)" class="dropdown-item dropdown-close">Đóng báo cáo</li>
+                <li @onclick="() => ShowConfirm(1)" class="dropdown-item dropdown-delete">Xóa</li>
             </ul>
         </div>
         <h1 class="form-report__title">Báo cáo&nbsp;<span>hoạt động</span></h1>
@@ -61,8 +95,8 @@
     </div>
 
     <div class="action-button d-flex justify-content-center mb-3">
-        <button class="action-button__processing">Đang xử lý</button>
-        <button class="action-button__complete-processing">Hoàn tất xử lý</button>
+        <button @onclick="() => ShowNotification(2)" class="action-button__processing">Đang xử lý</button>
+        <button @onclick="() => ShowNotification(3)" class="action-button__complete-processing">Hoàn tất xử lý</button>
     </div>
 
 </div>
@@ -71,5 +105,48 @@
 @code {
 
     private int soLuongAnhBaoCao = 3;
+    private string action = "";
 
+    [CascadingParameter] public IModalService Modal { get; set; }
+    async Task ShowConfirm(int act)
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+
+        ModalParameters parameters = new();
+        if (act == 1)
+        {
+            parameters.Add("ActionDelete", true);
+        }
+        else
+        {
+            action = "Đã đóng báo cáo";
+            parameters.Add("ActionDelete", false);
+        }
+        Modal.Show<VMS.Pages.Admin.ResolveReportPage.ConfirmAction>("", parameters, options);
+    }
+    async Task ShowNotification(int act)
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        ModalParameters para = new();
+        switch (act)
+        {
+            case 1: action = "Đã ghim báo cáo"; break;
+            case 2: action = "Đang xử lý báo cáo"; break;
+            case 3: action = "Hoàn tất xử lý báo cáo"; break;
+        }
+        para.Add("TypeNotification", act);
+        Modal.Show<VMS.Pages.Admin.ResolveReportPage.Notification>("", para, options);
+
+    }
 }

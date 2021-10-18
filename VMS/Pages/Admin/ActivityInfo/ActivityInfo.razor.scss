@@ -1,0 +1,74 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.my-container {
+    background-color: #f6f6f6;
+
+    .my-act {
+        background-color: #fff;
+        border-radius: 10px;
+    }
+}
+
+::deep {
+    .report {
+        display: none;
+    }
+
+    .btn-sign-up--cover {
+        display: none;
+    }
+
+    .heart-button1 {
+        display: none;
+    }
+
+    .inside-the-border {
+        display: flex;
+        justify-content: space-between;
+
+        .icons {
+            order: 2;
+        }
+
+        .about-infor {
+            order: 1;
+        }
+    }
+
+    .title {
+        &__content {
+            margin-bottom: 0;
+        }
+
+        &__name {
+            margin: 6px 0;
+        }
+    }
+}
+
+.act-footer {
+
+    &__btn {
+        button {
+            margin-left: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: $white;
+            padding: 5px 15px;
+            border-radius: 5px;
+
+            &:hover {
+                color: $white;
+            }
+        }
+
+        &--blue {
+            background-color: $blue;
+
+            &:hover {
+                background-color: $blue-bold;
+            }
+        }
+    }
+}
+

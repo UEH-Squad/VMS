@@ -2,10 +2,11 @@
 
 @attribute [Route(Routes.AdminActivityManagement)]
 @attribute [Authorize(Roles = "Admin")]
+
 <ActivityFilter />
 <ActList IsHappening="true" Closed="false"/>
-<ActList IsHappening="true" Closed="true" />
-<ActList Happened="true" IsHappening="false"/>
+@*<ActList IsHappening="true" Closed="true" />
+<ActList Happened="true" IsHappening="false"/>*@
 
 
 @code {

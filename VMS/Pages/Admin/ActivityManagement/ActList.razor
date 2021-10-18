@@ -5,93 +5,93 @@
     <div class="act col-10 px-0" id="act">
         <h3>Có <span>hoạt động</span> ứng với kết quả tìm kiếm</h3>
         <div class="px-2">
-            <div class="act__page-1">
-                @foreach (var item in fakeDatas)
-                {
-                    <div class="act__item row">
-                        <div class="col-4 h-100 d-flex align-items-center pe-0 ps-3 py-2">
-                            <img class="w-100" src="./img/activities/132780410759551427_71b3c892-eaa9-4471-b865-e809f12932b7.jpg" alt="">
-                        </div>
-                        <div class="col-8 act__content d-flex flex-column justify-content-between px-2">
-                            <ul class="position-absolute act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                                @if (IsHappening)
-                                {
+            @if (pagedResult is not null && pagedResult.Items.Count != 0)
+            {
+                <div class="act__page-1">
+                    @foreach (var item in pagedResult.Items)
+                    {
+                        <div class="act__item row">
+                            <div class="col-4 h-100 d-flex align-items-center pe-0 ps-3 py-2">
+                                <img class="w-100" src="./img/activities/132780410759551427_71b3c892-eaa9-4471-b865-e809f12932b7.jpg" alt="">
+                            </div>
+                            <div class="col-8 act__content d-flex flex-column justify-content-between px-2">
+                                <ul class="position-absolute act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                                     <li @onclick="() => ShowActPrivorModal(item.Id)" class="edit pb-2 text-decoration-none">Ưu tiên hoạt động</li>
                                     <a href="@Routes.EditActivity" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
                                     <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
-                                }
-                                @if (Happened)
-                                {
-                                    <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
-                                }
-                            </ul>
-                            <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute act__content__icon">
-                                more_horiz
-                            </i>
-                            <div class="pe-4">
-                                <a href="" class="lmtext-2 text-decoration-none">@item.Title</a>
-                                <div class="star">
-                                    <span class="material-icons">
-                                        star_rate
-                                    </span>
-                                    <span class="material-icons">
-                                        star_rate
-                                    </span>
-                                    <span class="material-icons">
-                                        star_rate
-                                    </span>
-                                    <span class="material-icons">
-                                        star_rate
-                                    </span>
-                                    <span class="material-icons">
-                                        star_rate
-                                    </span>
+                                </ul>
+                                <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute act__content__icon">
+                                    more_horiz
+                                </i>
+                                <div class="pe-4">
+                                    <a href="@Routes.AdminActivityInfo" class="lmtext-2 text-decoration-none">@item.Title</a>
+                                    <div class="star">
+                                        <span class="material-icons">
+                                            star_rate
+                                        </span>
+                                        <span class="material-icons">
+                                            star_rate
+                                        </span>
+                                        <span class="material-icons">
+                                            star_rate
+                                        </span>
+                                        <span class="material-icons">
+                                            star_rate
+                                        </span>
+                                        <span class="material-icons">
+                                            star_rate
+                                        </span>
+                                    </div>
+                                    <h5 class="org-name d-flex align-items-center">
+                                        <i class="material-icons">public</i> @item.Name
+                                    </h5>
+                                    <p class="lmtext-2 act__content-description mb-2">@item.Content</p>
+                                    <span class="align-self-start">Ngày đăng: @item.CreatedDate</span>
                                 </div>
-                                <h5 class="org-name d-flex align-items-center">
-                                    <i class="material-icons">public</i> @item.Name
-                                </h5>
-                                <p class="lmtext-2 act__content-description mb-2">@item.Content</p>
-                                <span class="align-self-start">Ngày đăng: @item.CreatedDate</span>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <h5 class="fw-normal d-flex align-items-center">
-                                    <i class="material-icons">
-                                        person
-                                    </i> 250
-                                </h5>
-                                <div class="d-flex">
-                                    @if (IsHappening)
-                                    {
-                                        @if (Closed)
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h5 class="fw-normal d-flex align-items-center">
+                                        <i class="material-icons">
+                                            person
+                                        </i> 250
+                                    </h5>
+                                    <div class="d-flex">
+                                        @if (IsHappening)
                                         {
-                                            <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
-                                                <i class="material-icons-outlined fst-normal">
-                                                    error
-                                                </i> Đã đóng đăng ký
-                                            </h5>
+                                            @if (Closed)
+                                            {
+                                                <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
+                                                    <i class="material-icons-outlined fst-normal">
+                                                        error
+                                                    </i> Đã đóng đăng ký
+                                                </h5>
+                                            }
+                                            <div class="act-footer__btn d-flex align-items-center">
+                                                <button @onclick="() => ShowEditModal(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
+                                            </div>
                                         }
-                                        <div class="act-footer__btn d-flex align-items-center">
-                                            <button @onclick="() => ShowEditModal(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
-                                        </div>
-                                    }
-                                    @if (Happened)
-                                    {
-                                        <div class="act-footer__btn d-flex align-items-center">
-                                            <a class="btn text-decoration-none act-footer__btn--green">Xem danh sách</a>
-                                        </div>
-                                        <div class="act-footer__btn d-flex align-items-center">
-                                            <a class="btn text-decoration-none act-footer__btn--blue">Xem đánh giá</a>
-                                        </div>
-                                    }
+                                        @if (Happened)
+                                        {
+                                            <div class="act-footer__btn d-flex align-items-center">
+                                                <a class="btn text-decoration-none act-footer__btn--green">Xem danh sách</a>
+                                            </div>
+                                            <div class="act-footer__btn d-flex align-items-center">
+                                                <a class="btn text-decoration-none act-footer__btn--blue">Xem đánh giá</a>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
+            }
         </div>
         <div class="pagination-org">
         </div>
+        <Pager CurrentPage="@pagedResult.PageIndex"
+               PageCount="@pagedResult.TotalPages"
+               OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
+               ShowPageNumbers="true" />
     </div>
 </section>
 
@@ -102,21 +102,37 @@
     [Parameter] public bool Happened { get; set; } = false;
     [CascadingParameter] public IModalService Modal { get; set; }
 
+    private PaginatedList<FakeData> pagedResult;
+    private int count = 20;
+    private int page = 1;
+
     protected override void OnInitialized()
     {
-        for (int i = 0; i < 1; i++)
-        {
-            fakeDatas.Add(new FakeData()
-            {
-                Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid - 19 tại địaaa phương",
-                Name = "Công nghệ thông tin kinh doanh",
-                Content = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
-                Person = 250,
-                CreatedDate = DateTime.Today
-            });
-        }
-
+        pagedResult = GetFakeData();
     }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
+    private PaginatedList<FakeData> GetFakeData()
+    {
+        var data = Enumerable.Range(0, 10).Select(x => new FakeData
+        {
+            Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid - 19 tại địaaa phương",
+            Name = "Công nghệ thông tin kinh doanh",
+            Content = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
+            Person = 250,
+            CreatedDate = DateTime.Today
+        }).ToList();
+
+        var result = new PaginatedList<FakeData>(data, 100, page, 10);
+        return result;
+    }
+
     private List<FakeData> fakeDatas = new();
 
     private class FakeData
@@ -131,7 +147,6 @@
         public DateTime CreatedDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -142,13 +157,13 @@
     [JSInvokable]
     public Task HideMenuInterop()
     {
-        fakeDatas.ForEach(a => a.IsMenu = false);
+        pagedResult.Items.ForEach(a => a.IsMenu = false);
         return InvokeAsync(StateHasChanged);
     }
 
     void ShowMenu(int id)
     {
-        fakeDatas.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
+        pagedResult.Items.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
     }
 
     private async Task ShowEditModal(int id)

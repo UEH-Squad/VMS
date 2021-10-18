@@ -74,14 +74,22 @@ input[type="checkbox"] {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         position: absolute;
         top: 100%;
-        height: 240px;
         background-color: #fff;
         z-index: 1;
         display: none;
         width: 100%;
 
+        &--fix-height {
+            height: 240px;
+        }
+
+        &--flexible-height {
+            height: fit-content;
+        }
+
         ul {
             overflow-y: scroll;
+            overflow-x: scroll;
             list-style: none;
             padding: 0;
             height: 100%;
@@ -138,5 +146,34 @@ input[type="checkbox"] {
 
 .filter-item__btn:focus ~ .filter-item__dropdown {
     display: block;
+}
+
+::deep {
+
+    .ant-picker {
+        border-radius: 10px;
+        height: 40px;
+        width: 100%;
+        border: 1px solid $border-color-bold;
+        color: #b4b4b4;
+        padding-left: 8px;
+        padding-right: 30px;
+        outline: none;
+        line-height: 40px;
+
+        &-input {
+            font-size: 24px;
+            padding-right: 0.5rem;
+
+            &>input {
+                font-size: 18px;
+                color: #b4b4b4;
+            }
+        }
+
+        &-clear {
+            display: none;
+        }
+    }
 }
 

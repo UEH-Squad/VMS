@@ -1,4 +1,6 @@
-﻿<section class="row justify-content-center">
+﻿@using VMS.Application.ViewModels;
+
+<section class="row justify-content-center">
     <div class="act-filter col-10 px-0">
         <div class="d-flex mb-4">
             <div class="act-filter__type d-flex justify-content-center">
@@ -25,7 +27,7 @@
         <div class="d-flex justify-content-between flex-wrap">
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterCity ? "bg-grey" : "")" placeholder="@cityChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isCityShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fix-height" style="display: @(isCityShow ? "block" : "none")">
                     <ul>
                         @if (provinces is not null)
                         {
@@ -43,7 +45,7 @@
 
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterDistrict ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isDistrictShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fix-height" style="display: @(isDistrictShow ? "block" : "none")">
                     <ul>
                         @if (districts is not null)
                         {
@@ -60,28 +62,28 @@
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <div @onclick="ShowAreasPopupAsync" class="filter-item__btn">Lĩnh vực</div>
+                <div @onclick="ShowAreasPopupAsync" class="filter-item__btn @(areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
                 <span class="material-icons-outlined position-absolute">
                     expand_more
                 </span>
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <div @onclick="ShowSkillsPopupAsync" class="filter-item__btn">Kỹ năng</div>
+                <div @onclick="ShowSkillsPopupAsync" class="filter-item__btn @(skills.Count != 0 ? "bg-grey" : "")">Kỹ năng</div>
                 <span class="material-icons-outlined position-absolute">
                     expand_more
                 </span>
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <input @onclick="ToggleHierarchyDropdown" @onfocusout="CloseHierarchyDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterHierarchy ? "bg-grey" : "")" placeholder="@hierarchyChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isHierarchyShow ? "block" : "none")">
+                <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterLevel ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--flexible-height" style="display: @(isLevelShow ? "block" : "none")">
                     <ul>
-                        @if (hierarchys is not null)
+                        @if (levels is not null)
                         {
-                            @foreach (var hierarchy in hierarchys)
+                            @foreach (var level in levels)
                             {
-                                <li @onmousedown="() => ChooseHierarchyValue(hierarchy.Name)">@hierarchy.Name</li>
+                                <li @onmousedown="() => ChooseLevelValue(level)">@level.Name</li>
                             }
                         }
                     </ul>
@@ -93,7 +95,7 @@
 
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterOrganization ? "bg-grey" : "")" placeholder="@organizationChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isOrganizationShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fix-height" style="display: @(isOrganizationShow ? "block" : "none")">
                     <ul>
                         @if (organizations is not null)
                         {
@@ -111,13 +113,13 @@
 
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleActTypeDropdown" @onfocusout="CloseActTypeDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterActType ? "bg-grey" : "")" placeholder="@acttypeChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isActTypeShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--flexible-height" style="display: @(isActTypeShow ? "block" : "none")">
                     <ul>
                         @if (acttypes is not null)
                         {
                             @foreach (var acttype in acttypes)
                             {
-                                <li @onmousedown="() => ChooseActTypeValue(acttype.Name)">@acttype.Name</li>
+                                <li @onmousedown="() => ChooseActTypeValue(acttype)">@acttype.Name</li>
                             }
                         }
                     </ul>
@@ -128,10 +130,9 @@
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <input type="month" class="filter-item__btn pe-0"/>
+                <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" OnChange="ChooseMonthValue" Format="MM/yyyy" />
             </div>
         </div>
-
 
         <div class="act-filter__btn d-flex justify-content-start align-items-center mb-4 text-center">
             <button class="btn act-filter__btn--green px-4 py-1 me-3">Lọc</button>
@@ -141,24 +142,26 @@
 </section>
 
 @code {
-
     private bool isOrganizationShow;
     private bool isCityShow;
     private bool isDistrictShow;
-    private bool isHierarchyShow;
+    private bool isLevelShow;
     private bool isActTypeShow;
     private bool isFilterDistrict;
     private bool isFilterActType;
     private bool isFilterCity;
-    private bool isFilterHierarchy;
+    private bool isFilterLevel;
     private bool isFilterOrganization;
+    private bool isFilterMonth;
     private string cityChoosenValue = "Tỉnh/Thành phố";
     private string districtChoosenValue = "Quận/Huyện";
     private string organizationChoosenValue = "Tổ chức";
-    private string hierarchyChoosenValue = "Cấp";
+    private string levelChoosenValue = "Cấp";
     private string acttypeChoosenValue = "Loại hoạt động";
     private string dateChoosenValue = "Tháng, năm";
-
+    [Parameter] public DateTime Value { get; set; }
+    private List<AreaViewModel> areas = new();
+    private List<SkillViewModel> skills = new();
 
     [CascadingParameter]
     public IModalService Modal { get; set; }
@@ -177,28 +180,41 @@
                 Name = "Quận 6",
             });
 
-            hierarchys.Add(new FakeData()
-            {
-                Name = "Khoa",
-            });
-
             organizations.Add(new FakeData()
             {
                 Name = "Tinh nguyen",
-            });
-
-            acttypes.Add(new FakeData()
-            {
-                Name = "Dang dien ra",
             });
         }
 
     }
     private List<FakeData> provinces = new();
     private List<FakeData> districts = new();
-    private List<FakeData> hierarchys = new();
     private List<FakeData> organizations = new();
-    private List<FakeData> acttypes = new();
+
+    private List<FakeData> acttypes = new()
+    {
+        new FakeData() { Name = "Đang diễn ra" },
+        new FakeData() { Name = "Đã diễn ra" },
+        new FakeData() { Name = "Đã đóng đăng ký" },
+    };
+    private void ChooseActTypeValue(FakeData acttype)
+    {
+        acttypeChoosenValue = acttype.Name;
+        isFilterActType = true;
+    }
+
+    private List<FakeData> levels = new()
+    {
+        new FakeData() { Name = "Ban Chuyên môn" },
+        new FakeData() { Name = "Khoa/Viện/KTX" },
+        new FakeData() { Name = "CLB/Đội/Nhóm" },
+    };
+
+    private void ChooseLevelValue(FakeData level)
+    {
+        levelChoosenValue = level.Name;
+        isFilterLevel = true;
+    }
 
     private class FakeData
     {
@@ -235,14 +251,14 @@
         isOrganizationShow = false;
     }
 
-    private void ToggleHierarchyDropdown()
+    private void ToggleLevelDropdown()
     {
-        isHierarchyShow = !isHierarchyShow;
+        isLevelShow = !isLevelShow;
     }
 
-    private void CloseHierarchyDropdown()
+    private void CloseLevelDropdown()
     {
-        isHierarchyShow = false;
+        isLevelShow = false;
     }
 
     private void ToggleActTypeDropdown()
@@ -267,27 +283,21 @@
         isFilterDistrict = true;
     }
 
-    void ChooseHierarchyValue(string name)
-    {
-        hierarchyChoosenValue = name;
-        isFilterHierarchy = true;
-    }
-
     void ChooseOrganizationValue(string name)
     {
         organizationChoosenValue = name;
         isFilterOrganization = true;
     }
 
-    void ChooseActTypeValue(string name)
+    void ChooseMonthValue()
     {
-        acttypeChoosenValue = name;
-        isFilterActType = true;
+        isFilterMonth = true;
     }
 
     private async Task ShowAreasPopupAsync()
     {
         var parameters = new ModalParameters();
+        parameters.Add("ChoosenAreasList", areas);
 
         var options = new ModalOptions()
         {
@@ -296,12 +306,13 @@
             UseCustomLayout = true
         };
 
-        await Modal.Show(typeof(Pages.ActivitySearchPage.AreasPopup),"", parameters, options).Result;
+        await Modal.Show<VMS.Pages.ActivitySearchPage.AreasPopup>("", parameters, options).Result;
     }
 
     private async Task ShowSkillsPopupAsync()
     {
         var skillsParameter = new ModalParameters();
+        skillsParameter.Add("ChoosenSkillsList", skills);
 
         var options = new ModalOptions()
         {
@@ -310,6 +321,6 @@
             UseCustomLayout = true
         };
 
-        await Modal.Show(typeof(Pages.ActivitySearchPage.SkillsPopup), "", skillsParameter, options).Result;
+        await Modal.Show<VMS.Pages.ActivitySearchPage.SkillsPopup>("", skillsParameter, options).Result;
     }
 }

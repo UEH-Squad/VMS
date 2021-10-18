@@ -49,6 +49,9 @@
   right: 0;
   width: 100% !important; }
 
+::deep .typeahead .form-control {
+  height: fit-content; }
+
 ::deep input {
   color: #515151;
   border: solid 1px #b4b4b4; }

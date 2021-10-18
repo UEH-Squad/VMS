@@ -68,6 +68,11 @@
             right: 0;
             width: 100% !important;
         }
+
+        .form-control
+        {
+            height: fit-content;
+        }
     }
 
     input {
@@ -93,3 +98,6 @@
         border: 2px solid white;
     }
 }
+
+
+

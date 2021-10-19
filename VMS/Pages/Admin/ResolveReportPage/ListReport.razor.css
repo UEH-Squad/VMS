@@ -30,6 +30,8 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis; }
+      .list-card .item .list-reason a {
+        color: #515151; }
     .list-card .item .info-item:first-child {
       width: 70%; }
     .list-card .item .info-item:nth-child(2) {

@@ -3,7 +3,7 @@
 <div class="filter-bar">
     <div class="item dropdown">
         <span class="material-icons-outlined"> expand_more </span>
-        <input readonly="readonly" placeholder="@valueTypeReport" data-bs-toggle="dropdown" class="@(haveType?"bg-grey":"")" />
+        <input readonly="readonly" placeholder="@valueTypeReport" data-bs-toggle="dropdown" class="@(haveType?"bg-grey":"") dropdown-input" />
         <ul class="dropdown-menu">
             <li @onclick="() =>ChooseValueType(1)">Báo cáo tổ chức</li>
             <li @onclick="() =>ChooseValueType(2)">Báo cáo tình nguyện viên</li>
@@ -12,7 +12,7 @@
 
     <div class="item dropdown">
         <span class="material-icons-outlined"> expand_more </span>
-        <input readonly="readonly" placeholder="@valueStatus" data-bs-toggle="dropdown" class="@(haveStatus?"bg-grey":"")" />
+        <input readonly="readonly" placeholder="@valueStatus" data-bs-toggle="dropdown" class="@(haveStatus?"bg-grey":"") dropdown-input" />
         <ul class="dropdown-menu">
             <li @onclick="() => ChooseValueStatus(1)" style="color: #F14747">Đã ghim</li>
             <li @onclick="() => ChooseValueStatus(2)">Đang xử lý</li>
@@ -21,8 +21,8 @@
         </ul>
     </div>
 
-    <div class="item">
-        <input type="month" placeholder="Tháng, năm" />
+    <div class="item filter-item">
+        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="DateTime.Now" Class="pe-1" style="@(isFilterMonth ? "bg-grey":"")" OnChange="ChooseMonthValue" Format="MM/yyyy"/>
     </div>
 
     <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
@@ -34,6 +34,8 @@
 @code {
     [Parameter]
     public string Status { get; set; }
+    [Parameter]
+    public DateTime Value { get; set; }
 
     [Parameter]
     public EventCallback<string> StatusChanged { get; set; }
@@ -42,7 +44,12 @@
     private string valueStatus = "Trạng thái";
     private bool haveType = false;
     private bool haveStatus = false;
+    private bool isFilterMonth = false;
 
+    public void ChooseMonthValue()
+    {
+        isFilterMonth = true;
+    }
 
     public void ChooseValueType(int id)
     {

@@ -22,14 +22,15 @@
       transform: translateY(-50%);
       right: 5px;
       pointer-events: none; }
-    .filter-bar .item input {
+    .filter-bar .item .dropdown-input {
       width: 100%;
       padding: 6px 30px 6px 10px;
       border-radius: 10px;
       border: 1px solid #707070;
-      color: #B4B4B4;
       outline: none;
       cursor: pointer; }
+      .filter-bar .item .dropdown-input::placeholder {
+        color: #B4B4B4; }
     .filter-bar .item .dropdown-menu {
       margin-top: 10px;
       width: 100%;
@@ -44,31 +45,44 @@
         color: #18A0FB; }
         .filter-bar .item .dropdown-menu li:hover {
           background-color: rgba(24, 160, 251, 0.1); }
-
-.filter-btn {
-  color: #fff;
-  font-weight: bold;
-  background-color: #64D72F;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  height: 40px;
-  padding: 0 20px; }
-  .filter-btn:hover {
-    background-color: #306C14;
-    opacity: 78%; }
-
-.clear-filter-btn {
-  color: #fff;
-  font-weight: bold;
-  background-color: #64D72F;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  width: fit-content;
-  color: #B4B4B4;
-  background-color: #fff; }
-  .clear-filter-btn:hover {
-    text-decoration: underline; }
+  .filter-bar ::deep .ant-picker {
+    width: 100%;
+    padding: 6px 30px 6px 10px;
+    border-radius: 10px;
+    border: 1px solid #707070;
+    outline: none; }
+    .filter-bar ::deep .ant-picker-input {
+      font-size: 24px;
+      padding-right: 0.5rem; }
+      .filter-bar ::deep .ant-picker-input > input {
+        font-size: 16px;
+        color: #B4B4B4;
+        cursor: pointer; }
+    .filter-bar ::deep .ant-picker-clear {
+      display: none; }
+  .filter-bar .filter-btn {
+    color: #fff;
+    font-weight: bold;
+    background-color: #64D72F;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    height: 40px;
+    padding: 0 20px; }
+    .filter-bar .filter-btn:hover {
+      background-color: #306C14;
+      opacity: 78%; }
+  .filter-bar .clear-filter-btn {
+    color: #fff;
+    font-weight: bold;
+    background-color: #64D72F;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    width: fit-content;
+    color: #B4B4B4;
+    background-color: #fff; }
+    .filter-bar .clear-filter-btn:hover {
+      text-decoration: underline; }

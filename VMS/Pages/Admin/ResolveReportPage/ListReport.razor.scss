@@ -35,6 +35,10 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+
+            a {
+                color: $grey-text;
+            }
         }
 
         .info-item:first-child {

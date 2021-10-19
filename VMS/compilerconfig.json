@@ -374,5 +374,9 @@
   {
     "outputFile": "Pages/Admin/ResolveReportPage/Notification.razor.css",
     "inputFile": "Pages/Admin/ResolveReportPage/Notification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.scss"
   }
 ]

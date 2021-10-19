@@ -1,6 +1,11 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
 .wrapper {
+    padding: 0 50px;
+
+    @include on('xxl') {
+        padding: 0 100px;
+    }
 
     .come-back {
         border-bottom: 1px solid $grey-input;
@@ -26,7 +31,7 @@
             }
 
             &--pin, &--cancel, &--processing, &--complete {
-                span,svg {
+                span, svg {
                     font-size: 24px;
                     margin-right: 5px;
                 }
@@ -37,20 +42,25 @@
                     margin: 0;
                 }
             }
+
             &--pin {
-                color:$red;
+                color: $red;
             }
+
             &--cancel {
-                color:$grey-icon;
+                color: $grey-icon;
             }
+
             &--complete {
-                color:$green;
+                color: $green;
             }
+
             &--processing {
-                color:$blue;
+                color: $blue;
+
                 svg {
-                    width:24px;
-                    height:24px;
+                    width: 24px;
+                    height: 24px;
                 }
             }
         }

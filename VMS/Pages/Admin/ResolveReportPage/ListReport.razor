@@ -9,11 +9,12 @@
         @foreach (var item in pagedResult.Results)
         {
             <div class="item">
-                <div @onclick="@(() => ShowDetailReport(item.Id))" class="list-reason">@item.ListReason</div>
+                <div class="list-reason"><a href="@Routes.AdminDetailReport">@item.ListReason</a></div
+                
                 <div class="d-flex justify-content-between">
 
                     <div class="info-item">
-                        <p class="info-item__who">Báo cáo bởi: <a href="#">@item.Who</a></p>
+                        <p class="info-item__who">Báo cáo bởi: <a href="@Routes.UserProfile">@item.Who</a></p>
                         <p class="info-item__activity">Hoạt động: <a href="#">@item.Activity</a></p>
                     </div>
 
@@ -173,24 +174,24 @@
     //    }
     //}
 
-    [CascadingParameter] public IModalService Modal { get; set; }
+    //[CascadingParameter] public IModalService Modal { get; set; }
 
-    async Task ShowDetailReport(int id)
-    {
-        var options = new ModalOptions()
-        {
+    //async Task ShowDetailReport(int id)
+    //{
+    //    var options = new ModalOptions()
+    //    {
 
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
+    //        HideCloseButton = true,
+    //        DisableBackgroundCancel = true,
+    //        UseCustomLayout = true
+    //    };
 
-        //ModalParameters parameters = new();
-        //parameters.Add("ActivityId", 0);
-        //parameters.Add("CurrentUser", new User());
-        //parameters.Add("IsReadOnly", true);
+    //    //ModalParameters parameters = new();
+    //    //parameters.Add("ActivityId", 0);
+    //    //parameters.Add("CurrentUser", new User());
+    //    //parameters.Add("IsReadOnly", true);
 
-        //Modal.Show<VMS.Pages.Admin.ResolveReportPage.DetailReport>("", parameters, options);
-        Modal.Show<VMS.Pages.Admin.ResolveReportPage.DetailReport>("", options);
-    }
+    //    //Modal.Show<VMS.Pages.Admin.ResolveReportPage.DetailReport>("", parameters, options);
+    //    Modal.Show<VMS.Pages.Admin.DetailReportPage.DetailReport>("", options);
+    //}
 }

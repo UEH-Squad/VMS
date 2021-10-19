@@ -8,8 +8,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:30px 0;
-    border-bottom:1px solid $grey-icon;
+    padding: 30px 0;
+    border-bottom: 1px solid $grey-icon;
 
     .item {
         position: relative;
@@ -23,14 +23,17 @@
             pointer-events: none;
         }
 
-        input {
+        .dropdown-input {
             width: 100%;
             padding: 6px 30px 6px 10px;
             border-radius: 10px;
             border: 1px solid $border-color-bold;
-            color: $grey-icon;
             outline: none;
             cursor: pointer;
+
+            &::placeholder {
+                color: $grey-icon;
+            }
         }
 
         .dropdown-menu {
@@ -53,28 +56,54 @@
             }
         }
     }
-}
 
-.filter-btn {
-    @include green-btn;
-    font-size: 20px;
-    height: 40px;
-    padding: 0 20px;
+    ::deep {
+        .ant-picker {
+            width: 100%;
+            padding: 6px 30px 6px 10px;
+            border-radius: 10px;
+            border: 1px solid $border-color-bold;
+            outline: none;
 
-    &:hover {
-        background-color: #306C14;
-        opacity: 78%;
+            &-input {
+                font-size: 24px;
+                padding-right: 0.5rem;
+
+                & > input {
+                    font-size: 16px;
+                    color: $grey-icon;
+                    cursor: pointer;
+                    
+                }
+            }
+
+            &-clear {
+                display: none;
+            }
+        }
     }
-}
 
-.clear-filter-btn {
-    @include green-btn;
-    font-size: 20px;
-    width: fit-content;
-    color: $grey-icon;
-    background-color: #fff;
+    .filter-btn {
+        @include green-btn;
+        font-size: 20px;
+        height: 40px;
+        padding: 0 20px;
 
-    &:hover {
-        text-decoration: underline;
+        &:hover {
+            background-color: #306C14;
+            opacity: 78%;
+        }
+    }
+
+    .clear-filter-btn {
+        @include green-btn;
+        font-size: 20px;
+        width: fit-content;
+        color: $grey-icon;
+        background-color: #fff;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }

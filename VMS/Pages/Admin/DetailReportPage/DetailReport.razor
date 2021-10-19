@@ -1,4 +1,9 @@
-﻿
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminDetailReport)]
+@attribute [Authorize(Roles = "Admin")]
+
+
 <div class="wrapper">
 
     <div class="come-back">
@@ -128,7 +133,7 @@
             action = "Đã đóng báo cáo";
             parameters.Add("ActionDelete", false);
         }
-        Modal.Show<VMS.Pages.Admin.ResolveReportPage.ConfirmAction>("", parameters, options);
+        Modal.Show<VMS.Pages.Admin.DetailReportPage.ConfirmAction>("", parameters, options);
     }
     async Task ShowNotification(int act)
     {
@@ -146,7 +151,7 @@
             case 3: action = "Hoàn tất xử lý báo cáo"; break;
         }
         para.Add("TypeNotification", act);
-        Modal.Show<VMS.Pages.Admin.ResolveReportPage.Notification>("", para, options);
+        Modal.Show<VMS.Pages.Admin.DetailReportPage.Notification>("", para, options);
 
     }
 }

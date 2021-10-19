@@ -4,7 +4,6 @@
 @attribute [Authorize(Roles = "Admin")]
 
 <div class="my-content">
-    <DetailReport></DetailReport>
     <Filter @bind-Status="selectedStatus"></Filter>
     <ListReport SelectedStatus="@selectedStatus"></ListReport>
 </div>

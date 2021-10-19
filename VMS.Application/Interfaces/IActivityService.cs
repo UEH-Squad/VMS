@@ -30,5 +30,7 @@ namespace VMS.Application.Interfaces
         Task CloseOrDeleteActivity(int activityId, bool isClose = false, bool isDelete = false);
 
         Task UpdateActFavorAsync(int activityId, string userId);
+
+        Task CloseActivityDailyAsync();
     }
 }

@@ -147,9 +147,6 @@ namespace VMS.Application.Services
 
             object[] id = await _repository.InsertAsync(dbContext, activity);
 
-            // Use Hangfire to auto close activity when activity is started
-            BackgroundJob.Schedule(() => CloseActivityAsync(Convert.ToInt32(id[0])), activity.StartDate - DateTime.Now);
-
             return Convert.ToInt32(id[0]);
         }
 
@@ -226,12 +223,6 @@ namespace VMS.Application.Services
             };
 
             Activity activity = await _repository.GetAsync(dbContext, specification);
-
-            if (activity.StartDate != activityViewModel.StartDate)
-            {
-                // Use Hangfire to auto close activity when activity is started
-                BackgroundJob.Schedule(() => CloseActivityAsync(activityId), activityViewModel.StartDate - DateTime.Now);
-            }
 
             activity = _mapper.Map(activityViewModel, activity);
             activity.UpdatedBy = activity.OrgId;
@@ -603,18 +594,24 @@ namespace VMS.Application.Services
             }
         }
 
-        public async Task CloseActivityAsync(int activityId)
+        public async Task CloseActivityDailyAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, activityId);
-
-            if (DateTime.Now >= activity.StartDate)
+            Specification<Activity> specification = new()
             {
-                activity.IsClosed = true;
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.StartDate <= DateTime.Now,
+                    a => !a.IsClosed
+                }
+            };
 
-                await _repository.UpdateAsync(dbContext, activity);
-            }
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            activities.ForEach(a => a.IsClosed = true);
+
+            await _repository.UpdateAsync(dbContext, activities);
         }
     }
 }

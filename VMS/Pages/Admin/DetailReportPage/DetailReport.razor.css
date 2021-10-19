@@ -41,8 +41,11 @@
       height: 24px; }
   .wrapper .general-info__who {
     font-weight: 500; }
+    .wrapper .general-info__who a {
+      color: #515151; }
   .wrapper .general-info__activity, .wrapper .general-info__date {
-    font-style: oblique; }
+    font-style: oblique;
+    color: #707070; }
   .wrapper .general-info a {
     cursor: pointer; }
   .wrapper .form-report {

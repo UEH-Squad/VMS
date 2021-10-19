@@ -40,7 +40,7 @@
       margin: 0;
       font-style: oblique;
       font-weight: 300; }
-    .list-card .item .info-item__who a, .list-card .item .info-item__activity a {
+    .list-card .item .info-item__who, .list-card .item .info-item__activity {
       text-decoration: none;
       color: unset;
       overflow: hidden;
@@ -72,6 +72,7 @@
       .list-card .item .info-item__status--processing {
         color: #18A0FB; }
         .list-card .item .info-item__status--processing svg {
+          margin-bottom: 2px;
           width: 24px;
           height: 24px; }
       .list-card .item .info-item__status .icon-tooltip {

@@ -8,14 +8,14 @@
     {
         @foreach (var item in pagedResult.Results)
         {
-            <div class="item">
-                <div class="list-reason"><a href="@Routes.AdminDetailReport">@item.ListReason</a></div
-                
+            <div class="item" style="@(item.Status=="pinned"?"background-color:#F3F3F3":"")">
+                <div class="list-reason"><a href="@Routes.AdminDetailReport">@item.ListReason</a></div>
+
                 <div class="d-flex justify-content-between">
 
                     <div class="info-item">
-                        <p class="info-item__who">Báo cáo bởi: <a href="@Routes.UserProfile">@item.Who</a></p>
-                        <p class="info-item__activity">Hoạt động: <a href="#">@item.Activity</a></p>
+                        <p class="info-item__who">Báo cáo bởi: @item.Who</p>
+                        <p class="info-item__activity">Hoạt động: @item.Activity</p>
                     </div>
 
                     <div class="info-item">
@@ -24,20 +24,18 @@
 
                             <p class="info-item__status--admin">@item.Admin</p>
                             <div class="info-item__status--pin">
-                                <span class="material-icons"> push_pin </span>
+                                <span class="material-icons" style="@(item.Status=="pinned"?"color:red":"#B4B4B4")"> push_pin </span>
                                 <span class="icon-tooltip">Ghim báo cáo</span>
                             </div>
-                            @if (item.Status == "complete")
+                            @switch (item.Status)
                             {
-                                <div class="info-item__status--complete">
-                                    <span class="material-icons"> check_circle </span>
-                                    <span class="icon-tooltip">Hoàn tất xử lý</span>
-                                </div>
-                            }
-                            else
-                            {
-                                if (item.Status == "processing")
-                                {
+                                case "complete":
+                                    <div class="info-item__status--complete">
+                                        <span class="material-icons"> check_circle </span>
+                                        <span class="icon-tooltip">Hoàn tất xử lý</span>
+                                    </div>
+                                    break;
+                                case "processing":
                                     <div class="info-item__status--processing">
                                         <svg class="material-icons">
                                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
@@ -46,19 +44,14 @@
 
                                         <span class="icon-tooltip">Đang xử lý</span>
                                     </div>
-                                }
-                                else
-                                {
-                                    if (item.Status == "closed")
-                                    {
-                                        <div class="info-item__status--closed">
-                                            <span class="material-icons"> cancel </span>
-                                            <span class="icon-tooltip">Đã đóng</span>
-                                        </div>
-                                    }
-                                }
+                                    break;
+                                case "closed":
+                                    <div class="info-item__status--closed">
+                                        <span class="material-icons"> cancel </span>
+                                        <span class="icon-tooltip">Đã đóng</span>
+                                    </div>
+                                    break;
                             }
-
                         </div>
                     </div>
 
@@ -174,24 +167,4 @@
     //    }
     //}
 
-    //[CascadingParameter] public IModalService Modal { get; set; }
-
-    //async Task ShowDetailReport(int id)
-    //{
-    //    var options = new ModalOptions()
-    //    {
-
-    //        HideCloseButton = true,
-    //        DisableBackgroundCancel = true,
-    //        UseCustomLayout = true
-    //    };
-
-    //    //ModalParameters parameters = new();
-    //    //parameters.Add("ActivityId", 0);
-    //    //parameters.Add("CurrentUser", new User());
-    //    //parameters.Add("IsReadOnly", true);
-
-    //    //Modal.Show<VMS.Pages.Admin.ResolveReportPage.DetailReport>("", parameters, options);
-    //    Modal.Show<VMS.Pages.Admin.DetailReportPage.DetailReport>("", options);
-    //}
 }

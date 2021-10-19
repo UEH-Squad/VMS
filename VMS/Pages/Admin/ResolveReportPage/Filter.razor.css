@@ -58,6 +58,8 @@
         font-size: 16px;
         color: #B4B4B4;
         cursor: pointer; }
+        .filter-bar ::deep .ant-picker-input > input:focus {
+          outline: none !important; }
     .filter-bar ::deep .ant-picker-clear {
       display: none; }
   .filter-bar .filter-btn {

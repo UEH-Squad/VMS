@@ -73,7 +73,9 @@
                     font-size: 16px;
                     color: $grey-icon;
                     cursor: pointer;
-                    
+                    &:focus {
+                        outline:none !important;
+                    }
                 }
             }
 

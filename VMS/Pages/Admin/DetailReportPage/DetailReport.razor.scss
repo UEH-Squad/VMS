@@ -67,10 +67,15 @@
 
         &__who {
             font-weight: 500;
+
+            a {
+                color: $grey-text;
+            }
         }
 
         &__activity, &__date {
             font-style: oblique;
+            color: #707070;
         }
 
         a {

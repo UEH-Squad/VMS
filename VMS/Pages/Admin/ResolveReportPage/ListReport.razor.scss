@@ -57,13 +57,11 @@
             }
 
             &__who, &__activity {
-                a {
                     text-decoration: none;
                     color: unset;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
-                }
             }
 
             &__time {
@@ -110,6 +108,7 @@
                     color: $blue;
 
                     svg {
+                        margin-bottom:2px;
                         width: 24px;
                         height: 24px;
                     }

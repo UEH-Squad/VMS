@@ -374,5 +374,9 @@
   {
     "outputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.css",
     "inputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.scss"
   }
 ]

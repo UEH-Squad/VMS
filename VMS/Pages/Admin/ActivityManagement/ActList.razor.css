@@ -4,11 +4,8 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-act {
-  border-left: solid 1px; }
-
 .act {
-  border-top: 2px solid #b4b4b4; }
+  border-top: 1px solid #b4b4b4; }
   .act h3 {
     margin-top: 10px;
     font-size: 24px;
@@ -62,7 +59,8 @@
     font-size: 24px;
     font-weight: 600;
     color: #18A0FB;
-    cursor: pointer; }
+    cursor: pointer;
+    word-spacing: -2px; }
     .act__content a:hover {
       color: #0B588c; }
   .act__content .star .material-icons {

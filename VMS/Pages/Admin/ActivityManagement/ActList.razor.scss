@@ -1,20 +1,16 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
-.my-act {
-    border-left: solid 1px;
-}
-
 .act {
-    border-top: 2px solid $border-color-normal;
+    border-top: 1px solid $border-color-normal;
 
     h3 {
         margin-top: 10px;
         font-size: 24px;
         font-weight: 400;
-        color: #18A0FB;
+        color: $blue;
 
         span {
-            color: #64D72F;
+            color: $green;
         }
     }
 
@@ -89,7 +85,7 @@
         font-weight: 600;
         color: $blue;
         cursor: pointer;
-        //word-spacing: -2px;
+        word-spacing: -2px;
 
         &:hover {
             color: $blue-hv;

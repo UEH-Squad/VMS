@@ -10,9 +10,21 @@
     z-index: 120;
 
     &-container {
+        height: 522px;
+        overflow-y: scroll;
         border-radius: 10px;
         background-color: $white;
         box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+
+        &::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
     }
 
     &__title {
@@ -69,8 +81,7 @@
             width: 100% !important;
         }
 
-        .form-control
-        {
+        .form-control {
             height: fit-content;
         }
     }
@@ -82,6 +93,16 @@
 
     .form-input {
         overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
     }
 }
 

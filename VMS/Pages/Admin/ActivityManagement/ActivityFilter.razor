@@ -27,7 +27,7 @@
         <div class="d-flex justify-content-between flex-wrap">
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterCity ? "bg-grey" : "")" placeholder="@cityChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fix-height" style="display: @(isCityShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isCityShow ? "block" : "none")">
                     <ul>
                         @if (provinces is not null)
                         {
@@ -45,7 +45,7 @@
 
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterDistrict ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fix-height" style="display: @(isDistrictShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isDistrictShow ? "block" : "none")">
                     <ul>
                         @if (districts is not null)
                         {
@@ -62,14 +62,14 @@
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <div @onclick="ShowAreasPopupAsync" class="filter-item__btn @(areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+                <div @onclick="ShowAreasPopupAsync" class="filter-item__btn filter-item__btn--lmtext-1 @(areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
                 <span class="material-icons-outlined position-absolute">
                     expand_more
                 </span>
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <div @onclick="ShowSkillsPopupAsync" class="filter-item__btn @(skills.Count != 0 ? "bg-grey" : "")">Kỹ năng</div>
+                <div @onclick="ShowSkillsPopupAsync" class="filter-item__btn filter-item__btn--lmtext-1 @(skills.Count != 0 ? "bg-grey" : "")">Kỹ năng</div>
                 <span class="material-icons-outlined position-absolute">
                     expand_more
                 </span>
@@ -77,7 +77,7 @@
 
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterLevel ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--flexible-height" style="display: @(isLevelShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fit-content" style="display: @(isLevelShow ? "block" : "none")">
                     <ul>
                         @if (levels is not null)
                         {
@@ -95,7 +95,7 @@
 
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterOrganization ? "bg-grey" : "")" placeholder="@organizationChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fix-height" style="display: @(isOrganizationShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isOrganizationShow ? "block" : "none")">
                     <ul>
                         @if (organizations is not null)
                         {
@@ -113,7 +113,7 @@
 
             <div class="filter-item position-relative mb-4">
                 <input @onclick="ToggleActTypeDropdown" @onfocusout="CloseActTypeDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterActType ? "bg-grey" : "")" placeholder="@acttypeChoosenValue" readonly />
-                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--flexible-height" style="display: @(isActTypeShow ? "block" : "none")">
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fit-content" style="display: @(isActTypeShow ? "block" : "none")">
                     <ul>
                         @if (acttypes is not null)
                         {

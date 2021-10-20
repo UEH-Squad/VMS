@@ -1,9 +1,10 @@
 ﻿@inject IJSRuntime JS;
 @using VMS.GenericRepository;
+@using Blazored.Modal;
 
 <section class="my-act row justify-content-center">
     <div class="act col-10 px-0" id="act">
-        <h3>Có <span>hoạt động</span> ứng với kết quả tìm kiếm</h3>
+        <h3>Có @pagedResult.Items.Count <span>hoạt động</span> ứng với kết quả tìm kiếm</h3>
         <div class="px-2">
             @if (pagedResult is not null && pagedResult.Items.Count != 0)
             {
@@ -16,15 +17,22 @@
                             </div>
                             <div class="col-8 act__content d-flex flex-column justify-content-between px-2">
                                 <ul class="position-absolute act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                                    <li @onclick="() => ShowActPrivorModal(item.Id)" class="edit pb-2 text-decoration-none">Ưu tiên hoạt động</li>
-                                    <a href="@Routes.EditActivity" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
-                                    <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
+                                    @if (item.EndDate < DateTime.Now)
+                                    {
+                                        <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
+                                    }
+                                    else
+                                    {
+                                        <li @onclick="() => ShowActPrivorModal(item.Id)" class="edit pb-2 text-decoration-none">@(item.IsPrivor ? "Gỡ ưu" : "Ưu") tiên hoạt động</li>
+                                        <a href="@Routes.AdminActivityInfo" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
+                                        <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
+                                    }
                                 </ul>
                                 <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute act__content__icon">
                                     more_horiz
                                 </i>
                                 <div class="pe-4">
-                                    <a href="@Routes.AdminActivityInfo" class="lmtext-2 text-decoration-none">@item.Title</a>
+                                    <a href="" class="lmtext-2 text-decoration-none">@item.Title</a>
                                     <div class="star">
                                         <span class="material-icons">
                                             star_rate
@@ -55,9 +63,9 @@
                                         </i> 250
                                     </h5>
                                     <div class="d-flex">
-                                        @if (IsHappening)
+                                        @if (item.EndDate >= DateTime.Now)
                                         {
-                                            @if (Closed)
+                                            if (item.IsClosed || item.StartDate <= DateTime.Now)
                                             {
                                                 <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
                                                     <i class="material-icons-outlined fst-normal">
@@ -69,7 +77,8 @@
                                                 <button @onclick="() => ShowEditModal(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
                                             </div>
                                         }
-                                        @if (Happened)
+
+                                        @if (item.EndDate < DateTime.Now)
                                         {
                                             <div class="act-footer__btn d-flex align-items-center">
                                                 <a class="btn text-decoration-none act-footer__btn--green">Xem danh sách</a>
@@ -86,20 +95,16 @@
                 </div>
             }
         </div>
-        <div class="pagination-org">
+        <div class="d-flex justify-content-center">
+            <Pager CurrentPage="@pagedResult.PageIndex"
+                   PageCount="@pagedResult.TotalPages"
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
+                   ShowPageNumbers="true" />
         </div>
-        <Pager CurrentPage="@pagedResult.PageIndex"
-               PageCount="@pagedResult.TotalPages"
-               OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
-               ShowPageNumbers="true" />
     </div>
 </section>
 
 @code {
-
-    [Parameter] public bool Closed { get; set; } = false;
-    [Parameter] public bool IsHappening { get; set; } = false;
-    [Parameter] public bool Happened { get; set; } = false;
     [CascadingParameter] public IModalService Modal { get; set; }
 
     private PaginatedList<FakeData> pagedResult;
@@ -120,26 +125,29 @@
 
     private PaginatedList<FakeData> GetFakeData()
     {
+        int i = 0;
         var data = Enumerable.Range(0, 10).Select(x => new FakeData
         {
             Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid - 19 tại địaaa phương",
             Name = "Công nghệ thông tin kinh doanh",
             Content = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
             Person = 250,
-            CreatedDate = DateTime.Today
+            CreatedDate = DateTime.Now,
+            Id = ++i,
+            EndDate = DateTime.Parse("2021/10/21"),
+            StartDate = DateTime.Parse("2021/10/20")
         }).ToList();
 
         var result = new PaginatedList<FakeData>(data, 100, page, 10);
         return result;
     }
 
-    private List<FakeData> fakeDatas = new();
-
     private class FakeData
     {
         public string Title { get; set; }
         public string Name { get; set; }
         public bool IsClosed { get; set; }
+        public bool IsPrivor { get; set; } = true;
         public string Content { get; set; }
         public int Person { get; set; }
         public int Id { get; set; }

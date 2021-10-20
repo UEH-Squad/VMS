@@ -66,6 +66,50 @@ input[type="checkbox"] {
         right: 15px;
     }
 
+    &__dropdown-flexible {
+        position: absolute;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border: none;
+        border-radius: 4px;
+        min-height: 2rem;
+        max-height: 30rem;
+        overflow-y: auto;
+        z-index: 1;
+        width: 100%;
+        background-color: #fff;
+        top: 100%;
+        margin-top: 10px;
+        padding: 15px 22px;
+
+        ul {
+            overflow-x: scroll;
+            list-style: none;
+            padding: 0;
+
+            &::-webkit-scrollbar {
+                height: 5px;
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $grey-icon;
+                border-radius: 20px;
+            }
+
+            li {
+                color: $blue;
+                font-size: 18px;
+                margin-bottom: 6px;
+                cursor: pointer;
+
+                &:hover {
+                    color: $green;
+                    background-color: rgba(24, 160, 251, 0.1);
+                }
+            }
+        }
+    }
+
     &__dropdown {
         padding: 15px 22px;
         border-radius: 4px;
@@ -78,24 +122,22 @@ input[type="checkbox"] {
         z-index: 1;
         display: none;
         width: 100%;
+        height: 240px;
 
-        &--fix-height {
-            height: 240px;
-        }
-
-        &--flexible-height {
+        &--fit-content {
             height: fit-content;
+            padding: 15px 22px 0 22px;
         }
 
         ul {
             overflow-y: scroll;
-            overflow-x: scroll;
             list-style: none;
             padding: 0;
             height: 100%;
 
             &::-webkit-scrollbar {
                 width: 5px;
+                height: 5px;
             }
 
             &::-webkit-scrollbar-thumb {

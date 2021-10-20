@@ -38,6 +38,9 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         [Inject]
         private IFacultyService FacultyService { get; set; }
 
+        [Parameter]
+        public bool IsUserForAdmin { get; set; }
+
         private int width;
         private string classWidth = "";
         private string UserId;

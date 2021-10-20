@@ -2,7 +2,7 @@
 
 @attribute [Route(Routes.AdminOrganizationManagement)]
 @attribute [Authorize(Roles = "Admin")]
-<div class="col-lg-10 mx-auto">
+<div class="col-lg-11 mx-auto">
     <VMS.Pages.SearchOrganizer.SearchAndFilter />
     <div class="arrange-bar mb-3">
         <div class="labels">
@@ -28,7 +28,7 @@
             </span>
         </div>
     </div>
-    <VMS.Pages.SearchOrganizer.SearchResult HaveActivitiesCount="true"/>
+    <VMS.Pages.SearchOrganizer.SearchResult HaveActivitiesCount="true" IsUserForAdmin="true"/>
 </div>
 
 @code {

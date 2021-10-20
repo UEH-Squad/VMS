@@ -45,7 +45,9 @@
 
         public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
         public const string AdminOrganizationManagement = "/admin/quan-ly-to-chuc";
+        public const string AdminEditOrganizationProfile = "/admin/chinh-sua-ho-so-to-chuc";
         public const string AdminVolunteerManagement = "/admin/quan-ly-ca-nhan";
+        public const string AdminEditVolunteerProfile = "/admin/chinh-sua-ho-so-ca-nhan";
 
         #endregion Admin
     }

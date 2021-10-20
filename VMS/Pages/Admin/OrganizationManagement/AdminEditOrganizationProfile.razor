@@ -1,0 +1,10 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminEditOrganizationProfile)]
+@attribute [Authorize(Roles = "Admin")]
+
+<VMS.Pages.Organization.Profile.EditOrganizationProfile IsUseForAdmin="true"/>
+
+@code {
+
+}

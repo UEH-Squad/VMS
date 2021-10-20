@@ -20,6 +20,10 @@
       margin-bottom: 5%;
       margin-top: 2%; }
 
+.container-avatar {
+  width: 85px;
+  height: 85px; }
+
 .member {
   display: flex;
   align-items: center;

@@ -611,7 +611,7 @@ namespace VMS.Application.Services
 
             activities.ForEach(a => a.IsClosed = true);
 
-            await _repository.UpdateAsync(dbContext, activities);
+            await _repository.UpdateAsync<Activity>(dbContext, activities);
         }
     }
 }

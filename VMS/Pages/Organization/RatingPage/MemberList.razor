@@ -13,7 +13,7 @@
                     </div>
                     <div class="member">
                         <div class="member-name">
-                            <p class="member-name1">@item.User.FullName</p>
+                            <a href="#" class="member-name1">@item.User.FullName</a>
                             <p class="member-name2">@item.User.Introduction</p>
                         </div>
                         <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)"/>

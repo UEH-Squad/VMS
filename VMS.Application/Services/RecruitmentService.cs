@@ -92,11 +92,9 @@ namespace VMS.Application.Services
                     recruitmentRating.Rank = rank ?? recruitmentRating.Rank;
                     recruitmentRating.Comment = (rank.HasValue ? recruitmentRating.Comment : comment);
                 }
-
-                await _repository.UpdateAsync(dbContext, recruitment);
             }
 
-            //await _repository.UpdateAsync(dbContext, recruitments);
+            await _repository.UpdateAsync<Recruitment>(dbContext, recruitments);
         }
 
         private static Expression<Func<Recruitment, bool>> GetConditionFromSearchValueAndFilter(string searchValue, bool? isRated)

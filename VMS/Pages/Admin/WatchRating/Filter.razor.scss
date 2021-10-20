@@ -1,9 +1,17 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
 .container {
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 6%;
+
+    &-1 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
 
     &-title {
         &_1 {
@@ -31,21 +39,24 @@
     }
 
     &-divider {
-        width: 90%;
+        width: 110%;
+        height: 1px;
         background-color: $grey-icon;
-        border: 0.5px solid rgba(112, 112, 112, 0.5);
     }
 
     &-checkbox {
-        width: 30%;
+        width: 63%;
         display: flex;
         flex-direction: column;
+        margin-top: 3%;
+        margin-left: -25%;
     }
 
     &-btn {
-        width: 100%;
+        width: 130%;
         display: flex;
         justify-content: space-between;
+        margin-top: 8%;
     }
 }
 //---------------CSS for Radio button-------------//
@@ -94,7 +105,7 @@
         line-height: 36px;
         color: $grey-text;
         cursor: pointer;
-        margin-left: 6%;
+        margin-left: 3%;
     }
 }
 //----------------------------//
@@ -105,8 +116,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 5%;
 
     #checkbox-btn_1, #checkbox-btn_2, #checkbox-btn_3, #checkbox-btn_4, #checkbox-btn_5 {
+        position: relative;
         border-radius: 5px;
         width: 15px;
         height: 15px;
@@ -121,7 +134,7 @@
         -moz-appearance: none;
         appearance: none;
         -webkit-print-color-adjust: exact;
-        position: relative;
+        cursor: pointer;
 
         &::before {
             content: "";
@@ -148,6 +161,7 @@
         line-height: 36px;
         color: #000000;
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
     }
 }
 //----------------------------//
@@ -157,11 +171,13 @@
 .container-btn {
     &_filter {
         text-align: center;
-        padding: 6px 30px;
+        padding: 3px 28px;
         border: none;
-        border-radius: 10px;
-        font-weight: 500;
+        border-radius: 5px;
+        font-style: normal;
+        font-weight: bold;
         font-size: 20px;
+        line-height: 36px;
         color: $white;
         background-color: $green;
         transition: all 0.25s;
@@ -173,12 +189,13 @@
     }
 
     &_delete {
-        margin-left: 10px;
         border-radius: 5px;
         border: none;
         cursor: pointer;
-        font-weight: 500;
+        font-style: normal;
+        font-weight: bold;
         font-size: 20px;
+        line-height: 36px;
         color: $border-color-normal;
         background-color: $white;
 

@@ -370,5 +370,13 @@
   {
     "outputFile": "Pages/Admin/WatchRating/Filter.razor.css",
     "inputFile": "Pages/Admin/WatchRating/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Index.razor.scss"
   }
 ]

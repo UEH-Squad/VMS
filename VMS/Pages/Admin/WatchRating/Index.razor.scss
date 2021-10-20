@@ -1,7 +1,12 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
+.right-container {
+    margin: 0 auto;
+}
+
 .container {
     padding: 0;
+    margin: 0 auto;
     margin-top: 5%;
 
     &_divider {
@@ -10,7 +15,7 @@
         background: $grey-icon;
     }
 
-    &_main-layout {
+    &_main-content {
         justify-content: space-between;
     }
 

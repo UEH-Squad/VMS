@@ -4,14 +4,18 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.right-container {
+  margin: 0 auto; }
+
 .container {
   padding: 0;
+  margin: 0 auto;
   margin-top: 5%; }
   .container_divider {
     width: 100%;
     height: 1px;
     background: #B4B4B4; }
-  .container_main-layout {
+  .container_main-content {
     justify-content: space-between; }
   .container .leftraight {
     display: flex;

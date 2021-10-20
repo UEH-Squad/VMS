@@ -6,7 +6,7 @@
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    padding: 3% 3%;
+    padding: 1.5% 3%;
     margin-bottom: 4%;
 }
 
@@ -16,6 +16,7 @@
 
     &_name {
         display: flex;
+        align-items: center;
 
         .name {
             display: flex;
@@ -25,12 +26,21 @@
 
             &-member {
                 margin: 0;
+                margin-bottom: -5%;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 36px;
+            }
+
+            span {
+                font-size: 1.5rem;
             }
         }
     }
 
     &_comment {
-        margin: 2% 5%;
+        margin: 0% 8%;
     }
 }
 //----------------End------------------//
@@ -42,6 +52,7 @@
 
     &_name {
         display: flex;
+        align-items: center;
 
         .name {
             display: flex;
@@ -51,90 +62,21 @@
 
             &-organization {
                 margin: 0;
+                margin-bottom: -5%;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 36px;
+            }
+
+            span {
+                font-size: 1.5rem;
             }
         }
     }
 
     &_comment {
-        margin: 2% 5%;
+        margin: 0% 8%;
     }
 }
 //--------------End----------------//
-
-
-
-/*::deep .popup-comment {*/
-    /*position: absolute;*/
-    /*box-sizing: border-box;
-    width: 50%;
-    height: 78%;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: $grey-icon;
-    box-shadow: 10px 4px 60px 2px rgba(11, 40, 50, 0.2);
-    border-radius: 0px;
-    overflow-y: no-display;*/
-    /*&::-webkit-scrollbar {
-        width: 0px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: $blue;
-        border-radius: 0px;
-    }*/
-
-    /*::deep &_icon {
-        display: none;
-    }
-}
-
-::deep .popup-comment_member {
-    margin: 7.5%;
-    border: 1px solid #D8D8D8;
-    border-radius: 0px;
-
-    ::deep .name {
-        display: flex;
-        align-items: center;
-        margin-top: 2%;
-
-        ::deep .popup-avatar {
-            margin-left: 5%;
-            margin-right: 5%;
-            border-radius: 0px;
-        }
-    }
-
-    ::deep .popup-member {
-        ::deep .popup-member1 {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 16px;
-            margin-top: 5%;
-            margin-bottom: 0;
-        }
-
-        ::deep .popup-member2 {
-            font-style: normal;
-            font-weight: normal;
-        }
-    }
-
-    ::deep .material-icons {
-        font-size: 24px;
-    }
-
-    ::deep .comment {
-        margin-top: 5%;
-        margin-left: 5%;
-        box-sizing: border-box;
-
-        ::deep &-input {
-            width: 85%;
-            font-size: 16px;
-        }
-    }
-}*/
-
-/*Kết thúc phần đánh giá*/

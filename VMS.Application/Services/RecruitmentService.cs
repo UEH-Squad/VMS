@@ -34,8 +34,8 @@ namespace VMS.Application.Services
                     r => r.UserId == userId,
                     GetConditionFromSearchValueAndFilter(searchValue, isRated)
                 },
-                Includes = r => r.Include(x => x.RecruitmentRatings).
-                                  Include(x => x.Activity).ThenInclude(x => x.Organizer),
+                Includes = r => r.Include(x => x.RecruitmentRatings)
+                                 .Include(x => x.Activity).ThenInclude(x => x.Organizer),
                 PageIndex = currentPage,
                 PageSize = 8,
             };
@@ -47,6 +47,7 @@ namespace VMS.Application.Services
                 {
                     Id = x.Id,
                     Activity = x.Activity,
+                    User = _identityService.FindUserById(x.UserId),
                     Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating && !z.IsReport)?.Rank,
                     RecruitmentRatings = _mapper.Map<List<RecruitmentRatingViewModel>>(x.RecruitmentRatings)
                 }).ToList(),

@@ -20,6 +20,12 @@ namespace VMS.Pages.ActivityLogPage
         private string userId;
         private PaginatedList<RecruitmentViewModel> pagedResult = new(new(), 0, 1, 1);
 
+        [CascadingParameter]
+        public IModalService ReportModal { get; set; }
+
+        [CascadingParameter]
+        public IModalService CommentModal { get; set; }
+
         [Parameter] public int StarRating { get; set; }
         [Parameter] public bool? IsRated { get; set; }
         [Parameter] public string SearchValue { get; set; }
@@ -59,6 +65,36 @@ namespace VMS.Pages.ActivityLogPage
             {
                 recruitment.Rating = rating;
             }
+        }
+
+        private async Task ShowReportPopUp()
+        {
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+            ReportModal.Show<ActivityInfoPage.PopUpReport>("", options);
+        }
+
+        private async Task ShowCommentPopUpAsync(RecruitmentViewModel recruitment)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add("UserTop", recruitment.Activity.Organizer);
+            parameters.Add("UserBottom", recruitment.User);
+            parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
+            parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
+            parameters.Add("RecruitmentId", recruitment.Id);
+
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+
+            await CommentModal.Show<Organization.RatingPage.PopUpComment>("", parameters, options).Result;
         }
 
     }

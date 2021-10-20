@@ -20,10 +20,11 @@
       margin-bottom: 5%;
       margin-top: 2%; }
 
-.container-avatar {
-  border-radius: 100px;
+.container-avatar img {
+  object-fit: cover;
   width: 85px;
-  height: 85px; }
+  height: 85px;
+  border-radius: 100%; }
 
 .member {
   display: flex;

@@ -24,9 +24,12 @@
 }
 
 .container-avatar {
-    border-radius: 100px;
-    width: 85px;
-    height: 85px;
+    img {
+        object-fit: cover;
+        width: 85px;
+        height: 85px;
+        border-radius: 100%;
+    }
 }
 
 .member {

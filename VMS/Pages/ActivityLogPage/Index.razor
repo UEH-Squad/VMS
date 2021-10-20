@@ -9,17 +9,31 @@
                 </div>
             </div>
             <div class="col-11">
-                <VMS.Pages.ActivitySearchPage.SearchBox />
+                <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="SearchValueChanged"/>
             </div>
             <div class="col-11">
-                <VMS.Pages.ActivityLogPage.Filter />
+                <VMS.Pages.ActivityLogPage.Filter IsRatedChanged="IsRatedChanged"/>
             </div>
             <div class="activities col-11">
-                <VMS.Pages.ActivityLogPage.ActivityCard />
+                <VMS.Pages.ActivityLogPage.ActivityCard StarRating=@starRating SearchValue=@searchValue IsRated=@isRated/>
             </div>
         </div>
     </div>
 </div>
 @code {
+    private bool? isRated;
+    private string searchValue;
+    private int starRating;
 
+    private void IsRatedChanged(bool? value)
+    {
+        isRated = value;
+        searchValue = string.Empty;
+    }
+
+    private void SearchValueChanged(string value)
+    {
+        searchValue = value;
+        isRated = null;
+    }
 }

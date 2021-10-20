@@ -13,6 +13,9 @@ namespace VMS.Pages.ActivityLogPage
         [Inject]
         private IFacultyService FacultyService { get; set; }
 
+        [Parameter]
+        public EventCallback<bool?> IsRatedChanged { get; set; }
+
         private string facultyDefault = "Đơn vị";
         private string semesterDefault = "Học kỳ";
         private List<FacultyViewModel> faculties = new();
@@ -39,6 +42,11 @@ namespace VMS.Pages.ActivityLogPage
         {
             facultyDefault = faculty.Name;
             Display2 = "d-none";
+        }
+
+        private async Task RadioButtonChanged(bool value)
+        {
+            await IsRatedChanged.InvokeAsync(value);
         }
 
     }

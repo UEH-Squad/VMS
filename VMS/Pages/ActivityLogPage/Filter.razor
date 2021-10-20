@@ -31,11 +31,11 @@
         </div>
         <div class="act-filter__radio d-flex">
             <div class="act-filter__radio-1 d-flex align-items-center">
-                <input class="radio-1" type="radio" id="rate" name="fav_language" value="rate">
+                <input class="radio-1" type="radio" id="rate" name="fav_language" @onclick="async () => await RadioButtonChanged(false)" value="rate">
                 <label class="label-1" for="rate">Chưa đánh giá</label><br>
             </div>
             <div class="act-filter__radio-2 d-flex align-items-center">
-                <input class="radio-2" type="radio" id="rated" name="fav_language" value="rated">
+                <input class="radio-2" type="radio" id="rated" name="fav_language" @onclick="async () => await RadioButtonChanged(true)" value="rated">
                 <label class="label-2" for="rated">Đã đánh giá</label><br>
             </div>
         </div>

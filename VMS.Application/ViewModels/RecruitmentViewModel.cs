@@ -10,6 +10,8 @@ namespace VMS.Application.ViewModels
         
         public User User {  get; set; }
 
+        public Activity Activity { get; set; }
+
         public List<RecruitmentRatingViewModel> RecruitmentRatings { get; set; }
     }
 }

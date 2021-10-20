@@ -22,7 +22,7 @@
     </div>
 
     <div class="item filter-item">
-        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" OnChange="ChooseMonthValue" Format="MM/yyyy"/>
+        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="@timeNow" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" OnChange="ChooseMonthValue" Format="MM/yyyy"/>
     </div>
 
     <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
@@ -45,6 +45,7 @@
     private bool haveType = false;
     private bool haveStatus = false;
     private bool isFilterMonth = false;
+    private DateTime timeNow = DateTime.Now;
 
     public void ChooseMonthValue()
     {
@@ -82,6 +83,7 @@
         isFilterMonth = false;
         haveStatus = false;
         haveType = false;
+        timeNow = DateTime.Now;
         await StatusChanged.InvokeAsync("");
     }
     private async Task UpdateFilterValueAsync()

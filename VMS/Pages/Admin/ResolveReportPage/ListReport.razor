@@ -24,7 +24,7 @@
 
                             <p class="info-item__status--admin">@item.Admin</p>
                             <div class="info-item__status--pin">
-                                <span class="material-icons" style="@(item.Status=="pinned"?"color:red":"#B4B4B4")"> push_pin </span>
+                                <span class="material-icons" style="@(item.IsPin?"color:red":"#B4B4B4")" @onclick="@(() =>HandlePin(item.Id))"> push_pin </span>
                                 <span class="icon-tooltip">Ghim báo cáo</span>
                             </div>
                             @switch (item.Status)
@@ -80,6 +80,7 @@
         public string Time { get; set; }
         public string Admin { get; set; }
         public string Status { get; set; }
+        public bool IsPin { get; set; }
     }
     public abstract class PagedResultBase
     {
@@ -152,19 +153,20 @@
             Activity = "Tuyển tình nguyện viên tham gia chống dịch",
             Time = "20/10/2021",
             Admin = "Minh Minh Kha Bùi ",
-            Status = type
+            Status = type,
+            IsPin=(type=="pinned"?true:false)
         }).ToArray();
 
         return result;
     }
 
-    //private async Task HandleCheck(int id)
-    //{
-    //    var checkItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-    //    if (checkItem is not null)
-    //    {
-    //        checkItem.IsCheck = !checkItem.IsCheck;
-    //    }
-    //}
+    private async Task HandlePin(int id)
+    {
+        var pinItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (pinItem is not null)
+        {
+            pinItem.IsPin = !pinItem.IsPin;
+        }
+    }
 
 }

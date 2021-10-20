@@ -7,7 +7,7 @@
 <div class="wrapper">
 
     <div class="come-back">
-        <a href="#" class="come-back--text">&#60;&#60; Quay lại</a>
+        <a href="@Routes.AdminResolveReport" class="come-back--text">&#60;&#60; Quay lại</a>
     </div>
 
     <div class="general-info">
@@ -99,7 +99,7 @@
 
     </div>
 
-    <div class="action-button d-flex justify-content-center mb-3">
+    <div class="action-button d-flex justify-content-center">
         <button @onclick="() => ShowNotification(2)" class="action-button__processing">Đang xử lý</button>
         <button @onclick="() => ShowNotification(3)" class="action-button__complete-processing">Hoàn tất xử lý</button>
     </div>
@@ -127,13 +127,22 @@
         if (act == 1)
         {
             parameters.Add("ActionDelete", true);
+            var result = await Modal.Show<VMS.Pages.Admin.DetailReportPage.ConfirmAction>("", parameters, options).Result;
+            if ((bool)result.Data)
+            {
+                action = "";
+            }
         }
         else
         {
-            action = "Đã đóng báo cáo";
             parameters.Add("ActionDelete", false);
+            var Result = await Modal.Show<VMS.Pages.Admin.DetailReportPage.ConfirmAction>("", parameters, options).Result;
+            if ((bool)Result.Data)
+            {
+                action = "Đã đóng báo cáo";
+            }
         }
-        Modal.Show<VMS.Pages.Admin.DetailReportPage.ConfirmAction>("", parameters, options);
+
     }
     async Task ShowNotification(int act)
     {

@@ -1,6 +1,6 @@
 ﻿<div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(isConfirm? "d-block" : "d-none")">
+        <div class="pop-up-container border-10 @(isConfirm? "d-none" : "d-block")">
             <div @onclick="CloseModal" class="close-btn">
                 <span class="material-icons">
                     close
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(isConfirm? "d-none" : "d-block")">
+        <div class="pop-up-container border-10 @(isConfirm? "d-block" : "d-none")">
             <div @onclick="CloseModal" class="close-btn-s">
                 <span class="material-icons">
                     close
@@ -37,12 +37,12 @@
     [Parameter]
     public bool ActionDelete { get; set; }
 
-    private bool isConfirm= true;
+    private bool isConfirm= false;
     private bool isDeleteSuccess;
 
     private async Task CloseModal()
     {
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok<bool>(isConfirm));
     }
 
     void DeleteSuccess()

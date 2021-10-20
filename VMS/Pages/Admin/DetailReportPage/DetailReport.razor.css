@@ -110,7 +110,7 @@
           height: 240px;
           width: 240px; } }
   .wrapper .action-button {
-    margin-top: 40px; }
+    margin: 40px 0; }
     .wrapper .action-button__processing, .wrapper .action-button__complete-processing {
       font-weight: 600;
       padding: 6px 10px;

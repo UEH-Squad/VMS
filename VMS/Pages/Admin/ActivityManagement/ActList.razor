@@ -4,7 +4,7 @@
 
 <section class="my-act row justify-content-center">
     <div class="act col-10 px-0" id="act">
-        <h3>Có @pagedResult.Items.Count <span>hoạt động</span> ứng với kết quả tìm kiếm</h3>
+        <h3>Có <span>@pagedResult.Items.Count hoạt động</span> ứng với kết quả tìm kiếm</h3>
         <div class="px-2">
             @if (pagedResult is not null && pagedResult.Items.Count != 0)
             {
@@ -108,7 +108,6 @@
     [CascadingParameter] public IModalService Modal { get; set; }
 
     private PaginatedList<FakeData> pagedResult;
-    private int count = 20;
     private int page = 1;
 
     protected override void OnInitialized()
@@ -126,7 +125,7 @@
     private PaginatedList<FakeData> GetFakeData()
     {
         int i = 0;
-        var data = Enumerable.Range(0, 10).Select(x => new FakeData
+        var data = Enumerable.Range(0, 20).Select(x => new FakeData
         {
             Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid - 19 tại địaaa phương",
             Name = "Công nghệ thông tin kinh doanh",
@@ -138,7 +137,7 @@
             StartDate = DateTime.Parse("2021/10/20")
         }).ToList();
 
-        var result = new PaginatedList<FakeData>(data, 100, page, 10);
+        var result = new PaginatedList<FakeData>(data, 100, page, 20);
         return result;
     }
 

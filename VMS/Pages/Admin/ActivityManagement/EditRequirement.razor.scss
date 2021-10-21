@@ -73,8 +73,6 @@
 }
 
 ::deep {
-    // As the typeahead is lazy-loaded, its styles will override our styles.
-    // To prevent it, we'll have to put !important somewhere.
     .typeahead {
         &__results {
             right: 0;

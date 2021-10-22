@@ -13,8 +13,8 @@
                     </div>
                     <div class="member">
                         <div class="member-name">
-                            <p class="member-name1">@item.User.FullName</p>
-                            <p class="member-name2">@item.User.Introduction</p>
+                            <a href="@Routes.UserProfile/@item.User.Id" class="member-name1">@item.User.FullName</a>
+                            <p class="member-name2">Chiến sĩ làm biếng</p>
                         </div>
                         <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)"/>
                         <div class="member-comment">

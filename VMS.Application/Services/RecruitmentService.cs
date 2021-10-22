@@ -17,10 +17,8 @@ namespace VMS.Application.Services
 {
     public class RecruitmentService : BaseService, IRecruitmentService
     {
-        private IIdentityService _identityService;
-        public RecruitmentService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper, IIdentityService identityService) : base(repository, dbContextFactory, mapper)
+        public RecruitmentService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
-            _identityService = identityService;
         }
 
         public async Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(string userId, int currentPage, string searchValue, bool? isRated)
@@ -68,10 +66,9 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
                     r => r.ActivityId == activityId,
-                    r => r.AcceptTime > r.EnrollTime,
                     GetConditionFromSearchValueAndFilter(searchValue, isRated)
                 },
-                Includes = r => r.Include(x => x.RecruitmentRatings),
+                Includes = r => r.Include(x => x.User).Include(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 20,
             };
@@ -83,7 +80,7 @@ namespace VMS.Application.Services
                 {
                     Id = x.Id,
                     Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating && !z.IsReport)?.Rank,
-                    User = _identityService.FindUserById(x.UserId),
+                    User = x.User,
                     RecruitmentRatings = _mapper.Map<List<RecruitmentRatingViewModel>>(x.RecruitmentRatings)
                 }).ToList(),
                 recruitments.TotalItems,

@@ -30,7 +30,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
                     r => r.UserId == userId,
-                    GetConditionFromSearchValueAndFilter(searchValue, isRated)
+                    GetActivitiesFromSearchValueAndFilter(searchValue, isRated)
                 },
                 Includes = r => r.Include(x => x.User)
                                  .Include(x => x.RecruitmentRatings)
@@ -147,7 +147,29 @@ namespace VMS.Application.Services
 
             if (!string.IsNullOrEmpty(searchValue))
             {
-                return r => r.User.FullName.ToLower().Contains(searchValue.ToLower()) || r.Activity.Name.ToLower().Contains(searchValue.ToLower());
+                return r => r.User.FullName.ToLower().Contains(searchValue.ToLower());
+            }
+
+            return r => true;
+        }
+
+        private static Expression<Func<Recruitment, bool>> GetActivitiesFromSearchValueAndFilter(string searchValue, bool? isRated)
+        {
+            if (isRated.HasValue)
+            {
+                if (isRated.Value)
+                {
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank != 0);
+                }
+                else
+                {
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank == 0) || !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                return r => r.Activity.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim());
             }
 
             return r => true;

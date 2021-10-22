@@ -32,7 +32,8 @@ namespace VMS.Application.Services
                     r => r.UserId == userId,
                     GetConditionFromSearchValueAndFilter(searchValue, isRated)
                 },
-                Includes = r => r.Include(x => x.RecruitmentRatings)
+                Includes = r => r.Include(x => x.User)
+                                 .Include(x => x.RecruitmentRatings)
                                  .Include(x => x.Activity).ThenInclude(x => x.Organizer),
                 PageIndex = currentPage,
                 PageSize = 8,
@@ -45,7 +46,7 @@ namespace VMS.Application.Services
                 {
                     Id = x.Id,
                     Activity = x.Activity,
-                    User = _identityService.FindUserById(x.UserId),
+                    User = x.User,
                     Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating && !z.IsReport)?.Rank,
                     RecruitmentRatings = _mapper.Map<List<RecruitmentRatingViewModel>>(x.RecruitmentRatings)
                 }).ToList(),
@@ -146,7 +147,7 @@ namespace VMS.Application.Services
 
             if (!string.IsNullOrEmpty(searchValue))
             {
-                return r => r.User.FullName.ToLower().Contains(searchValue.ToLower());
+                return r => r.User.FullName.ToLower().Contains(searchValue.ToLower()) || r.Activity.Name.ToLower().Contains(searchValue.ToLower());
             }
 
             return r => true;

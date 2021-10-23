@@ -9,7 +9,7 @@
                 <div class="col-6 schedule__act">
                     <h3 class="text-center pb-2 mb-5">Hoạt động <span> trong ngày của bạn</span></h3>
                     <div class="schedule__act-items px-3">
-                        @foreach (var item in Items)
+                        @foreach (var item in items)
                         {
                             <div class="schedule__act-item py-3 px-4 mb-4">
                                 <a href="@Routes.ActivityInfo/@item.Id"><h6 class="lmtext-2">@item.Name </h6></a>

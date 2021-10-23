@@ -13,7 +13,7 @@ namespace VMS.Pages.UserProflie
     {
         private bool isUser = false;
         private UserViewModel user;
-        private List<ActivityViewModel> currentActivities, favoriteActivities, endedActivities, scheduleActivities = new();
+        private List<ActivityViewModel> currentActivities, favoriteActivities, endedActivities = new();
 
         [Parameter] public string UserId { get; set; }
         [CascadingParameter] public string CurrentUserId { get; set; }
@@ -36,13 +36,6 @@ namespace VMS.Pages.UserProflie
             favoriteActivities.ForEach(a => a.IsFav = true);
 
             endedActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Ended);
-
-            scheduleActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Current, DateTime.Now);
-        }
-
-        private async Task OnScheduleDateTimeChanged(DateTime value)
-        {
-            scheduleActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Current, value);
         }
 
         private void ValidateUserProfile()

@@ -1,5 +1,5 @@
 ﻿<div class="search-and-button">
-    <VMS.Pages.ActivitySearchPage.SearchBox></VMS.Pages.ActivitySearchPage.SearchBox>
+    <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged ="SearchValueChanged"></VMS.Pages.ActivitySearchPage.SearchBox>
     <div class="button-download @(navDel ? "d-block" : "d-none")">
         <button class="button-download__text">
             <span class="material-icons"> download </span>
@@ -10,7 +10,7 @@
 
 <div class="container @(navDel ? "d-block" : "d-none")">
     <div class="my-container">
-        <p class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
+        <p class="quantity-volunteers">Có <span>@PagedResult.TotalItems</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
         <div class="button">
             <button @onclick="@(() => ShowConfirm("delete"))" class="button__text button__text--del">Xóa nhiều</button>
         </div>
@@ -22,7 +22,7 @@
 
 <div class="container @(navUndo ? "d-block" : "d-none")">
     <div class="my-container">
-        <h4 class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
+        <h4 class="quantity-volunteers">Có <span>@PagedResult.TotalItems</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
         <div class="button">
             <button @onclick="@(() => ShowConfirm("undo"))" class="button__text button__text--undo">Chọn lại</button>
         </div>
@@ -34,31 +34,4 @@
 
 
 @code {
-    [Parameter]
-    public Func<Task> OnToggleListType { get; set; }
-
-    private int quantity = 255;
-
-    private bool navDel = true; //hien thi mac dinh
-    private bool navUndo = false; // mac dinh ko hien thi
-    public void ChangeNav()
-    {
-        navDel = !navDel;
-        navUndo = !navUndo;
-        OnToggleListType?.Invoke();
-    }
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-    async Task ShowConfirm(string action)
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        if (action == "delete") Modal.Show<ConfirmDelList>("", options);
-        else Modal.Show<ConfirmUndoList>("", options);
-    }
 }

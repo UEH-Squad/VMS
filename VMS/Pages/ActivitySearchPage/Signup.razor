@@ -32,7 +32,7 @@
                         <ValidationMessage For="@(() => signupModel.PhoneNumber)" />
                         @if (IsReadOnly)
                         {
-                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control mb-3" disabled="true" />
+                            <InputText @bind-Value=@Volunteer.PhoneNumber class="form-control mb-3" disabled="true" />
                         }
                         else
                         {
@@ -58,7 +58,7 @@
                         <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
                         @if (IsReadOnly)
                         {
-                            <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3" disabled="true"></InputTextArea>
+                            <InputTextArea @bind-Value="Volunteer.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3" disabled="true"></InputTextArea>
                         }
                         else
                         {

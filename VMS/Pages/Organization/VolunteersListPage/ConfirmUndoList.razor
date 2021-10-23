@@ -32,19 +32,4 @@
 
 @code {
 
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    bool isConfirmUndo = true;
-    bool isUndoSuccess;
-
-    private async Task CloseModal()
-    {
-        await Modal.CloseAsync();
-    }
-
-    void UndoSuccess()
-    {
-        isConfirmUndo = !isConfirmUndo;
-    }
 }

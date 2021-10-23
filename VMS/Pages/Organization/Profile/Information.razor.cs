@@ -24,7 +24,7 @@ namespace VMS.Pages.Organization.Profile
 
         async Task ShowModal(InputFileChangeEventArgs e)
         {
-            if (e.File.ContentType == "image/jpeg")
+            if (e.File.ContentType == "image/jpeg" || e.File.ContentType == "image/png")
             {
                 file = e.File;
                 avatar = await UploadService.SaveImageAsync(file, UserId, ImgFolder.Avatar);

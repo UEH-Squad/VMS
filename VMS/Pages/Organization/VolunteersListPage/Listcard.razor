@@ -1,140 +1,30 @@
-﻿@using VMS.Domain.Models
-
-@inject IJSRuntime JsRuntime
-
-<div class="list-card">
-    @if (pagedResult != null && pagedResult.Results.Length != 0)
+﻿<div class="list-card">
+    @if (PagedResult is not null && PagedResult.TotalItems != 0)
     {
-        @foreach (var item in pagedResult.Results)
+        @foreach (var item in PagedResult.Items)
         {
             <div class="mycard">
                 <div class="mycard__info">
-                    <img class="mycard__info--avatar" src=@item.Avatar alt="Avatar" />
+                    <img class="mycard__info--avatar" src=@item.User.Avatar alt="Avatar" />
                     <div class="mycard__info--name-and-mssv" style="font-weight:@(item.IsCheck? 600:"")">
-                        <a href="@(Routes.UserProfile)" class="info-name">@item.Name</a>
-                        <div class="info-mssv">@item.Mssv</div>
+                        <a href="#" class="info-name">@item.User.FullName</a>
+                        <div class="info-mssv">@item.User.StudentId</div>
                     </div>
                 </div>
 
                 <div class="mycard__checkbox">
-                    <input checked="@item.IsCheck" @onclick="@(() =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
+                    <input checked="@item.IsCheck" @onclick="@( () =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
                 </div>
 
                 <div class="mycard__button">
-                    <button @onclick="@(() =>ShowSignUpPopUp(item.Id))" class="mycard__button--registration-form">Đơn đăng ký</button>
+                    <button @onclick="@(() =>ShowSignUpPopUp(item))" class="mycard__button--registration-form">Xem đơn đăng ký</button>
                 </div>
             </div>
         }
-    }
+    }   
 </div>
 <div class="d-flex justify-content-center">
-    <Pager CurrentPage="@pagedResult.CurrentPage"
-           PageCount="@pagedResult.PageCount"
-           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+   <Pager CurrentPage="@PagedResult.PageIndex"
+       PageCount="@PagedResult.TotalPages"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />         
 </div>
-
-@code {
-    [Parameter]
-    public bool ShowDeletedList { get; set; }
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Avatar { get; set; }
-        public string Name { get; set; }
-        public string Mssv { get; set; }
-        public bool IsCheck { get; set; }
-    }
-    public abstract class PagedResultBase
-    {
-        public int CurrentPage { get; set; }
-        public int PageCount { get; set; }
-        public int PageSize { get; set; }
-        public int RowCount { get; set; }
-        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
-        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
-    }
-    public class PagedResult<T> : PagedResultBase where T : class
-    {
-        public T[] Results { get; set; }
-    }
-    private PagedResult<FakeData> pagedResult;
-    private int page = 1;
-
-    protected override async Task OnInitializedAsync()
-    {
-        pagedResult = GetFakeData(0);
-    }
-
-    protected override void OnParametersSet()
-    {
-        if (ShowDeletedList)
-        {
-            page = 1;
-            pagedResult = GetFakeData(1);
-        }
-        else
-        {
-            page = 1;
-            pagedResult = GetFakeData(0);
-        }
-    }
-
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetFakeData(0);
-        StateHasChanged();
-        await Interop.ScrollToTop(JsRuntime);
-    }
-
-    /// <summary>
-    /// Get fake data
-    /// </summary>
-    /// <param name="type">0 for volunteer list; 1 for deleted one</param>
-    /// <returns></returns>
-    private PagedResult<FakeData> GetFakeData(int type)
-    {
-        var result = new PagedResult<FakeData>();
-        result.CurrentPage = page;
-        result.RowCount = 200;
-        result.PageSize = 20;
-        result.PageCount = result.RowCount / result.PageSize;
-        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
-        {
-            Id = x + 1,
-            Avatar = "/img/act1.png",
-            Name = $"Pham Thi Ngoc Anh {(type == 0 ? "" : "(deleted)")}",
-            Mssv = "31191025555"
-        }).ToArray();
-
-        return result;
-    }
-
-    private async Task HandleCheck(int id)
-    {
-        var checkItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
-        if (checkItem is not null)
-        {
-            checkItem.IsCheck = !checkItem.IsCheck;
-        }
-    }
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-    async Task ShowSignUpPopUp(int id)
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-
-        ModalParameters parameters = new();
-        parameters.Add("ActivityId", 0);
-        parameters.Add("CurrentUser", new User());
-        parameters.Add("IsReadOnly", true);
-
-        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, options);
-    }
-}

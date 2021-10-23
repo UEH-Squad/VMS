@@ -8,7 +8,7 @@
             </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
+                <h3><span class="delete-text">xóa tình nguyện viên</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
                 <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
@@ -31,19 +31,4 @@
 
 @code {
 
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    bool isConfirmDelete = true;
-    bool isDeleteSuccess;
-
-    private async Task CloseModal()
-    {
-        await Modal.CloseAsync();
-    }
-
-    void DeleteSuccess()
-    {
-        isConfirmDelete = !isConfirmDelete;
-    }
 }

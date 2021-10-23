@@ -3,19 +3,13 @@
 @attribute [Authorize]
 
 <div class="container-lg px-0 layout">
-    <Title></Title>
+    <Title num = "checkList.Count"></Title>
 
-    <NavMini OnToggleListType="OnToggleListType" />
+    <NavMini OnSearch = "OnSearch" ValueChange = "ValueChange" CheckedList = "checkList" ActId = "ActId" OnChangeList = "OnChange" PagedResult ="pagedResult" ShowDeletedList ="isDeletedList" />
 
-    <Listcard ShowDeletedList="isDeletedList" />
+    <Listcard SearchValue =@searchValue OnChangeList = "OnChecked" PagedResult ="pagedResult" IsDeleted="isDeletedList" ActId = "ActId" CheckList = "checkList"/>
 </div>
 
 @code {
-    bool isDeletedList = false;
-
-    async Task OnToggleListType()
-    {
-        isDeletedList = !isDeletedList;
-        StateHasChanged();
-    }
+   
 }

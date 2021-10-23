@@ -625,12 +625,17 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     GetConditionByStatusAct(userId, statusAct, dateTime)
-                }
+                },
+                Includes = a => a.Include(x => x.Organizer)
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            return _mapper.Map<List<ActivityViewModel>>(activities);
+            var activityViewModels = _mapper.Map<List<ActivityViewModel>>(activities);
+
+            activityViewModels.ForEach(a => a.Province = GetActProvince(a.ActivityAddresses));
+
+            return activityViewModels;
         }
 
         private static Expression<Func<Activity, bool>> GetConditionByStatusAct(string userId, StatusAct statusAct, DateTime dateTime)
@@ -638,8 +643,8 @@ namespace VMS.Application.Services
             return statusAct switch
             {
                 StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
-                StatusAct.Ended => x => x.EndDate < DateTime.Now && x.Recruitments.Any(x => x.UserId == userId && x.AcceptTime >= x.EnrollTime),
-                _ => x => x.StartDate <= dateTime && x.EndDate >= dateTime && x.Recruitments.Any(x => x.UserId == userId && x.AcceptTime >= x.EnrollTime),
+                StatusAct.Ended => x => x.EndDate < DateTime.Now && x.Recruitments.Any(x => x.UserId == userId),
+                _ => x => x.StartDate <= dateTime && x.EndDate >= dateTime && x.Recruitments.Any(x => x.UserId == userId),
             };
         }
     }

@@ -38,7 +38,7 @@ namespace VMS.Pages.Organization.RatingPage
                 StarRating = 0;
             }
 
-            recruitments = await RecruitmentService.GetAllRecruitmentsAsync(ActivityId, page, SearchValue, IsRated);
+            recruitments = await RecruitmentService.GetAllRecruitmentsAsync(ActivityId, 1, SearchValue, IsRated);
         }
 
         private async Task HandlePageChanged()

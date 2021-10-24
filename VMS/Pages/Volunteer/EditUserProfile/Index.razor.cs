@@ -38,11 +38,10 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         [Inject]
         private IFacultyService FacultyService { get; set; }
 
-        private int width;
-        private string classWidth = "";
         private string UserId;
         private int count;
         private bool isErrorMessageShown = false;
+        private string facultyChoosenValue = "Lựa chọn Khoa";
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private List<FacultyViewModel> faculties = new();
         private CreateUserProfileViewModel user = new();
@@ -53,6 +52,10 @@ namespace VMS.Pages.Volunteer.EditUserProfile
             user = await UserService.GetUserProfileViewModelAsync(UserId);
             faculties = await FacultyService.GetAllFacultiesAsync();
             choosenAreas = user.Areas;
+            if(user.FacultyId is not null)
+            {
+                facultyChoosenValue = user.FacultyName;
+            }
         }
 
         private async Task ShowAreasModal()
@@ -75,6 +78,12 @@ namespace VMS.Pages.Volunteer.EditUserProfile
             {
                 await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
             }
+        }
+
+        private void ChooseDepartmentValue(FacultyViewModel faculty)
+        {
+            facultyChoosenValue = faculty.Name;
+            user.FacultyId = faculty.Id.ToString();
         }
 
         private async Task ShowSkillsPopup()

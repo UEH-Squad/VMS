@@ -221,7 +221,11 @@
     }
 
     .org-card__member {
-        margin-right: 62px;
+        margin-right: 50px;
+
+        @include on("xxl") {
+            margin-right: 62px;
+        }
 
         .material-icons, {
             color: $green;

@@ -14,8 +14,9 @@ const informationCarousel = () => {
 }
 
 const organizeCarousel = () => {
+    const carousel = $('.organize__carousel');
     $('.organize__carousel').owlCarousel({
-        loop: true,
+        loop: false,
         margin: 0,
         nav: true,
         responsive: {
@@ -28,23 +29,29 @@ const organizeCarousel = () => {
     })
 }
 
-const editProfileCarousel = () => {
-    
+const editProfileCarousel = (count) => {
+    let nubitems = count;
+    if (count > 4) {
+       nubitems = 4;
+    }
+
     const carousel = $('.editProfile__carousel');
     carousel.owlCarousel('destroy');
     carousel.owlCarousel({
-        loop: true,
+        loop: false,
         margin: 0,
+        mouseDrag: count > 4,
         nav: true,
         responsive: {
 
             0: {
-                items: 4,
+                items: nubitems,
                 slideBy: 1,
             },
 
         }
     })
+
 }
 
 const addOutsideClickMenuHandler = (dotnetHelper, methodName) => {

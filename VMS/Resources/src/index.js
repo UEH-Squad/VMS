@@ -20,7 +20,7 @@ export const ShowResult = () => homepage.showResult();
 export const InformationCarousel = () => organizationProfile.informationCarousel();
 export const OrganizeCarousel = () => organizationProfile.organizeCarousel();
 export const RankCarousel = () => homepage.rankCarousel();
-export const EditProfileCarousel = () => organizationProfile.editProfileCarousel();
+export const EditProfileCarousel = (count) => organizationProfile.editProfileCarousel(count);
 export const AddOutsideClickMenuHandler = (dotnetHelper, methodName) => organizationProfile.addOutsideClickMenuHandler(dotnetHelper, methodName);
 export const SaveAs = (filename, bytesBase64) => volunteerListPage.saveAsFile(filename, bytesBase64);
 

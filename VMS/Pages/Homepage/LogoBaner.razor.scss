@@ -2,6 +2,7 @@
 
 .my-logoBaner {
     padding-bottom: 80px;
+
     h1 {
         text-align: center;
         margin: 30px 0;
@@ -80,7 +81,8 @@
                 transition: all 0.3s linear;
 
                 &:hover {
-                    color: #0B588C;
+                    color: $blue-bold;
+                    opacity: 0.73;
                 }
             }
 
@@ -110,7 +112,8 @@
                 transition: all 0.3s linear;
 
                 &:hover {
-                    color: #0B588C;
+                    color: $blue-bold;
+                    opacity: 0.73;
                 }
             }
 

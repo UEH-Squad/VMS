@@ -6,15 +6,12 @@
 /*#endregion */
 .my-information {
   padding: 50px 0; }
-  .my-information .row-1, .my-information .row-2 {
-    display: flex; }
   .my-information .col-left {
     width: 55%; }
   .my-information .col-right {
     width: 45%; }
   .my-information .information__logo .information__logo-img {
-    margin-bottom: 20px;
-    width: 80%; }
+    margin-bottom: 20px; }
   .my-information .information__logo img {
     width: 230px;
     height: 230px;
@@ -23,51 +20,33 @@
   .my-information .information__logo .icon-camera {
     position: absolute;
     bottom: 15px;
-    right: -10px;
+    right: -25px;
     font-size: 36px;
     color: #B4B4B4;
     cursor: pointer; }
     .my-information .information__logo .icon-camera:hover {
       color: #717171; }
   .my-information .information__logo p {
-    width: 80%;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 600; }
-  .my-information .information__logo span {
-    display: block;
-    width: 80%;
-    margin: 15px 0 20px 0;
-    text-align: center;
-    color: #18A0FB;
+  .my-information .information__logo .information__tilte {
+    display: inline-block;
+    background-color: #FBED6E;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), inset -4px -4px 20px rgba(0, 0, 0, 0.05), inset 4px 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 7px 30px;
+    color: #515151;
     font-size: 16px;
-    font-weight: 600; }
-  .my-information .information__logo .information__logo-button {
-    width: 80%;
-    position: relative;
-    display: block;
-    background: rgba(100, 215, 47, 0.8);
-    color: #FFFFFF;
-    text-decoration: none;
-    padding: 9px;
-    border-radius: 50px;
-    text-align: center;
-    transition: all 0.2s linear;
+    font-weight: 600;
+    border-radius: 10px;
     cursor: pointer; }
-    .my-information .information__logo .information__logo-button:hover {
-      background: #64d72f; }
-    .my-information .information__logo .information__logo-button i {
-      position: absolute;
-      top: 50%;
-      left: 5%;
-      transform: translateY(-50%);
-      font-size: 40px;
-      font-weight: 600; }
-    .my-information .information__logo .information__logo-button span {
-      color: #FFFFFF;
-      font-size: 24px;
-      font-weight: 700; }
-  .my-information .row-1 {
-    border-bottom: 1px solid rgba(112, 112, 112, 0.5); }
+    .my-information .information__logo .information__tilte:hover {
+      background: #FCFF81; }
+  .my-information .information__line {
+    background: rgba(112, 112, 112, 0.5);
+    height: 1px;
+    width: 90%;
+    margin: 40px auto; }
   .my-information .information__rank a {
     color: #64D72F;
     font-size: 40px;
@@ -99,17 +78,22 @@
     text-align: center;
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 30px; }
+    margin: 0; }
     .my-information .information__fields h3 span {
       color: #18A0FB; }
   .my-information .line {
-    height: 122px;
+    height: 120px;
     width: 1px;
+    margin: auto 0;
     background-color: rgba(112, 112, 112, 0.5); }
   .my-information .information__carousel, .my-information .information__NoCarousel {
     position: relative;
+    padding-left: 30px;
     padding-right: 30px;
     z-index: 0; }
+    @media (min-width: 1400px) {
+      .my-information .information__carousel, .my-information .information__NoCarousel {
+        padding-right: 60px; } }
     .my-information .information__carousel .item, .my-information .information__NoCarousel .item {
       text-align: center; }
       .my-information .information__carousel .item:hover > i, .my-information .information__NoCarousel .item:hover > i {
@@ -123,17 +107,25 @@
         color: white;
         margin: 5px auto;
         transition: all 0.3s linear;
-        width: 75px;
-        height: 75px;
-        line-height: 75px;
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
         font-size: 30px; }
+        @media (min-width: 1400px) {
+          .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
+            width: 75px;
+            height: 75px;
+            line-height: 75px; } }
       .my-information .information__carousel .item span, .my-information .information__NoCarousel .item span {
-        margin-top: 20px;
+        margin-top: 10px;
         color: #64D72F;
         font-weight: 500;
         display: inline-block;
         transition: all 0.3s linear;
-        font-size: 18px; }
+        font-size: 16px; }
+        @media (min-width: 1400px) {
+          .my-information .information__carousel .item span, .my-information .information__NoCarousel .item span {
+            font-size: 18px; } }
     .my-information .information__carousel ::deep .owl-nav, .my-information .information__NoCarousel ::deep .owl-nav {
       display: block; }
       .my-information .information__carousel ::deep .owl-nav .owl-prev, .my-information .information__NoCarousel ::deep .owl-nav .owl-prev {
@@ -141,13 +133,17 @@
       .my-information .information__carousel ::deep .owl-nav .owl-next, .my-information .information__NoCarousel ::deep .owl-nav .owl-next {
         position: absolute;
         top: -32px;
-        right: 0; }
+        right: 0px; }
+        @media (min-width: 1400px) {
+          .my-information .information__carousel ::deep .owl-nav .owl-next, .my-information .information__NoCarousel ::deep .owl-nav .owl-next {
+            right: 30px; } }
         .my-information .information__carousel ::deep .owl-nav .owl-next span, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span {
           font-size: 80px;
           color: #18A0FB;
           transition: all 0.3s linear; }
           .my-information .information__carousel ::deep .owl-nav .owl-next span:hover, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span:hover {
-            color: #0B588c; }
+            color: #0B588c;
+            opacity: 0.73; }
         .my-information .information__carousel ::deep .owl-nav .owl-next:hover, .my-information .information__NoCarousel ::deep .owl-nav .owl-next:hover {
           background: none; }
     .my-information .information__carousel ::deep .owl-dots, .my-information .information__NoCarousel ::deep .owl-dots {
@@ -156,8 +152,7 @@
     text-align: center;
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 20px;
-    margin-top: -36px; }
+    margin: 0; }
     .my-information .information__act h3 span {
       color: #18A0FB; }
   .my-information .information__act .information__act-number {
@@ -170,3 +165,25 @@
     color: #18A0FB;
     font-size: 50px;
     font-weight: 700; }
+  .my-information .information__act .information__act-button {
+    width: 85%;
+    background: rgba(100, 215, 47, 0.8);
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 6px 00px;
+    border-radius: 50px;
+    text-align: center;
+    transition: all 0.2s linear;
+    cursor: pointer; }
+    @media (min-width: 1400px) {
+      .my-information .information__act .information__act-button {
+        width: 75%; } }
+    .my-information .information__act .information__act-button:hover {
+      background: #64d72f; }
+    .my-information .information__act .information__act-button i {
+      font-size: 32px;
+      font-weight: 600; }
+    .my-information .information__act .information__act-button span {
+      color: #FFFFFF;
+      font-size: 24px;
+      font-weight: 700; }

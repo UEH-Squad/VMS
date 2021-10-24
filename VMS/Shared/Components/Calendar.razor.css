@@ -14,11 +14,11 @@
   .current-month__text {
     color: #64D72F; }
 
-input[type=date] {
+::deep .my-date-picker {
   border-radius: 5px;
   height: 30px;
   border: 1px solid #64D72F;
-  margin-left: 6rem; }
+  padding: 4px 8px 4px; }
 
 .btn {
   color: #fff;

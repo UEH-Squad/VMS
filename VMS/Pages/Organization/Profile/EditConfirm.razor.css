@@ -66,7 +66,7 @@
       margin-bottom: 0;
       color: #18A0FB; }
   .pop-up .content {
-    padding: 34px 64px 18px;
+    padding: 34px 70px 18px;
     display: flex;
     flex-direction: column;
     align-items: center; }
@@ -81,7 +81,7 @@
   .pop-up .pop-up-btn {
     display: flex;
     justify-content: flex-end;
-    padding: 0 30px 20px 0;
+    padding: 0 30px 34px 0;
     font-weight: 600; }
     .pop-up .pop-up-btn .deny {
       background-color: #FFFFFF;

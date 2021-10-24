@@ -1,13 +1,10 @@
-﻿@attribute [Route(Routes.VolunteersList)]
+﻿@attribute [Route(Routes.VolunteersList + "/{ActId}")]
 
-@attribute [Authorize]
+@attribute [Authorize(Roles = "Organization")]
 
 <div class="container-lg px-0 layout">
-    <Title num = "checkList.Count"></Title>
-
-    <NavMini OnSearch = "OnSearch" ValueChange = "ValueChange" CheckedList = "checkList" ActId = "ActId" OnChangeList = "OnChange" PagedResult ="pagedResult" ShowDeletedList ="isDeletedList" />
-
-    <Listcard SearchValue =@searchValue OnChangeList = "OnChecked" PagedResult ="pagedResult" IsDeleted="isDeletedList" ActId = "ActId" CheckList = "checkList"/>
+    <Title Name =@actName></Title>
+    <Listcard  ActId =@actId/>
 </div>
 
 @code {

@@ -32,7 +32,8 @@
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px; }
+  font-size: 16px; 
+  text-decoration: none;}
   .card-btn:hover {
     background-color: #306C14; }
 

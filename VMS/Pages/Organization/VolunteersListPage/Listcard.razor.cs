@@ -16,42 +16,53 @@ namespace VMS.Pages.Organization.VolunteersListPage
     public partial class Listcard : ComponentBase
     {
         private int page = 1;
-        [Parameter]
-        public string SearchValue { get; set; }
-        [Parameter]
-        public List<int> CheckList { get; set; }
-        [Parameter]
-        public bool IsDeleted { get; set; }
-        [Parameter]
-        public PaginatedList<ListVolunteerViewModel> PagedResult { get; set; }
+        private string searchValue = String.Empty;
+        private List<int> checkList = new();
+        private bool isDeleted = false;
+        private PaginatedList<ListVolunteerViewModel> pagedResult = new(new(), 0, 1, 1);
         [Parameter]
         public int ActId { get; set; }
-        [Parameter]
-        public EventCallback<List<int>> OnChangeList { get; set; }
         [Inject]
         private IListVolunteerService ListVolunteerService { get; set; }
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
+        }
+        private async Task ValueChange(string value)
+        {
+            this.searchValue = value;
+            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
+            StateHasChanged();
+        }
+        private async Task ShowDeletedList(bool value)
+        {
+            this.isDeleted = value;
+            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
+            StateHasChanged();
+        }
         private async Task HandleCheck(int id)
         {
-            var checkItem = PagedResult.Items.FirstOrDefault(x => x.Id == id);
+            var checkItem = pagedResult.Items.FirstOrDefault(x => x.Id == id);
             if (checkItem is not null)
             {
                 checkItem.IsCheck = !checkItem.IsCheck;
                 if (checkItem.IsCheck == true)
                 {
-                    CheckList.Add(id);
+                    checkList.Add(id);
                 }
                 else
                 {
-                    CheckList.Remove(id);
+                    checkList.Remove(id);
                 }
-                await OnChangeList.InvokeAsync(CheckList);
             }
         }
         public async Task HandlePageChanged()
         {
-            PagedResult = await ListVolunteerService.GetListVolunteers(ActId, SearchValue, !IsDeleted, page);
+            this.checkList = new();
+            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

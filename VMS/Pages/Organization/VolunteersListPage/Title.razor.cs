@@ -6,6 +6,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
     public partial class Title : ComponentBase
     {
         [Parameter]
-        public int num { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,13 +1,14 @@
-﻿<div class="list-card">
-    @if (PagedResult is not null && PagedResult.TotalItems != 0)
+﻿ <NavMini  ValueChange = "ValueChange" IsDeleted = "ShowDeletedList" CheckedList = "checkList" ActId = "ActId"  Quantity ="pagedResult.TotalItems" ShowDeletedList ="isDeleted" />
+<div class="list-card">
+    @if (pagedResult is not null && pagedResult.TotalItems != 0)
     {
-        @foreach (var item in PagedResult.Items)
+        @foreach (var item in pagedResult.Items)
         {
             <div class="mycard">
                 <div class="mycard__info">
                     <img class="mycard__info--avatar" src=@item.User.Avatar alt="Avatar" />
                     <div class="mycard__info--name-and-mssv" style="font-weight:@(item.IsCheck? 600:"")">
-                        <a href="#" class="info-name">@item.User.FullName</a>
+                        <a href="@Routes.UserProfile/@item.User.Id" class="info-name">@item.User.FullName</a>
                         <div class="info-mssv">@item.User.StudentId</div>
                     </div>
                 </div>
@@ -24,7 +25,7 @@
     }   
 </div>
 <div class="d-flex justify-content-center">
-   <Pager CurrentPage="@PagedResult.PageIndex"
-       PageCount="@PagedResult.TotalPages"
+   <Pager CurrentPage="@pagedResult.PageIndex"
+       PageCount="@pagedResult.TotalPages"
        OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />         
 </div>

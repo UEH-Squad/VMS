@@ -10,7 +10,7 @@
 
 <div class="container @(navDel ? "d-block" : "d-none")">
     <div class="my-container">
-        <p class="quantity-volunteers">Có <span>@PagedResult.TotalItems</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
+        <p class="quantity-volunteers">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
         <div class="button">
             <button @onclick="@(() => ShowConfirm("delete"))" class="button__text button__text--del">Xóa nhiều</button>
         </div>
@@ -22,7 +22,7 @@
 
 <div class="container @(navUndo ? "d-block" : "d-none")">
     <div class="my-container">
-        <h4 class="quantity-volunteers">Có <span>@PagedResult.TotalItems</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
+        <h4 class="quantity-volunteers">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
         <div class="button">
             <button @onclick="@(() => ShowConfirm("undo"))" class="button__text button__text--undo">Chọn lại</button>
         </div>

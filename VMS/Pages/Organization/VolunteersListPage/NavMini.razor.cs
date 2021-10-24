@@ -1,8 +1,6 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using System;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -13,45 +11,32 @@ namespace VMS.Pages.Organization.VolunteersListPage
 {
     public partial class NavMini : ComponentBase
     {
-        private int page = 1;
         private bool navDel = true; //hien thi mac dinh
         private bool navUndo = false; // mac dinh ko hien thi
         private string searchValue = string.Empty;
         [Parameter]
-        public List<int> CheckedList { get; set; }
-        [Parameter]
-        public PaginatedList<ListVolunteerViewModel> PagedResult { get; set; }
+        public long Quantity { get; set; }
         [Parameter]
         public int ActId { get; set; }
         [Parameter]
+        public List<int> CheckedList { get; set; }
+        [Parameter]
         public bool ShowDeletedList { get; set; }
         [Parameter]
-        public EventCallback<PaginatedList<ListVolunteerViewModel>> OnChangeList { get; set; }
-        [Parameter]
-        public EventCallback<PaginatedList<ListVolunteerViewModel>> OnSearch { get; set; }
-        [Parameter]
         public EventCallback<string> ValueChange { get; set; }
-        [Inject]
-        private IListVolunteerService ListVolunteerService { get; set; }
+        [Parameter]
+        public EventCallback<bool> IsDeleted { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            PagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, ShowDeletedList, page);
-            await OnChangeList.InvokeAsync(PagedResult);
-        }
         public async Task ChangeNav()
         {
             navDel = !navDel;
             navUndo = !navUndo;
-            PagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, ShowDeletedList, page);
-            await OnChangeList.InvokeAsync(PagedResult);
-            await ValueChange.InvokeAsync(searchValue);
+            this.ShowDeletedList = !ShowDeletedList;
+            await IsDeleted.InvokeAsync(ShowDeletedList);
         }
         private async Task SearchValueChanged(string searchValueChanged)
         {
             this.searchValue = searchValueChanged;
-            PagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, !ShowDeletedList, page);
-            await OnSearch.InvokeAsync(PagedResult);
             await ValueChange.InvokeAsync(searchValue);
         }
         [CascadingParameter] public IModalService Modal { get; set; }
@@ -61,7 +46,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
             parameters.Add("CheckedList", CheckedList);
             var options = new ModalOptions()
             {
-
                 HideCloseButton = true,
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true
@@ -71,8 +55,8 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 var result = await Modal.Show<ConfirmDelList>("", parameters, options).Result;
                 if ((bool)result.Data)
                 {
-                    PagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, false, page);
-                    await OnChangeList.InvokeAsync(PagedResult);
+                    this.ShowDeletedList = false;
+                    await IsDeleted.InvokeAsync(ShowDeletedList);
                 }
             }
             else
@@ -80,11 +64,10 @@ namespace VMS.Pages.Organization.VolunteersListPage
                var result = await Modal.Show<ConfirmUndoList>("", parameters, options).Result;
                 if ((bool)result.Data)
                 {
-                    PagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, true, page);
-                    await OnChangeList.InvokeAsync(PagedResult);
+                    this.ShowDeletedList = true;
+                    await IsDeleted.InvokeAsync(ShowDeletedList);
                 }
             }
-            await OnChangeList.InvokeAsync(PagedResult);
 
         }
     }

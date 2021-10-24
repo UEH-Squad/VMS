@@ -29,18 +29,18 @@ namespace VMS.Pages.Organization.VolunteersListPage
 
         protected override async Task OnInitializedAsync()
         {
-            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
+            pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
         }
         private async Task ValueChange(string value)
         {
             this.searchValue = value;
-            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
+            pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             StateHasChanged();
         }
         private async Task ShowDeletedList(bool value)
         {
             this.isDeleted = value;
-            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
+            pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             StateHasChanged();
         }
         private async Task HandleCheck(int id)
@@ -62,7 +62,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         public async Task HandlePageChanged()
         {
             this.checkList = new();
-            pagedResult = await ListVolunteerService.GetListVolunteers(ActId, searchValue, isDeleted, page);
+            pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

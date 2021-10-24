@@ -2,6 +2,7 @@
 import homepage from './homepage';
 import activitiespage from './activityInfo';
 import organizationProfile from './organizationProfile';
+import volunteerListPage from './volunteerListPage';
 
 export const SmoothScrollTo = (element) => smoothScrollTo(element);
 export const HookFileUploadEvent = (previewImg, fileUploadRefId, discardBtn, imgContainerId, originalSrc) => hookFileUploadEvent(previewImg, fileUploadRefId, discardBtn, imgContainerId, originalSrc);
@@ -18,4 +19,5 @@ export const OrganizeCarousel = () => organizationProfile.organizeCarousel();
 export const RankCarousel = () => homepage.rankCarousel();
 export const EditProfileCarousel = () => organizationProfile.editProfileCarousel();
 export const AddOutsideClickMenuHandler = (dotnetHelper, methodName) => organizationProfile.addOutsideClickMenuHandler(dotnetHelper, methodName);
+export const SaveAs = (filename, bytesBase64) => volunteerListPage.saveAsFile(filename, bytesBase64);
 

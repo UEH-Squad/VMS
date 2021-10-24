@@ -6,8 +6,9 @@ using VMS.Application.Interfaces;
 using System.Collections.Generic;
 using VMS.GenericRepository;
 using VMS.Application.ViewModels;
-using OfficeOpenXml;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
+using Microsoft.JSInterop;
 
 namespace VMS.Pages.Organization.VolunteersListPage
 {
@@ -32,6 +33,8 @@ namespace VMS.Pages.Organization.VolunteersListPage
         public EventCallback<bool> IsDeleted { get; set; }
         [Inject]
         private IExportExcelService ExportExcelService { get; set; }
+        [Inject]
+        private IJSRuntime JSRuntime { get; set; }
 
         public async Task ChangeNav()
         {
@@ -77,32 +80,29 @@ namespace VMS.Pages.Organization.VolunteersListPage
 
         }
 
-        public async Task<FileContentResult> DowLoad()
+        public async Task DowLoad()
         {
             var stream = new System.IO.MemoryStream();
-            using (var xlPackage = new ExcelPackage(stream))
+            using var xlPackage = new ExcelPackage(stream);
+            var worksheet = xlPackage.Workbook.Worksheets.Add("sheet1");
+
+            worksheet.Cells["A1"].Value = "Name";
+            worksheet.Cells["B1"].Value = "Email";
+            worksheet.Cells["C1"].Value = "Phone";
+            worksheet.Cells["A1:C1"].Style.Font.Bold = true;
+
+            int row = 2;
+            foreach (var item in Data.Items)
             {
-                var worksheet = xlPackage.Workbook.Worksheets.Add("sheet1");
+                worksheet.Cells[row, 1].Value = item.User.FullName;
+                worksheet.Cells[row, 2].Value = item.User.Email;
+                worksheet.Cells[row, 3].Value = item.User.PhoneNumber;
 
-                worksheet.Cells["A1"].Value = "Name";
-                worksheet.Cells["B1"].Value = "Email";
-                worksheet.Cells["C1"].Value = "Phone";
-                worksheet.Cells["A1:C1"].Style.Font.Bold = true;
-
-                int row = 2;
-                foreach (var item in Data.Items)
-                {
-                    worksheet.Cells[row, 1].Value = item.User.FullName;
-                    worksheet.Cells[row, 2].Value = item.User.Email;
-                    worksheet.Cells[row, 3].Value = item.User.PhoneNumber;
-
-                    row++;
-                }
-                xlPackage.Workbook.Properties.Title = "DSTNV";
-                xlPackage.Save();
+                row++;
             }
-            stream.Position = 0;
-            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DSTNV.xlsx");
+            xlPackage.Workbook.Properties.Title = "DSTNV";
+            xlPackage.Save();
+            await JSRuntime.InvokeVoidAsync("vms.SaveAs", "dstnv.xlsx", xlPackage.GetAsByteArray());
         }
 
     }

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VMS.Application.ViewModels;
+﻿using VMS.Application.ViewModels;
+using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
 {
     public interface IExportExcelService
     {
-        Task ResultExportToExcel(GenericRepository.PaginatedList<ListVolunteerViewModel> list);
+        byte[] ResultExportToExcel(PaginatedList<ListVolunteerViewModel> list, int actId);
     }
 }

@@ -33,7 +33,7 @@ namespace VMS.Application.Services
                     a => a.User.FullName.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
                     isDeleted ? a => a.IsDeleted == true : a => a.IsDeleted == false
                 },
-                Includes = a => a.Include(a => a.User),
+                Includes = a => a.Include(a => a.User).ThenInclude(a=> a.Faculty),
                 PageIndex = currentPage,
                 PageSize = 20
             };

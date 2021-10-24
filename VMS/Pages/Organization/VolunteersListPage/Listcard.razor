@@ -1,4 +1,4 @@
-﻿ <NavMini  ValueChange = "ValueChange" IsDeleted = "ShowDeletedList" CheckedList = "checkList" ActId = "ActId"  Quantity ="pagedResult.TotalItems" ShowDeletedList ="isDeleted" />
+﻿ <NavMini Data ="pagedResult" ValueChange = "ValueChange" IsDeleted = "ShowDeletedList" CheckedList = "checkList" ActId = "ActId"  Quantity ="pagedResult.TotalItems" ShowDeletedList ="isDeleted" />
 <div class="list-card">
     @if (pagedResult is not null && pagedResult.TotalItems != 0)
     {

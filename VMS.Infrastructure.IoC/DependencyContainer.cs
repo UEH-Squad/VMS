@@ -60,6 +60,7 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFacultyService, FacultyService>();
             services.AddTransient<IListVolunteerService, ListVolunteerService>();
+            services.AddTransient<IExportExcelService, ExportExcelService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)

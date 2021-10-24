@@ -1,7 +1,7 @@
 ﻿<div class="search-and-button">
     <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged ="SearchValueChanged"></VMS.Pages.ActivitySearchPage.SearchBox>
     <div class="button-download @(navDel ? "d-block" : "d-none")">
-        <button class="button-download__text">
+        <button @onclick="DowLoad" class="button-download__text">
             <span class="material-icons"> download </span>
             Tải danh sách
         </button>

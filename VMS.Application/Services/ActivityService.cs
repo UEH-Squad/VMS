@@ -134,6 +134,8 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Activity activity = _mapper.Map<Activity>(activityViewModel);
+            activity.StartDate = activity.StartDate.Date;
+            activity.StartDate = activity.EndDate.Date;
             activity.CreatedDate = DateTime.Now;
             activity.CreatedBy = activity.OrgId;
             activity.IsApproved = true;
@@ -225,6 +227,8 @@ namespace VMS.Application.Services
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
             activity = _mapper.Map(activityViewModel, activity);
+            activity.StartDate = activity.StartDate.Date;
+            activity.StartDate = activity.EndDate.Date;
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;
 
@@ -252,7 +256,7 @@ namespace VMS.Application.Services
 
             Specification<Activity> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                Conditions = new List<Expression<Func<Activity, bool>>>
                 {
                     a => a.Id == activityId
                 },

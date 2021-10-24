@@ -85,7 +85,7 @@ namespace VMS.Application.Services
         {
             string currentUserId = GetCurrentUserId();
             return Task.Run(() => _userManager.Users.Include(x => x.Favorites)
-                                                    .Include(x => x.Recruitments)
+                                                    .Include(x => x.Recruitments).ThenInclude(x => x.Activity)
                                                     .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
         }
 

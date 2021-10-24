@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common.Enums;
+using VMS.Common.Extensions;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -19,12 +20,15 @@ namespace VMS.Application.Services
     public class UserService : BaseService, IUserService
     {
         private readonly UserManager<User> _userManager;
+        private readonly IIdentityService _identityService;
         public UserService(IRepository repository,
                            IDbContextFactory<VmsDbContext> dbContextFactory,
                            IMapper mapper,
-                           UserManager<User> userManager) : base(repository, dbContextFactory, mapper)
+                           UserManager<User> userManager,
+                           IIdentityService identityService) : base(repository, dbContextFactory, mapper)
         {
             _userManager = userManager;
+            _identityService = identityService;
         }
 
         public async Task<CreateOrgProfileViewModel> GetOrgProfileViewModelAsync(string userId)
@@ -224,6 +228,19 @@ namespace VMS.Application.Services
             user.Avatar = avatar;
 
             Task.Run(() => _userManager.UpdateAsync(user));
+        }
+
+        public async Task<HashSet<DateTime>> GetActivityDaysAsync(string userId, DateTime startDate, DateTime endDate)
+        {
+            User result = _identityService.GetCurrentUserWithFavoritesAndRecruitments();
+
+            HashSet<DateTime> acts = result.Recruitments.Where(x => x.Activity.StartDate.Between(startDate, endDate)
+                                                                    && x.Activity.EndDate.Between(startDate, endDate))
+                                                        .Select(x => x.Activity.StartDate.GetDateRange(x.Activity.EndDate))
+                                                        .SelectMany(x => x)
+                                                        .ToHashSet();
+
+            return await Task.FromResult(acts);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace VMS.Application.Services
                        IMapper mapper) : base(repository, dbContextFactory, mapper)
         {}
 
-        public async Task<PaginatedList<ListVolunteerViewModel>> GetListVolunteers(int actId, string searchValue, bool isDeleted, int currentPage)
+        public async Task<PaginatedList<ListVolunteerViewModel>> GetListVolunteersAsync(int actId, string searchValue, bool isDeleted, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -31,7 +31,7 @@ namespace VMS.Application.Services
                 {
                     a => a.ActivityId == actId,
                     a => a.User.FullName.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
-                    isDeleted ? a => a.IsDeleted == true : a => a.IsDeleted == false
+                    a => a.IsDeleted == isDeleted
                 },
                 Includes = a => a.Include(a => a.User).ThenInclude(a=> a.Faculty),
                 PageIndex = currentPage,
@@ -61,15 +61,7 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Specification<Recruitment> specification = new()
-            {
-                Conditions = new List<Expression<Func<Recruitment, bool>>>
-                {
-                    a => a.Id == id
-                }
-            };
-
-            Recruitment rec = await _repository.GetAsync(dbContext, specification);
+            Recruitment rec = await _repository.GetByIdAsync<Recruitment>(dbContext, id);
             if (isDeleted == true)
             {
                 rec.IsDeleted = true;

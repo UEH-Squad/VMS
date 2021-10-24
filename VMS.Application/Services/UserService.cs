@@ -235,7 +235,7 @@ namespace VMS.Application.Services
             User result = _identityService.GetCurrentUserWithFavoritesAndRecruitments();
 
             HashSet<DateTime> acts = result.Recruitments.Where(x => x.Activity.StartDate.Between(startDate, endDate)
-                                                                    && x.Activity.EndDate.Between(startDate, endDate))
+                                                                    || x.Activity.EndDate.Between(startDate, endDate))
                                                         .Select(x => x.Activity.StartDate.GetDateRange(x.Activity.EndDate))
                                                         .SelectMany(x => x)
                                                         .ToHashSet();

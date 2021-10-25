@@ -30,7 +30,12 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null)
+        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 8)
+        {
+            return await GetAllActivitiesAsync(true, "", new FilterActivityViewModel(), 1, orderList, userLocation, pageSize);
+        }
+
+        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 20)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -38,17 +43,17 @@ namespace VMS.Application.Services
 
             if (isSearch)
             {
-                paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation);
+                paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation, pageSize);
             }
             else
             {
-                paginatedList = await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation);
+                paginatedList = await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation, pageSize);
             }
 
             return paginatedList;
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, string orgId, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, string orgId, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
         {
             PaginationSpecification<Activity> specification = new()
             {
@@ -63,7 +68,7 @@ namespace VMS.Application.Services
                                  .Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
-                PageSize = 20,
+                PageSize = pageSize,
                 OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
@@ -76,7 +81,7 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
         {
             PaginationSpecification<Activity> specification = new()
             {
@@ -97,7 +102,7 @@ namespace VMS.Application.Services
                                  .Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
-                PageSize = 20,
+                PageSize = pageSize,
                 OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
@@ -273,105 +278,6 @@ namespace VMS.Application.Services
             }).ToList();
 
             return activityViewModel;
-        }
-
-        public async Task<List<ActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false)
-        {
-            await using DbContext dbContext = _dbContextFactory.CreateDbContext();
-            List<Activity> activities;
-
-            if (string.IsNullOrEmpty(userId) && location == null)
-            {
-                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
-                return _mapper.Map<List<ActivityViewModel>>(activities);
-            }
-
-            if (!string.IsNullOrEmpty(userId) && location == null)
-            {
-                int? currentUserDistricts = _identityService.GetCurrentUserWithAddresses()?.UserAddresses
-                                                            .FirstOrDefault(x => x.AddressPath.Depth == 2)?.AddressPathId;
-                if (currentUserDistricts.HasValue)
-                {
-                    activities = await GetRelatedActivitiesForUsersTurnOffLocationAsync(isFeatured, currentUserDistricts, dbContext);
-                    return _mapper.Map<List<ActivityViewModel>>(activities);
-                }
-
-                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
-                return _mapper.Map<List<ActivityViewModel>>(activities);
-            }
-
-            activities = await GetRelatedActivitiesWhenLocationTurnedOnAsync(location, isFeatured, dbContext);
-            return _mapper.Map<List<ActivityViewModel>>(activities);
-        }
-
-        private async Task<List<Activity>> GetRelatedActivitiesWhenLocationTurnedOnAsync(Coordinate location, bool isFeatured, DbContext dbContext)
-        {
-            Specification<Activity> spec = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    x => x.EndDate >= DateTime.Now
-                },
-                OrderBy = GetOrderByClause(isFeatured, location),
-                Take = 8
-            };
-
-            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
-
-            return activities;
-        }
-
-        private async Task<List<Activity>> GetRelatedActivitiesForUsersTurnOffLocationAsync(bool isFeatured, int? currentUserDistricts, DbContext dbContext)
-        {
-            Specification<Activity> spec = new()
-            {
-                Includes = x => x.Include(y => y.ActivityAddresses).ThenInclude(y => y.AddressPath),
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    x => x.ActivityAddresses.Any(y => y.AddressPath.Id == currentUserDistricts),
-                    x => x.EndDate >= DateTime.Now
-                },
-                OrderBy = GetOrderByClause(isFeatured, null),
-                Take = 8
-            };
-
-            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
-            return activities;
-        }
-
-        private async Task<List<Activity>> GetRelatedActivitiesForNonUsersTurnOffLocationAsync(bool isFeatured, DbContext dbContext)
-        {
-            Specification<Activity> spec = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    x => x.EndDate >= DateTime.Now
-                },
-                OrderBy = GetOrderByClause(isFeatured, null),
-                Take = 8
-            };
-
-            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
-            return activities;
-        }
-
-        private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured, Coordinate coordinate)
-        {
-            Point userLocation = _geometryFactory.CreatePoint(coordinate);
-            Func<IQueryable<Activity>, IOrderedQueryable<Activity>> result = isFeatured
-                ? (x => x.OrderByDescending(y => y.MemberQuantity))
-                : (x => x.OrderByDescending(y => y.CreatedDate));
-
-            if (coordinate is not null)
-            {
-                result = isFeatured
-                    ? (x => x.OrderBy(y => y.Location.Distance(userLocation))
-                             .ThenByDescending(y => y.MemberQuantity))
-                    : (x => x.OrderBy(y => y.Location.Distance(userLocation))
-                             .ThenByDescending(y => y.CreatedDate));
-            }
-
-            return result;
         }
 
         private static ICollection<ActivitySkill> MapSkills(CreateActivityViewModel activityViewModel, Activity activity)

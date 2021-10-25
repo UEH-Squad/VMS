@@ -39,18 +39,8 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            PaginatedList<ActivityViewModel> paginatedList;
-
-            if (isSearch)
-            {
-                paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation, pageSize);
-            }
-            else
-            {
-                paginatedList = await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation, pageSize);
-            }
-
-            return paginatedList;
+            return isSearch ? await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation, pageSize)
+                            : await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation, pageSize);
         }
 
         private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, string orgId, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
@@ -60,7 +50,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     GetFilterByDate(),
-                    (!string.IsNullOrEmpty(orgId) ? a => a.OrgId == orgId : a => true),
+                    a => a.OrgId == orgId || string.IsNullOrEmpty(orgId),
                     a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
                     a => !a.IsDeleted
                 },
@@ -125,7 +115,7 @@ namespace VMS.Application.Services
                 {
                     a => a.IsPin
                 },
-                Take = 2
+                Take = 3
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);

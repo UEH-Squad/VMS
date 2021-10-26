@@ -1,0 +1,103 @@
+﻿@attribute [Route(Routes.AdminWatchRating)]
+@inject IJSRuntime JsRuntime
+<div class="d-flex">
+    <div class="col-3">
+        Đây là sidebar
+    </div>
+    <div class="right-container col-9">
+        <div class="container col-10">
+            <Title />
+            <div class="container_divider"></div>
+            <div class="container_main-content d-flex">
+                <div class="leftraight col-9">
+                    <SearchResult />
+                    <div class="container-list-card">
+                        @foreach (var item in pagedResult.Results)
+                        {
+                            <RatingList />
+                        }
+                    </div>
+                </div>
+                <div class="rightraight col-2">
+                    <Filter />
+                </div>
+            </div>
+            <div class="pagination-container">
+                <Pager CurrentPage="@pagedResult.CurrentPage"
+                       PageCount="@pagedResult.PageCount"
+                       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    /****Pagination****/
+    private class FakeData
+    {
+        //public int StarStyle { get; set; }
+        //public int RatingList { get; set; }
+        //public string Avatar { get; set; }
+        //public string MemberName { get; set; }
+        //public string ShortDescription { get; set; }
+    }
+
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+
+    private PagedResult<FakeData> pagedResult;
+    private int page = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    protected override void OnParametersSet()
+    {
+
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await Interop.ScrollToTop(JsRuntime);
+    }
+
+    /// <summary>
+    /// Get fake data
+    /// </summary>
+    /// <param name="type">0 for volunteer list; 1 for rated one</param>
+    /// <returns></returns>
+    private PagedResult<FakeData> GetFakeData()
+    {
+        var result = new PagedResult<FakeData>();
+        result.CurrentPage = page;
+        result.RowCount = 200;
+        result.PageSize = 20;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
+        {
+            //Avatar = "./img/RatingPage/Ellipse 28.png",
+            //MemberName = "Phạm Thị Ngọc Ánh",
+            //ShortDescription = "Thành viên vàng trong làng tình nguyện",
+        }).ToArray();
+
+        return result;
+    }
+}

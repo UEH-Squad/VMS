@@ -1,0 +1,49 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-container {
+  background-color: #f6f6f6; }
+  .my-container .my-act {
+    background-color: #FFFFFF;
+    border-radius: 10px; }
+
+::deep .report {
+  display: none; }
+
+::deep .btn-sign-up--cover {
+  display: none; }
+
+::deep .heart-button1 {
+  display: none; }
+
+::deep .inside-the-border {
+  display: flex;
+  justify-content: space-between; }
+  ::deep .inside-the-border .icons {
+    order: 2; }
+  ::deep .inside-the-border .about-infor {
+    order: 1; }
+
+::deep .title__content {
+  margin-bottom: 0; }
+
+::deep .title__name {
+  margin: 6px 0; }
+
+.act-footer__btn button {
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFFFFF;
+  padding: 5px 15px;
+  border-radius: 5px; }
+  .act-footer__btn button:hover {
+    color: #FFFFFF; }
+
+.act-footer__btn--blue {
+  background-color: #18A0FB; }
+  .act-footer__btn--blue:hover {
+    background-color: #0B588C; }

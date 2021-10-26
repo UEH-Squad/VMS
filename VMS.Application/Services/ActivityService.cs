@@ -59,15 +59,15 @@ namespace VMS.Application.Services
                     a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
                     a => !a.IsDeleted
                 },
-                Includes = a => a.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings),
+                Includes = a => a.Include(x => x.Organizer)
+                                 .Include(x => x.Recruitments)
+                                 .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 20,
                 OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
-
-            activities.Items.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
 
@@ -93,15 +93,15 @@ namespace VMS.Application.Services
                                          .Count() == filter.Skills.Count,
                     a => !a.IsDeleted
                 },
-                Includes = a => a.Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings),
+                Includes = a => a.Include(x => x.Organizer)
+                                 .Include(x => x.Recruitments)
+                                 .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 20,
                 OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
-
-            activities.Items.ForEach(a => a.Organizer = _identityService.FindUserById(a.OrgId));
 
             var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
 

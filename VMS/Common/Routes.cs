@@ -44,6 +44,11 @@
         #region Admin
 
         public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
+        public const string AdminWatchRating = "/admin/quan-ly-hoat-dong/xem-danh-gia";
+        public const string AdminWatchlistVolunteer = "/admin/quan-ly-hoat-dong/xem-danh-sach";
+
+        public const string AdminActivityInfo = "/admin/chi-tiet-hoat-dong";
+
         public const string AdminOrganizationManagement = "/admin/quan-ly-to-chuc";
         public const string AdminEditOrganizationProfile = "/admin/chinh-sua-ho-so-to-chuc";
         public const string AdminVolunteerManagement = "/admin/quan-ly-ca-nhan";

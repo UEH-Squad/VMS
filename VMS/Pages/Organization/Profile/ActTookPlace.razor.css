@@ -8,9 +8,16 @@
   font-weight: 600;
   font-size: 30px;
   line-height: 36px;
-  color: #515151; }
+  color: #515151;
+  padding-bottom: 5px; }
   .act h1 span {
     color: #64D72F; }
+
+.act hr {
+  width: 60%;
+  height: 1px;
+  background-color: #707070;
+  opacity: 50%; }
 
 .act-container {
   display: flex; }

@@ -22,14 +22,11 @@ namespace VMS.Pages.Organization.VolunteersListPage
 
         protected override async Task OnParametersSetAsync()
         {
-            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActId));
+            this.actId = int.Parse(ActId);
+            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(actId);
+            actName = actViewModel.Name;
             bool isUserOrg = string.Equals(this.actViewModel.OrgId, CurrentUserId, System.StringComparison.Ordinal);
             if (isUserOrg)
-            {
-                this.actId = int.Parse(ActId);
-                actName = actViewModel.Name;
-            }
-            else
             {
                 NavigationManager.NavigateTo(Routes.HomePage, true);
             }

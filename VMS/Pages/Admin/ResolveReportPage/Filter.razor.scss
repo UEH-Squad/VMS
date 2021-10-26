@@ -1,0 +1,111 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.bg-grey {
+    background-color: #f3f3f3;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    border-bottom: 1px solid $grey-icon;
+
+    .item {
+        position: relative;
+        width: 24%;
+
+        .material-icons-outlined {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 5px;
+            pointer-events: none;
+        }
+
+        .dropdown-input {
+            width: 100%;
+            padding: 6px 30px 6px 10px;
+            border-radius: 10px;
+            border: 1px solid $border-color-bold;
+            outline: none;
+            cursor: pointer;
+
+            &::placeholder {
+                color: $grey-icon;
+            }
+        }
+
+        .dropdown-menu {
+            margin-top: 10px;
+            width: 100%;
+            padding: 0 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border: none;
+
+            li {
+                margin: 8px 0;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                color: $blue;
+
+                &:hover {
+                    background-color: rgba(24, 160, 251, 0.1);
+                }
+            }
+        }
+    }
+
+    ::deep {
+        .ant-picker {
+            width: 100%;
+            padding: 6px 30px 6px 10px;
+            border-radius: 10px;
+            border: 1px solid $border-color-bold;
+            outline: none;
+
+            &-input {
+                font-size: 24px;
+                padding-right: 0.5rem;
+
+                & > input {
+                    font-size: 16px;
+                    color: $grey-icon;
+                    cursor: pointer;
+                    &:focus {
+                        outline:none !important;
+                    }
+                }
+            }
+
+            &-clear {
+                display: none;
+            }
+        }
+    }
+
+    .filter-btn {
+        @include green-btn;
+        font-size: 20px;
+        height: 40px;
+        padding: 0 20px;
+
+        &:hover {
+            background-color: #306C14;
+            opacity: 78%;
+        }
+    }
+
+    .clear-filter-btn {
+        @include green-btn;
+        font-size: 20px;
+        width: fit-content;
+        color: $grey-icon;
+        background-color: #fff;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

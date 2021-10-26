@@ -54,6 +54,9 @@
         public const string AdminVolunteerManagement = "/admin/quan-ly-ca-nhan";
         public const string AdminEditVolunteerProfile = "/admin/chinh-sua-ho-so-ca-nhan";
 
+        public const string AdminResolveReport = "/admin/quan-ly-bao-cao";
+        public const string AdminDetailReport = "/admin/quan-ly-bao-cao/chi-tiet";
+
         #endregion Admin
     }
 }

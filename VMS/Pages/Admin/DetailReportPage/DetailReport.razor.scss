@@ -1,0 +1,211 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.wrapper {
+    padding: 0 50px;
+
+    @include on('xxl') {
+        padding: 0 100px;
+    }
+
+    .come-back {
+        border-bottom: 1px solid $grey-input;
+        margin-bottom: 20px;
+
+        &--text {
+            text-decoration: none;
+            color: $green;
+            font-weight: 500;
+        }
+    }
+
+    .general-info {
+
+        &__item {
+            margin: 10px 0;
+        }
+
+        &__status {
+            .status-item {
+                display: flex;
+                align-items: center;
+            }
+
+            &--pin, &--cancel, &--processing, &--complete {
+                span, svg {
+                    font-size: 24px;
+                    margin-right: 5px;
+                }
+
+                p {
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin: 0;
+                }
+            }
+
+            &--pin {
+                color: $red;
+            }
+
+            &--cancel {
+                color: $grey-icon;
+            }
+
+            &--complete {
+                color: $green;
+            }
+
+            &--processing {
+                color: $blue;
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        &__who {
+            font-weight: 500;
+
+            a {
+                color: $grey-text;
+            }
+        }
+
+        &__activity, &__date {
+            font-style: oblique;
+            color: #707070;
+        }
+
+        a {
+            cursor: pointer;
+        }
+    }
+
+    .form-report {
+        margin-top: 20px;
+        padding: 40px;
+        border: 1px solid $grey-input;
+        border-radius: 15px;
+        font-size: 30px;
+        font-weight: 600;
+
+        &__more {
+            position: relative;
+
+            .material-icons-outlined {
+                position: absolute;
+                bottom: 5px;
+                right: -20px;
+                cursor: pointer;
+            }
+
+            .dropdown-menu {
+                box-shadow: 3px 3px 7px 7px #dee2e687;
+                border: 1px solid white;
+
+                .dropdown-item {
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+
+                .dropdown-pin {
+                    color: $red;
+                }
+
+                .dropdown-close {
+                    color: $grey-icon;
+                }
+            }
+        }
+
+        &__title {
+            display: flex;
+            justify-content: center;
+            color: $green;
+
+            span {
+                color: $blue;
+            }
+        }
+
+        &__reason, &__discript, &__proof {
+
+            &--text {
+                font-size: 18px;
+
+                span {
+                    color: $red;
+                }
+            }
+
+            textarea {
+                width: 100%;
+                border: 1px solid $grey-input;
+                border-radius: 5px;
+                font-size: 18px;
+                color: $grey-text;
+                padding: 10px 10px 10px 15px;
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    width: 20px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: $grey-icon;
+                    border-radius: 10px;
+                    border: 5px solid #fafafa;
+                }
+            }
+        }
+
+        &__proof--item {
+            height: 150px;
+            width: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+
+            @include on('xl') {
+                height: 220px;
+                width: 220px;
+            }
+
+            @include on('xxl') {
+                height: 240px;
+                width: 240px;
+            }
+        }
+    }
+
+    .action-button {
+        margin:40px 0;
+
+        &__processing, &__complete-processing {
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+        }
+
+        &__processing {
+            margin-right: 10px;
+            color: $green;
+            background: none;
+
+            &:hover {
+                border: 1px solid $green;
+            }
+        }
+
+        &__complete-processing {
+            color: $white;
+            background: $green;
+
+            &:hover {
+                background: $green-bold;
+            }
+        }
+    }
+}

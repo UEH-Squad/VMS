@@ -7,7 +7,7 @@
         <h3 class="text-center mt-4 mb-4">Lĩnh vực</h3>
         <div class="col-10 areas-modal-content">
             <div class="areas-modal-content__container">
-                <div class="area-item-wrapper d-flex align-items-center mb-4 covid-item">
+                <div class="area-item-wrapper d-flex align-items-center mb-2 covid-item">
                     <div class="d-flex align-items-center justify-content-center" style="background-color: #f14747" ;>
                         <span class="material-icons-outlined">
                             coronavirus
@@ -20,7 +20,7 @@
                 {
                     @foreach (var area in areas)
                     {
-                        <div class="area-item-wrapper d-flex align-items-center mb-4">
+                        <div class="area-item-wrapper d-flex align-items-center mb-2">
                             <div @onclick="() => ChangeState(area)" class="material-icons d-flex align-items-center justify-content-center">
                                 @area.Icon
                             </div>

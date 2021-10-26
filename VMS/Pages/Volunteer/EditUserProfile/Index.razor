@@ -4,7 +4,7 @@
 <div class="my-editProfile">
     <div class="container">
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="@(IsUserForAdmin ? "col-12" : "col-10") mx-auto">
                 @if (isErrorMessageShown)
                 {
                     <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
@@ -46,13 +46,14 @@
                             <div class="dropdown">
 
                                 <span class="material-icons-outlined"> arrow_drop_down </span>
-                                <InputSelect class="form-control my-form-department" @bind-Value="@user.FacultyId">
-                                    <option value="" disabled selected hidden>Lựa chọn Khoa</option>
+                                <input class="form-control my-form-department" readonly="readonly" data-bs-toggle="dropdown" placeholder="@facultyChoosenValue" />
+
+                                <ul class="dropdown-menu">
                                     @foreach (var item in faculties)
                                     {
-                                        <option value="@item.Id">@item.Name</option>
+                                        <li @onclick="()=>ChooseDepartmentValue(item)">@item.Name</li>
                                     }
-                                </InputSelect>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -104,7 +105,7 @@
                                                                                       Province="@user.Province"
                                                                                       WardId="@user.WardId"
                                                                                       Ward="@user.Ward"
-                                                                                      OnAddressChanged="OnAddressChanged"/>
+                                                                                      OnAddressChanged="OnAddressChanged" />
                             <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" style="width:auto" placeholder="Nhập số nhà, tên đường" />
                         </div>
                     </div>
@@ -112,28 +113,18 @@
                     <div class="row form-item">
                         <p class="col-3 form-text">Lĩnh vực <span>(*)</span></p>
                         <div class="col-9 form-field ">
-                            <div class="d-flex">
-                                @if (choosenAreas.Count < 5)
-                                {
-                                    width = choosenAreas.Count * 20;
-                                    classWidth = "w-" + width;
-                                }
-
-                                <div class="@(choosenAreas.Count>4 ?"owl-carousel owl-theme editProfile__carousel w-80" :"d-flex editProfile__NoCarousel ") @classWidth ">
-                                    @foreach (var item in choosenAreas)
-                                    {
-                                        <div class="form-field-item item @(choosenAreas.Count>4 ?"" :"item-NoCaroesel mx-auto")">
-                                            <i class="material-icons">@item.Icon</i>
-                                            <span>@item.Name</span>
-                                        </div>
-                                    }
-                                </div>
-
-                                <div class="form-field-item  item-add ">
+                            <div class="d-flex flex-wrap">
+                                <div class="form-field-item mx-auto item-add ">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
                                 </div>
+                                @foreach (var item in choosenAreas)
+                                {
+                                    <div class="form-field-item ">
+                                        <i class="material-icons">@item.Icon</i>
+                                        <span>@item.Name</span>
+                                    </div>
+                                }
                             </div>
-
                         </div>
                     </div>
 
@@ -169,7 +160,7 @@
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <a href="@($"{Routes.OrgProfile}/{user.Id}")" class="btn from__btn-cancel text-decoration-none">Hủy</a>
-                            <button type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn">Hoàn tất</button>
+                            <button type="submit" class="btn from__btn-submit ms-4 d-inline-block blue-btn">Lưu thay đổi</button>
                         </div>
                     </div>
                 </EditForm>

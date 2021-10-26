@@ -2,7 +2,11 @@
 
 <div class="container">
     <div class="row act">
-        <h1 class="mb-5">Hoạt động <span>@Title</span></h1>
+        <div class="d-flex align-items-center justify-content-between my-5">
+            <h1 class="mb-0">Hoạt động <span>@Title</span></h1>
+            <hr />
+        </div>
+        
         @if (Datas is not null)
         {
             <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
@@ -14,7 +18,7 @@
                             <div class="@(item.IsClosed ? "overlay" : "")"></div>
                         </div>
                         <div class="act-content @(OverridesImg ? "position-absolute act-content-overrides ":"" )">
-                            <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm")">
+                            <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm") ">
                                 <h3 class="act-title mb-0 lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
                             </a>
                         </div>
@@ -31,7 +35,7 @@
                         }
 
 
-                        @if (HaveHeart)
+                        @if (HaveHeart&&IsUser)
                         {
                             <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
                                 favorite
@@ -59,26 +63,11 @@
             </div>
         }
 
-        @if (HaveBorder)
-        {
-            @if (HaveDecor)
-            {
-                <div class="col-8">
-                    <hr class="bottom-line my-5" />
-                </div>
-            }
-            else
-            {
-                <div class="col-8 ms-auto">
-                    <hr class="bottom-line  my-5" />
-                </div>
-            }
-        }
 
         @if (HaveLinkAll)
         {
-            <div class="act__linkAll text-end mb-5 pb-5">
-                <a>Xem tất cả >>></a>
+            <div class="act__linkAll text-end mt-5">
+                <a href="">@TitleLinkALl >>></a>
             </div>
         }
     </div>

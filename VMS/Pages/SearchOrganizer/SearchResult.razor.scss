@@ -39,25 +39,38 @@ $border-width: 1px;
     &__img {
         height: $org-avata-size;
         width: $org-avata-size;
+        min-width: $org-avata-size;
         border-radius: 50%;
         z-index: 2;
     }
 
     &__name-group {
+        font-weight: 600;
+        max-width: 65%;
 
         a {
+            margin-bottom: 20px;
             text-decoration: none;
-            font-size: 26px;
+            font-size: 20px;
             color: $blue;
-            font-weight: 500;
         }
 
         p {
+            color: $border-color-normal;
+
+            span {
+                color: $green;
+            }
         }
     }
 
     &__rate-group {
-
+        height: inherit;
+        .seperate-line {
+            height: 80%;
+            border: 0.5px solid $border-color-normal;
+            margin-right: 30px;
+        }
         & > span {
             font-size: 40px;
             color: $green;
@@ -86,4 +99,20 @@ $border-width: 1px;
         color: $yellow;
         overflow: hidden;
     }
+}
+
+.lmtext-2, .lmtext-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.lmtext-2 {
+    -webkit-line-clamp: 2;
+}
+
+.lmtext-3 {
+    -webkit-line-clamp: 3;
 }

@@ -56,7 +56,6 @@
     }
 
     ::deep .form-input {
-        padding: 10px;
         font-size: 16px;
         font-weight: 300;
         color: $grey-text;
@@ -84,7 +83,8 @@
 
     .form-field-item {
         text-align: center;
-
+        width: 20%;
+        display: inline-block;
         &:hover > i {
             font-size: 40px;
 
@@ -150,77 +150,10 @@
     }
 
 
-    .owl-carousel {
-        z-index: 0;
-    }
-
-
-    .editProfile__carousel {
-        width: 80%;
-
-        .item {
-            margin: 0 auto;
-        }
-
-        ::deep .owl-nav {
-            display: block;
-
-            .owl-prev {
-                position: absolute;
-                top: -15%;
-                left: 0%;
-
-                span {
-                    font-size: 80px;
-                    color: $blue;
-                    transition: all 0.3s linear;
-
-                    &:hover {
-                        color: $blue-hv;
-                        opacity: 0.73;
-                    }
-                }
-
-                &:hover {
-                    background: none;
-                }
-            }
-
-            .owl-next {
-                position: absolute;
-                top: -15%;
-                right: 0%;
-
-                span {
-                    font-size: 80px;
-                    color: $blue;
-                    transition: all 0.3s linear;
-
-                    &:hover {
-                        color: $blue-hv;
-                    }
-                }
-
-                &:hover {
-                    background: none;
-                }
-            }
-        }
-
-        ::deep .owl-dots {
-            display: none;
-        }
-    }
-
-    ::deep .owl-carousel.owl-loading {
-        opacity: 1;
-    }
-
-
     .countWord {
         color: $border-color-bold;
         position: absolute;
-        top: 135px;
+        top: 130px;
         right: 15px;
     }
 
@@ -228,7 +161,7 @@
         margin: 60px 0;
 
         .btn {
-            padding: 12px 35px;
+            padding: 10px 35px;
             font-size: 16px;
             font-weight: 600;
         }

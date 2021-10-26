@@ -1,0 +1,34 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminActivityInfo)]
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="my-container col-12 d-flex justify-content-center align-items-center">
+    <div class="col-10 my-5 my-act d-flex align-items-center flex-column">
+        <div class="col-9 pb-4">
+            <VMS.Pages.ActivityInfoPage.InfoPage />
+            <div class="mb-3">
+                <VMS.Pages.ActivityInfoPage.Rightrail />
+            </div>
+        </div>
+        <div class="act-footer__btn d-flex align-items-center mb-4">
+            <button @onclick="() => ShowEditModal()" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private async Task ShowEditModal()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("", options);
+    }
+}

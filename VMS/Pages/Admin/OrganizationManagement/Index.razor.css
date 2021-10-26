@@ -1,0 +1,15 @@
+﻿::deep .pagination {
+  display: flex;
+  justify-content: center; }
+
+.arrange-bar {
+  display: flex; }
+  .arrange-bar .labels {
+    margin-right: 150px; }
+    .arrange-bar .labels span {
+      display: block; }
+
+.boxes-group {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 80px; }

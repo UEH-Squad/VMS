@@ -1,0 +1,59 @@
+﻿@inject IJSRuntime JS;
+<div class="position-relative my-uploadImg">
+        <InputFile OnChange="OnInputFileChange" class="w-100 uploadImg__input" multiple />
+        <div class="d-flex align-items-center justify-content-center flex-column">
+            <div class="d-flex w-100 justify-content-center align-items-center">
+                <i class="material-icons">
+                    cloud_upload
+                </i>
+                <span class="d-block">@prompt</span>
+            </div>
+            <div class="image-list d-flex w-100">
+                @foreach (var imageDataUrl in imageDataUrls)
+                {
+                    <div class="position-relative flex-column align-items-center me-3 d-flex">
+                        <img src="@imageDataUrl" class="preview-img my-2" />
+                        <i class="material-icons-outlined position-absolute mx-0 close-btn" @onclick="() => OnDiscardImage(imageDataUrl)">close</i>
+                        <span class=""></span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+@code {
+
+    IList<string> imageDataUrls = new List<string>();
+
+    async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        var imageFiles = e.GetMultipleFiles();
+        var format = "image/*";
+
+        foreach (var imageFile in imageFiles)
+        {
+            var resizedImageFile = await imageFile.RequestImageFileAsync(format, 100, 100);
+            var buffer = new byte[resizedImageFile.Size];
+            await resizedImageFile.OpenReadStream().ReadAsync(buffer);
+
+            var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+            imageDataUrls.Add(imageData);
+        }
+    }
+
+    public string DefaultPrompt { get; set; } = "Chọn hoặc kéo và thả hình ảnh liên quan tại đây!";
+    private string prompt;
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(prompt) && !string.IsNullOrEmpty(DefaultPrompt))
+        {
+            prompt = DefaultPrompt;
+        }
+    }
+
+    private void OnDiscardImage(string imageDataUrl)
+    {
+        imageDataUrls.Remove(imageDataUrl);
+    }
+}

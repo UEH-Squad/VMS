@@ -350,5 +350,33 @@
   {
     "outputFile": "Shared/AdminHeader.razor.css",
     "inputFile": "Shared/AdminHeader.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ActList.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ActList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.css",
+    "inputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.scss"
   }
 ]

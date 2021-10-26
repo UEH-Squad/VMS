@@ -1,0 +1,122 @@
+﻿@import "../../../Resources/scss/common/_variables";
+
+.pop-up {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 120;
+
+    &-container {
+        height: 522px;
+        overflow-y: scroll;
+        border-radius: 10px;
+        background-color: $white;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+
+        &::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+    }
+
+    &__title {
+        h3 {
+            font-size: 20px;
+            line-height: 25px;
+            color: $green;
+
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    &__form {
+        padding: 0 70px;
+
+        .required-asterick {
+            color: $red-warning;
+        }
+    }
+
+    .close-btn {
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 20px;
+            color: $grey-close-btn;
+        }
+    }
+
+    button {
+        font-size: 16px;
+        font-weight: 600;
+        color: $white;
+        padding: 5px 15px;
+        border-radius: 5px;
+        background-color: $blue;
+    }
+}
+
+::deep {
+    .typeahead {
+        &__results {
+            right: 0;
+            width: 100% !important;
+        }
+
+        .form-control {
+            height: fit-content;
+        }
+    }
+
+    input {
+        color: $grey-text;
+        border: solid 1px $border-color-normal;
+    }
+
+    .form-input {
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+    }
+}
+
+::deep textarea {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 14px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-icon;
+        border-radius: 20px;
+        border: 2px solid white;
+    }
+}
+
+
+

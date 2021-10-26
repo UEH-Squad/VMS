@@ -45,6 +45,8 @@
 
         public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
 
+        public const string AdminActivityInfo = "/admin/chi-tiet-hoat-dong";
+
         #endregion Admin
     }
 }

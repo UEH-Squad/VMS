@@ -56,7 +56,6 @@
     }
 
     ::deep .form-input {
-        padding: 10px;
         font-size: 16px;
         font-weight: 300;
         color: $grey-text;
@@ -154,7 +153,7 @@
     .countWord {
         color: $border-color-bold;
         position: absolute;
-        top: 135px;
+        top: 130px;
         right: 15px;
     }
 
@@ -162,7 +161,7 @@
         margin: 60px 0;
 
         .btn {
-            padding: 12px 35px;
+            padding: 10px 35px;
             font-size: 16px;
             font-weight: 600;
         }

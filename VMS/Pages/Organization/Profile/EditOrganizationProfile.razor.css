@@ -43,7 +43,6 @@
     color: #707070;
     margin: auto 0; }
   .my-editProfile ::deep .form-input {
-    padding: 10px;
     font-size: 16px;
     font-weight: 300;
     color: #515151;
@@ -110,12 +109,12 @@
   .my-editProfile .countWord {
     color: #707070;
     position: absolute;
-    top: 135px;
+    top: 130px;
     right: 15px; }
   .my-editProfile .from__btn {
     margin: 60px 0; }
     .my-editProfile .from__btn .btn {
-      padding: 12px 35px;
+      padding: 10px 35px;
       font-size: 16px;
       font-weight: 600; }
     .my-editProfile .from__btn .from__btn-cancel {

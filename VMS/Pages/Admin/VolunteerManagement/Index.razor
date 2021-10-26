@@ -1,0 +1,12 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminVolunteerManagement)]
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="col-lg-11 mx-auto">
+    <FilterUser />
+    <VMS.Pages.SearchOrganizer.SearchResult IsUserResult="true" IsUserForAdmin="true"/>
+</div>
+@code {
+
+}

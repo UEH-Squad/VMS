@@ -4,7 +4,7 @@
 <div class="my-editProfile">
     <div class="container">
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="@(IsUserForAdmin ? "col-12" : "col-10") mx-auto">
                 @if (isErrorMessageShown)
                 {
                     <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
@@ -160,7 +160,7 @@
                     <div class="row">
                         <div class="col-8 ms-auto from__btn">
                             <a href="@($"{Routes.OrgProfile}/{user.Id}")" class="btn from__btn-cancel text-decoration-none">Hủy</a>
-                            <button type="submit" class="btn from__btn-submit ms-5 d-inline-block blue-btn">Hoàn tất</button>
+                            <button type="submit" class="btn from__btn-submit ms-4 d-inline-block blue-btn">Lưu thay đổi</button>
                         </div>
                     </div>
                 </EditForm>

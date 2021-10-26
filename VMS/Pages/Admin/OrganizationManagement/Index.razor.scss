@@ -1,0 +1,20 @@
+﻿::deep .pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.arrange-bar {
+    display: flex;
+    .labels {
+        margin-right: 150px;
+        span {
+            display: block;
+        }
+    }
+}
+
+.boxes-group {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 80px;
+}

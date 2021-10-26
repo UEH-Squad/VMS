@@ -26,7 +26,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
             this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(actId);
             actName = actViewModel.Name;
             bool isUserOrg = string.Equals(this.actViewModel.OrgId, CurrentUserId, System.StringComparison.Ordinal);
-            if (isUserOrg)
+            if (!isUserOrg)
             {
                 NavigationManager.NavigateTo(Routes.HomePage, true);
             }

@@ -1,33 +1,30 @@
-﻿@attribute [Route(Routes.AdminWatchRating)]
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminWatchRating)]
+@attribute [Authorize(Roles = "Admin")]
 @inject IJSRuntime JsRuntime
-<div class="d-flex">
-    <div class="col-3">
-        Đây là sidebar
-    </div>
-    <div class="right-container col-9">
-        <div class="container col-10">
-            <Title />
-            <div class="container_divider"></div>
-            <div class="container_main-content d-flex">
-                <div class="leftraight col-9">
-                    <SearchResult />
-                    <div class="container-list-card">
-                        @foreach (var item in pagedResult.Results)
-                        {
-                            <RatingList />
-                        }
-                    </div>
-                </div>
-                <div class="rightraight col-2">
-                    <Filter />
-                </div>
-            </div>
-            <div class="pagination-container">
-                <Pager CurrentPage="@pagedResult.CurrentPage"
-                       PageCount="@pagedResult.PageCount"
-                       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+
+<div class="container">
+    <Title />
+    <div class="container_divider"></div>
+    <div class="container_main-content d-flex">
+        <div class="leftraight">
+            <SearchResult />
+            <div class="container-list-card">
+                @foreach (var item in pagedResult.Results)
+                {
+                    <RatingList />
+                }
             </div>
         </div>
+        <div class="rightraight">
+            <Filter />
+        </div>
+    </div>
+    <div class="pagination-container">
+        <Pager CurrentPage="@pagedResult.CurrentPage"
+               PageCount="@pagedResult.PageCount"
+               OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
     </div>
 </div>
 

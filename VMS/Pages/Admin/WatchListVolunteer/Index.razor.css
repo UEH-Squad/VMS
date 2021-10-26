@@ -4,12 +4,10 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.right-container {
-  margin: 0 auto; }
-
 .container {
+  width: 91.67%;
   padding: 0;
-  margin: 0 auto; }
+  margin-right: 0; }
   .container ::deep .title .sub-title {
     margin-bottom: 6%; }
     .container ::deep .title .sub-title--content {
@@ -22,20 +20,27 @@
     grid-template-columns: none; }
     .container ::deep .search-and-button .my-search-box {
       display: none !important; }
-  .container ::deep .container .my-container .quantity-volunteers {
-    width: 62%; }
-  .container ::deep .container .my-container .button {
-    width: 18%; }
-    .container ::deep .container .my-container .button__text--del {
-      background-color: #F14747; }
-    .container ::deep .container .my-container .button__text--del:hover {
-      background-color: #E10B0B; }
-  .container ::deep .container .my-container .link__text--del:hover {
-    color: #E10B0B; }
-  .container ::deep .container .my-container .link__text--undo:hover {
-    color: #0B588C; }
+  .container ::deep .container {
+    padding: 0; }
+  .container ::deep .my-container {
+    justify-content: space-between; }
+    .container ::deep .my-container .quantity-volunteers {
+      width: 62%; }
+    .container ::deep .my-container .button {
+      width: 18%; }
+      .container ::deep .my-container .button__text--del {
+        background-color: #F14747; }
+      .container ::deep .my-container .button__text--del:hover {
+        background-color: #E10B0B; }
+    .container ::deep .my-container .link__text--del:hover {
+      color: #E10B0B; }
+    .container ::deep .my-container .link__text--undo:hover {
+      color: #0B588C; }
   .container ::deep .list-card .mycard__info {
-    width: 70%; }
+    width: 70%;
+    grid-template-columns: 14% 86%; }
+    .container ::deep .list-card .mycard__info img {
+      object-fit: cover; }
   .container ::deep .list-card .mycard__info--name-and-mssv {
     display: flex;
     justify-content: space-between; }
@@ -50,6 +55,6 @@
       border-left: 2px solid #18A0FB;
       border-bottom: 2px solid #18A0FB; }
   .container ::deep .list-card .mycard__button {
-    width: 16%; }
+    width: 18%; }
     .container ::deep .list-card .mycard__button--registration-form {
       padding: 7px 15px; }

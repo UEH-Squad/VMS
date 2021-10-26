@@ -32,19 +32,18 @@
     display: flex;
     flex-direction: column; }
   .container-divider {
-    width: 110%;
+    width: 100%;
     height: 1px;
     background-color: #B4B4B4; }
   .container-checkbox {
     width: 63%;
     display: flex;
     flex-direction: column;
-    margin-top: 3%;
-    margin-left: -25%; }
+    margin-top: 3%; }
   .container-btn {
-    width: 130%;
+    width: 120%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 8%; }
 
 .container-radio_choise {
@@ -131,13 +130,12 @@
 
 .container-btn_filter {
   text-align: center;
-  padding: 3px 28px;
+  padding: 2px 25px;
   border: none;
   border-radius: 5px;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
-  line-height: 36px;
   color: #FFFFFF;
   background-color: #64D72F;
   transition: all 0.25s;
@@ -152,7 +150,6 @@
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
-  line-height: 36px;
   color: #b4b4b4;
   background-color: #FFFFFF; }
   .container-btn_delete:hover {

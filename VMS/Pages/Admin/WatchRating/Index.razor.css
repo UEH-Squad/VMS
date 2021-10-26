@@ -4,12 +4,9 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.right-container {
-  margin: 0 auto; }
-
 .container {
-  padding: 0;
-  margin: 0 auto;
+  width: 91.67%;
+  margin-right: 0;
   margin-top: 5%; }
   .container_divider {
     width: 100%;
@@ -18,11 +15,14 @@
   .container_main-content {
     justify-content: space-between; }
   .container .leftraight {
+    width: 70.83%;
     display: flex;
     flex-direction: column; }
     .container .leftraight .container-list-card {
       display: flex;
       flex-direction: column; }
+  .container .rightraight {
+    width: 20.83%; }
   .container .pagination-container {
     margin-top: 5%;
     display: flex;

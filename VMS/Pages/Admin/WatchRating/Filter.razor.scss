@@ -39,7 +39,7 @@
     }
 
     &-divider {
-        width: 110%;
+        width: 100%;
         height: 1px;
         background-color: $grey-icon;
     }
@@ -49,13 +49,12 @@
         display: flex;
         flex-direction: column;
         margin-top: 3%;
-        margin-left: -25%;
     }
 
     &-btn {
-        width: 130%;
+        width: 120%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-top: 8%;
     }
 }
@@ -171,13 +170,12 @@
 .container-btn {
     &_filter {
         text-align: center;
-        padding: 3px 28px;
+        padding: 2px 25px;
         border: none;
         border-radius: 5px;
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
-        line-height: 36px;
         color: $white;
         background-color: $green;
         transition: all 0.25s;
@@ -195,7 +193,6 @@
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
-        line-height: 36px;
         color: $border-color-normal;
         background-color: $white;
 

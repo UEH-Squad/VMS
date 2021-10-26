@@ -1,0 +1,16 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.notification-link {
+  margin: 10px 0; }
+  .notification-link__icon {
+    color: #18A0FB;
+    font-size: 32px; }
+  .notification-link:hover .notification-link__icon {
+    color: #0B588C; }
+
+::deep .my-search-box {
+  margin: 10px 0; }

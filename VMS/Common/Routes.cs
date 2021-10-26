@@ -54,6 +54,15 @@
         public const string AdminVolunteerManagement = "/admin/quan-ly-ca-nhan";
         public const string AdminEditVolunteerProfile = "/admin/chinh-sua-ho-so-ca-nhan";
 
+        public const string AdminResolveReport = "/admin/quan-ly-bao-cao";
+        public const string AdminDetailReport = "/admin/quan-ly-bao-cao/chi-tiet";
+
+        public const string AdminOrgAccountManagement = "/admin/quan-ly-tai-khoan-to-chuc";
+        public const string AdminVolunteerAccountManagement = "/admin/quan-ly-tai-khoan-ca-nhan";
+        public const string AdminAdminAccountManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";
+        public const string AdminFeatureSuggestionManagement = "/admin/bo-sung-tinh-nang";
+        public const string AdminDashboardManagement = "/admin/bao-cao-thong-ke";
+
         #endregion Admin
     }
 }

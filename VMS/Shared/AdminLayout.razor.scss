@@ -1,0 +1,24 @@
+﻿@import '../Resources/scss/common/_variables';
+
+@mixin profile-icon-mobile {
+    color: $blue;
+    font-size: 32px;
+}
+
+.notification-link {
+    margin: 10px 0;
+
+    &__icon {
+        @include profile-icon-mobile;
+    }
+
+    &:hover &__icon {
+        color: $blue-bold;
+    }
+}
+
+::deep {
+    .my-search-box {
+        margin: 10px 0;
+    }
+}

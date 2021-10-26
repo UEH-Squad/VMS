@@ -348,10 +348,6 @@
     "inputFile": "Shared/AdminSidebar.razor.scss"
   },
   {
-    "outputFile": "Shared/AdminHeader.razor.css",
-    "inputFile": "Shared/AdminHeader.razor.scss"
-  },
-  {
     "outputFile": "Pages/Admin/ActivityManagement/ActList.razor.css",
     "inputFile": "Pages/Admin/ActivityManagement/ActList.razor.scss"
   },
@@ -414,5 +410,37 @@
   {
     "outputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.css",
     "inputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Index.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Filter.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Notification.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Notification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.scss"
+  },
+  {
+    "outputFile": "Shared/AdminLayout.razor.css",
+    "inputFile": "Shared/AdminLayout.razor.scss"
   }
 ]

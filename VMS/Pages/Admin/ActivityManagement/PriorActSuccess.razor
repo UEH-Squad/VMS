@@ -1,0 +1,25 @@
+﻿<div class="pop-up">
+    <div class="d-flex justify-content-center align-items-center w-100 h-100">
+        <div class="pop-up-container position-relative border-10">
+            <div @onclick="CloseModal" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up-content text-center my-4 mx-5">
+                <h3 class="mb-0 fw-medium">Bạn đã <span>ưu tiên hoạt động</span></h3>
+                <h3 class="mb-0 fw-medium">thành công</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+    }
+}

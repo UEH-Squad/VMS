@@ -1,0 +1,87 @@
+﻿@using VMS.Application.ViewModels;
+
+<div class="pop-up">
+    <div class="d-flex justify-content-center align-items-center w-100 h-100">
+        <div class="pop-up-container position-relative border-10 w-50">
+            <div @onclick="CloseModal" class="close-btn position-absolute d-flex justify-content-center align-items-center">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up__title text-center py-4">
+                <h3 class="fw-medium">Yêu cầu<span> chỉnh sửa</span></h3>
+            </div>
+            <EditForm Model="edit">
+                <div class="pop-up__form mb-3">
+                    <div class="fw-medium align-self-center mb-2">Mục cần yêu cầu chỉnh sửa <span class="required-asterick">(*)</span></div>
+                    <div>
+                        <Typeahead SearchMethod="SearchTargets"
+                                   @bind-Values="chosenTargets"
+                                   EnableDropDown="true"
+                                   class="w-100">
+                            <SelectedTemplate Context="target">
+                                @target
+                            </SelectedTemplate>
+                            <ResultTemplate Context="target">
+                                @target
+                            </ResultTemplate>
+                        </Typeahead>
+                    </div>
+                </div>
+
+                <div class="pop-up__form mb-3">
+                    <div class="fw-medium align-self-center mb-2">Nội dung yêu cầu chỉnh sửa <span class="required-asterick">(*)</span></div>
+                    <div>
+                        <InputTextArea @bind-Value="edit.Content" rows="4" class="w-100 form-control form-input"></InputTextArea>
+                    </div>
+                </div>
+
+                <div class="pop-up__form mb-3">
+                    <div class="fw-medium align-self-center mb-2">Hình ảnh đính kèm <span class="required-asterick">(*)</span></div>
+                    <div>
+                        <UploadMultipleImg/>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center text-center justify-content-center my-4">
+                    <button class="btn">Yêu cầu chỉnh sửa</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private EditRequirementViewModel edit = new();
+
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+    }
+
+    private async Task<IEnumerable<string>> SearchTargets(string searchText)
+    {
+        return await Task.FromResult(targets.Where(x => x.ToLower().Contains(searchText.ToLower())).ToList());
+    }
+
+    private IList<string> chosenTargets = new List<string>();
+
+    private readonly List<string> targets = new List<string>()
+{
+            "Tiêu đề",
+            "Mô tả",
+            "Sứ mệnh",
+            "Nhiệm vụ tình nguyện sẽ tham gia",
+            "Nhiệm vụ tình nguyện viên sẽ tham gia",
+            "Đối tượng tham gia",
+            "Thời gian diễn ra",
+            "Địa điểm tham gia",
+            "Yêu cầu tham gia",
+            "Lĩnh vực",
+            "Kỹ năng",
+            "Khác"
+        };
+}

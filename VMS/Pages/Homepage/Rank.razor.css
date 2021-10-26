@@ -82,13 +82,13 @@
       top: 0%;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 45px;
+      font-size: 35px;
       font-weight: 600;
       color: #FFFFFF;
       transition: all 1s linear; }
       @media (min-width: 1400px) {
         .my-rank ::deep .owl-item .rank__img-rank span {
-          font-size: 50px; } }
+          font-size: 45px; } }
       .my-rank ::deep .owl-item .rank__img-rank span.position-top {
         top: 8%; }
 
@@ -100,10 +100,10 @@
   .my-rank ::deep .owl-item.active .rank__img-rank img {
     width: 100%; }
   .my-rank ::deep .owl-item.active .rank__img-rank span {
-    font-size: 50px; }
+    font-size: 45px; }
     @media (min-width: 1400px) {
       .my-rank ::deep .owl-item.active .rank__img-rank span {
-        font-size: 60px; } }
+        font-size: 55px; } }
 
 .my-rank ::deep .owl-nav {
   display: inline-block; }
@@ -115,7 +115,8 @@
     color: #18A0FB;
     transition: all 0.3s linear; }
     .my-rank ::deep .owl-nav .owl-prev span:hover {
-      color: #0B588c; }
+      color: #0B588C;
+      opacity: 0.73; }
   .my-rank ::deep .owl-nav .owl-next span {
     position: absolute;
     top: 25%;
@@ -124,7 +125,8 @@
     color: #18A0FB;
     transition: all 0.3s linear; }
     .my-rank ::deep .owl-nav .owl-next span:hover {
-      color: #0B588c; }
+      color: #0B588C;
+      opacity: 0.73; }
 
 .my-rank ::deep .owl-dots {
   transform: translateY(-50%);
@@ -158,8 +160,9 @@
 
 .my-rank .rank__review {
   display: inline-block;
-  background: linear-gradient(180deg, rgba(252, 255, 129, 0.568399) -20.51%, rgba(252, 255, 129, 0) -20.5%, rgba(252, 255, 129, 0.0290694) -20.49%, rgba(252, 255, 129, 0.0988999) -20.48%, #FCFF81 46.98%, #FCFF81 74.36%);
-  padding: 2px 40px;
+  background-color: #FBED6E;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), inset -4px -4px 20px rgba(0, 0, 0, 0.05), inset 4px 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 2px 30px;
   border-radius: 5px;
   color: #515151;
   font-size: 20px;

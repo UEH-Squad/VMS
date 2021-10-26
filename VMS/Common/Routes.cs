@@ -47,6 +47,8 @@
         public const string AdminWatchRating = "/admin/quan-ly-hoat-dong/xem-danh-gia";
         public const string AdminWatchlistVolunteer = "/admin/quan-ly-hoat-dong/xem-danh-sach";
 
+        public const string AdminActivityInfo = "/admin/chi-tiet-hoat-dong";
+
         #endregion Admin
     }
 }

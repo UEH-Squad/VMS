@@ -104,7 +104,7 @@
       color: #18A0FB;
       transition: all 0.3s linear; }
       .my-filter ::deep .owl-nav .owl-prev span:hover {
-        color: #18A0FB;
+        color: #0B588C;
         opacity: 0.73; }
     .my-filter ::deep .owl-nav .owl-prev:hover {
       background: none; }
@@ -125,7 +125,7 @@
       color: #18A0FB;
       transition: all 0.3s linear; }
       .my-filter ::deep .owl-nav .owl-next span:hover {
-        color: #18A0FB;
+        color: #0B588C;
         opacity: 0.73; }
     .my-filter ::deep .owl-nav .owl-next:hover {
       background: none; }

@@ -1,0 +1,155 @@
+﻿@import "../../../Resources/scss/common/_variables";
+
+.pop-up {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 120;
+
+    &-container {
+        border-radius: 10px;
+        background-color: $white;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+
+        &--large {
+            width: 45%;
+        }
+
+        &--small {
+            width: fit-content;
+        }
+    }
+
+    .lm-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 2;
+    }
+
+    &__title {
+        h3 {
+            font-size: 20px;
+            line-height: 25px;
+            color: $green;
+
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    &__subtitle {
+        h4 {
+            font-size: 14px;
+            color: #A8A8A8;
+        }
+    }
+
+    .close-btn {
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 20px;
+            color: $grey-close-btn;
+        }
+    }
+
+    &__act {
+        border-radius: 5px;
+        border: solid 1px $grey-close-bg;
+        font-weight: 600;
+
+        &__title {
+            font-size: 14px;
+            color: $blue;
+        }
+
+        h5 {
+            font-size: 11px;
+        }
+
+        i {
+            color: $green;
+        }
+    }
+
+    &__btn {
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 18px;
+
+        &--deny {
+            background-color: $white;
+            color: $blue;
+        }
+
+        &--accept {
+            background-color: $blue;
+            color: $white;
+        }
+    }
+
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        height: 18px;
+        width: 18px;
+        background-color: $white;
+        border: 1px solid $grey-icon;
+        border-radius: 5px;
+
+        &::after {
+            font-family: "Material Icons";
+            content: "\e876";
+            font-size: 18px;
+            font-weight: 600;
+            color: $blue;
+            display: none;
+        }
+
+        &:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+
+        &:checked:after {
+            display: block;
+        }
+    }
+
+    .close-btn-s {
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 14px;
+            color: $grey-close-btn;
+            line-height: 0;
+        }
+    }
+
+    h3 {
+        font-size: 20px;
+        line-height: 30px;
+        color: $green;
+
+        span {
+            color: $blue;
+        }
+    }
+}

@@ -378,5 +378,33 @@
   {
     "outputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.css",
     "inputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/SearchResult.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/RatingList.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/RatingList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Filter.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Index.razor.scss"
   }
 ]

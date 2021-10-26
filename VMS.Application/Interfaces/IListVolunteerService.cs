@@ -9,6 +9,6 @@ namespace VMS.Application.Interfaces
     public interface IListVolunteerService
     {
         Task<PaginatedList<ListVolunteerViewModel>> GetListVolunteersAsync(int actId, string searchValue, bool isDeleted, int currentPage);
-        Task UpdateVounteer(int id, bool isDeleted);
+        Task UpdateVounteerAsync(int id, bool isDeleted);
     }
 }

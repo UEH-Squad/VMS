@@ -16,16 +16,17 @@ namespace VMS.Pages.Organization.VolunteersListPage
         [Inject] 
         private NavigationManager NavigationManager { get; set; }
         [Inject]
-        private IIdentityService IdentityService { get; set; }
-        [Inject]
         private IActivityService ActivityService { get; set; }
-        protected override async Task OnInitializedAsync()
+        [CascadingParameter]
+        public string CurrentUserId { get; set; }
+
+        protected override async Task OnParametersSetAsync()
         {
-            this.actId = int.Parse(ActId);
-            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(actId);
-            string orgId = IdentityService.GetCurrentUserId();
-            if(orgId == actViewModel.OrgId)
+            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(int.Parse(ActId));
+            bool isUserOrg = string.Equals(this.actViewModel.OrgId, CurrentUserId, System.StringComparison.Ordinal);
+            if (isUserOrg)
             {
+                this.actId = int.Parse(ActId);
                 actName = actViewModel.Name;
             }
             else

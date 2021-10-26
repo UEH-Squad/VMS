@@ -12,7 +12,7 @@
     <div class="my-container">
         <p class="quantity-volunteers">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
         <div class="button">
-            <button @onclick="@(() => ShowConfirm("delete"))" class="button__text button__text--del">Xóa nhiều</button>
+            <button @onclick="@(() => ShowConfirm())" class="button__text button__text--del">Xóa nhiều</button>
         </div>
         <div class="link">
             <h4 @onclick="ChangeNav" class="link__text link__text--del">Danh sách xóa</h4>
@@ -24,7 +24,7 @@
     <div class="my-container">
         <h4 class="quantity-volunteers">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
         <div class="button">
-            <button @onclick="@(() => ShowConfirm("undo"))" class="button__text button__text--undo">Chọn lại</button>
+            <button @onclick="@(() => ShowConfirm())" class="button__text button__text--undo">Chọn lại</button>
         </div>
         <div class="link">
             <h4 @onclick="ChangeNav" class="link__text link__text--undo">Xem danh sách</h4>

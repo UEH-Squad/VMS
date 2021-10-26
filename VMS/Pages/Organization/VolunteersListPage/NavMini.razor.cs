@@ -48,34 +48,27 @@ namespace VMS.Pages.Organization.VolunteersListPage
             await ValueChange.InvokeAsync(searchValue);
         }
         [CascadingParameter] public IModalService Modal { get; set; }
-        async Task ShowConfirm(string action)
+        [Inject]
+        private IListVolunteerService ListVolunteerService { get; set; }
+        async Task ShowConfirm()
         {
             var parameters = new ModalParameters();
-            parameters.Add("CheckedList", CheckedList);
+            parameters.Add("Undo", !ShowDeletedList);
             var options = new ModalOptions()
             {
                 HideCloseButton = true,
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true
             };
-            if (action == "delete")
-            {
                 var result = await Modal.Show<ConfirmDelList>("", parameters, options).Result;
                 if ((bool)result.Data)
                 {
-                    this.ShowDeletedList = false;
-                    await IsDeleted.InvokeAsync(ShowDeletedList);
+                    foreach (var item in CheckedList)
+                    {
+                        await ListVolunteerService.UpdateVounteerAsync(item, !ShowDeletedList);
+                    }
+                await IsDeleted.InvokeAsync(ShowDeletedList);
                 }
-            }
-            else
-            {
-               var result = await Modal.Show<ConfirmUndoList>("", parameters, options).Result;
-                if ((bool)result.Data)
-                {
-                    this.ShowDeletedList = true;
-                    await IsDeleted.InvokeAsync(ShowDeletedList);
-                }
-            }
 
         }
         public async Task DowLoad()

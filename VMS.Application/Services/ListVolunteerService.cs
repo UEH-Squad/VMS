@@ -57,19 +57,12 @@ namespace VMS.Application.Services
 
         }
 
-        public async Task UpdateVounteer(int id, bool isDeleted)
+        public async Task UpdateVounteerAsync(int id, bool isDeleted)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Recruitment rec = await _repository.GetByIdAsync<Recruitment>(dbContext, id);
-            if (isDeleted == true)
-            {
-                rec.IsDeleted = true;
-            }
-            else
-            {
-                rec.IsDeleted = false;
-            }
+            rec.IsDeleted = isDeleted;
             await _repository.UpdateAsync(dbContext, rec);
         }
         

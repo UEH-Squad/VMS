@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Common.Extensions;
 
 namespace VMS.Pages.ActivitySearchPage

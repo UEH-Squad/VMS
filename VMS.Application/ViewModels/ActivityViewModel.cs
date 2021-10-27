@@ -8,7 +8,6 @@ namespace VMS.Application.ViewModels
     {
         public int Id { get; set; }
         public string OrgId { get; set; }
-        public int AreaId { get; set; }
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime StartDate { get; set; }
@@ -20,7 +19,6 @@ namespace VMS.Application.ViewModels
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Banner { get; set; }
-        public bool IsVirtual { get; set; }
         public bool IsPin { get; set; }
         public bool IsClosed { get; set; }
         public bool IsDeleted { get; set; }
@@ -33,6 +31,5 @@ namespace VMS.Application.ViewModels
         public User Organizer { get; set; }
         public ICollection<ActivityAddress> ActivityAddresses { get; set; }
         public List<ActivitySkill> ActivitySkills { get; set; }
-
     }
 }

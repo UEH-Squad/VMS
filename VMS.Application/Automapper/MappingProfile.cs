@@ -17,7 +17,18 @@ namespace VMS.Application.Automapper
             CreateMap<Area, AreaViewModel>();
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
-            CreateMap<User, UserViewModel>();
+            CreateMap<User, UserViewModel>()
+                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.Select(x => new AreaViewModel
+                {
+                    Id = x.AreaId,
+                    Name = x.Area.Name,
+                    Icon = x.Area.Icon
+                })))
+                .ForMember(x => x.Skills, opt => opt.MapFrom(src => src.UserSkills.Select(x => new SkillViewModel
+                {
+                    Id = x.SkillId,
+                    Name = x.Skill.Name
+                })));
             CreateMap<CreateUserProfileViewModel, User>();
             CreateMap<CreateUserProfileViewModel, User>();
             CreateMap<User, CreateUserProfileViewModel>()

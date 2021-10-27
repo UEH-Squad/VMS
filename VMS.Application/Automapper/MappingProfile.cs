@@ -10,7 +10,8 @@ namespace VMS.Application.Automapper
     {
         public MappingProfile()
         {
-            CreateMap<Activity, ActivityViewModel>();
+            CreateMap<Activity, ActivityViewModel>()
+                .ForMember(x => x.MemberQuantity, opt => opt.MapFrom(src => src.Recruitments.Count));
             CreateMap<CreateActivityViewModel, Activity>();
             CreateMap<Activity, CreateActivityViewModel>();
             CreateMap<Activity, ViewActivityViewModel>();

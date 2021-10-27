@@ -35,6 +35,8 @@ namespace VMS.Application.Interfaces
 
         Task UpdateActFavorAsync(int activityId, string userId);
 
+        Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(FilterOrgActivityViewModel filter, string searchValue, int currentPage, bool isSearch = true);
+
         Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime = new());
     }
 }

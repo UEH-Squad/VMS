@@ -12,6 +12,10 @@ namespace VMS.Application.ViewModels
         public DateTime CreatedDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTime OpenDate { get; set; }
+        public DateTime CloseDate { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
         public string Banner { get; set; }

@@ -64,27 +64,27 @@ namespace VMS.Infrastructure.Data.Context
                 .Property(f => f.ActivityId).IsRequired();
 
             builder.Entity<ImageReport>()
-                .HasOne(e => e.RecruitmentRating)
-                .WithMany(e => e.ImageReports)
-                .HasForeignKey(e => e.RecruitmentRatingId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<ImageReport>()
                 .HasOne(e => e.Feedback)
                 .WithMany(e => e.ImageReports)
                 .HasForeignKey(e => e.FeedbackId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ReasonReport>()
-                .HasOne(e => e.RecruitmentRating)
-                .WithMany(e => e.ReasonReports)
-                .HasForeignKey(e => e.RecruitmentRatingId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<ReasonReport>()
                 .HasOne(e => e.Feedback)
                 .WithMany(e => e.ReasonReports)
                 .HasForeignKey(e => e.FeedbackId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Feedback>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Feedbacks)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Feedback>()
+                .HasOne(x => x.Reporter)
+                .WithMany(x => x.Reports)
+                .HasForeignKey(x => x.ReportBy)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Skill>().HasData(

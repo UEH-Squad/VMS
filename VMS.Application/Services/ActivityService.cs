@@ -40,20 +40,19 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            return isSearch ? await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation, pageSize)
+            return isSearch ? await GetAllActivitiesWithSearchValueAsync(searchValue, dbContext, currentPage, orderList, userLocation, pageSize)
                             : await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation, pageSize);
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, string orgId, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
         {
             PaginationSpecification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    GetFilterByDate(),
-                    a => a.OrgId == orgId || string.IsNullOrEmpty(orgId),
-                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
-                    a => !a.IsDeleted
+                    a => !a.IsDeleted,
+                    a => a.EndDate >= DateTime.Now.Date,
+                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
                 },
                 Includes = a => a.Include(x => x.Organizer)
                                  .Include(x => x.Recruitments)
@@ -65,11 +64,7 @@ namespace VMS.Application.Services
 
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
-
-            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
-
-            return paginatedList;
+            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
         }
 
         private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
@@ -78,7 +73,8 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    GetFilterByDate(filter.TookPlace, filter.Happenning),
+                    a => !a.IsDeleted,
+                    a => a.EndDate >= DateTime.Now.Date,
                     a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual || !filter.Virtual && !filter.Actual,
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
@@ -86,8 +82,7 @@ namespace VMS.Application.Services
                     a => a.ActivitySkills.Select(activitySkills => activitySkills.SkillId)
                                          .Where(actSkillId => filter.Skills.Select(skill => skill.Id)
                                                                            .Any(skillId => skillId == actSkillId))
-                                         .Count() == filter.Skills.Count,
-                    a => !a.IsDeleted
+                                         .Count() == filter.Skills.Count
                 },
                 Includes = a => a.Include(x => x.Organizer)
                                  .Include(x => x.Recruitments)
@@ -99,11 +94,9 @@ namespace VMS.Application.Services
 
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+            
 
-            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
-
-            return paginatedList;
+            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
         }
 
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()
@@ -449,26 +442,6 @@ namespace VMS.Application.Services
             return x => x.OrderByDescending(a => a.Id);
         }
 
-        private static Expression<Func<Activity, bool>> GetFilterByDate(bool isTookPlace = false, bool isHappenning = false)
-        {
-            if (isTookPlace && isHappenning)
-            {
-                return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
-            }
-
-            if (isTookPlace)
-            {
-                return x => x.EndDate < DateTime.Now;
-            }
-
-            if (isHappenning)
-            {
-                return x => x.EndDate >= DateTime.Now;
-            }
-
-            return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
-        }
-
         public async Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -514,6 +487,91 @@ namespace VMS.Application.Services
             {
                 await _repository.DeleteAsync(dbContext, favorite);
             }
+        }
+
+        public async Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(FilterOrgActivityViewModel filter, string searchValue, int currentPage, bool isSearch = true)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            if (isSearch)
+            {
+                return await GetAllOrganizationActivityViewModelAsync(dbContext, searchValue, filter.OrgId, currentPage);
+            }
+            else
+            {
+                return await GetAllOrganizationActivityViewModelAsync(dbContext, filter, currentPage);
+            }
+        }
+
+        private async Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(DbContext dbContext, string searchValue, string orgId, int currentPage)
+        {
+            PaginationSpecification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.OrgId == orgId,
+                    a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
+                },
+                Includes = a => a.Include(x => x.Organizer)
+                                 .Include(x => x.Recruitments)
+                                 .ThenInclude(x => x.RecruitmentRatings),
+                PageIndex = currentPage,
+                PageSize = 20
+            };
+
+            PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+
+            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
+
+            return paginatedList;
+        }
+
+        private async Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(DbContext dbContext, FilterOrgActivityViewModel filter, int currentPage)
+        {
+            PaginationSpecification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    GetFilterOrgByDate(filter.IsTookPlace, filter.IsHappenning),
+                    a => a.IsVirtual == filter.IsVirtual || a.IsActual == filter.IsActual || !filter.IsVirtual && !filter.IsActual,
+                    a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(a.OrgId)
+                },
+                Includes = a => a.Include(x => x.Organizer)
+                                 .Include(x => x.Recruitments)
+                                 .ThenInclude(x => x.RecruitmentRatings),
+                PageIndex = currentPage,
+                PageSize = 20
+            };
+
+            PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+
+            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
+
+            return paginatedList;
+        }
+
+        private static Expression<Func<Activity, bool>> GetFilterOrgByDate(bool isTookPlace, bool isHappenning)
+        {
+            if (isTookPlace && isHappenning)
+            {
+                return x => true;
+            }
+
+            if (isTookPlace)
+            {
+                return x => x.EndDate < DateTime.Now;
+            }
+
+            if (isHappenning)
+            {
+                return x => x.EndDate >= DateTime.Now.Date && x.OpenDate <= DateTime.Now;
+            }
+
+            return x => true;
         }
 
         public async Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime = new())

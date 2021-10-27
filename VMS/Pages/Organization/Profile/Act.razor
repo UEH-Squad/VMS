@@ -45,18 +45,9 @@
 
                         @if (HaveFav)
                         {
-                            @if (HaveLogin)
-                            {
-                                <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
-                                    <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
-                                </a>
-                            }
-                            else
-                            {
-                                <a class="position-absolute favorite" @onclick="(() => ShowLoginRequire())">
-                                    <span class="material-icons nonefav">favorite_border</span>
-                                </a>
-                            }
+                            <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
+                                <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
+                            </a>
                         }
                     </div>
                 }

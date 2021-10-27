@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using AntDesign;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using VMS.Application.Interfaces;
 
 namespace VMS.Shared.Components
 {
@@ -11,6 +14,8 @@ namespace VMS.Shared.Components
 
         private List<string> WeekLists { get; set; }
 
+        private static HashSet<DateTime> hasActivity;
+
         [Parameter] public DateTime Value { get; set; }
 
         [Parameter] public EventCallback<DateTime> ValueChanged { get; set; }
@@ -18,7 +23,13 @@ namespace VMS.Shared.Components
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> AdditionalAttributes { get; set; }
 
-        protected override void OnInitialized()
+        [CascadingParameter]
+        public string UserId { get; set; }
+
+        [Inject]
+        public IUserService UserService { get; set; }
+
+        protected override async Task OnInitializedAsync()
         {
             base.OnInitialized();
 
@@ -29,6 +40,8 @@ namespace VMS.Shared.Components
 
             Today = "Hôm nay";
             WeekLists = new List<string>() { "CN", "T2", "T3", "T4", "T5", "T6", "T7" };
+
+            hasActivity = await UserService.GetActivityDaysAsync(UserId, StartDate, EndDate);
         }
 
         private DateTime EndDate => StartDate.AddDays(35);
@@ -52,16 +65,28 @@ namespace VMS.Shared.Components
                 await ValueChanged.InvokeAsync(Value);
             }
 
+            hasActivity = await UserService.GetActivityDaysAsync(UserId, StartDate, EndDate);
+
             StateHasChanged();
         });
 
-        private void OnChangeMonth(int offset)
+        private async Task OnChangeMonth(int offset)
         {
             Value = offset == 0 ? DateTime.Today : Value.AddMonths(offset);
 
             if (ValueChanged.HasDelegate)
             {
-                ValueChanged.InvokeAsync(Value);
+                await ValueChanged.InvokeAsync(Value);
+            }
+
+            hasActivity = await UserService.GetActivityDaysAsync(UserId, StartDate, EndDate);
+        }
+
+        private async Task OnValueChanged(DateTimeChangedEventArgs args)
+        {
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(Value);
             }
         }
     }

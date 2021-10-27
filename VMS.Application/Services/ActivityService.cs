@@ -18,16 +18,13 @@ namespace VMS.Application.Services
 {
     public class ActivityService : BaseService, IActivityService
     {
-        private readonly IIdentityService _identityService;
         private readonly IGeoLocationService _addressLocationService;
 
         public ActivityService(IRepository repository,
                                IDbContextFactory<VmsDbContext> dbContextFactory,
                                IMapper mapper,
-                               IIdentityService identityService,
                                IGeoLocationService addressLocationService) : base(repository, dbContextFactory, mapper)
         {
-            _identityService = identityService;
             _addressLocationService = addressLocationService;
         }
 
@@ -293,20 +290,23 @@ namespace VMS.Application.Services
             return result;
         }
 
-        public async Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status)
+        public async Task<List<ActivityViewModel>> GetOrgActsAsync(string id, StatusAct status)
         {
             DbContext context = _dbContextFactory.CreateDbContext();
+
             Specification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>
                 {
                     a => a.OrgId == id,
-                    status == StatusAct.Favor? a => a.Favorites.Count >=0 : GetFilterOrgByDate(status == StatusAct.Ended, status == StatusAct.Current),
-                    a => a.IsDeleted == false
+                    a => !a.IsDeleted,
+                    GetFilterOrgActByDate(status == StatusAct.Ended, status == StatusAct.Current)
                 },
                 Includes = activities => activities.Include(x => x.Favorites)
-                                                    .Include(x => x.Recruitments).ThenInclude(x => x.RecruitmentRatings)
-                                                    .Include(x=>x.ActivityAddresses).ThenInclude(x=> x.AddressPath),
+                                                    .Include(x => x.Recruitments)
+                                                    .ThenInclude(x => x.RecruitmentRatings)
+                                                    .Include(x=>x.ActivityAddresses)
+                                                    .ThenInclude(x=> x.AddressPath),
                 OrderBy = GetOrderByStatusAct(status),
                 Take = GetTakeByStatusAct(status)
             };
@@ -315,10 +315,13 @@ namespace VMS.Application.Services
 
             List<ActivityViewModel> activityViewModels = _mapper.Map<List<ActivityViewModel>>(activity);
 
-            foreach(var act in activityViewModels)
+            if (status == StatusAct.Ended)
             {
-                act.Province = GetActProvince(act.ActivityAddresses);
-                act.Rating = GetRateOfActivity(act.Recruitments);
+                foreach (var act in activityViewModels)
+                {
+                    act.Province = GetActProvince(act.ActivityAddresses);
+                    act.Rating = GetRateOfActivity(act.Recruitments);
+                }
             }
 
             return activityViewModels;
@@ -361,36 +364,6 @@ namespace VMS.Application.Services
         {
             return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
                     / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
-        }
-
-        public async Task UpdateStatusActAsync(int activityId, bool close, bool delete)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    a => a.Id == activityId
-                }
-            };
-            Activity activity = await _repository.GetAsync(dbContext, specification);
-            activity.UpdatedDate = DateTime.Now;
-            if(close == true)
-            { 
-                activity.IsClosed = true; 
-            }
-            else 
-            { 
-                activity.IsClosed = false;
-            }
-
-            if (delete == true)
-            {
-                activity.IsDeleted = true;
-            }
-           
-            await _repository.UpdateAsync(dbContext, activity);
         }
 
         private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate coordinate)
@@ -444,15 +417,7 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>()
-                {
-                    a => a.Id == activityId
-                }
-            };
-
-            Activity activity = await _repository.GetAsync(dbContext, specification);
+            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, activityId);
 
             activity.IsClosed = isClose;
             activity.IsDeleted = isDelete;
@@ -510,7 +475,7 @@ namespace VMS.Application.Services
 
             var paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
 
-            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(activities.Items.FirstOrDefault(x => x.Id == a.Id).Recruitments));
+            paginatedList.Items.ForEach(a => a.Rating = GetRateOfActivity(a.Recruitments));
 
             return paginatedList;
         }
@@ -529,14 +494,14 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Activity, bool>>>()
                 {
-                    GetFilterOrgByDate(filter.IsTookPlace, filter.IsHappenning),
+                    GetFilterOrgActByDate(filter.IsTookPlace, filter.IsHappenning),
                     a => a.IsVirtual == filter.IsVirtual || a.IsActual == filter.IsActual || !filter.IsVirtual && !filter.IsActual,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(a.OrgId)
                 };
             }
         }
 
-        private static Expression<Func<Activity, bool>> GetFilterOrgByDate(bool isTookPlace, bool isHappenning)
+        private static Expression<Func<Activity, bool>> GetFilterOrgActByDate(bool isTookPlace, bool isHappenning)
         {
             if (isTookPlace && isHappenning)
             {

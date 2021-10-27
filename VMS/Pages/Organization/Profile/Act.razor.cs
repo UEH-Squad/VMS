@@ -9,6 +9,7 @@ using Blazored.Modal.Services;
 using VMS.Common;
 using VMS.Domain.Models;
 using System.Linq;
+using System;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -62,13 +63,25 @@ namespace VMS.Pages.Organization.Profile
             Datas.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
         }
 
-        private void AnimateHeart(int id)
+        private void AnimateHeart(int activityId)
         {
-            var favorite = currentUser.Favorites.FirstOrDefault(x => x.ActivityId == id);
-            currentUser.Favorites.Remove(favorite);
+            Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == activityId);
 
-            var act = Datas.Find(a => a.Id == id);
-            Datas.Remove(act);
+            if (favorite is null)
+            {
+                currentUser.Favorites.Add(new()
+                {
+                    UserId = CurrentUserId,
+                    ActivityId = activityId,
+                    CreatedDate = DateTime.Now
+                });
+            }
+            else
+            {
+                currentUser.Favorites.Remove(favorite);
+            }
+
+            IdentityService.UpdateUser(currentUser);
         }
 
         [JSInvokable]
@@ -92,7 +105,7 @@ namespace VMS.Pages.Organization.Profile
             if ((bool)result.Data)
             {
                 var act = Datas.Find(a => a.Id == id);
-                await ActivityService.UpdateStatusActAsync(id, act.IsClosed, true);
+                await ActivityService.CloseOrDeleteActivity(id, true, act.IsClosed);
                 Datas.Remove(act);
             }
         }
@@ -115,7 +128,7 @@ namespace VMS.Pages.Organization.Profile
 
             if ((bool)result.Data)
             {
-                await ActivityService.UpdateStatusActAsync(id, !act.IsClosed, act.IsDeleted);
+                await ActivityService.CloseOrDeleteActivity(id, act.IsDeleted, !act.IsClosed);
                 act.IsClosed = !act.IsClosed;
                 Modal.Show<CloseSuccess>("", parameters, options);
             }

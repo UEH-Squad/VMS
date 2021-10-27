@@ -11,7 +11,9 @@ namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null);
+        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 20);
+
+        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 8);
 
         Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
 
@@ -24,8 +26,6 @@ namespace VMS.Application.Interfaces
         Task DeleteActivityAsync(int activityId);
 
         Task<ViewActivityViewModel> GetViewActivityViewModelAsync(int activityId);
-
-        Task<List<ActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false);
 
         Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status);
 

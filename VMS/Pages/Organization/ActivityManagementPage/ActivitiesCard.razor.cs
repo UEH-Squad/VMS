@@ -51,7 +51,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 
         protected override async Task OnParametersSetAsync()
         {
-            data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page);
+            data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, 1);
         }
 
         private async Task HandlePageChangedAsync(bool isPaging = false)

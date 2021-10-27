@@ -52,6 +52,26 @@ namespace VMS.Application.Services
             return _mapper.Map<CreateOrgProfileViewModel>(user);
         }
 
+        public async Task UpdateOrgProfile(CreateOrgProfileViewModel orgProfileViewModel, string userId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            User user = await _repository.GetAsync(dbContext, new Specification<User>()
+            {
+                Conditions = new List<Expression<Func<User, bool>>>
+                {
+                    a => a.Id == userId
+                },
+                Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
+            });
+
+            user = _mapper.Map(orgProfileViewModel, user);
+
+            user.UserAreas = MapAreas(orgProfileViewModel, user);
+
+            await _repository.UpdateAsync(dbContext, user);
+        }
+
         public async Task<CreateUserProfileViewModel> GetUserProfileViewModelAsync(string userId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -74,6 +94,11 @@ namespace VMS.Application.Services
             }
 
             CreateUserProfileViewModel userProfileViewModel = _mapper.Map<CreateUserProfileViewModel>(user);
+
+            if (userProfileViewModel.FacultyId is not null)
+            {
+                userProfileViewModel.FacultyName = user.Faculty.Name;
+            }
 
             UserAddress province = user.UserAddresses.FirstOrDefault(x => x.AddressPath.Depth == 1);
             if (province is not null)
@@ -112,6 +137,7 @@ namespace VMS.Application.Services
                 Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
                                  .Include(x => x.UserSkills).ThenInclude(s => s.Skill)
                                  .Include(x => x.UserAddresses).ThenInclude(s => s.AddressPath)
+                                 .Include(x => x.Faculty)
             });
 
             user = _mapper.Map(userProfileViewModel, user);
@@ -122,27 +148,7 @@ namespace VMS.Application.Services
 
             await _repository.UpdateAsync(dbContext, user);
         }
-
-        public async Task UpdateOrgProfile(CreateOrgProfileViewModel orgProfileViewModel, string userId)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            User user = await _repository.GetAsync(dbContext, new Specification<User>()
-            {
-                Conditions = new List<Expression<Func<User, bool>>>
-                {
-                    a => a.Id == userId
-                },
-                Includes = a => a.Include(x => x.UserAreas).ThenInclude(s => s.Area)
-            });
-
-            user = _mapper.Map(orgProfileViewModel, user);
-
-            user.UserAreas = MapAreas(orgProfileViewModel, user);
-
-            await _repository.UpdateAsync(dbContext, user);
-        }
-
+    
         private static ICollection<UserArea> MapAreas(UserProfileViewModel userProfileViewModel, User user)
         {
             return userProfileViewModel.Areas.Select(s => new UserArea

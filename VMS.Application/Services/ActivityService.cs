@@ -130,7 +130,7 @@ namespace VMS.Application.Services
 
             Activity activity = _mapper.Map<Activity>(activityViewModel);
             activity.StartDate = activity.StartDate.Date;
-            activity.StartDate = activity.EndDate.Date;
+            activity.EndDate = activity.EndDate.Date;
             activity.CreatedDate = DateTime.Now;
             activity.CreatedBy = activity.OrgId;
             activity.IsApproved = true;
@@ -223,7 +223,7 @@ namespace VMS.Application.Services
 
             activity = _mapper.Map(activityViewModel, activity);
             activity.StartDate = activity.StartDate.Date;
-            activity.StartDate = activity.EndDate.Date;
+            activity.EndDate = activity.EndDate.Date;
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;
 

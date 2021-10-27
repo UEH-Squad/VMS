@@ -487,6 +487,7 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Activity, bool>>>()
                 {
+                    a => !a.IsDeleted,
                     a => a.OrgId == filter.OrgId,
                     a => a.Name.ToUpper().Trim().Contains(filter.SearchValue.ToUpper().Trim())
                 };
@@ -495,6 +496,7 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Activity, bool>>>()
                 {
+                    a => !a.IsDeleted,
                     a => a.OrgId == filter.OrgId,
                     GetFilterOrgActByDate(filter.IsTookPlace, filter.IsHappenning),
                     a => a.IsVirtual == filter.IsVirtual || a.IsActual == filter.IsActual || !filter.IsVirtual && !filter.IsActual

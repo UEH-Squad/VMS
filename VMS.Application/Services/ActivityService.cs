@@ -489,6 +489,38 @@ namespace VMS.Application.Services
             }
         }
 
+        public async Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime = new())
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    GetConditionByStatusAct(userId, statusAct, dateTime)
+                },
+                Includes = a => a.Include(x => x.Organizer)
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            var activityViewModels = _mapper.Map<List<ActivityViewModel>>(activities);
+
+            activityViewModels.ForEach(a => a.Province = GetActProvince(a.ActivityAddresses));
+
+            return activityViewModels;
+        }
+
+        private static Expression<Func<Activity, bool>> GetConditionByStatusAct(string userId, StatusAct statusAct, DateTime dateTime)
+        {
+            return statusAct switch
+            {
+                StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
+                StatusAct.Ended => x => x.EndDate < DateTime.Now && x.Recruitments.Any(x => x.UserId == userId),
+                _ => x => x.StartDate <= dateTime && x.EndDate >= dateTime && x.Recruitments.Any(x => x.UserId == userId),
+            };
+        }
+
         public async Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(FilterOrgActivityViewModel filter, string searchValue, int currentPage, bool isSearch = true)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -572,38 +604,6 @@ namespace VMS.Application.Services
             }
 
             return x => true;
-        }
-
-        public async Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime = new())
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>()
-                {
-                    GetConditionByStatusAct(userId, statusAct, dateTime)
-                },
-                Includes = a => a.Include(x => x.Organizer)
-            };
-
-            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
-
-            var activityViewModels = _mapper.Map<List<ActivityViewModel>>(activities);
-
-            activityViewModels.ForEach(a => a.Province = GetActProvince(a.ActivityAddresses));
-
-            return activityViewModels;
-        }
-
-        private static Expression<Func<Activity, bool>> GetConditionByStatusAct(string userId, StatusAct statusAct, DateTime dateTime)
-        {
-            return statusAct switch
-            {
-                StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
-                StatusAct.Ended => x => x.EndDate < DateTime.Now && x.Recruitments.Any(x => x.UserId == userId),
-                _ => x => x.StartDate <= dateTime && x.EndDate >= dateTime && x.Recruitments.Any(x => x.UserId == userId),
-            };
         }
     }
 }

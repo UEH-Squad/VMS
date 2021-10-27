@@ -99,7 +99,7 @@ namespace VMS.Pages.ActivitySearchPage
             IdentityService.UpdateUser(currentUser);
         }
 
-        private void ShowModal(int id)
+        private async Task ShowSignupAsync(int id)
         {
             ModalParameters parameters = new();
             parameters.Add("ActivityId", id);
@@ -112,7 +112,7 @@ namespace VMS.Pages.ActivitySearchPage
                 UseCustomLayout = true,
             };
 
-            Modal.Show<Signup>("", parameters, options);
+            await Modal.Show<Signup>("", parameters, options).Result;
         }
         private void ShowRequireSignup()
         {

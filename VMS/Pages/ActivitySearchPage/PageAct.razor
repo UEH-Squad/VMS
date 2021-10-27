@@ -30,7 +30,14 @@
                                                 <Authorized>
                                                         <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(currentUser.Favorites.Any(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
 
-                                                        <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng ký</button>
+                                                        @if (currentUser.Recruitments.Any(f => f.ActivityId == item.Id) || item.CloseDate < DateTime.Now.Date)
+                                                        {
+                                                            <button class="btn bg-grey">Đăng ký</button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button @onclick="() => ShowSignupAsync(item.Id)" class="btn">Đăng ký</button>
+                                                        }
                                                 </Authorized>
                                                 <NotAuthorized>
                                                     <button @onclick="() => ShowRequireSignup()" class="btn">Đăng ký</button>

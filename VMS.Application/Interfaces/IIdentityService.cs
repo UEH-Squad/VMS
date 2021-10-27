@@ -20,7 +20,7 @@ namespace VMS.Application.Interfaces
 
         User GetCurrentUserWithAddresses();
 
-        User GetCurrentUserWithFavoritesAndRecruitments();
+        User GetUserWithFavoritesAndRecruitmentsById(string userId);
 
         void UpdateUser(User user);
     }

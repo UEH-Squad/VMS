@@ -81,12 +81,11 @@ namespace VMS.Application.Services
             return string.Empty;
         }
 
-        public User GetCurrentUserWithFavoritesAndRecruitments()
+        public User GetUserWithFavoritesAndRecruitmentsById(string userId)
         {
-            string currentUserId = GetCurrentUserId();
             return Task.Run(() => _userManager.Users.Include(x => x.Favorites)
                                                     .Include(x => x.Recruitments).ThenInclude(x => x.Activity)
-                                                    .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
+                                                    .SingleOrDefaultAsync(x => x.Id == userId)).Result;
         }
 
         public void UpdateUser(User user)

@@ -23,7 +23,7 @@
                             </a>
                         </div>
                         <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                            <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
 
                             <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-2">Xóa</li>
 
@@ -45,10 +45,10 @@
                         }
                         @* Phần này của Bằng e không đụng tới *@
 
-                        @if (HaveFav)
+                        @if (HaveFav && !string.IsNullOrEmpty(CurrentUserId))
                         {
-                            <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
-                                <span class="material-icons @(currentUser.Favorites.Any(x => x.ActivityId == item.Id) ? "isfav" : "nonefav")">@(currentUser.Favorites.Any(x => x.ActivityId == item.Id) ? "favorite" : "favorite_border")</span>
+                            <a class="position-absolute favorite" @onclick="() => AnimateHeart(item)">
+                                <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
                             </a>
                         }
                     </div>
@@ -57,7 +57,7 @@
         }
 
 
-        @if (HaveLinkAll && Datas.Count >= 4)
+        @if (HaveLinkAll)
         {
             <div class="act__linkAll text-end mt-5">
                 <a href="@Routes.ActivitySearch/@QueryString">@TitleLinkALl >>></a>

@@ -2,6 +2,9 @@
 {
     public class FilterOrgActivityViewModel
     {
+        public bool IsSearch { get; set; }
+        public string SearchValue { get; set; }
+
         public string OrgId { get; set; }
         public bool IsHappenning { get; set; }
         public bool IsTookPlace { get; set; }

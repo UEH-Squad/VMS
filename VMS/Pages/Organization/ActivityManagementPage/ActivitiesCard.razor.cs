@@ -20,10 +20,6 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         [Parameter]
         public FilterOrgActivityViewModel Filter { get; set; }
         [Parameter]
-        public bool IsSearch { get; set; } = false;
-        [Parameter]
-        public string SearchValue { get; set; } = "";
-        [Parameter]
         public bool IsOrgProfile { get; set; } = false;
         [CascadingParameter]
         public IModalService Modal { get; set; }
@@ -52,12 +48,12 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 
         protected override async Task OnParametersSetAsync()
         {
-            data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, SearchValue, 1, IsSearch);
+            data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, 1);
         }
 
         private async Task HandlePageChangedAsync(bool isPaging = false)
         {
-            data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, SearchValue, page, IsSearch);
+            data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, page);
             StateHasChanged();
             if (isPaging)
             {

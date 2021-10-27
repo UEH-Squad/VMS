@@ -8,8 +8,6 @@ namespace VMS.Pages.Organization.ActivityManagementPage
     {
         private string orgId;
         private FilterOrgActivityViewModel filter = new();
-        private string searchValue = string.Empty;
-        private bool isSearch = false;
 
         [CascadingParameter] private string OrgId { get; set; }
 
@@ -24,14 +22,14 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 
         private void SearchValueChanged(string searchValue)
         {
-            this.searchValue = searchValue;
-            isSearch = !string.IsNullOrEmpty(searchValue);
+            filter.SearchValue = searchValue;
+            filter.IsSearch = true;
         }
 
         private void FilterChanged(FilterOrgActivityViewModel filter)
         {
             this.filter = filter;
-            isSearch = false;
+            this.filter.IsSearch = false;
         }
     }
 }

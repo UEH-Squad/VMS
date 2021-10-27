@@ -32,5 +32,7 @@ namespace VMS.Application.Interfaces
         Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false);
 
         Task UpdateActFavorAsync(int activityId, string userId);
+
+        Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(FilterOrgActivityViewModel filter, string searchValue, int currentPage, bool isSearch = true);
     }
 }

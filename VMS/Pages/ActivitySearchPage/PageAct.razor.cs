@@ -36,6 +36,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         [CascadingParameter]
         public IModalService Modal { get; set; }
+        [CascadingParameter]
+        public string CurrentUserId { get; set; }
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -63,7 +65,7 @@ namespace VMS.Pages.ActivitySearchPage
                 userCoordinate = await AddressLocationService.GetCoordinateAsync(userAddresses);
             }
 
-            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+            currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
         }
 
         protected override async Task OnParametersSetAsync()

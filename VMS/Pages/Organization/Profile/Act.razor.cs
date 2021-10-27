@@ -7,12 +7,14 @@ using System.Collections.Generic;
 using Microsoft.JSInterop;
 using Blazored.Modal.Services;
 using VMS.Common;
+using VMS.Domain.Models;
+using System.Linq;
 
 namespace VMS.Pages.Organization.Profile
 {
     public partial class Act : ComponentBase
     {
-        readonly int id = -1;
+        private User currentUser;
 
         [Parameter] public bool HaveControl { get; set; }
         [Parameter] public bool HaveFav { get; set; }
@@ -23,22 +25,28 @@ namespace VMS.Pages.Organization.Profile
         [Parameter] public bool OverridesImg { get; set; } = false;
         [Parameter] public bool HaveBorder { get; set; } = true;
         [Parameter] public bool HaveLinkAll { get; set; } = false;
-        [CascadingParameter] public IModalService Modal { get; set; }
         [Parameter] public bool Owner { get; set; }
-        [Parameter] public List<ActivityViewModel> Datas { get; set; }
         [Parameter] public string QueryString { get; set; }
         [Parameter] public bool IsHomepage { get; set; } = true;
         [Parameter] public bool IsOrgProfile { get; set; } = true;
-        [CascadingParameter] public string UserId { get; set; }
         [Parameter] public bool IsUser { get; set; } = true;
         [Parameter] public string TitleLinkALl { get; set; }
+        [Parameter] public List<ActivityViewModel> Datas { get; set; }
+
+        [CascadingParameter] private string CurrentUserId { get; set; }
+        [CascadingParameter] public IModalService Modal { get; set; }
 
         [Inject]
         private IActivityService ActivityService { get; set; }
         [Inject]
         private IIdentityService IdentityService { get; set; }
         [Inject]
-        private NavigationManager NavigationManager{ get; set; }
+        private NavigationManager NavigationManager { get; set; }
+
+        protected override void OnInitialized()
+        {
+            currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
+        }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -54,10 +62,11 @@ namespace VMS.Pages.Organization.Profile
             Datas.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
         }
 
-        private async Task AnimateHeart(int id)
+        private void AnimateHeart(int id)
         {
-            string userId = IdentityService.GetCurrentUserId();
-            await ActivityService.UpdateActFavorAsync(id, userId);
+            var favorite = currentUser.Favorites.FirstOrDefault(x => x.ActivityId == id);
+            currentUser.Favorites.Remove(favorite);
+
             var act = Datas.Find(a => a.Id == id);
             Datas.Remove(act);
         }
@@ -84,8 +93,7 @@ namespace VMS.Pages.Organization.Profile
             {
                 var act = Datas.Find(a => a.Id == id);
                 await ActivityService.UpdateStatusActAsync(id, act.IsClosed, true);
-                //Datas.Remove(act);
-                NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
+                Datas.Remove(act);
             }
         }
 
@@ -103,7 +111,7 @@ namespace VMS.Pages.Organization.Profile
                 UseCustomLayout = true,
             };
 
-            var result = await Modal.Show<CloseConfirm>("",parameters, options).Result;
+            var result = await Modal.Show<CloseConfirm>("", parameters, options).Result;
 
             if ((bool)result.Data)
             {

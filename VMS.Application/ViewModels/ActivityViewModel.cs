@@ -25,11 +25,10 @@ namespace VMS.Application.ViewModels
         public double Rating { get; set; }
         public bool IsMenu { get; set; }
         public bool IsFav { get; set; }
-        public int Favorites { get; set; }
         public string Province { get; set; }
 
         public User Organizer { get; set; }
         public ICollection<ActivityAddress> ActivityAddresses { get; set; }
-        public List<ActivitySkill> ActivitySkills { get; set; }
+        public ICollection<Recruitment> Recruitments { get; set; }
     }
 }

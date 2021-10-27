@@ -6,7 +6,6 @@ using Blazored.Modal;
 using System.Collections.Generic;
 using Microsoft.JSInterop;
 using Blazored.Modal.Services;
-using VMS.Common;
 using VMS.Domain.Models;
 using System.Linq;
 using System;
@@ -44,9 +43,13 @@ namespace VMS.Pages.Organization.Profile
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
             currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
+            if (currentUser is not null && Datas is not null)
+            {
+                Datas.ForEach(a => a.IsFav = currentUser.Favorites.Any(x => x.ActivityId == a.Id));
+            }
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -63,16 +66,16 @@ namespace VMS.Pages.Organization.Profile
             Datas.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
         }
 
-        private void AnimateHeart(int activityId)
+        private void AnimateHeart(ActivityViewModel activity)
         {
-            Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == activityId);
+            Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == activity.Id);
 
             if (favorite is null)
             {
                 currentUser.Favorites.Add(new()
                 {
                     UserId = CurrentUserId,
-                    ActivityId = activityId,
+                    ActivityId = activity.Id,
                     CreatedDate = DateTime.Now
                 });
             }
@@ -80,6 +83,8 @@ namespace VMS.Pages.Organization.Profile
             {
                 currentUser.Favorites.Remove(favorite);
             }
+
+            activity.IsFav = !activity.IsFav;
 
             IdentityService.UpdateUser(currentUser);
         }

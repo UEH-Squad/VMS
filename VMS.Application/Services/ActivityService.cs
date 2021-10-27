@@ -48,6 +48,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
+                    a => a.IsApproved,
                     a => a.EndDate >= DateTime.Now.Date,
                     a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim())
                 },
@@ -71,6 +72,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
+                    a => a.IsApproved,
                     a => a.EndDate >= DateTime.Now.Date,
                     a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual || !filter.Virtual && !filter.Actual,
                     a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
@@ -119,8 +121,7 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Activity activity = _mapper.Map<Activity>(activityViewModel);
-            activity.StartDate = activity.StartDate.Date;
-            activity.EndDate = activity.EndDate.Date;
+
             activity.CreatedDate = DateTime.Now;
             activity.CreatedBy = activity.OrgId;
             activity.IsApproved = true;
@@ -212,8 +213,7 @@ namespace VMS.Application.Services
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
             activity = _mapper.Map(activityViewModel, activity);
-            activity.StartDate = activity.StartDate.Date;
-            activity.EndDate = activity.EndDate.Date;
+
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;
 
@@ -300,6 +300,7 @@ namespace VMS.Application.Services
                 {
                     a => a.OrgId == id,
                     a => !a.IsDeleted,
+                    a => a.IsApproved,
                     GetFilterOrgActByDate(status == StatusAct.Ended, status == StatusAct.Current)
                 },
                 Includes = activities => activities.Include(x => x.Favorites)
@@ -378,14 +379,14 @@ namespace VMS.Application.Services
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest] && orderList[ActOrderBy.Hottest])
             {
                 return x => x.OrderByDescending(a => a.Id)
-                            .ThenByDescending(a => a.MemberQuantity)
+                            .ThenByDescending(a => a.Recruitments.Count)
                             .ThenBy(a => a.Location.Distance(userLocation));
             }
 
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Hottest])
             {
                 return x => x.OrderByDescending(a => a.Id)
-                            .ThenByDescending(a => a.MemberQuantity);
+                            .ThenByDescending(a => a.Recruitments.Count);
             }
 
             if (orderList[ActOrderBy.Newest] && orderList[ActOrderBy.Nearest])
@@ -396,13 +397,13 @@ namespace VMS.Application.Services
 
             if (orderList[ActOrderBy.Hottest] && orderList[ActOrderBy.Nearest])
             {
-                return x => x.OrderByDescending(a => a.MemberQuantity)
+                return x => x.OrderByDescending(a => a.Recruitments.Count)
                             .ThenBy(a => a.Location.Distance(userLocation));
             }
 
             if (orderList[ActOrderBy.Hottest])
             {
-                return x => x.OrderByDescending(a => a.MemberQuantity);
+                return x => x.OrderByDescending(a => a.Recruitments.Count);
             }
 
             if (orderList[ActOrderBy.Nearest])
@@ -453,7 +454,7 @@ namespace VMS.Application.Services
             {
                 StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
                 StatusAct.Ended => x => x.EndDate.Date < dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
-                _ => x => x.OpenDate <= dateTime.Date && x.EndDate >= dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
+                _ => x => x.OpenDate.Date <= dateTime.Date && x.EndDate.Date >= dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
             };
         }
 
@@ -494,9 +495,9 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Activity, bool>>>()
                 {
+                    a => a.OrgId == filter.OrgId,
                     GetFilterOrgActByDate(filter.IsTookPlace, filter.IsHappenning),
-                    a => a.IsVirtual == filter.IsVirtual || a.IsActual == filter.IsActual || !filter.IsVirtual && !filter.IsActual,
-                    a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(a.OrgId)
+                    a => a.IsVirtual == filter.IsVirtual || a.IsActual == filter.IsActual || !filter.IsVirtual && !filter.IsActual
                 };
             }
         }
@@ -515,7 +516,7 @@ namespace VMS.Application.Services
 
             if (isHappenning)
             {
-                return x => x.EndDate >= DateTime.Now.Date && x.OpenDate.Date <= DateTime.Now.Date;
+                return x => x.EndDate.Date >= DateTime.Now.Date && x.OpenDate.Date <= DateTime.Now.Date;
             }
 
             return x => true;

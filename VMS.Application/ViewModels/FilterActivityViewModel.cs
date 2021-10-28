@@ -4,6 +4,9 @@ namespace VMS.Application.ViewModels
 {
     public class FilterActivityViewModel
     {
+        public string SearchValue { get; set; }
+        public bool IsSearch { get; set; }
+
         public bool Virtual { get; set; }
         public bool Actual { get; set; }
         public string OrgId { get; set; }

@@ -26,11 +26,7 @@ namespace VMS.Pages.ActivitySearchPage
         private PaginatedList<ActivityViewModel> pagedResult = new(new(), 0, 1, 1);
 
         [Parameter]
-        public bool IsSearch { get; set; }
-        [Parameter]
         public Dictionary<ActOrderBy, bool> OrderList { get; set; }
-        [Parameter]
-        public string SearchValue { get; set; }
         [Parameter]
         public FilterActivityViewModel Filter { get; set; }
 
@@ -70,12 +66,12 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnParametersSetAsync()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, 1, OrderList, userCoordinate);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, 1, OrderList, userCoordinate);
         }
 
         private async Task HandlePageChanged()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page, OrderList, userCoordinate);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, page, OrderList, userCoordinate);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

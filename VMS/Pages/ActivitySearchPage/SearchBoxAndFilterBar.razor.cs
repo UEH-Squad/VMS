@@ -148,12 +148,20 @@ namespace VMS.Pages.ActivitySearchPage
             await FilterChanged.InvokeAsync(Filter);
         }
 
-        private async Task ClearFilter()
+        private async Task ClearFilterAsync()
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
             organizationChoosenValue = "Tổ chức";
-            Filter = new FilterActivityViewModel();
+
+            isCityShow = false;
+            isDistrictShow = false;
+            isOrganizationShow = false;
+
+            districts = new();
+            provinces = await AddressService.GetAllProvincesAsync();
+
+            Filter = new();
             await FilterChanged.InvokeAsync(Filter);
         }
 

@@ -56,11 +56,6 @@ namespace VMS.Application.Services
                                                     .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
         }
 
-        public List<User> GetAllOrganizers()
-        {
-            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync(Role.Organization.ToString())).Result;
-        }
-
         public string GetCurrentUserAddress()
         {
             User user = Task.Run(() => _userManager.Users.Include(u => u.UserAddresses)

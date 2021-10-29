@@ -6,9 +6,9 @@ using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
 {
-    public interface IListVolunteerService
+    public interface IRecruitmentService
     {
         Task<PaginatedList<ListVolunteerViewModel>> GetListVolunteersAsync(int actId, string searchValue, bool isDeleted, int currentPage);
-        Task UpdateVounteerAsync(int id, bool isDeleted);
+        Task UpdateVounteerAsync(List<int> list, bool isDeleted);
     }
 }

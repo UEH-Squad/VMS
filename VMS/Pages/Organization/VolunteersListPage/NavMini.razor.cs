@@ -49,7 +49,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         }
         [CascadingParameter] public IModalService Modal { get; set; }
         [Inject]
-        private IListVolunteerService ListVolunteerService { get; set; }
+        private IRecruitmentService ListVolunteerService { get; set; }
         async Task ShowConfirm()
         {
             var parameters = new ModalParameters();
@@ -63,11 +63,8 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 var result = await Modal.Show<ConfirmDelList>("", parameters, options).Result;
                 if ((bool)result.Data)
                 {
-                    foreach (var item in CheckedList)
-                    {
-                        await ListVolunteerService.UpdateVounteerAsync(item, !ShowDeletedList);
-                    }
-                await IsDeleted.InvokeAsync(ShowDeletedList);
+                    await ListVolunteerService.UpdateVounteerAsync(CheckedList, !ShowDeletedList);
+                    await IsDeleted.InvokeAsync(ShowDeletedList);
                 }
 
         }

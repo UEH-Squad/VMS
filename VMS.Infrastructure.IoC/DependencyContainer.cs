@@ -59,7 +59,7 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFacultyService, FacultyService>();
-            services.AddTransient<IListVolunteerService, ListVolunteerService>();
+            services.AddTransient<IRecruitmentService, RecruitmentService>();
             services.AddTransient<IExportExcelService, ExportExcelService>();
         }
 

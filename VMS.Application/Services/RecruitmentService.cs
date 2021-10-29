@@ -14,9 +14,9 @@ using VMS.Infrastructure.Data.Context;
 
 namespace VMS.Application.Services
 {
-    public class ListVolunteerService : BaseService, IListVolunteerService
+    public class RecruitmentService : BaseService, IRecruitmentService
     {
-        public ListVolunteerService(IRepository repository,
+        public RecruitmentService(IRepository repository,
                        IDbContextFactory<VmsDbContext> dbContextFactory,
                        IMapper mapper) : base(repository, dbContextFactory, mapper)
         {}
@@ -37,33 +37,28 @@ namespace VMS.Application.Services
                 PageIndex = currentPage,
                 PageSize = 20
             };
+           
             PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
             PaginatedList<ListVolunteerViewModel> paginatedList = new(
-                recruitments.Items.Select(x =>  new ListVolunteerViewModel()
-                    {
-                    Id = x.Id,
-                    Desire = x.Desire,
-                    IsCommit = x.IsCommit,
-                    UserId = x.UserId,
-                    PhoneNumber = x.PhoneNumber,
-                    User = x.User
-                }).ToList(),
+               _mapper.Map<List<ListVolunteerViewModel>>(recruitments.Items),
                 recruitments.TotalItems,
                 currentPage,
                 recruitments.PageSize
-                );
+                ) ;
 
             return paginatedList;
 
         }
 
-        public async Task UpdateVounteerAsync(int id, bool isDeleted)
+        public async Task UpdateVounteerAsync(List<int> list, bool isDeleted)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Recruitment rec = await _repository.GetByIdAsync<Recruitment>(dbContext, id);
-            rec.IsDeleted = isDeleted;
-            await _repository.UpdateAsync(dbContext, rec);
+            foreach(var item in list)
+            {
+                Recruitment rec = await _repository.GetByIdAsync<Recruitment>(dbContext, item);
+                rec.IsDeleted = isDeleted;
+            }
+            dbContext.SaveChanges();
         }
         
     }

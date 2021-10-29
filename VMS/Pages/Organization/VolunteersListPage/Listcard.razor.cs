@@ -23,7 +23,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         [Parameter]
         public int ActId { get; set; }
         [Inject]
-        private IListVolunteerService ListVolunteerService { get; set; }
+        private IRecruitmentService ListVolunteerService { get; set; }
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
 

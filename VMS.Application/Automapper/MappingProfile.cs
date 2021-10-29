@@ -43,6 +43,7 @@ namespace VMS.Application.Automapper
                 })));
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
+            CreateMap<Recruitment, ListVolunteerViewModel>();
         }
     }
 }

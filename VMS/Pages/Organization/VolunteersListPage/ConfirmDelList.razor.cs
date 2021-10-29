@@ -15,16 +15,16 @@ namespace VMS.Pages.Organization.VolunteersListPage
         bool isConfirm = true;
         bool isSuccess;
 
-        private async Task CloseModal()
+        private async Task CloseModalAsync()
         {
             await Modal.CloseAsync(ModalResult.Ok<bool>(isSuccess));
         }
 
-        private async Task ActionSuccess()
+        private async Task ActionSuccessAsync()
         {
             isConfirm = !isConfirm;
             isSuccess = true;
-            await CloseModal();
+            await CloseModalAsync();
         }
     }
 }

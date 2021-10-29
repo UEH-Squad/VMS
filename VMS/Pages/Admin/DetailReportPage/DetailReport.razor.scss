@@ -133,7 +133,7 @@
         &__reason, &__discript, &__proof {
 
             &--text {
-                font-size: 18px;
+                font-size: 16px;
 
                 span {
                     color: $red;
@@ -144,10 +144,11 @@
                 width: 100%;
                 border: 1px solid $grey-input;
                 border-radius: 5px;
-                font-size: 18px;
-                color: $grey-text;
+                font-size: 16px;
+                color: $grey-icon;
                 padding: 10px 10px 10px 15px;
                 overflow-y: scroll;
+                background:$white;
 
                 &::-webkit-scrollbar {
                     width: 20px;
@@ -156,7 +157,7 @@
                 &::-webkit-scrollbar-thumb {
                     background-color: $grey-icon;
                     border-radius: 10px;
-                    border: 5px solid #fafafa;
+                    border: 5px solid $white;
                 }
             }
         }
@@ -168,13 +169,13 @@
             border-radius: 10px;
 
             @include on('xl') {
-                height: 220px;
-                width: 220px;
+                height: 205px;
+                width: 205px;
             }
 
             @include on('xxl') {
-                height: 240px;
-                width: 240px;
+                height: 215px;
+                width: 215px;
             }
         }
     }

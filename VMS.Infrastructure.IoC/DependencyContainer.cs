@@ -61,7 +61,7 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IFacultyService, FacultyService>();
         }
 
-        public static async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IActivityService activityService)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env, IActivityService activityService)
         {
             if (env.IsDevelopment())
             {

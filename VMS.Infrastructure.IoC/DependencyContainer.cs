@@ -66,11 +66,12 @@ namespace VMS.Infrastructure.IoC
             if (env.IsDevelopment())
             {
                 app.UseHangfireDashboard("/jobs");
-                RecurringJob.AddOrUpdate("dailyClose", () => activityService.CloseActivityDailyAsync(), Cron.Daily);
             }
             else
             {
             }
+
+            RecurringJob.AddOrUpdate("dailyClose", () => activityService.CloseActivityDailyAsync(), Cron.Daily);
         }
     }
 }

@@ -5,7 +5,7 @@
 /*#region mixins */
 /*#endregion */
 .act-filter__type__child--red {
-  color: #E10B0B; }
+  color: #F14747; }
 
 input[type="checkbox"] {
   -webkit-appearance: none;
@@ -50,7 +50,8 @@ input[type="checkbox"] {
   .filter-item .material-icons-outlined {
     top: 50%;
     transform: translateY(-50%);
-    right: 15px; }
+    right: 15px;
+    cursor: pointer; }
 
 .filter-item__dropdown {
   padding: 15px 22px;

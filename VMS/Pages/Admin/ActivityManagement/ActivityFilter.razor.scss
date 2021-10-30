@@ -1,7 +1,7 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
 .act-filter__type__child--red {
-    color: $red-warning;
+    color: $red;
 }
 
 input[type="checkbox"] {
@@ -64,6 +64,7 @@ input[type="checkbox"] {
         top: 50%;
         transform: translateY(-50%);
         right: 15px;
+        cursor: pointer;
     }
 }
 

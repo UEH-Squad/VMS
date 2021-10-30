@@ -212,11 +212,7 @@ namespace VMS.Application.Services
             activity.ActivitySkills = MapSkills(activityViewModel, activity);
             activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
 
-            // Check if any update on Start Date (to extend Register time..v.v)
-            if (activity.StartDate > DateTime.Now)
-            {
-                activity.IsClosed = false;
-            }
+            activity.IsClosed = activity.CloseDate.Date < DateTime.Now.Date;
 
             await _repository.UpdateAsync(dbContext, activity);
         }
@@ -525,7 +521,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    a => a.StartDate <= DateTime.Now,
+                    a => a.CloseDate.Date < DateTime.Now.Date,
                     a => !a.IsClosed
                 }
             };

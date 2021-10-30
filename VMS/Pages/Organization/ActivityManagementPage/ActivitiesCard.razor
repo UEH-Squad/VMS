@@ -13,8 +13,13 @@
             </i>
             <ul class="act-menu p-2 position-absolute @(item.IsMenu ? "d-block" : "d-none")">
                 <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+
                 <li @onclick="(() => ShowDeleteModalAsync(item))" class="delete pb-2">Xóa</li>
-                <li @onclick="(() => ShowCloseModalAsync(item))" class="close pb-2 @(item.CloseDate < DateTime.Now.Date ? "d-none" : "")">@(item.IsClosed ? "Mở" : "Đóng") hoạt động</li>
+
+                @if (item.CloseDate.Date >= DateTime.Now.Date)
+                {
+                    <li @onclick="(() => ShowCloseModalAsync(item))" class="close pb-2">@(item.IsClosed ? "Mở" : "Đóng") hoạt động</li>
+                }
             </ul>
             <div class="org-card__img">
                 <img src="@item.Banner" alt="photo">
@@ -71,15 +76,15 @@
                     }
                 </div>
             </div>
-                @if ((item.IsClosed || item.CloseDate < DateTime.Now.Date) && (DateTime.Now.Date <= item.EndDate))
-                {
-                    <div class="org-card__noti d-flex align-items-center position-absolute">
-                        <span class="material-icons-outlined">
-                            error
-                        </span>
-                        <i>Đã đóng đăng ký</i>
-                    </div>
-                }
+            @if ((item.IsClosed || item.CloseDate < DateTime.Now.Date) && (DateTime.Now.Date <= item.EndDate))
+            {
+                <div class="org-card__noti d-flex align-items-center position-absolute">
+                    <span class="material-icons-outlined">
+                        error
+                    </span>
+                    <i>Đã đóng đăng ký</i>
+                </div>
+            }
         </div>
     }
 }

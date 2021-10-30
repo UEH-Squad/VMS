@@ -1,15 +1,15 @@
 using Blazored.Modal;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using VMS.Application.Services;
+using VMS.Application.Interfaces;
 using VMS.Areas.Identity;
 using VMS.Domain.Models;
 using VMS.Infrastructure.Data.Context;
@@ -56,12 +56,16 @@ namespace VMS
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddBlazoredModal();
 
+            // Hangfire
+            GlobalConfiguration.Configuration
+                .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"));
+
             // Custom registrations
             DependencyContainer.RegisterServices(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IActivityService activityService)
         {
             if (env.IsDevelopment())
             {
@@ -76,7 +80,7 @@ namespace VMS
             }
 
             // Custom configurations
-            DependencyContainer.Configure(app, env);
+            DependencyContainer.Configure(app, env, activityService);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -62,7 +62,7 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IMailService, MailService>();
         }
 
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env, IActivityService activityService)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +71,8 @@ namespace VMS.Infrastructure.IoC
             else
             {
             }
+
+            RecurringJob.AddOrUpdate("dailyClose", () => activityService.CloseActivityDailyAsync(), Cron.Daily);
         }
     }
 }

@@ -47,8 +47,8 @@
                     {
                         <li>
                             <div class="dropdown-item" href="#">
-                                <input @onchange="x => { CheckboxClicked(reason, x.Value); }" type="checkbox" class="dropdown-item--checkbox" />
-                                <label for="checkbox-1">@reason</label>
+                                <input id="@reason" @onchange="x => { CheckboxClicked(reason, x.Value); }" type="checkbox" class="dropdown-item--checkbox" />
+                                <label for="@reason">@reason</label>
                             </div>
                         </li>
                     }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using VMS.Application.ViewModels;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -24,7 +25,15 @@ namespace VMS.Application.Automapper
             CreateMap<User, CreateUserProfileViewModel>();
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
-            CreateMap<ReportViewModel, Feedback>();
+            MapReportToFeedback();
+        }
+
+        private void MapReportToFeedback() {
+            CreateMap<ReportViewModel, Feedback>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.DesReport))
+                .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
         }
     }
 }

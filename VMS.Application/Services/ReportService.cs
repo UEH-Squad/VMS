@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -27,10 +23,6 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Feedback report = _mapper.Map<Feedback>(reportViewModel);
-            report.CreatedDate = DateTime.Now;
-            report.CreatedBy = report.UserId;
-            report.Content = reportViewModel.DesReport;
-            report.ActivityId = reportViewModel.ActivityId;
 
             report.ReasonReports = reportViewModel.Reasons.Select(x => new ReasonReport() 
             { 

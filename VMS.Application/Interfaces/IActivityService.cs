@@ -34,5 +34,7 @@ namespace VMS.Application.Interfaces
         Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime);
 
         Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(FilterOrgActivityViewModel filter, int currentPage);
+
+        Task CloseActivityDailyAsync();
     }
 }

@@ -319,7 +319,7 @@ namespace VMS.Application.Services
             return _mapper.Map<List<UserWithActivityViewModel>>(activities);
         }
 
-        public async Task<List<ViewActivityViewModel>> GetOtherActivities(string orgId, int[] excludedActitivyIds)
+        public async Task<List<ViewActivityViewModel>> GetOtherActivitiesAsync(string orgId, int[] excludedActitivyIds)
         {
             if (string.IsNullOrEmpty(orgId))
             {

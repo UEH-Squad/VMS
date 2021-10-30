@@ -33,6 +33,6 @@ namespace VMS.Application.Interfaces
 
         Task CloseActivityDailyAsync();
 
-        Task<List<ViewActivityViewModel>> GetOtherActivities(string orgId, int[] excludedActitivyIds);
+        Task<List<ViewActivityViewModel>> GetOtherActivitiesAsync(string orgId, int[] excludedActitivyIds);
     }
 }

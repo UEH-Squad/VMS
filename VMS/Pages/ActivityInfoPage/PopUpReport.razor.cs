@@ -46,7 +46,7 @@ namespace VMS.Pages.ActivityInfoPage
             report.Reasons = Reason;
             report.Images = Image;
 
-            await ReportService.AddReport(report);
+            await ReportService.AddReportAsync(report);
         }
 
         private static List<string> Reasons => new()

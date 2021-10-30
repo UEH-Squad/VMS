@@ -37,7 +37,7 @@ namespace VMS.Pages.ActivityInfoPage
 
         protected override async Task OnParametersSetAsync()
         {
-            otherActivities = await ActivityService.GetOtherActivities(OrgId, new[] { ActivityId });
+            otherActivities = await ActivityService.GetOtherActivitiesAsync(OrgId, new[] { ActivityId });
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

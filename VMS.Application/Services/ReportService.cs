@@ -12,27 +12,27 @@ namespace VMS.Application.Services
 {
     public class ReportService : BaseService, IReportService
     {
-        public ReportService(IIdentityService identityService,
-                                   IRepository repository,
-                                   IDbContextFactory<VmsDbContext> dbContextFactory,
-                                   IMapper mapper) : base(repository, dbContextFactory, mapper)
+        public ReportService(IRepository repository,
+                             IDbContextFactory<VmsDbContext> dbContextFactory,
+                             IMapper mapper) : base(repository, dbContextFactory, mapper)
         {
         }
-        public async Task AddReport(ReportViewModel reportViewModel)
+
+        public async Task AddReportAsync(ReportViewModel reportViewModel)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Feedback report = _mapper.Map<Feedback>(reportViewModel);
 
-            report.ReasonReports = reportViewModel.Reasons.Select(x => new ReasonReport() 
-            { 
-                Reason = x, 
-                Feedback = report 
+            report.ReasonReports = reportViewModel.Reasons.Select(x => new ReasonReport()
+            {
+                Reason = x,
+                Feedback = report
             }).ToList();
 
             report.ImageReports = reportViewModel.Images.Select(x => new ImageReport()
             {
-                Image= x,
+                Image = x,
                 Feedback = report
             }).ToList();
 

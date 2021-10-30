@@ -27,64 +27,43 @@ namespace VMS.Application.Services
             _userManager = userManager;
         }
 
-        private User CheckRoleOrg(string orgId)
+        private bool IsInRole(User org, Role role)
         {
-            User user = Task.Run(() => _userManager.FindByIdAsync(orgId)).Result;
-            if (user is null)
-            {
-                return null;
-            }
+            return Task.Run(() => _userManager.IsInRoleAsync(org, role.ToString())).Result;
+        }
 
-            bool orgRole = Task.Run(() => _userManager.IsInRoleAsync(user, Role.Organization.ToString())).Result;
-            return orgRole switch
-            {
-                true => user,
-                _ => null
-            };
+        private static void CalculateTotalAndRankRating(ICollection<Activity> activities, out int totalRating, out double totalRank)
+        {
+            var recruitmentRatings = activities.SelectMany(x => x.Recruitments)
+                                                    .SelectMany(x => x.RecruitmentRatings)
+                                                    .Where(x => !x.IsOrgRating && !x.IsReport);
+            totalRating = recruitmentRatings.Count();
+            totalRank = recruitmentRatings.Sum(x => x.Rank);
         }
 
         public UserViewModel GetOrgFull(string id)
         {
-            User org;
-            if (CheckRoleOrg(id) != null)
-            {
-                org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas)
+            User org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas)
                                                        .ThenInclude(x => x.Area)
                                                        .Include(x => x.Activities)
-                                                       .Include(x => x.Recruitments)
+                                                       .ThenInclude(x => x.Recruitments)
                                                        .ThenInclude(x => x.RecruitmentRatings)
-                                                       .SingleOrDefaultAsync(x => x.Id == id)).Result;
-                UserViewModel orgRatingViewModels = new();
-                orgRatingViewModels = _mapper.Map<UserViewModel>(org);
-                List<Recruitment> recruitments = org.Recruitments.ToList();
-                double quantityRating = 0;
-                double sumRating = 0;
-                foreach (var rcm in recruitments)
-                {
-                    var item = rcm.RecruitmentRatings.FirstOrDefault(r => r.IsOrgRating == false);
-                    if (item != null)
-                    {
-                        quantityRating++;
-                        sumRating += item.Rank;
-                    }
-                }
-                orgRatingViewModels.QuantityRating = quantityRating;
-                if (quantityRating != 0)
-                {
-                    orgRatingViewModels.AverageRating = (float)Math.Round(sumRating / quantityRating, 1);
-                }
-                else
-                {
-                    orgRatingViewModels.AverageRating = 5;
-                }
+                                                       .FirstOrDefault(x => x.Id == id)).Result;
 
-                return orgRatingViewModels;
+            if (IsInRole(org, Role.Organization))
+            {
+                UserViewModel orgViewModel = _mapper.Map<UserViewModel>(org);
+
+                CalculateTotalAndRankRating(org.Activities, out int totalRating, out double totalRank);
+                orgViewModel.QuantityRating = totalRating;
+                orgViewModel.AverageRating = totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5;
+
+                return orgViewModel;
             }
             else
             {
                 return null;
             }
-
         }
 
         public async Task UpdateUserAsync(UpdateUserViewModel updateUserViewModel, string userId)

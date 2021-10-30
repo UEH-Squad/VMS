@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Enums;
 using VMS.Common.Extensions;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -67,7 +68,7 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnParametersSetAsync()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page, OrderList, userCoordinate);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, 1, OrderList, userCoordinate);
         }
 
         private async Task HandlePageChanged()

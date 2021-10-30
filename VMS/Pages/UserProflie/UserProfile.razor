@@ -7,24 +7,27 @@
                 <div class="">
                     <div class="proflie__logo-img py-3">
                         <div class=" text-center d-inline-block position-relative">
-                            <img src="img/RelatedActivities/2nd-activity.png" alt="">
-                            <label for="myfile" class="@(IsUser ? "d-inline" : "d-none" ) ">
-                                <svg class="icon-camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z" /><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1a.5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0z" /></g></svg>
-                            </label>
-                            <InputFile OnChange="ShowModalUpAvata" type="file" id="myfile" name="myfile" class="d-none"></InputFile>
+                            <img src="@User.Avatar" alt="@User.FullName">
+                            @if (IsUser)
+                            {
+                                <label for="myfile">
+                                    <svg class="icon-camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z" /><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1a.5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0z" /></g></svg>
+                                </label>
+                            }
+                            <InputFile OnChange="OnAvatarFileChangedAsync" type="file" id="myfile" name="myfile" class="d-none"/>
                         </div>
                     </div>
-                    <p class="m-0 ">Trần Minh Nhật Anh</p>
+                    <p class="m-0 ">@User.FullName</p>
                     @if (IsUser)
                     {
-                        <button @onclick="() => ShowModalAppellation()" class="profile__type d-inline-block btn mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</button>
+                        <button @onclick="ShowModalAppellationAsync" class="profile__type d-inline-block btn mx-auto mt-1 mb-4">@appellation</button>
                     }
                     else
                     {
                         <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</span>
                     }
 
-                    <ProfileRank Rank="1" TotalRating="10" Stars="5" IsUser="true"></ProfileRank>
+                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser"/>
 
                 </div>
             </div>
@@ -33,30 +36,30 @@
                 <div class="profile__contact-content pb-4 mb-4 ">
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">account_circle</p>
-                        <p class="col-10 profile__contact-text">31201023789</p>
+                        <p class="col-10 profile__contact-text">@User.StudentId</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">folder_shared</p>
-                        <p class="col-10 profile__contact-text">K46-EC001</p>
+                        <p class="col-10 profile__contact-text">@User.Course - @User.Class</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">email</p>
-                        <p class="col-10 profile__contact-text">tmna2002@gmail.com</p>
+                        <p class="col-10 profile__contact-text">@User.Email</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">contact_phone</p>
-                        <p class="col-10 profile__contact-text">09472341179</p>
+                        <p class="col-10 profile__contact-text">@User.PhoneNumber</p>
                     </div>
 
                 </div>
                 <div class="profile__filter text-center">
                     <h3>Lĩnh vực</h3>
-                    <div class=" @(fakeDatas.Count>3 ? "owl-carousel owl-theme profile__carousel" : " profile__NoCarousel pe-0 d-flex justify-content-center")  ">
-                        @foreach (var item in fakeDatas)
+                    <div class="@(User.Areas.Count > 3 ? "owl-carousel owl-theme profile__carousel" : " profile__NoCarousel pe-0 d-flex justify-content-center")">
+                        @foreach (var item in User.Areas)
                         {
-                            <div class="item @(fakeDatas.Count>3 ? "" : "mx-2")">
-                                <i class="material-icons">@item.IconName</i>
-                                <span>@item.Filter</span>
+                            <div class="item @(User.Areas.Count > 3 ? "" : "mx-2")">
+                                <i class="material-icons">@item.Icon</i>
+                                <span>@item.Name</span>
                             </div>
                         }
 
@@ -69,93 +72,19 @@
                 <div class="profile__skills-content pt-3 pb-4 pb-xxl-5">
                     <h3 class="mb-4 text-center">Kĩ Năng</h3>
                     <div class=" mx-auto profile__content ">
-                        <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
-                        <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
-                        <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
-                        <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
-                        <p class="profile__skill">Kiến thức chuyên ngành</p>
-                        <p class="profile__skill">Chỉnh sửa/Thiết kế hình ảnh/Video</p>
-                        <p class="profile__skill">Viết Proposal/Kịch bản/Content</p>
-                        <p class="profile__skill">Kiến thức chuyên ngành</p>
-
+                        @foreach (var item in User.Skills)
+                        {
+                            <p class="profile__skill">@item.Name</p>
+                        }
                     </div>
                 </div>
 
             </div>
-                
+
         </div>
-        <p class="profile__dictum text-center py-4 px-5 mb-5">Đổi mới sáng tạo, tôi sẽ quyết tâm thực hiện chiến dịch tình nguyện, cống hiến sức trẻ trong bối cảnh dịch bênh hoành hành khó định. </p>
+        <p class="profile__dictum text-center py-4 px-5 mb-5">@User.Introduction</p>
     </div>
 </div>
 
 @code {
-    [Parameter] public bool IsUser { get; set; } = true;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntinme.InvokeVoidAsync("vms.ProfileCarousel");
-    }
-
-    [CascadingParameter]
-    public IModalService Modal { get; set; }
-
-
-
-    async Task ShowModalAppellation()
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-        Modal.Show<Appellation>("", options);
-    }
-
-    async Task ShowModalUpAvata()
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-        Modal.Show<Notification>("", options);
-    }
-
-    bool isNotification = false;
-    void ShowNotification()
-
-    {
-
-        isNotification = !isNotification;
-    }
-
-
-
-    protected override void OnInitialized()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            fakeDatas.Add(new FakeData()
-            {
-                Id = i,
-                IconName = "group",
-                Filter ="Cộng đồng"
-            });
-        }
-    }
-
-    private List<FakeData> fakeDatas = new();
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string IconName { get; set; }
-        public string Filter { get; set; }
-    }
-
-
-
-
 }

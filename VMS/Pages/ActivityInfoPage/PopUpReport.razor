@@ -43,54 +43,15 @@
                     </span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="display:@(showListReason ? "block" : "none")">
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason1" type="checkbox" id="checkbox-1" class="dropdown-item--checkbox"/>
+                    @foreach (var reason in Reasons)
+                    {
+                        <li>
+                            <div class="dropdown-item" href="#">
+                                <input @onchange="x => { CheckboxClicked(reason, x.Value); }" type="checkbox" class="dropdown-item--checkbox" />
+                                <label for="checkbox-1">@reason</label>
                             </div>
-                            <label for="checkbox-1">Hoạt động không có thật</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason2" type="checkbox" id="checkbox-2" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-2">Hoạt động không không tương thích với nội dung đã đề cập</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason3" type="checkbox" id="checkbox-3" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-3">Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason4" type="checkbox" id="checkbox-4" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-4">Nội dung hoạt động không phù hợp</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason5" type="checkbox" id="checkbox-5" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-5">Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason6" type="checkbox" id="checkbox-6" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-6">Khác</label>
-                        </div>
-                    </li>
+                        </li>
+                    }
                 </ul>
             </div>
 

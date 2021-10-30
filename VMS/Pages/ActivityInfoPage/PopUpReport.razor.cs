@@ -49,15 +49,15 @@ namespace VMS.Pages.ActivityInfoPage
             await ReportService.AddReport(report);
         }
 
-        private static List<string> Reasons() => new()
-            {
-                "Hoạt động không có thật",
-                "Hoạt động không không tương thích với nội dung đã đề cập",
-                "Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động",
-                "Nội dung hoạt động không phù hợp",
-                "Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động",
-                "Khác"
-            };
+        private static List<string> Reasons => new()
+        {
+            "Hoạt động không có thật",
+            "Hoạt động không không tương thích với nội dung đã đề cập",
+            "Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động",
+            "Nội dung hoạt động không phù hợp",
+            "Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động",
+            "Khác"
+        };
 
         private void CheckboxClicked(string reason, object checkedValue)
         {

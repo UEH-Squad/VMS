@@ -65,32 +65,8 @@
 }
 
 
-@code {
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-    async Task ShowReportPopUp()
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        Modal.Show<PopUpReport>("",options);
-    }
-    async Task ShowSignUpPopUp()
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
-    }
-
+@code 
+{
     private void ShowRequireSignup()
     {
 

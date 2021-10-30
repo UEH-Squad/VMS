@@ -19,7 +19,10 @@
                         <p class="limited-text">@item.Name</p>
                     </div>
                     <div class="act__container__card__icon">
-                        <a class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))" @onclick:preventDefault @onclick:stopPropagation>
+                        @{ 
+                            bool isFav = currentUser.Favorites.Any(x => x.ActivityId == item.Id);
+                        }
+                        <a class="@(isFav ? "heart" : "heart-line")" @onclick="@(() => HandleFavorite(item.Id))" @onclick:preventDefault @onclick:stopPropagation>
                             <span class="material-icons">favorite</span>
                         </a>
                     </div>
@@ -27,43 +30,4 @@
             }
         </div>
     </section>
-}
-
-@code {
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Banner { get; set; }
-        public bool IsFav { get; set; }
-    }
-
-    private List<FakeData> fakeData = new();
-
-    protected override async Task OnInitializedAsync()
-    {
-        fakeData.AddRange(Enumerable.Range(0,7).Select(x => new FakeData
-        {
-            Id = x,
-            Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
-            Banner = "img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg",
-            IsFav = false
-        }));
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
-    }
-
-    private void AnimateHeart(int id)
-    {
-        var item = fakeData.FirstOrDefault(x => x.Id == id);
-        if (item is not null)
-        {
-            item.IsFav = !item.IsFav;
-        }
-
-    }
 }

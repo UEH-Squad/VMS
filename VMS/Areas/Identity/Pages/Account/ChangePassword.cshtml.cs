@@ -39,20 +39,23 @@ namespace VMS.Areas.Identity.Pages.Account
             [Compare("NewPassword", ErrorMessage = "Xác nhận mật khẩu không chính xác.")]
             public string ConfirmPassword { get; set; }
         }
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-        public async Task<IActionResult> OnPostAsync()
+
+        public async Task<IActionResult> OnGetAsync()
         {
             User user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Hãy đăng nhập trước khi đổi mật khẩu!");
-                return Page();
+                return RedirectToPage("./Login");
             }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
             if (ModelState.IsValid)
             {
+                User user = await _userManager.GetUserAsync(User);
                 var result = await _userManager.ChangePasswordAsync(user, Input.CurrentPassword, Input.NewPassword);
                 if(result.Succeeded)
                 {

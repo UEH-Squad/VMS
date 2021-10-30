@@ -12,10 +12,8 @@ namespace VMS.Pages.Organization.Profile
     {
         [Parameter] 
         public string UserId { get; set; }
-        [Parameter]
-        public UserViewModel Org { get; set; }
-        [Parameter]
-        public bool Owner { get; set; }
+        [Parameter] public UserViewModel Org { get; set; }
+        [Parameter] public bool HaveControl { get; set; }
         public string avatar;
         public IBrowserFile file;
         [Inject]

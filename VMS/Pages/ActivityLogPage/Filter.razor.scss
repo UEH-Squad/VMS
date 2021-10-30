@@ -1,0 +1,211 @@
+﻿@import "../../Resources/scss/common/_variables.scss";
+
+.filter-container {
+    padding: 3% 3% 5% 3%;
+    border: 1px solid $grey-close-bg;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+.act-title {
+    font-size: 24px;
+    color: $blue;
+}
+.act-filter {
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+
+    .select-filter {
+        display: flex;
+        justify-content: space-between;
+        width: 45%;
+
+        .select-container {
+            position: relative;
+            width: 45%;
+        }
+    }
+
+    &__select {
+        border: 1px solid $grey-icon;
+        width: 100%;
+        height: 37px;
+        background: $white;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+
+        &-default {
+            font-weight: 400;
+            color: $grey-icon;
+            margin-left: 5%;
+        }
+
+        #act-filter__select-icon {
+            pointer-events: none;
+        }
+    }
+
+    &__list {
+        position: absolute;
+        background-color: $white;
+        border-radius: 10px;
+        top: 120%;
+        height: 157px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        box-shadow: 0px 4px 10px rgba(11, 50, 60, 0.2);
+        padding: 10% 15%;
+        z-index: 1;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+
+        &-item {
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            background-color: $white;
+            padding: 4%;
+            cursor: pointer;
+        }
+
+        &-item:hover {
+            color: $blue;
+        }
+    }
+
+    &__radio {
+        width: 33%;
+        justify-content: space-around;
+
+        &-1 {
+            width: 45%;
+        }
+
+        &-2 {
+            width: 40%;
+        }
+
+        .radio-1 {
+            position: relative;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            background-color: $white;
+            border: 2px solid $blue;
+            appearance: none;
+            cursor: pointer;
+
+            &::before {
+                position: absolute;
+                content: "";
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background-color: $blue;
+                top: 50%;
+                left: 51%;
+                transform: translate(-50%, -50%);
+                display: none;
+            }
+
+            &:checked::before {
+                display: block;
+            }
+
+            &:checked {
+                border-color: $blue;
+            }
+        }
+
+        .radio-2 {
+            position: relative;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            background-color: $white;
+            border: 2px solid $blue;
+            appearance: none;
+            cursor: pointer;
+
+            &::before {
+                position: absolute;
+                content: "";
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background-color: $blue;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: none;
+            }
+
+            &:checked::before {
+                display: block;
+            }
+
+            &:checked {
+                border-color: $blue;
+            }
+        }
+
+        .label-1 {
+            margin-left: 5%;
+            font-size: 16px;
+            font-weight: normal;
+            color: $border-color-bold;
+            cursor: pointer;
+        }
+
+        .label-2 {
+            margin-left: 5%;
+            font-size: 16px;
+            font-weight: normal;
+            color: $border-color-bold;
+            cursor: pointer;
+        }
+    }
+
+    &__btn-container {
+        width: 16%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__btn {
+        padding: 3px 25px;
+        background-color: $green;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        font-weight: 600;
+
+        &.--filter:hover {
+            background-color: $green-bold;
+        }
+
+        &.--del {
+            padding: 0;
+            color: $grey-icon;
+            background-color: transparent;
+        }
+
+        &.--del:hover {
+            text-decoration: underline;
+        }
+    }
+}

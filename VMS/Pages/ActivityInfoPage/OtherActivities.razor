@@ -8,7 +8,7 @@
         <div class="owl-carousel owl-theme">
             @foreach (var item in otherActivities)
             {
-                <div class="act__container__card" id="kiemtra">
+                <a href="" class="act__container__card position-relative" id="kiemtra">
                     <div class="act__container__card__img">
                         @if (!string.IsNullOrEmpty(item.Banner))
                         {
@@ -18,8 +18,52 @@
                     <div class="act__container__card__desc">
                         <p class="limited-text">@item.Name</p>
                     </div>
-                </div>
+                    <div class="act__container__card__icon">
+                        <a class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))" @onclick:preventDefault @onclick:stopPropagation>
+                            <span class="material-icons">favorite</span>
+                        </a>
+                    </div>
+                </a>
             }
         </div>
     </section>
+}
+
+@code {
+
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Banner { get; set; }
+        public bool IsFav { get; set; }
+    }
+
+    private List<FakeData> fakeData = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        fakeData.AddRange(Enumerable.Range(0,7).Select(x => new FakeData
+        {
+            Id = x,
+            Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
+            Banner = "img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg",
+            IsFav = false
+        }));
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
+    }
+
+    private void AnimateHeart(int id)
+    {
+        var item = fakeData.FirstOrDefault(x => x.Id == id);
+        if (item is not null)
+        {
+            item.IsFav = !item.IsFav;
+        }
+
+    }
 }

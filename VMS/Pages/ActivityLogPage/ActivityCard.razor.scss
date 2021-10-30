@@ -1,0 +1,109 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+
+.pagination-container{
+    justify-content: center;
+}
+.activity-row {
+    position: relative;
+    margin-bottom: 30px
+}
+.activity-container {
+    flex: 1;
+    padding: 0px 60px;
+    display: flex;
+    height: 117px;
+    border: 1px solid #B4B4B4;
+    border-radius: 10px;
+}
+.activity-space{
+    flex-basis: 60px;
+}
+.activity {
+    &__img {
+        position: absolute;
+        width: 117px;
+        left: 0;
+
+        img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 100%;
+        }
+    }
+
+    &__content {
+        flex: 1;
+        padding: 10px 20px;
+
+        &__title {
+            font-size: 20px;
+            font-weight: bold;
+            color: $blue;
+        }
+
+        &__icon {
+            justify-content: space-between;
+
+            .stars-rating {
+                ::deep .member-star {
+                    margin-left: 0%;
+
+                    &_button{
+                        background-color: transparent;
+                    }
+
+                    &_tooltip {
+                        display: none;
+                    }
+                }
+            }
+
+            .org-pic {
+                align-items: center;
+
+                &__icon {
+                    align-items: center;
+
+                    span {
+                        color: $green;
+                        font-size: 24px;
+                    }
+                }
+
+                &__name {
+                    color: #515151;
+                    font-weight: 600;
+                    font-size: 16px;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+
+    &__icon {
+        flex-basis: 50px;
+        justify-content: center;
+        flex-direction: column;
+
+        button {
+            border: none;
+            background-color: transparent;
+
+            span {
+                font-size: 24px;
+            }
+        }
+
+        &__report {
+            span {
+                color: $red;
+            }
+        }
+
+        &__comment {
+            span {
+                color: $blue;
+            }
+        }
+    }
+}

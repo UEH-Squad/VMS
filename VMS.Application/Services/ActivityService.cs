@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using System;
@@ -235,6 +236,12 @@ namespace VMS.Application.Services
             activity.ActivitySkills = MapSkills(activityViewModel, activity);
             activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
 
+            // Check if any update on Start Date (to extend Register time..v.v)
+            if (activity.StartDate > DateTime.Now)
+            {
+                activity.IsClosed = false;
+            }
+
             await _repository.UpdateAsync(dbContext, activity);
         }
 
@@ -447,7 +454,7 @@ namespace VMS.Application.Services
             };
 
             List<Activity> activity = await _repository.GetListAsync<Activity>(context, specification);
-
+            string currentId = _identityService.GetCurrentUserId();
             IEnumerable<ActivityViewModel> activityViewModels = activity.Select(x => new ActivityViewModel
             {
                 Id = x.Id,
@@ -458,7 +465,8 @@ namespace VMS.Application.Services
                 MemberQuantity = x.MemberQuantity,
                 Province = GetActProvince(x.ActivityAddresses),
                 EndDate = x.EndDate,
-                Rating = GetRateOfActivity(x.Recruitments)
+                Rating = GetRateOfActivity(x.Recruitments),
+                IsFav = GetActFavor(x.Id,currentId,x.Favorites)
             });
             return status switch
             {
@@ -467,6 +475,19 @@ namespace VMS.Application.Services
                StatusAct.Ended => activityViewModels.OrderByDescending(a => a.EndDate).Take(4).ToList(),
                 _ => null
             };
+        }
+
+        private static bool GetActFavor(int actId, string userId, ICollection<Favorite> favorites)
+        {
+            Favorite favorite = favorites.Where(a => a.ActivityId == actId && a.UserId == userId).FirstOrDefault();
+            if (favorite != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         private static string GetActProvince(ICollection<ActivityAddress> activityAddresses)
         {
@@ -485,36 +506,6 @@ namespace VMS.Application.Services
         {
             return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
                     / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
-        }
-
-        public async Task UpdateStatusActAsync(int activityId, bool close, bool delete)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    a => a.Id == activityId
-                }
-            };
-            Activity activity = await _repository.GetAsync(dbContext, specification);
-            activity.UpdatedDate = DateTime.Now;
-            if(close == true)
-            { 
-                activity.IsClosed = true; 
-            }
-            else 
-            { 
-                activity.IsClosed = false;
-            }
-
-            if (delete == true)
-            {
-                activity.IsDeleted = true;
-            }
-           
-            await _repository.UpdateAsync(dbContext, activity);
         }
 
         private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate coordinate)
@@ -584,7 +575,7 @@ namespace VMS.Application.Services
             return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
         }
 
-        public async Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false)
+        public async Task CloseOrDeleteActivity(int activityId, bool isClose = false, bool isDelete = false)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -602,6 +593,55 @@ namespace VMS.Application.Services
             activity.IsDeleted = isDelete;
 
             await _repository.UpdateAsync(dbContext, activity);
+        }
+
+        public async Task UpdateActFavorAsync(int activityId, string userId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Favorite> specification = new()
+            {
+                Conditions = new List<Expression<Func<Favorite, bool>>>
+                {
+                    a => a.ActivityId == activityId,
+                    a => a.UserId == userId
+                }
+            };
+
+            Favorite favorite = await _repository.GetAsync(dbContext, specification);
+
+            if(favorite ==null)
+            {
+                Favorite fav = new();
+                fav.ActivityId = activityId;
+                fav.UserId = userId;
+                fav.CreatedDate = DateTime.Now;
+                await _repository.InsertAsync(dbContext, fav);
+            }
+            else
+            {
+                await _repository.DeleteAsync(dbContext, favorite);
+            }
+        }
+
+        public async Task CloseActivityDailyAsync()
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.StartDate <= DateTime.Now,
+                    a => !a.IsClosed
+                }
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            activities.ForEach(a => a.IsClosed = true);
+
+            await _repository.UpdateAsync<Activity>(dbContext, activities);
         }
     }
 }

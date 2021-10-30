@@ -34,12 +34,11 @@
             }
 
             @include on('lg') {
-                width: 200px;
-                height: 60px;
+                width: 175px;
+                height: 45px;
                 font-size: 20px;
                 margin-right: 0;
             }
-
         }
 
         .my-login-btn, .my-register-btn {
@@ -70,7 +69,7 @@
             margin-bottom: 4px;
 
             @include on('lg') {
-              height: 20px;
+                height: 20px;
             }
         }
 
@@ -116,77 +115,84 @@
     .collapse:not(.show) {
         display: none;
     }
-}
 
-.my-collapse {
-    display: flex;
-    flex-direction: column-reverse;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    position: absolute;
-    border-radius: 5px;
-    top: 90%;
-    right: 15px;
-    min-width: 220px;
-    width: 40vw;
+    .my-collapse {
+        display: flex;
+        flex-direction: column-reverse;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        border-radius: 5px;
+        top: 90%;
+        right: 15px;
+        min-width: 220px;
+        width: 40vw;
 
 
-    @include on('xl') {
-        position: unset;
-        box-shadow: none;
-        border-radius: 0;
-        flex-direction: unset;
-        justify-content: flex-end;
-    }
+        @include on('xl') {
+            position: unset;
+            box-shadow: none;
+            border-radius: 0;
+            flex-direction: unset;
+            justify-content: flex-end;
+        }
 
-    &__list {
-        width: auto;
-        /*@include on('xl') {
+        .nav-link {
+            color: $blue;
+
+            &.active {
+                color: $blue-bold;
+            }
+
+            &:hover{
+                color: $blue-bold;
+            }
+        }
+
+        &__list {
+            width: auto;
+            /*@include on('xl') {
             margin-left: 6%;
         }
 
         @include on('xxl') {
             margin-left: 15%;
         }*/
-    }
-
-    &__list__link {
-        font-size: 16px;
-        color: $blue;
-        display: block;
-        font-weight: 600;
-
-        @include on('xl') {
-            font-size: 20px;
-
-            &:before {
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                height: 5px;
-                top: 71px;
-                background-color: $blue-bold;
-                display: none;
-            }
-
-            &:hover.my-collapse__list__link::before {
-                display: block;
-            }
         }
 
+        &__list__link {
+            font-size: 16px;
+            display: block;
+            font-weight: 600;
 
+            @include on('xl') {
+                font-size: 20px;
 
-        &:hover {
-            color: $blue-bold;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    height: 5px;
+                    top: 66px;
+                    background-color: $blue-bold;
+                    display: none;
+                }
+
+                &:hover.my-collapse__list__link::before {
+                    display: block;
+                }
+            }
+
         }
-    }
 
-    .my-collapse__login-area {
-        flex-direction: column;
+        .my-collapse__login-area {
+            flex-direction: column;
 
-        @include on('xl') {
-            flex-direction: row;
-            margin-left: 20px;
+            @include on('xl') {
+                flex-direction: row;
+                margin-left: 20px;
+            }
         }
     }
 }
+

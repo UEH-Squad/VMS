@@ -16,6 +16,7 @@
                     </span>
                 </div>
             </div>
+
             <div class="about-infor">
                 <div class="participant">
                     <p class="participant__title titles mb-0">Đối tượng tham gia</p>
@@ -44,20 +45,62 @@
                 </div>
             </div>
             <div class="btn-sign-up--cover">
-                @if (isAlreadySignedUp)
-                {
-                    <button disabled class="btn-sign-up">
-                        <h3 class="btn-sign-up__text">Bạn đă đăng ký</h3>
-                    </button>
-                }
-                else
-                {
-                    <button @onclick="@(() => ShowSignUpPopUp())" class="btn-sign-up">
-                        <h3 class="btn-sign-up__text">Đăng ký</h3>
-                    </button>
-                }
+                <AuthorizeView>
+                    <Authorized>
+                        <button @onclick="@(() =>ShowSignUpPopUp())" class="btn-sign-up">
+                            <h3 class="btn-sign-up__text">Đăng ký</h3>
+                        </button>
+                    </Authorized>
+                    <NotAuthorized>
+                        <button @onclick="@(() =>ShowRequireSignup())" class="btn-sign-up">
+                            <h3 class="btn-sign-up__text">Đăng ký</h3>
+                        </button>
+                    </NotAuthorized>
+                </AuthorizeView>
+                
             </div>
         </div>
         <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>
     </div>
+
+
+
+@code {
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+    async Task ShowReportPopUp()
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<PopUpReport>("",options);
+    }
+    async Task ShowSignUpPopUp()
+    {
+        var options = new ModalOptions()
+        {
+
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
+    }
+
+    private void ShowRequireSignup()
+    {
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+
+        Modal.Show<VMS.Shared.Components.RequireSignup>("", options);
+    }
 }

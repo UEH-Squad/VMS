@@ -1,0 +1,27 @@
+﻿<div class="pop-up">
+    <div class="center-screen">
+        <div class="pop-up-container border-10">
+            <div @onclick="CloseModal" class="close-btn-s">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up-content">
+                <h3 class="@(IsClosed ? "open-act" : "close-act")">@(IsClosed ? "Mở hoạt động thành công!" : "Đóng hoạt động thành công!")</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    [Parameter]
+    public bool IsClosed { get; set; }
+
+    private async Task CloseModal()
+    {
+        await Modal.CloseAsync();
+    }
+}

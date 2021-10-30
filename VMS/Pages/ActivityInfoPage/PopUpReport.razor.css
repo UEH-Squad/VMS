@@ -25,8 +25,7 @@
   z-index: 102; }
   .min-overlay .report-success {
     position: absolute;
-    height: 160px;
-    width: 500px;
+    padding: 40px 75px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -41,8 +40,8 @@
     align-items: center; }
     .min-overlay .report-success .min-overlay--icon {
       position: absolute;
-      top: 25px;
-      right: 25px;
+      top: 20px;
+      right: 20px;
       width: 33px;
       height: 33px;
       background-color: #E5E5E5;
@@ -58,24 +57,23 @@
     .min-overlay .report-success .blue-text {
       color: #18A0FB; }
 
-.container {
+.my-container {
+  width: 600px;
   position: absolute;
-  width: 51%;
-  height: 94%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   color: #515151;
   background-color: white;
   border-radius: 10px;
-  padding: 0 60px 60px 60px;
+  padding: 0 60px 30px;
   overflow-y: scroll; }
-  .container::-webkit-scrollbar {
+  .my-container::-webkit-scrollbar {
     width: 10px; }
-  .container::-webkit-scrollbar-thumb {
+  .my-container::-webkit-scrollbar-thumb {
     background-color: #B4B4B4;
     border-radius: 20px; }
-  .container .icon-close-popup {
+  .my-container .icon-close-popup {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -85,16 +83,15 @@
     display: flex;
     background-color: #E5E5E5;
     cursor: pointer; }
-    .container .icon-close-popup .material-icons {
+    .my-container .icon-close-popup .material-icons {
       margin: auto;
       font-size: 22px; }
-  .container .title {
-    margin-top: 45px;
+  .my-container .title {
     display: flex;
     font-weight: 500; }
-    .container .title h4 {
+    .my-container .title h4 {
       font-size: 16px; }
-  .container .check {
+  .my-container .check {
     color: red;
     margin-left: 5px; }
 
@@ -105,10 +102,9 @@
   display: flex;
   justify-content: center;
   margin-top: 30px;
-  letter-spacing: 2px; }
+  margin-bottom: 20px; }
   .title-header .title-header__report {
-    color: #64D72F;
-    margin-right: 14px; }
+    color: #64D72F; }
   .title-header .title-header__activity {
     color: #18A0FB; }
 
@@ -122,13 +118,15 @@
     float: right; }
 
 .dropdown-menu {
-  width: 100%;
+  width: 101%;
   box-shadow: 5px 5px 10px 10px #dee2e687;
-  font-size: 14px; }
+  left: 50%;
+  transform: translateX(-50%);
+  border: none; }
   .dropdown-menu .dropdown-item {
     display: flex;
-    align-items: center;
-    margin: 5px 0; }
+    margin: 5px 0;
+    white-space: unset; }
     .dropdown-menu .dropdown-item ::deep .dropdown-item--checkbox {
       margin-right: 10px; }
     .dropdown-menu .dropdown-item label {
@@ -143,7 +141,7 @@
 /*-----report description-----*/
 ::deep .form-control {
   border: 1px solid;
-  height: 250px;
+  height: 100px;
   overflow-y: scroll; }
   ::deep .form-control::-webkit-scrollbar {
     width: 14px; }
@@ -189,11 +187,8 @@
     margin: auto;
     background-color: #64D72F;
     color: #fff;
-    font-size: 24px;
     border: none;
-    width: 280px;
-    height: 62px;
-    font-weight: 600; }
+    font-weight: 500; }
   .btn-accept .btn:hover {
     background-color: #306C14; }
 

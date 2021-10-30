@@ -32,11 +32,16 @@
                         </div>
                         <span asp-validation-for="Input.Password" class="text-danger d-block mt-2"></span>
                     </div>
-
+                    @if (!ModelState.IsValid)
+                    {
+                        <div class="">
+                            <label class="text-danger">Email hoặc mật khẩu không hợp lệ.</label>
+                        </div>
+                    }
                     <div class="form-group">
                         <div class="checkbox">
                             <label asp-for="Input.RememberMe" class="mt-4 d-flex align-items-center" style="cursor:pointer;">
-                                <input asp-for="Input.RememberMe" class="remember-checkbox"/>
+                                <input asp-for="Input.RememberMe" class="remember-checkbox" />
                                 @Html.DisplayNameFor(m => m.Input.RememberMe)
                             </label>
                         </div>

@@ -24,7 +24,7 @@
         public const string ActivityLogPage = "/lich-su-hoat-dong";
 
         #endregion Org + User profile
-
+        public const string ResetPassword = "/reset-password";
         #region Activity
 
         public const string CreateActivity = "/tao-hoat-dong";

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using VMS.Application.ViewModels;
 using VMS.Domain.Models;
@@ -22,7 +24,8 @@ namespace VMS.Application.Automapper
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color
                 })))
                 .ForMember(x => x.Skills, opt => opt.MapFrom(src => src.UserSkills.Select(x => new SkillViewModel
                 {
@@ -36,7 +39,8 @@ namespace VMS.Application.Automapper
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color
                 })))
                 .ForMember(x => x.Skills, opt => opt.MapFrom(src => src.UserSkills.Select(x => new SkillViewModel
                 {
@@ -50,7 +54,8 @@ namespace VMS.Application.Automapper
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color
                 })));
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();

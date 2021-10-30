@@ -72,25 +72,34 @@ body {
 
 /* -----button sign up------ */
 .btn-sign-up--cover {
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .btn-sign-up {
+    @mixin btn {
         height: 40px;
         padding: 0 20px;
         border-radius: 4px;
-        background-color: #64D72F;
         margin: 0 auto 30px;
         border: none;
         display: flex;
+    }
 
-        .btn-sign-up__text {
-            margin: auto;
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-        }
+    .btn-sign-up {
+        @include btn;
+        background-color: #64D72F;
+    }
+
+    .btn-already-sign-up {
+        @include btn;
+        background-color: $grey-close-bg;
+    }
+
+    .btn-sign-up__text {
+        margin: auto;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
     }
 
     .btn-sign-up:hover {

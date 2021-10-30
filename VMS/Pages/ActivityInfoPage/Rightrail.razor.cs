@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
 using VMS.Application.ViewModels;
+using VMS.Common;
 using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivityInfoPage
@@ -51,7 +52,8 @@ namespace VMS.Pages.ActivityInfoPage
         {
             if (currentUser is null)
             {
-                // TODO: Show login pop-up
+                ShowRequireSignup();
+
                 return;
             }
 
@@ -63,21 +65,14 @@ namespace VMS.Pages.ActivityInfoPage
             ModalParameters parameters = new();
             parameters.Add("ActivityId", Activity.Id);
 
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            Modal.Show<PopUpReport>("", parameters, options);
+            Modal.Show<PopUpReport>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
 
         private void ShowSignUpPopUp()
         {
             if (currentUser is null)
             {
-                // TODO: Show login pop-up
+                ShowRequireSignup();
                 return;
             }
 
@@ -88,14 +83,13 @@ namespace VMS.Pages.ActivityInfoPage
 
             ModalParameters parameters = new();
             parameters.Add("ActivityId", Activity.Id);
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
 
-            Modal.Show<ActivitySearchPage.Signup>("", parameters, options);
+            Modal.Show<ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions());
+        }
+
+        private void ShowRequireSignup()
+        {
+            Modal.Show<Shared.Components.RequireSignup>("", BlazoredModalOptions.GetModalOptions());
         }
     }
 }

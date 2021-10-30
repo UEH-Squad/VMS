@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Modal.Services;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Linq;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common;
 using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivityInfoPage
@@ -14,6 +16,8 @@ namespace VMS.Pages.ActivityInfoPage
 
         [Parameter]
         public ViewActivityViewModel Activity { get; set; }
+
+        [CascadingParameter] public IModalService Modal { get; set; }
 
         [Inject]
         private IIdentityService IdentityService { get; set; }
@@ -35,7 +39,7 @@ namespace VMS.Pages.ActivityInfoPage
         {
             if (currentUser is null)
             {
-                // TODO: Show login pop-up or edit info pop-up
+                Modal.Show<Shared.Components.RequireSignup>("", BlazoredModalOptions.GetModalOptions());
 
                 return;
             }

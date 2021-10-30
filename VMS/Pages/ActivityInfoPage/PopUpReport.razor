@@ -81,7 +81,7 @@
                             {
                                 @foreach (var item in selectedImages)
                                 {
-                                    @if (item.ContentType != "image/jpeg")
+                                    @if (!item.ContentType.Contains("image/"))
                                     {
                                         <div style="color: #f14747">File không đúng định dạng..</div>
                                     }

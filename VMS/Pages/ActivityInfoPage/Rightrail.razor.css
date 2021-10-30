@@ -67,15 +67,23 @@
     height: 40px;
     padding: 0 20px;
     border-radius: 4px;
-    background-color: #64D72F;
     margin: 0 auto 30px;
     border: none;
-    display: flex; }
-    .btn-sign-up--cover .btn-sign-up .btn-sign-up__text {
-      margin: auto;
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff; }
+    display: flex;
+    background-color: #64D72F; }
+  .btn-sign-up--cover .btn-already-sign-up {
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 4px;
+    margin: 0 auto 30px;
+    border: none;
+    display: flex;
+    background-color: #C4C4C4; }
+  .btn-sign-up--cover .btn-sign-up__text {
+    margin: auto;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff; }
   .btn-sign-up--cover .btn-sign-up:hover {
     background-color: #306C14;
     cursor: pointer; }

@@ -47,12 +47,12 @@
             <div class="btn-sign-up--cover">
                 <AuthorizeView>
                     <Authorized>
-                        <button @onclick="@(() =>ShowSignUpPopUp())" class="btn-sign-up">
+                        <button @onclick="@(() => ShowSignUpPopUp())" class="btn-sign-up">
                             <h3 class="btn-sign-up__text">Đăng ký</h3>
                         </button>
                     </Authorized>
                     <NotAuthorized>
-                        <button @onclick="@(() =>ShowRequireSignup())" class="btn-sign-up">
+                        <button @onclick="@(() => ShowRequireSignup())" class="btn-sign-up">
                             <h3 class="btn-sign-up__text">Đăng ký</h3>
                         </button>
                     </NotAuthorized>
@@ -62,7 +62,7 @@
         </div>
         <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>
     </div>
-
+}
 
 
 @code {

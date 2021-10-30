@@ -35,14 +35,14 @@ namespace VMS.Pages.Organization.VolunteersListPage
         [Inject]
         private IJSRuntime JSRuntime { get; set; }
 
-        public async Task ChangeNav()
+        public async Task ChangeNavAsync()
         {
             navDel = !navDel;
             navUndo = !navUndo;
             this.ShowDeletedList = !ShowDeletedList;
             await IsDeleted.InvokeAsync(ShowDeletedList);
         }
-        private async Task SearchValueChanged(string searchValueChanged)
+        private async Task SearchValueChangedAsync(string searchValueChanged)
         {
             this.searchValue = searchValueChanged;
             await ValueChange.InvokeAsync(searchValue);
@@ -50,7 +50,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         [CascadingParameter] public IModalService Modal { get; set; }
         [Inject]
         private IRecruitmentService ListVolunteerService { get; set; }
-        async Task ShowConfirm()
+        async Task ShowConfirmAsync()
         {
             var parameters = new ModalParameters();
             parameters.Add("Undo", !ShowDeletedList);
@@ -68,7 +68,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 }
 
         }
-        public async Task DowLoad()
+        public async Task DowLoadAsync()
         {
             await JSRuntime.InvokeVoidAsync("vms.SaveAs", "DSTNV_" + ActId + "_" + DateTime.Now.ToString()+".xlsx", ExportExcelService.ResultExportToExcel(Data, ActId));
         }

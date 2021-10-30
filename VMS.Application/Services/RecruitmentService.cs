@@ -53,9 +53,17 @@ namespace VMS.Application.Services
         public async Task UpdateVounteerAsync(List<int> list, bool isDeleted)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-            foreach(var item in list)
+            Specification<Recruitment> specification = new()
             {
-                Recruitment rec = await _repository.GetByIdAsync<Recruitment>(dbContext, item);
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    a =>  list.Contains(a.Id)
+                }
+            };
+
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+            foreach (var rec in recruitments)
+            {
                 rec.IsDeleted = isDeleted;
             }
             dbContext.SaveChanges();

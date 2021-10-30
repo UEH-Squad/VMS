@@ -1,4 +1,4 @@
-﻿ <NavMini Data ="pagedResult" ValueChange = "ValueChange" IsDeleted = "ShowDeletedList" CheckedList = "checkList" ActId = "ActId"  Quantity ="pagedResult.TotalItems" ShowDeletedList ="isDeleted" />
+﻿ <NavMini Data ="pagedResult" ValueChange = "ValueChangeAsync" IsDeleted = "ShowDeletedListAsync" CheckedList = "checkList" ActId = "ActId"  Quantity ="pagedResult.TotalItems" ShowDeletedList ="isDeleted" />
 <div class="list-card">
     @if (pagedResult is not null && pagedResult.TotalItems != 0)
     {
@@ -14,11 +14,11 @@
                 </div>
 
                 <div class="mycard__checkbox">
-                    <input checked="@item.IsCheck" @onclick="@( () =>HandleCheck(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
+                    <input checked="@item.IsCheck" @onclick="@( () =>HandleCheckAsync(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
                 </div>
 
                 <div class="mycard__button">
-                    <button @onclick="@(() =>ShowSignUpPopUp(item))" class="mycard__button--registration-form">Xem đơn đăng ký</button>
+                    <button @onclick="@(() =>ShowSignUpPopUpAsync(item))" class="mycard__button--registration-form">Xem đơn đăng ký</button>
                 </div>
             </div>
         }
@@ -27,5 +27,5 @@
 <div class="d-flex justify-content-center">
    <Pager CurrentPage="@pagedResult.PageIndex"
        PageCount="@pagedResult.TotalPages"
-       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />         
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })" />         
 </div>

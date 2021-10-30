@@ -29,8 +29,6 @@ namespace VMS.Application.Interfaces
 
         Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status);
 
-        Task UpdateStatusActAsync(int activityId, bool close, bool delete);
-
         Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false);
 
         Task UpdateActFavorAsync(int activityId, string userId);

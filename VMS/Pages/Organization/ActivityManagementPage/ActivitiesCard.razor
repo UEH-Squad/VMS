@@ -61,7 +61,7 @@
                     <div class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
                         Xem danh sách
                     </div>
-                    @if (DateTime.Now.Date > item.EndDate)
+                    @if (DateTime.Now.Date > item.EndDate.Date)
                     {
                         <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1 position-relative">
                             <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
@@ -76,7 +76,7 @@
                     }
                 </div>
             </div>
-            @if ((item.IsClosed || item.CloseDate < DateTime.Now.Date) && (DateTime.Now.Date <= item.EndDate))
+            @if ((item.IsClosed || item.CloseDate.Date < DateTime.Now.Date) && (DateTime.Now.Date <= item.EndDate.Date))
             {
                 <div class="org-card__noti d-flex align-items-center position-absolute">
                     <span class="material-icons-outlined">

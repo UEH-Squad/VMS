@@ -1,71 +1,44 @@
-﻿<div class="infopage">
-    <div class="infopage-title">
-        <p class="title__content">
-            Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid-19 tại địa phương
-        </p>
-        <div class="title__name">
-            <span class="material-icons"><span class="earth-icon">public</span></span>
-            <a class="org-name" href="@Routes.OrgProfile">
-                <p class="organization m-0">Tên Đơn vị tổ chức</p>
-            </a>
+﻿@if (Activity is { } activity)
+{
+    <div class="infopage">
+        <div class="infopage-title">
+            <p class="title__content">
+                @activity.Name
+            </p>
+            <div class="title__name">
+                <span class="material-icons"><span class="earth-icon">public</span></span>
+                <a class="org-name" href="@($"{Routes.OrgProfile}/{activity.OrgId}")">
+                    <p class="organization m-0">@activity.Organizer?.FullName</p>
+                </a>
+            </div>
+            <div class="title__date mb-3">
+                <div class="d-flex justify-content-between align-items-end">
+                    <p class="postdate m-0 ms-2">
+                        Ngày đăng: @activity.CreatedDate
+                    </p>
+                    <button @onclick="@(() => HandleFavorite(activity.Id))" class="@(isFav ? "heart-button2" : "heart-button1")">
+                        <span class="material-icons"><span class="heart-icon">@(isFav ? "favorite" : "favorite_border")</span></span>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="title__date mb-3">
-            <div class="d-flex justify-content-between align-items-end">
-                <p class="postdate m-0 ms-2">
-                    Ngày đăng: 20/07/2021
+        <div class="infopage-activity">
+            <div class="activity__description">
+                <p class="content">
+                    @((MarkupString)activity.Description)
                 </p>
-                <button @onclick="AnimateHeart" class="@typeButton">
-                    <span class="material-icons"><span class="heart-icon">@typeI</span></span>
-                </button>
+            </div>
+            <div class="activity__image">
+                <img src="./img/ActivityInfoPage/ActivityImage.png" alt="Activity Image">
+            </div>
+            <div class="activity__mission">
+                <p class="mission">Sứ mệnh:</p>
+                @((MarkupString)activity.Mission)
+            </div>
+            <div class="activity__assignment">
+                <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
+                @((MarkupString)activity.Commission)
             </div>
         </div>
     </div>
-    <div class="infopage-activity">
-        <div class="activity__description">
-            <p class="content">
-                Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ,
-                tinh thần hăng hái TÌNH NGUYỆN tham gia hỗ trợ chuyên môn trong công tác phòng chống dịch tại địa phương.
-            </p>
-        </div>
-        <div class="activity__image">
-            <img src="./img/ActivityInfoPage/ActivityImage.png" alt="Activity Image">
-        </div>
-        <div class="activity__mission">
-            <p class="mission">Sứ mệnh:</p>
-            <ul class="misson-list">
-                <li>Góp phần công sức vào công cuộc chống dịch Covid-19 của cả nước</li>
-                <li>Sứ mệnh: Góp phần công sức vào công cuộc chống dịch Covid-19 của cả nước Mang lại việc làm ý nghĩa để cùng nhau thể hiện tinh thần trách nhiệm, tình yêu với Tổ quốc</li>
-                <li>Tình nguyện viên được hưởng 120.000 đồng/người/ngày, gồm tiền ăn là 80.000 đồng (theo mức quy định tại Khoản 5 Điều 2 Nghị quyết 16)</li>
-            </ul>
-        </div>
-        <div class="activity__assignment">
-            <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
-            <ul class="assignment-list">
-                <li>Hỗ trợ nhập liệu dữ liệu trên máy tính</li>
-                <li>Hỗ trợ hậu cần (thực phẩm, đồ ăn, thiết bị y tế)</li>
-                <li>Hỗ trợ tuyên truyền</li>
-                <li>Hỗ trợ công tác tổng hợp</li>
-                <li>Tham gia hỗ trợ điều phối</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-@code {
-    private string typeButton = "heart-button1";
-    private string typeI = "favorite_border";
-
-    private void AnimateHeart()
-    {
-        if (typeButton == "heart-button1")
-        {
-            typeButton = "heart-button2";
-            typeI = "favorite";
-        }
-        else
-        {
-            typeButton = "heart-button1";
-            typeI = "favorite_border";
-        }
-    }
 }

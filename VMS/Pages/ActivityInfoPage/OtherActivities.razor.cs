@@ -1,0 +1,72 @@
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
+using VMS.Domain.Models;
+
+namespace VMS.Pages.ActivityInfoPage
+{
+    public partial class OtherActivities : ComponentBase
+    {
+        private List<ViewActivityViewModel> otherActivities;
+        private User currentUser;
+
+        [Parameter]
+        public int ActivityId { get; set; }
+
+        [Parameter]
+        public string OrgId { get; set; }
+
+        [Inject]
+        public IJSRuntime JSRuntinme { get; set; }
+
+        [Inject]
+        public IActivityService ActivityService { get; set; }
+
+        [Inject]
+        public IIdentityService IdentityService { get; set; }
+
+        protected override void OnInitialized()
+        {
+            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            otherActivities = await ActivityService.GetOtherActivitiesAsync(OrgId, new[] { ActivityId });
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (otherActivities is not null)
+            {
+                await JSRuntinme.InvokeVoidAsync("vms.OtherAct", otherActivities.Count);
+            }
+        }
+
+        private void HandleFavorite(int id)
+        {
+            Favorite favorite = currentUser.Favorites.FirstOrDefault(f => f.ActivityId == id);
+
+            if (favorite is null)
+            {
+                currentUser.Favorites.Add(new()
+                {
+                    UserId = currentUser.Id,
+                    ActivityId = id,
+                    CreatedDate = DateTime.Now
+                });
+            }
+            else
+            {
+                currentUser.Favorites.Remove(favorite);
+            }
+
+            IdentityService.UpdateUser(currentUser);
+        }
+    }
+}

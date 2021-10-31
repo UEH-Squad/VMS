@@ -59,6 +59,8 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFacultyService, FacultyService>();
+            services.AddTransient<IReportService, ReportService>();
+
             services.AddTransient<IMailService, MailService>();
         }
 

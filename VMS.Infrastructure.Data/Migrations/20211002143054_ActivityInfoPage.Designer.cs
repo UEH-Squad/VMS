@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211002143054_ActivityInfoPage")]
+    partial class ActivityInfoPage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -471,18 +473,10 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Color")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("#18A0FB");
-
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPinned")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -496,119 +490,86 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Color = "#18A0FB",
                             Icon = "people_outline",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Cộng đồng"
                         },
                         new
                         {
                             Id = 2,
-                            Color = "#18A0FB",
                             Icon = "pan_tool",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Hỗ trợ"
                         },
                         new
                         {
                             Id = 3,
-                            Color = "#18A0FB",
                             Icon = "import_contacts",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Giáo dục"
                         },
                         new
                         {
                             Id = 4,
-                            Color = "#18A0FB",
                             Icon = "format_shapes",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Kỹ thuật"
                         },
                         new
                         {
                             Id = 5,
-                            Color = "#18A0FB",
                             Icon = "local_hospital",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Sức khỏe"
                         },
                         new
                         {
                             Id = 6,
-                            Color = "#18A0FB",
                             Icon = "drive_eta",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Phương tiện"
                         },
                         new
                         {
                             Id = 7,
-                            Color = "#18A0FB",
                             Icon = "wb_sunny",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Môi trường"
                         },
                         new
                         {
                             Id = 8,
-                            Color = "#18A0FB",
                             Icon = "directions_bike",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Thể thao"
                         },
                         new
                         {
                             Id = 9,
-                            Color = "#18A0FB",
                             Icon = "notifications_active",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Khẩn cấp"
                         },
                         new
                         {
                             Id = 10,
-                            Color = "#18A0FB",
                             Icon = "calendar_today",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Sự kiện"
                         },
                         new
                         {
                             Id = 11,
-                            Color = "#18A0FB",
                             Icon = "home",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Chuyển nhà"
                         },
                         new
                         {
                             Id = 12,
-                            Color = "#18A0FB",
                             Icon = "computer",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Công nghệ"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Color = "#F14747",
-                            Icon = "coronavirus",
-                            IsDeleted = false,
-                            IsPinned = true,
-                            Name = "COVID-19"
                         });
                 });
 

@@ -34,8 +34,8 @@
         content: "";
         width: 13px;
         height: 7px;
-        border-left: 2px solid $blue;
-        border-bottom: 2px solid $blue;
+        border-left: 2px solid var(--checkbox-color);
+        border-bottom: 2px solid var(--checkbox-color);
         position: absolute;
         top: 40%;
         left: 52%;
@@ -45,15 +45,6 @@
 
     &:checked::before {
         display: block;
-    }
-}
-
-.form-check:nth-child(3) {
-    .my-check-box {
-        &::before {
-            border-left: 2px solid #f14747;
-            border-bottom: 2px solid #f14747;
-        }
     }
 }
 

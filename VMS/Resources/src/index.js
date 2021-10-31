@@ -1,10 +1,11 @@
-﻿import { smoothScrollTo, hookFileUploadEvent } from './common';
+﻿import { smoothScrollTo, hookFileUploadEvent, floatBackToTop } from './common';
 import homepage from './homepage';
 import activitiespage from './activityInfo';
 import userProfile from './userProfile';
 import organizationProfile from './organizationProfile';
 
 export const SmoothScrollTo = (element) => smoothScrollTo(element);
+export const FloatBackToTop = (isFloat) => floatBackToTop(isFloat);
 export const HookFileUploadEvent = (previewImg, fileUploadRefId, discardBtn, imgContainerId, originalSrc) => hookFileUploadEvent(previewImg, fileUploadRefId, discardBtn, imgContainerId, originalSrc);
 export const PlayVideo = (src) => homepage.playVideo(src);
 export const FilterCarousel = () => homepage.filterCarousel();

@@ -1,8 +1,13 @@
 ﻿@inject IJSRuntime JsRuntime
 
+@if (IsFloat)
+{
+    <div class="faux-divider"></div>
+}
+
 <footer class="footer">
 
-    <a @onclick="ScrollToTop" class="btn-back-top">
+    <a id="backToTop" @onclick="ScrollToTop" class="@(IsFloat ? "btn-float-back-top" : "btn-back-top")">
         <span class="material-icons-outlined btn-back-top-icon">
             expand_less
         </span>
@@ -29,7 +34,6 @@
                         <h6><a href="" class="contact-items contact__contribute">Liên hệ/Đóng góp</a></h6>
                     </div>
                 </div>
-
             </div>
             <div class="footer__right col-6 col-xl-2">
                 <h6><a href="">Chính sách bảo mật</a></h6>
@@ -38,21 +42,34 @@
                 <h6><a href="">Hướng dẫn sử dụng</a></h6>
             </div>
             <div class="footer__contact col-6 d-xl-none m-auto text-center">
-                    <div>
-                        <h6 class="contact__name">Văn phòng Hội sinh viên Trường Đại học Kinh tế TP.HCM</h6>
-                        <h6>279 Nguyễn Tri Phương, Quận 10, TP. Hồ Chí Minh</h6>
-                        <h6>Điện thoại: 84.28.38295.99 - Email: info@ueh.edu.vn</h6>
-                        <h6><a href="" class="contact-items contact__contribute">Liên hệ/Đóng góp</a></h6>
-                    </div>               
+                <div>
+                    <h6 class="contact__name">Văn phòng Hội sinh viên Trường Đại học Kinh tế TP.HCM</h6>
+                    <h6>279 Nguyễn Tri Phương, Quận 10, TP. Hồ Chí Minh</h6>
+                    <h6>Điện thoại: 84.28.38295.99 - Email: info@ueh.edu.vn</h6>
+                    <h6><a href="" class="contact-items contact__contribute">Liên hệ/Đóng góp</a></h6>
+                </div>
             </div>
-
         </div>
-        
     </div>
 </footer>
 
 @code
 {
+    [Inject]
+    private IJSRuntime JS { get; set; }
+
+    [Parameter]
+    public bool IsFloat { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await base.OnInitializedAsync();
+            await JS.InvokeVoidAsync("vms.FloatBackToTop", IsFloat);
+        }
+    }
+
     private async Task ScrollToTop()
     {
         await Interop.ScrollToTop(JsRuntime);

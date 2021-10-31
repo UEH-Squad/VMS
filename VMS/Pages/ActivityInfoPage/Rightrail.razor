@@ -1,14 +1,18 @@
-﻿
+﻿@using VMS.Application.Interfaces
+
+@inject IIdentityService IdentityService
+
+@if (Activity is { } activity)
+{
     <div class="container">
         <div class="inside-the-border">
             <div class="icons">
-
                 <div class="icon position-relative">
                     <span class="material-icons my-icons">
-                        people_outline
+                        @activity.Area?.Icon
                     </span>
                     <span class="icon-tooltip">
-                        Cộng đồng
+                        @activity.Area?.Name
                     </span>
                 </div>
             </div>
@@ -16,87 +20,46 @@
             <div class="about-infor">
                 <div class="participant">
                     <p class="participant__title titles mb-0">Đối tượng tham gia</p>
-                    <p class="participant__content contents mb-0">Sinh viên năm 1,2,3</p>
+                    <ul class="mb-0">
+                        @foreach (var item in targets)
+                        {
+                            <li class="contents">@item</li>
+                        }
+                    </ul>
                 </div>
                 <div class="location">
                     <p class="location__title titles mb-0">Địa điểm tham gia</p>
-                    <p class="location__content contents mb-0">Tp.Thủ Đức, Vĩnh Long, Tp.HCM</p>
+                    <p class="location__content contents mb-0">@activity.Address</p>
                 </div>
                 <div class="time">
                     <p class="time__title titles mb-0">Thời gian tham gia</p>
-                    <p class="time__content contents mb-0">08/08/2021 - 09/09/2021</p>
+                    <p class="time__content contents mb-0">@activity.StartDate - @activity.EndDate</p>
                 </div>
                 <div class="skill">
                     <p class="skill__title titles mb-0">Kỹ năng</p>
-                    <p class="skill__content contents mb-0">Kỹ năng 1, kỹ năng 2, kỹ năng 3</p>
+                    <p class="skill__content contents mb-0">@string.Join(", ", activity.Skills.Select(x => x.Name))</p>
                 </div>
                 <div class="request">
                     <p class="request__title titles mb-0">Yêu cầu khi tham gia</p>
-                    <ul>
-                        <li class="request__content contents">Yêu cầu 1</li>
-                        <li class="request__content contents">Yêu cầu 2</li>
-                        <li class="request__content contents">Yêu cầu 3</li>
-                    </ul>
+                    @((MarkupString)activity.Requirement)
                 </div>
             </div>
             <div class="btn-sign-up--cover">
-                <AuthorizeView>
-                    <Authorized>
-                        <button @onclick="@(() =>ShowSignUpPopUp())" class="btn-sign-up">
-                            <h3 class="btn-sign-up__text">Đăng ký</h3>
-                        </button>
-                    </Authorized>
-                    <NotAuthorized>
-                        <button @onclick="@(() =>ShowRequireSignup())" class="btn-sign-up">
-                            <h3 class="btn-sign-up__text">Đăng ký</h3>
-                        </button>
-                    </NotAuthorized>
-                </AuthorizeView>
-                
+                @if (isAlreadySignedUp)
+                {
+                    <button class="btn-already-sign-up">
+                        <h3 class="btn-sign-up__text">Bạn đã đăng ký</h3>
+                    </button>
+                }
+                else
+                {
+                    <button @onclick="@(() => ShowSignUpPopUp())" class="btn-sign-up">
+                        <h3 class="btn-sign-up__text">Đăng ký</h3>
+                    </button>
+                }
             </div>
         </div>
-        <button @onclick="@(() =>ShowReportPopUp() )" class="report">Báo cáo hoạt động này</button>
+        <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>
     </div>
-
-
-
-@code {
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-    async Task ShowReportPopUp()
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        Modal.Show<PopUpReport>("",options);
-    }
-    async Task ShowSignUpPopUp()
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", options);
-    }
-
-    private void ShowRequireSignup()
-    {
-
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-
-        Modal.Show<VMS.Shared.Components.RequireSignup>("", options);
-    }
 }
 

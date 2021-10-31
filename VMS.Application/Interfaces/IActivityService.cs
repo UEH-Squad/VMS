@@ -32,5 +32,7 @@ namespace VMS.Application.Interfaces
         Task UpdateActFavorAsync(int activityId, string userId);
 
         Task CloseActivityDailyAsync();
+
+        Task<List<ViewActivityViewModel>> GetOtherActivitiesAsync(string orgId, int[] excludedActitivyIds);
     }
 }

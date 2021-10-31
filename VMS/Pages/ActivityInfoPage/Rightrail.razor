@@ -20,12 +20,10 @@
             <div class="about-infor">
                 <div class="participant">
                     <p class="participant__title titles mb-0">Đối tượng tham gia</p>
-                    <ul class="mb-0">
-                        @foreach (var item in targets)
-                        {
-                            <li class="contents">@item</li>
-                        }
-                    </ul>
+                    @foreach (var item in targets)
+                    {
+                        <p class="participant__content contents mb-0">@item</p>
+                    }
                 </div>
                 <div class="location">
                     <p class="location__title titles mb-0">Địa điểm tham gia</p>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211002143054_ActivityInfoPage")]
+    partial class ActivityInfoPage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "bfedbf16-6192-4db9-9be9-edc7c5fae896",
+                            ConcurrencyStamp = "445034e8-bea2-4693-803e-811277f3a2de",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "2a06db1b-9a7b-467d-89f7-23c9dd6c7687",
+                            ConcurrencyStamp = "d2ac63c5-f33e-4602-8a3b-b050359cbb08",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "df2b8eb2-edc7-4de7-b6d5-70eb28bb58df",
+                            ConcurrencyStamp = "5b73e236-a1fa-484e-95fc-0311f1c3a683",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -226,13 +228,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
-                            RoleId = "a18be9c0-aa65-4af8-bd17-00bd9344e570"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -1236,28 +1231,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasIndex("FacultyId");
 
                     b.HasDiscriminator().HasValue("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "128dcf2c-1853-451f-bcae-8d496abb79dc",
-                            Email = "hsv.ueh@ueh.edu.vn",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "hsv.ueh@ueh.edu.vn",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE4iU8jRuvJutgfH5ott5OO2Vgjf9ylDO8Z1Pez4qsCIXx3QKLOYwCx42u16DiWlwg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin",
-                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            Rank = 0
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

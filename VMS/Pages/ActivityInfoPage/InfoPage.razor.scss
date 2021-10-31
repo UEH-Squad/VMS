@@ -105,10 +105,6 @@
             font-weight: 600;
             font-size: 18px;
         }
-
-        .misson-list {
-            margin: 0 auto;
-        }
     }
 
     .activity__assignment {
@@ -123,9 +119,11 @@
             font-size: 18px;
             font-weight: 600;
         }
+    }
+}
 
-        .assignment-list {
-            margin: 0 auto;
-        }
+::deep {
+    ul {
+        margin: 0 auto;
     }
 }

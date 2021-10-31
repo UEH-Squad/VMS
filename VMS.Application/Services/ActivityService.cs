@@ -263,7 +263,9 @@ namespace VMS.Application.Services
                     a => a.Id == activityId
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
+                                .Include(x => x.ActivityAddresses).ThenInclude(s => s.AddressPath)
                                 .Include(x => x.Area)
+                                .Include(x => x.Organizer)
             };
 
             Activity activity = await _repository.GetAsync(dbContext, specification);
@@ -279,7 +281,35 @@ namespace VMS.Application.Services
                 IsDeleted = a.Skill.IsDeleted
             }).ToList();
 
+            activityViewModel.AddressPaths = activity.ActivityAddresses.Select(a => new AddressPath
+            {
+                Id = a.AddressPathId,
+                Name = a.AddressPath.Name
+            }).ToList();
+
             return activityViewModel;
+        }
+
+        public async Task<List<ViewActivityViewModel>> GetOtherActivitiesAsync(string orgId, int[] excludedActitivyIds)
+        {
+            if (string.IsNullOrEmpty(orgId))
+            {
+                return new List<ViewActivityViewModel>();
+            }
+
+            DbContext context = _dbContextFactory.CreateDbContext();
+
+            List<Activity> activity = await _repository.GetListAsync(context, new Specification<Activity>()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>
+                {
+                    a => !excludedActitivyIds.Contains(a.Id),
+                    a => a.OrgId == orgId,
+                    a => a.EndDate >= DateTime.Now
+                },
+            });
+
+            return _mapper.Map<List<ViewActivityViewModel>>(activity);
         }
 
         private static ICollection<ActivitySkill> MapSkills(CreateActivityViewModel activityViewModel, Activity activity)

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
-using VMS.Domain.Models;
 using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces

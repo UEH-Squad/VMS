@@ -19,7 +19,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
         private IActivityService ActivityService { get; set; }
         [CascadingParameter]
         public string CurrentUserId { get; set; }
-
         protected override async Task OnParametersSetAsync()
         {
             this.actId = int.Parse(ActId);

@@ -66,7 +66,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }
-
         [CascadingParameter] public IModalService Modal { get; set; }
         async Task ShowSignUpPopUpAsync(ListVolunteerViewModel volunteer)
         {
@@ -76,7 +75,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true
             };
-
             ModalParameters parameters = new();
             parameters.Add("ActivityId", 1);
             parameters.Add("Volunteer", volunteer);
@@ -85,8 +83,5 @@ namespace VMS.Pages.Organization.VolunteersListPage
 
             Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, options);
         }
-
     }
-
-
 }

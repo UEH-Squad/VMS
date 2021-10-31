@@ -11,15 +11,12 @@ namespace VMS.Pages.Organization.VolunteersListPage
         public bool Undo { get; set; }
         [CascadingParameter]
         public BlazoredModalInstance Modal { get; set; }
-
         bool isConfirm = true;
         bool isSuccess;
-
         private async Task CloseModalAsync()
         {
             await Modal.CloseAsync(ModalResult.Ok<bool>(isSuccess));
         }
-
         private async Task ActionSuccessAsync()
         {
             isConfirm = !isConfirm;

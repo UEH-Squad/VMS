@@ -34,7 +34,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
         private IExportExcelService ExportExcelService { get; set; }
         [Inject]
         private IJSRuntime JSRuntime { get; set; }
-
         public async Task ChangeNavAsync()
         {
             navDel = !navDel;
@@ -60,13 +59,11 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true
             };
-                var result = await Modal.Show<ConfirmDelList>("", parameters, options).Result;
-                if ((bool)result.Data)
-                {
-                    await ListVolunteerService.UpdateVounteerAsync(CheckedList, !ShowDeletedList);
-                    await IsDeleted.InvokeAsync(ShowDeletedList);
-                }
-
+            var result = await Modal.Show<ConfirmDelList>("", parameters, options).Result;
+            if((bool)result.Data)
+            {
+                await ListVolunteerService.UpdateVounteerAsync(CheckedList, !ShowDeletedList);
+            }
         }
         public async Task DowLoadAsync()
         {

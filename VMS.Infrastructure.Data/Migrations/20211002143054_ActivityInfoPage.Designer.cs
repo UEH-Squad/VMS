@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211002143054_ActivityInfoPage")]
+    partial class ActivityInfoPage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "c2d941df-9de5-482e-8e33-ced9777c7ddb",
+                            ConcurrencyStamp = "445034e8-bea2-4693-803e-811277f3a2de",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "557380c4-9cdf-4583-b3ca-276aeb0de3c6",
+                            ConcurrencyStamp = "d2ac63c5-f33e-4602-8a3b-b050359cbb08",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "7c280274-5174-4f0f-a8cd-d62f65e57fa4",
+                            ConcurrencyStamp = "5b73e236-a1fa-484e-95fc-0311f1c3a683",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -268,9 +270,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CloseDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Commission")
                         .HasColumnType("nvarchar(max)");
 
@@ -321,9 +320,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OpenDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
@@ -702,7 +698,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActivityId")
+                    b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -717,9 +713,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<bool>("IsProcessed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ReportBy")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -733,8 +726,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasIndex("ActivityId");
 
-                    b.HasIndex("ReportBy");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Feedbacks");
@@ -747,7 +738,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -772,7 +763,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -1409,21 +1400,15 @@ namespace VMS.Infrastructure.Data.Migrations
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
                         .WithMany()
-                        .HasForeignKey("ActivityId");
-
-                    b.HasOne("VMS.Domain.Models.User", "Reporter")
-                        .WithMany("Reports")
-                        .HasForeignKey("ReportBy")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Activity");
-
-                    b.Navigation("Reporter");
 
                     b.Navigation("User");
                 });
@@ -1433,14 +1418,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
                         .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId");
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1448,14 +1435,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
                         .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId");
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
@@ -1632,8 +1621,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Recruitments");
-
-                    b.Navigation("Reports");
 
                     b.Navigation("UserAddresses");
 

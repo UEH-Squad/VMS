@@ -28,11 +28,9 @@ namespace VMS.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
 
             [Required(AllowEmptyStrings = false, ErrorMessage = "Vui lòng nhập mật khẩu mới")]
+            [StringLength(30, MinimumLength = 4, ErrorMessage = "Mật khẩu phải có ít nhất 4 ký tự")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -41,11 +39,14 @@ namespace VMS.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "Mật khẩu xác nhận không chính xác")]
             public string ConfirmPassword { get; set; }
-
+            
+            [Required]
+            [EmailAddress]
+            public string Email { get; set; }
             public string Code { get; set; }
         }
 
-        public IActionResult OnGet(string code = "thanhlam")
+        public IActionResult OnGet(string code, string email)
         {
             if (code == null)
             {
@@ -55,37 +56,29 @@ namespace VMS.Areas.Identity.Pages.Account
             {
                 Input = new InputModel
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    Code = code,
+                    Email = email
                 };
                 return Page();
             }
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
             var user = await _userManager.FindByEmailAsync(Input.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToPage("./ResetPasswordConfirmation");
-            }
-
-            var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
+            var result = await _userManager.ResetPasswordAsync(user, Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(Input.Code)), Input.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ResetPasswordConfirmation");
+                return Page();
             }
-
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
             return Page();
-        }
+            }
     }
 }

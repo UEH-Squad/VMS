@@ -59,6 +59,9 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFacultyService, FacultyService>();
+            services.AddTransient<IReportService, ReportService>();
+
+            services.AddTransient<IMailService, MailService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env, IActivityService activityService)

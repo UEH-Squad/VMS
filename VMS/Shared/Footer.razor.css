@@ -26,6 +26,10 @@
     background: #64D72F; }
     .btn-back-top .btn-back-top-icon:hover {
       background: #306C14; }
+    .btn-back-top .btn-back-top-icon.grey-icon {
+      background: #D8D8D8; }
+      .btn-back-top .btn-back-top-icon.grey-icon:hover {
+        background: #B4B4B4; }
     @media (min-width: 576px) {
       .btn-back-top .btn-back-top-icon {
         width: 40px;

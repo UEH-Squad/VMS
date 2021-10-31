@@ -58,8 +58,8 @@
                         @foreach (var item in User.Areas)
                         {
                             <div class="item @(User.Areas.Count > 3 ? "" : "mx-2")">
-                                <i class="material-icons">@item.Icon</i>
-                                <span>@item.Name</span>
+                                <i class="material-icons" style="background-color: @item.Color">@item.Icon</i>
+                                <span style="color: @(item.IsPinned ? item.Color : "#64D72F")">@item.Name</span>
                             </div>
                         }
 

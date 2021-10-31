@@ -6,6 +6,8 @@ namespace VMS.Domain.Models
     {
         public string Name { get; set; }
         public string Icon { get; set; }
+        public bool IsPinned { get; set; }
+        public string Color { get; set; }
         public virtual ICollection<UserArea> UserAreas { get; set; }
         public virtual ICollection<Activity> Activities { get; set; }
     }

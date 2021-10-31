@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210929065811_AddIsPinnedColumnToArea")]
+    partial class AddIsPinnedColumnToArea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "445034e8-bea2-4693-803e-811277f3a2de",
+                            ConcurrencyStamp = "677e5ef0-c044-4152-9419-b7cce8caf5ac",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "d2ac63c5-f33e-4602-8a3b-b050359cbb08",
+                            ConcurrencyStamp = "0cdf4825-02cb-4228-91f5-de8ffb4ee954",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "5b73e236-a1fa-484e-95fc-0311f1c3a683",
+                            ConcurrencyStamp = "4fba7759-a424-46c3-8708-61cb60d5a54a",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -471,11 +473,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Color")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("#18A0FB");
-
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
@@ -496,7 +493,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Color = "#18A0FB",
                             Icon = "people_outline",
                             IsDeleted = false,
                             IsPinned = false,
@@ -505,7 +501,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Color = "#18A0FB",
                             Icon = "pan_tool",
                             IsDeleted = false,
                             IsPinned = false,
@@ -514,7 +509,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Color = "#18A0FB",
                             Icon = "import_contacts",
                             IsDeleted = false,
                             IsPinned = false,
@@ -523,7 +517,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 4,
-                            Color = "#18A0FB",
                             Icon = "format_shapes",
                             IsDeleted = false,
                             IsPinned = false,
@@ -532,7 +525,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 5,
-                            Color = "#18A0FB",
                             Icon = "local_hospital",
                             IsDeleted = false,
                             IsPinned = false,
@@ -541,7 +533,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 6,
-                            Color = "#18A0FB",
                             Icon = "drive_eta",
                             IsDeleted = false,
                             IsPinned = false,
@@ -550,7 +541,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 7,
-                            Color = "#18A0FB",
                             Icon = "wb_sunny",
                             IsDeleted = false,
                             IsPinned = false,
@@ -559,7 +549,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 8,
-                            Color = "#18A0FB",
                             Icon = "directions_bike",
                             IsDeleted = false,
                             IsPinned = false,
@@ -568,7 +557,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 9,
-                            Color = "#18A0FB",
                             Icon = "notifications_active",
                             IsDeleted = false,
                             IsPinned = false,
@@ -577,7 +565,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 10,
-                            Color = "#18A0FB",
                             Icon = "calendar_today",
                             IsDeleted = false,
                             IsPinned = false,
@@ -586,7 +573,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 11,
-                            Color = "#18A0FB",
                             Icon = "home",
                             IsDeleted = false,
                             IsPinned = false,
@@ -595,112 +581,10 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 12,
-                            Color = "#18A0FB",
                             Icon = "computer",
                             IsDeleted = false,
                             IsPinned = false,
                             Name = "Công nghệ"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Color = "#F14747",
-                            Icon = "coronavirus",
-                            IsDeleted = false,
-                            IsPinned = true,
-                            Name = "COVID-19"
-                        });
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Khoa Luật"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Khoa Kế toán"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Khoa Kinh tế"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Khoa Khoa học xã hội"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Khoa Ngân hàng"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Khoa Ngoại ngữ"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Khoa Quản lý nhà nước"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Khoa Quản trị"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Khoa Tài chính"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Khoa Tài chính công"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Khoa Công nghệ thông tin kinh doanh"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Khoa Kinh doanh quốc tế - Marketing"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Khoa Toán - Thống kê"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Viện Du lịch"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Viện Đào tạo quốc tế"
                         });
                 });
 
@@ -1216,20 +1100,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Class")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Course")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FullAddress")
                         .HasColumnType("nvarchar(max)");
@@ -1252,9 +1127,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("PhoneNumber2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rank")
-                        .HasColumnType("int");
-
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(max)");
 
@@ -1266,8 +1138,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("FacultyId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -1398,7 +1268,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.ActivityTarget", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany("ActivityTargets")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1489,7 +1359,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany("Recruitments")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1575,16 +1445,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.User", b =>
-                {
-                    b.HasOne("VMS.Domain.Models.Faculty", "Faculty")
-                        .WithMany("Users")
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Faculty");
-                });
-
             modelBuilder.Entity("VMS.Domain.Models.Activity", b =>
                 {
                     b.Navigation("ActivityAddresses");
@@ -1593,11 +1453,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Navigation("ActivitySkills");
 
-                    b.Navigation("ActivityTargets");
-
                     b.Navigation("Favorites");
-
-                    b.Navigation("Recruitments");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
@@ -1614,11 +1470,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Activities");
 
                     b.Navigation("UserAreas");
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>

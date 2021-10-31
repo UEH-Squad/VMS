@@ -10,15 +10,28 @@
         <input @bind=Filter.Actual class="my-check-box cursor-pointer" type="checkbox" id="actual" value="actual">
         <label class="my-check-box-label cursor-pointer" for="actual">Actual</label>
     </div>
-    <div class="form-check form-check-inline d-flex align-items-center p-0">
-        <input class="my-check-box cursor-pointer" type="checkbox" id="covid-19" value="actual">
-        <label class="my-check-box-label d-flex align-items-center cursor-pointer colored-red" for="covid-19">
-            COVID-19
-            <span class="material-icons-outlined">
-                coronavirus
-            </span>
-        </label>
-    </div>
+    @if (areasPinned is not null)
+    {
+        @foreach (var area in areasPinned)
+        {
+            <div class="form-check form-check-inline d-flex align-items-center p-0">
+                @if (Filter.Areas.Exists(x => x.Id == area.Id))
+                {
+                    <input @onclick="(() => ChangeStatePinnedArea(area))" class="my-check-box cursor-pointer" type="checkbox" id="@area.Icon" checked style="--checkbox-color: @area.Color">
+                }
+                else
+                {
+                    <input @onclick="(() => ChangeStatePinnedArea(area))" class="my-check-box cursor-pointer" type="checkbox" id="@area.Icon" style="--checkbox-color: @area.Color">
+                }
+                <label class="my-check-box-label d-flex align-items-center cursor-pointer" style="color: @area.Color" for="@area.Icon">
+                    @area.Name
+                    <span class="material-icons-outlined">
+                        @area.Icon
+                    </span>
+                </label>
+            </div>
+        }
+    }
 </div>
 
 <div class="filter-bar d-flex justify-content-between mb-5">

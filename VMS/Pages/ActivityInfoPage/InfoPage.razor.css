@@ -77,8 +77,6 @@
     margin: 0 auto;
     font-weight: 600;
     font-size: 18px; }
-  .infopage-activity .activity__mission .misson-list {
-    margin: 0 auto; }
 
 .infopage-activity .activity__assignment {
   margin-top: 3.5%;
@@ -90,5 +88,6 @@
     margin: 0 auto;
     font-size: 18px;
     font-weight: 600; }
-  .infopage-activity .activity__assignment .assignment-list {
-    margin: 0 auto; }
+
+::deep ul {
+  margin: 0 auto; }

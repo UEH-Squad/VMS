@@ -43,15 +43,8 @@
 
     private async Task CloseSuccess()
     {
-        if(IsClosed == true)
-        {
-            await ActivityService.UpdateStatusActAsync(ActId, false, false);
-        }
-        else
-        {
-            await ActivityService.UpdateStatusActAsync(ActId, true, false);
-        }
         IsClosed = !IsClosed;
+        await ActivityService.CloseOrDeleteActivity(ActId, IsClosed, false);
         isCloseSuccess = true;
         await CloseModal();
     }

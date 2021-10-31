@@ -49,8 +49,7 @@
 
     private async Task DeleteSuccess()
     {
-        bool delete = true;
-        await ActivityService.UpdateStatusActAsync(ActId, false ,delete);
+        await ActivityService.CloseOrDeleteActivity(ActId, false, true);
         isDeleteSuccess = true;
         await CloseModal();
     }

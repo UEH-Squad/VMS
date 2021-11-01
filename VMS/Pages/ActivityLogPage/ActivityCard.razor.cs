@@ -48,6 +48,7 @@ namespace VMS.Pages.ActivityLogPage
                 StarRating = 0;
             }
 
+            page = 1;
             pagedResult = await RecruitmentService.GetAllActivitiesAsync(userId, page, SearchValue, IsRated);
         }
 

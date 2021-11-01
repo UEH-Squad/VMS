@@ -33,14 +33,18 @@ namespace VMS.Pages.Organization.VolunteersListPage
         }
         private async Task ValueChangeAsync(string value)
         {
+            page = 1;
             this.searchValue = value;
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            checkList = new();
             StateHasChanged();
         }
         private async Task ShowDeletedListAsync(bool value)
         {
+            page = 1;
             this.isDeleted = value;
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            checkList = new();
             StateHasChanged();
         }
         private async Task HandleCheckAsync(int id)
@@ -66,6 +70,16 @@ namespace VMS.Pages.Organization.VolunteersListPage
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }
+        public async Task HandleDeletedAsync()
+        {
+            if (pagedResult.TotalItems - checkList.Count <= (pagedResult.PageIndex - 1) * pagedResult.PageSize)
+            {
+                page = pagedResult.PageIndex - 1;
+            }
+            pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            checkList = new();
+            StateHasChanged();
+        }
         [CascadingParameter] public IModalService Modal { get; set; }
         async Task ShowSignUpPopUpAsync(ListVolunteerViewModel volunteer)
         {
@@ -80,7 +94,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
             parameters.Add("Volunteer", volunteer);
             parameters.Add("CurrentUser", volunteer.User);
             parameters.Add("IsReadOnly", true);
-
             Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, options);
         }
     }

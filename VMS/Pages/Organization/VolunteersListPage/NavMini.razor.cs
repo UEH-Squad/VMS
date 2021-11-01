@@ -29,7 +29,9 @@ namespace VMS.Pages.Organization.VolunteersListPage
         [Parameter]
         public EventCallback<string> ValueChange { get; set; }
         [Parameter]
-        public EventCallback<bool> IsDeleted { get; set; }
+        public EventCallback<bool> ShowDelete { get; set; }
+        [Parameter]
+        public EventCallback<bool> HandleDeleted { get; set; }
         [Inject]
         private IExportExcelService ExportExcelService { get; set; }
         [Inject]
@@ -39,7 +41,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
             navDel = !navDel;
             navUndo = !navUndo;
             this.ShowDeletedList = !ShowDeletedList;
-            await IsDeleted.InvokeAsync(ShowDeletedList);
+            await ShowDelete.InvokeAsync(ShowDeletedList);
         }
         private async Task SearchValueChangedAsync(string searchValueChanged)
         {
@@ -63,6 +65,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
             if((bool)result.Data)
             {
                 await ListVolunteerService.UpdateVounteerAsync(CheckedList, !ShowDeletedList);
+                await HandleDeleted.InvokeAsync();
             }
         }
         public async Task DowLoadAsync()

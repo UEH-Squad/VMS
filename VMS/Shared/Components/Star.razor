@@ -1,0 +1,28 @@
+﻿<span class="material-icons-outlined" style="color:@(Rating >= 1 ? "#EDF131" : "#B4B4B4")">
+    star@(HaftStar(Rating, 1) ? "_half" : "")
+</span>
+<span class="material-icons-outlined" style="color:@(Rating >= 2 ? "#EDF131" : "#B4B4B4")">
+    star@(HaftStar(Rating, 2) ? "_half" : "")
+</span>
+<span class="material-icons-outlined" style="color:@(Rating >= 3 ? "#EDF131" : "#B4B4B4")">
+    star@(HaftStar(Rating, 3) ? "_half" : "")
+</span>
+<span class="material-icons-outlined" style="color:@(Rating >= 4 ? "#EDF131" : "#B4B4B4")">
+    star@(HaftStar(Rating, 4) ? "_half" : "")
+</span>
+<span class="material-icons-outlined" style="color:@(Rating >= 5 ? "#EDF131" : "#B4B4B4")">
+    star@(HaftStar(Rating, 5) ? "_half" : "")
+</span>
+
+@code {
+    [Parameter] public double Rating { get; set; }
+
+    private bool HaftStar(double rate, int star)
+    {
+        if (rate - star >= 0.5 && rate - star < 1)
+        {
+            return true;
+        }
+        return false;
+    }
+}

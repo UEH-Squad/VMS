@@ -25,6 +25,7 @@ namespace VMS.Pages.ActivitySearchPage
             new OrderData() { Name = "Nổi bật nhất", OrderBy = ActOrderBy.Hottest }
         };
 
+        private List<AreaViewModel> areasPinned;
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
         private List<UserViewModel> organizers;
@@ -49,6 +50,8 @@ namespace VMS.Pages.ActivitySearchPage
         private IOrganizationService OrganizationService { get; set; }
         [Inject]
         private IAddressService AddressService { get; set; }
+        [Inject]
+        private IAreaService AreaService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -56,6 +59,8 @@ namespace VMS.Pages.ActivitySearchPage
             isOrganizationShow = false;
 
             provinces = await AddressService.GetAllProvincesAsync();
+
+            areasPinned = await AreaService.GetAllAreasAsync(true);
         }
 
         private void ToggleCityDropdown()
@@ -169,6 +174,19 @@ namespace VMS.Pages.ActivitySearchPage
         {
             OrderList[key] = !OrderList[key];
             await OrderListChanged.InvokeAsync(OrderList);
+        }
+
+        private void ChangeStatePinnedArea(AreaViewModel areaViewModel)
+        {
+            AreaViewModel area = Filter.Areas.Find(a => a.Id == areaViewModel.Id);
+            if (area is null)
+            {
+                Filter.Areas.Add(areaViewModel);
+            }
+            else
+            {
+                Filter.Areas.Remove(area);
+            }
         }
     }
 }

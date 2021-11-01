@@ -61,10 +61,10 @@
                         @foreach (var item in choosenAreas)
                         {
                             <div class="item me-5">
-                                <i class="material-icons">
+                                <i class="material-icons" style="background-color: @item.Color">
                                     @item.Icon
                                 </i>
-                                <span>@item.Name</span>
+                                <span style="color: @(item.IsPinned ? item.Color : "#64D72F")">@item.Name</span>
                             </div>
                         }
                         <div class="item">

@@ -70,7 +70,6 @@
       transform: translateY(-5px); }
     .my-editProfile .form-field-item i {
       display: block;
-      background-color: #18A0FB;
       border-radius: 50%;
       color: white;
       margin: 5px auto;
@@ -86,7 +85,6 @@
           line-height: 83px;
           font-size: 35px; } }
     .my-editProfile .form-field-item span {
-      color: #64D72F;
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210929122640_SeedDefaultColorToArea")]
+    partial class SeedDefaultColorToArea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "c2d941df-9de5-482e-8e33-ced9777c7ddb",
+                            ConcurrencyStamp = "4f1a0f74-1bc9-4b66-9d58-7ff03ff47aea",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "557380c4-9cdf-4583-b3ca-276aeb0de3c6",
+                            ConcurrencyStamp = "8275a3f8-0527-42cf-a8db-ede17e5491c2",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "7c280274-5174-4f0f-a8cd-d62f65e57fa4",
+                            ConcurrencyStamp = "b90d6988-c38a-4017-8576-054742b29049",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -268,9 +270,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CloseDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Commission")
                         .HasColumnType("nvarchar(max)");
 
@@ -321,9 +320,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OpenDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
@@ -618,98 +614,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Khoa Luật"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Khoa Kế toán"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Khoa Kinh tế"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Khoa Khoa học xã hội"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Khoa Ngân hàng"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Khoa Ngoại ngữ"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Khoa Quản lý nhà nước"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Khoa Quản trị"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Khoa Tài chính"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Khoa Tài chính công"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Khoa Công nghệ thông tin kinh doanh"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Khoa Kinh doanh quốc tế - Marketing"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Khoa Toán - Thống kê"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Viện Du lịch"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Viện Đào tạo quốc tế"
-                        });
-                });
-
             modelBuilder.Entity("VMS.Domain.Models.Favorite", b =>
                 {
                     b.Property<int>("Id")
@@ -743,7 +647,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActivityId")
+                    b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -758,9 +662,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<bool>("IsProcessed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ReportBy")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -774,8 +675,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasIndex("ActivityId");
 
-                    b.HasIndex("ReportBy");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Feedbacks");
@@ -788,7 +687,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -813,7 +712,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -1227,20 +1126,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Class")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Course")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FullAddress")
                         .HasColumnType("nvarchar(max)");
@@ -1263,9 +1153,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("PhoneNumber2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rank")
-                        .HasColumnType("int");
-
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(max)");
 
@@ -1277,8 +1164,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("FacultyId");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -1409,7 +1294,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.ActivityTarget", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany("ActivityTargets")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1450,21 +1335,15 @@ namespace VMS.Infrastructure.Data.Migrations
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
                         .WithMany()
-                        .HasForeignKey("ActivityId");
-
-                    b.HasOne("VMS.Domain.Models.User", "Reporter")
-                        .WithMany("Reports")
-                        .HasForeignKey("ReportBy")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Activity");
-
-                    b.Navigation("Reporter");
 
                     b.Navigation("User");
                 });
@@ -1474,14 +1353,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
                         .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId");
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1489,20 +1370,22 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
                         .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId");
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany("Recruitments")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1588,16 +1471,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.User", b =>
-                {
-                    b.HasOne("VMS.Domain.Models.Faculty", "Faculty")
-                        .WithMany("Users")
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Faculty");
-                });
-
             modelBuilder.Entity("VMS.Domain.Models.Activity", b =>
                 {
                     b.Navigation("ActivityAddresses");
@@ -1606,11 +1479,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Navigation("ActivitySkills");
 
-                    b.Navigation("ActivityTargets");
-
                     b.Navigation("Favorites");
-
-                    b.Navigation("Recruitments");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.AddressPath", b =>
@@ -1627,11 +1496,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Activities");
 
                     b.Navigation("UserAreas");
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.Faculty", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Feedback", b =>
@@ -1673,8 +1537,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Recruitments");
-
-                    b.Navigation("Reports");
 
                     b.Navigation("UserAddresses");
 

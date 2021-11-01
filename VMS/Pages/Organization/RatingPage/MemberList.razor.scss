@@ -23,6 +23,15 @@
     }
 }
 
+.container-avatar {
+    img {
+        object-fit: cover;
+        width: 85px;
+        height: 85px;
+        border-radius: 100%;
+    }
+}
+
 .member {
     display: flex;
     align-items: center;
@@ -46,6 +55,8 @@
             font-weight: 600;
             font-size: 20px;
             line-height: 36px;
+            text-decoration: none;
+            color: black;
         }
 
         &2 {

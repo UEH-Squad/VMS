@@ -15,24 +15,13 @@
 </div>
 
 @code {
-
     double star;
-    bool showYellowStars = false;
 
     [Parameter]
     public double? StarRating { get; set; }
 
     [Parameter]
     public EventCallback<double?> StarRatingChanged { get; set; }
-
-    [Parameter]
-    public bool ShowYellowStars { get; set; } = false;
-
-    [Parameter]
-    public Func<Task> OnShowYellowStars { get; set; }
-
-    [Parameter]
-    public Func<Task> NoneShowYellowStars { get; set; }
 
     protected override void OnParametersSet()
     {

@@ -32,7 +32,7 @@
             <label for="filter-checkbox_5" class="filter-checkbox_txt">5 sao</label>
         </span>
     </div>
-    <button @onclick="async () => await SubmitRating()" class="filter-submit">Đánh giá</button>
+    <button @onclick="async () => await SubmitRatingAsync()" class="filter-submit">Đánh giá</button>
 </div>
 
 @code {
@@ -41,7 +41,7 @@
     [Parameter]
     public EventCallback<int> StarRatingChanged { get; set; }
 
-    private async Task SubmitRating()
+    private async Task SubmitRatingAsync()
     {
         await StarRatingChanged.InvokeAsync(StarRating);
     }

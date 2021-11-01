@@ -1,25 +1,28 @@
-﻿@attribute [Route(Routes.ActivityInfo)]
+﻿@attribute [Route(Routes.ActivityInfo + "/{activityId:int}")]
 
-<div class="container-lg px-0 layout">
-    <div class="toppage">
-        <div class="return">
-            <a href="@Routes.ActivitySearch" class="return-text">&#60; Quay lại</a>
+@if (isLoading)
+{
+    <Spinner IsLoading="isLoading" />
+}
+else
+{
+    <div class="container-lg px-0 layout">
+        <div class="toppage">
+            <div class="return">
+                <a href="@Routes.ActivitySearch" class="return-text">&#60; Quay lại</a>
+            </div>
+        </div>
+        <div class="row layout__body">
+            <div class="col-6 flex-grow-1 layout__body__main">
+                <InfoPage Activity="@activity" />
+            </div>
+            <div class="col-1"></div>
+            <div class="col-5 layout__body__rightrail">
+                <Rightrail Activity="@activity" />
+            </div>
+        </div>
+        <div class="layout__other-activities my-5">
+            <OtherActivities ActivityId="@activity.Id" OrgId="@activity.OrgId" />
         </div>
     </div>
-    <div class="row layout__body">
-        <div class="col-6 flex-grow-1 layout__body__main">
-            <InfoPage />
-        </div>
-        <div class="col-1"></div>
-        <div class="col-5 layout__body__rightrail">
-            <Rightrail />
-        </div>
-    </div>
-    <div class="layout__other-activities my-5">
-        <OtherActivities />
-    </div>
-</div>
-
-@code {
-
 }

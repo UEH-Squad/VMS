@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Linq;
 using VMS.Application.ViewModels;
 using VMS.Domain.Models;
@@ -13,19 +14,37 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, ActivityViewModel>();
             CreateMap<CreateActivityViewModel, Activity>();
             CreateMap<Activity, CreateActivityViewModel>();
-            CreateMap<Activity, ViewActivityViewModel>();
+            CreateMap<Activity, ViewActivityViewModel>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("dd/MM/yyyy")))
+                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.ToString("dd/MM/yyyy")));
             CreateMap<Area, AreaViewModel>();
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
-            CreateMap<User, UserViewModel>();
-            CreateMap<CreateUserProfileViewModel, User>();
-            CreateMap<CreateUserProfileViewModel, User>();
-            CreateMap<User, CreateUserProfileViewModel>()
-                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.Select(x => new AreaViewModel
+            CreateMap<User, UserViewModel>()
+                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color,
+                    IsPinned = x.Area.IsPinned
+                })))
+                .ForMember(x => x.Skills, opt => opt.MapFrom(src => src.UserSkills.Select(x => new SkillViewModel
+                {
+                    Id = x.SkillId,
+                    Name = x.Skill.Name
+                })));
+            CreateMap<CreateUserProfileViewModel, User>();
+            CreateMap<CreateUserProfileViewModel, User>();
+            CreateMap<User, CreateUserProfileViewModel>()
+                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
+                {
+                    Id = x.AreaId,
+                    Name = x.Area.Name,
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color,
+                    IsPinned = x.Area.IsPinned
                 })))
                 .ForMember(x => x.Skills, opt => opt.MapFrom(src => src.UserSkills.Select(x => new SkillViewModel
                 {
@@ -35,14 +54,28 @@ namespace VMS.Application.Automapper
 
             CreateMap<CreateOrgProfileViewModel, User>();
             CreateMap<User, CreateOrgProfileViewModel>()
-                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.Select(x => new AreaViewModel
+                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color,
+                    IsPinned = x.Area.IsPinned
                 })));
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
+            MapReportToFeedback();
+            CreateMap<PaginatedList<Recruitment>, PaginatedList<RecruitmentViewModel>>();
+            CreateMap<RecruitmentRating, RecruitmentRatingViewModel>();
+        }
+
+        private void MapReportToFeedback()
+        {
+            CreateMap<ReportViewModel, Feedback>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.DesReport))
+                .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
             CreateMap<Recruitment, ListVolunteerViewModel>();
         }
     }

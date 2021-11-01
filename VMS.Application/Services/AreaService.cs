@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -19,11 +20,20 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<List<AreaViewModel>> GetAllAreasAsync()
+        public async Task<List<AreaViewModel>> GetAllAreasAsync(bool isPinned = false)
         {
             using DbContext dbContext = _dbContextFactory.CreateDbContext();
+            
             List<Area> areas = await _repository.GetListAsync<Area>(dbContext);
-            return _mapper.Map<List<AreaViewModel>>(areas);
+
+            if (isPinned)
+            {
+                return _mapper.Map<List<AreaViewModel>>(areas.Where(x => x.IsPinned).Take(4));
+            }
+            else
+            {
+                return _mapper.Map<List<AreaViewModel>>(areas.OrderByDescending(x => x.IsPinned));
+            }
         }
     }
 }

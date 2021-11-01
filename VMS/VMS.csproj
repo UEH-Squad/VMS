@@ -21,6 +21,7 @@
   <ItemGroup>
     <PackageReference Include="AntDesign" Version="0.10.0" />
     <PackageReference Include="Blazored.Modal" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.9" />
     <PackageReference Include="EPPlus" Version="5.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
@@ -60,6 +61,8 @@
 
   <ItemGroup>
     <Folder Include="Pages\Admin\" />
+    <Folder Include="wwwroot\img\activities\" />
+    <Folder Include="wwwroot\img\Avatar\" />
     <Folder Include="wwwroot\img\OrganizationProfile\" />
   </ItemGroup>
 

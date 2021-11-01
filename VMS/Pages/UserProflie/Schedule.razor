@@ -4,27 +4,27 @@
         <div class="container">
             <div class="row schedule">
                 <div class="col-6 schedule__calendar">
-                    <Calendar @bind-Value="@value" />
+                    <Calendar ValueChanged="OnValueChanged" />
                 </div>
                 <div class="col-6 schedule__act">
                     <h3 class="text-center pb-2 mb-5">Hoạt động <span> trong ngày của bạn</span></h3>
                     <div class="schedule__act-items px-3">
-                        @foreach (var item in fakeDatas)
+                        @foreach (var item in items)
                         {
                             <div class="schedule__act-item py-3 px-4 mb-4">
-                                <h6 class="lmtext-2">@item.Title </h6>
+                                <a href="@Routes.ActivityInfo/@item.Id"><h6 class="lmtext-2">@item.Name </h6></a>
                                 <div class="d-flex align-items-center mt-3">
                                     <div class="d-flex align-items-center me-5">
                                         <span class="material-icons schedule__act-icon me-3">
                                             public
                                         </span>
-                                        <span class="schedule__act-text">@item.Org</span>
+                                        <span class="schedule__act-text">@item.Organizer.FullName</span>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <span class="material-icons schedule__act-icon me-3">
                                             location_on
                                         </span>
-                                        <span class="schedule__act-text">@item.Address</span>
+                                        <span class="schedule__act-text">@item.Province</span>
                                     </div>
                                 </div>
                             </div>
@@ -39,31 +39,4 @@
 
 
 @code {
-    DateTime value;
-
-    [Parameter] public bool IsUser { get; set; } = true;
-    protected override void OnInitialized()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            fakeDatas.Add(new FakeData()
-            {
-                Id = i,
-                Title = "Tuyển tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19 ",
-                Org = "Đội công tác viên",
-                Address = "TP. Hồ Chí Minh"
-
-            });
-        }
-    }
-
-    private List<FakeData> fakeDatas = new();
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Org { get; set; }
-        public string Address { get; set; }
-    }
 }

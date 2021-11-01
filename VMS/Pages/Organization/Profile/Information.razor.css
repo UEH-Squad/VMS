@@ -102,7 +102,6 @@
         transform: translateY(-5px); }
       .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
         display: block;
-        background-color: #18A0FB;
         border-radius: 50%;
         color: white;
         margin: 5px auto;
@@ -118,7 +117,6 @@
             line-height: 75px; } }
       .my-information .information__carousel .item span, .my-information .information__NoCarousel .item span {
         margin-top: 10px;
-        color: #64D72F;
         font-weight: 500;
         display: inline-block;
         transition: all 0.3s linear;

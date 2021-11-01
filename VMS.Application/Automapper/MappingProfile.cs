@@ -65,6 +65,8 @@ namespace VMS.Application.Automapper
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
             MapReportToFeedback();
+            CreateMap<PaginatedList<Recruitment>, PaginatedList<RecruitmentViewModel>>();
+            CreateMap<RecruitmentRating, RecruitmentRatingViewModel>();
         }
 
         private void MapReportToFeedback()

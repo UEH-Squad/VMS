@@ -52,7 +52,7 @@ namespace VMS.Pages.ActivityLogPage
             pagedResult = await RecruitmentService.GetAllActivitiesAsync(userId, page, SearchValue, IsRated);
         }
 
-        private async Task HandlePageChanged()
+        private async Task HandlePageChangedAsync()
         {
             pagedResult = await RecruitmentService.GetAllActivitiesAsync(userId, page, SearchValue, IsRated);
             StateHasChanged();
@@ -68,7 +68,7 @@ namespace VMS.Pages.ActivityLogPage
             }
         }
 
-        private async Task ShowReportPopUp()
+        private async Task ShowReportPopUpAsync()
         {
             var options = new ModalOptions()
             {

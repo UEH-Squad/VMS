@@ -44,7 +44,7 @@ namespace VMS.Pages.ActivityLogPage
             Display2 = "d-none";
         }
 
-        private async Task RadioButtonChanged(bool value)
+        private async Task RadioButtonChangedAsync(bool value)
         {
             await IsRatedChanged.InvokeAsync(value);
         }

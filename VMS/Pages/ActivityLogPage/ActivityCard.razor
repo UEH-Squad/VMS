@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="activity__icon d-flex">
-                            <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
+                            <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUpAsync())" id="popup-report_icon">
                                 @*Pop-up để report*@
                                 <span id="member-report_icon" class="material-icons">report_problem</span>
                             </button>
@@ -53,7 +53,7 @@
         <div class="pagination-container d-flex">
             <Pager CurrentPage="@pagedResult.PageIndex"
                    PageCount="@pagedResult.TotalPages"
-                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })" />
         </div>
     </div>
 </div>

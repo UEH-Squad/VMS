@@ -72,7 +72,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         {
             if (confirmDeleteId == activity.Id)
             {
-                await ActivityService.UpdateStatusActAsync(activity.Id, activity.IsClosed, !activity.IsDeleted);
+                await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsClosed, !activity.IsDeleted);
                 ResetState();
                 popupDelete = activity.Id;
                 await HandlePageChangedAsync();
@@ -87,7 +87,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         {
             if (confirmCloseId == activity.Id)
             {
-                await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
+                await ActivityService.CloseOrDeleteActivity(activity.Id, !activity.IsClosed, activity.IsDeleted);
                 ResetState();
                 popupClose = activity.Id;
                 await HandlePageChangedAsync();

@@ -1,6 +1,4 @@
-﻿@inject IJSRuntime JSRuntinme;
-
-@if (fakeData is not null && fakeData.Count != 0)
+﻿@if (otherActivities is not null && otherActivities.Count != 0)
 {
     <section class="other-act">
         <div class="other-act__title">
@@ -8,17 +6,23 @@
             <hr>
         </div>
         <div class="owl-carousel owl-theme">
-            @foreach (var data in fakeData)
+            @foreach (var item in otherActivities)
             {
                 <a href="" class="act__container__card position-relative" id="kiemtra">
                     <div class="act__container__card__img">
-                        <img src="@data.Banner" alt="photo">
+                        @if (!string.IsNullOrEmpty(item.Banner))
+                        {
+                            <img src="@item.Banner" alt="photo" />
+                        }
                     </div>
                     <div class="act__container__card__desc">
-                        <p class="limited-text">@data.Title</p>
+                        <p class="limited-text">@item.Name</p>
                     </div>
                     <div class="act__container__card__icon">
-                        <a class="@(data.IsFav ? "heart" : "heart-line")" @onclick="@(() => AnimateHeart(data.Id))" @onclick:preventDefault @onclick:stopPropagation>
+                        @{ 
+                            bool isFav = currentUser.Favorites.Any(x => x.ActivityId == item.Id);
+                        }
+                        <a class="@(isFav ? "heart" : "heart-line")" @onclick="@(() => HandleFavorite(item.Id))" @onclick:preventDefault @onclick:stopPropagation>
                             <span class="material-icons">favorite</span>
                         </a>
                     </div>
@@ -26,43 +30,4 @@
             }
         </div>
     </section>
-}
-
-@code {
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Banner { get; set; }
-        public bool IsFav { get; set; }
-    }
-
-    private List<FakeData> fakeData = new();
-
-    protected override async Task OnInitializedAsync()
-    {
-        fakeData.AddRange(Enumerable.Range(0,7).Select(x => new FakeData
-        {
-            Id = x,
-            Title = "Tình nguyện viên tham gia hỗ trợ công tác phòng, chống dịch Covid-19",
-            Banner = "img/AcitivitiesInfo/ki-niem-tinh-nguyen-vien.jpg",
-            IsFav = false
-        }));
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
-    }
-
-    private void AnimateHeart(int id)
-    {
-        var item = fakeData.FirstOrDefault(x => x.Id == id);
-        if (item is not null)
-        {
-            item.IsFav = !item.IsFav;
-        }
-
-    }
 }

@@ -1,7 +1,8 @@
 ﻿@using VMS.Domain.Models
 @inject IJSRuntime JsRuntime
+
 <div class="container__list-result">
-    <SearchResult />
+    <SearchResult ResultNumber="@recruitments.TotalItems" />
     <div class="container-member">
         @if (recruitments != null && recruitments.TotalItems != 0)
         {
@@ -16,7 +17,7 @@
                             <a href="@Routes.UserProfile/@item.User.Id" class="member-name1">@item.User.FullName</a>
                             <p class="member-name2">Chiến sĩ làm biếng</p>
                         </div>
-                        <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)"/>
+                        <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)" />
                         <div class="member-comment">
                             @*Pop-up để comment*@
                             <button @onclick="@(async () => await ShowCommentPopUpAsync(item))" id="popup-comment_icon">
@@ -38,10 +39,11 @@
         <div class="pagination-container">
             <Pager CurrentPage="@recruitments.PageIndex"
                    PageCount="@recruitments.TotalPages"
-                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })" />
         </div>
     </div>
 </div>
+
 
 @code {
 

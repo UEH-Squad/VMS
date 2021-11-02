@@ -25,6 +25,7 @@
   .container ::deep .my-container {
     justify-content: space-between; }
     .container ::deep .my-container .quantity-volunteers {
+      margin-top: -8%;
       width: 62%; }
     .container ::deep .my-container .button {
       width: 18%; }

@@ -97,9 +97,9 @@ namespace VMS.Areas.Identity.Pages.Account
                                 values: new { area = "Identity", userId = user.Id, code, returnUrl = await _userManager.IsInRoleAsync(user, "User") ? Routes.EditUserProfile : Routes.EditOrgProfile },
                                 protocol: Request.Scheme);
 
-                            await _mailService.SendConfirmEmail(user.Email, callbackUrl);
+                            await _mailService.SendConfirmEmail(user.UserName, callbackUrl);
 
-                            return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
+                            return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.UserName });
                         }
                     }
                     if (result.Succeeded)

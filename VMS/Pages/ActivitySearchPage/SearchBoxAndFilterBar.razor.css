@@ -33,8 +33,8 @@
     content: "";
     width: 13px;
     height: 7px;
-    border-left: 2px solid #18A0FB;
-    border-bottom: 2px solid #18A0FB;
+    border-left: 2px solid var(--checkbox-color);
+    border-bottom: 2px solid var(--checkbox-color);
     position: absolute;
     top: 40%;
     left: 52%;
@@ -42,10 +42,6 @@
     display: none; }
   .my-check-box:checked::before {
     display: block; }
-
-.form-check:nth-child(3) .my-check-box::before {
-  border-left: 2px solid #f14747;
-  border-bottom: 2px solid #f14747; }
 
 .my-check-box-label {
   font-size: 20px;

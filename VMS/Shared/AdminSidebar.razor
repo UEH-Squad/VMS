@@ -35,7 +35,7 @@
             </NavLink>
         </div>
         <div class="d-flex flex-wrap menu-item">
-            <span class="menu-item__icon material-icons @(isAccountMenuPages ? "blue-text" : "")">snippet_folder</span>
+            <span class="menu-item__icon material-icons @(isAccountMenuPages ? "blue-text" : "")">folder_shared</span>
             <div class="menu-item__name cursor-pointer @(isAccountMenuPages ? "blue-text" : "")" @onclick="ToggleAccountMenu">Quản lý tài khoản</div>
             <span class="menu-item__icon material-icons cursor-pointer @(isAccountMenuPages ? "blue-text" : "")" @onclick="ToggleAccountMenu">@(isAccountMenuCollapsed? "expand_more" : "expand_less")</span>
             @if (!isAccountMenuCollapsed)

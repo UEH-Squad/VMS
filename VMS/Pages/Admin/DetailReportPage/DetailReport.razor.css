@@ -79,23 +79,24 @@
       .wrapper .form-report__title span {
         color: #18A0FB; }
     .wrapper .form-report__reason--text, .wrapper .form-report__discript--text, .wrapper .form-report__proof--text {
-      font-size: 18px; }
+      font-size: 16px; }
       .wrapper .form-report__reason--text span, .wrapper .form-report__discript--text span, .wrapper .form-report__proof--text span {
         color: #F14747; }
     .wrapper .form-report__reason textarea, .wrapper .form-report__discript textarea, .wrapper .form-report__proof textarea {
       width: 100%;
       border: 1px solid #D8D8D8;
       border-radius: 5px;
-      font-size: 18px;
-      color: #515151;
+      font-size: 16px;
+      color: #B4B4B4;
       padding: 10px 10px 10px 15px;
-      overflow-y: scroll; }
+      overflow-y: scroll;
+      background: #FFFFFF; }
       .wrapper .form-report__reason textarea::-webkit-scrollbar, .wrapper .form-report__discript textarea::-webkit-scrollbar, .wrapper .form-report__proof textarea::-webkit-scrollbar {
         width: 20px; }
       .wrapper .form-report__reason textarea::-webkit-scrollbar-thumb, .wrapper .form-report__discript textarea::-webkit-scrollbar-thumb, .wrapper .form-report__proof textarea::-webkit-scrollbar-thumb {
         background-color: #B4B4B4;
         border-radius: 10px;
-        border: 5px solid #fafafa; }
+        border: 5px solid #FFFFFF; }
     .wrapper .form-report__proof--item {
       height: 150px;
       width: 150px;
@@ -103,12 +104,12 @@
       border-radius: 10px; }
       @media (min-width: 1200px) {
         .wrapper .form-report__proof--item {
-          height: 220px;
-          width: 220px; } }
+          height: 205px;
+          width: 205px; } }
       @media (min-width: 1400px) {
         .wrapper .form-report__proof--item {
-          height: 240px;
-          width: 240px; } }
+          height: 215px;
+          width: 215px; } }
   .wrapper .action-button {
     margin: 40px 0; }
     .wrapper .action-button__processing, .wrapper .action-button__complete-processing {

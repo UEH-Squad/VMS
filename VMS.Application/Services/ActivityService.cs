@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using System;
@@ -8,6 +9,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
@@ -30,32 +32,27 @@ namespace VMS.Application.Services
             _addressLocationService = addressLocationService;
         }
 
-        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null)
+        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 8)
+        {
+            return await GetAllActivitiesAsync(true, "", new FilterActivityViewModel(), 1, orderList, userLocation, pageSize);
+        }
+
+        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 20)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            PaginatedList<ActivityViewModel> paginatedList;
-
-            if (isSearch)
-            {
-                paginatedList = await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation);
-            }
-            else
-            {
-                paginatedList = await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation);
-            }
-
-            return paginatedList;
+            return isSearch ? await GetAllActivitiesWithSearchValueAsync(searchValue, filter.OrgId, dbContext, currentPage, orderList, userLocation, pageSize)
+                            : await GetAllActivitiesWithFilterAsync(filter, dbContext, currentPage, orderList, userLocation, pageSize);
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, string orgId, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithSearchValueAsync(string searchValue, string orgId, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
         {
             PaginationSpecification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     GetFilterByDate(),
-                    (!string.IsNullOrEmpty(orgId) ? a => a.OrgId == orgId : a => true),
+                    a => a.OrgId == orgId || string.IsNullOrEmpty(orgId),
                     a => a.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
                     a => !a.IsDeleted
                 },
@@ -63,7 +60,7 @@ namespace VMS.Application.Services
                                  .Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
-                PageSize = 20,
+                PageSize = pageSize,
                 OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
@@ -76,7 +73,7 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation)
+        private async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesWithFilterAsync(FilterActivityViewModel filter, DbContext dbContext, int currentPage, Dictionary<ActOrderBy, bool> orderList, Coordinate userLocation, int pageSize)
         {
             PaginationSpecification<Activity> specification = new()
             {
@@ -97,7 +94,7 @@ namespace VMS.Application.Services
                                  .Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
-                PageSize = 20,
+                PageSize = pageSize,
                 OrderBy = GetOrderActivities(orderList, userLocation)
             };
 
@@ -120,7 +117,7 @@ namespace VMS.Application.Services
                 {
                     a => a.IsPin
                 },
-                Take = 2
+                Take = 3
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
@@ -133,6 +130,8 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Activity activity = _mapper.Map<Activity>(activityViewModel);
+            activity.StartDate = activity.StartDate.Date;
+            activity.EndDate = activity.EndDate.Date;
             activity.CreatedDate = DateTime.Now;
             activity.CreatedBy = activity.OrgId;
             activity.IsApproved = true;
@@ -224,6 +223,8 @@ namespace VMS.Application.Services
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
             activity = _mapper.Map(activityViewModel, activity);
+            activity.StartDate = activity.StartDate.Date;
+            activity.EndDate = activity.EndDate.Date;
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;
 
@@ -234,6 +235,12 @@ namespace VMS.Application.Services
 
             activity.ActivitySkills = MapSkills(activityViewModel, activity);
             activity.ActivityAddresses = MapActivityAddresses(activityViewModel, activity);
+
+            // Check if any update on Start Date (to extend Register time..v.v)
+            if (activity.StartDate > DateTime.Now)
+            {
+                activity.IsClosed = false;
+            }
 
             await _repository.UpdateAsync(dbContext, activity);
         }
@@ -251,12 +258,14 @@ namespace VMS.Application.Services
 
             Specification<Activity> specification = new()
             {
-                Conditions = new List<System.Linq.Expressions.Expression<Func<Activity, bool>>>
+                Conditions = new List<Expression<Func<Activity, bool>>>
                 {
                     a => a.Id == activityId
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
+                                .Include(x => x.ActivityAddresses).ThenInclude(s => s.AddressPath)
                                 .Include(x => x.Area)
+                                .Include(x => x.Organizer)
             };
 
             Activity activity = await _repository.GetAsync(dbContext, specification);
@@ -272,106 +281,35 @@ namespace VMS.Application.Services
                 IsDeleted = a.Skill.IsDeleted
             }).ToList();
 
+            activityViewModel.AddressPaths = activity.ActivityAddresses.Select(a => new AddressPath
+            {
+                Id = a.AddressPathId,
+                Name = a.AddressPath.Name
+            }).ToList();
+
             return activityViewModel;
         }
 
-        public async Task<List<ActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false)
+        public async Task<List<ViewActivityViewModel>> GetOtherActivitiesAsync(string orgId, int[] excludedActitivyIds)
         {
-            await using DbContext dbContext = _dbContextFactory.CreateDbContext();
-            List<Activity> activities;
-
-            if (string.IsNullOrEmpty(userId) && location == null)
+            if (string.IsNullOrEmpty(orgId))
             {
-                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
-                return _mapper.Map<List<ActivityViewModel>>(activities);
+                return new List<ViewActivityViewModel>();
             }
 
-            if (!string.IsNullOrEmpty(userId) && location == null)
-            {
-                int? currentUserDistricts = _identityService.GetCurrentUserWithAddresses()?.UserAddresses
-                                                            .FirstOrDefault(x => x.AddressPath.Depth == 2)?.AddressPathId;
-                if (currentUserDistricts.HasValue)
-                {
-                    activities = await GetRelatedActivitiesForUsersTurnOffLocationAsync(isFeatured, currentUserDistricts, dbContext);
-                    return _mapper.Map<List<ActivityViewModel>>(activities);
-                }
+            DbContext context = _dbContextFactory.CreateDbContext();
 
-                activities = await GetRelatedActivitiesForNonUsersTurnOffLocationAsync(isFeatured, dbContext);
-                return _mapper.Map<List<ActivityViewModel>>(activities);
-            }
-
-            activities = await GetRelatedActivitiesWhenLocationTurnedOnAsync(location, isFeatured, dbContext);
-            return _mapper.Map<List<ActivityViewModel>>(activities);
-        }
-
-        private async Task<List<Activity>> GetRelatedActivitiesWhenLocationTurnedOnAsync(Coordinate location, bool isFeatured, DbContext dbContext)
-        {
-            Specification<Activity> spec = new()
+            List<Activity> activity = await _repository.GetListAsync(context, new Specification<Activity>()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>
                 {
-                    x => x.EndDate >= DateTime.Now
+                    a => !excludedActitivyIds.Contains(a.Id),
+                    a => a.OrgId == orgId,
+                    a => a.EndDate >= DateTime.Now
                 },
-                OrderBy = GetOrderByClause(isFeatured, location),
-                Take = 8
-            };
+            });
 
-            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
-
-            return activities;
-        }
-
-        private async Task<List<Activity>> GetRelatedActivitiesForUsersTurnOffLocationAsync(bool isFeatured, int? currentUserDistricts, DbContext dbContext)
-        {
-            Specification<Activity> spec = new()
-            {
-                Includes = x => x.Include(y => y.ActivityAddresses).ThenInclude(y => y.AddressPath),
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    x => x.ActivityAddresses.Any(y => y.AddressPath.Id == currentUserDistricts),
-                    x => x.EndDate >= DateTime.Now
-                },
-                OrderBy = GetOrderByClause(isFeatured, null),
-                Take = 8
-            };
-
-            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
-            return activities;
-        }
-
-        private async Task<List<Activity>> GetRelatedActivitiesForNonUsersTurnOffLocationAsync(bool isFeatured, DbContext dbContext)
-        {
-            Specification<Activity> spec = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    x => x.EndDate >= DateTime.Now
-                },
-                OrderBy = GetOrderByClause(isFeatured, null),
-                Take = 8
-            };
-
-            List<Activity> activities = await _repository.GetListAsync(dbContext, spec);
-            return activities;
-        }
-
-        private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderByClause(bool isFeatured, Coordinate coordinate)
-        {
-            Point userLocation = _geometryFactory.CreatePoint(coordinate);
-            Func<IQueryable<Activity>, IOrderedQueryable<Activity>> result = isFeatured
-                ? (x => x.OrderByDescending(y => y.MemberQuantity))
-                : (x => x.OrderByDescending(y => y.CreatedDate));
-
-            if (coordinate is not null)
-            {
-                result = isFeatured
-                    ? (x => x.OrderBy(y => y.Location.Distance(userLocation))
-                             .ThenByDescending(y => y.MemberQuantity))
-                    : (x => x.OrderBy(y => y.Location.Distance(userLocation))
-                             .ThenByDescending(y => y.CreatedDate));
-            }
-
-            return result;
+            return _mapper.Map<List<ViewActivityViewModel>>(activity);
         }
 
         private static ICollection<ActivitySkill> MapSkills(CreateActivityViewModel activityViewModel, Activity activity)
@@ -471,36 +409,6 @@ namespace VMS.Application.Services
                     / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
         }
 
-        public async Task UpdateStatusActAsync(int activityId, bool close, bool delete)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>
-                {
-                    a => a.Id == activityId
-                }
-            };
-            Activity activity = await _repository.GetAsync(dbContext, specification);
-            activity.UpdatedDate = DateTime.Now;
-            if(close == true)
-            { 
-                activity.IsClosed = true; 
-            }
-            else 
-            { 
-                activity.IsClosed = false;
-            }
-
-            if (delete == true)
-            {
-                activity.IsDeleted = true;
-            }
-           
-            await _repository.UpdateAsync(dbContext, activity);
-        }
-
         private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate coordinate)
         {
             Point userLocation = _geometryFactory.CreatePoint(coordinate);
@@ -568,7 +476,7 @@ namespace VMS.Application.Services
             return x => x.EndDate < DateTime.Now || x.EndDate >= DateTime.Now;
         }
 
-        public async Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false)
+        public async Task CloseOrDeleteActivity(int activityId, bool isClose = false, bool isDelete = false)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -600,7 +508,9 @@ namespace VMS.Application.Services
                     a => a.UserId == userId
                 }
             };
+
             Favorite favorite = await _repository.GetAsync(dbContext, specification);
+
             if(favorite ==null)
             {
                 Favorite fav = new();
@@ -613,6 +523,58 @@ namespace VMS.Application.Services
             {
                 await _repository.DeleteAsync(dbContext, favorite);
             }
+        }
+
+        public async Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime = new())
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    GetConditionByStatusAct(userId, statusAct, dateTime)
+                },
+                Includes = a => a.Include(x => x.Organizer)
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            var activityViewModels = _mapper.Map<List<ActivityViewModel>>(activities);
+
+            activityViewModels.ForEach(a => a.Province = GetActProvince(a.ActivityAddresses));
+
+            return activityViewModels;
+        }
+
+        private static Expression<Func<Activity, bool>> GetConditionByStatusAct(string userId, StatusAct statusAct, DateTime dateTime)
+        {
+            return statusAct switch
+            {
+                StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
+                StatusAct.Ended => x => x.EndDate < DateTime.Now && x.Recruitments.Any(x => x.UserId == userId),
+                _ => x => x.StartDate <= dateTime && x.EndDate >= dateTime && x.Recruitments.Any(x => x.UserId == userId),
+            };
+        }
+
+        public async Task CloseActivityDailyAsync()
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => a.StartDate <= DateTime.Now,
+                    a => !a.IsClosed
+                }
+            };
+
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            activities.ForEach(a => a.IsClosed = true);
+
+            await _repository.UpdateAsync<Activity>(dbContext, activities);
         }
     }
 }

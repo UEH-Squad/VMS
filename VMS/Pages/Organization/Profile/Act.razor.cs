@@ -59,7 +59,7 @@ namespace VMS.Pages.Organization.Profile
             string userId = IdentityService.GetCurrentUserId();
             await ActivityService.UpdateActFavorAsync(id, userId);
             var act = Datas.Find(a => a.Id == id);
-            act.IsFav = !act.IsFav;
+            Datas.Remove(act);
         }
 
         [JSInvokable]
@@ -83,7 +83,7 @@ namespace VMS.Pages.Organization.Profile
             if ((bool)result.Data)
             {
                 var act = Datas.Find(a => a.Id == id);
-                await ActivityService.UpdateStatusActAsync(id, act.IsClosed, true);
+                await ActivityService.CloseOrDeleteActivity(id, true, act.IsClosed);
                 //Datas.Remove(act);
                 NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
             }
@@ -107,7 +107,7 @@ namespace VMS.Pages.Organization.Profile
 
             if ((bool)result.Data)
             {
-                await ActivityService.UpdateStatusActAsync(id, !act.IsClosed, act.IsDeleted);
+                await ActivityService.CloseOrDeleteActivity(id, act.IsDeleted, !act.IsClosed);
                 act.IsClosed = !act.IsClosed;
                 Modal.Show<CloseSuccess>("", parameters, options);
             }

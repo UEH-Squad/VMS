@@ -5,7 +5,7 @@
 /*#region mixins */
 /*#endregion */
 .quantity-report {
-  font-size: 18px;
+  font-size: 24px;
   padding: 15px 0;
   font-weight: 400;
   color: #18A0FB; }
@@ -23,7 +23,8 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px; }
   .list-card .item {
-    padding: 15px; }
+    padding: 15px;
+    border-bottom: 1px solid #D8D8D8; }
     .list-card .item .list-reason {
       font-size: 16px;
       font-weight: 600;

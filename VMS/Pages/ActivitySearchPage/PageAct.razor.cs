@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Enums;
 using VMS.Common.Extensions;
 using VMS.Domain.Models;
 using VMS.GenericRepository;

@@ -1,41 +1,51 @@
 ﻿<div class="d-flex align-items-center profile__rank">
     @if (IsUser)
     {
-        <a href="" class="d-flex align-self-center me-3">#4</a>
+        <a href="" class="d-flex align-self-center me-3">#@Rank</a>
     }
     else
     {
-        <a class="d-flex align-self-center me-3">#4</a>
+        <a class="d-flex align-self-center me-3">#@Rank</a>
     }
 
     <div>
         <p class="mb-2 d-flex justify-content-evenly align-self-end">
-            <span class="profile__rank-number me-1">4,5</span>
-            <i class="material-icons">
-                star_rate
-            </i>
-            <i class="material-icons">
-                star_rate
-            </i>
-            <i class="material-icons">
-                star_rate
-            </i>
-            <i class="material-icons">
-                star_rate
-            </i>
-            <i class="material-icons icon-noColor">
-                star_rate
-            </i>
+            <span class="profile__rank-number me-1">@Stars</span>
+            @for (int i = 1; i <= 5; i++)
+            {
+                <i class="material-icons @(Stars >= i ? "" : "icon-noColor")">
+                    star@(HaftStar(Stars, i) ? "_half" : "")
+                </i>
+            }
         </p>
-        <span class="text-start">15N xếp hạng</span>
+        <span class="text-start">@GetTotalRatingString(TotalRating) xếp hạng</span>
     </div>
 </div>
 
 @code {
 
     [Parameter] public bool IsUser { get; set; } = true;
-    [Parameter] public int Rank { get; set; } =0;
-    [Parameter] public int TotalRating { get; set; } =0;
-    [Parameter] public int Stars { get; set; } =0;
+    [Parameter] public double Rank { get; set; } = 0;
+    [Parameter] public double TotalRating { get; set; } = 0;
+    [Parameter] public double Stars { get; set; } = 0;
 
+    private static bool HaftStar(double rate, int star)
+    {
+        return rate - star > 0 && rate - star <= 0.5;
+    }
+
+    private string GetTotalRatingString(double TotalRating)
+    {
+        if (TotalRating >= 1000000)
+        {
+            return (int)TotalRating / 1000000 + "TR";
+        }
+
+        if (TotalRating >= 1000)
+        {
+            return (int)TotalRating / 1000 + "N";
+        }
+
+        return TotalRating.ToString();
+    }
 }

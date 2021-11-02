@@ -1,7 +1,7 @@
 ﻿@import "../../../Resources/scss/common/_variables.scss";
 
 .quantity-report {
-    font-size: 18px;
+    font-size: 24px;
     padding: 15px 0;
     font-weight: 400;
     color: $blue;
@@ -28,6 +28,7 @@
 
     .item {
         padding: 15px;
+        border-bottom: 1px solid #D8D8D8;
 
         .list-reason {
             font-size: 16px;
@@ -57,11 +58,11 @@
             }
 
             &__who, &__activity {
-                    text-decoration: none;
-                    color: unset;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
+                text-decoration: none;
+                color: unset;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
 
             &__time {
@@ -108,7 +109,7 @@
                     color: $blue;
 
                     svg {
-                        margin-bottom:2px;
+                        margin-bottom: 2px;
                         width: 24px;
                         height: 24px;
                     }

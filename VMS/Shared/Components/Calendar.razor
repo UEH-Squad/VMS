@@ -2,7 +2,7 @@
 <div class="calendar">
     <div class="d-flex flex-column align-items-center pb-2 calendar-header">
         <div class="d-flex my-4 justify-content-center">
-            <AntDesign.DatePicker @bind-Value="@Value" Format="dd/MM/yyyy" AllowClear="false" ClassName="form-control w-50 my-date-picker" />
+            <AntDesign.DatePicker @bind-Value="@Value" OnChange="OnValueChanged" Format="dd/MM/yyyy" AllowClear="false" ClassName="form-control w-50 my-date-picker" />
             <button type="button" class="btn btn-sm ms-3" @onclick="e => OnChangeMonth(0)">
                 <span>@Today</span>
             </button>
@@ -47,6 +47,7 @@
     {
         public DateTime Value { get; init; }
         public DateTime CurrentValue { get; init; }
+        public bool HasActivity => hasActivity.Any(x => x.Date == Value.Date);
     }
 
     private string GetCalendarCellString(CalendarCell item) => CssBuilder.Default()
@@ -62,9 +63,12 @@
         <div class="calendar-day d-flex align-items-center justify-content-center my-1">
             <div class="text-center d-flex flex-column">
                 @item.Value.Day
-                <span class="material-icons dot-icon">
-                    fiber_manual_record
-                </span>
+                @if (item.HasActivity)
+                {
+                    <span class="material-icons dot-icon">
+                        fiber_manual_record
+                    </span>
+                }
             </div>
         </div>
     </td>;

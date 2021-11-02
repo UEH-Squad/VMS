@@ -18,6 +18,12 @@
         display: flex;
         align-items: center;
 
+        .avatar {
+            img {
+                cursor: pointer;
+            }
+        }
+
         .name {
             display: flex;
             flex-direction: column;
@@ -53,6 +59,12 @@
     &_name {
         display: flex;
         align-items: center;
+
+        .avatar {
+            img {
+                cursor: pointer;
+            }
+        }
 
         .name {
             display: flex;

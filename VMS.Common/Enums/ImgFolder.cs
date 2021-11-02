@@ -4,6 +4,7 @@
     {
         Activities,
         Avatar,
-        Banner
+        Banner,
+        Report
     }
 }

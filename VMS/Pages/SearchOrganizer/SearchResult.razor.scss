@@ -1,6 +1,6 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 $yellow: #EDF131;
-$org-avata-size: 150px;
+$org-avata-size: 115px;
 $border-width: 1px;
 .yellow-colored {
     color: $yellow !important;
@@ -11,7 +11,7 @@ $border-width: 1px;
 }
 
 .result-heading {
-    font-size: 26px;
+    font-size: 18px;
     color: $blue;
 
     span {
@@ -23,7 +23,7 @@ $border-width: 1px;
     height: $org-avata-size;
     border: $border-width solid $border-color-normal;
     border-radius: 10px;
-    margin-top: 60px;
+    margin-top: 28px;
     position: relative;
 
     &::before {
@@ -51,7 +51,7 @@ $border-width: 1px;
         a {
             margin-bottom: 20px;
             text-decoration: none;
-            font-size: 20px;
+            font-size: 18px;
             color: $blue;
         }
 
@@ -72,14 +72,14 @@ $border-width: 1px;
             margin-right: 30px;
         }
         & > span {
-            font-size: 40px;
+            font-size: 32px;
             color: $green;
             font-weight: 600;
         }
 
         p {
             font-weight: 600;
-            font-size: 20px;
+            font-size: 18px;
             color: #707070;
         }
     }
@@ -87,7 +87,7 @@ $border-width: 1px;
 
 //hanlde stars
 .org-item__rate-group-star {
-    font-size: 24px;
+    font-size: 20px;
     color: #b4b4b4;
     position: relative;
 

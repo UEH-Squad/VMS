@@ -9,9 +9,9 @@
                 <div class="d-flex align-items-center">
                     <img class="org-item__img me-2" src="/img/act.png" alt="Alternate Text" />
                     <div class="org-item__name-group ms-4">
-                        <a class="org-item__name lmtext-2" href="#">@item.OrganizationName</a>
+                        <a class="org-item__name lmtext-2" href="@(IsUserResult ? Routes.AdminEditVolunteerProfile : (IsOrgResult ? Routes.AdminEditOrganizationProfile: "#"))">@item.OrganizationName</a>
                         <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Level</p>
-                        <p class="m-0 @(HaveActivitiesCount? "d-block" : "d-none")">Đã tổ chức <span>@item.ActivitiesCount</span> hoạt động</p>
+                        <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">Đã tổ chức <span>@item.ActivitiesCount</span> hoạt động</p>
                         <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">Khóa @item.Year - Lớp @item.Class</p>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
     public bool HaveLevel { get; set; }
 
     [Parameter]
-    public bool HaveActivitiesCount { get; set; }
+    public bool IsOrgResult { get; set; }
 
     [Parameter]
     public bool IsUserResult { get; set; }

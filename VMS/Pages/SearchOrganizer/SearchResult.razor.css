@@ -11,29 +11,29 @@
   border-top: 2px solid #b4b4b4; }
 
 .result-heading {
-  font-size: 26px;
+  font-size: 18px;
   color: #18A0FB; }
   .result-heading span {
     color: #64D72F; }
 
 .org-item {
-  height: 150px;
+  height: 115px;
   border: 1px solid #b4b4b4;
   border-radius: 10px;
-  margin-top: 60px;
+  margin-top: 28px;
   position: relative; }
   .org-item::before {
     content: "";
     height: calc(100% + 2 * 1px);
-    width: calc(150px / 2 + 1px);
+    width: calc(115px / 2 + 1px);
     position: absolute;
     left: -1px;
     background-color: #fff;
     z-index: 1; }
   .org-item__img {
-    height: 150px;
-    width: 150px;
-    min-width: 150px;
+    height: 115px;
+    width: 115px;
+    min-width: 115px;
     border-radius: 50%;
     z-index: 2; }
   .org-item__name-group {
@@ -42,7 +42,7 @@
     .org-item__name-group a {
       margin-bottom: 20px;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 18px;
       color: #18A0FB; }
     .org-item__name-group p {
       color: #b4b4b4; }
@@ -55,16 +55,16 @@
       border: 0.5px solid #b4b4b4;
       margin-right: 30px; }
     .org-item__rate-group > span {
-      font-size: 40px;
+      font-size: 32px;
       color: #64D72F;
       font-weight: 600; }
     .org-item__rate-group p {
       font-weight: 600;
-      font-size: 20px;
+      font-size: 18px;
       color: #707070; }
 
 .org-item__rate-group-star {
-  font-size: 24px;
+  font-size: 20px;
   color: #b4b4b4;
   position: relative; }
   .org-item__rate-group-star span {

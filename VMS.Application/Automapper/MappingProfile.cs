@@ -22,11 +22,13 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
             CreateMap<User, UserViewModel>()
-                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.Select(x => new AreaViewModel
+                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color,
+                    IsPinned = x.Area.IsPinned
                 })))
                 .ForMember(x => x.Skills, opt => opt.MapFrom(src => src.UserSkills.Select(x => new SkillViewModel
                 {
@@ -36,11 +38,13 @@ namespace VMS.Application.Automapper
             CreateMap<CreateUserProfileViewModel, User>();
             CreateMap<CreateUserProfileViewModel, User>();
             CreateMap<User, CreateUserProfileViewModel>()
-                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.Select(x => new AreaViewModel
+                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color,
+                    IsPinned = x.Area.IsPinned
                 })))
                 .ForMember(x => x.Skills, opt => opt.MapFrom(src => src.UserSkills.Select(x => new SkillViewModel
                 {
@@ -50,18 +54,21 @@ namespace VMS.Application.Automapper
 
             CreateMap<CreateOrgProfileViewModel, User>();
             CreateMap<User, CreateOrgProfileViewModel>()
-                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.Select(x => new AreaViewModel
+                .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
                 {
                     Id = x.AreaId,
                     Name = x.Area.Name,
-                    Icon = x.Area.Icon
+                    Icon = x.Area.Icon,
+                    Color = x.Area.Color,
+                    IsPinned = x.Area.IsPinned
                 })));
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
             MapReportToFeedback();
         }
 
-        private void MapReportToFeedback() {
+        private void MapReportToFeedback()
+        {
             CreateMap<ReportViewModel, Feedback>()
                 .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.UserId))

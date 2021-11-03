@@ -28,6 +28,14 @@
             background: $green-bold;
         }
 
+        &.grey-icon {
+            background: $grey-input;
+
+            &:hover {
+                background: $grey-icon;
+            }
+        }
+
         @include on("sm") {
             width: 40px;
             height: 40px;

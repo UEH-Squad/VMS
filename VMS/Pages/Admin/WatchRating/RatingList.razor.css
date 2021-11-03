@@ -16,6 +16,8 @@
 .card-member_name {
   display: flex;
   align-items: center; }
+  .card-member_name .avatar img {
+    cursor: pointer; }
   .card-member_name .name {
     display: flex;
     flex-direction: column;
@@ -37,6 +39,8 @@
 .card-organization_name {
   display: flex;
   align-items: center; }
+  .card-organization_name .avatar img {
+    cursor: pointer; }
   .card-organization_name .name {
     display: flex;
     flex-direction: column;

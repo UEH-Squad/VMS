@@ -473,7 +473,9 @@ namespace VMS.Application.Services
             {
                 StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
                 StatusAct.Ended => x => x.EndDate.Date < dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
-                _ => x => x.OpenDate.Date <= dateTime.Date && x.EndDate.Date >= dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
+                _ => x => ((x.OpenDate.Date <= dateTime.Date && x.CloseDate.Date >= dateTime.Date)
+                            || (x.StartDate.Date <= dateTime.Date && x.EndDate.Date >= dateTime.Date))
+                            && x.Recruitments.Any(x => x.UserId == userId),
             };
         }
 

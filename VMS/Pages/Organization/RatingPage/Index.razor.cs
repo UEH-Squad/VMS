@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -33,6 +34,11 @@ namespace VMS.Pages.Organization.RatingPage
             if (activity.OrgId != currentUser.Id)
             {
                 NavigationManager.NavigateTo(Routes.HomePage, true);
+            }
+
+            if (DateTime.Parse(activity.EndDate).Date >= DateTime.Now.Date)
+            {
+                NavigationManager.NavigateTo(Routes.ActivityManagement, true);
             }
         }
 

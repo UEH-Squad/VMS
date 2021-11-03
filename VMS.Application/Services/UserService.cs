@@ -245,6 +245,12 @@ namespace VMS.Application.Services
                                                         .Select(x => x.Activity.StartDate.GetDateRange(x.Activity.EndDate))
                                                         .SelectMany(x => x)
                                                         .ToHashSet();
+            acts.UnionWith(result.Recruitments.Where(x => x.Activity.OpenDate.Between(startDate, endDate)
+                                                        || x.Activity.CloseDate.Between(startDate, endDate))
+                                            .Select(x => x.Activity.OpenDate.GetDateRange(x.Activity.CloseDate))
+                                            .SelectMany(x => x)
+                                            .ToHashSet()
+                );
 
             return await Task.FromResult(acts);
         }

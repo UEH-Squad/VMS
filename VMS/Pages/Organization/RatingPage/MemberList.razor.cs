@@ -50,7 +50,7 @@ namespace VMS.Pages.Organization.RatingPage
 
         private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment = null)
         {
-            await RecruitmentService.UpdateRatingAndCommentAsync(rating.Value, string.Empty, recruitment?.Id);
+            await RecruitmentService.UpdateRatingAndCommentAsync(ActivityId, rating.Value, string.Empty, recruitment?.Id);
             if (recruitment != null)
             {
                 recruitment.Rating = rating;
@@ -65,6 +65,7 @@ namespace VMS.Pages.Organization.RatingPage
             parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
             parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
             parameters.Add("RecruitmentId", recruitment.Id);
+            parameters.Add("ActivityId", ActivityId);
 
             var options = new ModalOptions()
             {

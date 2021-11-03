@@ -1,4 +1,5 @@
 ﻿@layout AdminLayout
+@using VMS.Application.ViewModels
 
 @attribute [Route(Routes.AdminActivityInfo)]
 @attribute [Authorize(Roles = "Admin")]
@@ -6,9 +7,9 @@
 <div class="my-container col-12 d-flex justify-content-center align-items-center">
     <div class="col-10 my-5 my-act d-flex align-items-center flex-column">
         <div class="col-9 pb-4">
-            <VMS.Pages.ActivityInfoPage.InfoPage />
+            <VMS.Pages.ActivityInfoPage.InfoPage Activity="@activity"/>
             <div class="mb-3">
-                <VMS.Pages.ActivityInfoPage.Rightrail />
+                <VMS.Pages.ActivityInfoPage.Rightrail Activity="@activity"/>
             </div>
         </div>
         <div class="act-footer__btn d-flex align-items-center mb-4">
@@ -31,4 +32,10 @@
 
         Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("", options);
     }
+
+    ViewActivityViewModel activity = new()
+    {
+        Name = "Tim kiem CEO tai nang",
+        Mission = "Tim duoc moot CEO tai nang cho cty"
+    };
 }

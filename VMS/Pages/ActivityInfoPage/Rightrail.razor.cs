@@ -20,8 +20,9 @@ namespace VMS.Pages.ActivityInfoPage
         
         [CascadingParameter] public string CurrentUserId { get; set; }
 
-        [Parameter]
-        public ViewActivityViewModel Activity { get; set; }
+        [Parameter] public ViewActivityViewModel Activity { get; set; }
+
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
         protected override void OnInitialized()
         {
@@ -46,9 +47,11 @@ namespace VMS.Pages.ActivityInfoPage
 
         private bool HasValidUser()
         {
-            // TODO: Check user profile
-
-            return true;
+            return !string.IsNullOrEmpty(currentUser.Class)
+                && !string.IsNullOrEmpty(currentUser.Email)
+                && !string.IsNullOrEmpty(currentUser.PhoneNumber)
+                && currentUser.UserSkills.Count != 0
+                && currentUser.UserAreas.Count != 0;
         }
 
         private void ShowReportPopUp()
@@ -62,7 +65,7 @@ namespace VMS.Pages.ActivityInfoPage
 
             if (!HasValidUser())
             {
-                // TODO: Show edit profile pop-up and redirect user to edit org profile page
+                NavigationManager.NavigateTo(Routes.EditUserProfile, true);
             }
 
             ModalParameters parameters = new();

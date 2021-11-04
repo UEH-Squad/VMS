@@ -46,11 +46,11 @@
             li {
                 margin: 8px 0;
                 font-size: 16px;
-                font-weight: 500;
                 cursor: pointer;
                 color: $blue;
 
                 &:hover {
+                    color:$green;
                     background-color: rgba(24, 160, 251, 0.1);
                 }
             }

@@ -148,40 +148,60 @@
                 color: $grey-icon;
                 padding: 10px 10px 10px 15px;
                 overflow-y: scroll;
-                background:$white;
+                background: $white;
 
                 &::-webkit-scrollbar {
-                    width: 20px;
+                    width: 10px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: $grey-icon;
+                    border-radius: 5px;
+                    border: 2px solid $white;
+                }
+            }
+        }
+
+        &__proof {
+            .list-img-report {
+                overflow-x: scroll;
+
+                &::-webkit-scrollbar {
+                    height: 10px;
                 }
 
                 &::-webkit-scrollbar-thumb {
                     background-color: $grey-icon;
                     border-radius: 10px;
-                    border: 5px solid $white;
+                    border: 2px solid $white;
                 }
             }
-        }
 
-        &__proof--item {
-            height: 150px;
-            width: 150px;
-            object-fit: cover;
-            border-radius: 10px;
+            &--item {
+                height: 150px;
+                width: 150px;
+                object-fit: cover;
+                border-radius: 10px;
 
-            @include on('xl') {
-                height: 205px;
-                width: 205px;
+                @include on('xl') {
+                    height: 205px;
+                    width: 205px;
+                }
+
+                @include on('xxl') {
+                    height: 215px;
+                    width: 215px;
+                }
             }
 
-            @include on('xxl') {
-                height: 215px;
-                width: 215px;
+            .margin-right-img {
+                margin-right: 15px;
             }
         }
     }
 
     .action-button {
-        margin:40px 0;
+        margin: 40px 0;
 
         &__processing, &__complete-processing {
             font-weight: 600;

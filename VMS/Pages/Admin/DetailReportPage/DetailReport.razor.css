@@ -92,11 +92,19 @@
       overflow-y: scroll;
       background: #FFFFFF; }
       .wrapper .form-report__reason textarea::-webkit-scrollbar, .wrapper .form-report__discript textarea::-webkit-scrollbar, .wrapper .form-report__proof textarea::-webkit-scrollbar {
-        width: 20px; }
+        width: 10px; }
       .wrapper .form-report__reason textarea::-webkit-scrollbar-thumb, .wrapper .form-report__discript textarea::-webkit-scrollbar-thumb, .wrapper .form-report__proof textarea::-webkit-scrollbar-thumb {
         background-color: #B4B4B4;
+        border-radius: 5px;
+        border: 2px solid #FFFFFF; }
+    .wrapper .form-report__proof .list-img-report {
+      overflow-x: scroll; }
+      .wrapper .form-report__proof .list-img-report::-webkit-scrollbar {
+        height: 10px; }
+      .wrapper .form-report__proof .list-img-report::-webkit-scrollbar-thumb {
+        background-color: #B4B4B4;
         border-radius: 10px;
-        border: 5px solid #FFFFFF; }
+        border: 2px solid #FFFFFF; }
     .wrapper .form-report__proof--item {
       height: 150px;
       width: 150px;
@@ -110,6 +118,8 @@
         .wrapper .form-report__proof--item {
           height: 215px;
           width: 215px; } }
+    .wrapper .form-report__proof .margin-right-img {
+      margin-right: 15px; }
   .wrapper .action-button {
     margin: 40px 0; }
     .wrapper .action-button__processing, .wrapper .action-button__complete-processing {

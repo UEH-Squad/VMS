@@ -40,10 +40,10 @@
       .filter-bar .item .dropdown-menu li {
         margin: 8px 0;
         font-size: 16px;
-        font-weight: 500;
         cursor: pointer;
         color: #18A0FB; }
         .filter-bar .item .dropdown-menu li:hover {
+          color: #64D72F;
           background-color: rgba(24, 160, 251, 0.1); }
   .filter-bar ::deep .ant-picker {
     width: 100%;

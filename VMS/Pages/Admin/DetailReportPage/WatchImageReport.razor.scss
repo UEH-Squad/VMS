@@ -1,0 +1,57 @@
+﻿
+/* Modal Content (Image) */
+.myModal {
+    display: flex;
+    padding-top: 30px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.4);
+    z-index: 101;
+
+    /* The Close Button */
+    .close {
+        position: absolute;
+        top: 35px;
+        right: 35px;
+        color: gray;
+        font-size: 40px;
+        transition: 0.3s;
+
+        &:hover, &foucus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 10px;
+        display: block;
+        width: 80%;
+        margin: auto;
+        max-width: 800px;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 800px) {
+    .modal-content {
+        width: 100%;
+    }
+}

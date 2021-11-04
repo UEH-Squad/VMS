@@ -1,0 +1,14 @@
+﻿
+<div class="myModal">
+    <span @onclick="CloseModal" class="material-icons close">  cancel  </span>
+    <img class="modal-content" src="./img/132752427653900370_43fdc502-ac5b-43eb-84c3-c8600d3756f8.jpg">
+</div>
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private async Task CloseModal()
+    {
+        Modal.CloseAsync();
+    }
+}

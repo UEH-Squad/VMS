@@ -442,5 +442,13 @@
   {
     "outputFile": "Shared/AdminLayout.razor.css",
     "inputFile": "Shared/AdminLayout.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchImageReport/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchImageReport/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
   }
 ]

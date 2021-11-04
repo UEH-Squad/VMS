@@ -29,6 +29,7 @@ namespace VMS.Pages.ActivityLogPage
         [Parameter] public int StarRating { get; set; }
         [Parameter] public bool? IsRated { get; set; }
         [Parameter] public string SearchValue { get; set; }
+        [Parameter] public FilterRecruitmentViewModel filter { get; set; }
 
         [Inject]
         private IRecruitmentService RecruitmentService { get; set; }
@@ -49,12 +50,12 @@ namespace VMS.Pages.ActivityLogPage
             }
 
             page = 1;
-            pagedResult = await RecruitmentService.GetAllActivitiesAsync(userId, page, SearchValue, IsRated);
+            pagedResult = await RecruitmentService.GetAllActivitiesAsync(filter, userId, page, SearchValue, IsRated);
         }
 
         private async Task HandlePageChangedAsync()
         {
-            pagedResult = await RecruitmentService.GetAllActivitiesAsync(userId, page, SearchValue, IsRated);
+            pagedResult = await RecruitmentService.GetAllActivitiesAsync(filter, userId, page, SearchValue, IsRated);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

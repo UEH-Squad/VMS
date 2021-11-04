@@ -9,6 +9,6 @@ namespace VMS.Application.Interfaces
     {
         Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage, string searchValue, bool? isRated);
         Task UpdateRatingAndCommentAsync(double? rank, string comment, int? recruitmentId = null);
-        Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(string userId, int currentPage, string searchValue, bool? isRated);
+        Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(FilterRecruitmentViewModel filter, string userId, int currentPage, string searchValue, bool? isRated);
     }
 }

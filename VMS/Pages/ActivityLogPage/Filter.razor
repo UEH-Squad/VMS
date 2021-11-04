@@ -22,9 +22,12 @@
                     <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
                 </div>
                 <div class="act-filter__list @Display2">
-                    @foreach (var item in faculties)
+                    @if (faculties is not null)
                     {
-                        <span class="act-filter__list-item" @onclick="() => ChooseFaculty(item)">@item.Name</span>
+                        @foreach (var item in faculties)
+                        {
+                            <span class="act-filter__list-item" @onclick="() => ChooseFaculty(item)">@item.Name</span>
+                        }
                     }
                 </div>
             </div>

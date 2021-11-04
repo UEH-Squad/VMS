@@ -21,7 +21,7 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(string userId, int currentPage, string searchValue, bool? isRated)
+        public async Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(FilterRecruitmentViewModel filter, string userId, int currentPage, string searchValue, bool? isRated)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -30,7 +30,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
                     r => r.UserId == userId,
-                    GetActivitiesFromSearchValueAndFilter(searchValue, isRated)
+                    GetActivitiesFromSearchValueAndFilter(filter, searchValue, isRated)
                 },
                 Includes = r => r.Include(x => x.User)
                                  .Include(x => x.RecruitmentRatings)
@@ -153,7 +153,7 @@ namespace VMS.Application.Services
             return r => true;
         }
 
-        private static Expression<Func<Recruitment, bool>> GetActivitiesFromSearchValueAndFilter(string searchValue, bool? isRated)
+        private static Expression<Func<Recruitment, bool>> GetActivitiesFromSearchValueAndFilter(FilterRecruitmentViewModel filter, string searchValue, bool? isRated)
         {
             if (isRated.HasValue)
             {
@@ -170,6 +170,11 @@ namespace VMS.Application.Services
             if (!string.IsNullOrEmpty(searchValue))
             {
                 return r => r.Activity.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim());
+            }
+
+            if (!string.IsNullOrEmpty(filter.FullName))
+            {
+                return r => r.User.FullName == filter.FullName || string.IsNullOrEmpty(filter.FullName);
             }
 
             return r => true;

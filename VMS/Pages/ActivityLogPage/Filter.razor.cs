@@ -15,6 +15,10 @@ namespace VMS.Pages.ActivityLogPage
 
         [Parameter]
         public EventCallback<bool?> IsRatedChanged { get; set; }
+        [Parameter]
+        public EventCallback<FilterRecruitmentViewModel> FilterChanged { get; set; }
+        [Parameter]
+        public FilterRecruitmentViewModel filter { get; set; }
 
         private string facultyDefault = "Đơn vị";
         private string semesterDefault = "Học kỳ";
@@ -41,6 +45,7 @@ namespace VMS.Pages.ActivityLogPage
         private void ChooseFaculty(FacultyViewModel faculty)
         {
             facultyDefault = faculty.Name;
+            filter.FullName = facultyDefault;
             Display2 = "d-none";
         }
 

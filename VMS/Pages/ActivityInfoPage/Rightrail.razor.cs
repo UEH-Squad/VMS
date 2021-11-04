@@ -47,11 +47,9 @@ namespace VMS.Pages.ActivityInfoPage
 
         private bool HasValidUser()
         {
-            return !string.IsNullOrEmpty(currentUser.Class)
-                && !string.IsNullOrEmpty(currentUser.Email)
-                && !string.IsNullOrEmpty(currentUser.PhoneNumber)
-                && currentUser.UserSkills.Count != 0
-                && currentUser.UserAreas.Count != 0;
+            // TODO: Show edit profile pop-up and redirect user to edit org profile page
+
+            return true;
         }
 
         private void ShowReportPopUp()
@@ -65,7 +63,7 @@ namespace VMS.Pages.ActivityInfoPage
 
             if (!HasValidUser())
             {
-                NavigationManager.NavigateTo(Routes.EditUserProfile, true);
+                // TODO: Show edit profile pop-up and redirect user to edit org profile page
             }
 
             ModalParameters parameters = new();

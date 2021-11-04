@@ -112,6 +112,7 @@ namespace VMS.Pages.ActivitySearchPage
 
             await Modal.Show<Signup>("", parameters, options).Result;
         }
+
         private void ShowRequireSignup()
         {
 
@@ -122,7 +123,12 @@ namespace VMS.Pages.ActivitySearchPage
                 UseCustomLayout = true
             };
 
-            Modal.Show<VMS.Shared.Components.RequireSignup>("", options);
+            Modal.Show<Shared.Components.RequireSignup>("", options);
+        }
+
+        private bool IsSignupTimeExpired(ActivityViewModel activity)
+        {
+            return currentUser.Recruitments.Any(f => f.ActivityId == activity.Id) || activity.CloseDate < DateTime.Now.Date || activity.IsClosed;
         }
     }
 }

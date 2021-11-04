@@ -36,7 +36,7 @@ namespace VMS.Pages.Organization.RatingPage
                 NavigationManager.NavigateTo(Routes.HomePage, true);
             }
 
-            if (DateTime.Parse(activity.EndDate).Date >= DateTime.Now.Date)
+            if (activity.EndDate >= DateTime.Now.Date)
             {
                 NavigationManager.NavigateTo(Routes.ActivityManagement, true);
             }

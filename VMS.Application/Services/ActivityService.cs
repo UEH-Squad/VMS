@@ -455,6 +455,7 @@ namespace VMS.Application.Services
                 {
                     GetConditionByStatusAct(userId, statusAct, dateTime)
                 },
+                OrderBy = a => a.OrderByDescending(x => x.Id),
                 Includes = a => a.Include(x => x.Organizer)
             };
 
@@ -472,9 +473,9 @@ namespace VMS.Application.Services
             return statusAct switch
             {
                 StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
-                StatusAct.Ended => x => x.EndDate.Date < dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
-                _ => x => ((x.OpenDate.Date <= dateTime.Date && x.CloseDate.Date >= dateTime.Date)
-                            || (x.StartDate.Date <= dateTime.Date && x.EndDate.Date >= dateTime.Date))
+                StatusAct.Ended => x => x.EndDate < dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
+                _ => x => ((x.OpenDate <= dateTime.Date && x.CloseDate >= dateTime.Date)
+                            || (x.StartDate <= dateTime.Date && x.EndDate >= dateTime.Date))
                             && x.Recruitments.Any(x => x.UserId == userId),
             };
         }
@@ -489,6 +490,7 @@ namespace VMS.Application.Services
                 Includes = a => a.Include(x => x.Organizer)
                                  .Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
+                OrderBy = a => a.OrderByDescending(x => x.Id),
                 PageIndex = currentPage,
                 PageSize = 20
             };
@@ -534,12 +536,13 @@ namespace VMS.Application.Services
 
             if (isTookPlace)
             {
-                return x => x.EndDate.Date < DateTime.Now.Date;
+                return x => x.EndDate < DateTime.Now.Date;
             }
 
             if (isHappenning)
             {
-                return x => x.EndDate.Date >= DateTime.Now.Date && x.OpenDate.Date <= DateTime.Now.Date;
+                return x => (x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date)
+                            || (x.CloseDate >= DateTime.Now.Date && x.OpenDate <= DateTime.Now.Date);
             }
 
             return x => true;
@@ -553,7 +556,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    a => a.CloseDate.Date < DateTime.Now.Date,
+                    a => a.CloseDate < DateTime.Now.Date,
                     a => !a.IsClosed
                 }
             };

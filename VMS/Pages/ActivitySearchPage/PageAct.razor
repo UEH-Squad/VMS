@@ -30,7 +30,7 @@
                                                 <Authorized>
                                                         <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(currentUser.Favorites.Any(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
 
-                                                        @if (currentUser.Recruitments.Any(f => f.ActivityId == item.Id) || item.CloseDate < DateTime.Now.Date || item.IsClosed)
+                                                        @if (IsSignupTimeExpired(item))
                                                         {
                                                             <button class="btn bg-grey">Đăng ký</button>
                                                         }

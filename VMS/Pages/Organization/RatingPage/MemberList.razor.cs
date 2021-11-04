@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -76,6 +77,31 @@ namespace VMS.Pages.Organization.RatingPage
             };
 
             await CommentModal.Show<PopUpComment>("", parameters, options).Result;
+        }
+
+        private void ShowReportPopUp(string UserId)
+        {
+            List<string> reasons = new()
+            {
+                "Đây là một tài khoản giả mạo",
+                "Đánh giá người dùng không tham gia hoạt động",
+                "Khác"
+            };
+
+            var parameters = new ModalParameters();
+            parameters.Add("ActivityId", ActivityId);
+            parameters.Add("UserId", UserId);
+            parameters.Add("Reasons", reasons);
+            parameters.Add("IsReportUser", true);
+
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+
+            CommentModal.Show<ActivityInfoPage.PopUpReport>("", parameters, options);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VMS.Application.ViewModels;
@@ -27,7 +28,7 @@ namespace VMS.Pages.ActivityInfoPage
             currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
             if (currentUser is not null)
             {
-                isAlreadySignedUp = currentUser.Recruitments.Any(x => x.UserId == currentUser.Id);
+                isAlreadySignedUp = currentUser.Recruitments.Any(x => x.ActivityId == Activity.Id);
             }
         }
 
@@ -92,6 +93,11 @@ namespace VMS.Pages.ActivityInfoPage
         private void ShowRequireSignup()
         {
             Modal.Show<Shared.Components.RequireSignup>("", BlazoredModalOptions.GetModalOptions());
+        }
+
+        private bool IsSignupTimeExpired()
+        {
+            return isAlreadySignedUp || Activity.CloseDate < DateTime.Now.Date || Activity.IsClosed;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace VMS.Areas.Identity.Pages.Account
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(Input.Email);
+                var user = await _userManager.FindByNameAsync(Input.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -58,12 +58,12 @@ namespace VMS.Areas.Identity.Pages.Account
                 string callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
-                    values: new { area = "Identity", email = user.Email, code, returnUrl = Routes.ResetPassword },
+                    values: new { area = "Identity", email = user.UserName, code, returnUrl = Routes.ResetPassword },
                     protocol: Request.Scheme);
 
-                await _mailService.SendConfirmEmail(user.Email, callbackUrl);
+                await _mailService.SendConfirmEmail(user.UserName, callbackUrl);
 
-                return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
+                return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.UserName });
             }
 
             return Page();

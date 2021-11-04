@@ -81,7 +81,7 @@ namespace VMS.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                User user = await _userManager.FindByEmailAsync(Input.Email);
+                User user = await _userManager.FindByNameAsync(Input.Email);
                 bool isCorrectPassword = await _userManager.CheckPasswordAsync(user, Input.Password);
                 if (isCorrectPassword)
                 {
@@ -97,9 +97,9 @@ namespace VMS.Areas.Identity.Pages.Account
                                 values: new { area = "Identity", userId = user.Id, code, returnUrl = await _userManager.IsInRoleAsync(user, "User") ? Routes.EditUserProfile : Routes.EditOrgProfile },
                                 protocol: Request.Scheme);
 
-                            await _mailService.SendConfirmEmail(user.Email, callbackUrl);
+                            await _mailService.SendConfirmEmail(user.UserName, callbackUrl);
 
-                            return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
+                            return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.UserName });
                         }
                     }
                     if (result.Succeeded)

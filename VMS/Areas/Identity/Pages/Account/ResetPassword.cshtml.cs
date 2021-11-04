@@ -68,7 +68,7 @@ namespace VMS.Areas.Identity.Pages.Account
             {
                 return Page();
             }
-            var user = await _userManager.FindByEmailAsync(Input.Email);
+            var user = await _userManager.FindByNameAsync(Input.Email);
             var result = await _userManager.ResetPasswordAsync(user, Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(Input.Code)), Input.Password);
             if (result.Succeeded)
             {

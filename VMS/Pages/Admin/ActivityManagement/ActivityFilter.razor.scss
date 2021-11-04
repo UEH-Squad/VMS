@@ -110,9 +110,11 @@ input[type="checkbox"] {
 
         li {
             color: $blue;
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 6px;
             cursor: pointer;
+            text-overflow: clip;
+            white-space: nowrap;
 
             &:hover {
                 color: $green;
@@ -129,7 +131,7 @@ input[type="checkbox"] {
     border: 1px solid $border-color-bold;
     cursor: pointer;
     color: $grey-icon;
-    padding-left: 8px;
+    padding-left: 20px;
     padding-right: 30px;
     font-size: 16px;
     outline: none;
@@ -161,14 +163,14 @@ input[type="checkbox"] {
         width: 100%;
         border: 1px solid $border-color-bold;
         color: $grey-icon;
-        padding-left: 8px;
+        padding-left: 20px;
         padding-right: 30px;
         outline: none;
         line-height: 40px;
 
         &-input {
             font-size: 24px;
-            padding-right: 0.5rem;
+            padding-right: 0.6rem;
 
             & > input {
                 font-size: 18px;

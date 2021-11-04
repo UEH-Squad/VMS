@@ -51,7 +51,7 @@
     &__btn {
         button {
             margin-left: 20px;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
             color: $white;
             padding: 5px 15px;
@@ -59,6 +59,18 @@
 
             &:hover {
                 color: $white;
+            }
+        }
+
+        a {
+            font-size: 16px;
+            font-weight: 600;
+            color: $blue;
+            padding: 5px 15px;
+
+            &:hover {
+                color: $blue-hv;
+                border: solid 1px $grey;
             }
         }
 

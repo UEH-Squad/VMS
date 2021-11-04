@@ -35,13 +35,22 @@
 
 .act-footer__btn button {
   margin-left: 20px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   color: #FFFFFF;
   padding: 5px 15px;
   border-radius: 5px; }
   .act-footer__btn button:hover {
     color: #FFFFFF; }
+
+.act-footer__btn a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #18A0FB;
+  padding: 5px 15px; }
+  .act-footer__btn a:hover {
+    color: #0B588c;
+    border: solid 1px #F3F3F5; }
 
 .act-footer__btn--blue {
   background-color: #18A0FB; }

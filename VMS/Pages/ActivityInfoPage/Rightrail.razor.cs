@@ -100,7 +100,7 @@ namespace VMS.Pages.ActivityInfoPage
 
         private bool IsSignupTimeExpired()
         {
-            return isAlreadySignedUp || Activity.CloseDate < DateTime.Now.Date || Activity.IsClosed;
+            return isAlreadySignedUp || !(Activity.OpenDate <= DateTime.Now.Date && DateTime.Now.Date <= Activity.CloseDate) || Activity.IsClosed;
         }
     }
 }

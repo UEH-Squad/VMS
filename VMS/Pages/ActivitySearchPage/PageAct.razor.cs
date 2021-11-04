@@ -128,7 +128,7 @@ namespace VMS.Pages.ActivitySearchPage
 
         private bool IsSignupTimeExpired(ActivityViewModel activity)
         {
-            return currentUser.Recruitments.Any(f => f.ActivityId == activity.Id) || activity.CloseDate < DateTime.Now.Date || activity.IsClosed;
+            return currentUser.Recruitments.Any(f => f.ActivityId == activity.Id) || !(activity.OpenDate <= DateTime.Now && DateTime.Now.Date <= activity.CloseDate) || activity.IsClosed;
         }
     }
 }

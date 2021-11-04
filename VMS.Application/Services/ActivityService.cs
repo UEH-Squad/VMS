@@ -325,8 +325,8 @@ namespace VMS.Application.Services
                 Includes = activities => activities.Include(x => x.Favorites)
                                                     .Include(x => x.Recruitments)
                                                     .ThenInclude(x => x.RecruitmentRatings)
-                                                    .Include(x=>x.ActivityAddresses)
-                                                    .ThenInclude(x=> x.AddressPath),
+                                                    .Include(x => x.ActivityAddresses)
+                                                    .ThenInclude(x => x.AddressPath),
                 OrderBy = GetOrderByStatusAct(status),
                 Take = GetTakeByStatusAct(status)
             };
@@ -376,7 +376,7 @@ namespace VMS.Application.Services
             }
             else
             {
-                return "Hồ Chí Minh"; 
+                return "Hồ Chí Minh";
             }
         }
 
@@ -474,9 +474,10 @@ namespace VMS.Application.Services
             {
                 StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
                 StatusAct.Ended => x => x.EndDate < dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
-                _ => x => ((x.OpenDate <= dateTime.Date && x.CloseDate >= dateTime.Date)
-                            || (x.StartDate <= dateTime.Date && x.EndDate >= dateTime.Date))
-                            && x.Recruitments.Any(x => x.UserId == userId),
+                StatusAct.Current => x => ((x.OpenDate <= dateTime.Date && dateTime.Date <= x.CloseDate)
+                                            || (x.StartDate <= dateTime.Date && dateTime.Date <= x.EndDate))
+                                            && x.Recruitments.Any(x => x.UserId == userId),
+                _ => x => x.StartDate <= dateTime.Date && dateTime.Date <= x.EndDate && x.Recruitments.Any(x => x.UserId == userId),
             };
         }
 

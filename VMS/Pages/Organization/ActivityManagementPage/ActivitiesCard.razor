@@ -16,7 +16,7 @@
 
                 <li @onclick="(() => ShowDeleteModalAsync(item))" class="delete pb-2">Xóa</li>
 
-                @if (item.CloseDate.Date >= DateTime.Now.Date)
+                @if (item.CloseDate >= DateTime.Now.Date)
                 {
                     <li @onclick="(() => ShowCloseModalAsync(item))" class="close pb-2">@(item.IsClosed ? "Mở" : "Đóng") hoạt động</li>
                 }
@@ -29,21 +29,7 @@
                     <a href="@Routes.ActivityInfo/@item.Id">@item.Name</a>
                 </div>
                 <div class="org-card__info__rate">
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 1 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,1)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 2 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,2)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 3 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,3)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 4 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,4)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 5 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,5)?"_half":"")
-                    </span>
+                    <Star Rating="@item.Rating"/>
                 </div>
                 <div class="lmtext-2 org-card__info__desc">
                     @((MarkupString)item.Description)
@@ -61,7 +47,7 @@
                     <div class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
                         Xem danh sách
                     </div>
-                    @if (DateTime.Now.Date > item.EndDate.Date)
+                    @if (DateTime.Now.Date > item.EndDate)
                     {
                         <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1 position-relative">
                             <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
@@ -76,7 +62,7 @@
                     }
                 </div>
             </div>
-            @if ((item.IsClosed || item.CloseDate.Date < DateTime.Now.Date) && (DateTime.Now.Date <= item.EndDate.Date))
+            @if ((item.IsClosed || item.CloseDate < DateTime.Now.Date) && (DateTime.Now.Date <= item.EndDate))
             {
                 <div class="org-card__noti d-flex align-items-center position-absolute">
                     <span class="material-icons-outlined">

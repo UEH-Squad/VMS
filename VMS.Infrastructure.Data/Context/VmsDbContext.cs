@@ -81,12 +81,6 @@ namespace VMS.Infrastructure.Data.Context
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Feedback>()
-                .HasOne(x => x.Reporter)
-                .WithMany(x => x.Reports)
-                .HasForeignKey(x => x.ReportBy)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.Entity<Skill>().HasData(
                     new Skill { Id = 1, Name = "Kiến thức chuyên ngành" },
                     new Skill { Id = 2, Name = "Kỹ năng mềm" },

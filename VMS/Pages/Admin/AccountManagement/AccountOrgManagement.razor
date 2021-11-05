@@ -1,12 +1,12 @@
 ﻿@layout AdminLayout
 
-@attribute [Route(Routes.AdminAccountOrgManagement)]
+@attribute [Route(Routes.AdminOrgAccountManagement)]
 @attribute [Authorize(Roles = "Admin")]
 @inject IJSRuntime JS;
 @using VMS.GenericRepository;
 @using Blazored.Modal;
 <div class="px-5">
-    <ManagementTool IsAccountOrg="true"></ManagementTool>
+    <ManagementTool IsAccountOrg="true" Tilte="tổ chức"></ManagementTool>
     <div class="d-flex justify-content-between align-items-center my-3">
         <p class="managementTool__title mb-0">Có <span>@(pagedResult.Items.Count * 20) kết quả</span> ứng với tìm kiếm</p>
         <div class="managementTool__down d-flex align-items-center">

@@ -510,16 +510,8 @@
     "inputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.scss"
   },
   {
-    "outputFile": "Pages/Admin/AccountManagement/EditConfirm.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/EditConfirm.razor.scss"
-  },
-  {
     "outputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.css",
     "inputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/ListAccountOrg.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/ListAccountOrg.razor.scss"
   },
   {
     "outputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.css",

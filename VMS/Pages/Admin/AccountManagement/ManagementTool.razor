@@ -1,5 +1,5 @@
 ﻿@using VMS.Application.ViewModels;
-<h1 class="my-5 pb-3">Quản lý tài khoản <span>tổ chức</span></h1>
+<h1 class="my-5 pb-3">Quản lý tài khoản <span>@Tilte</span></h1>
 <div class="d-flex justify-content-between my-managementTool">
     <div class="managementTool__filter">
         <div class="d-flex align-items-center">
@@ -79,6 +79,7 @@
     [Parameter] public bool IsAccountOrg { get; set; }
     [Parameter] public bool IsAccountUser { get; set; }
     [Parameter] public bool IsAccountAdminSp { get; set; }
+    [Parameter] public string Tilte { get; set; }
     [CascadingParameter] public IModalService Modal { get; set; }
 
     private async Task ShowCreateAccountOrg()
@@ -163,10 +164,10 @@
     }
     private List<fakeLevel> Levels = new()
     {
-            new fakeLevel() { Level = "Ban Chuyên môn" },
-            new fakeLevel() { Level = "Khoa/Viện/KTX" },
-            new fakeLevel() { Level = "CLB/Đội/Nhóm" },
-        };
+        new fakeLevel() { Level = "Ban Chuyên môn" },
+        new fakeLevel() { Level = "Khoa/Viện/KTX" },
+        new fakeLevel() { Level = "CLB/Đội/Nhóm" },
+    };
     private void ChooseLevelValue(fakeLevel level)
     {
         levelChoosenValue = level.Level;
@@ -193,11 +194,11 @@
     }
     private List<fakeCourse> Courses = new()
     {
-            new fakeCourse() { Course = "K44" },
-            new fakeCourse() { Course = "K45" },
-            new fakeCourse() { Course = "K46" },
-            new fakeCourse() { Course = "K47" },
-        };
+        new fakeCourse() { Course = "K44" },
+        new fakeCourse() { Course = "K45" },
+        new fakeCourse() { Course = "K46" },
+        new fakeCourse() { Course = "K47" },
+    };
     private void ChooseCourseValue(fakeCourse course)
     {
         courseChoosenValue = course.Course;

@@ -24,6 +24,12 @@
     font-size: 16px;
     color: #FFFFFF;
     background: #64D72F; }
+    .btn-back-top .btn-back-top-icon:hover {
+      background: #306C14; }
+    .btn-back-top .btn-back-top-icon.grey-icon {
+      background: #D8D8D8; }
+      .btn-back-top .btn-back-top-icon.grey-icon:hover {
+        background: #B4B4B4; }
     @media (min-width: 576px) {
       .btn-back-top .btn-back-top-icon {
         width: 40px;
@@ -42,6 +48,42 @@
         height: 70px;
         line-height: 70px;
         font-size: 64px; } }
+
+.btn-float-back-top {
+  position: fixed;
+  cursor: pointer;
+  bottom: 50px;
+  right: 0px;
+  transform: translate(-100%, -50%); }
+  .btn-float-back-top .btn-back-top-icon {
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #FFFFFF;
+    background: #D8D8D8; }
+    .btn-float-back-top .btn-back-top-icon:hover {
+      background: #B4B4B4; }
+    @media (min-width: 576px) {
+      .btn-float-back-top .btn-back-top-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 24px; } }
+    @media (min-width: 992px) {
+      .btn-float-back-top .btn-back-top-icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 44px; } }
+    @media (min-width: 1200px) {
+      .btn-float-back-top .btn-back-top-icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 44px; } }
 
 .footer__logo {
   padding: 0; }

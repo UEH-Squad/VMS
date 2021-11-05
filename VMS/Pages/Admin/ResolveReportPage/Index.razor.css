@@ -1,0 +1,11 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-content {
+  padding: 0 50px; }
+  @media (min-width: 1400px) {
+    .my-content {
+      padding: 0 100px; } }

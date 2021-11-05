@@ -1,0 +1,155 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.container {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6%; }
+  .container-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; }
+  .container-title_1 {
+    display: inline;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 36px;
+    color: #64D72F; }
+  .container-title_2 {
+    display: inline;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 36px;
+    color: #18A0FB; }
+  .container-radio {
+    display: flex;
+    flex-direction: column; }
+  .container-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #B4B4B4; }
+  .container-checkbox {
+    width: 58%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%; }
+  .container-btn {
+    width: 120%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8%; }
+
+.container-radio_choise {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; }
+  .container-radio_choise .radio-btn {
+    position: relative;
+    margin-left: -12%;
+    border-radius: 50%;
+    width: 13px;
+    height: 13px;
+    background-color: #FFFFFF;
+    border: 2px solid #18A0FB;
+    appearance: none;
+    cursor: pointer; }
+    .container-radio_choise .radio-btn::before {
+      position: absolute;
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #18A0FB;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none; }
+    .container-radio_choise .radio-btn:checked::before {
+      display: block; }
+    .container-radio_choise .radio-btn:checked {
+      border-color: #18A0FB; }
+  .container-radio_choise label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 36px;
+    color: #515151;
+    cursor: pointer;
+    margin-left: 3%; }
+
+.container-checkbox_choise {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%; }
+  .container-checkbox_choise #checkbox-btn_1, .container-checkbox_choise #checkbox-btn_2, .container-checkbox_choise #checkbox-btn_3, .container-checkbox_choise #checkbox-btn_4, .container-checkbox_choise #checkbox-btn_5 {
+    position: relative;
+    border-radius: 5px;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    vertical-align: top;
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid #B4B4B4;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    cursor: pointer; }
+    .container-checkbox_choise #checkbox-btn_1::before, .container-checkbox_choise #checkbox-btn_2::before, .container-checkbox_choise #checkbox-btn_3::before, .container-checkbox_choise #checkbox-btn_4::before, .container-checkbox_choise #checkbox-btn_5::before {
+      content: "";
+      width: 9px;
+      height: 6px;
+      border-left: 2px solid #18A0FB;
+      border-bottom: 2px solid #18A0FB;
+      position: absolute;
+      top: 40%;
+      left: 52%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      display: none; }
+    .container-checkbox_choise #checkbox-btn_1:checked::before, .container-checkbox_choise #checkbox-btn_2:checked::before, .container-checkbox_choise #checkbox-btn_3:checked::before, .container-checkbox_choise #checkbox-btn_4:checked::before, .container-checkbox_choise #checkbox-btn_5:checked::before {
+      display: block; }
+  .container-checkbox_choise label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 36px;
+    color: #000000;
+    cursor: pointer; }
+
+.container-btn_filter {
+  text-align: center;
+  padding: 5px 25px;
+  border: none;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFFFFF;
+  background-color: #64D72F;
+  transition: all 0.25s;
+  cursor: pointer; }
+  .container-btn_filter:hover {
+    background-color: #306C14; }
+
+.container-btn_delete {
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: #b4b4b4;
+  background-color: #FFFFFF; }
+  .container-btn_delete:hover {
+    text-decoration: underline; }

@@ -43,7 +43,6 @@
     color: #707070;
     margin: auto 0; }
   .my-editProfile ::deep .form-input {
-    padding: 10px;
     font-size: 16px;
     font-weight: 300;
     color: #515151;
@@ -58,7 +57,9 @@
   .my-editProfile .form-field .w-80 {
     width: 80%; }
   .my-editProfile .form-field-item {
-    text-align: center; }
+    text-align: center;
+    width: 20%;
+    display: inline-block; }
     .my-editProfile .form-field-item:hover > i {
       font-size: 40px; }
       @media (min-width: 1400px) {
@@ -68,7 +69,6 @@
       transform: translateY(-5px); }
     .my-editProfile .form-field-item i {
       display: block;
-      background-color: #18A0FB;
       border-radius: 50%;
       color: white;
       margin: 5px auto;
@@ -84,7 +84,6 @@
           line-height: 83px;
           font-size: 35px; } }
     .my-editProfile .form-field-item span {
-      color: #64D72F;
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;
@@ -105,52 +104,15 @@
     .my-editProfile .form-field-item.item-add {
       width: 20%;
       cursor: pointer; }
-  .my-editProfile .owl-carousel {
-    z-index: 0; }
-  .my-editProfile .editProfile__carousel {
-    width: 80%; }
-    .my-editProfile .editProfile__carousel .item {
-      margin: 0 auto; }
-    .my-editProfile .editProfile__carousel ::deep .owl-nav {
-      display: block; }
-      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev {
-        position: absolute;
-        top: -15%;
-        left: 0%; }
-        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev span {
-          font-size: 80px;
-          color: #18A0FB;
-          transition: all 0.3s linear; }
-          .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev span:hover {
-            color: #0B588c;
-            opacity: 0.73; }
-        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev:hover {
-          background: none; }
-      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next {
-        position: absolute;
-        top: -15%;
-        right: 0%; }
-        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span {
-          font-size: 80px;
-          color: #18A0FB;
-          transition: all 0.3s linear; }
-          .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span:hover {
-            color: #0B588c; }
-        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next:hover {
-          background: none; }
-    .my-editProfile .editProfile__carousel ::deep .owl-dots {
-      display: none; }
-  .my-editProfile ::deep .owl-carousel.owl-loading {
-    opacity: 1; }
   .my-editProfile .countWord {
     color: #707070;
     position: absolute;
-    top: 135px;
+    top: 130px;
     right: 15px; }
   .my-editProfile .from__btn {
     margin: 60px 0; }
     .my-editProfile .from__btn .btn {
-      padding: 12px 35px;
+      padding: 10px 35px;
       font-size: 16px;
       font-weight: 600; }
     .my-editProfile .from__btn .from__btn-cancel {

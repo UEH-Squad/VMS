@@ -348,6 +348,108 @@
     "inputFile": "Shared/AdminSidebar.razor.scss"
   },
   {
+    "outputFile": "Pages/Admin/ActivityManagement/ActList.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ActList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.css",
+    "inputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/SearchResult.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/RatingList.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/RatingList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Filter.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrgamizationManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/OrgamizationManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.css",
+    "inputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Index.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Filter.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Notification.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Notification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.scss"
+  },
+  {
+    "outputFile": "Shared/AdminLayout.razor.css",
+    "inputFile": "Shared/AdminLayout.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchImageReport/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchImageReport/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
     "outputFile": "Shared/AdminHeader.razor.css",
     "inputFile": "Shared/AdminHeader.razor.scss"
   },
@@ -422,10 +524,6 @@
   {
     "outputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.css",
     "inputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/Confrim.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/Confrim.razor.scss"
   },
   {
     "outputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.css",

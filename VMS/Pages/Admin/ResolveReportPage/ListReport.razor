@@ -1,0 +1,172 @@
+﻿@using VMS.Domain.Models
+@inject IJSRuntime JsRuntime
+
+<h3 class="quantity-report">Có <span>10 báo cáo</span> ứng với kết quả tìm kiếm</h3>
+
+<div class="list-card">
+    @if (pagedResult != null && pagedResult.Results.Length != 0)
+    {
+        @foreach (var item in pagedResult.Results)
+        {
+            <div class="item" style="@(item.Status=="pinned"?"background-color:#F3F3F3":"")">
+                <div class="list-reason"><a href="@Routes.AdminDetailReport">@item.ListReason</a></div>
+
+                <div class="d-flex justify-content-between">
+
+                    <div class="info-item">
+                        <p class="info-item__who">Báo cáo bởi: @item.Who</p>
+                        <p class="info-item__activity">Hoạt động: @item.Activity</p>
+                    </div>
+
+                    <div class="info-item">
+                        <p class="info-item__time">@item.Time</p> <br />
+                        <div class="d-flex info-item__status">
+
+                            <p class="info-item__status--admin">@item.Admin</p>
+                            <div class="info-item__status--pin">
+                                <span class="material-icons" style="@(item.IsPin?"color:red":"#B4B4B4")" @onclick="@(() =>HandlePin(item.Id))"> push_pin </span>
+                                <span class="icon-tooltip">Ghim báo cáo</span>
+                            </div>
+                            @switch (item.Status)
+                            {
+                                case "complete":
+                                    <div class="info-item__status--complete">
+                                        <span class="material-icons"> check_circle </span>
+                                        <span class="icon-tooltip">Hoàn tất xử lý</span>
+                                    </div>
+                                    break;
+                                case "processing":
+                                    <div class="info-item__status--processing">
+                                        <svg class="material-icons">
+                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                            <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2m0 2c-4.42 0-8 3.58-8 8s3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8m0 1c3.87 0 7 3.13 7 7s-3.13 7-7 7c-1.93 0-3.68-.78-4.95-2.05L12 12V5z" fill="currentColor" />
+                                        </svg>
+
+                                        <span class="icon-tooltip">Đang xử lý</span>
+                                    </div>
+                                    break;
+                                case "closed":
+                                    <div class="info-item__status--closed">
+                                        <span class="material-icons"> cancel </span>
+                                        <span class="icon-tooltip">Đã đóng</span>
+                                    </div>
+                                    break;
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="d-flex justify-content-center">
+    <Pager CurrentPage="@pagedResult.CurrentPage"
+           PageCount="@pagedResult.PageCount"
+           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+</div>
+
+@code {
+    [Parameter]
+    public string SelectedStatus { get; set; }
+
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string ListReason { get; set; }
+        public string Who { get; set; }
+        public string Activity { get; set; }
+        public string Time { get; set; }
+        public string Admin { get; set; }
+        public string Status { get; set; }
+        public bool IsPin { get; set; }
+    }
+    public abstract class PagedResultBase
+    {
+        public int CurrentPage { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public int RowCount { get; set; }
+        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
+        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
+    }
+    public class PagedResult<T> : PagedResultBase where T : class
+    {
+        public T[] Results { get; set; }
+    }
+    private PagedResult<FakeData> pagedResult;
+    private int page = 1;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pagedResult = GetFakeData("");
+    }
+
+    protected override void OnParametersSet()
+    {
+        switch (SelectedStatus)
+        {
+            case "pinned":
+                page = 1;
+                pagedResult = GetFakeData(SelectedStatus);
+                break;
+            case "processing":
+                page = 1;
+                pagedResult = GetFakeData(SelectedStatus);
+                break;
+            case "complete":
+                page = 1;
+                pagedResult = GetFakeData(SelectedStatus);
+                break;
+            case "closed":
+                page = 1;
+                pagedResult = GetFakeData(SelectedStatus);
+                break;
+            default:
+                page = 1;
+                pagedResult = GetFakeData(SelectedStatus);
+                break;
+
+        }
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData("");
+        StateHasChanged();
+        await Interop.ScrollToTop(JsRuntime);
+    }
+
+    private PagedResult<FakeData> GetFakeData(string type)
+    {
+        var result = new PagedResult<FakeData>();
+        result.CurrentPage = page;
+        result.RowCount = 200;
+        result.PageSize = 20;
+        result.PageCount = result.RowCount / result.PageSize;
+        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
+        {
+            Id = x + 1,
+            ListReason = "Hoạt động này không có thật; Hoạt động dỡ như hạch; Hoạt động này chán lắm",
+            Who = "Bùi Minh Minh Kha",
+            Activity = "Tuyển tình nguyện viên tham gia chống dịch",
+            Time = "20/10/2021",
+            Admin = "Minh Minh Kha Bùi ",
+            Status = type,
+            IsPin=(type=="pinned"?true:false)
+        }).ToArray();
+
+        return result;
+    }
+
+    private async Task HandlePin(int id)
+    {
+        var pinItem = pagedResult.Results.FirstOrDefault(x => x.Id == id);
+        if (pinItem is not null)
+        {
+            pinItem.IsPin = !pinItem.IsPin;
+        }
+    }
+
+}

@@ -37,6 +37,9 @@ namespace VMS.Pages.Organization.Profile
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
+        [Parameter]
+        public bool IsUseForAdmin { get; set; }
+
         private int width;
         private string classWidth = "";
         private string OrgId;

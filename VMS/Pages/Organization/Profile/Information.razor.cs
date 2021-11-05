@@ -11,7 +11,7 @@ namespace VMS.Pages.Organization.Profile
 {
     public partial class Information : ComponentBase
     {
-        [Parameter] 
+        [Parameter]
         public string UserId { get; set; }
         [Parameter] public UserViewModel Org { get; set; }
         [Parameter] public bool HaveControl { get; set; }
@@ -24,7 +24,7 @@ namespace VMS.Pages.Organization.Profile
 
         async Task ShowModal(InputFileChangeEventArgs e)
         {
-            if (e.File.ContentType == "image/jpeg"|| e.File.ContentType == "image/png")
+            if (e.File.ContentType == "image/jpeg" || e.File.ContentType == "image/png")
             {
                 file = e.File;
                 avatar = await UploadService.SaveImageAsync(file, UserId, ImgFolder.Avatar);
@@ -37,7 +37,7 @@ namespace VMS.Pages.Organization.Profile
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true,
             };
-           var result = await Modal.Show<Notification>("", parameters, options).Result;
+            var result = await Modal.Show<Notification>("", parameters, options).Result;
             if ((bool)result.Data)
             {
                 Org.Avatar = avatar;

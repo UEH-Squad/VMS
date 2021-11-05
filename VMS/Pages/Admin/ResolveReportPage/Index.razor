@@ -1,0 +1,15 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminResolveReport)]
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="my-content">
+    <Filter @bind-Status="selectedStatus"></Filter>
+    <ListReport SelectedStatus="@selectedStatus"></ListReport>
+</div>
+
+@code {
+    private string selectedStatus = "";
+
+
+}

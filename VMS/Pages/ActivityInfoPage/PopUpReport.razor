@@ -1,4 +1,4 @@
-﻿@inject IJSRuntime JSRuntinme
+﻿@attribute [Authorize]
 
 <div class="overlay">
 
@@ -18,7 +18,7 @@
 
         </div>
     </div>
-    <EditForm Model="@reportModel" OnValidSubmit="@HandleValidSubmit">
+    <EditForm Model="@report" OnValidSubmit="@AddReport">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="my-container @(isShowReport ? "d-none" : "d-block")">
@@ -43,54 +43,15 @@
                     </span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="display:@(showListReason ? "block" : "none")">
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason1" type="checkbox" id="checkbox-1" class="dropdown-item--checkbox"/>
+                    @foreach (var reason in Reasons)
+                    {
+                        <li>
+                            <div class="dropdown-item" href="#">
+                                <input id="@reason" @onchange="x => { CheckboxClicked(reason, x.Value); }" type="checkbox" class="dropdown-item--checkbox" />
+                                <label for="@reason">@reason</label>
                             </div>
-                            <label for="checkbox-1">Hoạt động không có thật</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason2" type="checkbox" id="checkbox-2" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-2">Hoạt động không không tương thích với nội dung đã đề cập</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason3" type="checkbox" id="checkbox-3" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-3">Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason4" type="checkbox" id="checkbox-4" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-4">Nội dung hoạt động không phù hợp</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason5" type="checkbox" id="checkbox-5" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-5">Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động</label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown-item" href="#">
-                            <div>
-                            <InputCheckbox @bind-Value="reportReason.Reason6" type="checkbox" id="checkbox-6" class="dropdown-item--checkbox"/>
-                            </div>
-                            <label for="checkbox-6">Khác</label>
-                        </div>
-                    </li>
+                        </li>
+                    }
                 </ul>
             </div>
 
@@ -99,7 +60,7 @@
                     <h4 class="title-discript__text">Mô tả về báo cáo</h4>
                     <h4 class="title-discript__check check">(*)</h4>
                 </div>
-                <InputTextArea @bind-Value="@reportModel.Discript" @onclick="TextArea" class="form-control" id="exampleFormControlTextarea1" rows=""></InputTextArea>
+                <InputTextArea @bind-Value="@report.DesReport" @onclick="TextArea" class="form-control" id="exampleFormControlTextarea1" rows=""></InputTextArea>
             </div>
 
             <div class="attached-proof">
@@ -107,14 +68,32 @@
                     <h4 class="title-attach__text">Minh chứng đính kèm</h4>
                     <h4 class="title-attach__check check"> (*)</h4>
                 </div>
-                <div class="add-file">
-                    <InputFile @onclick="AddFile" type="file" name="file" id="file" class="inputfile" />
-                    <label class="d-flex align-items-center justify-content-center" for="file">
-                        <span class="block-icon-text">
-                            <span class="material-icons my-icon-upload">cloud_upload</span>
-                            <span class="file__text d-flex align-items-center">Kéo hoặc thả hình ảnh liên quan tại đây</span>
-                        </span>
-                    </label>
+                <div class="add-file position-relative d-flex align-items-center justify-content-center">
+                        <InputFile OnChange="OnInputFile" multiple type="file" name="file" id="file" class="inputfile" />
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons my-icon-upload">
+                                cloud_upload
+                            </i>
+                            <span class="@(isChangeFile ? "d-none" : "d-block")">Kéo và thả hình ảnh liên quan tại dây</span>
+                        </div>
+                        <p class="m-0">
+                            @if (selectedImages is not null)
+                            {
+                                @foreach (var item in selectedImages)
+                                {
+                                    @if (!item.ContentType.Contains("image/"))
+                                    {
+                                        <div style="color: #f14747">File không đúng định dạng..</div>
+                                    }
+                                    else
+                                    {
+                                        @item.Name
+                                        @space
+                                    }
+                                }
+                            }
+                        </p>
+
                 </div>
             </div>
 
@@ -126,55 +105,3 @@
         </div>
     </EditForm>
 </div>
-
-@code {
-    [CascadingParameter]
-    private BlazoredModalInstance ReportModal { get; set; }
-    void CloseModal()
-    {
-        ReportModal.CloseAsync();
-    }
-
-    bool isShowReport = false;
-    void ShowModalReportSucess()
-    {
-        isShowReport = !isShowReport;
-        if (isShowReport == false)
-        {
-            ReportModal.CloseAsync();
-        }
-    }
-    public class ReportModel
-    {
-        public string Discript { get; set; }
-        public string FileName { get; set; }
-    }
-    private ReportModel reportModel = new();
-    private void HandleValidSubmit()
-    {
-
-    }
-    bool showListReason = false;
-    void ListReason()
-    {
-        showListReason = !showListReason;
-    }
-    void TextArea()
-    {
-        showListReason = false;
-    }
-    void AddFile()
-    {
-        showListReason = false;
-    }
-    public class ReportReason
-    {
-        public bool Reason1 { get; set; }
-        public bool Reason2 { get; set; }
-        public bool Reason3 { get; set; }
-        public bool Reason4 { get; set; }
-        public bool Reason5 { get; set; }
-        public bool Reason6 { get; set; }
-    }
-    private ReportReason reportReason = new();
-}

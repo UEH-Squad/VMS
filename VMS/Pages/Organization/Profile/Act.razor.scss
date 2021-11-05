@@ -6,20 +6,22 @@
         font-size: 30px;
         line-height: 36px;
         color: $grey-text;
+        padding-bottom: 5px;
 
         span {
             color: $green;
         }
     }
 
-    .owl-carousel {
-        z-index: 0;
-    }
-
-    .bottom-line {
+    hr {
+        width: 60%;
+        height: 1px;
         background-color: #707070;
         opacity: 50%;
-        height: 1px;
+    }
+
+    .owl-carousel {
+        z-index: 0;
     }
 }
 
@@ -75,8 +77,8 @@
     .material-icons, {
         color: $white;
         font-size: 24px;
-        right: 5px;
-        top: 0;
+        right: 10px;
+        top: 10px;
 
         &:hover {
             cursor: pointer;

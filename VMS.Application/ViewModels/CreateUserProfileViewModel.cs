@@ -20,7 +20,7 @@ namespace VMS.Application.ViewModels
         public string Avatar { get; set; }
 
         [RequiredHasItems]
-        public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();
+        public IList<AreaViewModel> Areas { get; set; } = new List<AreaViewModel>();      
     }
 
     public class CreateOrgProfileViewModel : UserProfileViewModel
@@ -30,7 +30,8 @@ namespace VMS.Application.ViewModels
 
     public class CreateUserProfileViewModel : UserProfileViewModel
     {
-        [RequiredGreaterThanZero] public int? FacultyId { get; set; }
+        [RequiredGreaterThanZero] public string? FacultyId { get; set; }
+        public string FacultyName { get; set; }
         [Required] public string Class { get; set; }
         public string Course { get; set; }
 

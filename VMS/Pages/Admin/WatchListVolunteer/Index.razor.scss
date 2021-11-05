@@ -1,0 +1,108 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.container {
+    width: 91.67%;
+    padding: 0;
+    margin-right: 0;
+
+    ::deep .title {
+        .sub-title {
+            margin-bottom: 6%;
+
+            &--content {
+                width: 80%;
+            }
+        }
+    }
+
+    &_divider {
+        width: 100%;
+        height: 1px;
+        background: $grey-icon;
+    }
+
+    ::deep .search-and-button {
+        grid-template-columns: none;
+
+        .my-search-box {
+            display: none !important;
+        }
+    }
+
+    ::deep .container {
+        padding: 0;
+    }
+
+    ::deep .my-container {
+        justify-content: space-between;
+
+        .quantity-volunteers {
+            margin-top: -8%;
+            width: 62%;
+        }
+
+        .button {
+            width: 18%;
+
+            &__text--del {
+                background-color: $red;
+            }
+
+            &__text--del:hover {
+                background-color: $error;
+            }
+        }
+
+        .link {
+            &__text--del:hover {
+                color: $error;
+            }
+
+            &__text--undo:hover {
+                color: $blue-bold;
+            }
+        }
+    }
+
+    ::deep .list-card {
+        .mycard {
+            &__info {
+                width: 70%;
+                grid-template-columns: 14% 86%;
+
+                img {
+                    object-fit: cover;
+                }
+            }
+
+            &__info--name-and-mssv {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            &__checkbox {
+                width: 14%;
+
+                &--my-checkbox {
+                    width: 25px;
+                    height: 25px;
+                }
+
+                &--my-checkbox::before {
+                    width: 15px;
+                    height: 7px;
+                    border-left: 2px solid #18A0FB;
+                    border-bottom: 2px solid #18A0FB;
+                }
+            }
+
+            &__button {
+                width: 18%;
+
+                &--registration-form {
+                    padding: 7px 15px;
+                }
+            }
+        }
+    }
+}

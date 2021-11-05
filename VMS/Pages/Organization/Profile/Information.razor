@@ -19,19 +19,12 @@
                 </div>
 
                 <p class="m-0">@Org?.FullName</p>
-                <span @onclick="ShowModalAppellation" class="information__tilte mx-auto my-3">Tổ chức hoàn hảo</span>
-                @if (HaveControl)
-                {
-                    <a href="@Routes.CreateActivity" class="information__logo-button mx-auto d-flex align-items-center justify-content-center">
-                        <i class="material-icons-outlined">add</i>
-                        <span class="ms-2">Tạo hoạt động mới</span>
-                    </a>
-                }
+                <span @onclick="ShowModalAppellation" class="information__tilte mx-auto my-3">Tổ chức chuyên nghiệp</span>
             </div>
-            <div class="col-8">
+            <div class="col-8 ps-4 ps-xxl-5">
                 <div class="row-1 d-flex align-items-center">
-                    <div class="col-left information__rank d-flex justify-content-evenly align-self-center">
-                        <a href="@Routes.EditOrgProfile" class="d-flex align-self-center">
+                    <div class="col-left information__rank d-flex justify-content-center align-self-center">
+                        <a href="@Routes.EditOrgProfile" class="d-flex align-self-center me-4 pe-2">
                             #@Org?.Rank @*There will be processing code in another place*@
                         </a>
                         <div>
@@ -76,14 +69,14 @@
                 <div class="row-2 d-flex align-items-start">
                     <div class="col-left information__fields">
                         <h3 class="mb-4 pb-2">Lĩnh vực <span>chuyên môn</span></h3>
-                        <div class=" @(Org.UserAreas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex justify-content-center information__NoCarousel px-0 ") ">
+                        <div class=" @(Org.Areas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex justify-content-center information__NoCarousel px-0 ") ">
                             @if (Org != null)
                             {
-                                @foreach (var area in Org.UserAreas)
+                                @foreach (var area in Org.Areas)
                                 {
-                                    <div class="item  @(Org.UserAreas.Count>3 ?"" :"mx-3")">
-                                        <i class="material-icons">@area.Area.Icon</i>
-                                        <span>@area.Area.Name</span>
+                                    <div class="item @(Org.Areas.Count >3 ?"" :"mx-3")">
+                                        <i class="material-icons" style="background-color: @area.Color">@area.Icon</i>
+                                        <span style="color: @(area.IsPinned ? area.Color : "#64D72F")">@area.Name</span>
                                     </div>
                                 }
                             }
@@ -96,6 +89,13 @@
                         <div class="d-flex justify-content-evenly align-self-center">
                             <span class="information__act-number">@Org?.Activities.Count</span>
                         </div>
+                        @if (HaveControl)
+                        {
+                            <a href="@Routes.CreateActivity" class="information__act-button mx-auto mt-4 d-flex align-items-center justify-content-center">
+                                <i class="material-icons-outlined">add</i>
+                                <span class="ms-2">Tạo hoạt động</span>
+                            </a>
+                        }
                     </div>
                 </div>
             </div>

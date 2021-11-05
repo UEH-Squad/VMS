@@ -24,7 +24,7 @@
         public const string ActivityLogPage = "/lich-su-hoat-dong";
 
         #endregion Org + User profile
-
+        public const string ResetPassword = "/reset-password";
         #region Activity
 
         public const string CreateActivity = "/tao-hoat-dong";
@@ -44,6 +44,23 @@
         #region Admin
 
         public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
+        public const string AdminWatchRating = "/admin/quan-ly-hoat-dong/xem-danh-gia";
+        public const string AdminWatchlistVolunteer = "/admin/quan-ly-hoat-dong/xem-danh-sach";
+
+        public const string AdminActivityInfo = "/admin/chi-tiet-hoat-dong";
+
+        public const string AdminOrganizationManagement = "/admin/quan-ly-to-chuc";
+        public const string AdminEditOrganizationProfile = "/admin/chinh-sua-ho-so-to-chuc";
+        public const string AdminVolunteerManagement = "/admin/quan-ly-ca-nhan";
+        public const string AdminEditVolunteerProfile = "/admin/chinh-sua-ho-so-ca-nhan";
+
+        public const string AdminResolveReport = "/admin/quan-ly-bao-cao";
+        public const string AdminDetailReport = "/admin/quan-ly-bao-cao/chi-tiet";
+        public const string AdminOrgAccountManagement = "/admin/quan-ly-tai-khoan-to-chuc";
+        public const string AdminVolunteerAccountManagement = "/admin/quan-ly-tai-khoan-ca-nhan";
+        public const string AdminAdminAccountManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";
+        public const string AdminFeatureSuggestionManagement = "/admin/bo-sung-tinh-nang";
+        public const string AdminDashboardManagement = "/admin/bao-cao-thong-ke";
         public const string AdminAccountOrgManagement = "/admin/quan-ly-tai-khoan-to-chuc";
         public const string AdminAccountSpManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";
         public const string AdminAccountUserManagement = "/admin/quan-ly-tai-khoan-tinh-nguyen-vien";

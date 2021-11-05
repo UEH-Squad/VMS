@@ -122,24 +122,6 @@
         public string CreateDate { get; set; }
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JS.InvokeVoidAsync("vms.AddOutsideClickMenuHandler", DotNetObjectReference.Create(this), nameof(HideMenuInterop));
-    }
-
-    [JSInvokable]
-    public Task HideMenuInterop()
-    {
-        pagedResult.Items.ForEach(a => a.IsMenu = false);
-        return InvokeAsync(StateHasChanged);
-    }
-
-    void ShowMenu(int id)
-    {
-        pagedResult.Items.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
-    }
-
-
     // Modal
 
     private async Task ShowEditAccountAdminSp()

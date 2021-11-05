@@ -350,5 +350,93 @@
   {
     "outputFile": "Shared/AdminHeader.razor.css",
     "inputFile": "Shared/AdminHeader.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditConfirm.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditConfirm.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/ListAccountOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/ListAccountOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/Confrim.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/Confrim.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.scss"
   }
 ]

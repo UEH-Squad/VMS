@@ -1,0 +1,147 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(196, 196, 196, 0.38);
+  z-index: 120; }
+  .my-modal .modal__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .my-modal .modal__edit, .my-modal .modal__confirm, .my-modal .modal__success {
+    background-color: #FFFFFF;
+    position: relative;
+    box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
+    border-radius: 10px; }
+  .my-modal .modal__edit {
+    width: 525px;
+    padding: 30px 50px; }
+    .my-modal .modal__edit h3 {
+      font-weight: 500;
+      font-size: 24px;
+      color: #64D72F;
+      margin-bottom: 30px; }
+      .my-modal .modal__edit h3 span {
+        color: #18A0FB; }
+  .my-modal .modal__confirm {
+    width: 400px;
+    height: 150px;
+    padding: 30px 30px 20px 30px; }
+    .my-modal .modal__confirm h3 {
+      padding: 0 35px;
+      font-weight: 500;
+      font-size: 20px;
+      color: #64D72F; }
+      .my-modal .modal__confirm h3 span {
+        color: #18A0FB; }
+    .my-modal .modal__confirm .btn-cancel {
+      font-weight: 600;
+      font-size: 16px;
+      color: #64D72F;
+      background-color: transparent; }
+      .my-modal .modal__confirm .btn-cancel:hover {
+        color: #306C14;
+        background-color: transparent; }
+      .my-modal .modal__confirm .btn-cancel:focus {
+        box-shadow: none; }
+    .my-modal .modal__confirm .btn-confirm {
+      font-weight: 600;
+      font-size: 16px;
+      color: #FFFFFF;
+      background-color: #64D72F; }
+      .my-modal .modal__confirm .btn-confirm:hover {
+        color: #FFFFFF;
+        background-color: #306C14; }
+      .my-modal .modal__confirm .btn-confirm:focus {
+        box-shadow: none; }
+  .my-modal .modal__success {
+    width: 400px;
+    padding: 30px 30px; }
+    .my-modal .modal__success h3 {
+      font-weight: 500;
+      font-size: 20px;
+      color: #64D72F; }
+      .my-modal .modal__success h3 span {
+        color: #18A0FB; }
+  .my-modal .modal__confirm .icon-close, .my-modal .modal__edit .icon-close {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    .my-modal .modal__confirm .icon-close .material-icons, .my-modal .modal__edit .icon-close .material-icons {
+      font-size: 20px;
+      color: #717171; }
+  .my-modal .modal__success .icon-close {
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    .my-modal .modal__success .icon-close .material-icons {
+      font-size: 16px;
+      color: #717171;
+      line-height: 0; }
+  .my-modal .form__title {
+    font-weight: 400;
+    font-size: 16px;
+    color: #515151;
+    margin-bottom: 0; }
+    .my-modal .form__title span {
+      color: red; }
+    .my-modal .form__title.form__title--name {
+      width: 55px; }
+    .my-modal .form__title.form__title--name + div {
+      width: calc(100% - 55px);
+      padding-left: 10px; }
+    .my-modal .form__title.form__title--password {
+      width: 105px; }
+    .my-modal .form__title.form__title--password + div {
+      width: calc(100% - 105px);
+      padding-left: 10px; }
+    .my-modal .form__title.form__title--passwordSp {
+      width: 210px; }
+    .my-modal .form__title.form__title--passwordSp + div {
+      width: calc(100% - 210px);
+      padding-left: 10px; }
+  .my-modal .form-control {
+    border: 1px solid #D8D8D8; }
+  .my-modal .from__btn {
+    font-weight: 600;
+    font-size: 16px; }
+    .my-modal .from__btn .btn-cancel {
+      background-color: transparent;
+      color: #64D72F; }
+      .my-modal .from__btn .btn-cancel:hover {
+        background-color: transparent;
+        color: #306C14; }
+      .my-modal .from__btn .btn-cancel:focus {
+        box-shadow: none; }
+    .my-modal .from__btn .btn-create {
+      background-color: #64D72F;
+      color: #FFFFFF; }
+      .my-modal .from__btn .btn-create:hover {
+        background-color: #306C14;
+        color: #FFFFFF; }

@@ -1,0 +1,265 @@
+﻿@import '../../../Resources/scss/common/_variables';
+
+h1 {
+    text-align:center;
+    font-weight: 600;
+    font-size: 36px;
+    color: $green;
+    span{
+        color: $blue;
+    }
+}
+.my-managementTool {
+    border-bottom: 1px solid #B4B4B4;
+}
+.managementTool__filter {
+
+    .btn-filter {
+        background: $green;
+        width: 90px;
+        height: 40px;
+        padding: 0px;
+        font-weight: 700;
+        font-size: 20px;
+        color: $white;
+
+        &:hover {
+            background: $green-bold;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .btn-delete-filter {
+        background-color: transparent;
+        padding: 7px 20px;
+        font-weight: 700;
+        font-size: 20px;
+        color: #B4B4B4;
+
+        &:hover {
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+.managementTool__level, .managementTool__course{
+    width: 200px;
+}
+
+
+//popup
+.popup-btn {
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #b4b4b4;
+    font-size: 16px;
+    line-height: 30px;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+
+    &::placeholder {
+        color: #b4b4b4;
+    }
+
+    &-icon {
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        pointer-events: none;
+    }
+}
+
+.my-dropdown {
+    padding: 15px 22px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 0%;
+    right: 0;
+    transform: translateY(105%);
+    background-color: #fff;
+    z-index: 1;
+    display: none;
+    width: 200px;
+
+    ul {
+        overflow-y: scroll;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+
+        li {
+            color: $blue;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            &:last-of-type {
+                margin-bottom: 0px;
+            }
+
+            &:hover {
+                color: $green;
+                background-color: rgba(24, 160, 251, 0.1);
+            }
+        }
+    }
+}
+
+.popup-btn:focus ~ .my-dropdown {
+  display: block;
+}
+// end popup
+.managementTool__create {
+    .btn {
+        width: 195px;
+        background: $blue;
+        padding: 6px 10px;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: $blue-bold;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &::after {
+            color: $white;
+        }
+
+        .icon-add {
+            font-size: 24px;
+            color: $white;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 18px;
+            color: $white;
+            margin-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+    .dropdown-menu {
+        width: 195px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 10px 12px;
+        transform: translate(-1px, 47px) !important;
+
+        li {
+            padding: 0 3px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: rgba(24, 160, 251, 0.1);
+        }
+    }
+}
+.managementTool__sort {
+
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        color: black;
+    }
+
+    label {
+        font-weight: 400;
+        font-size: 16px;
+        color: #515151;
+        cursor: pointer;
+    }
+
+    input[type='radio'] {
+        width: 15px;
+        height: 15px;
+        border: 1px solid red;
+        background-color: none;
+        cursor: pointer;
+    }
+
+    input[type='radio']:after {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
+        top: -4px;
+        left: 1.5px;
+        position: relative;
+        background-color: none;
+        display: inline-block;
+        visibility: hidden;
+        border: 2px solid white;
+        overflow: hidden;
+    }
+
+    input[type='radio']:checked:after {
+        position: relative;
+        background-color: $blue;
+        display: inline-block;
+        visibility: visible;
+    }
+    /*.input-radio {
+        width: 15px;
+        height: 15px;
+        vertical-align: top;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 1px solid $grey-icon;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid #18A0FB;
+            border-bottom: 2px solid #18A0FB;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+    }*/
+}

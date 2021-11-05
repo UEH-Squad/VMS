@@ -1,0 +1,239 @@
+﻿@using VMS.Application.ViewModels;
+<h1 class="my-5 pb-3">Quản lý tài khoản <span>tổ chức</span></h1>
+<div class="d-flex justify-content-between my-managementTool">
+    <div class="managementTool__filter">
+        <div class="d-flex align-items-center">
+            <div class="position-relative managementTool__level @(IsAccountOrg ? "d-block":"d-none")">
+                <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control @(isLevelGrey? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+                <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
+                    <ul>
+                        @if (Levels is not null)
+
+                        {
+                            @foreach (var level in Levels)
+                            {
+                                <li @onmousedown="() => ChooseLevelValue(level)">@level.Level</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute popup-btn-icon">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="position-relative managementTool__course  @(IsAccountUser ? "d-block":"d-none")">
+                <input @onclick="ToggCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn form-control" placeholder="@courseChoosenValue" readonly />
+                <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
+                    <ul>
+                        @if (Courses is not null)
+
+                        {
+                            @foreach (var course in Courses)
+                            {
+                                <li @onmousedown="() => ChooseCourseValue(course )">@course.Course</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute popup-btn-icon">
+                    expand_more
+                </span>
+            </div>
+            <div class="ms-4 @(IsAccountAdminSp?"d-none":"d-block")">
+                <button class="btn-filter btn">Lọc</button>
+                <button @onclick="ClearFilter" class="btn-delete-filter btn">Xóa lọc</button>
+            </div>
+        </div>
+        <div class="d-flex align-items-center managementTool__sort mt-4 ">
+            <p class="mb-0">Sắp xếp theo ngày tạo</p>
+            <div class="mx-5 d-flex align-items-center ">
+                <input @bind="@NewAccs" type="radio" id="new" name="filter" class="me-2 " />
+                <label for="new">Gần nhất</label>
+            </div>
+            <div class="d-flex align-items-center ">
+                <input @bind="OldAccs" type="radio" id="old" name="filter" class="me-2 input-radio cursor-pointer" />
+                <label for="old">Cũ nhất</label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="managementTool__create dropdown">
+        <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="material-icons-outlined icon-add">
+                control_point
+            </i>
+            <span>Tạo tài khoản</span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li @onclick="ShowCreateAcc" class="mb-2">Tạo một tài khoản</li>
+            <li @onclick="ShowCreateAccounts">Tạo nhiều tài khoản</li>
+        </ul>
+    </div>
+</div>
+
+
+@code {
+    // Modal
+    [Parameter] public bool IsAccountOrg { get; set; }
+    [Parameter] public bool IsAccountUser { get; set; }
+    [Parameter] public bool IsAccountAdminSp { get; set; }
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private async Task ShowCreateAccountOrg()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        var result = await Modal.Show<CreateAccountOrg>("", options).Result;
+
+    }
+
+    private async Task ShowCreateAccountUser()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        var result = await Modal.Show<CreateAccountUser>("", options).Result;
+
+    }
+
+    private async Task ShowCreateAccountAdminSp()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        var result = await Modal.Show<CreateAccountAdminSp>("", options).Result;
+
+    }
+
+    private async Task ShowCreateAccounts()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        var result = await Modal.Show<CreateAccounts>("", options).Result;
+        isShowDropDownCreate = false;
+
+    }
+    private async Task ShowCreateAcc()
+    {
+        if (IsAccountOrg)
+        {
+            ShowCreateAccountOrg();
+        }
+        if (IsAccountUser)
+        {
+            ShowCreateAccountUser();
+        }
+        if (IsAccountAdminSp)
+        {
+            ShowCreateAccountAdminSp();
+        }
+        isShowDropDownCreate = false;
+    }
+
+
+
+    // filter Level
+    private string levelChoosenValue = "Cấp";
+    private bool isLevelShow;
+    private bool isLevelGrey = false;
+
+    public class fakeLevel
+    {
+        public string Level { get; set; }
+    }
+    private List<fakeLevel> Levels = new()
+    {
+            new fakeLevel() { Level = "Ban Chuyên môn" },
+            new fakeLevel() { Level = "Khoa/Viện/KTX" },
+            new fakeLevel() { Level = "CLB/Đội/Nhóm" },
+        };
+    private void ChooseLevelValue(fakeLevel level)
+    {
+        levelChoosenValue = level.Level;
+        isLevelGrey = true;
+    }
+    private void ToggLeLevelDropdown()
+    {
+        isLevelShow = !isLevelShow;
+    }
+
+    private void CloseLevelDropdown()
+    {
+        isLevelShow = false;
+    }
+
+    //filter  Course
+    private string courseChoosenValue = "Khóa";
+    private bool isCourseShow;
+    private bool isCourseGrey = false;
+
+    public class fakeCourse
+    {
+        public string Course { get; set; }
+    }
+    private List<fakeCourse> Courses = new()
+    {
+            new fakeCourse() { Course = "K44" },
+            new fakeCourse() { Course = "K45" },
+            new fakeCourse() { Course = "K46" },
+            new fakeCourse() { Course = "K47" },
+        };
+    private void ChooseCourseValue(fakeCourse course)
+    {
+        courseChoosenValue = course.Course;
+        isCourseGrey = true;
+    }
+    private void ToggCourseDropdown()
+    {
+        isCourseShow = !isCourseShow;
+    }
+
+    private void CloseCourseDropdown()
+    {
+        isCourseShow = false;
+    }
+
+    // ClearFilter
+    [Parameter] public bool NewAccs { get; set; }
+    [Parameter] public bool OldAccs { get; set; }
+    private async Task ClearFilter()
+    {
+        levelChoosenValue = "Cấp";
+        courseChoosenValue = "Khóa";
+        OldAccs = new();
+        NewAccs = new();
+    }
+
+
+    // dropdown-create
+    private bool isShowDropDownCreate = false;
+    private void ShowDropDownCreate()
+    {
+        isShowDropDownCreate = !isShowDropDownCreate;
+    }
+
+
+
+}
+
+

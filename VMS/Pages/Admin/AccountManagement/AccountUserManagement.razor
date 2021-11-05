@@ -1,0 +1,168 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminAccountUserManagement)]
+@attribute [Authorize(Roles = "Admin")]
+@inject IJSRuntime JS;
+@using VMS.GenericRepository;
+@using Blazored.Modal;
+<div class="px-5">
+    <ManagementTool IsAccountUser="true"></ManagementTool>
+    <div class="d-flex justify-content-between align-items-center my-3">
+        <p class="managementTool__title mb-0">Có <span>@(pagedResult.Items.Count * 20) kết quả</span> ứng với tìm kiếm</p>
+        <div class="managementTool__down d-flex align-items-center">
+            <i class="material-icons icon-down me-1">
+                vertical_align_bottom
+            </i>
+            <span>Tải danh sách</span>
+        </div>
+    </div>
+    <div class=" d-flex align-items-center justify-content-end py-3">
+        <div class="d-flex align-items-center managementTool__chosseAll me-3">
+            <input class="check-box" type="checkbox" id="all" value="all">
+            <label for="all">Chọn tất cả</label>
+        </div>
+        <button class="btn-delete btn">Xóa</button>
+    </div>
+    <div class="my-acc">
+        <table class="acc__table">
+            <tr>
+                <th class="acc__tilte acc__tilte--checkbox"></th>
+                <th class="acc__tilte acc__tilte--date">Ngày tạo</th>
+                <th class="acc__tilte acc__tilte--course ">Khóa</th>
+                <th class="acc__tilte acc__tilte--idStudent">MSSV</th>
+                <th class="acc__tilte acc__tilte--name">Họ và tên</th>
+                <th class="acc__tilte acc__tilte--email">Email UEH</th>
+
+            </tr>
+
+            @if (pagedResult is not null && pagedResult.Items.Count != 0)
+            {
+                bool oddIndex = false;
+                string bg = "#FFF";
+                @foreach (var item in pagedResult.Items)
+                {
+                    oddIndex = !oddIndex;
+                    if (oddIndex)
+                    {
+                        bg = "#F2F9FF";
+                    }
+                    else
+                    {
+                        bg = "#FFF";
+                    }
+
+                    <tr class="position-relative" style="background-color:@bg">
+                        <td class="acc__content acc__content--checkbox pt-2">
+                            <div class="d-flex align-items-center">
+                                <input class="check-box" type="checkbox" id="all" value="all">
+                            </div>
+                        </td>
+                        <td class="acc__content acc__content--date">@item.CreateDate</td>
+                        <td class="acc__content acc__content--course">@item.Coures</td>
+                        <td class="acc__content acc__content--idStudent">@item.IdStudent</td>
+                        <td class="acc__content acc__content--name">@item.Name</td>
+                        <td class="acc__content acc__content--email">@item.EmailUEH</td>
+                        <div class="acc__menu dropdown">
+                            <i class="material-icons-outlined icon-menu dropdown-toggle" id="dropdownMenu-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
+                                more_vert
+                            </i>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
+                                <li @onclick="ShowEditAccountOrg" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
+                                <li @onclick="ShowDeleteAccount" class="dropdown-menu-delete">Xóa tài khoản</li>
+                            </ul>
+                        </div>
+
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <Pager CurrentPage="@pagedResult.PageIndex"
+               PageCount="@pagedResult.TotalPages"
+               OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
+               ShowPageNumbers="true" />
+    </div>
+</div>
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private PaginatedList<FakeData> pagedResult;
+    private int page = 1;
+
+    protected override void OnInitialized()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
+    private PaginatedList<FakeData> GetFakeData()
+    {
+        int i = 0;
+        var data = Enumerable.Range(0, 20).Select(x => new FakeData
+        {
+            Id = ++i + (page - 1) * 20,
+            CreateDate = new DateTime(2021, 11, 02).ToString("dd/MM/yyyy"),
+            Name = "Tên sinh viên rất chi là dài tin thi thoi, ten dai ",
+            EmailUEH = "VanHung.31161027841@st.ueh.edu.vn ",
+            Coures = 45,
+            IdStudent= "31161027841"
+
+
+        }).ToList();
+
+        var result = new PaginatedList<FakeData>(data, 100, page, 20);
+        return result;
+    }
+
+    private class FakeData
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public bool IsMenu { get; set; }
+        public string CreateDate { get; set; }
+        public string EmailUEH { get; set; }
+        public string IdStudent { get; set; }
+        public int Coures { get; set; }
+    }
+
+
+    // Modal
+
+    private async Task ShowEditAccountOrg()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        var result = await Modal.Show<EditAccountUser>("", options).Result;
+
+    }
+
+    private async Task ShowDeleteAccount()
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        var result = await Modal.Show<DeleteAccount>("", options).Result;
+
+    }
+
+}
+
+
+

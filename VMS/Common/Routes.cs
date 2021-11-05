@@ -44,6 +44,9 @@
         #region Admin
 
         public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
+        public const string AdminAccountOrgManagement = "/admin/quan-ly-tai-khoan-to-chuc";
+        public const string AdminAccountSpManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";
+        public const string AdminAccountUserManagement = "/admin/quan-ly-tai-khoan-tinh-nguyen-vien";
 
         #endregion Admin
     }

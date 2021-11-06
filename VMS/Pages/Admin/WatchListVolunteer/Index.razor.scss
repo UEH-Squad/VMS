@@ -37,16 +37,11 @@
         justify-content: space-between;
 
         .quantity-volunteers {
-            margin-top: -8%;
             width: 62%;
         }
 
         .button {
             width: 18%;
-
-            &__text--del {
-                background-color: $red;
-            }
 
             &__text--del:hover {
                 background-color: $error;

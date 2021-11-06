@@ -2,7 +2,7 @@
 
 <div class="my-modal">
     <div class="modal__content">
-        <div class="modal__edit @(isShowConfirm||isSuccess ? "d-none" : "d-block")">
+        <div class="modal__edit">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
@@ -48,46 +48,24 @@
                 <div class="d-flex align-items-center mb-3">
                     <p class="form__title form__title--password">Mật khẩu <span>(*)</span>:</p>
                     <div class="">
-                        <input class="form-control" type="password" />
+                        <InputText @bind-Value="@org.FullName" type="password" name="avd" class="form-control" />                     
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <p class="form__title form__title--passwordSp">Mật khẩu quản trị viên <span>(*)</span>:</p>
                     <div class="">
-                        <input class="form-control" type="password" />
+                        <InputText @bind-Value="@org.FullName" type="password" name="avd" class="form-control" />
                     </div>
                 </div>
 
                 <div class="from__btn text-center">
                     <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
                     <button @onclick="ShowEditConfirm" type="submit" class="btn btn-create">Sửa tài khoản</button>
+
                 </div>
 
             </EditForm>
 
-        </div>
-
-        <div class="modal__confirm @(isShowConfirm ? "d-block" : "d-none")">
-            <div @onclick="CloseModalAsync" class="icon-close">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div>
-                <h3 class="text-center mb-3">Bạn có chắc chắn muốn <span>sửa tài khoản</span> này không? </h3>
-                <div class="text-end">
-                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
-                    <button @onclick="ShowEditSuccess" class="btn btn-confirm">Chắc chắn</button>
-                </div>
-            </div>
-        </div>
-        <div class="modal__success @(isSuccess ? "d-block" : "d-none")">
-            <div @onclick="CloseModalAsync" class="icon-close">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <h3 class="text-center mb-0">Bạn đã <span>sửa tài khoản</span> thành công </h3>
         </div>
 
     </div>
@@ -95,8 +73,6 @@
 
 @code {
     // Modal
-    private bool isSuccess = false;
-    private bool isShowConfirm = false;
 
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
@@ -105,19 +81,24 @@
     {
         await Modal.CloseAsync();
     }
-    private async Task ShowEditSuccess()
-    {
-        isShowConfirm = false;
-        isSuccess = true;
-    }
+
+    [CascadingParameter] public IModalService ModalConfirm { get; set; }
 
     private async Task ShowEditConfirm()
     {
-        isShowConfirm = true;
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+        await Modal.CloseAsync();
+        await ModalConfirm.Show<EditConfirm> ("", options).Result;
     }
-    
+
     // popup drop-down
     private CreateOrgProfileViewModel org = new();
+
 
     private string levelChoosenValue = "Cấp";
     private bool isLevelShow;
@@ -147,5 +128,4 @@
     {
         isLevelShow = false;
     }
-
 }

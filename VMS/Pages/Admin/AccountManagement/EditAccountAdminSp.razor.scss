@@ -17,16 +17,13 @@
         align-items: center;
     }
 
-    .modal__edit, .modal__confirm, .modal__success {
+    .modal__edit {
+        width: 525px;
+        padding: 30px 50px;
         background-color: $white;
         position: relative;
         box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
         border-radius: 10px;
-    }
-
-    .modal__edit {
-        width: 525px;
-        padding: 30px 50px;
 
         h3 {
             font-weight: 500;
@@ -40,71 +37,7 @@
         }
     }
 
-    .modal__confirm {
-        width: 400px;
-        height: 150px;
-        padding: 30px 30px 20px 30px;
-
-        h3 {
-            padding: 0 35px;
-            font-weight: 500;
-            font-size: 20px;
-            color: $green;
-
-            span {
-                color: $blue;
-            }
-        }
-
-        .btn-cancel {
-            font-weight: 600;
-            font-size: 16px;
-            color: $green;
-            background-color: transparent;
-
-            &:hover {
-                color: $green-bold;
-                background-color: transparent;
-            }
-
-            &:focus {
-                box-shadow: none
-            }
-        }
-
-        .btn-confirm {
-            font-weight: 600;
-            font-size: 16px;
-            color: $white;
-            background-color: $green;
-
-            &:hover {
-                color: $white;
-                background-color: $green-bold;
-            }
-
-            &:focus {
-                box-shadow: none
-            }
-        }
-    }
-
-    .modal__success {
-        width: 400px;
-        padding: 30px 30px;
-
-        h3 {
-            font-weight: 500;
-            font-size: 20px;
-            color: $green;
-
-            span {
-                color: $blue;
-            }
-        }
-    }
-
-    .modal__confirm .icon-close, .modal__edit .icon-close {
+    .modal__edit .icon-close {
         width: 33px;
         height: 33px;
         border-radius: 100%;
@@ -120,26 +53,6 @@
         .material-icons {
             font-size: 20px;
             color: $grey-close-btn;
-        }
-    }
-
-    .modal__success .icon-close {
-        width: 22px;
-        height: 22px;
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-        background: rgba(196, 196, 196, .5);
-
-        .material-icons {
-            font-size: 16px;
-            color: $grey-close-btn;
-            line-height: 0;
         }
     }
     //Edit form

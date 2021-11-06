@@ -47,12 +47,14 @@
         </div>
         <div class="d-flex align-items-center managementTool__sort mt-4 ">
             <p class="mb-0">Sắp xếp theo ngày tạo</p>
+
             <div class="mx-5 d-flex align-items-center ">
-                <input @bind="@NewAccs" type="radio" id="new" name="filter" class="me-2 " />
-                <label for="new">Gần nhất</label>
+                <input checked="@(IsCheckd == 1)" @onchange="@(() => IsCheckd = 1)" type="radio" id="near" name="filter" class="me-2 " />
+
+                <label for="near">Gần nhất</label>
             </div>
             <div class="d-flex align-items-center ">
-                <input @bind="OldAccs" type="radio" id="old" name="filter" class="me-2 input-radio cursor-pointer" />
+                <input checked="@(IsCheckd == 2)" @onchange="@(() => IsCheckd = 2)" type="radio" id="old" name="filter" class="me-2 input-radio cursor-pointer" />
                 <label for="old">Cũ nhất</label>
             </div>
         </div>
@@ -75,6 +77,7 @@
 
 
 @code {
+
     // Modal
     [Parameter] public bool IsAccountOrg { get; set; }
     [Parameter] public bool IsAccountUser { get; set; }
@@ -215,14 +218,12 @@
     }
 
     // ClearFilter
-    [Parameter] public bool NewAccs { get; set; }
-    [Parameter] public bool OldAccs { get; set; }
+    int IsCheckd = 0;
     private async Task ClearFilter()
     {
         levelChoosenValue = "Cấp";
         courseChoosenValue = "Khóa";
-        OldAccs = new();
-        NewAccs = new();
+        IsCheckd = 0;
     }
 
 
@@ -233,7 +234,8 @@
         isShowDropDownCreate = !isShowDropDownCreate;
     }
 
-
+    //////////test
+    ///
 
 }
 

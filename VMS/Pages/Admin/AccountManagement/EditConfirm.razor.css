@@ -18,7 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center; }
-  .my-modal .modal__success, .my-modal .modal__confirm {
+  .my-modal .modal__confirm, .my-modal .modal__success {
     background-color: #FFFFFF;
     position: relative;
     box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
@@ -33,7 +33,7 @@
       font-size: 20px;
       color: #64D72F; }
       .my-modal .modal__confirm h3 span {
-        color: #F14747; }
+        color: #18A0FB; }
     .my-modal .modal__confirm .btn-cancel {
       font-weight: 600;
       font-size: 16px;
@@ -62,7 +62,7 @@
       font-size: 20px;
       color: #64D72F; }
       .my-modal .modal__success h3 span {
-        color: #F14747; }
+        color: #18A0FB; }
   .my-modal .modal__confirm .icon-close {
     width: 33px;
     height: 33px;

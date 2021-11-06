@@ -18,7 +18,7 @@
     </div>
     <div class=" d-flex align-items-center justify-content-end py-3">
         <div class="d-flex align-items-center managementTool__chosseAll me-3">
-            <input class="check-box" type="checkbox" id="all" value="all">
+            <input @bind="@IsCheckAll" @onclick="ChoseAll" class="check-box" type="checkbox" id="all">
             <label for="all">Chọn tất cả</label>
         </div>
         <button class="btn-delete btn">Xóa</button>
@@ -54,7 +54,7 @@
                     <tr class="position-relative" style="background-color:@bg">
                         <td class="acc__content acc__content--checkbox pt-2">
                             <div class="d-flex align-items-center">
-                                <input class="check-box" type="checkbox" id="all" value="all">
+                                <input @bind="@item.IsCheck" @onclick="DeselectAll" class="check-box" type="checkbox" id="acc-@item.Id" value="acc-@item.Id">
                             </div>
                         </td>
                         <td class="acc__content acc__content--date">@item.CreateDate</td>
@@ -113,7 +113,7 @@
             Name = "Tên sinh viên rất chi là dài tin thi thoi, ten dai ",
             EmailUEH = "VanHung.31161027841@st.ueh.edu.vn ",
             Coures = 45,
-            IdStudent= "31161027841"
+            IdStudent = "31161027841"
 
 
         }).ToList();
@@ -131,6 +131,22 @@
         public string EmailUEH { get; set; }
         public string IdStudent { get; set; }
         public int Coures { get; set; }
+        public bool IsCheck { get; set; } = false;
+    }
+
+    // Chose all
+    bool IsCheckAll = false;
+    private void ChoseAll()
+    {
+        IsCheckAll = !IsCheckAll;
+        @foreach (var item in pagedResult.Items)
+        {
+            item.IsCheck = IsCheckAll;
+        }
+    }
+    private void DeselectAll()
+    {
+        IsCheckAll = false;
     }
 
 

@@ -450,6 +450,8 @@
   {
     "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
     "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
+  },
+  {
     "outputFile": "Shared/AdminHeader.razor.css",
     "inputFile": "Shared/AdminHeader.razor.scss"
   },
@@ -528,5 +530,9 @@
   {
     "outputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.css",
     "inputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.scss"
   }
 ]

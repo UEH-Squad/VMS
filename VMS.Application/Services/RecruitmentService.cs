@@ -174,7 +174,7 @@ namespace VMS.Application.Services
 
             if (!string.IsNullOrEmpty(filter.FullName))
             {
-                return r => r.User.FullName == filter.FullName || string.IsNullOrEmpty(filter.FullName);
+                return r => r.Activity.Organizer.FullName == filter.FullName || string.IsNullOrEmpty(filter.FullName);
             }
 
             return r => true;

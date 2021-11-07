@@ -18,7 +18,7 @@ namespace VMS.Pages.ActivityLogPage
         [Parameter]
         public EventCallback<FilterRecruitmentViewModel> FilterChanged { get; set; }
         [Parameter]
-        public FilterRecruitmentViewModel filter { get; set; }
+        public FilterRecruitmentViewModel FilterChange { get; set; } = new();
 
         private string facultyDefault = "Đơn vị";
         private string semesterDefault = "Học kỳ";
@@ -35,6 +35,13 @@ namespace VMS.Pages.ActivityLogPage
         {
             faculties = await FacultyService.GetAllFacultiesAsync();
         }
+     
+        private void ChooseFaculty(FacultyViewModel faculty)
+        {
+            facultyDefault = faculty.Name;
+            FilterChange.FullName = facultyDefault;
+            Display2 = "d-none";
+        }
 
         private void ChooseSemester(string semester)
         {
@@ -42,16 +49,22 @@ namespace VMS.Pages.ActivityLogPage
             Display1 = "d-none";
         }
 
-        private void ChooseFaculty(FacultyViewModel faculty)
-        {
-            facultyDefault = faculty.Name;
-            filter.FullName = facultyDefault;
-            Display2 = "d-none";
-        }
-
         private async Task RadioButtonChangedAsync(bool value)
         {
             await IsRatedChanged.InvokeAsync(value);
+        }
+
+        private async Task UpdateFilterValueAsync()
+        {
+            await FilterChanged.InvokeAsync(FilterChange);
+        }
+
+        private async Task ClearFilter()
+        {
+            facultyDefault = "Đơn vị";
+            semesterDefault = "Học kỳ";
+            FilterChange = new FilterRecruitmentViewModel();
+            await FilterChanged.InvokeAsync(FilterChange);
         }
 
     }

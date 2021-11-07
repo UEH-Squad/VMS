@@ -43,8 +43,8 @@
             </div>
         </div>
         <div class="act-filter__btn-container">
-            <button class="act-filter__btn --filter">Lọc</button>
-            <button class="act-filter__btn --del">Xóa lọc</button>
+            <button @onclick="UpdateFilterValueAsync" class="act-filter__btn --filter">Lọc</button>
+            <button @onclick="ClearFilter" class="act-filter__btn --del">Xóa lọc</button>
         </div>
     </form>
 </div>

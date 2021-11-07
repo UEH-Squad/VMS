@@ -1,5 +1,5 @@
 ﻿<div class="search-and-button">
-    <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged ="SearchValueChangedAsync"></VMS.Pages.ActivitySearchPage.SearchBox>
+    <VMS.Pages.ActivitySearchPage.SearchBox SearchValue ="@searchValue" SearchValueChanged ="SearchValueChangedAsync"></VMS.Pages.ActivitySearchPage.SearchBox>
     <div class="button-download @(navDel ? "d-block" : "d-none")">
         <button @onclick="DowLoadAsync" class="button-download__text">
             <span class="material-icons"> download </span>

@@ -43,6 +43,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         {
             page = 1;
             this.isDeleted = value;
+            searchValue = String.Empty;
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             checkList = new();
             StateHasChanged();

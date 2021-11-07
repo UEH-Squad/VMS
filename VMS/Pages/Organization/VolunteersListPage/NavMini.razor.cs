@@ -38,6 +38,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         private IJSRuntime JSRuntime { get; set; }
         public async Task ChangeNavAsync()
         {
+            searchValue = string.Empty;
             navDel = !navDel;
             navUndo = !navUndo;
             this.ShowDeletedList = !ShowDeletedList;

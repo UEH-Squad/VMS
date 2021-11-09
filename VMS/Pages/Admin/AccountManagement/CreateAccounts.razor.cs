@@ -20,7 +20,7 @@ namespace VMS.Pages.Admin.AccountManagement
         [CascadingParameter] public BlazoredModalInstance Modal { get; set; }
 
         [Inject] private IExcelService ExcelService { get; set; }
-        [Inject] private IIdentityService IdentityService { get; set; }
+        [Inject] private IAdminService AdminService { get; set; }
 
         private async Task CloseModalAsync()
         {
@@ -49,7 +49,7 @@ namespace VMS.Pages.Admin.AccountManagement
             }
             else
             {
-                IdentityService.AddListAccount(accounts, Role);
+                await AdminService.AddListUserAsync(accounts, Role); 
                 isSuccess = true;
             }
         }

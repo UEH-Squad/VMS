@@ -16,15 +16,12 @@ namespace VMS.Application.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContext;
-        private readonly IMapper _mapper;
 
         public IdentityService(UserManager<User> userManager,
-                           IHttpContextAccessor httpContext,
-                           IMapper mapper)
+                           IHttpContextAccessor httpContext)
         {
             _userManager = userManager;
             _httpContext = httpContext;
-            _mapper = mapper;
         }
 
         /*
@@ -96,21 +93,6 @@ namespace VMS.Application.Services
         public void UpdateUser(User user)
         {
             Task.Run(() => _userManager.UpdateAsync(user));
-        }
-
-        public void AddListAccount(List<CreateAccountViewModel> accounts, Role role)
-        {
-            List<User> users = _mapper.Map<List<User>>(accounts);
-
-            foreach (var user in users)
-            {
-                IdentityResult result = Task.Run(() => _userManager.CreateAsync(user, user.StudentId)).Result;
-
-                if (result.Succeeded)
-                {
-                    Task.Run(() => _userManager.AddToRoleAsync(user, role.ToString()));
-                }
-            }
         }
     }
 }

@@ -7,6 +7,7 @@ namespace VMS.Domain.Models
 {
     public class User : IdentityUser, IAuditEntity<string>, IDeleteEntity<string>
     {
+
         // For user
         public string StudentId { get; set; }
 

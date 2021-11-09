@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using VMS.Application.ViewModels;

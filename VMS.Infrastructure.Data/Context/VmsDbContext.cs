@@ -6,7 +6,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Infrastructure.Data.Context
 {
-    public class VmsDbContext : IdentityDbContext
+    public class VmsDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAddress> ActivityAddresses { get; set; }
@@ -35,6 +35,8 @@ namespace VMS.Infrastructure.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<User>().HasDiscriminator<string>("Discriminator").HasValue("User");
 
             builder.Entity<User>()
                 .HasMany(x => x.Activities)

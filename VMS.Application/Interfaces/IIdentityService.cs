@@ -24,7 +24,5 @@ namespace VMS.Application.Interfaces
         User GetCurrentUserWithFavoritesAndRecruitments();
 
         void UpdateUser(User user);
-
-        void AddListAccount(List<CreateAccountViewModel> accounts, Role role);
     }
 }

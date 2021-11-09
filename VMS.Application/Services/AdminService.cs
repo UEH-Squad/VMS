@@ -33,9 +33,21 @@ namespace VMS.Application.Services
 
             IEnumerable<User> users = _mapper.Map<List<User>>(accounts);
 
-            await _repository.InsertAsync(dbContext, users);
+            AppRole userRole = await GetRoleAsync(dbContext, role);
 
-            await AddListUsersToRole(dbContext, users, role);
+            foreach (var user in users)
+            {
+                user.UserRoles = new List<UserRole>()
+                {
+                    new UserRole()
+                    {
+                        User = user,
+                        Role = userRole
+                    }
+                };
+            }
+
+            await _repository.InsertAsync(dbContext, users);
 
             return true;
         }
@@ -48,25 +60,17 @@ namespace VMS.Application.Services
             return await _repository.ExistsAsync(dbContext, predicate);
         }
 
-        private async Task AddListUsersToRole(DbContext dbContext, IEnumerable<User> users, Role userRole)
+        private async Task<AppRole> GetRoleAsync(DbContext dbContext, Role userRole)
         {
-            Specification<IdentityRole> specification = new()
+            Specification<AppRole> specification = new()
             {
-                Conditions = new List<Expression<Func<IdentityRole, bool>>>()
+                Conditions = new List<Expression<Func<AppRole, bool>>>()
                 {
                     x => x.Name == userRole.ToString()
                 }
             };
 
-            IdentityRole role = await _repository.GetAsync(dbContext, specification);
-
-            IEnumerable<IdentityUserRole<string>> userRoles = users.Select(x => new IdentityUserRole<string>()
-            {
-                RoleId = role.Id,
-                UserId = x.Id
-            });
-
-            await _repository.InsertAsync(dbContext, userRoles);
+            return await _repository.GetAsync(dbContext, specification);
         }
     }
 }

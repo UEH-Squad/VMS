@@ -35,7 +35,7 @@ namespace VMS
                     Configuration.GetConnectionString("DefaultConnection"),
                     x => x.UseNetTopologySuite()));
             services.AddScoped(x => x.GetRequiredService<IDbContextFactory<VmsDbContext>>().CreateDbContext());
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentity<User, AppRole>(options =>
             {
                 options.Password.RequiredLength = 4;
                 options.Password.RequireDigit = false;

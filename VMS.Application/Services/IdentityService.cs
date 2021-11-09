@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -15,12 +16,15 @@ namespace VMS.Application.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContext;
+        private readonly IMapper _mapper;
 
         public IdentityService(UserManager<User> userManager,
-                           IHttpContextAccessor httpContext)
+                           IHttpContextAccessor httpContext,
+                           IMapper mapper)
         {
             _userManager = userManager;
             _httpContext = httpContext;
+            _mapper = mapper;
         }
 
         /*
@@ -92,6 +96,21 @@ namespace VMS.Application.Services
         public void UpdateUser(User user)
         {
             Task.Run(() => _userManager.UpdateAsync(user));
+        }
+
+        public void AddListAccount(List<CreateAccountViewModel> accounts, Role role)
+        {
+            List<User> users = _mapper.Map<List<User>>(accounts);
+
+            foreach (var user in users)
+            {
+                IdentityResult result = Task.Run(() => _userManager.CreateAsync(user, user.StudentId)).Result;
+
+                if (result.Succeeded)
+                {
+                    Task.Run(() => _userManager.AddToRoleAsync(user, role.ToString()));
+                }
+            }
         }
     }
 }

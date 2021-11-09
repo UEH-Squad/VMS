@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using VMS.Application.ViewModels;
@@ -65,6 +66,10 @@ namespace VMS.Application.Automapper
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
             MapReportToFeedback();
+
+            CreateMap<CreateAccountViewModel, User>()
+                .ForMember(x => x.FullName, opt => opt.MapFrom(src => src.LastName + " " + src.FirstName))
+                .ForMember(x => x.UserName, opt => opt.MapFrom(src => src.Email));
         }
 
         private void MapReportToFeedback()

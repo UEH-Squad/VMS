@@ -7,6 +7,6 @@ namespace VMS.Application.Interfaces
 {
     public interface IAdminService
     {
-        Task AddListUserAsync(List<CreateAccountViewModel> accounts, Role role);
+        Task<bool> AddListUserAsync(List<CreateAccountViewModel> accounts, Role role);
     }
 }

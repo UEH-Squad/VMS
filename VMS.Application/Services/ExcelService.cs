@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using OfficeOpenXml;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -13,12 +12,7 @@ namespace VMS.Application.Services
     public class ExcelService : IExcelService
     {
         private const long MaxFileSize = 1024 * 1024 * 5;
-        private IIdentityService _identityService;
-
-        public ExcelService(IIdentityService identityService)
-        {
-            _identityService = identityService;
-        }
+        private const int MaxColumn = 6;
 
         public async Task<List<CreateAccountViewModel>> GetListAccountFromExcelFileAsync(IBrowserFile file)
         {
@@ -36,7 +30,11 @@ namespace VMS.Application.Services
 
                 foreach (var sheet in excelPackage.Workbook.Worksheets)
                 {
-                    int colCount = sheet.Dimension.End.Column;
+                    if (sheet.Dimension.End.Column != MaxColumn)
+                    {
+                        return null; 
+                    }
+
                     int rowCount = sheet.Dimension.End.Row;
 
                     for (int row = 2; row <= rowCount; row++)

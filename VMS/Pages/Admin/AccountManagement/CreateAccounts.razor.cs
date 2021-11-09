@@ -49,8 +49,8 @@ namespace VMS.Pages.Admin.AccountManagement
             }
             else
             {
-                await AdminService.AddListUserAsync(accounts, Role); 
-                isSuccess = true;
+                
+                isSuccess = await AdminService.AddListUserAsync(accounts, Role);
             }
         }
     }

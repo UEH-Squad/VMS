@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using VMS.Application.ViewModels;
@@ -65,11 +66,7 @@ namespace VMS.Application.Automapper
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
             MapReportToFeedback();
-
-            CreateMap<CreateAccountViewModel, User>()
-                .ForMember(x => x.FullName, opt => opt.MapFrom(src => src.LastName + " " + src.FirstName))
-                .ForMember(x => x.UserName, opt => opt.MapFrom(src => src.Email))
-                .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.Now));
+            MapAccountToUser();
         }
 
         private void MapReportToFeedback()
@@ -79,6 +76,19 @@ namespace VMS.Application.Automapper
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.DesReport))
                 .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
+        }
+
+        private void MapAccountToUser()
+        {
+            PasswordHasher<User> hasher = new();
+            CreateMap<CreateAccountViewModel, User>()
+                .ForMember(x => x.FullName, opt => opt.MapFrom(src => src.LastName + " " + src.FirstName))
+                .ForMember(x => x.UserName, opt => opt.MapFrom(src => src.Email))
+                .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => hasher.HashPassword(null, src.StudentId)))
+                .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(x => x.LockoutEnabled, opt => opt.MapFrom(src => true))
+                .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
+                .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.Email.ToUpper()));
         }
     }
 }

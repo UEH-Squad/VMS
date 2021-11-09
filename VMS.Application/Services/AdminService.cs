@@ -33,12 +33,6 @@ namespace VMS.Application.Services
 
             IEnumerable<User> users = _mapper.Map<List<User>>(accounts);
 
-            PasswordHasher<User> hasher = new();
-            foreach (var user in users)
-            {
-                user.PasswordHash = hasher.HashPassword(user, user.StudentId);
-            }
-
             await _repository.InsertAsync(dbContext, users);
 
             await AddListUsersToRole(dbContext, users, role);

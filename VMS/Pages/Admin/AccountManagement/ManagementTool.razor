@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-between my-managementTool">
     <div class="managementTool__filter">
         <div class="d-flex align-items-center">
-            <div class="position-relative managementTool__level @(IsAccountOrg ? "d-block":"d-none")">
+            <div class="position-relative managementTool__level @(IsAccountOrg ? "d-block" : "d-none")">
                 <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control @(isLevelGrey? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
                     <ul>
@@ -22,7 +22,7 @@
                 </span>
             </div>
 
-            <div class="position-relative managementTool__course  @(IsAccountUser ? "d-block":"d-none")">
+            <div class="position-relative managementTool__course  @(IsAccountUser ? "d-block" : "d-none")">
                 <input @onclick="ToggCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn form-control" placeholder="@courseChoosenValue" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
                     <ul>
@@ -40,7 +40,7 @@
                     expand_more
                 </span>
             </div>
-            <div class="ms-4 @(IsAccountAdminSp?"d-none":"d-block")">
+            <div class="ms-4 @(IsAccountAdminSp ? "d-none" : "d-block")">
                 <button class="btn-filter btn">Lọc</button>
                 <button @onclick="ClearFilter" class="btn-delete-filter btn">Xóa lọc</button>
             </div>
@@ -88,11 +88,11 @@
     private async Task ShowCreateAccountOrg()
     {
         var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
 
         var result = await Modal.Show<CreateAccountOrg>("", options).Result;
 
@@ -101,11 +101,11 @@
     private async Task ShowCreateAccountUser()
     {
         var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
 
         var result = await Modal.Show<CreateAccountUser>("", options).Result;
 
@@ -114,11 +114,11 @@
     private async Task ShowCreateAccountAdminSp()
     {
         var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
 
         var result = await Modal.Show<CreateAccountAdminSp>("", options).Result;
 
@@ -126,14 +126,17 @@
 
     private async Task ShowCreateAccounts()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
+        var parameters = new ModalParameters();
+        parameters.Add("Role", (IsAccountUser ? Role.User : IsAccountOrg ? Role.Organization : Role.Admin));
 
-        var result = await Modal.Show<CreateAccounts>("", options).Result;
+        var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
+
+        var result = await Modal.Show<CreateAccounts>("", parameters, options).Result;
         isShowDropDownCreate = false;
 
     }
@@ -166,11 +169,11 @@
         public string Level { get; set; }
     }
     private List<fakeLevel> Levels = new()
-    {
-        new fakeLevel() { Level = "Ban Chuyên môn" },
-        new fakeLevel() { Level = "Khoa/Viện/KTX" },
-        new fakeLevel() { Level = "CLB/Đội/Nhóm" },
-    };
+        {
+            new fakeLevel() { Level = "Ban Chuyên môn" },
+            new fakeLevel() { Level = "Khoa/Viện/KTX" },
+            new fakeLevel() { Level = "CLB/Đội/Nhóm" },
+        };
     private void ChooseLevelValue(fakeLevel level)
     {
         levelChoosenValue = level.Level;
@@ -196,12 +199,12 @@
         public string Course { get; set; }
     }
     private List<fakeCourse> Courses = new()
-    {
-        new fakeCourse() { Course = "K44" },
-        new fakeCourse() { Course = "K45" },
-        new fakeCourse() { Course = "K46" },
-        new fakeCourse() { Course = "K47" },
-    };
+        {
+            new fakeCourse() { Course = "K44" },
+            new fakeCourse() { Course = "K45" },
+            new fakeCourse() { Course = "K46" },
+            new fakeCourse() { Course = "K47" },
+        };
     private void ChooseCourseValue(fakeCourse course)
     {
         courseChoosenValue = course.Course;

@@ -1,12 +1,19 @@
-﻿namespace VMS.Application.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VMS.Application.ViewModels
 {
     public class CreateAccountViewModel
     {
-        public string StudentId { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
         public string Class { get; set; }
-        public string Course { get; set; }
+
+        [Required] public string StudentId { get; set; }
+
+        [Required] public string FullName { get; set; }
+
+        [Required] public string Course { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
     }
 }

@@ -42,8 +42,7 @@ namespace VMS.Application.Services
                         CreateAccountViewModel account = new();
 
                         account.StudentId = sheet.Cells[row, 1].Value.ToString();
-                        account.LastName = sheet.Cells[row, 2].Value.ToString();
-                        account.FirstName = sheet.Cells[row, 3].Value.ToString();
+                        account.FullName = sheet.Cells[row, 2].Value.ToString() + " " + sheet.Cells[row, 3].Value.ToString();
                         account.Class = sheet.Cells[row, 4].Value?.ToString();
                         account.Course = sheet.Cells[row, 5].Value.ToString();
                         account.Email = sheet.Cells[row, 6].Value.ToString();

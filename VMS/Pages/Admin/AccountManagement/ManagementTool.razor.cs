@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
 
@@ -9,7 +8,6 @@ namespace VMS.Pages.Admin.AccountManagement
 {
     public partial class ManagementTool : ComponentBase
     {
-        private string courseChoosenValue = "Khóa";
         private bool isCourseShow;
         private bool isLevelShow;
 

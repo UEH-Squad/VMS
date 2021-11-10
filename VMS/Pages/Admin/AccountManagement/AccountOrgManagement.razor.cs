@@ -10,9 +10,10 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components;
 
+
 namespace VMS.Pages.Admin.AccountManagement
 {
-    public partial class AccountUserManagement : ComponentBase
+    public partial class AccountOrgManagement : ComponentBase
     {
         private int page = 1;
         private FilterAccountViewModel filter = new();
@@ -25,7 +26,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         protected override async Task OnParametersSetAsync()
         {
-            filter.Role = Role.User.ToString();
+            filter.Role = Role.Organization.ToString();
             pageResult = await AdminService.GetAllAccountsAsync(filter, 1);
         }
 
@@ -39,7 +40,7 @@ namespace VMS.Pages.Admin.AccountManagement
         private async Task OnFilterChangedAsync(FilterAccountViewModel filter)
         {
             this.filter = filter;
-            this.filter.Role = Role.User.ToString();
+            this.filter.Role = Role.Organization.ToString();
             pageResult = await AdminService.GetAllAccountsAsync(this.filter, 1);
         }
 

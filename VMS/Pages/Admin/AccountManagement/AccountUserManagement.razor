@@ -18,7 +18,14 @@
     </div>
     <div class=" d-flex align-items-center justify-content-end py-3">
         <div class="d-flex align-items-center managementTool__chosseAll me-3">
-            <input class="check-box" type="checkbox" id="all">
+            @if (IsSelectedAllItems())
+            {
+                <input @onclick="() => SelectAllItems()" class="check-box" type="checkbox" id="all" checked>
+            }
+            else
+            {
+                <input @onclick="() => SelectAllItems()" class="check-box" type="checkbox" id="all">
+            }
             <label for="all">Chọn tất cả</label>
         </div>
         <button class="btn-delete btn">Xóa</button>
@@ -54,7 +61,14 @@
                     <tr class="position-relative" style="background-color:@bg">
                         <td class="acc__content acc__content--checkbox pt-2">
                             <div class="d-flex align-items-center">
-                                <input class="check-box" type="checkbox">
+                                @if (IsSelectedItem(item.StudentId))
+                                {
+                                    <input @onclick="() => SelectItem(item.StudentId)" class="check-box" type="checkbox" checked>
+                                }
+                                else
+                                {
+                                    <input @onclick="() => SelectItem(item.StudentId)" class="check-box" type="checkbox">
+                                }
                             </div>
                         </td>
                         <td class="acc__content acc__content--date">@item.CreatedDate.ToString("dd/MM/yyyy")</td>

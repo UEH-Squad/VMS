@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common;
 using VMS.Common.Enums;
 using VMS.Common.Extensions;
 
@@ -14,21 +15,22 @@ namespace VMS.Pages.Admin.AccountManagement
         private bool? isSuccess;
         private bool isLevelShow;
         private CreateAccountViewModel account = new() { Course = "Cấp"};
-        private List<string> levels = new()
-        {
-            "Ban Chuyên môn",
-            "Khoa/Viện/KTX",
-            "CLB/Đội/Nhóm"
-        };
+        private List<string> levels;
         
         [CascadingParameter] public BlazoredModalInstance Modal { get; set; }
 
         [Inject] IAdminService AdminService { get; set; }
 
+        protected override void OnInitialized()
+        {
+            levels = Courses.GetLevels();
+        }
+
         private void ChooseLevelValue(string level)
         {
             account.Course = level;
         }
+
         private void ToggLeLevelDropdown()
         {
             isLevelShow = !isLevelShow;

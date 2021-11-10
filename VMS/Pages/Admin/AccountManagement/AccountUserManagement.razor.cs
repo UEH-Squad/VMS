@@ -37,7 +37,7 @@ namespace VMS.Pages.Admin.AccountManagement
         {
             this.filter = filter;
             this.filter.Role = Role.User.ToString();
-            pageResult = await AdminService.GetAllAccountsAsync(this.filter, page);
+            pageResult = await AdminService.GetAllAccountsAsync(this.filter, 1);
         }
 
         private async Task ShowEditAccountOrgAsync()

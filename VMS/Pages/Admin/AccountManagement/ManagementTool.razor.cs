@@ -11,6 +11,7 @@ namespace VMS.Pages.Admin.AccountManagement
     {
         private string courseChoosenValue = "Khóa";
         private bool isCourseShow;
+        private bool isLevelShow;
 
         private FilterAccountViewModel filter = new();
         private List<string> levels, courses;
@@ -42,6 +43,21 @@ namespace VMS.Pages.Admin.AccountManagement
             isCourseShow = false;
         }
 
+        private void ChooseLevelValue(string level)
+        {
+            filter.Course = level;
+        }
+
+        private void ToggLeLevelDropdown()
+        {
+            isLevelShow = !isLevelShow;
+        }
+
+        private void CloseLevelDropdown()
+        {
+            isLevelShow = false;
+        }
+
         private async Task OnClickFilterAsync()
         {
             await FilterChanged.InvokeAsync(filter);
@@ -55,7 +71,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         private async Task ClearFilterAsync()
         {
-            filter = new();
+            filter.Course = string.Empty;
             await OnClickFilterAsync();
         }
     }

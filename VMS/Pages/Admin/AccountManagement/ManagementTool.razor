@@ -4,7 +4,7 @@
     <div class="managementTool__filter">
         <div class="d-flex align-items-center">
             <div class="position-relative managementTool__level @(IsAccountOrg ? "d-block" : "d-none")">
-                <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control @(isLevelGrey? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+                <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control" placeholder="@(!string.IsNullOrEmpty(filter.Course) ? filter.Course : "Cấp")" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
                     <ul>
                         @foreach (var level in levels)
@@ -63,7 +63,10 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li @onclick="ShowCreateAcc" class="mb-2">Tạo một tài khoản</li>
-            <li @onclick="ShowCreateAccounts">Tạo nhiều tài khoản</li>
+            @if (!IsAccountAdminSp)
+            {
+                <li @onclick="ShowCreateAccounts">Tạo nhiều tài khoản</li>
+            }
         </ul>
     </div>
 </div>
@@ -149,24 +152,7 @@
 
     // filter Level
     private string levelChoosenValue = "Cấp";
-    private bool isLevelShow;
-    private bool isLevelGrey = false;
 
-    private void ChooseLevelValue(string level)
-    {
-        levelChoosenValue = level;
-        isLevelGrey = true;
-    }
-
-    private void ToggLeLevelDropdown()
-    {
-        isLevelShow = !isLevelShow;
-    }
-
-    private void CloseLevelDropdown()
-    {
-        isLevelShow = false;
-    }
 
     // ClearFilter
     int IsCheckd = 0;

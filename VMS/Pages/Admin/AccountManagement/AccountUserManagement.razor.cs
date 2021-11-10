@@ -16,6 +16,8 @@ namespace VMS.Pages.Admin.AccountManagement
         private FilterAccountViewModel filter = new();
         private PaginatedList<CreateAccountViewModel> pageResult = new(new(), 0, 1, 0);
 
+        [CascadingParameter] public IModalService Modal { get; set; }
+
         [Inject] IAdminService AdminService { get; set; }
 
         protected override async Task OnParametersSetAsync()
@@ -31,14 +33,19 @@ namespace VMS.Pages.Admin.AccountManagement
             await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
         }
 
-        [CascadingParameter] public IModalService Modal { get; set; }
+        private async Task OnFilterChangedAsync(FilterAccountViewModel filter)
+        {
+            this.filter = filter;
+            this.filter.Role = Role.User.ToString();
+            pageResult = await AdminService.GetAllAccountsAsync(this.filter, page);
+        }
 
-        private async Task ShowEditAccountOrg()
+        private async Task ShowEditAccountOrgAsync()
         {
             var result = await Modal.Show<EditAccountUser>("", BlazoredModalOptions.GetModalOptions()).Result;
         }
 
-        private async Task ShowDeleteAccount()
+        private async Task ShowDeleteAccountAsync()
         {
             var result = await Modal.Show<DeleteAccount>("", BlazoredModalOptions.GetModalOptions()).Result;
         }

@@ -5,7 +5,8 @@
 @inject IJSRuntime JS;
 
 <div class="px-5">
-    <ManagementTool IsAccountUser="true" Tilte="tình nguyện viên"></ManagementTool>
+    <ManagementTool IsAccountUser="true" Tilte="tình nguyện viên" FilterChanged="OnFilterChangedAsync" />
+
     <div class="d-flex justify-content-between align-items-center my-3">
         <p class="managementTool__title mb-0">Có <span>@(pageResult.TotalItems) kết quả</span> ứng với tìm kiếm</p>
         <div class="managementTool__down d-flex align-items-center">
@@ -66,8 +67,8 @@
                                 more_vert
                             </i>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.StudentId">
-                                <li @onclick="ShowEditAccountOrg" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
-                                <li @onclick="ShowDeleteAccount" class="dropdown-menu-delete">Xóa tài khoản</li>
+                                <li @onclick="ShowEditAccountOrgAsync" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
+                                <li @onclick="ShowDeleteAccountAsync" class="dropdown-menu-delete">Xóa tài khoản</li>
                             </ul>
                         </div>
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace VMS.Application.ViewModels
 {
@@ -12,6 +13,8 @@ namespace VMS.Application.ViewModels
 
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        public DateTime CreatedDate { get; set; }
 
         [EmailAddress] public string Email { get; set; }
     }

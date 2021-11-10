@@ -20,7 +20,6 @@ namespace VMS.Pages.Admin.AccountManagement
         [CascadingParameter] public BlazoredModalInstance Modal { get; set; }
 
         [Inject] private IExcelService ExcelService { get; set; }
-        [Inject] private IAdminService AdminService { get; set; }
 
         private async Task CloseModalAsync()
         {
@@ -41,17 +40,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         private async Task OnClickCreateAsync()
         {
-            List<CreateAccountViewModel> accounts = await ExcelService.GetListAccountFromExcelFileAsync(file);
-
-            if (accounts == null)
-            {
-                isSuccess = false;
-            }
-            else
-            {
-                
-                isSuccess = await AdminService.AddListUserAsync(accounts, Role);
-            }
+            isSuccess = await ExcelService.AddListAccountsFromExcelFileAsync(file, Role);
         }
     }
 }

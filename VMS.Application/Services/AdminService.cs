@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,16 +21,16 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<bool> AddListUserAsync(List<CreateAccountViewModel> accounts, Role role)
+        public async Task AddListUsersAsync(List<CreateAccountViewModel> accounts, Role role)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             if (await IsExistAnyUserAsync(dbContext, accounts))
             {
-                return false;
+                return;
             }
 
-            IEnumerable<User> users = _mapper.Map<List<User>>(accounts);
+            IEnumerable<User> users = _mapper.Map<IEnumerable<User>>(accounts);
 
             AppRole userRole = await GetRoleAsync(dbContext, role);
 
@@ -48,8 +47,6 @@ namespace VMS.Application.Services
             }
 
             await _repository.InsertAsync(dbContext, users);
-
-            return true;
         }
 
         private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, List<CreateAccountViewModel> accounts)
@@ -60,13 +57,13 @@ namespace VMS.Application.Services
             return await _repository.ExistsAsync(dbContext, predicate);
         }
 
-        private async Task<AppRole> GetRoleAsync(DbContext dbContext, Role userRole)
+        private async Task<AppRole> GetRoleAsync(DbContext dbContext, Role role)
         {
             Specification<AppRole> specification = new()
             {
                 Conditions = new List<Expression<Func<AppRole, bool>>>()
                 {
-                    x => x.Name == userRole.ToString()
+                    x => x.Name == role.ToString()
                 }
             };
 

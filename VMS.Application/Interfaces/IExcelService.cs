@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using VMS.Common.Enums;
 using System.Threading.Tasks;
-using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components.Forms;
 
 namespace VMS.Application.Interfaces
 {
     public interface IExcelService
     {
-        Task<List<CreateAccountViewModel>> GetListAccountFromExcelFileAsync(IBrowserFile file);
+        Task<bool> AddListAccountsFromExcelFileAsync(IBrowserFile file, Role role);
     }
 }

@@ -6,15 +6,24 @@ using System.Collections.Generic;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components.Forms;
+using VMS.Common.Enums;
+using VMS.Domain.Models;
 
 namespace VMS.Application.Services
 {
     public class ExcelService : IExcelService
     {
-        private const long MaxFileSize = 1024 * 1024 * 5;
         private const int MaxColumn = 6;
+        private const long MaxFileSize = 1024 * 1024 * 5;
 
-        public async Task<List<CreateAccountViewModel>> GetListAccountFromExcelFileAsync(IBrowserFile file)
+        private IAdminService _adminService;
+
+        public ExcelService(IAdminService adminService)
+        {
+            _adminService = adminService;
+        }
+
+        public async Task<bool> AddListAccountsFromExcelFileAsync(IBrowserFile file, Role role)
         {
             try
             {
@@ -26,14 +35,14 @@ namespace VMS.Application.Services
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 using ExcelPackage excelPackage = new(memoryStream);
 
-                List<CreateAccountViewModel> accounts = new();
-
                 foreach (var sheet in excelPackage.Workbook.Worksheets)
                 {
                     if (sheet.Dimension.End.Column != MaxColumn)
                     {
-                        return null; 
+                        return false; 
                     }
+
+                    List<CreateAccountViewModel> accounts = new();
 
                     int rowCount = sheet.Dimension.End.Row;
 
@@ -49,13 +58,15 @@ namespace VMS.Application.Services
 
                         accounts.Add(account);
                     }
+
+                    await _adminService.AddListUsersAsync(accounts, role);
                 }
 
-                return accounts;
+                return true;
             }
             catch (Exception)
             {
-                return null;
+                return false;
             }
         }
     }

@@ -21,13 +21,13 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task AddListUsersAsync(List<CreateAccountViewModel> accounts, Role role)
+        public async Task<bool> AddListAccountsAsync(List<CreateAccountViewModel> accounts, Role role)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            if (await IsExistAnyUserAsync(dbContext, accounts))
+            if (await IsExistAnyUserAsync(dbContext, accounts, role))
             {
-                return;
+                return false;
             }
 
             IEnumerable<User> users = _mapper.Map<IEnumerable<User>>(accounts);
@@ -47,12 +47,58 @@ namespace VMS.Application.Services
             }
 
             await _repository.InsertAsync(dbContext, users);
+
+            return true;
         }
 
-        private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, List<CreateAccountViewModel> accounts)
+        public async Task<bool> AddSingleAccountAsync(CreateAccountViewModel account, Role role)
         {
-            Expression<Func<User, bool>> predicate = acc => accounts.Select(x => x.Email)
-                                                                    .Any(x => x == acc.Email);
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            if (await IsExistAnyUserAsync(dbContext, account.Email))
+            {
+                return false;
+            }
+
+            User user = _mapper.Map<User>(account);
+
+            AppRole userRole = await GetRoleAsync(dbContext, role);
+
+            user.UserRoles = new List<UserRole>()
+            {
+                new UserRole()
+                {
+                    User = user,
+                    Role = userRole
+                }
+            };
+
+            await _repository.InsertAsync(dbContext, user);
+
+            return true;
+        }
+
+        private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, string email)
+        {
+            Expression<Func<User, bool>> predicate = acc => acc.Email == email || acc.UserName == email;
+
+            return await _repository.ExistsAsync(dbContext, predicate);
+        }
+
+        private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, List<CreateAccountViewModel> accounts, Role role)
+        {
+            Expression<Func<User, bool>> predicate;
+
+            if (role == Role.Admin)
+            {
+                predicate = acc => accounts.Select(x => x.UserName)
+                                           .Any(x => x == acc.UserName);
+            }
+            else
+            {
+                predicate = acc => accounts.Select(x => x.Email)
+                                           .Any(x => x == acc.Email);
+            }
 
             return await _repository.ExistsAsync(dbContext, predicate);
         }

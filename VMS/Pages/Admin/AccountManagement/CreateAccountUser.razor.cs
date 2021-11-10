@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
+﻿using System;
+using Blazored.Modal;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
+using VMS.Application.Interfaces;
+using VMS.Common.Enums;
+using VMS.Common.Extensions;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
@@ -13,7 +17,11 @@ namespace VMS.Pages.Admin.AccountManagement
         private List<string> courses;
         private CreateAccountViewModel account = new();
 
-        protected override async Task OnInitializedAsync()
+        [CascadingParameter] public BlazoredModalInstance Modal { get; set; }
+
+        [Inject] private IAdminService AdminService { get; set; }
+
+        protected override void OnInitialized()
         {
             GenerateCourses();
         }
@@ -48,7 +56,22 @@ namespace VMS.Pages.Admin.AccountManagement
 
         private async Task OnValidSubmitAsync()
         {
-            isSuccess = false;
+            if (!IsValidAccount())
+            {
+                return;
+            }
+
+            isSuccess = await AdminService.AddSingleAccountAsync(account, Role.User);
+        }
+
+        private bool IsValidAccount()
+        {
+            return courses.Exists(x => x == account.Course) && account.IsValidAccount(Role.User);
+        }
+
+        private async Task CloseModalAsync()
+        {
+            await Modal.CloseAsync();
         }
     }
 }

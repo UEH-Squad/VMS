@@ -59,7 +59,7 @@ namespace VMS.Application.Services
                         accounts.Add(account);
                     }
 
-                    await _adminService.AddListUsersAsync(accounts, role);
+                    await _adminService.AddListAccountsAsync(accounts, role);
                 }
 
                 return true;

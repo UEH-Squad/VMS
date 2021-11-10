@@ -1,6 +1,4 @@
-﻿@using VMS.Application.ViewModels;
-
-<div class="my-modal">
+﻿<div class="my-modal">
     <div class="modal__content">
         <div class="modal__create @(!isSuccess.HasValue ? "d-block" : "d-none")">
             <div @onclick="CloseModalAsync" class="icon-close">
@@ -88,22 +86,4 @@
 </div>
 
 @code {
-    private bool isDeleteSuccess;
-
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    private CreateUserProfileViewModel user = new();
-
-    private async Task CloseModalAsync()
-    {
-        await Modal.CloseAsync();
-    }
-    private async Task DeleteSuccessAsync()
-    {
-        isDeleteSuccess = true;
-    }
-
-    private string courseChoosenValue = "";
-
 }

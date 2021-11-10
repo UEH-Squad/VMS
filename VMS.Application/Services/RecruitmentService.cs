@@ -184,12 +184,12 @@ namespace VMS.Application.Services
             {
                 if(filter.Semester == "Học kỳ đầu")
                 {
-
+                    return r => r == null;
                 }
 
                 if(filter.Semester == "Học kỳ giữa")
                 {
-
+                    return r => r == null;
                 }
 
                 if(filter.Semester == "Học kỳ cuối")

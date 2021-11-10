@@ -2,7 +2,7 @@
     <div class="act-title">
         Lọc hoạt động
     </div>
-    <form class="act-filter d-flex" action="" method="get">
+    <div class="act-filter d-flex">
         <div class="select-filter">
             <div class="select-container">
                 <div class="act-filter__select" @onclick="Showlist1">
@@ -46,7 +46,7 @@
             <button @onclick="UpdateFilterValueAsync" class="act-filter__btn --filter">Lọc</button>
             <button @onclick="ClearFilter" class="act-filter__btn --del">Xóa lọc</button>
         </div>
-    </form>
+    </div>
 </div>
 @code {
 

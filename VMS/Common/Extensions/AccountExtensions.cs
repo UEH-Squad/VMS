@@ -12,7 +12,7 @@ namespace VMS.Common.Extensions
                 Role.Admin => !string.IsNullOrEmpty(account.UserName)
                             && !string.IsNullOrEmpty(account.Password),
 
-                Role.Organization => !string.IsNullOrEmpty(account.Level)
+                Role.Organization => !string.IsNullOrEmpty(account.Course)
                             && !string.IsNullOrEmpty(account.FullName)
                             && !string.IsNullOrEmpty(account.Email),
 

@@ -5,6 +5,8 @@ namespace VMS.Application.ViewModels
 {
     public class CreateAccountViewModel
     {
+        public string Id { get; set; }
+
         public string FullName { get; set; }
 
         public string Class { get; set; }

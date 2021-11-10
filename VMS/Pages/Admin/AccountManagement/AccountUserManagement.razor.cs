@@ -53,26 +53,26 @@ namespace VMS.Pages.Admin.AccountManagement
             var result = await Modal.Show<DeleteAccount>("", BlazoredModalOptions.GetModalOptions()).Result;
         }
 
-        private void SelectItem(string studentId)
+        private void SelectItem(string accountId)
         {
-            if (IsSelectedItem(studentId))
+            if (IsSelectedItem(accountId))
             {
-                selectedList.Remove(studentId);
+                selectedList.Remove(accountId);
             }
             else
             {
-                selectedList.Add(studentId);
+                selectedList.Add(accountId);
             }
         }
 
-        private bool IsSelectedItem(string studentId)
+        private bool IsSelectedItem(string accountId)
         {
-            return selectedList.Exists(x => x == studentId);
+            return selectedList.Exists(x => x == accountId);
         }
 
         private void SelectAllItems()
         {
-            selectedList = IsSelectedAllItems() ? new() : pageResult.Items.Select(x => x.StudentId).ToList();
+            selectedList = IsSelectedAllItems() ? new() : pageResult.Items.Select(x => x.Id).ToList();
         }
 
         private bool IsSelectedAllItems()

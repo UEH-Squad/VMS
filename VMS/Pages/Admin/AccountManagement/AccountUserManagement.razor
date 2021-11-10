@@ -61,13 +61,13 @@
                     <tr class="position-relative" style="background-color:@bg">
                         <td class="acc__content acc__content--checkbox pt-2">
                             <div class="d-flex align-items-center">
-                                @if (IsSelectedItem(item.StudentId))
+                                @if (IsSelectedItem(item.Id))
                                 {
-                                    <input @onclick="() => SelectItem(item.StudentId)" class="check-box" type="checkbox" checked>
+                                    <input @onclick="() => SelectItem(item.Id)" class="check-box" type="checkbox" checked>
                                 }
                                 else
                                 {
-                                    <input @onclick="() => SelectItem(item.StudentId)" class="check-box" type="checkbox">
+                                    <input @onclick="() => SelectItem(item.Id)" class="check-box" type="checkbox">
                                 }
                             </div>
                         </td>
@@ -77,10 +77,10 @@
                         <td class="acc__content acc__content--name">@item.FullName</td>
                         <td class="acc__content acc__content--email">@item.Email</td>
                         <div class="acc__menu dropdown">
-                            <i class="material-icons-outlined icon-menu dropdown-toggle" id="dropdownMenu-@item.StudentId" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="material-icons-outlined icon-menu dropdown-toggle" id="dropdownMenu-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
                                 more_vert
                             </i>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.StudentId">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
                                 <li @onclick="ShowEditAccountOrgAsync" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
                                 <li @onclick="ShowDeleteAccountAsync" class="dropdown-menu-delete">Xóa tài khoản</li>
                             </ul>

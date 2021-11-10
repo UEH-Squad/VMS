@@ -10,10 +10,9 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components;
 
-
 namespace VMS.Pages.Admin.AccountManagement
 {
-    public partial class AccountOrgManagement : ComponentBase
+    public partial class AccountAdminSpManagement : ComponentBase
     {
         private int page = 1;
         private FilterAccountViewModel filter = new();

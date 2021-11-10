@@ -25,7 +25,7 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            if (await IsExistAnyUserAsync(dbContext, accounts, role))
+            if (await IsExistAnyUserAsync(dbContext, accounts))
             {
                 return false;
             }
@@ -85,20 +85,10 @@ namespace VMS.Application.Services
             return await _repository.ExistsAsync(dbContext, predicate);
         }
 
-        private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, List<CreateAccountViewModel> accounts, Role role)
+        private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, List<CreateAccountViewModel> accounts)
         {
-            Expression<Func<User, bool>> predicate;
-
-            if (role == Role.Admin)
-            {
-                predicate = acc => accounts.Select(x => x.UserName)
-                                           .Any(x => x == acc.UserName);
-            }
-            else
-            {
-                predicate = acc => accounts.Select(x => x.Email)
-                                           .Any(x => x == acc.Email);
-            }
+            Expression<Func<User, bool>> predicate = acc => accounts.Select(x => x.Email)
+                                                                    .Any(x => x == acc.Email);
 
             return await _repository.ExistsAsync(dbContext, predicate);
         }

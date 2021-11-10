@@ -7,13 +7,13 @@ using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components.Forms;
 using VMS.Common.Enums;
-using VMS.Domain.Models;
 
 namespace VMS.Application.Services
 {
     public class ExcelService : IExcelService
     {
-        private const int MaxColumn = 6;
+        private const int MaxUserColumn = 6;
+        private const int MaxOrgColumn = 4;
         private const long MaxFileSize = 1024 * 1024 * 5;
 
         private IAdminService _adminService;
@@ -37,9 +37,9 @@ namespace VMS.Application.Services
 
                 foreach (var sheet in excelPackage.Workbook.Worksheets)
                 {
-                    if (sheet.Dimension.End.Column != MaxColumn)
+                    if (sheet.Dimension.End.Column != (role == Role.User ? MaxUserColumn : MaxOrgColumn))
                     {
-                        return false; 
+                        return false;
                     }
 
                     List<CreateAccountViewModel> accounts = new();
@@ -48,13 +48,7 @@ namespace VMS.Application.Services
 
                     for (int row = 2; row <= rowCount; row++)
                     {
-                        CreateAccountViewModel account = new();
-
-                        account.StudentId = sheet.Cells[row, 1].Value.ToString();
-                        account.FullName = sheet.Cells[row, 2].Value.ToString() + " " + sheet.Cells[row, 3].Value.ToString();
-                        account.Class = sheet.Cells[row, 4].Value?.ToString();
-                        account.Course = sheet.Cells[row, 5].Value.ToString();
-                        account.Email = sheet.Cells[row, 6].Value.ToString();
+                        CreateAccountViewModel account = GetAccountByRole(sheet, row, role);
 
                         accounts.Add(account);
                     }
@@ -67,6 +61,30 @@ namespace VMS.Application.Services
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        private static CreateAccountViewModel GetAccountByRole(ExcelWorksheet sheet, int row, Role role)
+        {
+            if (role == Role.User)
+            {
+                return new CreateAccountViewModel()
+                {
+                    StudentId = sheet.Cells[row, 1].Value.ToString(),
+                    FullName = sheet.Cells[row, 2].Value.ToString() + " " + sheet.Cells[row, 3].Value.ToString(),
+                    Class = sheet.Cells[row, 4].Value?.ToString(),
+                    Course = sheet.Cells[row, 5].Value.ToString(),
+                    Email = sheet.Cells[row, 6].Value.ToString()
+                };
+            }
+            else
+            {
+                return new CreateAccountViewModel()
+                {
+                    Email = sheet.Cells[row, 2].Value.ToString(),
+                    FullName = sheet.Cells[row, 3].Value.ToString(),
+                    Course = sheet.Cells[row, 4].Value.ToString()
+                };
             }
         }
     }

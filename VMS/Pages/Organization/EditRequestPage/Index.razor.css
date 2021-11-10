@@ -5,7 +5,8 @@
 /*#region mixins */
 /*#endregion */
 .activity-info {
-  margin-top: 5%; }
+  margin-top: 5%;
+  margin-bottom: 8%; }
   .activity-info ::deep .toppage {
     display: none; }
   .activity-info ::deep .title__date .material-icons {

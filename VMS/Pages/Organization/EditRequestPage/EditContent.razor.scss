@@ -10,6 +10,9 @@
     }
 
     .form-input {
+        font-weight: 500;
+        font-size: 16px;
+        color: $grey-text;
         margin-top: 0.8%;
         padding: 0.2% 1%;
         width: 100%;
@@ -29,6 +32,9 @@
     }
 
     .form-input {
+        font-weight: 500;
+        font-size: 16px;
+        color: $grey-text;
         padding: 0.2% 1%;
         margin-top: 0.8%;
         width: 100%;
@@ -38,8 +44,9 @@
 }
 
 .edit-content_image {
+    margin-top: 2%;
+
     .title {
-        margin-top: 2%;
         font-weight: 500;
         font-size: 16px;
         color: $grey-text;

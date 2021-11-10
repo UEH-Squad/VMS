@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211027074755_addOpenCloseIntoActivityandChangeColumninFeedback")]
+    partial class addOpenCloseIntoActivityandChangeColumninFeedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "64922f05-22d2-4e89-aebb-2ef214e6c4ea",
+                            ConcurrencyStamp = "c2d941df-9de5-482e-8e33-ced9777c7ddb",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "5c3ee1ea-461c-48d1-95e2-9a75ea506db6",
+                            ConcurrencyStamp = "557380c4-9cdf-4583-b3ca-276aeb0de3c6",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "98370b3b-585a-4b93-bd98-1eb9424163bf",
+                            ConcurrencyStamp = "7c280274-5174-4f0f-a8cd-d62f65e57fa4",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -192,10 +194,12 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -232,10 +236,12 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -473,18 +479,10 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Color")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("#18A0FB");
-
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPinned")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -498,119 +496,86 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Color = "#18A0FB",
                             Icon = "people_outline",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Cộng đồng"
                         },
                         new
                         {
                             Id = 2,
-                            Color = "#18A0FB",
                             Icon = "pan_tool",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Hỗ trợ"
                         },
                         new
                         {
                             Id = 3,
-                            Color = "#18A0FB",
                             Icon = "import_contacts",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Giáo dục"
                         },
                         new
                         {
                             Id = 4,
-                            Color = "#18A0FB",
                             Icon = "format_shapes",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Kỹ thuật"
                         },
                         new
                         {
                             Id = 5,
-                            Color = "#18A0FB",
                             Icon = "local_hospital",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Sức khỏe"
                         },
                         new
                         {
                             Id = 6,
-                            Color = "#18A0FB",
                             Icon = "drive_eta",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Phương tiện"
                         },
                         new
                         {
                             Id = 7,
-                            Color = "#18A0FB",
                             Icon = "wb_sunny",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Môi trường"
                         },
                         new
                         {
                             Id = 8,
-                            Color = "#18A0FB",
                             Icon = "directions_bike",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Thể thao"
                         },
                         new
                         {
                             Id = 9,
-                            Color = "#18A0FB",
                             Icon = "notifications_active",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Khẩn cấp"
                         },
                         new
                         {
                             Id = 10,
-                            Color = "#18A0FB",
                             Icon = "calendar_today",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Sự kiện"
                         },
                         new
                         {
                             Id = 11,
-                            Color = "#18A0FB",
                             Icon = "home",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Chuyển nhà"
                         },
                         new
                         {
                             Id = 12,
-                            Color = "#18A0FB",
                             Icon = "computer",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Công nghệ"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Color = "#F14747",
-                            Icon = "coronavirus",
-                            IsDeleted = false,
-                            IsPinned = true,
-                            Name = "COVID-19"
                         });
                 });
 
@@ -739,7 +704,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActivityId")
+                    b.Property<int?>("ActivityId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -751,8 +716,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsReportUser")
+                    b.Property<bool>("IsProcessed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ReportBy")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -763,16 +731,13 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ReportBy");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Feedbacks");
                 });
@@ -1405,7 +1370,7 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.ActivityTarget", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
-                        .WithMany("ActivityTargets")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1446,20 +1411,21 @@ namespace VMS.Infrastructure.Data.Migrations
                 {
                     b.HasOne("VMS.Domain.Models.Activity", "Activity")
                         .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ActivityId");
+
+                    b.HasOne("VMS.Domain.Models.User", "Reporter")
+                        .WithMany("Reports")
+                        .HasForeignKey("ReportBy")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.User", null)
-                        .WithMany("Reports")
-                        .HasForeignKey("UserId1");
-
                     b.Navigation("Activity");
+
+                    b.Navigation("Reporter");
 
                     b.Navigation("User");
                 });
@@ -1600,8 +1566,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("ActivityImages");
 
                     b.Navigation("ActivitySkills");
-
-                    b.Navigation("ActivityTargets");
 
                     b.Navigation("Favorites");
 

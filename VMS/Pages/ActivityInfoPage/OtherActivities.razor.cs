@@ -21,6 +21,9 @@ namespace VMS.Pages.ActivityInfoPage
         [Parameter]
         public string OrgId { get; set; }
 
+        [CascadingParameter]
+        public string CurrentUserId { get; set; }
+
         [Inject]
         public IJSRuntime JSRuntinme { get; set; }
 
@@ -30,13 +33,9 @@ namespace VMS.Pages.ActivityInfoPage
         [Inject]
         public IIdentityService IdentityService { get; set; }
 
-        protected override void OnInitialized()
-        {
-            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
-        }
-
         protected override async Task OnParametersSetAsync()
         {
+            currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
             otherActivities = await ActivityService.GetOtherActivitiesAsync(OrgId, new[] { ActivityId });
         }
 

@@ -63,9 +63,9 @@ namespace VMS.Pages.Organization.Profile
                 haveControl = true;
             }
 
-            actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
-            actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);
-            actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.Ended);
+            actCurrent = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Current);
+            actFavorite = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Favor);
+            actEnded = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Ended);
 
             if (string.IsNullOrEmpty(CurrentUserId))
             {

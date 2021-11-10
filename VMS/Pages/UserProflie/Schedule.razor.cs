@@ -24,7 +24,7 @@ namespace VMS.Pages.UserProflie
 
         private async Task OnValueChanged(DateTime value)
         {
-            items = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Current, value);
+            items = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Calendar, value);
         }
     }
 }

@@ -18,7 +18,7 @@
 
         </div>
     </div>
-    <EditForm Model="@report" OnValidSubmit="@AddReport">
+    <EditForm Model="@report" OnValidSubmit="@AddReportAsync">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="my-container @(isShowReport ? "d-none" : "d-block")">
@@ -29,7 +29,7 @@
 
             <div class="title-header">
                 <span class="title-header__report">Báo cáo&nbsp</span>
-                <span class="title-header__activity">hoạt động</span>
+                <span class="title-header__activity">@(IsReportUser ? "người dùng" : "hoạt động")</span>
             </div>
 
             <div class="reporting-reason dropdown">
@@ -69,7 +69,7 @@
                     <h4 class="title-attach__check check"> (*)</h4>
                 </div>
                 <div class="add-file position-relative d-flex align-items-center justify-content-center">
-                        <InputFile OnChange="OnInputFile" multiple type="file" name="file" id="file" class="inputfile" />
+                        <InputFile OnChange="OnInputFileAsync" multiple type="file" name="file" id="file" class="inputfile" />
                         <div class="d-flex align-items-center">
                             <i class="material-icons my-icon-upload">
                                 cloud_upload
@@ -99,7 +99,7 @@
 
             <div class="btn-accept mt-4">
                 <button @onclick="ShowModalReportSucess" type="submit" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                    Báo cáo hoạt động
+                    @(IsReportUser ? "Báo cáo người dùng" : "Báo cáo hoạt động")
                 </button>
             </div>
         </div>

@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -50,7 +51,7 @@ namespace VMS.Pages.Organization.RatingPage
 
         private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment = null)
         {
-            await RecruitmentService.UpdateRatingAndCommentAsync(rating.Value, string.Empty, recruitment?.Id);
+            await RecruitmentService.UpdateRatingAndCommentAsync(ActivityId, rating.Value, string.Empty, recruitment?.Id);
             if (recruitment != null)
             {
                 recruitment.Rating = rating;
@@ -65,6 +66,7 @@ namespace VMS.Pages.Organization.RatingPage
             parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
             parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
             parameters.Add("RecruitmentId", recruitment.Id);
+            parameters.Add("ActivityId", ActivityId);
 
             var options = new ModalOptions()
             {
@@ -75,6 +77,31 @@ namespace VMS.Pages.Organization.RatingPage
             };
 
             await CommentModal.Show<PopUpComment>("", parameters, options).Result;
+        }
+
+        private void ShowReportPopUp(string UserId)
+        {
+            List<string> reasons = new()
+            {
+                "Đây là một tài khoản giả mạo",
+                "Đánh giá người dùng không tham gia hoạt động",
+                "Khác"
+            };
+
+            var parameters = new ModalParameters();
+            parameters.Add("ActivityId", ActivityId);
+            parameters.Add("UserId", UserId);
+            parameters.Add("Reasons", reasons);
+            parameters.Add("IsReportUser", true);
+
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
+
+            CommentModal.Show<ActivityInfoPage.PopUpReport>("", parameters, options);
         }
     }
 }

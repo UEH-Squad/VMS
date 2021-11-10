@@ -2,7 +2,8 @@
 {
     public enum StatusAct{
         Current, 
-        Favor, 
-        Ended
+        Favor,
+        Ended,
+        Calendar
     }
 }

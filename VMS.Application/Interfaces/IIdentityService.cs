@@ -14,13 +14,11 @@ namespace VMS.Application.Interfaces
 
         string GetCurrentUserId();
 
-        List<User> GetAllOrganizers();
-
         string GetCurrentUserAddress();
 
         User GetCurrentUserWithAddresses();
 
-        User GetCurrentUserWithFavoritesAndRecruitments();
+        User GetUserWithFavoritesAndRecruitmentsById(string userId);
 
         void UpdateUser(User user);
     }

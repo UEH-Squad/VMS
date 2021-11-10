@@ -155,6 +155,9 @@ namespace VMS.Application.Services
 
         private static Expression<Func<Recruitment, bool>> GetActivitiesFromSearchValueAndFilter(FilterRecruitmentViewModel filter, string searchValue, bool? isRated)
         {
+            DateTime month12 = new DateTime(2021, 12, 31);
+            DateTime month8 = new DateTime(2021, 8, 1);
+
             if (isRated.HasValue)
             {
                 if (isRated.Value)
@@ -175,6 +178,24 @@ namespace VMS.Application.Services
             if (!string.IsNullOrEmpty(filter.FullName))
             {
                 return r => r.Activity.Organizer.FullName == filter.FullName || string.IsNullOrEmpty(filter.FullName);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Semester))
+            {
+                if(filter.Semester == "Học kỳ đầu")
+                {
+
+                }
+
+                if(filter.Semester == "Học kỳ giữa")
+                {
+
+                }
+
+                if(filter.Semester == "Học kỳ cuối")
+                {
+                    return r => r.Activity.StartDate > month8 && r.Activity.StartDate < month12;
+                }
             }
 
             return r => true;

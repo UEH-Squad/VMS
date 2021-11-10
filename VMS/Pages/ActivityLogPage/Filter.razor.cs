@@ -16,7 +16,7 @@ namespace VMS.Pages.ActivityLogPage
         [Parameter]
         public EventCallback<bool?> IsRatedChanged { get; set; }
         [Parameter]
-        public EventCallback<FilterRecruitmentViewModel> FilterChanged { get; set; }
+        public EventCallback<FilterRecruitmentViewModel> FilterChanged { get; set; } 
         [Parameter]
         public FilterRecruitmentViewModel FilterChange { get; set; } = new();
 
@@ -36,16 +36,17 @@ namespace VMS.Pages.ActivityLogPage
             faculties = await FacultyService.GetAllFacultiesAsync();
         }
      
-        private void ChooseFaculty(FacultyViewModel faculty)
+        private void ChooseFacultyAsync(FacultyViewModel faculty)
         {
             facultyDefault = faculty.Name;
             FilterChange.FullName = facultyDefault;
             Display2 = "d-none";
         }
 
-        private void ChooseSemester(string semester)
+        private void ChooseSemesterAsync(string semester)
         {
             semesterDefault = semester;
+            FilterChange.Semester = semesterDefault;
             Display1 = "d-none";
         }
 

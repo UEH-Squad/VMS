@@ -450,5 +450,9 @@
   {
     "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
     "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.scss"
   }
 ]

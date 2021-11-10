@@ -127,59 +127,90 @@
         margin: 0;
     }
 
+    .icon-tooltip {
+        display: none;
+        color: #000;
+        min-width: max-content;
+        position: absolute;
+        transform: translate(-80%,-95%);
+        padding: 2px 10px;
+        font-size: 12px;
+        background-color: $white;
+        border-radius: 10px;
+        border-bottom-right-radius: 3px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25%);
+    }
+
     .material-icons-outlined {
         font-size: 20px;
     }
-}
 
-.lmtext-2, .lmtext-3 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-}
+    .my-icon {
+        cursor: default;
 
-.lmtext-2 {
-    -webkit-line-clamp: 2;
-}
-
-.lmtext-3 {
-    -webkit-line-clamp: 3;
-}
-
-.act-footer {
-    &__warn {
-        color: $red-warning;
+        :hover + .icon-tooltip {
+            display: block;
+        }
     }
 
-    &__btn {
-        button, a {
-            margin-left: 20px;
-            font-size: 16px;
-            font-weight: 600;
-            color: $white;
-            padding: 5px 15px;
-            border-radius: 5px;
+    .lmtext-2, .lmtext-3 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
 
-            &:hover {
+    .lmtext-2 {
+        -webkit-line-clamp: 2;
+    }
+
+    .lmtext-3 {
+        -webkit-line-clamp: 3;
+    }
+
+    .act-footer {
+        &__warn {
+            color: $red-warning;
+        }
+
+        &__btn {
+            button, a {
+                margin-left: 20px;
+                font-size: 16px;
+                font-weight: 600;
+                padding: 5px 15px;
+                border-radius: 5px;
+            }
+
+            &--approval {
+                color: $blue;
+                border: solid 2px $blue;
+
+                &:hover {
+                    color: $blue-bold;
+                    border-color: $blue-bold;
+                }
+            }
+
+            &--green {
                 color: $white;
+                background-color: $green;
+
+                &:hover {
+                    color: $white;
+                    background-color: $green-bold;
+                }
             }
-        }
 
-        &--green {
-            background-color: $green;
+            &--blue {
+                color: $white;
+                background-color: $blue;
 
-            &:hover {
-                background-color: $green-bold;
-            }
-        }
-
-        &--blue {
-            background-color: $blue;
-
-            &:hover {
-                background-color: $blue-bold;
+                &:hover {
+                    color: $white;
+                    background-color: $blue-bold;
+                }
             }
         }
     }

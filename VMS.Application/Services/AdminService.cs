@@ -148,5 +148,22 @@ namespace VMS.Application.Services
         {
             return filter.IsNewest ? x => x.OrderByDescending(u => u.CreatedDate) : x => x.OrderBy(u => u.CreatedDate);
         }
+
+        public async Task DeleteListAccountsAsync(List<string> listAccountIds)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<User> specification = new()
+            {
+                Conditions = new List<Expression<Func<User, bool>>>()
+                {
+                    acc => listAccountIds.Any(x => x == acc.Id)
+                }
+            };
+
+            IEnumerable<User> users = await _repository.GetListAsync(dbContext, specification);
+
+            await _repository.DeleteAsync(dbContext, users);
+        }
     }
 }

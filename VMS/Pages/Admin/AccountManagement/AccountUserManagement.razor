@@ -67,7 +67,7 @@
                                 more_vert
                             </i>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
-                                <li @onclick="ShowEditAccountOrg" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
+                                <li @onclick="ShowEditAccountUser" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
                                 <li @onclick="ShowDeleteAccount" class="dropdown-menu-delete">Xóa tài khoản</li>
                             </ul>
                         </div>
@@ -152,29 +152,14 @@
 
     // Modal
 
-    private async Task ShowEditAccountOrg()
+    private async Task ShowEditAccountUser()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<EditAccountUser>("", options).Result;
-
+        Modal.Show<Admin.AccountManagement.EditAccountUser>("", BlazoredModalOptions.GetModalOptions());
     }
 
     private async Task ShowDeleteAccount()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<DeleteAccount>("", options).Result;
+        Modal.Show<Admin.AccountManagement.DeleteAccount>("", BlazoredModalOptions.GetModalOptions());
 
     }
 

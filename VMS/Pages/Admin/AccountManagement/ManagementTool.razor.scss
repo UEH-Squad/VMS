@@ -79,6 +79,9 @@ h1 {
         right: 10px;
         pointer-events: none;
     }
+    &:focus{
+        box-shadow: none;
+    }
 }
 
 .my-dropdown {

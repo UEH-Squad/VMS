@@ -64,6 +64,8 @@ h1 {
     transform: translateY(-50%);
     right: 10px;
     pointer-events: none; }
+  .popup-btn:focus {
+    box-shadow: none; }
 
 .my-dropdown {
   padding: 15px 22px;

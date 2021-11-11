@@ -48,32 +48,22 @@
       font-size: 20px;
       color: #717171; }
   .my-modal .form__title {
+    width: 210px;
     font-weight: 400;
     font-size: 16px;
     color: #515151;
     margin-bottom: 0; }
     .my-modal .form__title span {
       color: red; }
-    .my-modal .form__title.form__title--name {
-      width: 55px; }
-    .my-modal .form__title.form__title--name + div {
-      width: calc(100% - 55px);
-      padding-left: 10px; }
-    .my-modal .form__title.form__title--password {
-      width: 105px; }
-    .my-modal .form__title.form__title--password + div {
-      width: calc(100% - 105px);
-      padding-left: 10px; }
-    .my-modal .form__title.form__title--passwordSp {
-      width: 210px; }
-    .my-modal .form__title.form__title--passwordSp + div {
+    .my-modal .form__title + div {
       width: calc(100% - 210px);
       padding-left: 10px; }
   .my-modal .form-control {
     border: 1px solid #D8D8D8; }
   .my-modal .from__btn {
     font-weight: 600;
-    font-size: 16px; }
+    font-size: 16px;
+    margin-top: 30px; }
     .my-modal .from__btn .btn-cancel {
       background-color: transparent;
       color: #64D72F; }

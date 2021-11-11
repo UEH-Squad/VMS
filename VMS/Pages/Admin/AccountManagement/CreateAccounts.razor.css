@@ -25,13 +25,12 @@
     border-radius: 10px; }
   .my-modal .modal__create {
     width: 525px;
-    height: 370px;
     padding: 30px 45px; }
     .my-modal .modal__create h3 {
       font-weight: 500;
       font-size: 24px;
       color: #64D72F;
-      margin-bottom: 20px; }
+      margin-bottom: 30px; }
       .my-modal .modal__create h3 span {
         color: #18A0FB; }
     .my-modal .modal__create .modal__step {
@@ -108,7 +107,7 @@
   .my-modal .from__btn {
     font-weight: 600;
     font-size: 16px;
-    margin-top: 15px; }
+    margin-top: 30px; }
     .my-modal .from__btn .btn-cancel {
       background-color: transparent;
       color: #64D72F; }

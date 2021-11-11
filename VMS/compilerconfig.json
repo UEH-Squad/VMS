@@ -534,5 +534,9 @@
   {
     "outputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.css",
     "inputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.scss"
   }
 ]

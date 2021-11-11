@@ -142,28 +142,13 @@
 
     private async Task ShowEditAccountAdminSp()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<EditAccountAdminSp>("", options).Result;
+        Modal.Show<Admin.AccountManagement.EditAccountAdminSp>("", BlazoredModalOptions.GetModalOptions());
 
     }
 
     private async Task ShowDeleteAccount()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<DeleteAccount>("", options).Result;
-
+        Modal.Show<Admin.AccountManagement.DeleteAccount>("", BlazoredModalOptions.GetModalOptions());
     }
 
 }

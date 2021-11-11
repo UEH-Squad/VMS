@@ -58,6 +58,7 @@
     //Edit form
 
     .form__title {
+        width: 210px;
         font-weight: 400;
         font-size: 16px;
         color: #515151;
@@ -67,29 +68,7 @@
             color: red;
         }
 
-        &.form__title--name {
-            width: 55px;
-        }
-
-        &.form__title--name + div {
-            width: calc(100% - 55px);
-            padding-left: 10px;
-        }
-
-        &.form__title--password {
-            width: 105px;
-        }
-
-        &.form__title--password + div {
-            width: calc(100% - 105px);
-            padding-left: 10px;
-        }
-
-        &.form__title--passwordSp {
-            width: 210px;
-        }
-
-        &.form__title--passwordSp + div {
+        & + div {
             width: calc(100% - 210px);
             padding-left: 10px;
         }
@@ -102,6 +81,7 @@
     .from__btn {
         font-weight: 600;
         font-size: 16px;
+        margin-top: 30px;
 
         .btn-cancel {
             background-color: transparent;

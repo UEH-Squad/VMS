@@ -87,53 +87,22 @@
 
     private async Task ShowCreateAccountOrg()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<CreateAccountOrg>("", options).Result;
-
+        Modal.Show<Admin.AccountManagement.CreateAccountOrg>("", BlazoredModalOptions.GetModalOptions());
     }
 
     private async Task ShowCreateAccountUser()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<CreateAccountUser>("", options).Result;
-
+        Modal.Show<Admin.AccountManagement.CreateAccountUser>("", BlazoredModalOptions.GetModalOptions());
     }
 
     private async Task ShowCreateAccountAdminSp()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<CreateAccountAdminSp>("", options).Result;
-
+        Modal.Show<Admin.AccountManagement.CreateAccountAdminSp>("", BlazoredModalOptions.GetModalOptions());
     }
 
     private async Task ShowCreateAccounts()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = await Modal.Show<CreateAccounts>("", options).Result;
+        Modal.Show<Admin.AccountManagement.CreateAccounts>("", BlazoredModalOptions.GetModalOptions());
         isShowDropDownCreate = false;
 
     }
@@ -151,10 +120,7 @@
         {
             ShowCreateAccountAdminSp();
         }
-        isShowDropDownCreate = false;
     }
-
-
 
     // filter Level
     private string levelChoosenValue = "Cấp";

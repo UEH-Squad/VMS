@@ -1,9 +1,8 @@
-﻿@using VMS.Application.ViewModels;
-<h1 class="my-5 pb-3">Quản lý tài khoản <span>@Tilte</span></h1>
+﻿<h1 class="my-5 pb-3">Quản lý tài khoản <span>@Tilte</span></h1>
 <div class="d-flex justify-content-between my-managementTool">
     <div class="managementTool__filter">
         <div class="d-flex align-items-center">
-            <div class="position-relative managementTool__level @(IsAccountOrg ? "d-block" : "d-none")">
+            <div class="position-relative managementTool__level @(PageRole == Role.Organization ? "d-block" : "d-none")">
                 <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control" placeholder="@(!string.IsNullOrEmpty(filter.Course) ? filter.Course : "Cấp")" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
                     <ul>
@@ -18,7 +17,7 @@
                 </span>
             </div>
 
-            <div class="position-relative managementTool__course  @(IsAccountUser ? "d-block" : "d-none")">
+            <div class="position-relative managementTool__course  @(PageRole == Role.User ? "d-block" : "d-none")">
                 <input @onclick="ToggCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn form-control" placeholder="@(!string.IsNullOrEmpty(filter.Course) ? filter.Course : "Khóa")" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
                     <ul>
@@ -33,7 +32,7 @@
                 </span>
             </div>
 
-            <div class="ms-4 @(IsAccountAdminSp ? "d-none" : "d-block")">
+            <div class="ms-4 @(PageRole == Role.Admin ? "d-none" : "d-block")">
                 <button @onclick="OnClickFilterAsync" class="btn-filter btn">Lọc</button>
                 <button @onclick="ClearFilterAsync" class="btn-delete-filter btn">Xóa lọc</button>
             </div>
@@ -62,8 +61,8 @@
             <span>Tạo tài khoản</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li @onclick="ShowCreateAcc" class="mb-2">Tạo một tài khoản</li>
-            @if (!IsAccountAdminSp)
+            <li @onclick="ShowCreateAccount" class="mb-2">Tạo một tài khoản</li>
+            @if (PageRole != Role.Admin)
             {
                 <li @onclick="ShowCreateAccounts">Tạo nhiều tài khoản</li>
             }
@@ -71,68 +70,7 @@
     </div>
 </div>
 
-
 @code {
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-
-    private async Task ShowCreateAccountOrg()
-    {
-        Modal.Show<Admin.AccountManagement.CreateAccountOrg>("", BlazoredModalOptions.GetModalOptions());
-    }
-
-    private async Task ShowCreateAccountUser()
-    {
-        Modal.Show<Admin.AccountManagement.CreateAccountUser>("", BlazoredModalOptions.GetModalOptions());
-    }
-
-    private async Task ShowCreateAccountAdminSp()
-    {
-        Modal.Show<Admin.AccountManagement.CreateAccountAdminSp>("", BlazoredModalOptions.GetModalOptions());
-    }
-
-    private async Task ShowCreateAccounts()
-    {
-        var parameters = new ModalParameters();
-        parameters.Add("Role", (IsAccountUser ? Role.User : IsAccountOrg ? Role.Organization : Role.Admin));
-
-        var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-
-        var result = await Modal.Show<CreateAccounts>("", parameters,  BlazoredModalOptions.GetModalOptions()).Result;
-        isShowDropDownCreate = false;
-
-    }
-    private async Task ShowCreateAcc()
-    {
-        if (IsAccountOrg)
-        {
-            ShowCreateAccountOrg();
-        }
-        if (IsAccountUser)
-        {
-            ShowCreateAccountUser();
-        }
-        if (IsAccountAdminSp)
-        {
-            ShowCreateAccountAdminSp();
-        }
-    }
-
-    // dropdown-create
-    private bool isShowDropDownCreate = false;
-    private void ShowDropDownCreate()
-    {
-        isShowDropDownCreate = !isShowDropDownCreate;
-    }
-
-    //////////test
-    ///
-
 }
 
 

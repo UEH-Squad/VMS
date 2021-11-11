@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
@@ -10,15 +13,16 @@ namespace VMS.Pages.Admin.AccountManagement
     {
         private bool isCourseShow;
         private bool isLevelShow;
+        private bool isShowDropDownCreate = false;
 
         private FilterAccountViewModel filter = new();
         private List<string> levels, courses;
 
-        [Parameter] public bool IsAccountOrg { get; set; }
-        [Parameter] public bool IsAccountUser { get; set; }
-        [Parameter] public bool IsAccountAdminSp { get; set; }
+        [Parameter] public Role PageRole { get; set; }
         [Parameter] public string Tilte { get; set; }
         [Parameter] public EventCallback<FilterAccountViewModel> FilterChanged { get; set; }
+
+        [CascadingParameter] public IModalService Modal { get; set; }
 
         protected override void OnInitialized()
         {
@@ -71,6 +75,41 @@ namespace VMS.Pages.Admin.AccountManagement
         {
             filter.Course = string.Empty;
             await OnClickFilterAsync();
+        }
+
+        private void ShowDropDownCreate()
+        {
+            isShowDropDownCreate = !isShowDropDownCreate;
+        }
+
+        private void ShowCreateAccounts()
+        {
+            var parameters = new ModalParameters();
+            parameters.Add("Role", PageRole);
+
+            Modal.Show<CreateAccounts>("", parameters, BlazoredModalOptions.GetModalOptions());
+
+            isShowDropDownCreate = false;
+        }
+
+        private void ShowCreateAccount()
+        {
+            switch (PageRole)
+            {
+                case Role.Admin:
+                    Modal.Show<CreateAccountAdminSp>("", BlazoredModalOptions.GetModalOptions());
+                    break;
+
+                case Role.Organization:
+                    Modal.Show<CreateAccountOrg>("", BlazoredModalOptions.GetModalOptions());
+                    break;
+
+                case Role.User:
+                    Modal.Show<CreateAccountUser>("", BlazoredModalOptions.GetModalOptions());
+                    break;
+            }
+
+            isShowDropDownCreate = false;
         }
     }
 }

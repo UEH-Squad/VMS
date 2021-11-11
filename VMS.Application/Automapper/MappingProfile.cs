@@ -93,7 +93,8 @@ namespace VMS.Application.Automapper
                 .ForMember(x => x.EmailConfirmed, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.UserName)))
                 .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
                 .ForMember(x => x.LockoutEnabled, opt => opt.MapFrom(src => true))
-                .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
+                .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Email)
+                                                                             ? src.Email.ToUpper() : src.UserName.ToUpper()))
                 .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()));
 
             CreateMap<PaginatedList<User>, PaginatedList<CreateAccountViewModel>>();

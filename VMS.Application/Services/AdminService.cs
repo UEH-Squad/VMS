@@ -110,7 +110,7 @@ namespace VMS.Application.Services
             return await _repository.GetAsync(dbContext, specification);
         }
 
-        public async Task<PaginatedList<AccountViewModel>> GetAllAccountsAsync(FilterAccountViewModel filter, int page)
+        public async Task<PaginatedList<AccountViewModel>> GetAllAccountsAsync(FilterAccountViewModel filter, int page, int pageSize = 20)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -118,13 +118,33 @@ namespace VMS.Application.Services
             {
                 Conditions = GetConditionsByFilter(filter),
                 OrderBy = GetOrderByFilter(filter),
-                PageSize = 20,
+                PageSize = pageSize,
                 PageIndex = page
             };
 
             PaginatedList<User> users = await _repository.GetListAsync(dbContext, specification);
 
             return _mapper.Map<PaginatedList<AccountViewModel>>(users);
+        }
+
+        public async Task<List<AccountViewModel>> GetAllAccountsByRoleAsync(Role role)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            string userRole = role.ToString();
+
+            Specification<User> specification = new()
+            {
+                Conditions = new List<Expression<Func<User, bool>>>()
+                {
+                    u => u.UserRoles.Any(x => x.Role.Name == userRole)
+                },
+                Includes = u => u.Include(x => x.Faculty) 
+            };
+
+            List<User> users = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<AccountViewModel>>(users);
         }
 
         private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterAccountViewModel filter)

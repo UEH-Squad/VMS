@@ -9,7 +9,7 @@
 
     <div class="d-flex justify-content-between align-items-center my-3">
         <p class="managementTool__title mb-0">Có <span>@(pageResult.TotalItems) kết quả</span> ứng với tìm kiếm</p>
-        <div class="managementTool__down d-flex align-items-center">
+        <div @onclick="OnClickDownloadListAccountsAsync" class="managementTool__down d-flex align-items-center">
             <i class="material-icons icon-down me-1">
                 vertical_align_bottom
             </i>

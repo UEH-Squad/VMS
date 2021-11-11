@@ -1,5 +1,7 @@
-﻿using VMS.Common;
+﻿using System;
+using VMS.Common;
 using System.Linq;
+using Blazored.Modal;
 using VMS.Common.Enums;
 using Microsoft.JSInterop;
 using VMS.GenericRepository;
@@ -9,7 +11,6 @@ using System.Collections.Generic;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components;
-using Blazored.Modal;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
@@ -23,6 +24,7 @@ namespace VMS.Pages.Admin.AccountManagement
         [CascadingParameter] public IModalService Modal { get; set; }
 
         [Inject] IAdminService AdminService { get; set; }
+        [Inject] IExcelService ExcelService { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -103,6 +105,15 @@ namespace VMS.Pages.Admin.AccountManagement
             parameters.Add("Account", account);
 
             await Modal.Show<EditAccountUser>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+        }
+
+        private async Task OnClickDownloadListAccountsAsync()
+        {
+            List<AccountViewModel> listAccounts = await AdminService.GetAllAccountsByRoleAsync(Role.User);
+
+            byte[] resultByteArray = ExcelService.ExportListAccountToExcel(listAccounts, Role.User);
+
+            await JS.InvokeVoidAsync("vms.SaveAsFile", $"DSTK_{Role.User}_{DateTime.Now:dd-MM-yyyy}.xlsx", resultByteArray);
         }
     }
 }

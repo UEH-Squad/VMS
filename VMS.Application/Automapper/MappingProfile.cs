@@ -95,13 +95,14 @@ namespace VMS.Application.Automapper
                 .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()));
 
             CreateMap<PaginatedList<User>, PaginatedList<AccountViewModel>>();
-            CreateMap<User, AccountViewModel>();
+            CreateMap<User, AccountViewModel>()
+                .ForMember(x => x.Faculty, opt => opt.MapFrom(src => src.FacultyId.HasValue ? src.Faculty.Name : ""));
             CreateMap<AccountViewModel, User>()
                 .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Password)
                                                                           ? hasher.HashPassword(null, src.Password)
                                                                           : src.Password))
                 .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
-                .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper())); ;
+                .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()));
         }
     }
 }

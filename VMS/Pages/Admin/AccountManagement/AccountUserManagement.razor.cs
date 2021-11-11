@@ -27,12 +27,18 @@ namespace VMS.Pages.Admin.AccountManagement
         protected override async Task OnParametersSetAsync()
         {
             filter.Role = Role.User.ToString();
-            pageResult = await AdminService.GetAllAccountsAsync(filter, 1);
+            await ResetDataAsync(filter, 1);
+        }
+
+        private async Task ResetDataAsync(FilterAccountViewModel filter, int page)
+        {
+            selectedList.Clear();
+            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
         }
 
         private async Task HandlePageChangedAsync()
         {
-            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+            await ResetDataAsync(filter, page);
             StateHasChanged();
             await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
         }
@@ -41,7 +47,7 @@ namespace VMS.Pages.Admin.AccountManagement
         {
             this.filter = filter;
             this.filter.Role = Role.User.ToString();
-            pageResult = await AdminService.GetAllAccountsAsync(this.filter, 1);
+            await ResetDataAsync(this.filter, 1);
         }
 
         private void SelectItem(string accountId)
@@ -78,7 +84,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
             await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
-            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+            await ResetDataAsync(filter, page);
         }
 
         private async Task OnClickDeleteAccountAsync(string accountId)
@@ -88,7 +94,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
             await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
-            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+            await ResetDataAsync(filter, page);
         }
 
         private async Task ShowEditAccountAsync(AccountViewModel account)

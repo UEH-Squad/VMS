@@ -1,10 +1,10 @@
 ﻿using Blazored.Modal;
-using Blazored.Modal.Services;
-using Microsoft.AspNetCore.Components;
+using VMS.Common.Enums;
 using System.Threading.Tasks;
+using Blazored.Modal.Services;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Common.Enums;
+using Microsoft.AspNetCore.Components;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
@@ -21,7 +21,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         private async Task CloseModalAsync()
         {
-            await Modal.CloseAsync(ModalResult.Ok(isSuccess));
+            await Modal.CloseAsync(ModalResult.Ok(isSuccess.HasValue && isSuccess.Value));
         }
 
         private async Task ShowEditSuccessAsync()

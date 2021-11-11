@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Blazored.Modal.Services;
 using VMS.Application.ViewModels;
 using System.Collections.Generic;
-using VMS.Application.Interfaces;
 using Microsoft.AspNetCore.Components;
+using VMS.Application.Interfaces;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
-    public partial class EditAccountUser : ComponentBase
+    public partial class EditAccountOrg : ComponentBase
     {
         private bool isConfirmShow;
         private bool isCourseShow;
@@ -28,7 +28,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         protected override void OnInitialized()
         {
-            courses = Courses.GetCourses();
+            courses = Courses.GetLevels();
             account.Copy(Account);
         }
 
@@ -58,7 +58,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
             ModalParameters parameters = new();
             parameters.Add("Account", account);
-            parameters.Add("AccountRole", Role.User);
+            parameters.Add("AccountRole", Role.Organization);
 
             var result = await ModalConfirm.Show<EditConfirm>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
             if ((bool)result.Data)
@@ -72,7 +72,7 @@ namespace VMS.Pages.Admin.AccountManagement
         private bool IsValidAccount()
         {
             return courses.Exists(x => x == account.Course)
-                && account.IsValidAccount(Role.User)
+                && account.IsValidAccount(Role.Organization)
                 && IdentityService.IsCorrectCurrentUserPassword(adminPassword);
         }
 

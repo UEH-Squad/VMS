@@ -91,7 +91,7 @@ namespace VMS.Pages.Admin.AccountManagement
             pageResult = await AdminService.GetAllAccountsAsync(filter, page);
         }
 
-        private async Task ShowEditAccount(AccountViewModel account)
+        private async Task ShowEditAccountAsync(AccountViewModel account)
         {
             ModalParameters parameters = new();
             parameters.Add("Account", account);

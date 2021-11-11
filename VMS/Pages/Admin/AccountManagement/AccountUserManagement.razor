@@ -81,7 +81,7 @@
                                 more_vert
                             </i>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
-                                <li @onclick="async () => await ShowEditAccount(item)" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
+                                <li @onclick="async () => await ShowEditAccountAsync(item)" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
                                 <li @onclick="async () => await OnClickDeleteAccountAsync(item.Id)" class="dropdown-menu-delete">Xóa tài khoản</li>
                             </ul>
                         </div>

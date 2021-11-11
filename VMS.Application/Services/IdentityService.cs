@@ -94,5 +94,18 @@ namespace VMS.Application.Services
         {
             Task.Run(() => _userManager.UpdateAsync(user));
         }
+
+        public bool IsCorrectCurrentUserPassword(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                return false;
+            }
+            else
+            {
+                User currentUser = GetCurrentUser();
+                return Task.Run(() => _userManager.CheckPasswordAsync(currentUser, password)).Result;
+            }
+        }
     }
 }

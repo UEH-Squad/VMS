@@ -24,5 +24,7 @@ namespace VMS.Application.Interfaces
         User GetCurrentUserWithFavoritesAndRecruitments();
 
         void UpdateUser(User user);
+
+        bool IsCorrectCurrentUserPassword(string password);
     }
 }

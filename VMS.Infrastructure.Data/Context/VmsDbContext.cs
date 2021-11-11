@@ -27,6 +27,8 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<ImageReport> ImageReports { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Club> Clubs { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {
@@ -179,6 +181,47 @@ namespace VMS.Infrastructure.Data.Context
                     new Faculty { Id = 13, Name = "Khoa Toán - Thống kê" },
                     new Faculty { Id = 14, Name = "Viện Du lịch" },
                     new Faculty { Id = 15, Name = "Viện Đào tạo quốc tế" }
+                );
+
+            builder.Entity<Department>().HasData(
+                    new Department { Id = 1, Name = "Ban Tổ chức - Xây dựng Đoàn" },
+                    new Department { Id = 2, Name = "Ban Phong trào - Tình nguyện" },
+                    new Department { Id = 3, Name = "Ban Học tập - Nghiên cứu khoa học - Quan hệ quốc tế" },
+                    new Department { Id = 4, Name = "Ban Tổ chức - Xây dựng Hội" },
+                    new Department { Id = 5, Name = "Ban Tình nguyện - Hỗ trợ sinh viên" }
+                );
+
+            builder.Entity<Club>().HasData(
+                    new Club { Id = 1, Name = "Câu lạc bộ Anh Văn - BELL" },
+                    new Club { Id = 2, Name = "Câu lạc bộ Bóng chuyền" },
+                    new Club { Id = 3, Name = "Câu lạc bộ Dân ca" },
+                    new Club { Id = 4, Name = "Câu lạc bộ Giai điệu trẻ" },
+                    new Club { Id = 5, Name = "Câu lạc bộ Guitar - UEHG" },
+                    new Club { Id = 6, Name = "Câu lạc bộ Tiếng Pháp - CFE" },
+                    new Club { Id = 7, Name = "Câu lạc bộ Võ thuật" },
+                    new Club { Id = 8, Name = "Câu lạc bộ Chuyện to nhỏ" },
+                    new Club { Id = 9, Name = "Câu lạc bộ Dynamic" },
+                    new Club { Id = 10, Name = "Đội Công tác xã hội" },
+                    new Club { Id = 11, Name = "Đội Văn nghệ xung kích" },
+                    new Club { Id = 12, Name = "Đội Cộng tác viên" },
+                    new Club { Id = 13, Name = "Nhóm Truyền thông Sinh viên - S Communications" },
+                    new Club { Id = 14, Name = "Câu lạc bộ Bất động sản - REC" },
+                    new Club { Id = 15, Name = "Câu lạc bộ Chuyên viên Nhân sự Tập sự - HuReA" },
+                    new Club { Id = 16, Name = "Câu lạc bộ Chứng khoán - SCUE" },
+                    new Club { Id = 17, Name = "Câu lạc bộ Công nghệ Kinh tế - ET Group" },
+                    new Club { Id = 18, Name = "Câu lạc bộ Kế toán - Kiểm toán A²C" },
+                    new Club { Id = 19, Name = "Câu lạc bộ Kinh doanh quốc tế - IBC" },
+                    new Club { Id = 20, Name = "Câu lạc bộ Nghiên cứu Kinh tế Trẻ - YoRE" },
+                    new Club { Id = 21, Name = "Câu lạc bộ Nhân Sự Khởi Nghiệp - HR Startup" },
+                    new Club { Id = 22, Name = "Câu lạc bộ Pháp lý" },
+                    new Club { Id = 23, Name = "Câu lạc bộ Thương mại - IC" },
+                    new Club { Id = 24, Name = "Câu lạc bộ Tiếng Anh - Apple Club" },
+                    new Club { Id = 25, Name = "Câu lạc bộ Lý luận trẻ" },
+                    new Club { Id = 26, Name = "Nhóm Hỗ Trợ Sinh Viên - SSG" },
+                    new Club { Id = 27, Name = "Nhóm Sinh viên Nghiên cứu Marketing - Margroup" },
+                    new Club { Id = 28, Name = "Nhóm Sinh Viên Nghiên Cứu Tài Chính - SFR" },
+                    new Club { Id = 29, Name = "Nhóm Sinh Viên Nghiên Cứu Thuế - TaxGroup" },
+                    new Club { Id = 30, Name = "Nhóm Sinh viên Nghiên cứu Du lịch - Travel Group" }
                 );
         }
     }

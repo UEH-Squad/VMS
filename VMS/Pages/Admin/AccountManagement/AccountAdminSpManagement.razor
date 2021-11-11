@@ -7,7 +7,7 @@
 <div class="px-5">
     <ManagementTool IsAccountAdminSp="true" Tilte="quản trị viên" FilterChanged="OnFilterChangedAsync" />
     <div class="d-flex justify-content-between align-items-center my-3">
-        <p class="managementTool__title mb-0">Có <span>@(pageResult.Items.Count * 20) kết quả</span> ứng với tìm kiếm</p>
+        <p class="managementTool__title mb-0">Có <span>@(pageResult.Items.Count) kết quả</span> ứng với tìm kiếm</p>
         <div class="managementTool__down d-flex align-items-center">
             <i class="material-icons icon-down me-1">
                 vertical_align_bottom
@@ -27,7 +27,7 @@
             }
             <label for="all">Chọn tất cả</label>
         </div>
-        <button class="btn-delete btn">Xóa</button>
+        <button @onclick="OnClickDeleteListAccountsAsync" class="btn-delete btn">Xóa</button>
     </div>
     <div class="my-acc">
         <table class="acc__table">
@@ -74,7 +74,7 @@
                             </i>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
                                 <li @onclick="ShowEditAccountOrgAsync" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
-                                <li @onclick="ShowDeleteAccountAsync" class="dropdown-menu-delete">Xóa tài khoản</li>
+                                <li @onclick="async () => await OnClickDeleteAccountAsync(item.Id)" class="dropdown-menu-delete">Xóa tài khoản</li>
                             </ul>
                         </div>
                     </tr>

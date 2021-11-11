@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components;
+using Blazored.Modal;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
@@ -25,7 +26,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         protected override async Task OnParametersSetAsync()
         {
-            filter.Role = Role.Organization.ToString();
+            filter.Role = Role.Admin.ToString();
             pageResult = await AdminService.GetAllAccountsAsync(filter, 1);
         }
 
@@ -39,18 +40,13 @@ namespace VMS.Pages.Admin.AccountManagement
         private async Task OnFilterChangedAsync(FilterAccountViewModel filter)
         {
             this.filter = filter;
-            this.filter.Role = Role.Organization.ToString();
+            this.filter.Role = Role.Admin.ToString();
             pageResult = await AdminService.GetAllAccountsAsync(this.filter, 1);
         }
 
         private async Task ShowEditAccountOrgAsync()
         {
             var result = await Modal.Show<EditAccountUser>("", BlazoredModalOptions.GetModalOptions()).Result;
-        }
-
-        private async Task ShowDeleteAccountAsync()
-        {
-            var result = await Modal.Show<DeleteAccount>("", BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private void SelectItem(string accountId)
@@ -78,6 +74,26 @@ namespace VMS.Pages.Admin.AccountManagement
         private bool IsSelectedAllItems()
         {
             return pageResult.Items.Count == selectedList.Count;
+        }
+
+        private async Task OnClickDeleteListAccountsAsync()
+        {
+            ModalParameters parameters = new();
+            parameters.Add("ListAccountIds", selectedList);
+
+            await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+        }
+
+        private async Task OnClickDeleteAccountAsync(string accountId)
+        {
+            ModalParameters parameters = new();
+            parameters.Add("ListAccountIds", new List<string>() { accountId });
+
+            await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
         }
     }
 }

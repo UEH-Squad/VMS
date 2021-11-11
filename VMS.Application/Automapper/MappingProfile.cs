@@ -82,6 +82,7 @@ namespace VMS.Application.Automapper
         {
             PasswordHasher<User> hasher = new();
             CreateMap<CreateAccountViewModel, User>()
+                .ForMember(x => x.Id, opt => opt.Ignore())
                 .ForMember(x => x.UserName, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.UserName)
                                                                       ? src.UserName : src.Email))
                 .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Password)

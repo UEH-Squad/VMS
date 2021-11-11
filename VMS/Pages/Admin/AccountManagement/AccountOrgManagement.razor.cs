@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components;
-
+using Blazored.Modal;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
@@ -49,11 +49,6 @@ namespace VMS.Pages.Admin.AccountManagement
             var result = await Modal.Show<EditAccountUser>("", BlazoredModalOptions.GetModalOptions()).Result;
         }
 
-        private async Task ShowDeleteAccountAsync()
-        {
-            var result = await Modal.Show<DeleteAccount>("", BlazoredModalOptions.GetModalOptions()).Result;
-        }
-
         private void SelectItem(string accountId)
         {
             if (IsSelectedItem(accountId))
@@ -79,6 +74,26 @@ namespace VMS.Pages.Admin.AccountManagement
         private bool IsSelectedAllItems()
         {
             return pageResult.Items.Count == selectedList.Count;
+        }
+
+        private async Task OnClickDeleteListAccountsAsync()
+        {
+            ModalParameters parameters = new();
+            parameters.Add("ListAccountIds", selectedList);
+
+            await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+        }
+
+        private async Task OnClickDeleteAccountAsync(string accountId)
+        {
+            ModalParameters parameters = new();
+            parameters.Add("ListAccountIds", new List<string>() { accountId });
+
+            await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            pageResult = await AdminService.GetAllAccountsAsync(filter, page);
         }
     }
 }

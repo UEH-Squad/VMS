@@ -27,7 +27,7 @@
             }
             <label for="all">Chọn tất cả</label>
         </div>
-        <button class="btn-delete btn">Xóa</button>
+        <button @onclick="OnClickDeleteListAccountsAsync" class="btn-delete btn">Xóa</button>
     </div>
 
     <div class="my-acc">
@@ -79,7 +79,7 @@
                             </i>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
                                 <li @onclick="ShowEditAccountOrgAsync" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
-                                <li @onclick="ShowDeleteAccountAsync" class="dropdown-menu-delete">Xóa tài khoản</li>
+                                <li @onclick="async () => await OnClickDeleteAccountAsync(item.Id)" class="dropdown-menu-delete">Xóa tài khoản</li>
                             </ul>
                         </div>
                     </tr>

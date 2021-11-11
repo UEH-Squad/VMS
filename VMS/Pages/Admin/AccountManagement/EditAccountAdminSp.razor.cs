@@ -11,12 +11,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace VMS.Pages.Admin.AccountManagement
 {
-    public partial class EditAccountOrg : ComponentBase
+    public partial class EditAccountAdminSp : ComponentBase
     {
         private bool isConfirmShow;
-        private bool isCourseShow;
         private string adminPassword;
-        private List<string> courses;
         private AccountViewModel account = new();
 
         [Parameter] public AccountViewModel Account { get; set; }
@@ -28,23 +26,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         protected override void OnInitialized()
         {
-            courses = Courses.GetLevels();
             account.Copy(Account);
-        }
-
-        private void ChooseCourseValue(string course)
-        {
-            account.Course = course;
-        }
-
-        private void ToggCourseDropdown()
-        {
-            isCourseShow = !isCourseShow;
-        }
-
-        private void CloseLevelDropdown()
-        {
-            isCourseShow = false;
         }
 
         private async Task OnValidSubmitAsync()
@@ -58,7 +40,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
             ModalParameters parameters = new();
             parameters.Add("Account", account);
-            parameters.Add("AccountRole", Role.Organization);
+            parameters.Add("AccountRole", Role.Admin);
 
             var result = await ModalConfirm.Show<EditConfirm>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
             if ((bool)result.Data)
@@ -71,8 +53,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         private bool IsValidAccount()
         {
-            return courses.Exists(x => x == account.Course)
-                && account.IsValidAccount(Role.Organization)
+            return account.IsValidAccount(Role.Admin)
                 && IdentityService.IsCorrectCurrentUserPassword(adminPassword);
         }
 

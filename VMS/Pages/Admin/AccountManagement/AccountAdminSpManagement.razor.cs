@@ -44,11 +44,6 @@ namespace VMS.Pages.Admin.AccountManagement
             pageResult = await AdminService.GetAllAccountsAsync(this.filter, 1);
         }
 
-        private async Task ShowEditAccountOrgAsync()
-        {
-            var result = await Modal.Show<EditAccountUser>("", BlazoredModalOptions.GetModalOptions()).Result;
-        }
-
         private void SelectItem(string accountId)
         {
             if (IsSelectedItem(accountId))
@@ -94,6 +89,14 @@ namespace VMS.Pages.Admin.AccountManagement
             await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
             pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+        }
+
+        private async Task ShowEditAccountAsync(AccountViewModel account)
+        {
+            ModalParameters parameters = new();
+            parameters.Add("Account", account);
+
+            await Modal.Show<EditAccountAdminSp>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
     }
 }

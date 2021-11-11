@@ -155,9 +155,6 @@ namespace VMS.Application.Services
 
         private static Expression<Func<Recruitment, bool>> GetActivitiesFromSearchValueAndFilter(FilterRecruitmentViewModel filter, string searchValue, bool? isRated)
         {
-            DateTime month12 = new DateTime(2021, 12, 31);
-            DateTime month8 = new DateTime(2021, 8, 1);
-
             if (isRated.HasValue)
             {
                 if (isRated.Value)
@@ -175,26 +172,26 @@ namespace VMS.Application.Services
                 return r => r.Activity.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim());
             }
 
-            if (!string.IsNullOrEmpty(filter.FullName))
+            if (!string.IsNullOrEmpty(filter.OrgId))
             {
-                return r => r.Activity.Organizer.FullName == filter.FullName || string.IsNullOrEmpty(filter.FullName);
+                return r => r.Activity.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId);
             }
 
             if (!string.IsNullOrEmpty(filter.Semester))
             {
                 if(filter.Semester == "Học kỳ đầu")
                 {
-                    return r => r == null;
+                    return r => r.Activity.StartDate.Month >= 1 && r.Activity.StartDate.Month <= 5;
                 }
 
                 if(filter.Semester == "Học kỳ giữa")
                 {
-                    return r => r == null;
+                    return r => r.Activity.StartDate.Month >= 6 && r.Activity.StartDate.Month <= 7;
                 }
 
                 if(filter.Semester == "Học kỳ cuối")
                 {
-                    return r => r.Activity.StartDate > month8 && r.Activity.StartDate < month12;
+                    return r => r.Activity.StartDate.Month >= 8 && r.Activity.StartDate.Month <= 12;
                 }
             }
 

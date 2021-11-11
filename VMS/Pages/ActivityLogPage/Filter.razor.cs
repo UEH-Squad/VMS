@@ -5,13 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivityLogPage
 {
     public partial class Filter
     {
         [Inject]
-        private IFacultyService FacultyService { get; set; }
+        private IIdentityService IdentityService { get; set; }
 
         [Parameter]
         public EventCallback<bool?> IsRatedChanged { get; set; }
@@ -20,9 +21,9 @@ namespace VMS.Pages.ActivityLogPage
         [Parameter]
         public FilterRecruitmentViewModel FilterChange { get; set; } = new();
 
-        private string facultyDefault = "Đơn vị";
+        private string orgDefault = "Tổ chức";
         private string semesterDefault = "Học kỳ";
-        private List<FacultyViewModel> faculties = new();
+        private List<User> organizers;
 
         private readonly List<string> semesters = new()
         {
@@ -33,13 +34,13 @@ namespace VMS.Pages.ActivityLogPage
 
         protected override async Task OnInitializedAsync()
         {
-            faculties = await FacultyService.GetAllFacultiesAsync();
+            organizers = IdentityService.GetAllOrganizers();
         }
 
-        private void ChooseFacultyAsync(FacultyViewModel faculty)
+        private void ChooseFacultyAsync(User organizer)
         {
-            facultyDefault = faculty.Name;
-            FilterChange.FullName = facultyDefault;
+            FilterChange.OrgId = organizer.Id;
+            orgDefault = organizer.FullName;
             Display2 = "d-none";
         }
 
@@ -62,7 +63,7 @@ namespace VMS.Pages.ActivityLogPage
 
         private async Task ClearFilter()
         {
-            facultyDefault = "Đơn vị";
+            orgDefault = "Tổ chức";
             semesterDefault = "Học kỳ";
             FilterChange = new FilterRecruitmentViewModel();
             await FilterChanged.InvokeAsync(FilterChange);

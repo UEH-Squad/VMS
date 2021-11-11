@@ -8,7 +8,7 @@ namespace VMS.Application.ViewModels
 {
     public class FilterRecruitmentViewModel
     {
-        public string FullName { get; set; }
+        public string OrgId { get; set; }
         public string Semester { get; set; }
     }
 }

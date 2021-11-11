@@ -2,7 +2,7 @@
 
 <div class="my-modal">
     <div class="modal__content">
-        <div class="modal__create @(!isDeleteSuccess ? " d-block" : "d-none" )">
+        <div class="modal__create @(isSuccess||isFailed ? " d-none" : "d-block" )">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
@@ -22,12 +22,12 @@
 
             <div class="from__btn text-center">
                 <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
-                <button @onclick="DeleteSuccessAsync" type="submit" class="btn btn-create">Tạo tài khoản</button>
+                <button @onclick="ShowCreateSuccess" type="submit" class="btn btn-create">Tạo tài khoản</button>
             </div>
 
         </div>
 
-        <div class="modal__success @(!isDeleteSuccess ? " d-none" : "d-block" )">
+        <div class="modal__success @(isSuccess ? " d-block" : "d-none" )">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
@@ -42,11 +42,21 @@
             </div>
         </div>
 
+        <div class="modal__failed @(isFailed ? " d-block" : "d-none" ) ">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center mb-0">Tài khoản tạo <span>không thành công</span></h3>
+        </div>
+
     </div>
 </div>
 
 @code {
-    private bool isDeleteSuccess;
+    private bool isSuccess;
+    private bool isFailed;
 
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
@@ -57,9 +67,15 @@
     {
         await Modal.CloseAsync();
     }
-    private async Task DeleteSuccessAsync()
+
+    private async Task ShowCreateSuccess()
     {
-        isDeleteSuccess = true;
+        isSuccess = true;
+    }
+
+    private async Task ShowCreateFailed()
+    {
+        isFailed = true;
     }
 
 

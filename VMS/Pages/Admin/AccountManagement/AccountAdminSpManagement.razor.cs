@@ -18,7 +18,7 @@ namespace VMS.Pages.Admin.AccountManagement
         private int page = 1;
         private FilterAccountViewModel filter = new();
         private List<string> selectedList = new();
-        private PaginatedList<CreateAccountViewModel> pageResult = new(new(), 0, 1, 0);
+        private PaginatedList<AccountViewModel> pageResult = new(new(), 0, 1, 0);
 
         [CascadingParameter] public IModalService Modal { get; set; }
 

@@ -18,7 +18,7 @@ namespace VMS.Pages.Admin.AccountManagement
         private int page = 1;
         private FilterAccountViewModel filter = new();
         private List<string> selectedList = new();
-        private PaginatedList<CreateAccountViewModel> pageResult = new(new(), 0, 1, 0);
+        private PaginatedList<AccountViewModel> pageResult = new(new(), 0, 1, 0);
 
         [CascadingParameter] public IModalService Modal { get; set; }
 
@@ -42,11 +42,6 @@ namespace VMS.Pages.Admin.AccountManagement
             this.filter = filter;
             this.filter.Role = Role.User.ToString();
             pageResult = await AdminService.GetAllAccountsAsync(this.filter, 1);
-        }
-
-        private async Task ShowEditAccountOrgAsync()
-        {
-            var result = await Modal.Show<EditAccountUser>("", BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private void SelectItem(string accountId)
@@ -94,6 +89,14 @@ namespace VMS.Pages.Admin.AccountManagement
             await Modal.Show<DeleteAccount>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
             pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+        }
+
+        private async Task ShowEditAccount(AccountViewModel account)
+        {
+            ModalParameters parameters = new();
+            parameters.Add("Account", account);
+
+            await Modal.Show<EditAccountUser>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
     }
 }

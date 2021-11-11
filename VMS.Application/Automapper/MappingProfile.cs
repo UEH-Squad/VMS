@@ -83,22 +83,23 @@ namespace VMS.Application.Automapper
             PasswordHasher<User> hasher = new();
             CreateMap<CreateAccountViewModel, User>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
-                .ForMember(x => x.UserName, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.UserName)
-                                                                      ? src.UserName : src.Email))
+                .ForMember(x => x.UserName, opt => opt.MapFrom(src => src.UserName))
                 .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Password)
                                                                           ? hasher.HashPassword(null, src.Password)
                                                                           : hasher.HashPassword(null, src.StudentId)))
-                .ForMember(x => x.Email, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Email)
-                                                                   ? src.Email : src.UserName))
+                .ForMember(x => x.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(x => x.EmailConfirmed, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.UserName)))
                 .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
                 .ForMember(x => x.LockoutEnabled, opt => opt.MapFrom(src => true))
-                .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Email)
-                                                                             ? src.Email.ToUpper() : src.UserName.ToUpper()))
+                .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
                 .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()));
 
-            CreateMap<PaginatedList<User>, PaginatedList<CreateAccountViewModel>>();
-            CreateMap<User, CreateAccountViewModel>();
+            CreateMap<PaginatedList<User>, PaginatedList<AccountViewModel>>();
+            CreateMap<User, AccountViewModel>();
+            CreateMap<AccountViewModel, User>()
+                .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Password)
+                                                                          ? hasher.HashPassword(null, src.Password)
+                                                                          : src.Password));
         }
     }
 }

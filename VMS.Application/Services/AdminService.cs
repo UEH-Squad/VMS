@@ -36,6 +36,7 @@ namespace VMS.Application.Services
 
             foreach (var user in users)
             {
+                MapUsernameAndEmail(user, role);
                 user.UserRoles = new List<UserRole>()
                 {
                     new UserRole()
@@ -55,15 +56,14 @@ namespace VMS.Application.Services
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            if (await IsExistAnyUserAsync(dbContext, account.Email))
+            if (await IsExistAnyUserAsync(dbContext, role == Role.Admin ? account.UserName : account.Email))
             {
                 return false;
             }
 
-            User user = _mapper.Map<User>(account);
-
             AppRole userRole = await GetRoleAsync(dbContext, role);
 
+            User user = _mapper.Map<User>(account);
             user.UserRoles = new List<UserRole>()
             {
                 new UserRole()
@@ -72,6 +72,7 @@ namespace VMS.Application.Services
                     Role = userRole
                 }
             };
+            MapUsernameAndEmail(user, role);
 
             await _repository.InsertAsync(dbContext, user);
 
@@ -80,15 +81,18 @@ namespace VMS.Application.Services
 
         private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, string email)
         {
-            Expression<Func<User, bool>> predicate = acc => acc.Email == email || acc.UserName == email;
+            string normalizedEmail = email.ToUpper();
+
+            Expression<Func<User, bool>> predicate = acc => acc.NormalizedEmail == normalizedEmail
+                                                         || acc.NormalizedUserName == normalizedEmail;
 
             return await _repository.ExistsAsync(dbContext, predicate);
         }
 
         private async Task<bool> IsExistAnyUserAsync(DbContext dbContext, List<CreateAccountViewModel> accounts)
         {
-            Expression<Func<User, bool>> predicate = acc => accounts.Select(x => x.Email)
-                                                                    .Any(x => x == acc.Email);
+            Expression<Func<User, bool>> predicate = acc => accounts.Select(x => x.Email.ToUpper())
+                                                                    .Any(x => x == acc.NormalizedEmail);
 
             return await _repository.ExistsAsync(dbContext, predicate);
         }
@@ -106,7 +110,7 @@ namespace VMS.Application.Services
             return await _repository.GetAsync(dbContext, specification);
         }
 
-        public async Task<PaginatedList<CreateAccountViewModel>> GetAllAccountsAsync(FilterAccountViewModel filter, int page)
+        public async Task<PaginatedList<AccountViewModel>> GetAllAccountsAsync(FilterAccountViewModel filter, int page)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -120,7 +124,7 @@ namespace VMS.Application.Services
 
             PaginatedList<User> users = await _repository.GetListAsync(dbContext, specification);
 
-            return _mapper.Map<PaginatedList<CreateAccountViewModel>>(users);
+            return _mapper.Map<PaginatedList<AccountViewModel>>(users);
         }
 
         private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterAccountViewModel filter)
@@ -164,6 +168,42 @@ namespace VMS.Application.Services
             IEnumerable<User> users = await _repository.GetListAsync(dbContext, specification);
 
             await _repository.DeleteAsync(dbContext, users);
+        }
+
+        public async Task<bool> UpdateAccountAsync(AccountViewModel account, Role role)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            User user = await _repository.GetByIdAsync<User>(dbContext, account.Id);
+
+            if (role == Role.Admin
+                ? account.UserName.ToUpper() != user.NormalizedUserName && await IsExistAnyUserAsync(dbContext, account.UserName)
+                : account.Email.ToUpper() != user.NormalizedEmail && await IsExistAnyUserAsync(dbContext, account.Email))
+            {
+                return false;
+            }
+
+            _mapper.Map(account, user);
+
+            MapUsernameAndEmail(user, role);
+
+            await _repository.UpdateAsync(dbContext, user);
+
+            return true;
+        }
+
+        private static void MapUsernameAndEmail(User user, Role role)
+        {
+            if (role == Role.Admin)
+            {
+                user.Email = user.UserName;
+                user.NormalizedEmail = user.NormalizedUserName;
+            }
+            else
+            {
+                user.UserName = user.Email;
+                user.NormalizedUserName = user.NormalizedEmail;
+            }
         }
     }
 }

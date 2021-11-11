@@ -10,16 +10,36 @@ namespace VMS.Common.Extensions
             return role switch
             {
                 Role.Admin => !string.IsNullOrEmpty(account.UserName)
-                            && !string.IsNullOrEmpty(account.Password),
+                           && !string.IsNullOrEmpty(account.Password),
 
                 Role.Organization => !string.IsNullOrEmpty(account.Course)
-                            && !string.IsNullOrEmpty(account.FullName)
-                            && !string.IsNullOrEmpty(account.Email),
+                                  && !string.IsNullOrEmpty(account.FullName)
+                                  && !string.IsNullOrEmpty(account.Email),
 
                 Role.User => !string.IsNullOrEmpty(account.StudentId)
-                            && !string.IsNullOrEmpty(account.Course)
-                            && !string.IsNullOrEmpty(account.FullName)
-                            && !string.IsNullOrEmpty(account.Email),
+                          && !string.IsNullOrEmpty(account.Course)
+                          && !string.IsNullOrEmpty(account.FullName)
+                          && !string.IsNullOrEmpty(account.Email),
+
+                _ => false,
+            };
+        }
+
+        public static bool IsValidAccount(this AccountViewModel account, Role role)
+        {
+            return role switch
+            {
+                Role.Admin => !string.IsNullOrEmpty(account.UserName)
+                           && !string.IsNullOrEmpty(account.Password),
+
+                Role.Organization => !string.IsNullOrEmpty(account.Course)
+                                  && !string.IsNullOrEmpty(account.FullName)
+                                  && !string.IsNullOrEmpty(account.Email),
+
+                Role.User => !string.IsNullOrEmpty(account.StudentId)
+                          && !string.IsNullOrEmpty(account.Course)
+                          && !string.IsNullOrEmpty(account.FullName)
+                          && !string.IsNullOrEmpty(account.Email),
 
                 _ => false,
             };

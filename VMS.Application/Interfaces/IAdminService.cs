@@ -12,8 +12,10 @@ namespace VMS.Application.Interfaces
 
         Task<bool> AddSingleAccountAsync(CreateAccountViewModel account, Role role);
 
-        Task<PaginatedList<CreateAccountViewModel>> GetAllAccountsAsync(FilterAccountViewModel filter, int page);
+        Task<PaginatedList<AccountViewModel>> GetAllAccountsAsync(FilterAccountViewModel filter, int page);
 
         Task DeleteListAccountsAsync(List<string> listAccountIds);
+
+        Task<bool> UpdateAccountAsync(AccountViewModel account, Role role);
     }
 }

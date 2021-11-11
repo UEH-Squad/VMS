@@ -77,11 +77,6 @@ namespace VMS.Pages.Admin.AccountManagement
             await OnClickFilterAsync();
         }
 
-        private void ShowDropDownCreate()
-        {
-            isShowDropDownCreate = !isShowDropDownCreate;
-        }
-
         private void ShowCreateAccounts()
         {
             var parameters = new ModalParameters();
@@ -89,7 +84,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
             Modal.Show<CreateAccounts>("", parameters, BlazoredModalOptions.GetModalOptions());
 
-            isShowDropDownCreate = false;
+            isShowDropDownCreate = false; 
         }
 
         private void ShowCreateAccount()

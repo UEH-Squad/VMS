@@ -25,13 +25,12 @@
     border-radius: 10px; }
   .my-modal .modal__create {
     width: 520px;
-    height: 320px;
     padding: 30px 45px; }
     .my-modal .modal__create h3 {
       font-weight: 500;
       font-size: 24px;
       color: #64D72F;
-      margin-bottom: 20px; }
+      margin-bottom: 30px; }
       .my-modal .modal__create h3 span {
         color: #18A0FB; }
   .my-modal .modal__success {
@@ -106,30 +105,24 @@
     margin-bottom: 0; }
     .my-modal .form__title span {
       color: red; }
-    .my-modal .form__title.form__title--id {
-      width: 70px; }
+    .my-modal .form__title.form__title--name, .my-modal .form__title.form__title--id, .my-modal .form__title.form__title--email {
+      width: 110px; }
+    .my-modal .form__title.form__title--name + div, .my-modal .form__title.form__title--email + div {
+      width: calc(100% - 110px);
+      padding-left: 10px; }
     .my-modal .form__title.form__title--id + div {
-      width: 190px;
+      width: 175px;
       padding-left: 10px;
       padding-right: 10px; }
     .my-modal .form__title.form__title--course {
       width: 65px; }
     .my-modal .form__title.form__title--course + div {
-      width: calc(100% - 70px - 190px - 65px);
-      padding-left: 10px; }
-    .my-modal .form__title.form__title--name {
-      width: 105px; }
-    .my-modal .form__title.form__title--name + div {
-      width: calc(100% - 105px);
-      padding-left: 10px; }
-    .my-modal .form__title.form__title--email {
-      width: 110px; }
-    .my-modal .form__title.form__title--email + div {
-      width: calc(100% - 110px);
+      width: calc(100% - 110px - 155px - 65px);
       padding-left: 10px; }
   .my-modal .from__btn {
     font-weight: 600;
-    font-size: 16px; }
+    font-size: 16px;
+    margin-top: 30px; }
     .my-modal .from__btn .btn-cancel {
       background-color: transparent;
       color: #64D72F; }

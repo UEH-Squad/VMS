@@ -76,48 +76,26 @@
             color: red;
         }
 
-        &.form__title--level {
-            width: 60px;
-        }
-
         &.form__title--level + div {
             width: calc(100% - 60px);
             padding-left: 10px;
         }
 
-        &.form__title--name {
+        &.form__title--level, &.form__title--name, &.form__title--email, &.form__title--password {
             width: 120px;
         }
 
-        &.form__title--name + div {
+        &.form__title--level + div, &.form__title--name + div, &.form__title--email + div, &.form__title--password + div {
             width: calc(100% - 120px);
             padding-left: 10px;
         }
 
-        &.form__title--email {
-            width: 75px;
-        }
-
-        &.form__title--email + div {
-            width: calc(100% - 75px);
-            padding-left: 10px;
-        }
-
-        &.form__title--password {
-            width: 105px;
-        }
-
-        &.form__title--password + div {
-            width: calc(100% - 105px);
-            padding-left: 10px;
-        }
-
         &.form__title--passwordSp {
-            width: 210px;
+            width: 160px;
         }
 
         &.form__title--passwordSp + div {
-            width: calc(100% - 210px);
+            width: calc(100% - 160px);
             padding-left: 10px;
         }
     }
@@ -129,6 +107,7 @@
     .from__btn {
         font-weight: 600;
         font-size: 16px;
+        margin-top: 30px;
 
         .btn-cancel {
             background-color: transparent;

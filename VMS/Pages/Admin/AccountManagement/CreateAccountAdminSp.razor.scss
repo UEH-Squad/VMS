@@ -26,14 +26,13 @@
 
     .modal__create {
         width: 520px;
-        height: 265px;
         padding: 30px 45px;
 
         h3 {
             font-weight: 500;
             font-size: 24px;
             color: $green;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
 
             span {
                 color: $blue;
@@ -138,6 +137,7 @@
     }
 
     .form__title {
+        width: 135px;
         font-weight: 400;
         font-size: 16px;
         color: #515151;
@@ -147,21 +147,8 @@
             color: red;
         }
 
-        &.form__title--name {
-            width: 55px;
-        }
-
-        &.form__title--name + div {
-            width: calc(100% - 55px);
-            padding-left: 10px;
-        }
-
-        &.form__title--password {
-            width: 105px;
-        }
-
-        &.form__title--password + div {
-            width: calc(100% - 105px);
+        & + div {
+            width: calc(100% - 135px);
             padding-left: 10px;
         }
     }
@@ -169,6 +156,7 @@
     .from__btn {
         font-weight: 600;
         font-size: 16px;
+        margin-top: 30px;
 
         .btn-cancel {
             background-color: transparent;

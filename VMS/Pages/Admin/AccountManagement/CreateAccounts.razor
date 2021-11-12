@@ -2,7 +2,7 @@
 
 <div class="my-modal">
     <div class="modal__content">
-        <div class="modal__create @(isSuccess||isFailed ? " d-none" : "d-block" )">
+        <div class="modal__create @(isSuccess ? "d-none" : "d-block" )">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
@@ -41,22 +41,11 @@
                 </div>
             </div>
         </div>
-
-        <div class="modal__failed @(isFailed ? " d-block" : "d-none" ) ">
-            <div @onclick="CloseModalAsync" class="icon-close">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <h3 class="text-center mb-0">Tài khoản tạo <span>không thành công</span></h3>
-        </div>
-
     </div>
 </div>
 
 @code {
     private bool isSuccess;
-    private bool isFailed;
 
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
@@ -72,11 +61,5 @@
     {
         isSuccess = true;
     }
-
-    private async Task ShowCreateFailed()
-    {
-        isFailed = true;
-    }
-
 
 }

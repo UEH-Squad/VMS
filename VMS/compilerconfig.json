@@ -538,5 +538,9 @@
   {
     "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.css",
     "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.scss"
   }
 ]

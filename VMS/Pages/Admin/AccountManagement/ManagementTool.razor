@@ -103,8 +103,6 @@
     private async Task ShowCreateAccounts()
     {
         Modal.Show<Admin.AccountManagement.CreateAccounts>("", BlazoredModalOptions.GetModalOptions());
-        isShowDropDownCreate = false;
-
     }
     private async Task ShowCreateAcc()
     {
@@ -191,17 +189,6 @@
         courseChoosenValue = "Khóa";
         IsCheckd = 0;
     }
-
-
-    // dropdown-create
-    private bool isShowDropDownCreate = false;
-    private void ShowDropDownCreate()
-    {
-        isShowDropDownCreate = !isShowDropDownCreate;
-    }
-
-    //////////test
-    ///
 
 }
 

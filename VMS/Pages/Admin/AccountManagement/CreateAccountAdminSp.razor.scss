@@ -166,6 +166,10 @@
                 background-color: transparent;
                 color: $green-bold;
             }
+
+            &:focus {
+                box-shadow: none
+            }
         }
 
         .btn-create {
@@ -183,6 +187,10 @@
 
             &:focus {
                 box-shadow: none;
+            }
+
+            &:focus {
+                box-shadow: none
             }
         }
     }

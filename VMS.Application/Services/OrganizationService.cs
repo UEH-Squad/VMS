@@ -86,5 +86,12 @@ namespace VMS.Application.Services
 
             await _repository.UpdateAsync(dbContext, user);
         }
+
+        public List<UserViewModel> GetAllOrganizers()
+        {
+            var organizers = Task.Run(() => _userManager.GetUsersInRoleAsync(Role.Organization.ToString())).Result;
+            
+            return _mapper.Map<List<UserViewModel>>(organizers);
+        }
     }
 }

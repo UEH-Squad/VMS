@@ -18,14 +18,18 @@
                     <div class="act__container__card__desc">
                         <p class="limited-text m-0">@item.Name</p>
                     </div>
-                    <div class="act__container__card__icon">
-                        @{ 
-                            bool isFav = currentUser.Favorites.Any(x => x.ActivityId == item.Id);
-                        }
-                        <a class="@(isFav ? "heart" : "heart-line")" @onclick="@(() => HandleFavorite(item.Id))" @onclick:preventDefault @onclick:stopPropagation>
-                            <span class="material-icons">favorite</span>
-                        </a>
-                    </div>
+                    <AuthorizeView>
+                        <Authorized>
+                            <div class="act__container__card__icon">
+                                @{
+                                    bool isFav = currentUser.Favorites.Any(x => x.ActivityId == item.Id);
+                                }
+                                <a class="@(isFav ? "heart" : "heart-line")" @onclick="@(() => HandleFavorite(item.Id))" @onclick:preventDefault @onclick:stopPropagation>
+                                    <span class="material-icons">favorite</span>
+                                </a>
+                            </div>
+                        </Authorized>
+                    </AuthorizeView>
                 </a>
             }
         </div>

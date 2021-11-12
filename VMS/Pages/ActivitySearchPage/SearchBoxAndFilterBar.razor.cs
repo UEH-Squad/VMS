@@ -28,7 +28,7 @@ namespace VMS.Pages.ActivitySearchPage
         private List<AreaViewModel> areasPinned;
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
-        private List<User> organizers;
+        private List<UserViewModel> organizers;
         private bool isOrganizationShow;
         private bool isCityShow;
         private bool isDistrictShow;
@@ -47,7 +47,7 @@ namespace VMS.Pages.ActivitySearchPage
         [Parameter]
         public EventCallback<FilterActivityViewModel> FilterChanged { get; set; }
         [Inject]
-        private IIdentityService IdentityService { get; set; }
+        private IOrganizationService OrganizationService { get; set; }
         [Inject]
         private IAddressService AddressService { get; set; }
         [Inject]
@@ -55,7 +55,7 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnInitializedAsync()
         {
-            organizers = IdentityService.GetAllOrganizers();
+            organizers = OrganizationService.GetAllOrganizers();
             isOrganizationShow = false;
 
             provinces = await AddressService.GetAllProvincesAsync();
@@ -111,7 +111,7 @@ namespace VMS.Pages.ActivitySearchPage
             isOrganizationShow = false;
         }
 
-        private void ChooseOrganizationValue(User organizer)
+        private void ChooseOrganizationValue(UserViewModel organizer)
         {
             Filter.OrgId = organizer.Id;
             organizationChoosenValue = organizer.FullName;
@@ -153,12 +153,20 @@ namespace VMS.Pages.ActivitySearchPage
             await FilterChanged.InvokeAsync(Filter);
         }
 
-        private async Task ClearFilter()
+        private async Task ClearFilterAsync()
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
             organizationChoosenValue = "Tổ chức";
-            Filter = new FilterActivityViewModel();
+
+            isCityShow = false;
+            isDistrictShow = false;
+            isOrganizationShow = false;
+
+            districts = new();
+            provinces = await AddressService.GetAllProvincesAsync();
+
+            Filter = new();
             await FilterChanged.InvokeAsync(Filter);
         }
 

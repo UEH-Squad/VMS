@@ -1,6 +1,6 @@
 ﻿<div class="my-modal">
     <div class="modal__content">
-        <div class="modal__create @(!isSuccess.HasValue ? " d-block" : "d-none" )">
+        <div class="modal__create">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
@@ -21,33 +21,6 @@
             <div class="from__btn text-center">
                 <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
                 <button @onclick="OnClickCreateAsync" type="submit" class="btn btn-create">Tạo tài khoản</button>
-            </div>
-
-        </div>
-
-        <div class="modal__success @(isSuccess.HasValue && isSuccess.Value ? "d-block" : "d-none")">
-            <div @onclick="CloseModalAsync" class="icon-close">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div>
-                <h3 class="text-center mb-4">Bạn đã <span>tạo tài khoản</span> thành công </h3>
-                <div class="text-center">
-                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
-                    <a href="@Routes.HomePage" class="btn btn-watchList">Xem danh sách tài khoản</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal__success @(isSuccess.HasValue && !isSuccess.Value ? "d-block" : "d-none")">
-            <div @onclick="CloseModalAsync" class="icon-close">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div>
-                <h3 class="text-center">Có lỗi xảy ra trong quá trình <span style="color: red">tạo tài khoản</span>. Vui lòng thử lại sau.</h3>
             </div>
         </div>
     </div>

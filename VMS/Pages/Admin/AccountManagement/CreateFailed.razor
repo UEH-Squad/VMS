@@ -1,24 +1,33 @@
-﻿@using VMS.Application.ViewModels;
-
-<div class="my-modal">
+﻿<div class="my-modal">
     <div class="modal__content">
-        <div class="modal__failed">
+        <div class="@(IsSuccess ? "modal__success" : "modal__failed")">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
                 </span>
             </div>
-            <h3 class="text-center mb-0">Tài khoản tạo <span>không thành công</span></h3>
+            @if (IsSuccess)
+            {
+                <h3 class="text-center mb-4">Bạn đã <span>tạo tài khoản</span> thành công</h3>
+                <div class="text-center">
+                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
+                    <a href="@Routes.HomePage" class="btn btn-watchList">Xem danh sách tài khoản</a>
+                </div>
+            }
+            else
+            {
+                <h3 class="text-center mb-0">Tài khoản tạo <span>không thành công</span></h3>
+            }
         </div>
-
     </div>
 </div>
 
 @code {
+    [Parameter]
+    public bool IsSuccess { get; set; } = true;
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
-
-    private CreateOrgProfileViewModel org = new();
 
     private async Task CloseModalAsync()
     {

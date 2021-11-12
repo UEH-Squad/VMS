@@ -15,7 +15,7 @@ namespace VMS.Application.Services
     public class ExcelService : IExcelService
     {
         private const int MaxInputUserColumn = 6;
-        private const int MaxInputOrgColumn = 4;
+        private const int MaxInputOrgColumn = 5;
         private const long MaxFileSize = 1024 * 1024 * 5;
 
         private IAdminService _adminService;
@@ -85,7 +85,8 @@ namespace VMS.Application.Services
                 {
                     Email = sheet.Cells[row, 2].Value.ToString(),
                     FullName = sheet.Cells[row, 3].Value.ToString(),
-                    Course = sheet.Cells[row, 4].Value.ToString()
+                    Course = sheet.Cells[row, 4].Value.ToString(),
+                    Password = sheet.Cells[row, 5].Value.ToString()
                 };
             }
         }

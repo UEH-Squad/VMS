@@ -129,6 +129,8 @@
       .my-modal .from__btn .btn-cancel:hover {
         background-color: transparent;
         color: #306C14; }
+      .my-modal .from__btn .btn-cancel:focus {
+        box-shadow: none; }
     .my-modal .from__btn .btn-create {
       background-color: #64D72F;
       color: #FFFFFF;
@@ -138,6 +140,8 @@
       .my-modal .from__btn .btn-create:hover {
         background-color: #306C14;
         color: #FFFFFF; }
+      .my-modal .from__btn .btn-create:focus {
+        box-shadow: none; }
   .my-modal .popup-btn {
     border: 1px solid #D8D8D8;
     cursor: pointer;

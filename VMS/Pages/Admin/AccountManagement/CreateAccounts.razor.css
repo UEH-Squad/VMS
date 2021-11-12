@@ -45,11 +45,12 @@
       margin-bottom: 10px; }
       .my-modal .modal__create .btn-down:hover {
         background: #0B588C; }
+      .my-modal .modal__create .btn-down:focus {
+        box-shadow: none; }
     .my-modal .modal__create .icon-down {
       font-size: 24px; }
   .my-modal .modal__success {
     width: 400px;
-    height: 150px;
     padding: 30px 30px; }
     .my-modal .modal__success h3 {
       font-weight: 500;
@@ -65,6 +66,8 @@
       .my-modal .modal__success .btn-cancel:hover {
         color: #0B588C;
         background-color: transparent; }
+      .my-modal .modal__success .btn-cancel:focus {
+        box-shadow: none; }
     .my-modal .modal__success .btn-watchList {
       font-weight: 600;
       font-size: 16px;
@@ -73,6 +76,8 @@
       .my-modal .modal__success .btn-watchList:hover {
         color: #FFFFFF;
         background-color: #0B588C; }
+      .my-modal .modal__success .btn-watchList:focus {
+        box-shadow: none; }
   .my-modal .modal__create .icon-close {
     width: 33px;
     height: 33px;
@@ -114,6 +119,8 @@
       .my-modal .from__btn .btn-cancel:hover {
         background-color: transparent;
         color: #306C14; }
+      .my-modal .from__btn .btn-cancel:focus {
+        box-shadow: none; }
     .my-modal .from__btn .btn-create {
       width: 140px;
       height: 35px;
@@ -123,6 +130,8 @@
       .my-modal .from__btn .btn-create:hover {
         background-color: #306C14;
         color: #FFFFFF; }
+      .my-modal .from__btn .btn-create:focus {
+        box-shadow: none; }
   .my-modal ::deep .my-uploadImg {
     padding: 0; }
     .my-modal ::deep .my-uploadImg span {

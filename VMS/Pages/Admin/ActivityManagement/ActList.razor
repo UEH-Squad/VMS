@@ -60,7 +60,7 @@
                                                 assignment
                                             </span>
                                             <span class="icon-tooltip">Ngày đăng ký</span>
-                                            <span>@item.OpenRegistrationDate.ToString("dd/MM/yyyy") - @item.CloseRegistrationDate.ToString("dd/MM/yyyy")</span>
+                                            <span>@item.OpenDate.ToString("dd/MM/yyyy") - @item.CloseDate.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <span class="material-icons-outlined me-2 my-icon">
@@ -88,7 +88,7 @@
                                                     </i> Đã đóng đăng ký
                                                 </h5>
                                             }
-                                            else if (item.CloseRegistrationDate >= DateTime.Now || item.StartDate >= DateTime.Now)
+                                            else if (item.StartDate >= DateTime.Now)
                                             {
                                                 <div class="act-footer__btn d-flex align-items-center">
                                                     <button @onclick="() => ShowApproveModal(item.Id)" class="btn act-footer__btn--approval">Duyệt hoạt động</button>
@@ -152,11 +152,11 @@
             Name = "Công nghệ thông tin kinh doanh",
             Content = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
             Person = 250,
-            CloseRegistrationDate = DateTime.Parse("2021/11/21"),
-            OpenRegistrationDate = DateTime.Parse("2021/10/20"),
+            CloseDate = DateTime.Parse("2021/11/21"),
+            OpenDate = DateTime.Parse("2021/10/20"),
             Id = ++i,
             EndDate = DateTime.Parse("2022/10/21"),
-            StartDate = DateTime.Parse("2021/12/20")
+            StartDate = DateTime.Parse("2021/10/20")
         }).ToList();
 
         var result = new PaginatedList<FakeData>(data, 100, page, 20);
@@ -174,8 +174,8 @@
         public int Id { get; set; }
         public bool IsMenu { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime OpenRegistrationDate { get; set; }
-        public DateTime CloseRegistrationDate { get; set; }
+        public DateTime OpenDate { get; set; }
+        public DateTime CloseDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }

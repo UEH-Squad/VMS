@@ -6,9 +6,10 @@
 .arrange-bar {
     display: flex;
     .labels {
-        margin-right: 150px;
+        margin-right: 60px;
         span {
             display: block;
+            font-weight: 500;
         }
     }
 }

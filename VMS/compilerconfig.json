@@ -442,5 +442,13 @@
   {
     "outputFile": "Shared/AdminLayout.razor.css",
     "inputFile": "Shared/AdminLayout.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/OrganizationManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/VolunteerManagement/Index.razor.scss"
   }
 ]

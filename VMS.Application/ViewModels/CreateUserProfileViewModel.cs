@@ -11,7 +11,7 @@ namespace VMS.Application.ViewModels
     public class CreateUserProfileViewModel
     {
         [Required] public string FullName { get; set; }
-        [Required] public string Email { get; set; }
+        [Required] public string NotifiedEmail { get; set; }
         [Required] public string PhoneNumber { get; set; }
         [Required] public string Mission { get; set; }
         [Required] public string UserName { get; set; }

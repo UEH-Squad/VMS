@@ -65,40 +65,25 @@
 
         <div class="form-report__reason mb-3">
             <h6 class="form-report__reason--text">Lý do báo cáo <span>(*)</span></h6>
-            <textarea rows="2" disabled="true">
-                    02. Yêu Một Người Gian Dối - Như Việt
-                    03. Yêu Một Người Tổn Thương - Nhật Phong
-                    04. Người Lạ Từng Thương - Thương Võ
-                </textarea>
+            <textarea rows="2" disabled="true">Hoạt động này không có thật; Hoạt động tổ chức không chuyên nghiệp; Hoạt động lừa đảo tham gia.</textarea>
         </div>
 
         <div class="form-report__discript mb-3">
             <h6 class="form-report__discript--text">Mô tả về báo cáo <span>(*)</span></h6>
-            <textarea rows="4" disabled="true">
-                    01. Đừng Hẹn Kiếp Sau - Đình Dũng
-                    02. Yêu Một Người Gian Dối - Như Việt
-                    03. Yêu Một Người Tổn Thương - Nhật Phong
-                    04. Người Lạ Từng Thương - Thương Võ
-                    05. Câu Hẹn Câu Thề - Đình Dũng
-                    06. Sầu Tương Tư - Nhật Phong
-                    07. Tình Anh - Đình Dũng
-                    08. Lệ Duyên Tình - KICM ft. Long Nón Lá
-                    09. Tránh Duyên - Đình Dũng
-                </textarea>
+            <textarea rows="4" disabled="true">Có hai cái cây trong một cái rừng. Trên những tán cây nở rộ những đóa hoa. Có hai đứa nhóc đang chơi trốn tìm. Tìm hoài tìm mãi nên quên lối về. Anh đi tìm thì em trốn, anh đi trốn em không tìm (Ah). Lòng em không gợn sóng, cuối cùng anh mất công chìm (Yeah). Nếu mà có cây búa anh sẽ nện cho bõ công. Vì nhớ nhung đặc quánh giờ nó khô thành bê tông.</textarea>
         </div>
 
         <div class="form-report__proof">
             <h6 class="form-report__proof--text">Minh chứng đính kèm <span>(*)</span></h6>
-            <div class="d-flex @(soLuongAnhBaoCao<3?" justify-content-evenly":"justify-content-between")">
+            <div class="list-img-report d-flex @(soLuongAnhBaoCao==3? "justify-content-between":soLuongAnhBaoCao<3?"justify-content-evenly":"")">
                 @for (int i = 0; i < soLuongAnhBaoCao; i++)
                 {
-                    <img class="form-report__proof--item" src="./img/act.png" alt="Ảnh mô tả báo cáo" />
+                    <img @onclick="() =>ShowImage(nameImg)" class="form-report__proof--item @(soLuongAnhBaoCao>3?"margin-right-img":"")" src="@nameImg" alt="Ảnh mô tả báo cáo" />
                 }
             </div>
         </div>
 
     </div>
-
     <div class="action-button d-flex justify-content-center">
         <button @onclick="() => ShowNotification(2)" class="action-button__processing">Đang xử lý</button>
         <button @onclick="() => ShowNotification(3)" class="action-button__complete-processing">Hoàn tất xử lý</button>
@@ -108,11 +93,24 @@
 
 
 @code {
-
-    private int soLuongAnhBaoCao = 3;
+    string nameImg = "./img/132752427653900370_43fdc502-ac5b-43eb-84c3-c8600d3756f8.jpg";
+    private int soLuongAnhBaoCao = 4;
     private string action = "";
 
     [CascadingParameter] public IModalService Modal { get; set; }
+    async Task ShowImage(string nameImg)
+    {
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true
+        };
+        ModalParameters para = new();
+        para.Add("Image", nameImg);
+        Modal.Show<VMS.Pages.Admin.DetailReportPage.WatchImageReport>("", para, options);
+    }
+
     async Task ShowConfirm(int act)
     {
         var options = new ModalOptions()

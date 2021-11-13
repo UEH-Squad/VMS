@@ -3,11 +3,13 @@
 .my-uploadImg {
     border: 1px solid $border-color-normal;
     border-radius: 5px;
-    padding: 10px 15px;
+    padding: 10px 15px 0px 15px;
 }
 
 .image-list {
     overflow-x: scroll;
+    z-index: 1;
+    padding-bottom: 10px;
 
     &::-webkit-scrollbar {
         height: 5px;

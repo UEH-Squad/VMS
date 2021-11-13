@@ -344,6 +344,22 @@
     "inputFile": "Pages/ActivityLogPage/Index.razor.scss"
   },
   {
+    "outputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.css",
+    "inputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Title.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Index.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
+  },
+  {
     "outputFile": "Shared/AdminSidebar.razor.css",
     "inputFile": "Shared/AdminSidebar.razor.scss"
   },
@@ -442,6 +458,14 @@
   {
     "outputFile": "Shared/AdminLayout.razor.css",
     "inputFile": "Shared/AdminLayout.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchImageReport/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchImageReport/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
   },
   {
     "outputFile": "Pages/Admin/OrganizationManagement/Index.razor.css",

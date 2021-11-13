@@ -50,11 +50,24 @@
                                             star_rate
                                         </span>
                                     </div>
-                                    <h5 class="org-name d-flex align-items-center">
+                                    <h5 class="org-name d-flex align-items-center mb-0">
                                         <i class="material-icons">public</i> @item.Name
                                     </h5>
-                                    <p class="lmtext-2 act__content-description mb-2">@item.Content</p>
-                                    <span class="align-self-start">Ngày đăng: @item.CreatedDate</span>
+                                    <p class="lmtext-2 act__content-description mb-1">@item.Content</p>
+                                    <div class="act_content-date d-flex flex-column">
+                                        <div class="d-flex mb-1 align-items-center">
+                                            <span class="material-icons-outlined me-2">
+                                                today
+                                            </span>
+                                            <span>Thời gian đăng ký từ @item.RegisterDate.ToString("dd/MM/yyyy") đến @item.CloseRegisterDate.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="material-icons-outlined me-2">
+                                                today
+                                            </span>
+                                            <span>Thời gian diễn ra từ @item.StartDate.ToString("dd/MM/yyyy") đến @item.EndDate.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h5 class="fw-normal d-flex align-items-center">
@@ -152,6 +165,8 @@
         public int Id { get; set; }
         public bool IsMenu { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime RegisterDate { get; set; }
+        public DateTime CloseRegisterDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }

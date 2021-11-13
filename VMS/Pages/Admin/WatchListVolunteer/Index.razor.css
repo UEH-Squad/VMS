@@ -25,12 +25,9 @@
   .container ::deep .my-container {
     justify-content: space-between; }
     .container ::deep .my-container .quantity-volunteers {
-      margin-top: -8%;
       width: 62%; }
     .container ::deep .my-container .button {
       width: 18%; }
-      .container ::deep .my-container .button__text--del {
-        background-color: #F14747; }
       .container ::deep .my-container .button__text--del:hover {
         background-color: #E10B0B; }
     .container ::deep .my-container .link__text--del:hover {

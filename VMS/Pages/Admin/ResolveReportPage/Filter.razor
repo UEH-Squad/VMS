@@ -15,14 +15,14 @@
         <input readonly="readonly" placeholder="@valueStatus" data-bs-toggle="dropdown" class="@(haveStatus?"bg-grey":"") dropdown-input" />
         <ul class="dropdown-menu">
             <li @onclick="() => ChooseValueStatus(1)" style="color: #F14747">Đã ghim</li>
-            <li @onclick="() => ChooseValueStatus(2)">Đang xử lý</li>
+            <li @onclick="() => ChooseValueStatus(2)" style="color: #18A0FB">Đang xử lý</li>
             <li @onclick="() => ChooseValueStatus(3)" style="color: #64D72F">Hoàn tất xử lý</li>
             <li @onclick="() => ChooseValueStatus(4)" style="color: unset">Đã đóng</li>
         </ul>
     </div>
 
     <div class="item filter-item">
-        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="@timeNow" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" OnChange="ChooseMonthValue" Format="MM/yyyy"/>
+        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" OnChange="ChooseMonthValue" Format="MM/yyyy"/>
     </div>
 
     <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
@@ -34,8 +34,8 @@
 @code {
     [Parameter]
     public string Status { get; set; }
-    [Parameter]
-    public DateTime Value { get; set; }
+
+    DateTime Value { get; set; }
 
     [Parameter]
     public EventCallback<string> StatusChanged { get; set; }
@@ -45,7 +45,6 @@
     private bool haveType = false;
     private bool haveStatus = false;
     private bool isFilterMonth = false;
-    private DateTime timeNow = DateTime.Now;
 
     public void ChooseMonthValue()
     {
@@ -83,7 +82,7 @@
         isFilterMonth = false;
         haveStatus = false;
         haveType = false;
-        timeNow = DateTime.Now;
+        Value = DateTime.Now;
         await StatusChanged.InvokeAsync("");
     }
     private async Task UpdateFilterValueAsync()

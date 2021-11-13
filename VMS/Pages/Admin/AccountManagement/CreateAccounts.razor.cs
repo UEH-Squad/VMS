@@ -54,7 +54,7 @@ namespace VMS.Pages.Admin.AccountManagement
             ResultModal.Show<CreateFailed>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
 
-        private async Task OnClickDownloadDemo()
+        private async Task OnClickDownloadDemoAsync()
         {
             string fileName = Role == Role.User ? "IMPORT_USER_DEMO.xlsx" : "IMPORT_ORG_DEMO.xlsx";
 

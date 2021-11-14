@@ -18,11 +18,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         private PaginatedList<ActivityViewModel> data = new(new(), 0, 1, 1);
 
         [Parameter]
-        public FilterActivityViewModel Filter { get; set; }
-        [Parameter]
-        public bool IsSearch { get; set; } = false;
-        [Parameter]
-        public string SearchValue { get; set; } = "";
+        public FilterOrgActivityViewModel Filter { get; set; }
         [Parameter]
         public bool IsOrgProfile { get; set; } = false;
         [CascadingParameter]
@@ -33,6 +29,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         private IActivityService ActivityService { get; set; }
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await JS.InvokeVoidAsync("vms.AddOutsideClickMenuHandler", DotNetObjectReference.Create(this), nameof(HideMenuInterop));
@@ -51,12 +48,12 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 
         protected override async Task OnParametersSetAsync()
         {
-            data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, 1);
+            data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, 1);
         }
 
         private async Task HandlePageChangedAsync(bool isPaging = false)
         {
-            data = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page);
+            data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, page);
             StateHasChanged();
             if (isPaging)
             {
@@ -90,7 +87,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
                 UseCustomLayout = true,
             };
 
-            var result = await Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", options).Result;
+            var result = await Modal.Show(typeof(Profile.DeleteConfirm), "", options).Result;
 
             if ((bool)result.Data)
             {
@@ -98,6 +95,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
                 await HandlePageChangedAsync();
             }
         }
+
         private async Task ShowCloseModalAsync(ActivityViewModel activity)
         {
             var parameters = new ModalParameters();
@@ -110,13 +108,13 @@ namespace VMS.Pages.Organization.ActivityManagementPage
                 UseCustomLayout = true,
             };
 
-            var result = await Modal.Show(typeof(Pages.Organization.Profile.CloseConfirm), "", parameters, options).Result;
+            var result = await Modal.Show(typeof(Profile.CloseConfirm), "", parameters, options).Result;
 
             if ((bool)result.Data)
             {
                 await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
                 activity.IsClosed = !activity.IsClosed;
-                Modal.Show(typeof(Pages.Organization.Profile.CloseSuccess), "", parameters, options);
+                Modal.Show(typeof(Profile.CloseSuccess), "", parameters, options);
             }
         }
     }

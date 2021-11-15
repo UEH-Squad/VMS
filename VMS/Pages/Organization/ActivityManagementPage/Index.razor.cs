@@ -7,9 +7,9 @@ namespace VMS.Pages.Organization.ActivityManagementPage
     public partial class Index : ComponentBase
     {
         private string orgId;
-        private FilterActivityViewModel filter = new();
-        private string searchValue = string.Empty;
-        private bool isSearch = false;
+        private FilterOrgActivityViewModel filter = new();
+
+        [CascadingParameter] private string OrgId { get; set; }
 
         [Inject]
         private IIdentityService IdentityService { get; set; }
@@ -22,14 +22,14 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 
         private void SearchValueChanged(string searchValue)
         {
-            this.searchValue = searchValue;
-            isSearch = !string.IsNullOrEmpty(searchValue);
+            filter.SearchValue = searchValue;
+            filter.IsSearch = true;
         }
 
-        private void FilterChanged(FilterActivityViewModel filter)
+        private void FilterChanged(FilterOrgActivityViewModel filter)
         {
             this.filter = filter;
-            isSearch = false;
+            this.filter.IsSearch = false;
         }
     }
 }

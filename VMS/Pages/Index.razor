@@ -1,20 +1,14 @@
 ﻿@attribute [Route(Routes.HomePage)]
 
-@using VMS.Domain.Models
-@using VMS.Application.Interfaces
-@using VMS.Application.ViewModels
-
 @inject IJSRuntime JsRuntime
-@inject IIdentityService IdentityService
-@inject IActivityService UserWithActService
 
 <VMS.Pages.Homepage.SloganAndVideo />
 <VMS.Pages.Homepage.Filter />
 <VMS.Pages.Homepage.Rank />
 <section class="my-act">
     <div class="container-lg p-0 position-relative">
-        <VMS.Pages.Homepage.RelatedActivities Title="Mới Nhất" Activities="@newestActivities" QueryString="?newest=true&nearest=true" />
-        <VMS.Pages.Homepage.RelatedActivities Title="Nổi Bật Nhất" Activities="@featuredActivities" IsFeaturedActivities="true" QueryString="?hottest=true&nearest=true" />
+        <VMS.Pages.Organization.Profile.Act Title="mới nhất" Datas="@newestActivities" QueryString="?newest=true&nearest=true" HaveLinkAll="true" TitleLinkALl="Nhiều hơn" />
+        <VMS.Pages.Organization.Profile.Act Title="nổi bật nhất" Datas="@featuredActivities" QueryString="?hottest=true&nearest=true" HaveLinkAll="true" TitleLinkALl="Nhiều hơn" />
     </div>
 </section>
 
@@ -23,22 +17,4 @@
 
 @code
 {
-    public List<UserWithActivityViewModel> newestActivities, featuredActivities;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JsRuntime.InvokeVoidAsync("vms.SetUserLocation");
-        }
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        User user = IdentityService.GetCurrentUser();
-        var location = await JsRuntime.InvokeAsync<CoordinateJs>("vms.GetUserLocation");
-        var userLocation = location.ToCoordinate();
-        newestActivities = await UserWithActService.GetRelatedActivities(user?.Id, userLocation);
-        featuredActivities = await UserWithActService.GetRelatedActivities(user?.Id, userLocation, true);
-    }
 }

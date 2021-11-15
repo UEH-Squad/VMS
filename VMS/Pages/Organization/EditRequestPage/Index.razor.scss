@@ -1,0 +1,26 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.activity-info {
+    margin-top: 5%;
+    margin-bottom: 8%;
+
+    ::deep .toppage {
+        display: none;
+    }
+
+    ::deep .title__date {
+        .material-icons {
+            display: none;
+        }
+    }
+
+    ::deep .inside-the-border {
+        .btn-sign-up--cover {
+            display: none;
+        }
+    }
+
+    ::deep .report {
+        display: none;
+    }
+}

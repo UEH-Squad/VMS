@@ -37,7 +37,7 @@
 
         &__title {
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 600;
             color: $blue;
         }
 
@@ -48,7 +48,7 @@
                 ::deep .member-star {
                     margin-left: 0%;
 
-                    &_button{
+                    &_button {
                         background-color: transparent;
                     }
 
@@ -84,13 +84,14 @@
         flex-basis: 50px;
         justify-content: center;
         flex-direction: column;
+        align-content: space-around;
 
         button {
             border: none;
             background-color: transparent;
 
             span {
-                font-size: 24px;
+                font-size: 30px;
             }
         }
 
@@ -98,11 +99,20 @@
             span {
                 color: $red;
             }
+
+            span:hover {
+                color: $red-warning;
+            }
         }
 
         &__comment {
             span {
+                margin-top: 10px;
                 color: $blue;
+            }
+
+            span:hover {
+                color: $blue-hv;
             }
         }
     }

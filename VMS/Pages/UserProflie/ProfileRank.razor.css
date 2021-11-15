@@ -1,0 +1,30 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.profile__rank a {
+  color: #64D72F;
+  font-size: 40px;
+  font-weight: 600;
+  text-decoration: none; }
+
+.profile__rank .profile__rank-number {
+  color: #707070;
+  font-size: 24px;
+  font-weight: 700; }
+
+.profile__rank i {
+  margin: auto 2px;
+  color: #EDF131;
+  font-size: 30px; }
+
+.profile__rank .icon-noColor {
+  color: #D8D8D8; }
+
+.profile__rank span {
+  display: block;
+  color: #707070;
+  font-size: 20px;
+  font-weight: 500; }

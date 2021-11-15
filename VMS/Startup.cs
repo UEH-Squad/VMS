@@ -55,6 +55,7 @@ namespace VMS
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddBlazoredModal();
+            services.AddAntDesign();
 
             // Hangfire
             GlobalConfiguration.Configuration

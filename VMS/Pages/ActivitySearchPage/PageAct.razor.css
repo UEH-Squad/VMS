@@ -21,7 +21,7 @@
       color: #64D72F; }
   .act .act__item {
     background-color: #F3F3F5;
-    padding: 20px 10px;
+    padding: 10px 0px;
     border-radius: 10px;
     margin-top: 30px;
     height: 285px; }
@@ -30,14 +30,14 @@
       object-fit: cover; }
 
 .act__content {
-  padding: 0 20px;
   position: relative; }
   .act__content a {
     font-size: 24px;
     font-weight: 400;
     color: #18A0FB;
     text-decoration: none;
-    cursor: pointer; }
+    cursor: pointer;
+    word-spacing: -2px; }
     .act__content a:hover {
       color: #0B588c; }
   .act__content h5 {

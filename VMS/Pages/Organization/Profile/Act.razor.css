@@ -9,18 +9,18 @@
   font-size: 30px;
   line-height: 36px;
   color: #515151;
-  margin-bottom: 42px;
-  margin-top: 70px; }
+  padding-bottom: 5px; }
   .act h1 span {
     color: #64D72F; }
 
+.act hr {
+  width: 60%;
+  height: 1px;
+  background-color: #707070;
+  opacity: 50%; }
+
 .act .owl-carousel {
   z-index: 0; }
-
-.act .bottom-line {
-  background-color: rgba(70, 70, 70, 0.5);
-  height: 1px;
-  margin-top: 50px; }
 
 .overlay {
   background-color: rgba(100, 100, 100, 0.2);
@@ -60,8 +60,8 @@
 .act-container .material-icons {
   color: #FFFFFF;
   font-size: 24px;
-  right: 5px;
-  top: 0; }
+  right: 10px;
+  top: 10px; }
   .act-container .material-icons:hover {
     cursor: pointer; }
 
@@ -76,7 +76,9 @@
 .act-content {
   background-color: #F3F3F5;
   border-radius: 0 0 10px 10px;
-  min-height: 162px; }
+  min-height: 125px; }
+  .act-content a {
+    min-height: 125px; }
   .act-content .content-cl {
     background-color: rgba(100, 100, 100, 0.2); }
   .act-content .content-nm,
@@ -102,7 +104,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    -webkit-line-clamp: 4; }
+    -webkit-line-clamp: 3; }
 
 .act-container:hover > .img-container {
   opacity: .6; }
@@ -130,11 +132,13 @@
   .act-content-overrides .content-nm .act-title, .act-content-overrides .content-cl .act-title {
     color: #FFFFFF;
     font-size: 24px;
-    font-weight: 400; }
+    font-weight: 400;
+    height: 90px;
+    width: 100%; }
 
 .img-container .act-img {
   width: 100%;
-  max-height: 269px;
+  height: 269px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px 10px 0 0; }
@@ -145,10 +149,12 @@
 ::deep .owl-carousel .owl-item {
   padding: 0 7px; }
 
+::deep .owl-carousel.owl-loading {
+  opacity: 1; }
+
 ::deep .owl-nav button.owl-next,
 ::deep .owl-nav button.owl-prev {
   background: #18A0FB;
-  opacity: .85;
   position: absolute;
   border-radius: 100%;
   top: 26%;
@@ -165,7 +171,8 @@
     color: #FFFFFF; }
   ::deep .owl-nav button.owl-next:hover,
   ::deep .owl-nav button.owl-prev:hover {
-    background: #18A0FB; }
+    background: #0B588C;
+    opacity: .73; }
 
 ::deep .owl-nav button.owl-prev {
   left: 20px; }
@@ -176,15 +183,13 @@
 ::deep .owl-dots {
   display: none; }
 
-.act__linkAll {
-  margin-top: 50px; }
-  .act__linkAll a {
-    font-weight: 600;
-    font-size: 24px;
-    color: #64D72F; }
-    .act__linkAll a:hover {
-      color: #306C14;
-      cursor: pointer; }
+.act__linkAll a {
+  font-weight: 600;
+  font-size: 24px;
+  color: #64D72F; }
+  .act__linkAll a:hover {
+    color: #306C14;
+    cursor: pointer; }
 
 .favorite {
   right: 10px;

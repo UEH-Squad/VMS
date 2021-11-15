@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
-using VMS.Application.Services;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Organization.Profile
 {
@@ -36,9 +36,20 @@ namespace VMS.Pages.Organization.Profile
 
         protected override async Task OnParametersSetAsync()
         {
-            await base.OnParametersSetAsync();
+            if (string.IsNullOrEmpty(CurrentUserId) && string.IsNullOrEmpty(UserId))
+            {
+                NavigationManager.NavigateTo(Routes.LogIn, true);
+            }
+
+            UserId = string.IsNullOrEmpty(UserId) ? CurrentUserId : UserId;
 
             org = OrganizationService.GetOrgFull(UserId);
+
+            if (org == null)
+            {
+                NavigationManager.NavigateTo(Routes.HomePage, true);
+            }
+
             bool isUserOrg = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);
 
             if (isUserOrg)
@@ -52,9 +63,9 @@ namespace VMS.Pages.Organization.Profile
                 haveControl = true;
             }
 
-            actCurrent = await ActivityService.GetOrgActs(UserId, StatusAct.Current);
-            actFavorite = await ActivityService.GetOrgActs(UserId, StatusAct.Favor);
-            actEnded = await ActivityService.GetOrgActs(UserId, StatusAct.Ended);
+            actCurrent = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Current);
+            actFavorite = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Favor);
+            actEnded = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Ended);
 
             if (string.IsNullOrEmpty(CurrentUserId))
             {
@@ -79,6 +90,6 @@ namespace VMS.Pages.Organization.Profile
                                                                  && !string.IsNullOrEmpty(org.PhoneNumber)
                                                                  && !string.IsNullOrEmpty(org.Mission)
                                                                  && !string.IsNullOrEmpty(org.Banner)
-                                                                 && org.UserAreas.Count != 0;
+                                                                 && org.Areas.Count != 0;
     }
 }

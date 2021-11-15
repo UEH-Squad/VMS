@@ -23,6 +23,10 @@
         color: $white;
         background: $green;
 
+        &:hover {
+            background: $green-bold;
+        }
+
         @include on("sm") {
             width: 40px;
             height: 40px;

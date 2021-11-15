@@ -1,7 +1,6 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
@@ -13,6 +12,7 @@ using VMS.Application.Services;
 using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Common.CustomValidations;
+using VMS.Pages.Organization.Profile;
 
 namespace VMS.Pages.Volunteer.EditUserProfile
 {
@@ -38,12 +38,10 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         [Inject]
         private IFacultyService FacultyService { get; set; }
 
-        private int width;
-        private string classWidth = "";
-        private bool isLoading;
         private string UserId;
         private int count;
         private bool isErrorMessageShown = false;
+        private string facultyChoosenValue = "Lựa chọn Khoa";
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private List<FacultyViewModel> faculties = new();
         private CreateUserProfileViewModel user = new();
@@ -51,9 +49,13 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         protected override async Task OnInitializedAsync()
         {
             UserId = IdentityService.GetCurrentUserId();
-            user = await UserService.GetCreateUserProfileViewModelAsync(UserId);
+            user = await UserService.GetUserProfileViewModelAsync(UserId);
             faculties = await FacultyService.GetAllFacultiesAsync();
             choosenAreas = user.Areas;
+            if(user.FacultyId is not null)
+            {
+                facultyChoosenValue = user.FacultyName;
+            }
         }
 
         private async Task ShowAreasModal()
@@ -76,6 +78,12 @@ namespace VMS.Pages.Volunteer.EditUserProfile
             {
                 await JSRuntime.InvokeVoidAsync("vms.EditProfileCarousel");
             }
+        }
+
+        private void ChooseDepartmentValue(FacultyViewModel faculty)
+        {
+            facultyChoosenValue = faculty.Name;
+            user.FacultyId = faculty.Id.ToString();
         }
 
         private async Task ShowSkillsPopup()
@@ -127,45 +135,46 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task HandleSubmit()
         {
-            if (!string.IsNullOrWhiteSpace(user.Address))
+            ModalOptions options = new()
             {
-                user.FullAddress = $"{user.Address}, {user.FullAddress}";
-            }
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true
+            };
 
-            Logger.LogInformation("HandleValidSubmit called");
-            isErrorMessageShown = false;
-            isLoading = true;
+            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", options);
+            ModalResult result = await editConfirmModal.Result;
+            if (!result.Cancelled)
+            {
+                if (!string.IsNullOrWhiteSpace(user.Address))
+                {
+                    user.FullAddress = $"{user.Address}, {user.FullAddress}";
+                }
 
-            try
-            {
-                await UserService.UpdateUserProfile(user, UserId);
-                isLoading = false;
-            }
-            catch (Exception ex)
-            {
-                isLoading = false;
-                Logger.LogError("Error occurs when trying to edit profile", ex.Message);
-                await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+                Logger.LogInformation("HandleValidSubmit called");
+                isErrorMessageShown = false;
+
+                try
+                {
+                    await UserService.UpdateUserProfile(user, UserId);
+
+                    ModalParameters modalParams = new();
+                    modalParams.Add("Title", succeededCreateTitle);
+                    await Modal.Show<Organization.Activities.NotificationPopup>("", modalParams, options).Result;
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError("Error occurs when trying to edit profile", ex.Message);
+                    await JSRuntime.InvokeVoidAsync("alert", ex.Message);
+                }
             }
         }
 
         private async Task HandleInvalidSubmit()
         {
-            isLoading = false;
             isErrorMessageShown = true;
             await Interop.ScrollToTop(JSRuntime);
         }
 
-        async Task ShowConfirmPopUp()
-        {
-            var options = new ModalOptions()
-            {
-
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-            Modal.Show<ConfirmNotification>("", options);
-        }
     }
 }

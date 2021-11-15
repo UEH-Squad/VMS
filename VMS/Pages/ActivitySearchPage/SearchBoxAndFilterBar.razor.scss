@@ -34,8 +34,8 @@
         content: "";
         width: 13px;
         height: 7px;
-        border-left: 2px solid $blue;
-        border-bottom: 2px solid $blue;
+        border-left: 2px solid var(--checkbox-color);
+        border-bottom: 2px solid var(--checkbox-color);
         position: absolute;
         top: 40%;
         left: 52%;
@@ -45,15 +45,6 @@
 
     &:checked::before {
         display: block;
-    }
-}
-
-.form-check:nth-child(3) {
-    .my-check-box {
-        &::before {
-            border-left: 2px solid #f14747;
-            border-bottom: 2px solid #f14747;
-        }
     }
 }
 
@@ -110,7 +101,7 @@
     background-color: #fff;
     z-index: 1;
     display: none;
-    width:100%;
+    width: 100%;
 
     ul {
         overflow-y: scroll;
@@ -129,10 +120,14 @@
 
         li {
             color: $blue;
-            font-size: 20px;
-            line-height: 24px;
-            margin-bottom: 12px;
+            font-size: 18px;
+            margin-bottom: 6px;
             cursor: pointer;
+
+            &:hover {
+                color: $green;
+                background-color: rgba(24, 160, 251, 0.1);
+            }
         }
     }
 }

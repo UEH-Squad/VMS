@@ -13,12 +13,13 @@
                 <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="SearchValueChanged"/>
             </div>
             <div class="activities col-9">
-                <ActivitiesCard SearchValue=@searchValue IsSearch=@isSearch Filter=@filter/>
+                <ActivitiesCard Filter=@filter/>
             </div>
             <div class="filter col-1">
             </div>
             <div class="filter col-2">
                 <Filter FilterAct=@filter FilterActChanged="FilterChanged" OrgId=@orgId />
+                <EditRequest />
             </div>
         </div>
     </div>

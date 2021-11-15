@@ -38,7 +38,7 @@
             <div class="form-group mb-3">
                 <div class="row my-form-group">
                     <div class="fw-medium col-3 align-self-center">Đối tượng tham gia <span class="required-asterick">(*)</span></div>
-                    <div class="col-9">
+                    <div class="col-6">
                         <Typeahead SearchMethod="SearchTargets"
                                    PlaceHolderText="Lựa chọn đối tượng tham gia"
                                    @bind-Values="chosenTargets"
@@ -61,10 +61,10 @@
                         @foreach (var item in choosenAreas)
                         {
                             <div class="item me-5">
-                                <i class="material-icons">
+                                <i class="material-icons" style="background-color: @item.Color">
                                     @item.Icon
                                 </i>
-                                <span>@item.Name</span>
+                                <span style="color: @(item.IsPinned ? item.Color : "#64D72F")">@item.Name</span>
                             </div>
                         }
                         <div class="item">
@@ -92,10 +92,19 @@
             </div>
             <div class="form-group mb-3">
                 <div class="row my-form-group">
+                    <div class="fw-medium col-3 align-self-center">Thời gian đăng ký <span class="required-asterick">(*)</span></div>
+                    <div class="col-9 d-flex flex-row align-items-center">
+                        Từ <AntDesign.DatePicker @bind-Value="activity.OpenDate" Format="dd/MM/yyyy" class="form-control ms-2 me-4 my-date-picker" />
+                        Đến <AntDesign.DatePicker @bind-Value="activity.CloseDate" Format="dd/MM/yyyy" class="form-control ms-2 my-date-picker" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="row my-form-group">
                     <div class="fw-medium col-3 align-self-center">Thời gian diễn ra <span class="required-asterick">(*)</span></div>
                     <div class="col-9 d-flex flex-row align-items-center">
-                        Từ <InputDate @bind-Value="activity.StartDate" @oninput="OnStartDateChanged" class="form-control ms-2 me-4 my-date-picker" placeholder="Ngày bắt đầu" />
-                        Đến <InputDate @bind-Value="activity.EndDate" @oninput="OnEndDateChanged" class="form-control ms-2 my-date-picker" placeholder="Ngày kết thúc" />
+                        Từ <AntDesign.DatePicker @bind-Value="activity.StartDate" Format="dd/MM/yyyy" class="form-control ms-2 me-4 my-date-picker" />
+                        Đến <AntDesign.DatePicker @bind-Value="activity.EndDate" Format="dd/MM/yyyy" class="form-control ms-2 my-date-picker" />
                     </div>
                 </div>
             </div>

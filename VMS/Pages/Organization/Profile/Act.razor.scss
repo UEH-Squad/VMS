@@ -6,22 +6,22 @@
         font-size: 30px;
         line-height: 36px;
         color: $grey-text;
-        margin-bottom: 42px;
-        margin-top: 70px;
+        padding-bottom: 5px;
 
         span {
             color: $green;
         }
     }
 
-    .owl-carousel {
-        z-index: 0;
+    hr {
+        width: 60%;
+        height: 1px;
+        background-color: #707070;
+        opacity: 50%;
     }
 
-    .bottom-line {
-        background-color: rgba(70, 70, 70, 0.5);
-        height: 1px;
-        margin-top: 50px;
+    .owl-carousel {
+        z-index: 0;
     }
 }
 
@@ -77,8 +77,8 @@
     .material-icons, {
         color: $white;
         font-size: 24px;
-        right: 5px;
-        top: 0;
+        right: 10px;
+        top: 10px;
 
         &:hover {
             cursor: pointer;
@@ -100,7 +100,11 @@
 .act-content {
     background-color: $grey;
     border-radius: 0 0 10px 10px;
-    min-height: 162px;
+    min-height: 125px;
+
+    a {
+        min-height: 125px;
+    }
 
     .content-cl {
         background-color: rgba(100,100,100,.2);
@@ -134,7 +138,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 3;
     }
 }
 
@@ -179,6 +183,8 @@
             color: $white;
             font-size: 24px;
             font-weight: 400;
+            height: 90px;
+            width: 100%;
         }
     }
 }
@@ -186,7 +192,7 @@
 .img-container {
     .act-img {
         width: 100%;
-        max-height: 269px;
+        height: 269px;
         object-fit: cover;
         object-position: center;
         border-radius: 10px 10px 0 0;
@@ -202,11 +208,14 @@
     }
 }
 
+::deep .owl-carousel.owl-loading {
+    opacity: 1;
+}
+
 ::deep .owl-nav {
     button.owl-next,
     button.owl-prev {
-        background: $blue;
-        opacity: .85;
+        background: $blue;      
         position: absolute;
         border-radius: 100%;
         top: 26%;
@@ -224,7 +233,8 @@
         }
 
         &:hover {
-            background: $blue;
+            background: $blue-bold;
+            opacity: .73;
         }
     }
 
@@ -241,7 +251,6 @@
     display: none;
 }
 .act__linkAll {
-    margin-top: 50px;
 
     a {
         font-weight: 600;

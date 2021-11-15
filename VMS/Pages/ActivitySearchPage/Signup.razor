@@ -13,49 +13,64 @@
         </div>
 
     </div>
-    
+
     <div class="signUp__content">
         <EditForm Model="@signupModel" OnValidSubmit="@HandleSignUp" Context="CurrentEditContext">
             <DataAnnotationsValidator />
-            <ValidationSummary />
             <i @onclick="ExitModalAsync" class="material-icons-outlined signUp__exit d-flex align-items-center justify-content-center">
                 close
             </i>
             <div class="signUp__form">
-                <form action="">
-                    <h1>Đơn <span>đăng ký</span></h1>
-                    <div class="row">
-                        <div class="col-6">
-                            <p class="form-text">Họ tên <span>(*)</span></p>
-                            <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control mb-3" disabled="true" />
-                            <p class="form-text">Email nhận thông báo <span>(*)</span></p>
-                            <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control mb-3" disabled="true" />
-                            <p class="form-text">Số điện thoại <span>(*)</span></p>
-                            <InputText @bind-Value="signupModel.PhoneNumber" class="form-control mb-3" />
+                <h1>Đơn <span>đăng ký</span></h1>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="form-text">Họ tên <span>(*)</span></p>
+                        <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
+                        <p class="form-text mt-3">Email nhận thông báo <span>(*)</span></p>
+                        <InputText @bind-Value=@CurrentUser.Email type="email" class="form-control" disabled="true" />
+                        <p class="form-text mt-3">Số điện thoại <span>(*)</span></p>
+                        @if (IsReadOnly)
+                        {
+                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control" disabled="true" />
+                        }
+                        else
+                        {
+                            <InputText @bind-Value=@signupModel.PhoneNumber class="form-control" />
+                        }
+                        <ValidationMessage For="@(() => signupModel.PhoneNumber)" />
 
-                            <p class="form-text">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
+                        <p class="form-text mt-3">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
 
-                            <InputRadioGroup Name="radioSignUp" @bind-Value="check">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
-                                    <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp" />
-                                    <label for="checksure">Chắc chắn</label>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
-                                    <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" />
-                                    <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
-                                </div>
-                            </InputRadioGroup>
-                        </div>
-                        <div class="col-6">
-                            <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
-                            <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3"></InputTextArea>
-                            <img class="w-100" src="img/formSignUp.png" alt="">
-                        </div>
+                        <InputRadioGroup Name="radioSignUp" @bind-Value="check">
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
+                                <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp" />
+                                <label for="checksure">Chắc chắn</label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
+                                <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" />
+                                <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
+                            </div>
+                        </InputRadioGroup>
                     </div>
-                    <button @onclick="ShowReportSuccessAsync" @onclick:preventDefault class="btn">Đăng ký</button>
-                </form>
+                    <div class="col-6">
+                        <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
+                        @if (IsReadOnly)
+                        {
+                            <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3" disabled="true"></InputTextArea>
+                        }
+                        else
+                        {
+                            <InputTextArea @bind-Value="signupModel.Desire" name="" id="" cols="30" rows="4" class="form-control mb-3"></InputTextArea>
+                        }
+                        <img class="w-100" src="img/formSignUp.png" alt="">
+                    </div>
+                </div>
+                @if (!IsReadOnly)
+                {
+                    <button type="submit" class="btn">Đăng ký</button>
+                }
             </div>
         </EditForm>
     </div>

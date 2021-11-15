@@ -11,7 +11,7 @@
                 <div class="mycard__info">
                     <img class="mycard__info--avatar" src=@item.Avatar alt="Avatar" />
                     <div class="mycard__info--name-and-mssv" style="font-weight:@(item.IsCheck? 600:"")">
-                        <a href="#" class="info-name">@item.Name</a>
+                        <a href="@(Routes.UserProfile)" class="info-name">@item.Name</a>
                         <div class="info-mssv">@item.Mssv</div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="mycard__button">
-                    <button @onclick="@(() =>ShowSignUpPopUp(item.Id))" class="mycard__button--registration-form">Xem đơn đăng ký</button>
+                    <button @onclick="@(() =>ShowSignUpPopUp(item.Id))" class="mycard__button--registration-form">Đơn đăng ký</button>
                 </div>
             </div>
         }
@@ -133,6 +133,7 @@
         ModalParameters parameters = new();
         parameters.Add("ActivityId", 0);
         parameters.Add("CurrentUser", new User());
+        parameters.Add("IsReadOnly", true);
 
         Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, options);
     }

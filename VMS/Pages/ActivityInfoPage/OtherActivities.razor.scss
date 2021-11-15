@@ -65,8 +65,9 @@ $fav-icon: #fff;
         flex-direction: column;
         transition: all ease 0.2s;
         background-color: #F3F3F5;
-        border-radius:10px;
+        border-radius: 10px;
         text-decoration: none;
+
         &:hover {
             img {
                 opacity: 0.6;
@@ -110,25 +111,25 @@ $fav-icon: #fff;
             font-size: 8px;
             color: $blue;
             //limit 3 line
-            max-height: calc(8px * 4 + 19px);
+            height: 160px;
             overflow: hidden;
 
             @include on('md') {
                 padding: 14px;
                 font-size: 14px;
-                max-height: calc(14px * 4 + 19px);
+                height: 160px;
             }
 
             @include on('xl') {
                 padding: 16px;
                 font-size: 18px;
-                max-height: calc(18px * 4 + 19px);
+                height: 160px;
             }
 
             @include on('xxl') {
                 padding: 19px;
                 font-size: 20px;
-                max-height: calc(24px * 5 + 19px);
+                height: 160px;
             }
         }
 

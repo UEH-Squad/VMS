@@ -1,10 +1,12 @@
 ﻿using Blazored.Modal;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common.Extensions;
 using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivitySearchPage
@@ -18,6 +20,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         [Parameter]
         public int ActivityId { get; set; }
+        [Parameter]
+        public bool IsReadOnly { get; set; } = false;
         [Parameter]
         public User CurrentUser { get; set; }
         [CascadingParameter]
@@ -39,18 +43,18 @@ namespace VMS.Pages.ActivitySearchPage
         {
             isShowReport = !isShowReport;
 
-            HandleSignUp();
-
             if (isShowReport == false)
             {
                 await Modal.CloseAsync();
             }
         }
+
         protected override async Task OnInitializedAsync()
         {
             CurrentUser = IdentityService.GetCurrentUser();
         }
-        private void HandleSignUp()
+
+        private async Task HandleSignUp()
         {
             if (!CurrentUser.Recruitments.Any(r => r.ActivityId == ActivityId))
             {
@@ -67,6 +71,8 @@ namespace VMS.Pages.ActivitySearchPage
                 });
                 IdentityService.UpdateUser(CurrentUser);
             }
+
+            await ShowReportSuccessAsync();
         }
     }
 }

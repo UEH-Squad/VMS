@@ -330,5 +330,33 @@
   {
     "outputFile": "Pages/ActivityLogPage/Filter.razor.css",
     "inputFile": "Pages/ActivityLogPage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/Profile/Appellation.razor.css",
+    "inputFile": "Pages/Organization/Profile/Appellation.razor.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/ProfileRank.razor.css",
+    "inputFile": "Pages/UserProflie/ProfileRank.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityLogPage/Index.razor.css",
+    "inputFile": "Pages/ActivityLogPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.css",
+    "inputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Title.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Index.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
   }
 ]

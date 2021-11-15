@@ -1,15 +1,19 @@
 ﻿using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Services;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
 {
     public interface IActivityService
     {
-        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(bool isSearch, string searchValue, FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null);
+        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 20);
+
+        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 8);
 
         Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
 
@@ -23,13 +27,13 @@ namespace VMS.Application.Interfaces
 
         Task<ViewActivityViewModel> GetViewActivityViewModelAsync(int activityId);
 
-        Task<List<UserWithActivityViewModel>> GetRelatedActivities(string userId, Coordinate location, bool isFeatured = false);
+        Task<List<ActivityViewModel>> GetOrgActsAsync(string id, StatusAct status);
 
-        Task<List<ActivityViewModel>> GetOrgActs(string id, StatusAct status);
+        Task CloseOrDeleteActivity(int activityId, bool isDelete = false, bool isClose = false);
 
-        Task CloseOrDeleteActivity(int activityId, bool isClose = false, bool isDelete = false);
+        Task<List<ActivityViewModel>> GetAllUserActivityViewModelsAsync(string userId, StatusAct statusAct, DateTime dateTime);
 
-        Task UpdateActFavorAsync(int activityId, string userId);
+        Task<PaginatedList<ActivityViewModel>> GetAllOrganizationActivityViewModelAsync(FilterOrgActivityViewModel filter, int currentPage);
 
         Task CloseActivityDailyAsync();
 

@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Common.Extensions;
 
 namespace VMS.Pages.ActivitySearchPage
 {
     public partial class Index : ComponentBase
     {
-        private string searchValue = string.Empty;
         private FilterActivityViewModel filter = new();
-        private bool isSearch = false;
         private Dictionary<ActOrderBy, bool> orderList = new(new List<KeyValuePair<ActOrderBy, bool>>() {
             new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Newest, false),
             new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Nearest, false),
@@ -53,14 +52,14 @@ namespace VMS.Pages.ActivitySearchPage
 
         private void SearchValueChanged(string searchValue)
         {
-            this.searchValue = searchValue;
-            isSearch = !string.IsNullOrEmpty(searchValue);
+            filter.SearchValue = searchValue;
+            filter.IsSearch = true;
         }
 
         private void FilterChanged(FilterActivityViewModel filter)
         {
             this.filter = filter;
-            isSearch = false;
+            this.filter.IsSearch = false;
         }
     }
 }

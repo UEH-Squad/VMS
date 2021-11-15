@@ -27,7 +27,7 @@
                         </div>
                         <div class="member-report">
                             @*Pop-up để report*@
-                            <button @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
+                            <button @onclick="@(()=>ShowReportPopUp(item.User.Id))" id="popup-report_icon">
                                 <span id="member-report_icon" class="material-icons">report_problem</span>
                             </button>
                             <div class="member-report_tooltip">Báo cáo xấu nếu mình vi phạm nhé!</div>
@@ -44,20 +44,5 @@
     </div>
 </div>
 
-
 @code {
-
-    [CascadingParameter] public IModalService Modal2 { get; set; }
-    async Task ShowReportPopUp()
-    {
-        var options = new ModalOptions()
-            {
-
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-        Modal2.Show<PopUpReportMember>("", options);
-    }
-
 }

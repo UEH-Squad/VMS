@@ -29,44 +29,21 @@
     font-size: 24px;
     font-weight: 600; }
   .my-profile .profile__logo .profile__type {
-    background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%);
+    background-color: #FBED6E;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), inset -4px -4px 20px rgba(0, 0, 0, 0.05), inset 4px 4px 20px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 7px 30px;
     color: #515151;
     font-size: 16px;
-    font-weight: 500;
-    border-radius: 10px; }
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer; }
     .my-profile .profile__logo .profile__type:hover {
-      background: linear-gradient(to top, rgba(237, 241, 49, 0.35) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
+      background: #FCFF81; }
     .my-profile .profile__logo .profile__type:focus {
       box-shadow: none; }
   .my-profile .profile__logo .profile__type-notHover:hover {
-    background: linear-gradient(to top, rgba(237, 241, 49, 0.45) 43.23%, rgba(255, 255, 255, 0.45) 100%); }
-
-.my-profile .profile__rank a {
-  color: #64D72F;
-  font-size: 40px;
-  font-weight: 600;
-  text-decoration: none; }
-
-.my-profile .profile__rank .profile__rank-number {
-  color: #707070;
-  font-size: 24px;
-  font-weight: 700; }
-
-.my-profile .profile__rank i {
-  margin: auto 2px;
-  color: #EDF131;
-  font-size: 30px; }
-
-.my-profile .profile__rank .icon-noColor {
-  color: #D8D8D8; }
-
-.my-profile .profile__rank span {
-  display: block;
-  color: #707070;
-  font-size: 20px;
-  font-weight: 500; }
+    background: linear-gradient(180deg, rgba(252, 255, 129, 0.568399) -20.51%, rgba(252, 255, 129, 0) -20.5%, rgba(252, 255, 129, 0.0290694) -20.49%, rgba(252, 255, 129, 0.0988999) -20.48%, #FCFF81 46.98%, #FCFF81 74.36%); }
 
 .my-profile .profile__contact {
   width: 28%; }
@@ -102,7 +79,6 @@
       transform: translateY(-5px); }
     .my-profile .profile__carousel .item i, .my-profile .profile__NoCarousel .item i {
       display: block;
-      background-color: #18A0FB;
       border-radius: 50%;
       color: white;
       margin: 5px auto;
@@ -119,7 +95,6 @@
           font-size: 32px; } }
     .my-profile .profile__carousel .item span, .my-profile .profile__NoCarousel .item span {
       margin-top: 10px;
-      color: #64D72F;
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;

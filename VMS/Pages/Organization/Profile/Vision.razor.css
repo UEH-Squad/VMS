@@ -5,18 +5,6 @@
 /*#region mixins */
 /*#endregion */
 .vision .act-img {
-  max-height: 630px;
+  max-height: 640px;
   object-fit: cover;
   object-position: center; }
-
-.vision h3 {
-  font-weight: 600;
-  color: #FFFFFF;
-  font-size: 72px;
-  top: 15%; }
-
-.vision p {
-  font-weight: 500;
-  color: #FFFFFF;
-  font-size: 36px;
-  bottom: 15%; }

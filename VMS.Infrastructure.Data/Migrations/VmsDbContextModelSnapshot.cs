@@ -200,6 +200,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CloseDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Commission")
                         .HasColumnType("nvarchar(max)");
 
@@ -250,6 +253,9 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OpenDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
@@ -681,7 +687,7 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsProcessed")
+                    b.Property<bool>("IsReportUser")
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
@@ -693,11 +699,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Feedbacks");
                 });
@@ -709,7 +720,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -734,7 +745,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -1131,18 +1142,7 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Mission")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("NotifiedEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber2")
@@ -1463,7 +1463,12 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VMS.Domain.Models.User", null)
+                        .WithMany("Reports")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Activity");
 
@@ -1475,16 +1480,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
                         .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1492,16 +1495,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
                         .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
@@ -1678,6 +1679,8 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Recruitments");
+
+                    b.Navigation("Reports");
 
                     b.Navigation("UserAddresses");
 

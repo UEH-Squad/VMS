@@ -238,7 +238,7 @@ namespace VMS.Application.Services
 
         public async Task<HashSet<DateTime>> GetActivityDaysAsync(string userId, DateTime startDate, DateTime endDate)
         {
-            User result = _identityService.GetCurrentUserWithFavoritesAndRecruitments();
+            User result = _identityService.GetUserWithFavoritesAndRecruitmentsById(userId);
 
             HashSet<DateTime> acts = result.Recruitments.Where(x => x.Activity.StartDate.Between(startDate, endDate)
                                                                     || x.Activity.EndDate.Between(startDate, endDate))

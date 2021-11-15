@@ -4,10 +4,11 @@ namespace VMS.Application.ViewModels
 {
     public class FilterActivityViewModel
     {
+        public string SearchValue { get; set; }
+        public bool IsSearch { get; set; }
+
         public bool Virtual { get; set; }
         public bool Actual { get; set; }
-        public bool Happenning { get; set; }
-        public bool TookPlace { get; set; }
         public string OrgId { get; set; }
         public int ProvinceId { get; set; }
         public int DistrictId { get; set; }
@@ -23,8 +24,6 @@ namespace VMS.Application.ViewModels
         {
             Virtual = false;
             Actual = false;
-            Happenning = false;
-            TookPlace = false;
             Areas = new();
             Skills = new();
         }

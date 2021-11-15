@@ -9,16 +9,16 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         [Parameter]
         public string OrgId { get; set; }
         [Parameter]
-        public FilterActivityViewModel FilterAct { get; set; }
+        public FilterOrgActivityViewModel FilterAct { get; set; }
         [Parameter]
-        public EventCallback<FilterActivityViewModel> FilterActChanged { get; set; } 
+        public EventCallback<FilterOrgActivityViewModel> FilterActChanged { get; set; } 
 
         private async Task OnClickFilterAsync()
         {
             await FilterActChanged.InvokeAsync(FilterAct);
         }
 
-        private async Task ClearFilter()
+        private async Task ClearFilterAsync()
         {
             FilterAct = new();
             FilterAct.OrgId = OrgId;

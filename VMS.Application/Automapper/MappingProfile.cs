@@ -12,13 +12,16 @@ namespace VMS.Application.Automapper
     {
         public MappingProfile()
         {
-            CreateMap<Activity, ActivityViewModel>();
-            CreateMap<CreateActivityViewModel, Activity>();
+            CreateMap<Activity, ActivityViewModel>()
+                .ForMember(x => x.MemberQuantity, opt => opt.MapFrom(src => src.Recruitments.Count));
+            CreateMap<CreateActivityViewModel, Activity>()
+                .ForMember(dest => dest.OpenDate, opt => opt.MapFrom(src => src.OpenDate.Date))
+                .ForMember(dest => dest.CloseDate, opt => opt.MapFrom(src => src.CloseDate.Date))
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.Date))
+                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.Date));
             CreateMap<Activity, CreateActivityViewModel>();
             CreateMap<Activity, ViewActivityViewModel>()
-                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("dd/MM/yyyy")))
-                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.ToString("dd/MM/yyyy")))
-                .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.ToString("dd/MM/yyyy")));
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("dd/MM/yyyy")));
             CreateMap<Area, AreaViewModel>();
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
@@ -66,6 +69,8 @@ namespace VMS.Application.Automapper
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
             MapReportToFeedback();
+            CreateMap<PaginatedList<Recruitment>, PaginatedList<RecruitmentViewModel>>();
+            CreateMap<RecruitmentRating, RecruitmentRatingViewModel>();
             MapAccountToUserAndBack();
         }
 
@@ -73,8 +78,9 @@ namespace VMS.Application.Automapper
         {
             CreateMap<ReportViewModel, Feedback>()
                 .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ReportBy))
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.DesReport))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
         }
 

@@ -9,7 +9,7 @@
 .filter-bar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-row-gap: 10px;
+    grid-row-gap: 15px;
     grid-column-gap: 20px;
 
     .filter-item {
@@ -33,7 +33,6 @@
     color: #b4b4b4;
     padding-left: 8px;
     padding-right: 30px;
-    font-size: 18px;
     outline: none;
     line-height: 40px;
     overflow: hidden;
@@ -96,10 +95,10 @@
 
 .filter-btn {
     @include green-btn;
-    font-size: 20px;
+    font-size: 18px;
     width: fit-content;
     height: 40px;
-    padding: 0 20px;
+    padding: 0 16px;
 
     &:hover {
         background-color: #306C14;
@@ -109,7 +108,7 @@
 
 .clear-filter-btn {
     @include green-btn;
-    font-size: 20px;
+    font-size: 18px;
     width: fit-content;
     color: $grey-icon;
     background-color: #fff;

@@ -1,0 +1,67 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.edit-content_name {
+    font-weight: 500;
+    font-size: 16px;
+    color: $grey-text;
+
+    span {
+        color: $red;
+    }
+
+    .form-input {
+        font-weight: 500;
+        font-size: 16px;
+        color: $grey-text;
+        margin-top: 0.8%;
+        padding: 0.2% 1%;
+        width: 100%;
+        border: 1px solid $grey-text;
+        border-radius: 5px;
+    }
+}
+
+.edit-content_content {
+    margin-top: 2%;
+    font-weight: 500;
+    font-size: 16px;
+    color: $grey-text;
+
+    span {
+        color: $red;
+    }
+
+    .form-input {
+        font-weight: 500;
+        font-size: 16px;
+        color: $grey-text;
+        padding: 0.2% 1%;
+        margin-top: 0.8%;
+        width: 100%;
+        border: 1px solid $grey-text;
+        border-radius: 5px;
+    }
+}
+
+.edit-content_image {
+    margin-top: 2%;
+
+    .title {
+        font-weight: 500;
+        font-size: 16px;
+        color: $grey-text;
+    }
+
+    .image {
+        margin-top: 0.8%;
+        display: flex;
+        justify-content: space-between;
+
+        img {
+            width: 257px;
+            height: 257px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+    }
+}

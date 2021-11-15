@@ -344,6 +344,22 @@
     "inputFile": "Pages/ActivityLogPage/Index.razor.scss"
   },
   {
+    "outputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.css",
+    "inputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Title.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Index.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
+  },
+  {
     "outputFile": "Shared/AdminSidebar.razor.css",
     "inputFile": "Shared/AdminSidebar.razor.scss"
   },
@@ -450,6 +466,14 @@
   {
     "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
     "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/OrganizationManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/VolunteerManagement/Index.razor.scss"
   },
   {
     "outputFile": "Shared/AdminHeader.razor.css",

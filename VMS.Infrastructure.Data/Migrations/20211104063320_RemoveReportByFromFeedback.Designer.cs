@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211104063320_RemoveReportByFromFeedback")]
+    partial class RemoveReportByFromFeedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "5ffcef2a-5b15-4186-9c27-119ba3edf5ed",
+                            ConcurrencyStamp = "64922f05-22d2-4e89-aebb-2ef214e6c4ea",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "ff1b571c-17fe-4513-a65f-6039498cf32d",
+                            ConcurrencyStamp = "5c3ee1ea-461c-48d1-95e2-9a75ea506db6",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "09c6c292-df64-4d53-b422-6a2e8726e25a",
+                            ConcurrencyStamp = "98370b3b-585a-4b93-bd98-1eb9424163bf",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -1254,9 +1256,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Mission")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NotifiedEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber2")

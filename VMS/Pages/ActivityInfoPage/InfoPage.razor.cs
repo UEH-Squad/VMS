@@ -19,12 +19,14 @@ namespace VMS.Pages.ActivityInfoPage
 
         [CascadingParameter] public IModalService Modal { get; set; }
 
+        [CascadingParameter] public string CurrentUserId { get; set; }
+
         [Inject]
         private IIdentityService IdentityService { get; set; }
 
         protected override void OnInitialized()
         {
-            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+            currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
         }
 
         protected override void OnParametersSet()

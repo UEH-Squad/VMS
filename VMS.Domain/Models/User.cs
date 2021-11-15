@@ -19,6 +19,7 @@ namespace VMS.Domain.Models
         public string Class { get; set; }
         public string Course { get; set; }
         public int? FacultyId { get; set; }
+        public string NotifiedEmail { get; set; }
 
 
         // For org + seeker
@@ -45,5 +46,6 @@ namespace VMS.Domain.Models
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Activity> ActivityApprovals { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
+        public virtual ICollection<Feedback> Reports { get; set; }
     }
 }

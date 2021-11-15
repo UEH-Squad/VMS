@@ -26,16 +26,14 @@ namespace VMS.Pages.ActivitySearchPage
         private PaginatedList<ActivityViewModel> pagedResult = new(new(), 0, 1, 1);
 
         [Parameter]
-        public bool IsSearch { get; set; }
-        [Parameter]
         public Dictionary<ActOrderBy, bool> OrderList { get; set; }
-        [Parameter]
-        public string SearchValue { get; set; }
         [Parameter]
         public FilterActivityViewModel Filter { get; set; }
 
         [CascadingParameter]
         public IModalService Modal { get; set; }
+        [CascadingParameter]
+        public string CurrentUserId { get; set; }
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -63,17 +61,17 @@ namespace VMS.Pages.ActivitySearchPage
                 userCoordinate = await AddressLocationService.GetCoordinateAsync(userAddresses);
             }
 
-            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+            currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
         }
 
         protected override async Task OnParametersSetAsync()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, 1, OrderList, userCoordinate);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, 1, OrderList, userCoordinate);
         }
 
         private async Task HandlePageChanged()
         {
-            pagedResult = await ActivityService.GetAllActivitiesAsync(IsSearch, SearchValue, Filter, page, OrderList, userCoordinate);
+            pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, page, OrderList, userCoordinate);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }
@@ -99,7 +97,7 @@ namespace VMS.Pages.ActivitySearchPage
             IdentityService.UpdateUser(currentUser);
         }
 
-        private void ShowModal(int id)
+        private async Task ShowSignupAsync(int id)
         {
             ModalParameters parameters = new();
             parameters.Add("ActivityId", id);
@@ -112,8 +110,9 @@ namespace VMS.Pages.ActivitySearchPage
                 UseCustomLayout = true,
             };
 
-            Modal.Show<Signup>("", parameters, options);
+            await Modal.Show<Signup>("", parameters, options).Result;
         }
+
         private void ShowRequireSignup()
         {
 
@@ -124,7 +123,12 @@ namespace VMS.Pages.ActivitySearchPage
                 UseCustomLayout = true
             };
 
-            Modal.Show<VMS.Shared.Components.RequireSignup>("", options);
+            Modal.Show<Shared.Components.RequireSignup>("", options);
+        }
+
+        private bool IsSignupTimeExpired(ActivityViewModel activity)
+        {
+            return currentUser.Recruitments.Any(f => f.ActivityId == activity.Id) || !(activity.OpenDate <= DateTime.Now && DateTime.Now.Date <= activity.CloseDate) || activity.IsClosed;
         }
     }
 }

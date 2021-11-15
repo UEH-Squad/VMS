@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VMS.Application.ViewModels;
@@ -16,16 +17,19 @@ namespace VMS.Pages.ActivityInfoPage
         bool isAlreadySignedUp;
 
         [CascadingParameter] public IModalService Modal { get; set; }
+        
+        [CascadingParameter] public string CurrentUserId { get; set; }
 
-        [Parameter]
-        public ViewActivityViewModel Activity { get; set; }
+        [Parameter] public ViewActivityViewModel Activity { get; set; }
+
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
         protected override void OnInitialized()
         {
-            currentUser = IdentityService.GetCurrentUserWithFavoritesAndRecruitments();
+            currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
             if (currentUser is not null)
             {
-                isAlreadySignedUp = currentUser.Recruitments.Any(x => x.UserId == currentUser.Id);
+                isAlreadySignedUp = currentUser.Recruitments.Any(x => x.ActivityId == Activity.Id);
             }
         }
 
@@ -43,7 +47,7 @@ namespace VMS.Pages.ActivityInfoPage
 
         private bool HasValidUser()
         {
-            // TODO: Check user profile
+            // TODO: Show edit profile pop-up and redirect user to edit org profile page
 
             return true;
         }
@@ -90,6 +94,11 @@ namespace VMS.Pages.ActivityInfoPage
         private void ShowRequireSignup()
         {
             Modal.Show<Shared.Components.RequireSignup>("", BlazoredModalOptions.GetModalOptions());
+        }
+
+        private bool IsSignupTimeExpired()
+        {
+            return isAlreadySignedUp || !(Activity.OpenDate <= DateTime.Now.Date && DateTime.Now.Date <= Activity.CloseDate) || Activity.IsClosed;
         }
     }
 }

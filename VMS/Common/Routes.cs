@@ -22,6 +22,7 @@
         public const string ActivityManagement = "/quan-ly-hoat-dong";
         public const string Rating = "/quan-ly-tinh-nguyen-vien/danh-gia";
         public const string ActivityLogPage = "/lich-su-hoat-dong";
+        public const string EditRequestPage = "/quan-ly-hoat-dong/yeu-cau-chinh-sua";
 
         #endregion Org + User profile
         public const string ResetPassword = "/reset-password";

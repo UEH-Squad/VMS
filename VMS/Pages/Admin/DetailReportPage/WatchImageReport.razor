@@ -1,7 +1,10 @@
 ﻿
 <div class="myModal">
     <span @onclick="CloseModal" class="material-icons close">  cancel  </span>
-    <img class="modal-content" src="./img/132752427653900370_43fdc502-ac5b-43eb-84c3-c8600d3756f8.jpg">
+    @if (Image != "")
+    {
+        <img class="modal-content" src="@Image">
+    }
 </div>
 @code {
     [CascadingParameter]
@@ -11,4 +14,6 @@
     {
         Modal.CloseAsync();
     }
+    [Parameter]
+    public string Image { get; set; } = "";
 }

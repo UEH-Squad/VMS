@@ -4,7 +4,7 @@
         int id = i;
         <button class="member-star_button">
             <span @onclick="() => { StarRating = id; star = id; StarRatingChanged.InvokeAsync(id); }"
-                  @onmouseout="() => star = StarRating"
+                  @onmouseout="() => star = StarRating.Value"
                   @onmouseover="() => star = id"
                   style="@(id <= star? "color: #EDF131" : "#C4C4C4")" id="member-star_icon" class="material-icons">
                 star_rate
@@ -15,27 +15,17 @@
 </div>
 
 @code {
-
-    int star;
-    bool showYellowStars = false;
+    double star;
 
     [Parameter]
-    public int StarRating { get; set; }
+    public double? StarRating { get; set; }
 
     [Parameter]
-    public EventCallback<int> StarRatingChanged { get; set; }
-
-    [Parameter]
-    public bool ShowYellowStars { get; set; } = false;
-
-    [Parameter]
-    public Func<Task> OnShowYellowStars { get; set; }
-
-    [Parameter]
-    public Func<Task> NoneShowYellowStars { get; set; }
+    public EventCallback<double?> StarRatingChanged { get; set; }
 
     protected override void OnParametersSet()
     {
-        star = StarRating;
+        StarRating = (StarRating.HasValue ? StarRating : 0);
+        star = StarRating.Value;
     }
 }

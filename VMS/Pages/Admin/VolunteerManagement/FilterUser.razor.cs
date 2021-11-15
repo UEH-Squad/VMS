@@ -151,6 +151,7 @@ namespace VMS.Pages.Admin.VolunteerManagement
             isRankGrey = false;
             isLabelGrey = false;
             areas = new();
+            skills = new();
         }
     }
 }

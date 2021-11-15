@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VMS.Domain.Models;
 
 namespace VMS.Application.ViewModels
@@ -10,8 +11,10 @@ namespace VMS.Application.ViewModels
         public string Name { get; set; }
         public int AreaId { get; set; }
         public string CreatedDate { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public DateTime OpenDate { get; set; }
+        public DateTime CloseDate { get; set; }
         public string Address { get; set; }
         public int MemberQuantity { get; set; }
         public string Description { get; set; }
@@ -22,6 +25,7 @@ namespace VMS.Application.ViewModels
         public string Website { get; set; }
         public string Banner { get; set; }
         public bool IsApproved { get; set; }
+        public bool IsClosed { get; set; }
         public string Targets { get; set; }
 
         public Area Area { get; set; }

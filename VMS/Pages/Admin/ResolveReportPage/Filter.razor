@@ -34,8 +34,8 @@
 @code {
     [Parameter]
     public string Status { get; set; }
-    [Parameter]
-    public DateTime Value { get; set; }
+
+    DateTime Value { get; set; }
 
     [Parameter]
     public EventCallback<string> StatusChanged { get; set; }

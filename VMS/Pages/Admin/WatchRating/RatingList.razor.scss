@@ -19,6 +19,8 @@
         align-items: center;
 
         .avatar {
+            text-decoration: none;
+
             img {
                 cursor: pointer;
             }
@@ -31,12 +33,15 @@
             margin-left: 2%;
 
             &-member {
+                text-decoration: none;
+                color: black;
                 margin: 0;
                 margin-bottom: -5%;
                 font-style: normal;
                 font-weight: 600;
                 font-size: 16px;
                 line-height: 36px;
+                cursor: pointer;
             }
 
             span {
@@ -61,6 +66,7 @@
         align-items: center;
 
         .avatar {
+            text-decoration: none;
             img {
                 cursor: pointer;
             }
@@ -73,12 +79,15 @@
             margin-left: 2%;
 
             &-organization {
+                text-decoration: none;
+                color: black;
                 margin: 0;
                 margin-bottom: -5%;
                 font-style: normal;
                 font-weight: 600;
                 font-size: 16px;
                 line-height: 36px;
+                cursor: pointer;
             }
 
             span {

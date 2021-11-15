@@ -7,21 +7,35 @@
 .search-and-button {
   display: grid;
   grid-template-columns: 55% 45%; }
-  .search-and-button .button-download {
-    margin-top: 15px; }
-    .search-and-button .button-download__text {
+  .search-and-button .dropdown button {
+    float: right;
+    color: #18A0FB;
+    background: #FFFFFF;
+    border: 1px solid #18A0FB;
+    font-size: 16px;
+    min-width: 158px;
+    cursor: pointer;
+    margin-right: 12px; }
+    .search-and-button .dropdown button:hover {
+      color: #FFFFFF;
+      background: #18A0FB; }
+  .search-and-button .dropdown .dropdown-menu {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: none; }
+    .search-and-button .dropdown .dropdown-menu .dropdown-item {
       display: flex;
-      color: #18A0FB;
-      background: none;
-      border: none;
-      padding: 0 12px;
-      float: right;
-      font-weight: 500; }
-      .search-and-button .button-download__text:hover {
-        color: #0B588c; }
-      .search-and-button .button-download__text .material-icons {
-        margin-right: 5px;
-        font-size: 24px; }
+      align-items: center;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      position: relative; }
+      .search-and-button .dropdown .dropdown-menu .dropdown-item__download {
+        color: #64D72F; }
+      .search-and-button .dropdown .dropdown-menu .dropdown-item__upload {
+        color: #18A0FB; }
+      .search-and-button .dropdown .dropdown-menu .dropdown-item .material-icons-outlined {
+        position: absolute;
+        right: 20px; }
 
 .my-container {
   padding: 0;

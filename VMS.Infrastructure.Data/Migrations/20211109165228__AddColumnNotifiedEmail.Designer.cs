@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211109165228__AddColumnNotifiedEmail")]
+    partial class _AddColumnNotifiedEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "bfedbf16-6192-4db9-9be9-edc7c5fae896",
+                            ConcurrencyStamp = "5ffcef2a-5b15-4186-9c27-119ba3edf5ed",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "2a06db1b-9a7b-467d-89f7-23c9dd6c7687",
+                            ConcurrencyStamp = "ff1b571c-17fe-4513-a65f-6039498cf32d",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "df2b8eb2-edc7-4de7-b6d5-70eb28bb58df",
+                            ConcurrencyStamp = "09c6c292-df64-4d53-b422-6a2e8726e25a",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -224,13 +226,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
-                            RoleId = "a18be9c0-aa65-4af8-bd17-00bd9344e570"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -270,9 +265,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CloseDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Commission")
                         .HasColumnType("nvarchar(max)");
@@ -324,9 +316,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("OpenDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
@@ -480,18 +469,10 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Color")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("#18A0FB");
-
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPinned")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -505,119 +486,86 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Color = "#18A0FB",
                             Icon = "people_outline",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Cộng đồng"
                         },
                         new
                         {
                             Id = 2,
-                            Color = "#18A0FB",
                             Icon = "pan_tool",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Hỗ trợ"
                         },
                         new
                         {
                             Id = 3,
-                            Color = "#18A0FB",
                             Icon = "import_contacts",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Giáo dục"
                         },
                         new
                         {
                             Id = 4,
-                            Color = "#18A0FB",
                             Icon = "format_shapes",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Kỹ thuật"
                         },
                         new
                         {
                             Id = 5,
-                            Color = "#18A0FB",
                             Icon = "local_hospital",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Sức khỏe"
                         },
                         new
                         {
                             Id = 6,
-                            Color = "#18A0FB",
                             Icon = "drive_eta",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Phương tiện"
                         },
                         new
                         {
                             Id = 7,
-                            Color = "#18A0FB",
                             Icon = "wb_sunny",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Môi trường"
                         },
                         new
                         {
                             Id = 8,
-                            Color = "#18A0FB",
                             Icon = "directions_bike",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Thể thao"
                         },
                         new
                         {
                             Id = 9,
-                            Color = "#18A0FB",
                             Icon = "notifications_active",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Khẩn cấp"
                         },
                         new
                         {
                             Id = 10,
-                            Color = "#18A0FB",
                             Icon = "calendar_today",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Sự kiện"
                         },
                         new
                         {
                             Id = 11,
-                            Color = "#18A0FB",
                             Icon = "home",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Chuyển nhà"
                         },
                         new
                         {
                             Id = 12,
-                            Color = "#18A0FB",
                             Icon = "computer",
                             IsDeleted = false,
-                            IsPinned = false,
                             Name = "Công nghệ"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Color = "#F14747",
-                            Icon = "coronavirus",
-                            IsDeleted = false,
-                            IsPinned = true,
-                            Name = "COVID-19"
                         });
                 });
 
@@ -758,7 +706,7 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsReportUser")
+                    b.Property<bool>("IsProcessed")
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
@@ -770,16 +718,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Feedbacks");
                 });
@@ -791,7 +734,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -816,7 +759,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeedbackId")
+                    b.Property<int?>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -1287,28 +1230,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasIndex("FacultyId");
 
                     b.HasDiscriminator().HasValue("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "128dcf2c-1853-451f-bcae-8d496abb79dc",
-                            Email = "hsv.ueh@ueh.edu.vn",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "hsv.ueh@ueh.edu.vn",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE4iU8jRuvJutgfH5ott5OO2Vgjf9ylDO8Z1Pez4qsCIXx3QKLOYwCx42u16DiWlwg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin",
-                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            Rank = 0
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1484,12 +1405,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("VMS.Domain.Models.User", null)
-                        .WithMany("Reports")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Activity");
 
@@ -1501,14 +1417,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
                         .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId");
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1516,14 +1434,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
                         .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId");
+                        .HasForeignKey("RecruitmentRatingId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Feedback");
+
+                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
@@ -1700,8 +1620,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Recruitments");
-
-                    b.Navigation("Reports");
 
                     b.Navigation("UserAddresses");
 

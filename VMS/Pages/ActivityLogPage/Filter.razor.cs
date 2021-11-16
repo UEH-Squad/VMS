@@ -12,7 +12,7 @@ namespace VMS.Pages.ActivityLogPage
     public partial class Filter
     {
         [Inject]
-        private IIdentityService IdentityService { get; set; }
+        private IOrganizationService OrganizationService { get; set; }
 
         [Parameter]
         public EventCallback<bool?> IsRatedChanged { get; set; }
@@ -23,7 +23,7 @@ namespace VMS.Pages.ActivityLogPage
 
         private string orgDefault = "Tổ chức";
         private string semesterDefault = "Học kỳ";
-        private List<User> organizers;
+        private List<UserViewModel> organizers;
 
         private readonly List<string> semesters = new()
         {
@@ -34,10 +34,10 @@ namespace VMS.Pages.ActivityLogPage
 
         protected override async Task OnInitializedAsync()
         {
-            organizers = IdentityService.GetAllOrganizers();
+            organizers = OrganizationService.GetAllOrganizers();
         }
 
-        private void ChooseFacultyAsync(User organizer)
+        private void ChooseFacultyAsync(UserViewModel organizer)
         {
             FilterChange.OrgId = organizer.Id;
             orgDefault = organizer.FullName;

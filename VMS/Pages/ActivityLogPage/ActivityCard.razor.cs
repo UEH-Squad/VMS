@@ -18,6 +18,7 @@ namespace VMS.Pages.ActivityLogPage
     {
         private int page = 1;
         private string userId;
+        private int ActivityId;
         private PaginatedList<RecruitmentViewModel> pagedResult = new(new(), 0, 1, 1);
 
         [CascadingParameter]
@@ -62,7 +63,8 @@ namespace VMS.Pages.ActivityLogPage
 
         private async Task UpdateRatingAsync(double? rating, RecruitmentViewModel recruitment = null)
         {
-            await RecruitmentService.UpdateRatingAndCommentAsync(rating.Value, string.Empty, recruitment?.Id);
+            ActivityId = recruitment.Activity.Id;
+            await RecruitmentService.UpdateRatingAndCommentAsync(ActivityId, rating.Value, string.Empty, recruitment?.Id);
             if (recruitment != null)
             {
                 recruitment.Rating = rating;

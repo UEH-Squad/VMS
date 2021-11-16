@@ -13,7 +13,7 @@
         font-size: 18px;
     }
 
-    .required-asterick{
+    .required-asterick {
         color: $error;
     }
 
@@ -84,9 +84,14 @@
 
     .form-field-item {
         text-align: center;
-
+        width: 20%;
+        display: inline-block;
         &:hover > i {
-            font-size: 50px;
+            font-size: 40px;
+
+            @include on("xxl") {
+                font-size: 45px;
+            }
         }
 
         &:hover > span {
@@ -95,7 +100,6 @@
 
         i {
             display: block;
-            background-color: $blue;
             border-radius: 50%;
             color: white;
             margin: 5px auto;
@@ -103,18 +107,17 @@
             width: 73px;
             height: 73px;
             line-height: 73px;
-            font-size: 35px;
+            font-size: 30px;
 
             @include on("xxl") {
                 width: 83px;
                 height: 83px;
                 line-height: 83px;
-                font-size: 40px;
+                font-size: 35px;
             }
         }
 
         span {
-            color: $green;
             font-weight: 500;
             display: inline-block;
             transition: all 0.3s linear;
@@ -130,12 +133,12 @@
             background: $grey-close-bg;
             opacity: 50%;
             color: $white;
-            font-size: 70px;
+            font-size: 60px;
 
             &:hover {
                 background: $grey-close-bg;
                 opacity: 100%;
-                font-size: 80px;
+                font-size: 70px;
             }
         }
 
@@ -145,59 +148,6 @@
         }
     }
 
-    .editProfile__NoCarousel {
-
-        .item-NoCaroesel {
-        }
-    }
-
-    .owl-carousel {
-        z-index: 0;
-    }
-
-
-    .editProfile__carousel {
-        width: 80%;
-        padding-right: 50px;
-
-        .item {
-            margin: 0 auto;
-        }
-
-
-
-        ::deep .owl-nav {
-            display: block;
-
-            .owl-prev {
-                display: none;
-            }
-
-            .owl-next {
-                position: absolute;
-                top: -15%;
-                right: 0%;
-
-                span {
-                    font-size: 80px;
-                    color: $blue;
-                    transition: all 0.3s linear;
-
-                    &:hover {
-                        color: $blue-hv;
-                    }
-                }
-
-                &:hover {
-                    background: none;
-                }
-            }
-        }
-
-        ::deep .owl-dots {
-            display: none;
-        }
-    }
 
     .countWord {
         color: $border-color-bold;

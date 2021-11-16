@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
+using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Application.Services
@@ -54,11 +56,6 @@ namespace VMS.Application.Services
                                                     .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
         }
 
-        public List<User> GetAllOrganizers()
-        {
-            return (List<User>)Task.Run(() => _userManager.GetUsersInRoleAsync(Common.Role.Organization.ToString())).Result;
-        }
-
         public string GetCurrentUserAddress()
         {
             User user = Task.Run(() => _userManager.Users.Include(u => u.UserAddresses)
@@ -79,18 +76,16 @@ namespace VMS.Application.Services
             return string.Empty;
         }
 
-        public User GetCurrentUserWithFavoritesAndRecruitments()
+        public User GetUserWithFavoritesAndRecruitmentsById(string userId)
         {
-            string currentUserId = GetCurrentUserId();
             return Task.Run(() => _userManager.Users.Include(x => x.Favorites)
-                                                    .Include(x => x.Recruitments)
-                                                    .SingleOrDefaultAsync(x => x.Id == currentUserId)).Result;
+                                                    .Include(x => x.Recruitments).ThenInclude(x => x.Activity)
+                                                    .SingleOrDefaultAsync(x => x.Id == userId)).Result;
         }
 
         public void UpdateUser(User user)
         {
             Task.Run(() => _userManager.UpdateAsync(user));
         }
-
     }
 }

@@ -100,7 +100,3 @@
   border: none; }
 
 /* ------end report-----*/
-::deep li {
-  color: #515151;
-  margin-left: 25px;
-  font-weight: 300; }

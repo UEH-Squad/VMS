@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivitySearchPage
@@ -24,9 +25,10 @@ namespace VMS.Pages.ActivitySearchPage
             new OrderData() { Name = "Nổi bật nhất", OrderBy = ActOrderBy.Hottest }
         };
 
+        private List<AreaViewModel> areasPinned;
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
-        private List<User> organizers;
+        private List<UserViewModel> organizers;
         private bool isOrganizationShow;
         private bool isCityShow;
         private bool isDistrictShow;
@@ -45,16 +47,20 @@ namespace VMS.Pages.ActivitySearchPage
         [Parameter]
         public EventCallback<FilterActivityViewModel> FilterChanged { get; set; }
         [Inject]
-        private IIdentityService IdentityService { get; set; }
+        private IOrganizationService OrganizationService { get; set; }
         [Inject]
         private IAddressService AddressService { get; set; }
+        [Inject]
+        private IAreaService AreaService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            organizers = IdentityService.GetAllOrganizers();
+            organizers = OrganizationService.GetAllOrganizers();
             isOrganizationShow = false;
 
             provinces = await AddressService.GetAllProvincesAsync();
+
+            areasPinned = await AreaService.GetAllAreasAsync(true);
         }
 
         private void ToggleCityDropdown()
@@ -105,7 +111,7 @@ namespace VMS.Pages.ActivitySearchPage
             isOrganizationShow = false;
         }
 
-        private void ChooseOrganizationValue(User organizer)
+        private void ChooseOrganizationValue(UserViewModel organizer)
         {
             Filter.OrgId = organizer.Id;
             organizationChoosenValue = organizer.FullName;
@@ -147,12 +153,20 @@ namespace VMS.Pages.ActivitySearchPage
             await FilterChanged.InvokeAsync(Filter);
         }
 
-        private async Task ClearFilter()
+        private async Task ClearFilterAsync()
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
             organizationChoosenValue = "Tổ chức";
-            Filter = new FilterActivityViewModel();
+
+            isCityShow = false;
+            isDistrictShow = false;
+            isOrganizationShow = false;
+
+            districts = new();
+            provinces = await AddressService.GetAllProvincesAsync();
+
+            Filter = new();
             await FilterChanged.InvokeAsync(Filter);
         }
 
@@ -160,6 +174,19 @@ namespace VMS.Pages.ActivitySearchPage
         {
             OrderList[key] = !OrderList[key];
             await OrderListChanged.InvokeAsync(OrderList);
+        }
+
+        private void ChangeStatePinnedArea(AreaViewModel areaViewModel)
+        {
+            AreaViewModel area = Filter.Areas.Find(a => a.Id == areaViewModel.Id);
+            if (area is null)
+            {
+                Filter.Areas.Add(areaViewModel);
+            }
+            else
+            {
+                Filter.Areas.Remove(area);
+            }
         }
     }
 }

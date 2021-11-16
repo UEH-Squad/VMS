@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using VMS.Common;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Areas.Identity.Pages.Account

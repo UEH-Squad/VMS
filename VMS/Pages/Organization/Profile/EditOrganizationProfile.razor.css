@@ -58,14 +58,18 @@
   .my-editProfile .form-field .w-80 {
     width: 80%; }
   .my-editProfile .form-field-item {
-    text-align: center; }
+    text-align: center;
+    width: 20%;
+    display: inline-block; }
     .my-editProfile .form-field-item:hover > i {
-      font-size: 50px; }
+      font-size: 40px; }
+      @media (min-width: 1400px) {
+        .my-editProfile .form-field-item:hover > i {
+          font-size: 45px; } }
     .my-editProfile .form-field-item:hover > span {
       transform: translateY(-5px); }
     .my-editProfile .form-field-item i {
       display: block;
-      background-color: #18A0FB;
       border-radius: 50%;
       color: white;
       margin: 5px auto;
@@ -73,15 +77,14 @@
       width: 73px;
       height: 73px;
       line-height: 73px;
-      font-size: 35px; }
+      font-size: 30px; }
       @media (min-width: 1400px) {
         .my-editProfile .form-field-item i {
           width: 83px;
           height: 83px;
           line-height: 83px;
-          font-size: 40px; } }
+          font-size: 35px; } }
     .my-editProfile .form-field-item span {
-      color: #64D72F;
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;
@@ -94,39 +97,14 @@
       background: #C4C4C4;
       opacity: 50%;
       color: #FFFFFF;
-      font-size: 70px; }
+      font-size: 60px; }
       .my-editProfile .form-field-item .icon-add:hover {
         background: #C4C4C4;
         opacity: 100%;
-        font-size: 80px; }
+        font-size: 70px; }
     .my-editProfile .form-field-item.item-add {
       width: 20%;
       cursor: pointer; }
-  .my-editProfile .owl-carousel {
-    z-index: 0; }
-  .my-editProfile .editProfile__carousel {
-    width: 80%;
-    padding-right: 50px; }
-    .my-editProfile .editProfile__carousel .item {
-      margin: 0 auto; }
-    .my-editProfile .editProfile__carousel ::deep .owl-nav {
-      display: block; }
-      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-prev {
-        display: none; }
-      .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next {
-        position: absolute;
-        top: -15%;
-        right: 0%; }
-        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span {
-          font-size: 80px;
-          color: #18A0FB;
-          transition: all 0.3s linear; }
-          .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next span:hover {
-            color: #0B588c; }
-        .my-editProfile .editProfile__carousel ::deep .owl-nav .owl-next:hover {
-          background: none; }
-    .my-editProfile .editProfile__carousel ::deep .owl-dots {
-      display: none; }
   .my-editProfile .countWord {
     color: #707070;
     position: absolute;

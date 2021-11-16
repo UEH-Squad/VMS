@@ -120,11 +120,3 @@ body {
     border:none;    
 }
 /* ------end report-----*/
-
-::deep {
-    li {
-        color: $grey-text;
-        margin-left: 25px;
-        font-weight: 300;
-    }
-}

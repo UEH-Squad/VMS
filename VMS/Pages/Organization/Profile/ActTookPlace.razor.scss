@@ -6,12 +6,18 @@
         font-size: 30px;
         line-height: 36px;
         color: $grey-text;
-        margin-bottom: 42px;
-        margin-top: 70px;
+        padding-bottom: 5px;
 
         span {
             color: $green;
         }
+    }
+
+    hr {
+        width: 60%;
+        height: 1px;
+        background-color: #707070;
+        opacity: 50%;
     }
 
     &-container {

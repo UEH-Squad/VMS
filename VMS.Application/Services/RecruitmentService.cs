@@ -92,12 +92,16 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        public async Task UpdateRatingAndCommentAsync(double? rank, string comment, int? recruitmentId = null)
+        public async Task UpdateRatingAndCommentAsync(int activityId, double? rank, string comment, int? recruitmentId = null)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Specification<Recruitment> specification = new()
             {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    x => x.ActivityId == activityId
+                },
                 Includes = r => r.Include(x => x.RecruitmentRatings)
             };
 

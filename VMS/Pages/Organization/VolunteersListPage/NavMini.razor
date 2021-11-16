@@ -1,18 +1,21 @@
 ﻿<div class="search-and-button">
     <VMS.Pages.ActivitySearchPage.SearchBox></VMS.Pages.ActivitySearchPage.SearchBox>
     <div class="button-download @(navDel ? "d-block" : "d-none")">
-        <button class="button-download__text">Tải danh sách</button>
+        <button class="button-download__text">
+            <span class="material-icons"> download </span>
+            Tải danh sách
+        </button>
     </div>
 </div>
 
 <div class="container @(navDel ? "d-block" : "d-none")">
     <div class="my-container">
-        <h4 class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</h4>
+        <p class="quantity-volunteers">Có <span>@quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
         <div class="button">
             <button @onclick="@(() => ShowConfirm("delete"))" class="button__text button__text--del">Xóa nhiều</button>
         </div>
         <div class="link">
-            <h4 @onclick="ChangeNav" class="link__text link__text--del">Xem danh sách xóa</h4>
+            <h4 @onclick="ChangeNav" class="link__text link__text--del">Danh sách xóa</h4>
         </div>
     </div>
 </div>

@@ -5,12 +5,13 @@ using Microsoft.AspNetCore.Components.Forms;
 using Blazored.Modal.Services;
 using System.Threading.Tasks;
 using Blazored.Modal;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Organization.Profile
 {
     public partial class Information : ComponentBase
     {
-        [Parameter] 
+        [Parameter]
         public string UserId { get; set; }
         [Parameter] public UserViewModel Org { get; set; }
         [Parameter] public bool HaveControl { get; set; }
@@ -23,10 +24,10 @@ namespace VMS.Pages.Organization.Profile
 
         async Task ShowModal(InputFileChangeEventArgs e)
         {
-            if (e.File.ContentType == "image/jpeg")
+            if (e.File.ContentType == "image/jpeg" || e.File.ContentType == "image/png")
             {
                 file = e.File;
-                avatar = await UploadService.SaveImageAsync(file, UserId);//this code will save image to ./img/activities, need to improve later
+                avatar = await UploadService.SaveImageAsync(file, UserId, ImgFolder.Avatar);
             }
             var parameters = new ModalParameters();
             parameters.Add("avatar", avatar);
@@ -36,14 +37,23 @@ namespace VMS.Pages.Organization.Profile
                 DisableBackgroundCancel = true,
                 UseCustomLayout = true,
             };
-           var result = await Modal.Show<Notification>("", parameters, options).Result;
+            var result = await Modal.Show<Notification>("", parameters, options).Result;
             if ((bool)result.Data)
             {
                 Org.Avatar = avatar;
             }
 
         }
-
+        async Task ShowModalAppellation()
+        {
+            var options = new ModalOptions()
+            {
+                HideCloseButton = true,
+                DisableBackgroundCancel = true,
+                UseCustomLayout = true,
+            };
+            Modal.Show<Appellation>("", options);
+        }
         private static bool HaftStar(double rate, int star)
         {
             if (rate - star > 0 && rate - star <= 0.5)

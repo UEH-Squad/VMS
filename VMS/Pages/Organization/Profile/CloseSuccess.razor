@@ -1,7 +1,7 @@
 ﻿<div class="pop-up">
     <div class="center-screen">
         <div class="pop-up-container border-10">
-            <div @onclick="CloseModal" class="close-btn-s">
+            <div @onclick="CloseModalAsync" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
@@ -20,7 +20,7 @@
     [Parameter]
     public bool IsClosed { get; set; }
 
-    private async Task CloseModal()
+    private async Task CloseModalAsync()
     {
         await Modal.CloseAsync();
     }

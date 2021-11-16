@@ -264,6 +264,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CloseDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Commission")
                         .HasColumnType("nvarchar(max)");
 
@@ -314,6 +317,9 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OpenDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
@@ -467,10 +473,18 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Color")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("#18A0FB");
+
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPinned")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -484,86 +498,119 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Color = "#18A0FB",
                             Icon = "people_outline",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Cộng đồng"
                         },
                         new
                         {
                             Id = 2,
+                            Color = "#18A0FB",
                             Icon = "pan_tool",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Hỗ trợ"
                         },
                         new
                         {
                             Id = 3,
+                            Color = "#18A0FB",
                             Icon = "import_contacts",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Giáo dục"
                         },
                         new
                         {
                             Id = 4,
+                            Color = "#18A0FB",
                             Icon = "format_shapes",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Kỹ thuật"
                         },
                         new
                         {
                             Id = 5,
+                            Color = "#18A0FB",
                             Icon = "local_hospital",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Sức khỏe"
                         },
                         new
                         {
                             Id = 6,
+                            Color = "#18A0FB",
                             Icon = "drive_eta",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Phương tiện"
                         },
                         new
                         {
                             Id = 7,
+                            Color = "#18A0FB",
                             Icon = "wb_sunny",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Môi trường"
                         },
                         new
                         {
                             Id = 8,
+                            Color = "#18A0FB",
                             Icon = "directions_bike",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Thể thao"
                         },
                         new
                         {
                             Id = 9,
+                            Color = "#18A0FB",
                             Icon = "notifications_active",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Khẩn cấp"
                         },
                         new
                         {
                             Id = 10,
+                            Color = "#18A0FB",
                             Icon = "calendar_today",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Sự kiện"
                         },
                         new
                         {
                             Id = 11,
+                            Color = "#18A0FB",
                             Icon = "home",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Chuyển nhà"
                         },
                         new
                         {
                             Id = 12,
+                            Color = "#18A0FB",
                             Icon = "computer",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Công nghệ"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Color = "#F14747",
+                            Icon = "coronavirus",
+                            IsDeleted = false,
+                            IsPinned = true,
+                            Name = "COVID-19"
                         });
                 });
 
@@ -704,7 +751,7 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsProcessed")
+                    b.Property<bool>("IsReportUser")
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
@@ -716,11 +763,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Feedbacks");
                 });
@@ -732,7 +784,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -757,7 +809,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -1403,7 +1455,12 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("VMS.Domain.Models.User", null)
+                        .WithMany("Reports")
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Activity");
 
@@ -1415,16 +1472,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
                         .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1432,16 +1487,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
                         .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
@@ -1618,6 +1671,8 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Recruitments");
+
+                    b.Navigation("Reports");
 
                     b.Navigation("UserAddresses");
 

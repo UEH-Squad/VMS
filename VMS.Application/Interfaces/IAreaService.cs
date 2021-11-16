@@ -6,6 +6,6 @@ namespace VMS.Application.Interfaces
 {
     public interface IAreaService
     {
-        Task<List<AreaViewModel>> GetAllAreasAsync();
+        Task<List<AreaViewModel>> GetAllAreasAsync(bool isPinned = false);
     }
 }

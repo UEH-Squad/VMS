@@ -36,7 +36,7 @@
   padding: 10px 20px; }
   .activity__content__title {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
     color: #18A0FB; }
   .activity__content__icon {
     justify-content: space-between; }
@@ -62,13 +62,19 @@
 .activity__icon {
   flex-basis: 50px;
   justify-content: center;
-  flex-direction: column; }
+  flex-direction: column;
+  align-content: space-around; }
   .activity__icon button {
     border: none;
     background-color: transparent; }
     .activity__icon button span {
-      font-size: 24px; }
+      font-size: 30px; }
   .activity__icon__report span {
     color: #F14747; }
+  .activity__icon__report span:hover {
+    color: #E10B0B; }
   .activity__icon__comment span {
+    margin-top: 10px;
     color: #18A0FB; }
+  .activity__icon__comment span:hover {
+    color: #0B588c; }

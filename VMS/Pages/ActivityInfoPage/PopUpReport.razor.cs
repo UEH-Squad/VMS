@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.ActivityInfoPage
 {
@@ -20,7 +21,24 @@ namespace VMS.Pages.ActivityInfoPage
         private BlazoredModalInstance ReportModal { get; set; }
 
         [Parameter]
+        public string UserId { get; set; }
+
+        [Parameter]
         public int ActivityId { get; set; }
+
+        [Parameter]
+        public bool IsReportUser { get; set; } = false;
+
+        [Parameter]
+        public List<string> Reasons { get; set; } = new()
+        {
+            "Hoạt động không có thật",
+            "Hoạt động không không tương thích với nội dung đã đề cập",
+            "Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động",
+            "Nội dung hoạt động không phù hợp",
+            "Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động",
+            "Khác"
+        };
 
         [Inject]
         private IReportService ReportService { get; set; }
@@ -36,28 +54,20 @@ namespace VMS.Pages.ActivityInfoPage
             report = new ReportViewModel();
         }
 
-        private List<string> Reason { get; set; } = new List<string>();
-        private List<string> Image { get; set; } = new List<string>();
+        private List<string> Reason { get; set; } = new();
+        private List<string> Image { get; set; } = new();
 
-        private async Task AddReport()
+        private async Task AddReportAsync()
         {
-            report.UserId = IdentityService.GetCurrentUserId();
+            report.ReportBy = IdentityService.GetCurrentUserId();
+            report.UserId = UserId;
             report.ActivityId = ActivityId;
+            report.IsReportUser = IsReportUser;
             report.Reasons = Reason;
             report.Images = Image;
 
             await ReportService.AddReportAsync(report);
         }
-
-        private static List<string> Reasons => new()
-        {
-            "Hoạt động không có thật",
-            "Hoạt động không không tương thích với nội dung đã đề cập",
-            "Hình ảnh, video không phù hợp/không liên quan tới nội dung hoạt động",
-            "Nội dung hoạt động không phù hợp",
-            "Lĩnh vực và kỹ năng không phù hợp với nội dung hoạt động",
-            "Khác"
-        };
 
         private void CheckboxClicked(string reason, object checkedValue)
         {
@@ -79,7 +89,7 @@ namespace VMS.Pages.ActivityInfoPage
 
         private bool isChangeFile = false;
 
-        private async Task OnInputFile(InputFileChangeEventArgs e)
+        private async Task OnInputFileAsync(InputFileChangeEventArgs e)
         {
             var imageFiles = e.GetMultipleFiles();
             selectedImages = imageFiles;
@@ -89,11 +99,11 @@ namespace VMS.Pages.ActivityInfoPage
             {
                 if (file.ContentType != "image/jpeg")
                 {
-                    this.StateHasChanged();
+                    StateHasChanged();
                 }
                 else
                 {
-                    string x = await UploadService.SaveImageAsync(file, IdentityService.GetCurrentUserId());
+                    string x = await UploadService.SaveImageAsync(file, IdentityService.GetCurrentUserId(), ImgFolder.Report);
                     Image.Add(x);
                 }
             }

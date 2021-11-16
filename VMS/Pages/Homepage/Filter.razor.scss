@@ -24,8 +24,6 @@
         @include on("xl") {
             font-size: 30px;
         }
-
-        
     }
 
     .owl-carousel {
@@ -152,7 +150,8 @@
                 transition: all 0.3s linear;
 
                 &:hover {
-                    color: #0B588C;
+                    color: $blue-bold;
+                    opacity: 0.73;
                 }
             }
 
@@ -182,7 +181,8 @@
                 transition: all 0.3s linear;
 
                 &:hover {
-                    color: #0B588C;
+                    color: $blue-bold;
+                    opacity: 0.73;
                 }
             }
 

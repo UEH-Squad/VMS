@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.Organization.Activities
 {
@@ -41,13 +42,14 @@ namespace VMS.Pages.Organization.Activities
         [Inject]
         private IUploadService UploadService { get; set; }
 
+
         private bool isEditPage;
         private bool isLoading;
         private IList<string> chosenTargets = new List<string>();
         private readonly IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
-
+        [CascadingParameter] public string UserId { get; set; }
         private CreateActivityViewModel activity = new();
 
         private readonly List<string> targets = new()
@@ -196,7 +198,7 @@ namespace VMS.Pages.Organization.Activities
                         return;
                     }
 
-                    activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
+                    activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId, ImgFolder.Activities);
                     ActivityId = await ActivityService.AddActivityAsync(activity);
                     title = succeededCreateTitle;
                 }
@@ -205,7 +207,7 @@ namespace VMS.Pages.Organization.Activities
                     if (uploadFile is not null)
                     {
                         string oldImageName = activity.Banner;
-                        activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId);
+                        activity.Banner = await UploadService.SaveImageAsync(uploadFile, activity.OrgId, ImgFolder.Activities);
                         UploadService.RemoveImage(oldImageName);
                     }
 
@@ -220,6 +222,7 @@ namespace VMS.Pages.Organization.Activities
                 modalParams.Add("CTALink", $"{Routes.ActivityInfo}/{ActivityId}");
                 modalParams.Add("CancelText", "Đóng");
                 await ShowModalAsync(typeof(NotificationPopup), modalParams);
+                NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
             }
             catch (Exception ex)
             {

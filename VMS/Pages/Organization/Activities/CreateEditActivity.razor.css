@@ -59,7 +59,6 @@
     transform: translateY(-5px); }
   .item i {
     display: block;
-    background-color: #18A0FB;
     border-radius: 50%;
     color: white;
     margin: 5px auto;
@@ -76,7 +75,6 @@
         background-color: #B4B4B4;
         cursor: pointer; }
   .item span {
-    color: #64D72F;
     font-weight: 500;
     transition: all 0.3s linear; }
 
@@ -107,7 +105,8 @@
       width: 30% !important; } }
 
 ::deep input {
-  color: #515151; }
+  color: #515151;
+  font-size: 1rem; }
   ::deep input::placeholder {
     color: #b4b4b4; }
 
@@ -144,3 +143,9 @@
     display: none; }
   ::deep .my-radio-box:checked::before {
     display: block; }
+  ::deep .my-radio-box:hover {
+    background: #F3F3F5; }
+
+::deep .my-date-picker {
+  border-radius: 5px;
+  height: 38px; }

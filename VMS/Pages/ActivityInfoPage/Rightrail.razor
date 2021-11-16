@@ -20,12 +20,10 @@
             <div class="about-infor">
                 <div class="participant">
                     <p class="participant__title titles mb-0">Đối tượng tham gia</p>
-                    <ul class="mb-0">
-                        @foreach (var item in targets)
-                        {
-                            <li class="contents">@item</li>
-                        }
-                    </ul>
+                    @foreach (var item in targets)
+                    {
+                        <p class="participant__content contents mb-0">@item</p>
+                    }
                 </div>
                 <div class="location">
                     <p class="location__title titles mb-0">Địa điểm tham gia</p>
@@ -33,7 +31,7 @@
                 </div>
                 <div class="time">
                     <p class="time__title titles mb-0">Thời gian tham gia</p>
-                    <p class="time__content contents mb-0">@activity.StartDate - @activity.EndDate</p>
+                    <p class="time__content contents mb-0">@activity.StartDate.ToString("dd/MM/yyyy") - @activity.EndDate.ToString("dd/MM/yyyy")</p>
                 </div>
                 <div class="skill">
                     <p class="skill__title titles mb-0">Kỹ năng</p>
@@ -45,18 +43,27 @@
                 </div>
             </div>
             <div class="btn-sign-up--cover">
-                @if (isAlreadySignedUp)
-                {
-                    <button class="btn-already-sign-up">
-                        <h3 class="btn-sign-up__text">Bạn đã đăng ký</h3>
-                    </button>
-                }
-                else
-                {
-                    <button @onclick="@(() => ShowSignUpPopUp())" class="btn-sign-up">
-                        <h3 class="btn-sign-up__text">Đăng ký</h3>
-                    </button>
-                }
+                <AuthorizeView>
+                    <Authorized>
+                        @if (IsSignupTimeExpired())
+                        {
+                            <button class="btn-already-sign-up">
+                                <h3 class="btn-sign-up__text">@(isAlreadySignedUp ? "Bạn đã đăng ký" : "Đăng ký")</h3>
+                            </button>
+                        }
+                        else
+                        {
+                            <button @onclick="ShowSignUpPopUp" class="btn-sign-up">
+                                <h3 class="btn-sign-up__text">Đăng ký</h3>
+                            </button>
+                        }
+                    </Authorized>
+                    <NotAuthorized>
+                            <button @onclick="ShowRequireSignup" class="btn-sign-up">
+                                <h3 class="btn-sign-up__text">Đăng ký</h3>
+                            </button>
+                    </NotAuthorized>
+                </AuthorizeView>
             </div>
         </div>
         <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>

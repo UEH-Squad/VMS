@@ -64,6 +64,9 @@
         public const string AdminFeatureSuggestionManagement = "/admin/bo-sung-tinh-nang";
         public const string AdminDashboardManagement = "/admin/bao-cao-thong-ke";
 
+        public const string AdminVolunteerProfile = "/admin/ho-so-ca-nhan";
+        public const string AdminOrganizationProfile = "/admin/ho-so-to-chuc";
+
         #endregion Admin
     }
 }

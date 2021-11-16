@@ -1,24 +1,24 @@
 ﻿<div class="d-flex align-items-center profile__rank">
     @if (IsUser)
     {
-        <a href="" class="d-flex align-self-center me-3">#@Rank</a>
+        <a href="" class="d-flex align-self-center me-3" style="@(IsUsedForAdmin ? "font-size: 32px" : "")">#@Rank</a>
     }
     else
     {
-        <a class="d-flex align-self-center me-3">#@Rank</a>
+        <a class="d-flex align-self-center me-3" style="@(IsUsedForAdmin ? "font-size: 32px" : "")">#@Rank</a>
     }
 
     <div>
         <p class="mb-2 d-flex justify-content-evenly align-self-end">
-            <span class="profile__rank-number me-1">@Stars</span>
+            <span class="profile__rank-number me-1" style="@(IsUsedForAdmin ? "font-size: 20px" : "")">@Stars</span>
             @for (int i = 1; i <= 5; i++)
             {
-                <i class="material-icons @(Stars >= i ? "" : "icon-noColor")">
+                <i class="material-icons @(Stars >= i ? "" : "icon-noColor")" style="@(IsUsedForAdmin ? "font-size: 20px" : "")">
                     star@(HaftStar(Stars, i) ? "_half" : "")
                 </i>
             }
         </p>
-        <span class="text-start">@GetTotalRatingString(TotalRating) xếp hạng</span>
+        <span class="text-start" style="@(IsUsedForAdmin ? "font-size: 18px" : "")">@GetTotalRatingString(TotalRating) xếp hạng</span>
     </div>
 </div>
 
@@ -28,6 +28,8 @@
     [Parameter] public double Rank { get; set; } = 0;
     [Parameter] public double TotalRating { get; set; } = 0;
     [Parameter] public double Stars { get; set; } = 0;
+    [Parameter] public bool IsUsedForAdmin { get; set; }
+
 
     private static bool HaftStar(double rate, int star)
     {

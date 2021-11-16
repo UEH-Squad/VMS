@@ -4,6 +4,9 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.admin-divider {
+  border-top: 1px solid #b4b4b4; }
+
 .notification-link {
   margin: 10px 0; }
   .notification-link__icon {
@@ -13,4 +16,7 @@
     color: #0B588C; }
 
 ::deep .my-search-box {
+  margin: 10px 0; }
+
+.my-navbar__brand {
   margin: 10px 0; }

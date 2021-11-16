@@ -11,6 +11,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         [Parameter]
         public EventCallback<string> SearchValueChanged { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
+
 
         private void UpdateSearchValue(ChangeEventArgs e)
         {

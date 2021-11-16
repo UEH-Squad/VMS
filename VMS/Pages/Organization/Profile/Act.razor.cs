@@ -31,6 +31,8 @@ namespace VMS.Pages.Organization.Profile
         [Parameter] public bool IsOrgProfile { get; set; } = true;
         [Parameter] public bool IsUser { get; set; } = true;
         [Parameter] public string TitleLinkALl { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
+
         [Parameter] public List<ActivityViewModel> Datas { get; set; }
 
         [CascadingParameter] private string CurrentUserId { get; set; }

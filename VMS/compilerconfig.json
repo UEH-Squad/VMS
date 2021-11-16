@@ -474,5 +474,13 @@
   {
     "outputFile": "Pages/Admin/VolunteerManagement/Index.razor.css",
     "inputFile": "Pages/Admin/VolunteerManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/UserProfile/Index.razor.css",
+    "inputFile": "Pages/Admin/UserProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationProfile/Index.razor.css",
+    "inputFile": "Pages/Admin/OrganizationProfile/Index.razor.scss"
   }
 ]

@@ -12,11 +12,9 @@ namespace VMS.Pages.Admin.AccountManagement
     public partial class ManagementTool : ComponentBase
     {
         private bool isCourseShow;
-        private bool isLevelShow;
-        private bool isShowDropDownCreate = false;
 
         private FilterAccountViewModel filter = new();
-        private List<string> levels, courses;
+        private List<string> courses;
 
         [Parameter] public Role PageRole { get; set; }
         [Parameter] public string Tilte { get; set; }
@@ -26,8 +24,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         protected override void OnInitialized()
         {
-            levels = Courses.GetLevels();
-            courses = Courses.GetCourses();
+            courses = PageRole == Role.User ? Courses.GetCourses() : Courses.GetLevels();
         }
 
         private void ChooseCourseValue(string course)
@@ -45,19 +42,10 @@ namespace VMS.Pages.Admin.AccountManagement
             isCourseShow = false;
         }
 
-        private void ChooseLevelValue(string level)
+        private string GetDropdownValue()
         {
-            filter.Course = level;
-        }
-
-        private void ToggLeLevelDropdown()
-        {
-            isLevelShow = !isLevelShow;
-        }
-
-        private void CloseLevelDropdown()
-        {
-            isLevelShow = false;
+            return !string.IsNullOrEmpty(filter.Course) ? filter.Course
+                : PageRole == Role.User ? "Khóa" : "Cấp";
         }
 
         private async Task OnClickFilterAsync()
@@ -83,8 +71,6 @@ namespace VMS.Pages.Admin.AccountManagement
             parameters.Add("Role", PageRole);
 
             Modal.Show<CreateAccounts>("", parameters, BlazoredModalOptions.GetModalOptions());
-
-            isShowDropDownCreate = false; 
         }
 
         private void ShowCreateAccount()
@@ -103,8 +89,6 @@ namespace VMS.Pages.Admin.AccountManagement
                     Modal.Show<CreateAccountUser>("", BlazoredModalOptions.GetModalOptions());
                     break;
             }
-
-            isShowDropDownCreate = false;
         }
     }
 }

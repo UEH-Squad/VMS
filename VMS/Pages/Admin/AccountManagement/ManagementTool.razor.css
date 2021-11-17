@@ -56,7 +56,8 @@ h1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   /* number of lines to show */
-  -webkit-box-orient: vertical; }
+  -webkit-box-orient: vertical;
+  background-color: white; }
   .popup-btn::placeholder {
     color: #b4b4b4; }
   .popup-btn-icon {
@@ -66,6 +67,8 @@ h1 {
     pointer-events: none; }
   .popup-btn:focus {
     box-shadow: none; }
+  .popup-btn.bg-grey {
+    background-color: #f3f3f3; }
 
 .my-dropdown {
   padding: 15px 22px;
@@ -142,68 +145,37 @@ h1 {
     background: rgba(24, 160, 251, 0.1); }
 
 .managementTool__sort {
-  /*.input-radio {
-        width: 15px;
-        height: 15px;
-        vertical-align: top;
-        background-color: #fff;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        border: 1px solid $grey-icon;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        -webkit-print-color-adjust: exact;
-        position: relative;
-
-        &::before {
-            content: "";
-            width: 9px;
-            height: 5px;
-            border-left: 2px solid #18A0FB;
-            border-bottom: 2px solid #18A0FB;
-            position: absolute;
-            top: 40%;
-            left: 52%;
-            transform: translate(-50%, -50%) rotate( -45deg );
-            display: none;
-        }
-
-        &:checked::before {
-            display: block;
-        }
-    }*/ }
+  /* pretty radio */
+  /* basic layout */ }
   .managementTool__sort p {
     font-weight: 400;
     font-size: 16px;
     color: black; }
-  .managementTool__sort label {
+  .managementTool__sort input, .managementTool__sort span {
+    cursor: pointer; }
+  .managementTool__sort span {
     font-weight: 400;
     font-size: 16px;
-    color: #515151;
-    cursor: pointer; }
-  .managementTool__sort input[type='radio'] {
-    width: 15px;
-    height: 15px;
-    border: 1px solid red;
-    background-color: none;
-    cursor: pointer; }
-  .managementTool__sort input[type='radio']:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    border-radius: 12px;
-    top: -4px;
-    left: 1.5px;
-    position: relative;
-    background-color: none;
+    color: #515151; }
+  .managementTool__sort label > input[type="radio"] {
+    display: none; }
+  .managementTool__sort label > input[type="radio"] + *::before {
+    content: "";
     display: inline-block;
-    visibility: hidden;
-    border: 2px solid white;
-    overflow: hidden; }
-  .managementTool__sort input[type='radio']:checked:after {
-    position: relative;
-    background-color: #18A0FB;
+    vertical-align: bottom;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: #B4B4B4; }
+  .managementTool__sort label > input[type="radio"]:checked + *::before {
+    background: radial-gradient(#18A0FB 0%, #18A0FB 40%, transparent 50%, transparent); }
+  .managementTool__sort fieldset {
+    margin: 20px;
+    max-width: 400px; }
+  .managementTool__sort label > input[type="radio"] + * {
     display: inline-block;
-    visibility: visible; }
+    padding: 0.5rem 1rem; }

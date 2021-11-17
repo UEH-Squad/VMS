@@ -2,23 +2,8 @@
 <div class="d-flex justify-content-between my-managementTool">
     <div class="managementTool__filter">
         <div class="d-flex align-items-center">
-            <div class="position-relative managementTool__level @(PageRole == Role.Organization ? "d-block" : "d-none")">
-                <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control" placeholder="@(!string.IsNullOrEmpty(filter.Course) ? filter.Course : "Cấp")" readonly />
-                <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
-                    <ul>
-                        @foreach (var level in levels)
-                        {
-                            <li @onmousedown="() => ChooseLevelValue(level)">@level</li>
-                        }
-                    </ul>
-                </div>
-                <span class="material-icons-outlined position-absolute popup-btn-icon">
-                    expand_more
-                </span>
-            </div>
-
-            <div class="position-relative managementTool__course  @(PageRole == Role.User ? "d-block" : "d-none")">
-                <input @onclick="ToggCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn form-control" placeholder="@(!string.IsNullOrEmpty(filter.Course) ? filter.Course : "Khóa")" readonly />
+            <div class="position-relative managementTool__course  @(PageRole == Role.User || PageRole == Role.Organization ? "d-block" : "d-none")">
+                <input @onclick="ToggCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn form-control @(!string.IsNullOrEmpty(filter.Course) ? "bg-grey" : "")" placeholder="@GetDropdownValue()" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
                     <ul>
                         @foreach (var course in courses)
@@ -40,15 +25,15 @@
         <div class="d-flex align-items-center managementTool__sort mt-4 ">
             <p class="mb-0">Sắp xếp theo ngày tạo</p>
 
-            <div class="mx-5 d-flex align-items-center ">
-                <input @onclick="@(async () => await OnClickOrderAsync(true))" type="radio" id="near" name="filter" class="me-2 " />
+            <label class="d-flex align-items-center">
+                <input @onclick="@(async () => await OnClickOrderAsync(true))" type="radio" id="near" name="filter" />
+                <span>Gần nhất</span>
+            </label>
 
-                <label for="near">Gần nhất</label>
-            </div>
-            <div class="d-flex align-items-center ">
+            <label class="d-flex align-items-center">
                 <input @onclick="@(async () => await OnClickOrderAsync(false))" type="radio" id="old" name="filter" class="me-2 input-radio cursor-pointer" />
-                <label for="old">Cũ nhất</label>
-            </div>
+                <span>Cũ nhất</span>
+            </label>
         </div>
 
     </div>
@@ -68,6 +53,7 @@
             }
         </ul>
     </div>
+
 </div>
 
 @code {

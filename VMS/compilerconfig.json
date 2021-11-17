@@ -482,5 +482,9 @@
   {
     "outputFile": "Pages/Admin/OrganizationProfile/Index.razor.css",
     "inputFile": "Pages/Admin/OrganizationProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.css",
+    "inputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.scss"
   }
 ]

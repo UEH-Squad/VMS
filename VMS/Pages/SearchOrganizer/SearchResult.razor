@@ -11,7 +11,7 @@
                     <div class="org-item__name-group ms-4">
                         <a class="org-item__name lmtext-2" href="@(IsUserResult ? Routes.AdminVolunteerProfile : (IsOrgResult ? Routes.AdminOrganizationProfile: "#"))">@item.OrganizationName</a>
                         <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Level</p>
-                        <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">Đã tổ chức <span>@item.ActivitiesCount</span> hoạt động</p>
+                        <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">Đã tổ chức <span @onclick="(() => ShowHeldActivities())">@item.ActivitiesCount</span> hoạt động</p>
                         <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">Khóa @item.Year - Lớp @item.Class</p>
                     </div>
                 </div>
@@ -148,5 +148,20 @@
         }).ToArray();
 
         return result;
+    }
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private async Task ShowHeldActivities()
+    {
+
+        var options = new ModalOptions()
+        {
+            HideCloseButton = true,
+            DisableBackgroundCancel = true,
+            UseCustomLayout = true,
+        };
+
+        var result = Modal.Show<VMS.Pages.Admin.OrganizationManagement.HeldActivities>("", options).Result;
     }
 }

@@ -17,7 +17,7 @@
     background-color: #FFFFFF;
     box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
     .pop-up-container--large {
-      width: 45%; }
+      width: 50%; }
     .pop-up-container--small {
       width: fit-content; }
   .pop-up .lm-text {
@@ -76,3 +76,8 @@
     color: #64D72F; }
     .pop-up h3 span {
       color: #18A0FB; }
+
+.my-pagination-container {
+  width: 80%;
+  display: flex;
+  justify-content: center; }

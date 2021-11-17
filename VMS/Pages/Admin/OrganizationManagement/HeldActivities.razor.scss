@@ -15,7 +15,7 @@
         box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
 
         &--large {
-            width: 45%;
+            width: 50%;
         }
 
         &--small {
@@ -110,4 +110,10 @@
             color: $blue;
         }
     }
+}
+
+.my-pagination-container {
+    width: 80%;
+    display: flex;
+    justify-content: center;
 }

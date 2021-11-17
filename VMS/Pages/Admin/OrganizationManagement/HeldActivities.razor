@@ -23,7 +23,7 @@
                     </div>
                 </div>
             }
-            <div class="w-75">
+            <div class="my-pagination-container">
                 <Pager CurrentPage="@pagedResult.CurrentPage"
                        PageCount="@pagedResult.PageCount"
                        OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" 

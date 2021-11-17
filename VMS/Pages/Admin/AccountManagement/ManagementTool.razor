@@ -48,15 +48,15 @@
         <div class="d-flex align-items-center managementTool__sort mt-4 ">
             <p class="mb-0">Sắp xếp theo ngày tạo</p>
 
-            <div class="mx-5 d-flex align-items-center ">
-                <input checked="@(IsCheckd == 1)" @onchange="@(() => IsCheckd = 1)" type="radio" id="near" name="filter" class="me-2 " />
+            <label class="d-flex align-items-center">
+                <input checked="@(IsCheckd == 1)" @onchange="@(() => IsCheckd = 1)" type="radio" id="near" name="filter" />
+                <span>Gần nhất</span>
+            </label>
 
-                <label for="near">Gần nhất</label>
-            </div>
-            <div class="d-flex align-items-center ">
-                <input checked="@(IsCheckd == 2)" @onchange="@(() => IsCheckd = 2)" type="radio" id="old" name="filter" class="me-2 input-radio cursor-pointer" />
-                <label for="old">Cũ nhất</label>
-            </div>
+            <label class="d-flex align-items-center">
+                <input checked="@(IsCheckd == 2)" @onchange="@(() => IsCheckd = 2)" type="radio" id="old" name="filter" />
+                <span>Cũ nhất</span>
+            </label>
         </div>
 
     </div>
@@ -73,7 +73,9 @@
             <li @onclick="ShowCreateAccounts">Tạo nhiều tài khoản</li>
         </ul>
     </div>
+
 </div>
+
 
 
 @code {
@@ -131,10 +133,10 @@
     }
     private List<fakeLevel> Levels = new()
     {
-        new fakeLevel() { Level = "Ban Chuyên môn" },
-        new fakeLevel() { Level = "Khoa/Viện/KTX" },
-        new fakeLevel() { Level = "CLB/Đội/Nhóm" },
-    };
+            new fakeLevel() { Level = "Ban Chuyên môn" },
+            new fakeLevel() { Level = "Khoa/Viện/KTX" },
+            new fakeLevel() { Level = "CLB/Đội/Nhóm" },
+        };
     private void ChooseLevelValue(fakeLevel level)
     {
         levelChoosenValue = level.Level;
@@ -161,11 +163,11 @@
     }
     private List<fakeCourse> Courses = new()
     {
-        new fakeCourse() { Course = "K44" },
-        new fakeCourse() { Course = "K45" },
-        new fakeCourse() { Course = "K46" },
-        new fakeCourse() { Course = "K47" },
-    };
+            new fakeCourse() { Course = "K44" },
+            new fakeCourse() { Course = "K45" },
+            new fakeCourse() { Course = "K46" },
+            new fakeCourse() { Course = "K47" },
+        };
     private void ChooseCourseValue(fakeCourse course)
     {
         courseChoosenValue = course.Course;
@@ -188,6 +190,7 @@
         levelChoosenValue = "Cấp";
         courseChoosenValue = "Khóa";
         IsCheckd = 0;
+        isLevelGrey = false;
     }
 
 }

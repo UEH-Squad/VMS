@@ -55,6 +55,8 @@ h1 {
 
 
 //popup
+
+
 .popup-btn {
     border: 1px solid #D8D8D8;
     border-radius: 10px;
@@ -68,6 +70,7 @@ h1 {
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
+    background-color: white;
 
     &::placeholder {
         color: #b4b4b4;
@@ -79,8 +82,13 @@ h1 {
         right: 10px;
         pointer-events: none;
     }
-    &:focus{
+
+    &:focus {
         box-shadow: none;
+    }
+
+    &.bg-grey {
+        background-color: #f3f3f3;
     }
 }
 
@@ -190,79 +198,53 @@ h1 {
     }
 }
 .managementTool__sort {
-
     p {
         font-weight: 400;
         font-size: 16px;
         color: black;
     }
 
-    label {
+    input, span {
+        cursor: pointer;
+    }
+
+    span {
         font-weight: 400;
         font-size: 16px;
         color: #515151;
-        cursor: pointer;
+    }
+    /* pretty radio */
+    label > input[type="radio"] {
+        display: none;
     }
 
-    input[type='radio'] {
-        width: 15px;
-        height: 15px;
-        border: 1px solid red;
-        background-color: none;
-        cursor: pointer;
-    }
-
-    input[type='radio']:after {
-        content: '';
-        width: 12px;
-        height: 12px;
-        border-radius: 12px;
-        top: -4px;
-        left: 1.5px;
-        position: relative;
-        background-color: none;
+    label > input[type="radio"] + *::before {
+        content: "";
         display: inline-block;
-        visibility: hidden;
-        border: 2px solid white;
-        overflow: hidden;
+        vertical-align: bottom;
+        width: 1rem;
+        height: 1rem;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 0.1rem;
+        border-color: #B4B4B4;
     }
 
-    input[type='radio']:checked:after {
-        position: relative;
-        background-color: $blue;
+    label > input[type="radio"]:checked + *::before {
+        background: radial-gradient($blue 0%, $blue 40%, transparent 50%, transparent);
+    }
+    /* basic layout */
+    fieldset {
+        margin: 20px;
+        max-width: 400px;
+    }
+
+    label > input[type="radio"] + * {
         display: inline-block;
-        visibility: visible;
+        padding: 0.5rem 1rem;
     }
-    /*.input-radio {
-        width: 15px;
-        height: 15px;
-        vertical-align: top;
-        background-color: #fff;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        border: 1px solid $grey-icon;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        -webkit-print-color-adjust: exact;
-        position: relative;
-
-        &::before {
-            content: "";
-            width: 9px;
-            height: 5px;
-            border-left: 2px solid #18A0FB;
-            border-bottom: 2px solid #18A0FB;
-            position: absolute;
-            top: 40%;
-            left: 52%;
-            transform: translate(-50%, -50%) rotate( -45deg );
-            display: none;
-        }
-
-        &:checked::before {
-            display: block;
-        }
-    }*/
 }
+
+

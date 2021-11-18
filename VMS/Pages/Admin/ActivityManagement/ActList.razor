@@ -156,7 +156,7 @@
             OpenDate = DateTime.Parse("2021/10/20"),
             Id = ++i,
             EndDate = DateTime.Parse("2022/10/21"),
-            StartDate = DateTime.Parse("2021/10/20")
+            StartDate = DateTime.Parse("2021/11/20")
         }).ToList();
 
         var result = new PaginatedList<FakeData>(data, 100, page, 20);
@@ -211,14 +211,7 @@
 
     private async Task ShowApproveModal(int id)
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show<ApprovalActivity>("", options);
+        Modal.Show<ApprovalActivity>("", BlazoredModalOptions.GetModalOptions());
     }
 
     private async Task ShowActPrivorModal(int id)

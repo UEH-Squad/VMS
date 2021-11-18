@@ -1,0 +1,129 @@
+﻿@using VMS.Application.ViewModels;
+
+<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__create @(!isDeleteSuccess ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center">Tạo tài khoản <span>Tình nguyện viên</span></h3>
+            <EditForm Model="user">
+                <DataAnnotationsValidator />
+                <div class="d-flex align-items-center mb-20">
+                    <p class="form__title form__title--name">Họ và tên <span>(*)</span>:</p>
+                    <div class="">
+                        <InputText @bind-Value="@user.FullName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center mb-20">
+                    <p class="form__title form__title--id">MSSV<span>(*)</span>:</p>
+                    <div class="">
+                        <InputText @bind-Value="@user.Id" class="form-control" />
+                    </div>
+                    <p class="form__title form__title--course">Khóa<span>(*)</span>:</p>
+                    <div class="position-relative">
+                        <input @onclick="ToggCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn form-control" value="@courseChoosenValue" readonly />
+                        <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
+                            <ul>
+                                @if (Courses is not null)
+
+                                {
+                                    @foreach (var course in Courses)
+                                    {
+                                <li @onmousedown="() => ChooseCourseValue(course )">@course.Course</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <span class="material-icons-outlined position-absolute popup-btn-icon">
+                            expand_more
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p class="form__title form__title--email">Email UEH<span>(*)</span>:</p>
+                    <div class="">
+                        <InputText @bind-Value="@user.Email" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="from__btn text-center">
+                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
+                    <button @onclick="DeleteSuccessAsync" type="submit" class="btn btn-create">Tạo tài khoản</button>
+                </div>
+
+            </EditForm>
+
+        </div>
+
+        <div class="modal__success @(!isDeleteSuccess ? "d-none" : "d-block")">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div>
+                <h3 class="text-center mb-4">Bạn đã <span>tạo tài khoản</span> thành công </h3>
+                <div class="text-center">
+                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
+                    <a href="@Routes.HomePage" class="btn btn-watchList">Xem danh sách tài khoản</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code {
+    private bool isDeleteSuccess;
+
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private CreateUserProfileViewModel user = new();
+
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync();
+    }
+    private async Task DeleteSuccessAsync()
+    {
+        isDeleteSuccess = true;
+    }
+
+    private string courseChoosenValue = "";
+    private bool isCourseShow;
+    private bool isCourseGrey = false;
+
+    public class fakeCourse
+    {
+        public string Course { get; set; }
+    }
+    private List<fakeCourse> Courses = new()
+    {
+        new fakeCourse() { Course = "K44" },
+        new fakeCourse() { Course = "K45" },
+        new fakeCourse() { Course = "K46" },
+        new fakeCourse() { Course = "K47" },
+    };
+    private void ChooseCourseValue(fakeCourse course)
+    {
+        courseChoosenValue = course.Course;
+        isCourseGrey = true;
+    }
+    private void ToggCourseDropdown()
+    {
+        isCourseShow = !isCourseShow;
+    }
+
+    private void CloseCourseDropdown()
+    {
+        isCourseShow = false;
+    }
+
+}

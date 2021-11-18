@@ -57,7 +57,6 @@
 
         public const string AdminResolveReport = "/admin/quan-ly-bao-cao";
         public const string AdminDetailReport = "/admin/quan-ly-bao-cao/chi-tiet";
-
         public const string AdminOrgAccountManagement = "/admin/quan-ly-tai-khoan-to-chuc";
         public const string AdminVolunteerAccountManagement = "/admin/quan-ly-tai-khoan-ca-nhan";
         public const string AdminAdminAccountManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";

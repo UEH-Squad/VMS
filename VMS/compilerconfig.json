@@ -566,7 +566,6 @@
   {
     "outputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.css",
     "inputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.scss"
-  }
   },
   {
     "outputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.css",

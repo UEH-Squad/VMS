@@ -199,14 +199,7 @@
 
     private async Task ShowEditModal(int id)
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show<EditRequirement>("", options);
+        Modal.Show<EditRequirement>("", BlazoredModalOptions.GetModalOptions());
     }
 
     private async Task ShowApproveModal(int id)
@@ -217,25 +210,11 @@
     private async Task ShowActPrivorModal(int id)
     {
 
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = Modal.Show<PriorActivity>("", options).Result;
+        var result = Modal.Show<PriorActivity>("", BlazoredModalOptions.GetModalOptions()).Result;
     }
 
     private async Task ShowDeleteModal(int id)
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", options);
+        Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", BlazoredModalOptions.GetModalOptions());
     }
 }

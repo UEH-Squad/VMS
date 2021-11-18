@@ -24,14 +24,7 @@
 
     private async Task ShowEditModal()
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("", options);
+        Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("", BlazoredModalOptions.GetModalOptions());
     }
 
     ViewActivityViewModel activity = new()

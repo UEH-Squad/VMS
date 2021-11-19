@@ -13,8 +13,13 @@
             </i>
             <ul class="act-menu p-2 position-absolute @(item.IsMenu ? "d-block" : "d-none")">
                 <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+
                 <li @onclick="(() => ShowDeleteModalAsync(item))" class="delete pb-2">Xóa</li>
-                <li @onclick="(() => ShowCloseModalAsync(item))" class="close pb-2 @(item.StartDate <= DateTime.Now ? "d-none" : "")">@(item.IsClosed ? "Mở" : "Đóng") hoạt động</li>
+
+                @if (item.CloseDate >= DateTime.Now.Date)
+                {
+                    <li @onclick="(() => ShowCloseModalAsync(item))" class="close pb-2">@(item.IsClosed ? "Mở" : "Đóng") hoạt động</li>
+                }
             </ul>
             <div class="org-card__img">
                 <img src="@item.Banner" alt="photo">
@@ -24,34 +29,33 @@
                     <a href="@Routes.ActivityInfo/@item.Id">@item.Name</a>
                 </div>
                 <div class="org-card__info__rate">
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 1 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,1)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 2 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,2)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 3 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,3)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 4 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,4)?"_half":"")
-                    </span>
-                    <span class="material-icons-outlined" style="color:@(item.Rating >= 5 ? "#EDF131" : "#B4B4B4")">
-                        star@(HaftStar(item.Rating,5)?"_half":"")
-                    </span>
+                    <Star Rating="@item.Rating"/>
                 </div>
                 <div class="lmtext-2 org-card__info__desc">
                     @((MarkupString)item.Description)
                 </div>
-                <div class="org-card__info__date">
-                    Ngày đăng: <span>@item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                <div class="org-card__info__date d-flex flex-column mb-1">
+                    <div class="d-flex mb-1 align-items-center">
+                        <span class="material-icons-outlined me-2 my-icon">
+                            assignment
+                        </span>
+                        <span class="icon-tooltip">Ngày đăng ký</span>
+                        <span>@item.OpenDate.ToString("dd/MM/yyyy") - @item.CloseDate.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="material-icons-outlined me-2 my-icon">
+                            today
+                        </span>
+                        <span class="icon-tooltip">Ngày diễn ra</span>
+                        <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
+                    </div>
                 </div>
                 <div class="org-card__footer w-100 d-flex position-absolute">
                     <div class="org-card__member py-1 d-flex px-0">
                         <span class="org-card__member__icon material-icons me-1 pe-none">
                             person
                         </span>
-                        <span class="org-card__member__text">400</span>
+                        <span class="org-card__member__text">@item.MemberQuantity</span>
                     </div>
                     <a href="@Routes.VolunteersList/@item.Id" class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
                         Xem danh sách
@@ -71,15 +75,15 @@
                     }
                 </div>
             </div>
-                @if ((item.IsClosed || item.StartDate <= DateTime.Now) && (item.EndDate >= DateTime.Now))
-                {
-                    <div class="org-card__noti d-flex align-items-center position-absolute">
-                        <span class="material-icons-outlined">
-                            error
-                        </span>
-                        <i>Đã đóng đăng ký</i>
-                    </div>
-                }
+            @if ((item.IsClosed || item.CloseDate < DateTime.Now.Date) && (DateTime.Now.Date <= item.EndDate))
+            {
+                <div class="org-card__noti d-flex align-items-center position-absolute">
+                    <span class="material-icons-outlined">
+                        error
+                    </span>
+                    <i>Đã đóng đăng ký</i>
+                </div>
+            }
         </div>
     }
 }

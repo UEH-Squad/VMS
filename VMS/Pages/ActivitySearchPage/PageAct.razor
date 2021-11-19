@@ -22,7 +22,22 @@
                                                 </h5>
                                             </a>
                                             <p class="lmtext-2 act__content-description">@((MarkupString)item.Description)</p>
-                                            <span class="align-self-start">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                                            <div class="act_content-date d-flex flex-column mb-1">
+                                                <div class="d-flex mb-1 align-items-center">
+                                                    <span class="material-icons-outlined me-2 my-icon">
+                                                        assignment
+                                                    </span>
+                                                    <span class="icon-tooltip">Ngày đăng ký</span>
+                                                    <span>@item.OpenDate.ToString("dd/MM/yyyy") - @item.CloseDate.ToString("dd/MM/yyyy")</span>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="material-icons-outlined me-2 my-icon">
+                                                        today
+                                                    </span>
+                                                    <span class="icon-tooltip">Ngày diễn ra</span>
+                                                    <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-end">
                                             <div class="act__signUp d-flex align-items-center">
@@ -30,7 +45,14 @@
                                                 <Authorized>
                                                         <i @onclick="() => HandleFavorite(item.Id)" class="material-icons">@(currentUser.Favorites.Any(f => f.ActivityId == item.Id) ? "favorite" : "favorite_border")</i>
 
-                                                        <button @onclick="() => ShowModal(item.Id)" class="btn">Đăng ký</button>
+                                                        @if (IsSignupTimeExpired(item))
+                                                        {
+                                                            <button class="btn bg-grey">Đăng ký</button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button @onclick="() => ShowSignupAsync(item.Id)" class="btn">Đăng ký</button>
+                                                        }
                                                 </Authorized>
                                                 <NotAuthorized>
                                                     <button @onclick="() => ShowRequireSignup()" class="btn">Đăng ký</button>

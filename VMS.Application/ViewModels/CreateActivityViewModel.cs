@@ -13,8 +13,10 @@ namespace VMS.Application.ViewModels
         public string Name { get; set; }
 
         public string OrgId { get; set; }
-        public DateTime StartDate { get; set; } = DateTime.Now;
-        public DateTime EndDate { get; set; } = DateTime.Now.AddDays(7);
+        public DateTime StartDate { get; set; } = DateTime.Now.AddDays(8).Date;
+        public DateTime EndDate { get; set; } = DateTime.Now.AddDays(15).Date;
+        public DateTime OpenDate { get; set; } = DateTime.Now.Date;
+        public DateTime CloseDate { get; set; } = DateTime.Now.AddDays(7).Date;
 
         [Required]
         public string Mission { get; set; }

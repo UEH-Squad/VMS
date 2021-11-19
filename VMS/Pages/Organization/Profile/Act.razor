@@ -6,7 +6,7 @@
             <h1 class="mb-0">Hoạt động <span>@Title</span></h1>
             <hr />
         </div>
-        
+
         @if (Datas is not null)
         {
             <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
@@ -23,9 +23,14 @@
                             </a>
                         </div>
                         <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                            <a href="@Routes.EditActivity" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+
                             <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-2">Xóa</li>
-                            <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+
+                            @if (item.CloseDate.Date >= DateTime.Now.Date)
+                            {
+                                <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+                            }
                         </ul>
                         @if (HaveControl)
                         {
@@ -36,7 +41,7 @@
 
                         @if (HaveFav)
                         {
-                            <a class="position-absolute favorite" @onclick="() => AnimateHeart(item.Id)">
+                            <a class="position-absolute favorite" @onclick="() => AnimateHeart(item)">
                                 <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
                             </a>
                         }

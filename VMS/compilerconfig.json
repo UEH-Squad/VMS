@@ -342,5 +342,21 @@
   {
     "outputFile": "Pages/ActivityLogPage/Index.razor.css",
     "inputFile": "Pages/ActivityLogPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.css",
+    "inputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Title.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Index.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
   }
 ]

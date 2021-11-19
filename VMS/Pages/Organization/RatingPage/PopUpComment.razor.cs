@@ -18,6 +18,7 @@ namespace VMS.Pages.Organization.RatingPage
         [Parameter] public RecruitmentRatingViewModel RecruitmentRatingTop { get; set; }
         [Parameter] public RecruitmentRatingViewModel RecruitmentRatingBottom { get; set; }
         [Parameter] public int RecruitmentId { get; set; }
+        [Parameter] public int ActivityId { get; set; }
 
         [Inject]
         private IRecruitmentService RecruitmentService { get; set; }
@@ -44,7 +45,7 @@ namespace VMS.Pages.Organization.RatingPage
         {
             if (editContext.IsModified())
             {
-                await RecruitmentService.UpdateRatingAndCommentAsync(null, RecruitmentRatingBottom.Comment, RecruitmentId);
+                await RecruitmentService.UpdateRatingAndCommentAsync(ActivityId, null, RecruitmentRatingBottom.Comment, RecruitmentId);
             }
 
             ChangeState();

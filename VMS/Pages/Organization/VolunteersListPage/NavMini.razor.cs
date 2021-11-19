@@ -27,6 +27,8 @@ namespace VMS.Pages.Organization.VolunteersListPage
         [Parameter]
         public PaginatedList<ListVolunteerViewModel> Data { get; set; }
         [Parameter]
+        public List<ListVolunteerViewModel> FullList { get; set; }
+        [Parameter]
         public EventCallback<string> ValueChange { get; set; }
         [Parameter]
         public EventCallback<bool> ShowDelete { get; set; }
@@ -71,7 +73,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         }
         public async Task DowLoadAsync()
         {
-            await JSRuntime.InvokeVoidAsync("vms.SaveAs", "DSTNV_" + ActId + "_" + DateTime.Now.ToString()+".xlsx", ExportExcelService.ResultExportToExcel(Data, ActId));
+            await JSRuntime.InvokeVoidAsync("vms.SaveAs", "DSTNV_" + ActId + "_" + DateTime.Now.ToString()+".xlsx", ExportExcelService.ResultExportToExcel(FullList, ActId));
         }
     }
 }

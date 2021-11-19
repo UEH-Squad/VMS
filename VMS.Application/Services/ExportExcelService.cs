@@ -1,14 +1,15 @@
 ﻿using OfficeOpenXml;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.GenericRepository;
 
 namespace VMS.Application.Services
 {
     public class ExportExcelService :  IExportExcelService
     {
-        public byte[] ResultExportToExcel(PaginatedList<ListVolunteerViewModel> list, int actId)
+        public byte[] ResultExportToExcel(List<ListVolunteerViewModel> list, int actId)
         {
             var stream = new System.IO.MemoryStream();
             using var xlPackage = new ExcelPackage(stream);
@@ -24,7 +25,7 @@ namespace VMS.Application.Services
             worksheet.Cells["I1"].Value = "CAM KẾT";
 
             int row = 2;
-            foreach (var item in list.Items)
+            foreach (var item in list)
             {
                 worksheet.Cells[row, 1].Value = row - 1;
                 worksheet.Cells[row, 2].Value = item.User.FullName;

@@ -20,6 +20,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         private List<int> checkList = new();
         private bool isDeleted = false;
         private PaginatedList<ListVolunteerViewModel> pagedResult = new(new(), 0, 1, 1);
+        private List<ListVolunteerViewModel> fullList = new List<ListVolunteerViewModel>();
         [Parameter]
         public int ActId { get; set; }
         [Inject]
@@ -30,6 +31,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         protected override async Task OnInitializedAsync()
         {
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            fullList = await ListVolunteerService.GetAllListVolunteerAsync(ActId);
         }
         private async Task ValueChangeAsync(string value)
         {

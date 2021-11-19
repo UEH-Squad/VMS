@@ -1,10 +1,10 @@
-﻿using VMS.Application.ViewModels;
-using VMS.GenericRepository;
+﻿using System.Collections.Generic;
+using VMS.Application.ViewModels;
 
 namespace VMS.Application.Interfaces
 {
     public interface IExportExcelService
     {
-        byte[] ResultExportToExcel(PaginatedList<ListVolunteerViewModel> list, int actId);
+        byte[] ResultExportToExcel(List<ListVolunteerViewModel> list, int actId);
     }
 }

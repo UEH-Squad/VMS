@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -161,6 +160,24 @@ namespace VMS.Application.Services
             }
 
             return r => true;
+        }
+
+        public async Task<List<ListVolunteerViewModel>> GetAllListVolunteerAsync(int actId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    a => a.ActivityId == actId,
+                    a => a.IsDeleted == false
+                },
+                Includes = a => a.Include(a => a.User).ThenInclude(a => a.Faculty)
+            };
+
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<ListVolunteerViewModel>>(recruitments);
         }
     }
 }

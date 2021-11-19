@@ -80,6 +80,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 page = pagedResult.PageIndex - 1;
             }
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            fullList = await ListVolunteerService.GetAllListVolunteerAsync(ActId);
             checkList = new();
             StateHasChanged();
         }

@@ -27,11 +27,12 @@ namespace VMS.Pages.Organization.VolunteersListPage
         private IRecruitmentService ListVolunteerService { get; set; }
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
+        [Inject]
+        private IExportExcelService ExportExcelService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
-            fullList = await ListVolunteerService.GetAllListVolunteerAsync(ActId);
         }
         private async Task ValueChangeAsync(string value)
         {
@@ -80,7 +81,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 page = pagedResult.PageIndex - 1;
             }
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
-            fullList = await ListVolunteerService.GetAllListVolunteerAsync(ActId);
             checkList = new();
             StateHasChanged();
         }
@@ -99,6 +99,11 @@ namespace VMS.Pages.Organization.VolunteersListPage
             parameters.Add("CurrentUser", volunteer.User);
             parameters.Add("IsReadOnly", true);
             Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, options);
+        }
+        public async Task DowLoadAsync()
+        {
+            fullList = await ListVolunteerService.GetAllListVolunteerAsync(ActId);
+            await JsRuntime.InvokeVoidAsync("vms.SaveAs", "DSTNV_" + ActId + "_" + DateTime.Now.ToString() + ".xlsx", ExportExcelService.ResultExportToExcel(fullList, ActId));
         }
     }
 }

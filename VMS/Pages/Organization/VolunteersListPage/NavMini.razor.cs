@@ -34,6 +34,8 @@ namespace VMS.Pages.Organization.VolunteersListPage
         public EventCallback<bool> ShowDelete { get; set; }
         [Parameter]
         public EventCallback<bool> HandleDeleted { get; set; }
+        [Parameter]
+        public EventCallback DowLoad { get; set; }
         [Inject]
         private IExportExcelService ExportExcelService { get; set; }
         [Inject]
@@ -70,10 +72,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
                 await ListVolunteerService.UpdateVounteerAsync(CheckedList, !ShowDeletedList);
                 await HandleDeleted.InvokeAsync();
             }
-        }
-        public async Task DowLoadAsync()
-        {
-            await JSRuntime.InvokeVoidAsync("vms.SaveAs", "DSTNV_" + ActId + "_" + DateTime.Now.ToString()+".xlsx", ExportExcelService.ResultExportToExcel(FullList, ActId));
         }
     }
 }

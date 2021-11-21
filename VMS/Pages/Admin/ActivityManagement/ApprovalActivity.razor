@@ -1,0 +1,50 @@
+﻿<div class="pop-up">
+    <div class="center-screen">
+        <div class="pop-up-container border-10 @(!isApproveSuccess ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="content">
+                <h3>Bạn có chắc chắn muốn</h3>
+                <h3><span>duyệt hoạt động</span> này không?</h3>
+            </div>
+            <div class="pop-up-btn">
+                <div @onclick="CloseModalAsync" class="btn px-0 deny">Hủy</div>
+                <div @onclick="ApproveSuccessAsync" class="btn accept px-0">Xác nhận</div>
+            </div>
+        </div>
+
+        <div class="pop-up-container border-10 @(!isApproveSuccess ? "d-none" : "d-block")">
+            <div @onclick="CloseModalAsync" class="close-btn-s">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up-content">
+                <h3>Bạn đã <span>duyệt hoạt động</span></h3>
+                <h3>thành công</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool isApproveSuccess;
+
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync();
+    }
+
+    private async Task ApproveSuccessAsync()
+    {
+        isApproveSuccess = true;
+    }
+
+
+}

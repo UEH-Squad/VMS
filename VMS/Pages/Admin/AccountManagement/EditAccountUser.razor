@@ -1,6 +1,4 @@
-﻿@using VMS.Application.ViewModels;
-
-<div class="my-modal">
+﻿<div class="my-modal @(isConfirmShow ? "d-none" : "")">
     <div class="modal__content">
         <div class="modal__edit">
             <div @onclick="CloseModalAsync" class="icon-close">
@@ -9,32 +7,30 @@
                 </span>
             </div>
             <h3 class="text-center">Sửa tài khoản <span>Tình nguyện viên</span></h3>
-            <EditForm Model="user">
+            <EditForm Model="account" OnValidSubmit="OnValidSubmitAsync">
+
                 <DataAnnotationsValidator />
+
                 <div class="d-flex align-items-center mb-3">
                     <p class="form__title form__title--name">Họ và tên <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@user.FullName" class="form-control" />
+                        <InputText @bind-Value="@account.FullName" class="form-control" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <p class="form__title form__title--id">MSSV<span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@user.Id" class="form-control" />
+                        <InputText @bind-Value="@account.StudentId" class="form-control" />
                     </div>
                     <p class="form__title form__title--course">Khóa<span>(*)</span>:</p>
                     <div class="position-relative">
-                        <input @onclick="ToggCourseDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control" value="@courseChoosenValue" readonly />
+                        <input @onclick="ToggCourseDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control" value="@account.Course" readonly />
                         <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "d-block" : "d-none")">
                             <ul>
-                                @if (Courses is not null)
-
+                                @foreach (var course in courses)
                                 {
-                                    @foreach (var course in Courses)
-                                    {
-                                        <li @onmousedown="() => ChooseCourseValue(course )">@course.Course</li>
+                                    <li @onmousedown="() => ChooseCourseValue(course)">@course</li>
                                     }
-                                }
                             </ul>
                         </div>
                         <span class="material-icons-outlined position-absolute popup-btn-icon">
@@ -46,25 +42,25 @@
                 <div class="d-flex align-items-center mb-3">
                     <p class="form__title form__title--email">Email UEH<span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@user.Email" class="form-control" />
+                        <InputText @bind-Value="@account.Email" class="form-control" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
                     <p class="form__title form__title-password">Mật khẩu <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@user.FullName" type="password" name="avd" class="form-control" />
+                        <InputText @bind-Value="@account.Password" type="password" name="avd" class="form-control" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
                     <p class="form__title form__title--passwordSp">Mật khẩu Admin <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@user.FullName" type="password" name="avd" class="form-control" />
+                        <input @bind="adminPassword" type="password" name="avd" class="form-control" />
                     </div>
                 </div>
 
                 <div class="from__btn text-center">
                     <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
-                    <button @onclick="ShowEditConfirm" type="submit" class="btn btn-create">Sửa tài khoản</button>
+                    <button type="submit" class="btn btn-create">Sửa tài khoản</button>
                 </div>
 
             </EditForm>
@@ -74,54 +70,4 @@
 </div>
 
 @code {
-    //Modal 
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    private async Task CloseModalAsync()
-    {
-        await Modal.CloseAsync();
-    }
-
-    [CascadingParameter] public IModalService ModalConfirm { get; set; }
-
-    private async Task ShowEditConfirm()
-    {
-        await Modal.CloseAsync();
-        ModalConfirm.Show<Admin.AccountManagement.EditConfirm>("", BlazoredModalOptions.GetModalOptions());
-    }
-
-    //popup drop-down
-
-    private CreateUserProfileViewModel user = new();
-
-    private string courseChoosenValue = "";
-    private bool isCourseShow;
-    private bool isCourseGrey = false;
-
-    public class fakeCourse
-    {
-        public string Course { get; set; }
-    }
-    private List<fakeCourse> Courses = new()
-    {
-        new fakeCourse() { Course = "K44" },
-        new fakeCourse() { Course = "K45" },
-        new fakeCourse() { Course = "K46" },
-        new fakeCourse() { Course = "K47" },
-    };
-    private void ChooseCourseValue(fakeCourse course)
-    {
-        courseChoosenValue = course.Course;
-        isCourseGrey = true;
-    }
-    private void ToggCourseDropdown()
-    {
-        isCourseShow = !isCourseShow;
-    }
-    private void CloseLevelDropdown()
-    {
-        isCourseShow = false;
-    }
-
 }

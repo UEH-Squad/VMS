@@ -6,7 +6,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Infrastructure.Data.Context
 {
-    public class VmsDbContext : IdentityDbContext
+    public class VmsDbContext : IdentityDbContext<User, AppRole, string, IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAddress> ActivityAddresses { get; set; }
@@ -27,6 +27,8 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<ImageReport> ImageReports { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
+        public new DbSet<AppRole> Roles { get; set; }
+        public new DbSet<UserRole> UserRoles { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {
@@ -35,6 +37,18 @@ namespace VMS.Infrastructure.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<UserRole>()
+                .HasOne(x => x.Role)
+                .WithMany(x => x.UserRoles)
+                .HasForeignKey(x => x.RoleId);
+
+            builder.Entity<UserRole>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.UserRoles)
+                .HasForeignKey(x => x.UserId);
+
+            builder.Entity<User>().HasDiscriminator<string>("Discriminator").HasValue("User");
 
             builder.Entity<User>()
                 .HasMany(x => x.Activities)
@@ -171,7 +185,7 @@ namespace VMS.Infrastructure.Data.Context
                 SecurityStamp = string.Empty
             });
 
-            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            builder.Entity<UserRole>().HasData(new UserRole
             {
                 RoleId = ADMIN_ROLE_ID,
                 UserId = ADMIN_ID

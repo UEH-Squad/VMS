@@ -26,7 +26,8 @@
   .pagination .btn-prev span:hover, .pagination .btn-next span:hover {
     background: #0B588c; }
   .pagination .numb {
-    width: 40px;
+    padding: 0 5px;
+    min-width: 40px;
     height: 40px;
     line-height: 40px;
     border-radius: 50%;

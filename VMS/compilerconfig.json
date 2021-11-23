@@ -1,574 +1,574 @@
 ﻿[
-  {
-    "outputFile": "Shared/Components/Pager.razor.css",
-    "inputFile": "Shared/Components/Pager.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/Typeahead.razor.css",
-    "inputFile": "Shared/Components/Typeahead.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/Spinner.razor.css",
-    "inputFile": "Shared/Components/Spinner.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/UploadImg.razor.css",
-    "inputFile": "Shared/Components/UploadImg.razor.scss"
-  },
-  {
-    "outputFile": "Shared/MainLayout.razor.css",
-    "inputFile": "Shared/MainLayout.razor.scss"
-  },
-  {
-    "outputFile": "Shared/LoginDisplay.razor.css",
-    "inputFile": "Shared/LoginDisplay.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/Calendar.razor.css",
-    "inputFile": "Shared/Components/Calendar.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Index.razor.css",
-    "inputFile": "Pages/Index.razor.scss"
-  },
-  {
-    "outputFile": "Shared/NavMenu.razor.css",
-    "inputFile": "Shared/NavMenu.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Homepage/SloganAndVideo.razor.css",
-    "inputFile": "Pages/Homepage/SloganAndVideo.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Notification.razor.css",
-    "inputFile": "Shared/Notification.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Homepage/Filter.razor.css",
-    "inputFile": "Pages/Homepage/Filter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Homepage/LogoBaner.razor.css",
-    "inputFile": "Pages/Homepage/LogoBaner.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Homepage/RelatedActivities.razor.css",
-    "inputFile": "Pages/Homepage/RelatedActivities.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Homepage/QuoteBanner.razor.css",
-    "inputFile": "Pages/Homepage/QuoteBanner.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Footer.razor.css",
-    "inputFile": "Shared/Footer.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/Index.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/AreasPopup.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/AreasPopup.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/Signup.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/Signup.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/PageAct.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/PageAct.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityInfoPage/Index.razor.css",
-    "inputFile": "Pages/ActivityInfoPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityInfoPage/InfoPage.razor.css",
-    "inputFile": "Pages/ActivityInfoPage/InfoPage.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityInfoPage/Rightrail.razor.css",
-    "inputFile": "Pages/ActivityInfoPage/Rightrail.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityInfoPage/PopUpReport.razor.css",
-    "inputFile": "Pages/ActivityInfoPage/PopUpReport.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
-    "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Activities/CreateEditActivity.razor.css",
-    "inputFile": "Pages/Organization/Activities/CreateEditActivity.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.css",
-    "inputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Activities/NotificationPopup.razor.css",
-    "inputFile": "Pages/Organization/Activities/NotificationPopup.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/Notification.razor.css",
-    "inputFile": "Pages/UserProflie/Notification.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/Profile.razor.css",
-    "inputFile": "Pages/UserProflie/Profile.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/UserProfile.razor.css",
-    "inputFile": "Pages/UserProflie/UserProfile.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/ActOnGoing.razor.css",
-    "inputFile": "Pages/UserProflie/ActOnGoing.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/Schedule.razor.css",
-    "inputFile": "Pages/UserProflie/Schedule.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/UserAct.razor.css",
-    "inputFile": "Pages/UserProflie/UserAct.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/Report.razor.css",
-    "inputFile": "Pages/UserProflie/Report.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/Appellation.razor.css",
-    "inputFile": "Pages/UserProflie/Appellation.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/Act.razor.css",
-    "inputFile": "Pages/Organization/Profile/Act.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/ActTookPlace.razor.css",
-    "inputFile": "Pages/Organization/Profile/ActTookPlace.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/EditOrganizationProfile.razor.css",
-    "inputFile": "Pages/Organization/Profile/EditOrganizationProfile.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/Information.razor.css",
-    "inputFile": "Pages/Organization/Profile/Information.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/Notification.razor.css",
-    "inputFile": "Pages/Organization/Profile/Notification.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Homepage/Rank.razor.css",
-    "inputFile": "Pages/Homepage/Rank.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivitySearchPage/SearchBox.razor.css",
-    "inputFile": "Pages/ActivitySearchPage/SearchBox.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/Vision.razor.css",
-    "inputFile": "Pages/Organization/Profile/Vision.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/Mission.razor.css",
-    "inputFile": "Pages/Organization/Profile/Mission.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/CloseConfirm.razor.css",
-    "inputFile": "Pages/Organization/Profile/CloseConfirm.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/EditConfirm.razor.css",
-    "inputFile": "Pages/Organization/Profile/EditConfirm.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/CloseSuccess.razor.css",
-    "inputFile": "Pages/Organization/Profile/CloseSuccess.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/RequireSignup.razor.css",
-    "inputFile": "Shared/Components/RequireSignup.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/LoginRequire.razor.css",
-    "inputFile": "Pages/Organization/Profile/LoginRequire.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/DeleteConfirm.razor.css",
-    "inputFile": "Pages/Organization/Profile/DeleteConfirm.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/ActivityManagementPage/ActivitiesCard.razor.css",
-    "inputFile": "Pages/Organization/ActivityManagementPage/ActivitiesCard.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/ActivityManagementPage/Filter.razor.css",
-    "inputFile": "Pages/Organization/ActivityManagementPage/Filter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/ActivityManagementPage/Index.razor.css",
-    "inputFile": "Pages/Organization/ActivityManagementPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/FilterBar.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/FilterBar.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/FilterRatingAll.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/FilterRatingAll.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/Index.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/MemberList.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/MemberList.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/PopUpComment.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/PopUpComment.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/PopUpReportMember.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/PopUpReportMember.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/SearchBar.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/SearchBar.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/SearchResult.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/SearchResult.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/Stars.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/Stars.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/RatingPage/Title.razor.css",
-    "inputFile": "Pages/Organization/RatingPage/Title.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/VolunteersListPage/ConfirmDelList.razor.css",
-    "inputFile": "Pages/Organization/VolunteersListPage/ConfirmDelList.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/VolunteersListPage/ConfirmUndoList.razor.css",
-    "inputFile": "Pages/Organization/VolunteersListPage/ConfirmUndoList.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/VolunteersListPage/Listcard.razor.css",
-    "inputFile": "Pages/Organization/VolunteersListPage/Listcard.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/VolunteersListPage/NavMini.razor.css",
-    "inputFile": "Pages/Organization/VolunteersListPage/NavMini.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/VolunteersListPage/Title.razor.css",
-    "inputFile": "Pages/Organization/VolunteersListPage/Title.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Volunteer/EditUserProfile/ConfirmNotification.razor.css",
-    "inputFile": "Pages/Volunteer/EditUserProfile/ConfirmNotification.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Volunteer/EditUserProfile/Index.razor.css",
-    "inputFile": "Pages/Volunteer/EditUserProfile/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/SearchOrganizer/Index.razor.css",
-    "inputFile": "Pages/SearchOrganizer/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/SearchOrganizer/SearchAndFilter.razor.css",
-    "inputFile": "Pages/SearchOrganizer/SearchAndFilter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/SearchOrganizer/SearchResult.razor.css",
-    "inputFile": "Pages/SearchOrganizer/SearchResult.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/RequireSignup.razor.css",
-    "inputFile": "Shared/Components/RequireSignup.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/LoginRequire.razor.css",
-    "inputFile": "Pages/Organization/Profile/LoginRequire.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/DeleteConfirm.razor.css",
-    "inputFile": "Pages/Organization/Profile/DeleteConfirm.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityLogPage/Index.razor.css",
-    "inputFile": "Pages/ActivityLogPage/Index.razor.sass"
-  },
-  {
-    "outputFile": "Pages/ActivityLogPage/ActivityCard.razor.css",
-    "inputFile": "Pages/ActivityLogPage/ActivityCard.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityLogPage/Filter.razor.css",
-    "inputFile": "Pages/ActivityLogPage/Filter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/Profile/Appellation.razor.css",
-    "inputFile": "Pages/Organization/Profile/Appellation.razor.scss"
-  },
-  {
-    "outputFile": "Pages/UserProflie/ProfileRank.razor.css",
-    "inputFile": "Pages/UserProflie/ProfileRank.razor.scss"
-  },
-  {
-    "outputFile": "Pages/ActivityLogPage/Index.razor.css",
-    "inputFile": "Pages/ActivityLogPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.css",
-    "inputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/EditRequestPage/Title.razor.css",
-    "inputFile": "Pages/Organization/EditRequestPage/Title.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/EditRequestPage/Index.razor.css",
-    "inputFile": "Pages/Organization/EditRequestPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
-    "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
-  },
-  {
-    "outputFile": "Shared/AdminSidebar.razor.css",
-    "inputFile": "Shared/AdminSidebar.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/ActList.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/ActList.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.css",
-    "inputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchRating/Title.razor.css",
-    "inputFile": "Pages/Admin/WatchRating/Title.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchRating/Index.razor.css",
-    "inputFile": "Pages/Admin/WatchRating/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchRating/SearchResult.razor.css",
-    "inputFile": "Pages/Admin/WatchRating/SearchResult.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchRating/RatingList.razor.css",
-    "inputFile": "Pages/Admin/WatchRating/RatingList.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchRating/Filter.razor.css",
-    "inputFile": "Pages/Admin/WatchRating/Filter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchListVolunteer/Title.razor.css",
-    "inputFile": "Pages/Admin/WatchListVolunteer/Title.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchListVolunteer/Index.razor.css",
-    "inputFile": "Pages/Admin/WatchListVolunteer/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/OrgamizationManagement/Index.razor.css",
-    "inputFile": "Pages/Admin/OrgamizationManagement/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.css",
-    "inputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ResolveReportPage/Index.razor.css",
-    "inputFile": "Pages/Admin/ResolveReportPage/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ResolveReportPage/Filter.razor.css",
-    "inputFile": "Pages/Admin/ResolveReportPage/Filter.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.css",
-    "inputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.css",
-    "inputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.css",
-    "inputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ResolveReportPage/Notification.razor.css",
-    "inputFile": "Pages/Admin/ResolveReportPage/Notification.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.css",
-    "inputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.scss"
-  },
-  {
-    "outputFile": "Shared/AdminLayout.razor.css",
-    "inputFile": "Shared/AdminLayout.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/WatchImageReport/Index.razor.css",
-    "inputFile": "Pages/Admin/WatchImageReport/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
-    "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/OrganizationManagement/Index.razor.css",
-    "inputFile": "Pages/Admin/OrganizationManagement/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/VolunteerManagement/Index.razor.css",
-    "inputFile": "Pages/Admin/VolunteerManagement/Index.razor.scss"
-  },
-  {
-    "outputFile": "Shared/AdminHeader.razor.css",
-    "inputFile": "Shared/AdminHeader.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.css",
-    "inputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.css",
-    "inputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.scss"
-  },
+    {
+        "outputFile": "Shared/Components/Pager.razor.css",
+        "inputFile": "Shared/Components/Pager.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Components/Typeahead.razor.css",
+        "inputFile": "Shared/Components/Typeahead.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Components/Spinner.razor.css",
+        "inputFile": "Shared/Components/Spinner.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Components/UploadImg.razor.css",
+        "inputFile": "Shared/Components/UploadImg.razor.scss"
+    },
+    {
+        "outputFile": "Shared/MainLayout.razor.css",
+        "inputFile": "Shared/MainLayout.razor.scss"
+    },
+    {
+        "outputFile": "Shared/LoginDisplay.razor.css",
+        "inputFile": "Shared/LoginDisplay.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Components/Calendar.razor.css",
+        "inputFile": "Shared/Components/Calendar.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Index.razor.css",
+        "inputFile": "Pages/Index.razor.scss"
+    },
+    {
+        "outputFile": "Shared/NavMenu.razor.css",
+        "inputFile": "Shared/NavMenu.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Homepage/SloganAndVideo.razor.css",
+        "inputFile": "Pages/Homepage/SloganAndVideo.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Notification.razor.css",
+        "inputFile": "Shared/Notification.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Homepage/Filter.razor.css",
+        "inputFile": "Pages/Homepage/Filter.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Homepage/LogoBaner.razor.css",
+        "inputFile": "Pages/Homepage/LogoBaner.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Homepage/RelatedActivities.razor.css",
+        "inputFile": "Pages/Homepage/RelatedActivities.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Homepage/QuoteBanner.razor.css",
+        "inputFile": "Pages/Homepage/QuoteBanner.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Footer.razor.css",
+        "inputFile": "Shared/Footer.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/Index.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/SearchBoxAndFilterBar.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/AreasPopup.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/AreasPopup.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/SkillsPopup.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/Signup.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/Signup.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/FeaturedAct.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/PageAct.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/PageAct.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityInfoPage/Index.razor.css",
+        "inputFile": "Pages/ActivityInfoPage/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityInfoPage/InfoPage.razor.css",
+        "inputFile": "Pages/ActivityInfoPage/InfoPage.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityInfoPage/Rightrail.razor.css",
+        "inputFile": "Pages/ActivityInfoPage/Rightrail.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityInfoPage/PopUpReport.razor.css",
+        "inputFile": "Pages/ActivityInfoPage/PopUpReport.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityInfoPage/OtherActivities.razor.css",
+        "inputFile": "Pages/ActivityInfoPage/OtherActivities.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Activities/CreateEditActivity.razor.css",
+        "inputFile": "Pages/Organization/Activities/CreateEditActivity.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.css",
+        "inputFile": "Pages/Organization/Activities/CascadingAddressPicker.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Activities/NotificationPopup.razor.css",
+        "inputFile": "Pages/Organization/Activities/NotificationPopup.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/Notification.razor.css",
+        "inputFile": "Pages/UserProflie/Notification.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/Profile.razor.css",
+        "inputFile": "Pages/UserProflie/Profile.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/UserProfile.razor.css",
+        "inputFile": "Pages/UserProflie/UserProfile.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/ActOnGoing.razor.css",
+        "inputFile": "Pages/UserProflie/ActOnGoing.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/Schedule.razor.css",
+        "inputFile": "Pages/UserProflie/Schedule.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/UserAct.razor.css",
+        "inputFile": "Pages/UserProflie/UserAct.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/Report.razor.css",
+        "inputFile": "Pages/UserProflie/Report.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/Appellation.razor.css",
+        "inputFile": "Pages/UserProflie/Appellation.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/Act.razor.css",
+        "inputFile": "Pages/Organization/Profile/Act.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/ActTookPlace.razor.css",
+        "inputFile": "Pages/Organization/Profile/ActTookPlace.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/EditOrganizationProfile.razor.css",
+        "inputFile": "Pages/Organization/Profile/EditOrganizationProfile.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/Information.razor.css",
+        "inputFile": "Pages/Organization/Profile/Information.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/Notification.razor.css",
+        "inputFile": "Pages/Organization/Profile/Notification.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Homepage/Rank.razor.css",
+        "inputFile": "Pages/Homepage/Rank.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivitySearchPage/SearchBox.razor.css",
+        "inputFile": "Pages/ActivitySearchPage/SearchBox.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/Vision.razor.css",
+        "inputFile": "Pages/Organization/Profile/Vision.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/Mission.razor.css",
+        "inputFile": "Pages/Organization/Profile/Mission.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/CloseConfirm.razor.css",
+        "inputFile": "Pages/Organization/Profile/CloseConfirm.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/EditConfirm.razor.css",
+        "inputFile": "Pages/Organization/Profile/EditConfirm.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/CloseSuccess.razor.css",
+        "inputFile": "Pages/Organization/Profile/CloseSuccess.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Components/RequireSignup.razor.css",
+        "inputFile": "Shared/Components/RequireSignup.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/LoginRequire.razor.css",
+        "inputFile": "Pages/Organization/Profile/LoginRequire.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/DeleteConfirm.razor.css",
+        "inputFile": "Pages/Organization/Profile/DeleteConfirm.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/ActivityManagementPage/ActivitiesCard.razor.css",
+        "inputFile": "Pages/Organization/ActivityManagementPage/ActivitiesCard.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/ActivityManagementPage/Filter.razor.css",
+        "inputFile": "Pages/Organization/ActivityManagementPage/Filter.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/ActivityManagementPage/Index.razor.css",
+        "inputFile": "Pages/Organization/ActivityManagementPage/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/FilterBar.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/FilterBar.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/FilterRatingAll.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/FilterRatingAll.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/Index.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/MemberList.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/MemberList.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/PopUpComment.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/PopUpComment.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/PopUpReportMember.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/PopUpReportMember.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/SearchBar.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/SearchBar.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/SearchResult.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/SearchResult.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/Stars.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/Stars.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/RatingPage/Title.razor.css",
+        "inputFile": "Pages/Organization/RatingPage/Title.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/VolunteersListPage/ConfirmDelList.razor.css",
+        "inputFile": "Pages/Organization/VolunteersListPage/ConfirmDelList.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/VolunteersListPage/ConfirmUndoList.razor.css",
+        "inputFile": "Pages/Organization/VolunteersListPage/ConfirmUndoList.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/VolunteersListPage/Listcard.razor.css",
+        "inputFile": "Pages/Organization/VolunteersListPage/Listcard.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/VolunteersListPage/NavMini.razor.css",
+        "inputFile": "Pages/Organization/VolunteersListPage/NavMini.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/VolunteersListPage/Title.razor.css",
+        "inputFile": "Pages/Organization/VolunteersListPage/Title.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Volunteer/EditUserProfile/ConfirmNotification.razor.css",
+        "inputFile": "Pages/Volunteer/EditUserProfile/ConfirmNotification.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Volunteer/EditUserProfile/Index.razor.css",
+        "inputFile": "Pages/Volunteer/EditUserProfile/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/SearchOrganizer/Index.razor.css",
+        "inputFile": "Pages/SearchOrganizer/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/SearchOrganizer/SearchAndFilter.razor.css",
+        "inputFile": "Pages/SearchOrganizer/SearchAndFilter.razor.scss"
+    },
+    {
+        "outputFile": "Pages/SearchOrganizer/SearchResult.razor.css",
+        "inputFile": "Pages/SearchOrganizer/SearchResult.razor.scss"
+    },
+    {
+        "outputFile": "Shared/Components/RequireSignup.razor.css",
+        "inputFile": "Shared/Components/RequireSignup.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/LoginRequire.razor.css",
+        "inputFile": "Pages/Organization/Profile/LoginRequire.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/DeleteConfirm.razor.css",
+        "inputFile": "Pages/Organization/Profile/DeleteConfirm.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityLogPage/Index.razor.css",
+        "inputFile": "Pages/ActivityLogPage/Index.razor.sass"
+    },
+    {
+        "outputFile": "Pages/ActivityLogPage/ActivityCard.razor.css",
+        "inputFile": "Pages/ActivityLogPage/ActivityCard.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityLogPage/Filter.razor.css",
+        "inputFile": "Pages/ActivityLogPage/Filter.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/Profile/Appellation.razor.css",
+        "inputFile": "Pages/Organization/Profile/Appellation.razor.scss"
+    },
+    {
+        "outputFile": "Pages/UserProflie/ProfileRank.razor.css",
+        "inputFile": "Pages/UserProflie/ProfileRank.razor.scss"
+    },
+    {
+        "outputFile": "Pages/ActivityLogPage/Index.razor.css",
+        "inputFile": "Pages/ActivityLogPage/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.css",
+        "inputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/EditRequestPage/Title.razor.css",
+        "inputFile": "Pages/Organization/EditRequestPage/Title.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/EditRequestPage/Index.razor.css",
+        "inputFile": "Pages/Organization/EditRequestPage/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
+        "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
+    },
+    {
+        "outputFile": "Shared/AdminSidebar.razor.css",
+        "inputFile": "Shared/AdminSidebar.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/ActList.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/ActList.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.css",
+        "inputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchRating/Title.razor.css",
+        "inputFile": "Pages/Admin/WatchRating/Title.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchRating/Index.razor.css",
+        "inputFile": "Pages/Admin/WatchRating/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchRating/SearchResult.razor.css",
+        "inputFile": "Pages/Admin/WatchRating/SearchResult.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchRating/RatingList.razor.css",
+        "inputFile": "Pages/Admin/WatchRating/RatingList.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchRating/Filter.razor.css",
+        "inputFile": "Pages/Admin/WatchRating/Filter.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchListVolunteer/Title.razor.css",
+        "inputFile": "Pages/Admin/WatchListVolunteer/Title.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchListVolunteer/Index.razor.css",
+        "inputFile": "Pages/Admin/WatchListVolunteer/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/OrgamizationManagement/Index.razor.css",
+        "inputFile": "Pages/Admin/OrgamizationManagement/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.css",
+        "inputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ResolveReportPage/Index.razor.css",
+        "inputFile": "Pages/Admin/ResolveReportPage/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ResolveReportPage/Filter.razor.css",
+        "inputFile": "Pages/Admin/ResolveReportPage/Filter.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.css",
+        "inputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.css",
+        "inputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.css",
+        "inputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ResolveReportPage/Notification.razor.css",
+        "inputFile": "Pages/Admin/ResolveReportPage/Notification.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.css",
+        "inputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.scss"
+    },
+    {
+        "outputFile": "Shared/AdminLayout.razor.css",
+        "inputFile": "Shared/AdminLayout.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/WatchImageReport/Index.razor.css",
+        "inputFile": "Pages/Admin/WatchImageReport/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
+        "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/OrganizationManagement/Index.razor.css",
+        "inputFile": "Pages/Admin/OrganizationManagement/Index.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/VolunteerManagement/Index.razor.css",
+        "inputFile": "Pages/Admin/VolunteerManagement/Index.razor.scss"
+    },
+    {
+        "outputFile": "Shared/AdminHeader.razor.css",
+        "inputFile": "Shared/AdminHeader.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.css",
+        "inputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.scss"
+    },
+    {
+        "outputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.css",
+        "inputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.scss"
+    }
 ]

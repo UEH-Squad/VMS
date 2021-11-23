@@ -3,13 +3,13 @@
 @attribute [Route(Routes.AdminVolunteerAccountManagement)]
 @attribute [Authorize(Roles = "Admin")]
 @inject IJSRuntime JS;
-@using VMS.GenericRepository;
-@using Blazored.Modal;
+
 <div class="px-5">
-    <ManagementTool IsAccountUser="true" Tilte="tình nguyện viên"></ManagementTool>
+    <ManagementTool PageRole="Role.User" Tilte="tình nguyện viên" FilterChanged="OnFilterChangedAsync" />
+
     <div class="d-flex justify-content-between align-items-center my-3">
-        <p class="managementTool__title mb-0">Có <span>@(pagedResult.Items.Count * 20) kết quả</span> ứng với tìm kiếm</p>
-        <div class="managementTool__down d-flex align-items-center">
+        <p class="managementTool__title mb-0">Có <span>@(pageResult.TotalItems) kết quả</span> ứng với tìm kiếm</p>
+        <div @onclick="OnClickDownloadListAccountsAsync" class="managementTool__down d-flex align-items-center">
             <i class="material-icons icon-down me-1">
                 vertical_align_bottom
             </i>
@@ -18,10 +18,17 @@
     </div>
     <div class=" d-flex align-items-center justify-content-end py-3">
         <div class="d-flex align-items-center managementTool__chosseAll me-3">
-            <input @bind="@IsCheckAll" @onclick="ChoseAll" class="check-box" type="checkbox" id="all">
+            @if (IsSelectedAllItems())
+            {
+                <input @onclick="() => SelectAllItems()" class="check-box" type="checkbox" id="all" checked>
+            }
+            else
+            {
+                <input @onclick="() => SelectAllItems()" class="check-box" type="checkbox" id="all">
+            }
             <label for="all">Chọn tất cả</label>
         </div>
-        <button class="btn-delete btn">Xóa</button>
+        <button @onclick="OnClickDeleteListAccountsAsync" class="btn-delete btn">Xóa</button>
     </div>
     <div class="my-acc">
         <table class="acc__table">
@@ -35,11 +42,11 @@
 
             </tr>
 
-            @if (pagedResult is not null && pagedResult.Items.Count != 0)
+            @if (pageResult is not null && pageResult.Items.Count != 0)
             {
                 bool oddIndex = false;
                 string bg = "#FFF";
-                @foreach (var item in pagedResult.Items)
+                @foreach (var item in pageResult.Items)
                 {
                     oddIndex = !oddIndex;
                     if (oddIndex)
@@ -54,21 +61,28 @@
                     <tr class="position-relative" style="background-color:@bg">
                         <td class="acc__content acc__content--checkbox pt-2">
                             <div class="d-flex align-items-center">
-                                <input @bind="@item.IsCheck" @onclick="DeselectAll" class="check-box" type="checkbox" id="acc-@item.Id" value="acc-@item.Id">
+                                @if (IsSelectedItem(item.Id))
+                                {
+                                    <input @onclick="() => SelectItem(item.Id)" class="check-box" type="checkbox" checked>
+                                }
+                                else
+                                {
+                                    <input @onclick="() => SelectItem(item.Id)" class="check-box" type="checkbox">
+                                }
                             </div>
                         </td>
-                        <td class="acc__content acc__content--date">@item.CreateDate</td>
-                        <td class="acc__content acc__content--course">@item.Coures</td>
-                        <td class="acc__content acc__content--idStudent">@item.IdStudent</td>
-                        <td class="acc__content acc__content--name">@item.Name</td>
-                        <td class="acc__content acc__content--email">@item.EmailUEH</td>
+                        <td class="acc__content acc__content--date">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        <td class="acc__content acc__content--course">@item.Course</td>
+                        <td class="acc__content acc__content--idStudent">@item.StudentId</td>
+                        <td class="acc__content acc__content--name">@item.FullName</td>
+                        <td class="acc__content acc__content--email">@item.Email</td>
                         <div class="acc__menu dropdown">
                             <i class="material-icons-outlined icon-menu dropdown-toggle" id="dropdownMenu-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
                                 more_vert
                             </i>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
-                                <li @onclick="ShowEditAccountUser" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
-                                <li @onclick="ShowDeleteAccount" class="dropdown-menu-delete">Xóa tài khoản</li>
+                                <li @onclick="async () => await ShowEditAccountAsync(item)" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
+                                <li @onclick="async () => await OnClickDeleteAccountAsync(item.Id)" class="dropdown-menu-delete">Xóa tài khoản</li>
                             </ul>
                         </div>
 
@@ -79,91 +93,12 @@
         </table>
     </div>
     <div class="d-flex justify-content-center">
-        <Pager CurrentPage="@pagedResult.PageIndex"
-               PageCount="@pagedResult.TotalPages"
-               OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
+        <Pager CurrentPage="@pageResult.PageIndex"
+               PageCount="@pageResult.TotalPages"
+               OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })"
                ShowPageNumbers="true" />
     </div>
 </div>
+
 @code {
-    [CascadingParameter] public IModalService Modal { get; set; }
-
-    private PaginatedList<FakeData> pagedResult;
-    private int page = 1;
-
-    protected override void OnInitialized()
-    {
-        pagedResult = GetFakeData();
-    }
-
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetFakeData();
-        StateHasChanged();
-        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
-    }
-
-    private PaginatedList<FakeData> GetFakeData()
-    {
-        int i = 0;
-        var data = Enumerable.Range(0, 20).Select(x => new FakeData
-        {
-            Id = ++i + (page - 1) * 20,
-            CreateDate = new DateTime(2021, 11, 02).ToString("dd/MM/yyyy"),
-            Name = "Tên sinh viên rất chi là dài tin thi thoi, ten dai ",
-            EmailUEH = "VanHung.31161027841@st.ueh.edu.vn ",
-            Coures = 45,
-            IdStudent = "31161027841"
-
-
-        }).ToList();
-
-        var result = new PaginatedList<FakeData>(data, 100, page, 20);
-        return result;
-    }
-
-    private class FakeData
-    {
-        public string Name { get; set; }
-        public int Id { get; set; }
-        public bool IsMenu { get; set; }
-        public string CreateDate { get; set; }
-        public string EmailUEH { get; set; }
-        public string IdStudent { get; set; }
-        public int Coures { get; set; }
-        public bool IsCheck { get; set; } = false;
-    }
-
-    // Chose all
-    bool IsCheckAll = false;
-    private void ChoseAll()
-    {
-        IsCheckAll = !IsCheckAll;
-        @foreach (var item in pagedResult.Items)
-        {
-            item.IsCheck = IsCheckAll;
-        }
-    }
-    private void DeselectAll()
-    {
-        IsCheckAll = false;
-    }
-
-
-    // Modal
-
-    private async Task ShowEditAccountUser()
-    {
-        Modal.Show<Admin.AccountManagement.EditAccountUser>("", BlazoredModalOptions.GetModalOptions());
-    }
-
-    private async Task ShowDeleteAccount()
-    {
-        Modal.Show<Admin.AccountManagement.DeleteAccount>("", BlazoredModalOptions.GetModalOptions());
-
-    }
-
 }
-
-
-

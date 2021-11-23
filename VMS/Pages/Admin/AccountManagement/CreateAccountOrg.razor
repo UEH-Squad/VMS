@@ -1,29 +1,25 @@
-﻿@using VMS.Application.ViewModels;
-
-<div class="my-modal">
+﻿<div class="my-modal">
     <div class="modal__content">
-        <div class=" modal__create @(!isDeleteSuccess ? "d-block" : "d-none")">
+        <div class=" modal__create">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <h3 class="text-center">Tạo tài khoản <span>tổ chức</span></h3>
-            <EditForm Model="org">
+            <EditForm Model="account" OnValidSubmit="OnValidSubmitAsync">
+
                 <DataAnnotationsValidator />
+
                 <div class="d-flex align-items-center mb-20 ">
                     <p class="form__title form__title--level">Cấp <span>(*)</span>:</p>
                     <div class="position-relative">
-                        <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control @(isLevelGrey? "bg-grey" : "")" value="@levelChoosenValue" readonly />
+                        <input @onclick="ToggLeLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn form-control" value="@account.Course" readonly />
                         <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
                             <ul>
-                                @if (Levels is not null)
-
+                                @foreach (var level in levels)
                                 {
-                                    @foreach (var level in Levels)
-                                    {
-                                        <li @onmousedown="() => ChooseLevelValue(level)">@level.Level</li>
-                                    }
+                                    <li @onmousedown="() => ChooseLevelValue(level)">@level</li>
                                 }
                             </ul>
                         </div>
@@ -35,98 +31,31 @@
                 <div class="d-flex align-items-center mb-20">
                     <p class="form__title form__title--name">Tên tổ chức <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@org.FullName" class="form-control" />
+                        <InputText @bind-Value="@account.FullName" class="form-control" />
                     </div>
                 </div>
 
                 <div class="d-flex align-items-center mb-20">
                     <p class="form__title form__title--email">Email <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@org.Email" class="form-control" />
+                        <InputText @bind-Value="@account.Email" class="form-control" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
                     <p class="form__title form__title-password">Mật khẩu <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@org.FullName" type="password" name="" class="form-control" />
+                        <InputText @bind-Value="@account.Password" type="password" class="form-control" />
                     </div>
                 </div>
                 <div class="from__btn text-center">
                     <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
-                    <button @onclick="DeleteSuccessAsync" type="submit" class="btn btn-create">Tạo tài khoản</button>
+                    <button type="submit" class="btn btn-create">Tạo tài khoản</button>
                 </div>
 
             </EditForm>
-
         </div>
-
-        <div class="modal__success @(!isDeleteSuccess ? "d-none" : "d-block")">
-            <div @onclick="CloseModalAsync" class="icon-close">
-                <span class="material-icons">
-                    close
-                </span>
-            </div>
-            <div >
-                <h3 class="text-center mb-4">Bạn đã <span>tạo tài khoản</span> thành công </h3>
-                <div class="text-center">
-                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
-                    <a href="@Routes.HomePage" class="btn btn-watchList">Xem danh sách tài khoản</a>                                    
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 
 @code {
-    private bool isDeleteSuccess;
-
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    private CreateOrgProfileViewModel org = new();
-
-    private async Task CloseModalAsync()
-    {
-        await Modal.CloseAsync();
-    }
-    private async Task DeleteSuccessAsync()
-    {
-        isDeleteSuccess = true;
-    }
-
-
-    /// filter 
-    private string levelChoosenValue = "Cấp";
-    private bool isLevelShow;
-    private bool isLevelGrey = false;
-
-    public class fakeLevel
-    {
-        public string Level { get; set; }
-    }
-    private List<fakeLevel> Levels = new()
-    {
-        new fakeLevel() { Level = "Ban Chuyên môn" },
-        new fakeLevel() { Level = "Khoa/Viện/KTX" },
-        new fakeLevel() { Level = "CLB/Đội/Nhóm" },
-    };
-    private void ChooseLevelValue(fakeLevel level)
-    {
-        levelChoosenValue = level.Level;
-        isLevelGrey = true;
-    }
-    private void ToggLeLevelDropdown()
-    {
-        isLevelShow = !isLevelShow;
-    }
-
-    private void CloseLevelDropdown()
-    {
-        isLevelShow = false;
-    }
-
-
-
-
 }

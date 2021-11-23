@@ -1,6 +1,4 @@
-﻿@using VMS.Application.ViewModels;
-
-<div class="my-modal @(isConfirmShow ? "d-none" : "")">
+﻿<div class="my-modal @(isConfirmShow ? "d-none" : "")">
     <div class="modal__content">
         <div class="modal__edit">
             <div @onclick="CloseModalAsync" class="icon-close">
@@ -32,7 +30,7 @@
                                 @foreach (var course in courses)
                                 {
                                     <li @onmousedown="() => ChooseCourseValue(course)">@course</li>
-                                }
+                                    }
                             </ul>
                         </div>
                         <span class="material-icons-outlined position-absolute popup-btn-icon">

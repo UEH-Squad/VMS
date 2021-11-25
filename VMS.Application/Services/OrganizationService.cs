@@ -27,6 +27,42 @@ namespace VMS.Application.Services
             _userManager = userManager;
         }
 
+        public async Task<PaginatedList<UserViewModel>> GetAllOrgsAsync(string userId, int currentPage)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginationSpecification<User> specification = new()
+            {
+                Conditions = new List<Expression<Func<User, bool>>>()
+                {
+                    r => r.Id == userId,
+                },
+                //Includes = r => r.Include(x => x.User)
+                //                 .Include(x => x.RecruitmentRatings)
+                //                 .Include(x => x.Activity).ThenInclude(x => x.Organizer),
+                PageIndex = currentPage,
+                PageSize = 8,
+            };
+
+            PaginatedList<User> orgs = await _repository.GetListAsync(dbContext, specification);
+
+            PaginatedList<UserViewModel> paginatedList = new(
+                orgs.Items.Select(x => new UserViewModel()
+                {
+                    Id = x.Id,
+                    //Activity = x.Activity,
+                    //User = x.User,
+                    //Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating && !z.IsReport)?.Rank,
+                    //RecruitmentRatings = _mapper.Map<List<RecruitmentRatingViewModel>>(x.RecruitmentRatings)
+                }).ToList(),
+                orgs.TotalItems,
+                currentPage,
+                orgs.PageSize
+            );
+
+            return paginatedList;
+        }
+
         private bool IsInRole(User org, Role role)
         {
             return Task.Run(() => _userManager.IsInRoleAsync(org, role.ToString())).Result;

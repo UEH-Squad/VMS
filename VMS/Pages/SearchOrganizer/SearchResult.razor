@@ -1,32 +1,32 @@
 ﻿@inject IJSRuntime JsRuntime
 <section class="my-container mb-5">
-    <h3 class="result-heading mt-4 mb-3">Có <span>@(pagedResult is null ? "0" : pagedResult.RowCount) tổ chức</span> ứng với kết quả tìm kiếm của bạn</h3>
-    @if (pagedResult != null && pagedResult.Results.Length != 0)
+    <h3 class="result-heading mt-4 mb-3">Có <span>@(pagedResult is null ? "0" : pagedResult.TotalItems) tổ chức</span> ứng với kết quả tìm kiếm của bạn</h3>
+    @if (pagedResult != null && pagedResult.TotalItems != 0)
     {
-        @foreach (var item in pagedResult.Results)
+        @foreach (var item in pagedResult.Items)
         {
             <div class="org-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                     <img class="org-item__img me-4" src="/img/act.png" alt="Alternate Text" />
                     <div class="org-item__name-group ms-5">
-                        <a class="org-item__name" href="#">@item.OrganizationName</a>
-                        <p>@item.Level</p>
+                        <a class="org-item__name" href="#">@item.FullName</a>
+                        <p>@item.FullName</p>
                     </div>
                 </div>
                 <div class="org-item__rate-group d-flex align-items-center me-5">
                     <span class="me-4">#@item.Rank</span>
                     <div>
                         <p class="m-0 d-flex align-items-center">
-                            @item.StarNumber
+                            @item.QuantityRating
                             @for (int i = 1; i <= 5; i++)
                             {
                                 isYellow = false;
                                 isHalf = false;
-                                @if (i <= item.StarNumber)
+                                @if (i <= item.QuantityRating)
                                 {
                                     isYellow = true;
                                 }
-                                @if ((item.StarNumber % 1) != 0 && (i == Math.Ceiling(item.StarNumber / 1)))
+                                @if ((item.QuantityRating % 1) != 0 && (i == Math.Ceiling(item.QuantityRating / 1)))
                                 {
                                     isHalf = true;
                                     isYellow = true;
@@ -37,14 +37,14 @@
                             }
                         </p>
                         <p class="m-0">
-                            @if (item.RateNumber >= 1000)
+                            @if (item.AverageRating >= 1000)
                             {
-                                var a = Math.Round((double)item.RateNumber / 1000, 1, MidpointRounding.ToZero);
+                                var a = Math.Round((double)item.AverageRating / 1000, 1, MidpointRounding.ToZero);
                                 @(a + "N")
                             }
                             else
                             {
-                                @item.RateNumber
+                                @item.AverageRating
                             }
                             xếp hạng
                         </p>
@@ -55,9 +55,9 @@
     }
 </section>
 
-<Pager CurrentPage="@pagedResult.CurrentPage"
-       PageCount="@pagedResult.PageCount"
-       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+<Pager CurrentPage="@pagedResult.PageIndex"
+       PageCount="@pagedResult.TotalPages"
+       OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })"  />
 @code {
     private bool isYellow;
     private bool isHalf;
@@ -84,20 +84,6 @@
     public class PagedResult<T> : PagedResultBase where T : class
     {
         public T[] Results { get; set; }
-    }
-    private PagedResult<FakeData> pagedResult;
-    private int page = 1;
-
-    protected override async Task OnInitializedAsync()
-    {
-        pagedResult = GetFakeData();
-    }
-
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetFakeData();
-        StateHasChanged();
-        await Interop.ScrollToTop(JsRuntime);
     }
 
     private PagedResult<FakeData> GetFakeData()

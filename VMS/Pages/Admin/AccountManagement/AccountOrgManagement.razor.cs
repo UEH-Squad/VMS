@@ -106,14 +106,5 @@ namespace VMS.Pages.Admin.AccountManagement
 
             await Modal.Show<EditAccountOrg>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
-
-        private async Task OnClickDownloadListAccountsAsync()
-        {
-            List<AccountViewModel> listAccounts = await AdminService.GetAllAccountsByRoleAsync(Role.Organization);
-
-            byte[] resultByteArray = ExcelService.ExportListAccountToExcel(listAccounts, Role.Organization);
-
-            await JS.InvokeVoidAsync("vms.SaveAsFile", $"DSTK_{Role.Organization}_{DateTime.Now:dd-MM-yyyy}.xlsx", resultByteArray);
-        }
     }
 }

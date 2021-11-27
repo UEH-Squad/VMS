@@ -62,7 +62,7 @@ namespace VMS.Application.Services
 
             return paginatedList;
         }
-
+        
         private bool IsInRole(User org, Role role)
         {
             return Task.Run(() => _userManager.IsInRoleAsync(org, role.ToString())).Result;

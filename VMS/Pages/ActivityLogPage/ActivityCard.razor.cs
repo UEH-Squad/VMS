@@ -11,6 +11,8 @@ using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
+using System.Linq.Expressions;
+
 
 namespace VMS.Pages.ActivityLogPage
 {
@@ -20,6 +22,7 @@ namespace VMS.Pages.ActivityLogPage
         private string userId;
         private int ActivityId;
         private PaginatedList<RecruitmentViewModel> pagedResult = new(new(), 0, 1, 1);
+        private List<Expression<Func<Recruitment, bool>>> listConditions;
 
         [CascadingParameter]
         public IModalService ReportModal { get; set; }
@@ -51,12 +54,12 @@ namespace VMS.Pages.ActivityLogPage
             }
 
             page = 1;
-            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated);
+            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated, listConditions);
         }
 
         private async Task HandlePageChangedAsync()
         {
-            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated);
+            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated, listConditions);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

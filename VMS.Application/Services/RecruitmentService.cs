@@ -21,7 +21,7 @@ namespace VMS.Application.Services
         {
         }
 
-        public async Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(FilterRecruitmentViewModel filter, string userId, int currentPage, string searchValue, bool? isRated)
+        public async Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(FilterRecruitmentViewModel filter, string userId, int currentPage, string searchValue, bool? isRated, List<Expression<Func<Recruitment, bool>>> listConditions)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -30,7 +30,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
                     r => r.UserId == userId,
-                    GetActivitiesFromSearchValueAndFilter(filter, searchValue, isRated)
+                    GetActivitiesFromSearchValueAndFilter(filter, searchValue, isRated, listConditions)
                 },
                 Includes = r => r.Include(x => x.User)
                                  .Include(x => x.RecruitmentRatings)
@@ -157,49 +157,52 @@ namespace VMS.Application.Services
             return r => true;
         }
 
-        private static Expression<Func<Recruitment, bool>> GetActivitiesFromSearchValueAndFilter(FilterRecruitmentViewModel filter, string searchValue, bool? isRated)
+        private static Expression<Func<Recruitment, bool>> GetActivitiesFromSearchValueAndFilter(FilterRecruitmentViewModel filter, string searchValue, bool? isRated, List<Expression<Func<Recruitment, bool>>> listConditions)
         {
+            filter = new FilterRecruitmentViewModel();
+            listConditions = new List<Expression<Func<Recruitment, bool>>>();
+
             if (isRated.HasValue)
             {
                 if (isRated.Value)
                 {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank != 0);
+                    listConditions.Add(r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank != 0));
                 }
                 else
                 {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank == 0) || !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport);
+                    listConditions.Add(r => r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport && x.Rank == 0) || !r.RecruitmentRatings.Any(x => x.IsOrgRating && !x.IsReport));
                 }
             }
 
             if (!string.IsNullOrEmpty(searchValue))
             {
-                return r => r.Activity.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim());
+                listConditions.Add(r => r.Activity.Name.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()));
             }
 
             if (!string.IsNullOrEmpty(filter.OrgId))
             {
-                return r => r.Activity.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId);
+                listConditions.Add(r => r.Activity.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId));
             }
 
             if (!string.IsNullOrEmpty(filter.Semester))
             {
-                if(filter.Semester == "Học kỳ đầu")
+                if (filter.Semester == "Học kỳ đầu")
                 {
-                    return r => r.Activity.StartDate.Month >= 1 && r.Activity.StartDate.Month <= 5;
+                    listConditions.Add(r => r.Activity.StartDate.Month >= 1 && r.Activity.StartDate.Month <= 5);
                 }
 
-                if(filter.Semester == "Học kỳ giữa")
+                if (filter.Semester == "Học kỳ giữa")
                 {
-                    return r => r.Activity.StartDate.Month >= 6 && r.Activity.StartDate.Month <= 7;
+                    listConditions.Add(r => r.Activity.StartDate.Month >= 6 && r.Activity.StartDate.Month <= 7);
                 }
 
-                if(filter.Semester == "Học kỳ cuối")
+                if (filter.Semester == "Học kỳ cuối")
                 {
-                    return r => r.Activity.StartDate.Month >= 8 && r.Activity.StartDate.Month <= 12;
+                    listConditions.Add(r => r.Activity.StartDate.Month >= 8 && r.Activity.StartDate.Month <= 12);
                 }
             }
 
-            return r => true;
+            return listConditions => true;
         }
     }
 }

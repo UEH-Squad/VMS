@@ -42,7 +42,7 @@ namespace VMS.Application.Services
                 worksheet.Cells[row, 3].Value = item.User.StudentId;
                 worksheet.Cells[row, 4].Value = item.User.Class;
                 worksheet.Cells[row, 5].Value = item.User.Course;
-                worksheet.Cells[row, 6].Value = item.User.Faculty == null? "": item.User.Faculty.Name;
+                worksheet.Cells[row, 6].Value = item.User.FacultyId == null? "": item.User.Faculty.Name;
                 worksheet.Cells[row, 7].Value = item.User.Email;
                 worksheet.Cells[row, 8].Value = item.Desire;
                 worksheet.Cells[row, 9].Value = item.IsCommit ? "" : "X";

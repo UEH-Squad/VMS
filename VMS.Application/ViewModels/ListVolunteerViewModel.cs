@@ -10,11 +10,6 @@ namespace VMS.Application.ViewModels
         public string Desire { get; set; }
         public bool IsCommit { get; set; }
         public bool IsCheck { get; set; }
-
         public User User { get; set; }
-        public ListVolunteerViewModel()
-        {
-            User = new();
-        }
     }
 }

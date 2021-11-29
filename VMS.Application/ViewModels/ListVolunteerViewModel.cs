@@ -1,5 +1,4 @@
-﻿using System;
-using VMS.Domain.Models;
+﻿using VMS.Domain.Models;
 
 namespace VMS.Application.ViewModels
 {
@@ -13,5 +12,9 @@ namespace VMS.Application.ViewModels
         public bool IsCheck { get; set; }
 
         public User User { get; set; }
+        public ListVolunteerViewModel()
+        {
+            User = new();
+        }
     }
 }

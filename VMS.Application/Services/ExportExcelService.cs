@@ -1,6 +1,8 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -9,6 +11,14 @@ namespace VMS.Application.Services
 {
     public class ExportExcelService :  IExportExcelService
     {
+        private const int MaxInputVolunteerColumn = 9;
+        private const long MaxFileSize = 1024 * 1024 * 5;
+        private IRecruitmentService _recruitmentService;
+
+        public ExportExcelService(IRecruitmentService recruitmentService)
+        {
+            _recruitmentService = recruitmentService;
+        }
         public byte[] ResultExportToExcel(List<ListVolunteerViewModel> list, int actId)
         {
             var stream = new System.IO.MemoryStream();
@@ -32,7 +42,7 @@ namespace VMS.Application.Services
                 worksheet.Cells[row, 3].Value = item.User.StudentId;
                 worksheet.Cells[row, 4].Value = item.User.Class;
                 worksheet.Cells[row, 5].Value = item.User.Course;
-                worksheet.Cells[row, 6].Value = item.User.FacultyId == null? "": item.User.Faculty.Name;
+                worksheet.Cells[row, 6].Value = item.User.Faculty == null? "": item.User.Faculty.Name;
                 worksheet.Cells[row, 7].Value = item.User.Email;
                 worksheet.Cells[row, 8].Value = item.Desire;
                 worksheet.Cells[row, 9].Value = item.IsCommit ? "" : "X";
@@ -46,6 +56,45 @@ namespace VMS.Application.Services
             xlPackage.Workbook.Properties.Title = $@"DSTNV_{actId}_{DateTime.Now.ToFileTime()}";
             xlPackage.Save();
             return xlPackage.GetAsByteArray();
-        } 
+        }
+        public async Task<bool> UpdateListVolunteerFromExcelFileAsync(IBrowserFile file, int actId )
+        {
+            try
+            {
+                using Stream stream = file.OpenReadStream(MaxFileSize);
+
+                MemoryStream memoryStream = new();
+                await stream.CopyToAsync(memoryStream);
+
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                using ExcelPackage excelPackage = new(memoryStream);
+
+                foreach (var sheet in excelPackage.Workbook.Worksheets)
+                {
+                    if (sheet.Dimension.End.Column != MaxInputVolunteerColumn)
+                    {
+                        return false;
+                    }
+
+                    int rowCount = sheet.Dimension.End.Row;
+                    List<string> volunteers = new();
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        if(sheet.Cells[row, 3].Value != null)
+                        {
+                            volunteers.Add(sheet.Cells[row, 3].Value.ToString());
+                        }
+                    }
+                    await _recruitmentService.UpdateRecruitmentAsync(volunteers, actId);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+      
     }
 }

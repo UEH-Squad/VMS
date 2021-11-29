@@ -6,8 +6,7 @@ using VMS.Application.Interfaces;
 using System.Collections.Generic;
 using VMS.GenericRepository;
 using VMS.Application.ViewModels;
-using Microsoft.JSInterop;
-using System;
+using VMS.Common;
 
 namespace VMS.Pages.Organization.VolunteersListPage
 {
@@ -36,10 +35,11 @@ namespace VMS.Pages.Organization.VolunteersListPage
         public EventCallback<bool> HandleDeleted { get; set; }
         [Parameter]
         public EventCallback DowLoad { get; set; }
+        [Parameter]
+        public EventCallback Upload { get; set; }
+        [CascadingParameter] public IModalService Modal { get; set; }
         [Inject]
-        private IExportExcelService ExportExcelService { get; set; }
-        [Inject]
-        private IJSRuntime JSRuntime { get; set; }
+        private IRecruitmentService ListVolunteerService { get; set; }
         public async Task ChangeNavAsync()
         {
             searchValue = string.Empty;
@@ -53,9 +53,6 @@ namespace VMS.Pages.Organization.VolunteersListPage
             this.searchValue = searchValueChanged;
             await ValueChange.InvokeAsync(searchValue);
         }
-        [CascadingParameter] public IModalService Modal { get; set; }
-        [Inject]
-        private IRecruitmentService ListVolunteerService { get; set; }
         async Task ShowConfirmAsync()
         {
             var parameters = new ModalParameters();
@@ -71,6 +68,16 @@ namespace VMS.Pages.Organization.VolunteersListPage
             {
                 await ListVolunteerService.UpdateVounteerAsync(CheckedList, !ShowDeletedList);
                 await HandleDeleted.InvokeAsync();
+            }
+        }
+        async void ShowUploadAsync()
+        {
+            var parameter = new ModalParameters();
+            parameter.Add("ActId", ActId);
+            var result = await Modal.Show<UpLoadForm>("", parameter, BlazoredModalOptions.GetModalOptions()).Result;
+            if ((bool)result.Data)
+            {
+                await Upload.InvokeAsync();
             }
         }
     }

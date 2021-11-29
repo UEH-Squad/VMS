@@ -179,5 +179,29 @@ namespace VMS.Application.Services
 
             return _mapper.Map<List<ListVolunteerViewModel>>(recruitments);
         }
+        public async Task UpdateRecruitmentAsync(List<string> volunteers, int activityId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    x => x.ActivityId == activityId,
+                    x => x.IsDeleted == false
+                },
+                Includes = r => r.Include(x => x.User)
+            };
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+            foreach(var item in recruitments)
+            {
+                item.IsDeleted = !volunteers.Exists(x => x == item.User.StudentId);
+                if(item.IsDeleted == true)
+                {
+                    string a = item.User.StudentId.ToString();
+                }
+            }
+            await _repository.UpdateAsync<Recruitment>(dbContext, recruitments);
+        }
     }
 }

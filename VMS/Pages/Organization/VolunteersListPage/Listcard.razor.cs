@@ -20,7 +20,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         private List<int> checkList = new();
         private bool isDeleted = false;
         private PaginatedList<ListVolunteerViewModel> pagedResult = new(new(), 0, 1, 1);
-        private List<ListVolunteerViewModel> fullList = new List<ListVolunteerViewModel>();
+        private List<ListVolunteerViewModel> fullList = new();
         [Parameter]
         public int ActId { get; set; }
         [Inject]
@@ -104,6 +104,14 @@ namespace VMS.Pages.Organization.VolunteersListPage
         {
             fullList = await ListVolunteerService.GetAllListVolunteerAsync(ActId);
             await JsRuntime.InvokeVoidAsync("vms.SaveAs", "DSTNV_" + ActId + "_" + DateTime.Now.ToString() + ".xlsx", ExportExcelService.ResultExportToExcel(fullList, ActId));
+        }
+        public async Task HandleUploadAsync()
+        {
+            page = 1;
+            isDeleted = false;
+            pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            StateHasChanged();
+            await Interop.ScrollToTop(JsRuntime);
         }
     }
 }

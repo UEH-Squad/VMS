@@ -1,18 +1,11 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
-using VMS.Domain.Models;
 using VMS.GenericRepository;
-using System.Linq.Expressions;
-
 
 namespace VMS.Pages.ActivityLogPage
 {
@@ -22,7 +15,6 @@ namespace VMS.Pages.ActivityLogPage
         private string userId;
         private int ActivityId;
         private PaginatedList<RecruitmentViewModel> pagedResult = new(new(), 0, 1, 1);
-        private List<Expression<Func<Recruitment, bool>>> listConditions;
 
         [CascadingParameter]
         public IModalService ReportModal { get; set; }
@@ -54,12 +46,12 @@ namespace VMS.Pages.ActivityLogPage
             }
 
             page = 1;
-            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated, listConditions);
+            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated);
         }
 
         private async Task HandlePageChangedAsync()
         {
-            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated, listConditions);
+            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChange, userId, page, SearchValue, IsRated);
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

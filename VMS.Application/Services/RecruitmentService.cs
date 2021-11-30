@@ -37,13 +37,7 @@ namespace VMS.Application.Services
             };
 
             PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
-            PaginatedList<ListVolunteerViewModel> paginatedList = new(
-               _mapper.Map<List<ListVolunteerViewModel>>(recruitments.Items),
-                recruitments.TotalItems,
-                currentPage,
-                recruitments.PageSize
-                ) ;
-            return paginatedList;
+            return _mapper.Map<PaginatedList<ListVolunteerViewModel>>(recruitments);
         }
         public async Task UpdateVounteerAsync(List<int> list, bool isDeleted)
         {
@@ -196,10 +190,6 @@ namespace VMS.Application.Services
             foreach(var item in recruitments)
             {
                 item.IsDeleted = !volunteers.Exists(x => x == item.User.StudentId);
-                if(item.IsDeleted == true)
-                {
-                    string a = item.User.StudentId.ToString();
-                }
             }
             await _repository.UpdateAsync<Recruitment>(dbContext, recruitments);
         }

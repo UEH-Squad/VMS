@@ -87,18 +87,12 @@ namespace VMS.Pages.Organization.VolunteersListPage
         [CascadingParameter] public IModalService Modal { get; set; }
         async Task ShowSignUpPopUpAsync(ListVolunteerViewModel volunteer)
         {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
             ModalParameters parameters = new();
             parameters.Add("ActivityId", 1);
             parameters.Add("Volunteer", volunteer);
             parameters.Add("CurrentUser", volunteer.User);
             parameters.Add("IsReadOnly", true);
-            Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, options);
+            Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
         public async Task DowLoadAsync()
         {

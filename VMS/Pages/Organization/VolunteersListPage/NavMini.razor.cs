@@ -57,20 +57,14 @@ namespace VMS.Pages.Organization.VolunteersListPage
         {
             var parameters = new ModalParameters();
             parameters.Add("Undo", !ShowDeletedList);
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-            var result = await Modal.Show<ConfirmDelList>("", parameters, options).Result;
+            var result = await Modal.Show<ConfirmDelList>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
             if((bool)result.Data)
             {
                 await ListVolunteerService.UpdateVounteerAsync(CheckedList, !ShowDeletedList);
                 await HandleDeleted.InvokeAsync();
             }
         }
-        async void ShowUploadAsync()
+        async Task ShowUploadAsync()
         {
             var parameter = new ModalParameters();
             parameter.Add("ActId", ActId);

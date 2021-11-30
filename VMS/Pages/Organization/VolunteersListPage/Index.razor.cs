@@ -9,8 +9,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
     public partial class Index : ComponentBase
     {
         [Parameter]
-        public string ActId { get; set; }
-        private int actId;
+        public int ActId { get; set; }
         private string actName;
         private ViewActivityViewModel actViewModel;
         [Inject] 
@@ -21,8 +20,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         public string CurrentUserId { get; set; }
         protected override async Task OnParametersSetAsync()
         {
-            this.actId = int.Parse(ActId);
-            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(actId);
+            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(ActId);
             actName = actViewModel.Name;
             bool isUserOrg = string.Equals(this.actViewModel.OrgId, CurrentUserId, System.StringComparison.Ordinal);
             if (!isUserOrg)

@@ -10,15 +10,16 @@ $fav-icon: #fff;
     position: relative;
 
     &__title {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         font-style: normal;
         font-weight: 500;
 
         h3 {
             color: $blue;
-            font-size: 18px;
+            font-size: 14px;
 
             @include on('md') {
+                margin-bottom: 50px;
                 font-size: 24px;
             }
         }

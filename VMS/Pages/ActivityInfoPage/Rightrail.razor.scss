@@ -3,21 +3,34 @@ body {
 }
 
 .container {
-    margin-top:50px;
-    padding:0;
+    padding: 0;
+
+    @include on('lg') {
+        margin-top: 50px;
+    }
 }
 
 .inside-the-border {
-    float:right;
     width: 100%;
     border-radius: 10px;
-    border: 1px solid #C4C4C4
+    border: 1px solid #C4C4C4;
+    position: relative;
+
+    @include on('lg') {
+        float: right;
+    }
 }
 /* ------icons------- */
 .icons {
-    display: flex;
-    justify-content: end;
-    margin: 25px 25px 0 0;
+    position: absolute;
+    right: 0;
+
+    @include on('lg') {
+        position: relative;
+        display: flex;
+        justify-content: end;
+        margin: 25px 25px 0 0;
+    }
 
     .icon {
         width: 45px;
@@ -57,14 +70,34 @@ body {
 
 /* -----about-infor----- */
 .about-infor {
-    padding-left: 30px;
+    padding-left: 15px;
+
+    @include on('lg') {
+        padding-left: 30px;
+    }
 
     .titles {
-        padding:10px 0;
-        font-size: 20px;
+        padding: 10px 0;
+        font-size: 12px;
         font-weight: 500;
-        line-height: 30px;
-        color:$blue;
+        line-height: 20px;
+        color: $blue;
+        text-indent: 0;
+
+        @include on('lg') {
+            font-size: 20px;
+            line-height: 30px;
+        }
+    }
+
+    p {
+        font-size: 12px;
+        text-indent: 10px;
+
+        @include on('lg') {
+            font-size: 16px;
+            text-indent: 15px;
+        }
     }
 }
 
@@ -113,10 +146,14 @@ body {
 .report {
     float: right;
     color: #F14747;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 400;
     margin-top: 10px;
-    background-color:unset;
-    border:none;    
+    background-color: unset;
+    border: none;
+
+    @include on('lg') {
+        font-size: 18px;
+    }
 }
 /* ------end report-----*/

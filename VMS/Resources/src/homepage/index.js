@@ -3,7 +3,7 @@
 const playVideo = (src) => {
     const video = document.querySelector('.video-header__source');
     video.src = src;
-    video.play();   
+    video.play();
 }
 
 const filterCarousel = () => {
@@ -102,7 +102,11 @@ const rankCarousel = () => {
         responsive: {
             0: {
                 items: 1,
-                stagePadding: 50,
+                stagePadding: 0,
+            },
+            992: {
+                items: 1,
+                stagePadding: 100,
             },
             1200: {
                 items: 1,

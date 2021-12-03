@@ -67,6 +67,7 @@ namespace VMS.Pages.ActivityLogPage
             semesterDefault = "Học kỳ";
             FilterChange = new FilterRecruitmentViewModel();
             await FilterChanged.InvokeAsync(FilterChange);
+            await IsRatedChanged.InvokeAsync(new bool?());
         }
 
     }

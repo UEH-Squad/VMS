@@ -32,21 +32,15 @@
     private void IsRatedChanged(bool? value)
     {
         isRated = value;
-        searchValue = string.Empty;
-        filterChange = null;
     }
 
     private void SearchValueChanged(string value)
     {
         searchValue = value;
-        isRated = null;
-        filterChange = null;
     }
 
     private void FilterChanged(FilterRecruitmentViewModel value)
     {
         filterChange = value;
-        searchValue = null;
-        isRated = null;
     }
 }

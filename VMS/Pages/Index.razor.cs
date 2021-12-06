@@ -42,12 +42,12 @@ namespace VMS.Pages
                 new KeyValuePair<ActOrderBy, bool>(ActOrderBy.Hottest, false)
             });
 
-            newestActivities = (await ActivityService.GetAllActivitiesAsync(orderList, userCoordinate)).Items;
+            newestActivities = (await ActivityService.GetAllActivitiesAsync(orderList, userCoordinate, 4)).Items;
 
             orderList[ActOrderBy.Newest] = false;
             orderList[ActOrderBy.Hottest] = true;
 
-            featuredActivities = (await ActivityService.GetAllActivitiesAsync(orderList, userCoordinate)).Items;
+            featuredActivities = (await ActivityService.GetAllActivitiesAsync(orderList, userCoordinate, 4)).Items;
         }
     }
 }

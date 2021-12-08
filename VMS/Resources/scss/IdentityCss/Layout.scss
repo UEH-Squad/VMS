@@ -4,11 +4,21 @@ main {
 }
 
 .colored-green {
+    display: none;
     color: $green;
+
+    @include on('lg') {
+        display: inline-block;
+    }
 }
 
 .colored-blue {
+    display: none;
     color: $blue;
+
+    @include on('lg') {
+        display: inline-block;
+    }
 }
 
 .my-row {
@@ -20,6 +30,7 @@ main {
     }
 
     h5 {
+        display: none;
         font-size: 35px;
 
         span {

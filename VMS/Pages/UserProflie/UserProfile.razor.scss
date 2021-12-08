@@ -1,8 +1,28 @@
 ﻿@import "../../Resources/scss/common/_variables";
 
 .my-profile {
+
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        @include on('lg') {
+            display: block;
+        }
+    }
+
+    .container-info {
+        align-items: center;
+        flex-direction: column;
+
+        @include on('lg') {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
     .profile__logo {
-        width: 25%;
 
         @include on("xxl") {
             width: 25%;
@@ -13,22 +33,33 @@
         }
 
         img {
-            width: 200px;
-            height: 200px;
+            width: 99px;
+            height: 99px;
             border-radius: 50%;
             object-fit: cover;
+
+            @include on('lg') {
+                width: 200px;
+                height: 200px;
+            }
         }
 
         .icon-camera {
             position: absolute;
-            bottom: 15px;
-            right: -25px;
-            font-size: 36px;
+            bottom: 0;
+            right: -15px;
+            font-size: 20px;
             color: $grey-icon;
             cursor: pointer;
 
             &:hover {
                 color: #717171;
+            }
+
+            @include on('lg') {
+                bottom: 15px;
+                right: -25px;
+                font-size: 36px;
             }
         }
 
@@ -37,16 +68,44 @@
             font-weight: 600;
         }
 
+        button {
+            font-size: 10px;
+
+            @include on('sm') {
+                font-size: 14px;
+            }
+
+            @include on('md') {
+                font-size: 16px;
+            }
+
+            @include on('lg') {
+                font-size: 20px;
+            }
+        }
+
         .profile__type {
             background-color: #FBED6E;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), inset -4px -4px 20px rgba(0, 0, 0, 0.05), inset 4px 4px 20px rgba(0, 0, 0, 0.05);
             border-radius: 10px;
             padding: 7px 30px;
             color: #515151;
-            font-size: 16px;
+            font-size: 10px;
             font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
+
+            @include on('sm') {
+                font-size: 12px;
+            }
+
+            @include on('md') {
+                font-size: 14px;
+            }
+
+            @include on('xxl') {
+                font-size: 16px;
+            }
 
             &:hover {
                 background: #FCFF81;
@@ -63,16 +122,32 @@
     }
 
     .profile__contact {
-        width: 28%;
+        width: 90%;
 
-        @include on("xxl") {
+        @include on("lg") {
             width: 28%;
         }
 
+        hr {
+            width: 100%;
+            height: 1px;
+            display: block;
+            color: $border-color-normal;
+        }
+
+        @include on("lg") {
+            display: none;
+        }
+
         h3 {
-            font-size: 30px;
-            font-weight: 600;
-            color: $blue;
+            display: none;
+
+            @include on('lg') {
+                display: block;
+                font-size: 30px;
+                font-weight: 600;
+                color: $blue;
+            }
         }
 
         .profile__contact-content {
@@ -81,14 +156,22 @@
 
 
         .profile__contact-icon {
-            font-size: 24px;
+            font-size: 15px;
             color: $grey-icon;
+
+            @include on("lg") {
+                font-size: 24px;
+            }
         }
 
         .profile__contact-text {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 400;
             color: #515151;
+
+            @include on("lg") {
+                font-size: 18px;
+            }
 
             @include on("xxl") {
                 font-size: 20px;
@@ -96,9 +179,203 @@
         }
     }
 
+    .profile__contact {
+        .profile__filter {
+            display: none;
 
+            @include on("lg") {
+                display: block;
+            }
+
+            .profile__carousel, .profile__NoCarousel {
+                position: relative;
+                padding-right: 30px;
+                z-index: 0;
+
+                .item {
+                    text-align: center;
+
+                    &:hover > i {
+                        font-size: 40px;
+                    }
+
+                    &:hover > span {
+                        transform: translateY(-5px);
+                    }
+
+                    i {
+                        display: block;
+                        border-radius: 50%;
+                        color: white;
+                        margin: 5px auto;
+                        transition: all 0.3s linear;
+                        width: 65px;
+                        height: 65px;
+                        line-height: 65px;
+                        font-size: 30px;
+
+                        @include on("xxl") {
+                            width: 70px;
+                            height: 70px;
+                            line-height: 70px;
+                            font-size: 32px;
+                        }
+                    }
+
+                    span {
+                        margin-top: 10px;
+                        font-weight: 500;
+                        display: inline-block;
+                        transition: all 0.3s linear;
+                        font-size: 14px;
+
+                        @include on("xxl") {
+                            font-size: 16px;
+                        }
+                    }
+                }
+
+                ::deep .owl-nav {
+                    display: block;
+
+                    .owl-prev {
+                        display: none;
+                    }
+
+                    .owl-next {
+                        position: absolute;
+                        top: -32px;
+                        right: 0;
+
+                        @include on("xxl") {
+                            top: -32px;
+                        }
+
+                        span {
+                            font-size: 80px;
+                            color: $blue;
+                            transition: all 0.3s linear;
+
+                            &:hover {
+                                color: $blue-hv;
+                            }
+                        }
+
+                        &:hover {
+                            background: none;
+                        }
+                    }
+                }
+
+                ::deep .owl-dots {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .profile__skills {
+
+        @include on("lg") {
+            width: 32%;
+        }
+
+        .profile__skills-content {
+            border: none;
+
+            @include on("lg") {
+                border: 1px solid rgba(112, 112, 112, 0.5);
+                border-radius: 10px;
+            }
+        }
+
+        .profile__content {
+            display: inline;
+            overflow-x: scroll;
+            padding-left: 30px;
+
+            @include on("lg") {
+                width: 98%;
+                height: 305px;
+                overflow-y: scroll;
+                padding-left: 35px;
+                padding-right: 35px;
+            }
+
+            @include on("xxl") {
+                height: 323px;
+                overflow-y: scroll;
+                padding-left: 45px;
+                padding-right: 45px;
+            }
+
+            &::-webkit-scrollbar {
+                width: 3px;
+                margin-right: 20px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #B4B4B4;
+                border-radius: 20px;
+            }
+        }
+
+        h3 {
+            color: $blue;
+            display: inline;
+            font-weight: 600;
+            font-size: 16px;
+
+            @include on("lg") {
+                text-align: center;
+                font-size: 30px;
+            }
+        }
+
+        .profile__skill {
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #515151;
+            border-bottom: 1px solid rgba(112, 112, 112, 0.5);
+
+            &:last-child {
+                border: none;
+                margin-bottom: 0px;
+                padding-bottom: 0px;
+            }
+
+            @include on("xxl") {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .profile__filter {
+        display: flex;
+        justify-content: space-between;
+
+        h3 {
+            color: $blue;
+            display: inline;
+            font-weight: 600;
+            font-size: 16px;
+
+            @include on("lg") {
+                display: block;
+                text-align: center;
+                font-size: 30px;
+            }
+        }
+
+        @include on("lg") {
+            display: none;
+        }
+    }
 
     .profile__carousel, .profile__NoCarousel {
+        display: inline;
         position: relative;
         padding-right: 30px;
         z-index: 0;
@@ -183,72 +460,14 @@
         }
     }
 
-    .profile__skills {
-        width: 32%;
-
-        @include on("xxl") {
-            width: 32%;
-        }
-
-        .profile__skills-content {
-            border: 1px solid rgba(112, 112, 112, 0.5);
-            border-radius: 10px;
-        }
-
-        .profile__content {
-            width: 98%;
-            height: 305px;
-            overflow-y: scroll;
-            padding-left: 45px;
-            padding-right: 45px;
-
-            @include on("xxl") {
-                height: 323px;
-            }
-
-            &::-webkit-scrollbar {
-                width: 3px;
-                margin-right: 20px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background-color: #B4B4B4;
-                border-radius: 20px;
-            }
-        }
-
-
-        h3 {
-            font-size: 30px;
-            font-weight: 600;
-            color: $blue;
-        }
-
-        .profile__skill {
-            margin-bottom: 20px;
-            padding-bottom: 5px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #515151;
-            border-bottom: 1px solid rgba(112, 112, 112, 0.5);
-
-            &:last-child {
-                border: none;
-                margin-bottom: 0px;
-                padding-bottom: 0px;
-            }
-
-
-            @include on("xxl") {
-                font-size: 16px;
-            }
-        }
-    }
-
     .profile__dictum {
-        font-size: 24px;
+        font-size: 14px;
         font-weight: 400;
         border-top: 1px solid rgba(112, 112, 112, 0.5);
         border-bottom: 1px solid rgba(112, 112, 112, 0.5);
+
+        @include on("xxl") {
+            font-size: 24px;
+        }
     }
 }

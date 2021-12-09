@@ -32,7 +32,12 @@ const logoBanerCarousel = () => {
         responsive: {
             0: {
                 items: 1,
+                nav: false
             },
+            992: {
+                items: 1,
+                nav: true
+            }
         }
     })
 }

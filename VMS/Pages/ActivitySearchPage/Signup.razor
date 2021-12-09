@@ -23,7 +23,7 @@
             <div class="signUp__form">
                 <h1>Đơn <span>đăng ký</span></h1>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         <p class="form-text">Họ tên <span>(*)</span></p>
                         <InputText @bind-Value=@CurrentUser.FullName type="text" class="form-control" disabled="true" />
                         <p class="form-text mt-3">Email nhận thông báo <span>(*)</span></p>
@@ -54,7 +54,7 @@
                             </div>
                         </InputRadioGroup>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         <p class="form-text">Bạn mong muốn gì khi tham gia hoạt động này? (Vị trí bạn muốn tham gia, số ngày tham gia mong muốn,...) <span>(*)</span></p>
                         @if (IsReadOnly)
                         {

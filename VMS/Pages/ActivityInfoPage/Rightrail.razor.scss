@@ -84,6 +84,10 @@ body {
         color: $blue;
         text-indent: 0;
 
+        @include on('md') {
+            font-size: 14px;
+        }
+
         @include on('lg') {
             font-size: 20px;
             line-height: 30px;
@@ -93,6 +97,11 @@ body {
     p {
         font-size: 12px;
         text-indent: 10px;
+
+        @include on('md') {
+            font-size: 14px;
+            text-indent: 12px;
+        }
 
         @include on('lg') {
             font-size: 16px;
@@ -120,6 +129,12 @@ body {
 
     .btn-sign-up {
         @include btn;
+        margin: 0 auto 20px;
+
+        @include on('lg') {
+            margin: 0 auto 30px;
+        }
+
         background-color: #64D72F;
     }
 
@@ -130,9 +145,17 @@ body {
 
     .btn-sign-up__text {
         margin: auto;
-        font-size: 20px;
+        font-size: 14px;
         font-weight: 700;
         color: #fff;
+
+        @include on('md') {
+            font-size: 16px;
+        }
+
+        @include on('lg') {
+            font-size: 20px;
+        }
     }
 
     .btn-sign-up:hover {
@@ -151,6 +174,10 @@ body {
     margin-top: 10px;
     background-color: unset;
     border: none;
+
+    @include on('md') {
+        font-size: 14px;
+    }
 
     @include on('lg') {
         font-size: 18px;

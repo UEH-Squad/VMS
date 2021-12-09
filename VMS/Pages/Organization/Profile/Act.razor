@@ -2,17 +2,17 @@
 
 <div class="container">
     <div class="row act">
-        <div class="d-flex align-items-center justify-content-between my-5">
+        <div class="d-flex align-items-center justify-content-between my-lg-5 my-2 my-sm-3">
             <h1 class="mb-0">Hoạt động <span>@Title</span></h1>
             <hr />
         </div>
 
         @if (Datas is not null)
         {
-            <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
+            <div class="owl-carousel owl-theme position-relative">
                 @foreach (var item in Datas)
                 {
-                    <div class="@(Datas.Count >4 ? "" : "w-25 mx-2") act-container item position-relative">
+                    <div class="mx-lg-2 ms-0 me-2 act-container item position-relative">
                         <div class="img-container position-relative">
                             <img src="@item?.Banner" alt="" class="act-img">
                             <div class="@(item.IsClosed ? "overlay" : "")"></div>
@@ -62,7 +62,7 @@
 
         @if (HaveLinkAll)
         {
-            <div class="act__linkAll text-end mt-5">
+            <div class="act__linkAll text-end mt-lg-5 mt-2 mt-sm-3">
                 <a href="@Routes.ActivitySearch/@QueryString">@TitleLinkALl >>></a>
             </div>
         }

@@ -11,6 +11,10 @@
         line-height: 25px;
         margin-bottom: 4px;
 
+        @include on('md') {
+            font-size: 20px;
+        }
+
         @include on('lg') {
             font-size: 24px;
             line-height: 44px;
@@ -76,7 +80,6 @@
         }
 
         .heart-button2 {
-            margin-left: 47.5%;
             color: #F14747;
             background: transparent;
             border: none;
@@ -104,6 +107,10 @@
         line-height: 30px;
         color: $grey-text;
         font-size: 12px;
+
+        @include on('md') {
+            font-size: 14px;
+        }
 
         @include on('lg') {
             font-size: 16px;
@@ -143,13 +150,21 @@
             font-weight: 600;
             font-size: 12px;
 
+            @include on('md') {
+                font-size: 14px;
+            }
+
             @include on('lg') {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
 
         p {
             font-size: 12px;
+
+            @include on('md') {
+                font-size: 14px;
+            }
 
             @include on('lg') {
                 font-size: 16px;
@@ -172,13 +187,21 @@
             font-size: 12px;
             font-weight: 600;
 
+            @include on('md') {
+                font-size: 14px;
+            }
+
             @include on('lg') {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
 
         p {
             font-size: 12px;
+
+            @include on('md') {
+                font-size: 14px;
+            }
 
             @include on('lg') {
                 font-size: 16px;
@@ -196,6 +219,10 @@
             margin: 0 auto;
             font-size: 12px;
             font-weight: 600;
+
+            @include on('md') {
+                font-size: 14px;
+            }
 
             @include on('lg') {
                 display: none;

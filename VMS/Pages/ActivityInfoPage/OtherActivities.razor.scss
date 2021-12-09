@@ -16,11 +16,14 @@ $fav-icon: #fff;
 
         h3 {
             color: $blue;
-            font-size: 14px;
+            font-size: 16px;
 
-            @include on('md') {
-                margin-bottom: 50px;
+            @include on('sm') {
                 font-size: 24px;
+            }
+
+            @include on('lg') {
+                font-size: 30px;
             }
         }
 
@@ -109,27 +112,23 @@ $fav-icon: #fff;
             padding: 10px;
             font-style: normal;
             font-weight: 600;
-            font-size: 8px;
+            font-size: 10px;
             color: $blue;
             //limit 3 line
-            height: 160px;
+            height: 75px;
             overflow: hidden;
+            line-height: 17px;
 
-            @include on('md') {
-                padding: 14px;
+            @include on('sm') {
                 font-size: 14px;
-                height: 160px;
+                line-height: 20px;
+                height: 90px;
             }
 
-            @include on('xl') {
-                padding: 16px;
-                font-size: 18px;
-                height: 160px;
-            }
-
-            @include on('xxl') {
+            @include on('lg') {
                 padding: 19px;
                 font-size: 20px;
+                line-height: 30px;
                 height: 160px;
             }
         }
@@ -178,7 +177,7 @@ $fav-icon: #fff;
     z-index: 0;
 }
 
-::deep .owl-nav {
+::deep .owl-carousel {
 
     .owl-prev, .owl-next {
         position: absolute;
@@ -192,21 +191,40 @@ $fav-icon: #fff;
     .owl-next {
         right: 0;
     }
+}
 
-    .owl-prev, .owl-next:hover {
-        background-color: transparent !important;
-    }
+::deep .owl-nav {
+    button.owl-next,
+    button.owl-prev {
+        background: $blue;
+        position: absolute;
+        border-radius: 100%;
+        top: 26%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    span {
-        font-size: 50px;
-        color: $white;
-        transition: all 0.3s linear;
-        border-radius: 100% !important;
-        background-color: $blue !important;
+        span {
+            font-size: 40px;
+            margin-bottom: 5px;
+            line-height: 0;
+            color: $white;
+        }
 
         &:hover {
-            filter: blur(90%);
+            background: $blue-bold;
+            opacity: .73;
         }
+    }
+
+    button.owl-prev {
+        left: 5px;
+    }
+
+    button.owl-next {
+        right: 5px;
     }
 }
 
@@ -222,7 +240,7 @@ $fav-icon: #fff;
     white-space: normal;
     -webkit-line-clamp: 3;
 
-    @include on('sm') {
+    @include on('lg') {
         -webkit-line-clamp: 4;
     }
 }

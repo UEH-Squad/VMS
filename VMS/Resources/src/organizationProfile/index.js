@@ -14,13 +14,28 @@ const informationCarousel = () => {
 }
 
 const organizeCarousel = () => {
-    const carousel = $('.organize__carousel');
-    $('.organize__carousel').owlCarousel({
+    const carousel = $('.owl-carousel');
+    $('.owl-carousel').owlCarousel({
         loop: false,
         margin: 0,
         nav: true,
         responsive: {
             0: {
+                items: 2,
+                slideBy: 2,
+                nav: false
+            },
+            576: {
+                items: 3,
+                slideBy: 1,
+                nav: false
+            },
+            768: {
+                items: 4,
+                slideBy: 4,
+                nav: false
+            },
+            992: {
                 items: 4,
                 slideBy: 4,
                 mouseDrag: false

@@ -13,6 +13,9 @@
   color: #18A0FB;
   line-height: 25px;
   margin-bottom: 4px; }
+  @media (min-width: 768px) {
+    .infopage-title .title__content {
+      font-size: 20px; } }
   @media (min-width: 992px) {
     .infopage-title .title__content {
       font-size: 24px;
@@ -60,7 +63,6 @@
   .infopage-title .title__date .heart-button1:hover {
     cursor: pointer; }
   .infopage-title .title__date .heart-button2 {
-    margin-left: 47.5%;
     color: #F14747;
     background: transparent;
     border: none; }
@@ -78,6 +80,9 @@
   line-height: 30px;
   color: #515151;
   font-size: 12px; }
+  @media (min-width: 768px) {
+    .infopage-activity .content {
+      font-size: 14px; } }
   @media (min-width: 992px) {
     .infopage-activity .content {
       font-size: 16px; } }
@@ -108,11 +113,17 @@
     margin: 0 auto;
     font-weight: 600;
     font-size: 12px; }
+    @media (min-width: 768px) {
+      .infopage-activity .activity__mission .mission {
+        font-size: 14px; } }
     @media (min-width: 992px) {
       .infopage-activity .activity__mission .mission {
-        font-size: 18px; } }
+        font-size: 16px; } }
   .infopage-activity .activity__mission p {
     font-size: 12px; }
+    @media (min-width: 768px) {
+      .infopage-activity .activity__mission p {
+        font-size: 14px; } }
     @media (min-width: 992px) {
       .infopage-activity .activity__mission p {
         font-size: 16px; } }
@@ -129,11 +140,17 @@
     margin: 0 auto;
     font-size: 12px;
     font-weight: 600; }
+    @media (min-width: 768px) {
+      .infopage-activity .activity__assignment .assignment {
+        font-size: 14px; } }
     @media (min-width: 992px) {
       .infopage-activity .activity__assignment .assignment {
-        font-size: 18px; } }
+        font-size: 16px; } }
   .infopage-activity .activity__assignment p {
     font-size: 12px; }
+    @media (min-width: 768px) {
+      .infopage-activity .activity__assignment p {
+        font-size: 14px; } }
     @media (min-width: 992px) {
       .infopage-activity .activity__assignment p {
         font-size: 16px; } }
@@ -147,6 +164,9 @@
     margin: 0 auto;
     font-size: 12px;
     font-weight: 600; }
+    @media (min-width: 768px) {
+      .infopage-activity .activity__detail .detail {
+        font-size: 14px; } }
     @media (min-width: 992px) {
       .infopage-activity .activity__detail .detail {
         display: none; } }

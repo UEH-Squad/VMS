@@ -1,7 +1,6 @@
-﻿const otherAct = (count) => {
-    const isLoop = count >= 3;
+﻿const otherAct = () => {
     $('.owl-carousel').owlCarousel({
-        loop: isLoop,
+        loop: false,
         margin: 10,
         nav: true,
         dots: false,

@@ -30,9 +30,14 @@
     }
 
     .content {
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 500;
-        padding: 40px 75px 20px;
+        padding: 40px 45px 20px;
+
+        @include on('xl') {
+            font-size: 24px;
+            padding: 40px 75px 20px;
+        }
 
         span:first-of-type {
             color: $green;
@@ -47,11 +52,15 @@
         a {
             background-color: $blue;
             padding: 0px 20px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             color: $white;
             padding: 5px 15px;
             border-radius: 5px;
+
+            @include on('xl') {
+                font-size: 20px;
+            }
 
             &:hover {
                 background-color: $blue-bold;

@@ -15,7 +15,7 @@
                             <div @onclick="() => ChangeState(area)" class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center"  style="background-color: @area.Color">
                                 @area.Icon
                             </div>
-                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-3" style="@(choosenAreas.Exists(a => a.Id == area.Id) ? "color: #64D72F" : (area.IsPinned ? $"color: {area.Color}" : ""))">@area.Name</p>
+                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-2" style="@(choosenAreas.Exists(a => a.Id == area.Id) ? "color: #64D72F" : (area.IsPinned ? $"color: {area.Color}" : ""))">@area.Name</p>
                         </div>
                     }
                 }

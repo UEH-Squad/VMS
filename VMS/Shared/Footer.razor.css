@@ -7,7 +7,17 @@
 .footer {
   position: relative;
   padding-top: 30px;
-  border-top: 1px solid rgba(51, 51, 51, 0.5); }
+  border-top: 1px solid #b4b4b4; }
+  .footer .my-container {
+    padding: 0 40px; }
+    @media (min-width: 992px) {
+      .footer .my-container {
+        padding: 0 20px; } }
+  .footer .my-row {
+    border-bottom: 1px solid #b4b4b4; }
+    @media (min-width: 992px) {
+      .footer .my-row {
+        border-bottom: none; } }
 
 .btn-back-top {
   position: absolute;
@@ -78,7 +88,7 @@
   padding: 0;
   padding-top: 10px; }
   .footer__contact h6 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 8px;
     font-weight: 300;
     color: #515151; }
@@ -102,9 +112,12 @@
 .footer__right {
   padding: 0;
   padding-top: 10px;
-  text-align: right; }
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: end; }
   .footer__right h6 {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     font-size: 7px;
     font-weight: 400;
     color: #515151; }

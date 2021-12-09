@@ -3,8 +3,21 @@
 .footer {
     position: relative;
     padding-top: 30px;
-    border-top: 1px solid rgba(51, 51, 51, 0.5);
-    ;
+    border-top: 1px solid $border-color-normal;
+
+    .my-container {
+        padding: 0 40px;
+
+        @include on('lg') {
+            padding: 0 20px;
+        }
+    }
+    .my-row {
+        border-bottom: 1px solid $border-color-normal;
+        @include on('lg') {
+            border-bottom: none;
+        }
+    }
 }
 .btn-back-top {
     position: absolute;
@@ -98,7 +111,7 @@
     padding-top: 10px;
 
     h6 {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         font-size: 8px;
         font-weight: 300;
         color: $grey-text;
@@ -133,9 +146,12 @@
     padding: 0;
     padding-top: 10px;
     text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 
     h6 {
-        margin-bottom: 20px;
+        margin-bottom: 8px;
         font-size: 7px;
         font-weight: 400;
         color: $grey-text;

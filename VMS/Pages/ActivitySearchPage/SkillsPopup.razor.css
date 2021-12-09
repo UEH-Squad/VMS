@@ -14,10 +14,13 @@
   background-color: rgba(196, 196, 196, 0.38); }
 
 .my-custom-popup {
-  width: 50%;
+  width: 90%;
   background-color: #fff;
   border-radius: 10px;
   z-index: 999; }
+  @media (min-width: 1200px) {
+    .my-custom-popup {
+      width: 50%; } }
   .my-custom-popup h3 {
     font-size: 24px;
     font-weight: 500;
@@ -39,17 +42,24 @@
     /*height: 70%;*/ }
     .my-custom-popup .skill-modal-content__container {
       height: 100%;
-      display: grid;
-      grid-template-columns: auto auto; }
+      font-size: 14px; }
+      @media (min-width: 1200px) {
+        .my-custom-popup .skill-modal-content__container {
+          display: grid;
+          grid-template-columns: auto auto; } }
   .my-custom-popup .skill-item-wrapper {
     cursor: pointer;
+    margin-bottom: 15px;
     /*
         &:nth-child(3n-1) {
             width: 41.6667%;
         }*/ }
     .my-custom-popup .skill-item-wrapper > p {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 400; }
+      @media (min-width: 1200px) {
+        .my-custom-popup .skill-item-wrapper > p {
+          font-size: 16px; } }
     .my-custom-popup .skill-item-wrapper > p:hover {
       color: #64D72F; }
   .my-custom-popup .save-btn {
@@ -67,15 +77,20 @@
       background-color: #306C14; }
   .my-custom-popup .my-custom-sub-popup {
     top: -60px;
-    left: 100%;
+    left: 85px;
     background-color: white;
     box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
     padding: 15px 25px 0;
     border-radius: 5px;
-    min-width: 250px;
+    min-width: 210px;
+    font-size: 14px;
     font-size: 14px;
     z-index: 999;
     display: none; }
+    @media (min-width: 1200px) {
+      .my-custom-popup .my-custom-sub-popup {
+        min-width: 250px;
+        left: 100%; } }
     .my-custom-popup .my-custom-sub-popup .sub-popup-item {
       color: #64D72F; }
       .my-custom-popup .my-custom-sub-popup .sub-popup-item:hover {

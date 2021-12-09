@@ -13,7 +13,12 @@
 }
 
 .my-custom-popup {
-    width: 50%;
+    width: 90%;
+
+    @include on('xl') {
+        width: 50%;
+    }
+
     background-color: #fff;
     border-radius: 10px;
     z-index: 999;
@@ -44,16 +49,26 @@
 
         &__container {
             height: 100%;
-            display: grid;
-            grid-template-columns: auto auto;
+            font-size: 14px;
+
+            @include on('xl') {
+                display: grid;
+                grid-template-columns: auto auto;
+            }
         }
     }
 
     .skill-item-wrapper {
         cursor: pointer;
+        margin-bottom: 15px;
 
         & > p {
-            font-size: 16px;
+            font-size: 14px;
+
+            @include on('xl') {
+                font-size: 16px;
+            }
+
             font-weight: 400;
         }
 
@@ -80,12 +95,19 @@
 
     .my-custom-sub-popup {
         top: -60px;
-        left: 100%;
+        left: 85px;
         background-color: white;
         box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
         padding: 15px 25px 0;
         border-radius: 5px;
-        min-width: 250px;
+        min-width: 210px;
+        font-size: 14px;
+
+        @include on('xl') {
+            min-width: 250px;
+            left: 100%;
+        }
+
         font-size: 14px;
         z-index: 999;
         display: none;

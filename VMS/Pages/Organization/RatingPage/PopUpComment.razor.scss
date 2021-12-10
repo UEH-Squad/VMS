@@ -70,6 +70,13 @@
             margin-left: 5%;
             margin-right: 5%;
             border-radius: 50%;
+
+            img {
+                object-fit: cover;
+                width: 52px;
+                height: 52px;
+                border-radius: 100%;
+            }
         }
     }
 
@@ -154,6 +161,13 @@
             margin-left: 5%;
             margin-right: 5%;
             border-radius: 50%;
+
+            img {
+                object-fit: cover;
+                width: 52px;
+                height: 52px;
+                border-radius: 100%;
+            }
         }
     }
 

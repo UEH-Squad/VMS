@@ -4,25 +4,37 @@ main {
 }
 
 .colored-green {
-    display: none;
     color: $green;
-
-    @include on('lg') {
-        display: inline-block;
-    }
 }
 
 .colored-blue {
-    display: none;
     color: $blue;
-
-    @include on('lg') {
-        display: inline-block;
-    }
 }
 
 .my-row {
     height: 650px;
+
+    .introduce {
+        display: none;
+
+        @include on("lg") {
+            display: inline;
+        }
+    }
+
+    .form-login {
+        width: 90%;
+        margin: 0 auto;
+
+        @include on("lg") {
+            width: 41.67%;
+            padding-left: 60px;
+        }
+
+        @include on("xxl") {
+            padding-left: 80px;
+        }
+    }
 
     h1 {
         font-size: 70px;
@@ -30,7 +42,6 @@ main {
     }
 
     h5 {
-        display: none;
         font-size: 35px;
 
         span {
@@ -42,13 +53,17 @@ main {
 .my-content-wrapper {
     border-radius: 10px;
     width: 100%;
-    min-height: 500px;
+    min-height: 0px;
     background-color: #fff;
     background-image: url("/img/login-img.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     padding: 60px 40px;
+
+    @include on("lg") {
+        min-height: 500px;
+    }
 }
 
 .footer {

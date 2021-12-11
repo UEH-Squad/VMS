@@ -1,0 +1,140 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(196, 196, 196, 0.38);
+  z-index: 120; }
+  .my-modal .modal__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .my-modal .modal__create, .my-modal .modal__success {
+    background-color: #FFFFFF;
+    position: relative;
+    box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
+    border-radius: 10px; }
+  .my-modal .modal__create {
+    width: 525px;
+    padding: 30px 45px; }
+    .my-modal .modal__create h3 {
+      font-weight: 500;
+      font-size: 24px;
+      color: #64D72F;
+      margin-bottom: 30px; }
+      .my-modal .modal__create h3 span {
+        color: #18A0FB; }
+    .my-modal .modal__create .modal__step {
+      font-weight: 400;
+      font-size: 16px;
+      margin-bottom: 12px; }
+    .my-modal .modal__create .btn-down {
+      background: #18A0FB;
+      font-weight: 600;
+      font-size: 16px;
+      color: #FFFFFF;
+      margin-bottom: 10px; }
+      .my-modal .modal__create .btn-down:hover {
+        background: #0B588C; }
+      .my-modal .modal__create .btn-down:focus {
+        box-shadow: none; }
+    .my-modal .modal__create .icon-down {
+      font-size: 24px; }
+  .my-modal .modal__success {
+    width: 400px;
+    padding: 30px 30px; }
+    .my-modal .modal__success h3 {
+      font-weight: 500;
+      font-size: 20px;
+      color: #64D72F; }
+      .my-modal .modal__success h3 span {
+        color: #18A0FB; }
+    .my-modal .modal__success .btn-cancel {
+      font-weight: 600;
+      font-size: 16px;
+      color: #18A0FB;
+      background-color: transparent; }
+      .my-modal .modal__success .btn-cancel:hover {
+        color: #0B588C;
+        background-color: transparent; }
+      .my-modal .modal__success .btn-cancel:focus {
+        box-shadow: none; }
+    .my-modal .modal__success .btn-watchList {
+      font-weight: 600;
+      font-size: 16px;
+      color: #FFFFFF;
+      background-color: #18A0FB; }
+      .my-modal .modal__success .btn-watchList:hover {
+        color: #FFFFFF;
+        background-color: #0B588C; }
+      .my-modal .modal__success .btn-watchList:focus {
+        box-shadow: none; }
+  .my-modal .modal__create .icon-close {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    .my-modal .modal__create .icon-close .material-icons {
+      font-size: 20px;
+      color: #717171; }
+  .my-modal .modal__success .icon-close {
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    .my-modal .modal__success .icon-close .material-icons {
+      font-size: 16px;
+      color: #717171;
+      line-height: 0; }
+  .my-modal .from__btn {
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 30px; }
+    .my-modal .from__btn .btn-cancel {
+      background-color: transparent;
+      color: #64D72F; }
+      .my-modal .from__btn .btn-cancel:hover {
+        background-color: transparent;
+        color: #306C14; }
+      .my-modal .from__btn .btn-cancel:focus {
+        box-shadow: none; }
+    .my-modal .from__btn .btn-create {
+      width: 140px;
+      height: 35px;
+      padding: 0;
+      background-color: #64D72F;
+      color: #FFFFFF; }
+      .my-modal .from__btn .btn-create:hover {
+        background-color: #306C14;
+        color: #FFFFFF; }
+      .my-modal .from__btn .btn-create:focus {
+        box-shadow: none; }
+  .my-modal ::deep .my-uploadImg {
+    padding: 0; }
+    .my-modal ::deep .my-uploadImg span {
+      font-weight: 300;
+      font-size: 16px;
+      color: #515151; }

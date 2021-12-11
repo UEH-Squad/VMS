@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -17,10 +16,47 @@ namespace VMS.Application.Services
 {
     public class RecruitmentService : BaseService, IRecruitmentService
     {
-        public RecruitmentService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
+        public RecruitmentService(IRepository repository,
+                       IDbContextFactory<VmsDbContext> dbContextFactory,
+                       IMapper mapper) : base(repository, dbContextFactory, mapper)
+        {}
+        public async Task<PaginatedList<ListVolunteerViewModel>> GetListVolunteersAsync(int actId, string searchValue, bool isDeleted, int currentPage)
         {
-        }
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            PaginationSpecification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    a => a.ActivityId == actId,
+                    a => a.User.FullName.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
+                    a => a.IsDeleted == isDeleted
+                },
+                Includes = a => a.Include(a => a.User).ThenInclude(a=> a.Faculty),
+                PageIndex = currentPage,
+                PageSize = 20
+            };
 
+            PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+            return _mapper.Map<PaginatedList<ListVolunteerViewModel>>(recruitments);
+        }
+        public async Task UpdateVounteerAsync(List<int> list, bool isDeleted)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+            {
+                    a =>  list.Contains(a.Id)
+            }
+            };
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+            foreach (var rec in recruitments)
+            {
+                rec.IsDeleted = isDeleted;
+            }
+            dbContext.SaveChanges();
+        }
         public async Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage, string searchValue, bool? isRated)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -118,6 +154,44 @@ namespace VMS.Application.Services
             }
 
             return r => true;
+        }
+
+        public async Task<List<ListVolunteerViewModel>> GetAllListVolunteerAsync(int actId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    a => a.ActivityId == actId,
+                    a => a.IsDeleted == false
+                },
+                Includes = a => a.Include(a => a.User).ThenInclude(a => a.Faculty)
+            };
+
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<ListVolunteerViewModel>>(recruitments);
+        }
+        public async Task UpdateRecruitmentAsync(List<string> volunteers, int activityId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    x => x.ActivityId == activityId,
+                    x => x.IsDeleted == false
+                },
+                Includes = r => r.Include(x => x.User)
+            };
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+            foreach(var item in recruitments)
+            {
+                item.IsDeleted = !volunteers.Exists(x => x == item.User.StudentId);
+            }
+            await _repository.UpdateAsync<Recruitment>(dbContext, recruitments);
         }
     }
 }

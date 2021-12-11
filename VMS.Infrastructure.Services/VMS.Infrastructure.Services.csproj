@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\VMS.Common\VMS.Common.csproj" />
     <ProjectReference Include="..\VMS.Domain\VMS.Domain.csproj" />
   </ItemGroup>

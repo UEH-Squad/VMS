@@ -57,10 +57,10 @@
                         </span>
                         <span class="org-card__member__text">@item.MemberQuantity</span>
                     </div>
-                    <div class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
+                    <a href="@Routes.VolunteersList/@item.Id" class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
                         Xem danh sách
-                    </div>
-                    @if (DateTime.Now.Date > item.EndDate)
+                    </a>
+                     @if (DateTime.Now.Date > item.EndDate)
                     {
                         <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1 position-relative">
                             <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>

@@ -70,6 +70,8 @@ namespace VMS.Application.Automapper
             MapReportToFeedback();
             CreateMap<PaginatedList<Recruitment>, PaginatedList<RecruitmentViewModel>>();
             CreateMap<RecruitmentRating, RecruitmentRatingViewModel>();
+            CreateMap<Recruitment, ListVolunteerViewModel>();
+            CreateMap<PaginatedList<Recruitment>, PaginatedList<ListVolunteerViewModel>>();
         }
 
         private void MapReportToFeedback()
@@ -80,6 +82,7 @@ namespace VMS.Application.Automapper
                 .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.DesReport))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
+            CreateMap<Recruitment, ListVolunteerViewModel>();
         }
     }
 }

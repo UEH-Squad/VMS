@@ -78,7 +78,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
         {
             if (pagedResult.TotalItems - checkList.Count <= (pagedResult.PageIndex - 1) * pagedResult.PageSize)
             {
-                page = pagedResult.PageIndex - 1;
+                page = pagedResult.PageIndex==1? 1:pagedResult.PageIndex - 1;
             }
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             checkList = new();

@@ -53,19 +53,21 @@
                                     <h5 class="org-name d-flex align-items-center mb-0">
                                         <i class="material-icons">public</i> @item.Name
                                     </h5>
-                                    <p class="lmtext-2 act__content-description mb-1">@item.Content</p>
-                                    <div class="act_content-date d-flex flex-column">
+                                    <p class="lmtext-2 act__content-description mb-0">@item.Content</p>
+                                    <div class="act_content-date d-flex flex-column mb-1">
                                         <div class="d-flex mb-1 align-items-center">
-                                            <span class="material-icons-outlined me-2">
-                                                today
+                                            <span class="material-icons-outlined me-2 my-icon">
+                                                assignment
                                             </span>
-                                            <span>Thời gian đăng ký từ @item.RegisterDate.ToString("dd/MM/yyyy") đến @item.CloseRegisterDate.ToString("dd/MM/yyyy")</span>
+                                            <span class="icon-tooltip">Ngày đăng ký</span>
+                                            <span>@item.OpenDate.ToString("dd/MM/yyyy") - @item.CloseDate.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <span class="material-icons-outlined me-2">
+                                            <span class="material-icons-outlined me-2 my-icon">
                                                 today
                                             </span>
-                                            <span>Thời gian diễn ra từ @item.StartDate.ToString("dd/MM/yyyy") đến @item.EndDate.ToString("dd/MM/yyyy")</span>
+                                            <span class="icon-tooltip">Ngày diễn ra</span>
+                                            <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </div>
@@ -78,13 +80,19 @@
                                     <div class="d-flex">
                                         @if (item.EndDate >= DateTime.Now)
                                         {
-                                            if (item.IsClosed || item.StartDate <= DateTime.Now)
+                                            if (item.IsClosed || item.StartDate < DateTime.Now)
                                             {
                                                 <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
                                                     <i class="material-icons-outlined fst-normal">
                                                         error
                                                     </i> Đã đóng đăng ký
                                                 </h5>
+                                            }
+                                            else if (item.StartDate >= DateTime.Now)
+                                            {
+                                                <div class="act-footer__btn d-flex align-items-center">
+                                                    <button @onclick="() => ShowApproveModal(item.Id)" class="btn act-footer__btn--approval">Duyệt hoạt động</button>
+                                                </div>
                                             }
                                             <div class="act-footer__btn d-flex align-items-center">
                                                 <button @onclick="() => ShowEditModal(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
@@ -144,10 +152,11 @@
             Name = "Công nghệ thông tin kinh doanh",
             Content = "Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái.",
             Person = 250,
-            CreatedDate = DateTime.Now,
+            CloseDate = DateTime.Parse("2021/11/21"),
+            OpenDate = DateTime.Parse("2021/10/20"),
             Id = ++i,
             EndDate = DateTime.Parse("2022/10/21"),
-            StartDate = DateTime.Parse("2021/10/20")
+            StartDate = DateTime.Parse("2021/11/20")
         }).ToList();
 
         var result = new PaginatedList<FakeData>(data, 100, page, 20);
@@ -165,8 +174,8 @@
         public int Id { get; set; }
         public bool IsMenu { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime RegisterDate { get; set; }
-        public DateTime CloseRegisterDate { get; set; }
+        public DateTime OpenDate { get; set; }
+        public DateTime CloseDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }
@@ -190,38 +199,22 @@
 
     private async Task ShowEditModal(int id)
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
+        Modal.Show<EditRequirement>("", BlazoredModalOptions.GetModalOptions());
+    }
 
-        Modal.Show<EditRequirement>("", options);
+    private async Task ShowApproveModal(int id)
+    {
+        Modal.Show<ApprovalActivity>("", BlazoredModalOptions.GetModalOptions());
     }
 
     private async Task ShowActPrivorModal(int id)
     {
 
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        var result = Modal.Show<PriorActivity>("", options).Result;
+        var result = Modal.Show<PriorActivity>("", BlazoredModalOptions.GetModalOptions()).Result;
     }
 
     private async Task ShowDeleteModal(int id)
     {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true,
-        };
-
-        Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", options);
+        Modal.Show(typeof(Pages.Organization.Profile.DeleteConfirm), "", BlazoredModalOptions.GetModalOptions());
     }
 }

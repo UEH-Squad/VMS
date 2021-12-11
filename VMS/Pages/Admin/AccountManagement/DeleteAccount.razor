@@ -1,7 +1,7 @@
 ﻿
 <div class="my-modal">
     <div class="modal__content">
-        <div class="modal__confirm @(isShowConfirm ? "d-block" : "d-none")">
+        <div class="modal__confirm @(!isShowConfirm ? "d-block" : "d-none")">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
@@ -11,11 +11,11 @@
                 <h3 class="text-center mb-3">Bạn có chắc chắn muốn <span>xóa tài khoản</span> này không? </h3>
                 <div class="text-end">
                     <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
-                    <button @onclick="ShowConfirm" class="btn btn-confirm">Chắc chắn</button>
+                    <button @onclick="OnAcceptDeleteAsync" class="btn btn-confirm">Chắc chắn</button>
                 </div>
             </div>
         </div>
-        <div class=" modal__success @(isShowConfirm ? "d-none" : "d-block")">
+        <div class=" modal__success @(isShowConfirm ? "d-block" : "d-none")">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
@@ -28,20 +28,4 @@
 </div>
 
 @code {
-    private bool isShowConfirm = true;
-
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    private async Task CloseModalAsync()
-    {
-        await Modal.CloseAsync();
-    }
-    private async Task ShowConfirm()
-    {
-        isShowConfirm =!isShowConfirm;
-
-    }
-
-
 }

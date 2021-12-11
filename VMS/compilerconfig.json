@@ -568,15 +568,19 @@
     "inputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.scss"
   },
   {
+    "outputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.scss"
+  },
+  {
     "outputFile": "Pages/Admin/UserProfile/Index.razor.css",
-    "inputFile": "Pages/Admin/UserProfile/Index.razor.scss",
+    "inputFile": "Pages/Admin/UserProfile/Index.razor.scss"
   },
   {
     "outputFile": "Pages/Admin/OrganizationProfile/Index.razor.css",
-    "inputFile": "Pages/Admin/OrganizationProfile/Index.razor.scss",
+    "inputFile": "Pages/Admin/OrganizationProfile/Index.razor.scss"
   },
   {
     "outputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.css",
-    "inputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.scss",
+    "inputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.scss"
   }
 ]

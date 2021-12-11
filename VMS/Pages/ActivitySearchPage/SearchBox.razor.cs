@@ -30,9 +30,10 @@ namespace VMS.Pages.ActivitySearchPage
             await SearchValueChanged.InvokeAsync(SearchValue);
         }
 
-        private void ClearSearchBox()
+        private async Task ClearSearchBoxAsync()
         {
             SearchValue = string.Empty;
+            await SearchValueChanged.InvokeAsync(SearchValue);
         }
     }
 }

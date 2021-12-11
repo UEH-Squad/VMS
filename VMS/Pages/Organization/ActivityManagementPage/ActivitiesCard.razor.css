@@ -32,7 +32,8 @@
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px; }
+  font-size: 16px; 
+  text-decoration: none;}
   .card-btn:hover {
     background-color: #306C14; }
 
@@ -117,6 +118,28 @@
         font-size: 24px; }
     .org-card__info__joiner__sum {
       display: inline-block; }
+  .org-card__info .icon-tooltip {
+    display: none;
+    color: #000;
+    min-width: max-content;
+    position: absolute;
+    transform: translate(-80%, -95%);
+    padding: 2px 10px;
+    font-size: 12px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25); }
+  .org-card__info .my-icon {
+    cursor: default; }
+    .org-card__info .my-icon:hover + .icon-tooltip {
+      display: block; }
+  .org-card__info .material-icons-outlined {
+    font-size: 20px; }
+  .org-card__info span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #0B588C; }
 
 .org-card__footer {
   bottom: 0; }

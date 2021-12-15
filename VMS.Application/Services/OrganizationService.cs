@@ -90,8 +90,49 @@ namespace VMS.Application.Services
         public List<UserViewModel> GetAllOrganizers()
         {
             var organizers = Task.Run(() => _userManager.GetUsersInRoleAsync(Role.Organization.ToString())).Result;
-            
+
             return _mapper.Map<List<UserViewModel>>(organizers);
+        }
+
+        public async Task<PaginatedList<UserViewModel>> GetAllOrganizers(FilterOrgViewModel filter, int currentPage)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginationSpecification<User> specification = new()
+            {
+                Conditions = GetConditionsByFilter(filter),
+                Includes = x => x.Include(x => x.Activities)
+                                 .ThenInclude(x => x.Recruitments)
+                                 .ThenInclude(x => x.RecruitmentRatings),
+                PageIndex = currentPage,
+                PageSize = 8,
+            };
+
+            PaginatedList<User> organizers = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<PaginatedList<UserViewModel>>(organizers);
+        }
+
+        private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterOrgViewModel filter)
+        {
+            if (filter.IsSearch)
+            {
+                return new List<Expression<Func<User, bool>>>()
+                {
+                    x => x.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                };
+            }
+            else
+            {
+                return new List<Expression<Func<User, bool>>>()
+                {
+                    x => x.Course == filter.Course,
+                    x => x.UserAreas.Select(uArea => uArea.AreaId)
+                                    .Where(uAreaId => filter.Areas.Select(area => area.Id)
+                                                                  .Any(areaId => areaId == uAreaId))
+                                    .Count() == filter.Areas.Count
+                };
+            }
         }
     }
 }

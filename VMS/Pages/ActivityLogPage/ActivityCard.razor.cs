@@ -23,7 +23,6 @@ namespace VMS.Pages.ActivityLogPage
         [CascadingParameter] public string UserId { get; set; }
 
         [Inject] private IRecruitmentService RecruitmentService { get; set; }
-        [Inject] private IUserService UserService { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -55,8 +54,8 @@ namespace VMS.Pages.ActivityLogPage
         private async Task ShowCommentPopUpAsync(RecruitmentViewModel recruitment)
         {
             var parameters = new ModalParameters();
-            parameters.Add("UserTop", recruitment.User);
-            parameters.Add("UserBottom", UserService.GetUserViewModel(UserId));
+            parameters.Add("UserTop", recruitment.Organizer);
+            parameters.Add("UserBottom", recruitment.User);
             parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
             parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
             parameters.Add("RecruitmentId", recruitment.Id);

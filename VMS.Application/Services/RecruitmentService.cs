@@ -38,19 +38,9 @@ namespace VMS.Application.Services
 
             PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
 
-            PaginatedList<RecruitmentViewModel> paginatedList = new(
-                recruitments.Items.Select(x => new RecruitmentViewModel()
-                {
-                    Id = x.Id,
-                    Activity = _mapper.Map<ActivityViewModel>(x.Activity),
-                    User = _mapper.Map<UserViewModel>(x.Activity.Organizer),
-                    Rating = x.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating && !z.IsReport)?.Rank,
-                    RecruitmentRatings = _mapper.Map<List<RecruitmentRatingViewModel>>(x.RecruitmentRatings)
-                }).ToList(),
-                recruitments.TotalItems,
-                currentPage,
-                recruitments.PageSize
-            );
+            PaginatedList<RecruitmentViewModel> paginatedList = _mapper.Map<PaginatedList<RecruitmentViewModel>>(recruitments);
+
+            paginatedList.Items.ForEach(x => x.Rating = x.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Rank);
 
             return paginatedList;
         }
@@ -66,25 +56,19 @@ namespace VMS.Application.Services
                     r => r.ActivityId == activityId,
                     GetConditionBySearchOrOrder(searchValue, isRated)
                 },
-                Includes = r => r.Include(x => x.User).Include(x => x.RecruitmentRatings),
+                Includes = r => r.Include(x => x.User)
+                                .Include(x => x.Activity)
+                                .ThenInclude(x => x.Organizer)
+                                .Include(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 20,
             };
 
             PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
 
-            PaginatedList<RecruitmentViewModel> paginatedList = new(
-                recruitments.Items.Select(x => new RecruitmentViewModel()
-                {
-                    Id = x.Id,
-                    Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating && !z.IsReport)?.Rank,
-                    User = _mapper.Map<UserViewModel>(x.User),
-                    RecruitmentRatings = _mapper.Map<List<RecruitmentRatingViewModel>>(x.RecruitmentRatings)
-                }).ToList(),
-                recruitments.TotalItems,
-                currentPage,
-                recruitments.PageSize
-            );
+            PaginatedList<RecruitmentViewModel> paginatedList = _mapper.Map<PaginatedList<RecruitmentViewModel>>(recruitments);
+
+            paginatedList.Items.ForEach(x => x.Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Rank);
 
             return paginatedList;
         }

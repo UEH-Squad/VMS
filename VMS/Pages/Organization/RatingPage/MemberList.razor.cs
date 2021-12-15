@@ -19,7 +19,6 @@ namespace VMS.Pages.Organization.RatingPage
         [Parameter] public int ActivityId { get; set; }
         [Parameter] public bool? IsRated { get; set; }
         [Parameter] public string SearchValue { get; set; }
-        [Parameter] public UserViewModel Organizer { get; set; }
         [Parameter] public int StarRating { get; set; }
 
 
@@ -61,7 +60,7 @@ namespace VMS.Pages.Organization.RatingPage
         private async Task ShowCommentPopUpAsync(RecruitmentViewModel recruitment)
         {
             var parameters = new ModalParameters();
-            parameters.Add("UserBottom", Organizer);
+            parameters.Add("UserBottom", recruitment.Organizer);
             parameters.Add("UserTop", recruitment.User);
             parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
             parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));

@@ -69,6 +69,9 @@ namespace VMS.Application.Automapper
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
             MapReportToFeedback();
+
+            CreateMap<Recruitment, RecruitmentViewModel>()
+                .ForMember(x => x.Organizer, opt => opt.MapFrom(src => src.Activity.Organizer));
             CreateMap<PaginatedList<Recruitment>, PaginatedList<RecruitmentViewModel>>();
             CreateMap<RecruitmentRating, RecruitmentRatingViewModel>();
             CreateMap<Recruitment, ListVolunteerViewModel>();

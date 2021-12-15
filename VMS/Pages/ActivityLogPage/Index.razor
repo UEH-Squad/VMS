@@ -1,4 +1,7 @@
 ﻿@attribute [Route(Routes.ActivityLogPage)]
+@attribute [Authorize(Roles = "User")]
+
+@using VMS.Application.ViewModels;
 
 <div class="container-lg px-0 layout">
     <div class="container">
@@ -9,17 +12,17 @@
                 </div>
             </div>
             <div class="col-11 mt-5">
-                <VMS.Pages.ActivitySearchPage.SearchBox />
+                <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="SearchValueChanged" />
             </div>
             <div class="col-11">
-                <VMS.Pages.ActivityLogPage.Filter />
+                <VMS.Pages.ActivityLogPage.Filter FilterChanged="FilterChanged" />
             </div>
             <div class="activities col-11">
-                <VMS.Pages.ActivityLogPage.ActivityCard />
+                <VMS.Pages.ActivityLogPage.ActivityCard FilterChanged="filterChange"/>
             </div>
         </div>
     </div>
 </div>
-@code {
 
+@code {
 }

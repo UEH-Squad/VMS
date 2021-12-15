@@ -10,7 +10,7 @@
         <FilterBar IsRatedChanged="IsRatedChanged"/>
     </div>
     <div class="body-page">
-        <MemberList ActivityId=@ActivityId Organizer=@currentUser StarRating=@starRating SearchValue=@searchValue IsRated=@isRated />
+        <MemberList ActivityId=@ActivityId StarRating=@starRating SearchValue=@searchValue IsRated=@isRated />
         <FilterRatingAll @bind-StarRating=@starRating />
     </div>
 </div>

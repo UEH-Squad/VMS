@@ -1,74 +1,67 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Domain.Models;
+using VMS.Common.Enums;
 
 namespace VMS.Pages.ActivityLogPage
 {
-    public partial class Filter
+    public partial class Filter : ComponentBase
     {
-        [Inject]
-        private IOrganizationService OrganizationService { get; set; }
-
-        [Parameter]
-        public EventCallback<bool?> IsRatedChanged { get; set; }
-        [Parameter]
-        public EventCallback<FilterRecruitmentViewModel> FilterChanged { get; set; }
-        [Parameter]
-        public FilterRecruitmentViewModel FilterChange { get; set; } = new();
-
         private string orgDefault = "Tổ chức";
         private string semesterDefault = "Học kỳ";
         private List<UserViewModel> organizers;
+        private FilterRecruitmentViewModel filter = new();
 
-        private readonly List<string> semesters = new()
-        {
-            "Học kỳ đầu",
-            "Học kỳ giữa",
-            "Học kỳ cuối"
-        };
+        private readonly Dictionary<Semester, string> semesters = new(
+            new List<KeyValuePair<Semester, string>>() {
+                new KeyValuePair<Semester, string>(Semester.First, "Học kỳ đầu"),
+                new KeyValuePair<Semester, string>(Semester.Middle, "Học kỳ giữa"),
+                new KeyValuePair<Semester, string>(Semester.Last, "Học kỳ cuối")
+        });
 
-        protected override async Task OnInitializedAsync()
+        [Parameter] public EventCallback<FilterRecruitmentViewModel> FilterChanged { get; set; }
+
+        [Inject] private IOrganizationService OrganizationService { get; set; }
+
+        protected override void OnInitialized()
         {
             organizers = OrganizationService.GetAllOrganizers();
         }
 
-        private void ChooseFacultyAsync(UserViewModel organizer)
+        private void ChooseOrg(UserViewModel organizer)
         {
-            FilterChange.OrgId = organizer.Id;
+            filter.OrgId = organizer.Id;
             orgDefault = organizer.FullName;
             Display2 = "d-none";
         }
 
-        private void ChooseSemesterAsync(string semester)
+        private void ChooseSemester(Semester semester)
         {
-            semesterDefault = semester;
-            FilterChange.Semester = semesterDefault;
+            semesterDefault = semesters[semester];
+            filter.Semester = semester;
             Display1 = "d-none";
         }
 
-        private async Task RadioButtonChangedAsync(bool value)
+        private async Task CheckOrderAsync(bool value)
         {
-            await IsRatedChanged.InvokeAsync(value);
+            filter.IsRated = value;
+            await UpdateFilterValueAsync();
         }
 
         private async Task UpdateFilterValueAsync()
         {
-            await FilterChanged.InvokeAsync(FilterChange);
+            await FilterChanged.InvokeAsync(filter);
         }
 
-        private async Task ClearFilter()
+        private async Task ClearFilterAsync()
         {
+            filter = new();
             orgDefault = "Tổ chức";
             semesterDefault = "Học kỳ";
-            FilterChange = new FilterRecruitmentViewModel();
-            await FilterChanged.InvokeAsync(FilterChange);
-            await IsRatedChanged.InvokeAsync(new bool?());
+            await UpdateFilterValueAsync();
         }
-
     }
 }

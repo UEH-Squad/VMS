@@ -15,32 +15,14 @@
                 <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="SearchValueChanged" />
             </div>
             <div class="col-11">
-                <VMS.Pages.ActivityLogPage.Filter IsRatedChanged="IsRatedChanged" FilterChanged="FilterChanged" />
+                <VMS.Pages.ActivityLogPage.Filter FilterChanged="FilterChanged" />
             </div>
             <div class="activities col-11">
-                <VMS.Pages.ActivityLogPage.ActivityCard StarRating=@starRating SearchValue=@searchValue IsRated=@isRated FilterChange="@filterChange" />
+                <VMS.Pages.ActivityLogPage.ActivityCard FilterChanged="filterChange"/>
             </div>
         </div>
     </div>
 </div>
+
 @code {
-    private bool? isRated;
-    private string searchValue;
-    private int starRating;
-    private FilterRecruitmentViewModel filterChange = new();
-
-    private void IsRatedChanged(bool? value)
-    {
-        isRated = value;
-    }
-
-    private void SearchValueChanged(string value)
-    {
-        searchValue = value;
-    }
-
-    private void FilterChanged(FilterRecruitmentViewModel value)
-    {
-        filterChange = value;
-    }
 }

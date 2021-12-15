@@ -18,11 +18,13 @@
                         </div>
                         <div class="activity__content">
                             <div class="activity__content__title">
-                                <p class="member-name1">@item.Activity.Name</p>
+                                <p class="member-name1"><a href="@Routes.ActivityInfo/@item.Activity.Id">@item.Activity.Name</a></p>
                             </div>
                             <div class="activity__content__icon d-flex">
                                 <div class="stars-rating">
-                                    <VMS.Pages.Organization.RatingPage.Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)" />
+                                    <VMS.Pages.Organization.RatingPage.Stars
+                                        StarRating="item.Rating"
+                                        StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)" />
                                 </div>
                                 <div class="org-pic d-flex">
                                     <div class="org-pic__icon d-flex">
@@ -31,13 +33,15 @@
                                         </span>
                                     </div>
                                     <div class="org-pic__name">
-                                        @item.Activity.Organizer.FullName
+                                        <a href="@Routes.OrgProfile/@item.Activity.OrgId">
+                                            @item.Activity.Organizer.FullName
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="activity__icon d-flex">
-                            <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUpAsync())" id="popup-report_icon">
+                            <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUp(item.Activity.Id))" id="popup-report_icon">
                                 @*Pop-up để report*@
                                 <span id="member-report_icon" class="material-icons">report_problem</span>
                             </button>
@@ -58,6 +62,5 @@
     </div>
 </div>
 
-@code {   
-
+@code {
 }

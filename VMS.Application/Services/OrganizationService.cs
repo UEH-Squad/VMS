@@ -110,15 +110,27 @@ namespace VMS.Application.Services
 
             PaginatedList<User> organizers = await _repository.GetListAsync(dbContext, specification);
 
-            return _mapper.Map<PaginatedList<UserViewModel>>(organizers);
+            PaginatedList<UserViewModel> paginatedList = _mapper.Map<PaginatedList<UserViewModel>>(organizers);
+
+            foreach (var organizer in paginatedList.Items)
+            {
+                CalculateTotalAndRankRating(organizer.Activities, out int totalRating, out double totalRank);
+                organizer.QuantityRating = totalRating;
+                organizer.AverageRating = totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5;
+            }
+
+            return paginatedList;
         }
 
         private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterOrgViewModel filter)
         {
+            string orgRole = Role.Organization.ToString();
+
             if (filter.IsSearch)
             {
                 return new List<Expression<Func<User, bool>>>()
                 {
+                    x => x.UserRoles.Any(x => x.Role.Name == orgRole),
                     x => x.FullName.ToLower().Contains(filter.SearchValue.ToLower())
                 };
             }
@@ -126,11 +138,12 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<User, bool>>>()
                 {
-                    x => x.Course == filter.Course,
-                    x => x.UserAreas.Select(uArea => uArea.AreaId)
-                                    .Where(uAreaId => filter.Areas.Select(area => area.Id)
-                                                                  .Any(areaId => areaId == uAreaId))
-                                    .Count() == filter.Areas.Count
+                    x => x.UserRoles.Any(x => x.Role.Name == orgRole),
+                    x => x.Course == filter.Course || string.IsNullOrEmpty(filter.Course),
+                    a => a.UserAreas.Select(r => r.AreaId)
+                                         .Where(userAreaId => filter.Areas.Select(area => area.Id)
+                                                                           .Any(areaId => areaId == userAreaId))
+                                         .Count() == filter.Areas.Count
                 };
             }
         }

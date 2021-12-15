@@ -3,11 +3,11 @@
 <div class="container-lg">
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <SearchAndFilter HaveSearchBox="true" IsLongDistanceFilter="true"/>
+            <SearchAndFilter HaveSearchBox="true" IsLongDistanceFilter="true" FilterChanged="OnFilterChanged"/>
             <SearchResult HaveLevel="true" Filter="filter" />
         </div>
     </div>
-</div>   
+</div>
+
 @code {
-    FilterOrgViewModel filter = new();
 }

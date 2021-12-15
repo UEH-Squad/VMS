@@ -132,6 +132,7 @@ namespace VMS.Application.Services
                 {
                     x => x.UserRoles.Any(x => x.Role.Name == orgRole),
                     x => x.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                        || x.NormalizedEmail.Contains(filter.SearchValue.ToUpper())
                 };
             }
             else

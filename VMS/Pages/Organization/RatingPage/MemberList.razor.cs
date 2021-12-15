@@ -19,7 +19,6 @@ namespace VMS.Pages.Organization.RatingPage
         [Parameter] public int ActivityId { get; set; }
         [Parameter] public bool? IsRated { get; set; }
         [Parameter] public string SearchValue { get; set; }
-        [Parameter] public User Organizer { get; set; }
         [Parameter] public int StarRating { get; set; }
 
 
@@ -61,22 +60,14 @@ namespace VMS.Pages.Organization.RatingPage
         private async Task ShowCommentPopUpAsync(RecruitmentViewModel recruitment)
         {
             var parameters = new ModalParameters();
-            parameters.Add("UserBottom", Organizer);
+            parameters.Add("UserBottom", recruitment.Organizer);
             parameters.Add("UserTop", recruitment.User);
             parameters.Add("RecruitmentRatingTop", recruitment.RecruitmentRatings.Find(x => !x.IsOrgRating));
             parameters.Add("RecruitmentRatingBottom", recruitment.RecruitmentRatings.Find(x => x.IsOrgRating));
             parameters.Add("RecruitmentId", recruitment.Id);
             parameters.Add("ActivityId", ActivityId);
 
-            var options = new ModalOptions()
-            {
-
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await CommentModal.Show<PopUpComment>("", parameters, options).Result;
+            await CommentModal.Show<PopUpComment>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private void ShowReportPopUp(string UserId)
@@ -94,14 +85,7 @@ namespace VMS.Pages.Organization.RatingPage
             parameters.Add("Reasons", reasons);
             parameters.Add("IsReportUser", true);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            CommentModal.Show<ActivityInfoPage.PopUpReport>("", parameters, options);
+            CommentModal.Show<ActivityInfoPage.PopUpReport>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
     }
 }

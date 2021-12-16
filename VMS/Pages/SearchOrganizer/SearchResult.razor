@@ -7,7 +7,7 @@
         {
             <div class="org-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img class="org-item__img me-2" src="@item.Banner" alt="Alternate Text" />
+                    <img class="org-item__img me-2" src="@item.Avatar" alt="@item.FullName" />
                     <div class="org-item__name-group ms-4">
                         <a class="org-item__name lmtext-2" href="@(IsUserResult ? Routes.AdminVolunteerProfile : (IsOrgResult ? Routes.AdminOrganizationProfile : Routes.OrgProfile))/@item.Id">@item.FullName</a>
                         <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Course</p>

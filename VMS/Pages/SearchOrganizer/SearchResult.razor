@@ -7,13 +7,18 @@
         {
             <div class="org-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img class="org-item__img me-4" src="@item.Banner" alt="Alternate Text" />
-                    <div class="org-item__name-group ms-5">
-                        <a class="org-item__name" href="@Routes.OrgProfile/@item.Id">@item.FullName</a>
-                        <p>@item.Course</p>
+                    <img class="org-item__img me-2" src="@item.Banner" alt="Alternate Text" />
+                    <div class="org-item__name-group ms-4">
+                        <a class="org-item__name lmtext-2" href="@(IsUserResult ? Routes.AdminVolunteerProfile : (IsOrgResult ? Routes.AdminOrganizationProfile : Routes.OrgProfile))/@item.Id">@item.FullName</a>
+                        <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Course</p>
+                        <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">
+                            Đã tổ chức <span style="@(IsUsedForAdmin ? "cursor: pointer;" : "")"
+                                     @onclick=" (()=> ShowHeldActivitiesAsync())">@item.Activities.Count</span> hoạt động
+                        </p>
+                        <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course - Lớp @item.Class</p>
                     </div>
                 </div>
-                <div class="org-item__rate-group d-flex align-items-center @(IsUserForAdmin ? "me-3" : "me-5")">
+                <div class="org-item__rate-group d-flex align-items-center @(IsUsedForAdmin ? "me-3" : "me-5")">
                     <div class="seperate-line"></div>
                     <span class="me-4">#@item.Rank</span>
                     <div>
@@ -61,6 +66,5 @@
     public bool IsUserResult { get; set; }
 
     [Parameter]
-    public bool IsUserForAdmin { get; set; }
-
+    public bool IsUsedForAdmin { get; set; }
 }

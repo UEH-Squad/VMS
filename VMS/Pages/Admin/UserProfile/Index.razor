@@ -1,0 +1,17 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminVolunteerProfile)]
+@attribute [Authorize(Roles = "Admin")]
+<div class="row mt-4">
+    <div class="col-lg-10 mx-auto px-0">
+        <div class="position-relative head-section">
+            <h1 class="text-center m-0">Hồ sơ <span>cá nhân</span></h1>
+            <a href="@Routes.AdminEditVolunteerProfile" class="position-absolute">Chỉnh sửa</a>
+        </div>
+        <VMS.Pages.UserProflie.Index IsUsedForAdmin="true" UserId="3b49a591-10ec-42e4-8045-83cc070b76c2"/>
+    </div>
+</div>
+
+@code {
+
+}

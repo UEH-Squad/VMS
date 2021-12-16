@@ -1,13 +1,13 @@
 ﻿@attribute [Route(Routes.UserProfile + "/{UserId}")]
 @attribute [Route(Routes.UserProfile)]
 
-<UserProfile IsUser="@isUser" User="user"/>
+<UserProfile IsUsedForAdmin=@IsUsedForAdmin IsUser="@isUser" User="user"/>
 
-<VMS.Pages.Organization.Profile.Act Title="đang diễn ra" HaveDecor="false" Datas="currentActivities" />
+<VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="đang diễn ra" HaveDecor="false" Datas="currentActivities" />
 
-<VMS.Pages.Organization.Profile.Act Title="yêu thích" HaveDecor="true" HaveFav="@isUser" Datas="favoriteActivities" />
+<VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="yêu thích" HaveDecor="true" HaveFav="@isUser" Datas="favoriteActivities" />
 
-<VMS.Pages.Organization.Profile.Act Title="đã tham gia" OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas="endedActivities" />
+<VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="đã tham gia" OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas="endedActivities" />
 
 <Schedule UserId="@UserId" IsUser="@isUser"></Schedule>
 

@@ -62,6 +62,7 @@
         public const string AdminAdminAccountManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";
         public const string AdminFeatureSuggestionManagement = "/admin/bo-sung-tinh-nang";
         public const string AdminDashboardManagement = "/admin/bao-cao-thong-ke";
+        public const string AdminAreaAndSkill = "/admin/linh-vuc-va-ky-nang";
 
         #endregion Admin
     }

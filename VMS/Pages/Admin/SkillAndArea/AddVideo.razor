@@ -1,0 +1,28 @@
+﻿@using VMS.Application.ViewModels;
+
+<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__addVideo">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center">Thêm video <span>vào trang chủ</span></h3>
+            <p>Dán link tại đây</p>
+            <input type="text" class="form-control" />
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync();
+    }
+
+
+}

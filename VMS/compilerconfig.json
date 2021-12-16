@@ -450,5 +450,49 @@
   {
     "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
     "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/index.css",
+    "inputFile": "Pages/Admin/SkillAndArea/index.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/Index.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/AddVideo.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/AddVideo.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/AddArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/AddArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/DeteleArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/DeteleArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/AddSkill.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/AddSkill.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/DeleteSkill.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/DeleteSkill.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/OptionsArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/OptionsArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/OptionsSkill.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/OptionsSkill.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/ListArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/ListArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.scss"
   }
 ]

@@ -1,0 +1,149 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminAreaAndSkill)]
+@attribute [Authorize(Roles = "Admin")]
+@inject IJSRuntime JS;
+@using VMS.GenericRepository;
+@using Blazored.Modal;
+@using VMS.Application.ViewModels;
+@using VMS.Application.Interfaces;
+
+@using Microsoft.AspNetCore.Components;
+@using System.Collections.Generic;
+@using System.Threading.Tasks;
+
+
+
+<div class="my-option px-5">
+    <div class="d-flex align-items-center mb-5">
+        <button @onclick="ChoseArea" class="btn btn-area me-2">Lĩnh vực</button>
+        <button @onclick="ChoseSkill" class="btn btn-skill me-5">Kỹ năng</button>
+        <div class="btn btn-addVideo d-flex align-items-center">
+            <i class="material-icons-outlined icon-add me-1">
+                add_circle
+            </i>
+            <span @onclick="ShowModalAddVideo">Thêm video vào trang chủ</span>
+        </div>
+    </div>
+    <div class="d-flex align-items-center">
+        <div class="btn btn-add d-flex align-items-center me-4">
+            <i class="material-icons-outlined icon-add me-1">
+                add_circle
+            </i>
+            <span @onclick="(() => ShowOptions(true))">@titleBtn</span>
+        </div>
+        <button @onclick="ShowPopupDelete" class="btn btn-delete">Xóa</button>
+    </div>
+</div>
+<div class="my-areas @(isArea ? "d-block":"d-none") px-5 ">
+    <ListArea/>
+</div>
+
+<div class="my-skills px-5 @(isSkill ? "d-block":"d-none")">
+   <ListSkills/>
+</div>
+
+@code {
+    //Modal
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private async Task ShowModalAddVideo()
+    {
+        Modal.Show<Admin.SkillAndArea.AddVideo>("", BlazoredModalOptions.GetModalOptions());
+    }
+    ///
+
+    //////////
+    private async Task ShowOptions(bool isAdd)
+    {
+
+        if (isArea)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(OptionsArea.isAdd), isAdd);
+            Modal.Show<Admin.SkillAndArea.OptionsArea>("", parameters, BlazoredModalOptions.GetModalOptions());
+        }
+        else
+        {
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(OptionsSkill.isAdd), isAdd);
+            Modal.Show<Admin.SkillAndArea.OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions());
+        }
+
+    }
+
+    // Areas
+
+    private PaginatedList<FakeDataAreas> pagedResult;
+    private int page = 1;
+
+    protected override void OnInitialized()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
+    private PaginatedList<FakeDataAreas> GetFakeData()
+    {
+        int i = 0;
+        var data = Enumerable.Range(0, 21).Select(x => new FakeDataAreas
+        {
+            Id = i,
+            IconName = "coronavirus",
+            Area = "Cộng đồng những xu hướng",
+            IsCheck = false,
+        }).ToList();
+
+        var result = new PaginatedList<FakeDataAreas>(data, 100, page, 20);
+        return result;
+    }
+
+    private class FakeDataAreas
+    {
+        public int Id { get; set; }
+        public string IconName { get; set; }
+        public string Area { get; set; }
+        public bool IsCheck { get; set; } = false;
+
+    }
+
+    /// <summary>
+    /// ////////////////////
+    /// </summary>
+
+    private void ShowPopupDelete()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(ShowDelete.isArea), isArea);
+        Modal.Show<Admin.SkillAndArea.ShowDelete>("", parameters, BlazoredModalOptions.GetModalOptions());
+    }
+
+
+    /// chose option
+    ///
+
+    bool isSkill = false;
+    bool isArea = true;
+    string titleBtn = "Thêm lĩnh vực";
+    private void ChoseSkill()
+    {
+        isSkill = true;
+        isArea = false;
+        titleBtn = "Thêm kỹ năng";
+    }
+    private void ChoseArea()
+    {
+        isSkill = false;
+        isArea = true;
+        titleBtn = "Thêm lĩnh vực";
+    }
+
+    /// ///////////////////
+
+}

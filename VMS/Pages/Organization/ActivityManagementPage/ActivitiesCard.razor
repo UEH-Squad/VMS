@@ -8,10 +8,10 @@
     @foreach (var item in data.Items)
     {
         <div class="org-card" style="z-index:@(CheckForZIndex(item.Id) ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || CheckForZIndex(item.Id) ? 1 : 0.75)">
-            <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
+            <i @onclick="() => ChangeDropdownState(item.Id)" class="material-icons position-absolute">
                 more_horiz
             </i>
-            <ul class="act-menu p-2 position-absolute @(item.IsMenu ? "d-block" : "d-none")">
+            <ul class="act-menu p-2 position-absolute @(item.Id == dropdownId ? "d-block" : "d-none")">
                 <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
 
                 <li @onclick="(() => ShowDeleteModalAsync(item))" class="delete pb-2">Xóa</li>
@@ -57,10 +57,10 @@
                         </span>
                         <span class="org-card__member__text">@item.MemberQuantity</span>
                     </div>
-                    <div class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
+                    <a href="@Routes.VolunteersList/@item.Id" class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
                         Xem danh sách
-                    </div>
-                    @if (DateTime.Now.Date > item.EndDate)
+                    </a>
+                     @if (DateTime.Now.Date > item.EndDate)
                     {
                         <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1 position-relative">
                             <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>

@@ -39,16 +39,7 @@
                             </i>
                         }
 
-
-                        @if (HaveHeart && IsUser)
-                        {
-                            <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
-                                favorite
-                            </span>
-                        }
-                        @* Phần này của Bằng e không đụng tới *@
-
-                        @if (HaveFav && !string.IsNullOrEmpty(CurrentUserId))
+                        @if (HaveFav)
                         {
                             <a class="position-absolute favorite" @onclick="() => AnimateHeart(item)">
                                 <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.8.0" />
     <PackageReference Include="Hangfire" Version="1.7.24">
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>

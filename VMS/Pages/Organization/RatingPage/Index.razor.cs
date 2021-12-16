@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
+﻿using System;
+using VMS.Common;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Common;
-using VMS.Domain.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace VMS.Pages.Organization.RatingPage
 {
@@ -13,13 +12,15 @@ namespace VMS.Pages.Organization.RatingPage
         private bool? isRated;
         private string searchValue;
         private int starRating;
-        private User currentUser;
+        private UserViewModel currentUser;
         private ViewActivityViewModel activity;
 
         [Parameter] public int ActivityId { get; set; }
 
+        [CascadingParameter] public string UserId { get; set; }
+
         [Inject]
-        private IIdentityService IdentityService { get; set; }
+        private IOrganizationService OrganizationService { get; set; }
         [Inject]
         private IActivityService ActivityService { get; set; }
         [Inject]
@@ -27,7 +28,7 @@ namespace VMS.Pages.Organization.RatingPage
 
         protected override async Task OnInitializedAsync()
         {
-            currentUser = IdentityService.GetCurrentUser();
+            currentUser = OrganizationService.GetOrgFull(UserId);
 
             activity = await ActivityService.GetViewActivityViewModelAsync(ActivityId);
 

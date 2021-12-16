@@ -37,13 +37,9 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         [JSInvokable]
         public Task HideMenuInterop()
         {
-            data.Items.ForEach(a => a.IsMenu = false);
+            dropdownId = 0;
+            rateId = 0;
             return InvokeAsync(StateHasChanged);
-        }
-
-        void ShowMenu(int id)
-        {
-            data.Items.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
         }
 
         protected override async Task OnParametersSetAsync()

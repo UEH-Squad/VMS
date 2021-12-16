@@ -37,3 +37,6 @@
   .pagination .numb.active, .pagination .numb:hover {
     background: #18A0FB;
     color: #FFFFFF; }
+
+.margin-x-short {
+  margin: 0 8px !important; }

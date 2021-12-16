@@ -2,9 +2,10 @@
 
 @attribute [Route(Routes.AdminActivityManagement)]
 @attribute [Authorize(Roles = "Admin")]
-
-<ActivityFilter />
-<ActList />
+<div class="mt-4">
+    <ActivityFilter />
+    <ActList />
+</div>
 
 
 @code {

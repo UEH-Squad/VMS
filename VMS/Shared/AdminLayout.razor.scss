@@ -5,6 +5,10 @@
     font-size: 32px;
 }
 
+.admin-divider {
+    border-top: 1px solid $border-color-normal;
+}
+
 .notification-link {
     margin: 10px 0;
 
@@ -21,4 +25,8 @@
     .my-search-box {
         margin: 10px 0;
     }
+}
+
+.my-navbar__brand {
+    margin: 10px 0;
 }

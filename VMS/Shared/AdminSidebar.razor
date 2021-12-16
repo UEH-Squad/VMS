@@ -1,14 +1,6 @@
 ﻿@inject NavigationManager NavigationManager
 
 <nav class="col-3 sidebar">
-    <div class="d-flex flex-column my-navbar__brand">
-        <a href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
-            <img src="img/UEH.png" alt="UEH logo" class="brand__ueh" />
-        </a>
-        <a href="@Routes.ActivitySearch" class="my-navbar__brand-item">
-            <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
-        </a>
-    </div>
 
     <div class="d-flex align-items-center profile-container">
         <img src="img/Avatar/132780878009549304_c84a2f73-a170-4f00-813c-2481dcc9a498.jpg" class="rounded-avatar" alt="admin avatar" />
@@ -84,7 +76,7 @@
 
 @code
 {
-    bool isAccountMenuCollapsed = false;
+    bool isAccountMenuCollapsed = true;
     bool isAccountMenuPages = false;
 
     private void ToggleAccountMenu()

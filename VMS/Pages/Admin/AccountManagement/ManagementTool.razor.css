@@ -1,0 +1,181 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+h1 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 36px;
+  color: #64D72F; }
+  h1 span {
+    color: #18A0FB; }
+
+.my-managementTool {
+  border-bottom: 1px solid #B4B4B4; }
+
+.managementTool__filter .btn-filter {
+  background: #64D72F;
+  width: 90px;
+  height: 40px;
+  padding: 0px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #FFFFFF; }
+  .managementTool__filter .btn-filter:hover {
+    background: #306C14; }
+  .managementTool__filter .btn-filter:focus {
+    box-shadow: none; }
+
+.managementTool__filter .btn-delete-filter {
+  background-color: transparent;
+  padding: 7px 20px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #B4B4B4; }
+  .managementTool__filter .btn-delete-filter:hover {
+    background-color: transparent;
+    text-decoration: underline; }
+  .managementTool__filter .btn-delete-filter:focus {
+    box-shadow: none; }
+
+.managementTool__level, .managementTool__course {
+  width: 200px; }
+
+.popup-btn {
+  border: 1px solid #D8D8D8;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #b4b4b4;
+  font-size: 16px;
+  line-height: 30px;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
+  background-color: white; }
+  .popup-btn::placeholder {
+    color: #b4b4b4; }
+  .popup-btn-icon {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    pointer-events: none; }
+  .popup-btn:focus {
+    box-shadow: none; }
+  .popup-btn.bg-grey {
+    background-color: #f3f3f3; }
+
+.my-dropdown {
+  padding: 15px 22px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 0%;
+  right: 0;
+  transform: translateY(105%);
+  background-color: #fff;
+  z-index: 1;
+  display: none;
+  width: 200px; }
+  .my-dropdown ul {
+    overflow-y: scroll;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%; }
+    .my-dropdown ul::-webkit-scrollbar {
+      width: 5px; }
+    .my-dropdown ul::-webkit-scrollbar-thumb {
+      background-color: #B4B4B4;
+      border-radius: 20px; }
+    .my-dropdown ul li {
+      color: #18A0FB;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      cursor: pointer; }
+      .my-dropdown ul li:last-of-type {
+        margin-bottom: 0px; }
+      .my-dropdown ul li:hover {
+        color: #64D72F;
+        background-color: rgba(24, 160, 251, 0.1); }
+
+.popup-btn:focus ~ .my-dropdown {
+  display: block; }
+
+.managementTool__create .btn {
+  width: 195px;
+  background: #18A0FB;
+  padding: 6px 10px;
+  border-radius: 5px; }
+  .managementTool__create .btn:hover {
+    background-color: #0B588C; }
+  .managementTool__create .btn:focus {
+    box-shadow: none; }
+  .managementTool__create .btn::after {
+    color: #FFFFFF; }
+  .managementTool__create .btn .icon-add {
+    font-size: 24px;
+    color: #FFFFFF; }
+  .managementTool__create .btn span {
+    font-weight: 600;
+    font-size: 18px;
+    color: #FFFFFF;
+    margin-left: 5px;
+    padding-right: 5px; }
+
+.managementTool__create .dropdown-menu {
+  width: 195px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  transform: translate(-1px, 47px) !important; }
+  .managementTool__create .dropdown-menu li {
+    padding: 0 3px;
+    cursor: pointer; }
+  .managementTool__create .dropdown-menu li:hover {
+    background: rgba(24, 160, 251, 0.1); }
+
+.managementTool__sort {
+  /* pretty radio */
+  /* basic layout */ }
+  .managementTool__sort p {
+    font-weight: 400;
+    font-size: 16px;
+    color: black; }
+  .managementTool__sort input, .managementTool__sort span {
+    cursor: pointer; }
+  .managementTool__sort span {
+    font-weight: 400;
+    font-size: 16px;
+    color: #515151; }
+  .managementTool__sort label > input[type="radio"] {
+    display: none; }
+  .managementTool__sort label > input[type="radio"] + *::before {
+    content: "";
+    display: inline-block;
+    vertical-align: bottom;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: #B4B4B4; }
+  .managementTool__sort label > input[type="radio"]:checked + *::before {
+    background: radial-gradient(#18A0FB 0%, #18A0FB 40%, transparent 50%, transparent); }
+  .managementTool__sort fieldset {
+    margin: 20px;
+    max-width: 400px; }
+  .managementTool__sort label > input[type="radio"] + * {
+    display: inline-block;
+    padding: 0.5rem 1rem; }

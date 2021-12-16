@@ -62,6 +62,11 @@
       margin-left: 5%;
       margin-right: 5%;
       border-radius: 50%; }
+      .popup-comment_member .name .popup-avatar img {
+        object-fit: cover;
+        width: 52px;
+        height: 52px;
+        border-radius: 100%; }
   .popup-comment_member .popup-member .popup-member1 {
     font-style: normal;
     font-weight: 600;
@@ -122,6 +127,11 @@
       margin-left: 5%;
       margin-right: 5%;
       border-radius: 50%; }
+      .popup-comment_organization .name .popup-avatar img {
+        object-fit: cover;
+        width: 52px;
+        height: 52px;
+        border-radius: 100%; }
   .popup-comment_organization .popup-member .popup-member1 {
     font-style: normal;
     font-weight: 600;

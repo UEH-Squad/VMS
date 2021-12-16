@@ -5,9 +5,10 @@
 .arrange-bar {
   display: flex; }
   .arrange-bar .labels {
-    margin-right: 150px; }
+    margin-right: 60px; }
     .arrange-bar .labels span {
-      display: block; }
+      display: block;
+      font-weight: 500; }
 
 .boxes-group {
   display: grid;

@@ -1,0 +1,22 @@
+﻿<div class="edit-content_name">
+    <div class="title">Mục cần yêu cầu chỉnh sửa <span>(*)</span></div>
+    <textarea class="form-input" readonly="readonly" rows="1" >@activityName</textarea>
+</div>
+<div class="edit-content_content">
+    <div class="title">Nội dung yêu cầu chỉnh sửa <span>(*)</span></div>
+    <textarea class="form-input" readonly="readonly" rows="5">@editContent</textarea>
+</div>
+<div class="edit-content_image">
+    <div class="title">Hình ảnh đính kèm</div>
+    <div class="image">
+        <img src="./img/EditRequestPage/dog-Image.png" alt="Image 1" />
+        <img src="./img/EditRequestPage/cat-Image.png" alt="Image 2" />
+        <img src="./img/EditRequestPage/dog-Image.png" alt="Image 3" />
+        <img src="./img/EditRequestPage/cat-Image.png" alt="Image 4" />
+    </div>
+</div>
+
+@code {
+    string activityName = "Đây là mục cần yêu cầu chỉnh sửa";
+    string editContent = "Đây là nội dung yêu cầu chỉnh sửa";
+}

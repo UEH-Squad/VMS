@@ -1,0 +1,173 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.managementTool__title {
+  font-weight: 400;
+  font-size: 18px;
+  color: #18A0FB; }
+  .managementTool__title span {
+    color: #64D72F; }
+
+.managementTool__down {
+  color: #64D72F;
+  cursor: pointer; }
+  .managementTool__down:hover {
+    color: #306C14; }
+  .managementTool__down .icon-down {
+    font-size: 24px; }
+  .managementTool__down span {
+    font-weight: 600;
+    font-size: 18px; }
+
+.managementTool__chosseAll {
+  font-weight: 600;
+  font-size: 14px;
+  color: #B4B4B4; }
+  .managementTool__chosseAll .check-box {
+    border-radius: 5px;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    vertical-align: top;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid #B4B4B4;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    position: relative;
+    cursor: pointer; }
+    .managementTool__chosseAll .check-box::before {
+      content: "";
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid #18A0FB;
+      border-bottom: 2px solid #18A0FB;
+      position: absolute;
+      top: 40%;
+      left: 52%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      display: none; }
+    .managementTool__chosseAll .check-box:checked::before {
+      display: block; }
+  .managementTool__chosseAll label {
+    cursor: pointer; }
+
+.btn-delete {
+  background: #F14747;
+  width: 42px;
+  height: 25px;
+  padding: 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #FFFFFF; }
+  .btn-delete:hover {
+    background: #E10B0B; }
+  .btn-delete:focus {
+    box-shadow: none; }
+
+.my-acc {
+  border: 1px solid #C4C4C4;
+  border-radius: 7px;
+  overflow-x: scroll; }
+  .my-acc::-webkit-scrollbar {
+    width: 3px;
+    height: 5px; }
+  .my-acc::-webkit-scrollbar-thumb {
+    background: #707070;
+    border-radius: 10px; }
+
+.acc__table {
+  table-layout: fixed; }
+  .acc__table .acc__tilte, .acc__table .acc__content {
+    padding: 5px 15px; }
+  .acc__table .acc__tilte {
+    font-weight: 500;
+    font-size: 16px;
+    color: #515151;
+    padding-bottom: 15px; }
+  .acc__table .acc__content {
+    vertical-align: top;
+    font-weight: 300;
+    font-size: 16px;
+    color: black; }
+  .acc__table .acc__tilte--checkbox, .acc__table .acc__content--checkbox {
+    min-width: 10px; }
+    .acc__table .acc__tilte--checkbox .check-box, .acc__table .acc__content--checkbox .check-box {
+      border-radius: 5px;
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      vertical-align: top;
+      background-color: #fff;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      border: 1px solid #B4B4B4;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      -webkit-print-color-adjust: exact;
+      position: relative;
+      cursor: pointer; }
+      .acc__table .acc__tilte--checkbox .check-box::before, .acc__table .acc__content--checkbox .check-box::before {
+        content: "";
+        width: 9px;
+        height: 5px;
+        border-left: 2px solid #18A0FB;
+        border-bottom: 2px solid #18A0FB;
+        position: absolute;
+        top: 40%;
+        left: 52%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        display: none; }
+      .acc__table .acc__tilte--checkbox .check-box:checked::before, .acc__table .acc__content--checkbox .check-box:checked::before {
+        display: block; }
+  .acc__table .acc__tilte--date, .acc__table .acc__content--date {
+    min-width: 120px; }
+  .acc__table .acc__tilte--course, .acc__table .acc__content--course {
+    min-width: 50px;
+    text-align: center; }
+  .acc__table .acc__tilte--idStudent, .acc__table .acc__content--idStudent {
+    min-width: 150px; }
+  .acc__table .acc__tilte--name, .acc__table .acc__content--name {
+    min-width: 250px; }
+  .acc__table .acc__tilte--email, .acc__table .acc__content--email {
+    min-width: 180px;
+    padding-right: 30px; }
+  .acc__table .acc__menu {
+    position: absolute;
+    top: 2px;
+    right: 0px; }
+    .acc__table .acc__menu .icon-menu {
+      cursor: pointer;
+      color: #707070;
+      font-size: 20px; }
+      .acc__table .acc__menu .icon-menu::after {
+        display: none; }
+    .acc__table .acc__menu .dropdown-menu {
+      background: #FFFFFF;
+      border-radius: 5px;
+      width: 170px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+      z-index: 1;
+      transform: translate(-102%, 0) !important;
+      padding: 15px 12px; }
+      .acc__table .acc__menu .dropdown-menu li {
+        padding: 0 3px;
+        cursor: pointer; }
+      .acc__table .acc__menu .dropdown-menu li:hover {
+        background: rgba(24, 160, 251, 0.1); }
+      .acc__table .acc__menu .dropdown-menu-edit {
+        color: #64D72F; }
+      .acc__table .acc__menu .dropdown-menu-delete {
+        color: #F14747; }

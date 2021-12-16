@@ -3,10 +3,13 @@
 @attribute [Route(Routes.AdminVolunteerManagement)]
 @attribute [Authorize(Roles = "Admin")]
 
-<div class="col-lg-11 mx-auto">
-    <FilterUser />
-    <VMS.Pages.SearchOrganizer.SearchResult IsUserResult="true" IsUserForAdmin="true"/>
+<div class="row mt-4">
+    <div class="col-lg-10 mx-auto p-0">
+        <FilterUser />
+        <VMS.Pages.SearchOrganizer.SearchResult IsUserResult="true" IsUsedForAdmin="true"/>
+    </div>
 </div>
+
 @code {
 
 }

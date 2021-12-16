@@ -2,62 +2,71 @@
     <div class="act-title">
         Lọc hoạt động
     </div>
-    <form class="act-filter d-flex" action="" method="get">
+    <div class="act-filter d-flex">
         <div class="select-filter">
             <div class="select-container">
                 <div class="act-filter__select" @onclick="Showlist1">
-                    <span class="act-filter__select-default">@SelectDefault1</span>
+                    <span class="act-filter__select-default">@semesterDefault</span>
                     <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
                 </div>
                 <div class="act-filter__list @Display1">
-                    <span class="act-filter__list-item" @onclick="ChooseOption1">@List1Select1</span>
-                    <span class="act-filter__list-item" @onclick="ChooseOption2">@List1Select2</span>
-                    <span class="act-filter__list-item" @onclick="ChooseOption3">@List1Select3</span>
+                    @foreach (var item in semesters.Keys)
+                    {
+                        <span class="act-filter__list-item" @onclick="() => ChooseSemester(item)">@semesters[item]</span>
+                    }
                 </div>
             </div>
             <div class="select-container">
                 <div class="act-filter__select" @onclick="Showlist2">
-                    <span class="act-filter__select-default">@SelectDefault2</span>
+                    <span class="act-filter__select-default">@orgDefault</span>
                     <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
                 </div>
                 <div class="act-filter__list @Display2">
-                    @for (int i = 0; i <= 10; i++)
+                    @if (organizers is not null)
                     {
-                        <span class="act-filter__list-item" @onclick="ChooseOption">@List2Select</span>
+                        @foreach (var org in organizers)
+                        {
+                            <span class="act-filter__list-item" @onclick="() => ChooseOrg(org)">@org.FullName</span>
+                        }
                     }
                 </div>
             </div>
         </div>
         <div class="act-filter__radio d-flex">
             <div class="act-filter__radio-1 d-flex align-items-center">
-                <input class="radio-1" type="radio" id="rate" name="fav_language" value="rate">
+                @if (filter.IsRated.HasValue && !filter.IsRated.Value)
+                {
+                    <input class="radio-1" type="radio" id="rate" name="fav_language" @onclick="async () => await CheckOrderAsync(false)" checked>
+                }
+                else
+                {
+                    <input class="radio-1" type="radio" id="rate" name="fav_language" @onclick="async () => await CheckOrderAsync(false)">
+                }
                 <label class="label-1" for="rate">Chưa đánh giá</label><br>
             </div>
             <div class="act-filter__radio-2 d-flex align-items-center">
-                <input class="radio-2" type="radio" id="rated" name="fav_language" value="rated">
+                @if (filter.IsRated.HasValue && filter.IsRated.Value)
+                {
+                    <input class="radio-2" type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)" checked>
+                }
+                else
+                {
+                    <input class="radio-2" type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)">
+                }
                 <label class="label-2" for="rated">Đã đánh giá</label><br>
             </div>
         </div>
         <div class="act-filter__btn-container">
-            <button class="act-filter__btn --filter">Lọc</button>
-            <button class="act-filter__btn --del">Xóa lọc</button>
+            <button @onclick="UpdateFilterValueAsync" class="act-filter__btn --filter">Lọc</button>
+            <button @onclick="ClearFilterAsync" class="act-filter__btn --del">Xóa lọc</button>
         </div>
-    </form>
+    </div>
 </div>
 @code {
 
     // Code để mô tả cách filter hoạt động
-    string SelectDefault1 = "Học kỳ";
-    string SelectDefault2 = "Đơn vị";
-
-    string List1Select1 = "Học kỳ đầu";
-    string List1Select2 = "Học kỳ giữa";
-    string List1Select3 = "Học kỳ cuối";
-
-    string List2Select = "Khoa kế toán";
-
-    string Display1 = "d-none";
-    string Display2 = "d-none";
+    private string Display1 = "d-none";
+    private string Display2 = "d-none";
 
     private void Showlist1()
     {
@@ -83,27 +92,4 @@
         }
     }
 
-    private void ChooseOption1()
-    {
-        SelectDefault1 = List1Select1;
-        Display1 = "d-none";
-    }
-
-    private void ChooseOption2()
-    {
-        SelectDefault1 = List1Select2;
-        Display1 = "d-none";
-    }
-
-    private void ChooseOption3()
-    {
-        SelectDefault1 = List1Select3;
-        Display1 = "d-none";
-    }
-
-    private void ChooseOption()
-    {
-        SelectDefault2 = List2Select;
-        Display2 = "d-none";
-    }
 }

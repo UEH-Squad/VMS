@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Application.Interfaces
@@ -14,14 +15,14 @@ namespace VMS.Application.Interfaces
 
         string GetCurrentUserId();
 
-        List<User> GetAllOrganizers();
-
         string GetCurrentUserAddress();
 
         User GetCurrentUserWithAddresses();
 
-        User GetCurrentUserWithFavoritesAndRecruitments();
+        User GetUserWithFavoritesAndRecruitmentsById(string userId);
 
         void UpdateUser(User user);
+
+        bool IsCorrectCurrentUserPassword(string password);
     }
 }

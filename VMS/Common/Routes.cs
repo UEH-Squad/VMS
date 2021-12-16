@@ -22,6 +22,7 @@
         public const string ActivityManagement = "/quan-ly-hoat-dong";
         public const string Rating = "/quan-ly-tinh-nguyen-vien/danh-gia";
         public const string ActivityLogPage = "/lich-su-hoat-dong";
+        public const string EditRequestPage = "/quan-ly-hoat-dong/yeu-cau-chinh-sua";
 
         #endregion Org + User profile
         public const string ResetPassword = "/reset-password";
@@ -56,13 +57,15 @@
 
         public const string AdminResolveReport = "/admin/quan-ly-bao-cao";
         public const string AdminDetailReport = "/admin/quan-ly-bao-cao/chi-tiet";
-
         public const string AdminOrgAccountManagement = "/admin/quan-ly-tai-khoan-to-chuc";
         public const string AdminVolunteerAccountManagement = "/admin/quan-ly-tai-khoan-ca-nhan";
         public const string AdminAdminAccountManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";
         public const string AdminFeatureSuggestionManagement = "/admin/bo-sung-tinh-nang";
         public const string AdminDashboardManagement = "/admin/bao-cao-thong-ke";
         public const string AdminAreaAndSkill = "/admin/linh-vuc-va-ky-nang";
+
+        public const string AdminVolunteerProfile = "/admin/ho-so-ca-nhan";
+        public const string AdminOrganizationProfile = "/admin/ho-so-to-chuc";
 
         #endregion Admin
     }

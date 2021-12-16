@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "outputFile": "Shared/Components/Pager.razor.css",
     "inputFile": "Shared/Components/Pager.razor.scss"
@@ -344,6 +344,22 @@
     "inputFile": "Pages/ActivityLogPage/Index.razor.scss"
   },
   {
+    "outputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.css",
+    "inputFile": "Pages/Organization/ActivityManagementPage/EditRequest.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Title.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/Index.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
+    "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
+  },
+  {
     "outputFile": "Shared/AdminSidebar.razor.css",
     "inputFile": "Shared/AdminSidebar.razor.scss"
   },
@@ -450,6 +466,122 @@
   {
     "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
     "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/OrganizationManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/VolunteerManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Shared/AdminHeader.razor.css",
+    "inputFile": "Shared/AdminHeader.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/UserProfile/Index.razor.css",
+    "inputFile": "Pages/Admin/UserProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationProfile/Index.razor.css",
+    "inputFile": "Pages/Admin/OrganizationProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.css",
+    "inputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.scss"
   },
   {
     "outputFile": "Pages/Admin/SkillAndArea/index.css",

@@ -13,7 +13,7 @@
 .filter-bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-row-gap: 10px;
+  grid-row-gap: 15px;
   grid-column-gap: 20px; }
   .filter-bar .filter-item {
     width: 100%; }
@@ -32,7 +32,6 @@
   color: #b4b4b4;
   padding-left: 8px;
   padding-right: 30px;
-  font-size: 18px;
   outline: none;
   line-height: 40px;
   overflow: hidden;
@@ -85,10 +84,10 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   width: fit-content;
   height: 40px;
-  padding: 0 20px; }
+  padding: 0 16px; }
   .filter-btn:hover {
     background-color: #306C14;
     opacity: 78%; }
@@ -100,7 +99,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   width: fit-content;
   color: #B4B4B4;
   background-color: #fff; }

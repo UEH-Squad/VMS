@@ -56,7 +56,7 @@
     color: #707070;
     font-size: 24px;
     font-weight: 700;
-    margin-right: 20px; }
+    margin-right: 10px; }
   .my-information .information__rank i {
     margin: auto 2px;
     color: #64D72F;
@@ -67,7 +67,7 @@
     font-weight: 500; }
   .my-information .information__contact i {
     font-size: 24px;
-    margin: auto 20px;
+    margin: auto 10px;
     color: #707070; }
   .my-information .information__contact a {
     color: #515151;

@@ -16,6 +16,7 @@ namespace VMS.Pages.UserProflie
         private List<ActivityViewModel> currentActivities, favoriteActivities, endedActivities = new();
 
         [Parameter] public string UserId { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
         [CascadingParameter] public string CurrentUserId { get; set; }
 
         [Inject] private NavigationManager NavigationManager { get; set; }
@@ -32,10 +33,9 @@ namespace VMS.Pages.UserProflie
         {
             currentActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Current, DateTime.Now);
 
-            favoriteActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Favor);
-            favoriteActivities.ForEach(a => a.IsFav = true);
+            favoriteActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Favor, DateTime.Now);
 
-            endedActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Ended);
+            endedActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Ended, DateTime.Now);
         }
 
         private void ValidateUserProfile()

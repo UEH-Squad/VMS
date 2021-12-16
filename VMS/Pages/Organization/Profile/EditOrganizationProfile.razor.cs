@@ -38,7 +38,7 @@ namespace VMS.Pages.Organization.Profile
         private NavigationManager NavigationManager { get; set; }
 
         [Parameter]
-        public bool IsUseForAdmin { get; set; }
+        public bool IsUsedForAdmin { get; set; }
 
         private int width;
         private string classWidth = "";

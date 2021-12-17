@@ -1,29 +1,29 @@
 ﻿<div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-block" : "d-none")">
-            <div @onclick="CloseModal" class="close-btn">
+        <div class="pop-up-container border-10 @(isConfirm ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="close-btn">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="delete-text">xóa hoạt động</span> này không?</h3>
+                <h3><span class="delete-text">@(!Undo? "chọn lại tình nguyện viên" : "xóa tình nguyện viên")</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
-                <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
-                <div @onclick="DeleteSuccess" class="btn accept px-0">Xác nhận</div>
+                <div @onclick="CloseModalAsync" class="btn px-0 deny">Hủy</div>
+                <div @onclick="ActionSuccessAsync" class="btn accept px-0">Xác nhận</div>
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(isConfirmDelete ? "d-none" : "d-block")">
-            <div @onclick="CloseModal" class="close-btn-s">
+        <div class="pop-up-container border-10 @(isConfirm ? "d-none" : "d-block")">
+            <div @onclick="CloseModalAsync" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <div class="pop-up-content">
-                <h3 class="delete-act">Xóa thành công!</h3>
+                <h3 class="delete-act">@(!Undo? "Hoàn tác thành công!" : "Xóa thành công!")</h3>
             </div>
         </div>
     </div>
@@ -31,19 +31,4 @@
 
 @code {
 
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    bool isConfirmDelete = true;
-    bool isDeleteSuccess;
-
-    private async Task CloseModal()
-    {
-        await Modal.CloseAsync();
-    }
-
-    void DeleteSuccess()
-    {
-        isConfirmDelete = !isConfirmDelete;
-    }
 }

@@ -13,12 +13,13 @@ namespace VMS.Pages.Organization.RatingPage
         private bool isReadonly = false;
         private bool isEmpty = false;
 
-        [Parameter] public User UserBottom { get; set; }
-        [Parameter] public User UserTop { get; set; }
+        [Parameter] public UserViewModel UserBottom { get; set; }
+        [Parameter] public UserViewModel UserTop { get; set; }
         [Parameter] public RecruitmentRatingViewModel RecruitmentRatingTop { get; set; }
         [Parameter] public RecruitmentRatingViewModel RecruitmentRatingBottom { get; set; }
         [Parameter] public int RecruitmentId { get; set; }
         [Parameter] public int ActivityId { get; set; }
+        [Parameter] public bool IsOrgRating { get; set; } = true;
 
         [Inject]
         private IRecruitmentService RecruitmentService { get; set; }
@@ -45,7 +46,7 @@ namespace VMS.Pages.Organization.RatingPage
         {
             if (editContext.IsModified())
             {
-                await RecruitmentService.UpdateRatingAndCommentAsync(ActivityId, null, RecruitmentRatingBottom.Comment, RecruitmentId);
+                await RecruitmentService.UpdateRatingAndCommentAsync(ActivityId, null, RecruitmentRatingBottom.Comment, RecruitmentId, IsOrgRating);
             }
 
             ChangeState();

@@ -13,19 +13,26 @@
 
 .activity-container {
   flex: 1;
-  padding: 0px 60px;
+  padding-left: 30px;
   display: flex;
-  height: 117px;
+  height: 101px;
   border: 1px solid #B4B4B4;
   border-radius: 10px; }
+  @media (min-width: 576px) {
+    .activity-container {
+      height: 117px;
+      padding: 0px 60px; } }
 
 .activity-space {
   flex-basis: 60px; }
 
 .activity__img {
   position: absolute;
-  width: 117px;
+  width: 100px;
   left: 0; }
+  @media (min-width: 576px) {
+    .activity__img {
+      width: 117px; } }
   .activity__img img {
     width: 100%;
     aspect-ratio: 1;
@@ -33,11 +40,17 @@
 
 .activity__content {
   flex: 1;
-  padding: 10px 20px; }
+  padding: 10px 20px;
+  padding-right: 0; }
   .activity__content__title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #18A0FB; }
+    font-size: 14px;
+    color: #18A0FB;
+    line-height: 17px; }
+    @media (min-width: 576px) {
+      .activity__content__title {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: unset; } }
   .activity__content__icon {
     justify-content: space-between; }
     .activity__content__icon .stars-rating ::deep .member-star {
@@ -68,7 +81,10 @@
     border: none;
     background-color: transparent; }
     .activity__icon button span {
-      font-size: 30px; }
+      font-size: 18px; }
+      @media (min-width: 576px) {
+        .activity__icon button span {
+          font-size: 30px; } }
   .activity__icon__report span {
     color: #F14747; }
   .activity__icon__report span:hover {

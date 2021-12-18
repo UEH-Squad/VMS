@@ -7,51 +7,51 @@
         {
             @foreach (var item in pagedResult.Results)
             {
-        <div class="activity-row d-flex">
-            <div class="activity-space"></div>
-            <div class="activity-container">
-                <div class="activity__img">
-                    <img src="@item.Avatar" alt="Avatar">
-                </div>
-                <div class="activity__content">
-                    <div class="activity__content__title">
-                        <p class="member-name1">@item.ActName</p>
-                    </div>
-                    <div class="activity__content__icon d-flex">
-                        <div class="stars-rating">
-                            <VMS.Pages.Organization.RatingPage.Stars />
+                <div class="activity-row d-flex">
+                    <div class="activity-space"></div>
+                    <div class="activity-container">
+                        <div class="activity__img">
+                            <img src="@item.Avatar" alt="Avatar">
                         </div>
-                        <div class="org-pic d-flex">
-                            <div class="org-pic__icon d-flex">
-                                <span class="material-icons-outlined">
-                                    public
-                                </span>
+                        <div class="activity__content">
+                            <div class="activity__content__title">
+                                <p class="member-name1">@item.ActName</p>
                             </div>
-                            <div class="org-pic__name">
-                                @item.OrgName
+                            <div class="activity__content__icon d-flex">
+                                <div class="stars-rating">
+                                    <VMS.Pages.Organization.RatingPage.Stars />
+                                </div>
+                                <div class="org-pic d-flex">
+                                    <div class="org-pic__icon d-flex">
+                                        <span class="material-icons-outlined">
+                                            public
+                                        </span>
+                                    </div>
+                                    <div class="org-pic__name">
+                                        @item.OrgName
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="activity__icon d-flex">
+                            <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
+                                @*Pop-up để report*@
+                                <span id="member-report_icon" class="material-icons">report_problem</span>
+                            </button>
+                            <button class="activity__icon__comment" @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
+                                @*Pop-up để comment*@
+                                <span id="member-comment_icon" class="material-icons">comment</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="activity__icon d-flex">
-                    <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUp())" id="popup-report_icon">
-                        @*Pop-up để report*@
-                        <span id="member-report_icon" class="material-icons">report_problem</span>
-                    </button>
-                    <button class="activity__icon__comment" @onclick="@(()=>ShowCommentPopUp())" id="popup-comment_icon">
-                        @*Pop-up để comment*@
-                        <span id="member-comment_icon" class="material-icons">comment</span>
-                    </button>
-                </div>
-            </div>
-        </div>
             }
         }
-        <div class="pagination-container d-flex">
-            <Pager CurrentPage="@pagedResult.CurrentPage"
-                   PageCount="@pagedResult.PageCount"
-                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
-        </div>
+        @*<div class="pagination-container d-flex">
+                <Pager CurrentPage="@pagedResult.CurrentPage"
+                       PageCount="@pagedResult.PageCount"
+                       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+            </div>*@
     </div>
 </div>
 

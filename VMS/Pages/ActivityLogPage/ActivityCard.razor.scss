@@ -1,28 +1,41 @@
 ﻿@import '../../Resources/scss/common/_variables.scss';
 
-.pagination-container{
+.pagination-container {
     justify-content: center;
 }
+
 .activity-row {
     position: relative;
     margin-bottom: 30px
 }
+
 .activity-container {
     flex: 1;
-    padding: 0px 60px;
+    padding-left: 30px;
     display: flex;
-    height: 117px;
+    height: 101px;
     border: 1px solid #B4B4B4;
     border-radius: 10px;
+
+    @include on ('sm') {
+        height: 117px;
+        padding: 0px 60px;
+    }
 }
-.activity-space{
+
+.activity-space {
     flex-basis: 60px;
 }
+
 .activity {
     &__img {
         position: absolute;
-        width: 117px;
+        width: 100px;
         left: 0;
+
+        @include on ('sm') {
+            width: 117px;
+        }
 
         img {
             width: 100%;
@@ -34,11 +47,18 @@
     &__content {
         flex: 1;
         padding: 10px 20px;
+        padding-right: 0;
 
         &__title {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 14px;
             color: $blue;
+            line-height:17px;
+
+            @include on ('sm') {
+                font-size: 20px;
+                font-weight: 600;
+                line-height:unset;
+            }
         }
 
         &__icon {
@@ -91,7 +111,11 @@
             background-color: transparent;
 
             span {
-                font-size: 30px;
+                font-size: 18px;
+
+                @include on('sm') {
+                    font-size: 30px;
+                }
             }
         }
 

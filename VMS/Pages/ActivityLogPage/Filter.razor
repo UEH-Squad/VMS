@@ -2,46 +2,48 @@
     <div class="act-title">
         Lọc hoạt động
     </div>
-    <form class="act-filter d-flex" action="" method="get">
-        <div class="select-filter">
-            <div class="select-container">
-                <div class="act-filter__select" @onclick="Showlist1">
-                    <span class="act-filter__select-default">@SelectDefault1</span>
-                    <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
+    <form class="row act-filter d-flex" action="" method="get">
+
+            <div class="col-12 col-lg-6 col-xl-5 col-xxl-5 select-filter">
+                <div class="select-container">
+                    <div class="act-filter__select" @onclick="Showlist1">
+                        <span class="act-filter__select-default">@SelectDefault1</span>
+                        <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
+                    </div>
+                    <div class="act-filter__list @Display1">
+                        <span class="act-filter__list-item" @onclick="ChooseOption1">@List1Select1</span>
+                        <span class="act-filter__list-item" @onclick="ChooseOption2">@List1Select2</span>
+                        <span class="act-filter__list-item" @onclick="ChooseOption3">@List1Select3</span>
+                    </div>
                 </div>
-                <div class="act-filter__list @Display1">
-                    <span class="act-filter__list-item" @onclick="ChooseOption1">@List1Select1</span>
-                    <span class="act-filter__list-item" @onclick="ChooseOption2">@List1Select2</span>
-                    <span class="act-filter__list-item" @onclick="ChooseOption3">@List1Select3</span>
+                <div class="select-container">
+                    <div class="act-filter__select" @onclick="Showlist2">
+                        <span class="act-filter__select-default">@SelectDefault2</span>
+                        <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
+                    </div>
+                    <div class="act-filter__list @Display2">
+                        @for (int i = 0; i <= 10; i++)
+                        {
+                            <span class="act-filter__list-item" @onclick="ChooseOption">@List2Select</span>
+                        }
+                    </div>
                 </div>
             </div>
-            <div class="select-container">
-                <div class="act-filter__select" @onclick="Showlist2">
-                    <span class="act-filter__select-default">@SelectDefault2</span>
-                    <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
+
+            <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 act-filter__radio d-flex">
+                <div class="act-filter__radio-1 d-flex align-items-center">
+                    <input class="radio-1" type="radio" id="rate" name="fav_language" value="rate">
+                    <label class="label-1" for="rate">Chưa đánh giá</label><br>
                 </div>
-                <div class="act-filter__list @Display2">
-                    @for (int i = 0; i <= 10; i++)
-                    {
-                        <span class="act-filter__list-item" @onclick="ChooseOption">@List2Select</span>
-                    }
+                <div class="act-filter__radio-2 d-flex align-items-center">
+                    <input class="radio-2" type="radio" id="rated" name="fav_language" value="rated">
+                    <label class="label-2" for="rated">Đã đánh giá</label><br>
                 </div>
             </div>
-        </div>
-        <div class="act-filter__radio d-flex">
-            <div class="act-filter__radio-1 d-flex align-items-center">
-                <input class="radio-1" type="radio" id="rate" name="fav_language" value="rate">
-                <label class="label-1" for="rate">Chưa đánh giá</label><br>
+            <div class="col-12 col-xl-2 col-xxl-3 act-filter__btn-container">
+                <button class="act-filter__btn --filter">Lọc</button>
+                <button class="act-filter__btn --del">Xóa lọc</button>
             </div>
-            <div class="act-filter__radio-2 d-flex align-items-center">
-                <input class="radio-2" type="radio" id="rated" name="fav_language" value="rated">
-                <label class="label-2" for="rated">Đã đánh giá</label><br>
-            </div>
-        </div>
-        <div class="act-filter__btn-container">
-            <button class="act-filter__btn --filter">Lọc</button>
-            <button class="act-filter__btn --del">Xóa lọc</button>
-        </div>
     </form>
 </div>
 @code {

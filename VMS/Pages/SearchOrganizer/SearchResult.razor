@@ -1,9 +1,9 @@
 ﻿@inject IJSRuntime JsRuntime
 <section class="my-container mb-5">
-    <h3 class="result-heading mt-4 mb-3">Có <span>@(pagedResult is null ? "0" : pagedResult.TotalItems) tổ chức</span> ứng với kết quả tìm kiếm của bạn</h3>
-    @if (pagedResult != null && pagedResult.TotalItems != 0)
+    <h3 class="result-heading mt-4 mb-3">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) tổ chức</span> ứng với kết quả tìm kiếm của bạn</h3>
+    @if (PagedResult != null && PagedResult.TotalItems != 0)
     {
-        @foreach (var item in pagedResult.Items)
+        @foreach (var item in PagedResult.Items)
         {
             <div class="org-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
@@ -48,9 +48,9 @@
     }
 </section>
 
-<Pager CurrentPage="@pagedResult.PageIndex"
-       PageCount="@pagedResult.TotalPages"
-       OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })" />
+<Pager CurrentPage="@PagedResult.PageIndex"
+       PageCount="@PagedResult.TotalPages"
+       OnPageChanged="@(async (e)=> { await HandlePageChangedAsync(e); })" />
 
 @code {
     private bool isYellow;

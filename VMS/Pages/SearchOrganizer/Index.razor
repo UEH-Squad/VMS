@@ -3,8 +3,13 @@
 <div class="container-lg">
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <SearchAndFilter HaveSearchBox="true" IsLongDistanceFilter="true" FilterChanged="OnFilterChanged"/>
-            <SearchResult HaveLevel="true" Filter="filter" />
+            <SearchAndFilter
+                HaveSearchBox="true" IsLongDistanceFilter="true"
+                FilterChanged="OnFilterChangedAsync" />
+
+            <SearchResult HaveLevel="true"
+                PagedResult="pagedResult"
+                OnPageChanged="OnPageChangedAsync" />
         </div>
     </div>
 </div>

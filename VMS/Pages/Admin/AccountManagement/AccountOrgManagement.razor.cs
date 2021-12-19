@@ -24,7 +24,6 @@ namespace VMS.Pages.Admin.AccountManagement
         [CascadingParameter] public IModalService Modal { get; set; }
 
         [Inject] IAdminService AdminService { get; set; }
-        [Inject] IExcelService ExcelService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

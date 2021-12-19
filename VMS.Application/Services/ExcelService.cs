@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
 using OfficeOpenXml;
+using VMS.Common.Enums;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using Microsoft.AspNetCore.Components.Forms;
-using VMS.Common.Enums;
-using VMS.GenericRepository;
-using System.Linq;
 
 namespace VMS.Application.Services
 {

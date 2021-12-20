@@ -57,12 +57,6 @@ namespace VMS.Pages.Organization.ActivityManagementPage
             }
         }
 
-        private void ChangeRateState(int id)
-        {
-            rateId = (rateId == id ? 0 : id);
-            dropdownId = 0;
-        }
-
         private void ChangeDropdownState(int id)
         {
             rateId = 0;

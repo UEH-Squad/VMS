@@ -37,6 +37,19 @@
       font-size: 16px;
       color: #515151;
       margin-bottom: 20px; }
+    .my-modal .modal__addVideo .btn-add {
+      margin-top: 30px;
+      background-color: #18A0FB;
+      color: #FFFFFF;
+      border-radius: 5px;
+      width: 140px;
+      height: 35px;
+      padding: 0; }
+      .my-modal .modal__addVideo .btn-add:hover {
+        background-color: #0B588C;
+        color: #FFFFFF; }
+      .my-modal .modal__addVideo .btn-add:focus {
+        box-shadow: none; }
   .my-modal .modal__addVideo .icon-close {
     width: 33px;
     height: 33px;
@@ -52,6 +65,24 @@
     .my-modal .modal__addVideo .icon-close .material-icons {
       font-size: 20px;
       color: #717171; }
+  .my-modal .modal__success {
+    background-color: #FFFFFF;
+    position: relative;
+    box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
+    border-radius: 10px; }
+  .my-modal .modal__success {
+    width: 400px;
+    padding: 30px 30px; }
+    .my-modal .modal__success h3 {
+      font-weight: 500;
+      font-size: 20px;
+      color: #64D72F; }
+      .my-modal .modal__success h3 span {
+        color: #18A0FB; }
+    .my-modal .modal__success p {
+      font-weight: 500;
+      font-size: 20px;
+      color: #64D72F; }
   .my-modal .modal__success .icon-close {
     width: 22px;
     height: 22px;

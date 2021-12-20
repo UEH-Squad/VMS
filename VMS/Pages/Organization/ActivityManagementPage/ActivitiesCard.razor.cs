@@ -12,7 +12,6 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 {
     public partial class ActivitiesCard : ComponentBase
     {
-        private int rateId;
         private int dropdownId;
         private int page = 1;
         private PaginatedList<ActivityViewModel> data = new(new(), 0, 1, 1);
@@ -21,9 +20,9 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         public FilterOrgActivityViewModel Filter { get; set; }
         [Parameter]
         public bool IsOrgProfile { get; set; } = false;
+
         [CascadingParameter]
         public IModalService Modal { get; set; }
-
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -34,11 +33,11 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         {
             await JS.InvokeVoidAsync("vms.AddOutsideClickMenuHandler", DotNetObjectReference.Create(this), nameof(HideMenuInterop));
         }
+
         [JSInvokable]
         public Task HideMenuInterop()
         {
             dropdownId = 0;
-            rateId = 0;
             return InvokeAsync(StateHasChanged);
         }
 
@@ -59,25 +58,12 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 
         private void ChangeDropdownState(int id)
         {
-            rateId = 0;
             dropdownId = (dropdownId == id ? 0 : id);
-        }
-
-        private bool CheckForZIndex(int id)
-        {
-            return id == dropdownId || id == rateId;
         }
 
         private async Task ShowDeleteModalAsync(ActivityViewModel activity)
         {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-
-            var result = await Modal.Show(typeof(Profile.DeleteConfirm), "", options).Result;
+            var result = await Modal.Show(typeof(Profile.DeleteConfirm), "", BlazoredModalOptions.GetModalOptions()).Result;
 
             if ((bool)result.Data)
             {
@@ -91,20 +77,13 @@ namespace VMS.Pages.Organization.ActivityManagementPage
             var parameters = new ModalParameters();
             parameters.Add("IsClosed", activity.IsClosed);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-
-            var result = await Modal.Show(typeof(Profile.CloseConfirm), "", parameters, options).Result;
+            var result = await Modal.Show(typeof(Profile.CloseConfirm), "", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
             if ((bool)result.Data)
             {
                 await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
                 activity.IsClosed = !activity.IsClosed;
-                Modal.Show(typeof(Profile.CloseSuccess), "", parameters, options);
+                Modal.Show(typeof(Profile.CloseSuccess), "", parameters, BlazoredModalOptions.GetModalOptions());
             }
         }
     }

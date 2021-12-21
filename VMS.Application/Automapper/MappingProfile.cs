@@ -77,6 +77,8 @@ namespace VMS.Application.Automapper
             CreateMap<Recruitment, ListVolunteerViewModel>();
             CreateMap<PaginatedList<Recruitment>, PaginatedList<ListVolunteerViewModel>>();
             MapAccountToUserAndBack();
+
+            CreateMap<PaginatedList<User>, PaginatedList<UserViewModel>>();
         }
 
         private void MapReportToFeedback()

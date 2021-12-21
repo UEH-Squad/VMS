@@ -11,9 +11,16 @@
 
     .signUp__content {
         position: relative;
-        width: 950px;
+        width: 100%;
+        overflow-y: scroll;
+        height: 100%;
         border-radius: 10px;
         background: $white;
+
+        @include on('lg') {
+            width: 950px;
+            height: unset;
+        }
 
         &::-webkit-scrollbar {
             width: 10px;

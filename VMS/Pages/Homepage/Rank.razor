@@ -8,30 +8,30 @@
             <span @onclick="showPer" class="rank__link-students @(isShowPer  ? "cssShowPer": "" )">Sinh viên</span>
         </p>
         
-        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-5">
+        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-lg-5 px-4">
             @foreach (var item in organizations)
             {
-                <div class="item ">
+                <div class="item">
                     <div class="rank__img-rank @(item.Id>=10 ?"w-nmb10" :"")">
                         <img src="img/rank.png" alt="">
                         <span class="@(item.Id>=10 ?"position-top" :"")">@item.Id</span>
                     </div>
-                    <div class=" rank__content mx-auto py-4 text-center">
+                    <div class=" rank__content mx-auto py-md-4 py-2 text-center">
                         <div class="rank__img m-auto ">
                             <img class="mx-auto" src="@item.Banner" alt="">
                         </div>
-                        <p class="rank__name my-3">@item.Name</p>
-                        <span class="rank__review mb-4">@item.Rank</span>
+                        <p class="rank__name my-lg-3 my-2">@item.Name</p>
+                        <span class="rank__review mb-lg-4 mb-2">@item.Rank</span>
                         <div class="row justify-content-between px-2 mt-2">
-                            <div class="rank__act col-4">
+                            <div class="rank__act col-4 px-0">
                                 <p>@item.NumberOfActivities</p>
                                 <span>Hoạt động</span>
                             </div>
-                            <div class="rank__class col-4">
+                            <div class="rank__class col-4 px-0">
                                 <p>@item.Class</p>
                                 <span>@item.Faculty - @item.Course </span>
                             </div>
-                            <div class="rank__star col-4">
+                            <div class="rank__star col-4 px-0">
                                 <p>@item.StarRating</p>
                                 @for (int i = 0; i <= 4; i++)
                                 {

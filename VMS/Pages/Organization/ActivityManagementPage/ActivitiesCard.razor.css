@@ -32,8 +32,7 @@
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px; 
-  text-decoration: none;}
+  font-size: 16px; }
   .card-btn:hover {
     background-color: #306C14; }
 
@@ -55,7 +54,7 @@
   display: flex;
   flex-direction: row;
   padding: 20px 18px;
-  height: 267px;
+  height: 283px;
   margin-bottom: 15px;
   background-color: #F3F3F5;
   border-radius: 10px; }
@@ -142,7 +141,7 @@
     color: #0B588C; }
 
 .org-card__footer {
-  bottom: 0; }
+  bottom: -8px; }
   .org-card__footer__btn {
     width: fit-content; }
 
@@ -201,6 +200,9 @@
 .org-card__cbb-rate {
   width: 120px;
   background-color: #18A0FB; }
+  .org-card__cbb-rate a {
+    text-decoration: none;
+    color: #FFFFFF; }
   .org-card__cbb-rate:hover {
     background-color: #0B588C; }
   .org-card__cbb-rate__list {

@@ -21,7 +21,7 @@
     <EditForm Model="@report" OnValidSubmit="@AddReportAsync">
         <DataAnnotationsValidator />
         <ValidationSummary />
-        <div class="my-container @(isShowReport ? "d-none" : "d-block")">
+            <div class="my-container @(isShowReport ? "d-none" : "d-block")">
             <div class="icon-close-popup">
                 <span @onclick="CloseModal" class="material-icons">close</span>
             </div>

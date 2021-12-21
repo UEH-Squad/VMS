@@ -36,6 +36,10 @@
         /*width: 45%;*/
         margin-bottom: 10px;
 
+        @include on('xl') {
+            margin-bottom: 0;
+        }
+
         .select-container {
             position: relative;
             width: 46%;

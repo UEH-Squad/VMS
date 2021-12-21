@@ -50,7 +50,7 @@
                     <li>
                         <div class="dropdown-item" href="#">
                             <InputCheckbox @bind-Value="reportReason.Reason2" type="checkbox" id="checkbox-2" class="dropdown-item--checkbox" />
-                            <label for="checkbox-2">Đánh giá người dùng không tham gia hoạt động</label>
+                            <label for="checkbox-2">Người dùng không tham gia hoạt động</label>
                         </div>
                     </li>
                     <li>
@@ -75,18 +75,7 @@
                     <h4 class="title-attach__text">Minh chứng đính kèm</h4>
                     <h4 class="title-attach__check check"> (*)</h4>
                 </div>
-                <div class="add-file">
-                    <div class="add-file__block">
-                        <InputFile @onclick="AddFile" type="file" name="file" id="file" class="inputfile" />
-                        <label for="file">
-                            <span class="block-icon-text">
-                                <span class="material-icons my-icon-upload">cloud_upload</span>
-                                <span class="file__text">Chọn, kéo và thả hình ảnh liên quan tại đây</span>
-                            </span>
-                        </label>
-                    </div>
-
-                </div>
+                <UploadImg ShowPreview="true" />
             </div>
 
             <div class="btn-accept">

@@ -33,6 +33,9 @@
     justify-content: space-between;
     /*width: 45%;*/
     margin-bottom: 10px; }
+    @media (min-width: 1200px) {
+      .act-filter .select-filter {
+        margin-bottom: 0; } }
     .act-filter .select-filter .select-container {
       position: relative;
       width: 46%; }

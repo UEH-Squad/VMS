@@ -3,10 +3,18 @@
 .act {
     h1 {
         font-weight: 600;
-        font-size: 30px;
+        font-size: 16px;
         line-height: 36px;
         color: $grey-text;
         padding-bottom: 5px;
+
+        @include on('sm') {
+            font-size: 24px;
+        }
+
+        @include on('lg') {
+            font-size: 30px;
+        }
 
         span {
             color: $green;
@@ -14,10 +22,15 @@
     }
 
     hr {
-        width: 60%;
+        display: none;
         height: 1px;
         background-color: #707070;
         opacity: 50%;
+
+        @include on('lg') {
+            width: 60%;
+            display: block;
+        }
     }
 
     .owl-carousel {
@@ -100,10 +113,17 @@
 .act-content {
     background-color: $grey;
     border-radius: 0 0 10px 10px;
-    min-height: 125px;
 
     a {
-        min-height: 125px;
+        height: 100px;
+
+        @include on('sm') {
+            height: 118px;
+        }
+
+        @include on('lg') {
+            height: 160px;
+        }
     }
 
     .content-cl {
@@ -112,15 +132,28 @@
 
     .content-nm,
     .content-cl {
-        padding: 17px 17px 17px 28px;
+        padding: 10px 13px 10px 13px;
         text-decoration: none;
         display: block;
         border-radius: 0 0 10px 10px;
 
+        @include on('lg') {
+            padding: 17px 17px 17px 28px;
+        }
+
         .act-title {
-            font-size: 20px;
+            font-size: 14px;
             font-weight: 600;
-            line-height: 30px;
+            line-height: 17px;
+
+            @include on('sm') {
+                line-height: 23px;
+            }
+
+            @include on('lg') {
+                font-size: 20px;
+                line-height: 30px;
+            }
         }
 
         .title-nm {
@@ -138,7 +171,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 4;
     }
 }
 
@@ -192,19 +225,33 @@
 .img-container {
     .act-img {
         width: 100%;
-        height: 269px;
+        height: 133px;
         object-fit: cover;
         object-position: center;
         border-radius: 10px 10px 0 0;
+
+        @include on('lg') {
+            height: 180px;
+        }
+
+        @include on('xl') {
+            height: 250px;
+        }
     }
 }
 ::deep .owl-carousel {
-    .owl-nav {
-        display: block;
+
+    .owl-prev, .owl-next {
+        position: absolute;
+        top: 25%;
     }
 
-    .owl-item {
-        padding: 0 7px;
+    .owl-prev {
+        left: 0;
+    }
+
+    .owl-next {
+        right: 0;
     }
 }
 
@@ -254,8 +301,16 @@
 
     a {
         font-weight: 600;
-        font-size: 24px;
+        font-size: 14px;
         color: $green;
+
+        @include on('sm') {
+            font-size: 20px;
+        }
+
+        @include on('lg') {
+            font-size: 24px;
+        }
 
         &:hover {
             color: $green-bold;
@@ -280,6 +335,7 @@
         color: $white;
     }
 }
+
 
 
 

@@ -1,2 +1,14 @@
-﻿.my-act {
-  margin-bottom: 120px; }
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-act {
+  margin-bottom: 30px; }
+  @media (min-width: 576px) {
+    .my-act {
+      margin-bottom: 50px; } }
+  @media (min-width: 1200px) {
+    .my-act {
+      margin-bottom: 120px; } }

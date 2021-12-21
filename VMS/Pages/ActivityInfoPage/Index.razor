@@ -6,22 +6,22 @@
 }
 else
 {
-    <div class="container-lg px-0 layout">
+    <div class="container-lg container px-lg-0 layout">
         <div class="toppage">
             <div class="return">
                 <a href="@Routes.ActivitySearch" class="return-text">&#60; Quay lại</a>
             </div>
         </div>
         <div class="row layout__body">
-            <div class="col-6 flex-grow-1 layout__body__main">
+            <div class="col-lg-6 flex-grow-1 layout__body__main">
                 <InfoPage Activity="@activity" />
             </div>
             <div class="col-1"></div>
-            <div class="col-5 layout__body__rightrail">
+            <div class="col-lg-5 layout__body__rightrail">
                 <Rightrail Activity="@activity" />
             </div>
         </div>
-        <div class="layout__other-activities my-5">
+        <div class="layout__other-activities my-lg-5 my-3">
             <OtherActivities ActivityId="@activity.Id" OrgId="@activity.OrgId" />
         </div>
     </div>

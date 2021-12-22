@@ -8,7 +8,7 @@
         <div class="owl-carousel owl-theme">
             @foreach (var item in otherActivities)
             {
-                <a href="" class="act__container__card position-relative" id="kiemtra">
+                <a @onclick="() => NavigationTo(item.Id)" class="act__container__card position-relative" id="kiemtra">
                     <div class="act__container__card__img">
                         @if (!string.IsNullOrEmpty(item.Banner))
                         {
@@ -18,17 +18,15 @@
                     <div class="act__container__card__desc">
                         <p class="limited-text m-0">@item.Name</p>
                     </div>
-                    <AuthorizeView>
-                        <Authorized>
-                            <div class="act__container__card__icon">
-                                @{
-                                    bool isFav = currentUser.Favorites.Any(x => x.ActivityId == item.Id);
-                                }
-                                <a class="@(isFav ? "heart" : "heart-line")" @onclick="@(() => HandleFavorite(item.Id))" @onclick:preventDefault @onclick:stopPropagation>
-                                    <span class="material-icons">favorite</span>
-                                </a>
-                            </div>
-                        </Authorized>
+                    <AuthorizeView Roles="@($"{Role.User}")">
+                        <div class="act__container__card__icon">
+                            @{
+                                bool isFav = currentUser.Favorites.Any(x => x.ActivityId == item.Id);
+                            }
+                            <a class="@(isFav ? "heart" : "heart-line")" @onclick="@(() => HandleFavorite(item.Id))" @onclick:preventDefault @onclick:stopPropagation>
+                                <span class="material-icons">favorite</span>
+                            </a>
+                        </div>
                     </AuthorizeView>
                 </a>
             }

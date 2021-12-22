@@ -16,9 +16,12 @@
                     <p class="postdate m-0 ms-2">
                         Ngày đăng: @activity.CreatedDate
                     </p>
-                    <button @onclick="@(() => HandleFavorite(activity.Id))" class="@(isFav ? "heart-button2" : "heart-button1")">
-                        <span class="material-icons"><span class="heart-icon">@(isFav ? "favorite" : "favorite_border")</span></span>
-                    </button>
+
+                    <AuthorizeView Roles="@($"{Role.User}")">
+                        <button @onclick="@(() => HandleFavorite(activity.Id))" class="@(isFav ? "heart-button2" : "heart-button1")">
+                            <span class="material-icons"><span class="heart-icon">@(isFav ? "favorite" : "favorite_border")</span></span>
+                        </button>
+                    </AuthorizeView>
                 </div>
             </div>
         </div>

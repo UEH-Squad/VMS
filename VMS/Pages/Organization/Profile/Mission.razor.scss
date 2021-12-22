@@ -11,12 +11,41 @@
     h3 {
         color: $grey-text;
         font-weight: 600;
-        font-size: 60px;
+        font-size: 20px;
+
+        @include on("sm") {
+            font-size: 36px;
+        }
+
+        @include on("lg") {
+            font-size: 52px;
+        }
+
+        @include on("xxl") {
+            font-size: 60px;
+        }
     }
 
     p {
         color: $grey-text;
         font-weight: 400;
-        font-size: 30px;
+        font-size: 10px;
+
+
+        @include on("sm") {
+            font-size: 16px;
+        }
+
+        @include on("md") {
+            font-size: 20px;
+        }
+
+        @include on("lg") {
+            font-size: 24px;
+        }
+
+        @include on("xl") {
+            font-size: 30px;
+        }
     }
 }

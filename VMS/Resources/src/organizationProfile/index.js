@@ -4,9 +4,9 @@ const informationCarousel = () => {
         loop: true,
         margin: 0,
         nav: true,
+        items: 3,
         responsive: {
             0: {
-                items: 3,
                 slideBy: 1,
             },
         }

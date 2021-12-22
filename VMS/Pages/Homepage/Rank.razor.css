@@ -5,7 +5,13 @@
 /*#region mixins */
 /*#endregion */
 .my-rank .rank__content {
-  width: 70%; }
+  width: 100%; }
+  @media (min-width: 992px) {
+    .my-rank .rank__content {
+      width: 75%; } }
+  @media (min-width: 1200px) {
+    .my-rank .rank__content {
+      width: 70%; } }
   @media (min-width: 1400px) {
     .my-rank .rank__content {
       width: 75%; } }
@@ -15,47 +21,97 @@
 
 .my-rank h1 {
   color: #18A0FB;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 500;
   text-align: center; }
+  @media (min-width: 576px) {
+    .my-rank h1 {
+      font-size: 24px; } }
+  @media (min-width: 1200px) {
+    .my-rank h1 {
+      font-size: 30px; } }
   .my-rank h1 span {
     color: #64D72F; }
 
 .my-rank .rank__link {
   margin-top: 10px;
-  margin-bottom: 40px;
-  height: 50px; }
+  margin-bottom: 0;
+  height: 30px; }
+  @media (min-width: 992px) {
+    .my-rank .rank__link {
+      margin-bottom: 40px;
+      height: 50px; } }
 
 .my-rank .rank__link-organization {
   display: inline-block;
-  margin-right: 100px;
   color: #18A0FB;
-  font-size: 26px;
+  font-size: 12px;
   font-weight: 500;
-  width: 130px; }
+  width: 70px; }
+  @media (min-width: 576px) {
+    .my-rank .rank__link-organization {
+      font-size: 14px;
+      width: 75px; } }
+  @media (min-width: 992px) {
+    .my-rank .rank__link-organization {
+      font-size: 26px;
+      margin-right: 100px;
+      width: 130px; } }
   .my-rank .rank__link-organization:hover {
     color: #0B588c;
-    font-size: 30px;
+    font-size: 16px;
     cursor: pointer; }
+    @media (min-width: 576px) {
+      .my-rank .rank__link-organization:hover {
+        font-size: 18px; } }
+    @media (min-width: 992px) {
+      .my-rank .rank__link-organization:hover {
+        font-size: 30px; } }
 
 .my-rank .rank__link-students {
   color: #64D72F;
-  font-size: 26px;
+  font-size: 12px;
   font-weight: 500; }
+  @media (min-width: 576px) {
+    .my-rank .rank__link-students {
+      font-size: 16px; } }
+  @media (min-width: 992px) {
+    .my-rank .rank__link-students {
+      font-size: 26px; } }
   .my-rank .rank__link-students:hover {
     color: #306C14;
-    font-size: 30px;
+    font-size: 16px;
     cursor: pointer; }
+    @media (min-width: 576px) {
+      .my-rank .rank__link-students:hover {
+        font-size: 18px; } }
+    @media (min-width: 992px) {
+      .my-rank .rank__link-students:hover {
+        font-size: 30px; } }
 
 .my-rank .cssShowOrg {
   border-bottom: 1px solid #0B588c;
   color: #0B588c !important;
-  font-size: 30px !important; }
+  font-size: 16px !important;
+  margin-right: 10px; }
+  @media (min-width: 576px) {
+    .my-rank .cssShowOrg {
+      font-size: 18px !important; } }
+  @media (min-width: 992px) {
+    .my-rank .cssShowOrg {
+      font-size: 30px !important;
+      margin-right: 100px; } }
 
 .my-rank .cssShowPer {
   border-bottom: 1px solid #306C14;
   color: #306C14;
-  font-size: 30px; }
+  font-size: 16px !important; }
+  @media (min-width: 576px) {
+    .my-rank .cssShowPer {
+      font-size: 18px !important; } }
+  @media (min-width: 992px) {
+    .my-rank .cssShowPer {
+      font-size: 30px !important; } }
 
 .my-rank ::deep .owl-stage {
   padding-top: 20px;
@@ -65,7 +121,11 @@
   transform: scaleY(0.9);
   transition: all 1s linear;
   background-color: rgba(196, 196, 196, 0.2);
-  box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25); }
+  box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 10px; }
+  @media (min-width: 992px) {
+    .my-rank ::deep .owl-item {
+      border-radius: 5px; } }
   .my-rank ::deep .owl-item .rank__img-rank {
     width: 9%;
     position: absolute;
@@ -82,7 +142,7 @@
       top: 0%;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 35px;
+      font-size: 4vw;
       font-weight: 600;
       color: #FFFFFF;
       transition: all 1s linear; }
@@ -100,37 +160,57 @@
   .my-rank ::deep .owl-item.active .rank__img-rank img {
     width: 100%; }
   .my-rank ::deep .owl-item.active .rank__img-rank span {
-    font-size: 45px; }
+    font-size: 4.8vw; }
+    @media (min-width: 992px) {
+      .my-rank ::deep .owl-item.active .rank__img-rank span {
+        font-size: 45px; } }
     @media (min-width: 1400px) {
       .my-rank ::deep .owl-item.active .rank__img-rank span {
         font-size: 55px; } }
 
 .my-rank ::deep .owl-nav {
-  display: inline-block; }
+  display: none; }
+  @media (min-width: 992px) {
+    .my-rank ::deep .owl-nav {
+      display: inline-block; } }
   .my-rank ::deep .owl-nav .owl-prev span {
     position: absolute;
-    top: 25%;
-    left: 0;
+    top: 15%;
+    left: -10;
     font-size: 100px;
     color: #18A0FB;
-    transition: all 0.3s linear; }
+    transition: all 0.3s linear;
+    display: block; }
+    @media (min-width: 992px) {
+      .my-rank ::deep .owl-nav .owl-prev span {
+        top: 25%;
+        left: 0; } }
     .my-rank ::deep .owl-nav .owl-prev span:hover {
       color: #0B588C;
       opacity: 0.73; }
   .my-rank ::deep .owl-nav .owl-next span {
     position: absolute;
-    top: 25%;
-    right: 0;
+    top: 15%;
+    right: -10;
     font-size: 100px;
     color: #18A0FB;
-    transition: all 0.3s linear; }
+    transition: all 0.3s linear;
+    display: block; }
+    @media (min-width: 992px) {
+      .my-rank ::deep .owl-nav .owl-next span {
+        top: 25%;
+        right: 0; } }
     .my-rank ::deep .owl-nav .owl-next span:hover {
       color: #0B588C;
       opacity: 0.73; }
 
 .my-rank ::deep .owl-dots {
   transform: translateY(-50%);
-  display: block; }
+  display: block;
+  margin-top: 5px; }
+  @media (min-width: 992px) {
+    .my-rank ::deep .owl-dots {
+      margin-top: 0; } }
   .my-rank ::deep .owl-dots span {
     background-color: #C4C4C4;
     width: 8px;
@@ -147,16 +227,30 @@
 .my-rank .rank__img {
   overflow: hidden; }
   .my-rank .rank__img img {
-    width: 140px;
-    height: 140px;
     border-radius: 50%;
-    object-fit: cover; }
+    object-fit: cover;
+    width: 70px;
+    height: 70px; }
+    @media (min-width: 768px) {
+      .my-rank .rank__img img {
+        width: 90px;
+        height: 90px; } }
+    @media (min-width: 992px) {
+      .my-rank .rank__img img {
+        width: 140px;
+        height: 140px; } }
 
 .my-rank .rank__name {
   margin: 0;
   color: #64D72F;
-  font-size: 24px;
-  font-weight: 600; }
+  font-weight: 600;
+  font-size: 12px; }
+  @media (min-width: 768px) {
+    .my-rank .rank__name {
+      font-size: 16px; } }
+  @media (min-width: 992px) {
+    .my-rank .rank__name {
+      font-size: 24px; } }
 
 .my-rank .rank__review {
   display: inline-block;
@@ -165,30 +259,54 @@
   padding: 2px 30px;
   border-radius: 5px;
   color: #515151;
-  font-size: 20px;
+  font-size: 10px;
   font-weight: 500; }
+  @media (min-width: 768px) {
+    .my-rank .rank__review {
+      font-size: 14px; } }
+  @media (min-width: 992px) {
+    .my-rank .rank__review {
+      font-size: 20px; } }
 
 .my-rank .rank__act p, .my-rank .rank__class p {
   margin-bottom: 0;
   color: #18A0FB;
-  font-size: 34px;
+  font-size: 16px;
   font-weight: 600; }
+  @media (min-width: 992px) {
+    .my-rank .rank__act p, .my-rank .rank__class p {
+      font-size: 34px; } }
 
 .my-rank .rank__act span, .my-rank .rank__class span {
   color: #64D72F;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 500; }
+  @media (min-width: 768px) {
+    .my-rank .rank__act span, .my-rank .rank__class span {
+      font-size: 14px; } }
+  @media (min-width: 992px) {
+    .my-rank .rank__act span, .my-rank .rank__class span {
+      font-size: 18px; } }
 
 .my-rank .rank__star p {
   margin: 0;
   color: #18A0FB;
-  font-size: 34px;
+  font-size: 16px;
   font-weight: 600; }
+  @media (min-width: 992px) {
+    .my-rank .rank__star p {
+      font-size: 34px; } }
 
 .my-rank .rank__star i {
   color: #EDF131;
-  font-size: 20px;
+  font-size: 10px;
   margin: 0 3px; }
+  @media (min-width: 768px) {
+    .my-rank .rank__star i {
+      font-size: 16px; } }
+  @media (min-width: 992px) {
+    .my-rank .rank__star i {
+      font-size: 20px; } }
 
 .my-rank .rank__star .star-noColor {
   color: #B4B4B4; }

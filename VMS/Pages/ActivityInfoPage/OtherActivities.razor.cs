@@ -45,9 +45,9 @@ namespace VMS.Pages.ActivityInfoPage
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (otherActivities is not null)
+            if (!firstRender && otherActivities.Count > 0)
             {
-                await JSRuntinme.InvokeVoidAsync("vms.OtherAct", otherActivities.Count);
+                await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
             }
         }
 

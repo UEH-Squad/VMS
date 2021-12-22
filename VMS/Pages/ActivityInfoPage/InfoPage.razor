@@ -6,7 +6,7 @@
                 @activity.Name
             </p>
             <div class="title__name">
-                <span class="material-icons"><span class="earth-icon">public</span></span>
+                <span class="material-icons"><span class="earth-icon me-2">public</span></span>
                 <a class="org-name" href="@($"{Routes.OrgProfile}/{activity.OrgId}")">
                     <p class="organization m-0">@activity.Organizer?.FullName</p>
                 </a>
@@ -36,11 +36,14 @@
             </div>
             <div class="activity__mission">
                 <p class="mission">Sứ mệnh:</p>
-                @((MarkupString)activity.Mission)
+                <p>@((MarkupString)activity.Mission)</p>
             </div>
             <div class="activity__assignment">
                 <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
-                @((MarkupString)activity.Commission)
+                <p>@((MarkupString)activity.Commission)</p>
+            </div>
+            <div class="activity__detail">
+                <p class="detail mb-3">Chi tiết hoạt động:</p>
             </div>
         </div>
     </div>

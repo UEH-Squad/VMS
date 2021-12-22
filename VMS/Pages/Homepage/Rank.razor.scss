@@ -3,7 +3,15 @@
 .my-rank {
 
     .rank__content {
-        width: 70%;
+        width: 100%;
+
+        @include on('lg') {
+            width: 75%;
+        }
+
+        @include on('xl') {
+            width: 70%;
+        }
 
         @include on("xxl") {
             width: 75%;
@@ -16,9 +24,17 @@
 
     h1 {
         color: $blue;
-        font-size: 30px;
+        font-size: 16px;
         font-weight: 500;
         text-align: center;
+
+        @include on("sm") {
+            font-size: 24px;
+        }
+
+        @include on("xl") {
+            font-size: 30px;
+        }
 
         span {
             color: $green;
@@ -27,47 +43,104 @@
 
     .rank__link {
         margin-top: 10px;
-        margin-bottom: 40px;
-        height: 50px;
+        margin-bottom: 0;
+        height: 30px;
+
+        @include on('lg') {
+            margin-bottom: 40px;
+            height: 50px;
+        }
     }
 
     .rank__link-organization {
         display: inline-block;
-        margin-right: 100px;
         color: $blue;
-        font-size: 26px;
+        font-size: 12px;
         font-weight: 500;
-        width: 130px;
+        width: 70px;
+
+        @include on('sm') {
+            font-size: 14px;
+            width: 75px;
+        }
+
+        @include on('lg') {
+            font-size: 26px;
+            margin-right: 100px;
+            width: 130px;
+        }
 
         &:hover {
             color: $blue-hv;
-            font-size: 30px;
+            font-size: 16px;
             cursor: pointer;
+
+            @include on('sm') {
+                font-size: 18px;
+            }
+
+            @include on('lg') {
+                font-size: 30px;
+            }
         }
     }
 
     .rank__link-students {
         color: $green;
-        font-size: 26px;
+        font-size: 12px;
         font-weight: 500;
+
+        @include on('sm') {
+            font-size: 16px;
+        }
+
+        @include on('lg') {
+            font-size: 26px;
+        }
 
         &:hover {
             color: $green-bold;
-            font-size: 30px;
+            font-size: 16px;
             cursor: pointer;
+
+            @include on('sm') {
+                font-size: 18px;
+            }
+
+            @include on('lg') {
+                font-size: 30px;
+            }
         }
     }
 
     .cssShowOrg {
         border-bottom: 1px solid $blue-hv;
         color: $blue-hv !important;
-        font-size: 30px !important;
+        font-size: 16px !important;
+        margin-right: 10px;
+
+        @include on('sm') {
+            font-size: 18px !important;
+        }
+
+        @include on('lg') {
+            font-size: 30px !important;
+            margin-right: 100px;
+        }
     }
 
     .cssShowPer {
         border-bottom: 1px solid $green-bold;
         color: $green-bold;
-        font-size: 30px;
+        font-size: 16px !important;
+
+        @include on('sm') {
+            font-size: 18px !important;
+        }
+
+        @include on('lg') {
+            font-size: 30px !important;
+        }
     }
 
     ::deep .owl-stage {
@@ -80,6 +153,11 @@
         transition: all 1s linear;
         background-color: rgba($color: #C4C4C4, $alpha: 0.2);
         box-shadow: 0px 4px 4px 0 rgba($color: #000000, $alpha: 0.25);
+        border-radius: 10px;
+
+        @include on('lg') {
+            border-radius: 5px;
+        }
 
         .rank__img-rank {
             width: 9%;
@@ -103,7 +181,7 @@
                 top: 0%;
                 left: 50%;
                 transform: translateX(-50%);
-                font-size: 35px;
+                font-size: 4vw;
                 font-weight: 600;
                 color: $white;
                 transition: all 1s linear;
@@ -132,7 +210,11 @@
             }
 
             span {
-                font-size: 45px;
+                font-size: 4.8vw;
+
+                @include on('lg') {
+                    font-size: 45px;
+                }
 
                 @include on("xxl") {
                     font-size: 55px;
@@ -142,16 +224,26 @@
     }
 
     ::deep .owl-nav {
-        display: inline-block;
+        display: none;
+
+        @include on('lg') {
+            display: inline-block;
+        }
 
         .owl-prev {
             span {
                 position: absolute;
-                top: 25%;
-                left: 0;
+                top: 15%;
+                left: -10;
                 font-size: 100px;
                 color: $blue;
                 transition: all 0.3s linear;
+                display: block;
+
+                @include on('lg') {
+                    top: 25%;
+                    left: 0;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -163,11 +255,17 @@
         .owl-next {
             span {
                 position: absolute;
-                top: 25%;
-                right: 0;
+                top: 15%;
+                right: -10;
                 font-size: 100px;
                 color: $blue;
                 transition: all 0.3s linear;
+                display: block;
+
+                @include on('lg') {
+                    top: 25%;
+                    right: 0;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -181,6 +279,11 @@
     ::deep .owl-dots {
         transform: translateY(-50%);
         display: block;
+        margin-top: 5px;
+
+        @include on('lg') {
+            margin-top: 0;
+        }
 
         span {
             background-color: #C4C4C4;
@@ -207,18 +310,36 @@
 
 
         img {
-            width: 140px;
-            height: 140px;
             border-radius: 50%;
             object-fit: cover;
+            width: 70px;
+            height: 70px;
+
+            @include on('md') {
+                width: 90px;
+                height: 90px;
+            }
+
+            @include on('lg') {
+                width: 140px;
+                height: 140px;
+            }
         }
     }
 
     .rank__name {
         margin: 0;
         color: $green;
-        font-size: 24px;
         font-weight: 600;
+        font-size: 12px;
+
+        @include on('md') {
+            font-size: 16px;
+        }
+
+        @include on('lg') {
+            font-size: 24px;
+        }
     }
 
     .rank__review {
@@ -228,23 +349,42 @@
         padding: 2px 30px;
         border-radius: 5px;
         color: $grey-text;
-        font-size: 20px;
+        font-size: 10px;
         font-weight: 500;
 
+        @include on('md') {
+            font-size: 14px;
+        }
+
+        @include on('lg') {
+            font-size: 20px;
+        }
     }
 
     .rank__act, .rank__class {
         p {
             margin-bottom: 0;
             color: $blue;
-            font-size: 34px;
+            font-size: 16px;
             font-weight: 600;
+
+            @include on('lg') {
+                font-size: 34px;
+            }
         }
 
         span {
             color: $green;
-            font-size: 18px;
+            font-size: 12px;
             font-weight: 500;
+
+            @include on('md') {
+                font-size: 14px;
+            }
+
+            @include on('lg') {
+                font-size: 18px;
+            }
         }
     }
 
@@ -252,14 +392,26 @@
         p {
             margin: 0;
             color: $blue;
-            font-size: 34px;
+            font-size: 16px;
             font-weight: 600;
+
+            @include on('lg') {
+                font-size: 34px;
+            }
         }
 
         i {
             color: #EDF131;
-            font-size: 20px;
+            font-size: 10px;
             margin: 0 3px;
+
+            @include on('md') {
+                font-size: 16px;
+            }
+
+            @include on('lg') {
+                font-size: 20px;
+            }
         }
 
         .star-noColor {

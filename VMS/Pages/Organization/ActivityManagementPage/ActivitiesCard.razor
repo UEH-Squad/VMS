@@ -7,7 +7,7 @@
 {
     @foreach (var item in data.Items)
     {
-        <div class="org-card" style="z-index:@(CheckForZIndex(item.Id) ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || CheckForZIndex(item.Id) ? 1 : 0.75)">
+        <div class="org-card" style="z-index:@(item.Id == dropdownId ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || item.Id == dropdownId ? 1 : 0.75)">
             <i @onclick="() => ChangeDropdownState(item.Id)" class="material-icons position-absolute">
                 more_horiz
             </i>
@@ -63,14 +63,7 @@
                      @if (DateTime.Now.Date > item.EndDate)
                     {
                         <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1 position-relative">
-                            <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
-                            <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
-                                expand_more
-                            </span>
-                            <ul class="rate-menu org-card__cbb-rate__list card-list position-absolute" style="display:@(item.Id == rateId ? "inline-block" : "none");">
-                                <li>Tình nguyện viên</li>
-                                <li>Xem đánh giá hoạt động</li>
-                            </ul>
+                            <a href="@Routes.Rating/@item.Id" class="org-card__cbb-rate__title">Đánh giá</a>
                         </div>
                     }
                 </div>

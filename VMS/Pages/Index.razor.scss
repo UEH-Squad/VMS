@@ -1,3 +1,13 @@
-﻿.my-act{
-    margin-bottom: 120px;
+﻿@import '../Resources/scss/common/_variables.scss';
+
+.my-act {
+    margin-bottom: 30px;
+
+    @include on('sm') {
+        margin-bottom: 50px;
+    }
+
+    @include on('xl') {
+        margin-bottom: 120px;
+    }
 }

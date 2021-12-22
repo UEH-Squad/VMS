@@ -14,9 +14,15 @@
   z-index: 101; }
   .my-signUp .signUp__content {
     position: relative;
-    width: 950px;
+    width: 100%;
+    overflow-y: scroll;
+    height: 100%;
     border-radius: 10px;
     background: #FFFFFF; }
+    @media (min-width: 992px) {
+      .my-signUp .signUp__content {
+        width: 950px;
+        height: unset; } }
     .my-signUp .signUp__content::-webkit-scrollbar {
       width: 10px; }
     .my-signUp .signUp__content::-webkit-scrollbar-thumb {

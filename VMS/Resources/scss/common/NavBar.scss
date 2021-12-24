@@ -1,4 +1,5 @@
 ﻿@import '_variables';
+
 .my-navbar {
     min-height: 65px;
     z-index: 100;
@@ -9,6 +10,7 @@
 
     &-container {
         justify-content: unset;
+
         @include on('xl') {
             position: relative;
         }
@@ -50,6 +52,12 @@
     }
 
     &__brand {
+        flex-direction: column;
+
+        @include on('sm') {
+            flex-direction: row;
+            align-items: center;
+        }
 
         @include on('md') {
             margin-left: 20px;
@@ -65,10 +73,11 @@
         }
 
         .brand__ueh {
-            height: 16px;
+            height: 29px;
 
-            @include on('lg') {
-                height: 20px;
+            @include on('sm') {
+                height: 50px;
+                margin-right: 15px;
             }
         }
 
@@ -140,11 +149,12 @@
                 color: $blue-bold;
             }
 
-            &:hover{
+            &:hover {
                 color: $blue-bold;
             }
-            &.active::before{
-               display: block;
+
+            &.active::before {
+                display: block;
             }
         }
 
@@ -182,7 +192,6 @@
                     display: block;
                 }
             }
-
         }
 
         &__login-area {
@@ -198,4 +207,3 @@
         }
     }
 }
-

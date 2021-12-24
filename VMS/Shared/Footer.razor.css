@@ -70,10 +70,13 @@
       .footer__logo .footer__logo-ueh-hsv {
         margin: 20px 0; } }
   .footer__logo .footer__logo-ueh {
-    width: 52%; }
+    width: 26%; }
   .footer__logo .footer__logo-hsv {
-    width: 15%;
-    margin-left: 20px; }
+    width: 16%;
+    margin-left: 10px; }
+    @media (min-width: 576px) {
+      .footer__logo .footer__logo-hsv {
+        margin-left: 20px; } }
   .footer__logo p {
     font-size: 8px;
     font-weight: 400; }

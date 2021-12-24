@@ -1,1 +1,281 @@
-main{background-color:#f3f3f5}.colored-green{color:#64D72F}.colored-blue{color:#18A0FB}.my-row{height:650px}.my-row h1{font-size:70px;font-weight:bold}.my-row h5{font-size:35px}.my-row h5 span{font-size:35px}.my-content-wrapper{border-radius:10px;width:100%;min-height:500px;background-color:#fff;background-image:url("/img/login-img.png");background-repeat:no-repeat;background-size:contain;background-position:center;padding:60px 40px}.footer{position:relative;padding-top:30px;border-top:1px solid rgba(51,51,51,0.5)}.btn-back-top{position:absolute;cursor:pointer;top:0;right:0px;transform:translate(-100%, -50%)}.btn-back-top .btn-back-top-icon{text-align:center;width:25px;height:25px;line-height:25px;border-radius:50%;font-size:16px;color:#fff;background:#64D72F}@media (min-width: 576px){.btn-back-top .btn-back-top-icon{width:40px;height:40px;line-height:40px;font-size:24px}}@media (min-width: 992px){.btn-back-top .btn-back-top-icon{width:60px;height:60px;line-height:60px;font-size:44px}}@media (min-width: 1200px){.btn-back-top .btn-back-top-icon{width:70px;height:70px;line-height:70px;font-size:64px}}.footer__logo{padding:0}.footer__logo .footer__logo-govirlunteer{width:100%}.footer__logo .footer__logo-ueh-hsv{display:flex;align-items:center;margin:10px 0}@media (min-width: 992px){.footer__logo .footer__logo-ueh-hsv{margin:15px 0}}@media (min-width: 1200px){.footer__logo .footer__logo-ueh-hsv{margin:20px 0}}.footer__logo .footer__logo-ueh{width:52%}.footer__logo .footer__logo-hsv{width:15%;margin-left:20px}.footer__logo p{font-size:8px;font-weight:400}@media (min-width: 576px){.footer__logo p{font-size:12px}}@media (min-width: 1200px){.footer__logo p{font-size:15px}}.footer__contact{padding:0;padding-top:10px}.footer__contact h6{margin-bottom:20px;font-size:8px;font-weight:300;color:#515151}@media (min-width: 576px){.footer__contact h6{font-size:12px}}@media (min-width: 1200px){.footer__contact h6{font-size:16px}}@media (min-width: 1400px){.footer__contact h6{font-size:18px}}.footer__contact h6 a{color:#515151;text-decoration:none}.footer__contact .contact__name{font-weight:700}.footer__contact .contact__contribute{font-weight:400}.footer__right{padding:0;padding-top:10px;text-align:right}.footer__right h6{margin-bottom:20px;font-size:7px;font-weight:400;color:#515151}@media (min-width: 576px){.footer__right h6{margin-bottom:25px;font-size:12px}}@media (min-width: 1200px){.footer__right h6{margin-bottom:33px;font-size:16px}}@media (min-width: 1400px){.footer__right h6{margin-bottom:35px;font-size:18px}}.footer__right h6 a{color:#515151;text-decoration:none}
+main {
+    background-color: #f3f3f5;
+}
+
+.colored-green {
+    color: #64d72f;
+}
+
+.colored-blue {
+    color: #18a0fb;
+}
+
+.my-row {
+    height: 650px;
+}
+
+    .my-row h1 {
+        font-size: 70px;
+        font-weight: bold;
+    }
+
+    .my-row h5 {
+        font-size: 35px;
+    }
+
+        .my-row h5 span {
+            font-size: 35px;
+        }
+
+.my-content-wrapper {
+    border-radius: 10px;
+    width: 100%;
+    min-height: 500px;
+    background-color: #fff;
+    background-image: url("/img/login-img.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 60px 40px;
+}
+
+.footer {
+    position: relative;
+    padding-top: 30px;
+    border-top: 1px solid rgba(51,51,51,.5);
+}
+
+.btn-back-top {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    transform: translate(-100%,-50%);
+}
+
+    .btn-back-top .btn-back-top-icon {
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 50%;
+        font-size: 16px;
+        color: #fff;
+        background: #64d72f;
+    }
+
+@media(min-width:576px) {
+    .btn-back-top .btn-back-top-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 24px;
+    }
+}
+
+@media(min-width:992px) {
+    .btn-back-top .btn-back-top-icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 44px;
+    }
+}
+
+@media(min-width:1200px) {
+    .btn-back-top .btn-back-top-icon {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        font-size: 64px;
+    }
+}
+
+.my-navbar__brand {
+    flex-direction: column;
+}
+
+@media(min-width:576px) {
+    .my-navbar__brand {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+@media(min-width:768px) {
+    .my-navbar__brand {
+        margin-left: 20px;
+    }
+}
+
+@media(min-width:1200px) {
+    .my-navbar__brand {
+        margin: 0;
+    }
+}
+
+.my-navbar__brand-item {
+    height: 50%;
+    display: block;
+}
+
+.my-navbar__brand .brand__ueh {
+    height: 29px;
+}
+
+@media(min-width:576px) {
+    .my-navbar__brand .brand__ueh {
+        height: 50px;
+        margin-right: 15px;
+    }
+}
+
+.my-navbar__brand .brand__govirlunteer {
+    height: 16px;
+}
+
+@media(min-width:992px) {
+    .my-navbar__brand .brand__govirlunteer {
+        height: 20px;
+    }
+}
+
+.footer__logo {
+    padding: 0;
+}
+
+    .footer__logo .footer__logo-govirlunteer {
+        width: 100%;
+    }
+
+    .footer__logo .footer__logo-ueh-hsv {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+@media(min-width:992px) {
+    .footer__logo .footer__logo-ueh-hsv {
+        margin: 15px 0;
+    }
+}
+
+@media(min-width:1200px) {
+    .footer__logo .footer__logo-ueh-hsv {
+        margin: 20px 0;
+    }
+}
+
+.footer__logo .footer__logo-ueh {
+    width: 26%;
+}
+
+.footer__logo .footer__logo-hsv {
+    width: 16%;
+    margin-left: 10px;
+}
+
+@media(min-width:576px) {
+    .footer__logo .footer__logo-hsv {
+        margin-left: 20px;
+    }
+}
+
+.footer__logo p {
+    font-size: 8px;
+    font-weight: 400;
+}
+
+@media(min-width:576px) {
+    .footer__logo p {
+        font-size: 12px;
+    }
+}
+
+@media(min-width:1200px) {
+    .footer__logo p {
+        font-size: 15px;
+    }
+}
+
+.footer__contact {
+    padding: 0;
+    padding-top: 10px;
+}
+
+    .footer__contact h6 {
+        margin-bottom: 20px;
+        font-size: 8px;
+        font-weight: 300;
+        color: #515151;
+    }
+
+@media(min-width:576px) {
+    .footer__contact h6 {
+        font-size: 12px;
+    }
+}
+
+@media(min-width:1200px) {
+    .footer__contact h6 {
+        font-size: 16px;
+    }
+}
+
+@media(min-width:1400px) {
+    .footer__contact h6 {
+        font-size: 18px;
+    }
+}
+
+.footer__contact h6 a {
+    color: #515151;
+    text-decoration: none;
+}
+
+.footer__contact .contact__name {
+    font-weight: 700;
+}
+
+.footer__contact .contact__contribute {
+    font-weight: 400;
+}
+
+.footer__right {
+    padding: 0;
+    padding-top: 10px;
+    text-align: right;
+}
+
+    .footer__right h6 {
+        margin-bottom: 20px;
+        font-size: 7px;
+        font-weight: 400;
+        color: #515151;
+    }
+
+@media(min-width:576px) {
+    .footer__right h6 {
+        margin-bottom: 25px;
+        font-size: 12px;
+    }
+}
+
+@media(min-width:1200px) {
+    .footer__right h6 {
+        margin-bottom: 33px;
+        font-size: 16px;
+    }
+}
+
+@media(min-width:1400px) {
+    .footer__right h6 {
+        margin-bottom: 35px;
+        font-size: 18px;
+    }
+}
+
+.footer__right h6 a {
+    color: #515151;
+    text-decoration: none;
+}

@@ -85,12 +85,16 @@
     }
 
     .footer__logo-ueh {
-        width: 52%;
+        width: 26%;
     }
 
     .footer__logo-hsv {
-        width: 15%;
-        margin-left: 20px;
+        width: 16%;
+        margin-left: 10px;
+
+        @include on('sm') {
+            margin-left: 20px;
+        }
     }
 
     p {

@@ -47,25 +47,32 @@
     @media (min-width: 992px) {
       .my-navbar-container .my-login-btn, .my-navbar-container .my-register-btn {
         margin-right: 20px; } }
-  @media (min-width: 768px) {
-    .my-navbar__brand {
-      margin-left: 20px; } }
-  @media (min-width: 1200px) {
-    .my-navbar__brand {
-      margin: 0; } }
-  .my-navbar__brand-item {
-    height: 50%;
-    display: block; }
-  .my-navbar__brand .brand__ueh {
-    height: 16px; }
-    @media (min-width: 992px) {
-      .my-navbar__brand .brand__ueh {
-        height: 20px; } }
-  .my-navbar__brand .brand__govirlunteer {
-    height: 16px; }
-    @media (min-width: 992px) {
-      .my-navbar__brand .brand__govirlunteer {
-        height: 20px; } }
+  .my-navbar__brand {
+    flex-direction: column; }
+    @media (min-width: 576px) {
+      .my-navbar__brand {
+        flex-direction: row;
+        align-items: center; } }
+    @media (min-width: 768px) {
+      .my-navbar__brand {
+        margin-left: 20px; } }
+    @media (min-width: 1200px) {
+      .my-navbar__brand {
+        margin: 0; } }
+    .my-navbar__brand-item {
+      height: 50%;
+      display: block; }
+    .my-navbar__brand .brand__ueh {
+      height: 29px; }
+      @media (min-width: 576px) {
+        .my-navbar__brand .brand__ueh {
+          height: 50px;
+          margin-right: 15px; } }
+    .my-navbar__brand .brand__govirlunteer {
+      height: 16px; }
+      @media (min-width: 992px) {
+        .my-navbar__brand .brand__govirlunteer {
+          height: 20px; } }
   .my-navbar__hamburger-wrapper {
     position: relative; }
     @media (min-width: 1200px) {

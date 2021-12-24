@@ -358,5 +358,9 @@
   {
     "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
     "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
+  },
+  {
+    "outputFile": "Resources/scss/IdentityCss/Layout.css",
+    "inputFile": "Resources/scss/IdentityCss/Layout.scss"
   }
 ]

@@ -143,21 +143,24 @@
     }
 
     ::deep .owl-nav {
-        display: none;
-
-        @include on('lg') {
-            display: block;
-        }
 
         .owl-prev {
             position: absolute;
-            top: -35px;
-            left: 0;
+            top: -12px;
+            left: 10px;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    top: 11px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -182,13 +185,21 @@
 
         .owl-next {
             position: absolute;
-            top: -35px;
-            right: 0;
+            top: -12px;
+            right: 10px;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    font-size: 60px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;

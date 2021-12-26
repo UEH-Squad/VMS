@@ -17,8 +17,14 @@
       .my-quoteBaner .quoteBaner__item {
         padding-bottom: 30px; } }
     .my-quoteBaner .quoteBaner__item h1 {
-      margin-bottom: 30px;
+      margin-bottom: 8px;
       color: #64D72F; }
+      @media (min-width: 768px) {
+        .my-quoteBaner .quoteBaner__item h1 {
+          margin-bottom: 16px; } }
+      @media (min-width: 992px) {
+        .my-quoteBaner .quoteBaner__item h1 {
+          margin-bottom: 24px; } }
       .my-quoteBaner .quoteBaner__item h1 svg {
         font-size: 36px;
         color: #64D72F; }

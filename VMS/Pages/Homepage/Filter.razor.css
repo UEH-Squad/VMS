@@ -98,52 +98,59 @@
     background: #F14747; }
   .my-filter .item-covid span {
     color: #F14747; }
-  .my-filter ::deep .owl-nav {
-    display: none; }
+  .my-filter ::deep .owl-nav .owl-prev {
+    position: absolute;
+    top: -12px;
+    left: 10px; }
+    .my-filter ::deep .owl-nav .owl-prev span {
+      font-size: 50px;
+      color: #18A0FB;
+      transition: all 0.3s linear; }
+      @media (min-width: 768px) {
+        .my-filter ::deep .owl-nav .owl-prev span {
+          top: 11px; } }
+      @media (min-width: 992px) {
+        .my-filter ::deep .owl-nav .owl-prev span {
+          font-size: 80px; } }
+      .my-filter ::deep .owl-nav .owl-prev span:hover {
+        color: #0B588C;
+        opacity: 0.73; }
+    .my-filter ::deep .owl-nav .owl-prev:hover {
+      background: none; }
     @media (min-width: 992px) {
-      .my-filter ::deep .owl-nav {
-        display: block; } }
-    .my-filter ::deep .owl-nav .owl-prev {
-      position: absolute;
-      top: -35px;
-      left: 0; }
-      .my-filter ::deep .owl-nav .owl-prev span {
-        font-size: 80px;
-        color: #18A0FB;
-        transition: all 0.3s linear; }
-        .my-filter ::deep .owl-nav .owl-prev span:hover {
-          color: #0B588C;
-          opacity: 0.73; }
-      .my-filter ::deep .owl-nav .owl-prev:hover {
-        background: none; }
+      .my-filter ::deep .owl-nav .owl-prev {
+        top: -30px;
+        left: 30px; } }
+    @media (min-width: 1400px) {
+      .my-filter ::deep .owl-nav .owl-prev {
+        top: -20px;
+        left: 30px; } }
+  .my-filter ::deep .owl-nav .owl-next {
+    position: absolute;
+    top: -12px;
+    right: 10px; }
+    .my-filter ::deep .owl-nav .owl-next span {
+      font-size: 50px;
+      color: #18A0FB;
+      transition: all 0.3s linear; }
+      @media (min-width: 768px) {
+        .my-filter ::deep .owl-nav .owl-next span {
+          font-size: 60px; } }
       @media (min-width: 992px) {
-        .my-filter ::deep .owl-nav .owl-prev {
-          top: -30px;
-          left: 30px; } }
-      @media (min-width: 1400px) {
-        .my-filter ::deep .owl-nav .owl-prev {
-          top: -20px;
-          left: 30px; } }
-    .my-filter ::deep .owl-nav .owl-next {
-      position: absolute;
-      top: -35px;
-      right: 0; }
-      .my-filter ::deep .owl-nav .owl-next span {
-        font-size: 80px;
-        color: #18A0FB;
-        transition: all 0.3s linear; }
-        .my-filter ::deep .owl-nav .owl-next span:hover {
-          color: #0B588C;
-          opacity: 0.73; }
-      .my-filter ::deep .owl-nav .owl-next:hover {
-        background: none; }
-      @media (min-width: 992px) {
-        .my-filter ::deep .owl-nav .owl-next {
-          top: -30px;
-          right: 30px; } }
-      @media (min-width: 1400px) {
-        .my-filter ::deep .owl-nav .owl-next {
-          top: -20px;
-          right: 30px; } }
+        .my-filter ::deep .owl-nav .owl-next span {
+          font-size: 80px; } }
+      .my-filter ::deep .owl-nav .owl-next span:hover {
+        color: #0B588C;
+        opacity: 0.73; }
+    .my-filter ::deep .owl-nav .owl-next:hover {
+      background: none; }
+    @media (min-width: 992px) {
+      .my-filter ::deep .owl-nav .owl-next {
+        top: -30px;
+        right: 30px; } }
+    @media (min-width: 1400px) {
+      .my-filter ::deep .owl-nav .owl-next {
+        top: -20px;
+        right: 30px; } }
   .my-filter ::deep .owl-dots {
     display: none; }

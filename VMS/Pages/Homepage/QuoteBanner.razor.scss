@@ -16,8 +16,16 @@
         }
 
         h1 {
-            margin-bottom: 30px;
+            margin-bottom: 8px;
             color: $green;
+
+            @include on('md') {
+                margin-bottom: 16px;
+            }
+
+            @include on('lg') {
+                margin-bottom: 24px;
+            }
 
             svg {
                 font-size: 36px;

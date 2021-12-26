@@ -56,16 +56,13 @@
     .act__container__card__img {
       position: relative;
       width: 100%;
-      height: calc(247px * 0.4); }
-      @media (min-width: 768px) {
+      height: 133px; }
+      @media (min-width: 992px) {
         .act__container__card__img {
-          height: calc(247px * 0.6); } }
+          height: 180px; } }
       @media (min-width: 1200px) {
         .act__container__card__img {
-          height: calc(247px * 0.8); } }
-      @media (min-width: 1400px) {
-        .act__container__card__img {
-          height: 247px; } }
+          height: 250px; } }
       .act__container__card__img img {
         width: 100%;
         height: 100%;
@@ -76,43 +73,45 @@
       padding: 10px;
       font-style: normal;
       font-weight: 600;
-      font-size: 10px;
+      font-size: 14px;
       color: #18A0FB;
-      height: 75px;
+      height: 100px;
       overflow: hidden;
       line-height: 17px; }
       @media (min-width: 576px) {
         .act__container__card__desc {
-          font-size: 14px;
+          font-size: 16px;
           line-height: 20px;
-          height: 90px; } }
+          height: 118px; } }
       @media (min-width: 992px) {
         .act__container__card__desc {
           padding: 19px;
           font-size: 20px;
           line-height: 30px;
-          height: 160px; } }
+          height: 170px; } }
     .act__container__card__icon {
       position: absolute;
-      top: 10px;
-      right: 10px; }
+      bottom: -4px;
+      right: 3px; }
+      @media (min-width: 992px) {
+        .act__container__card__icon {
+          bottom: 2px;
+          right: 10px; } }
       .act__container__card__icon span {
         font-size: 16px;
         color: transparent;
-        -webkit-text-stroke: 2px #fff; }
-        @media (min-width: 768px) {
+        -webkit-text-stroke: 2px #F14747; }
+        @media (min-width: 576px) {
           .act__container__card__icon span {
             font-size: 18px; } }
-        @media (min-width: 1200px) {
+        @media (min-width: 992px) {
           .act__container__card__icon span {
-            font-size: 36px; } }
-        @media (min-width: 1400px) {
-          .act__container__card__icon span {
-            font-size: 36px; } }
+            -webkit-text-stroke: 3px #F14747;
+            font-size: 25px; } }
 
 .heart span {
   cursor: pointer;
-  color: #fff !important; }
+  color: #F14747 !important; }
 
 .heart-line span {
   cursor: pointer;
@@ -168,7 +167,4 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
-  -webkit-line-clamp: 3; }
-  @media (min-width: 992px) {
-    .limited-text {
-      -webkit-line-clamp: 4; } }
+  -webkit-line-clamp: 4; }

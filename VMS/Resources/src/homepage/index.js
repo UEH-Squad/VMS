@@ -20,6 +20,10 @@ const filterCarousel = () => {
                 items: 4,
                 slideBy: 4
             },
+            992: {
+                items: 6,
+                slideBy: 6
+            },
             1200: {
                 items: 6,
                 slideBy: 6
@@ -99,12 +103,12 @@ const rankCarousel = () => {
         loop: true,
         margin: 0,
         nav: true,
-        //autoplay: false,
-        //autoplayTimeout: 5000,
-        //autoplaySpeed: 2000,
-        //autoplayHoverPause: true,
-        //navSpeed: 2000,
-        //dotsSpeed: 2000,
+        autoplay: false,
+        autoplayTimeout: 5000,
+        autoplaySpeed: 2000,
+        autoplayHoverPause: true,
+        navSpeed: 2000,
+        dotsSpeed: 2000,
         responsiveClass: true,
         responsive: {
             0: {

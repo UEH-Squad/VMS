@@ -101,14 +101,14 @@
   .my-filter ::deep .owl-nav .owl-prev {
     position: absolute;
     top: -12px;
-    left: 10px; }
+    left: 13px; }
     .my-filter ::deep .owl-nav .owl-prev span {
       font-size: 50px;
       color: #18A0FB;
       transition: all 0.3s linear; }
       @media (min-width: 768px) {
         .my-filter ::deep .owl-nav .owl-prev span {
-          top: 11px; } }
+          font-size: 60px; } }
       @media (min-width: 992px) {
         .my-filter ::deep .owl-nav .owl-prev span {
           font-size: 80px; } }
@@ -117,10 +117,13 @@
         opacity: 0.73; }
     .my-filter ::deep .owl-nav .owl-prev:hover {
       background: none; }
+    @media (min-width: 768px) {
+      .my-filter ::deep .owl-nav .owl-prev {
+        left: -3px; } }
     @media (min-width: 992px) {
       .my-filter ::deep .owl-nav .owl-prev {
         top: -30px;
-        left: 30px; } }
+        left: 0; } }
     @media (min-width: 1400px) {
       .my-filter ::deep .owl-nav .owl-prev {
         top: -20px;
@@ -128,7 +131,7 @@
   .my-filter ::deep .owl-nav .owl-next {
     position: absolute;
     top: -12px;
-    right: 10px; }
+    right: 13px; }
     .my-filter ::deep .owl-nav .owl-next span {
       font-size: 50px;
       color: #18A0FB;
@@ -144,10 +147,13 @@
         opacity: 0.73; }
     .my-filter ::deep .owl-nav .owl-next:hover {
       background: none; }
+    @media (min-width: 768px) {
+      .my-filter ::deep .owl-nav .owl-next {
+        right: -3px; } }
     @media (min-width: 992px) {
       .my-filter ::deep .owl-nav .owl-next {
         top: -30px;
-        right: 30px; } }
+        right: 0; } }
     @media (min-width: 1400px) {
       .my-filter ::deep .owl-nav .owl-next {
         top: -20px;

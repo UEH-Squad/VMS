@@ -1,0 +1,41 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.container .activities ::deep .act h1 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 36px;
+  color: #515151;
+  padding-bottom: 5px; }
+  @media (min-width: 992px) {
+    .container .activities ::deep .act h1 {
+      font-size: 30px; } }
+  .container .activities ::deep .act h1 span {
+    font-weight: 600;
+    font-size: 18px;
+    color: #64D72F; }
+    @media (min-width: 992px) {
+      .container .activities ::deep .act h1 span {
+        font-size: 30px; } }
+
+.container .activities ::deep .act hr {
+  display: none; }
+  @media (min-width: 992px) {
+    .container .activities ::deep .act hr {
+      display: block;
+      width: 60%;
+      height: 1px;
+      background-color: #707070;
+      opacity: 50%; } }
+
+.container .activities ::deep .act .owl-carousel {
+  z-index: 0; }
+
+.container .activities ::deep .act .act__linkAll {
+  display: none; }
+  @media (min-width: 992px) {
+    .container .activities ::deep .act .act__linkAll {
+      display: block; } }

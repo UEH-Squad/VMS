@@ -86,6 +86,45 @@ main {
         }
     }
 }
+//Nav login
+.my-navbar__brand {
+    flex-direction: column;
+
+    @include on('sm') {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    @include on('md') {
+        margin-left: 20px;
+    }
+
+    @include on('xl') {
+        margin: 0;
+    }
+
+    &-item {
+        height: 50%;
+        display: block;
+    }
+
+    .brand__ueh {
+        height: 29px;
+
+        @include on('sm') {
+            height: 50px;
+            margin-right: 15px;
+        }
+    }
+
+    .brand__govirlunteer {
+        height: 16px;
+
+        @include on('lg') {
+            height: 20px;
+        }
+    }
+}
 
 //Footer
 .footer__logo {
@@ -110,12 +149,16 @@ main {
     }
 
     .footer__logo-ueh {
-        width: 52%;
+        width: 26%;
     }
 
     .footer__logo-hsv {
-        width: 15%;
-        margin-left: 20px;
+        width: 16%;
+        margin-left: 10px;
+
+        @include on ('sm') {
+            margin-left: 20px;
+        }
     }
 
     p {

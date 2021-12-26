@@ -1,6 +1,6 @@
 ﻿@import '_variables';
 .my-navbar {
-    min-height: 75px;
+    min-height: 65px;
     z-index: 100;
 
     @include on('lg') {
@@ -8,6 +8,8 @@
     }
 
     &-container {
+        justify-content: unset;
+
         @include on('xl') {
             position: relative;
         }
@@ -49,7 +51,11 @@
     }
 
     &__brand {
-        margin-left: 10px;
+        flex-direction: column;
+
+        @include on('sm') {
+            align-items: center;
+        }
 
         @include on('md') {
             margin-left: 20px;
@@ -57,6 +63,7 @@
 
         @include on('xl') {
             margin: 0;
+            align-items: unset;
         }
 
         &-item {
@@ -65,16 +72,16 @@
         }
 
         .brand__ueh {
-            height: 16px;
-            margin-bottom: 4px;
+            height: 29px;
 
-            @include on('lg') {
-                height: 20px;
+            @include on('sm') {
+                height: 50px;
+                margin-right: 15px;
             }
         }
 
         .brand__govirlunteer {
-            height: 18px;
+            height: 16px;
 
             @include on('lg') {
                 height: 20px;
@@ -94,7 +101,6 @@
             background: transparent;
             width: 50px;
             height: 50px;
-            margin-right: 10px;
 
 
             @include on('xl') {
@@ -103,8 +109,7 @@
         }
 
         .hamburger-icon {
-            color: $blue;
-            font-size: 44px;
+            font-size: 32px;
 
             @include on('xl') {
                 display: none;
@@ -122,8 +127,8 @@
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         position: absolute;
         border-radius: 5px;
-        top: 90%;
-        right: 15px;
+        top: 100%;
+        left: 15px;
         min-width: 220px;
         width: 40vw;
 
@@ -143,11 +148,12 @@
                 color: $blue-bold;
             }
 
-            &:hover{
+            &:hover {
                 color: $blue-bold;
             }
-            &.active::before{
-               display: block;
+
+            &.active::before {
+                display: block;
             }
         }
 
@@ -185,13 +191,15 @@
                     display: block;
                 }
             }
-
         }
 
-        .my-collapse__login-area {
+        &__login-area {
+            position: absolute;
+            right: 30px;
             flex-direction: column;
 
             @include on('xl') {
+                position: unset;
                 flex-direction: row;
                 margin-left: 20px;
             }

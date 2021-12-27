@@ -6,7 +6,7 @@
     h1 {
         text-align: center;
         margin: 30px 0;
-        color: $border-color-bold;
+        color: $blue;
         font-size: 13px;
         font-weight: 500;
 
@@ -72,13 +72,21 @@
     ::deep .owl-nav {
         .owl-prev {
             position: absolute;
-            top: -10px;
+            top: 16px;
             left: 0;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    font-size: 60px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -91,8 +99,7 @@
             }
 
             @include on("sm") {
-                top: -5px;
-                left: 0;
+                top: 11px;
             }
 
             @include on("lg") {
@@ -103,13 +110,21 @@
 
         .owl-next {
             position: absolute;
-            top: -10px;
+            top: 16px;
             right: 0;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    font-size: 60px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -122,8 +137,7 @@
             }
 
             @include on("sm") {
-                top: -5px;
-                right: 0;
+                top: 11px;
             }
 
             @include on("lg") {

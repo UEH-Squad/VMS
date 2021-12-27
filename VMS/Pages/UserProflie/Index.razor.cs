@@ -55,10 +55,10 @@ namespace VMS.Pages.UserProflie
 
             isUser = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);
 
-            if (isUser && !IsValidProfile(user))
-            {
-                NavigationManager.NavigateTo(Routes.EditUserProfile, true);
-            }
+            //if (isUser && !IsValidProfile(user))
+            //{
+            //    NavigationManager.NavigateTo(Routes.EditUserProfile, true);
+            //}
         }
 
         private static bool IsValidProfile(UserViewModel user)

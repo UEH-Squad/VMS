@@ -132,7 +132,13 @@
     top: 0;
     left: 5%; }
     .my-rank ::deep .owl-item .rank__img-rank.w-nmb10 {
-      width: 10%; }
+      width: 9%; }
+      @media (min-width: 768px) {
+        .my-rank ::deep .owl-item .rank__img-rank.w-nmb10 {
+          width: 10%; } }
+      @media (min-width: 992px) {
+        .my-rank ::deep .owl-item .rank__img-rank.w-nmb10 {
+          width: 12%; } }
     .my-rank ::deep .owl-item .rank__img-rank img {
       width: 80%;
       margin: 0 auto;
@@ -146,6 +152,9 @@
       font-weight: 600;
       color: #FFFFFF;
       transition: all 1s linear; }
+      @media (min-width: 992px) {
+        .my-rank ::deep .owl-item .rank__img-rank span {
+          font-size: 3.2vw; } }
       @media (min-width: 1400px) {
         .my-rank ::deep .owl-item .rank__img-rank span {
           font-size: 45px; } }
@@ -213,8 +222,9 @@
       margin-top: 0; } }
   .my-rank ::deep .owl-dots span {
     background-color: #C4C4C4;
-    width: 8px;
-    height: 8px; }
+    width: 6px;
+    height: 6px;
+    margin: 5px 4px; }
     .my-rank ::deep .owl-dots span:hover {
       background-color: #18A0FB; }
   .my-rank ::deep .owl-dots .owl-dot.active > span {
@@ -300,13 +310,14 @@
 .my-rank .rank__star i {
   color: #EDF131;
   font-size: 10px;
-  margin: 0 3px; }
+  margin: 0 1px; }
   @media (min-width: 768px) {
     .my-rank .rank__star i {
       font-size: 16px; } }
   @media (min-width: 992px) {
     .my-rank .rank__star i {
-      font-size: 20px; } }
+      font-size: 20px;
+      margin: 0 3px; } }
 
 .my-rank .rank__star .star-noColor {
   color: #B4B4B4; }

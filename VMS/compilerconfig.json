@@ -358,5 +358,13 @@
   {
     "outputFile": "Pages/Organization/EditRequestPage/EditContent.razor.css",
     "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
+  },
+  {
+    "outputFile": "Resources/scss/IdentityCss/Layout.css",
+    "inputFile": "Resources/scss/IdentityCss/Layout.scss"
+  },
+  {
+    "outputFile": "Pages/UserProflie/Index.razor.css",
+    "inputFile": "Pages/UserProflie/Index.razor.scss"
   }
 ]

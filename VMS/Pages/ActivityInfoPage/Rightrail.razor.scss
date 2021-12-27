@@ -70,10 +70,10 @@ body {
 
 /* -----about-infor----- */
 .about-infor {
-    padding-left: 15px;
+    padding: 0 15px;
 
     @include on('lg') {
-        padding-left: 30px;
+        padding: 0 30px;
     }
 
     .titles {

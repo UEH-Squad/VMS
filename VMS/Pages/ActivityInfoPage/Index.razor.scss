@@ -9,6 +9,11 @@
         font-size: 14px;
         line-height: 30px;
         color: $green;
+        display: none;
+
+        @include on('lg') {
+            display: block;
+        }
     }
 
     .return-text:hover {

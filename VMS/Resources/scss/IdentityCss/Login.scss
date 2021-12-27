@@ -1,10 +1,21 @@
 ﻿@import "../common/_variables.scss";
 .login-heading {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 600;
     color: $blue;
+
+    @include on("lg") {
+        font-size: 32px;
+    }
 }
 
+.text-danger {
+    font-size: 12px;
+
+    @include on("lg") {
+        font-size: 16px;
+    }
+}
 
 .my-input {
     width: 100%;
@@ -56,6 +67,14 @@
     display: none;
 }
 
+.checkbox-label {
+    font-size: 14px;
+
+    @include on("lg") {
+        font-size: unset;
+    }
+}
+
 .remember-checkbox {
     cursor: pointer;
     border-radius: 5px;
@@ -94,6 +113,11 @@
 #forgot-password {
     text-decoration: none;
     color: $blue;
+    font-size: 14px;
+
+    @include on("lg") {
+        font-size: unset;
+    }
 
     &:hover {
         color: $blue-hv;
@@ -103,9 +127,14 @@
 .form-login-btn {
     width: 100%;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     background-color: $blue;
-    font-size: 20px;
+    font-size: 14px;
+
+    @include on("lg") {
+        border-radius: 5px;
+        font-size: 20px;
+    }
 
     &:hover {
         background-color: $blue-hv;

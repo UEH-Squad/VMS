@@ -166,7 +166,15 @@
             left: 5%;
 
             &.w-nmb10 {
-                width: 10%;
+                width: 9%;
+
+                @include on('md') {
+                    width: 10%;
+                }
+
+                @include on('lg') {
+                    width: 12%;
+                }
             }
 
 
@@ -185,6 +193,10 @@
                 font-weight: 600;
                 color: $white;
                 transition: all 1s linear;
+
+                @include on('lg') {
+                    font-size: 3.2vw;
+                }
 
                 @include on("xxl") {
                     font-size: 45px;
@@ -287,8 +299,9 @@
 
         span {
             background-color: #C4C4C4;
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
+            margin: 5px 4px;
 
             &:hover {
                 background-color: $blue;
@@ -403,7 +416,7 @@
         i {
             color: #EDF131;
             font-size: 10px;
-            margin: 0 3px;
+            margin: 0 1px;
 
             @include on('md') {
                 font-size: 16px;
@@ -411,6 +424,7 @@
 
             @include on('lg') {
                 font-size: 20px;
+                margin: 0 3px;
             }
         }
 

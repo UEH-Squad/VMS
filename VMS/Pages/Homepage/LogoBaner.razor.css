@@ -9,7 +9,7 @@
   .my-logoBaner h1 {
     text-align: center;
     margin: 30px 0;
-    color: #707070;
+    color: #18A0FB;
     font-size: 13px;
     font-weight: 500; }
     @media (min-width: 576px) {
@@ -56,12 +56,18 @@
         grid-row-gap: 20px; } }
   .my-logoBaner ::deep .owl-nav .owl-prev {
     position: absolute;
-    top: -10px;
+    top: 16px;
     left: 0; }
     .my-logoBaner ::deep .owl-nav .owl-prev span {
-      font-size: 80px;
+      font-size: 50px;
       color: #18A0FB;
       transition: all 0.3s linear; }
+      @media (min-width: 768px) {
+        .my-logoBaner ::deep .owl-nav .owl-prev span {
+          font-size: 60px; } }
+      @media (min-width: 992px) {
+        .my-logoBaner ::deep .owl-nav .owl-prev span {
+          font-size: 80px; } }
       .my-logoBaner ::deep .owl-nav .owl-prev span:hover {
         color: #0B588C;
         opacity: 0.73; }
@@ -69,20 +75,25 @@
       background: none; }
     @media (min-width: 576px) {
       .my-logoBaner ::deep .owl-nav .owl-prev {
-        top: -5px;
-        left: 0; } }
+        top: 11px; } }
     @media (min-width: 992px) {
       .my-logoBaner ::deep .owl-nav .owl-prev {
         top: 20px;
         left: 30px; } }
   .my-logoBaner ::deep .owl-nav .owl-next {
     position: absolute;
-    top: -10px;
+    top: 16px;
     right: 0; }
     .my-logoBaner ::deep .owl-nav .owl-next span {
-      font-size: 80px;
+      font-size: 50px;
       color: #18A0FB;
       transition: all 0.3s linear; }
+      @media (min-width: 768px) {
+        .my-logoBaner ::deep .owl-nav .owl-next span {
+          font-size: 60px; } }
+      @media (min-width: 992px) {
+        .my-logoBaner ::deep .owl-nav .owl-next span {
+          font-size: 80px; } }
       .my-logoBaner ::deep .owl-nav .owl-next span:hover {
         color: #0B588C;
         opacity: 0.73; }
@@ -90,8 +101,7 @@
       background: none; }
     @media (min-width: 576px) {
       .my-logoBaner ::deep .owl-nav .owl-next {
-        top: -5px;
-        right: 0; } }
+        top: 11px; } }
     @media (min-width: 992px) {
       .my-logoBaner ::deep .owl-nav .owl-next {
         top: 20px;

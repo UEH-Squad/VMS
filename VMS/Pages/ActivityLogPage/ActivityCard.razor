@@ -11,20 +11,15 @@
                     <div class="activity-space"></div>
                     <div class="activity-container">
                         <div class="activity__img">
-                            @if (!string.IsNullOrEmpty(item.Activity.Banner))
-                            {
-                                <img src="@item.Activity.Banner" alt="Avatar">
-                            }
+                            <img src="@item.Activity.Banner" alt="Avatar">
                         </div>
                         <div class="activity__content">
                             <div class="activity__content__title">
-                                <p class="member-name1"><a href="@Routes.ActivityInfo/@item.Activity.Id">@item.Activity.Name</a></p>
+                                <p class="member-name1">@item.Activity.Name</p>
                             </div>
                             <div class="activity__content__icon d-flex">
                                 <div class="stars-rating">
-                                    <VMS.Pages.Organization.RatingPage.Stars
-                                        StarRating="item.Rating"
-                                        StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)" />
+                                    <VMS.Pages.Organization.RatingPage.Stars />
                                 </div>
                                 <div class="org-pic d-flex">
                                     <div class="org-pic__icon d-flex">
@@ -33,9 +28,7 @@
                                         </span>
                                     </div>
                                     <div class="org-pic__name">
-                                        <a href="@Routes.OrgProfile/@item.Activity.OrgId">
-                                            @item.Activity.Organizer.FullName
-                                        </a>
+                                        @item.Organizer.FullName
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +38,7 @@
                                 @*Pop-up để report*@
                                 <span id="member-report_icon" class="material-icons">report_problem</span>
                             </button>
-                            <button class="activity__icon__comment" @onclick="@(async () => await ShowCommentPopUpAsync(item))" id="popup-comment_icon">
+                            <button class="activity__icon__comment" @onclick="@(()=>ShowCommentPopUpAsync(item))" id="popup-comment_icon">
                                 @*Pop-up để comment*@
                                 <span id="member-comment_icon" class="material-icons">comment</span>
                             </button>
@@ -54,11 +47,11 @@
                 </div>
             }
         }
-        <div class="pagination-container d-flex">
-            <Pager CurrentPage="@pagedResult.PageIndex"
-                   PageCount="@pagedResult.TotalPages"
-                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })" />
-        </div>
+        @*<div class="pagination-container d-flex">
+                <Pager CurrentPage="@pagedResult.CurrentPage"
+                       PageCount="@pagedResult.PageCount"
+                       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+            </div>*@
     </div>
 </div>
 

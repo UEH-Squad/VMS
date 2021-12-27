@@ -1,0 +1,44 @@
+﻿@using VMS.Application.ViewModels;
+
+<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__addVideo @(isSuccess ? " d-none" : "d-block" )">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center">Thêm video <span>vào trang chủ</span></h3>
+            <p>Dán link tại đây</p>
+            <input type="text" class="form-control" />
+            <div class="from__btn text-center ">
+                <button @onclick="ShowSuccess" type="submit" class="btn btn-add">Hoàn tất</button>
+            </div>
+        </div>
+        <div class="modal__success @(isSuccess ? " d-block" : "d-none" )">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div>
+                <h3 class="text-center mb-0">Bạn đã <span>thêm video</span> thành công</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+    private bool isSuccess;
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync();
+    }
+
+    private void ShowSuccess()
+    {
+        isSuccess = !isSuccess;
+    }
+}

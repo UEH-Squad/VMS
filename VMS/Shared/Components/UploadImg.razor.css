@@ -10,12 +10,28 @@
   padding: 10px 15px; }
 
 i {
-  font-size: 36px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0 5% 0 0; }
+  @media (min-width: 768px) {
+    i {
+      font-size: 30px; } }
+  @media (min-width: 1200px) {
+    i {
+      font-size: 36px; } }
 
 span {
-  overflow-wrap: anywhere; }
+  overflow-wrap: anywhere;
+  font-size: 10px; }
+  @media (min-width: 768px) {
+    span {
+      font-size: 13px; } }
+  @media (min-width: 992px) {
+    span {
+      font-size: 14px; } }
+  @media (min-width: 1200px) {
+    span {
+      font-size: 16px; } }
 
 .preview-img {
   height: 150px; }

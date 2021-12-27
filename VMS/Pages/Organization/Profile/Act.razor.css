@@ -9,11 +9,21 @@
   font-size: 18px;
   line-height: 36px;
   color: #515151;
-  padding-bottom: 5px; }
+  padding-bottom: 5px;
+  /*@include on('sm') {
+            font-size: 24px;
+        }
+
+        @include on('lg') {
+            font-size: 30px;
+        }*/ }
   @media (min-width: 576px) {
     .act h1 {
-      font-size: 24px; } }
+      font-size: 20px; } }
   @media (min-width: 992px) {
+    .act h1 {
+      font-size: 24px; } }
+  @media (min-width: 1200px) {
     .act h1 {
       font-size: 30px; } }
   .act h1 span {
@@ -48,13 +58,40 @@
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
-  width: 190.5px; }
+  width: 86px; }
+  @media (min-width: 576px) {
+    .act-container ul {
+      width: 115px; } }
+  @media (min-width: 768px) {
+    .act-container ul {
+      width: 140px; } }
+  @media (min-width: 992px) {
+    .act-container ul {
+      width: 160.5px; } }
+  @media (min-width: 1200px) {
+    .act-container ul {
+      width: 190.5px; } }
   .act-container ul li, .act-container ul a {
     list-style: none;
-    font-size: 16px;
+    font-size: 8px;
     font-weight: 500;
-    padding: 10px 20px;
+    padding: 2px 0px;
     display: block; }
+    @media (min-width: 576px) {
+      .act-container ul li, .act-container ul a {
+        font-size: 10px;
+        padding: 3px 5px; } }
+    @media (min-width: 768px) {
+      .act-container ul li, .act-container ul a {
+        font-size: 12px;
+        padding: 5px 10px; } }
+    @media (min-width: 992px) {
+      .act-container ul li, .act-container ul a {
+        padding: 7px 15px; } }
+    @media (min-width: 1200px) {
+      .act-container ul li, .act-container ul a {
+        font-size: 16px;
+        padding: 10px 20px; } }
     .act-container ul li:hover, .act-container ul a:hover {
       background: rgba(24, 160, 251, 0.1); }
   .act-container ul .edit {

@@ -23,13 +23,13 @@
                             </a>
                         </div>
                         <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-1 pb-sm-2    text-decoration-none">Chỉnh sửa</a>
 
-                            <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-2">Xóa</li>
+                            <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-1 pb-sm-2">Xóa</li>
 
                             @if (item.CloseDate.Date >= DateTime.Now.Date)
                             {
-                                <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+                                <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
                             }
                         </ul>
                         @if (HaveControl)

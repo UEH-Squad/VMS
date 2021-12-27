@@ -81,19 +81,29 @@
         }
 
         .brand__govirlunteer {
-            height: 16px;
+            height: 17px;
 
-            @include on('lg') {
+            @include on('sm') {
                 height: 20px;
+            }
+
+            @include on('xl') {
+                height: 27px;
+            }
+
+            @include on('xxl') {
+                height: 33px;
             }
         }
     }
 
     &__hamburger-wrapper {
         position: relative;
+        display: block;
 
         @include on('xl') {
             position: unset;
+            display: none;
         }
 
         &__btn {
@@ -101,19 +111,10 @@
             background: transparent;
             width: 50px;
             height: 50px;
-
-
-            @include on('xl') {
-                display: none;
-            }
         }
 
         .hamburger-icon {
             font-size: 32px;
-
-            @include on('xl') {
-                display: none;
-            }
         }
     }
 

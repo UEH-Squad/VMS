@@ -13,12 +13,20 @@ const filterCarousel = () => {
         nav: true,
         responsive: {
             0: {
+                items: 3,
+                slideBy: 3
+            },
+            768: {
                 items: 4,
-                slideBy: 4,
+                slideBy: 4
+            },
+            992: {
+                items: 6,
+                slideBy: 6
             },
             1200: {
                 items: 6,
-                slideBy: 6,
+                slideBy: 6
             },
         }
     })
@@ -31,12 +39,10 @@ const logoBanerCarousel = () => {
         nav: true,
         responsive: {
             0: {
-                items: 1,
-                nav: false
+                items: 1
             },
             992: {
-                items: 1,
-                nav: true
+                items: 1
             }
         }
     })
@@ -97,7 +103,7 @@ const rankCarousel = () => {
         loop: true,
         margin: 0,
         nav: true,
-        autoplay: true,
+        autoplay: false,
         autoplayTimeout: 5000,
         autoplaySpeed: 2000,
         autoplayHoverPause: true,

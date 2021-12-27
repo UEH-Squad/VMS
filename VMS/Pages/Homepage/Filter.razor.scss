@@ -143,21 +143,24 @@
     }
 
     ::deep .owl-nav {
-        display: none;
-
-        @include on('lg') {
-            display: block;
-        }
 
         .owl-prev {
             position: absolute;
-            top: -35px;
-            left: 0;
+            top: -12px;
+            left: 13px;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    font-size: 60px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -169,9 +172,13 @@
                 background: none;
             }
 
+            @include on('md') {
+                left: -3px;
+            }
+
             @include on("lg") {
                 top: -30px;
-                left: 30px;
+                left: 0;
             }
 
             @include on("xxl") {
@@ -182,13 +189,21 @@
 
         .owl-next {
             position: absolute;
-            top: -35px;
-            right: 0;
+            top: -12px;
+            right: 13px;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    font-size: 60px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -200,9 +215,13 @@
                 background: none;
             }
 
+            @include on('md') {
+                right: -3px;
+            }
+
             @include on("lg") {
                 top: -30px;
-                right: 30px;
+                right: 0;
             }
 
             @include on("xxl") {

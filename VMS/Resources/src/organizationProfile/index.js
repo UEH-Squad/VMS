@@ -22,22 +22,20 @@ const organizeCarousel = () => {
             0: {
                 items: 2,
                 slideBy: 2,
-                nav: false
+                nav: false,
+                margin: 10
             },
             576: {
                 items: 3,
-                slideBy: 1,
-                nav: false
+                slideBy: 3,
+                nav: false,
+                margin: 10
             },
-            768: {
+            1200: {
                 items: 4,
                 slideBy: 4,
-                nav: false
-            },
-            992: {
-                items: 4,
-                slideBy: 4,
-                mouseDrag: false
+                mouseDrag: false,
+                margin: 18
             }
         }
     })

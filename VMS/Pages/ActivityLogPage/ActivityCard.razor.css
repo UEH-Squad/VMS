@@ -32,12 +32,18 @@
     border-radius: 100%; }
 
 .activity__content {
+  width: 100px;
   flex: 1;
   padding: 10px 20px; }
   .activity__content__title {
     font-size: 20px;
     font-weight: 600;
     color: #18A0FB; }
+    .activity__content__title .member-name1 {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
   .activity__content__icon {
     justify-content: space-between; }
     .activity__content__icon .stars-rating ::deep .member-star {

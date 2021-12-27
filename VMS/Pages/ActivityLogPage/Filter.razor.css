@@ -62,6 +62,7 @@
       background-color: #B4B4B4;
       border-radius: 20px; }
     .act-filter__list-item {
+      text-align: center;
       font-size: 16px;
       font-weight: 500;
       color: #18A0FB;

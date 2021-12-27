@@ -3,16 +3,28 @@
 .act {
     h1 {
         font-weight: 600;
-        font-size: 16px;
+        font-size: 18px;
         line-height: 36px;
         color: $grey-text;
         padding-bottom: 5px;
 
-        @include on('sm') {
+        /*@include on('sm') {
             font-size: 24px;
         }
 
         @include on('lg') {
+            font-size: 30px;
+        }*/
+
+        @include on("sm") {
+            font-size: 20px;
+        }
+
+        @include on("lg") {
+            font-size: 24px;
+        }
+
+        @include on("xl") {
             font-size: 30px;
         }
 
@@ -57,14 +69,49 @@
         background: $white;
         border-radius: 10px;
         box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
-        width: 190.5px;
+        width: 86px;
 
-        li,a {
+        @include on('sm') {
+            width: 115px;
+        }
+
+        @include on('md') {
+            width: 140px;
+        }
+
+        @include on('lg') {
+            width: 160.5px;
+        }
+
+        @include on('xl') {
+            width: 190.5px;
+        }
+
+        li, a {
             list-style: none;
-            font-size: 16px;
+            font-size: 8px;
             font-weight: 500;
-            padding: 10px 20px;
+            padding: 2px 0px;
             display: block;
+
+            @include on('sm') {
+                font-size: 10px;
+                padding: 3px 5px;
+            }
+
+            @include on('md') {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            @include on('lg') {
+                padding: 7px 15px;
+            }
+
+            @include on('xl') {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
 
             &:hover {
                 background: rgba(24, 160, 251, 0.1);
@@ -148,6 +195,7 @@
 
             @include on('sm') {
                 line-height: 23px;
+                font-size: 16px;
             }
 
             @include on('lg') {

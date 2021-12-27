@@ -25,8 +25,8 @@
     position: relative;
     box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
   .pop-up .close-btn-s {
-    width: 20px;
-    height: 20px;
+    width: 11px;
+    height: 11px;
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -36,21 +36,71 @@
     right: 5px;
     cursor: pointer;
     background: rgba(196, 196, 196, 0.5); }
+    @media (min-width: 576px) {
+      .pop-up .close-btn-s {
+        width: 16px;
+        height: 16px; } }
+    @media (min-width: 1200px) {
+      .pop-up .close-btn-s {
+        width: 22px;
+        height: 22px; } }
     .pop-up .close-btn-s .material-icons {
-      font-size: 14px;
+      font-size: 8px;
       color: #717171;
       line-height: 0; }
+      @media (min-width: 576px) {
+        .pop-up .close-btn-s .material-icons {
+          font-size: 12px; } }
+      @media (min-width: 1200px) {
+        .pop-up .close-btn-s .material-icons {
+          font-size: 14px; } }
   .pop-up .pop-up-content {
-    padding: 13px 55px; }
+    padding: 5px 35px; }
+    @media (min-width: 576px) {
+      .pop-up .pop-up-content {
+        padding: 7px 40px; } }
+    @media (min-width: 768px) {
+      .pop-up .pop-up-content {
+        padding: 7px 45px; } }
+    @media (min-width: 992px) {
+      .pop-up .pop-up-content {
+        padding: 10px 50px; } }
+    @media (min-width: 1200px) {
+      .pop-up .pop-up-content {
+        padding: 13px 55px; } }
     .pop-up .pop-up-content .close-act {
-      font-size: 18px;
+      color: #18A0FB;
+      font-size: 10px;
       line-height: 36px;
       font-weight: 500;
-      margin-bottom: 0;
-      color: #18A0FB; }
+      margin-bottom: 0; }
+      @media (min-width: 576px) {
+        .pop-up .pop-up-content .close-act {
+          font-size: 12px; } }
+      @media (min-width: 768px) {
+        .pop-up .pop-up-content .close-act {
+          font-size: 14px; } }
+      @media (min-width: 992px) {
+        .pop-up .pop-up-content .close-act {
+          font-size: 16px; } }
+      @media (min-width: 1200px) {
+        .pop-up .pop-up-content .close-act {
+          font-size: 18px; } }
     .pop-up .pop-up-content .open-act {
-      font-size: 18px;
+      color: #64D72F;
+      font-size: 10px;
       line-height: 36px;
       font-weight: 500;
-      margin-bottom: 0;
-      color: #64D72F; }
+      margin-bottom: 0; }
+      @media (min-width: 576px) {
+        .pop-up .pop-up-content .open-act {
+          font-size: 12px; } }
+      @media (min-width: 768px) {
+        .pop-up .pop-up-content .open-act {
+          font-size: 14px; } }
+      @media (min-width: 992px) {
+        .pop-up .pop-up-content .open-act {
+          font-size: 16px; } }
+      @media (min-width: 1200px) {
+        .pop-up .pop-up-content .open-act {
+          font-size: 18px; } }

@@ -10,15 +10,23 @@
         color: $error;
         background-color: $blue-background;
         font-weight: 300;
-        font-size: 18px;
+        font-size: 10px;
+
+        @include on ('sm') {
+            font-size: 18px;
+        }
     }
 
     .editProfile__title {
         margin-top: 50px;
-        font-size: 36px;
+        font-size: 18px;
         font-weight: 600;
         color: $blue;
         text-align: center;
+
+        @include on ('sm') {
+            font-size: 36px;
+        }
 
         span {
             color: $green;
@@ -29,10 +37,15 @@
         overflow: hidden;
 
         img {
-            width: 200px;
-            height: 200px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             object-fit: cover;
+
+            @include on ('sm') {
+                width: 200px;
+                height: 200px;
+            }
         }
     }
 
@@ -41,15 +54,24 @@
     }
 
     .form-item {
-        margin-bottom: 40px;
+        margin-bottom: 15px;
+
+        @include on('sm') {
+            margin-bottom: 40px;
+        }
 
         .dropdown {
 
             .material-icons-outlined {
                 position: absolute;
-                top: 8px;
-                right: 10px;
+                top: 4px;
+                right: 8px;
                 pointer-events: none;
+
+                @include on ('sm') {
+                    top: 8px;
+                    right: 10px;
+                }
             }
 
             .my-form-department {
@@ -58,19 +80,28 @@
             }
 
             &-menu {
-                height: 200px;
+                height: 140px;
                 overflow-y: scroll;
                 width: 100%;
                 padding-left: 12px;
                 background: #fff;
                 box-shadow: 0px 10px 20px 2px rgba(4, 20, 69, 0.1);
 
+                @include on ('sm') {
+                    height: 200px;
+                }
+
                 li {
                     cursor: pointer;
-                    margin-top: 15px;
-                    font-size: 16px;
+                    margin-top: 5px;
+                    font-size: 14px;
                     font-weight: 300;
                     color: #515151;
+
+                    @include on ('sm') {
+                        font-size: 16px;
+                        margin-top: 15px;
+                    }
 
                     &:hover {
                         background: #F3F3F3;
@@ -80,26 +111,51 @@
         }
 
         .form-text {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             color: $border-color-bold;
             margin: auto 0;
+            margin-bottom: 3px;
+            padding: 0;
+
+            @include on('sm') {
+                font-size: 16px;
+            }
 
             span {
                 color: red;
             }
         }
 
+        .my-address-textbox {
+            width: 100%;
+
+            @include on('sm') {
+                width: auto;
+            }
+        }
+
         ::deep .form-control {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 300;
             color: $grey-text;
             border: 1px solid #D8D8D8;
             border-radius: 5px;
+            height: 30px;
+
+            @include on ('sm') {
+                height: unset;
+                font-size: 16px;
+            }
         }
 
         ::deep .form-control-maxim {
+            height: 100px;
             padding: 10px;
+
+            @include on('sm') {
+                height: unset;
+            }
         }
 
         ::deep .form-control--disable {
@@ -112,15 +168,25 @@
 
         ::deep .my-date-picker {
             border-radius: 5px;
-            height: 38px;
+            height: 30px;
+
+            @include on ('sm') {
+                height: 38px;
+            }
 
             input {
                 color: $grey-text;
-                font-size: 1rem;
+                font-size: 14px;
+
+                @include on('sm') {
+                    font-size: 16px;
+                }
             }
         }
 
         .form-field {
+            padding: 0;
+
             .w-20 {
                 width: 20%;
             }
@@ -161,10 +227,17 @@
                 color: white;
                 margin: 5px auto;
                 transition: all 0.3s linear;
-                width: 73px;
-                height: 73px;
-                line-height: 73px;
-                font-size: 30px;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 20px;
+
+                @include on('sm') {
+                    width: 73px;
+                    height: 73px;
+                    line-height: 73px;
+                    font-size: 30px;
+                }
 
                 @include on("xxl") {
                     width: 83px;
@@ -178,8 +251,13 @@
                 font-weight: 500;
                 display: inline-block;
                 transition: all 0.3s linear;
-                font-size: 18px;
-                margin-top: 20px;
+                font-size: 14px;
+                margin-top: 0px;
+
+                @include on ('sm') {
+                    font-size: 18px;
+                    margin-top: 20px;
+                }
 
                 @include on("xxl") {
                     font-size: 20px;
@@ -190,7 +268,11 @@
                 background: $grey-close-bg;
                 opacity: 50%;
                 color: $white;
-                font-size: 60px;
+                font-size: 40px;
+
+                @include on('sm') {
+                    font-size: 60px;
+                }
 
                 &:hover {
                     background: $grey-close-bg;
@@ -208,12 +290,23 @@
         .countWord {
             color: $border-color-bold;
             position: absolute;
-            top: 135px;
-            right: 15px;
+            top: 77px;
+            right: 8px;
+            font-size: 12px;
+
+            @include on ('sm') {
+                top: 135px;
+                right: 15px;
+                font-size: 16px;
+            }
         }
         /* width */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 5px;
+
+            @include on ('sm') {
+                width: 10px;
+            }
         }
         /* Track */
         ::-webkit-scrollbar-track {
@@ -254,9 +347,14 @@
     margin: 20px 0 60px;
 
     .btn {
-        padding: 10px 35px;
-        font-size: 16px;
+        padding: 8px 33px;
+        font-size: 14px;
         font-weight: 600;
+
+        @include on('sm') {
+            padding: 12px 35px;
+            font-size: 16px;
+        }
     }
 
     .from__btn-cancel {

@@ -43,29 +43,29 @@
                 </div>
                 <div class="request">
                     <p class="request__title titles mb-0">Yêu cầu khi tham gia:</p>
-                    @((MarkupString)activity.Requirement)
+                    <p>@((MarkupString)activity.Requirement)</p>
                 </div>
             </div>
             <div class="btn-sign-up--cover">
+                <AuthorizeView Roles="@($"{Role.User}")">
+                    @if (IsSignupTimeExpired())
+                    {
+                        <button class="btn-already-sign-up">
+                            <h3 class="btn-sign-up__text">@(isAlreadySignedUp ? "Bạn đã đăng ký" : "Đăng ký")</h3>
+                        </button>
+                    }
+                    else
+                    {
+                        <button @onclick="ShowSignUpPopUp" class="btn-sign-up">
+                            <h3 class="btn-sign-up__text">Đăng ký</h3>
+                        </button>
+                    }
+                </AuthorizeView>
                 <AuthorizeView>
-                    <Authorized>
-                        @if (IsSignupTimeExpired())
-                        {
-                            <button class="btn-already-sign-up">
-                                <h3 class="btn-sign-up__text">@(isAlreadySignedUp ? "Bạn đã đăng ký" : "Đăng ký")</h3>
-                            </button>
-                        }
-                        else
-                        {
-                            <button @onclick="ShowSignUpPopUp" class="btn-sign-up">
-                                <h3 class="btn-sign-up__text">Đăng ký</h3>
-                            </button>
-                        }
-                    </Authorized>
                     <NotAuthorized>
-                            <button @onclick="ShowRequireSignup" class="btn-sign-up">
-                                <h3 class="btn-sign-up__text">Đăng ký</h3>
-                            </button>
+                        <button @onclick="ShowRequireSignup" class="btn-sign-up">
+                            <h3 class="btn-sign-up__text">Đăng ký</h3>
+                        </button>
                     </NotAuthorized>
                 </AuthorizeView>
             </div>

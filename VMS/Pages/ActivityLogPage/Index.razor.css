@@ -5,11 +5,16 @@
 /*#region mixins */
 /*#endregion */
 .org-title {
-  margin-top: 60px;
+  margin-top: 30px;
   margin-bottom: 20px;
   font-weight: 600;
-  font-size: 36px;
+  font-size: 18px;
   color: #64D72F;
   text-align: center; }
+  @media (min-width: 576px) {
+    .org-title {
+      font-size: 36px;
+      margin-top: 60px;
+      margin-bottom: 50px; } }
   .org-title span {
     color: #18A0FB; }

@@ -13,24 +13,24 @@
                 <div class="user-avatar-wrapper position-relative" @onclick="OnAvatarClick">
                     <img src="img/hsv.png" alt="user avatar" class="user-avatar">
                 </div>
-                <span class="user-label mt-2 fw-bold">Trang cá nhân</span>
+
                 <div class="dropdown">
                     <span class="material-icons-outlined user-section__dropdown-icon" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         arrow_drop_down
                     </span>
-                    <ul class="dropdown-menu user-section__list list-unstyled bg-white">
+                    <ul class="dropdown-menu user-section__list list-unstyled bg-white pb-2">
                         @if (context.User.IsInRole(Role.User.ToString()))
                         {
                             <li class="user-info">
-                                <a href="@profileUrl" class="d-flex px-3 pt-4 text-decoration-none align-items-center">
+                                <a href="@profileUrl" class="user-info-link d-flex px-3 pt-4 text-decoration-none align-items-center">
                                     <img src="./img/HamburgerMenu/AvaUser.png" class="user-img" />
-                                    <div class="d-flex flex-column text-start ps-3">
+                                    <div class="user-info-heading d-flex flex-column">
                                         <h3 class="py-1 mb-0">Công nghệ thông tin kinh doanh</h3>
                                         <h4 class="py-1 mb-0">Cộng tác viên Govirlunteer</h4>
                                     </div>
                                 </a>
                             </li>
-                            <hr class="mx-3 my-20" />
+                            <hr class="mx-3 my-3" />
                             <li class="edit pt-1 pb-2">
                                 <a href="@Routes.EditUserProfile" class="d-flex justify-content-center align-items-center text-decoration-none mx-3">
                                     <h4 class="py-2 mb-0">Chỉnh sửa thông tin cá nhân</h4>
@@ -46,20 +46,20 @@
                                     Lịch sử hoạt động
                                 </a>
                             </li>
-                            <hr class="mx-3 my-14" />
+                            <hr class="mx-3 my-2" />
                         }
                         else
                         {
                             <li class="user-info">
-                                <a href="@profileUrl" class="d-flex px-3 pt-4 text-decoration-none align-items-center">
+                                <a href="@profileUrl" class="user-info-link d-flex px-3 pt-4 text-decoration-none align-items-center">
                                     <img src="./img/HamburgerMenu/AvaUser.png" class="user-img" />
-                                    <div class="d-flex flex-column text-start ps-3">
+                                    <div class="user-info-heading d-flex flex-column">
                                         <h3 class="py-1 mb-0">Công nghệ thông tin kinh doanh</h3>
                                         <h4 class="py-1 mb-0">Đơn vị tổ chức Govirlunteer</h4>
                                     </div>
                                 </a>
                             </li>
-                            <hr class="mx-3 my-4" />
+                            <hr class="mx-3 my-3" />
                             <li class="edit pt-2 pb-3">
                                 <a href="@Routes.EditOrgProfile" class="d-flex justify-content-center align-items-center text-decoration-none mx-3">
                                     <h4 class="py-2 mb-0">Chỉnh sửa thông tin tổ chức</h4>
@@ -70,7 +70,7 @@
                                     Quản lý hoạt động
                                 </a>
                             </li>
-                            <hr class="mx-3 mt-4" />
+                            <hr class="mx-3 mt-3" />
                         }
                         <li class="user-logout d-flex justify-content-center">
                             <form method="post" action="@Routes.LogOut" class="d-flex justify-content-center align-items-center py-2 mx-3">

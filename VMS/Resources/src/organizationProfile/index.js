@@ -4,9 +4,9 @@ const informationCarousel = () => {
         loop: true,
         margin: 0,
         nav: true,
+        items: 3,
         responsive: {
             0: {
-                items: 3,
                 slideBy: 1,
             },
         }
@@ -14,16 +14,28 @@ const informationCarousel = () => {
 }
 
 const organizeCarousel = () => {
-    const carousel = $('.organize__carousel');
-    $('.organize__carousel').owlCarousel({
+    $('.owl-carousel').owlCarousel({
         loop: false,
         margin: 0,
         nav: true,
         responsive: {
             0: {
+                items: 2,
+                slideBy: 2,
+                nav: false,
+                margin: 10
+            },
+            576: {
+                items: 3,
+                slideBy: 3,
+                nav: false,
+                margin: 10
+            },
+            1200: {
                 items: 4,
                 slideBy: 4,
-                mouseDrag: false
+                mouseDrag: false,
+                margin: 18
             }
         }
     })

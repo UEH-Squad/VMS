@@ -7,13 +7,34 @@
 }
 
 i {
-    font-size: 36px;
+    font-size: 16px;
     font-weight: 600;
     margin: 0 5% 0 0;
+
+    @include on("md") {
+        font-size: 30px;
+    }
+
+    @include on("xl") {
+        font-size: 36px;
+    }
 }
 
 span {
     overflow-wrap: anywhere;
+    font-size: 10px;
+
+    @include on("md") {
+        font-size: 13px;
+    }
+
+    @include on("lg") {
+        font-size: 14px;
+    }
+
+    @include on("xl") {
+        font-size: 16px;
+    }
 }
 .lm-text {
         display: -webkit-box;

@@ -1,23 +1,49 @@
 ﻿@import "../../Resources/scss/common/_variables";
 
 .profile__rank {
+    justify-content: center;
+
     a {
         color: $green;
-        font-size: 40px;
+        font-size: 16px;
         font-weight: 600;
         text-decoration: none;
+
+        @include on('lg') {
+            font-size: 20px;
+        }
+
+        @include on('xxl') {
+            font-size: 40px;
+        }
     }
 
     .profile__rank-number {
         color: $border-color-bold;
-        font-size: 24px;
+        font-size: 14px;
         font-weight: 700;
+
+        @include on('lg') {
+            font-size: 18px;
+        }
+
+        @include on('xxl') {
+            font-size: 24px;
+        }
     }
 
     i {
         margin: auto 2px;
         color: #EDF131;
-        font-size: 30px;
+        font-size: 14px;
+
+        @include on('lg') {
+            font-size: 24px;
+        }
+
+        @include on('xxl') {
+            font-size: 30px;
+        }
     }
 
     .icon-noColor {
@@ -27,7 +53,15 @@
     span {
         display: block;
         color: $border-color-bold;
-        font-size: 20px;
+        font-size: 8px;
         font-weight: 500;
+
+        @include on('lg') {
+            font-size: 12px;
+        }
+
+        @include on('xxl') {
+            font-size: 16px;
+        }
     }
 }

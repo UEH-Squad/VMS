@@ -79,19 +79,10 @@ namespace VMS.Pages.Organization.Profile
 
         private async Task ShowAreasModal()
         {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
             var areasParameter = new ModalParameters();
             areasParameter.Add("choosenAreasList", choosenAreas);
-            var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
-            await areasModal.Result;
+            await Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
-
-
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -106,14 +97,7 @@ namespace VMS.Pages.Organization.Profile
                 return;
             }
 
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", options);
+            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", BlazoredModalOptions.GetModalOptions());
             ModalResult result = await editConfirmModal.Result;
             if (!result.Cancelled)
             {
@@ -133,7 +117,7 @@ namespace VMS.Pages.Organization.Profile
 
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
-                    await Modal.Show<Activities.NotificationPopup>("", modalParams, options).Result;
+                    await Modal.Show<Activities.NotificationPopup>("", modalParams, BlazoredModalOptions.GetModalOptions()).Result;
                     NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
                 }
                 catch (Exception ex)

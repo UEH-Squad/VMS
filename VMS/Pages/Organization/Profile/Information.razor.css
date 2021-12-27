@@ -6,29 +6,70 @@
 /*#endregion */
 .my-information {
   padding: 50px 0; }
+  .my-information .col-left-top {
+    width: 100%; }
+    @media (min-width: 768px) {
+      .my-information .col-left-top {
+        width: 55%; } }
   .my-information .col-left {
-    width: 55%; }
+    width: 65%; }
+    @media (min-width: 768px) {
+      .my-information .col-left {
+        width: 55%; } }
   .my-information .col-right {
     width: 45%; }
   .my-information .information__logo .information__logo-img {
     margin-bottom: 20px; }
   .my-information .information__logo img {
-    width: 230px;
-    height: 230px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover; }
+    @media (min-width: 576px) {
+      .my-information .information__logo img {
+        width: 150px;
+        height: 150px; } }
+    @media (min-width: 768px) {
+      .my-information .information__logo img {
+        width: 160px;
+        height: 160px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__logo img {
+        width: 230px;
+        height: 230px; } }
   .my-information .information__logo .icon-camera {
     position: absolute;
     bottom: 15px;
     right: -25px;
-    font-size: 36px;
+    font-size: 20px;
     color: #B4B4B4;
     cursor: pointer; }
+    @media (min-width: 576px) {
+      .my-information .information__logo .icon-camera {
+        font-size: 24px; } }
+    @media (min-width: 768px) {
+      .my-information .information__logo .icon-camera {
+        font-size: 28px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__logo .icon-camera {
+        font-size: 36px; } }
     .my-information .information__logo .icon-camera:hover {
       color: #717171; }
   .my-information .information__logo p {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600; }
+    @media (min-width: 576px) {
+      .my-information .information__logo p {
+        font-size: 18px; } }
+    @media (min-width: 768px) {
+      .my-information .information__logo p {
+        font-size: 16px; } }
+    @media (min-width: 992px) {
+      .my-information .information__logo p {
+        font-size: 20px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__logo p {
+        font-size: 24px; } }
   .my-information .information__logo .information__tilte {
     display: inline-block;
     background-color: #FBED6E;
@@ -36,10 +77,19 @@
     border-radius: 10px;
     padding: 7px 30px;
     color: #515151;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer; }
+    @media (min-width: 576px) {
+      .my-information .information__logo .information__tilte {
+        font-size: 12px; } }
+    @media (min-width: 992px) {
+      .my-information .information__logo .information__tilte {
+        font-size: 14px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__logo .information__tilte {
+        font-size: 16px; } }
     .my-information .information__logo .information__tilte:hover {
       background: #FCFF81; }
   .my-information .information__line {
@@ -49,43 +99,127 @@
     margin: 40px auto; }
   .my-information .information__rank a {
     color: #64D72F;
-    font-size: 40px;
+    font-size: 26px;
     font-weight: 600;
     text-decoration: none; }
+    @media (min-width: 576px) {
+      .my-information .information__rank a {
+        font-size: 30px; } }
+    @media (min-width: 768px) {
+      .my-information .information__rank a {
+        font-size: 26px; } }
+    @media (min-width: 992px) {
+      .my-information .information__rank a {
+        font-size: 32px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__rank a {
+        font-size: 40px; } }
   .my-information .information__rank .information__rank-number {
     color: #707070;
-    font-size: 24px;
+    font-size: 15px;
     font-weight: 700;
-    margin-right: 10px; }
+    margin-right: 20px; }
+    @media (min-width: 576px) {
+      .my-information .information__rank .information__rank-number {
+        font-size: 18px; } }
+    @media (min-width: 768px) {
+      .my-information .information__rank .information__rank-number {
+        font-size: 15px; } }
+    @media (min-width: 992px) {
+      .my-information .information__rank .information__rank-number {
+        font-size: 20px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__rank .information__rank-number {
+        font-size: 24px; } }
   .my-information .information__rank i {
     margin: auto 2px;
     color: #64D72F;
-    font-size: 30px; }
+    font-size: 16px; }
+    @media (min-width: 576px) {
+      .my-information .information__rank i {
+        font-size: 20px; } }
+    @media (min-width: 768px) {
+      .my-information .information__rank i {
+        font-size: 16px; } }
+    @media (min-width: 992px) {
+      .my-information .information__rank i {
+        font-size: 24px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__rank i {
+        font-size: 30px; } }
   .my-information .information__rank span {
     color: #707070;
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 500; }
+    @media (min-width: 576px) {
+      .my-information .information__rank span {
+        font-size: 12px; } }
+    @media (min-width: 768px) {
+      .my-information .information__rank span {
+        font-size: 16px; } }
+    @media (min-width: 992px) {
+      .my-information .information__rank span {
+        font-size: 12px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__rank span {
+        font-size: 20px; } }
   .my-information .information__contact i {
-    font-size: 24px;
-    margin: auto 10px;
+    font-size: 16px;
+    margin: auto 20px;
     color: #707070; }
+    @media (min-width: 576px) {
+      .my-information .information__contact i {
+        font-size: 18px; } }
+    @media (min-width: 768px) {
+      .my-information .information__contact i {
+        font-size: 16px; } }
+    @media (min-width: 992px) {
+      .my-information .information__contact i {
+        font-size: 20px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__contact i {
+        font-size: 24px; } }
   .my-information .information__contact a {
     color: #515151;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: 400;
     text-decoration: none; }
+    @media (min-width: 576px) {
+      .my-information .information__contact a {
+        font-size: 12px; } }
+    @media (min-width: 768px) {
+      .my-information .information__contact a {
+        font-size: 10px; } }
+    @media (min-width: 992px) {
+      .my-information .information__contact a {
+        font-size: 14px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__contact a {
+        font-size: 16px; } }
   .my-information .information__fields h3 {
     text-align: center;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
     margin: 0; }
+    @media (min-width: 992px) {
+      .my-information .information__fields h3 {
+        font-size: 24px; } }
     .my-information .information__fields h3 span {
       color: #18A0FB; }
   .my-information .line {
-    height: 120px;
+    height: 40px;
     width: 1px;
     margin: auto 0;
     background-color: rgba(112, 112, 112, 0.5); }
+    @media (min-width: 576px) {
+      .my-information .line {
+        height: 55px; } }
+    @media (min-width: 768px) {
+      .my-information .line {
+        height: 80px; } }
+    @media (min-width: 1200px) {
+      .my-information .line {
+        height: 120px; } }
   .my-information .information__carousel, .my-information .information__NoCarousel {
     position: relative;
     padding-left: 30px;
@@ -97,7 +231,19 @@
     .my-information .information__carousel .item, .my-information .information__NoCarousel .item {
       text-align: center; }
       .my-information .information__carousel .item:hover > i, .my-information .information__NoCarousel .item:hover > i {
-        font-size: 45px; }
+        font-size: 30px; }
+        @media (min-width: 576px) {
+          .my-information .information__carousel .item:hover > i, .my-information .information__NoCarousel .item:hover > i {
+            font-size: 32px; } }
+        @media (min-width: 768px) {
+          .my-information .information__carousel .item:hover > i, .my-information .information__NoCarousel .item:hover > i {
+            font-size: 30px; } }
+        @media (min-width: 992px) {
+          .my-information .information__carousel .item:hover > i, .my-information .information__NoCarousel .item:hover > i {
+            font-size: 34px; } }
+        @media (min-width: 1200px) {
+          .my-information .information__carousel .item:hover > i, .my-information .information__NoCarousel .item:hover > i {
+            font-size: 45px; } }
       .my-information .information__carousel .item:hover > span, .my-information .information__NoCarousel .item:hover > span {
         transform: translateY(-5px); }
       .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
@@ -106,10 +252,34 @@
         color: white;
         margin: 5px auto;
         transition: all 0.3s linear;
-        width: 70px;
-        height: 70px;
-        line-height: 70px;
-        font-size: 30px; }
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px; }
+        @media (min-width: 576px) {
+          .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 22px; } }
+        @media (min-width: 768px) {
+          .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px; } }
+        @media (min-width: 992px) {
+          .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
+            width: 55px;
+            height: 55px;
+            line-height: 55px;
+            font-size: 24px; } }
+        @media (min-width: 1200px) {
+          .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            font-size: 30px; } }
         @media (min-width: 1400px) {
           .my-information .information__carousel .item i, .my-information .information__NoCarousel .item i {
             width: 75px;
@@ -130,15 +300,36 @@
         display: none; }
       .my-information .information__carousel ::deep .owl-nav .owl-next, .my-information .information__NoCarousel ::deep .owl-nav .owl-next {
         position: absolute;
-        top: -32px;
+        top: -14px;
         right: 0px; }
-        @media (min-width: 1400px) {
+        @media (min-width: 576px) {
           .my-information .information__carousel ::deep .owl-nav .owl-next, .my-information .information__NoCarousel ::deep .owl-nav .owl-next {
-            right: 30px; } }
+            top: -20px; } }
+        @media (min-width: 768px) {
+          .my-information .information__carousel ::deep .owl-nav .owl-next, .my-information .information__NoCarousel ::deep .owl-nav .owl-next {
+            top: -14px; } }
+        @media (min-width: 992px) {
+          .my-information .information__carousel ::deep .owl-nav .owl-next, .my-information .information__NoCarousel ::deep .owl-nav .owl-next {
+            top: -24px; } }
+        @media (min-width: 1200px) {
+          .my-information .information__carousel ::deep .owl-nav .owl-next, .my-information .information__NoCarousel ::deep .owl-nav .owl-next {
+            top: -34px; } }
         .my-information .information__carousel ::deep .owl-nav .owl-next span, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span {
-          font-size: 80px;
+          font-size: 40px;
           color: #18A0FB;
           transition: all 0.3s linear; }
+          @media (min-width: 576px) {
+            .my-information .information__carousel ::deep .owl-nav .owl-next span, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span {
+              font-size: 50px; } }
+          @media (min-width: 768px) {
+            .my-information .information__carousel ::deep .owl-nav .owl-next span, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span {
+              font-size: 40px; } }
+          @media (min-width: 992px) {
+            .my-information .information__carousel ::deep .owl-nav .owl-next span, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span {
+              font-size: 60px; } }
+          @media (min-width: 1200px) {
+            .my-information .information__carousel ::deep .owl-nav .owl-next span, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span {
+              font-size: 80px; } }
           .my-information .information__carousel ::deep .owl-nav .owl-next span:hover, .my-information .information__NoCarousel ::deep .owl-nav .owl-next span:hover {
             color: #0B588c;
             opacity: 0.73; }
@@ -148,23 +339,50 @@
       display: none; }
   .my-information .information__act h3 {
     text-align: center;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
     margin: 0; }
+    @media (min-width: 992px) {
+      .my-information .information__act h3 {
+        font-size: 24px; } }
     .my-information .information__act h3 span {
       color: #18A0FB; }
   .my-information .information__act .information__act-number {
-    width: 115px;
-    height: 115px;
-    line-height: 115px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
     border: 1px solid #707070;
     border-radius: 50%;
     text-align: center;
     color: #18A0FB;
-    font-size: 50px;
+    font-size: 16px;
     font-weight: 700; }
-  .my-information .information__act .information__act-button {
-    width: 85%;
+    @media (min-width: 576px) {
+      .my-information .information__act .information__act-number {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 24px; } }
+    @media (min-width: 768px) {
+      .my-information .information__act .information__act-number {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px; } }
+    @media (min-width: 992px) {
+      .my-information .information__act .information__act-number {
+        width: 75px;
+        height: 75px;
+        line-height: 75px;
+        font-size: 32px; } }
+    @media (min-width: 1200px) {
+      .my-information .information__act .information__act-number {
+        width: 115px;
+        height: 115px;
+        line-height: 115px;
+        font-size: 50px; } }
+  .my-information .information__act-button {
+    width: 45%;
     background: rgba(100, 215, 47, 0.8);
     color: #FFFFFF;
     text-decoration: none;
@@ -173,15 +391,48 @@
     text-align: center;
     transition: all 0.2s linear;
     cursor: pointer; }
-    @media (min-width: 1400px) {
-      .my-information .information__act .information__act-button {
+    @media (min-width: 768px) {
+      .my-information .information__act-button {
+        width: 55%; } }
+    @media (min-width: 768px) {
+      .my-information .information__act-button {
+        width: 85%; } }
+    @media (min-width: 1200px) {
+      .my-information .information__act-button {
         width: 75%; } }
-    .my-information .information__act .information__act-button:hover {
+    .my-information .information__act-button:hover {
       background: #64d72f; }
-    .my-information .information__act .information__act-button i {
-      font-size: 32px;
+    .my-information .information__act-button i {
+      font-size: 20px;
       font-weight: 600; }
-    .my-information .information__act .information__act-button span {
+      @media (min-width: 576px) {
+        .my-information .information__act-button i {
+          font-size: 24px; } }
+      @media (min-width: 768px) {
+        .my-information .information__act-button i {
+          font-size: 20px; } }
+      @media (min-width: 992px) {
+        .my-information .information__act-button i {
+          font-size: 26px; } }
+      @media (min-width: 1200px) {
+        .my-information .information__act-button i {
+          font-size: 32px; } }
+    .my-information .information__act-button span {
       color: #FFFFFF;
-      font-size: 24px;
+      font-size: 14px;
       font-weight: 700; }
+      @media (min-width: 576px) {
+        .my-information .information__act-button span {
+          font-size: 18px; } }
+      @media (min-width: 768px) {
+        .my-information .information__act-button span {
+          font-size: 14px; } }
+      @media (min-width: 992px) {
+        .my-information .information__act-button span {
+          font-size: 18px; } }
+      @media (min-width: 1200px) {
+        .my-information .information__act-button span {
+          font-size: 20px; } }
+      @media (min-width: 1400px) {
+        .my-information .information__act-button span {
+          font-size: 24px; } }

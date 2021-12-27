@@ -20,26 +20,26 @@
                     <DataAnnotationsValidator />
 
                     <div class="row form-item">
-                        <p class="col-4 form-text">Tên tổ chức <span class="required-asterick">(*)</span></p>
-                        <div class="col-8 px-0">
+                        <p class="col-12 col-md-4 form-text">Tên tổ chức <span class="required-asterick">(*)</span></p>
+                        <div class="col-12 col-md-8 px-0">
                             <InputText @bind-Value="@org.FullName" class="form-input form-control" />
                         </div>
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Gmail <span class="required-asterick">(*)</span></p>
-                        <div class="col-8 px-0">
+                        <p class="col-12 col-md-4 form-text">Gmail <span class="required-asterick">(*)</span></p>
+                        <div class="col-12 col-md-8 px-0">
                             <InputText @bind-Value="@org.NotifiedEmail" class="form-input form-control" />
                         </div>
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Điện thoại <span class="required-asterick">(*)</span></p>
-                        <div class="col-8 px-0">
+                        <p class="col-12 col-md-4 form-text">Điện thoại <span class="required-asterick">(*)</span></p>
+                        <div class="col-12 col-md-8 px-0">
                             <InputText @bind-Value="@org.PhoneNumber" class="form-input form-control" />
                         </div>
                     </div>
                     <div class="row form-item">
                         <p class="col-4 form-text">Lĩnh vực <span class="required-asterick">(*)</span></p>
-                        <div class="col-8 form-field ">
+                        <div class="col-12 col-md-8 form-field ">
                             <div class="d-flex flex-wrap">
                                 <div class="form-field-item item-add ">
                                     <i class="material-icons-outlined icon-add" @onclick="ShowAreasModal">add</i>
@@ -55,8 +55,8 @@
                         </div>
                     </div>
                     <div class="row form-item">
-                        <p class="col-4 form-text">Tầm nhìn & sứ mệnh <span class="required-asterick">(*)</span></p>
-                        <div class="col-8 position-relative px-0">
+                        <p class="col-12 col-md-4 form-text">Tầm nhìn & sứ mệnh <span class="required-asterick">(*)</span></p>
+                        <div class="col-12 col-md-8 position-relative px-0">
                             <div class="col-8 px-0 w-100">
                                 <InputLimitedTextArea MaxLength="@maxWord" @bind-Value="org.Mission" class="form-input mx-0 form-control" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
@@ -64,8 +64,8 @@
                         </div>
                     </div>
                     <div class="row form-item mb-0">
-                        <p class="col-4 form-text">Thay đổi ảnh bìa <span class="required-asterick">(*)</span></p>
-                        <div class="col-8 px-0 ">
+                        <p class="col-12 col-md-4 form-text">Thay đổi ảnh bìa <span class="required-asterick">(*)</span></p>
+                        <div class="col-12 col-md-8 px-0 ">
                             <UploadImg InputFileChanged="HandleFileChanged"
                                        ImageDiscarded="HandleImageDiscarded"
                                        PreviewImgSrc="@org.Banner"
@@ -73,9 +73,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8 ms-auto from__btn">
+                        <div class="col-12 col-md-8 ms-auto from__btn">
                             <a href="@($"{Routes.OrgProfile}/{org.Id}")" class="btn from__btn-cancel text-decoration-none">Hủy</a>
-                            <button type="submit" class="btn from__btn-submit ms-4 d-inline-block blue-btn">Hoàn tất</button>
+                            <button type="submit" class="btn from__btn-submit ms-4 ms-md-5 d-inline-block blue-btn">Hoàn tất</button>
                         </div>
                     </div>
                 </EditForm>
@@ -85,5 +85,5 @@
 </div>
 
 @code {
-    RenderFragment succeededCreateTitle =@<h3><span>Lưu thành công!</span></h3>;
+    RenderFragment succeededCreateTitle =@<h3><span>Chỉnh sửa thông tin thành công!</span></h3>;
 }

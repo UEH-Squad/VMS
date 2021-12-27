@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 101;
   background-color: rgba(196, 196, 196, 0.38); }
 
 .min-overlay {
@@ -25,8 +25,8 @@
   z-index: 3; }
   .min-overlay .report-success {
     position: absolute;
-    height: 100px;
-    width: 30%;
+    height: 80px;
+    width: 320px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -39,10 +39,14 @@
     display: flex;
     justify-content: center;
     align-items: center; }
+    @media (min-width: 576px) {
+      .min-overlay .report-success {
+        height: 100px;
+        width: 360px; } }
     .min-overlay .report-success .min-overlay--icon {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 10px;
+      right: 10px;
       width: 25px;
       height: 25px;
       background-color: #E5E5E5;
@@ -51,29 +55,47 @@
       justify-content: center;
       align-items: center;
       cursor: pointer; }
+      @media (min-width: 576px) {
+        .min-overlay .report-success .min-overlay--icon {
+          top: 15px;
+          right: 15px; } }
       .min-overlay .report-success .min-overlay--icon .material-icons {
-        font-size: 22px; }
+        font-size: 18px; }
+        @media (min-width: 576px) {
+          .min-overlay .report-success .min-overlay--icon .material-icons {
+            font-size: 22px; } }
     .min-overlay .report-success .green-text {
-      color: #64D72F;
-      font-weight: 500;
-      font-size: 20px; }
+      color: #64D72F; }
     .min-overlay .report-success .blue-text {
-      color: #18A0FB;
+      color: #18A0FB; }
+    .min-overlay .report-success .green-text, .min-overlay .report-success .blue-text {
       font-weight: 500;
-      font-size: 20px; }
+      font-size: 16px; }
+      @media (min-width: 576px) {
+        .min-overlay .report-success .green-text, .min-overlay .report-success .blue-text {
+          font-size: 20px; } }
 
 .container {
   position: absolute;
-  width: 41.67%;
-  height: 80%;
+  width: 95%;
+  max-height: 80%;
   left: 50%;
-  top: 57%;
+  top: 50%;
   transform: translate(-50%, -50%);
   color: #515151;
   background-color: #FFFFFF;
   border-radius: 10px;
-  padding: 0 70px 40px 70px;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  padding: 0;
+  padding-left: 10px; }
+  @media (min-width: 380px) {
+    .container {
+      width: 460px;
+      padding: 0 12px 0 22px; } }
+  @media (min-width: 576px) {
+    .container {
+      width: 560px;
+      padding: 0 50px 20px 60px; } }
   .container::-webkit-scrollbar {
     width: 10px; }
   .container::-webkit-scrollbar-thumb {
@@ -81,14 +103,18 @@
     border-radius: 20px; }
   .container .icon-close-popup {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 13px;
+    right: 5px;
     width: 33px;
     height: 33px;
     border-radius: 50%;
     display: flex;
     background-color: #E5E5E5;
     cursor: pointer; }
+    @media (min-width: 576px) {
+      .container .icon-close-popup {
+        top: 20px;
+        right: 20px; } }
     .container .icon-close-popup .material-icons {
       margin: auto;
       font-size: 22px; }
@@ -101,12 +127,15 @@
 
 /*----title Báo cáo hoạt động----*/
 .title-header {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
   display: flex;
   justify-content: center;
   margin-top: 30px;
   letter-spacing: 2px; }
+  @media (min-width: 576px) {
+    .title-header {
+      font-size: 24px; } }
   .title-header .title-header__report {
     color: #64D72F;
     margin-right: 14px; }
@@ -124,21 +153,17 @@
 
 .title-discript {
   margin-top: 6%; }
-  .title-discript .title-discript__text {
-    font-size: 16px; }
-  .title-discript .title-discript__check {
+  .title-discript .title-discript__text, .title-discript .title-discript__check {
     font-size: 16px; }
 
 .title-attach {
   margin-top: 6%; }
-  .title-attach .title-attach__text {
-    font-size: 16px; }
-  .title-attach .title-attach__check {
+  .title-attach .title-attach__text, .title-attach .title-attach__check {
     font-size: 16px; }
 
 .dropdown .my-btn {
   width: 100%;
-  border: 1px solid #515151;
+  border: 1px solid #B4B4B4;
   height: 36px; }
   .dropdown .my-btn .my-icon-dropdown {
     float: right;
@@ -146,14 +171,17 @@
 
 .dropdown-menu {
   width: 100%;
-  box-shadow: 5px 5px 10px 10px #dee2e687;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 14px;
-  border-radius: 10px; }
+  border: none; }
   .dropdown-menu .dropdown-item {
     display: flex;
     align-items: center;
-    margin: 5px 0;
+    margin: 0;
     padding-left: 5%; }
+    @media (min-width: 576px) {
+      .dropdown-menu .dropdown-item {
+        margin: 5px 0; } }
     .dropdown-menu .dropdown-item ::deep .dropdown-item--checkbox {
       margin-right: 10px; }
     .dropdown-menu .dropdown-item label {
@@ -167,9 +195,9 @@
 /*-----end reporting reason------*/
 /*-----report description-----*/
 ::deep .form-control {
-  border: 1px solid;
+  border: 1px solid #B4B4B4;
   font-size: 16px;
-  height: 150px;
+  height: 100px;
   overflow-y: scroll; }
   ::deep .form-control::-webkit-scrollbar {
     width: 14px; }
@@ -179,49 +207,20 @@
     border: 2px solid white; }
 
 /*-----end report description-----*/
-/*---attached proof-----*/
-.add-file {
-  border-radius: 4px;
-  border: 1px solid #515151;
-  padding: 9px 0;
-  display: flex; }
-  .add-file .add-file__block {
-    display: flex;
-    margin: auto; }
-    .add-file .add-file__block .my-icon-upload {
-      font-size: 1.5rem;
-      margin-right: 10px;
-      color: #515151; }
-    .add-file .add-file__block .block-icon-text {
-      display: flex; }
-      .add-file .add-file__block .block-icon-text .file__text {
-        font-size: 16px;
-        font-weight: 300px; }
-    .add-file .add-file__block ::deep .inputfile {
-      opacity: 0;
-      overflow: hidden;
-      position: absolute;
-      z-index: -1;
-      display: none; }
-    .add-file .add-file__block .inputfile + label {
-      color: #333;
-      display: inline-block;
-      cursor: pointer; }
-
-/*----end attached proof----*/
 /*button report*/
 .btn-accept {
   display: flex;
-  margin-top: 10%; }
+  margin: 30px 0; }
   .btn-accept .btn {
     margin: auto;
     background-color: #64D72F;
     color: #FFFFFF;
     font-size: 16px;
-    width: 46%;
-    height: 54px;
     font-weight: 600;
     border-radius: 5px; }
+    @media (min-width: 576px) {
+      .btn-accept .btn {
+        padding: 5px 10px; } }
   .btn-accept .btn:hover {
     background-color: #306C14; }
 

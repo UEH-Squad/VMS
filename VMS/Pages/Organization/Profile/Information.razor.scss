@@ -3,8 +3,20 @@
 .my-information {
     padding: 50px 0;
 
+    .col-left-top {
+        width: 100%;
+
+        @include on("md") {
+            width: 55%;
+        }
+    }
+
     .col-left {
-        width: 55%;
+        width: 65%;
+
+        @include on("md") {
+            width: 55%;
+        }
     }
 
     .col-right {
@@ -17,19 +29,46 @@
         }
 
         img {
-            width: 230px;
-            height: 230px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
+
+            @include on("sm") {
+                width: 150px;
+                height: 150px;
+            }
+
+            @include on("md") {
+                width: 160px;
+                height: 160px;
+            }
+
+            @include on("xl") {
+                width: 230px;
+                height: 230px;
+            }
         }
 
         .icon-camera {
             position: absolute;
             bottom: 15px;
             right: -25px;
-            font-size: 36px;
+            font-size: 20px;
             color: $grey-icon;
             cursor: pointer;
+
+            @include on("sm") {
+                font-size: 24px;
+            }
+
+            @include on("md") {
+                font-size: 28px;
+            }
+
+            @include on("xl") {
+                font-size: 36px;
+            }
 
             &:hover {
                 color: $grey-close-btn
@@ -37,8 +76,24 @@
         }
 
         p {
-            font-size: 24px;
+            font-size: 16px;
             font-weight: 600;
+
+            @include on("sm") {
+                font-size: 18px;
+            }
+
+            @include on("md") {
+                font-size: 16px;
+            }
+
+            @include on("lg") {
+                font-size: 20px;
+            }
+
+            @include on("xl") {
+                font-size: 24px;
+            }
         }
 
         .information__tilte {
@@ -48,10 +103,22 @@
             border-radius: 10px;
             padding: 7px 30px;
             color: #515151;
-            font-size: 16px;
+            font-size: 10px;
             font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
+
+            @include on("sm") {
+                font-size: 12px;
+            }
+
+            @include on("lg") {
+                font-size: 14px;
+            }
+
+            @include on("xl") {
+                font-size: 16px;
+            }
 
             &:hover {
                 background: #FCFF81;
@@ -70,43 +137,139 @@
     .information__rank {
         a {
             color: $green;
-            font-size: 40px;
+            font-size: 26px;
             font-weight: 600;
             text-decoration: none;
+
+            @include on("sm") {
+                font-size: 30px;
+            }
+
+            @include on("md") {
+                font-size: 26px;
+            }
+
+            @include on("lg") {
+                font-size: 32px;
+            }
+
+            @include on("xl") {
+                font-size: 40px;
+            }
         }
 
         .information__rank-number {
             color: $border-color-bold;
-            font-size: 24px;
+            font-size: 15px;
             font-weight: 700;
-            margin-right: 10px;
+            margin-right: 20px;
+
+            @include on("sm") {
+                font-size: 18px;
+            }
+
+            @include on("md") {
+                font-size: 15px;
+            }
+
+            @include on("lg") {
+                font-size: 20px;
+            }
+
+            @include on("xl") {
+                font-size: 24px;
+            }
         }
 
         i {
             margin: auto 2px;
             color: $green;
-            font-size: 30px;
+            font-size: 16px;
+
+            @include on("sm") {
+                font-size: 20px;
+            }
+
+            @include on("md") {
+                font-size: 16px;
+            }
+
+            @include on("lg") {
+                font-size: 24px;
+            }
+
+            @include on("xl") {
+                font-size: 30px;
+            }
         }
 
         span {
             color: $border-color-bold;
-            font-size: 20px;
+            font-size: 12px;
             font-weight: 500;
+
+            @include on("sm") {
+                font-size: 12px;
+            }
+
+            @include on("md") {
+                font-size: 16px;
+            }
+
+            @include on("lg") {
+                font-size: 12px;
+            }
+
+            @include on("xl") {
+                font-size: 20px;
+            }
         }
     }
 
     .information__contact {
         i {
-            font-size: 24px;
-            margin: auto 10px;
+            font-size: 16px;
+            margin: auto 20px;
             color: $border-color-bold;
+
+            @include on("sm") {
+                font-size: 18px;
+            }
+
+            @include on("md") {
+                font-size: 16px;
+            }
+
+            @include on("lg") {
+                font-size: 20px;
+            }
+
+            @include on("xl") {
+                font-size: 24px;
+            }
         }
 
         a {
             color: $grey-text;
-            font-size: 16px;
+            font-size: 10px;
             font-weight: 400;
             text-decoration: none;
+
+            @include on("sm") {
+                font-size: 12px;
+            }
+
+            @include on("md") {
+                font-size: 10px;
+            }
+
+            @include on("lg") {
+                font-size: 14px;
+            }
+
+            @include on("xl") {
+                font-size: 16px;
+            }
         }
     }
 
@@ -114,9 +277,13 @@
 
         h3 {
             text-align: center;
-            font-size: 24px;
+            font-size: 16px;
             font-weight: 600;
             margin: 0;
+
+            @include on("lg") {
+                font-size: 24px;
+            }
 
             span {
                 color: $blue;
@@ -125,10 +292,22 @@
     }
 
     .line {
-        height: 120px;
+        height: 40px;
         width: 1px;
         margin: auto 0;
         background-color: rgba(112, 112, 112, .5);
+
+        @include on("sm") {
+            height: 55px;
+        }
+
+        @include on("md") {
+            height: 80px;
+        }
+
+        @include on("xl") {
+            height: 120px;
+        }
     }
 
     .information__carousel, .information__NoCarousel {
@@ -145,7 +324,23 @@
             text-align: center;
 
             &:hover > i {
-                font-size: 45px;
+                font-size: 30px;
+
+                @include on("sm") {
+                    font-size: 32px;
+                }
+
+                @include on("md") {
+                    font-size: 30px;
+                }
+
+                @include on("lg") {
+                    font-size: 34px;
+                }
+
+                @include on("xl") {
+                    font-size: 45px;
+                }
             }
 
             &:hover > span {
@@ -158,10 +353,38 @@
                 color: white;
                 margin: 5px auto;
                 transition: all 0.3s linear;
-                width: 70px;
-                height: 70px;
-                line-height: 70px;
-                font-size: 30px;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 20px;
+
+                @include on("sm") {
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    font-size: 22px;
+                }
+
+                @include on("md") {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    font-size: 20px;
+                }
+
+                @include on("lg") {
+                    width: 55px;
+                    height: 55px;
+                    line-height: 55px;
+                    font-size: 24px;
+                }
+
+                @include on("xl") {
+                    width: 70px;
+                    height: 70px;
+                    line-height: 70px;
+                    font-size: 30px;
+                }
 
                 @include on("xxl") {
                     width: 75px;
@@ -192,17 +415,45 @@
 
             .owl-next {
                 position: absolute;
-                top: -32px;
+                top: -14px;
                 right: 0px;
 
-                @include on('xxl') {
-                    right: 30px;
+                @include on('sm') {
+                    top: -20px;
+                }
+
+                @include on('md') {
+                    top: -14px;
+                }
+
+                @include on('lg') {
+                    top: -24px;
+                }
+
+                @include on('xl') {
+                    top: -34px;
                 }
 
                 span {
-                    font-size: 80px;
+                    font-size: 40px;
                     color: $blue;
                     transition: all 0.3s linear;
+
+                    @include on("sm") {
+                        font-size: 50px;
+                    }
+
+                    @include on("md") {
+                        font-size: 40px;
+                    }
+
+                    @include on("lg") {
+                        font-size: 60px;
+                    }
+
+                    @include on("xl") {
+                        font-size: 80px;
+                    }
 
                     &:hover {
                         color: $blue-hv;
@@ -224,9 +475,13 @@
     .information__act {
         h3 {
             text-align: center;
-            font-size: 24px;
+            font-size: 16px;
             font-weight: 600;
             margin: 0;
+
+            @include on("lg") {
+                font-size: 24px;
+            }
 
             span {
                 color: $blue;
@@ -234,45 +489,117 @@
         }
 
         .information__act-number {
-            width: 115px;
-            height: 115px;
-            line-height: 115px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
             border: 1px solid $border-color-bold;
             border-radius: 50%;
             text-align: center;
             color: $blue;
-            font-size: 50px;
+            font-size: 16px;
             font-weight: 700;
+
+            @include on("sm") {
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 24px;
+            }
+
+            @include on("md") {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 16px;
+            }
+
+            @include on("lg") {
+                width: 75px;
+                height: 75px;
+                line-height: 75px;
+                font-size: 32px;
+            }
+
+            @include on("xl") {
+                width: 115px;
+                height: 115px;
+                line-height: 115px;
+                font-size: 50px;
+            }
+        }
+    }
+
+    .information__act-button {
+        width: 45%;
+        background: rgba(100, 215, 47, 0.8);
+        color: $white;
+        text-decoration: none;
+        padding: 6px 00px;
+        border-radius: 50px;
+        text-align: center;
+        transition: all 0.2s linear;
+        cursor: pointer;
+
+        @include on("md") {
+            width: 55%;
         }
 
-        .information__act-button {
+        @include on("md") {
             width: 85%;
-            background: rgba(100, 215, 47, 0.8);
+        }
+
+        @include on("xl") {
+            width: 75%;
+        }
+
+        &:hover {
+            background: rgba(100, 215, 47, 1);
+        }
+
+        i {
+            font-size: 20px;
+            font-weight: 600;
+
+            @include on("sm") {
+                font-size: 24px;
+            }
+
+            @include on("md") {
+                font-size: 20px;
+            }
+
+            @include on("lg") {
+                font-size: 26px;
+            }
+
+            @include on("xl") {
+                font-size: 32px;
+            }
+        }
+
+        span {
             color: $white;
-            text-decoration: none;
-            padding: 6px 00px;
-            border-radius: 50px;
-            text-align: center;
-            transition: all 0.2s linear;
-            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+
+            @include on("sm") {
+                font-size: 18px;
+            }
+
+            @include on("md") {
+                font-size: 14px;
+            }
+
+            @include on("lg") {
+                font-size: 18px;
+            }
+
+            @include on("xl") {
+                font-size: 20px;
+            }
 
             @include on("xxl") {
-                width: 75%;
-            }
-
-            &:hover {
-                background: rgba(100, 215, 47, 1);
-            }
-
-            i {
-                font-size: 32px;
-                font-weight: 600;
-            }
-
-            span {
-                color: $white;
                 font-size: 24px;
-                font-weight: 700;
             }
         }
     }

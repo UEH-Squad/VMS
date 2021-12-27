@@ -8,10 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
-using VMS.Application.Services;
 using VMS.Application.ViewModels;
 using VMS.Common;
-using VMS.Common.CustomValidations;
 using VMS.Pages.Organization.Profile;
 
 namespace VMS.Pages.Volunteer.EditUserProfile
@@ -37,6 +35,9 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         [Inject]
         private IFacultyService FacultyService { get; set; }
+
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
 
         [Parameter]
         public bool IsUsedForAdmin { get; set; }
@@ -65,16 +66,9 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task ShowAreasModal()
         {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
             var areasParameter = new ModalParameters();
             areasParameter.Add("choosenAreasList", choosenAreas);
-            var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
-            await areasModal.Result;
+            await Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -107,14 +101,7 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task ShowModalAsync(Type type, ModalParameters parameters)
         {
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show(type, "", parameters, options).Result;
+            await Modal.Show(type, "", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private int maxWord = 300;
@@ -140,14 +127,7 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task HandleSubmit()
         {
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", options);
+            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", BlazoredModalOptions.GetModalOptions());
             ModalResult result = await editConfirmModal.Result;
             if (!result.Cancelled)
             {
@@ -165,7 +145,8 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
-                    await Modal.Show<Organization.Activities.NotificationPopup>("", modalParams, options).Result;
+                    await Modal.Show<Organization.Activities.NotificationPopup>("", modalParams, BlazoredModalOptions.GetModalOptions()).Result;
+                    NavigationManager.NavigateTo($"{Routes.UserProfile}/{UserId}", true);
                 }
                 catch (Exception ex)
                 {

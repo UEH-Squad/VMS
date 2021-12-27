@@ -37,8 +37,8 @@
 .user-section {
   cursor: pointer; }
   .user-section__link .user-avatar {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: block;
     margin: 0 auto; }
@@ -59,6 +59,7 @@
     height: 0;
     width: 0; }
   .user-section .dropdown-menu {
+    position: absolute;
     top: 100%;
     left: auto;
     right: -50%;
@@ -69,21 +70,21 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: -62%;
-    color: #18A0FB;
-    font-size: 35px;
-    cursor: pointer;
-    display: none; }
+    right: -55%;
+    font-size: 30px;
+    cursor: pointer; }
     @media (min-width: 1200px) {
       .user-section__dropdown-icon {
         display: block; } }
   .user-section__list {
     margin: 10px auto 0;
-    width: 420px;
-    height: 350px;
+    width: 260px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25); }
+    @media (min-width: 1200px) {
+      .user-section__list {
+        width: 420px; } }
   @media (min-width: 1200px) {
     .user-section {
       margin-left: 60px; } }
@@ -96,24 +97,39 @@
     margin: 14px 0; }
 
 .user-info .user-img {
-  width: 70px;
-  height: 70px; }
+  width: 58px;
+  height: 58px; }
+  @media (min-width: 1200px) {
+    .user-info .user-img {
+      width: 70px;
+      height: 70px; } }
 
 .user-info h3 {
   color: #515151;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500; }
 
 .user-info h4 {
   color: #515151;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400; }
+
+.user-info .user-info-link {
+  flex-direction: column; }
+  @media (min-width: 1200px) {
+    .user-info .user-info-link {
+      flex-direction: row; } }
+  .user-info .user-info-link .user-info-heading {
+    text-align: center; }
+    @media (min-width: 1200px) {
+      .user-info .user-info-link .user-info-heading {
+        text-align: left; } }
 
 .edit a {
   border-radius: 50px;
   border: solid 1px #18A0FB; }
   .edit a h4 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     color: #18A0FB; }
 

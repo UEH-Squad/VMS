@@ -1,40 +1,40 @@
 ﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(IsFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
     <div class="container-lg p-0 my-navbar-container">
-        <div class="d-flex flex-column my-navbar__brand">
-            <NavLink href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
-                <img src="img/UEH.png" alt="UEH logo" class="brand__ueh" />
-            </NavLink>
-            <NavLink href="@Routes.ActivitySearch" class="my-navbar__brand-item">
-                <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
-            </NavLink>
-        </div>
         <div class="my-navbar__hamburger-wrapper">
-            <Notification />
             <button class="my-navbar__hamburger-wrapper__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="material-icons hamburger-icon">
                     menu
                 </span>
             </button>
         </div>
+        <div class="d-flex my-navbar__brand">
+            <NavLink href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
+                <img src="img/UEH-logo-2.png" alt="UEH logo" class="brand__ueh" />
+            </NavLink>
+            <NavLink href="@Routes.ActivitySearch" class="my-navbar__brand-item">
+                <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
+            </NavLink>
+        </div>
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
-            <ul class="navbar-nav navbar-list mb-4 mb-xl-0 text-center fw-bold my-collapse__list">
+            <ul class="navbar-nav navbar-list mb-4 mb-xl-0 fw-bold my-collapse__list">
                 <li class="nav-item">
                     <NavLink href="@Routes.HomePage" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-2 mx-xxl-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
                 </li>
                 <li class="nav-item">
                     <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-2 mx-xxl-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
                 </li>
-                <li class="nav-item"> 
+                <li class="nav-item">
                     <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
                 </li>
                 <li class="nav-item">
                     <NavLink href="@Routes.UserProfile" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đại lộ danh vọng</NavLink>
                 </li>
             </ul>
-            <ul class="my-collapse__login-area navbar-nav d-flex align-items-center mt-4 mb-2 my-xl-0">
-                <LoginDisplay />
-            </ul>
         </div>
+        <ul class="my-collapse__login-area navbar-nav d-flex align-items-center my-xl-0">
+            <Notification />
+            <LoginDisplay />
+        </ul>
 
     </div>
 </nav>

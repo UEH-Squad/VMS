@@ -1,1 +1,1 @@
-﻿.heading-container{width:fit-content;}.heading-container .page-heading{font-size:66px;color:#18a0fb;font-weight:500;}.heading-container .page-heading span{color:#64d72f;}
+﻿.my-container{padding:0 20px;}@media(min-width:1200px){.my-container{padding:0 0;}}.heading-container .page-heading{font-size:24px;color:#18a0fb;font-weight:500;}@media(min-width:1200px){.heading-container .page-heading{font-size:60px;}}.heading-container .page-heading span{color:#64d72f;}

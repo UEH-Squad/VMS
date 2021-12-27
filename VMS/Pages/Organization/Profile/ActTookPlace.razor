@@ -12,27 +12,13 @@
                 {
                     <div class="col-12 col-lg-6 act-container position-relative pb-5">
                         <div class="img-container position-absolute">
-                            <img src="./img/OrganizationProfile/ActTookPlace.png" alt="" class="act-img">
+                            <img src="@item.Banner" alt="" class="act-img">
                         </div>
                         <div class="act-content col-11 col-lg-10 ms-auto mt-1 mb-2">    
                             <div class="act-ctn col-9 ms-auto ps-3 ps-md-4 pe-3 my-1 my-sm-2">
                                 <a href="@Routes.ActivityInfo/@item.Id" class="act-title">@item?.Name</a>
                                 <div class="act-ranking my-1 my-sm-2 my-lg-3 lh-1">
-                                    <span class="material-icons-outlined icon-star" style="color:@(item.Rating > 0 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating,0)?"_half":"")
-                                    </span>
-                                    <span class="material-icons-outlined icon-star" style="color:@(item.Rating > 1 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating,1)?"_half":"")
-                                    </span>
-                                    <span class="material-icons-outlined icon-star" style="color:@(item.Rating > 2 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 2)?"_half":"")
-                                    </span>
-                                    <span class="material-icons-outlined icon-star" style="color:@(item.Rating > 3 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 3)?"_half":"")
-                                    </span>
-                                    <span class="material-icons-outlined icon-star" style="color:@(item.Rating > 4 ? "#EDF131" : "#B4B4B4")">
-                                        star@(HaftStar(item.Rating, 4)?"_half":"")
-                                    </span>
+                                    <Star Rating="item.Rating" />
                                 </div>
                                 <div class="act-footer">
                                     <h5 class="act-participant">

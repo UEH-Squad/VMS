@@ -1,0 +1,16 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminWatchlistVolunteer)]
+@attribute [Authorize(Roles = "Admin")]
+@inject IJSRuntime JsRuntime
+
+<div class="container">
+    <VMS.Pages.Organization.VolunteersListPage.Title />
+    <div class="container_divider"></div>
+    <VMS.Pages.Organization.VolunteersListPage.NavMini />
+    <VMS.Pages.Organization.VolunteersListPage.Listcard />
+</div>
+
+@code {
+
+}

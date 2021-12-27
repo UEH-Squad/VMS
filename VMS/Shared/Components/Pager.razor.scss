@@ -29,7 +29,8 @@
     }
 
     .numb {
-        width: 40px;
+        padding:0 5px;
+        min-width: 40px;
         height: 40px;
         line-height: 40px;
         border-radius: 50%;
@@ -42,4 +43,8 @@
         background: $blue;
         color: $white;
     }
+}
+
+.margin-x-short {
+    margin: 0 8px !important;
 }

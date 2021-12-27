@@ -1,0 +1,32 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.container {
+    width: 91.67%;
+    margin-right: 0;
+    margin-top: 5%;
+
+    &_main-content {
+        justify-content: space-between;
+    }
+
+    .leftraight {
+        width: 70.83%;
+        display: flex;
+        flex-direction: column;
+
+        .container-list-card {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .rightraight{
+        width: 20.83%;
+    }
+        
+    .pagination-container {
+        margin-top: 5%;
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -21,6 +21,8 @@ namespace VMS.Pages.Organization.Profile
         
         [Parameter]
         public string UserId { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
+
 
         [CascadingParameter]
         public string CurrentUserId { get; set; }

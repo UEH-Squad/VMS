@@ -6,7 +6,7 @@
             <div class="col-12 col-md-4 text-center information__logo">
                 <div class="information__logo-img">
                     <div class=" text-center d-inline-block position-relative">
-                        <img src="@Org?.Avatar" alt="Avartar đơn vị">
+                        <img src="@Org?.Avatar" alt="Avartar đơn vị" style="@(IsUsedForAdmin ? "width:150px; height:150px;" : "")">
                         @if (HaveControl)
                         {
                             <label for="myfile" class="d-inline">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-                <p class="m-0">@Org?.FullName</p>
+                <p class="m-0" style="@(IsUsedForAdmin ? "font-size: 16px" : "")">@Org?.FullName</p>
                 <div class="col-left-top d-block d-md-none information__rank ">
                     <div class="d-flex justify-content-center align-self-center">
                         <a href="@Routes.EditOrgProfile" class="d-flex align-self-center me-2 me-md-4 pe-2">
@@ -49,35 +49,35 @@
 
                 </div>
 
-                <span @onclick="ShowModalAppellation" class="information__tilte mx-auto my-3">Tổ chức chuyên nghiệp</span>
+                <span @onclick="ShowModalAppellation" class="information__tilte mx-auto my-3" style="@(IsUsedForAdmin ? "font-size: 14px" : "")>Tổ chức chuyên nghiệp</span>
             </div>
             <div class="col-12 col-md-8 ps-4 ps-xxl-5">
                 <div class="row-1 d-flex align-items-center">
                     <div class="col-left-top d-none d-md-block information__rank ">
                         <div class="d-flex justify-content-center align-self-center">
-                            <a href="@Routes.EditOrgProfile" class="d-flex align-self-center me-4 pe-2">
+                            <a href="@Routes.EditOrgProfile" class="d-flex align-self-center me-4 pe-2" style="@(IsUsedForAdmin ? "font-size: 32px" : "")">
                                 #@Org?.Rank @*There will be processing code in another place*@
                             </a>
                             <div class="text-start">
                                 <p class="mb-2 d-flex justify-content-evenly align-self-end">
-                                    <span class="information__rank-number">@Org?.AverageRating</span>
-                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 0 ? "#EDF131" : "#B4B4B4")">
+                                    <span class="information__rank-number" style="@(IsUsedForAdmin ? "font-size: 20px" : "")">@Org?.AverageRating</span>
+                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 0 ? "#EDF131" : "#B4B4B4"); @(IsUsedForAdmin ? "font-size: 32px" : "")">
                                         star@(HaftStar(Org.AverageRating,0)?"_half":"")
                                     </i>
-                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 1 ? "#EDF131" : "#B4B4B4")">
+                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 1 ? "#EDF131" : "#B4B4B4"); @(IsUsedForAdmin ? "font-size: 32px" : "")">
                                         star@(HaftStar(Org.AverageRating,1)?"_half":"")
                                     </i>
-                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 2 ? "#EDF131" : "#B4B4B4")">
+                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 2 ? "#EDF131" : "#B4B4B4"); @(IsUsedForAdmin ? "font-size: 32px" : "")">
                                         star@(HaftStar(Org.AverageRating, 2)?"_half":"")
                                     </i>
-                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 3 ? "#EDF131" : "#B4B4B4")">
+                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 3 ? "#EDF131" : "#B4B4B4"); @(IsUsedForAdmin ? "font-size: 32px" : "")">
                                         star@(HaftStar(Org.AverageRating, 3)?"_half":"")
                                     </i>
-                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 4 ? "#EDF131" : "#B4B4B4")">
+                                    <i class="material-icons-outlined" style="color:@(Org.AverageRating > 4 ? "#EDF131" : "#B4B4B4"); @(IsUsedForAdmin ? "font-size: 32px" : "")">
                                         star@(HaftStar(Org.AverageRating, 4)?"_half":"")
                                     </i>
                                 </p>
-                                <span>@Org.QuantityRating xếp hạng</span>
+                                <span style="@(IsUsedForAdmin ? "font-size: 18px" : "")">@Org.QuantityRating xếp hạng</span>
                             </div>
                         </div>
                         
@@ -101,7 +101,7 @@
                 <div class="information__line d-none d-md-block"></div>
                 <div class="row-2 d-flex align-items-start">
                     <div class="col-left information__fields">
-                        <h3 class="mb-4 pb-2 d-none d-md-block">Lĩnh vực <span>chuyên môn</span></h3>
+                        <h3 class="mb-4 pb-2 d-none d-md-block" style="@(IsUsedForAdmin ? "font-size: 20px" : "")">Lĩnh vực <span>chuyên môn</span></h3>
                         <div class=" @(Org.Areas.Count>3 ? "owl-carousel owl-theme information__carousel" : "d-flex justify-content-center information__NoCarousel px-0 ") ">
                             @if (Org != null)
                             {
@@ -118,9 +118,9 @@
                     </div>
                     <div class="line mx-2"></div>
                     <div class="col-right information__act px-0">
-                        <h3 class="d-none d-md-block mb-4 pb-2">Số hoạt động <span>đã tạo</span></h3>
+                        <h3 class="d-none d-md-block mb-4 pb-2" style="@(IsUsedForAdmin ? "font-size: 20px" : "")">Số hoạt động <span>đã tạo</span></h3>
                         <div class="d-flex justify-content-evenly align-self-center">
-                            <span class="information__act-number">@Org?.Activities.Count</span>
+                            <span class="information__act-number" style="@(IsUsedForAdmin ? "width:80px; height:80px;line-height:80px;font-size:30px;" : "")">@Org?.Activities.Count</span>
                         </div>
                         @if (HaveControl)
                         {

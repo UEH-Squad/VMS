@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/IdentityCss/Layout.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
 </head>
@@ -23,10 +23,10 @@
         <div class="container-lg p-0 my-navbar-container">
             <div class="d-flex flex-column my-navbar__brand">
                 <a href="@Routes.HomePage" class="my-navbar__brand-item" Match="NavLinkMatch.All">
-                    <img src="img/UEH.png" alt="UEH logo" class="brand__ueh" />
+                    <img src="~/img/UEH.png" alt="UEH logo" class="brand__ueh" />
                 </a>
                 <a href="@Routes.ActivitySearch" class="my-navbar__brand-item">
-                    <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
+                    <img src="~/img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
                 </a>
             </div>
            
@@ -61,7 +61,7 @@
         <div class="container">
             <div class="row ">
                 <div class="footer__logo col-6 col-xl-4">
-                    <img src="img/GoVirlunteer (1).png" alt="" class="footer__logo-govirlunteer">
+                    <img src="~/img/GoVirlunteer (1).png" alt="" class="footer__logo-govirlunteer">
                     <div class="footer__logo-ueh-hsv">
                         <img src="img/UEH.png" alt="" class="footer__logo-ueh">
                         <img src="img/hsv.png" alt="" class="footer__logo-hsv">

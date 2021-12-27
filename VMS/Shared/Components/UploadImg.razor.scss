@@ -36,6 +36,14 @@ span {
         font-size: 16px;
     }
 }
+.lm-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 1;
+    }
 
 .preview-img {
     height: 150px;

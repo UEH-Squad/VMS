@@ -39,6 +39,11 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
+        [Parameter]
+        public bool IsUsedForAdmin { get; set; }
+
+        private int width;
+        private string classWidth = "";
         private string UserId;
         private int count;
         private bool isErrorMessageShown = false;

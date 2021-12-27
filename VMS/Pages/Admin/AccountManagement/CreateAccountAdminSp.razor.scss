@@ -1,0 +1,197 @@
+﻿@import '../../../Resources/scss/common/_variables';
+
+.my-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 120;
+
+    .modal__content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal__create, .modal__success {
+        background-color: $white;
+        position: relative;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+        border-radius: 10px;
+    }
+
+    .modal__create {
+        width: 520px;
+        padding: 30px 45px;
+
+        h3 {
+            font-weight: 500;
+            font-size: 24px;
+            color: $green;
+            margin-bottom: 30px;
+
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    .modal__success {
+        width: 400px;
+        padding: 30px 30px;
+
+        h3 {
+            font-weight: 500;
+            font-size: 20px;
+            color: $green;
+
+            span {
+                color: $blue;
+            }
+        }
+
+        .btn-cancel {
+            font-weight: 600;
+            font-size: 16px;
+            color: $blue;
+            background-color: transparent;
+
+            &:hover {
+                color: $blue-bold;
+                background-color: transparent;
+            }
+        }
+
+        .btn-watchList {
+            font-weight: 600;
+            font-size: 16px;
+            color: $white;
+            background-color: $blue;
+
+            &:hover {
+                color: $white;
+                background-color: $blue-bold;
+            }
+        }
+    }
+
+    .modal__create .icon-close {
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 20px;
+            color: $grey-close-btn;
+        }
+    }
+
+    .modal__success .icon-close {
+        width: 22px;
+        height: 22px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 16px;
+            color: $grey-close-btn;
+            line-height: 0;
+        }
+    }
+    //Edit form
+
+    .mb-20 {
+        margin-bottom: 20px;
+    }
+
+    .bg-grey {
+        background-color: #f3f3f3;
+    }
+
+    .form-control {
+        border: 1px solid #D8D8D8;
+    }
+
+    .form-control[readonly] {
+        background-color: $white;
+        opacity: 1;
+    }
+
+    .form__title {
+        width: 135px;
+        font-weight: 400;
+        font-size: 16px;
+        color: #515151;
+        margin-bottom: 0;
+
+        span {
+            color: red;
+        }
+
+        & + div {
+            width: calc(100% - 135px);
+            padding-left: 10px;
+        }
+    }
+
+    .from__btn {
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 30px;
+
+        .btn-cancel {
+            background-color: transparent;
+            color: $green;
+
+            &:hover {
+                background-color: transparent;
+                color: $green-bold;
+            }
+
+            &:focus {
+                box-shadow: none
+            }
+        }
+
+        .btn-create {
+            background-color: $green;
+            color: $white;
+            border-radius: 5px;
+            width: 140px;
+            height: 35px;
+            padding: 0;
+
+            &:hover {
+                background-color: $green-bold;
+                color: $white;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            &:focus {
+                box-shadow: none
+            }
+        }
+    }
+}

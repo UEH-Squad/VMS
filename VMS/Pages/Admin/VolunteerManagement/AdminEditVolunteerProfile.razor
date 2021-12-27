@@ -1,0 +1,9 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminEditVolunteerProfile)]
+@attribute [Authorize(Roles = "Admin")]
+
+<VMS.Pages.Volunteer.EditUserProfile.Index IsUsedForAdmin="true"/>
+@code {
+
+}

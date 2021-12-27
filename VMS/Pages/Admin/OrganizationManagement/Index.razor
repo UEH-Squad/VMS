@@ -1,0 +1,38 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminOrganizationManagement)]
+@attribute [Authorize(Roles = "Admin")]
+<div class="row">
+    <div class="col-lg-10 p-0 mx-auto">
+    <VMS.Pages.SearchOrganizer.SearchAndFilter />
+    <div class="arrange-bar mb-3">
+        <div class="labels">
+            <span>Số hoạt động đã tổ chức</span>
+            <span>Thứ hạng</span>
+        </div>
+        <div class="boxes-group">
+            <span>
+                <input type="radio" name="order" value="increase" id="increase" />
+                <label for="increase">Tăng dần</label>
+            </span>
+            <span>
+                <input type="radio" name="order" value="decrease" id="decrease" />
+                <label for="decrease">Giảm dần</label>
+            </span>
+            <span>
+                <input type="radio" name="rank" value="higherToLower" id="higher-to-lower" />
+                <label for="higher-to-lower">Từ cao xuống thấp</label>
+            </span>
+            <span>
+                <input type="radio" name="rank" value="lowerToHigher" id="lower-to-higher" />
+                <label for="lower-to-higher">Từ thấp đến cao</label>
+            </span>
+        </div>
+    </div>
+    <VMS.Pages.SearchOrganizer.SearchResult IsOrgResult="true" IsUsedForAdmin="true"/>
+</div>
+</div>
+
+@code {
+
+}

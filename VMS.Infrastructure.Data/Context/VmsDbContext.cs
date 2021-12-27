@@ -6,7 +6,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Infrastructure.Data.Context
 {
-    public class VmsDbContext : IdentityDbContext
+    public class VmsDbContext : IdentityDbContext<User, AppRole, string, IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityAddress> ActivityAddresses { get; set; }
@@ -27,6 +27,8 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<ImageReport> ImageReports { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
+        public new DbSet<AppRole> Roles { get; set; }
+        public new DbSet<UserRole> UserRoles { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {
@@ -35,6 +37,18 @@ namespace VMS.Infrastructure.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<UserRole>()
+                .HasOne(x => x.Role)
+                .WithMany(x => x.UserRoles)
+                .HasForeignKey(x => x.RoleId);
+
+            builder.Entity<UserRole>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.UserRoles)
+                .HasForeignKey(x => x.UserId);
+
+            builder.Entity<User>().HasDiscriminator<string>("Discriminator").HasValue("User");
 
             builder.Entity<User>()
                 .HasMany(x => x.Activities)
@@ -133,9 +147,10 @@ namespace VMS.Infrastructure.Data.Context
 
             builder.Entity<Area>().Property(x => x.Color).HasDefaultValue("#18A0FB");
 
+            const string ADMIN_ROLE_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e570";
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
-                Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
+                Id = ADMIN_ROLE_ID,
                 Name = Role.Admin.ToString(),
                 NormalizedName = Role.Admin.ToString()
             });
@@ -152,6 +167,28 @@ namespace VMS.Infrastructure.Data.Context
                 Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
                 Name = Role.User.ToString(),
                 NormalizedName = Role.User.ToString()
+            });
+
+            // seed admin account
+            const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
+
+            PasswordHasher<User> hasher = new();
+            builder.Entity<User>().HasData(new User
+            {
+                Id = ADMIN_ID,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "hsv.ueh@ueh.edu.vn",
+                NormalizedEmail = "hsv.ueh@ueh.edu.vn",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                SecurityStamp = string.Empty
+            });
+
+            builder.Entity<UserRole>().HasData(new UserRole
+            {
+                RoleId = ADMIN_ROLE_ID,
+                UserId = ADMIN_ID
             });
 
             builder.Entity<Faculty>()

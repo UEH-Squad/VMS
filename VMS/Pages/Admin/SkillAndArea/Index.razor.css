@@ -1,0 +1,135 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.my-option .btn:focus {
+  box-shadow: none; }
+
+.my-option .btn-area, .my-option .btn-skill {
+  position: relative;
+  width: 117px;
+  height: 42px;
+  padding: 0;
+  background: #F3F3F5;
+  font-weight: 600;
+  font-size: 18px;
+  color: #18A0FB; }
+  .my-option .btn-area::after, .my-option .btn-skill::after {
+    content: "";
+    width: 100%;
+    height: 4px;
+    background: #0B588C;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none; }
+  .my-option .btn-area:hover::after, .my-option .btn-skill:hover::after {
+    display: block; }
+
+.my-option .btn-addVideo {
+  width: 260px;
+  height: 36px;
+  padding: 0 6px;
+  background: #64D72F;
+  border-radius: 5px;
+  color: #FFFFFF;
+  cursor: pointer; }
+  .my-option .btn-addVideo:hover {
+    background: #306C14; }
+  .my-option .btn-addVideo .icon-add {
+    font-size: 24px; }
+  .my-option .btn-addVideo span {
+    font-weight: 600;
+    font-size: 16px; }
+
+.my-option .btn-add {
+  width: 165px;
+  height: 36px;
+  padding: 0 6px;
+  background: #18A0FB;
+  border-radius: 5px;
+  color: #FFFFFF;
+  cursor: pointer; }
+  .my-option .btn-add:hover {
+    background: #0B588C; }
+  .my-option .btn-add .icon-add {
+    font-size: 24px; }
+  .my-option .btn-add span {
+    font-weight: 600;
+    font-size: 16px; }
+
+.my-option .btn-delete {
+  width: 47px;
+  height: 36px;
+  padding: 0;
+  background: #F14747;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF; }
+  .my-option .btn-delete:hover {
+    background: #E10B0B; }
+
+.my-areas .cursor-pointer {
+  cursor: pointer; }
+
+.my-areas .lm-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2; }
+
+.my-areas .div-checkbox {
+  width: 15px;
+  height: 15px; }
+
+.my-areas .check-box {
+  border-radius: 5px;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid #B4B4B4;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  position: relative;
+  cursor: pointer; }
+  .my-areas .check-box::before {
+    content: "";
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid #18A0FB;
+    border-bottom: 2px solid #18A0FB;
+    position: absolute;
+    top: 40%;
+    left: 52%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    display: none; }
+  .my-areas .check-box:checked::before {
+    display: block; }
+
+.my-areas .area {
+  margin-top: 30px;
+  width: 85%; }
+  .my-areas .area i {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: #F14747;
+    text-align: center;
+    color: white;
+    font-size: 24px; }
+  .my-areas .area span {
+    font-weight: 400;
+    font-size: 16px;
+    color: #F14747; }

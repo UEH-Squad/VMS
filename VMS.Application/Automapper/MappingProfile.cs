@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using VMS.Application.ViewModels;
@@ -75,6 +76,9 @@ namespace VMS.Application.Automapper
             CreateMap<RecruitmentRating, RecruitmentRatingViewModel>();
             CreateMap<Recruitment, ListVolunteerViewModel>();
             CreateMap<PaginatedList<Recruitment>, PaginatedList<ListVolunteerViewModel>>();
+            MapAccountToUserAndBack();
+
+            CreateMap<PaginatedList<User>, PaginatedList<UserViewModel>>();
         }
 
         private void MapReportToFeedback()
@@ -86,6 +90,33 @@ namespace VMS.Application.Automapper
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
             CreateMap<Recruitment, ListVolunteerViewModel>();
+        }
+
+        private void MapAccountToUserAndBack()
+        {
+            PasswordHasher<User> hasher = new();
+            CreateMap<CreateAccountViewModel, User>()
+                .ForMember(x => x.Id, opt => opt.Ignore())
+                .ForMember(x => x.UserName, opt => opt.MapFrom(src => src.UserName))
+                .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Password)
+                                                                          ? hasher.HashPassword(null, src.Password)
+                                                                          : hasher.HashPassword(null, src.StudentId)))
+                .ForMember(x => x.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(x => x.EmailConfirmed, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.UserName)))
+                .ForMember(x => x.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
+                .ForMember(x => x.LockoutEnabled, opt => opt.MapFrom(src => true))
+                .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
+                .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()));
+
+            CreateMap<PaginatedList<User>, PaginatedList<AccountViewModel>>();
+            CreateMap<User, AccountViewModel>()
+                .ForMember(x => x.Faculty, opt => opt.MapFrom(src => src.FacultyId.HasValue ? src.Faculty.Name : ""));
+            CreateMap<AccountViewModel, User>()
+                .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Password)
+                                                                          ? hasher.HashPassword(null, src.Password)
+                                                                          : src.Password))
+                .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
+                .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()));
         }
     }
 }

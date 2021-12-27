@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
-using VMS.Domain.Models;
+using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
 {
@@ -12,5 +12,7 @@ namespace VMS.Application.Interfaces
         Task UpdateUserAsync(UpdateUserViewModel userViewModel, string userId);
 
         List<UserViewModel> GetAllOrganizers();
+
+        Task<PaginatedList<UserViewModel>> GetAllOrganizers(FilterOrgViewModel filter, int currentPage);
     }
 }

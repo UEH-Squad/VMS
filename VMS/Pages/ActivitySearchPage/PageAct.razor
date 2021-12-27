@@ -1,7 +1,7 @@
 ﻿<section class="my-act">
     <div class="container">
         <div class="row">
-            <div class="act col-8 ps-0" id="act">
+            <div class="act col-12 col-xl-8 ps-0" id="act">
                 <h3>Có <span>@(pagedResult is null ? "0" : pagedResult.TotalItems) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
                 <div class="px-2">
                     <div class="act__page-1">
@@ -21,7 +21,7 @@
                                                     <i class="material-icons">public</i> @item.Organizer?.FullName
                                                 </h5>
                                             </a>
-                                            <p class="lmtext-2 act__content-description">@((MarkupString)item.Description)</p>
+                                            <p class="lmtext-2 act__content-description d-none">@((MarkupString)item.Description)</p>
                                             <div class="act_content-date d-flex flex-column mb-1">
                                                 <div class="d-flex mb-1 align-items-center">
                                                     <span class="material-icons-outlined me-2 my-icon">
@@ -68,7 +68,7 @@
                 </div>
                 <a class="goToDivAct d-none " href="#act">go to div act</a>
             </div>
-            <div class="col-3 ms-auto">
+            <div class="col-3 ms-auto d-none d-xl-block">
                 <FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
             </div>
         </div>

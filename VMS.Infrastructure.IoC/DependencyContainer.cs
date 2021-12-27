@@ -63,6 +63,9 @@ namespace VMS.Infrastructure.IoC
             services.AddTransient<IMailService, MailService>();
             services.AddTransient<IRecruitmentService, RecruitmentService>();
             services.AddTransient<IExportExcelService, ExportExcelService>();
+
+            services.AddTransient<IExcelService, ExcelService>();
+            services.AddTransient<IAdminService, AdminService>();
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env, IActivityService activityService)

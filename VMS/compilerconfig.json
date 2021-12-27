@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "outputFile": "Shared/Components/Pager.razor.css",
     "inputFile": "Shared/Components/Pager.razor.scss"
@@ -360,11 +360,271 @@
     "inputFile": "Pages/Organization/EditRequestPage/EditContent.razor.scss"
   },
   {
-    "outputFile": "Resources/scss/IdentityCss/Layout.css",
-    "inputFile": "Resources/scss/IdentityCss/Layout.scss"
+    "outputFile": "Shared/AdminSidebar.razor.css",
+    "inputFile": "Shared/AdminSidebar.razor.scss"
   },
   {
-    "outputFile": "Pages/UserProflie/Index.razor.css",
-    "inputFile": "Pages/UserProflie/Index.razor.scss"
+    "outputFile": "Pages/Admin/ActivityManagement/ActList.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ActList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ActivityFilter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/EditRequirement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PriorActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PopUpSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.css",
+    "inputFile": "Pages/Admin/ActivityInfo/ActivityInfo.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/UploadMultipleImg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/SearchResult.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/RatingList.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/RatingList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchRating/Filter.razor.css",
+    "inputFile": "Pages/Admin/WatchRating/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Title.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Title.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchListVolunteer/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchListVolunteer/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrgamizationManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/OrgamizationManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.css",
+    "inputFile": "Pages/Admin/VolunteerManagement/FilterUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Index.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Filter.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Filter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ListReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/DetailReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/ConfirmAction.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ResolveReportPage/Notification.razor.css",
+    "inputFile": "Pages/Admin/ResolveReportPage/Notification.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/DetailReport.razor.scss"
+  },
+  {
+    "outputFile": "Shared/AdminLayout.razor.css",
+    "inputFile": "Shared/AdminLayout.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/WatchImageReport/Index.razor.css",
+    "inputFile": "Pages/Admin/WatchImageReport/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.css",
+    "inputFile": "Pages/Admin/DetailReportPage/WatchImageReport.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/OrganizationManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerManagement/Index.razor.css",
+    "inputFile": "Pages/Admin/VolunteerManagement/Index.razor.scss"
+  },
+  {
+    "outputFile": "Shared/AdminHeader.razor.css",
+    "inputFile": "Shared/AdminHeader.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ManagementTool.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreatedOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountCollaborator.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountCollaborator.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountUser.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/DeleteAccount.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountOrg.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdministrators.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccounts.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdministrators.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/ManagementTool.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountOrgManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountUserManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/AccountAdminSpManagement.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditAccountAdminSp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/EditConfirmAccount.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateAccountAdminSp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.css",
+    "inputFile": "Pages/Admin/AccountManagement/CreateFailed.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/ApprovalActivity.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/UserProfile/Index.razor.css",
+    "inputFile": "Pages/Admin/UserProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationProfile/Index.razor.css",
+    "inputFile": "Pages/Admin/OrganizationProfile/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.css",
+    "inputFile": "Pages/Admin/OrganizationManagement/HeldActivities.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/index.css",
+    "inputFile": "Pages/Admin/SkillAndArea/index.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/Index.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/AddVideo.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/AddVideo.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/AddArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/AddArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/DeteleArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/DeteleArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/AddSkill.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/AddSkill.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/DeleteSkill.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/DeleteSkill.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/OptionsArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/OptionsArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/OptionsSkill.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/OptionsSkill.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/ListArea.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/ListArea.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.scss"
   }
 ]

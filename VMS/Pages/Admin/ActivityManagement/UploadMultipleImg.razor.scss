@@ -1,0 +1,67 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.my-uploadImg {
+    border: 1px solid $border-color-normal;
+    border-radius: 5px;
+    padding: 10px 15px 0px 15px;
+}
+
+.image-list {
+    overflow-x: scroll;
+    z-index: 1;
+    padding-bottom: 10px;
+
+    &::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-icon;
+        border-radius: 20px;
+    }
+}
+
+i {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 5% 0 0;
+}
+
+span {
+    overflow-wrap: anywhere;
+}
+
+.preview-img {
+    height: 150px;
+}
+
+.close-btn {
+    background: #c4c4c4;
+    border-radius: 50%;
+    color: #717171;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px;
+    right: -10px;
+    top: 0px;
+}
+
+.image-hidden-container {
+    border-style: dashed;
+}
+
+::deep {
+    .uploadImg__input {
+        border: none;
+        color: transparent;
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &::-webkit-file-upload-button {
+            display: none;
+        }
+    }
+}

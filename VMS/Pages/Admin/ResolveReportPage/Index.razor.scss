@@ -1,0 +1,9 @@
+﻿@import "../../../Resources/scss/common/_variables.scss";
+
+.my-content {
+    padding:0 50px;
+
+    @include on('xxl') {
+        padding:0 100px;
+    }
+}

@@ -8,13 +8,21 @@
         background-color: $white;
         border: none;
         font-size: 85%;
-        padding: 3px;
+        padding: 2px;
+
+        @include on('sm'){
+            padding:3px;
+        }
     }
 
     #member-star_icon {
         color: #C4C4C4;
-        font-size: 165%;
+        font-size: 90%;
         cursor: pointer;
+
+        @include on('sm'){
+            font-size:165%;
+        }
     }
 
     &_tooltip {

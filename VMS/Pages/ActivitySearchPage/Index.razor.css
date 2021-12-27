@@ -4,11 +4,18 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.heading-container {
-  width: fit-content; }
-  .heading-container .page-heading {
-    font-size: 66px;
-    color: #18A0FB;
-    font-weight: 500; }
-    .heading-container .page-heading span {
-      color: #64D72F; }
+.my-container {
+  padding: 0 20px; }
+  @media (min-width: 1200px) {
+    .my-container {
+      padding: 0 0; } }
+
+.heading-container .page-heading {
+  font-size: 24px;
+  color: #18A0FB;
+  font-weight: 500; }
+  @media (min-width: 1200px) {
+    .heading-container .page-heading {
+      font-size: 60px; } }
+  .heading-container .page-heading span {
+    color: #64D72F; }

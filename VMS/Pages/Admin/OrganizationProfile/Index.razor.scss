@@ -1,0 +1,23 @@
+﻿@import "../../../Resources/scss/common/_variables.scss";
+
+.head-section {
+    h1 {
+        font-size: 32px;
+        font-weight: 600;
+        color: $blue;
+
+        span {
+            color: $green;
+        }
+    }
+
+    a {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: $blue;
+        border-radius: 6px;
+        padding: 10px 16px;
+        color: $white;
+    }
+}

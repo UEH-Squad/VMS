@@ -1,0 +1,91 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminAdminAccountManagement)]
+@attribute [Authorize(Roles = "Admin")]
+@inject IJSRuntime JS;
+
+<div class="px-5">
+    <ManagementTool PageRole="Role.Admin" Tilte="quản trị viên" FilterChanged="OnFilterChangedAsync" />
+    <div class="d-flex justify-content-between align-items-center my-3">
+        <p class="managementTool__title mb-0">Có <span>@(pageResult.Items.Count) kết quả</span> ứng với tìm kiếm</p>
+        </div>
+    <div class=" d-flex align-items-center justify-content-end py-3">
+        <div class="d-flex align-items-center managementTool__chosseAll me-3">
+            @if (IsSelectedAllItems())
+            {
+                <input @onclick="() => SelectAllItems()" class="check-box" type="checkbox" id="all" checked>
+            }
+            else
+            {
+                <input @onclick="() => SelectAllItems()" class="check-box" type="checkbox" id="all">
+            }
+            <label for="all">Chọn tất cả</label>
+        </div>
+        <button @onclick="OnClickDeleteListAccountsAsync" class="btn-delete btn">Xóa</button>
+    </div>
+    <div class="my-acc">
+        <table class="acc__table">
+            <tr>
+                <th class="acc__tilte acc__tilte--checkbox"></th>
+                <th class="acc__tilte acc__tilte--date">Ngày tạo</th>
+                <th class="acc__tilte acc__tilte--name">Tên tài khoản</th>
+            </tr>
+
+            @if (pageResult is not null && pageResult.Items.Count != 0)
+            {
+                bool oddIndex = false;
+                string bg = "#FFF";
+                @foreach (var item in pageResult.Items)
+                {
+                    oddIndex = !oddIndex;
+                    if (oddIndex)
+                    {
+                        bg = "#F2F9FF";
+                    }
+                    else
+                    {
+                        bg = "#FFF";
+                    }
+
+                    <tr class="position-relative" style="background-color:@bg">
+                        <td class="acc__content acc__content--checkbox pt-2">
+                            <div class="d-flex align-items-center">
+                                @if (IsSelectedItem(item.Id))
+                                {
+                                    <input @onclick="() => SelectItem(item.Id)" class="check-box" type="checkbox" checked>
+                                }
+                                else
+                                {
+                                    <input @onclick="() => SelectItem(item.Id)" class="check-box" type="checkbox">
+                                }
+                            </div>
+                        </td>
+                        <td class="acc__content acc__content--date">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        <td class="acc__content acc__content--name">@item.UserName</td>
+                        <div class="acc__menu dropdown">
+                            <i class="material-icons-outlined icon-menu dropdown-toggle" id="dropdownMenu-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
+                                more_vert
+                            </i>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
+                                <li @onclick="async () => await ShowEditAccountAsync(item)" class="mb-2 dropdown-menu-edit">Sửa tài khoản</li>
+                                <li @onclick="async () => await OnClickDeleteAccountAsync(item.Id)" class="dropdown-menu-delete">Xóa tài khoản</li>
+                            </ul>
+                        </div>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <Pager CurrentPage="@pageResult.PageIndex"
+               PageCount="@pageResult.TotalPages"
+               OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })"
+               ShowPageNumbers="true" />
+    </div>
+</div>
+
+@code {
+}
+
+
+

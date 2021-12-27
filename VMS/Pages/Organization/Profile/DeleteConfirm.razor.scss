@@ -28,8 +28,8 @@
     }
 
     .close-btn {
-        width: 33px;
-        height: 33px;
+        width: 11px;
+        height: 11px;
         border-radius: 100%;
         display: flex;
         justify-content: center;
@@ -40,15 +40,33 @@
         cursor: pointer;
         background: rgba(196, 196, 196, .5);
 
+        @include on("sm") {
+            width: 22px;
+            height: 22px;
+        }
+
+        @include on("xl") {
+            width: 33px;
+            height: 33px;
+        }
+
         .material-icons {
-            font-size: 20px;
+            font-size: 8px;
             color: $grey-close-btn;
+
+            @include on("sm") {
+                font-size: 16px;
+            }
+
+            @include on("md") {
+                font-size: 20px;
+            }
         }
     }
 
     .close-btn-s {
-        width: 20px;
-        height: 20px;
+        width: 11px;
+        height: 11px;
         border-radius: 100%;
         display: flex;
         justify-content: center;
@@ -59,38 +77,116 @@
         cursor: pointer;
         background: rgba(196, 196, 196, .5);
 
+        @include on("sm") {
+            width: 16px;
+            height: 16px;
+        }
+
+        @include on("xl") {
+            width: 22px;
+            height: 22px;
+        }
+
         .material-icons {
-            font-size: 14px;
+            font-size: 8px;
             color: $grey-close-btn;
             line-height: 0;
+
+            @include on("sm") {
+                font-size: 12px;
+            }
+
+            @include on("xl") {
+                font-size: 14px;
+            }
         }
     }
 
 
     .pop-up-content {
-        padding: 13px 55px;
+        padding: 5px 35px;
+
+        @include on("sm") {
+            padding: 7px 40px;
+        }
+
+        @include on("md") {
+            padding: 7px 45px;
+        }
+
+        @include on("lg") {
+            padding: 10px 50px;
+        }
+
+        @include on("xl") {
+            padding: 13px 55px;
+        }
 
         .delete-act {
-            font-size: 18px;
+            font-size: 10px;
             line-height: 36px;
             font-weight: 500;
             margin-bottom: 0;
             color: $green;
+
+            @include on("sm") {
+                font-size: 12px;
+            }
+
+            @include on("md") {
+                font-size: 14px;
+            }
+
+            @include on("lg") {
+                font-size: 16px;
+            }
+
+            @include on("xl") {
+                font-size: 18px;
+            }
         }
     }
 
     .content {
-        padding: 34px 64px 18px;
+        padding: 20px 30px 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
 
+        @include on("md") {
+            padding: 20px 40px 20px;
+        }
+
+        @include on("lg") {
+            padding: 20px 50px 20px;
+        }
+
+        @include on("xl") {
+            padding: 34px 64px 18px;
+        }
+
         h3 {
-            font-size: 20px;
-            line-height: 25px;
+            font-size: 10px;
             font-weight: 500;
             margin-bottom: 0;
             color: $green;
+
+            @include on("sm") {
+                font-size: 14px;
+                line-height: 25px;
+            }
+
+            @include on("md") {
+                font-size: 16px;
+            }
+
+            @include on("lg") {
+                font-size: 18px;
+            }
+
+            @include on("xl") {
+                font-size: 20px;
+            }
         }
 
         .delete-text {
@@ -101,20 +197,48 @@
     .pop-up-btn {
         display: flex;
         justify-content: flex-end;
-        padding: 0 30px 20px 0;
+        padding: 0 20px 20px 0;
         font-weight: 600;
+
+        @include on("sm") {
+            padding: 0 20px 20px 0;
+        }
 
         .deny {
             background-color: $white;
             color: $blue;
             cursor: pointer;
-            font-size: 18px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 104px;
-            height: 32px;
             font-weight: 600;
+            width: 37px;
+            height: 17px;
+            font-size: 8px;
+
+            @include on("sm") {
+                width: 57px;
+                height: 22px;
+                font-size: 12px;
+            }
+
+            @include on("md") {
+                width: 67px;
+                height: 27px;
+                font-size: 14px;
+            }
+
+            @include on("lg") {
+                width: 87px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            @include on("xl") {
+                width: 94px;
+                height: 32px;
+                font-size: 18px;
+            }
         }
 
         .accept {
@@ -124,11 +248,35 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 104px;
-            height: 32px;
             cursor: pointer;
-            font-size: 18px;
             font-weight: 600;
+            width: 57px;
+            height: 17px;
+            font-size: 8px;
+
+            @include on("sm") {
+                width: 77px;
+                height: 22px;
+                font-size: 12px;
+            }
+
+            @include on("md") {
+                width: 87px;
+                height: 27px;
+                font-size: 14px;
+            }
+
+            @include on("lg") {
+                width: 97px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            @include on("xl") {
+                width: 104px;
+                height: 32px;
+                font-size: 18px;
+            }
         }
     }
 }

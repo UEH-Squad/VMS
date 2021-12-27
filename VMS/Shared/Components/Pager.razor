@@ -34,23 +34,23 @@
         <ul class="pagination">
             @if (hasPrevious)
             {
-                <li class="btn-prev" @onclick="@(() => PagerButtonClicked(CurrentPage - 1))">
+                <li class="btn-prev" @onclick="@(() => PagerButtonClicked(CurrentPage - 1))" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">
                     <span class="material-icons">keyboard_arrow_left</span>
                 </li>
             }
             else
             {
-                <li class="btn-prev">
+                <li class="btn-prev" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">
                     <span class="material-icons">keyboard_arrow_left</span>
                 </li>
             }
             @if (ShowPageNumbers)
             {
-                <li class="numb @(CurrentPage == 1 ? "active" : "")" @onclick="@(() => PagerButtonClicked(1))">1</li>
+                <li class="numb @(CurrentPage == 1 ? "active" : "")" @onclick="@(() => PagerButtonClicked(1))" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">1</li>
 
                 @if (shouldShowLeftDots)
                 {
-                    <li class="dots">...</li>
+                    <li class="dots" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">...</li>
                 }
 
                 for (var i = start; i <= finish; i++)
@@ -58,30 +58,30 @@
                     var currentIndex = i;
                     if (i == CurrentPage)
                     {
-                        <li class="numb active">@i</li>
+                        <li class="numb active" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">@i</li>
                     }
                     else
                     {
-                        <li class="numb" @onclick="@(() => PagerButtonClicked(currentIndex))">@currentIndex</li>
+                        <li class="numb" @onclick="@(() => PagerButtonClicked(currentIndex))" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">@currentIndex</li>
                     }
                 }
 
                 @if (shouldShowRightDots)
                 {
-                    <li class="dots">...</li>
+                    <li class="dots" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">...</li>
                 }
 
-                <li class="numb @(CurrentPage == PageCount ? "active" : "")" @onclick="@(() => PagerButtonClicked(PageCount))">@PageCount</li>
+                <li class="numb @(CurrentPage == PageCount ? "active" : "")" @onclick="@(() => PagerButtonClicked(PageCount))" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">@PageCount</li>
             }
             @if (hasNext)
             {
-                <li class="btn-prev" @onclick="@(() => PagerButtonClicked(CurrentPage + 1))">
+                <li class="btn-prev" @onclick="@(() => PagerButtonClicked(CurrentPage + 1))" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">
                     <span class="material-icons">keyboard_arrow_right</span>
                 </li>
             }
             else
             {
-                <li class="btn-prev">
+                <li class="btn-prev" style="@(IsUsedForPopup ? "margin: 0 8px;" : "")">
                     <span class="material-icons">keyboard_arrow_right</span>
                 </li>
             }
@@ -106,6 +106,9 @@ else
 
     [Parameter]
     public bool ShowPageNumbers { get; set; } = true;
+
+    [Parameter] public bool IsUsedForPopup { get; set; }
+
 
     private int visiblePages = 5;
 

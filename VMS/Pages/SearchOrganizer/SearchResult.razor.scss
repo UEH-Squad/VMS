@@ -1,6 +1,6 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 $yellow: #EDF131;
-$org-avata-size: 150px;
+$org-avata-size: 115px;
 $border-width: 1px;
 .yellow-colored {
     color: $yellow !important;
@@ -11,7 +11,7 @@ $border-width: 1px;
 }
 
 .result-heading {
-    font-size: 26px;
+    font-size: 18px;
     color: $blue;
 
     span {
@@ -23,7 +23,7 @@ $border-width: 1px;
     height: $org-avata-size;
     border: $border-width solid $border-color-normal;
     border-radius: 10px;
-    margin-top: 60px;
+    margin-top: 28px;
     position: relative;
 
     &::before {
@@ -39,34 +39,47 @@ $border-width: 1px;
     &__img {
         height: $org-avata-size;
         width: $org-avata-size;
+        min-width: $org-avata-size;
         border-radius: 50%;
         z-index: 2;
     }
 
     &__name-group {
+        font-weight: 600;
+        max-width: 65%;
 
         a {
+            margin-bottom: 20px;
             text-decoration: none;
-            font-size: 26px;
+            font-size: 18px;
             color: $blue;
-            font-weight: 500;
         }
 
         p {
+            color: $border-color-normal;
+
+            span {
+                color: $green;
+            }
         }
     }
 
     &__rate-group {
-
+        height: inherit;
+        .seperate-line {
+            height: 80%;
+            border: 0.5px solid $border-color-normal;
+            margin-right: 30px;
+        }
         & > span {
-            font-size: 40px;
+            font-size: 32px;
             color: $green;
             font-weight: 600;
         }
 
         p {
             font-weight: 600;
-            font-size: 20px;
+            font-size: 18px;
             color: #707070;
         }
     }
@@ -74,7 +87,7 @@ $border-width: 1px;
 
 //hanlde stars
 .org-item__rate-group-star {
-    font-size: 24px;
+    font-size: 20px;
     color: #b4b4b4;
     position: relative;
 
@@ -86,4 +99,20 @@ $border-width: 1px;
         color: $yellow;
         overflow: hidden;
     }
+}
+
+.lmtext-2, .lmtext-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.lmtext-2 {
+    -webkit-line-clamp: 2;
+}
+
+.lmtext-3 {
+    -webkit-line-clamp: 3;
 }

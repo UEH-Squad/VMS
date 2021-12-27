@@ -1,0 +1,240 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.act {
+    border-top: 1px solid $border-color-normal;
+
+    h3 {
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: 400;
+        color: $blue;
+
+        span {
+            color: $green;
+        }
+    }
+
+    .act__item {
+        background-color: $grey;
+        padding: 10px 0px;
+        border-radius: 10px;
+        margin-top: 30px;
+        height: 285px;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .icon-tooltip {
+        display: none;
+        color: #000;
+        min-width: max-content;
+        position: absolute;
+        transform: translate(-80%,-95%);
+        padding: 2px 10px;
+        font-size: 12px;
+        background-color: $white;
+        border-radius: 10px;
+        border-bottom-right-radius: 3px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25%);
+    }
+
+    .my-icon {
+        cursor: default;
+
+        &:hover + .icon-tooltip {
+            display: block;
+        }
+    }
+}
+
+.act__content {
+    position: relative;
+
+    .material-icons {
+        font-size: 24px;
+    }
+
+    &__icon {
+        transform: rotate(90deg);
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    ul {
+        top: 40px;
+        right: 15px;
+        background: $white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+
+        li, a {
+            list-style: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 20px;
+            display: block;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(24, 160, 251, 0.1);
+            }
+        }
+
+        .edit {
+            color: $grey-text;
+        }
+
+        a {
+            color: $blue;
+
+            &:hover {
+                color: $blue;
+            }
+        }
+
+        .delete {
+            color: $red;
+            width: 210.54px;
+        }
+    }
+
+    a {
+        font-size: 24px;
+        font-weight: 400;
+        color: $blue;
+        cursor: pointer;
+        word-spacing: -2px;
+
+        &:hover {
+            color: $blue-hv;
+        }
+    }
+
+    .star {
+        .material-icons {
+            color: $yellow-star;
+        }
+    }
+
+    h5 {
+        font-size: 14px;
+        font-weight: 600;
+
+        i {
+            color: $green;
+            margin-right: 5px;
+        }
+
+        .material-icons-outlined {
+            color: $red-warning;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    span {
+        font-size: 14px;
+        font-weight: 400;
+        color: $blue-hv;
+    }
+
+    ::deep &-description > * {
+        margin: 0;
+    }
+
+    .icon-tooltip {
+        display: none;
+        color: #000;
+        min-width: max-content;
+        position: absolute;
+        transform: translate(-80%,-95%);
+        padding: 2px 10px;
+        font-size: 12px;
+        background-color: $white;
+        border-radius: 10px;
+        border-bottom-right-radius: 3px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25%);
+    }
+
+    .my-icon {
+        cursor: default;
+
+        :hover + .icon-tooltip {
+            display: block;
+        }
+    }
+
+    .material-icons-outlined {
+        font-size: 20px;
+    }
+
+
+    .lmtext-2, .lmtext-3 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+    .lmtext-2 {
+        -webkit-line-clamp: 2;
+    }
+
+    .lmtext-3 {
+        -webkit-line-clamp: 3;
+    }
+
+    .act-footer {
+        &__warn {
+            color: $red-warning;
+        }
+
+        &__btn {
+            button, a {
+                margin-left: 20px;
+                font-size: 16px;
+                font-weight: 600;
+                padding: 5px 15px;
+                border-radius: 5px;
+            }
+
+            &--approval {
+                color: $blue;
+                border: solid 2px $blue;
+
+                &:hover {
+                    color: $blue-bold;
+                    border-color: $blue-bold;
+                }
+            }
+
+            &--green {
+                color: $white;
+                background-color: $green;
+
+                &:hover {
+                    color: $white;
+                    background-color: $green-bold;
+                }
+            }
+
+            &--blue {
+                color: $white;
+                background-color: $blue;
+
+                &:hover {
+                    color: $white;
+                    background-color: $blue-bold;
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row act">
         <div class="d-flex align-items-center justify-content-between my-lg-5 my-2 my-sm-3 px-3">
-            <h1 class="mb-0">Hoạt động <span>@Title</span></h1>
+            <h1 style="@(IsUsedForAdmin ? "font-size:24px;" : "")" class="mb-0">Hoạt động <span>@Title</span></h1>
             <hr />
         </div>
 
@@ -14,22 +14,22 @@
                 {
                     <div class="act-container item position-relative">
                         <div class="img-container position-relative">
-                            <img src="@item?.Banner" alt="" class="act-img">
+                            <img src="@item?.Banner" alt="" class="act-img" style="@(IsUsedForAdmin ? "height:200px;" : "")">
                             <div class="@(item.IsClosed ? "overlay" : "")"></div>
                         </div>
                         <div class="act-content @(OverridesImg ? "position-absolute act-content-overrides ":"" )">
                             <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm") ">
-                                <h3 class="act-title mb-0 lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
+                                <h3 style="@(IsUsedForAdmin ? "font-size:16px;" : "")" class="act-title mb-0 lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
                             </a>
                         </div>
                         <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-1 pb-sm-2    text-decoration-none">Chỉnh sửa</a>
 
-                            <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-2">Xóa</li>
+                            <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-1 pb-sm-2">Xóa</li>
 
                             @if (item.CloseDate.Date >= DateTime.Now.Date)
                             {
-                                <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+                                <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
                             }
                         </ul>
                         @if (HaveControl)

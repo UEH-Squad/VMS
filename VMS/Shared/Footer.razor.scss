@@ -2,10 +2,26 @@
 
 .footer {
     position: relative;
-    padding-top: 30px;
-    border-top: 1px solid rgba(51, 51, 51, 0.5);
-    ;
+    padding-top: 20px;
+    border-top: 1px solid $border-color-normal;
+
+    .my-container {
+        padding: 0 40px;
+
+        @include on('lg') {
+            padding: 0 20px;
+        }
+    }
+
+    .my-row {
+        border-bottom: 1px solid $border-color-normal;
+
+        @include on('lg') {
+            border-bottom: none;
+        }
+    }
 }
+
 .btn-back-top {
     position: absolute;
     cursor: pointer;
@@ -27,6 +43,14 @@
             background: $green-bold;
         }
 
+        &.grey-icon {
+            background: $grey-input;
+
+            &:hover {
+                background: $grey-icon;
+            }
+        }
+
         @include on("sm") {
             width: 40px;
             height: 40px;
@@ -46,6 +70,50 @@
             height: 70px;
             line-height: 70px;
             font-size: 64px;
+        }
+    }
+}
+
+.btn-float-back-top {
+    position: fixed;
+    cursor: pointer;
+    bottom: 50px;
+    right: 0px;
+    transform: translate(-100%, -50%);
+
+    .btn-back-top-icon {
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 50%;
+        font-size: 16px;
+        color: $white;
+        background: $grey-input;
+
+        &:hover {
+            background: $grey-icon;
+        }
+
+        @include on("sm") {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 24px;
+        }
+
+        @include on("lg") {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 44px;
+        }
+
+        @include on("xl") {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 44px;
         }
     }
 }
@@ -72,12 +140,16 @@
     }
 
     .footer__logo-ueh {
-        width: 52%;
+        width: 26%;
     }
 
     .footer__logo-hsv {
-        width: 15%;
-        margin-left: 20px;
+        width: 16%;
+        margin-left: 10px;
+
+        @include on('sm') {
+            margin-left: 20px;
+        }
     }
 
     p {
@@ -98,7 +170,7 @@
     padding-top: 10px;
 
     h6 {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         font-size: 8px;
         font-weight: 300;
         color: $grey-text;
@@ -133,9 +205,12 @@
     padding: 0;
     padding-top: 10px;
     text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 
     h6 {
-        margin-bottom: 20px;
+        margin-bottom: 8px;
         font-size: 7px;
         font-weight: 400;
         color: $grey-text;

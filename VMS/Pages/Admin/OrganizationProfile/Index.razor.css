@@ -1,0 +1,21 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.head-section h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #18A0FB; }
+  .head-section h1 span {
+    color: #64D72F; }
+
+.head-section a {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #18A0FB;
+  border-radius: 6px;
+  padding: 10px 16px;
+  color: #FFFFFF; }

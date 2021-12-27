@@ -1,13 +1,13 @@
 ﻿@inject IJSRuntime JSRuntinme;
 
 <div class="my-profile">
-    <div class="container">
-        <div class="container-info d-flex py-5">
+    <div class="@(IsUsedForAdmin ? "" : "container")">
+        <div class="d-flex justify-content-between py-5">
             <div class="text-center profile__logo">
                 <div class="">
                     <div class="proflie__logo-img py-3">
                         <div class=" text-center d-inline-block position-relative">
-                            <img src="@User.Avatar" alt="@User.FullName">
+                            <img src="@User.Avatar" alt="@User.FullName" style="@(IsUsedForAdmin ? "width: 150px; height: 150px;" : "")">
                             @if (IsUser)
                             {
                                 <label for="myfile">
@@ -17,39 +17,38 @@
                             <InputFile OnChange="OnAvatarFileChangedAsync" type="file" id="myfile" name="myfile" class="d-none" />
                         </div>
                     </div>
-                    <p class="m-0 ">@User.FullName</p>
+                    <p class="m-0" style="@(IsUsedForAdmin ? "font-size: 16px" : "")">@User.FullName</p>
                     @if (IsUser)
                     {
                         <button @onclick="ShowModalAppellationAsync" class="profile__type d-inline-block btn mx-auto mt-1 mb-4">@appellation</button>
                     }
                     else
                     {
-                        <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</span>
+                        <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4" style="@(IsUsedForAdmin ? "font-size: 14px" : "")" >Chiến sĩ hạng đồng</span>
                     }
 
-                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser" />
+                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser" IsUsedForAdmin=@IsUsedForAdmin/>
 
                 </div>
             </div>
-            <div class="profile__contact ">
-                <h3 class="text-center mb-3">Thông tin cá nhân</h3>
-                <hr />
+            <div class="profile__contact" style="@(IsUsedForAdmin ? "width: 32%" : "")">
+                <h3 class="text-center mb-3" style="@(IsUsedForAdmin ? "font-size: 24px" : "")">Thông tin cá nhân</h3>
                 <div class="profile__contact-content pb-4 mb-4 ">
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">account_circle</p>
-                        <p class="col-10 profile__contact-text">@User.StudentId</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.StudentId</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">folder_shared</p>
-                        <p class="col-10 profile__contact-text">@User.Course - @User.Class</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.Course - @User.Class</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">email</p>
-                        <p class="col-10 profile__contact-text">@User.Email</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.Email</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">contact_phone</p>
-                        <p class="col-10 profile__contact-text">@User.PhoneNumber</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.PhoneNumber</p>
                     </div>
 
                 </div>
@@ -71,8 +70,8 @@
 
             <div class=" profile__skills">
                 <div class="profile__skills-content pt-3 pb-4 pb-xxl-5">
-                    <h3 class="mb-4">Kĩ Năng</h3>
-                    <div class=" mx-auto profile__content ">
+                    <h3 class="mb-4 text-center" style="@(IsUsedForAdmin ? "font-size: 24px" : "")">Kĩ Năng</h3>
+                    <div class=" mx-auto profile__content" style="@(IsUsedForAdmin ? "padding: 0 20px" : "")">
                         @foreach (var item in User.Skills)
                         {
                             <p class="profile__skill">@item.Name</p>

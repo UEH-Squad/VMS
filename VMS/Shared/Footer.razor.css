@@ -6,8 +6,18 @@
 /*#endregion */
 .footer {
   position: relative;
-  padding-top: 30px;
-  border-top: 1px solid rgba(51, 51, 51, 0.5); }
+  padding-top: 20px;
+  border-top: 1px solid #b4b4b4; }
+  .footer .my-container {
+    padding: 0 40px; }
+    @media (min-width: 992px) {
+      .footer .my-container {
+        padding: 0 20px; } }
+  .footer .my-row {
+    border-bottom: 1px solid #b4b4b4; }
+    @media (min-width: 992px) {
+      .footer .my-row {
+        border-bottom: none; } }
 
 .btn-back-top {
   position: absolute;
@@ -26,6 +36,10 @@
     background: #64D72F; }
     .btn-back-top .btn-back-top-icon:hover {
       background: #306C14; }
+    .btn-back-top .btn-back-top-icon.grey-icon {
+      background: #D8D8D8; }
+      .btn-back-top .btn-back-top-icon.grey-icon:hover {
+        background: #B4B4B4; }
     @media (min-width: 576px) {
       .btn-back-top .btn-back-top-icon {
         width: 40px;
@@ -45,6 +59,42 @@
         line-height: 70px;
         font-size: 64px; } }
 
+.btn-float-back-top {
+  position: fixed;
+  cursor: pointer;
+  bottom: 50px;
+  right: 0px;
+  transform: translate(-100%, -50%); }
+  .btn-float-back-top .btn-back-top-icon {
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #FFFFFF;
+    background: #D8D8D8; }
+    .btn-float-back-top .btn-back-top-icon:hover {
+      background: #B4B4B4; }
+    @media (min-width: 576px) {
+      .btn-float-back-top .btn-back-top-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 24px; } }
+    @media (min-width: 992px) {
+      .btn-float-back-top .btn-back-top-icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 44px; } }
+    @media (min-width: 1200px) {
+      .btn-float-back-top .btn-back-top-icon {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 44px; } }
+
 .footer__logo {
   padding: 0; }
   .footer__logo .footer__logo-govirlunteer {
@@ -60,10 +110,13 @@
       .footer__logo .footer__logo-ueh-hsv {
         margin: 20px 0; } }
   .footer__logo .footer__logo-ueh {
-    width: 52%; }
+    width: 26%; }
   .footer__logo .footer__logo-hsv {
-    width: 15%;
-    margin-left: 20px; }
+    width: 16%;
+    margin-left: 10px; }
+    @media (min-width: 576px) {
+      .footer__logo .footer__logo-hsv {
+        margin-left: 20px; } }
   .footer__logo p {
     font-size: 8px;
     font-weight: 400; }
@@ -78,7 +131,7 @@
   padding: 0;
   padding-top: 10px; }
   .footer__contact h6 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 8px;
     font-weight: 300;
     color: #515151; }
@@ -102,9 +155,12 @@
 .footer__right {
   padding: 0;
   padding-top: 10px;
-  text-align: right; }
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: end; }
   .footer__right h6 {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     font-size: 7px;
     font-weight: 400;
     color: #515151; }

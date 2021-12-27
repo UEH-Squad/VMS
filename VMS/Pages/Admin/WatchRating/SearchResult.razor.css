@@ -1,0 +1,30 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.search-result {
+  margin-top: 1.8%;
+  margin-bottom: 1.8%; }
+  .search-result .search-result_text-1 {
+    display: inline;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 30px;
+    color: #18A0FB; }
+  .search-result .search-result_text-2 {
+    display: inline;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 30px;
+    color: #64D72F; }
+  .search-result .search-result_text-3 {
+    display: inline;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 30px;
+    color: #18A0FB; }

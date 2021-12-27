@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 101;
     background-color: rgba(196, 196, 196, 0.38);
 }
 
@@ -22,8 +22,8 @@
 
     .report-success {
         position: absolute;
-        height: 100px;
-        width: 30%;
+        height: 80px;
+        width: 320px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -37,10 +37,15 @@
         justify-content: center;
         align-items: center;
 
+        @include on ('sm') {
+            height: 100px;
+            width: 360px;
+        }
+
         .min-overlay--icon {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             width: 25px;
             height: 25px;
             background-color: $grey-bg;
@@ -50,37 +55,62 @@
             align-items: center;
             cursor: pointer;
 
+            @include on('sm') {
+                top: 15px;
+                right: 15px;
+            }
+
             .material-icons {
-                font-size: 22px;
+                font-size: 18px;
+
+                @include on('sm'){
+                    font-size:22px;
+                }
             }
         }
 
         .green-text {
             color: $green;
-            font-weight: 500;
-            font-size: 20px;
         }
 
         .blue-text {
             color: $blue;
+        }
+
+        .green-text, .blue-text {
             font-weight: 500;
-            font-size: 20px;
+            font-size: 16px;
+
+            @include on('sm') {
+                font-size: 20px;
+            }
         }
     }
 }
 
 .container {
     position: absolute;
-    width: 41.67%;
-    height: 80%;
+    width: 95%;
+    max-height: 80%;
     left: 50%;
-    top: 57%;
+    top: 50%;
     transform: translate(-50%, -50%);
     color: $grey-text;
     background-color: $white;
     border-radius: 10px;
-    padding: 0 70px 40px 70px;
     overflow-y: scroll;
+    padding: 0;
+    padding-left: 10px;
+
+    @media (min-width:380px) {
+        width: 460px;
+        padding:0 12px 0 22px;
+    }
+
+    @include on('sm') {
+        width: 560px;
+        padding: 0 50px 20px 60px;
+    }
 
     &::-webkit-scrollbar {
         width: 10px;
@@ -94,14 +124,19 @@
 
     .icon-close-popup {
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 13px;
+        right: 5px;
         width: 33px;
         height: 33px;
         border-radius: 50%;
         display: flex;
         background-color: $grey-bg;
         cursor: pointer;
+
+        @include on('sm') {
+            top: 20px;
+            right: 20px;
+        }
 
         .material-icons {
             margin: auto;
@@ -121,12 +156,16 @@
 }
 /*----title Báo cáo hoạt động----*/
 .title-header {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
     display: flex;
     justify-content: center;
     margin-top: 30px;
     letter-spacing: 2px;
+
+    @include on('sm') {
+        font-size: 24px;
+    }
 
     .title-header__report {
         color: $green;
@@ -155,11 +194,7 @@
 .title-discript {
     margin-top: 6%;
 
-    .title-discript__text {
-        font-size: 16px;
-    }
-
-    .title-discript__check {
+    .title-discript__text, .title-discript__check {
         font-size: 16px;
     }
 }
@@ -167,18 +202,14 @@
 .title-attach {
     margin-top: 6%;
 
-    .title-attach__text {
-        font-size: 16px;
-    }
-
-    .title-attach__check {
+    .title-attach__text, .title-attach__check {
         font-size: 16px;
     }
 }
 
 .dropdown .my-btn {
     width: 100%;
-    border: 1px solid $grey-text;
+    border: 1px solid $grey-icon;
     height: 36px;
 
     .my-icon-dropdown {
@@ -189,15 +220,19 @@
 
 .dropdown-menu {
     width: 100%;
-    box-shadow: 5px 5px 10px 10px #dee2e687;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     font-size: 14px;
-    border-radius: 10px;
+    border: none;
 
     .dropdown-item {
         display: flex;
         align-items: center;
-        margin: 5px 0;
+        margin: 0;
         padding-left: 5%;
+
+        @include on('sm') {
+            margin: 5px 0;
+        }
 
         ::deep .dropdown-item--checkbox {
             margin-right: 10px;
@@ -218,9 +253,9 @@
 
 /*-----report description-----*/
 ::deep .form-control {
-    border: 1px solid;
+    border: 1px solid $grey-icon;
     font-size: 16px;
-    height: 150px;
+    height: 100px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -235,65 +270,22 @@
 }
 /*-----end report description-----*/
 
-/*---attached proof-----*/
-.add-file {
-    border-radius: 4px;
-    border: 1px solid $grey-text;
-    padding: 9px 0;
-    display: flex;
-
-    .add-file__block {
-        display: flex;
-        margin: auto;
-
-
-        .my-icon-upload {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            color: $grey-text;
-        }
-
-        .block-icon-text {
-            display: flex;
-
-            .file__text {
-                font-size: 16px;
-                font-weight: 300px;
-            }
-        }
-
-        ::deep .inputfile {
-            opacity: 0;
-            overflow: hidden;
-            position: absolute;
-            z-index: -1;
-            display: none;
-        }
-
-        .inputfile + label {
-            color: #333;
-            display: inline-block;
-            cursor: pointer;
-        }
-    }
-}
-/*----end attached proof----*/
-
-
 /*button report*/
 .btn-accept {
     display: flex;
-    margin-top: 10%;
+    margin: 30px 0;
 
     .btn {
         margin: auto;
         background-color: $green;
         color: $white;
         font-size: 16px;
-        width: 46%;
-        height: 54px;
         font-weight: 600;
         border-radius: 5px;
+
+        @include on('sm') {
+            padding: 5px 10px;
+        }
     }
 
     .btn:hover {

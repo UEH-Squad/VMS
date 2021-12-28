@@ -15,11 +15,16 @@
                         </div>
                         <div class="activity__content">
                             <div class="activity__content__title">
-                                <p class="member-name1">@item.Activity.Name</p>
+                                <p class="member-name1">
+                                    <a href="@Routes.ActivityInfo/@item.Id">
+                                        @item.Activity.Name
+                                    </a>
+                                </p>
                             </div>
                             <div class="activity__content__icon d-flex">
                                 <div class="stars-rating">
-                                    <VMS.Pages.Organization.RatingPage.Stars />
+                                    <VMS.Pages.Organization.RatingPage.Stars StarRating="@item.Rating"
+                                                                     StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)" />
                                 </div>
                                 <div class="org-pic d-flex">
                                     <div class="org-pic__icon d-flex">
@@ -47,11 +52,11 @@
                 </div>
             }
         }
-        @*<div class="pagination-container d-flex">
-                <Pager CurrentPage="@pagedResult.CurrentPage"
-                       PageCount="@pagedResult.PageCount"
-                       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
-            </div>*@
+        <div class="pagination-container d-flex">
+            <Pager CurrentPage="@pagedResult.PageIndex"
+                   PageCount="@pagedResult.TotalPages"
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })" />
+        </div>
     </div>
 </div>
 

@@ -27,22 +27,7 @@ namespace VMS.Pages.ActivityLogPage
         protected override async Task OnParametersSetAsync()
         {
             page = 1;
-            //pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChanged, UserId, page);
-            List<RecruitmentViewModel> recruitments = new();
-            for (int i = 0; i < 10; i++)
-            {
-                recruitments.Add(
-                new RecruitmentViewModel
-                {
-                    Id = 0,
-                    Activity = new() { Banner = "ảnh", Name = "Tên hoạt động" },
-                    Organizer = new() { FullName = "Tên tổ chức", Avatar = "Ảnh đại diện" },
-                    User = new() { FullName = "Tên tình nguyện viên", Avatar = "Ảnh đại diện" },
-                    RecruitmentRatings = new(),
-                    Rating = 4
-                });
-            }
-            pagedResult = new(recruitments, 10, 1, 1);
+            pagedResult = await RecruitmentService.GetAllActivitiesAsync(FilterChanged, UserId, page);
         }
 
         private async Task HandlePageChangedAsync()

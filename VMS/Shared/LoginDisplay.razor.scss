@@ -28,8 +28,15 @@
 
 .login-btn {
     background-color: $blue;
-    width: 137px;
-    height: 40px;
+    width: 100px;
+    height: 27px;
+    font-size: 12px;
+
+    @include on ('sm') {
+        width: 137px;
+        height: 40px;
+        font-size: 18px;
+    }
 
     &:hover {
         background-color: $blue-bold;
@@ -41,8 +48,6 @@
         font-size: 20px;
         line-height: 60px;
     }
-
-  
 }
 
 .user-section {

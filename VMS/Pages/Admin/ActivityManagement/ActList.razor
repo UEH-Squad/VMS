@@ -15,7 +15,7 @@
                             <div class="col-4 h-100 d-flex align-items-center pe-0 ps-3 py-2">
                                 <img class="w-100" src="./img/activities/132780410759551427_71b3c892-eaa9-4471-b865-e809f12932b7.jpg" alt="">
                             </div>
-                            <div class="col-8 act__content d-flex flex-column justify-content-between px-2">
+                            <div class="col-8 act__content d-flex flex-column justify-content-between px-3">
                                 <ul class="position-absolute act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
                                     @if (item.EndDate < DateTime.Now)
                                     {
@@ -23,8 +23,9 @@
                                     }
                                     else
                                     {
-                                        <li @onclick="() => ShowActPrivorModal(item.Id)" class="edit pb-2 text-decoration-none">@(item.IsPrivor ? "Gỡ ưu" : "Ưu") tiên hoạt động</li>
-                                        <a href="@Routes.AdminActivityInfo" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
+                                        <li @onclick="() => ShowActPrivorModal(item.Id)" class="pb-2">@(item.IsPrivor ? "Gỡ ưu" : "Ưu") tiên hoạt động</li>
+                                        <a href="@Routes.EditActivity" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
+                                        <li @onclick="() => ShowEditModal(item.Id)" class="pb-2">Yêu cầu chỉnh sửa</li>
                                         <li @onclick="() => ShowDeleteModal(item.Id)" class="delete pb-2">Xóa</li>
                                     }
                                 </ul>
@@ -32,7 +33,7 @@
                                     more_horiz
                                 </i>
                                 <div class="pe-4">
-                                    <a href="" class="lmtext-2 text-decoration-none">@item.Title</a>
+                                    <a href="@Routes.AdminActivityInfo" class="lmtext-2 text-decoration-none">@item.Title</a>
                                     <div class="star">
                                         <span class="material-icons">
                                             star_rate
@@ -54,7 +55,7 @@
                                         <i class="material-icons">public</i> @item.Name
                                     </h5>
                                     <p class="lmtext-2 act__content-description mb-0">@item.Content</p>
-                                    <div class="act_content-date d-flex flex-column mb-1">
+                                    <div class="act__content-date d-flex flex-column mb-1">
                                         <div class="d-flex mb-1 align-items-center">
                                             <span class="material-icons-outlined me-2 my-icon">
                                                 assignment
@@ -71,13 +72,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h5 class="fw-normal d-flex align-items-center">
+                                <div>
+                                    <h5 class="fw-normal d-flex align-items-center position-absolute act__content-participant">
                                         <i class="material-icons">
                                             person
                                         </i> 250
                                     </h5>
-                                    <div class="d-flex">
+                                    <div class="d-flex position-absolute act-footer">
                                         @if (item.EndDate >= DateTime.Now)
                                         {
                                             if (item.IsClosed || item.StartDate < DateTime.Now)
@@ -155,7 +156,7 @@
             CloseDate = DateTime.Parse("2021/11/21"),
             OpenDate = DateTime.Parse("2021/10/20"),
             Id = ++i,
-            EndDate = DateTime.Parse("2022/10/21"),
+            EndDate = DateTime.Parse("2021/10/21"),
             StartDate = DateTime.Parse("2021/11/20")
         }).ToList();
 

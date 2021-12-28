@@ -29,8 +29,8 @@ input[type="checkbox"] {
 
 .act-filter__btn--green {
   border-radius: 5px;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: normal;
+  font-size: 16px;
   color: #FFFFFF;
   background-color: #64D72F; }
   .act-filter__btn--green:hover {
@@ -38,8 +38,8 @@ input[type="checkbox"] {
 
 .act-filter__btn--clear {
   border: none;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: normal;
+  font-size: 16px;
   color: #b4b4b4;
   background-color: #FFFFFF; }
   .act-filter__btn--clear:hover {

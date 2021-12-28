@@ -99,11 +99,6 @@
         font-size: 16px; } }
     .my-editProfile .form-item .form-text span {
       color: red; }
-  .my-editProfile .form-item .my-address-textbox {
-    width: 100%; }
-    @media (min-width: 576px) {
-      .my-editProfile .form-item .my-address-textbox {
-        width: auto; } }
   .my-editProfile .form-item ::deep .form-control {
     font-size: 14px;
     font-weight: 300;
@@ -115,6 +110,9 @@
       .my-editProfile .form-item ::deep .form-control {
         height: unset;
         font-size: 16px; } }
+  @media (min-width: 1200px) {
+    .my-editProfile .form-item ::deep .my-address-textbox {
+      width: auto; } }
   .my-editProfile .form-item ::deep .form-control-maxim {
     height: 100px;
     padding: 10px; }
@@ -137,22 +135,32 @@
       @media (min-width: 576px) {
         .my-editProfile .form-item ::deep .my-date-picker input {
           font-size: 16px; } }
-  .my-editProfile .form-item .form-field {
-    padding: 0; }
-    .my-editProfile .form-item .form-field .w-20 {
-      width: 20%; }
-    .my-editProfile .form-item .form-field .w-40 {
-      width: 40%; }
-    .my-editProfile .form-item .form-field .w-60 {
-      width: 60%; }
-    .my-editProfile .form-item .form-field .w-80 {
-      width: 80%; }
+  .my-editProfile .form-item .form-field .w-20 {
+    width: 20%; }
+  .my-editProfile .form-item .form-field .w-40 {
+    width: 40%; }
+  .my-editProfile .form-item .form-field .w-60 {
+    width: 60%; }
+  .my-editProfile .form-item .form-field .w-80 {
+    width: 80%; }
   .my-editProfile .form-item .form-field-item {
     text-align: center;
-    width: 20%;
+    width: 33.33%;
     display: inline-block; }
+    @media (min-width: 768px) {
+      .my-editProfile .form-item .form-field-item {
+        width: 25%; } }
+    @media (min-width: 1200px) {
+      .my-editProfile .form-item .form-field-item {
+        width: 20%; } }
     .my-editProfile .form-item .form-field-item:hover > i {
-      font-size: 40px; }
+      font-size: 25px; }
+      @media (min-width: 576px) {
+        .my-editProfile .form-item .form-field-item:hover > i {
+          font-size: 35px; } }
+      @media (min-width: 992px) {
+        .my-editProfile .form-item .form-field-item:hover > i {
+          font-size: 40px; } }
       @media (min-width: 1400px) {
         .my-editProfile .form-item .form-field-item:hover > i {
           font-size: 45px; } }
@@ -170,26 +178,35 @@
       font-size: 20px; }
       @media (min-width: 576px) {
         .my-editProfile .form-item .form-field-item i {
-          width: 73px;
-          height: 73px;
-          line-height: 73px;
+          width: 55px;
+          height: 55px;
+          line-height: 55px;
+          font-size: 25px; } }
+      @media (min-width: 992px) {
+        .my-editProfile .form-item .form-field-item i {
+          width: 70px;
+          height: 70px;
+          line-height: 70px;
           font-size: 30px; } }
       @media (min-width: 1400px) {
         .my-editProfile .form-item .form-field-item i {
-          width: 83px;
-          height: 83px;
-          line-height: 83px;
+          width: 85px;
+          height: 85px;
+          line-height: 85px;
           font-size: 35px; } }
     .my-editProfile .form-item .form-field-item span {
       font-weight: 500;
       display: inline-block;
       transition: all 0.3s linear;
       font-size: 14px;
-      margin-top: 0px; }
-      @media (min-width: 576px) {
+      margin-top: 10px; }
+      @media (min-width: 992px) {
         .my-editProfile .form-item .form-field-item span {
           font-size: 18px;
           margin-top: 20px; } }
+      @media (min-width: 1400px) {
+        .my-editProfile .form-item .form-field-item span {
+          font-size: 20px; } }
       @media (min-width: 1400px) {
         .my-editProfile .form-item .form-field-item span {
           font-size: 20px; } }
@@ -197,17 +214,38 @@
       background: #C4C4C4;
       opacity: 50%;
       color: #FFFFFF;
-      font-size: 40px; }
+      font-size: 35px; }
       @media (min-width: 576px) {
         .my-editProfile .form-item .form-field-item .icon-add {
-          font-size: 60px; } }
+          font-size: 40px; } }
+      @media (min-width: 992px) {
+        .my-editProfile .form-item .form-field-item .icon-add {
+          font-size: 45px; } }
+      @media (min-width: 1400px) {
+        .my-editProfile .form-item .form-field-item .icon-add {
+          font-size: 50px; } }
       .my-editProfile .form-item .form-field-item .icon-add:hover {
         background: #C4C4C4;
         opacity: 100%;
-        font-size: 70px; }
+        font-size: 40px; }
+        @media (min-width: 576px) {
+          .my-editProfile .form-item .form-field-item .icon-add:hover {
+            font-size: 50px; } }
+        @media (min-width: 992px) {
+          .my-editProfile .form-item .form-field-item .icon-add:hover {
+            font-size: 55px; } }
+        @media (min-width: 1400px) {
+          .my-editProfile .form-item .form-field-item .icon-add:hover {
+            font-size: 60px; } }
     .my-editProfile .form-item .form-field-item.item-add {
-      width: 20%;
+      width: 33.33%;
       cursor: pointer; }
+      @media (min-width: 768px) {
+        .my-editProfile .form-item .form-field-item.item-add {
+          width: 25%; } }
+      @media (min-width: 1200px) {
+        .my-editProfile .form-item .form-field-item.item-add {
+          width: 20%; } }
   .my-editProfile .form-item .countWord {
     color: #707070;
     position: absolute;

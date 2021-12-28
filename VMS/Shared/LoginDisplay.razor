@@ -1,17 +1,19 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Http;
+@using VMS.Application.Interfaces
 @using VMS.Domain.Models
 
 @inject NavigationManager NavigationManager
 @inject UserManager<User> _userManager;
 @inject IHttpContextAccessor _httpContext;
+@inject IIdentityService IdentityService
 
 <AuthorizeView>
     <Authorized>
         <li class="user-section nav-item dflex flex-column align-items-center position-relative">
             <div class="d-block text-decoration-none user-section__link">
                 <div class="user-avatar-wrapper position-relative" @onclick="OnAvatarClick">
-                    <img src="img/hsv.png" alt="user avatar" class="user-avatar">
+                    <img src="@userAvatar" alt="user avatar" class="user-avatar">
                 </div>
 
                 <div class="dropdown">
@@ -23,9 +25,9 @@
                         {
                             <li class="user-info">
                                 <a href="@profileUrl" class="user-info-link d-flex px-3 pt-4 text-decoration-none align-items-center">
-                                    <img src="./img/HamburgerMenu/AvaUser.png" class="user-img" />
+                                    <img src="@userAvatar" class="user-img" />
                                     <div class="user-info-heading d-flex flex-column">
-                                        <h3 class="py-1 mb-0">Công nghệ thông tin kinh doanh</h3>
+                                        <h3 class="py-1 mb-0">@userFullname</h3>
                                         <h4 class="py-1 mb-0">Cộng tác viên Govirlunteer</h4>
                                     </div>
                                 </a>
@@ -42,7 +44,7 @@
                                 </a>
                             </li>
                             <li class="history py-2 mx-3">
-                                <a href="" class="text-decoration-none mx-3">
+                                <a href="@Routes.ActivityLogPage" class="text-decoration-none mx-3">
                                     Lịch sử hoạt động
                                 </a>
                             </li>
@@ -52,9 +54,9 @@
                         {
                             <li class="user-info">
                                 <a href="@profileUrl" class="user-info-link d-flex px-3 pt-4 text-decoration-none align-items-center">
-                                    <img src="./img/HamburgerMenu/AvaUser.png" class="user-img" />
+                                    <img src="@userAvatar" class="user-img" />
                                     <div class="user-info-heading d-flex flex-column">
-                                        <h3 class="py-1 mb-0">Công nghệ thông tin kinh doanh</h3>
+                                        <h3 class="py-1 mb-0">@userFullname</h3>
                                         <h4 class="py-1 mb-0">Đơn vị tổ chức Govirlunteer</h4>
                                     </div>
                                 </a>
@@ -66,7 +68,7 @@
                                 </a>
                             </li>
                             <li class="manage d-flex justify-content-between py-2 my-1 mx-3">
-                                <a href="" class="text-decoration-none mx-3">
+                                <a href="@Routes.ActivityManagement" class="text-decoration-none mx-3">
                                     Quản lý hoạt động
                                 </a>
                             </li>
@@ -98,7 +100,7 @@
 
 @code
 {
-    string profileUrl;
+    string profileUrl, userAvatar, userFullname;
 
     [CascadingParameter]
     public string UserId { get; set; }
@@ -110,6 +112,10 @@
         profileUrl = (_httpContext.HttpContext.User.IsInRole(Role.Organization.ToString())
             ? Routes.OrgProfile
             : Routes.UserProfile) + $"/{UserId}";
+
+        var user = IdentityService.FindUserById(UserId);
+        userAvatar = string.IsNullOrEmpty(user?.Avatar) ? "img/hsv.png" : user?.Avatar;
+        userFullname = user?.FullName;
     }
 
     private void OnAvatarClick()

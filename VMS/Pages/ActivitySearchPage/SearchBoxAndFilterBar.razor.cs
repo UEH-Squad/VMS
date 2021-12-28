@@ -28,12 +28,15 @@ namespace VMS.Pages.ActivitySearchPage
         private List<AreaViewModel> areasPinned;
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
+        private List<AddressPath> wards;
         private List<UserViewModel> organizers;
         private bool isOrganizationShow;
         private bool isCityShow;
         private bool isDistrictShow;
+        private bool isWardShow;
         private string cityChoosenValue = "Tỉnh/Thành phố";
         private string districtChoosenValue = "Quận/Huyện";
+        private string wardChoosenValue = "Phường/Xã";
         private string organizationChoosenValue = "Tổ chức";
 
         [CascadingParameter]
@@ -73,7 +76,7 @@ namespace VMS.Pages.ActivitySearchPage
             isCityShow = false;
         }
 
-        private async Task ChooseCityValue(AddressPath addressPath)
+        private async Task ChooseCityValueAsync(AddressPath addressPath)
         {
             Filter.ProvinceId = addressPath.Id;
             cityChoosenValue = addressPath.Name;
@@ -94,11 +97,32 @@ namespace VMS.Pages.ActivitySearchPage
             isDistrictShow = false;
         }
 
-        private void ChooseDistrictValue(AddressPath addressPath)
+        private async Task ChooseDistrictValueAsync(AddressPath addressPath)
         {
             Filter.DistrictId = addressPath.Id;
             districtChoosenValue = addressPath.Name;
             ToggleDistrictDropdown();
+
+            wards = await AddressService.GetAllAddressPathsByParentIdAsync(addressPath.Id);
+            Filter.WardId = 0;
+            wardChoosenValue = "Phường/Xã";
+        }
+
+        private void ToggleWardDropdown()
+        {
+            isWardShow = !isWardShow;
+        }
+
+        private void CloseWardDropdown()
+        {
+            isWardShow = false;
+        }
+
+        private void ChooseWardValue(AddressPath addressPath)
+        {
+            Filter.WardId = addressPath.Id;
+            wardChoosenValue = addressPath.Name;
+            ToggleWardDropdown();
         }
 
         private void ToggleOrganizationDropdown()

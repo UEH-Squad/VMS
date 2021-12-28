@@ -43,7 +43,7 @@
                 {
                     @foreach (var province in provinces)
                     {
-                        <li @onmousedown="() => ChooseCityValue(province)">@province.Name</li>
+                        <li @onmousedown="() => ChooseCityValueAsync(province)">@province.Name</li>
                     }
                 }
             </ul>
@@ -61,7 +61,25 @@
                 {
                     @foreach (var district in districts)
                     {
-                        <li @onmousedown="() => ChooseDistrictValue(district)">@district.Name</li>
+                        <li @onmousedown="() => ChooseDistrictValueAsync(district)">@district.Name</li>
+                    }
+                }
+            </ul>
+        </div>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+
+    <div class="filter-item filter-item-ward position-relative">
+        <input @onclick="ToggleWardDropdown" @onfocusout="CloseWardDropdown" class="popup-btn @(Filter.WardId != 0 ? "bg-grey" : "")" placeholder="@wardChoosenValue" readonly />
+        <div class="my-dropdown" style="display: @(isWardShow ? "block" : "none")">
+            <ul>
+                @if (wards is not null)
+                {
+                    @foreach (var ward in wards)
+                    {
+                        <li @onmousedown="() => ChooseWardValue(ward)">@ward.Name</li>
                     }
                 }
             </ul>

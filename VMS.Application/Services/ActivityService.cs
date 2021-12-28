@@ -320,7 +320,8 @@ namespace VMS.Application.Services
                     a => a.OrgId == id,
                     a => !a.IsDeleted,
                     a => a.IsApproved,
-                    GetFilterOrgActByDate(status == StatusAct.Ended, status == StatusAct.Current)
+                    GetFilterOrgActByDate(status == StatusAct.Ended, status == StatusAct.Current),
+                    a => status != StatusAct.Favor || a.Favorites.Count > 0
                 },
                 Includes = activities => activities.Include(x => x.Favorites)
                                                     .Include(x => x.Recruitments)

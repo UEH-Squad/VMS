@@ -87,7 +87,8 @@ p {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: unset;
   height: 40px;
   padding: 0 20px; }
   .filter-btn:hover {
@@ -101,7 +102,8 @@ p {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: unset;
   width: fit-content;
   color: #B4B4B4;
   background-color: #fff; }

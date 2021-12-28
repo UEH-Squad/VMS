@@ -1,14 +1,14 @@
 ﻿@attribute [Route(Routes.EditUserProfile)]
 @attribute [Authorize(Roles = "User")]
-
+@if (isErrorMessageShown)
+{
+    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
+}
 <div class="my-editProfile">
     <div class="container">
         <div class="row">
             <div class="@(IsUsedForAdmin ? "col-11" : "col-12 col-sm-10") mx-auto">
-                @if (isErrorMessageShown)
-                {
-                    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
-                }
+
             </div>
             <div class="col-11 col-sm-10 mx-auto">
 

@@ -197,3 +197,11 @@
 .lmtext-3 {
     -webkit-line-clamp: 3;
 }
+
+.act__content-description {
+    display: none;
+
+    @include on('xl') {
+        display: -webkit-box;
+    }
+}

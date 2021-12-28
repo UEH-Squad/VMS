@@ -1,14 +1,15 @@
 ﻿@attribute [Route(Routes.EditOrgProfile)]
 @attribute [Authorize(Roles = "Organization")]
-
+@if (isErrorMessageShown)
+{
+    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
+}
 <div class="my-editProfile">
+
     <div class="container">
         <div class="row">
             <div class="@(IsUsedForAdmin ? "col-11" : "col-10") mx-auto">
-                @if (isErrorMessageShown)
-                {
-                    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
-                }
+
                 <h1 class="editProfile__title mt-4 mb-3">Chỉnh sửa <span>thông tin tổ chức</span></h1>
                 <div class="editProfile__logo text-center my-5">
                     @if (!string.IsNullOrEmpty(org.Avatar))

@@ -84,7 +84,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: unset;
   width: fit-content;
   height: 40px;
   padding: 0 16px; }
@@ -99,7 +100,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: unset;
   width: fit-content;
   color: #B4B4B4;
   background-color: #fff; }

@@ -23,8 +23,14 @@
 
 .login-btn {
   background-color: #18A0FB;
-  width: 137px;
-  height: 40px; }
+  width: 100px;
+  height: 27px;
+  font-size: 12px; }
+  @media (min-width: 576px) {
+    .login-btn {
+      width: 137px;
+      height: 40px;
+      font-size: 18px; } }
   .login-btn:hover {
     background-color: #0B588C; }
   @media (min-width: 1200px) {

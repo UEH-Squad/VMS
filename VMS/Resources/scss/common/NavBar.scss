@@ -51,7 +51,6 @@
     }
 
     &__brand {
-        flex-direction: column;
 
         @include on('sm') {
             align-items: center;
@@ -83,8 +82,16 @@
         .brand__govirlunteer {
             height: 16px;
 
-            @include on('lg') {
+            @include on('sm') {
                 height: 20px;
+            }
+
+            @include on('lg') {
+                height: 27px;
+            }
+
+            @include on('xxl') {
+                height: 33px;
             }
         }
     }
@@ -110,10 +117,10 @@
 
         .hamburger-icon {
             font-size: 32px;
+        }
 
-            @include on('xl') {
-                display: none;
-            }
+        @include on('xl') {
+            display: none;
         }
     }
 

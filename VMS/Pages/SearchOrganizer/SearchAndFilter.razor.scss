@@ -99,7 +99,8 @@ p {
 
 .filter-btn {
     @include green-btn;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: unset;
     height: 40px;
     padding: 0 20px;
 
@@ -111,7 +112,8 @@ p {
 
 .clear-filter-btn {
     @include green-btn;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: unset;
     width: fit-content;
     color: $grey-icon;
     background-color: #fff;

@@ -1,14 +1,14 @@
 ﻿@attribute [Route(Routes.EditUserProfile)]
 @attribute [Authorize(Roles = "User")]
-
+@if (isErrorMessageShown)
+{
+    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
+}
 <div class="my-editProfile">
     <div class="container">
         <div class="row">
             <div class="@(IsUsedForAdmin ? "col-11" : "col-12 col-sm-10") mx-auto">
-                @if (isErrorMessageShown)
-                {
-                    <div class="text-center error-message py-2">Bạn cần điền tất cả thông tin dưới đây để hoàn thiện thông tin</div>
-                }
+
             </div>
             <div class="col-11 col-sm-10 mx-auto">
 
@@ -109,7 +109,7 @@
                                                                                       WardId="@user.WardId"
                                                                                       Ward="@user.Ward"
                                                                                       OnAddressChanged="OnAddressChanged" />
-                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" placeholder="Nhập số nhà, tên đường" />
+                            <InputText @bind-Value="@user.Address" class="form-control ms-xl-2 my-address-textbox" placeholder="Nhập số nhà, tên đường"/>
                         </div>
                     </div>
 
@@ -154,14 +154,14 @@
                         <p class="col-12 col-sm-4 col-lg-3 form-text">Châm ngôn</p>
                         <div class="col-12 col-sm-8 col-lg-9 position-relative px-0">
                             <div class="col-12 col-sm-8 col-lg-9 px-0 w-100">
-                                <InputLimitedTextArea MaxLength="@maxWord" @bind-Value="user.Introduction" class="form-input mx-0 form-control form-control-maxim" />
+                                <InputLimitedTextArea MaxLength="@maxWord" @bind-Value="user.Introduction" class="form-input mx-0 form-control form-control-maxim minhkhabui" />
                                 <p class="countWord text-end mb-0">@CountWord()/@maxWord</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-12 col-sm-8 col-lg-9 ms-auto from__btn">
+                        <div class="col-12 d-flex justify-content-center ms-auto from__btn">
                             <a href="@($"{Routes.OrgProfile}/{user.Id}")" class="btn from__btn-cancel text-decoration-none">Hủy</a>
                             <button type="submit" class="btn from__btn-submit ms-4 d-inline-block blue-btn">Lưu thay đổi</button>
                         </div>

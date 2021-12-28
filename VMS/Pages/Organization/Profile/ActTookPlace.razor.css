@@ -82,17 +82,17 @@
       min-height: 88.8px;
       -webkit-line-clamp: 3; } }
 
-.act-ranking .icon-star {
+::deep .act-ranking .material-icons-outlined {
   color: #EDF131;
   font-size: 12px; }
   @media (min-width: 576px) {
-    .act-ranking .icon-star {
+    ::deep .act-ranking .material-icons-outlined {
       font-size: 14px; } }
   @media (min-width: 992px) {
-    .act-ranking .icon-star {
+    ::deep .act-ranking .material-icons-outlined {
       font-size: 16px; } }
   @media (min-width: 1400px) {
-    .act-ranking .icon-star {
+    ::deep .act-ranking .material-icons-outlined {
       font-size: 20px; } }
 
 .act-footer {

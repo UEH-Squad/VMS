@@ -97,8 +97,8 @@
     }
 }
 
-.act-ranking {
-    .icon-star {
+::deep .act-ranking {
+    .material-icons-outlined {
         color: $yellow-star;
         font-size: 12px;
 

@@ -39,12 +39,14 @@
                             </i>
                         }
 
-                        @if (HaveFav)
-                        {
-                            <a class="position-absolute favorite" @onclick="() => AnimateHeart(item)">
-                                <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
-                            </a>
-                        }
+                        <AuthorizeView Roles="@($"{Role.User}")">
+                            @if (HaveFav)
+                            {
+                                <a class="position-absolute favorite" @onclick="() => AnimateHeart(item)">
+                                    <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
+                                </a>
+                            }
+                        </AuthorizeView>
                     </div>
                 }
             </div>

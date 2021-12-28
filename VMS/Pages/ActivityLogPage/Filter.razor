@@ -2,8 +2,7 @@
     <div class="act-title">
         Lọc hoạt động
     </div>
-    <form class="row act-filter d-flex" action="" method="get">
-
+    <div class="row act-filter d-flex">
         <div class="col-12 col-lg-6 col-xl-5 col-xxl-5 select-filter">
             <div class="select-container">
                 <div class="act-filter__select" @onclick="Showlist1">
@@ -36,19 +35,33 @@
 
         <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 act-filter__radio d-flex">
             <div class="act-filter__radio-1 d-flex align-items-center">
-                <input class="radio-1" type="radio" id="rate" name="fav_language" value="rate">
+                @if (filter.IsRated.HasValue && !filter.IsRated.Value)
+                {
+                    <input class="radio-1" type="radio" id="rate" name="fav_language" @onclick="async () => await CheckOrderAsync(false)" checked>
+                }
+                else
+                {
+                    <input class="radio-1" type="radio" id="rate" name="fav_language" @onclick="async () => await CheckOrderAsync(false)">
+                }
                 <label class="label-1" for="rate">Chưa đánh giá</label><br>
             </div>
             <div class="act-filter__radio-2 d-flex align-items-center">
-                <input class="radio-2" type="radio" id="rated" name="fav_language" value="rated">
+                @if (filter.IsRated.HasValue && filter.IsRated.Value)
+                {
+                    <input class="radio-2" type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)" checked>
+                }
+                else
+                {
+                    <input class="radio-2" type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)">
+                }
                 <label class="label-2" for="rated">Đã đánh giá</label><br>
             </div>
         </div>
         <div class="col-12 col-xl-2 col-xxl-3 act-filter__btn-container">
-            <button class="act-filter__btn --filter">Lọc</button>
-            <button class="act-filter__btn --del">Xóa lọc</button>
+            <button class="act-filter__btn --filter" @onclick="UpdateFilterValueAsync">Lọc</button>
+            <button class="act-filter__btn --del" @onclick="ClearFilterAsync">Xóa lọc</button>
         </div>
-    </form>
+    </div>
 </div>
 @code {
 

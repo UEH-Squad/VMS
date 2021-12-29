@@ -142,3 +142,9 @@
 
 .lmtext-3 {
   -webkit-line-clamp: 3; }
+
+.act__content-description {
+  display: none; }
+  @media (min-width: 1200px) {
+    .act__content-description {
+      display: -webkit-box; } }

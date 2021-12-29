@@ -19,11 +19,12 @@
         padding: 10px 0px;
         border-radius: 10px;
         margin-top: 30px;
-        height: 285px;
+        height: 305px;
 
         img {
             height: 100%;
             object-fit: cover;
+            object-position: center;
         }
     }
 
@@ -78,21 +79,10 @@
             padding: 10px 20px;
             display: block;
             cursor: pointer;
+            color: $grey-text;
 
             &:hover {
                 background: rgba(24, 160, 251, 0.1);
-            }
-        }
-
-        .edit {
-            color: $grey-text;
-        }
-
-        a {
-            color: $blue;
-
-            &:hover {
-                color: $blue;
             }
         }
 
@@ -121,6 +111,7 @@
     }
 
     h5 {
+        bottom: 12px;
         font-size: 14px;
         font-weight: 600;
 
@@ -193,6 +184,19 @@
     }
 
     .act-footer {
+        bottom: 10px;
+        right: 16px;
+
+        .btn-deny {
+            background: #D8D8D8;
+            border-radius: 5px;
+            color: #707070;
+            font-weight:600;
+            &:hover {
+                color: #707070;
+            }
+        }
+
         &__warn {
             color: $red-warning;
         }
@@ -236,5 +240,49 @@
                 }
             }
         }
+    }
+}
+.div-checkbox {
+    .check-box {
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        vertical-align: top;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 1px solid #F14747;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid #18A0FB;
+            border-bottom: 2px solid #18A0FB;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+    }
+
+    label {
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 14px;
+        color: #F14747;
     }
 }

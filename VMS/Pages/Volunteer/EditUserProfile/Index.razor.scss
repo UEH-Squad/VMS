@@ -1,21 +1,20 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
+.error-message {
+    color: $error;
+    background-color: $blue-background;
+    font-weight: 300;
+    font-size: 10px;
 
+    @include on ('sm') {
+        font-size: 18px;
+    }
+}
 .my-editProfile {
     ::deep .form-control:focus {
         border: 1px solid $blue;
         box-shadow: none;
     }
 
-    .error-message {
-        color: $error;
-        background-color: $blue-background;
-        font-weight: 300;
-        font-size: 10px;
-
-        @include on ('sm') {
-            font-size: 18px;
-        }
-    }
 
     .editProfile__title {
         margin-top: 50px;
@@ -127,14 +126,6 @@
             }
         }
 
-        .my-address-textbox {
-            width: 100%;
-
-            @include on('sm') {
-                width: auto;
-            }
-        }
-
         ::deep .form-control {
             font-size: 14px;
             font-weight: 300;
@@ -146,6 +137,12 @@
             @include on ('sm') {
                 height: unset;
                 font-size: 16px;
+            }
+        }
+
+        ::deep .my-address-textbox {
+            @include on('xl') {
+                width: auto;
             }
         }
 
@@ -185,8 +182,6 @@
         }
 
         .form-field {
-            padding: 0;
-
             .w-20 {
                 width: 20%;
             }
@@ -206,11 +201,27 @@
 
         .form-field-item {
             text-align: center;
-            width: 20%;
+            width: 33.33%;
             display: inline-block;
 
+            @include on("md") {
+                width: 25%;
+            }
+
+            @include on("xl") {
+                width: 20%;
+            }
+
             &:hover > i {
-                font-size: 40px;
+                font-size: 25px;
+
+                @include on("sm") {
+                    font-size: 35px;
+                }
+
+                @include on("lg") {
+                    font-size: 40px;
+                }
 
                 @include on("xxl") {
                     font-size: 45px;
@@ -232,17 +243,24 @@
                 line-height: 50px;
                 font-size: 20px;
 
-                @include on('sm') {
-                    width: 73px;
-                    height: 73px;
-                    line-height: 73px;
+                @include on("sm") {
+                    width: 55px;
+                    height: 55px;
+                    line-height: 55px;
+                    font-size: 25px;
+                }
+
+                @include on("lg") {
+                    width: 70px;
+                    height: 70px;
+                    line-height: 70px;
                     font-size: 30px;
                 }
 
                 @include on("xxl") {
-                    width: 83px;
-                    height: 83px;
-                    line-height: 83px;
+                    width: 85px;
+                    height: 85px;
+                    line-height: 85px;
                     font-size: 35px;
                 }
             }
@@ -252,11 +270,15 @@
                 display: inline-block;
                 transition: all 0.3s linear;
                 font-size: 14px;
-                margin-top: 0px;
+                margin-top: 10px;
 
-                @include on ('sm') {
+                @include on("lg") {
                     font-size: 18px;
                     margin-top: 20px;
+                }
+
+                @include on("xxl") {
+                    font-size: 20px;
                 }
 
                 @include on("xxl") {
@@ -268,22 +290,50 @@
                 background: $grey-close-bg;
                 opacity: 50%;
                 color: $white;
-                font-size: 40px;
+                font-size: 35px;
 
-                @include on('sm') {
-                    font-size: 60px;
+                @include on("sm") {
+                    font-size: 40px;
+                }
+
+                @include on("lg") {
+                    font-size: 45px;
+                }
+
+                @include on("xxl") {
+                    font-size: 50px;
                 }
 
                 &:hover {
                     background: $grey-close-bg;
                     opacity: 100%;
-                    font-size: 70px;
+                    font-size: 40px;
+
+                    @include on("sm") {
+                        font-size: 50px;
+                    }
+
+                    @include on("lg") {
+                        font-size: 55px;
+                    }
+
+                    @include on("xxl") {
+                        font-size: 60px;
+                    }
                 }
             }
 
             &.item-add {
-                width: 20%;
+                width: 33.33%;
                 cursor: pointer;
+
+                @include on("md") {
+                    width: 25%;
+                }
+
+                @include on("xl") {
+                    width: 20%;
+                }
             }
         }
 
@@ -383,3 +433,4 @@
         cursor: context-menu;
     }
 }
+

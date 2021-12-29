@@ -28,7 +28,7 @@
         }
 
         @include on('xxl') {
-            width: 35%;
+            width: 30%;
         }
     }
 
@@ -43,8 +43,8 @@
             object-position: center;
 
             @include on('xxl') {
-                width: 250px;
-                height: 250px;
+                width: 216px;
+                height: 216px;
             }
         }
     }

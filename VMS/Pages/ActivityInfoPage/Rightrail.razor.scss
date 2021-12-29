@@ -184,3 +184,15 @@ body {
     }
 }
 /* ------end report-----*/
+.recognize {
+    i {
+        color: $green;
+        margin-right: 12px;
+    }
+
+    span {
+        font-weight: 500;
+        font-size: 16px;
+        color: #515151;
+    }
+}

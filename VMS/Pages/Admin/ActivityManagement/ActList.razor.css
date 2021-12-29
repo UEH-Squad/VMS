@@ -18,10 +18,11 @@
     padding: 10px 0px;
     border-radius: 10px;
     margin-top: 30px;
-    height: 285px; }
+    height: 305px; }
     .act .act__item img {
       height: 100%;
-      object-fit: cover; }
+      object-fit: cover;
+      object-position: center; }
   .act .icon-tooltip {
     display: none;
     color: #000;
@@ -60,15 +61,10 @@
       font-weight: 500;
       padding: 10px 20px;
       display: block;
-      cursor: pointer; }
+      cursor: pointer;
+      color: #515151; }
       .act__content ul li:hover, .act__content ul a:hover {
         background: rgba(24, 160, 251, 0.1); }
-    .act__content ul .edit {
-      color: #515151; }
-    .act__content ul a {
-      color: #18A0FB; }
-      .act__content ul a:hover {
-        color: #18A0FB; }
     .act__content ul .delete {
       color: #F14747;
       width: 210.54px; }
@@ -83,6 +79,7 @@
   .act__content .star .material-icons {
     color: #EDF131; }
   .act__content h5 {
+    bottom: 12px;
     font-size: 14px;
     font-weight: 600; }
     .act__content h5 i {
@@ -127,29 +124,76 @@
     -webkit-line-clamp: 2; }
   .act__content .lmtext-3 {
     -webkit-line-clamp: 3; }
-  .act__content .act-footer__warn {
-    color: #E10B0B; }
-  .act__content .act-footer__btn button, .act__content .act-footer__btn a {
-    margin-left: 20px;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 5px 15px;
-    border-radius: 5px; }
-  .act__content .act-footer__btn--approval {
-    color: #18A0FB;
-    border: solid 2px #18A0FB; }
-    .act__content .act-footer__btn--approval:hover {
-      color: #0B588C;
-      border-color: #0B588C; }
-  .act__content .act-footer__btn--green {
-    color: #FFFFFF;
-    background-color: #64D72F; }
-    .act__content .act-footer__btn--green:hover {
+  .act__content .act-footer {
+    bottom: 10px;
+    right: 16px; }
+    .act__content .act-footer .btn-deny {
+      background: #D8D8D8;
+      border-radius: 5px;
+      color: #707070;
+      font-weight: 600; }
+      .act__content .act-footer .btn-deny:hover {
+        color: #707070; }
+    .act__content .act-footer__warn {
+      color: #E10B0B; }
+    .act__content .act-footer__btn button, .act__content .act-footer__btn a {
+      margin-left: 20px;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 5px 15px;
+      border-radius: 5px; }
+    .act__content .act-footer__btn--approval {
+      color: #18A0FB;
+      border: solid 2px #18A0FB; }
+      .act__content .act-footer__btn--approval:hover {
+        color: #0B588C;
+        border-color: #0B588C; }
+    .act__content .act-footer__btn--green {
       color: #FFFFFF;
-      background-color: #306C14; }
-  .act__content .act-footer__btn--blue {
-    color: #FFFFFF;
-    background-color: #18A0FB; }
-    .act__content .act-footer__btn--blue:hover {
+      background-color: #64D72F; }
+      .act__content .act-footer__btn--green:hover {
+        color: #FFFFFF;
+        background-color: #306C14; }
+    .act__content .act-footer__btn--blue {
       color: #FFFFFF;
-      background-color: #0B588C; }
+      background-color: #18A0FB; }
+      .act__content .act-footer__btn--blue:hover {
+        color: #FFFFFF;
+        background-color: #0B588C; }
+
+.div-checkbox .check-box {
+  border-radius: 5px;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid #F14747;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  position: relative;
+  cursor: pointer; }
+  .div-checkbox .check-box::before {
+    content: "";
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid #18A0FB;
+    border-bottom: 2px solid #18A0FB;
+    position: absolute;
+    top: 40%;
+    left: 52%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    display: none; }
+  .div-checkbox .check-box:checked::before {
+    display: block; }
+
+.div-checkbox label {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: #F14747; }

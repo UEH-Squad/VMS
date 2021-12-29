@@ -12,100 +12,156 @@
 }
 
 .my-custom-popup {
-    width: 90%;
+    width: 280px;
     background-color: #fff;
     border-radius: 10px;
     z-index: 999;
 
-    @include on('xl') {
-        width: 50%;
+    @include on('sm') {
+        width: 500px;
+    }
+
+    @include on('md') {
+        width: 570px;
+    }
+
+    @include on('lg') {
+        width: 620px;
     }
 
     h3 {
-        font-size: 24px;
+        font-weight: 500;
+        font-size: 22px;
         color: $green;
+
+        @include on('lg') {
+            font-size: 24px;
+        }
     }
 
     .close-btn {
         position: absolute;
         top: 15px;
         right: 15px;
-        width: 40px;
-        height: 40px;
+        width: 20px;
+        height: 20px;
         background-color: $grey-bg;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 25px;
+        font-size: 16px;
         cursor: pointer;
+
+        @include on('md') {
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            top: 18px;
+            right: 29px;
+        }
+
+        @include on('xl') {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+        }
     }
 
     .areas-modal-content {
+        /*padding-left: 45px;
+
         @include on('xl') {
-            margin-left: 80px;
-        }
+            padding-left: 80px;
+        }*/
 
         &__container {
-            height: 100%;
-            display: grid;
-            grid-template-columns: auto auto;
-            grid-column-gap: 10px;
+            height: 315px;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 3px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $grey-icon;
+                border-radius: 20px;
+            }
+
+            @include on('sm') {
+                height: 100%;
+            }
+
+            @include on('xl') {
+                height: 100%;
+                grid-template-columns: auto auto;
+            }
         }
     }
 
 
     .area-item-wrapper {
         cursor: pointer;
+        margin-bottom: 13px;
+
+        @include on('md') {
+            margin-bottom: 18px;
+        }
+
+        @include on('xl') {
+            margin-bottom: 22px;
+        }
 
         div {
-            width: 45px;
-            height: 45px;
-
-            @include on('xl') {
-                width: 50px;
-                height: 50pl;
-            }
-
+            width: 40px;
+            height: 40px;
             background-color: $blue;
             border-radius: 50%;
             color: #fff;
         }
 
         p {
-            font-size: 14px;
-
-            @include on('xl') {
-                font-size: 16px;
-            }
+            font-weight: 400;
+            font-size: 16px;
         }
 
         span:hover ~ p,
         p:hover {
-            color: $green;
+           /* color: $green;*/
         }
     }
 
     .save-btn {
         @include green-btn;
         font-size: 20px;
-        width: 90px;
-        height: 40px;
-        margin-bottom: 27px;
+        width: 74px;
+        height: 33px;
+
+        @include on('md') {
+            width: 82px;
+            height: 36px;
+        }
+
+        @include on('xl') {
+            width: 90px;
+            height: 40px;
+        }
 
         &:hover {
             background-color: $green-bold;
         }
     }
+
+    .covid-item {
+        p {
+        }
+
+        span:hover ~ p,
+        p:hover {
+            color: #f14747 !important;
+        }
+    }
 }
 
 
-.covid-item {
-    p {
-    }
-
-    span:hover ~ p,
-    p:hover {
-        color: #f14747 !important;
-    }
-}
+    

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
@@ -65,5 +66,10 @@ namespace VMS.Pages.ActivityInfoPage
             IdentityService.UpdateUser(currentUser);
             isFav = !isFav;
         }
-    }
+
+        private async Task ShowEditRequirement()
+        {
+            Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("", BlazoredModalOptions.GetModalOptions());
+        }
+    }    
 }

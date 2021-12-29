@@ -1,16 +1,15 @@
 ﻿@import "../../../Resources/scss/common/_variables";
+.error-message {
+    color: $error;
+    background-color: $blue-background;
+    font-weight: 300;
+    font-size: 18px;
+}
 
 .my-editProfile {
     ::deep .form-control:focus {
         border: 1px solid $blue;
         box-shadow: none;
-    }
-
-    .error-message {
-        color: $error;
-        background-color: $blue-background;
-        font-weight: 300;
-        font-size: 18px;
     }
 
     .required-asterick {

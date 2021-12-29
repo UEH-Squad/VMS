@@ -104,4 +104,7 @@ input[type="checkbox"]:checked:after {
     font-size: 16px;
     color: $border-color-bold;
     background-color: #fff;
+    &:hover{
+        text-decoration: underline;
+    }
 }

@@ -634,5 +634,13 @@
   {
     "outputFile": "Pages/SearchVolunteer/SearchResult.razor.css",
     "inputFile": "Pages/SearchVolunteer/SearchResult.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PopupDenyAct.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PopupDenyAct.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/PopupConvert.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/PopupConvert.razor.scss"
   }
 ]

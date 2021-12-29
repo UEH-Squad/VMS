@@ -1,0 +1,37 @@
+﻿@inject IJSRuntime JsRuntime
+<section class="my-container mb-5">
+    <h3 class="result-heading mt-4 mb-3">Có <span>1 tình nguyện viên</span> ứng với kết quả tìm kiếm của bạn</h3>
+    @for (int i = 0; i < 5; i++)
+    {
+        <div class="org-item d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <img class="org-item__img me-2" src="./img/Ellipse 8.png" alt="Avatar TNV" />
+                <div class="org-item__name-group ms-4">
+                    <a class="org-item__name lmtext-2" href="#">Nguyễn Phú Hòa</a>
+                    <p class="m-0 d-block">Khóa 46 - EC002</p>
+                </div>
+            </div>
+            <div class="org-item__rate-group d-flex align-items-center me-5">
+                <div class="seperate-line"></div>
+                <span class="me-4">#1</span>
+                <div>
+                    <p class="m-0 d-flex align-items-center">
+                        4.5
+                        <Star Rating="rating" />
+                    </p>
+                    <p class="m-0">
+                        /15N đánh giá
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@*<Pager CurrentPage="@PagedResult.PageIndex"
+    PageCount="@PagedResult.TotalPages"
+    OnPageChanged="@(async (e)=> { await HandlePageChangedAsync(e); })" />*@
+
+@code {
+    double rating = 4.5;
+}

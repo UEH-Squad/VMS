@@ -2,6 +2,7 @@
 $yellow: #EDF131;
 $org-avata-size: 115px;
 $border-width: 1px;
+
 .yellow-colored {
     color: $yellow !important;
 }
@@ -71,14 +72,32 @@ $border-width: 1px;
 
     &__name-group {
         font-weight: 600;
-        max-width: 65%;
+        margin-left: 5px !important;
+
+        @include on('lg') {
+            margin-left: unset;
+        }
 
         a {
             font-weight: 600;
             font-size: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             text-decoration: none;
-            color: $blue;
+            color: $grey-text;
+
+            @include on('sm') {
+                font-size: 12px;
+            }
+
+            @include on('md') {
+                font-size: 14px;
+                margin-bottom: 0px;
+            }
+
+            @include on('lg') {
+                font-size: 16px;
+                margin-bottom: 0px;
+            }
 
             @include on('xl') {
                 font-size: 18px;
@@ -87,7 +106,7 @@ $border-width: 1px;
 
         p {
             font-size: 8px;
-            color: $border-color-normal;
+            color: $grey-text;
 
             @include on('sm') {
                 font-size: 12px;

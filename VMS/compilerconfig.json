@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "outputFile": "Shared/Components/Pager.razor.css",
     "inputFile": "Shared/Components/Pager.razor.scss"
@@ -626,5 +626,13 @@
   {
     "outputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.css",
     "inputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchVolunteer/SearchAndFilter.razor.css",
+    "inputFile": "Pages/SearchVolunteer/SearchAndFilter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchVolunteer/SearchResult.razor.css",
+    "inputFile": "Pages/SearchVolunteer/SearchResult.razor.scss"
   }
 ]

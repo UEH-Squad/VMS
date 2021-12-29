@@ -147,6 +147,9 @@
     .user-img {
         width: 58px;
         height: 58px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
 
         @include on('xl') {
             width: 70px;

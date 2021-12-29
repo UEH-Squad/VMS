@@ -104,7 +104,10 @@
 
 .user-info .user-img {
   width: 58px;
-  height: 58px; }
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center; }
   @media (min-width: 1200px) {
     .user-info .user-img {
       width: 70px;

@@ -148,3 +148,11 @@
       font-size: 18px; } }
 
 /* ------end report-----*/
+.recognize i {
+  color: #64D72F;
+  margin-right: 12px; }
+
+.recognize span {
+  font-weight: 500;
+  font-size: 16px;
+  color: #515151; }

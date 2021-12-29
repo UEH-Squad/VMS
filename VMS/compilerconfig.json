@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "outputFile": "Shared/Components/Pager.razor.css",
     "inputFile": "Shared/Components/Pager.razor.scss"
@@ -626,5 +626,13 @@
   {
     "outputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.css",
     "inputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityManagement/PopupDenyAct.razor.css",
+    "inputFile": "Pages/Admin/ActivityManagement/PopupDenyAct.razor.scss"
+  },
+  {
+    "outputFile": "Pages/ActivityInfoPage/PopupConvert.razor.css",
+    "inputFile": "Pages/ActivityInfoPage/PopupConvert.razor.scss"
   }
 ]

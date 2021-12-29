@@ -56,20 +56,33 @@
                                     </h5>
                                     <p class="lmtext-2 act__content-description mb-0">@item.Content</p>
                                     <div class="act__content-date d-flex flex-column mb-1">
-                                        <div class="d-flex mb-1 align-items-center">
-                                            <span class="material-icons-outlined me-2 my-icon">
-                                                assignment
-                                            </span>
-                                            <span class="icon-tooltip">Ngày đăng ký</span>
-                                            <span>@item.OpenDate.ToString("dd/MM/yyyy") - @item.CloseDate.ToString("dd/MM/yyyy")</span>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex mb-1 align-items-center">
+                                                <span class="material-icons-outlined me-2 my-icon">
+                                                    assignment
+                                                </span>
+                                                <span class="icon-tooltip">Ngày đăng ký</span>
+                                                <span>@item.OpenDate.ToString("dd/MM/yyyy") - @item.CloseDate.ToString("dd/MM/yyyy")</span>
+                                            </div>
+                                            <div class=" col-6 d-flex mb-1 align-items-center div-checkbox">
+                                                <input id="NubOfVolunteer" class="check-box" type="checkbox">
+                                                <label for="NubOfVolunteer" class="ms-2">Số ngày tình nguyện</label>
+                                            </div>
                                         </div>
-                                        <div class="d-flex align-items-center">
-                                            <span class="material-icons-outlined me-2 my-icon">
-                                                today
-                                            </span>
-                                            <span class="icon-tooltip">Ngày diễn ra</span>
-                                            <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <span class="material-icons-outlined me-2 my-icon">
+                                                    today
+                                                </span>
+                                                <span class="icon-tooltip">Ngày diễn ra</span>
+                                                <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
+                                            </div>
+                                            <div class=" col-6 d-flex mb-1 align-items-center div-checkbox">
+                                                <input id="pointTraining" class="check-box" type="checkbox">
+                                                <label for="pointTraining" class="ms-2">Điểm rèn luyện</label>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <div>
@@ -91,12 +104,15 @@
                                             }
                                             else if (item.StartDate >= DateTime.Now)
                                             {
-                                                <div class="act-footer__btn d-flex align-items-center">
+                                                @*<div class="act-footer__btn d-flex align-items-center">
                                                     <button @onclick="() => ShowApproveModal(item.Id)" class="btn act-footer__btn--approval">Duyệt hoạt động</button>
-                                                </div>
+                                                </div>*@
                                             }
+                                        <div class="act-footer__btn d-flex align-items-center">
+                                            <button @onclick="() => ShowDenyModal(item.Id)" class="btn btn-deny">Từ chối</button>
+                                        </div>
                                             <div class="act-footer__btn d-flex align-items-center">
-                                                <button @onclick="() => ShowEditModal(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
+                                                <button @onclick="() => ShowApproveModal(item.Id)" class="btn act-footer__btn--blue">Duyệt</button>
                                             </div>
                                         }
 
@@ -207,7 +223,10 @@
     {
         Modal.Show<ApprovalActivity>("", BlazoredModalOptions.GetModalOptions());
     }
-
+    private async Task ShowDenyModal(int id)
+    {
+        Modal.Show<PopupDenyAct>("", BlazoredModalOptions.GetModalOptions());
+    }
     private async Task ShowActPrivorModal(int id)
     {
 

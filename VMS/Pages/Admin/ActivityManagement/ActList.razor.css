@@ -127,6 +127,13 @@
   .act__content .act-footer {
     bottom: 10px;
     right: 16px; }
+    .act__content .act-footer .btn-deny {
+      background: #D8D8D8;
+      border-radius: 5px;
+      color: #707070;
+      font-weight: 600; }
+      .act__content .act-footer .btn-deny:hover {
+        color: #707070; }
     .act__content .act-footer__warn {
       color: #E10B0B; }
     .act__content .act-footer__btn button, .act__content .act-footer__btn a {
@@ -153,3 +160,40 @@
       .act__content .act-footer__btn--blue:hover {
         color: #FFFFFF;
         background-color: #0B588C; }
+
+.div-checkbox .check-box {
+  border-radius: 5px;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid #F14747;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  position: relative;
+  cursor: pointer; }
+  .div-checkbox .check-box::before {
+    content: "";
+    width: 9px;
+    height: 5px;
+    border-left: 2px solid #18A0FB;
+    border-bottom: 2px solid #18A0FB;
+    position: absolute;
+    top: 40%;
+    left: 52%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    display: none; }
+  .div-checkbox .check-box:checked::before {
+    display: block; }
+
+.div-checkbox label {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: #F14747; }

@@ -15,6 +15,7 @@ namespace VMS.Pages.ActivityInfoPage
         readonly List<string> targets = new();
         User currentUser;
         bool isAlreadySignedUp;
+        int numberVolunteer;
 
         [CascadingParameter] public IModalService Modal { get; set; }
         

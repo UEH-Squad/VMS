@@ -7,21 +7,12 @@
                 </span>
             </div>
             <div class="content">
-                <h3 class="mb-3"><span>Duyệt </span>hoạt động</h3>
-                <div>
-                    <div class=" d-flex align-items-center div-checkbox">
-                        <input id="pointTraining" class="check-box" type="checkbox">
-                        <label for="pointTraining" class="ms-2">Cập nhật mã vạch</label>
-                    </div>
-                    <div class=" d-flex align-items-center div-checkbox">
-                        <input id="dayVolunteer" class="check-box" type="checkbox">
-                        <label for="dayVolunteer" class="ms-2">Ghi nhận ngày tình nguyện</label>
-                        <input type="number" class="form-control input-number"/>
-                    </div>
-                </div>
+                <h3>Bạn có chắc chắn muốn</h3>
+                <h3 class="mb-3"><span>Từ chối hoạt động </span>này</h3>
             </div>
             <div class="pop-up-btn">
-                <div @onclick="ApproveSuccessAsync" class="btn accept px-0 mx-auto">Duyệt</div>
+                <div @onclick="CloseModalAsync" class="btn deny px-0">Hủy</div>
+                <div @onclick="ApproveSuccessAsync" class="btn accept px-0">Xác nhận</div>
             </div>
         </div>
 
@@ -32,7 +23,7 @@
                 </span>
             </div>
             <div class="pop-up-content">
-                <h3>Bạn đã <span>duyệt hoạt động</span></h3>
+                <h3>Bạn đã <span>từ chối hoạt động</span></h3>
                 <h3>thành công</h3>
             </div>
         </div>

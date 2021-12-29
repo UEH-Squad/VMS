@@ -7,6 +7,9 @@
 .container .schedule {
   display: flex;
   flex-direction: column; }
+  @media (min-width: 992px) {
+    .container .schedule {
+      flex-direction: row; } }
 
 .schedule__calendar {
   width: 100%; }
@@ -57,22 +60,26 @@
         font-size: 24px; } }
 
 .schedule__act {
-  width: 100%; }
+  width: 100%;
+  margin-top: 50px; }
   @media (min-width: 992px) {
     .schedule__act {
-      width: 50%; } }
+      width: 50%;
+      margin-top: unset; } }
   .schedule__act h3 {
     font-size: 18px;
     font-weight: 600;
-    color: #64D72F; }
+    color: #64D72F;
+    margin-bottom: 20px !important; }
     @media (min-width: 992px) {
+      .schedule__act h3 {
+        font-size: 24px;
+        margin-bottom: 0; } }
+    @media (min-width: 1400px) {
       .schedule__act h3 {
         font-size: 30px; } }
     .schedule__act h3 span {
       color: #18A0FB; }
-      @media (min-width: 992px) {
-        .schedule__act h3 span {
-          font-size: 30px; } }
   .schedule__act-items {
     height: 420px;
     overflow-y: scroll; }

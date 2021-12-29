@@ -2,7 +2,7 @@
 
 <div class="my-profile">
     <div class="@(IsUsedForAdmin ? "" : "container")">
-        <div class="d-flex justify-content-between py-5">
+        <div class="container-profile d-flex justify-content-between py-5">
             <div class="text-center profile__logo">
                 <div class="">
                     <div class="proflie__logo-img py-3">
@@ -31,6 +31,7 @@
 
                 </div>
             </div>
+
             <div class="profile__contact" style="@(IsUsedForAdmin ? "width: 32%" : "")">
                 <h3 class="text-center mb-3" style="@(IsUsedForAdmin ? "font-size: 24px" : "")">Thông tin cá nhân</h3>
                 <div class="profile__contact-content pb-4 mb-4 ">
@@ -52,7 +53,7 @@
                     </div>
 
                 </div>
-                <div class="profile__filter">
+                <div class="profile__filter-1">
                     <h3>Lĩnh vực</h3>
                     <div class="@(User.Areas.Count > 3 ? "owl-carousel owl-theme profile__carousel" : " profile__NoCarousel pe-0 d-flex justify-content-center")">
                         @foreach (var item in User.Areas)
@@ -70,7 +71,7 @@
 
             <div class=" profile__skills">
                 <div class="profile__skills-content pt-3 pb-4 pb-xxl-5">
-                    <h3 class="mb-4 text-center" style="@(IsUsedForAdmin ? "font-size: 24px" : "")">Kĩ Năng</h3>
+                    <h3 class="mb-4" style="@(IsUsedForAdmin ? "font-size: 24px" : "")">Kĩ Năng</h3>
                     <div class=" mx-auto profile__content" style="@(IsUsedForAdmin ? "padding: 0 20px" : "")">
                         @foreach (var item in User.Skills)
                         {
@@ -81,7 +82,7 @@
 
             </div>
 
-            <div class="profile__filter text-center">
+            <div class="profile__filter-2">
                 <h3>Lĩnh vực</h3>
                 <div class="@(User.Areas.Count > 3 ? "owl-carousel owl-theme profile__carousel" : " profile__NoCarousel pe-0 d-flex justify-content-center")">
                     @foreach (var item in User.Areas)

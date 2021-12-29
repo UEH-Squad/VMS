@@ -1,0 +1,102 @@
+﻿@inject IJSRuntime JS;
+<div class="ranking">
+    <div class="owl-carousel owl-theme">
+        <div class="ranking-list">
+            <div class="ranking-img">
+                <div class="ranking-img__container mx-auto">
+                    <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
+                </div>
+            </div>
+            <h3 class="text-center pt-3">Ban chuyen mon</h3>
+            <div class="ranking-item d-flex">
+                <h1>1</h1>
+                <div class="ranking-item__img">
+                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
+                </div>
+                <div class="ranking-item__info">
+                    <h2>Ban phong trào - tình nguyện</h2>
+                    <div class="d-flex">
+                        <p>4,5</p>
+                        @for (int i = 0; i <= 4; i++)
+                        {
+                            <i class="material-icons">star_rate</i>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ranking-list">
+            <div class="ranking-img">
+                <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
+            </div>
+            <h3>Ban chuyen mon</h3>
+            <div class="ranking-item d-flex">
+                <h1>1</h1>
+                <div class="ranking-item__img">
+                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
+                </div>
+                <div class="ranking-item__info">
+                    <h2>Ban phong trào - tình nguyện</h2>
+                    <div class="d-flex">
+                        <p>4,5</p>
+                        @for (int i = 0; i <= 4; i++)
+                        {
+                            <i class="material-icons">star_rate</i>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ranking-list">
+            <div class="ranking-img">
+                <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
+            </div>
+            <h3>Ban chuyen mon</h3>
+            <div class="ranking-item d-flex">
+                <h1>1</h1>
+                <div class="ranking-item__img">
+                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
+                </div>
+                <div class="ranking-item__info">
+                    <h2>Ban phong trào - tình nguyện</h2>
+                    <div class="d-flex">
+                        <p>4,5</p>
+                        @for (int i = 0; i <= 4; i++)
+                        {
+                            <i class="material-icons">star_rate</i>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ranking-list">
+            <div class="ranking-img">
+                <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
+            </div>
+            <h3>Ban chuyen mon</h3>
+            <div class="ranking-item d-flex">
+                <h1>1</h1>
+                <div class="ranking-item__img">
+                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
+                </div>
+                <div class="ranking-item__info">
+                    <h2>Ban phong trào - tình nguyện</h2>
+                    <div class="d-flex">
+                        <p>4,5</p>
+                        @for (int i = 0; i <= 4; i++)
+                        {
+                            <i class="material-icons">star_rate</i>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("vms.RankingCarousel");
+    }
+}

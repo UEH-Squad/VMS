@@ -5,6 +5,7 @@ import userProfile from './userProfile';
 import organizationProfile from './organizationProfile';
 import volunteerListPage from './volunteerListPage';
 import admin from './admin';
+import gloryAvenue from './gloryAvenue';
 
 export const SmoothScrollTo = (element) => smoothScrollTo(element);
 export const FloatBackToTop = (isFloat) => floatBackToTop(isFloat);
@@ -27,3 +28,5 @@ export const AddOutsideClickMenuHandler = (dotnetHelper, methodName) => organiza
 export const SaveAs = (filename, bytesBase64) => volunteerListPage.saveAsFile(filename, bytesBase64);
 
 export const SaveAsFile = (filename, bytesBase64) => admin.saveAsFile(filename, bytesBase64);
+export const RankingCarousel = () => gloryAvenue.rankingCarousel();
+

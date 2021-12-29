@@ -2,7 +2,9 @@
 
 <div class="my-rank">
     <div class="container position-relative">
-        <h1>Đại lộ <span>danh vọng</span></h1>
+        @if(isShowTitle) {
+            <h1>Đại lộ <span>danh vọng</span></h1>
+        }
         <p class="rank__link d-flex align-items-center">
             <span @onclick="showOrg" class="rank__link-organization @(isShowOrg ? "cssShowOrg": "" )">Tổ chức</span>
             <span @onclick="showPer" class="rank__link-students @(isShowPer  ? "cssShowPer": "" )">Sinh viên</span>
@@ -54,6 +56,8 @@
 </div>
 
 @code {
+    [Parameter] 
+    public bool isShowTitle { get; set; } = true;
 
     class FakeData
     {

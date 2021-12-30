@@ -30,13 +30,3 @@
   height: 80%;
   border: 0.5px solid #b4b4b4;
   margin-right: 30px; }
-
-.result-heading {
-  display: none;
-  font-size: 18px;
-  color: #18A0FB; }
-  @media (min-width: 992px) {
-    .result-heading {
-      display: block; } }
-  .result-heading span {
-    color: #64D72F; }

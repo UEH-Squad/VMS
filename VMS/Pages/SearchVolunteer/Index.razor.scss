@@ -44,17 +44,3 @@ $border-width: 1px;
         }
     }
 }
-
-.result-heading {
-    display: none;
-    font-size: 18px;
-    color: $blue;
-
-    @include on('lg') {
-        display: block;
-    }
-
-    span {
-        color: $green;
-    }
-}

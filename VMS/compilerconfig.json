@@ -642,5 +642,9 @@
   {
     "outputFile": "Pages/ActivityInfoPage/PopupConvert.razor.css",
     "inputFile": "Pages/ActivityInfoPage/PopupConvert.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchVolunteer/Index.razor.css",
+    "inputFile": "Pages/SearchVolunteer/Index.razor.scss"
   }
 ]

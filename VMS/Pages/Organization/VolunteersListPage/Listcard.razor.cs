@@ -15,6 +15,7 @@ namespace VMS.Pages.Organization.VolunteersListPage
 {
     public partial class Listcard : ComponentBase
     {
+        private bool isLoading;
         private int page = 1;
         private string searchValue = String.Empty;
         private List<int> checkList = new();
@@ -32,23 +33,29 @@ namespace VMS.Pages.Organization.VolunteersListPage
 
         protected override async Task OnInitializedAsync()
         {
+            isLoading = true;
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            isLoading = false;
         }
         private async Task ValueChangeAsync(string value)
         {
+            isLoading = true;
             page = 1;
             this.searchValue = value;
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             checkList = new();
+            isLoading = false;
             StateHasChanged();
         }
         private async Task ShowDeletedListAsync(bool value)
         {
+            isLoading = true;
             page = 1;
             this.isDeleted = value;
             searchValue = String.Empty;
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             checkList = new();
+            isLoading = false;
             StateHasChanged();
         }
         private async Task HandleCheckAsync(int id)
@@ -69,19 +76,23 @@ namespace VMS.Pages.Organization.VolunteersListPage
         }
         public async Task HandlePageChangedAsync()
         {
+            isLoading = true;
             this.checkList = new();
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
+            isLoading = false;
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }
         public async Task HandleDeletedAsync()
         {
+            isLoading = true;
             if (pagedResult.TotalItems - checkList.Count <= (pagedResult.PageIndex - 1) * pagedResult.PageSize)
             {
-                page = pagedResult.PageIndex==1? 1:pagedResult.PageIndex - 1;
+                page = pagedResult.PageIndex == 1 ? 1 : pagedResult.PageIndex - 1;
             }
             pagedResult = await ListVolunteerService.GetListVolunteersAsync(ActId, searchValue, isDeleted, page);
             checkList = new();
+            isLoading = false;
             StateHasChanged();
         }
         [CascadingParameter] public IModalService Modal { get; set; }
@@ -92,11 +103,13 @@ namespace VMS.Pages.Organization.VolunteersListPage
             parameters.Add("Volunteer", volunteer);
             parameters.Add("CurrentUser", volunteer.User);
             parameters.Add("IsReadOnly", true);
-            Modal.Show<VMS.Pages.ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions());
+            Modal.Show<ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
         public async Task DowLoadAsync()
         {
+            isLoading = true;
             fullList = await ListVolunteerService.GetAllListVolunteerAsync(ActId);
+            isLoading = false;
             await JsRuntime.InvokeVoidAsync("vms.SaveAs", "DSTNV_" + ActId + "_" + DateTime.Now.ToString() + ".xlsx", ExportExcelService.ResultExportToExcel(fullList, ActId));
         }
         public async Task HandleUploadAsync()

@@ -101,5 +101,10 @@ namespace VMS.Application.Services
                 return Task.Run(() => _userManager.CheckPasswordAsync(currentUser, password)).Result;
             }
         }
+
+        public bool IsInRole(string userId, Role role)
+        {
+            return Task.Run(() => _userManager.IsInRoleAsync(FindUserById(userId), role.ToString())).Result;
+        }
     }
 }

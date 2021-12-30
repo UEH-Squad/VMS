@@ -65,6 +65,17 @@
       margin-bottom: 20px;
       text-decoration: none;
       color: #18A0FB; }
+      @media (min-width: 576px) {
+        .org-item__name-group a {
+          font-size: 12px; } }
+      @media (min-width: 768px) {
+        .org-item__name-group a {
+          font-size: 14px;
+          margin-bottom: 0px; } }
+      @media (min-width: 992px) {
+        .org-item__name-group a {
+          font-size: 16px;
+          margin-bottom: 0px; } }
       @media (min-width: 1200px) {
         .org-item__name-group a {
           font-size: 18px; } }

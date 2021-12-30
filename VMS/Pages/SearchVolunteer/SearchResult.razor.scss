@@ -15,6 +15,36 @@ $border-width: 1px;
     }
 }
 
+.search-result {
+
+    ::deep .my-container {
+        border-top: none;
+    }
+
+    ::deep .result-heading {
+        display: none;
+    }
+
+    ::deep .org-item__name-group {
+        a {
+            color: $grey-text;
+        }
+
+        p {
+            color: $grey-text;
+        }
+    }
+
+    ::deep .org-item__rate-group {
+        .seperate-line {
+            display: block;
+            height: 80%;
+            border: 0.5px solid $border-color-normal;
+            margin-right: 30px;
+        }
+    }
+}
+
 .result-heading {
     display: none;
     font-size: 18px;
@@ -27,217 +57,4 @@ $border-width: 1px;
     span {
         color: $green;
     }
-}
-
-.org-item {
-    height: 55px;
-    border: $border-width solid $border-color-normal;
-    border-radius: 10px;
-    margin-top: 40px;
-    position: relative;
-
-    @include on('xl') {
-        height: $org-avata-size;
-        margin-top: 28px;
-    }
-
-    &::before {
-        content: "";
-        height: calc(100% + 2 * #{$border-width});
-        width: calc(#{55px} / 2 + #{$border-width});
-        position: absolute;
-        left: -$border-width;
-        background-color: #fff;
-        z-index: 1;
-
-        @include on('xl') {
-            width: calc(#{$org-avata-size} / 2 + #{$border-width});
-        }
-    }
-
-    &__img {
-        height: 55px;
-        width: 55px;
-        min-width: 55px;
-        border-radius: 50%;
-        z-index: 2;
-        object-fit: cover;
-
-        @include on('xl') {
-            height: $org-avata-size;
-            width: $org-avata-size;
-            min-width: $org-avata-size;
-        }
-    }
-
-    &__name-group {
-        font-weight: 600;
-        margin-left: 5px !important;
-
-        @include on('lg') {
-            margin-left: unset;
-        }
-
-        a {
-            font-weight: 600;
-            font-size: 10px;
-            margin-bottom: 8px;
-            text-decoration: none;
-            color: $grey-text;
-
-            @include on('sm') {
-                font-size: 12px;
-            }
-
-            @include on('md') {
-                font-size: 14px;
-                margin-bottom: 0px;
-            }
-
-            @include on('lg') {
-                font-size: 16px;
-                margin-bottom: 0px;
-            }
-
-            @include on('xl') {
-                font-size: 18px;
-            }
-        }
-
-        p {
-            font-size: 8px;
-            color: $grey-text;
-
-            @include on('sm') {
-                font-size: 12px;
-            }
-
-            @include on('md') {
-                font-size: 14px;
-            }
-
-            @include on('lg') {
-                font-size: 16px;
-            }
-
-            @include on('xl') {
-                font-size: 20px;
-            }
-
-            span {
-                color: $green;
-            }
-        }
-    }
-
-    &__rate-group {
-        height: inherit;
-
-        .seperate-line {
-            display: none;
-            height: 80%;
-            border: 0.5px solid $border-color-normal;
-            margin-right: 30px;
-
-            @include on('lg') {
-                display: block;
-            }
-        }
-
-        & > span {
-            font-size: 14px;
-            color: $green;
-            font-weight: 600;
-
-            @include on('sm') {
-                font-size: 18px;
-            }
-
-            @include on('md') {
-                font-size: 24px;
-            }
-
-            @include on('lg') {
-                font-size: 28px;
-            }
-
-            @include on('xl') {
-                font-size: 32px;
-            }
-        }
-
-        p {
-            font-weight: 600;
-            font-size: 10px;
-            color: #707070;
-
-            @include on('sm') {
-                font-size: 12px;
-            }
-
-            @include on('md') {
-                font-size: 14px;
-            }
-
-            @include on('lg') {
-                font-size: 16px;
-            }
-
-            @include on('xl') {
-                font-size: 18px;
-            }
-
-            ::deep span {
-                font-size: 10px;
-
-                @include on('sm') {
-                    font-size: 12px;
-                }
-
-                @include on('md') {
-                    font-size: 14px;
-                }
-
-                @include on('lg') {
-                    font-size: 16px;
-                }
-
-                @include on('xl') {
-                    font-size: 18px;
-                }
-            }
-        }
-    }
-}
-
-//hanlde stars
-.org-item__rate-group-star {
-    font-size: 20px;
-    color: #b4b4b4;
-    position: relative;
-
-    span {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 15px;
-        color: $yellow;
-        overflow: hidden;
-    }
-}
-
-.lmtext-2, .lmtext-3 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-}
-
-.lmtext-2 {
-    -webkit-line-clamp: 2;
-}
-
-.lmtext-3 {
-    -webkit-line-clamp: 3;
 }

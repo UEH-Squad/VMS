@@ -80,6 +80,20 @@ $border-width: 1px;
             text-decoration: none;
             color: $blue;
 
+            @include on('sm') {
+                font-size: 12px;
+            }
+
+            @include on('md') {
+                font-size: 14px;
+                margin-bottom: 0px;
+            }
+
+            @include on('lg') {
+                font-size: 16px;
+                margin-bottom: 0px;
+            }
+
             @include on('xl') {
                 font-size: 18px;
             }

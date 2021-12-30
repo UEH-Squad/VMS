@@ -4,9 +4,14 @@
 <div class="container-lg">
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <SearchAndFilter />
+            <SearchAndFilter
+                HaveSearchBox="true" IsLongDistanceFilter="true"
+                FilterChanged="OnFilterChangedAsync"/>
+
             <VMS.Pages.SearchOrganizer.SearchResult
-                IsUserResult="true" />
+                IsUserResult="true" 
+                PagedResult="pagedResult"
+                OnPageChanged="OnPageChangedAsync"/>
         </div>
     </div>
 </div>

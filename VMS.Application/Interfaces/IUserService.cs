@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
+using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
 {
@@ -19,5 +20,8 @@ namespace VMS.Application.Interfaces
 
         void UpdateUserAvatar(string userId, string avatar);
         Task<HashSet<DateTime>> GetActivityDaysAsync(string userId, DateTime startDate, DateTime endDate);
+        List<UserViewModel> GetAllVolunteers();
+
+        Task<PaginatedList<UserViewModel>> GetAllVolunteers(FilterVltViewModel filter, int currentPage);
     }
 }

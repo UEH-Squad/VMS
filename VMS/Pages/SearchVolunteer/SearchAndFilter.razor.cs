@@ -17,6 +17,7 @@ namespace VMS.Pages.SearchVolunteer
         private string courseChoosenValue = "Khóa";
         private bool isCourseShow;
         private bool isCourseGrey = false;
+        private List<string> courses;
         private string facultyChoosenValue = "Khoa";
         private bool isFacultyShow;
         private bool isFacultyGrey = false;
@@ -36,13 +37,16 @@ namespace VMS.Pages.SearchVolunteer
         [Inject]
         private IFacultyService FacultyService { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            faculties = await FacultyService.GetAllFacultiesAsync();
+            courses = Courses.GetCourses();
         }
 
-        private void ChooseCourseValue()
+        private void ChooseCourseValue(string course)
         {
+            filter.Course = course;
+            courseChoosenValue = course;
+            isCourseGrey = true;
         }
 
         private void ToggleCourseDropdown()
@@ -55,10 +59,16 @@ namespace VMS.Pages.SearchVolunteer
             isCourseShow = false;
         }
 
+        protected override async Task OnInitializedAsync()
+        {
+            faculties = await FacultyService.GetAllFacultiesAsync();
+        }
+
         private void ChooseFacultyValue(FacultyViewModel faculty)
         {
-            facultyChoosenValue = faculty.Name;
             filter.FacultyName = faculty.Name;
+            facultyChoosenValue = faculty.Name;
+            isFacultyGrey = true;
         }
 
         private void ToggleFacultyDropdown()
@@ -94,8 +104,11 @@ namespace VMS.Pages.SearchVolunteer
 
         private async Task ClearFilterAsync()
         {
-            filter = new();
+            courseChoosenValue = "Khóa";
             facultyChoosenValue = "Khoa";
+            filter = new();
+            isCourseGrey = false;
+            isFacultyGrey = false;
             await UpdateFilterValueAsync();
         }
 

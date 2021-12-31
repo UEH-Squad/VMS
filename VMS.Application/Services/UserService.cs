@@ -301,6 +301,7 @@ namespace VMS.Application.Services
                 return new List<Expression<Func<User, bool>>>()
                 {
                     x => x.UserRoles.Any(x => x.Role.Name == vltRole),
+                    x => x.Course == filter.Course || string.IsNullOrEmpty(filter.Course),
                     a => a.Faculty.Name == filter.FacultyName || string.IsNullOrEmpty(filter.FacultyName),
                     a => a.UserAreas.Select(r => r.AreaId)
                                          .Where(userAreaId => filter.Areas.Select(area => area.Id)

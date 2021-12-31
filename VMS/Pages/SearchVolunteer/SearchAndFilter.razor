@@ -15,10 +15,13 @@
                 <input @onclick="ToggleCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn @(isCourseGrey ? "bg-grey" : "")" placeholder="@courseChoosenValue" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
                     <ul>
-                        <li @onclick="ChooseCourseValue">Khóa 44</li>
-                        <li @onclick="ChooseCourseValue">Khóa 45</li>
-                        <li @onclick="ChooseCourseValue">Khóa 46</li>
-                        <li @onclick="ChooseCourseValue">Khóa 47</li>
+                        @if (courses is not null)
+                        {
+                            @foreach (var course in courses)
+                            {
+                                <li @onmousedown="() => ChooseCourseValue(course)">@course</li>
+                            }
+                        }
                     </ul>
                 </div>
                 <span class="material-icons-outlined position-absolute filter-item__icon">

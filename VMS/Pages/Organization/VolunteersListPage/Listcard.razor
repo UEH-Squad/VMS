@@ -1,4 +1,6 @@
-﻿ <NavMini Data ="pagedResult" DowLoad="DowLoadAsync" ValueChange = "ValueChangeAsync" ShowDelete = "ShowDeletedListAsync" Upload="HandleUploadAsync" CheckedList = "checkList" ActId = "ActId"  Quantity ="pagedResult.TotalItems" ShowDeletedList ="isDeleted" HandleDeleted = "HandleDeletedAsync"/>
+﻿<Spinner IsLoading="isLoading" />
+
+<NavMini Data ="pagedResult" DowLoad="DowLoadAsync" ValueChange = "ValueChangeAsync" ShowDelete = "ShowDeletedListAsync" Upload="HandleUploadAsync" CheckedList = "checkList" ActId = "ActId"  Quantity ="pagedResult.TotalItems" ShowDeletedList ="isDeleted" HandleDeleted = "HandleDeletedAsync"/>
 <div class="list-card">
     @if (pagedResult is not null && pagedResult.TotalItems != 0)
     {

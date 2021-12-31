@@ -11,6 +11,7 @@ namespace VMS.Pages.UserProflie
 {
     public partial class Index : ComponentBase
     {
+        private bool isLoading;
         private bool isUser = false;
         private UserViewModel user;
         private List<ActivityViewModel> currentActivities, favoriteActivities, endedActivities = new();
@@ -25,8 +26,10 @@ namespace VMS.Pages.UserProflie
 
         protected override async Task OnInitializedAsync()
         {
+            isLoading = true;
             ValidateUserProfile();
             await GetAllActivities();
+            isLoading = false;
         }
 
         private async Task GetAllActivities()

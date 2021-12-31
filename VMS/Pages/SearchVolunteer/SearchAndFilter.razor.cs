@@ -12,7 +12,7 @@ namespace VMS.Pages.SearchVolunteer
 {
     public partial class SearchAndFilter : ComponentBase
     {
-        private FilterVltViewModel filter = new();
+        private FilterVolunteerViewModel filter = new();
         private List<FacultyViewModel> faculties = new();
         private string courseChoosenValue = "Khóa";
         private bool isCourseShow;
@@ -29,7 +29,7 @@ namespace VMS.Pages.SearchVolunteer
         public bool IsLongDistanceFilter { get; set; }
 
         [Parameter]
-        public EventCallback<FilterVltViewModel> FilterChanged { get; set; }
+        public EventCallback<FilterVolunteerViewModel> FilterChanged { get; set; }
 
         [CascadingParameter]
         public IModalService Modal { get; set; }

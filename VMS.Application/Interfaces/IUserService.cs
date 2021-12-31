@@ -22,6 +22,6 @@ namespace VMS.Application.Interfaces
         Task<HashSet<DateTime>> GetActivityDaysAsync(string userId, DateTime startDate, DateTime endDate);
         List<UserViewModel> GetAllVolunteers();
 
-        Task<PaginatedList<UserViewModel>> GetAllVolunteers(FilterVltViewModel filter, int currentPage);
+        Task<PaginatedList<UserViewModel>> GetAllVolunteers(FilterVolunteerViewModel filter, int currentPage);
     }
 }

@@ -8,7 +8,7 @@ namespace VMS.Pages.SearchVolunteer
 {
     public partial class Index : ComponentBase
     {
-        private FilterVltViewModel filter = new();
+        private FilterVolunteerViewModel filter = new();
         private PaginatedList<UserViewModel> pagedResult = new(new(), 0, 1, 1);
 
         [Inject] private IUserService UserService { get; set; }
@@ -18,7 +18,7 @@ namespace VMS.Pages.SearchVolunteer
             await OnPageChangedAsync(1);
         }
 
-        private async Task OnFilterChangedAsync(FilterVltViewModel filter)
+        private async Task OnFilterChangedAsync(FilterVolunteerViewModel filter)
         {
             this.filter = filter;
             await OnPageChangedAsync(1);

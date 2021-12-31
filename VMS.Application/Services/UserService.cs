@@ -256,7 +256,7 @@ namespace VMS.Application.Services
             return _mapper.Map<List<UserViewModel>>(volunteers);
         }
 
-        public async Task<PaginatedList<UserViewModel>> GetAllVolunteers(FilterVltViewModel filter, int currentPage)
+        public async Task<PaginatedList<UserViewModel>> GetAllVolunteers(FilterVolunteerViewModel filter, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -284,7 +284,7 @@ namespace VMS.Application.Services
             return paginatedList;
         }
 
-        private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterVltViewModel filter)
+        private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterVolunteerViewModel filter)
         {
             string vltRole = Role.User.ToString();
 

@@ -88,3 +88,11 @@
     font-size: 10px;
     color: $green;
 }
+span.material-icons-outlined {
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+
+.my-material-icons-outlined:not(.collapsed) {
+    transform: rotate(-90deg);
+}

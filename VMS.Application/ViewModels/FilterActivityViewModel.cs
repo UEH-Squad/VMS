@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using VMS.Common.Enums;
 
 namespace VMS.Application.ViewModels
 {
@@ -9,10 +11,15 @@ namespace VMS.Application.ViewModels
 
         public bool Virtual { get; set; }
         public bool Actual { get; set; }
+        public bool Covid { get; set; }
         public string OrgId { get; set; }
         public int ProvinceId { get; set; }
         public int DistrictId { get; set; }
         public int WardId { get; set; }
+        public string Level { get; set; }
+        public StatusAct ActType { get; set; } = StatusAct.All;
+        public bool IsMonthFilter { get; set; } = false;
+        public DateTime DateTimeValue { get; set; }
         public List<AreaViewModel> Areas { get; set; }
         public List<SkillViewModel> Skills { get; set; }
 
@@ -25,6 +32,7 @@ namespace VMS.Application.ViewModels
         {
             Virtual = false;
             Actual = false;
+            Covid = false;
             Areas = new();
             Skills = new();
         }

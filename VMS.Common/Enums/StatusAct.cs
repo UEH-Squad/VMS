@@ -4,6 +4,12 @@
         Current, 
         Favor,
         Ended,
-        Calendar
+        Calendar,
+
+        Upcoming,
+        Happenning,
+        TookPlace,
+        Closed,
+        All
     }
 }

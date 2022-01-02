@@ -39,7 +39,10 @@ namespace VMS.Domain.Models
         public string Banner { get; set; }
         public bool IsPin { get; set; }
         public bool IsClosed { get; set; }
-
+        //criteria for evaluating volunteer activities
+        //public bool IsPoint { get; set; }
+        //public bool IsDay { get; set; }
+        //public int NumberOfDay { get; set; }
         public virtual User Organizer { get; set; }
         public virtual User Approver { get; set; }
         public virtual Area Area { get; set; }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using VMS.Application.Services;
 using VMS.Application.ViewModels;
 using VMS.Common.Enums;
+using VMS.Domain.Models;
 using VMS.GenericRepository;
 
 namespace VMS.Application.Interfaces
@@ -14,6 +15,7 @@ namespace VMS.Application.Interfaces
         Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter, int currentPage, Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 20);
 
         Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(Dictionary<ActOrderBy, bool> orderList = null, Coordinate userLocation = null, int pageSize = 8);
+        Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter, int currentPage);
 
         Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync();
 
@@ -38,5 +40,7 @@ namespace VMS.Application.Interfaces
         Task CloseActivityDailyAsync();
 
         Task<List<ViewActivityViewModel>> GetOtherActivitiesAsync(string orgId, int[] excludedActitivyIds);
+        Task<List<ActivityViewModel>> GetActivityIsPin();
+        Task PinActivityAsync(List<int> list, bool isPin);
     }
 }

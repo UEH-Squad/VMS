@@ -14,6 +14,7 @@ using VMS.Domain.Interfaces;
 using VMS.Domain.Models;
 using VMS.GenericRepository;
 using VMS.Infrastructure.Data.Context;
+using VMS.Common;
 
 namespace VMS.Application.Services
 {
@@ -53,6 +54,24 @@ namespace VMS.Application.Services
 
             return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
         }
+        public async Task<PaginatedList<ActivityViewModel>> GetAllActivitiesAsync(FilterActivityViewModel filter, int currentPage)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginationSpecification<Activity> specification = new()
+            {
+                Conditions = GetFilterActivityConditionsByFilterAdmin(filter),
+                Includes = a => a.Include(x => x.Organizer)
+                                 .Include(x => x.Recruitments)
+                                 .ThenInclude(x => x.RecruitmentRatings),
+                PageIndex = currentPage,
+                PageSize = 8
+            };
+
+            PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+        }
 
         private static List<Expression<Func<Activity, bool>>> GetFilterActivityConditionsByFilter(FilterActivityViewModel filter)
         {
@@ -84,7 +103,50 @@ namespace VMS.Application.Services
                 };
             }
         }
+        private static List<Expression<Func<Activity, bool>>> GetFilterActivityConditionsByFilterAdmin(FilterActivityViewModel filter)
+        {
+            if (filter.IsSearch)
+            {
+                return new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => !a.IsDeleted,
+                    //a => a.EndDate >= DateTime.Now.Date,
+                    a => a.Name.ToUpper().Trim().Contains(filter.SearchValue.ToUpper().Trim())
+                };
+            }
+            else
+            {
+                int lastday = DateTime.DaysInMonth(filter.DateTimeValue.Year, filter.DateTimeValue.Month);
+                DateTime dateTime = new(filter.DateTimeValue.Year, filter.DateTimeValue.Month, lastday);
+                return new List<Expression<Func<Activity, bool>>>()
+                {
+                    a => !a.IsDeleted,
+                    GetFilterActByType (filter.ActType),
+                    a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
+                    a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,
+                    a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual || !filter.Virtual && !filter.Actual,
+                    a => a.ActivityAddresses.Any(x => x.AddressPathId == filter.AddressPathId) || filter.AddressPathId == 0,
+                    a => a.ActivitySkills.Select(activitySkills => activitySkills.SkillId)
+                                         .Where(actSkillId => filter.Skills.Select(skill => skill.Id)
+                                                                           .Any(skillId => skillId == actSkillId))
+                                         .Count() == filter.Skills.Count,
+                    a => a.Organizer.Course == filter.Level || string.IsNullOrEmpty(filter.Level),
+                    GetFilterActByMonth(filter.IsMonthFilter, dateTime)
+                };
+            }
+        }
+        private static Expression<Func<Activity, bool>> GetFilterActByMonth(bool isMonthFilter, DateTime dateTime)
+        {
 
+            if (!isMonthFilter)
+            {
+                return x => true;
+            }
+            else
+            {
+                return x => (x.StartDate <= dateTime && x.EndDate >= dateTime) || (x.OpenDate <= dateTime && x.CloseDate >= dateTime);
+            }
+        }
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -528,7 +590,35 @@ namespace VMS.Application.Services
                 };
             }
         }
+        private static Expression<Func<Activity, bool>> GetFilterActByType(StatusAct actType)
+        {
 
+            if (actType == StatusAct.Upcoming)
+            {
+                return x => x.StartDate > DateTime.Now.Date;
+            }
+
+            if (actType == StatusAct.Happenning)
+            {
+                return x => x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date;
+            }
+
+            if (actType == StatusAct.TookPlace)
+            {
+                return x => x.EndDate < DateTime.Now.Date;
+            }
+
+            if (actType == StatusAct.Closed)
+            {
+                return x => x.CloseDate < DateTime.Now.Date;
+            }
+            if (actType == StatusAct.All)
+            {
+                return x => true;
+            }
+
+            return x => true;
+        }
         private static Expression<Func<Activity, bool>> GetFilterOrgActByDate(bool isTookPlace, bool isHappenning)
         {
             if (isTookPlace && isHappenning)
@@ -568,6 +658,38 @@ namespace VMS.Application.Services
             activities.ForEach(a => a.IsClosed = true);
 
             await _repository.UpdateAsync<Activity>(dbContext, activities);
+        }
+        public async Task<List<ActivityViewModel>> GetActivityIsPin()
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+            {
+                    a =>  a.IsPin == true,
+            }
+            };
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+            return _mapper.Map<List<ActivityViewModel>>(activities);
+        }
+        public async Task PinActivityAsync(List<int> list, bool isPin)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Activity> specification = new()
+            {
+                Conditions = new List<Expression<Func<Activity, bool>>>()
+            {
+                    a =>  list.Contains(a.Id)
+            }
+            };
+            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
+            foreach (var rec in activities)
+            {
+                rec.IsPin = isPin;
+            }
+            dbContext.SaveChanges();
         }
     }
 }

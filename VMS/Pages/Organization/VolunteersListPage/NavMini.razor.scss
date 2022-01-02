@@ -1,8 +1,6 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
 .search-and-button {
-    display: grid;
-    grid-template-columns: 55% 45%;
 
     .dropdown {
 
@@ -58,9 +56,12 @@
     margin: 15px 0 20px;
 
     .quantity-volunteers {
-        width: 50%;
-        font-size: 18px;
+        font-size: 14px;
         color: $blue;
+
+        @include on('sm') {
+            font-size: 18px;
+        }
 
         span {
             color: $green;
@@ -68,16 +69,19 @@
     }
 
     .button {
-        width: 30%;
 
         &__text {
-            float: right;
-            font-size: 16px;
+            font-size: 14px;
             color: $white;
-            padding: 8px 25px;
+            padding: 4px 10px;
             border: none;
             border-radius: 5px;
-            margin-right: 7px;
+
+            @include on('sm') {
+                font-size: 16px;
+                padding: 8px 25px;
+                margin-right: 7px;
+            }
         }
 
         &__text--undo {
@@ -89,7 +93,7 @@
         }
 
         &__text--del {
-            background-color:$grey-close-bg;
+            background-color: $grey-close-bg;
 
             &:hover {
                 background-color: $red;
@@ -98,13 +102,16 @@
     }
 
     .link {
-        width: 20%;
 
         &__text {
+            font-size: 14px;
             float: right;
-            font-size: 20px;
             margin: auto;
             cursor: pointer;
+        }
+
+        @include on ('sm') {
+            font-size: 18px;
         }
 
         &__text--del {

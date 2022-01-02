@@ -3,12 +3,9 @@
 .list-card {
 
     .mycard {
-        display: flex;
-        align-items: center;
         margin: 10px 0;
 
         &__info {
-            width: 75%;
             font-size: 20px;
             display: grid;
             grid-template-columns: 10% 90%;
@@ -18,6 +15,7 @@
             &--avatar {
                 width: 60px;
                 height: 60px;
+                object-fit: cover;
                 border-radius: 50%;
             }
 
@@ -37,9 +35,6 @@
         }
 
         &__checkbox {
-            width: 5%;
-            display: flex;
-            justify-content: center;
 
             &--my-checkbox {
                 cursor: pointer;
@@ -79,11 +74,10 @@
         }
 
         &__button {
-            width: 20%;
-
+        
             &--registration-form {
                 float: right;
-                padding: 9px 29px;
+                padding: 9px 20px;
                 border: none;
                 border-radius: 5px;
                 color: white;

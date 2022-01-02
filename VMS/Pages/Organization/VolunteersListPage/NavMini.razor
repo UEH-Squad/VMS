@@ -1,9 +1,9 @@
 ﻿<div class="container">
     <div class="row search-and-button">
-        <div class="col-12 col-sm-8 col-xl-9">
+        <div class="col-12 col-sm-8 col-xl-7">
             <VMS.Pages.ActivitySearchPage.SearchBox SearchValue="@searchValue" SearchValueChanged="SearchValueChangedAsync"></VMS.Pages.ActivitySearchPage.SearchBox>
         </div>
-        <div class="dropdown col-12 col-sm-4 col-xl-3">
+        <div class="dropdown col-12 col-sm-4 col-xl-5">
             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Danh sách&#160;
             </button>
@@ -27,11 +27,11 @@
 
 <div class="container @(navDel ? "d-block" : "d-none")">
     <div class="my-container row">
-        <p class="quantity-volunteers p-0 col-12 col-xl-7">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
-        <div class="button p-0 col-6 col-xl-3">
+        <p class="quantity-volunteers p-0 col-12 col-xl-8">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
+        <div class="button p-0 col-6 col-xl-2">
             <button @onclick="@(() => ShowConfirmAsync())" class="button__text button__text--del">Xóa nhiều</button>
         </div>
-        <div class="link p-0 col-6 col-xl-3">
+        <div class="link p-0 col-6 col-xl-2">
             <h4 @onclick="ChangeNavAsync" class="link__text link__text--del">Danh sách xóa</h4>
         </div>
     </div>
@@ -39,11 +39,11 @@
 
 <div class="container @(navUndo ? "d-block" : "d-none")">
     <div class="my-container row">
-        <p class="quantity-volunteers p-0 col-12 col-xl-7">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
-        <div class="button p-0 col-6 col-xl-3">
+        <p class="quantity-volunteers p-0 col-12 col-xl-8">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
+        <div class="button p-0 col-6 col-xl-2">
             <button @onclick="@(() => ShowConfirmAsync())" class="button__text button__text--undo">Chọn lại</button>
         </div>
-        <div class="link p-0 col-6 col-xl-3">
+        <div class="link p-0 col-6 col-xl-2">
             <h4 @onclick="ChangeNavAsync" class="link__text link__text--undo">Xem danh sách</h4>
         </div>
     </div>

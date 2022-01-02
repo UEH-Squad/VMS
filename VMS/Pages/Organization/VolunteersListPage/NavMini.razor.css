@@ -11,11 +11,13 @@
   border: 1px solid #18A0FB;
   font-size: 16px;
   min-width: 158px;
-  cursor: pointer;
-  margin-right: 12px; }
+  cursor: pointer; }
   .search-and-button .dropdown button:hover {
     color: #FFFFFF;
     background: #18A0FB; }
+  .search-and-button .dropdown button:focus, .search-and-button .dropdown button:active {
+    outline: none !important;
+    box-shadow: none !important; }
 
 .search-and-button .dropdown .dropdown-menu {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -42,10 +44,12 @@
   margin: 15px 0 20px; }
   .my-container .quantity-volunteers {
     font-size: 14px;
-    color: #18A0FB; }
+    color: #18A0FB;
+    margin-bottom: 0; }
     @media (min-width: 576px) {
       .my-container .quantity-volunteers {
-        font-size: 18px; } }
+        font-size: 18px;
+        margin-bottom: 12px; } }
     .my-container .quantity-volunteers span {
       color: #64D72F; }
   .my-container .button__text {
@@ -72,9 +76,9 @@
     float: right;
     margin: auto;
     cursor: pointer; }
-  @media (min-width: 576px) {
-    .my-container .link {
-      font-size: 18px; } }
+    @media (min-width: 576px) {
+      .my-container .link__text {
+        font-size: 18px; } }
   .my-container .link__text--del {
     color: #F14747; }
   .my-container .link__text--undo {

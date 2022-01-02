@@ -12,11 +12,15 @@
             font-size: 16px;
             min-width: 158px;
             cursor: pointer;
-            margin-right: 12px;
 
             &:hover {
                 color: $white;
                 background: $blue;
+            }
+
+            &:focus, &:active {
+                outline: none !important;
+                box-shadow: none !important;
             }
         }
 
@@ -58,9 +62,11 @@
     .quantity-volunteers {
         font-size: 14px;
         color: $blue;
+        margin-bottom: 0; 
 
         @include on('sm') {
             font-size: 18px;
+            margin-bottom: 12px;
         }
 
         span {
@@ -108,10 +114,10 @@
             float: right;
             margin: auto;
             cursor: pointer;
-        }
 
-        @include on ('sm') {
-            font-size: 18px;
+            @include on ('sm') {
+                font-size: 18px;
+            }
         }
 
         &__text--del {

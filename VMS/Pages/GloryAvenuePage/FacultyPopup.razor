@@ -22,9 +22,9 @@
     public BlazoredModalInstance Modal { get; set; }
     private int chooseCount = 0;
 
-    private class Filter
+    public class Filter
     {
-        public string facultyName { get; set; }
+        public string FalcutyName { get; set; }
         public bool IsFilter { get; set; }
     }
 
@@ -72,7 +72,7 @@
             {
                 item.isChosen = true;
                 chooseCount++;
-                filter.facultyName = Convert.ToString(item.Id);
+                filter.FalcutyName = Convert.ToString(item.Name);
             }
         }
     }

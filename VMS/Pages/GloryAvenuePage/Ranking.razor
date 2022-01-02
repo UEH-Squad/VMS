@@ -6,7 +6,7 @@
             <hr />
         </div>
         <div class="filter-item position-relative mb-4">
-            <input @onclick="ShowFacultyPopup" class="filter-item__btn filter-item__btn--lmtext-1 @(filter.IsFilter ? "bg-grey":"")" placeholder="@filter.facultyName" readonly/>
+            <input @onclick="ShowFacultyPopup" class="filter-item__btn filter-item__btn--lmtext-1 @(filter.IsFilter ? "bg-grey":"")" placeholder="@filter.FalcutyName" readonly/>
             <span class="material-icons-outlined position-absolute pe-none">
                 expand_more
             </span>
@@ -60,18 +60,11 @@
         await JS.InvokeVoidAsync("vms.RankingCarousel");
     }
 
-    private class Filter
-    {
-        public string facultyName;
-        public bool IsFilter = false;
-    }
-    private Filter filter = new();
+    private FacultyPopup.Filter filter = new();
 
     private async Task ShowFacultyPopup()
     {
         var result = await Modal.Show<FacultyPopup>("", BlazoredModalOptions.GetModalOptions()).Result;
-        var output = (Filter)(result.Data);
-        output.IsFilter = !output.IsFilter;
-        output.facultyName = Convert.ToString(result.Data);
+        filter = (FacultyPopup.Filter)(result.Data);
     }
 }

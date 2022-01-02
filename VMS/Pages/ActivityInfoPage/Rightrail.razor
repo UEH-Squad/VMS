@@ -58,8 +58,8 @@
                     <span>Cập nhật mã vạch</span>
                 </div>
             </div>
-            <div class="btn-sign-up--cover">
-                <AuthorizeView Roles="@($"{Role.User}")">
+            <AuthorizeView Roles="@($"{Role.User}")">
+                <div class="btn-sign-up--cover">
                     @if (IsSignupTimeExpired())
                     {
                         <button class="btn-already-sign-up">
@@ -72,17 +72,19 @@
                             <h3 class="btn-sign-up__text">Đăng ký</h3>
                         </button>
                     }
-                </AuthorizeView>
-                <AuthorizeView>
-                    <NotAuthorized>
+                </div>
+                <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>
+            </AuthorizeView>
+            <AuthorizeView>
+                <NotAuthorized>
+                    <div class="btn-sign-up--cover">
                         <button @onclick="ShowRequireSignup" class="btn-sign-up">
                             <h3 class="btn-sign-up__text">Đăng ký</h3>
                         </button>
-                    </NotAuthorized>
-                </AuthorizeView>
-            </div>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView>
         </div>
-        <button @onclick="@(() => ShowReportPopUp())" class="report">Báo cáo hoạt động này</button>
     </div>
 }
 

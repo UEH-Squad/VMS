@@ -1,6 +1,7 @@
 ﻿@attribute [Route(Routes.OrgProfile + "/{UserId}")]
 @attribute [Route(Routes.OrgProfile)]
 
+<Spinner IsLoading="isLoading" />
 
 <Information Org="org" UserId="@UserId" HaveControl="haveControl" IsUsedForAdmin="@IsUsedForAdmin"></Information>
 <Vision Org="org"></Vision>

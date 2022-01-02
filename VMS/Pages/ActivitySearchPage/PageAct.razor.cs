@@ -21,6 +21,7 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private User currentUser;
         private int page = 1;
+        private bool isLoading;
         private Coordinate userCoordinate;
         private IEnumerable<ActivityViewModel> featuredActivities;
         private PaginatedList<ActivityViewModel> pagedResult = new(new(), 0, 1, 1);
@@ -66,12 +67,16 @@ namespace VMS.Pages.ActivitySearchPage
 
         protected override async Task OnParametersSetAsync()
         {
+            isLoading = true;
             pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, 1, OrderList, userCoordinate);
+            isLoading = false;
         }
 
         private async Task HandlePageChanged()
         {
+            isLoading = true;
             pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, page, OrderList, userCoordinate);
+            isLoading = false;
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

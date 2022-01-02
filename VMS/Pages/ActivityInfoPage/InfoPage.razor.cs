@@ -25,6 +25,9 @@ namespace VMS.Pages.ActivityInfoPage
         [Inject]
         private IIdentityService IdentityService { get; set; }
 
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
+
         protected override void OnInitialized()
         {
             currentUser = IdentityService.GetUserWithFavoritesAndRecruitmentsById(CurrentUserId);
@@ -69,7 +72,12 @@ namespace VMS.Pages.ActivityInfoPage
 
         private async Task ShowEditRequirement()
         {
-            Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("", BlazoredModalOptions.GetModalOptions());
+            Modal.Show<Admin.ActivityManagement.EditRequirement>("", BlazoredModalOptions.GetModalOptions());
+        }
+
+        private void OnClickNavigateToEditActivty(int activityId)
+        {
+            NavigationManager.NavigateTo(Routes.EditActivity + "/" + activityId, true);
         }
     }    
 }

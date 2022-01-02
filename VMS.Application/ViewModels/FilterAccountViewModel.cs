@@ -11,5 +11,10 @@ namespace VMS.Application.ViewModels
 
         public string Course { get; set; }
         public bool IsNewest { get; set; }
+
+        public FilterAccountViewModel()
+        {
+            IsNewest = true;
+        }
     }
 }

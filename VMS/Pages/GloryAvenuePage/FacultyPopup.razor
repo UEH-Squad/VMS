@@ -1,0 +1,79 @@
+﻿<div class="pop-up d-flex align-items-center justify-content-center">
+    <div class="pop-up-container w-100 h-100">
+        <div @onclick="CloseModalAsync" class="close-btn position-absolute d-flex justify-content-center align-items-center">
+            <span class="material-icons">
+                close
+            </span>
+        </div>
+        <h1 class="text-center">Khoa</h1>
+        <div class="filter-list">
+            <ul class="p-0">
+                @foreach (var faculty in faculties)
+                {
+                    <li style="@(chooseCount == 1 && !faculty.isChosen ? "cursor: default;":"") @(faculty.isChosen ? "color: #64D72F;":"")" @onclick="() => ChooseFacultyValue(faculty.Id)">@faculty.Name</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+    private int chooseCount = 0;
+
+    private class Filter
+    {
+        public string facultyName { get; set; }
+        public bool IsFilter { get; set; }
+    }
+
+    private Filter filter = new();
+
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync(ModalResult.Ok<Filter>(filter));
+    }
+
+    private class FakeData
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public bool isChosen { get; set; } = false;
+
+    }
+
+    private List<FakeData> faculties = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 1; i <= 50; i++)
+        {
+            faculties.Add(new FakeData()
+            {
+                Name = "Công nghệ thông tin kinh doanh trường Đại học Kinh tế TP. HCM 12345678910",
+                Id = i
+            });
+        }
+    }
+
+    private void ChooseFacultyValue(int id)
+    {
+        var item = faculties.Find(x => x.Id == id);
+
+        if (item.isChosen)
+        {
+            item.isChosen = false;
+            chooseCount--;
+        }
+        else
+        {
+            if (chooseCount < 1)
+            {
+                item.isChosen = true;
+                chooseCount++;
+                filter.facultyName = Convert.ToString(item.Id);
+            }
+        }
+    }
+}

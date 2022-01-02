@@ -1,102 +1,77 @@
 ﻿@inject IJSRuntime JS;
-<div class="ranking">
-    <div class="owl-carousel owl-theme">
-        <div class="ranking-list">
-            <div class="ranking-img">
-                <div class="ranking-img__container mx-auto">
-                    <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
-                </div>
-            </div>
-            <h3 class="text-center pt-3">Ban chuyen mon</h3>
-            <div class="ranking-item d-flex">
-                <h1>1</h1>
-                <div class="ranking-item__img">
-                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
-                </div>
-                <div class="ranking-item__info">
-                    <h2>Ban phong trào - tình nguyện</h2>
-                    <div class="d-flex">
-                        <p>4,5</p>
-                        @for (int i = 0; i <= 4; i++)
-                        {
-                            <i class="material-icons">star_rate</i>
-                        }
-                    </div>
-                </div>
-            </div>
+<session class="ranking">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mt-3 mb-4 mt-lg-4 mb-lg-5">
+            <h1>Bảng xếp hạng @Role <span>@Type</span></h1>
+            <hr />
         </div>
-        <div class="ranking-list">
-            <div class="ranking-img">
-                <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
-            </div>
-            <h3>Ban chuyen mon</h3>
-            <div class="ranking-item d-flex">
-                <h1>1</h1>
-                <div class="ranking-item__img">
-                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
-                </div>
-                <div class="ranking-item__info">
-                    <h2>Ban phong trào - tình nguyện</h2>
-                    <div class="d-flex">
-                        <p>4,5</p>
-                        @for (int i = 0; i <= 4; i++)
-                        {
-                            <i class="material-icons">star_rate</i>
-                        }
-                    </div>
-                </div>
-            </div>
+        <div class="filter-item position-relative mb-4">
+            <input @onclick="ShowFacultyPopup" class="filter-item__btn filter-item__btn--lmtext-1 @(filter.IsFilter ? "bg-grey":"")" placeholder="@filter.facultyName" readonly/>
+            <span class="material-icons-outlined position-absolute pe-none">
+                expand_more
+            </span>
         </div>
-        <div class="ranking-list">
-            <div class="ranking-img">
-                <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
-            </div>
-            <h3>Ban chuyen mon</h3>
-            <div class="ranking-item d-flex">
-                <h1>1</h1>
-                <div class="ranking-item__img">
-                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
-                </div>
-                <div class="ranking-item__info">
-                    <h2>Ban phong trào - tình nguyện</h2>
-                    <div class="d-flex">
-                        <p>4,5</p>
-                        @for (int i = 0; i <= 4; i++)
-                        {
-                            <i class="material-icons">star_rate</i>
-                        }
+        <div class="owl-carousel owl-theme px-lg-5">
+            @for (int y = 0; y <= 4; y++)
+            {
+                <div class="ranking-list">
+                    <div class="ranking-img">
+                        <div class="ranking-img__container mx-auto">
+                            <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="ranking-list">
-            <div class="ranking-img">
-                <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
-            </div>
-            <h3>Ban chuyen mon</h3>
-            <div class="ranking-item d-flex">
-                <h1>1</h1>
-                <div class="ranking-item__img">
-                    <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
-                </div>
-                <div class="ranking-item__info">
-                    <h2>Ban phong trào - tình nguyện</h2>
-                    <div class="d-flex">
-                        <p>4,5</p>
-                        @for (int i = 0; i <= 4; i++)
-                        {
-                            <i class="material-icons">star_rate</i>
-                        }
+                    <div class="d-flex align-items-center justify-content-center ranking-name">
+                        <h3 class="text-center px-5 px-sm-2 px-md-5 px-lg-2">Công nghệ thông tin kinh doanh</h3>
                     </div>
+                    @for (int x = 0; x <= 4; x++)
+                    {
+                        <div class="ranking-item d-flex align-items-center mb-lg-4 mb-3">
+                            <h1 class="mb-0 mx-3">1</h1>
+                            <div class="ranking-item__img me-3 flex-shrink-0">
+                                <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
+                            </div>
+                            <div class="ranking-item__info pe-3">
+                                <h2 class="mb-0">Khoa Công nghệ thông tin kinh doanh Đại học Kinh tế TP. HCM</h2>
+                                <div class="d-flex align-items-center">
+                                    <p class="mb-0 me-2">4,5</p>
+                                    @for (int i = 0; i <= 4; i++)
+                                    {
+                                        <i class="material-icons me-1">star_rate</i>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </div>
+            }
         </div>
     </div>
-</div>
+</session>
 
 @code {
+    [Parameter] public string Role { get; set; }
+    [Parameter] public string Type { get; set; }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JS.InvokeVoidAsync("vms.RankingCarousel");
+    }
+
+    private class Filter
+    {
+        public string facultyName;
+        public bool IsFilter = false;
+    }
+    private Filter filter = new();
+
+    private async Task ShowFacultyPopup()
+    {
+        var result = await Modal.Show<FacultyPopup>("", BlazoredModalOptions.GetModalOptions()).Result;
+        var output = (Filter)(result.Data);
+        output.IsFilter = !output.IsFilter;
+        output.facultyName = Convert.ToString(result.Data);
     }
 }

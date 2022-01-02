@@ -1,6 +1,41 @@
 ﻿@import '../../Resources/scss/common/_variables.scss';
 
 .ranking {
+    h1 {
+        font-size: 18px;
+        font-weight: 600;
+        color: $blue;
+
+        span {
+            color: $green;
+        }
+
+        @include on("sm") {
+            font-size: 20px;
+        }
+
+        @include on("lg") {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        @include on("xl") {
+            font-size: 30px;
+        }
+    }
+
+    hr {
+        display: none;
+        height: 1px;
+        background-color: #707070;
+        opacity: 50%;
+
+        @include on('xl') {
+            width: 40%;
+            display: block;
+        }
+    }
+
     &-list {
         height: 500px;
         background-color: $grey;
@@ -19,6 +54,24 @@
         }
     }
 
+    &-name {
+        height: 75px;
+
+        h3 {
+            font-size: 20px;
+            color: $blue;
+            padding-top: 10px;
+
+            @include on('lg') {
+                font-size: 30px;
+            }
+        }
+
+        @include on('lg') {
+            height: 90px;
+        }
+    }
+
     &-img__container {
         width: 70px;
         height: 70px;
@@ -33,21 +86,11 @@
         }
     }
 
-    h3 {
-        font-size: 20px;
-        color: $blue;
-        padding-top: 10px;
-
-        @include on('lg') {
-            padding-top: 30px;
-            font-size: 30px;
-        }
-    }
-
     &-item {
         h1 {
             font-size: 40px;
             color: $blue;
+            font-weight: 500;
 
             @include on('lg') {
                 font-size: 45px;
@@ -75,15 +118,23 @@
         h2 {
             font-size: 14px;
             color: $grey-text;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            -webkit-line-clamp: 1;
 
             @include on('lg') {
                 font-size: 16px;
+                -webkit-line-clamp: 2;
             }
         }
 
         p {
             font-size: 18px;
             color: $border-color-bold;
+            font-weight: 700;
 
             @include on('lg') {
                 font-size: 14px;
@@ -118,7 +169,7 @@
                 display: block;
 
                 @include on('lg') {
-                    top: 25%;
+                    top: 32%;
                     left: 0;
                 }
 
@@ -140,7 +191,7 @@
                 display: block;
 
                 @include on('lg') {
-                    top: 25%;
+                    top: 32%;
                     right: 0;
                 }
 
@@ -155,7 +206,7 @@
 
     ::deep .owl-dots {
         transform: translateY(-50%);
-        margin-top: 5px;
+        margin-top: 20px;
 
         @include on('lg') {
             margin-top: 0;
@@ -176,5 +227,9 @@
             background-color: $blue;
             width: 20px;
         }
+    }
+
+    .bg-grey {
+        background-color: #f3f3f3;
     }
 }

@@ -11,66 +11,16 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    [Migration("20211109165228__AddColumnNotifiedEmail")]
-    partial class _AddColumnNotifiedEmail
+    [Migration("20220102082729_InitDatabase")]
+    partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "5ffcef2a-5b15-4186-9c27-119ba3edf5ed",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        },
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "ff1b571c-17fe-4513-a65f-6039498cf32d",
-                            Name = "Organization",
-                            NormalizedName = "Organization"
-                        },
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "09c6c292-df64-4d53-b422-6a2e8726e25a",
-                            Name = "User",
-                            NormalizedName = "User"
-                        });
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -94,77 +44,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -213,21 +92,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
@@ -265,6 +129,9 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Banner")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CloseDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Commission")
                         .HasColumnType("nvarchar(max)");
@@ -316,6 +183,9 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OpenDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrgId")
                         .HasColumnType("nvarchar(450)");
@@ -462,6 +332,56 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("AddressPaths");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.AppRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
+                            ConcurrencyStamp = "aee811b4-8736-476e-9078-3d1ca9c564ba",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
+                            ConcurrencyStamp = "c1bac379-fde4-4e51-888a-d6d030f97ac2",
+                            Name = "Organization",
+                            NormalizedName = "Organization"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
+                            ConcurrencyStamp = "e318844b-b823-4895-b4a8-44eb8713065a",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>
                 {
                     b.Property<int>("Id")
@@ -469,10 +389,18 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Color")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("#18A0FB");
+
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPinned")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -486,86 +414,119 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Color = "#18A0FB",
                             Icon = "people_outline",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Cộng đồng"
                         },
                         new
                         {
                             Id = 2,
+                            Color = "#18A0FB",
                             Icon = "pan_tool",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Hỗ trợ"
                         },
                         new
                         {
                             Id = 3,
+                            Color = "#18A0FB",
                             Icon = "import_contacts",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Giáo dục"
                         },
                         new
                         {
                             Id = 4,
+                            Color = "#18A0FB",
                             Icon = "format_shapes",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Kỹ thuật"
                         },
                         new
                         {
                             Id = 5,
+                            Color = "#18A0FB",
                             Icon = "local_hospital",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Sức khỏe"
                         },
                         new
                         {
                             Id = 6,
+                            Color = "#18A0FB",
                             Icon = "drive_eta",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Phương tiện"
                         },
                         new
                         {
                             Id = 7,
+                            Color = "#18A0FB",
                             Icon = "wb_sunny",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Môi trường"
                         },
                         new
                         {
                             Id = 8,
+                            Color = "#18A0FB",
                             Icon = "directions_bike",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Thể thao"
                         },
                         new
                         {
                             Id = 9,
+                            Color = "#18A0FB",
                             Icon = "notifications_active",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Khẩn cấp"
                         },
                         new
                         {
                             Id = 10,
+                            Color = "#18A0FB",
                             Icon = "calendar_today",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Sự kiện"
                         },
                         new
                         {
                             Id = 11,
+                            Color = "#18A0FB",
                             Icon = "home",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Chuyển nhà"
                         },
                         new
                         {
                             Id = 12,
+                            Color = "#18A0FB",
                             Icon = "computer",
                             IsDeleted = false,
+                            IsPinned = false,
                             Name = "Công nghệ"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Color = "#F14747",
+                            Icon = "coronavirus",
+                            IsDeleted = false,
+                            IsPinned = true,
+                            Name = "COVID-19"
                         });
                 });
 
@@ -706,7 +667,10 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsProcessed")
+                    b.Property<bool>("IsReport")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReportUser")
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
@@ -734,7 +698,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -759,7 +723,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FeedbackId")
+                    b.Property<int>("FeedbackId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -1082,6 +1046,167 @@ namespace VMS.Infrastructure.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Banner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Course")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Introduction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Mission")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NotifiedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
+                            AccessFailedCount = 0,
+                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "cfd2966e-eb18-463f-b881-d01999f44022",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "hsv.ueh@ueh.edu.vn",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "hsv.ueh@ueh.edu.vn",
+                            NormalizedUserName = "admin",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJhobHB1sLqSub/18KrFpcakJnnjuRDIVn6EhUwHfmw+ArcmFX+um43qUIre9nYHNw==",
+                            PhoneNumberConfirmed = false,
+                            Rank = 0,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.UserAddress", b =>
                 {
                     b.Property<int>("Id")
@@ -1132,6 +1257,28 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("UserAreas");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.UserRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
+                            RoleId = "a18be9c0-aa65-4af8-bd17-00bd9344e570"
+                        });
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.UserSkill", b =>
                 {
                     b.Property<int>("Id")
@@ -1157,84 +1304,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("UserSkills");
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Banner")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Class")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Course")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FullAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Introduction")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Mission")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NotifiedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rank")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Website")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("FacultyId");
-
-                    b.HasDiscriminator().HasValue("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("VMS.Domain.Models.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1243,7 +1315,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("VMS.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1252,22 +1324,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("VMS.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1276,7 +1333,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("VMS.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1405,7 +1462,8 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Activity");
 
@@ -1417,16 +1475,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ImageReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
                         .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.ReasonReport", b =>
@@ -1434,16 +1490,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasOne("VMS.Domain.Models.Feedback", "Feedback")
                         .WithMany("ReasonReports")
                         .HasForeignKey("FeedbackId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", "RecruitmentRating")
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
                         .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
-
-                    b.Navigation("RecruitmentRating");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
@@ -1484,6 +1538,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("ParentSkill");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.User", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.Faculty", "Faculty")
+                        .WithMany("Users")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Faculty");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.UserAddress", b =>
                 {
                     b.HasOne("VMS.Domain.Models.AddressPath", "AddressPath")
@@ -1518,6 +1582,25 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.UserRole", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.AppRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VMS.Domain.Models.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.UserSkill", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Skill", "Skill")
@@ -1533,16 +1616,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Skill");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("VMS.Domain.Models.User", b =>
-                {
-                    b.HasOne("VMS.Domain.Models.Faculty", "Faculty")
-                        .WithMany("Users")
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Faculty");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Activity", b =>
@@ -1567,6 +1640,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("SubPaths");
 
                     b.Navigation("UserAddresses");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.AppRole", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>
@@ -1624,6 +1702,8 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("UserAddresses");
 
                     b.Navigation("UserAreas");
+
+                    b.Navigation("UserRoles");
 
                     b.Navigation("UserSkills");
                 });

@@ -77,9 +77,11 @@
             </AuthorizeView>
             <AuthorizeView>
                 <NotAuthorized>
-                    <button @onclick="ShowRequireSignup" class="btn-sign-up">
-                        <h3 class="btn-sign-up__text">Đăng ký</h3>
-                    </button>
+                    <div class="btn-sign-up--cover">
+                        <button @onclick="ShowRequireSignup" class="btn-sign-up">
+                            <h3 class="btn-sign-up__text">Đăng ký</h3>
+                        </button>
+                    </div>
                 </NotAuthorized>
             </AuthorizeView>
         </div>

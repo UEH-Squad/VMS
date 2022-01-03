@@ -27,10 +27,10 @@
     padding: 10px 0px;
     border-radius: 10px;
     margin-top: 30px;
-    min-height: 135px; }
+    height: 180px; }
     @media (min-width: 1200px) {
       .act .act__item {
-        min-height: 285px; } }
+        height: 310px; } }
     .act .act__item img {
       height: 100%;
       object-fit: cover; }

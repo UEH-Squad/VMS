@@ -263,8 +263,7 @@ namespace VMS.Application.Services
             PaginationSpecification<User> specification = new()
             {
                 Conditions = GetConditionsByFilter(filter),
-                Includes = x => x.Include(x => x.Activities)
-                                 .ThenInclude(x => x.Recruitments)
+                Includes = x => x.Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
                 PageSize = 8,
@@ -276,7 +275,8 @@ namespace VMS.Application.Services
 
             foreach (var volunteer in paginatedList.Items)
             {
-                CalculateTotalAndRankRating(volunteer.Activities, out int totalRating, out double totalRank);
+                CalculateTotalAndRankRating(volunteers.Items.First(x => x.Id == volunteer.Id).Recruitments,
+                                            out int totalRating, out double totalRank);
                 volunteer.QuantityRating = totalRating;
                 volunteer.AverageRating = totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5;
             }
@@ -313,15 +313,6 @@ namespace VMS.Application.Services
                                          .Count() == filter.Skills.Count
                 };
             }
-        }
-
-        private static void CalculateTotalAndRankRating(ICollection<Activity> activities, out int totalRating, out double totalRank)
-        {
-            var recruitmentRatings = activities.SelectMany(x => x.Recruitments)
-                                                    .SelectMany(x => x.RecruitmentRatings)
-                                                    .Where(x => !x.IsOrgRating && !x.IsReport);
-            totalRating = recruitmentRatings.Count();
-            totalRank = recruitmentRatings.Sum(x => x.Rank);
         }
     }
 }

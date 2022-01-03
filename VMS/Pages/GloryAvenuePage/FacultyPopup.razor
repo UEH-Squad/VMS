@@ -1,11 +1,11 @@
 ﻿<div class="pop-up d-flex align-items-center justify-content-center">
-    <div class="pop-up-container w-100 h-100">
+    <div class="pop-up-container h-100">
         <div @onclick="CloseModalAsync" class="close-btn position-absolute d-flex justify-content-center align-items-center">
             <span class="material-icons">
                 close
             </span>
         </div>
-        <h1 class="text-center">Khoa</h1>
+        <h1 class="text-center">@FilterType</h1>
         <div class="filter-list">
             <ul class="p-0">
                 @foreach (var faculty in faculties)
@@ -22,9 +22,11 @@
     public BlazoredModalInstance Modal { get; set; }
     private int chooseCount = 0;
 
+    private string FilterType { get; set; } = "Khoa";
+
     public class Filter
     {
-        public string FalcutyName { get; set; }
+        public string FacultyName { get; set; } = "Khoa";
         public bool IsFilter { get; set; }
     }
 
@@ -65,6 +67,7 @@
         {
             item.isChosen = false;
             chooseCount--;
+            filter.IsFilter = false;
         }
         else
         {
@@ -72,7 +75,8 @@
             {
                 item.isChosen = true;
                 chooseCount++;
-                filter.FalcutyName = Convert.ToString(item.Name);
+                filter.FacultyName = Convert.ToString(item.Name);
+                filter.IsFilter = true;
             }
         }
     }

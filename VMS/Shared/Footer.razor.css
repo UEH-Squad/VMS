@@ -8,8 +8,14 @@
   position: relative;
   padding-top: 20px;
   border-top: 1px solid #b4b4b4; }
+  @media (min-width: 576px) {
+    .footer {
+      padding-top: 40px; } }
+  @media (min-width: 1200px) {
+    .footer {
+      padding-top: 60px; } }
   .footer .my-container {
-    padding: 0 40px; }
+    padding: 0 30px; }
     @media (min-width: 992px) {
       .footer .my-container {
         padding: 0 20px; } }
@@ -140,7 +146,8 @@
         font-size: 12px; } }
     @media (min-width: 1200px) {
       .footer__contact h6 {
-        font-size: 16px; } }
+        font-size: 16px;
+        margin-bottom: 20px; } }
     @media (min-width: 1400px) {
       .footer__contact h6 {
         font-size: 18px; } }
@@ -170,11 +177,10 @@
         font-size: 12px; } }
     @media (min-width: 1200px) {
       .footer__right h6 {
-        margin-bottom: 33px;
+        margin-bottom: 27px;
         font-size: 16px; } }
     @media (min-width: 1400px) {
       .footer__right h6 {
-        margin-bottom: 35px;
         font-size: 18px; } }
     .footer__right h6 a {
       color: #515151;

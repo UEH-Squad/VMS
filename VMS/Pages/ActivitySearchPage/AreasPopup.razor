@@ -15,11 +15,14 @@
                     {
                         i = !i;
                 <div class="area-item-wrapper d-flex align-items-center @(i ? "ps-5 ps-sm-3 ps-md-5 col-12 col-sm-7" : "col-12 col-sm-5 ps-5 ps-sm-3 ps-md-4")">
-                    <div @onclick="() => ChangeState(area)" class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center" style=" @(choosenAreas.Exists(a => a.Id == area.Id) ? $"background-color: {area.Color}" : "background-color: #B4B4B4")">
+                    <div @onclick="() => ChangeState(area)"
+                            class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center"
+                            style=" @(choosenAreas.Exists(a => a.Id == area.Id) || area.IsPinned ? $"background-color: {area.Color}" : "background-color: #B4B4B4")">
                         @area.Icon
                     </div>
-                    @*<p @onclick="() => ChangeState(area)" class="mb-0 ms-3" style="@(choosenAreas.Exists(a => a.Id == area.Id) ? "color: #64D72F" : (area.IsPinned ? $"color: {area.Color}" : ""))">@area.Name</p>*@
-                    <p @onclick="() => ChangeState(area)" class="mb-0 ms-3" >@area.Name</p>
+                    <p @onclick="() => ChangeState(area)"
+                        class="mb-0 ms-3"
+                        style="@(choosenAreas.Exists(a => a.Id == area.Id) && area.IsPinned ? $"color: {area.Color}" : "")">@area.Name</p>
                 </div>
                     }
                 }

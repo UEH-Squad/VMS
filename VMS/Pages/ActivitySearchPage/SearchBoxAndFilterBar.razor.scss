@@ -208,7 +208,7 @@
 
     @include on('xl') {
         @include green-btn;
-        font-size: 20px;
+        font-size: 16px;
         height: 40px;
 
         &:hover {
@@ -227,7 +227,7 @@
     width: 50%;
 
     @include on('xl') {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     &:hover {

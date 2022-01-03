@@ -24,5 +24,7 @@ namespace VMS.Application.Interfaces
         void UpdateUser(User user);
 
         bool IsCorrectCurrentUserPassword(string password);
+
+        bool IsInRole(string userId, Role role);
     }
 }

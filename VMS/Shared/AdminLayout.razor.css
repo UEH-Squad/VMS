@@ -20,3 +20,14 @@
 
 .my-navbar__brand {
   margin: 10px 0; }
+  .my-navbar__brand .brand__govirlunteer {
+    height: 16px; }
+    @media (min-width: 576px) {
+      .my-navbar__brand .brand__govirlunteer {
+        height: 20px; } }
+    @media (min-width: 992px) {
+      .my-navbar__brand .brand__govirlunteer {
+        height: 27px; } }
+    @media (min-width: 1400px) {
+      .my-navbar__brand .brand__govirlunteer {
+        height: 33px; } }

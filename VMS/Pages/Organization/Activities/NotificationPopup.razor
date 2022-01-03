@@ -9,7 +9,7 @@
         {
             <div class="mt-3 d-flex flex-row justify-content-end my-btn">
                 <button class="btn me-3 my-btn__cancel" @onclick="CloseModal">@CancelText</button>
-                <a href="@CTALink" class="btn my-btn__view-activity">@CTAText</a>
+                <a @onclick="OnClickNavigateTo" class="btn my-btn__view-activity">@CTAText</a>
             </div>
         }
     </div>
@@ -32,8 +32,16 @@
     [Parameter]
     public string CancelText { get; set; }
 
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
     private async Task CloseModal()
     {
         await Modal.CancelAsync();
+    }
+
+    private void OnClickNavigateTo()
+    {
+        NavigationManager.NavigateTo(CTALink, true);
     }
 }

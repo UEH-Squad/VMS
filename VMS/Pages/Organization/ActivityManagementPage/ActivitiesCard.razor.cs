@@ -12,6 +12,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 {
     public partial class ActivitiesCard : ComponentBase
     {
+        private bool isLoading;
         private int dropdownId;
         private int page = 1;
         private PaginatedList<ActivityViewModel> data = new(new(), 0, 1, 1);
@@ -43,12 +44,16 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 
         protected override async Task OnParametersSetAsync()
         {
+            isLoading = true;
             data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, 1);
+            isLoading = false;
         }
 
         private async Task HandlePageChangedAsync(bool isPaging = false)
         {
+            isLoading = true;
             data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, page);
+            isLoading = false;
             StateHasChanged();
             if (isPaging)
             {

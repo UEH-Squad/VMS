@@ -116,7 +116,7 @@
 }
 
 .my-container {
-    width: 100%;
+    width: 95%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -125,10 +125,11 @@
     background-color: white;
     border-radius: 10px;
     padding: 16px;
+    padding-right: 6px;
     overflow-y: scroll;
 
     @include on('sm') {
-        width: 100%;
+        width: 80%;
         height: 100%;
         padding: 0 30px 24px;
     }
@@ -157,8 +158,8 @@
 
     .icon-close-popup {
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 15px;
+        right: 10px;
         width: 33px;
         height: 33px;
         border-radius: 50%;
@@ -168,11 +169,14 @@
 
         @include on('md') {
             top: 50px;
+            right: 20px;
         }
 
         @include on('lg') {
             top: 20px;
+            right: 20px;
         }
+
         .material-icons {
             margin: auto;
             font-size: 22px;

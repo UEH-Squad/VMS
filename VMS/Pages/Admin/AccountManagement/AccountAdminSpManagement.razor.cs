@@ -15,6 +15,7 @@ namespace VMS.Pages.Admin.AccountManagement
 {
     public partial class AccountAdminSpManagement : ComponentBase
     {
+        private bool isLoading;
         private int page = 1;
         private FilterAccountViewModel filter = new();
         private List<string> selectedList = new();
@@ -32,8 +33,10 @@ namespace VMS.Pages.Admin.AccountManagement
 
         private async Task ResetDataAsync(FilterAccountViewModel filter, int page)
         {
+            isLoading = true;
             selectedList.Clear();
             pageResult = await AdminService.GetAllAccountsAsync(filter, page);
+            isLoading = false;
         }
 
         private async Task HandlePageChangedAsync()

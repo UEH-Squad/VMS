@@ -64,9 +64,11 @@
                                                 <span class="icon-tooltip">Thời hạn đăng ký</span>
                                                 <span>@item.CloseDate.ToString("dd/MM/yyyy")</span>
                                             </div>
-                                            <div class=" col-6 d-flex mb-1 align-items-center div-checkbox">
-                                                <input id="NubOfVolunteer" class="check-box" type="checkbox">
-                                                <label for="NubOfVolunteer" class="ms-2">Số ngày tình nguyện</label>
+                                            <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
+                                                <i class="material-icons-outlined icon-check">
+                                                    check_circle
+                                                </i>
+                                                <span class="ms-2">Số ngày tình nguyện: @numberVolunteer</span>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -77,9 +79,11 @@
                                                 <span class="icon-tooltip">Ngày diễn ra</span>
                                                 <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
                                             </div>
-                                            <div class=" col-6 d-flex mb-1 align-items-center div-checkbox">
-                                                <input id="pointTraining" class="check-box" type="checkbox">
-                                                <label for="pointTraining" class="ms-2">Điểm rèn luyện</label>
+                                            <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
+                                                <i class="material-icons-outlined icon-check">
+                                                    check_circle
+                                                </i>
+                                                <span class="ms-2">Điểm rèn luyện</span>
                                             </div>
                                         </div>
                                         
@@ -143,6 +147,7 @@
 </section>
 
 @code {
+    private int numberVolunteer = 1;
     [CascadingParameter] public IModalService Modal { get; set; }
 
     private PaginatedList<FakeData> pagedResult;

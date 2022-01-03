@@ -634,5 +634,9 @@
   {
     "outputFile": "Pages/ActivityInfoPage/PopupConvert.razor.css",
     "inputFile": "Pages/ActivityInfoPage/PopupConvert.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityInfo/PopupApproval.razor.css",
+    "inputFile": "Pages/Admin/ActivityInfo/PopupApproval.razor.scss"
   }
 ]

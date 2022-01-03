@@ -31,6 +31,7 @@ namespace VMS.Application.ViewModels
         public bool IsPoint { get; set; }
         public bool IsDay { get; set; }
         public int NumberOfDay { get; set; }
+        public bool IsDenied { get; set; }
 
         public User Organizer { get; set; }
         public ICollection<ActivityAddress> ActivityAddresses { get; set; }

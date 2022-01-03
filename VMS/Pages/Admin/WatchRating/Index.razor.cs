@@ -10,13 +10,13 @@ namespace VMS.Pages.Admin.WatchRating
 {
     public partial class Index : ComponentBase
     {
-        [Parameter]
-        public int ActId { get; set; }
+        private int page;
         private string actName;
         private ViewActivityViewModel actViewModel;
-        private int page = 1;
         private PaginatedList<RecruitmentViewModel> pagedResult = new(new(), 0, 1, 1);
         private FilterRecruitmentViewModel filter = new();
+
+        [Parameter] public int ActId { get; set; }
 
         [Inject]
         private IRecruitmentService RecruitmentService { get; set; }
@@ -31,22 +31,33 @@ namespace VMS.Pages.Admin.WatchRating
 
             if (actViewModel is null)
             {
-                NavigationManager.NavigateTo(Routes.AdminActivityManagement, true);
+                NavigationManager.NavigateTo("404");
+                return;
             }
 
             actName = actViewModel.Name;
+
+            page = 1;
+            await InitDataAsync();
+        }
+
+        private async Task InitDataAsync()
+        {
             pagedResult = await RecruitmentService.GetAllRatingAsync(ActId, filter, page);
         }
 
-        private void FilterChanged(FilterRecruitmentViewModel filter)
+        private async Task FilterChangedAsync(FilterRecruitmentViewModel filter)
         {
             this.filter = filter;
             this.filter.IsSearch = false;
+
+            page = 1;
+            await InitDataAsync();
         }
 
         private async Task HandlePageChangedAsync()
         {
-            pagedResult = await RecruitmentService.GetAllRatingAsync(ActId, filter, page);
+            await InitDataAsync();
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }

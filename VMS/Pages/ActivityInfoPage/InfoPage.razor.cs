@@ -75,7 +75,7 @@ namespace VMS.Pages.ActivityInfoPage
         {
             ModalParameters parameters = new();
             parameters.Add("ActId", Activity.Id);
-            Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("", parameters, BlazoredModalOptions.GetModalOptions());
+            Modal.Show<Admin.ActivityManagement.EditRequirement>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
         private void OnClickNavigateToEditActivty(int activityId)
         {

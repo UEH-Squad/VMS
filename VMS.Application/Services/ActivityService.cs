@@ -71,10 +71,12 @@ namespace VMS.Application.Services
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
             PaginatedList<ActivityViewModel> paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+
             foreach (var item in paginatedList.Items)
             {
                 item.Rating = GetRateOfActivity(item.Recruitments);
             }
+
             return paginatedList;
         }
 
@@ -163,7 +165,8 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
                     a => a.IsPin
-                }
+                },
+                Includes = a => a.Include(x => x.Organizer)
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);

@@ -12,12 +12,14 @@ namespace VMS.Application.ViewModels
 
         public string OrgId { get; set; }
         public Semester Semester { get; set; }
-        public bool IsOrgRating { get; set; } = false;
-        public bool IsUserRating { get; set; } = false;
-        public List<double> Ranks { get; set; } = new();
+
+        public bool? IsOrgRating { get; set; }
+        public List<double> Ranks { get; set; }
+
         public FilterRecruitmentViewModel()
         {
             Semester = Semester.Full;
+            Ranks = new();
         }
     }
 }

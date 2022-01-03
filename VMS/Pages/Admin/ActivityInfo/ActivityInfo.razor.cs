@@ -27,7 +27,8 @@ namespace VMS.Pages.Admin.ActivityInfo
 
             if (activity is null)
             {
-                NavigationManager.NavigateTo(Routes.AdminActivityManagement, true);
+                NavigationManager.NavigateTo("404");
+                return;
             }
         }
 

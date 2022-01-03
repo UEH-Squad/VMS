@@ -110,11 +110,8 @@ namespace VMS.Pages.Admin.ActivityManagement
                     await Modal.Show<PriorActivity>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
                 }
 
-                if (pinnedActivities.Count < 3)
-                {
-                    activity.IsPin = true;
-                    pinnedActivities.Add(activity);
-                }
+                activity.IsPin = pinnedActivities.FindAll(x => x.IsPin).Count < 3;
+                pinnedActivities.Add(activity);
             }
 
             await ActivityService.ChangePinStateListActivityAsync(pinnedActivities);

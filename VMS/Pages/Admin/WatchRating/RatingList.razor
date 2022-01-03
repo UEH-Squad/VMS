@@ -1,15 +1,15 @@
 ﻿@using VMS.Application.ViewModels
 @using VMS.GenericRepository
 <div class="card">
-    @if (IsUserRating == true || IsUserRating == IsOrgRating)
+    @if (!IsOrgRating.HasValue || IsOrgRating.HasValue && !IsOrgRating.Value)
     {
         <div class="card-member">
             <div class="card-member_name">
-                <a href="@Routes.UserProfile/@Item.User.Id" class="avatar">
+                <a href="@Routes.AdminVolunteerProfile/@Item.User.Id" class="avatar">
                     <img src="@Item.User.Avatar" alt="avatar">
                 </a>
                 <div class="name">
-                    <a href="@Routes.UserProfile/@Item.User.Id" class="name-member">@Item.User.FullName</a>
+                    <a href="@Routes.AdminVolunteerProfile/@Item.User.Id" class="name-member">@Item.User.FullName</a>
                     <div class="name_stars">
                         @for (int i = 1; i <= 5; i++)
                         {
@@ -23,27 +23,25 @@
                             }
                         }
                     </div>
+                </div>
+            </div>
+            <div class="card-member_comment mt-2 mb-3">
+                <p class="comment-show">
+                    @Item.CommentByUser
+                </p>
             </div>
         </div>
-        <div class="card-member_comment mt-2 mb-3">
-            <p class="comment-show">
-                @Item.CommentByUser
-            </p>
-        </div>
-    </div>
     }
-    @if (IsOrgRating == true || IsUserRating == IsOrgRating)
+    @if (!IsOrgRating.HasValue || IsOrgRating.HasValue && IsOrgRating.Value)
     {
-
-
         <div class="card-organization">
             <div class="card-organization_name">
-            <a href="@Routes.OrgProfile/@Item.Organizer.Id" class="avatar">
-                <img src="@Item.Organizer.Avatar" alt="avatar">
-            </a>
-            <div class="name">
-                <a href="@Routes.OrgProfile/@Item.Organizer.Id" class="name-organization">@Item.Organizer.FullName</a>
-                <div class="name_stars">
+                <a href="@Routes.AdminOrganizationProfile/@Item.Organizer.Id" class="avatar">
+                    <img src="@Item.Organizer.Avatar" alt="avatar">
+                </a>
+                <div class="name">
+                    <a href="@Routes.AdminOrganizationProfile/@Item.Organizer.Id" class="name-organization">@Item.Organizer.FullName</a>
+                    <div class="name_stars">
                         @for (int i = 1; i <= 5; i++)
                         {
                             if (i <= Item.RatingByOrg)
@@ -56,14 +54,14 @@
                             }
                         }
                     </div>
+                </div>
+            </div>
+            <div class="card-organization_comment mt-2 mb-3">
+                <p class="comment-show">
+                    @Item.CommentByOrg
+                </p>
             </div>
         </div>
-        <div class="card-organization_comment mt-2 mb-3">
-            <p class="comment-show">
-                @Item.CommentByOrg
-            </p>
-        </div>
-    </div>
     }
 </div>
 
@@ -71,11 +69,7 @@
     string Color1 = "#EDF131";
     string Color2 = "#C4C4C4";
 
-    [Parameter]
-    public RecruitmentViewModel Item{ get; set; }
-    [Parameter]
-    public bool IsOrgRating{ get; set; }
-    [Parameter]
-    public bool IsUserRating{ get; set; }
+    [Parameter] public bool? IsOrgRating { get; set; }
 
+    [Parameter] public RecruitmentViewModel Item { get; set; }
 }

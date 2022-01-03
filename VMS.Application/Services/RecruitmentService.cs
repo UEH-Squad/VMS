@@ -258,17 +258,13 @@ namespace VMS.Application.Services
                 };
             }
         }
-        public async Task<PaginatedList<RecruitmentViewModel>>GetAllRatingAsync(int activityId, FilterRecruitmentViewModel filterRecruitmentViewModel, int currentPage)
+        public async Task<PaginatedList<RecruitmentViewModel>> GetAllRatingAsync(int activityId, FilterRecruitmentViewModel filter, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             PaginationSpecification<Recruitment> specification = new()
             {
-                Conditions = new List<Expression<Func<Recruitment, bool>>>()
-                {
-                    r => r.ActivityId == activityId,
-                    FilterRating(filterRecruitmentViewModel)
-                },
+                Conditions = GetConditionsByFilter(activityId, filter),
                 Includes = r => r.Include(x => x.User)
                                 .Include(x => x.Activity)
                                 .ThenInclude(x => x.Organizer)
@@ -281,31 +277,38 @@ namespace VMS.Application.Services
 
             PaginatedList<RecruitmentViewModel> paginatedList = _mapper.Map<PaginatedList<RecruitmentViewModel>>(recruitments);
 
-            paginatedList.Items.ForEach(x => x.Rating = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Rank);
-            paginatedList.Items.ForEach(x => x.RatingByOrg = x.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Rank);
-            paginatedList.Items.ForEach(x => x.CommentByOrg = x.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Comment);
-            paginatedList.Items.ForEach(x => x.CommentByUser = x.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Comment);
+            foreach (var item in paginatedList.Items)
+            {
+                item.Rating = item.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Rank;
+                item.CommentByUser = item.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Comment;
+
+                item.RatingByOrg = item.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Rank;
+                item.CommentByOrg = item.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Comment;
+            }
 
             return paginatedList;
         }
-        private static Expression<Func<Recruitment, bool>> FilterRating(FilterRecruitmentViewModel filterRecruitmentViewModel)
+
+        private static List<Expression<Func<Recruitment, bool>>> GetConditionsByFilter(int activityId, FilterRecruitmentViewModel filter)
         {
-            if (!string.IsNullOrEmpty(filterRecruitmentViewModel.SearchValue))
+            if (filter.IsSearch)
             {
-                return r => r.User.FullName.ToLower().Contains(filterRecruitmentViewModel.SearchValue.ToLower())
-                                        || r.Activity.Name.ToLower().Contains(filterRecruitmentViewModel.SearchValue.ToLower())
-                                       || r.Activity.Organizer.FullName.ToLower().Contains(filterRecruitmentViewModel.SearchValue.ToLower());
+                return new()
+                {
+                    r => r.ActivityId == activityId,
+                    r => r.User.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                        || r.Activity.Name.ToLower().Contains(filter.SearchValue.ToLower())
+                        || r.Activity.Organizer.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                };
             }
             else
             {
-                if (filterRecruitmentViewModel.IsUserRating == filterRecruitmentViewModel.IsOrgRating && filterRecruitmentViewModel.Ranks == null)
+                return new()
                 {
-                    return r => r.RecruitmentRatings.Any(x => !x.IsReport && x.Rank != 0);
-                }
-                else
-                {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == filterRecruitmentViewModel.IsOrgRating && !x.IsReport && filterRecruitmentViewModel.Ranks.Count > 0 ?  filterRecruitmentViewModel.Ranks.Contains(x.Rank) : x.Rank != 0);
-                }
+                    r => r.ActivityId == activityId,
+                    r => !filter.IsOrgRating.HasValue || r.RecruitmentRatings.Any(x => x.IsOrgRating == filter.IsOrgRating.Value),
+                    r => r.RecruitmentRatings.Any(x => filter.Ranks.Contains(x.Rank)) || filter.Ranks.Count == 0
+                };
             }
         }
     }

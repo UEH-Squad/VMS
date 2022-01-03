@@ -1,24 +1,23 @@
 ﻿@layout AdminLayout
 
-@attribute [Route(Routes.AdminWatchRating+ "/{ActId:int}")]
+@attribute [Route(Routes.AdminWatchRating + "/{ActId:int}")]
 @attribute [Authorize(Roles = "Admin")]
 @inject IJSRuntime JsRuntime
 
 <div class="container">
-    <Title ActName="@actName"/>
+    <Title ActName="@actName" />
     <div class="container_main-content d-flex">
         <div class="leftraight">
-            <SearchResult Num = "pagedResult.TotalItems"/>
+            <SearchResult Num="pagedResult.TotalItems" />
             <div class="container-list-card">
                 @foreach (var item in pagedResult.Items)
                 {
-                    <RatingList Item = "item" IsOrgRating = "filter.IsOrgRating" IsUserRating = "filter.IsUserRating"/>
+                    <RatingList IsOrgRating="filter.IsOrgRating" Item="item" />
                 }
             </div>
         </div>
         <div class="rightraight">
-            <Filter Filters="filter"
-                               FilterChanged="FilterChanged"/>
+            <Filter FilterChanged="FilterChangedAsync" />
         </div>
     </div>
     <div class="pagination-container">
@@ -28,8 +27,5 @@
     </div>
 </div>
 
-
-
 @code {
-   
 }

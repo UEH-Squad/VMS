@@ -28,7 +28,8 @@ namespace VMS.Pages.ActivityInfoPage
 
             if (activity is null)
             {
-                NavigationManager.NavigateTo(Routes.ActivitySearch, true);
+                NavigationManager.NavigateTo("404");
+                return;
             }
 
             isLoading = false;

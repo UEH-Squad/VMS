@@ -34,7 +34,8 @@ namespace VMS.Pages.Organization.RatingPage
 
             if (activity is null)
             {
-                NavigationManager.NavigateTo(Routes.ActivityManagement, true);
+                NavigationManager.NavigateTo("404");
+                return;
             }
 
             if (activity.OrgId != currentUser.Id)

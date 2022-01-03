@@ -24,14 +24,16 @@ namespace VMS.Pages.Organization.VolunteersListPage
 
             if (actViewModel is null)
             {
-                NavigationManager.NavigateTo(Routes.ActivityManagement, true);
+                NavigationManager.NavigateTo("404");
+                return;
             }
 
             actName = actViewModel.Name;
             bool isUserOrg = string.Equals(actViewModel.OrgId, CurrentUserId, System.StringComparison.Ordinal);
             if (!isUserOrg)
             {
-                NavigationManager.NavigateTo(Routes.HomePage, true);
+                NavigationManager.NavigateTo("404");
+                return;
             }
         }
     }

@@ -6,37 +6,50 @@
         </div>
         <div class="container-radio">
             <div class="container-radio_choise">
-                <input checked="@(typeRating == 1)" @onchange="@(() => typeRating = 1)" class="radio-btn" id="radio-btn_1" type="radio" name="radio" />
-                <label for="radio-btn_1">Tình nguyện viên</label>
+                @if (filter.IsOrgRating.HasValue && !filter.IsOrgRating.Value)
+                {
+                    <input @onchange="() => OnRadioChanged(false)"
+                       type="radio" name="radio" class="radio-btn" id="radio-btn_1" checked />
+                }
+                else
+                {
+                    <input @onchange="() => OnRadioChanged(false)"
+                       type="radio" name="radio" class="radio-btn" id="radio-btn_1" />
+                }
+                &#160;<label for="radio-btn_1">Tình nguyện viên</label>
             </div>
             <div class="container-radio_choise">
-                <input checked="@(typeRating == 2)" @onchange="@(() => typeRating = 2)" class="radio-btn" id="radio-btn_2" type="radio" name="radio" />
-                <label for="radio-btn_2">Tổ chức</label>
+                @if (filter.IsOrgRating.HasValue && filter.IsOrgRating.Value)
+                {
+                    <input @onchange="() => OnRadioChanged(true)"
+                       type="radio" name="radio" class="radio-btn" id="radio-btn_2" checked />
+                }
+                else
+                {
+                    <input @onchange="() => OnRadioChanged(true)"
+                       type="radio" name="radio" class="radio-btn" id="radio-btn_2" />
+                }
+                &#160;<label for="radio-btn_2">Tổ chức</label>
             </div>
         </div>
         <div class="container-divider"></div>
     </div>
     <div class="container-checkbox">
-        <div class="container-checkbox_choise">
-            <input checked="@(star[0] == true)" @onchange="@(() => star[0] = true)" id="checkbox-btn_1" type="checkbox" />
-            <label for="checkbox-btn_1">1 sao</label>
-        </div>
-        <div class="container-checkbox_choise">
-            <input checked="@(star[1] == true)" @onchange="@(() => star[1] = true)" id="checkbox-btn_2" type="checkbox" />
-            <label for="checkbox-btn_2">2 sao</label>
-        </div>
-        <div class="container-checkbox_choise">
-            <input checked="@(star[2] == true)" @onchange="@(() => star[2] = true)" id="checkbox-btn_3" type="checkbox" />
-            <label for="checkbox-btn_3">3 sao</label>
-        </div>
-        <div class="container-checkbox_choise">
-            <input checked="@(star[3] == true)" @onchange="@(() => star[3] = true)" id="checkbox-btn_4" type="checkbox" />
-            <label for="checkbox-btn_4">4 sao</label>
-        </div>
-        <div class="container-checkbox_choise">
-            <input checked="@(star[4] == true)" @onchange="@(() => star[4] = true)" id="checkbox-btn_5" type="checkbox" />
-            <label for="checkbox-btn_5">5 sao</label>
-        </div>
+        @for (int i = 1; i <= 5; i++)
+        {
+            var star = i;
+            <div class="container-checkbox_choise">
+                @if (filter.Ranks.Exists(x => x == star))
+                {
+                    <input id="checkbox-btn_@star" @onclick="() => OnCheckBoxChanged(star)" type="checkbox" checked />
+                }
+                else
+                {
+                    <input id="checkbox-btn_@star" @onclick="() => OnCheckBoxChanged(star)" type="checkbox" />
+                }
+                <label for="checkbox-btn_@star">@star sao</label>
+            </div>
+        }
     </div>
     <div class="container-btn">
         <button @onclick="@UpdateFilterValueAsync" class="container-btn_filter">Lọc</button>
@@ -45,5 +58,5 @@
 </div>
 
 @code {
-  
+
 }

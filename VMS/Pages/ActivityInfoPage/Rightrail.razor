@@ -45,18 +45,24 @@
                     <p class="request__title titles mb-0">Yêu cầu khi tham gia:</p>
                     <p>@((MarkupString)activity.Requirement)</p>
                 </div>
-                <div class="d-flex align-items-center recognize mb-3">
-                    <i class="material-icons-outlined">
-                        check_circle_outline
-                    </i>
-                    <span>Ghi nhận ngày tình nguyện: @numberVolunteer</span>
-                </div>
-                <div class="d-flex align-items-center recognize mb-3">
-                    <i class="material-icons-outlined">
-                        check_circle_outline
-                    </i>
-                    <span>Cập nhật mã vạch</span>
-                </div>
+                @if (activity.IsDay)
+                {
+                    <div class="d-flex align-items-center recognize mb-3">
+                        <i class="material-icons-outlined">
+                            check_circle_outline
+                        </i>
+                        <span>Ghi nhận ngày tình nguyện: @activity.NumberOfDay</span>
+                    </div>
+                }
+                @if (activity.IsPoint)
+                {
+                    <div class="d-flex align-items-center recognize mb-3">
+                        <i class="material-icons-outlined">
+                            check_circle_outline
+                        </i>
+                        <span>Cập nhật mã vạch</span>
+                    </div>
+                }
             </div>
             <AuthorizeView Roles="@($"{Role.User}")">
                 <div class="btn-sign-up--cover">

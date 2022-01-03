@@ -20,17 +20,23 @@
             @foreach (var item in ListPinned)
             {
                 <div class="d-flex justify-content-center align-items-center w-75 pb-3">
-                    <input @bind="item.IsPin" type="checkbox" id="md" class="d-flex justify-content-center align-items-center me-4 flex-shrink-0">
+                    <input type="checkbox" @bind="item.IsPin" class="d-flex justify-content-center align-items-center me-4 flex-shrink-0">
                     <label for="md">
-                        <la class="pop-up__act p-2">
-                            <div class="pop-up__act__title px-1 pt-1 lm-text">@item.Name</div>
+                        <div class="pop-up__act p-2">
+                            <div class="pop-up__act__title px-1 pt-1 lm-text">
+                                <a href="@Routes.AdminActivityInfo/@item.Id">
+                                    @item.Name
+                                </a>
+                            </div>
                             <div class="d-flex justify-content-between mt-1">
                                 <h5 class="pop-up__act__org d-flex align-items-center mb-0">
-                                    <i class="material-icons me-1">public</i> @item.Organizer?.FullName
+                                    <a href="@Routes.AdminOrganizationProfile/@item.OrgId">
+                                        <i class="material-icons me-1">public</i> @item.Organizer.FullName
+                                    </a>
                                 </h5>
-                                <h5 class="fw-normal mb-0">Ngày đăng: @item.CreatedDate</h5>
+                                <h5 class="fw-normal mb-0">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</h5>
                             </div>
-                        </la>
+                        </div>
                     </label>
                 </div>
             }
@@ -55,5 +61,5 @@
 </div>
 
 @code {
-   
+
 }

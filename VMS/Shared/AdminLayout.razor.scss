@@ -29,4 +29,20 @@
 
 .my-navbar__brand {
     margin: 10px 0;
+
+    .brand__govirlunteer {
+        height: 16px;
+
+        @include on('sm') {
+            height: 20px;
+        }
+
+        @include on('lg') {
+            height: 27px;
+        }
+
+        @include on('xxl') {
+            height: 33px;
+        }
+    }
 }

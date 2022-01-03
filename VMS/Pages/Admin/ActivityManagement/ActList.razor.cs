@@ -111,5 +111,17 @@ namespace VMS.Pages.Admin.ActivityManagement
             }
            
         }
+        private async Task ShowDenyModalAsync(int id)
+        {
+            var result = await Modal.Show<PopupDenyAct>("", BlazoredModalOptions.GetModalOptions()).Result;
+            if ((bool)result.Data == true)
+            {
+                await ActivityService.DenyActAsync(id);
+                pagedResult.Items.Find(x => x.Id == id).IsApproved = false;
+                pagedResult.Items.Find(x => x.Id == id).IsDenied = true;
+                pagedResult.Items.Find(x => x.Id == id).IsDay = false;
+                pagedResult.Items.Find(x => x.Id == id).IsPoint = false;
+            }
+        }
     }
 }

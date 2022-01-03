@@ -126,6 +126,7 @@ namespace VMS.Application.Services
                 return new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
+                    a=> a.IsDenied == false,
                     GetFilterActByType (filter.ActType),
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,

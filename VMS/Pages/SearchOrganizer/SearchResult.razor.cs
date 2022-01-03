@@ -1,4 +1,5 @@
-﻿using Blazored.Modal.Services;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using VMS.Application.ViewModels;
@@ -22,11 +23,14 @@ namespace VMS.Pages.SearchOrganizer
             await Interop.ScrollToTop(JsRuntime);
         }
 
-        private async Task ShowHeldActivitiesAsync()
+        private void ShowHeldActivitiesAsync(string userId)
         {
             if (IsUsedForAdmin)
             {
-                await Modal.Show<Admin.OrganizationManagement.HeldActivities>("", BlazoredModalOptions.GetModalOptions()).Result;
+                var parameters = new ModalParameters();
+                parameters.Add("UserId", userId);
+
+                Modal.Show<Admin.OrganizationManagement.HeldActivities>("", parameters, BlazoredModalOptions.GetModalOptions());
             }
         }
     }

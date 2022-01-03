@@ -11,25 +11,25 @@
 <div class="filter-bar d-flex @(IsLongDistanceFilter?"justify-content-between":"") my-4">
     <div class="d-flex me-3" style="width: @(IsLongDistanceFilter? 40 : 50)%;">
         <div class="filter-item position-relative me-3">
-        <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
-        <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
-            <ul>
-                @if (levels is not null)
-                {
-                    @foreach (var level in levels)
+            <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+            <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
+                <ul>
+                    @if (levels is not null)
                     {
-                        <li @onmousedown="() => ChooseLevelValue(level)">@level</li>
+                        @foreach (var level in levels)
+                        {
+                            <li @onmousedown="() => ChooseLevelValue(level)">@level</li>
+                        }
                     }
-                }
-            </ul>
+                </ul>
+            </div>
+            <span class="material-icons-outlined position-absolute filter-item__icon">
+                expand_more
+            </span>
         </div>
-        <span class="material-icons-outlined position-absolute filter-item__icon">
-            expand_more
-        </span>
-    </div>
 
         <div class="filter-item position-relative">
-            <div @onclick="ShowAreasPopupAsync" class="popup-btn @(filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+            <div @onclick="ShowAreasPopupAsync" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
             <span class="material-icons-outlined position-absolute filter-item__icon">
                 expand_more
             </span>

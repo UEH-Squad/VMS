@@ -40,6 +40,8 @@ namespace VMS.Pages.Organization.Profile
         [Parameter]
         public bool IsUsedForAdmin { get; set; }
 
+        [Parameter] public string UserId { get; set; }
+
         private int width;
         private string classWidth = "";
         private string OrgId;
@@ -48,11 +50,12 @@ namespace VMS.Pages.Organization.Profile
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private CreateOrgProfileViewModel org = new();
-        [CascadingParameter] public string UserId { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        [CascadingParameter] public string CurrentUserId { get; set; }
+
+        protected override async Task OnParametersSetAsync()
         {
-            OrgId = IdentityService.GetCurrentUserId();
+            OrgId = string.IsNullOrEmpty(UserId) ? IdentityService.GetCurrentUserId() : UserId;
             org = await UserService.GetOrgProfileViewModelAsync(OrgId);
             choosenAreas = org.Areas;
         }
@@ -118,7 +121,9 @@ namespace VMS.Pages.Organization.Profile
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
                     await Modal.Show<Activities.NotificationPopup>("", modalParams, BlazoredModalOptions.GetModalOptions()).Result;
-                    NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
+
+                    string redirectUrl = string.IsNullOrEmpty(UserId) ? $"{Routes.OrgProfile}/{org.Id}" : $"{Routes.AdminOrganizationProfile}/{org.Id}";
+                    NavigationManager.NavigateTo(redirectUrl, true);
                 }
                 catch (Exception ex)
                 {

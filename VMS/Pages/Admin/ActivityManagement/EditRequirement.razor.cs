@@ -27,17 +27,22 @@ namespace VMS.Pages.Admin.ActivityManagement
         {
             await Modal.CloseAsync();
         }
+
         private IList<string> chosenTargets = new List<string>();
+
         private async Task<IEnumerable<string>> SearchTargetsAsync(string searchText)
         {
             List<string> targets = PartToFix.GetList();
             return await Task.FromResult(targets.Where(x => x.ToLower().Contains(searchText.ToLower())).ToList());
         }
+
         private List<string> Image { get; set; } = new();
+
         private void ImageChange(List<string> img)
         {
             Image = img;
         }
+
         private async Task AddEditRequirementAsync()
         {
             edit.ActivityId = ActId;

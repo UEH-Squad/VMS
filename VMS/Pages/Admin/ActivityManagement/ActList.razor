@@ -1,9 +1,8 @@
-﻿@inject IJSRuntime JS;
-@using VMS.GenericRepository;
-@using Blazored.Modal;
-
-<section class="my-act row justify-content-center">
+﻿<section class="my-act row justify-content-center">
     <div class="act col-10 px-0" id="act">
+
+        <Spinner IsLoading="isLoading" />
+
         <h3>Có <span>@pagedResult.TotalItems hoạt động</span> ứng với kết quả tìm kiếm</h3>
         <div class="px-2">
             @if (pagedResult is not null && pagedResult.Items.Count != 0)
@@ -16,17 +15,17 @@
                                 <img class="w-100" src="@item.Banner" alt="">
                             </div>
                             <div class="col-8 act__content d-flex flex-column justify-content-between px-3">
-                                <ul class="position-absolute act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
+                                <ul class="position-absolute act-menu p-2 @(menuId == item.Id ? "d-block" : "d-none")">
                                     @if (item.EndDate < DateTime.Now)
                                     {
-                                        <li @onclick="() => ShowDeleteModalAsync(item.Id)" class="delete pb-2">Xóa</li>
+                                        <li @onclick="() => ShowDeleteModalAsync(item)" class="delete pb-2">Xóa</li>
                                     }
                                     else
                                     {
                                         <li @onclick="() => ShowActPrivorModalAsync(item.Id)" class="pb-2">@(item.IsPin ? "Gỡ ưu" : "Ưu") tiên hoạt động</li>
                                         <a href="@Routes.EditActivity/@item.Id" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
-                                        <li @onclick="() => ShowEditModalAsync(item.Id)" class="pb-2">Yêu cầu chỉnh sửa</li>
-                                        <li @onclick="() => ShowDeleteModalAsync(item.Id)" class="delete pb-2">Xóa</li>
+                                        <li @onclick="() => ShowEditModal(item.Id)" class="pb-2">Yêu cầu chỉnh sửa</li>
+                                        <li @onclick="() => ShowDeleteModalAsync(item)" class="delete pb-2">Xóa</li>
                                     }
                                 </ul>
                                 <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute act__content__icon">
@@ -105,7 +104,7 @@
                                                 </div>
                                             }
                                             <div class="act-footer__btn d-flex align-items-center">
-                                                <button @onclick="() => ShowEditModalAsync(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
+                                                <button @onclick="() => ShowEditModal(item.Id)" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
                                             </div>
                                         }
 
@@ -136,7 +135,4 @@
 </section>
 
 @code {
-
-   
-
 }

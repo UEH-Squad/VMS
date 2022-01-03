@@ -108,6 +108,7 @@ namespace VMS.Application.Services
                 };
             }
         }
+
         private static List<Expression<Func<Activity, bool>>> GetFilterActivityConditionsByFilterAdmin(FilterActivityViewModel filter)
         {
             if (filter.IsSearch)
@@ -121,8 +122,8 @@ namespace VMS.Application.Services
             }
             else
             {
-                int lastday = DateTime.DaysInMonth(filter.DateTimeValue.Year, filter.DateTimeValue.Month);
-                DateTime dateTime = new(filter.DateTimeValue.Year, filter.DateTimeValue.Month, lastday);
+                int lastDay = DateTime.DaysInMonth(filter.DateTimeValue.Year, filter.DateTimeValue.Month);
+                DateTime dateTime = new(filter.DateTimeValue.Year, filter.DateTimeValue.Month, lastDay);
                 return new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
@@ -140,6 +141,7 @@ namespace VMS.Application.Services
                 };
             }
         }
+
         private static Expression<Func<Activity, bool>> GetFilterActByMonth(bool isMonthFilter, DateTime dateTime)
         {
 
@@ -152,6 +154,7 @@ namespace VMS.Application.Services
                 return x => (x.StartDate <= dateTime && x.EndDate >= dateTime) || (x.OpenDate <= dateTime && x.CloseDate >= dateTime);
             }
         }
+
         public async Task<List<ActivityViewModel>> GetFeaturedActivitiesAsync()
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -178,7 +181,7 @@ namespace VMS.Application.Services
 
             activity.CreatedDate = DateTime.Now;
             activity.CreatedBy = activity.OrgId;
-            activity.IsApproved = true;
+            activity.IsApproved = false;
 
             Coordinate coordinateResponse = await _addressLocationService.GetCoordinateAsync(activityViewModel.FullAddress);
             activity.Location = _geometryFactory.CreatePoint(coordinateResponse);
@@ -267,6 +270,8 @@ namespace VMS.Application.Services
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
             activity = _mapper.Map(activityViewModel, activity);
+
+            activity.IsApproved = false;
 
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;

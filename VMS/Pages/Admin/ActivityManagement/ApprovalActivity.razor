@@ -1,6 +1,6 @@
 ﻿<div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(!isApproveSuccess ? "d-block" : "d-none")">
+        <div class="pop-up-container border-10 @(!Result.IsApprove ? "d-block" : "d-none")">
             <div @onclick="CloseModalAsync" class="close-btn">
                 <span class="material-icons">
                     close
@@ -10,13 +10,13 @@
                 <h3 class="mb-3"><span>Duyệt </span>hoạt động</h3>
                 <div>
                     <div class=" d-flex align-items-center div-checkbox">
-                        <input @bind-value = "@isPoint" id="pointTraining" class="check-box" type="checkbox">
+                        <input @bind="Result.IsPoint" id="pointTraining" class="check-box" type="checkbox">
                         <label for="pointTraining" class="ms-2">Cập nhật mã vạch</label>
                     </div>
                     <div class=" d-flex align-items-center div-checkbox">
-                        <input @bind-value = "@isDay" id="dayVolunteer" class="check-box" type="checkbox">
+                        <input @bind="Result.IsDay" id="dayVolunteer" class="check-box" type="checkbox">
                         <label for="dayVolunteer" class="ms-2">Ghi nhận ngày tình nguyện</label>
-                        <input @bind-value = "@numberOfDay"  type="number" class="form-control input-number"/>
+                        <input @bind="Result.NumberOfDays" type="number" min="0" class="form-control input-number"/>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(!isApproveSuccess ? "d-none" : "d-block")">
+        <div class="pop-up-container border-10 @(!Result.IsApprove ? "d-none" : "d-block")">
             <div @onclick="CloseModalAsync" class="close-btn-s">
                 <span class="material-icons">
                     close
@@ -40,27 +40,27 @@
 </div>
 
 @code {
-    private bool isApproveSuccess;
-    private bool isPoint = false;
-    private bool isDay = false;
-    private int numberOfDay = 0;
-    List<object> result = new();
+    public class ApproveResult
+    {
+        public bool IsApprove { get; set; }
+        public bool IsPoint { get; set; }
+        public bool IsDay { get; set; }
+        public int NumberOfDays { get; set; }
+    }
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
 
+    [Parameter] public ApproveResult Result { get; set; } = new();
+
     private async Task CloseModalAsync()
     {
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok<ApproveResult>(Result));
     }
 
     private async Task ApproveSuccessAsync()
     {
-        result.Add(isPoint);
-        result.Add(isDay);
-        result.Add(numberOfDay);
-        isApproveSuccess = true;
-        await Modal.CloseAsync(ModalResult.Ok(result));
+        Result.IsApprove = true;
+        await CloseModalAsync();
     }
-
-
 }

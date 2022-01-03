@@ -26,9 +26,13 @@
       border-radius: 50%; }
       @media (min-width: 576px) {
         .list-card .mycard__info--avatar {
+          width: 35px;
+          height: 35px; } }
+      @media (min-width: 768px) {
+        .list-card .mycard__info--avatar {
           width: 60px;
           height: 60px; } }
-    @media (min-width: 576px) {
+    @media (min-width: 768px) {
       .list-card .mycard__info--name-and-mssv {
         border-bottom: 1px solid #B4B4B4;
         display: grid;
@@ -40,6 +44,9 @@
       align-items: center;
       text-decoration: none; }
       @media (min-width: 576px) {
+        .list-card .mycard__info--name-and-mssv .info-name, .list-card .mycard__info--name-and-mssv .info-mssv {
+          font-size: 16px; } }
+      @media (min-width: 768px) {
         .list-card .mycard__info--name-and-mssv .info-name, .list-card .mycard__info--name-and-mssv .info-mssv {
           font-size: 20px; } }
   .list-card .mycard__checkbox {

@@ -11,7 +11,7 @@
   bottom: 0;
   left: 0;
   background-color: rgba(196, 196, 196, 0.38);
-  z-index: 3; }
+  z-index: 101; }
   .pop-up .border-10 {
     border-radius: 10px; }
   .pop-up .center-screen {
@@ -21,9 +21,15 @@
     justify-content: center;
     align-items: center; }
   .pop-up .pop-up-container {
+    width: 90%;
+    max-width: 360px;
     background-color: #FFFFFF;
     position: relative;
     box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
+    @media (min-width: 576px) {
+      .pop-up .pop-up-container {
+        width: unset;
+        max-width: unset; } }
   .pop-up .close-btn {
     width: 33px;
     height: 33px;
@@ -63,16 +69,22 @@
       margin-bottom: 0;
       color: #64D72F; }
   .pop-up .content {
-    padding: 34px 64px 18px;
+    padding: 34px 15px 18px;
     display: flex;
     flex-direction: column;
     align-items: center; }
+    @media (min-width: 576px) {
+      .pop-up .content {
+        padding: 34px 64px 18px; } }
     .pop-up .content h3 {
-      font-size: 20px;
+      font-size: 16px;
       line-height: 25px;
       font-weight: 500;
       margin-bottom: 0;
       color: #64D72F; }
+      @media (min-width: 576px) {
+        .pop-up .content h3 {
+          font-size: 20px; } }
     .pop-up .content .delete-text {
       color: #F14747; }
   .pop-up .pop-up-btn {
@@ -84,13 +96,16 @@
       background-color: #FFFFFF;
       color: #18A0FB;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 104px;
       height: 32px;
       font-weight: 600; }
+      @media (min-width: 576px) {
+        .pop-up .pop-up-btn .deny {
+          font-size: 18px; } }
     .pop-up .pop-up-btn .accept {
       background-color: #18A0FB;
       color: #FFFFFF;
@@ -101,5 +116,8 @@
       width: 104px;
       height: 32px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600; }
+      @media (min-width: 576px) {
+        .pop-up .pop-up-btn .accept {
+          font-size: 18px; } }

@@ -2,52 +2,12 @@
 
 <NavMini Data="pagedResult" DowLoad="DowLoadAsync" ValueChange="ValueChangeAsync" ShowDelete="ShowDeletedListAsync" Upload="HandleUploadAsync" CheckedList="checkList" ActId="ActId" Quantity="pagedResult.TotalItems" ShowDeletedList="isDeleted" HandleDeleted="HandleDeletedAsync" />
 
-<div class="list-card ">
-    <div class="mycard row">
-        <div class="mycard__info col-7 col-md-8 col-xl-9">
-            <img class="mycard__info--avatar" src="/img/GoVirlunteer (1).png" alt="Avatar" />
-            <div class="mycard__info--name-and-mssv">
-                <a href="" class="info-name">Phạm Thị Ngọc Ánh</a>
-                <div class="info-mssv">31191025985</div>
-            </div>
-        </div>
-
-        <div class="mycard__checkbox p-0 col-1 col-md-1 col-xl-1 d-flex align-items-center">
-            <input class="mycard__checkbox--my-checkbox" type="checkbox">
-        </div>
-
-        <div class="mycard__button col-4 col-md-3 col-xl-2 p-0 m-auto">
-            <button class="mycard__button--registration-form">Đơn đăng ký</button>
-        </div>
-    </div>
-</div>
-
-<div class="list-card ">
-    <div class="mycard row">
-        <div class="mycard__info col-7 col-md-8 col-xl-9">
-            <img class="mycard__info--avatar" src="/img/GoVirlunteer (1).png" alt="Avatar" />
-            <div class="mycard__info--name-and-mssv">
-                <a href="" class="info-name">Phạm Thị Ngọc Ánh</a>
-                <div class="info-mssv">31191025985</div>
-            </div>
-        </div>
-
-        <div class="mycard__checkbox p-0 col-1 col-md-1 col-xl-1 d-flex align-items-center">
-            <input class="mycard__checkbox--my-checkbox" type="checkbox">
-        </div>
-
-        <div class="mycard__button col-4 col-md-3 col-xl-2 p-0 m-auto">
-            <button class="mycard__button--registration-form">Đơn đăng ký</button>
-        </div>
-    </div>
-</div>
-
 <div class="list-card">
     @if (pagedResult is not null && pagedResult.TotalItems != 0)
     {
         @foreach (var item in pagedResult.Items)
         {
-            <div class="mycard">
+            @*<div class="mycard">
                 <div class="mycard__info">
                     <img class="mycard__info--avatar" src=@item.User.Avatar alt="Avatar" />
                     <div class="mycard__info--name-and-mssv" style="font-weight:@(item.IsCheck? 600:"")">
@@ -61,7 +21,24 @@
                 </div>
 
                 <div class="mycard__button">
-                    <button @onclick="@(() =>ShowSignUpPopUpAsync(item))" class="mycard__button--registration-form">Xem đơn đăng ký</button>
+                    <button @onclick="@(() =>ShowSignUpPopUpAsync(item))" class="mycard__button--registration-form">Đơn đăng ký</button>
+                </div>
+            </div>*@
+            <div class="mycard row">
+                <div class="mycard__info col-7 col-md-8 col-xl-9">
+                    <img class="mycard__info--avatar" src=@item.User.Avatar alt="Avatar" />
+                    <div class="mycard__info--name-and-mssv" style="font-weight:@(item.IsCheck? 600:"")">
+                        <a href="@Routes.UserProfile/@item.User.Id" class="info-name">@item.User.FullName</a>
+                        <div class="info-mssv">@item.User.StudentId</div>
+                    </div>
+                </div>
+
+                <div class="mycard__checkbox p-0 col-1 col-md-1 col-xl-1 d-flex align-items-center">
+                    <input checked="@item.IsCheck" @onclick="@( () =>HandleCheckAsync(item.Id))" class="mycard__checkbox--my-checkbox" type="checkbox">
+                </div>
+
+                <div class="mycard__button col-4 col-md-3 col-xl-2 p-0 m-auto">
+                    <button @onclick="@(() =>ShowSignUpPopUpAsync(item))" class="mycard__button--registration-form">Đơn đăng ký</button>
                 </div>
             </div>
         }

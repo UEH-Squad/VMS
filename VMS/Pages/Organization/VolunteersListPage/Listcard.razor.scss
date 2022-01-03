@@ -28,6 +28,11 @@
                 border-radius: 50%;
 
                 @include on('sm') {
+                    width: 35px;
+                    height: 35px;
+                }
+
+                @include on('md') {
                     width: 60px;
                     height: 60px;
                 }
@@ -35,7 +40,7 @@
 
             &--name-and-mssv {
 
-                @include on ('sm') {
+                @include on ('md') {
                     border-bottom: 1px solid $grey-icon;
                     display: grid;
                     grid-template-columns: 60% 40%;
@@ -49,6 +54,10 @@
                     text-decoration: none;
 
                     @include on ('sm') {
+                        font-size: 16px;
+                    }
+
+                    @include on ('md') {
                         font-size: 20px;
                     }
                 }
@@ -61,6 +70,7 @@
             @include on ('xl') {
                 justify-content: unset;
             }
+
             &--my-checkbox {
                 width: 15px;
                 height: 15px;

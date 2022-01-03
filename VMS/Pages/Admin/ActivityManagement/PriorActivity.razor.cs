@@ -7,40 +7,24 @@ using VMS.Application.ViewModels;
 
 namespace VMS.Pages.Admin.ActivityManagement
 {
-    public partial class PriorActivity : ComponentBase 
+    public partial class PriorActivity : ComponentBase
     {
-        [Parameter]
-        public List<ActivityViewModel> ListPinned { get; set; }
-        private List<int> unPinList = new();
         private bool isSuccess = true;
+
+        [Parameter] public List<ActivityViewModel> ListPinned { get; set; }
 
         [CascadingParameter]
         public BlazoredModalInstance Modal { get; set; }
 
         private async Task CloseModalAsync()
         {
-            await Modal.CloseAsync();
+            await Modal.CloseAsync(ModalResult.Ok(ListPinned));
         }
-        private async Task HandleCheckAsync(int id)
-        {
-            var checkItem = ListPinned.Find(x => x.Id == id);
-            if (checkItem is not null)
-            {
-                checkItem.IsCheck = !checkItem.IsCheck;
-                if (checkItem.IsCheck == true)
-                {
-                    unPinList.Add(id);
-                }
-                else
-                {
-                    unPinList.Remove(id);
-                }
-            }
-        }
+
         private async Task SuccessAsync()
         {
             isSuccess = !isSuccess;
-            await Modal.CloseAsync(ModalResult.Ok(unPinList));
+            await CloseModalAsync();
         }
     }
 }

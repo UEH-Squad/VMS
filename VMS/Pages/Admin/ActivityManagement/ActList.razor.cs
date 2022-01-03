@@ -30,19 +30,22 @@ namespace VMS.Pages.Admin.ActivityManagement
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
 
-        protected override async Task OnParametersSetAsync()
+        private async Task InitDataAsync()
         {
             isLoading = true;
-            page = 1;
             pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, page);
             isLoading = false;
         }
 
+        protected override async Task OnParametersSetAsync()
+        {
+            page = 1;
+            await InitDataAsync();
+        }
+
         private async Task HandlePageChangedAsync()
         {
-            isLoading = true;
-            pagedResult = await ActivityService.GetAllActivitiesAsync(Filter, page);
-            isLoading = false;
+            await InitDataAsync();
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }
@@ -54,7 +57,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             if ((bool)result.Data)
             {
                 await ActivityService.CloseOrDeleteActivity(activity.Id, true, activity.IsClosed);
-                await OnParametersSetAsync();
+                await InitDataAsync();
             }
         }
 
@@ -79,7 +82,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             if (approveResult.IsApprove)
             {
                 await ActivityService.ApproveActAsync(activityId, approveResult.IsPoint, approveResult.IsDay, approveResult.NumberOfDays);
-                await OnParametersSetAsync();
+                await InitDataAsync();
             }
         }
 
@@ -90,37 +93,33 @@ namespace VMS.Pages.Admin.ActivityManagement
             return InvokeAsync(StateHasChanged);
         }
 
-        private async Task ShowActPrivorModalAsync(int id)
+        private async Task ShowActPrivorModalAsync(ActivityViewModel activity)
         {
-            List<int> pin = new();
-            pin.Add(id);
-            List<ActivityViewModel> list = await ActivityService.GetActivityIsPin();
-            bool isPin = pagedResult.Items.Find(x => x.Id == id).IsPin;
-            if (isPin == false && list.Count >= 3)
+            List<ActivityViewModel> pinnedActivities = await ActivityService.GetFeaturedActivitiesAsync();
+
+            if (activity.IsPin)
             {
-                ModalParameters parameters = new();
-                parameters.Add("ListPinned", list);
-                var result = await Modal.Show<PriorActivity>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
-                List<int> listUnpin = (List<int>)result.Data;
-                if (listUnpin != null)
-                {
-                    await ActivityService.PinActivityAsync(listUnpin, false);
-                    await ActivityService.PinActivityAsync(pin, true);
-                    pagedResult.Items.Find(x => x.Id == id).IsPin = true;
-                }
+                pinnedActivities.ForEach(x => x.IsPin = activity.Id != x.Id);
             }
             else
             {
-                ModalParameters parameters = new();
-                parameters.Add("IsPin", !isPin);
-                var result = await Modal.Show<PriorActSuccess>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
-                if ((bool)result.Data == true)
+                if (pinnedActivities.Count >= 3)
                 {
-                    await ActivityService.PinActivityAsync(pin, !isPin);
-                    pagedResult.Items.Find(x => x.Id == id).IsPin = !isPin;
+                    var parameters = new ModalParameters();
+                    parameters.Add("ListPinned", pinnedActivities);
+                    await Modal.Show<PriorActivity>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+                }
+
+                if (pinnedActivities.Count < 3)
+                {
+                    activity.IsPin = true;
+                    pinnedActivities.Add(activity);
                 }
             }
 
+            await ActivityService.ChangePinStateListActivityAsync(pinnedActivities);
+
+            await InitDataAsync();
         }
 
         private async Task ShowDenyModalAsync(int id)
@@ -129,6 +128,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             if ((bool)result.Data == true)
             {
                 await ActivityService.CloseOrDeleteActivity(id, true, true);
+                await InitDataAsync();
             }
         }
     }

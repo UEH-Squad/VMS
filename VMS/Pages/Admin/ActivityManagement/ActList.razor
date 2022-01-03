@@ -24,7 +24,7 @@
                                         }
                                         else
                                         {
-                                            <li @onclick="() => ShowActPrivorModalAsync(item.Id)" class="pb-2">@(item.IsPin ? "Gỡ ưu" : "Ưu") tiên hoạt động</li>
+                                            <li @onclick="() => ShowActPrivorModalAsync(item)" class="pb-2">@(item.IsPin ? "Gỡ ưu" : "Ưu") tiên hoạt động</li>
                                             <a href="@Routes.EditActivity/@item.Id" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
                                             <li @onclick="() => ShowEditModal(item.Id)" class="pb-2">Yêu cầu chỉnh sửa</li>
                                             <li @onclick="() => ShowDeleteModalAsync(item)" class="delete pb-2">Xóa</li>

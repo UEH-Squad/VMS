@@ -20,7 +20,7 @@
             @foreach (var item in ListPinned)
             {
                 <div class="d-flex justify-content-center align-items-center w-75 pb-3">
-                    <input checked="@item.IsCheck" @onclick="@( () =>HandleCheckAsync(item.Id))" type="checkbox" id="md" class="d-flex justify-content-center align-items-center me-4 flex-shrink-0">
+                    <input @bind="item.IsPin" type="checkbox" id="md" class="d-flex justify-content-center align-items-center me-4 flex-shrink-0">
                     <label for="md">
                         <la class="pop-up__act p-2">
                             <div class="pop-up__act__title px-1 pt-1 lm-text">@item.Name</div>
@@ -56,5 +56,4 @@
 
 @code {
    
-}
 }

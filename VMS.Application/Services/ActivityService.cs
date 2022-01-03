@@ -70,8 +70,8 @@ namespace VMS.Application.Services
 
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            PaginatedList<ActivityViewModel> paginatedList =  _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
-            foreach(var item in paginatedList.Items)
+            PaginatedList<ActivityViewModel> paginatedList = _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+            foreach (var item in paginatedList.Items)
             {
                 item.Rating = GetRateOfActivity(item.Recruitments);
             }
@@ -162,11 +162,8 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    a => a.IsPin,
-                    a => !a.IsDeleted,
-                    a => a.IsApproved
-                },
-                Take = 3
+                    a => a.IsPin
+                }
             };
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
@@ -672,56 +669,37 @@ namespace VMS.Application.Services
 
             await _repository.UpdateAsync<Activity>(dbContext, activities);
         }
-        public async Task<List<ActivityViewModel>> GetActivityIsPin()
+
+        public async Task ChangePinStateListActivityAsync(List<ActivityViewModel> activityViewModels)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Specification<Activity> specification = new()
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
-            {
-                    a =>  a.IsPin == true,
-            }
+                {
+                    a => activityViewModels.Select(x => x.Id).Any(x => x == a.Id)
+                }
             };
-            List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
-            return _mapper.Map<List<ActivityViewModel>>(activities);
-        }
-        public async Task PinActivityAsync(List<int> list, bool isPin)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            Specification<Activity> specification = new()
-            {
-                Conditions = new List<Expression<Func<Activity, bool>>>()
-            {
-                    a =>  list.Contains(a.Id)
-            }
-            };
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
-            foreach (var rec in activities)
-            {
-                rec.IsPin = isPin;
-            }
-            dbContext.SaveChanges();
+
+            activities.ForEach (a => a.IsPin = activityViewModels.Find(x => x.Id == a.Id).IsPin);
+
+            await _repository.UpdateAsync<Activity>(dbContext, activities);
         }
+
         public async Task ApproveActAsync(int id, bool isPoint, bool isDay, int numberOfDay)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext,id);
+
+            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, id);
+
             activity.IsApproved = true;
-            if(isPoint == true)
-            {
-                activity.IsPoint = isPoint;
-            }
-            if(isDay == false || numberOfDay <=0)
-            {
-                activity.IsDay = false;
-            }
-            else
-            {
-                activity.IsDay = true;
-                activity.NumberOfDay = numberOfDay;
-            }
+            activity.IsPoint = isPoint;
+            activity.IsDay = isDay;
+            activity.NumberOfDay = numberOfDay;
+
             await _repository.UpdateAsync(dbContext, activity);
         }
 
@@ -739,6 +717,5 @@ namespace VMS.Application.Services
 
             await _repository.InsertAsync(dbContext, report);
         }
-       
     }
 }

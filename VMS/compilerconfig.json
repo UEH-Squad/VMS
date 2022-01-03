@@ -628,6 +628,14 @@
     "inputFile": "Pages/Admin/SkillAndArea/ListSkills.razor.scss"
   },
   {
+    "outputFile": "Pages/SearchVolunteer/SearchAndFilter.razor.css",
+    "inputFile": "Pages/SearchVolunteer/SearchAndFilter.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchVolunteer/SearchResult.razor.css",
+    "inputFile": "Pages/SearchVolunteer/SearchResult.razor.scss"
+  },
+  {
     "outputFile": "Pages/Admin/ActivityManagement/PopupDenyAct.razor.css",
     "inputFile": "Pages/Admin/ActivityManagement/PopupDenyAct.razor.scss"
   },
@@ -638,5 +646,9 @@
   {
     "outputFile": "Pages/Admin/ActivityInfo/PopupApproval.razor.css",
     "inputFile": "Pages/Admin/ActivityInfo/PopupApproval.razor.scss"
+  },
+  {
+    "outputFile": "Pages/SearchVolunteer/Index.razor.css",
+    "inputFile": "Pages/SearchVolunteer/Index.razor.scss"
   }
 ]

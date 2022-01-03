@@ -248,5 +248,80 @@ namespace VMS.Application.Services
 
             return await Task.FromResult(acts);
         }
+
+        public List<UserViewModel> GetAllVolunteers()
+        {
+            var volunteers = Task.Run(() => _userManager.GetUsersInRoleAsync(Role.User.ToString())).Result;
+
+            return _mapper.Map<List<UserViewModel>>(volunteers);
+        }
+
+        public async Task<PaginatedList<UserViewModel>> GetAllVolunteers(FilterVolunteerViewModel filter, int currentPage)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginationSpecification<User> specification = new()
+            {
+                Conditions = GetConditionsByFilter(filter),
+                Includes = x => x.Include(x => x.Activities)
+                                 .ThenInclude(x => x.Recruitments)
+                                 .ThenInclude(x => x.RecruitmentRatings),
+                PageIndex = currentPage,
+                PageSize = 8,
+            };
+
+            PaginatedList<User> volunteers = await _repository.GetListAsync(dbContext, specification);
+
+            PaginatedList<UserViewModel> paginatedList = _mapper.Map<PaginatedList<UserViewModel>>(volunteers);
+
+            foreach (var volunteer in paginatedList.Items)
+            {
+                CalculateTotalAndRankRating(volunteer.Activities, out int totalRating, out double totalRank);
+                volunteer.QuantityRating = totalRating;
+                volunteer.AverageRating = totalRating > 0 ? Math.Round(totalRank / totalRating, 1) : 5;
+            }
+
+            return paginatedList;
+        }
+
+        private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterVolunteerViewModel filter)
+        {
+            string vltRole = Role.User.ToString();
+
+            if (filter.IsSearch)
+            {
+                return new List<Expression<Func<User, bool>>>()
+                {
+                    x => x.UserRoles.Any(x => x.Role.Name == vltRole),
+                    x => x.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                };
+            }
+            else
+            {
+                return new List<Expression<Func<User, bool>>>()
+                {
+                    x => x.UserRoles.Any(x => x.Role.Name == vltRole),
+                    x => x.Course == filter.Course || string.IsNullOrEmpty(filter.Course),
+                    a => a.Faculty.Name == filter.FacultyName || string.IsNullOrEmpty(filter.FacultyName),
+                    a => a.UserAreas.Select(r => r.AreaId)
+                                         .Where(userAreaId => filter.Areas.Select(area => area.Id)
+                                                                           .Any(areaId => areaId == userAreaId))
+                                         .Count() == filter.Areas.Count,
+                    a => a.UserSkills.Select(r => r.SkillId)
+                                         .Where(userSkillId => filter.Skills.Select(skill => skill.Id)
+                                                                           .Any(skillId => skillId == userSkillId))
+                                         .Count() == filter.Skills.Count
+                };
+            }
+        }
+
+        private static void CalculateTotalAndRankRating(ICollection<Activity> activities, out int totalRating, out double totalRank)
+        {
+            var recruitmentRatings = activities.SelectMany(x => x.Recruitments)
+                                                    .SelectMany(x => x.RecruitmentRatings)
+                                                    .Where(x => !x.IsOrgRating && !x.IsReport);
+            totalRating = recruitmentRatings.Count();
+            totalRank = recruitmentRatings.Sum(x => x.Rank);
+        }
     }
 }

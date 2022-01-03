@@ -116,7 +116,6 @@ namespace VMS.Application.Services
                 return new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
-                    //a => a.EndDate >= DateTime.Now.Date,
                     a => a.Name.ToUpper().Trim().Contains(filter.SearchValue.ToUpper().Trim())
                 };
             }
@@ -163,7 +162,9 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>()
                 {
-                    a => a.IsPin
+                    a => a.IsPin,
+                    a => !a.IsDeleted,
+                    a => a.IsApproved
                 },
                 Take = 3
             };
@@ -203,7 +204,8 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>
                 {
-                    a => a.Id == activityId
+                    a => a.Id == activityId,
+                    a => !a.IsDeleted
                 },
                 Includes = a => a.Include(x => x.ActivitySkills)
                                     .ThenInclude(s => s.Skill)
@@ -304,7 +306,8 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Activity, bool>>>
                 {
-                    a => a.Id == activityId
+                    a => a.Id == activityId,
+                    a => !a.IsDeleted
                 },
                 Includes = a => a.Include(x => x.ActivitySkills).ThenInclude(s => s.Skill)
                                 .Include(x => x.ActivityAddresses).ThenInclude(s => s.AddressPath)
@@ -314,7 +317,7 @@ namespace VMS.Application.Services
 
             Activity activity = await _repository.GetAsync(dbContext, specification);
 
-            if (activity is null) return new ViewActivityViewModel();
+            if (activity is null) return null;
 
             ViewActivityViewModel activityViewModel = _mapper.Map<ViewActivityViewModel>(activity);
 
@@ -349,7 +352,7 @@ namespace VMS.Application.Services
                 {
                     a => !excludedActitivyIds.Contains(a.Id),
                     a => a.OrgId == orgId,
-                    a => a.EndDate >= DateTime.Now
+                    a => !a.IsDeleted
                 },
             });
 
@@ -721,17 +724,7 @@ namespace VMS.Application.Services
             }
             await _repository.UpdateAsync(dbContext, activity);
         }
-        public async Task DenyActAsync(int id)
-        {
-            DbContext dbContext = _dbContextFactory.CreateDbContext();
-            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, id);
-            activity.IsApproved = false;
-            activity.IsDenied = true;
-            activity.IsPoint = false;
-            activity.IsDay = false;
-            activity.NumberOfDay = 0;
-            await _repository.UpdateAsync(dbContext, activity);
-        }
+
         public async Task EditRequirementActAsync(EditRequirementViewModel editRequirementViewModel)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();

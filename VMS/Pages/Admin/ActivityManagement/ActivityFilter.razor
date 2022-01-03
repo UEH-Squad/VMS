@@ -12,11 +12,11 @@
                     <input @bind="@Filter.Actual" type="checkbox" id="md2" class="d-flex justify-content-center align-items-center me-2">
                     <label for="md2">Actual</label>
                 </div>
-                 @if (areasPinned is not null)
-                 {
-                     @foreach (var area in areasPinned)
-                     {
-                          <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                @if (areasPinned is not null)
+                {
+                    @foreach (var area in areasPinned)
+                    {
+                        <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
                             @if (Filter.Areas.Exists(x => x.Id == area.Id))
                             {
                                 <input @onclick="(() => ChangeStatePinnedArea(area))" class="d-flex justify-content-center align-items-center me-2" type="checkbox" id="@area.Icon" checked style="--checkbox-color: @area.Color">
@@ -34,7 +34,7 @@
                         </div>
                     }
                 }
-               
+
             </div>
         </div>
 
@@ -149,7 +149,7 @@
         </div>
 
         <div class="act-filter__btn d-flex justify-content-start align-items-center mb-4 text-center">
-            <button @onclick = "UpdateFilterValueAsync" class="btn act-filter__btn--green px-3 py-1">Lọc</button>
+            <button @onclick="UpdateFilterValueAsync" class="btn act-filter__btn--green px-3 py-1">Lọc</button>
             <button @onclick="ClearFilterAsync" class="act-filter__btn--clear ms-3">Xóa lọc</button>
         </div>
     </div>

@@ -32,6 +32,11 @@ namespace VMS.Pages.Organization.RatingPage
 
             activity = await ActivityService.GetViewActivityViewModelAsync(ActivityId);
 
+            if (activity is null)
+            {
+                NavigationManager.NavigateTo(Routes.ActivityManagement, true);
+            }
+
             if (activity.OrgId != currentUser.Id)
             {
                 NavigationManager.NavigateTo(Routes.HomePage, true);

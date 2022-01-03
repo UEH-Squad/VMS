@@ -10,6 +10,7 @@ namespace VMS.Pages.Admin.ActivityManagement
     public partial class Index : ComponentBase
     {
         private FilterActivityViewModel filter = new();
+
         private void SearchValueChanged(string searchValue)
         {
             filter.SearchValue = searchValue;

@@ -20,9 +20,15 @@ namespace VMS.Pages.Organization.VolunteersListPage
         public string CurrentUserId { get; set; }
         protected override async Task OnParametersSetAsync()
         {
-            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(ActId);
+            actViewModel = await ActivityService.GetViewActivityViewModelAsync(ActId);
+
+            if (actViewModel is null)
+            {
+                NavigationManager.NavigateTo(Routes.ActivityManagement, true);
+            }
+
             actName = actViewModel.Name;
-            bool isUserOrg = string.Equals(this.actViewModel.OrgId, CurrentUserId, System.StringComparison.Ordinal);
+            bool isUserOrg = string.Equals(actViewModel.OrgId, CurrentUserId, System.StringComparison.Ordinal);
             if (!isUserOrg)
             {
                 NavigationManager.NavigateTo(Routes.HomePage, true);

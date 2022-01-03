@@ -38,12 +38,12 @@
 
     private async Task CloseModalAsync()
     {
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok<bool>(isApproveSuccess));
     }
 
     private async Task ApproveSuccessAsync()
     {
         isApproveSuccess = true;
-        await Modal.CloseAsync(ModalResult.Ok((bool)isApproveSuccess));
+        await CloseModalAsync();
     }
 }

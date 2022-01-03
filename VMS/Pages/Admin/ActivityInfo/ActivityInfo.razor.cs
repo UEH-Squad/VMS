@@ -19,9 +19,16 @@ namespace VMS.Pages.Admin.ActivityInfo
 
         [Inject] private IActivityService ActivityService { get; set; }
 
+        [Inject] private NavigationManager NavigationManager { get; set; }
+
         protected override async Task OnParametersSetAsync()
         {
             activity = await ActivityService.GetViewActivityViewModelAsync(ActId);
+
+            if (activity is null)
+            {
+                NavigationManager.NavigateTo(Routes.AdminActivityManagement, true);
+            }
         }
 
         private void ShowEditModal()
@@ -59,10 +66,8 @@ namespace VMS.Pages.Admin.ActivityInfo
 
             if ((bool)result.Data == true)
             {
-                activity.IsDay = false;
-                activity.IsPoint = false;
-                activity.NumberOfDay = 0;
-                await ActivityService.DenyActAsync(ActId);
+                await ActivityService.CloseOrDeleteActivity(ActId, true, true);
+                NavigationManager.NavigateTo(Routes.AdminActivityManagement);
             }
         }
 

@@ -22,10 +22,18 @@ namespace VMS.Pages.Admin.WatchRating
         private IRecruitmentService RecruitmentService { get; set; }
         [Inject]
         private IActivityService ActivityService { get; set; }
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            this.actViewModel = await ActivityService.GetViewActivityViewModelAsync(ActId);
+            actViewModel = await ActivityService.GetViewActivityViewModelAsync(ActId);
+
+            if (actViewModel is null)
+            {
+                NavigationManager.NavigateTo(Routes.AdminActivityManagement, true);
+            }
+
             actName = actViewModel.Name;
             pagedResult = await RecruitmentService.GetAllRatingAsync(ActId, filter, page);
         }
@@ -35,6 +43,7 @@ namespace VMS.Pages.Admin.WatchRating
             this.filter = filter;
             this.filter.IsSearch = false;
         }
+
         private async Task HandlePageChangedAsync()
         {
             pagedResult = await RecruitmentService.GetAllRatingAsync(ActId, filter, page);

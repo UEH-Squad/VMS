@@ -46,6 +46,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             StateHasChanged();
             await Interop.ScrollToTop(JsRuntime);
         }
+
         private async Task ShowDeleteModalAsync(ActivityViewModel activity)
         {
             var result = await Modal.Show(typeof(Organization.Profile.DeleteConfirm), "", BlazoredModalOptions.GetModalOptions()).Result;
@@ -59,7 +60,7 @@ namespace VMS.Pages.Admin.ActivityManagement
 
         private void ShowMenu(int id)
         {
-            menuId = id;
+            menuId = menuId == id ? 0 : id;
         }
 
         private void ShowEditModal(int id)
@@ -120,6 +121,15 @@ namespace VMS.Pages.Admin.ActivityManagement
                 }
             }
 
+        }
+
+        private async Task ShowDenyModalAsync(int id)
+        {
+            var result = await Modal.Show<PopupDenyAct>("", BlazoredModalOptions.GetModalOptions()).Result;
+            if ((bool)result.Data == true)
+            {
+                await ActivityService.CloseOrDeleteActivity(id, true, true);
+            }
         }
     }
 }

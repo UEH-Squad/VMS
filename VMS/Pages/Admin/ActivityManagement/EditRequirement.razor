@@ -1,7 +1,7 @@
 ﻿<div class="pop-up">
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
         <div class="pop-up-container position-relative border-10 w-50">
-            <div @onclick="CloseModal" class="close-btn position-absolute d-flex justify-content-center align-items-center">
+            <div @onclick="CloseModalAsync" class="close-btn position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
                 </span>
@@ -9,11 +9,11 @@
             <div class="pop-up__title text-center py-4">
                 <h3 class="fw-medium">Yêu cầu<span> chỉnh sửa</span></h3>
             </div>
-            <EditForm Model="edit" OnValidSubmit="@AddEditRequirement">
+            <EditForm Model="edit" OnValidSubmit="@AddEditRequirementAsync">
                 <div class="pop-up__form mb-3">
                     <div class="fw-medium align-self-center mb-2">Mục cần yêu cầu chỉnh sửa <span class="required-asterick">(*)</span></div>
                     <div>
-                        <Typeahead SearchMethod="SearchTargets"
+                        <Typeahead SearchMethod="SearchTargetsAsync"
                                    @bind-Values="chosenTargets"
                                    EnableDropDown="true"
                                    class="w-100">
@@ -36,36 +36,14 @@
 
                 <div class="pop-up__form mb-3">
                     <div class="fw-medium align-self-center mb-2">Hình ảnh đính kèm <span class="required-asterick">(*)</span></div>
-                    <div class="add-file position-relative d-flex align-items-center justify-content-center">
-                        <InputFile OnChange="OnInputFileAsync" multiple type="file" name="file" id="file" class="inputfile" />
-                        <div class="d-flex align-items-center">
-                            <i class="material-icons my-icon-upload">
-                                cloud_upload
-                            </i>
-                            <span class="@(isChangeFile ? "d-none" : "d-block")">Kéo và thả hình ảnh liên quan tại dây</span>
-                        </div>
-                        <p class="m-0">
-                            @if (selectedImages is not null)
-                            {
-                                @foreach (var item in selectedImages)
-                                {
-                                    @if (!item.ContentType.Contains("image/"))
-                                    {
-                                        <div style="color: #f14747">File không đúng định dạng..</div>
-                                    }
-                                    else
-                                    {
-                                        @item.Name
-                                        @space
-                                    }
-                                }
-                            }
-                        </p>
+                    <div>
+                        <UploadMultipleImg Image="Image" ImageChange = "ImageChange"/>
                     </div>
                 </div>
 
+
                 <div class="d-flex align-items-center text-center justify-content-center my-4">
-                    <button type="submit" @onclick="CloseModal" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">Yêu cầu chỉnh sửa</button>
+                    <button type="submit" @onclick="CloseModalAsync" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal1">Yêu cầu chỉnh sửa</button>
                 </div>
             </EditForm>
         </div>

@@ -22,24 +22,24 @@ namespace VMS.Pages.Admin.ActivityInfo
         {
             activity = await ActivityService.GetViewActivityViewModelAsync(ActId);
         }
-        private async Task ShowEditModal()
+        private async Task ShowEditModalAsync()
         {
             ModalParameters parameters = new();
             parameters.Add("ActId", ActId);
             Modal.Show<VMS.Pages.Admin.ActivityManagement.EditRequirement>("",parameters, BlazoredModalOptions.GetModalOptions());
         }
 
-        private async Task ShowApproveModal()
+        private async Task ShowApproveModalAsync()
         {
             var result = await Modal.Show<VMS.Pages.Admin.ActivityManagement.ApprovalActivity>("", BlazoredModalOptions.GetModalOptions()).Result;
             List<object> list = (List<object>)result.Data;
-            await ActivityService.ApproveAct(ActId, (bool)list[0], (bool)list[1], (int)list[2]);
+            await ActivityService.ApproveActAsync(ActId, (bool)list[0], (bool)list[1], (int)list[2]);
             activity.IsDay = (bool)list[1];
             activity.IsPoint = (bool)list[0];
             activity.NumberOfDay = (int)list[2];
         }
 
-        private async Task ShowDenyModal()
+        private async Task ShowDenyModalAsync()
         {
             var result = await Modal.Show<VMS.Pages.Admin.ActivityManagement.PopupDenyAct>("", BlazoredModalOptions.GetModalOptions()).Result;
             if((bool)result.Data == true)
@@ -47,11 +47,11 @@ namespace VMS.Pages.Admin.ActivityInfo
                 activity.IsDay = false;
                 activity.IsPoint = false;
                 activity.NumberOfDay = 0;
-                await ActivityService.DenyAct(ActId);
+                await ActivityService.DenyActAsync(ActId);
             }
         }
 
-        private async Task ShowPopupConvert()
+        private async Task ShowPopupConvertAsync()
         {
             Modal.Show<PopupConvert>("", BlazoredModalOptions.GetModalOptions());
         }

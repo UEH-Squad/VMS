@@ -696,7 +696,7 @@ namespace VMS.Application.Services
             }
             dbContext.SaveChanges();
         }
-        public async Task ApproveAct(int id, bool isPoint, bool isDay, int numberOfDay)
+        public async Task ApproveActAsync(int id, bool isPoint, bool isDay, int numberOfDay)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
             Activity activity = await _repository.GetByIdAsync<Activity>(dbContext,id);
@@ -716,7 +716,7 @@ namespace VMS.Application.Services
             }
             await _repository.UpdateAsync(dbContext, activity);
         }
-        public async Task DenyAct(int id)
+        public async Task DenyActAsync(int id)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
             Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, id);
@@ -727,7 +727,7 @@ namespace VMS.Application.Services
             activity.NumberOfDay = 0;
             await _repository.UpdateAsync(dbContext, activity);
         }
-        public async Task EditRequirementAct(EditRequirementViewModel editRequirementViewModel)
+        public async Task EditRequirementActAsync(EditRequirementViewModel editRequirementViewModel)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 

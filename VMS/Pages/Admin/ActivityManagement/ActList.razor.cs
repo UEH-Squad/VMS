@@ -66,7 +66,7 @@ namespace VMS.Pages.Admin.ActivityManagement
         {
             var result = await Modal.Show<ApprovalActivity>("", BlazoredModalOptions.GetModalOptions()).Result;
             List<object> list = (List<object>)result.Data;
-                await ActivityService.ApproveAct(id,(bool)list[0], (bool)list[1],(int)list[2]);
+                await ActivityService.ApproveActAsync(id,(bool)list[0], (bool)list[1],(int)list[2]);
                 pagedResult.Items.Find(x => x.Id == id).IsApproved = true;
                 pagedResult.Items.Find(x => x.Id == id).IsDay = (bool)list[1];
                 pagedResult.Items.Find(x => x.Id == id).IsPoint = (bool)list[0];

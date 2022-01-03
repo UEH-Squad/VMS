@@ -35,10 +35,10 @@
                 </div>
                 <div class="">
                     <div class="mb-2 text-end">
-                        <button @onclick="ShowDenyModal" class="btn btn-deny">Từ chối</button>
-                        <button @onclick="ShowApproveModal" class="btn btn-approvie ms-2">Duyệt</button>
+                        <button @onclick="ShowDenyModalAsync" class="btn btn-deny">Từ chối</button>
+                        <button @onclick="ShowApproveModalAsync" class="btn btn-approvie ms-2">Duyệt</button>
                     </div>
-                    <span @onclick="ShowPopupConvert" class="regulation">Xem quy đổi ngày tình nguyện</span>
+                    <span @onclick="ShowPopupConvertAsync" class="regulation">Xem quy đổi ngày tình nguyện</span>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
         </div>
         <div class="act-footer__btn d-flex align-items-center mb-4">
             <a href="@Routes.EditActivity/@ActId" class="btn">Chỉnh sửa hoạt động</a>
-            <button @onclick="() => ShowEditModal()" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
+            <button @onclick="() => ShowEditModalAsync()" class="btn act-footer__btn--blue">Yêu cầu chỉnh sửa</button>
         </div>
     </div>
 </div>

@@ -71,7 +71,7 @@ namespace VMS.Pages.ActivityInfoPage
             isFav = !isFav;
         }
 
-        private async Task ShowEditRequirement()
+        private async Task ShowEditRequirementAsync()
         {
             ModalParameters parameters = new();
             parameters.Add("ActId", Activity.Id);

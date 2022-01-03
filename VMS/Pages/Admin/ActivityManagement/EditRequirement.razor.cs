@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
-using VMS.Common.Enums;
 
 namespace VMS.Pages.Admin.ActivityManagement
 {
@@ -20,26 +19,26 @@ namespace VMS.Pages.Admin.ActivityManagement
         public BlazoredModalInstance Modal { get; set; }
 
         private EditRequirementViewModel edit = new();
-        private IReadOnlyList<IBrowserFile> selectedImages;
-        private readonly string space = " ";
 
         [Inject]
         private IActivityService ActivityService { get; set; }
-        [Inject]
-        private IUploadService UploadService { get; set; }
-        private async Task CloseModal()
+      
+        private async Task CloseModalAsync()
         {
             await Modal.CloseAsync();
         }
         private IList<string> chosenTargets = new List<string>();
-        private async Task<IEnumerable<string>> SearchTargets(string searchText)
+        private async Task<IEnumerable<string>> SearchTargetsAsync(string searchText)
         {
             List<string> targets = PartToFix.GetList();
             return await Task.FromResult(targets.Where(x => x.ToLower().Contains(searchText.ToLower())).ToList());
         }
         private List<string> Image { get; set; } = new();
-
-        private async Task AddEditRequirement()
+        private void ImageChange(List<string> img)
+        {
+            Image = img;
+        }
+        private async Task AddEditRequirementAsync()
         {
             edit.ActivityId = ActId;
             edit.IsReport = false;
@@ -47,28 +46,8 @@ namespace VMS.Pages.Admin.ActivityManagement
             edit.CreateDate = DateTime.Now;
             edit.Images = Image;
             edit.PartToFix = (chosenTargets?.First());
-            await ActivityService.EditRequirementAct(edit);
+            await ActivityService.EditRequirementActAsync(edit);
         }
-        private bool isChangeFile = false;
-
-        private async Task OnInputFileAsync(InputFileChangeEventArgs e)
-        {
-            var imageFiles = e.GetMultipleFiles();
-            selectedImages = imageFiles;
-            Image.Clear();
-            isChangeFile = true;
-            foreach (var file in imageFiles)
-            {
-                if (file.ContentType != "image/jpeg")
-                {
-                    StateHasChanged();
-                }
-                else
-                {
-                    string x = await UploadService.SaveImageAsync(file, "admin", ImgFolder.Activities);
-                    Image.Add(x);
-                }
-            }
-        }
+       
     }
 }

@@ -17,7 +17,7 @@ namespace VMS.Pages.Admin.ActivityManagement
         [CascadingParameter]
         public BlazoredModalInstance Modal { get; set; }
 
-        private async Task CloseModal()
+        private async Task CloseModalAsync()
         {
             await Modal.CloseAsync();
         }
@@ -37,7 +37,7 @@ namespace VMS.Pages.Admin.ActivityManagement
                 }
             }
         }
-        private async Task Success()
+        private async Task SuccessAsync()
         {
             isSuccess = !isSuccess;
             await Modal.CloseAsync(ModalResult.Ok(unPinList));

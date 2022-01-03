@@ -42,8 +42,8 @@ namespace VMS.Application.Interfaces
         Task<List<ViewActivityViewModel>> GetOtherActivitiesAsync(string orgId, int[] excludedActitivyIds);
         Task<List<ActivityViewModel>> GetActivityIsPin();
         Task PinActivityAsync(List<int> list, bool isPin);
-        Task ApproveAct(int id, bool isPoint, bool isDay, int numberOfDay);
-        Task DenyAct(int id);
-        Task EditRequirementAct(EditRequirementViewModel editRequirementViewModel);
+        Task ApproveActAsync(int id, bool isPoint, bool isDay, int numberOfDay);
+        Task DenyActAsync(int id);
+        Task EditRequirementActAsync(EditRequirementViewModel editRequirementViewModel);
     }
 }

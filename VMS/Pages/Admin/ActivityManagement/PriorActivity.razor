@@ -1,7 +1,7 @@
 ﻿<div class="pop-up">
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
         <div class="pop-up-container pop-up-container--large position-relative border-10 d-flex align-items-center flex-column @(isSuccess ? "d-block" : "d-none")">
-            <div @onclick="CloseModal" class="close-btn position-absolute d-flex justify-content-center align-items-center">
+            <div @onclick="CloseModalAsync" class="close-btn position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
                 </span>
@@ -35,13 +35,13 @@
                 </div>
             }
             <div class="pop-up__btn d-flex mb-3">
-                <div @onclick="CloseModal" class="btn py-0 px-3 d-flex justify-content-center align-items-center pop-up__btn pop-up__btn--deny">Hủy</div>
-                <div @onclick="Success" class="btn py-0 px-2 pop-up__btn--accept d-flex justify-content-center align-items-center pop-up__btn">Gỡ ưu tiên</div>
+                <div @onclick="CloseModalAsync" class="btn py-0 px-3 d-flex justify-content-center align-items-center pop-up__btn pop-up__btn--deny">Hủy</div>
+                <div @onclick="SuccessAsync" class="btn py-0 px-2 pop-up__btn--accept d-flex justify-content-center align-items-center pop-up__btn">Gỡ ưu tiên</div>
             </div>
 
         </div>
         <div class="pop-up-container pop-up-container--small position-relative border-10 d-flex align-items-center flex-column @(isSuccess ? "d-none" : "d-block")">
-            <div @onclick="CloseModal" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
+            <div @onclick="CloseModalAsync" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
                 </span>

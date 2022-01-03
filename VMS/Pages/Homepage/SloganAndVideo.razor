@@ -6,18 +6,19 @@
             GoVirlunteer: Cộng đồng Tình nguyện trực tuyến Trường Đại học Kinh tế TP. HCM
         </div>
     </div>
-    <video class="video-header__source" loop muted></video> 
+    <img src="./img/Banner.png" alt="Alternate Text" class="w-100" />
+    @*<video class="video-header__source" loop muted></video>*@ 
 </div>
 
 @code {
     //Change your video url here
-    private string videoUrl = "https://player.vimeo.com/external/359344963.sd.mp4?s=95e2d6120bf8034a2f0d9c797f9b6a059e1deaf1&profile_id=165";
+    //private string videoUrl = "https://player.vimeo.com/external/359344963.sd.mp4?s=95e2d6120bf8034a2f0d9c797f9b6a059e1deaf1&profile_id=165";
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JsRuntime.InvokeVoidAsync("vms.PlayVideo", videoUrl);
-        }
-    }
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        await JsRuntime.InvokeVoidAsync("vms.PlayVideo", videoUrl);
+    //    }
+    //}
 }

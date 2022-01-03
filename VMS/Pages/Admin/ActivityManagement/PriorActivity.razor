@@ -1,7 +1,7 @@
 ﻿<div class="pop-up">
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
         <div class="pop-up-container pop-up-container--large position-relative border-10 d-flex align-items-center flex-column @(isSuccess ? "d-block" : "d-none")">
-            <div @onclick="CloseModal" class="close-btn position-absolute d-flex justify-content-center align-items-center">
+            <div @onclick="CloseModalAsync" class="close-btn position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
                 </span>
@@ -17,31 +17,37 @@
                     để tiếp tục thao tác này
                 </h4>
             </div>
-            @foreach (var item in fakeDatas)
+            @foreach (var item in ListPinned)
             {
                 <div class="d-flex justify-content-center align-items-center w-75 pb-3">
-                    <input type="checkbox" id="md" class="d-flex justify-content-center align-items-center me-4 flex-shrink-0">
+                    <input type="checkbox" @bind="item.IsPin" class="d-flex justify-content-center align-items-center me-4 flex-shrink-0">
                     <label for="md">
                         <div class="pop-up__act p-2">
-                            <div class="pop-up__act__title px-1 pt-1 lm-text">@item.Title</div>
+                            <div class="pop-up__act__title px-1 pt-1 lm-text">
+                                <a href="@Routes.AdminActivityInfo/@item.Id">
+                                    @item.Name
+                                </a>
+                            </div>
                             <div class="d-flex justify-content-between mt-1">
                                 <h5 class="pop-up__act__org d-flex align-items-center mb-0">
-                                    <i class="material-icons me-1">public</i> @item.Name
+                                    <a href="@Routes.AdminOrganizationProfile/@item.OrgId">
+                                        <i class="material-icons me-1">public</i> @item.Organizer.FullName
+                                    </a>
                                 </h5>
-                                <h5 class="fw-normal mb-0">Ngày đăng: 13/10/2021</h5>
+                                <h5 class="fw-normal mb-0">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</h5>
                             </div>
                         </div>
                     </label>
                 </div>
             }
             <div class="pop-up__btn d-flex mb-3">
-                <div @onclick="CloseModal" class="btn py-0 px-3 d-flex justify-content-center align-items-center pop-up__btn pop-up__btn--deny">Hủy</div>
-                <div @onclick="Success" class="btn py-0 px-2 pop-up__btn--accept d-flex justify-content-center align-items-center pop-up__btn">Gỡ ưu tiên</div>
+                <div @onclick="CloseModalAsync" class="btn py-0 px-3 d-flex justify-content-center align-items-center pop-up__btn pop-up__btn--deny">Hủy</div>
+                <div @onclick="SuccessAsync" class="btn py-0 px-2 pop-up__btn--accept d-flex justify-content-center align-items-center pop-up__btn">Gỡ ưu tiên</div>
             </div>
 
         </div>
         <div class="pop-up-container pop-up-container--small position-relative border-10 d-flex align-items-center flex-column @(isSuccess ? "d-none" : "d-block")">
-            <div @onclick="CloseModal" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
+            <div @onclick="CloseModalAsync" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
                 </span>
@@ -55,43 +61,5 @@
 </div>
 
 @code {
-    private bool isSuccess = true;
 
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-
-    [Parameter]
-    public bool IsClosed { get; set; }
-
-    private async Task CloseModal()
-    {
-        await Modal.CloseAsync();
-    }
-
-    protected override void OnInitialized()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            fakeDatas.Add(new FakeData()
-            {
-                Title = "Tuyển tình nguyện viên tham gia công tác phòng, chống dịch bệnh Covid - 19 tại địaaa phương",
-                Name = "Công nghệ thông tin kinh doanh",
-            });
-        }
-
-    }
-    private List<FakeData> fakeDatas = new();
-
-    private class FakeData
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Name { get; set; }
-    }
-
-    private async Task Success()
-    {
-        isSuccess = !isSuccess;
-    }
-}
 }

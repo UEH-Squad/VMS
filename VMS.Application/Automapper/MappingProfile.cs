@@ -79,6 +79,7 @@ namespace VMS.Application.Automapper
             MapAccountToUserAndBack();
 
             CreateMap<PaginatedList<User>, PaginatedList<UserViewModel>>();
+            CreateMap<EditRequirementViewModel, Feedback>();
         }
 
         private void MapReportToFeedback()

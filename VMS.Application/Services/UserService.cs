@@ -197,7 +197,7 @@ namespace VMS.Application.Services
         private static void CalculateTotalAndRankRating(ICollection<Recruitment> recruitments, out int totalRating, out double totalRank)
         {
             var recruitmentRatings = recruitments.SelectMany(x => x.RecruitmentRatings)
-                                                    .Where(x => x.IsOrgRating && !x.IsReport);
+                                                    .Where(x => x.IsOrgRating);
             totalRating = recruitmentRatings.Count();
             totalRank = recruitmentRatings.Sum(x => x.Rank);
         }

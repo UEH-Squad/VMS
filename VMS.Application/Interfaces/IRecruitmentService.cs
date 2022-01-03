@@ -14,5 +14,6 @@ namespace VMS.Application.Interfaces
         Task UpdateVounteerAsync(List<int> list, bool isDeleted);
         Task<List<ListVolunteerViewModel>> GetAllListVolunteerAsync(int actId);
         Task UpdateRecruitmentAsync(List<string> volunteers, int activityId);
+        Task<PaginatedList<RecruitmentViewModel>> GetAllRatingAsync(int activityId, FilterRecruitmentViewModel filterRecruitmentViewModel, int currentPage);
     }
 }

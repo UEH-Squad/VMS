@@ -148,21 +148,21 @@ namespace VMS.Infrastructure.Data.Context
             builder.Entity<Area>().Property(x => x.Color).HasDefaultValue("#18A0FB");
 
             const string ADMIN_ROLE_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e570";
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            builder.Entity<AppRole>().HasData(new AppRole
             {
                 Id = ADMIN_ROLE_ID,
                 Name = Role.Admin.ToString(),
                 NormalizedName = Role.Admin.ToString()
             });
 
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            builder.Entity<AppRole>().HasData(new AppRole
             {
                 Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
                 Name = Role.Organization.ToString(),
                 NormalizedName = Role.Organization.ToString()
             });
 
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            builder.Entity<AppRole>().HasData(new AppRole
             {
                 Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
                 Name = Role.User.ToString(),

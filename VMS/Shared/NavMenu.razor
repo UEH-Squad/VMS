@@ -14,27 +14,36 @@
         </div>
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
             <ul class="navbar-nav navbar-list mb-4 mb-xl-0 fw-bold my-collapse__list">
-                <li class="nav-item">
-                    <NavLink href="@Routes.HomePage" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-2 mx-xxl-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
+                <li class="nav-item nav-item-haverHover">
+                    <NavLink href="@Routes.HomePage" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
                 </li>
-                <li class="nav-item">
-                    <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-2 mx-xxl-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
+                <li class="nav-item nav-item-haverHover">
+                    <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
                 </li>
-                <li class="nav-item nav-mega-menu">
-                    <NavLink  class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link ">Cộng đồng</NavLink>
+                <li class="nav-item  nav-mega-menu @(isShowMenu ? "" : "nav-item-haverHover")">
+                    <NavLink @onclick="ShowMenu" class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link d-flex align-items-center " >
+                        <span>Cộng đồng</span>
+                        <i class="material-icons-outlined icon-down-up ms-1">
+                            @(isShowMenu ? "expand_less" : "expand_more")
+                        </i>
+                    </NavLink>
                     <div class="mega-menu row">
                         <div class="row">
                             <div class="col-6 ">
                                 <a @onmousemove="(() => ShowDetail(1))" class="d-flex align-items-center mega-menu-li-org">
-                                    <i class="material-icons-outlined ">person</i>
+                                    <i class="material-icons-outlined">
+                                        people
+                                    </i>
                                     <span>Đơn vị tổ chức</span>
                                 </a>
                                 <a @onmousemove="(() => ShowDetail(2))" class="d-flex align-items-center mega-menu-li-user">
-                                    <i class="material-icons-outlined ">person</i>
+                                    <i class="material-icons">person</i>
                                     <span>Tình nguyện viên</span>
                                 </a>
                                 <a @onmousemove="(() => ShowDetail(3))" class="d-flex align-items-center mega-menu-li-rank">
-                                    <i class="material-icons-outlined">person</i>
+                                    <i class="material-icons">
+                                        local_fire_department
+                                    </i>
                                     <span>Đại lộ danh vọng</span>
                                 </a>
                             </div>
@@ -60,12 +69,29 @@
                                 </div>
                                 <p class="mb-0">Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái công tác có sức khoẻ, tinh thần hăng hái công tác hăng hái công tác </p>
                             </div>
-                        </div>
-                       
+                        </div>                      
+                    </div>
+                    <div class="menuCommunity @(isShowMenu ? "d-block" : "d-none")">
+                        <a class="d-flex align-items-center mega-menu-li-org">
+                            <i class="material-icons-outlined">
+                                people
+                            </i>
+                            <span>Đơn vị tổ chức</span>
+                        </a>
+                        <a  class="d-flex align-items-center mega-menu-li-user">
+                            <i class="material-icons">person</i>
+                            <span>Tình nguyện viên</span>
+                        </a>
+                        <a class="d-flex align-items-center mega-menu-li-rank">
+                            <i class="material-icons">
+                                local_fire_department
+                            </i>
+                            <span>Đại lộ danh vọng</span>
+                        </a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <NavLink  class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
+                <li class="nav-item nav-item-haverHover">
+                    <NavLink  class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
                 </li>
                 @*<li class="nav-item">
             <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
@@ -93,6 +119,12 @@
     bool isShowDetailOrg = true;
     bool isShowDetailUser = false;
     bool isShowDetailRank = false;
+    bool isShowMenu = false;
+
+    private void ShowMenu()
+    {
+        isShowMenu = !isShowMenu;
+    }
 
     private void ShowDetail(int i)
     {

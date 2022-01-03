@@ -2,10 +2,9 @@
 .my-navbar {
     min-height: 65px;
     z-index: 100;
-
-    @include on('lg') {
+    /*    @include on('lg') {
         min-height: 80px;
-    }
+    }*/
 
     &-container {
         justify-content: unset;
@@ -133,44 +132,75 @@
         flex-direction: column-reverse;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         position: absolute;
-        border-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
         top: 100%;
-        left: 15px;
+        left: 0px;
         min-width: 220px;
+        min-height: 100vh;
         width: 40vw;
-
-
+        justify-content: flex-end;
+        /**/
         @include on('xl') {
+            left: 15px;
+            justify-content: flex-start;
+            /* height: 30px;*/
+            min-height: 80px;
             position: unset;
             box-shadow: none;
             border-radius: 0;
-           /* flex-direction: unset;
+            /* flex-direction: unset;
             justify-content: flex-end;*/
+        }
+
+        .nav-item {
+        }
+
+        .nav-item-haverHover {
+            &:hover {
+                background: rgba($blue, 0.1);
+            }
+
+            @include on('xl') {
+                &:hover {
+                    background-color: transparent;
+                }
+            }
         }
 
         .nav-link {
             color: $blue;
 
             &.active {
-                color: $blue-bold;
+                color: $blue;
             }
 
             &:hover {
-                color: $blue-bold;
+                color: $blue;
             }
 
-            &.active::before {
-                display: block;
+            @include on('xl') {
+                &.active {
+                    color: $blue-bold;
+                }
+
+                &:hover {
+                    color: $blue-bold;
+                }
+
+                &.active::before {
+                    display: block;
+                }
             }
         }
 
         &__list {
-            width: auto;
-            /*@include on('xl') {
-            margin-left: 6%;
-        }
+            width: 100%;
 
-        @include on('xxl') {
+            @include on('xl') {
+                width: auto;
+            }
+            /*@include on('xxl') {
             margin-left: 15%;
         }*/
         }
@@ -179,6 +209,22 @@
             font-size: 16px;
             display: block;
             font-weight: 600;
+
+            &:before {
+                content: "";
+                position: absolute;
+                left: -24px;
+                right: 0;
+                height: 100%;
+                width: 5px;
+                top: 0px;
+                background-color: $blue;
+                display: none;
+            }
+
+            &:hover.my-collapse__list__link::before {
+                display: block;
+            }
 
             @include on('xl') {
                 font-size: 20px;
@@ -189,7 +235,8 @@
                     left: 0;
                     right: 0;
                     height: 5px;
-                    top: 67px;
+                    width: 100%;
+                    top: 59px;
                     background-color: $blue-bold;
                     display: none;
                 }
@@ -211,21 +258,60 @@
                 margin-left: 20px;
             }
         }
+
+        .menuCommunity {
+            @include on('xl') {
+                display: none !important
+            }
+
+            span {
+                font-weight: 400;
+                font-size: 14px;
+                letter-spacing: -0.015em;
+                color: #000000;
+            }
+
+            i {
+                color: #85CEFF;
+                margin-right: 16px;
+                font-size: 20px;
+            }
+
+            a {
+                padding: 5px 30px;
+
+                &:hover {
+                    background: rgba($blue, 0.1);
+                }
+            }
+        }
+
+        .icon-down-up {
+            @include on('xl') {
+                display: none !important;
+            }
+        }
+    }
+
+    .navbar-collapse {
+        width: 285px;
     }
 }
 
 .nav-mega-menu {
     position: relative;
 
-    &:hover .mega-menu {
-        display: block;
+    @include on('xl') {
+        &:hover .mega-menu {
+            display: block;
+        }
     }
 
     .mega-menu {
-        width: 760px;
         display: none;
+        width: 760px;
         position: absolute;
-        bottom: -280px;
+        bottom: -275px;
         left: -250px;
         background: #FFFFFF;
         box-shadow: 5px 10px 40px 2px rgba(11, 40, 50, 0.15);
@@ -234,7 +320,7 @@
 
         a {
             display: block;
-            padding: 20px 0 30px 40px;
+            padding: 25px 0 25px 40px;
 
             &:hover {
                 background: rgba(24, 160, 251, 0.1);
@@ -248,9 +334,10 @@
             }
 
             i {
-                color: $blue;
+                color: #85CEFF;
                 margin-right: 20px;
-                font-size: 24px;
+                font-size: 32px;
+                transform: translateY(-4px)
             }
         }
 

@@ -3,11 +3,11 @@
         <input @onclick="ToggleYearDropdown" @onfocusout="CloseCityDropdown" class="popup-btn @(isYearGrey ? "bg-grey" : "")" placeholder="@yearChoosenValue" readonly />
         <div @onclick:preventDefault class="my-dropdown" style="display: @(isYearShow ? "block" : "none")">
             <ul>
-                @if (Years is not null)
+                @if (courses is not null)
                 {
-                    @foreach (var year in Years)
+                    @foreach (var course in courses)
                     {
-                        <li @onmousedown="() => ChooseYearlValue(year)">@year.Year</li>
+                        <li @onmousedown="() => ChooseYearValue(course)">@course</li>
                     }
                 }
             </ul>
@@ -70,9 +70,7 @@
         <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
         <button @onclick="ClearFilter" type="button" class="clear-filter-btn">Xóa lọc</button>
     </div>
-
 </div>
 
-    @code {
-
-    }
+@code {
+}

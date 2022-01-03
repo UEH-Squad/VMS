@@ -1,19 +1,21 @@
 ﻿@using VMS.Application.ViewModels
-@attribute [Route(Routes.OrganizerSearch)]
+@attribute [Route(Routes.VolunteerSearch)]
+
 <div class="container-lg">
     <div class="row">
         <div class="col-lg-10 mx-auto">
             <SearchAndFilter
                 HaveSearchBox="true" IsLongDistanceFilter="true"
-                FilterChanged="OnFilterChangedAsync" />
+                FilterChanged="OnFilterChangedAsync"/>
 
-            <SearchResult HaveLevel="true"
-                IsOrgResult="true"
+            <VMS.Pages.SearchOrganizer.SearchResult
+                IsUserResult="true" 
                 PagedResult="pagedResult"
-                OnPageChanged="OnPageChangedAsync" />
+                OnPageChanged="OnPageChangedAsync"/>
         </div>
     </div>
 </div>
 
 @code {
+
 }

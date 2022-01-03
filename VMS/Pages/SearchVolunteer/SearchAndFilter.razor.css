@@ -28,13 +28,15 @@ h3 {
 
 p {
   font-size: 12px;
-  color: #18A0FB; }
+  color: #18A0FB;
+  margin-top: 12px !important; }
   @media (min-width: 576px) {
     p {
       font-size: 16px; } }
   @media (min-width: 992px) {
     p {
-      font-size: 24px; } }
+      font-size: 24px;
+      margin-top: unset; } }
   @media (min-width: 1200px) {
     p {
       font-size: 30px; } }
@@ -44,15 +46,39 @@ p {
       p span {
         color: #18A0FB; } }
 
+.filter-bar {
+  justify-content: space-between; }
+
 .filter-bar_left {
-  width: 65% !important; }
+  width: 65%;
+  flex-direction: column; }
+  @media (min-width: 768px) {
+    .filter-bar_left {
+      width: 75%; } }
+  @media (min-width: 992px) {
+    .filter-bar_left {
+      width: 65%;
+      flex-direction: row;
+      justify-content: space-between; } }
   @media (min-width: 1200px) {
     .filter-bar_left {
-      width: 40% !important; } }
+      width: 70%; } }
+
+.filter-bar_row-1 {
+  display: flex;
+  margin-bottom: 5%;
+  justify-content: space-around; }
+
+.filter-bar_row-2 {
+  display: flex;
+  justify-content: space-around; }
+  @media (min-width: 992px) {
+    .filter-bar_row-2 {
+      margin-bottom: 5%; } }
 
 .filter-item {
   font-size: 10px;
-  width: 50%; }
+  width: 45%; }
   @media (min-width: 1200px) {
     .filter-item {
       font-size: 18px; } }
@@ -120,15 +146,13 @@ p {
   margin-top: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   position: absolute;
-  top: 40%;
   background-color: #fff;
   z-index: 10;
   display: none;
   width: 100%; }
   @media (min-width: 1200px) {
     .my-dropdown {
-      padding: 15px 18px;
-      top: 100%; } }
+      padding: 15px 18px; } }
   .my-dropdown ul {
     font-size: 9px;
     font-weight: 500;
@@ -165,6 +189,12 @@ p {
 
 .popup-btn:focus ~ .my-dropdown {
   display: block; }
+
+.filter-bar_right {
+  align-items: flex-end; }
+  @media (min-width: 992px) {
+    .filter-bar_right {
+      align-items: baseline; } }
 
 .filter-btn {
   color: #fff;

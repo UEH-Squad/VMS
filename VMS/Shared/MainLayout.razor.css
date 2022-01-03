@@ -6,6 +6,6 @@
 /*#endregion */
 .main-layout {
   margin-top: 65px; }
-  @media (min-width: 992px) {
+  @media (min-width: 1200px) {
     .main-layout {
       margin-top: 80px; } }

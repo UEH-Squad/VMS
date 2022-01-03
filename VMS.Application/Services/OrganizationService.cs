@@ -36,7 +36,7 @@ namespace VMS.Application.Services
         {
             var recruitmentRatings = activities.SelectMany(x => x.Recruitments)
                                                     .SelectMany(x => x.RecruitmentRatings)
-                                                    .Where(x => !x.IsOrgRating && !x.IsReport);
+                                                    .Where(x => !x.IsOrgRating);
             totalRating = recruitmentRatings.Count();
             totalRank = recruitmentRatings.Sum(x => x.Rank);
         }

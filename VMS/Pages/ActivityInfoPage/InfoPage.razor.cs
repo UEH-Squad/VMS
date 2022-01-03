@@ -1,4 +1,5 @@
-﻿using Blazored.Modal.Services;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Linq;
@@ -70,11 +71,12 @@ namespace VMS.Pages.ActivityInfoPage
             isFav = !isFav;
         }
 
-        private async Task ShowEditRequirement()
+        private async Task ShowEditRequirementAsync()
         {
-            Modal.Show<Admin.ActivityManagement.EditRequirement>("", BlazoredModalOptions.GetModalOptions());
+            ModalParameters parameters = new();
+            parameters.Add("ActId", Activity.Id);
+            Modal.Show<Admin.ActivityManagement.EditRequirement>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
-
         private void OnClickNavigateToEditActivty(int activityId)
         {
             NavigationManager.NavigateTo(Routes.EditActivity + "/" + activityId, true);

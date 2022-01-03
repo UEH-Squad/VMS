@@ -17,58 +17,8 @@ namespace VMS.Infrastructure.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "40f5b055-fc1f-4e25-b077-0a78c3925ca3",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        },
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "a30995e2-03ba-4eb8-8f95-e13cf6fc0b16",
-                            Name = "Organization",
-                            NormalizedName = "Organization"
-                        },
-                        new
-                        {
-                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "d1be8518-cb44-4973-a8da-d46b25a6cd88",
-                            Name = "User",
-                            NormalizedName = "User"
-                        });
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -140,28 +90,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
-                            RoleId = "a18be9c0-aa65-4af8-bd17-00bd9344e570"
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
@@ -227,10 +155,16 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDay")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsPin")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPoint")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsVirtual")
@@ -253,6 +187,9 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfDays")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OpenDate")
                         .HasColumnType("datetime2");
@@ -400,6 +337,56 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasIndex("ParentPathId");
 
                     b.ToTable("AddressPaths");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.AppRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
+                            ConcurrencyStamp = "d8a35366-4fcc-494e-ab65-3d515e0b1990",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
+                            ConcurrencyStamp = "903be336-8422-4da4-b84e-1a877aa0816f",
+                            Name = "Organization",
+                            NormalizedName = "Organization"
+                        },
+                        new
+                        {
+                            Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
+                            ConcurrencyStamp = "d6b0bdad-dbd4-4458-a457-408f0917bbb5",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>
@@ -690,6 +677,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<bool>("IsReportUser")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRequest")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -699,16 +689,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Feedbacks");
                 });
@@ -726,14 +711,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RecruitmentRatingId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
-
-                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ImageReports");
                 });
@@ -751,14 +731,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RecruitmentRatingId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
-
-                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ReasonReports");
                 });
@@ -829,9 +804,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsOrgRating")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsReport")
                         .HasColumnType("bit");
 
                     b.Property<double>("Rank")
@@ -1142,7 +1114,21 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Mission")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
                     b.Property<string>("NotifiedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber2")
@@ -1198,7 +1184,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "2461e544-0a15-4f9a-a7af-720be5c5249f",
+                            ConcurrencyStamp = "efdef68d-8c79-48af-b5c1-7dec37c9e108",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1206,7 +1192,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPkWnAIN1u0qxxLhXt9npV0rLJ8Ta2TCliJSqRxSdFv4pd6fvD8Gs9OJLiQqVvmlCg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENOCkuhDoXVasyOW/yiWYZsuHya4BHwrpK54HLN41ALoOUoRwqqMMJXGnMHiWejy9w==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",
@@ -1265,6 +1251,28 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.ToTable("UserAreas");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.UserRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
+                            RoleId = "a18be9c0-aa65-4af8-bd17-00bd9344e570"
+                        });
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.UserSkill", b =>
                 {
                     b.Property<int>("Id")
@@ -1292,7 +1300,7 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("VMS.Domain.Models.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1310,21 +1318,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("VMS.Domain.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("VMS.Domain.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -1466,10 +1459,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VMS.Domain.Models.User", null)
-                        .WithMany("Reports")
-                        .HasForeignKey("UserId1");
-
                     b.Navigation("Activity");
 
                     b.Navigation("User");
@@ -1483,10 +1472,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
-                        .WithMany("ImageReports")
-                        .HasForeignKey("RecruitmentRatingId");
-
                     b.Navigation("Feedback");
                 });
 
@@ -1497,10 +1482,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasForeignKey("FeedbackId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
-                        .WithMany("ReasonReports")
-                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
                 });
@@ -1587,6 +1568,25 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.UserRole", b =>
+                {
+                    b.HasOne("VMS.Domain.Models.AppRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VMS.Domain.Models.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.UserSkill", b =>
                 {
                     b.HasOne("VMS.Domain.Models.Skill", "Skill")
@@ -1628,6 +1628,11 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("UserAddresses");
                 });
 
+            modelBuilder.Entity("VMS.Domain.Models.AppRole", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
             modelBuilder.Entity("VMS.Domain.Models.Area", b =>
                 {
                     b.Navigation("Activities");
@@ -1652,13 +1657,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("RecruitmentRatings");
                 });
 
-            modelBuilder.Entity("VMS.Domain.Models.RecruitmentRating", b =>
-                {
-                    b.Navigation("ImageReports");
-
-                    b.Navigation("ReasonReports");
-                });
-
             modelBuilder.Entity("VMS.Domain.Models.Skill", b =>
                 {
                     b.Navigation("ActivitySkills");
@@ -1680,11 +1678,11 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Navigation("Recruitments");
 
-                    b.Navigation("Reports");
-
                     b.Navigation("UserAddresses");
 
                     b.Navigation("UserAreas");
+
+                    b.Navigation("UserRoles");
 
                     b.Navigation("UserSkills");
                 });

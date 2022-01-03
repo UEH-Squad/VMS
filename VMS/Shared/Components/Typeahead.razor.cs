@@ -55,7 +55,7 @@ namespace VMS.Shared.Components
         [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
         [Parameter] public int MinimumLength { get; set; } = 1;
         [Parameter] public int Debounce { get; set; } = 300;
-        [Parameter] public int MaximumSuggestions { get; set; } = 10;
+        [Parameter] public int MaximumSuggestions { get; set; } = 12;
         [Parameter] public bool EnableDropDown { get; set; } = false;
         [Parameter] public bool EnablePopup { get; set; } = false;
         [Parameter] public bool ShowDropDownOnFocus { get; set; } = false;

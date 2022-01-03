@@ -3,11 +3,7 @@
 @attribute [Route(Routes.AdminActivityManagement)]
 @attribute [Authorize(Roles = "Admin")]
 <div class="mt-4">
-    <ActivityFilter />
-    <ActList />
+    <ActivityFilter Filter="filter"
+                               FilterChanged="FilterChanged" />
+    <ActList Filter=@filter />
 </div>
-
-
-@code {
-
-}

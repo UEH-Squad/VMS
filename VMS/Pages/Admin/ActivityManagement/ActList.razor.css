@@ -162,10 +162,11 @@
         background-color: #0B588C; }
 
 .div-volunteer .icon-check {
-  font-size: 14px;
-  color: #F14747; }
+  font-size: 17px;
+  color: #64D72F; }
 
 .div-volunteer span {
-  font-weight: 500;
-  font-size: 14px;
-  color: #F14747; }
+    font-weight: 500;
+    font-size: 14px;
+    color: #717171;
+}

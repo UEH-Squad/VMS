@@ -28,11 +28,13 @@
 <div class="container @(navDel ? "d-block" : "d-none")">
     <div class="my-container row">
         <p class="quantity-volunteers p-0 col-12 col-xl-8">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
-        <div class="button p-0 col-6 col-xl-2">
-            <button @onclick="@(() => ShowConfirmAsync())" class="button__text button__text--del">Xóa nhiều</button>
-        </div>
-        <div class="link p-0 col-6 col-xl-2">
-            <h4 @onclick="ChangeNavAsync" class="link__text link__text--del">Danh sách xóa</h4>
+        <div class="button-and-link p-0 col-12 col-xl-4 d-flex">
+            <div class="button">
+                <button @onclick="@(() => ShowConfirmAsync())" class="button__text button__text--del">Xóa nhiều</button>
+            </div>
+            <div class="link">
+                <h4 @onclick="ChangeNavAsync" class="link__text link__text--del">Danh sách xóa</h4>
+            </div>
         </div>
     </div>
 </div>
@@ -40,11 +42,13 @@
 <div class="container @(navUndo ? "d-block" : "d-none")">
     <div class="my-container row">
         <p class="quantity-volunteers p-0 col-12 col-xl-8">Có <span>@Quantity</span> tình nguyện viên ứng với kết quả tìm kiếm của bạn</p>
-        <div class="button p-0 col-6 col-xl-2">
-            <button @onclick="@(() => ShowConfirmAsync())" class="button__text button__text--undo">Chọn lại</button>
-        </div>
-        <div class="link p-0 col-6 col-xl-2">
-            <h4 @onclick="ChangeNavAsync" class="link__text link__text--undo">Xem danh sách</h4>
+        <div class="button-and-link p-0 col-12 col-xl-4 d-flex">
+            <div class="button">
+                <button @onclick="@(() => ShowConfirmAsync())" class="button__text button__text--undo">Chọn lại</button>
+            </div>
+            <div class="link">
+                <h4 @onclick="ChangeNavAsync" class="link__text link__text--undo">Xem danh sách</h4>
+            </div>
         </div>
     </div>
 </div>

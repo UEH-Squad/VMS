@@ -3,44 +3,69 @@
 .list-card {
 
     .mycard {
-        margin: 10px 0;
+        margin: 12px;
+        border-bottom: 1px solid $grey-icon;
+
+        @include on('sm') {
+            border-bottom: none;
+        }
 
         &__info {
             font-size: 20px;
             display: grid;
-            grid-template-columns: 10% 90%;
+            grid-template-columns: 17% 83%;
             padding: 7px;
             border-radius: 5px;
 
+            @include on ('xl') {
+                grid-template-columns: 10% 90%;
+            }
+
             &--avatar {
-                width: 60px;
-                height: 60px;
+                width: 22px;
+                height: 22px;
                 object-fit: cover;
                 border-radius: 50%;
+
+                @include on('sm') {
+                    width: 60px;
+                    height: 60px;
+                }
             }
 
             &--name-and-mssv {
-                border-bottom: 1px solid $grey-icon;
-                display: grid;
-                grid-template-columns: 60% 40%;
-                margin-bottom: -6px;
+
+                @include on ('sm') {
+                    border-bottom: 1px solid $grey-icon;
+                    display: grid;
+                    grid-template-columns: 60% 40%;
+                }
 
                 .info-name, .info-mssv {
+                    font-size: 14px;
                     color: $grey-text;
                     display: flex;
                     align-items: center;
                     text-decoration: none;
+
+                    @include on ('sm') {
+                        font-size: 20px;
+                    }
                 }
             }
         }
 
         &__checkbox {
+            justify-content: center;
 
+            @include on ('xl') {
+                justify-content: unset;
+            }
             &--my-checkbox {
+                width: 15px;
+                height: 15px;
+                border-radius: 2px;
                 cursor: pointer;
-                border-radius: 5px;
-                width: 35px;
-                height: 35px;
                 margin-right: 5px;
                 vertical-align: top;
                 background-color: #fff;
@@ -54,17 +79,30 @@
                 -webkit-print-color-adjust: exact;
                 position: relative;
 
+                @include on ('sm') {
+                    border-radius: 5px;
+                    width: 35px;
+                    height: 35px;
+                }
+
                 &::before {
                     content: "";
-                    width: 22px;
-                    height: 9px;
-                    border-left: 3px solid $blue;
-                    border-bottom: 3px solid $blue;
+                    width: 9px;
+                    height: 4px;
+                    border-left: 2px solid $blue;
+                    border-bottom: 2px solid $blue;
                     position: absolute;
                     top: 40%;
                     left: 52%;
                     transform: translate(-50%, -50%) rotate( -45deg );
                     display: none;
+
+                    @include on ('sm') {
+                        width: 22px;
+                        height: 9px;
+                        border-left: 3px solid $blue;
+                        border-bottom: 3px solid $blue;
+                    }
                 }
 
                 &:checked::before {
@@ -74,14 +112,20 @@
         }
 
         &__button {
-        
+
             &--registration-form {
+                font-size: 12px;
+                padding: 4px 10px;
                 float: right;
-                padding: 9px 20px;
                 border: none;
                 border-radius: 5px;
                 color: white;
                 background-color: $green;
+
+                @include on('sm') {
+                    font-size: 16px;
+                    padding: 9px 24px;
+                }
 
                 &:hover {
                     background-color: $green-bold;

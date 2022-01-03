@@ -10,7 +10,7 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.SearchOrganizer
 {
-    public partial class SearchAndFilter
+    public partial class SearchAndFilter : ComponentBase
     {
         private string levelChoosenValue = "Cấp";
         private bool isLevelShow;

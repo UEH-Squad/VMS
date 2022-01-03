@@ -69,7 +69,6 @@ namespace VMS.Application.Automapper
             CreateMap<Faculty, FacultyViewModel>();
             CreateMap<PaginatedList<Activity>, PaginatedList<ActivityViewModel>>();
             MapReportToFeedback();
-            MapEditRequirementToFeedback();
 
             CreateMap<Recruitment, RecruitmentViewModel>()
                 .ForMember(x => x.Organizer, opt => opt.MapFrom(src => src.Activity.Organizer));
@@ -80,6 +79,7 @@ namespace VMS.Application.Automapper
             MapAccountToUserAndBack();
 
             CreateMap<PaginatedList<User>, PaginatedList<UserViewModel>>();
+            CreateMap<EditRequirementViewModel, Feedback>();
         }
 
         private void MapReportToFeedback()
@@ -91,16 +91,6 @@ namespace VMS.Application.Automapper
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
             CreateMap<Recruitment, ListVolunteerViewModel>();
-        }
-        private void MapEditRequirementToFeedback()
-        {
-            CreateMap<EditRequirementViewModel, Feedback>()
-                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
-                .ForMember(dest => dest.IsReport, opt => opt.MapFrom(src => false))
-                .ForMember(dest => dest.IsReportUser, opt => opt.MapFrom(src => false))
-                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Content))
-                .ForMember(dest => dest.PartToFix, opt => opt.MapFrom(src => src.PartToFix))
-                .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
         }
 
         private void MapAccountToUserAndBack()

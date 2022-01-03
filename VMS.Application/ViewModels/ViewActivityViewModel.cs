@@ -30,7 +30,7 @@ namespace VMS.Application.ViewModels
         public string Targets { get; set; }
         public bool IsPoint { get; set; }
         public bool IsDay { get; set; }
-        public int NumberOfDay { get; set; }
+        public int NumberOfDays { get; set; }
 
 
         public Area Area { get; set; }

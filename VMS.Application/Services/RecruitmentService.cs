@@ -111,7 +111,7 @@ namespace VMS.Application.Services
 
             foreach (var recruitment in recruitments)
             {
-                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating == isOrgRating && !x.IsReport);
+                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating == isOrgRating);
 
                 if (recruitmentRating is null)
                 {
@@ -138,12 +138,12 @@ namespace VMS.Application.Services
             {
                 if (isRated.Value)
                 {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && !x.IsReport && x.Rank != 0);
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && x.Rank != 0);
                 }
                 else
                 {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && !x.IsReport && x.Rank == 0)
-                                || !r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && !x.IsReport);
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && x.Rank == 0)
+                                || !r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating);
                 }
             }
 

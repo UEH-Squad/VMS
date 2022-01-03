@@ -458,8 +458,8 @@ namespace VMS.Application.Services
 
         private static double GetRateOfActivity(ICollection<Recruitment> recruitments)
         {
-            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Sum(x => x.Rank))
-                    / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating && !x.IsReport).Count());
+            return recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating).Sum(x => x.Rank))
+                    / recruitments.Sum(a => a.RecruitmentRatings.Where(x => !x.IsOrgRating).Count());
         }
 
         private Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivities(Dictionary<ActOrderBy, bool> orderList, Coordinate coordinate)
@@ -608,7 +608,7 @@ namespace VMS.Application.Services
 
             if (actType == StatusAct.Upcoming)
             {
-                return x => x.StartDate > DateTime.Now.Date || x.IsApproved == false && (x.IsDenied == false);
+                return x => x.StartDate > DateTime.Now.Date || x.IsApproved == false && (x.IsDeleted == false);
             }
 
             if (actType == StatusAct.Happenning)
@@ -625,6 +625,7 @@ namespace VMS.Application.Services
             {
                 return x => x.CloseDate < DateTime.Now.Date || x.IsClosed == true;
             }
+
             if (actType == StatusAct.All)
             {
                 return x => true;
@@ -701,7 +702,7 @@ namespace VMS.Application.Services
             activity.IsApproved = true;
             activity.IsPoint = isPoint;
             activity.IsDay = isDay;
-            activity.NumberOfDay = numberOfDay;
+            activity.NumberOfDays = numberOfDay;
 
             await _repository.UpdateAsync(dbContext, activity);
         }

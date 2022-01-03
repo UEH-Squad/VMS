@@ -9,7 +9,7 @@
             <div class="pop-up__title text-center py-4">
                 <h3 class="fw-medium">Yêu cầu<span> chỉnh sửa</span></h3>
             </div>
-            <EditForm Model="edit" OnValidSubmit="@AddEditRequirementAsync">
+            <EditForm Model="editRequest" OnValidSubmit="@AddEditRequirementAsync">
                 <div class="pop-up__form mb-3">
                     <div class="fw-medium align-self-center mb-2">Mục cần yêu cầu chỉnh sửa <span class="required-asterick">(*)</span></div>
                     <div>
@@ -30,7 +30,7 @@
                 <div class="pop-up__form mb-3">
                     <div class="fw-medium align-self-center mb-2">Nội dung yêu cầu chỉnh sửa <span class="required-asterick">(*)</span></div>
                     <div>
-                        <InputTextArea @bind-Value="edit.Content" rows="4" class="w-100 form-control form-input"></InputTextArea>
+                        <InputTextArea @bind-Value="editRequest.DesReport" rows="4" class="w-100 form-control form-input"></InputTextArea>
                     </div>
                 </div>
 

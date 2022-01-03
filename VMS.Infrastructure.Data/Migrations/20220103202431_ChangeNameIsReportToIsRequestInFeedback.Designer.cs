@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220103202431_ChangeNameIsReportToIsRequestInFeedback")]
+    partial class ChangeNameIsReportToIsRequestInFeedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -369,21 +371,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "d8a35366-4fcc-494e-ab65-3d515e0b1990",
+                            ConcurrencyStamp = "f47c2688-cd99-463a-9bc4-c46651ea3fd2",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "903be336-8422-4da4-b84e-1a877aa0816f",
+                            ConcurrencyStamp = "c3546493-4d60-4713-9924-5bd4e4bb0cb1",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "d6b0bdad-dbd4-4458-a457-408f0917bbb5",
+                            ConcurrencyStamp = "9f118fc0-1b66-4c01-a4b7-9d4c984e6c41",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -711,9 +713,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RecruitmentRatingId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
+
+                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ImageReports");
                 });
@@ -731,9 +738,14 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RecruitmentRatingId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FeedbackId");
+
+                    b.HasIndex("RecruitmentRatingId");
 
                     b.ToTable("ReasonReports");
                 });
@@ -804,6 +816,9 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsOrgRating")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReport")
                         .HasColumnType("bit");
 
                     b.Property<double>("Rank")
@@ -1184,7 +1199,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "efdef68d-8c79-48af-b5c1-7dec37c9e108",
+                            ConcurrencyStamp = "b5fafe76-713c-4345-9b71-125cc836b690",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1192,7 +1207,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENOCkuhDoXVasyOW/yiWYZsuHya4BHwrpK54HLN41ALoOUoRwqqMMJXGnMHiWejy9w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGA5L0d8nJ+QNpC0+PQg9f5uNkizGbEEsHeXAdDpBof8rGMW65mQe7EXLM7hRJt/uQ==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",
@@ -1472,6 +1487,10 @@ namespace VMS.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                        .WithMany("ImageReports")
+                        .HasForeignKey("RecruitmentRatingId");
+
                     b.Navigation("Feedback");
                 });
 
@@ -1482,6 +1501,10 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasForeignKey("FeedbackId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("VMS.Domain.Models.RecruitmentRating", null)
+                        .WithMany("ReasonReports")
+                        .HasForeignKey("RecruitmentRatingId");
 
                     b.Navigation("Feedback");
                 });
@@ -1655,6 +1678,13 @@ namespace VMS.Infrastructure.Data.Migrations
             modelBuilder.Entity("VMS.Domain.Models.Recruitment", b =>
                 {
                     b.Navigation("RecruitmentRatings");
+                });
+
+            modelBuilder.Entity("VMS.Domain.Models.RecruitmentRating", b =>
+                {
+                    b.Navigation("ImageReports");
+
+                    b.Navigation("ReasonReports");
                 });
 
             modelBuilder.Entity("VMS.Domain.Models.Skill", b =>

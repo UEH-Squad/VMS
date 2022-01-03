@@ -46,7 +46,7 @@ namespace VMS.Pages.Admin.ActivityInfo
                 IsApprove = false,
                 IsPoint = activity.IsPoint,
                 IsDay = activity.IsDay,
-                NumberOfDays = activity.NumberOfDay
+                NumberOfDays = activity.NumberOfDays
             };
 
             var parameters = new ModalParameters();

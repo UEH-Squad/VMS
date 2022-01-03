@@ -9,24 +9,28 @@ namespace VMS.Pages.Admin.ActivityManagement
 {
     public partial class UploadMultipleImg : ComponentBase
     {
-        [Parameter]
-        public List<string> Image { get; set; }
+        [Parameter] public List<string> Image { get; set; }
+
         [Parameter]
         public EventCallback<List<string>> ImageChange { get; set; }
-        [Inject]
-        private IUploadService UploadService { get; set; }
+
+        [Inject] private IUploadService UploadService { get; set; }
+        [Inject] private IIdentityService IdentityService { get; set; }
+
         private async Task OnInputFileAsync(InputFileChangeEventArgs e)
         {
+            string userId = IdentityService.GetCurrentUserId();
+
             var imageFiles = e.GetMultipleFiles();
             foreach (var file in imageFiles)
             {
-                if (file.ContentType != "image/jpeg")
+                if (!file.ContentType.Contains("image/"))
                 {
                     StateHasChanged();
                 }
                 else
                 {
-                    string x = await UploadService.SaveImageAsync(file, "editrequirement", ImgFolder.Activities);
+                    string x = await UploadService.SaveImageAsync(file, userId, ImgFolder.Request);
                     Image.Add(x);
                     await ImageChange.InvokeAsync(Image);
                 }
@@ -46,7 +50,5 @@ namespace VMS.Pages.Admin.ActivityManagement
             Image.Remove(img);
             await ImageChange.InvokeAsync(Image);
         }
-
-       
     }
 }

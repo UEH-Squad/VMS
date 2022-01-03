@@ -13,15 +13,18 @@ namespace VMS.Pages.Admin.ActivityManagement
 {
     public partial class EditRequirement : ComponentBase
     {
-        [Parameter]
-        public int ActId { get; set; }
+        private ReportViewModel editRequest = new();
+
+        [Parameter] public int ActId { get; set; }
+
         [CascadingParameter]
         public BlazoredModalInstance Modal { get; set; }
 
-        private EditRequirementViewModel edit = new();
+        [CascadingParameter]
+        public string CurrentUserId { get; set; }
 
         [Inject]
-        private IActivityService ActivityService { get; set; }
+        private IReportService ReportService { get; set; }
       
         private async Task CloseModalAsync()
         {
@@ -45,13 +48,15 @@ namespace VMS.Pages.Admin.ActivityManagement
 
         private async Task AddEditRequirementAsync()
         {
-            edit.ActivityId = ActId;
-            edit.IsReport = false;
-            edit.IsReportUser = false;
-            edit.CreateDate = DateTime.Now;
-            edit.Images = Image;
-            edit.PartToFix = (chosenTargets?.First());
-            await ActivityService.EditRequirementActAsync(edit);
+            editRequest.IsRequest = true;
+
+            editRequest.ReportBy = CurrentUserId;
+            editRequest.ActivityId = ActId;
+            editRequest.IsReportUser = false;
+            editRequest.Reasons = chosenTargets.ToList();
+            editRequest.Images = Image;
+
+           await ReportService.AddReportAsync(editRequest);
         }
        
     }

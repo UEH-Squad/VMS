@@ -112,8 +112,8 @@
         position: unset;
         box-shadow: none;
         border-radius: 0;
-        flex-direction: unset;
-        justify-content: flex-end; } }
+        /* flex-direction: unset;
+            justify-content: flex-end;*/ } }
     .my-navbar .my-collapse .nav-link {
       color: #18A0FB; }
       .my-navbar .my-collapse .nav-link.active {
@@ -158,3 +158,47 @@
           position: unset;
           flex-direction: row;
           margin-left: 20px; } }
+
+.nav-mega-menu {
+  position: relative; }
+  .nav-mega-menu:hover .mega-menu {
+    display: block; }
+  .nav-mega-menu .mega-menu {
+    width: 760px;
+    display: none;
+    position: absolute;
+    bottom: -280px;
+    left: -250px;
+    background: #FFFFFF;
+    box-shadow: 5px 10px 40px 2px rgba(11, 40, 50, 0.15);
+    z-index: 100;
+    padding: 15px 15px 15px 35px; }
+    .nav-mega-menu .mega-menu a {
+      display: block;
+      padding: 20px 0 30px 40px; }
+      .nav-mega-menu .mega-menu a:hover {
+        background: rgba(24, 160, 251, 0.1); }
+      .nav-mega-menu .mega-menu a span {
+        font-weight: 400;
+        font-size: 22px;
+        letter-spacing: -0.015em;
+        color: #000000; }
+      .nav-mega-menu .mega-menu a i {
+        color: #18A0FB;
+        margin-right: 20px;
+        font-size: 24px; }
+    .nav-mega-menu .mega-menu .mega-menu-detail h6 {
+      color: #64D72F;
+      font-size: 20px;
+      font-weight: 600; }
+    .nav-mega-menu .mega-menu .mega-menu-detail .mega-menu-img {
+      width: 70px;
+      height: 70px;
+      overflow: hidden;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 12px; }
+    .nav-mega-menu .mega-menu .mega-menu-detail p {
+      font-weight: 400;
+      font-size: 14px;
+      color: #515151; }

@@ -178,7 +178,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 16px;
       height: 40px; }
       .filter-btn:hover {
         background-color: #306C14;
@@ -198,7 +198,7 @@
   width: 50%; }
   @media (min-width: 1200px) {
     .clear-filter-btn {
-      font-size: 20px; } }
+      font-size: 16px; } }
   .clear-filter-btn:hover {
     text-decoration: underline; }
 

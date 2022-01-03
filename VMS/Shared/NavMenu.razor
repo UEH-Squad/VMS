@@ -20,12 +20,59 @@
                 <li class="nav-item">
                     <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-2 mx-xxl-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
                 </li>
-                <li class="nav-item">
-                    <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
+                <li class="nav-item nav-mega-menu">
+                    <NavLink  class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link ">Cộng đồng</NavLink>
+                    <div class="mega-menu row">
+                        <div class="row">
+                            <div class="col-6 ">
+                                <a @onmousemove="(() => ShowDetail(1))" class="d-flex align-items-center mega-menu-li-org">
+                                    <i class="material-icons-outlined ">person</i>
+                                    <span>Đơn vị tổ chức</span>
+                                </a>
+                                <a @onmousemove="(() => ShowDetail(2))" class="d-flex align-items-center mega-menu-li-user">
+                                    <i class="material-icons-outlined ">person</i>
+                                    <span>Tình nguyện viên</span>
+                                </a>
+                                <a @onmousemove="(() => ShowDetail(3))" class="d-flex align-items-center mega-menu-li-rank">
+                                    <i class="material-icons-outlined">person</i>
+                                    <span>Đại lộ danh vọng</span>
+                                </a>
+                            </div>
+
+                            <div class="col-6  mega-menu-detail mega-menu-detail-org @(isShowDetailOrg ? "d-block" :"d-none")">
+                                <h6 class="text-center">ĐƠN VỊ TỔ CHỨC</h6>
+                                <div class="mega-menu-img mx-auto">
+                                    <img src="./img/detailorg.png" class="w-100" />
+                                </div>
+                                <p class="mb-0">Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái công tác có sức khoẻ, tinh thần hăng hái công tác hăng hái công tác </p>
+                            </div>
+                            <div class="col-6  mega-menu-detail mega-menu-detail-org @(isShowDetailUser ? "d-block" :"d-none")">
+                                <h6 class="text-center">TÌNH NGUYỆN VIÊN</h6>
+                                <div class="mega-menu-img mx-auto">
+                                    <img src="./img/deatiluser.png" class="w-100" />
+                                </div>
+                                <p class="mb-0">Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái công tác có sức khoẻ, tinh thần hăng hái công tác hăng hái công tác </p>
+                            </div>
+                            <div class="col-6  mega-menu-detail mega-menu-detail-org @(isShowDetailRank ? "d-block" :"d-none")">
+                                <h6 class="text-center">ĐẠI LỘ DANH VỌNG</h6>
+                                <div class="mega-menu-img mx-auto">
+                                    <img src="./img/detailrank.png" class="w-100" />
+                                </div>
+                                <p class="mb-0">Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái công tác có sức khoẻ, tinh thần hăng hái công tác hăng hái công tác </p>
+                            </div>
+                        </div>
+                       
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <NavLink href="@Routes.UserProfile" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đại lộ danh vọng</NavLink>
+                    <NavLink  class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
                 </li>
+                @*<li class="nav-item">
+            <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink href="@Routes.UserProfile" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đại lộ danh vọng</NavLink>
+        </li>*@
             </ul>
         </div>
         <ul class="my-collapse__login-area navbar-nav d-flex align-items-center my-xl-0">
@@ -42,4 +89,33 @@
 
     [Parameter]
     public bool IsFixedTop { get; set; }
+
+    bool isShowDetailOrg = true;
+    bool isShowDetailUser = false;
+    bool isShowDetailRank = false;
+
+    private void ShowDetail(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                isShowDetailOrg = false;
+                isShowDetailUser = false;
+                isShowDetailRank = false;
+                isShowDetailOrg = true;
+                break;
+            case 2:
+                isShowDetailOrg = false;
+                isShowDetailUser = false;
+                isShowDetailRank = false;
+                isShowDetailUser = true;
+                break;
+            case 3:
+                isShowDetailOrg = false;
+                isShowDetailUser = false;
+                isShowDetailRank = false;
+                isShowDetailRank = true;
+                break;
+        }
+    }
 }

@@ -242,47 +242,15 @@
         }
     }
 }
-.div-checkbox {
-    .check-box {
-        border-radius: 5px;
-        width: 15px;
-        height: 15px;
-        margin-right: 5px;
-        vertical-align: top;
-        background-color: #fff;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        border: 1px solid #F14747;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        -webkit-print-color-adjust: exact;
-        position: relative;
-        cursor: pointer;
-
-        &::before {
-            content: "";
-            width: 9px;
-            height: 5px;
-            border-left: 2px solid #18A0FB;
-            border-bottom: 2px solid #18A0FB;
-            position: absolute;
-            top: 40%;
-            left: 52%;
-            transform: translate(-50%, -50%) rotate( -45deg );
-            display: none;
-        }
-
-        &:checked::before {
-            display: block;
-        }
+.div-volunteer {
+    .icon-check {
+        font-size: 14px;
+        color: $red;
     }
 
-    label {
-        cursor: pointer;
+    span {
         font-weight: 500;
         font-size: 14px;
-        color: #F14747;
+        color: $red;
     }
 }

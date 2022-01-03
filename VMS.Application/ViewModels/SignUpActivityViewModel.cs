@@ -17,6 +17,6 @@ namespace VMS.Application.ViewModels
         public string Desire { get; set; }
 
         [Required]
-        public bool IsCommit { get; set; }
+        public bool IsCommit { get; set; } = true;
     }
 }

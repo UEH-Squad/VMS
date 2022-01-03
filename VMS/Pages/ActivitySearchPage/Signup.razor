@@ -53,36 +53,55 @@
                         <p class="form-text mt-3">Bạn có cam kết đồng hành xuyên suốt chương trình hay không? <span>(*)</span></p>
                         @if (IsReadOnly)
                         {
-                            check = Volunteer.IsCommit ? Check.Notsure : Check.Sure;
-                            <InputRadioGroup Name="radioSignUp" @bind-Value="check">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
-                                    <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp" disabled="true" />
-                                    <label for="checksure">Chắc chắn</label>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
-                                    <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" disabled="true" />
-                                    <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
-                                </div>
-                            </InputRadioGroup>
+                            <div class="d-flex align-items-center mb-2">
+                                @if (Volunteer.IsCommit)
+                                {
+                                    <input class="input-radio" type="radio" id="checksure" checked disabled />
+                                }
+                                else
+                                {
+                                    <input class="input-radio" type="radio" id="checksure" disabled />
+                                }
+                                <label for="checksure">Chắc chắn</label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                @if (!Volunteer.IsCommit)
+                                {
+                                    <input class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" checked disabled />
+                                }
+                                else
+                                {
+                                    <input class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" disabled />
+                                }
+                                <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
+                            </div>
                         }
                         else
                         {
-                            <InputRadioGroup Name="radioSignUp" @bind-Value="check">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
-                                    <InputRadio Value="Check.Sure" class="input-radio" type="radio" id="checksure" Name="radioSignUp" />
-                                    <label for="checksure">Chắc chắn</label>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="d-none">@CurrentEditContext.FieldCssClass(() => check)</div>
-                                    <InputRadio Value="Check.Notsure" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" />
-                                    <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
-                                </div>
-                            </InputRadioGroup>
+                            <div class="d-flex align-items-center mb-2">
+                                @if (signupModel.IsCommit)
+                                {
+                                    <input @onchange="() => OnCommitChanged(true)" class="input-radio" type="radio" id="checksure" checked />
+                                }
+                                else
+                                {
+                                    <input @onchange="() => OnCommitChanged(true)" class="input-radio" type="radio" id="checksure" />
+                                }
+                                <label for="checksure">Chắc chắn</label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                @if (!signupModel.IsCommit)
+                                {
+                                    <input @onchange="() => OnCommitChanged(false)" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" checked />
+                                }
+                                else
+                                {
+                                    <input @onchange="() => OnCommitChanged(false)" class="input-radio" type="radio" id="checknotsure" Name="radioSignUp" />
+                                }
+                                <label for="checknotsure">Cần xem xét lại thời gian cụ thể</label>
+                            </div>
                         }
-                        
+
                         <img class="img-signup w-100" src="img/formSignUp.png" alt="">
                     </div>
                 </div>

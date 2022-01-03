@@ -12,15 +12,29 @@
                     <input @bind="@Filter.Actual" type="checkbox" id="md2" class="d-flex justify-content-center align-items-center me-2">
                     <label for="md2">Actual</label>
                 </div>
-                <div class="act-filter__type__child d-flex justify-content-center align-items-center">
-                    <input @bind="@Filter.Covid" type="checkbox" id="md3" class="d-flex justify-content-center align-items-center me-2">
-                    <label for="md3" class="act-filter__type__child--red d-flex justify-content-center align-items-center">
-                        COVID-19
-                        <span class="material-icons-outlined">
-                            coronavirus
-                        </span>
-                    </label>
-                </div>
+                 @if (areasPinned is not null)
+                 {
+                     @foreach (var area in areasPinned)
+                     {
+                          <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                            @if (Filter.Areas.Exists(x => x.Id == area.Id))
+                            {
+                                <input @onclick="(() => ChangeStatePinnedArea(area))" class="d-flex justify-content-center align-items-center me-2" type="checkbox" id="@area.Icon" checked style="--checkbox-color: @area.Color">
+                            }
+                            else
+                            {
+                                <input @onclick="(() => ChangeStatePinnedArea(area))" class="d-flex justify-content-center align-items-center me-2" type="checkbox" id="@area.Icon" style="--checkbox-color: @area.Color">
+                            }
+                            <label class="my-check-box-label d-flex align-items-center cursor-pointer" style="color: @area.Color" for="@area.Icon">
+                                @area.Name
+                                <span class="material-icons-outlined">
+                                    @area.Icon
+                                </span>
+                            </label>
+                        </div>
+                    }
+                }
+               
             </div>
         </div>
 

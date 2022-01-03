@@ -20,6 +20,7 @@ namespace VMS.Pages.Admin.ActivityManagement
         private List<UserViewModel> organizers;
         private List<string> levels;
         private List<string> actTypes;
+        private List<AreaViewModel> areasPinned;
         private bool isOrganizationShow;
         private bool isCityShow;
         private bool isDistrictShow;
@@ -47,6 +48,8 @@ namespace VMS.Pages.Admin.ActivityManagement
         private IOrganizationService OrganizationService { get; set; }
         [Inject]
         private IAddressService AddressService { get; set; }
+        [Inject]
+        private IAreaService AreaService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -54,6 +57,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             isOrganizationShow = false;
 
             provinces = await AddressService.GetAllProvincesAsync();
+            areasPinned = await AreaService.GetAllAreasAsync(true);
 
             levels = Courses.GetLevels();
             actTypes = ActType.GetType();
@@ -208,6 +212,18 @@ namespace VMS.Pages.Admin.ActivityManagement
             provinces = await AddressService.GetAllProvincesAsync();
             Filter = new();
             await FilterChanged.InvokeAsync(Filter);
+        }
+        private void ChangeStatePinnedArea(AreaViewModel areaViewModel)
+        {
+            AreaViewModel area = Filter.Areas.Find(a => a.Id == areaViewModel.Id);
+            if (area is null)
+            {
+                Filter.Areas.Add(areaViewModel);
+            }
+            else
+            {
+                Filter.Areas.Remove(area);
+            }
         }
     }
 }

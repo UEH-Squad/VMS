@@ -6,11 +6,11 @@
         </div>
         <div class="container-radio">
             <div class="container-radio_choise">
-                <input checked="@(RadioChosen == 1)" @onchange="@(() => RadioChosen = 1)" class="radio-btn" id="radio-btn_1" type="radio" name="radio" />
+                <input checked="@(typeRating == 1)" @onchange="@(() => typeRating = 1)" class="radio-btn" id="radio-btn_1" type="radio" name="radio" />
                 <label for="radio-btn_1">Tình nguyện viên</label>
             </div>
             <div class="container-radio_choise">
-                <input checked="@(RadioChosen == 2)" @onchange="@(() => RadioChosen = 2)" class="radio-btn" id="radio-btn_2" type="radio" name="radio" />
+                <input checked="@(typeRating == 2)" @onchange="@(() => typeRating = 2)" class="radio-btn" id="radio-btn_2" type="radio" name="radio" />
                 <label for="radio-btn_2">Tổ chức</label>
             </div>
         </div>
@@ -18,47 +18,32 @@
     </div>
     <div class="container-checkbox">
         <div class="container-checkbox_choise">
-            <input checked="@(CheckboxChosen1 == 1)" @onchange="@(() => CheckboxChosen1 = 1)" id="checkbox-btn_1" type="checkbox" />
+            <input checked="@(star[0] == true)" @onchange="@(() => star[0] = true)" id="checkbox-btn_1" type="checkbox" />
             <label for="checkbox-btn_1">1 sao</label>
         </div>
         <div class="container-checkbox_choise">
-            <input checked="@(CheckboxChosen2 == 1)" @onchange="@(() => CheckboxChosen2 = 1)" id="checkbox-btn_2" type="checkbox" />
+            <input checked="@(star[1] == true)" @onchange="@(() => star[1] = true)" id="checkbox-btn_2" type="checkbox" />
             <label for="checkbox-btn_2">2 sao</label>
         </div>
         <div class="container-checkbox_choise">
-            <input checked="@(CheckboxChosen3 == 1)" @onchange="@(() => CheckboxChosen3 = 1)" id="checkbox-btn_3" type="checkbox" />
+            <input checked="@(star[2] == true)" @onchange="@(() => star[2] = true)" id="checkbox-btn_3" type="checkbox" />
             <label for="checkbox-btn_3">3 sao</label>
         </div>
         <div class="container-checkbox_choise">
-            <input checked="@(CheckboxChosen4 == 1)" @onchange="@(() => CheckboxChosen4 = 1)" id="checkbox-btn_4" type="checkbox" />
+            <input checked="@(star[3] == true)" @onchange="@(() => star[3] = true)" id="checkbox-btn_4" type="checkbox" />
             <label for="checkbox-btn_4">4 sao</label>
         </div>
         <div class="container-checkbox_choise">
-            <input checked="@(CheckboxChosen5 == 1)" @onchange="@(() => CheckboxChosen5 = 1)" id="checkbox-btn_5" type="checkbox" />
+            <input checked="@(star[4] == true)" @onchange="@(() => star[4] = true)" id="checkbox-btn_5" type="checkbox" />
             <label for="checkbox-btn_5">5 sao</label>
         </div>
     </div>
     <div class="container-btn">
-        <button class="container-btn_filter">Lọc</button>
-        <button @onclick="@Delete" class="container-btn_delete">Xóa lọc</button>
+        <button @onclick="@UpdateFilterValueAsync" class="container-btn_filter">Lọc</button>
+        <button @onclick="@ClearFilterAsync" class="container-btn_delete">Xóa lọc</button>
     </div>
 </div>
 
 @code {
-    int RadioChosen;
-    int CheckboxChosen1;
-    int CheckboxChosen2;
-    int CheckboxChosen3;
-    int CheckboxChosen4;
-    int CheckboxChosen5;
-
-    private void Delete()
-    {
-        RadioChosen = 0;
-        CheckboxChosen1 = 0;
-        CheckboxChosen2 = 0;
-        CheckboxChosen3 = 0;
-        CheckboxChosen4 = 0;
-        CheckboxChosen5 = 0;
-    }
+  
 }

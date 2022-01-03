@@ -65,12 +65,17 @@ namespace VMS.Application.Services
                                  .Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
                 PageIndex = currentPage,
-                PageSize = 8
+                PageSize = 20
             };
 
             PaginatedList<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            return _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+            PaginatedList<ActivityViewModel> paginatedList =  _mapper.Map<PaginatedList<ActivityViewModel>>(activities);
+            foreach(var item in paginatedList.Items)
+            {
+                item.Rating = GetRateOfActivity(item.Recruitments);
+            }
+            return paginatedList;
         }
 
         private static List<Expression<Func<Activity, bool>>> GetFilterActivityConditionsByFilter(FilterActivityViewModel filter)
@@ -595,12 +600,12 @@ namespace VMS.Application.Services
 
             if (actType == StatusAct.Upcoming)
             {
-                return x => x.StartDate > DateTime.Now.Date;
+                return x => x.StartDate > DateTime.Now.Date || x.IsApproved == false && (x.IsDenied == false);
             }
 
             if (actType == StatusAct.Happenning)
             {
-                return x => x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date;
+                return x => x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date && x.IsApproved == true;
             }
 
             if (actType == StatusAct.TookPlace)
@@ -610,7 +615,7 @@ namespace VMS.Application.Services
 
             if (actType == StatusAct.Closed)
             {
-                return x => x.CloseDate < DateTime.Now.Date;
+                return x => x.CloseDate < DateTime.Now.Date || x.IsClosed == true;
             }
             if (actType == StatusAct.All)
             {
@@ -691,5 +696,51 @@ namespace VMS.Application.Services
             }
             dbContext.SaveChanges();
         }
+        public async Task ApproveAct(int id, bool isPoint, bool isDay, int numberOfDay)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext,id);
+            activity.IsApproved = true;
+            if(isPoint == true)
+            {
+                activity.IsPoint = isPoint;
+            }
+            if(isDay == false || numberOfDay <=0)
+            {
+                activity.IsDay = false;
+            }
+            else
+            {
+                activity.IsDay = true;
+                activity.NumberOfDay = numberOfDay;
+            }
+            await _repository.UpdateAsync(dbContext, activity);
+        }
+        public async Task DenyAct(int id)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            Activity activity = await _repository.GetByIdAsync<Activity>(dbContext, id);
+            activity.IsApproved = false;
+            activity.IsDenied = true;
+            activity.IsPoint = false;
+            activity.IsDay = false;
+            activity.NumberOfDay = 0;
+            await _repository.UpdateAsync(dbContext, activity);
+        }
+        public async Task EditRequirementAct(EditRequirementViewModel editRequirementViewModel)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Feedback report = _mapper.Map<Feedback>(editRequirementViewModel);
+
+            report.ImageReports = editRequirementViewModel.Images.Select(x => new ImageReport()
+            {
+                Image = x,
+                Feedback = report
+            }).ToList();
+
+            await _repository.InsertAsync(dbContext, report);
+        }
+       
     }
 }

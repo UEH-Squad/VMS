@@ -1,12 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using VMS.Common.CustomValidations;
+﻿using System;
+using System.Collections.Generic;
 
 namespace VMS.Application.ViewModels
 {
     public class EditRequirementViewModel
     {
-
-        [Required]
+        public bool IsReport { get; set; }
+        public bool IsReportUser { get; set; }  
         public string Content { get; set; }
+        public string PartToFix { get; set; }
+        public int ActivityId { get; set; }
+        public DateTime CreateDate { get; set; }
+        public List<string> Images { get; set; }
+
     }
 }

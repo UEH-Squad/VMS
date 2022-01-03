@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220102151142_AddIsPointIsDayNumbeOfDayColumnToActivity")]
+    partial class AddIsPointIsDayNumbeOfDayColumnToActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,9 +161,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDenied")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsPin")
@@ -372,21 +371,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "7ba030d6-1286-4f5a-9bf8-4c30fe673b41",
+                            ConcurrencyStamp = "14b8cabf-c77a-4a66-87d2-a1aafc6625d4",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "7928bc4d-918c-4f06-bfca-3f4c830f5c7e",
+                            ConcurrencyStamp = "07f4007f-e7f8-4258-84a9-b4e2c82044e6",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "76ff8748-7a38-46f8-80c2-717a44932672",
+                            ConcurrencyStamp = "5b71d8bc-f8ba-49ac-b84c-756e8cf5a29d",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -682,9 +681,6 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Property<bool>("IsReportUser")
                         .HasColumnType("bit");
-
-                    b.Property<string>("PartToFix")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1203,7 +1199,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a14d9b06-54aa-4dda-ba14-17f9518321c6",
+                            ConcurrencyStamp = "ea2ef337-161e-480f-ad47-69e8cf0073b9",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1211,7 +1207,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPDiN+4UdbpNMdFun2kmTr/EzMgbvwWUJGkbBynWPwbIbK/+F3KQFz7KI01AK1z/XQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE2Gq8ZnIkbmmldofxr8SqoyBSy03SMLrDJsWk7E+39+02WgtSzajLjYukdLJ/ZIyQ==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",

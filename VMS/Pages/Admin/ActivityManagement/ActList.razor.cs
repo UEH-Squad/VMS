@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
-using VMS.Common.Enums;
-using VMS.Domain.Models;
 using VMS.GenericRepository;
 
 namespace VMS.Pages.Admin.ActivityManagement
@@ -59,12 +57,20 @@ namespace VMS.Pages.Admin.ActivityManagement
 
         private async Task ShowEditModalAsync(int id)
         {
-            Modal.Show<EditRequirement>("", BlazoredModalOptions.GetModalOptions());
+            ModalParameters parameters = new();
+            parameters.Add("ActId", id);
+            Modal.Show<EditRequirement>("",parameters, BlazoredModalOptions.GetModalOptions());
         }
 
         private async Task ShowApproveModalAsync(int id)
         {
-            Modal.Show<ApprovalActivity>("", BlazoredModalOptions.GetModalOptions());
+            var result = await Modal.Show<ApprovalActivity>("", BlazoredModalOptions.GetModalOptions()).Result;
+            List<object> list = (List<object>)result.Data;
+                await ActivityService.ApproveAct(id,(bool)list[0], (bool)list[1],(int)list[2]);
+                pagedResult.Items.Find(x => x.Id == id).IsApproved = true;
+                pagedResult.Items.Find(x => x.Id == id).IsDay = (bool)list[1];
+                pagedResult.Items.Find(x => x.Id == id).IsPoint = (bool)list[0];
+
         }
         [JSInvokable]
         public Task HideMenuInterop()

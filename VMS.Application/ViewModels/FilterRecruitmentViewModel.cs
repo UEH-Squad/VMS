@@ -1,4 +1,5 @@
-﻿using VMS.Common.Enums;
+﻿using System.Collections.Generic;
+using VMS.Common.Enums;
 
 namespace VMS.Application.ViewModels
 {
@@ -11,7 +12,9 @@ namespace VMS.Application.ViewModels
 
         public string OrgId { get; set; }
         public Semester Semester { get; set; }
-
+        public bool IsOrgRating { get; set; } = false;
+        public bool IsUserRating { get; set; } = false;
+        public List<double> Ranks { get; set; } = new();
         public FilterRecruitmentViewModel()
         {
             Semester = Semester.Full;

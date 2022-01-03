@@ -24,7 +24,7 @@ namespace VMS.Domain.Models
         public string Requirement { get; set; }
         public string Targets { get; set; }
         public bool IsApproved { get; set; }
-
+        public bool IsDenied { get; set; }
         [ForeignKey(nameof(Approver))]
         public string ApprovedBy { get; set; }
 
@@ -40,9 +40,9 @@ namespace VMS.Domain.Models
         public bool IsPin { get; set; }
         public bool IsClosed { get; set; }
         //criteria for evaluating volunteer activities
-        //public bool IsPoint { get; set; }
-        //public bool IsDay { get; set; }
-        //public int NumberOfDay { get; set; }
+        public bool IsPoint { get; set; }
+        public bool IsDay { get; set; }
+        public int NumberOfDay { get; set; }
         public virtual User Organizer { get; set; }
         public virtual User Approver { get; set; }
         public virtual Area Area { get; set; }

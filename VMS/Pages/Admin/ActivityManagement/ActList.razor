@@ -33,14 +33,14 @@
                                     more_horiz
                                 </i>
                                 <div class="pe-4">
-                                    <a href="@Routes.AdminActivityInfo" class="lmtext-2 text-decoration-none">@item.Name</a>
+                                    <a href="@Routes.AdminActivityInfo/@item.Id" class="lmtext-2 text-decoration-none">@item.Name</a>
                                     <div class="star">
                                         <Star Rating="item.Rating" />
                                     </div>
                                     <h5 class="org-name d-flex align-items-center mb-0">
                                         <i class="material-icons">public</i> @item.Organizer?.FullName
                                     </h5>
-                                    <p class="lmtext-2 act__content-description mb-0">@item.Description</p>
+                                    <p class="lmtext-2 act__content-description mb-0">@((MarkupString)item.Description)</p>
                                     <div class="act__content-date d-flex flex-column mb-1">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex mb-1 align-items-center">
@@ -51,7 +51,14 @@
                                                 <span>@item.OpenDate.ToString("dd/MM/yyyy") - @item.CloseDate.ToString("dd/MM/yyyy")</span>
                                             </div>
                                             <div class=" col-6 d-flex mb-1 align-items-center div-checkbox">
-                                                <input id="NubOfVolunteer" class="check-box" type="checkbox">
+                                                @if(item.IsDay == true)
+                                                {
+                                                    
+                                                    <input disabled checked id="NubOfVolunteer" class="check-box" type="checkbox">
+                                                }
+                                                else{
+                                                    <input disabled   id="NubOfVolunteer" class="check-box" type="checkbox">
+                                                }
                                                 <label for="NubOfVolunteer" class="ms-2">Số ngày tình nguyện</label>
                                             </div>
                                         </div>
@@ -64,7 +71,14 @@
                                                 <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
                                             </div>
                                             <div class=" col-6 d-flex mb-1 align-items-center div-checkbox">
-                                                <input id="pointTraining" class="check-box" type="checkbox">
+                                                @if(item.IsPoint == true)
+                                                {
+                                                    <input disabled checked id="pointTraining" class="check-box" type="checkbox">
+                                                }
+                                                else
+                                                {
+                                                    <input disabled  id="pointTraining" class="check-box" type="checkbox">
+                                                }
                                                 <label for="pointTraining" class="ms-2">Điểm rèn luyện</label>
                                             </div>
                                         </div>
@@ -78,9 +92,9 @@
                                         </i> @item.MemberQuantity
                                     </h5>
                                     <div class="d-flex position-absolute act-footer">
-                                        @if (item.EndDate >= DateTime.Now)
+                                        @if (item.EndDate >= DateTime.Now.Date)
                                         {
-                                            if (item.IsClosed || item.StartDate < DateTime.Now)
+                                            if (item.IsClosed || item.CloseDate < DateTime.Now.Date)
                                             {
                                                 <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
                                                     <i class="material-icons-outlined fst-normal">
@@ -88,7 +102,7 @@
                                                     </i> Đã đóng đăng ký
                                                 </h5>
                                             }
-                                            else if (item.StartDate >= DateTime.Now)
+                                            else if (item.StartDate >= DateTime.Now.Date && item.IsApproved == false)
                                             {
                                                 <div class="act-footer__btn d-flex align-items-center">
                                                     <button @onclick="() => ShowApproveModalAsync(item.Id)" class="btn act-footer__btn--approval">Duyệt hoạt động</button>
@@ -99,13 +113,13 @@
                                             </div>
                                         }
 
-                                        @if (item.EndDate < DateTime.Now)
+                                        @if (item.EndDate < DateTime.Now.Date)
                                         {
                                             <div class="act-footer__btn d-flex align-items-center">
                                                 <a href="@Routes.AdminWatchlistVolunteer/@item.Id"  class="btn text-decoration-none act-footer__btn--green">Xem danh sách</a>
                                             </div>
                                             <div class="act-footer__btn d-flex align-items-center">
-                                                <a href="@Routes.AdminWatchRating" class="btn text-decoration-none act-footer__btn--blue">Xem đánh giá</a>
+                                                <a href="@Routes.AdminWatchRating/@item.Id" class="btn text-decoration-none act-footer__btn--blue">Xem đánh giá</a>
                                             </div>
                                         }
                                     </div>

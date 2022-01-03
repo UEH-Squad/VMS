@@ -7,7 +7,7 @@ namespace VMS.Domain.Models
     public class Feedback : EntityBase<int>, IAuditEntity
     {
         public bool IsReport { get; set; }
-
+        public string PartToFix { get; set; }
         public string Content { get; set; }
         public bool IsReportUser { get; set; }
         public DateTime CreatedDate { get; set; }

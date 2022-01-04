@@ -10,16 +10,18 @@ using VMS.Domain.Models;
 
 namespace VMS.Pages.SearchOrganizer
 {
-    public partial class SearchAndFilter
+    public partial class SearchAndFilter : ComponentBase
     {
         private string levelChoosenValue = "Cấp";
         private bool isLevelShow;
         private bool isLevelGrey = false;
-        private FilterOrgViewModel filter = new();
         private List<string> levels;
 
         [Parameter]
         public EventCallback<FilterOrgViewModel> FilterChanged { get; set; }
+
+        [Parameter]
+        public FilterOrgViewModel Filter { get; set; } = new();
 
         [CascadingParameter]
         public IModalService Modal { get; set; }
@@ -31,7 +33,7 @@ namespace VMS.Pages.SearchOrganizer
 
         private void ChooseLevelValue(string level)
         {
-            filter.Course = level;
+            Filter.Course = level;
             levelChoosenValue = level;
             isLevelGrey = true;
         }
@@ -49,28 +51,28 @@ namespace VMS.Pages.SearchOrganizer
         private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
-            parameters.Add("ChoosenAreasList", filter.Areas);
+            parameters.Add("ChoosenAreasList", Filter.Areas);
 
             await Modal.Show<ActivitySearchPage.AreasPopup>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
         private async Task UpdateFilterValueAsync()
         {
-            await FilterChanged.InvokeAsync(filter);
+            await FilterChanged.InvokeAsync(Filter);
         }
 
         private async Task ClearFilterAsync()
         {
             levelChoosenValue = "Cấp";
             isLevelGrey = false;
-            filter = new();
+            Filter = new();
 
             await UpdateFilterValueAsync();
         }
 
         private async Task OnSearchValueChangedAsync(string searchValue)
         {
-            filter.SearchValue = searchValue;
-            filter.IsSearch = true;
+            Filter.SearchValue = searchValue;
+            Filter.IsSearch = true;
 
             await UpdateFilterValueAsync();
         }

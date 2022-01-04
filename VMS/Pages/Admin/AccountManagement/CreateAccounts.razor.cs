@@ -26,6 +26,7 @@ namespace VMS.Pages.Admin.AccountManagement
         [Inject] private IExcelService ExcelService { get; set; }
         [Inject] private IWebHostEnvironment WebHostEnvironment { get; set; }
         [Inject] private IJSRuntime JSRuntime { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
         private async Task CloseModalAsync()
         {

@@ -65,12 +65,14 @@ namespace VMS.Pages.Admin.AccountManagement
             await OnClickFilterAsync();
         }
 
-        private void ShowCreateAccounts()
+        private async Task ShowCreateAccountsAsync()
         {
             var parameters = new ModalParameters();
             parameters.Add("Role", PageRole);
 
-            Modal.Show<CreateAccounts>("", parameters, BlazoredModalOptions.GetModalOptions());
+            await Modal.Show<CreateAccounts>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            await ClearFilterAsync();
         }
 
         private void ShowCreateAccount()

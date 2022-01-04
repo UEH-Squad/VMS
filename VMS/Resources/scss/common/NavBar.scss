@@ -2,9 +2,9 @@
 .my-navbar {
     min-height: 65px;
     z-index: 100;
-    /*    @include on('lg') {
-        min-height: 80px;
-    }*/
+        @include on('xl') {
+        min-height: 85px;
+    }
 
     &-container {
         justify-content: unset;
@@ -236,7 +236,7 @@
                     right: 0;
                     height: 5px;
                     width: 100%;
-                    top: 59px;
+                    top: 61px;
                     background-color: $blue-bold;
                     display: none;
                 }

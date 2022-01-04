@@ -58,6 +58,8 @@
       font-size: 11px; }
     .pop-up__act i {
       color: #64D72F; }
+    .pop-up__act span {
+      color: #515151; }
   .pop-up .close-btn-s {
     width: 20px;
     height: 20px;

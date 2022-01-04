@@ -6,10 +6,10 @@
 /*#endregion */
 .my-navbar {
   min-height: 65px;
-  z-index: 100;
-  /*    @include on('lg') {
-        min-height: 80px;
-    }*/ }
+  z-index: 100; }
+  @media (min-width: 1200px) {
+    .my-navbar {
+      min-height: 85px; } }
   .my-navbar-container {
     justify-content: unset; }
     @media (min-width: 1200px) {
@@ -174,7 +174,7 @@
             right: 0;
             height: 5px;
             width: 100%;
-            top: 59px;
+            top: 61px;
             background-color: #0B588C;
             display: none; }
           .my-navbar .my-collapse__list__link:hover.my-collapse__list__link::before {

@@ -10,6 +10,9 @@ namespace VMS.Application.ViewModels
         public string Course { get; set; }
         public List<AreaViewModel> Areas { get; set; }
 
+        public bool? OrderByTotalActivity { get; set; }
+        public bool? OrderByRank { get; set; }
+
         public FilterOrgViewModel()
         {
             Areas = new();

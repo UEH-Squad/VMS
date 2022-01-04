@@ -4,33 +4,70 @@
 @attribute [Authorize(Roles = "Admin")]
 <div class="row">
     <div class="col-lg-10 p-0 mx-auto">
-    <VMS.Pages.SearchOrganizer.SearchAndFilter />
-    <div class="arrange-bar mb-3">
-        <div class="labels">
-            <span>Số hoạt động đã tổ chức</span>
-            <span>Thứ hạng</span>
+        <VMS.Pages.SearchOrganizer.SearchAndFilter Filter="filter" FilterChanged="OnFilterChangedAsync" />
+        <div class="arrange-bar mb-3">
+            <div class="labels">
+                <span>Số hoạt động đã tổ chức</span>
+                <span>Thứ hạng</span>
+            </div>
+            <div class="boxes-group">
+                <span>
+                    @if (filter.OrderByTotalActivity.HasValue && filter.OrderByTotalActivity.Value)
+                    {
+                        <input @onchange="() => OnOrderByTotalActivityChanged(true)"
+                           type="radio" name="order" id="increase" checked />
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnOrderByTotalActivityChanged(true)"
+                           type="radio" name="order" id="increase" />
+                    }
+                    &#160;<label for="increase">Tăng dần</label>
+                </span>
+                <span>
+                    @if (filter.OrderByTotalActivity.HasValue && !filter.OrderByTotalActivity.Value)
+                    {
+                        <input @onchange="() => OnOrderByTotalActivityChanged(false)"
+                           type="radio" name="order" value="decrease" id="decrease" checked />
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnOrderByTotalActivityChanged(false)"
+                           type="radio" name="order" value="decrease" id="decrease" />
+                    }
+                    &#160;<label for="decrease">Giảm dần</label>
+                </span>
+                <span>
+                    @if (filter.OrderByRank.HasValue && filter.OrderByRank.Value)
+                    {
+                        <input @onchange="() => OnOrderByRankChanged(true)"
+                           type="radio" name="rank" id="higher-to-lower" checked />
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnOrderByRankChanged(true)"
+                           type="radio" name="rank" id="higher-to-lower" />
+                    }
+                    &#160;<label for="higher-to-lower">Từ cao xuống thấp</label>
+                </span>
+                <span>
+                    @if (filter.OrderByRank.HasValue && !filter.OrderByRank.Value)
+                    {
+                        <input @onchange="() => OnOrderByRankChanged(false)"
+                           type="radio" name="rank" id="lower-to-higher" checked />
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnOrderByRankChanged(false)"
+                           type="radio" name="rank" id="lower-to-higher" />
+                    }
+                    &#160;<label for="lower-to-higher">Từ thấp đến cao</label>
+                </span>
+            </div>
         </div>
-        <div class="boxes-group">
-            <span>
-                <input type="radio" name="order" value="increase" id="increase" />
-                <label for="increase">Tăng dần</label>
-            </span>
-            <span>
-                <input type="radio" name="order" value="decrease" id="decrease" />
-                <label for="decrease">Giảm dần</label>
-            </span>
-            <span>
-                <input type="radio" name="rank" value="higherToLower" id="higher-to-lower" />
-                <label for="higher-to-lower">Từ cao xuống thấp</label>
-            </span>
-            <span>
-                <input type="radio" name="rank" value="lowerToHigher" id="lower-to-higher" />
-                <label for="lower-to-higher">Từ thấp đến cao</label>
-            </span>
-        </div>
+        <VMS.Pages.SearchOrganizer.SearchResult IsOrgResult="true" IsUsedForAdmin="true" HaveLevel="true"
+                                                PagedResult="pagedResult" OnPageChanged="OnPageChangedAsync" />
     </div>
-    <VMS.Pages.SearchOrganizer.SearchResult IsOrgResult="true" IsUsedForAdmin="true"/>
-</div>
 </div>
 
 @code {

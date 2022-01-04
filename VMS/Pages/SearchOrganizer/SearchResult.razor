@@ -7,7 +7,7 @@
         {
             <div class="org-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img class="org-item__img me-2" src="@item.Avatar" alt="@item.FullName" />
+                    <img class="org-item__img me-2" src="@(string.IsNullOrEmpty(item.Avatar) ? $"img/Default/{(IsUserResult ? "user" : "org")}_avatar.png" : item.Avatar)" alt="@item.FullName" />
                     <div class="org-item__name-group ms-4">
                         <a class="org-item__name lmtext-2"
                             href="@(IsUsedForAdmin

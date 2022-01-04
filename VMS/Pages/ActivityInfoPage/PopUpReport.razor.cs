@@ -97,7 +97,7 @@ namespace VMS.Pages.ActivityInfoPage
             isChangeFile = true;
             foreach (var file in imageFiles)
             {
-                if (file.ContentType != "image/jpeg")
+                if (!file.ContentType.Contains("image/"))
                 {
                     StateHasChanged();
                 }

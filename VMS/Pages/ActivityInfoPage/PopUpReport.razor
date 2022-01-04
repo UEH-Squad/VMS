@@ -21,7 +21,7 @@
     <EditForm Model="@report" OnValidSubmit="@AddReportAsync">
         <DataAnnotationsValidator />
         <ValidationSummary />
-            <div class="my-container @(isShowReport ? "d-none" : "d-block")">
+        <div class="my-container @(isShowReport ? "d-none" : "d-block")">
             <div class="icon-close-popup">
                 <span @onclick="CloseModal" class="material-icons">close</span>
             </div>
@@ -69,30 +69,23 @@
                     <h4 class="title-attach__check check"> (*)</h4>
                 </div>
                 <div class="add-file position-relative d-flex align-items-center justify-content-center">
-                        <InputFile OnChange="OnInputFileAsync" multiple type="file" name="file" id="file" class="inputfile" />
-                        <div class="d-flex align-items-center">
-                            <i class="material-icons my-icon-upload">
-                                cloud_upload
-                            </i>
-                            <span class="@(isChangeFile ? "d-none" : "d-block")">Kéo và thả hình ảnh liên quan tại dây</span>
-                        </div>
-                        <p class="m-0">
-                            @if (selectedImages is not null)
+                    <InputFile OnChange="OnInputFileAsync" multiple type="file" name="file" id="file" class="inputfile" accept="image/*" />
+                    <div class="d-flex align-items-center">
+                        <i class="material-icons my-icon-upload">
+                            cloud_upload
+                        </i>
+                        <span class="@(isChangeFile ? "d-none" : "d-block")">Kéo và thả hình ảnh liên quan tại dây</span>
+                    </div>
+                    <p class="m-0">
+                        @if (selectedImages is not null)
+                        {
+                            @foreach (var item in selectedImages)
                             {
-                                @foreach (var item in selectedImages)
-                                {
-                                    @if (!item.ContentType.Contains("image/"))
-                                    {
-                                        <div style="color: #f14747">File không đúng định dạng..</div>
-                                    }
-                                    else
-                                    {
-                                        @item.Name
-                                        @space
-                                    }
-                                }
+                                @item.Name
+                                @space
                             }
-                        </p>
+                        }
+                    </p>
 
                 </div>
             </div>

@@ -30,7 +30,7 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
                     a => a.ActivityId == actId,
-                    a => a.User.FullName.ToUpper().Trim().Contains(searchValue.ToUpper().Trim()),
+                    a => a.User.FullName.ToUpper().Contains(searchValue.ToUpper().Trim()) || a.User.StudentId.Contains(searchValue.Trim()),
                     a => a.IsDeleted == isDeleted
                 },
                 Includes = a => a.Include(a => a.User).ThenInclude(a => a.Faculty),
@@ -49,16 +49,19 @@ namespace VMS.Application.Services
             Specification<Recruitment> specification = new()
             {
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
-            {
-                    a =>  list.Contains(a.Id)
-            }
+                {
+                    a => list.Contains(a.Id)
+                }
             };
+
             List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
             foreach (var rec in recruitments)
             {
                 rec.IsDeleted = isDeleted;
             }
-            dbContext.SaveChanges();
+
+            await _repository.UpdateAsync<Recruitment>(dbContext, recruitments);
         }
 
         public async Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage, string searchValue, bool? isRated)
@@ -149,9 +152,10 @@ namespace VMS.Application.Services
 
             if (!string.IsNullOrEmpty(searchValue))
             {
-                return r => isOrgRating ? r.User.FullName.ToLower().Contains(searchValue.ToLower())
-                                        : r.Activity.Name.ToLower().Contains(searchValue.ToLower())
-                                       || r.Activity.Organizer.FullName.ToLower().Contains(searchValue.ToLower());
+                return r => isOrgRating ? (r.User.FullName.ToLower().Contains(searchValue.ToLower())
+                                        || r.User.StudentId.Contains(searchValue))
+                                        : (r.Activity.Name.ToLower().Contains(searchValue.ToLower())
+                                        || r.Activity.Organizer.FullName.ToLower().Contains(searchValue.ToLower()));
             }
 
             return r => true;
@@ -299,6 +303,7 @@ namespace VMS.Application.Services
                     r => r.User.FullName.ToLower().Contains(filter.SearchValue.ToLower())
                         || r.Activity.Name.ToLower().Contains(filter.SearchValue.ToLower())
                         || r.Activity.Organizer.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                        || r.User.StudentId.Contains(filter.SearchValue)
                 };
             }
             else

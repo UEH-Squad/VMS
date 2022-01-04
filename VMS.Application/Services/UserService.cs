@@ -294,6 +294,7 @@ namespace VMS.Application.Services
                 {
                     x => x.UserRoles.Any(x => x.Role.Name == vltRole),
                     x => x.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                      || x.StudentId.Contains(filter.SearchValue)
                 };
             }
             else

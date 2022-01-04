@@ -42,15 +42,15 @@ namespace VMS.Application.Services
 
         private async Task SendEmail(MailMessage message)
         {
-            using SmtpClient smtpClient = new(systemHost, systemPort)
+            using SmtpClient smtpClient = new(systemHost, systemPort);
+
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential()
             {
-                Credentials = new NetworkCredential()
-                {
-                    UserName = systemEmail,
-                    Password = systemEmailPassword
-                },
-                EnableSsl = true
+                UserName = systemEmail,
+                Password = systemEmailPassword
             };
+            smtpClient.EnableSsl = true;
 
             await smtpClient.SendMailAsync(message);
             message.Dispose();

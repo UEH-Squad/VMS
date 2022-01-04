@@ -10,6 +10,8 @@
         Happenning,
         TookPlace,
         Closed,
-        All
+        All,
+        Approved,
+        NotApproved,
     }
 }

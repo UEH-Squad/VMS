@@ -4,20 +4,24 @@ namespace VMS.Common
 {
     public static class ActType
     {
-        public const string upComing = "Sắp diễn ra";
-        public const string happenning = "Đang diễn ra";
-        public const string tookPlace = "Đã diễn ra";
-        public const string closed = "Đã đóng đăng ký";
+        public const string Upcoming = "Sắp diễn ra";
+        public const string Happenning = "Đang diễn ra";
+        public const string TookPlace = "Đã diễn ra";
+        public const string Closed = "Đã đóng đăng ký";
+        public const string Approved = "Đã được duyệt";
+        public const string NotApproved = "Chưa được duyệt";
 
 
-        public static List<string> GetType()
+        public static List<string> GetList()
         {
-           return new()
+            return new()
             {
-                upComing,
-                happenning,
-                tookPlace,
-                closed
+                Upcoming,
+                Happenning,
+                TookPlace,
+                Closed,
+                Approved,
+                NotApproved
             };
         }
     }

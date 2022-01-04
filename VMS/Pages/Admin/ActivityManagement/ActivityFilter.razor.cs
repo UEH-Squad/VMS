@@ -65,7 +65,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             areasPinned = await AreaService.GetAllAreasAsync(true);
 
             levels = Courses.GetLevels();
-            actTypes = ActType.GetType();
+            actTypes = ActType.GetList();
         }
 
         private void ToggleCityDropdown()
@@ -191,10 +191,13 @@ namespace VMS.Pages.Admin.ActivityManagement
         private void ChooseActTypeValue(string actType)
         {
             switch (actType){
-                case ActType.upComing: Filter.ActType = StatusAct.Upcoming; break;
-                case ActType.happenning: Filter.ActType = StatusAct.Happenning; break;
-                case ActType.tookPlace: Filter.ActType = StatusAct.TookPlace; break;
-                case ActType.closed: Filter.ActType = StatusAct.Closed; break;
+                case ActType.Upcoming: Filter.ActType = StatusAct.Upcoming; break;
+                case ActType.Happenning: Filter.ActType = StatusAct.Happenning; break;
+                case ActType.TookPlace: Filter.ActType = StatusAct.TookPlace; break;
+                case ActType.Closed: Filter.ActType = StatusAct.Closed; break;
+                case ActType.Approved: Filter.ActType = StatusAct.Approved; break;
+                case ActType.NotApproved: Filter.ActType = StatusAct.NotApproved; break;
+                default: Filter.ActType = StatusAct.All; break;
             } 
             acttypeChoosenValue = actType;
             isFilterActType = true;
@@ -236,6 +239,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             Filter = new();
             await FilterChanged.InvokeAsync(Filter);
         }
+
         private void ChangeStatePinnedArea(AreaViewModel areaViewModel)
         {
             AreaViewModel area = Filter.Areas.Find(a => a.Id == areaViewModel.Id);

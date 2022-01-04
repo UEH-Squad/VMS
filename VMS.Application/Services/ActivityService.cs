@@ -64,6 +64,7 @@ namespace VMS.Application.Services
                 Includes = a => a.Include(x => x.Organizer)
                                  .Include(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
+                OrderBy = GetOrderActivitiesByActType(),
                 PageIndex = currentPage,
                 PageSize = 20
             };
@@ -78,6 +79,11 @@ namespace VMS.Application.Services
             }
 
             return paginatedList;
+        }
+
+        private static Func<IQueryable<Activity>, IOrderedQueryable<Activity>> GetOrderActivitiesByActType()
+        {
+            return x => x.OrderBy(x => x.IsApproved).ThenByDescending(x => x.CreatedDate);
         }
 
         private static List<Expression<Func<Activity, bool>>> GetFilterActivityConditionsByFilter(FilterActivityViewModel filter)
@@ -128,7 +134,7 @@ namespace VMS.Application.Services
                 return new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
-                    GetFilterActByType (filter.ActType),
+                    GetFilterActByType(filter.ActType),
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,
                     a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual || !filter.Virtual && !filter.Actual,
@@ -606,35 +612,26 @@ namespace VMS.Application.Services
                 };
             }
         }
+
         private static Expression<Func<Activity, bool>> GetFilterActByType(StatusAct actType)
         {
-
-            if (actType == StatusAct.Upcoming)
+            switch (actType)
             {
-                return x => x.StartDate > DateTime.Now.Date || x.IsApproved == false && (x.IsDeleted == false);
+                case StatusAct.Upcoming:
+                    return x => x.StartDate <= DateTime.Now.Date.AddDays(15);
+                case StatusAct.Happenning:
+                    return x => x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date && x.IsApproved;
+                case StatusAct.TookPlace:
+                    return x => x.EndDate < DateTime.Now.Date;
+                case StatusAct.Closed:
+                    return x => x.CloseDate < DateTime.Now.Date || x.IsClosed;
+                case StatusAct.Approved:
+                    return x => x.IsApproved;
+                case StatusAct.NotApproved:
+                    return x => !x.IsApproved;
+                default:
+                    return x => true;
             }
-
-            if (actType == StatusAct.Happenning)
-            {
-                return x => x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date && x.IsApproved == true;
-            }
-
-            if (actType == StatusAct.TookPlace)
-            {
-                return x => x.EndDate < DateTime.Now.Date;
-            }
-
-            if (actType == StatusAct.Closed)
-            {
-                return x => x.CloseDate < DateTime.Now.Date || x.IsClosed == true;
-            }
-
-            if (actType == StatusAct.All)
-            {
-                return x => true;
-            }
-
-            return x => true;
         }
         private static Expression<Func<Activity, bool>> GetFilterOrgActByDate(bool isTookPlace, bool isHappenning)
         {
@@ -691,7 +688,7 @@ namespace VMS.Application.Services
 
             List<Activity> activities = await _repository.GetListAsync(dbContext, specification);
 
-            activities.ForEach (a => a.IsPin = activityViewModels.Find(x => x.Id == a.Id).IsPin);
+            activities.ForEach(a => a.IsPin = activityViewModels.Find(x => x.Id == a.Id).IsPin);
 
             await _repository.UpdateAsync<Activity>(dbContext, activities);
         }

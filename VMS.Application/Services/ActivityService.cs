@@ -158,7 +158,7 @@ namespace VMS.Application.Services
             }
             else
             {
-                return x => (x.StartDate <= dateTime && x.EndDate >= dateTime) || (x.OpenDate <= dateTime && x.CloseDate >= dateTime);
+                return x => x.StartDate <= dateTime && x.EndDate >= dateTime;
             }
         }
 
@@ -560,9 +560,9 @@ namespace VMS.Application.Services
             {
                 StatusAct.Favor => x => x.Favorites.Any(f => f.UserId == userId),
                 StatusAct.Ended => x => x.EndDate < dateTime.Date && x.Recruitments.Any(x => x.UserId == userId),
-                StatusAct.Current => x => ((x.OpenDate <= dateTime.Date && dateTime.Date <= x.CloseDate)
-                                            || (x.StartDate <= dateTime.Date && dateTime.Date <= x.EndDate))
-                                            && x.Recruitments.Any(x => x.UserId == userId),
+                StatusAct.Current => x => (dateTime.Date <= x.CloseDate
+                                       || (x.StartDate <= dateTime.Date && dateTime.Date <= x.EndDate))
+                                       &&  x.Recruitments.Any(x => x.UserId == userId),
                 _ => x => x.StartDate <= dateTime.Date && dateTime.Date <= x.EndDate && x.Recruitments.Any(x => x.UserId == userId),
             };
         }
@@ -649,7 +649,7 @@ namespace VMS.Application.Services
             if (isHappenning)
             {
                 return x => (x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date)
-                            || (x.CloseDate >= DateTime.Now.Date && x.OpenDate <= DateTime.Now.Date);
+                            || x.CloseDate >= DateTime.Now.Date;
             }
 
             return x => true;

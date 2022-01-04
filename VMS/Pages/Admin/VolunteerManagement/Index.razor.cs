@@ -8,17 +8,17 @@ namespace VMS.Pages.Admin.VolunteerManagement
 {
     public partial class Index : ComponentBase
     {
-        private FilterOrgViewModel filter = new();
+        private FilterVolunteerViewModel filter = new();
         private PaginatedList<UserViewModel> pagedResult = new(new(), 0, 1, 1);
 
-        [Inject] private IOrganizationService OrganizationService { get; set; }
+        [Inject] private IUserService UserService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             await OnPageChangedAsync(1);
         }
 
-        private async Task OnFilterChangedAsync(FilterOrgViewModel filter)
+        private async Task OnFilterChangedAsync(FilterVolunteerViewModel filter)
         {
             this.filter = filter;
             await OnPageChangedAsync(1);
@@ -26,17 +26,7 @@ namespace VMS.Pages.Admin.VolunteerManagement
 
         private async Task OnPageChangedAsync(int page)
         {
-            pagedResult = await OrganizationService.GetAllOrganizers(filter, page);
-        }
-
-        private void OnOrderByTotalActivityChanged(bool isChecked)
-        {
-            filter.OrderByTotalActivity = isChecked;
-        }
-
-        private void OnOrderByRankChanged(bool isChecked)
-        {
-            filter.OrderByRank = isChecked;
+            pagedResult = await UserService.GetAllVolunteers(filter, page);
         }
     }
 }

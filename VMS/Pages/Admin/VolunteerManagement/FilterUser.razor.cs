@@ -29,6 +29,12 @@ namespace VMS.Pages.Admin.VolunteerManagement
         [CascadingParameter]
         public IModalService Modal { get; set; }
 
+        [Parameter]
+        public FilterVolunteerViewModel Filter { get; set; } = new();
+
+        [Parameter]
+        public EventCallback<FilterVolunteerViewModel> FilterChanged { get; set; }
+
         protected override void OnInitialized()
         {
             courses = Courses.GetCourses();
@@ -37,7 +43,7 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
-            parameters.Add("ChoosenAreasList", areas);
+            parameters.Add("ChoosenAreasList", Filter.Areas);
 
             await Modal.Show<ActivitySearchPage.AreasPopup>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
@@ -45,7 +51,7 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private async Task ShowSkillsPopupAsync()
         {
             var skillsParameter = new ModalParameters();
-            skillsParameter.Add("ChoosenSkillsList", skills);
+            skillsParameter.Add("ChoosenSkillsList", Filter.Skills);
 
             await Modal.Show<ActivitySearchPage.SkillsPopup>("", skillsParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
@@ -53,6 +59,7 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private void ChooseYearValue(string year)
         {
             yearChoosenValue = year;
+            Filter.Course = year;
             isYearGrey = true;
         }
 
@@ -127,10 +134,10 @@ namespace VMS.Pages.Admin.VolunteerManagement
 
         private async Task UpdateFilterValueAsync()
         {
-
+            await FilterChanged.InvokeAsync(Filter);
         }
 
-        private void ClearFilter()
+        private async Task ClearFilterAsync()
         {
             yearChoosenValue = "Khóa";
             rankChoosenValue = "Hạng";
@@ -138,8 +145,9 @@ namespace VMS.Pages.Admin.VolunteerManagement
             isYearGrey = false;
             isRankGrey = false;
             isLabelGrey = false;
-            areas = new();
-            skills = new();
+            Filter = new();
+
+            await UpdateFilterValueAsync();
         }
     }
 }

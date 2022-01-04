@@ -42,9 +42,7 @@ namespace VMS.Pages.Organization.Profile
 
         [Parameter] public string UserId { get; set; }
 
-        private int width;
-        private string classWidth = "";
-        private string OrgId;
+        private string orgId;
         private int count;
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
@@ -55,8 +53,8 @@ namespace VMS.Pages.Organization.Profile
 
         protected override async Task OnParametersSetAsync()
         {
-            OrgId = string.IsNullOrEmpty(UserId) ? IdentityService.GetCurrentUserId() : UserId;
-            org = await UserService.GetOrgProfileViewModelAsync(OrgId);
+            orgId = string.IsNullOrEmpty(UserId) ? IdentityService.GetCurrentUserId() : UserId;
+            org = await UserService.GetOrgProfileViewModelAsync(orgId);
             choosenAreas = org.Areas;
         }
 
@@ -112,11 +110,11 @@ namespace VMS.Pages.Organization.Profile
                     if (uploadFile is not null)
                     {
                         string oldImageName = org.Banner;
-                        org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId, ImgFolder.Banner);
+                        org.Banner = await UploadService.SaveImageAsync(uploadFile, orgId, ImgFolder.Banner);
                         UploadService.RemoveImage(oldImageName);
                     }
 
-                    await UserService.UpdateOrgProfile(org, OrgId);
+                    await UserService.UpdateOrgProfile(org, orgId);
 
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);

@@ -18,14 +18,14 @@
     </div>
 
     <div class="filter-item position-relative">
-        <div @onclick="ShowAreasPopupAsync" class="popup-btn @(areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+        <div @onclick="ShowAreasPopupAsync" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
     <div class="filter-item position-relative">
-        <div @onclick="ShowSkillsPopupAsync" class="popup-btn @(skills.Count != 0? "bg-grey" : "")">Kỹ năng</div>
+        <div @onclick="ShowSkillsPopupAsync" class="popup-btn @(Filter.Skills.Count != 0? "bg-grey" : "")">Kỹ năng</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
@@ -68,7 +68,7 @@
     </div>
     <div class="d-flex">
         <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
-        <button @onclick="ClearFilter" type="button" class="clear-filter-btn">Xóa lọc</button>
+        <button @onclick="ClearFilterAsync" type="button" class="clear-filter-btn">Xóa lọc</button>
     </div>
 </div>
 

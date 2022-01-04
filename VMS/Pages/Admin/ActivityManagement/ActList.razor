@@ -51,13 +51,13 @@
                                                     <span class="icon-tooltip">Thời hạn đăng ký</span>
                                                     <span>@item.CloseDate.ToString("dd/MM/yyyy")</span>
                                                 </div>
-                                                @if (item.IsApproved == true && item.IsDay == true)
+                                                @if (item.IsApproved && item.IsDay)
                                                 {
                                                     <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
                                                         <i class="material-icons-outlined icon-check">
                                                             check_circle
                                                         </i>
-                                                        <span class="ms-2">Số ngày tình nguyện: @item.NumberOfDay</span>
+                                                        <span class="ms-2">Số ngày tình nguyện: @item.NumberOfDays</span>
                                                     </div>
                                                 }
                                             </div>
@@ -69,7 +69,7 @@
                                                     <span class="icon-tooltip">Ngày diễn ra</span>
                                                     <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
                                                 </div>
-                                                @if (item.IsApproved == true && item.IsPoint == true)
+                                                @if (item.IsApproved && item.IsPoint)
                                                 {
                                                     <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
                                                         <i class="material-icons-outlined icon-check">

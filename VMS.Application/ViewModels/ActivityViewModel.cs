@@ -30,7 +30,7 @@ namespace VMS.Application.ViewModels
         public bool IsCheck { get; set; }
         public bool IsPoint { get; set; }
         public bool IsDay { get; set; }
-        public int NumberOfDay { get; set; }
+        public int NumberOfDays { get; set; }
         public bool IsDenied { get; set; }
 
         public User Organizer { get; set; }

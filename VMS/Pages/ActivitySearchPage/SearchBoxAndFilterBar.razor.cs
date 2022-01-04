@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common;
 using VMS.Common.Enums;
 using VMS.Domain.Models;
 
@@ -147,14 +148,7 @@ namespace VMS.Pages.ActivitySearchPage
             var parameters = new ModalParameters();
             parameters.Add("ChoosenAreasList", Filter.Areas);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show<AreasPopup>("", parameters, options).Result;
+            await Modal.Show<AreasPopup>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private async Task ShowSkillsPopupAsync()
@@ -169,7 +163,7 @@ namespace VMS.Pages.ActivitySearchPage
                 UseCustomLayout = true
             };
 
-            await Modal.Show<SkillsPopup>("", skillsParameter, options).Result;
+            await Modal.Show<SkillsPopup>("", skillsParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private async Task UpdateFilterValueAsync()

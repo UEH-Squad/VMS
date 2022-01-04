@@ -30,7 +30,7 @@
             <div class="">
                 <div class="mb-2 text-end">
                     <button @onclick="ShowDenyModalAsync" class="btn btn-deny">Từ chối</button>
-                    <button @onclick="ShowApproveModalAsync" class="btn btn-approvie ms-2">Duyệt</button>
+                    <button @onclick="ShowApproveModalAsync" class="btn btn-approvie ms-2">@(activity.IsApproved ? "Sửa" : "Duyệt")</button>
                 </div>
                 <span @onclick="ShowPopupConvert" class="regulation">Xem quy đổi ngày tình nguyện</span>
             </div>

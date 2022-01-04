@@ -274,6 +274,9 @@ namespace VMS.Application.Services
             activity = _mapper.Map(activityViewModel, activity);
 
             activity.IsApproved = false;
+            activity.IsDay = false;
+            activity.IsPoint = false;
+            activity.NumberOfDays = 0;
 
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;

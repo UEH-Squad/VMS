@@ -24,10 +24,10 @@
                     }
                     else
                     {
-                        <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4" style="@(IsUsedForAdmin ? "font-size: 14px" : "")" >Chiến sĩ hạng đồng</span>
+                        <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">Chiến sĩ hạng đồng</span>
                     }
 
-                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser" IsUsedForAdmin=@IsUsedForAdmin/>
+                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser" IsUsedForAdmin=@IsUsedForAdmin />
 
                 </div>
             </div>
@@ -45,7 +45,9 @@
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">email</p>
-                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.Email</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">
+                            <a style="color: #515151;" href="mailto:@User.Email">@User.Email</a>
+                        </p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">contact_phone</p>

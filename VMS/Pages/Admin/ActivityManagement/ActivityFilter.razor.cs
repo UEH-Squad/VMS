@@ -17,6 +17,7 @@ namespace VMS.Pages.Admin.ActivityManagement
     {
         private List<AddressPath> provinces;
         private List<AddressPath> districts;
+        private List<AddressPath> wards;
         private List<UserViewModel> organizers;
         private List<string> levels;
         private List<string> actTypes;
@@ -24,19 +25,23 @@ namespace VMS.Pages.Admin.ActivityManagement
         private bool isOrganizationShow;
         private bool isCityShow;
         private bool isDistrictShow;
+        private bool isWardShow;
         private bool isLevelShow;
         private bool isActTypeShow;
         private bool isFilterDistrict;
         private bool isFilterActType;
         private bool isFilterCity;
+        private bool isFilterWard;
         private bool isFilterLevel;
         private bool isFilterOrganization;
         private bool isFilterMonth;
         private string cityChoosenValue = "Tỉnh/Thành phố";
         private string districtChoosenValue = "Quận/Huyện";
+        private string wardChoosenValue = "Phường/Xã";
         private string organizationChoosenValue = "Tổ chức";
         private string levelChoosenValue = "Cấp";
         private string acttypeChoosenValue = "Loại hoạt động";
+
         [Parameter] public DateTime DateTimeValue { get; set; }
         [CascadingParameter]
         public IModalService Modal { get; set; }
@@ -73,7 +78,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             isCityShow = false;
         }
 
-        private async Task ChooseCityValue(AddressPath addressPath)
+        private async Task ChooseCityValueAsync(AddressPath addressPath)
         {
             Filter.ProvinceId = addressPath.Id;
             cityChoosenValue = addressPath.Name;
@@ -81,8 +86,14 @@ namespace VMS.Pages.Admin.ActivityManagement
             ToggleCityDropdown();
           
             districts = await AddressService.GetAllAddressPathsByParentIdAsync(addressPath.Id);
+            isFilterDistrict = false;
             Filter.DistrictId = 0;
             districtChoosenValue = "Quận/Huyện";
+
+            wards = new();
+            isFilterWard = false;
+            Filter.WardId = 0;
+            wardChoosenValue = "Phường/Xã";
         }
 
         private void ToggleDistrictDropdown()
@@ -95,12 +106,35 @@ namespace VMS.Pages.Admin.ActivityManagement
             isDistrictShow = false;
         }
 
-        private void ChooseDistrictValue(AddressPath addressPath)
+        private async Task ChooseDistrictValueAsync(AddressPath addressPath)
         {
             Filter.DistrictId = addressPath.Id;
             districtChoosenValue = addressPath.Name;
             isFilterDistrict = true;
             ToggleDistrictDropdown();
+
+            wards = await AddressService.GetAllAddressPathsByParentIdAsync(addressPath.Id);
+            isFilterWard = false;
+            Filter.WardId = 0;
+            wardChoosenValue = "Phường/Xã";
+        }
+
+        private void ToggleWardDropdown()
+        {
+            isWardShow = !isWardShow;
+        }
+
+        private void CloseWardDropdown()
+        {
+            isWardShow = false;
+        }
+
+        private void ChooseWardValue(AddressPath addressPath)
+        {
+            Filter.WardId = addressPath.Id;
+            wardChoosenValue = addressPath.Name;
+            isFilterWard = true;
+            ToggleWardDropdown();
         }
 
         private void ToggleOrganizationDropdown()
@@ -126,14 +160,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             var parameters = new ModalParameters();
             parameters.Add("ChoosenAreasList", Filter.Areas);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show<AreasPopup>("", parameters, options).Result;
+            await Modal.Show<AreasPopup>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private async Task ShowSkillsPopupAsync()
@@ -141,14 +168,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             var skillsParameter = new ModalParameters();
             skillsParameter.Add("ChoosenSkillsList", Filter.Skills);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show<SkillsPopup>("", skillsParameter, options).Result;
+            await Modal.Show<SkillsPopup>("", skillsParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
         private void ToggleLevelDropdown()
         {
@@ -198,6 +218,7 @@ namespace VMS.Pages.Admin.ActivityManagement
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
+            wardChoosenValue = "Phường/Xã";
             organizationChoosenValue = "Tổ chức";
             levelChoosenValue = "Cấp";
             acttypeChoosenValue = "Loại hoạt động";
@@ -205,10 +226,12 @@ namespace VMS.Pages.Admin.ActivityManagement
             isFilterActType = false;
             isFilterCity = false;
             isFilterDistrict = false;
+            isFilterWard = false;
             isFilterLevel = false;
             isFilterMonth = false;
             isFilterOrganization = false;
             districts = new();
+            wards = new();
             provinces = await AddressService.GetAllProvincesAsync();
             Filter = new();
             await FilterChanged.InvokeAsync(Filter);

@@ -26,7 +26,8 @@ namespace VMS.Common
             {
                 "Ban Chuyên môn",
                 "Khoa/Viện/KTX",
-                "CLB/Đội/Nhóm"
+                "CLB/Đội/Nhóm",
+                "Khác"
             };
         }
     }

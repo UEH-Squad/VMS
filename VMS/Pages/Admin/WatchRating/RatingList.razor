@@ -6,7 +6,7 @@
         <div class="card-member">
             <div class="card-member_name">
                 <a href="@Routes.AdminVolunteerProfile/@Item.User.Id" class="avatar">
-                    <img src="@Item.User.Avatar" alt="avatar">
+                    <img src="@(string.IsNullOrEmpty(Item.User.Avatar) ? "img/Default/avatar.png" : Item.User.Avatar)" alt="avatar">
                 </a>
                 <div class="name">
                     <a href="@Routes.AdminVolunteerProfile/@Item.User.Id" class="name-member">@Item.User.FullName</a>
@@ -37,7 +37,7 @@
         <div class="card-organization">
             <div class="card-organization_name">
                 <a href="@Routes.AdminOrganizationProfile/@Item.Organizer.Id" class="avatar">
-                    <img src="@Item.Organizer.Avatar" alt="avatar">
+                    <img src="@(string.IsNullOrEmpty(Item.Organizer.Avatar) ? "img/Default/avatar.png" : Item.Organizer.Avatar)" alt="avatar">
                 </a>
                 <div class="name">
                     <a href="@Routes.AdminOrganizationProfile/@Item.Organizer.Id" class="name-organization">@Item.Organizer.FullName</a>

@@ -7,7 +7,7 @@
                 <div class="">
                     <div class="proflie__logo-img py-3">
                         <div class=" text-center d-inline-block position-relative">
-                            <img src="@(string.IsNullOrEmpty(User.Avatar) ? "img/Default/user_avatar.png" : User.Avatar)" alt="@User.FullName" style="@(IsUsedForAdmin ? "width: 150px; height: 150px;" : "")">
+                            <img src="@(string.IsNullOrEmpty(User.Avatar) ? "img/Default/avatar.png" : User.Avatar)" alt="@User.FullName" style="@(IsUsedForAdmin ? "width: 150px; height: 150px;" : "")">
                             @if (IsUser)
                             {
                                 <label for="myfile">

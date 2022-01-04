@@ -86,6 +86,9 @@ namespace VMS.Pages.ActivitySearchPage
             districts = await AddressService.GetAllAddressPathsByParentIdAsync(addressPath.Id);
             Filter.DistrictId = 0;
             districtChoosenValue = "Quận/Huyện";
+
+            Filter.WardId = 0;
+            wardChoosenValue = "Phường/Xã";
         }
 
         private void ToggleDistrictDropdown()

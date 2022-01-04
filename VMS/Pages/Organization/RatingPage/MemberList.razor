@@ -10,12 +10,12 @@
             {
                 <div class="container">
                     <div class="container-avatar">
-                        <img src="@item.User.Avatar" alt="Avatar" class="member-avatar">
+                        <img src="@(string.IsNullOrEmpty(item.User.Avatar) ? "img/Default/avatar.png" : item.User.Avatar)" alt="Avatar" class="member-avatar">
                     </div>
                     <div class="member">
                         <div class="member-name">
                             <a href="@Routes.UserProfile/@item.User.Id" class="member-name1">@item.User.FullName</a>
-                            <p class="member-name2">Chiến sĩ làm biếng</p>
+                            <p class="member-name2">Tình nguyện viên GoVirlunteer</p>
                         </div>
                         <Stars StarRating="item.Rating" StarRatingChanged="async (e) => await UpdateRatingAsync(e, item)" />
                         <div class="member-comment">

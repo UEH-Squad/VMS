@@ -114,7 +114,7 @@
             : Routes.UserProfile) + $"/{UserId}";
 
         var user = IdentityService.FindUserById(UserId);
-        userAvatar = string.IsNullOrEmpty(user?.Avatar) ? "img/hsv.png" : user?.Avatar;
+        userAvatar = string.IsNullOrEmpty(user?.Avatar) ? "img/Default/avatar.png" : user?.Avatar;
         userFullname = user?.FullName;
     }
 

@@ -6,7 +6,7 @@
             <div class="col-12 col-md-4 text-center information__logo">
                 <div class="information__logo-img">
                     <div class=" text-center d-inline-block position-relative">
-                        <img src="@(string.IsNullOrEmpty(Org.Avatar) ? "img/Default/org_avatar.png" : Org.Avatar)" alt="Avartar đơn vị" style="@(IsUsedForAdmin ? "width:150px; height:150px;" : "")">
+                        <img src="@(string.IsNullOrEmpty(Org.Avatar) ? "img/Default/avatar.png" : Org.Avatar)" alt="Avartar đơn vị" style="@(IsUsedForAdmin ? "width:150px; height:150px;" : "")">
                         @if (HaveControl)
                         {
                             <label for="myfile" class="d-inline">

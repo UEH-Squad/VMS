@@ -1,20 +1,20 @@
-﻿<div class="container">
-    <div class="row act">
-        <div class="d-flex align-items-center justify-content-between my-5">
-            <h1 class="mb-0">Hoạt động <span>đã diễn ra</span></h1>
-            <hr />
-        </div>
-        
-        <div class="row pb-5">
-            @if (ActEnded != null)
-            {
+﻿@if (ActEnded != null && ActEnded.Count > 0)
+{
+    <div class="container">
+        <div class="row act">
+            <div class="d-flex align-items-center justify-content-between my-5">
+                <h1 class="mb-0">Hoạt động <span>đã diễn ra</span></h1>
+                <hr />
+            </div>
+
+            <div class="row pb-5">
                 @foreach (var item in ActEnded)
                 {
                     <div class="col-12 col-lg-6 act-container position-relative pb-5">
                         <div class="img-container position-absolute">
                             <img src="@item.Banner" alt="" class="act-img">
                         </div>
-                        <div class="act-content col-11 col-lg-10 ms-auto mt-1 mb-2">    
+                        <div class="act-content col-11 col-lg-10 ms-auto mt-1 mb-2">
                             <div class="act-ctn col-9 ms-auto ps-3 ps-md-4 pe-3 my-1 my-sm-2">
                                 <a href="@Routes.ActivityInfo/@item.Id" class="act-title">@item?.Name</a>
                                 <div class="act-ranking my-1 my-sm-2 my-lg-3 lh-1 ">
@@ -32,10 +32,9 @@
                         </div>
                     </div>
                 }
-            }
+            </div>
         </div>
     </div>
-</div>
-
+}
 @code {
 }

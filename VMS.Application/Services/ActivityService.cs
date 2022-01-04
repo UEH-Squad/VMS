@@ -361,7 +361,8 @@ namespace VMS.Application.Services
                 {
                     a => !excludedActitivyIds.Contains(a.Id),
                     a => a.OrgId == orgId,
-                    a => !a.IsDeleted
+                    a => !a.IsDeleted,
+                    a => a.IsApproved
                 },
             });
 

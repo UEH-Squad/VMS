@@ -1,14 +1,14 @@
 ﻿@inject IJSRuntime JS;
 
-<div class="container">
-    <div class="row act">
-        <div class="d-flex align-items-center justify-content-between my-lg-5 my-2 my-sm-3 px-3">
-            <h1 style="@(IsUsedForAdmin ? "font-size:24px;" : "")" class="mb-0">Hoạt động <span>@Title</span></h1>
-            <hr />
-        </div>
+@if (Datas is not null && Datas.Count > 0)
+{
+    <div class="container">
+        <div class="row act">
+            <div class="d-flex align-items-center justify-content-between my-lg-5 my-2 my-sm-3 px-3">
+                <h1 style="@(IsUsedForAdmin ? "font-size:24px;" : "")" class="mb-0">Hoạt động <span>@Title</span></h1>
+                <hr />
+            </div>
 
-        @if (Datas is not null)
-        {
             <div class="owl-carousel owl-theme position-relative px-3">
                 @foreach (var item in Datas)
                 {
@@ -50,14 +50,14 @@
                     </div>
                 }
             </div>
-        }
 
 
-        @if (HaveLinkAll)
-        {
-            <div class="act__linkAll text-end mt-lg-5 mt-2 mt-sm-3 pe-3">
-                <a href="@Routes.ActivitySearch/@QueryString">@TitleLinkALl >>></a>
-            </div>
-        }
+            @if (HaveLinkAll)
+            {
+                <div class="act__linkAll text-end mt-lg-5 mt-2 mt-sm-3 pe-3">
+                    <a href="@Routes.ActivitySearch/@QueryString">@TitleLinkALl >>></a>
+                </div>
+            }
+        </div>
     </div>
-</div>
+}

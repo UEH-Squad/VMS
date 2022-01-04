@@ -195,6 +195,11 @@
     margin-left: 5px;
     padding-right: 5px; }
 
+.managementTool__create .icon-dots {
+  cursor: pointer; }
+  .managementTool__create .icon-dots::after {
+    display: none; }
+
 .managementTool__create .dropdown-menu {
   width: 210px;
   background-color: #fff;
@@ -202,8 +207,10 @@
   border-radius: 10px;
   padding: 10px 12px;
   transform: translate(-85px, 52px) !important; }
-  .managementTool__create .dropdown-menu li {
+  .managementTool__create .dropdown-menu li, .managementTool__create .dropdown-menu a {
     padding: 0 3px;
-    cursor: pointer; }
+    cursor: pointer;
+    font-size: 16px;
+    color: #515151; }
   .managementTool__create .dropdown-menu li:hover {
     background: rgba(24, 160, 251, 0.1); }

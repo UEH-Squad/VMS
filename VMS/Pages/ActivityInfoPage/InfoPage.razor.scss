@@ -269,6 +269,14 @@
         }
     }
 
+    .icon-dots {
+        cursor: pointer;
+
+        &::after {
+            display: none;
+        }
+    }
+
     .dropdown-menu {
         width: 210px;
         background-color: #fff;
@@ -277,13 +285,17 @@
         padding: 10px 12px;
         transform: translate(-85px, 52px) !important;
 
-        li {
+        li, a {
             padding: 0 3px;
             cursor: pointer;
+            font-size: 16px;
+            color: #515151;
         }
 
         li:hover {
             background: rgba(24, 160, 251, 0.1);
         }
+
+
     }
 }

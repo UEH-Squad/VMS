@@ -120,3 +120,19 @@
   text-decoration-line: underline;
   color: #18A0FB;
   cursor: pointer; }
+
+.toppage {
+  margin-top: 0.5%; }
+  .toppage .return-text {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 30px;
+    color: #64D72F;
+    display: none; }
+    @media (min-width: 992px) {
+      .toppage .return-text {
+        display: block; } }
+  .toppage .return-text:hover {
+    color: #306C14; }

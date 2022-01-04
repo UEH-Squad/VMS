@@ -17,13 +17,13 @@
                         Ngày đăng: @activity.CreatedDate
                     </p>
                     <AuthorizeView Roles="@($"{Role.Admin}")">
-                        <div class="managementTool__create dropdown mb-3">
-                            <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>Chỉnh sửa</span>
-                            </button>
+                        <div class="managementTool__create dropdown mb-0">
+                            <span class="material-icons-outlined dropdown-toggle icon-dots" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                more_vert
+                            </span>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li @onclick="ShowEditRequirementAsync" class="mb-2">Yêu cầu chỉnh sửa</li>
-                                <li ><a href = "@Routes.EditActivity/@activity.Id">Chỉnh sửa hoạt động</a></li>
+                                <li><a href="@Routes.EditActivity/@activity.Id">Chỉnh sửa hoạt động</a></li>
                             </ul>
                         </div>
                     </AuthorizeView>

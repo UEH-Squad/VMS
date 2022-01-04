@@ -248,6 +248,7 @@ namespace VMS.Application.Services
                 return new List<Expression<Func<Recruitment, bool>>>()
                 {
                     r => r.UserId == userId,
+                    r => r.Activity.EndDate < DateTime.Now.Date,
                     GetConditionBySearchOrOrder(filter.SearchValue, null, false)
                 };
             }
@@ -257,6 +258,7 @@ namespace VMS.Application.Services
                 {
                     r => r.UserId == userId,
                     r => r.Activity.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
+                    r => r.Activity.EndDate < DateTime.Now.Date,
                     GetConditionBySemester(filter.Semester),
                     GetConditionBySearchOrOrder(string.Empty, filter.IsRated, false)
                 };

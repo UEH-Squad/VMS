@@ -1,16 +1,16 @@
 ﻿@layout AdminLayout
 
-@attribute [Route(Routes.AdminOrganizationProfile)]
+@attribute [Route(Routes.AdminOrganizationProfile + "/{UserId}")]
 @attribute [Authorize(Roles = "Admin")]
 <div class="row mt-4">
     <div class="col-lg-12 mx-auto px-0">
         <div class="position-relative head-section">
             <h1 class="text-center m-0">Hồ sơ <span>tổ chức</span></h1>
-            <a href="@Routes.AdminEditOrganizationProfile" class="position-absolute">Chỉnh sửa</a>
+            <a href="@Routes.AdminEditOrganizationProfile/@UserId" class="position-absolute">Chỉnh sửa</a>
         </div>
-        <VMS.Pages.Organization.Profile.Index IsUsedForAdmin="true" UserId="3b49a591-10ec-42e4-8045-83cc070b76c2"/>
+        <VMS.Pages.Organization.Profile.Index IsUsedForAdmin="true" UserId="@UserId"/>
     </div>
 </div>
 @code {
-
+    [Parameter] public string UserId { get; set; }
 }

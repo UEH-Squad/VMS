@@ -3,9 +3,8 @@ using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
-using VMS.Domain.Models;
+using VMS.Common;
 
 namespace VMS.Pages.Admin.VolunteerManagement
 {
@@ -23,57 +22,47 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private bool isLabelShow;
         private bool isLabelGrey = false;
 
+        private List<string> courses;
+        private List<AreaViewModel> areas = new();
+        private List<SkillViewModel> skills = new();
+
         [CascadingParameter]
         public IModalService Modal { get; set; }
 
-        private List<AreaViewModel> areas = new();
-        private List<SkillViewModel> skills = new();
+        [Parameter]
+        public FilterVolunteerViewModel Filter { get; set; } = new();
+
+        [Parameter]
+        public EventCallback<FilterVolunteerViewModel> FilterChanged { get; set; }
+
+        protected override void OnInitialized()
+        {
+            courses = Courses.GetCourses();
+        }
+
         private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
-            parameters.Add("ChoosenAreasList", areas);
+            parameters.Add("ChoosenAreasList", Filter.Areas);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show<VMS.Pages.ActivitySearchPage.AreasPopup>("", parameters, options).Result;
+            await Modal.Show<ActivitySearchPage.AreasPopup>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private async Task ShowSkillsPopupAsync()
         {
             var skillsParameter = new ModalParameters();
-            skillsParameter.Add("ChoosenSkillsList", skills);
+            skillsParameter.Add("ChoosenSkillsList", Filter.Skills);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show<VMS.Pages.ActivitySearchPage.SkillsPopup>("", skillsParameter, options).Result;
-        }
-        public class fakeYears
-        {
-            public string Year { get; set; }
+            await Modal.Show<ActivitySearchPage.SkillsPopup>("", skillsParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
-        private List<fakeYears> Years = new()
+        private void ChooseYearValue(string year)
         {
-            new fakeYears() { Year = "Khóa 44" },
-            new fakeYears() { Year = "Khóa 45" },
-            new fakeYears() { Year = "Khóa 46" },
-            new fakeYears() { Year = "Khóa 47" },
-        };
-        private void ChooseYearlValue(fakeYears year)
-        {
-            yearChoosenValue = year.Year;
+            yearChoosenValue = year;
+            Filter.Course = year;
             isYearGrey = true;
         }
+
         private void ToggleYearDropdown()
         {
             isYearShow = !isYearShow;
@@ -94,11 +83,13 @@ namespace VMS.Pages.Admin.VolunteerManagement
             new fakeRanks() { Rank = "Cao đến thấp" },
             new fakeRanks() { Rank = "Thấp đến cao" },
         };
+
         private void ChooseRanklValue(fakeRanks rank)
         {
             rankChoosenValue = rank.Rank;
             isRankGrey = true;
         }
+
         private void ToggleRankDropdown()
         {
             isRankShow = !isRankShow;
@@ -124,11 +115,13 @@ namespace VMS.Pages.Admin.VolunteerManagement
             new fakeLabels() { Label = "Kẻ hủy diệt deadline" },
             new fakeLabels() { Label = "Chúa tể thả thính" },
         };
+
         private void ChooseLabellValue(fakeLabels label)
         {
             labelChoosenValue = label.Label;
             isLabelGrey = true;
         }
+
         private void ToggleLabelDropdown()
         {
             isLabelShow = !isLabelShow;
@@ -138,11 +131,13 @@ namespace VMS.Pages.Admin.VolunteerManagement
         {
             isLabelShow = false;
         }
+
         private async Task UpdateFilterValueAsync()
         {
-
+            await FilterChanged.InvokeAsync(Filter);
         }
-        private void ClearFilter()
+
+        private async Task ClearFilterAsync()
         {
             yearChoosenValue = "Khóa";
             rankChoosenValue = "Hạng";
@@ -150,8 +145,9 @@ namespace VMS.Pages.Admin.VolunteerManagement
             isYearGrey = false;
             isRankGrey = false;
             isLabelGrey = false;
-            areas = new();
-            skills = new();
+            Filter = new();
+
+            await UpdateFilterValueAsync();
         }
     }
 }

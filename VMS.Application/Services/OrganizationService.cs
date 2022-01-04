@@ -104,8 +104,9 @@ namespace VMS.Application.Services
                 Includes = x => x.Include(x => x.Activities)
                                  .ThenInclude(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
+                OrderBy = GetOrderByFilter(filter),
                 PageIndex = currentPage,
-                PageSize = 8,
+                PageSize = 8
             };
 
             PaginatedList<User> organizers = await _repository.GetListAsync(dbContext, specification);
@@ -120,6 +121,20 @@ namespace VMS.Application.Services
             }
 
             return paginatedList;
+        }
+
+        private Func<IQueryable<User>, IOrderedQueryable<User>> GetOrderByFilter(FilterOrgViewModel filter)
+        {
+            if (filter.OrderByTotalActivity.HasValue)
+            {
+                return x => filter.OrderByTotalActivity.Value
+                            ? x.OrderBy(x => x.Activities.Count)
+                            : x.OrderByDescending(x => x.Activities.Count);
+            }
+            else
+            {
+                return x => x.OrderByDescending(x => x.CreatedDate);
+            }
         }
 
         private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterOrgViewModel filter)

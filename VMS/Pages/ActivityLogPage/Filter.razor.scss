@@ -1,13 +1,10 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 
 .filter-container {
-    padding: 3% 3% 5% 3%;
-    border-radius: 10px;
     margin-bottom: 30px;
 
     @include on('sm') {
-        border: 1px solid $grey-close-bg;
-        margin-top: 40px;
+        margin-top: 10px;
         margin-bottom: 60px;
     }
 }
@@ -236,7 +233,7 @@
 
         @include on('xl') {
             margin-top: 0;
-            justify-content: space-between;
+            justify-content: space-around;
         }
 
         @include on('xxl') {

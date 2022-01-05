@@ -19,8 +19,9 @@
                     </div>
                     <div class="d-flex justify-content-between mt-1">
                         <h5 class="pop-up__act__org d-flex align-items-center mb-0">
+                            <i class="material-icons me-1">public</i>
                             <a href="@Routes.AdminOrganizationProfile/@item.OrgId">
-                                <i class="material-icons me-1">public</i> @item.Organizer?.FullName
+                                @item.Organizer?.FullName
                             </a>
                         </h5>
                         <h5 class="fw-normal mb-0">Ngày đăng: @item.CreatedDate.ToString("dd/MM/yyyy")</h5>

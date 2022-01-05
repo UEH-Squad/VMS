@@ -162,14 +162,14 @@
 .filter-btn {
   display: flex;
   align-items: center;
-  padding: 5px 10px;
+  padding: 5px 20px;
   width: fit-content;
   color: #18A0FB;
   font-size: 14px;
-  font-weight: 600;
   border-radius: 8px;
   border: 1px solid #18A0FB;
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+  font-weight: 400 !important; }
   @media (min-width: 1200px) {
     .filter-btn {
       color: #fff;
@@ -185,6 +185,7 @@
         opacity: 78%; } }
 
 .clear-filter-btn {
+  font-weight: 400 !important;
   color: #fff;
   font-weight: bold;
   background-color: #64D72F;

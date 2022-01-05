@@ -72,8 +72,10 @@ body {
 .about-infor {
     padding: 0 15px;
 
+
     @include on('lg') {
         padding: 0 30px;
+        margin-top: -70px;
     }
 
     .titles {

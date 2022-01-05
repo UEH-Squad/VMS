@@ -26,6 +26,8 @@
     }
 
     .pop-up-container {
+        width: 80%;
+        max-width: 330px;
         background-color: $white;
         position: relative;
         box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
@@ -84,18 +86,31 @@
     }
 
     .content {
-        padding: 34px 70px 18px;
+        padding: 30px 35px 18px;
         display: flex;
         flex-direction: column;
         align-items: center;
 
+        @include on ('lg') {
+            padding: 30px 70px 18px;
+        }
+
         h3 {
-            font-size: 20px;
+            font-size: 16px;
             line-height: 25px;
             font-weight: 500;
             margin-bottom: 0;
             color: $green;
         }
+
+        @include on ('sm') {
+            font-size: 18px;
+        }
+
+        @include on ('md') {
+            font-size: 20px;
+        }
+
 
         .edit-text {
             color: $blue;
@@ -105,34 +120,41 @@
     .pop-up-btn {
         display: flex;
         justify-content: flex-end;
-        padding: 0 30px 34px 0;
+        padding: 0 20px 20px 0;
         font-weight: 600;
 
-        .deny {
-            background-color: $white;
-            color: $blue;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 104px;
-            height: 32px;
-            font-weight: 600;
+        @include on ('sm') {
+            padding: 0 30px 27px 0;
         }
 
-        .accept {
-            background-color: $blue;
-            color: $white;
+        .deny, .accept {
+            cursor: pointer;
             border-radius: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 104px;
             height: 32px;
-            cursor: pointer;
-            font-size: 18px;
             font-weight: 600;
+            font-size: 14px;
+
+            @include on ('sm') {
+                font-size: 16px;
+            }
+
+            @include on ('lg') {
+                font-size: 18px;
+            }
+        }
+
+        .deny {
+            background-color: $white;
+            color: $blue;
+        }
+
+        .accept {
+            background-color: $blue;
+            color: $white;
         }
     }
 }

@@ -28,6 +28,10 @@
     background-color: #FFFFFF;
     position: relative;
     box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
+    @media (min-width: 992px) {
+      .pop-up .pop-up-container {
+        max-width: unset;
+        width: 400px; } }
   .pop-up .close-btn {
     width: 33px;
     height: 33px;
@@ -81,12 +85,12 @@
       font-weight: 500;
       margin-bottom: 0;
       color: #64D72F; }
-    @media (min-width: 576px) {
-      .pop-up .content {
-        font-size: 18px; } }
-    @media (min-width: 768px) {
-      .pop-up .content {
-        font-size: 20px; } }
+      @media (min-width: 576px) {
+        .pop-up .content h3 {
+          font-size: 18px; } }
+      @media (min-width: 768px) {
+        .pop-up .content h3 {
+          font-size: 20px; } }
     .pop-up .content .edit-text {
       color: #18A0FB; }
   .pop-up .pop-up-btn {

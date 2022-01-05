@@ -184,15 +184,9 @@ p {
       padding: 0 12px; } }
   @media (min-width: 768px) {
     .filter-btn {
-      font-size: 18px;
+      font-size: 18x;
       height: 36px;
       padding: 0 16px; } }
-  @media (min-width: 992px) {
-    .filter-btn {
-      font-size: 20px;
-      font-weight: 600;
-      height: 40px;
-      padding: 0 20px; } }
   .filter-btn:hover {
     background-color: #306C14;
     opacity: 78%; }
@@ -211,14 +205,9 @@ p {
   background-color: #fff; }
   @media (min-width: 576px) {
     .clear-filter-btn {
-      font-size: 16px; } }
-  @media (min-width: 768px) {
-    .clear-filter-btn {
       font-size: 18px; } }
   @media (min-width: 992px) {
     .clear-filter-btn {
-      font-size: 20px;
-      font-weight: 600;
       color: #B4B4B4; } }
   .clear-filter-btn:hover {
     text-decoration: underline; }

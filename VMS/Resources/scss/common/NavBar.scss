@@ -1,8 +1,10 @@
 ﻿@import '_variables';
+
 .my-navbar {
     min-height: 65px;
     z-index: 100;
-        @include on('xl') {
+
+    @include on('xl') {
         min-height: 85px;
     }
 
@@ -307,28 +309,35 @@
         }
     }
 
-    .mega-menu {
+    .mega-menu-k {
         display: none;
-        width: 760px;
+        width: 660px;
         position: absolute;
-        bottom: -275px;
-        left: -250px;
+        bottom: -226px;
+        left: -225px;
         background: #FFFFFF;
         box-shadow: 5px 10px 40px 2px rgba(11, 40, 50, 0.15);
         z-index: 100;
-        padding: 15px 15px 15px 35px;
+        padding: 30px;
+        border-radius: 10px;
 
-        a {
+        .mega-menu-col {
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+        }
+
+        .mega-menu-a {
             display: block;
-            padding: 25px 0 25px 40px;
+            padding: 10px;
 
             &:hover {
                 background: rgba(24, 160, 251, 0.1);
             }
 
             span {
-                font-weight: 400;
-                font-size: 22px;
+                font-weight: 500;
+                font-size: 18px;
                 letter-spacing: -0.015em;
                 color: #000000;
             }
@@ -342,28 +351,29 @@
         }
 
         .mega-menu-detail {
+
             h6 {
                 color: $green;
                 font-size: 20px;
                 font-weight: 600;
             }
 
-            .mega-menu-img {
-                width: 70px;
-                height: 70px;
-                overflow: hidden;
-                border-radius: 50%;
-                object-fit: cover;
-                margin: 12px;
+            .mega-menu-image {
+                display: flex;
+                justify-content: center;
+
+                img {
+                    height: 100px;
+                }
             }
 
             p {
                 font-weight: 400;
                 font-size: 14px;
+                line-height: 24px;
+                text-align: center;
                 color: #515151;
             }
         }
     }
 }
-
-

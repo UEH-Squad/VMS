@@ -27,59 +27,60 @@
                             @(isShowMenu ? "expand_less" : "expand_more")
                         </i>
                     </NavLink>
-                    <div class="mega-menu row">
+                    <div class="mega-menu mega-menu-k">
                         <div class="row">
-                            <div class="col-6 ">
-                                <a href="@Routes.OrganizerSearch" @onmousemove="(() => ShowDetail(1))" class="d-flex align-items-center mega-menu-li-org">
-                                    <i class="material-icons-outlined">
-                                        people
-                                    </i>
+                            <div class="col-6 mega-menu-col">
+                                <a href="@Routes.OrganizerSearch" @onmousemove="(() => ShowDetail(1))" class="d-flex align-items-center mega-menu-a">
+                                    <i class="material-icons"> person </i>
                                     <span>Đơn vị tổ chức</span>
                                 </a>
-                                <a href="@Routes.VolunteerSearch" @onmousemove="(() => ShowDetail(2))" class="d-flex align-items-center mega-menu-li-user">
-                                    <i class="material-icons">person</i>
+                                <a href="@Routes.VolunteerSearch" @onmousemove="(() => ShowDetail(2))" class="d-flex align-items-center mega-menu-a">
+                                    <i class="material-icons-outlined"> people </i>
                                     <span>Tình nguyện viên</span>
                                 </a>
-                                <a @onmousemove="(() => ShowDetail(3))" class="d-flex align-items-center mega-menu-li-rank">
-                                    <i class="material-icons">
-                                        local_fire_department
-                                    </i>
+                                <a @onmousemove="(() => ShowDetail(3))" class="d-flex align-items-center mega-menu-a">
+                                    <i class="material-icons"> local_fire_department </i>
                                     <span>Đại lộ danh vọng</span>
                                 </a>
                             </div>
 
-                            <div class="col-6  mega-menu-detail mega-menu-detail-org @(isShowDetailOrg ? "d-block" :"d-none")">
-                                <h6 class="text-center">ĐƠN VỊ TỔ CHỨC</h6>
-                                <div class="mega-menu-img mx-auto">
-                                    <img src="./img/detailorg.png" class="w-100" />
+                            <div class="col-6 mega-menu-detail mega-menu-detail-org @(isShowDetailOrg ? "d-block" :"d-none")">
+                                <div class="mega-menu-image">
+                                    <img src="./img/Cộng đồng-DVTC.png" class="" />
                                 </div>
-                                <p class="mb-0">Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái công tác có sức khoẻ, tinh thần hăng hái công tác hăng hái công tác </p>
+                                <p class="mb-0">
+                                    Những đơn vị tổ chức uy tín hứa hẹn mang đến cho sinh viên không gian tình nguyện bổ ích và chất lượng.
+                                </p>
                             </div>
-                            <div class="col-6  mega-menu-detail mega-menu-detail-org @(isShowDetailUser ? "d-block" :"d-none")">
-                                <h6 class="text-center">TÌNH NGUYỆN VIÊN</h6>
-                                <div class="mega-menu-img mx-auto">
-                                    <img src="./img/deatiluser.png" class="w-100" />
+
+                            <div class="col-6 mega-menu-detail mega-menu-detail-org @(isShowDetailUser ? "d-block" :"d-none")">
+                                <div class="mega-menu-image">
+                                    <img src="./img/Cộng đồng-TNV.png" class="" />
                                 </div>
-                                <p class="mb-0">Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái công tác có sức khoẻ, tinh thần hăng hái công tác hăng hái công tác </p>
+                                <p class="mb-0">
+                                    Các tình nguyện viên là những sinh viên tài năng, nhiệt huyết, hứa hẹn lan tỏa giá trị tích cực đến cộng đồng.
+                                </p>
                             </div>
-                            <div class="col-6  mega-menu-detail mega-menu-detail-org @(isShowDetailRank ? "d-block" :"d-none")">
-                                <h6 class="text-center">ĐẠI LỘ DANH VỌNG</h6>
-                                <div class="mega-menu-img mx-auto">
-                                    <img src="./img/detailrank.png" class="w-100" />
+
+                            <div class="col-6 mega-menu-detail mega-menu-detail-org @(isShowDetailRank ? "d-block" :"d-none")">
+                                <div class="mega-menu-image">
+                                    <img src="./img/Cộng đồng-DLDV.png"/>
                                 </div>
-                                <p class="mb-0">Phường Phú Hữu thành phố Thủ Đức trân trọng kính mời y bác sĩ, cán bộ y tế nghỉ hưu có sức khoẻ, tinh thần hăng hái công tác có sức khoẻ, tinh thần hăng hái công tác hăng hái công tác </p>
+                                <p class="mb-0">Đại lộ danh vọng là không gian vinh danh những cá nhân và tập thể có thành tích tình nguyện xuất sắc.</p>
                             </div>
                         </div>                      
                     </div>
                     <div class="menuCommunity @(isShowMenu ? "d-block" : "d-none")">
                         <a class="d-flex align-items-center mega-menu-li-org">
-                            <i class="material-icons-outlined">
-                                people
+                            <i class="material-icons">
+                                person
                             </i>
                             <span>Đơn vị tổ chức</span>
                         </a>
                         <a  class="d-flex align-items-center mega-menu-li-user">
-                            <i class="material-icons">person</i>
+                            <i class="material-icons-outlined">
+                                people
+                            </i>
                             <span>Tình nguyện viên</span>
                         </a>
                         <a class="d-flex align-items-center mega-menu-li-rank">

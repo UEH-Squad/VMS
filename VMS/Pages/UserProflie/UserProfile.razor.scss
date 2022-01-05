@@ -202,6 +202,10 @@
             @include on("xxl") {
                 font-size: 20px;
             }
+
+            a {
+                color: $grey-text;
+            }
         }
     }
 

@@ -71,13 +71,13 @@
                         </div>                      
                     </div>
                     <div class="menuCommunity @(isShowMenu ? "d-block" : "d-none")">
-                        <a class="d-flex align-items-center mega-menu-li-org">
+                        <a href="@Routes.OrganizerSearch" class="d-flex align-items-center mega-menu-li-org">
                             <i class="material-icons">
                                 person
                             </i>
                             <span>Đơn vị tổ chức</span>
                         </a>
-                        <a  class="d-flex align-items-center mega-menu-li-user">
+                        <a href="@Routes.VolunteerSearch" class="d-flex align-items-center mega-menu-li-user">
                             <i class="material-icons-outlined">
                                 people
                             </i>
@@ -94,12 +94,6 @@
                 <li class="nav-item nav-item-haverHover">
                     <NavLink  class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
                 </li>
-                @*<li class="nav-item">
-            <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
-        </li>
-        <li class="nav-item">
-            <NavLink href="@Routes.UserProfile" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đại lộ danh vọng</NavLink>
-        </li>*@
             </ul>
         </div>
         <ul class="my-collapse__login-area navbar-nav d-flex align-items-center my-xl-0">

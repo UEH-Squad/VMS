@@ -62,7 +62,8 @@
   padding: 0 15px; }
   @media (min-width: 992px) {
     .about-infor {
-      padding: 0 30px; } }
+      padding: 0 30px;
+      margin-top: -70px; } }
   .about-infor .titles {
     padding: 10px 0;
     font-size: 12px;

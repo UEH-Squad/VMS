@@ -150,9 +150,22 @@
 /* ------end report-----*/
 .recognize i {
   color: #64D72F;
-  margin-right: 12px; }
+  margin-right: 12px;
+  font-size: 16px; }
+  @media (min-width: 768px) {
+    .recognize i {
+      font-size: 20px; } }
+  @media (min-width: 992px) {
+    .recognize i {
+      font-size: 24px; } }
 
 .recognize span {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 12px;
   color: #515151; }
+  @media (min-width: 768px) {
+    .recognize span {
+      font-size: 14px; } }
+  @media (min-width: 992px) {
+    .recognize span {
+      font-size: 16px; } }

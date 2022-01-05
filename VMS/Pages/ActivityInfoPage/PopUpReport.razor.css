@@ -62,7 +62,11 @@
         width: 45%; } }
     @media (min-width: 1200px) {
       .min-overlay .report-success {
-        padding: 40px 75px; } }
+        padding: 25px 40px;
+        width: 40%; } }
+    @media (min-width: 1400px) {
+      .min-overlay .report-success {
+        width: 30%; } }
     .min-overlay .report-success .min-overlay--icon {
       position: absolute;
       top: 5px;
@@ -123,8 +127,8 @@
   @media (min-width: 992px) {
     .my-container {
       width: 600px;
-      height: 550px;
-      padding: 50px; } }
+      height: 481px;
+      padding: 30px; } }
   .my-container::-webkit-scrollbar {
     width: 10px; }
   .my-container::-webkit-scrollbar-thumb {
@@ -173,7 +177,7 @@
       margin-top: 50px; } }
   @media (min-width: 992px) {
     .title-header {
-      margin-top: 30px; } }
+      margin-top: 0px; } }
   .title-header .title-header__report {
     color: #64D72F; }
   .title-header .title-header__activity {
@@ -254,6 +258,13 @@
     cursor: pointer; }
   .add-file::-webkit-file-upload-button {
     display: none; }
+  .add-file p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 1; }
 
 /*----end attached proof----*/
 /*button report*/

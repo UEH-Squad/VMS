@@ -92,15 +92,14 @@
     .my-custom-popup .area-item-wrapper div {
       width: 40px;
       height: 40px;
-      background-color: #18A0FB;
+      background-color: #B4B4B4;
       border-radius: 50%;
       color: #fff; }
     .my-custom-popup .area-item-wrapper p {
       font-weight: 400;
       font-size: 16px; }
-    .my-custom-popup .area-item-wrapper span:hover ~ p,
-    .my-custom-popup .area-item-wrapper p:hover {
-      /* color: $green;*/ }
+    .my-custom-popup .area-item-wrapper:hover > div {
+      background-color: #18A0FB; }
   .my-custom-popup .save-btn {
     color: #fff;
     font-weight: bold;

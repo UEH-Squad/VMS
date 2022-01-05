@@ -115,7 +115,7 @@
         div {
             width: 40px;
             height: 40px;
-            background-color: $blue;
+            background-color: #B4B4B4;
             border-radius: 50%;
             color: #fff;
         }
@@ -125,9 +125,8 @@
             font-size: 16px;
         }
 
-        span:hover ~ p,
-        p:hover {
-           /* color: $green;*/
+        &:hover > div{
+            background-color: $blue;
         }
     }
 

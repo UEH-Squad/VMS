@@ -148,3 +148,12 @@
   @media (min-width: 1200px) {
     .act__content-description {
       display: -webkit-box; } }
+
+.div-volunteer .icon-check {
+  font-size: 14px;
+  color: #F14747; }
+
+.div-volunteer span {
+  font-weight: 500;
+  font-size: 14px;
+  color: #F14747; }

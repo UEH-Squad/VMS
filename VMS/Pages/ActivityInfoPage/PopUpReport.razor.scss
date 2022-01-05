@@ -64,7 +64,12 @@
         }
 
         @include on('xl') {
-            padding: 40px 75px;
+            padding: 25px 40px;
+            width: 40%;
+        }
+
+        @include on('xxl') {
+            width: 30%;
         }
 
         .min-overlay--icon {
@@ -142,8 +147,8 @@
 
     @include on('lg') {
         width: 600px;
-        height: 550px;
-        padding: 50px;
+        height: 481px;
+        padding: 30px;
     }
 
     &::-webkit-scrollbar {
@@ -211,7 +216,7 @@
     }
 
     @include on('lg') {
-        margin-top: 30px;
+        margin-top: 0px;
     }
 
     .title-header__report {
@@ -326,6 +331,15 @@
 
     &::-webkit-file-upload-button {
         display: none;
+    }
+
+    p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 1;
     }
 }
 /*----end attached proof----*/

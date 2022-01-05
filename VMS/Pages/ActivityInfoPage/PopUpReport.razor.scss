@@ -31,40 +31,35 @@
 
     .report-success {
         position: absolute;
-        padding: 10px;
+        padding: 15px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         z-index: 103;
         background-color: white;
         border-radius: 10px;
-        font-size: 10px;
         font-weight: 500;
-        letter-spacing: 1px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 60%;
+        font-size: 12px;
+        width: 210px;
 
         @include on('sm') {
-            font-size: 16px;
-            width: 45%;
+            font-size: 14px;
+            width: 230px;
         }
 
         @include on('md') {
-            padding: 25px 35px;
-            font-size: 24px;
-            width: 60%;
+            font-size: 16px;
+            width: 300px;
+            padding: 30px 15px;
         }
 
         @include on('lg') {
-            padding: 30px 49px;
-            font-size: 24px;
-            width: 45%;
-        }
-
-        @include on('xl') {
-            padding: 40px 75px;
+            font-size: 18px;
+            padding: 30px 50px;
+            width: 350px;
         }
 
         .min-overlay--icon {
@@ -117,6 +112,7 @@
 
 .my-container {
     width: 95%;
+    max-height: 80%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -129,21 +125,12 @@
     overflow-y: scroll;
 
     @include on('sm') {
-        width: 80%;
-        height: 100%;
-        padding: 0 30px 24px;
+        width: 500px;
     }
-
-    @include on('md') {
-        width: 70%;
-        height: 470px;
-        padding: 0 30px;
-    }
-
-    @include on('lg') {
+      
+    @include on ('md') {
         width: 600px;
-        height: 550px;
-        padding: 50px;
+        padding: 30px 20px 30px 30px;
     }
 
     &::-webkit-scrollbar {
@@ -203,16 +190,7 @@
     font-weight: 500;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
     margin-bottom: 20px;
-
-    @include on('md') {
-        margin-top: 50px;
-    }
-
-    @include on('lg') {
-        margin-top: 30px;
-    }
 
     .title-header__report {
         color: $green;
@@ -227,16 +205,20 @@
 /*-----reporting reason------*/
 .dropdown .my-btn {
     width: 100%;
-    border: 1px solid $grey-text;
+    border: 1px solid $grey-icon;
     height: 36px;
 
     .my-icon-dropdown {
         float: right;
     }
+
+    &:focus {
+        border: 1px solid #86b7fe;
+    }
 }
 
 .dropdown-menu {
-    width: 101%;
+    width: 100%;
     box-shadow: 5px 5px 10px 10px #dee2e687;
     left: 50%;
     transform: translateX(-50%);
@@ -244,6 +226,7 @@
 
     .dropdown-item {
         display: flex;
+        align-items: center;
         margin: 5px 0;
         white-space: unset;
 
@@ -254,6 +237,13 @@
         label {
             width: 100%;
         }
+    }
+
+
+    dropdown-item.active, .dropdown-item:active {
+        color: $grey-text;
+        text-decoration: none;
+        background-color: white;
     }
 }
 
@@ -266,7 +256,7 @@
 
 /*-----report description-----*/
 ::deep .form-control {
-    border: 1px solid;
+    border: 1px solid $grey-icon;
     height: 100px;
     overflow-y: scroll;
 
@@ -287,19 +277,23 @@
         border-radius: 20px;
         border: 2px solid white;
     }
+
+    &:focus {
+        border: 1px solid #86b7fe;
+    }
 }
 /*-----end report description-----*/
 
 /*---attached proof-----*/
 .add-file {
     border-radius: 4px;
-    border: 1px solid $grey-text;
+    border: 1px solid $grey-icon;
     min-height: 36px;
     padding: 0 50px;
 
     .my-icon-upload {
         font-size: 30px;
-        color: $grey-text;
+        color: $grey-icon;
         margin-right: 15px;
     }
 

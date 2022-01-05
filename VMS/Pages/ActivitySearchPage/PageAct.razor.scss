@@ -2,6 +2,7 @@
 
 .bg-grey {
     background-color: $grey-icon !important;
+
     &:hover {
         background-color: $grey-icon !important;
         cursor: default !important;
@@ -138,6 +139,15 @@
         &:hover + .icon-tooltip {
             display: block;
         }
+    }
+
+    .record-icon {
+        color: $green
+    }
+
+    .record-text {
+        color: $grey-text;
+        font-weight: 500;
     }
 
     .material-icons-outlined {

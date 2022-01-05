@@ -64,6 +64,11 @@
             font-weight: 400;
             color: $grey-icon;
             margin-left: 5%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; /* number of lines to show */
+            -webkit-box-orient: vertical;
         }
 
         #act-filter__select-icon {
@@ -243,12 +248,12 @@
     }
 
     &__btn {
-        padding: 3px 25px;
+        padding: 4px 16px;
         background-color: $green;
         border: none;
         color: white;
         border-radius: 5px;
-        font-weight: 600;
+        font-weight: 300;
 
         &.--filter:hover {
             background-color: $green-bold;

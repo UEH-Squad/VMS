@@ -1,0 +1,56 @@
+﻿@layout AdminLayout
+@using VMS.Application.ViewModels
+
+@attribute [Route(Routes.AdminActivityInfo + "/{ActId:int}")]
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="my-container  col-12 d-flex justify-content-center align-items-center">
+    <div class="col-10  d-flex flex-column">
+        <div class="toppage">
+            <div class="return">
+                <a href="@Routes.AdminActivityManagement" class="return-text">&#60;&#60; Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-container  col-12 d-flex justify-content-center align-items-center">
+    <div class="col-10 accroval d-flex align-items-center flex-column mt-2">
+        <div class="col-9 d-flex align-items-center justify-content-between mx-auto py-3">
+            <div>
+                <div class=" d-flex align-items-center div-checkbox mb-3">
+                    <input @bind="activity.IsPoint" id="pointTraining" class="check-box" type="checkbox">
+                    <label for="pointTraining" class="ms-2">Cập nhật mã vạch</label>
+                </div>
+                <div class=" d-flex align-items-center div-checkbox">
+                    <input @bind="activity.IsDay" id="dayVolunteer" class="check-box" type="checkbox">
+                    <label for="dayVolunteer" class="ms-2">Ghi nhận ngày tình nguyện</label>
+                    <input @bind="@activity.NumberOfDays" type="number" min="0" class="form-control input-number" />
+                </div>
+            </div>
+            <div class="">
+                <div class="mb-2 text-end">
+                    <button @onclick="ShowDenyModalAsync" class="btn btn-deny">Từ chối</button>
+                    <button @onclick="ShowApproveModalAsync" class="btn btn-approvie ms-2">@(activity.IsApproved ? "Sửa" : "Duyệt")</button>
+                </div>
+                <span @onclick="ShowPopupConvert" class="regulation">Xem quy đổi ngày tình nguyện</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="my-container col-12 d-flex justify-content-center align-items-center">
+
+    <div class="col-10 my-5 my-act d-flex align-items-center flex-column">
+        <div class="col-9 pb-4">
+            <VMS.Pages.ActivityInfoPage.InfoPage Activity="@activity" />
+            <div class="mb-3">
+                <VMS.Pages.ActivityInfoPage.Rightrail Activity="@activity" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

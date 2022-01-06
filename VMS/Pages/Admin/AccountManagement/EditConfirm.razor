@@ -1,0 +1,37 @@
+﻿<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__confirm @(!isSuccess.HasValue ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div>
+                <h3 class="text-center mb-3">Bạn có chắc chắn muốn <span>sửa tài khoản</span> này không?</h3>
+                <div class="text-end">
+                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
+                    <button @onclick="ShowEditSuccessAsync" class="btn btn-confirm">Chắc chắn</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal__success @(isSuccess.HasValue && isSuccess.Value ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center mb-0">Bạn đã <span>sửa tài khoản</span> thành công </h3>
+        </div>
+        <div class="modal__success @(isSuccess.HasValue && !isSuccess.Value ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center mb-0">Bạn đã <span>sửa tài khoản</span> thất bại </h3>
+        </div>
+    </div>
+</div>
+
+@code {
+}

@@ -5,6 +5,7 @@
         Activities,
         Avatar,
         Banner,
-        Report
+        Report,
+        Request
     }
 }

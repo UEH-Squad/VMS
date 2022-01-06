@@ -1,0 +1,218 @@
+﻿@import '../../../Resources/scss/common/_variables';
+
+.my-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 120;
+
+    .modal__content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal__edit {
+        width: 525px;
+        padding: 30px 50px;
+        background-color: $white;
+        position: relative;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+        border-radius: 10px;
+
+        h3 {
+            font-weight: 500;
+            font-size: 24px;
+            color: $green;
+            margin-bottom: 30px;
+
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    .modal__edit .icon-close {
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 20px;
+            color: $grey-close-btn;
+        }
+    }
+    // Edit form
+
+    .bg-grey {
+        background-color: #f3f3f3;
+    }
+
+    .form-control[readonly] {
+        background-color: $white;
+        opacity: 1;
+    }
+
+    .form__title {
+        font-weight: 400;
+        font-size: 16px;
+        color: #515151;
+        margin-bottom: 0;
+
+        span {
+            color: red;
+        }
+
+        &.form__title--level + div {
+            width: calc(100% - 60px);
+            padding-left: 10px;
+        }
+
+        &.form__title--level, &.form__title--name, &.form__title--email, &.form__title--password {
+            width: 120px;
+        }
+
+        &.form__title--level + div, &.form__title--name + div, &.form__title--email + div, &.form__title--password + div {
+            width: calc(100% - 120px);
+            padding-left: 10px;
+        }
+
+        &.form__title--passwordSp {
+            width: 160px;
+        }
+
+        &.form__title--passwordSp + div {
+            width: calc(100% - 160px);
+            padding-left: 10px;
+        }
+    }
+
+    .form-control {
+        border: 1px solid #D8D8D8;
+    }
+
+    .from__btn {
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 30px;
+
+        .btn-cancel {
+            background-color: transparent;
+            color: $green;
+
+            &:hover {
+                background-color: transparent;
+                color: $green-bold;
+            }
+
+            &:focus {
+                box-shadow: none
+            }
+        }
+
+        .btn-create {
+            background-color: $green;
+            color: $white;
+            border-radius: 5px;
+            width: 140px;
+            height: 35px;
+            padding: 0;
+
+            &:hover {
+                background-color: $green-bold;
+                color: $white;
+            }
+        }
+    }
+    // popup
+    .popup-btn {
+        border: 1px solid #D8D8D8;
+        cursor: pointer;
+        color: #515151;
+        font-size: 16px;
+        outline: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -webkit-box-orient: vertical;
+
+        &::placeholder {
+            color: #b4b4b4;
+        }
+
+        &-icon {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            pointer-events: none;
+        }
+    }
+
+    .my-dropdown {
+        padding: 15px 22px;
+        border-radius: 5px;
+        border: none;
+        margin-top: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        bottom: 0%;
+        right: 0;
+        transform: translateY(105%);
+        background-color: #fff;
+        z-index: 1;
+        display: none;
+        width: 200px;
+
+        ul {
+            overflow-y: scroll;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $grey-icon;
+                border-radius: 20px;
+            }
+
+            li {
+                color: $blue;
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 10px;
+                cursor: pointer;
+
+                &:last-of-type {
+                    margin-bottom: 0px;
+                }
+
+                &:hover {
+                    color: $green;
+                    background-color: rgba(24, 160, 251, 0.1);
+                }
+            }
+        }
+    }
+
+    .popup-btn:focus ~ .my-dropdown {
+        display: block;
+    }
+}

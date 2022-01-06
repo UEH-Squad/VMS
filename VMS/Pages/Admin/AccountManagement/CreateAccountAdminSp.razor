@@ -1,0 +1,39 @@
+﻿<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__create">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center">Tạo tài khoản <span>quản trị viên</span></h3>
+            <EditForm Model="account" OnValidSubmit="OnValidSubmitAsync">
+
+                <DataAnnotationsValidator />
+
+                <div class="d-flex align-items-center mb-4">
+                    <p class="form__title form__title--name">Tên tài khoản <span>(*)</span>:</p>
+                    <div class="">
+                        <InputText @bind-Value="@account.UserName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p class="form__title form__title--password">Mật khẩu <span>(*)</span>:</p>
+                    <div class="">
+                        <InputText @bind-Value="@account.Password" class="form-control" type="password" />
+                    </div>
+                </div>
+
+                <div class="from__btn text-center">
+                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
+                    <button type="submit" class="btn btn-create">Tạo tài khoản</button>
+                </div>
+
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    }

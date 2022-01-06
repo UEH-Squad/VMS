@@ -9,6 +9,7 @@
         public const string ActivityInfo = "/chi-tiet-hoat-dong";
         public const string Map = "/ban-do";
         public const string OrganizerSearch = "/don-vi-to-chuc";
+        public const string VolunteerSearch = "/tinh-nguyen-vien";
 
         #endregion Main
 
@@ -37,9 +38,37 @@
 
         public const string Register = "/dang-ky";
         public const string LogIn = "/dang-nhap";
+        public const string ChangePassword = "/doi-mat-khau";
         public const string LogOut = "Identity/Account/LogOut";
         public const string Manage = "Identity/Account/Manage";
 
         #endregion Identity
+
+        #region Admin
+
+        public const string AdminActivityManagement = "/admin/quan-ly-hoat-dong";
+        public const string AdminWatchRating = "/admin/quan-ly-hoat-dong/xem-danh-gia";
+        public const string AdminWatchlistVolunteer = "/admin/quan-ly-hoat-dong/xem-danh-sach";
+
+        public const string AdminActivityInfo = "/admin/chi-tiet-hoat-dong";
+
+        public const string AdminOrganizationManagement = "/admin/quan-ly-to-chuc";
+        public const string AdminEditOrganizationProfile = "/admin/chinh-sua-ho-so-to-chuc";
+        public const string AdminVolunteerManagement = "/admin/quan-ly-ca-nhan";
+        public const string AdminEditVolunteerProfile = "/admin/chinh-sua-ho-so-ca-nhan";
+
+        public const string AdminResolveReport = "/admin/quan-ly-bao-cao";
+        public const string AdminDetailReport = "/admin/quan-ly-bao-cao/chi-tiet";
+        public const string AdminOrgAccountManagement = "/admin/quan-ly-tai-khoan-to-chuc";
+        public const string AdminVolunteerAccountManagement = "/admin/quan-ly-tai-khoan-ca-nhan";
+        public const string AdminAdminAccountManagement = "/admin/quan-ly-tai-khoan-quan-tri-vien";
+        public const string AdminFeatureSuggestionManagement = "/admin/bo-sung-tinh-nang";
+        public const string AdminDashboardManagement = "/admin/bao-cao-thong-ke";
+        public const string AdminAreaAndSkill = "/admin/linh-vuc-va-ky-nang";
+
+        public const string AdminVolunteerProfile = "/admin/ho-so-ca-nhan";
+        public const string AdminOrganizationProfile = "/admin/ho-so-to-chuc";
+
+        #endregion Admin
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using VMS.Application.ViewModels;
+using VMS.Common.Enums;
 using VMS.Domain.Models;
 
 namespace VMS.Application.Interfaces
@@ -21,5 +22,9 @@ namespace VMS.Application.Interfaces
         User GetUserWithFavoritesAndRecruitmentsById(string userId);
 
         void UpdateUser(User user);
+
+        bool IsCorrectCurrentUserPassword(string password);
+
+        bool IsInRole(string userId, Role role);
     }
 }

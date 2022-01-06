@@ -6,22 +6,29 @@
 
         <h3 class="text-center mt-4 mb-4">Lĩnh vực</h3>
         <div class="col-10 areas-modal-content">
-            <div class="areas-modal-content__container">
+            <div class="areas-modal-content__container row">                
                 @if (areas is not null)
                 {
+                    bool i = false;
+
                     @foreach (var area in areas)
                     {
-                        <div class="area-item-wrapper d-flex align-items-center mb-2">
-                            <div @onclick="() => ChangeState(area)" class="@(area.IsPinned ? "material-icons-outlined" : "material-icons") d-flex align-items-center justify-content-center"  style="background-color: @area.Color">
-                                @area.Icon
-                            </div>
-                            <p @onclick="() => ChangeState(area)" class="mb-0 ms-3" style="@(choosenAreas.Exists(a => a.Id == area.Id) ? "color: #64D72F" : (area.IsPinned ? $"color: {area.Color}" : ""))">@area.Name</p>
-                        </div>
+                        i = !i;
+                <div class="area-item-wrapper d-flex align-items-center @(i ? "ps-5 ps-sm-3 ps-md-5 col-12 col-sm-7" : "col-12 col-sm-5 ps-5 ps-sm-3 ps-md-4")">
+                    <div @onclick="() => ChangeState(area)"
+                            class="@(area.IsPinned ? "material-icons-outlined area-item-icon" : "material-icons") d-flex align-items-center justify-content-center"
+                            style=" @(choosenAreas.Exists(a => a.Id == area.Id) || area.IsPinned ? $"background-color: {area.Color}" : "")">
+                        @area.Icon
+                    </div>
+                    <p @onclick="() => ChangeState(area)"
+                        class="mb-0 ms-3 area-item-title"
+                        style="@(choosenAreas.Exists(a => a.Id == area.Id) && area.IsPinned ? $"color: {area.Color}" : "")">@area.Name</p>
+                </div>
                     }
                 }
             </div>
         </div>
-        <div @onclick="SaveModalAsync" class="save-btn d-flex justify-content-center align-items-center">Lưu</div>
+        <div @onclick="SaveModalAsync" class="save-btn d-flex justify-content-center align-items-center mt-4 mt-md-0 mb-4">Lưu</div>
 
     </div>
 </div>
@@ -32,4 +39,5 @@
     {
         isCovidChoosen = !isCovidChoosen;
     }
+
 }

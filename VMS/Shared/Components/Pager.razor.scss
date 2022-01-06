@@ -1,27 +1,43 @@
 ﻿@import '../../Resources/scss/common/_variables';
 
 .pagination {
-    margin: 30px 0;
+    margin: 15px 0;
+
+    @include on ('sm') {
+        margin: 30px 0;
+    }
 
     li {
         display: inline-block;
         list-style: none;
-        margin: 0 14px;
-        font-size: 18px;
+        margin: 0 8px;
+        font-size: 16px;
+
+        @include on ('sm') {
+            margin: 0 14px;
+            font-size: 18px;
+        }
     }
 
     .btn-prev span, .btn-next span {
         background-color: $blue;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         border-radius: 50%;
         text-align: center;
         color: white;
         font-weight: 700;
-        font-size: 30px;
+        font-size: 24px;
         transition: all 0.3s linear;
         cursor: pointer;
+
+        @include on ('sm') {
+            min-width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 30px;
+        }
     }
 
     .btn-prev span:hover, .btn-next span:hover {
@@ -29,17 +45,28 @@
     }
 
     .numb {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
+        padding: 0 5px;
+        min-width: 30px;
+        height: 30px;
+        line-height: 30px;
         border-radius: 50%;
         text-align: center;
         transition: all 0.3s linear;
         cursor: pointer;
+
+        @include on ('sm') {
+            min-width: 40px;
+            height: 40px;
+            line-height: 40px;
+        }
     }
 
     .numb.active, .numb:hover {
         background: $blue;
         color: $white;
     }
+}
+
+.margin-x-short {
+    margin: 0 8px !important;
 }

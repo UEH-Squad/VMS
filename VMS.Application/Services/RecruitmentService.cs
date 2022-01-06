@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
@@ -18,31 +17,51 @@ namespace VMS.Application.Services
 {
     public class RecruitmentService : BaseService, IRecruitmentService
     {
-        public RecruitmentService(IRepository repository, IDbContextFactory<VmsDbContext> dbContextFactory, IMapper mapper) : base(repository, dbContextFactory, mapper)
-        {
-        }
+        public RecruitmentService(IRepository repository,
+                       IDbContextFactory<VmsDbContext> dbContextFactory,
+                       IMapper mapper) : base(repository, dbContextFactory, mapper)
+        { }
 
-        public async Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(FilterRecruitmentViewModel filter, string userId, int currentPage)
+        public async Task<PaginatedList<ListVolunteerViewModel>> GetListVolunteersAsync(int actId, string searchValue, bool isDeleted, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
-
             PaginationSpecification<Recruitment> specification = new()
             {
-                Conditions = GetActivityLogConditions(filter, userId),
-                Includes = r => r.Include(x => x.User)
-                                 .Include(x => x.RecruitmentRatings)
-                                 .Include(x => x.Activity).ThenInclude(x => x.Organizer),
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    a => a.ActivityId == actId,
+                    a => a.User.FullName.ToUpper().Contains(searchValue.ToUpper().Trim()) || a.User.StudentId.Contains(searchValue.Trim()),
+                    a => a.IsDeleted == isDeleted
+                },
+                Includes = a => a.Include(a => a.User).ThenInclude(a => a.Faculty),
                 PageIndex = currentPage,
-                PageSize = 8,
+                PageSize = 20
             };
 
             PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+            return _mapper.Map<PaginatedList<ListVolunteerViewModel>>(recruitments);
+        }
 
-            PaginatedList<RecruitmentViewModel> paginatedList = _mapper.Map<PaginatedList<RecruitmentViewModel>>(recruitments);
+        public async Task UpdateVounteerAsync(List<int> list, bool isDeleted)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            paginatedList.Items.ForEach(x => x.Rating = x.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Rank);
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    a => list.Contains(a.Id)
+                }
+            };
 
-            return paginatedList;
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            foreach (var rec in recruitments)
+            {
+                rec.IsDeleted = isDeleted;
+            }
+
+            await _repository.UpdateAsync<Recruitment>(dbContext, recruitments);
         }
 
         public async Task<PaginatedList<RecruitmentViewModel>> GetAllRecruitmentsAsync(int activityId, int currentPage, string searchValue, bool? isRated)
@@ -53,6 +72,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     r => r.ActivityId == activityId,
                     GetConditionBySearchOrOrder(searchValue, isRated)
                 },
@@ -81,6 +101,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     x => x.ActivityId == activityId
                 },
                 Includes = r => r.Include(x => x.RecruitmentRatings)
@@ -95,7 +116,7 @@ namespace VMS.Application.Services
 
             foreach (var recruitment in recruitments)
             {
-                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating == isOrgRating && !x.IsReport);
+                RecruitmentRating recruitmentRating = recruitment.RecruitmentRatings.FirstOrDefault(x => x.IsOrgRating == isOrgRating);
 
                 if (recruitmentRating is null)
                 {
@@ -122,23 +143,86 @@ namespace VMS.Application.Services
             {
                 if (isRated.Value)
                 {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && !x.IsReport && x.Rank != 0);
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && x.Rank != 0);
                 }
                 else
                 {
-                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && !x.IsReport && x.Rank == 0)
-                                || !r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && !x.IsReport);
+                    return r => r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating && x.Rank == 0)
+                                || !r.RecruitmentRatings.Any(x => x.IsOrgRating == isOrgRating);
                 }
             }
 
             if (!string.IsNullOrEmpty(searchValue))
             {
-                return r => isOrgRating ? r.User.FullName.ToLower().Contains(searchValue.ToLower())
-                                        : r.Activity.Name.ToLower().Contains(searchValue.ToLower())
-                                       || r.Activity.Organizer.FullName.ToLower().Contains(searchValue.ToLower());
+                return r => isOrgRating ? (r.User.FullName.ToLower().Contains(searchValue.ToLower())
+                                        || r.User.StudentId.Contains(searchValue))
+                                        : (r.Activity.Name.ToLower().Contains(searchValue.ToLower())
+                                        || r.Activity.Organizer.FullName.ToLower().Contains(searchValue.ToLower()));
             }
 
             return r => true;
+        }
+
+        public async Task<List<ListVolunteerViewModel>> GetAllListVolunteerAsync(int actId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    a => a.ActivityId == actId,
+                    a => a.IsDeleted == false
+                },
+                Includes = a => a.Include(a => a.User).ThenInclude(a => a.Faculty)
+            };
+
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<ListVolunteerViewModel>>(recruitments);
+        }
+
+        public async Task UpdateRecruitmentAsync(List<string> volunteers, int activityId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    x => x.ActivityId == activityId,
+                    x => x.IsDeleted == false
+                },
+                Includes = r => r.Include(x => x.User)
+            };
+            List<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+            foreach (var item in recruitments)
+            {
+                item.IsDeleted = !volunteers.Exists(x => x == item.User.StudentId);
+            }
+            await _repository.UpdateAsync<Recruitment>(dbContext, recruitments);
+        }
+
+        public async Task<PaginatedList<RecruitmentViewModel>> GetAllActivitiesAsync(FilterRecruitmentViewModel filter, string userId, int currentPage)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginationSpecification<Recruitment> specification = new()
+            {
+                Conditions = GetActivityLogConditions(filter, userId),
+                Includes = r => r.Include(x => x.User)
+                                 .Include(x => x.RecruitmentRatings)
+                                 .Include(x => x.Activity).ThenInclude(x => x.Organizer),
+                PageIndex = currentPage,
+                PageSize = 8,
+            };
+
+            PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            PaginatedList<RecruitmentViewModel> paginatedList = _mapper.Map<PaginatedList<RecruitmentViewModel>>(recruitments);
+
+            paginatedList.Items.ForEach(x => x.Rating = x.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Rank);
+
+            return paginatedList;
         }
 
         private static Expression<Func<Recruitment, bool>> GetConditionBySemester(Semester semester)
@@ -165,7 +249,9 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     r => r.UserId == userId,
+                    r => r.Activity.EndDate < DateTime.Now.Date,
                     GetConditionBySearchOrOrder(filter.SearchValue, null, false)
                 };
             }
@@ -173,10 +259,69 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     r => r.UserId == userId,
                     r => r.Activity.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
+                    r => r.Activity.EndDate < DateTime.Now.Date,
                     GetConditionBySemester(filter.Semester),
                     GetConditionBySearchOrOrder(string.Empty, filter.IsRated, false)
+                };
+            }
+        }
+
+        public async Task<PaginatedList<RecruitmentViewModel>> GetAllRatingAsync(int activityId, FilterRecruitmentViewModel filter, int currentPage)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginationSpecification<Recruitment> specification = new()
+            {
+                Conditions = GetConditionsByFilter(activityId, filter),
+                Includes = r => r.Include(x => x.User)
+                                .Include(x => x.Activity)
+                                .ThenInclude(x => x.Organizer)
+                                .Include(x => x.RecruitmentRatings),
+                PageIndex = currentPage,
+                PageSize = 20,
+            };
+
+            PaginatedList<Recruitment> recruitments = await _repository.GetListAsync(dbContext, specification);
+
+            PaginatedList<RecruitmentViewModel> paginatedList = _mapper.Map<PaginatedList<RecruitmentViewModel>>(recruitments);
+
+            foreach (var item in paginatedList.Items)
+            {
+                item.Rating = item.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Rank;
+                item.CommentByUser = item.RecruitmentRatings.FirstOrDefault(z => !z.IsOrgRating)?.Comment;
+
+                item.RatingByOrg = item.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Rank;
+                item.CommentByOrg = item.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Comment;
+            }
+
+            return paginatedList;
+        }
+
+        private static List<Expression<Func<Recruitment, bool>>> GetConditionsByFilter(int activityId, FilterRecruitmentViewModel filter)
+        {
+            if (filter.IsSearch)
+            {
+                return new()
+                {
+                    r => !r.IsDeleted,
+                    r => r.ActivityId == activityId,
+                    r => r.User.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                        || r.Activity.Name.ToLower().Contains(filter.SearchValue.ToLower())
+                        || r.Activity.Organizer.FullName.ToLower().Contains(filter.SearchValue.ToLower())
+                        || r.User.StudentId.Contains(filter.SearchValue)
+                };
+            }
+            else
+            {
+                return new()
+                {
+                    r => !r.IsDeleted,
+                    r => r.ActivityId == activityId,
+                    r => !filter.IsOrgRating.HasValue || r.RecruitmentRatings.Any(x => x.IsOrgRating == filter.IsOrgRating.Value),
+                    r => r.RecruitmentRatings.Any(x => filter.Ranks.Contains(x.Rank)) || filter.Ranks.Count == 0
                 };
             }
         }

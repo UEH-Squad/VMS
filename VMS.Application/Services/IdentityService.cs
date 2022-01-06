@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -86,6 +87,24 @@ namespace VMS.Application.Services
         public void UpdateUser(User user)
         {
             Task.Run(() => _userManager.UpdateAsync(user));
+        }
+
+        public bool IsCorrectCurrentUserPassword(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                return false;
+            }
+            else
+            {
+                User currentUser = GetCurrentUser();
+                return Task.Run(() => _userManager.CheckPasswordAsync(currentUser, password)).Result;
+            }
+        }
+
+        public bool IsInRole(string userId, Role role)
+        {
+            return Task.Run(() => _userManager.IsInRoleAsync(FindUserById(userId), role.ToString())).Result;
         }
     }
 }

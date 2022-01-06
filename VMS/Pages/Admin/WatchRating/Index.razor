@@ -1,0 +1,31 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminWatchRating + "/{ActId:int}")]
+@attribute [Authorize(Roles = "Admin")]
+@inject IJSRuntime JsRuntime
+
+<div class="container">
+    <Title ActName="@actName" />
+    <div class="container_main-content d-flex">
+        <div class="leftraight">
+            <SearchResult Num="pagedResult.TotalItems" />
+            <div class="container-list-card">
+                @foreach (var item in pagedResult.Items)
+                {
+                    <RatingList IsOrgRating="filter.IsOrgRating" Item="item" />
+                }
+            </div>
+        </div>
+        <div class="rightraight">
+            <Filter FilterChanged="FilterChangedAsync" />
+        </div>
+    </div>
+    <div class="pagination-container">
+        <Pager CurrentPage="@pagedResult.PageIndex"
+               PageCount="@pagedResult.TotalPages"
+               OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })" />
+    </div>
+</div>
+
+@code {
+}

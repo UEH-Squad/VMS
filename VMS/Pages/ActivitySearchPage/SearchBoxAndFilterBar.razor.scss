@@ -13,10 +13,27 @@
 }
 
 //Check box Vir/actual
+.check-box-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 10px;
+
+    @include on('lg') {
+        display: flex;
+        align-items: center;
+    }
+}
 .my-check-box {
+    --checkbox-color: $blue;
     border-radius: 5px;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
+
+    @include on('xl') {
+        width: 20px;
+        height: 20px;
+    }
+
     margin-right: 5px;
     vertical-align: top;
     background-color: #fff;
@@ -32,15 +49,21 @@
 
     &::before {
         content: "";
-        width: 13px;
-        height: 7px;
+        width: 10px;
+        height: 5px;
         border-left: 2px solid var(--checkbox-color);
         border-bottom: 2px solid var(--checkbox-color);
         position: absolute;
         top: 40%;
-        left: 52%;
+        left: 50%;
         transform: translate(-50%, -50%) rotate( -45deg );
         display: none;
+
+        @include on('xl') {
+            left: 52%;
+            width: 13px;
+            height: 7px;
+        }
     }
 
     &:checked::before {
@@ -49,14 +72,37 @@
 }
 
 .my-check-box-label {
-    font-size: 20px;
+    font-size: 14px;
     color: $grey-text;
+
+    @include on('xl') {
+        font-size: 20px;
+    }
 }
 //End check box Vir/actual
 
+.btn-reverse {
+    background-color: $blue;
+    color: $white;
+}
 //filter bar
+.filter-bar-pc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 20px;
+    grid-column-gap: 15px;
+
+    @include on('xl') {
+        display: flex;
+        justify-content: space-between;
+    }
+}
 .filter-item {
-    width: 16%;
+    width: 100%;
+
+    @include on('xl') {
+        width: 16%;
+    }
 
     &__icon {
         top: 50%;
@@ -75,7 +121,7 @@
     color: #b4b4b4;
     padding-left: 8px;
     padding-right: 30px;
-    font-size: 18px;
+    font-size: 14px;
     outline: none;
     line-height: 40px;
     overflow: hidden;
@@ -83,6 +129,10 @@
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
+
+    @include on('xl') {
+        font-size: 16px;
+    }
 
     &::placeholder {
         color: #b4b4b4;
@@ -136,25 +186,50 @@
     display: block;
 }
 
+.btn-wrapper {
+    display: flex;
+
+    @include on('xl') {
+        width: 17%;
+    }
+}
 
 .filter-btn {
-    @include green-btn;
-    font-size: 20px;
-    width: 7%;
-    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    width: fit-content;
+    color: $blue;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid $blue;
+    background-color: $white;
+    font-weight: 400!important;
 
-    &:hover {
-        background-color: #306C14;
-        opacity: 78%;
+    @include on('xl') {
+        @include green-btn;
+        font-size: 16px;
+        height: 40px;
+
+        &:hover {
+            background-color: #306C14;
+            opacity: 78%;
+        }
     }
 }
 
 .clear-filter-btn {
+    font-weight: 400 !important;
     @include green-btn;
-    font-size: 20px;
+    font-size: 14px;
     width: fit-content;
     color: $grey-icon;
     background-color: #fff;
+    width: 50%;
+
+    @include on('xl') {
+        font-size: 16px;
+    }
 
     &:hover {
         text-decoration: underline;
@@ -164,6 +239,13 @@
 
 //Arrange bar
 .arrange-bar {
+    display: none;
+
+    @include on('lg') {
+        display: flex;
+        align-items: center;
+    }
+
     label {
         font-size: 18px;
         color: $grey-text;

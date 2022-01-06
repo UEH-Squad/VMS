@@ -11,6 +11,8 @@ namespace VMS.Pages.ActivitySearchPage
 
         [Parameter]
         public EventCallback<string> SearchValueChanged { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
+
 
         private void UpdateSearchValue(ChangeEventArgs e)
         {
@@ -30,9 +32,10 @@ namespace VMS.Pages.ActivitySearchPage
             await SearchValueChanged.InvokeAsync(SearchValue);
         }
 
-        private void ClearSearchBox()
+        private async Task ClearSearchBoxAsync()
         {
             SearchValue = string.Empty;
+            await SearchValueChanged.InvokeAsync(SearchValue);
         }
     }
 }

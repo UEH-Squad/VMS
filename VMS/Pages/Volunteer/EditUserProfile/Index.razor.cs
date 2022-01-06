@@ -8,10 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
-using VMS.Application.Services;
 using VMS.Application.ViewModels;
 using VMS.Common;
-using VMS.Common.CustomValidations;
 using VMS.Pages.Organization.Profile;
 
 namespace VMS.Pages.Volunteer.EditUserProfile
@@ -38,7 +36,14 @@ namespace VMS.Pages.Volunteer.EditUserProfile
         [Inject]
         private IFacultyService FacultyService { get; set; }
 
-        private string UserId;
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
+
+        [Parameter] public bool IsUsedForAdmin { get; set; }
+
+        [Parameter] public string UserId { get; set; }
+
+        private string userId;
         private int count;
         private bool isErrorMessageShown = false;
         private string facultyChoosenValue = "Lựa chọn Khoa";
@@ -48,8 +53,8 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         protected override async Task OnInitializedAsync()
         {
-            UserId = IdentityService.GetCurrentUserId();
-            user = await UserService.GetUserProfileViewModelAsync(UserId);
+            userId = string.IsNullOrEmpty(UserId) ? IdentityService.GetCurrentUserId() : UserId;
+            user = await UserService.GetUserProfileViewModelAsync(userId);
             faculties = await FacultyService.GetAllFacultiesAsync();
             choosenAreas = user.Areas;
             if(user.FacultyId is not null)
@@ -60,16 +65,9 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task ShowAreasModal()
         {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
             var areasParameter = new ModalParameters();
             areasParameter.Add("choosenAreasList", choosenAreas);
-            var areasModal = Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, options);
-            await areasModal.Result;
+            await Modal.Show<ActivitySearchPage.AreasPopup>("", areasParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -102,14 +100,7 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task ShowModalAsync(Type type, ModalParameters parameters)
         {
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            await Modal.Show(type, "", parameters, options).Result;
+            await Modal.Show(type, "", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
         private int maxWord = 300;
@@ -135,14 +126,7 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
         private async Task HandleSubmit()
         {
-            ModalOptions options = new()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
-
-            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", options);
+            IModalReference editConfirmModal = Modal.Show<EditConfirm>("", BlazoredModalOptions.GetModalOptions());
             ModalResult result = await editConfirmModal.Result;
             if (!result.Cancelled)
             {
@@ -156,11 +140,14 @@ namespace VMS.Pages.Volunteer.EditUserProfile
 
                 try
                 {
-                    await UserService.UpdateUserProfile(user, UserId);
+                    await UserService.UpdateUserProfile(user, userId);
 
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
-                    await Modal.Show<Organization.Activities.NotificationPopup>("", modalParams, options).Result;
+                    await Modal.Show<Organization.Activities.NotificationPopup>("", modalParams, BlazoredModalOptions.GetModalOptions()).Result;
+
+                    string redirectUrl = IsUsedForAdmin ? $"{Routes.AdminVolunteerProfile}/{userId}" : $"{Routes.UserProfile}/{userId}";
+                    NavigationManager.NavigateTo(redirectUrl, true);
                 }
                 catch (Exception ex)
                 {

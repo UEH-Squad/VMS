@@ -11,11 +11,13 @@ namespace VMS.Pages.UserProflie
 {
     public partial class Index : ComponentBase
     {
+        private bool isLoading;
         private bool isUser = false;
         private UserViewModel user;
         private List<ActivityViewModel> currentActivities, favoriteActivities, endedActivities = new();
 
         [Parameter] public string UserId { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
         [CascadingParameter] public string CurrentUserId { get; set; }
 
         [Inject] private NavigationManager NavigationManager { get; set; }
@@ -24,8 +26,10 @@ namespace VMS.Pages.UserProflie
 
         protected override async Task OnInitializedAsync()
         {
+            isLoading = true;
             ValidateUserProfile();
             await GetAllActivities();
+            isLoading = false;
         }
 
         private async Task GetAllActivities()
@@ -55,10 +59,10 @@ namespace VMS.Pages.UserProflie
 
             isUser = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);
 
-            if (isUser && !IsValidProfile(user))
-            {
-                NavigationManager.NavigateTo(Routes.EditUserProfile, true);
-            }
+            //if (isUser && !IsValidProfile(user))
+            //{
+            //    NavigationManager.NavigateTo(Routes.EditUserProfile, true);
+            //}
         }
 
         private static bool IsValidProfile(UserViewModel user)

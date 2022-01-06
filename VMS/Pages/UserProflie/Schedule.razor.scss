@@ -1,11 +1,107 @@
 ﻿@import "../../Resources/scss/common/_variables";
 
+.container {
+    .schedule {
+        display: flex;
+        flex-direction: column;
+
+        @include on('lg') {
+            flex-direction: row;
+        }
+    }
+}
+
+.schedule__calendar {
+    width: 100%;
+
+    @include on('lg') {
+        width: 50%;
+    }
+
+    ::deep .current-month {
+        font-size: 18px;
+
+        @include on('lg') {
+            font-size: 24px;
+        }
+
+        @include on('xxl') {
+            font-size: 30px;
+        }
+    }
+
+    ::deep .calendar-table {
+        thead {
+            th {
+                padding: 8px 0;
+                color: $blue;
+                font-weight: 600;
+                text-align: center;
+                font-size: 14px;
+
+                @include on('lg') {
+                    padding: 10px 0;
+                    font-size: 18px;
+                }
+
+                @include on('xxl') {
+                    padding: 12px 0;
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .calendar-day {
+            height: 30px;
+            width: 30px;
+            padding: 0px;
+            font-size: 18px;
+
+            .dot-icon {
+                font-size: .5rem;
+                color: $green;
+            }
+
+            @include on('lg') {
+                height: 40px;
+                width: 40px;
+                padding: 4px;
+                font-size: 20px;
+            }
+
+            @include on('xxl') {
+                height: 50px;
+                width: 50px;
+                padding: 8px;
+                font-size: 24px;
+            }
+        }
+    }
+}
+
 .schedule__act {
+    width: 100%;
+    margin-top: 50px;
+
+    @include on('lg') {
+        width: 50%;
+        margin-top: unset;
+    }
 
     h3 {
-        font-size: 30px;
+        font-size: 18px;
         font-weight: 600;
         color: $green;
+        margin-bottom: 20px !important;
+
+        @include on('lg') {
+            font-size: 24px;
+            margin-bottom: 0;
+        }
+
+        @include on('xxl') {
+            font-size: 30px;
+        }
 
         span {
             color: $blue;
@@ -37,9 +133,13 @@
         }
 
         h6 {
-            font-size: 20px;
+            font-size: 14px;
             font-weight: 600;
             color: $blue;
+
+            @include on('lg') {
+                font-size: 20px;
+            }
         }
     }
 
@@ -48,14 +148,26 @@
     }
 
     &-icon {
-        font-size: 24px;
+        font-size: 26px;
         color: $green;
+
+        @include on('lg') {
+            font-size: 18px;
+        }
     }
 
     &-text {
-        font-size: 16px;
+        font-size: 10px;
         font-weight: 600;
-        color: #515151;
+        color: $grey-text;
+
+        @include on('lg') {
+            font-size: 16px;
+        }
+
+        a {
+            color: $grey-text;
+        }
     }
 
     .lmtext-2 {

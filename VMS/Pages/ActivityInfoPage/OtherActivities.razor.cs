@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
+using VMS.Common;
 using VMS.Domain.Models;
 
 namespace VMS.Pages.ActivityInfoPage
@@ -32,6 +33,9 @@ namespace VMS.Pages.ActivityInfoPage
 
         [Inject]
         public IIdentityService IdentityService { get; set; }
+        
+        [Inject]
+        private NavigationManager NavigationManager { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
@@ -41,9 +45,9 @@ namespace VMS.Pages.ActivityInfoPage
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (otherActivities is not null)
+            if (!firstRender && otherActivities.Count > 0)
             {
-                await JSRuntinme.InvokeVoidAsync("vms.OtherAct", otherActivities.Count);
+                await JSRuntinme.InvokeVoidAsync("vms.OtherAct");
             }
         }
 
@@ -66,6 +70,11 @@ namespace VMS.Pages.ActivityInfoPage
             }
 
             IdentityService.UpdateUser(currentUser);
+        }
+
+        private void NavigationTo(int activityId)
+        {
+            NavigationManager.NavigateTo(Routes.ActivityInfo + "/" + activityId, true);
         }
     }
 }

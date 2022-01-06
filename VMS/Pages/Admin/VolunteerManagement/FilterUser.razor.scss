@@ -1,0 +1,121 @@
+﻿@import "../../../Resources/scss/common/_variables.scss";
+.bg-grey {
+    background-color: #f3f3f3;
+}
+
+.colored-red {
+    color: #f14747 !important;
+}
+.filter-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 15px;
+    grid-column-gap: 20px;
+
+    .filter-item {
+        width: 100%;
+
+        &__icon {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            pointer-events: none;
+        }
+    }
+}
+
+.popup-btn {
+    border-radius: 10px;
+    height: 40px;
+    width: 100%;
+    border: 1px solid $border-color-bold;
+    cursor: pointer;
+    color: #b4b4b4;
+    padding-left: 8px;
+    padding-right: 30px;
+    outline: none;
+    line-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+
+    &::placeholder {
+        color: #b4b4b4;
+    }
+}
+
+.my-dropdown {
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    z-index: 5;
+    display: none;
+    width: 100%;
+
+    ul {
+        overflow-y: scroll;
+        list-style: none;
+        padding: 0;
+        height: 100%;
+        margin: 0;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+
+        li {
+            color: $blue;
+            margin-bottom: 6px;
+            cursor: pointer;
+
+            &:hover {
+                color: $green;
+                background-color: rgba(24, 160, 251, 0.1);
+            }
+        }
+    }
+}
+
+.popup-btn:focus ~ .my-dropdown {
+    display: block;
+}
+
+
+.filter-btn {
+    @include green-btn;
+    font-size: 16px;
+    font-weight: unset;
+    width: fit-content;
+    height: 40px;
+    padding: 0 16px;
+
+    &:hover {
+        background-color: #306C14;
+        opacity: 78%;
+    }
+}
+
+.clear-filter-btn {
+    @include green-btn;
+    font-size: 16px;
+    font-weight: unset;
+    width: fit-content;
+    color: $grey-icon;
+    background-color: #fff;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

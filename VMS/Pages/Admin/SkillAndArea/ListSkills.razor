@@ -1,0 +1,79 @@
+﻿@inject IJSRuntime JS;
+@using VMS.GenericRepository;
+@using Blazored.Modal;
+
+<div class="row">
+    @if (pagedResult is not null && pagedResult.Items.Count != 0)
+    {
+        @foreach (var item in pagedResult.Items)
+        {
+    <div class="col-4 pe-5">
+        <div class="d-flex align-items-center mt-4">
+            <div class="div-checkbox div-checkbox-skillGr me-2 "><input @bind="item.IsCheckSkill" class="check-box check-box-skillGr" type="checkbox"></div>
+            <p  @onclick="(() => ShowOptions(false))" class="skill-group mb-0 cursor-pointer lm-text">@item.SkillGroup</p>
+        </div>
+        <div class="d-flex align-items-center ms-4 ps-2 mt-2">
+            <div class="div-checkbox div-checkbox-skill me-3"><input @bind="item.IsCheckSkillGroup" class="check-box check-box-skill" type="checkbox"></div>
+            <p  @onclick="(() => ShowOptions(false))" class="skill mb-0 cursor-pointer lm-text">@item.Skill</p>
+        </div>
+    </div>
+        }
+    }
+
+</div>
+<div class="d-flex justify-content-center">
+    <Pager CurrentPage="@pagedResult.PageIndex"
+           PageCount="@pagedResult.TotalPages"
+           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
+           ShowPageNumbers="true" />
+</div>
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private PaginatedList<FakeDataSkills> pagedResult;
+    private int page = 1;
+
+    protected override void OnInitialized()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
+    private PaginatedList<FakeDataSkills> GetFakeData()
+    {
+        int i = 0;
+        var data = Enumerable.Range(0, 21).Select(x => new FakeDataSkills
+        {
+            Id = i,
+            SkillGroup = "Kỹ năng mềm ",
+            Skill = "Làm việc nhóm",
+            IsCheckSkill = false,
+            IsCheckSkillGroup = false,
+        }).ToList();
+
+        var result = new PaginatedList<FakeDataSkills>(data, 100, page, 20);
+        return result;
+    }
+
+    private class FakeDataSkills
+    {
+        public int Id { get; set; }
+        public string Skill { get; set; }
+        public string SkillGroup { get; set; }
+        public bool IsCheckSkill { get; set; } = false;
+        public bool IsCheckSkillGroup { get; set; } = false;
+    }
+
+    private async Task ShowOptions(bool isAdd)
+    { 
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(OptionsSkill.isAdd), isAdd);
+        Modal.Show<Admin.SkillAndArea.OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions());       
+    }
+}

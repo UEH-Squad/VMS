@@ -1,0 +1,33 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.admin-divider {
+  border-top: 1px solid #b4b4b4; }
+
+.notification-link {
+  margin: 10px 0; }
+  .notification-link__icon {
+    color: #18A0FB;
+    font-size: 32px; }
+  .notification-link:hover .notification-link__icon {
+    color: #0B588C; }
+
+::deep .my-search-box {
+  margin: 10px 0; }
+
+.my-navbar__brand {
+  margin: 10px 0; }
+  .my-navbar__brand .brand__govirlunteer {
+    height: 16px; }
+    @media (min-width: 576px) {
+      .my-navbar__brand .brand__govirlunteer {
+        height: 20px; } }
+    @media (min-width: 992px) {
+      .my-navbar__brand .brand__govirlunteer {
+        height: 27px; } }
+    @media (min-width: 1400px) {
+      .my-navbar__brand .brand__govirlunteer {
+        height: 33px; } }

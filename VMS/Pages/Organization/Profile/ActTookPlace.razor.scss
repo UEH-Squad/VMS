@@ -3,7 +3,7 @@
 .act {
     h1 {
         font-weight: 600;
-        font-size: 30px;
+        font-size: 14px;
         line-height: 36px;
         color: $grey-text;
         padding-bottom: 5px;
@@ -11,13 +11,37 @@
         span {
             color: $green;
         }
+
+        @include on("sm") {
+            font-size: 20px;
+        }
+
+        @include on("lg") {
+            font-size: 24px;
+        }
+
+        @include on("xl") {
+            font-size: 30px;
+        }
     }
 
     hr {
-        width: 60%;
+        width: 30%;
         height: 1px;
         background-color: #707070;
         opacity: 50%;
+
+        @include on("sm") {
+            width: 40%;
+        }
+
+        @include on("lg") {
+            width: 50%;
+        }
+
+        @include on("xxl") {
+            width: 60%;
+        }
     }
 
     &-container {
@@ -33,10 +57,10 @@
 }
 
 .act-title {
-    font-size: 20px;
+    font-size: 10px;
     font-weight: 600;
-    line-height: 30px;
-    min-height: 88.8px;
+    line-height: 16px;
+    min-height: 30px;
     color: $blue;
     text-decoration: none;
     cursor: pointer;
@@ -45,40 +69,109 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
+
+    @include on("sm") {
+        min-height: 45px;
+        font-size: 12px;
+        -webkit-line-clamp: 3;
+    }
+
+    @include on("md") {
+        min-height: 60px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    @include on("lg") {
+        font-size: 16px;
+        min-height: 57px;
+        line-height: 30px;
+        -webkit-line-clamp: 2;
+    }
+
+    @include on("xl") {
+        font-size: 20px;
+        min-height: 88.8px;
+        -webkit-line-clamp: 3;
+    }
 }
 
-.act-ranking {
-    .material-icons {
-    color: $yellow-star;
-    font-size: 20px;
+::deep .act-ranking {
+    .material-icons-outlined {
+        color: $yellow-star;
+        font-size: 12px;
+
+        @include on("sm") {
+            font-size: 14px;
+        }
+
+        @include on("lg") {
+            font-size: 16px;
+        }
+
+        @include on("xxl") {
+            font-size: 20px;
+        }
     }
 }
 
 .act-footer {
-    margin-top: 16px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
+
+    @include on("sm") {
+        margin-top: 16px;
+    }
 
     .act-participant,
     .act-location {
         display: flex;
         align-items: center;
         color: $grey-text;
-        font-size: 16px;
-        line-height: 30px;
+        font-size: 12px;
 
         .material-icons {
             color: $green;
         }
+
+        @include on("sm") {
+            font-size: 14px;
+        }
+
+        @include on("lg") {
+            font-size: 16px;
+        }
+
     }
 }
 
 .img-container {
     overflow: hidden;
     border-radius: 100%;
-    width: 210px;
-    height: 210px;
+    width: 100px;
+    height: 100px;
+
+    @include on("sm") {
+        width: 140px;
+        height: 140px;
+    }
+
+    @include on("md") {
+        width: 160px;
+        height: 160px;
+    }
+
+    @include on("xl") {
+        width: 190px;
+        height: 190px;
+    }
+
+    @include on("xxl") {
+        width: 210px;
+        height: 210px;
+    }
 }
 
 .act-img {
@@ -104,3 +197,4 @@
         }
     }
 }
+

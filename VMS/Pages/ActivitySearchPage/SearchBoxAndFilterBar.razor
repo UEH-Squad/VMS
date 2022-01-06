@@ -1,7 +1,7 @@
 ﻿@using VMS.Application.ViewModels
 @inject IJSRuntime JSRuntime
 
-<div class="d-flex align-items-center mb-3">
+<div class="check-box-container mb-3">
     <div class="form-check form-check-inline d-flex align-items-center ps-0 pe-5">
         <input @bind=Filter.Virtual class="my-check-box cursor-pointer" type="checkbox" id="virtual">
         <label class="my-check-box-label cursor-pointer" for="virtual">Virtual</label>
@@ -34,7 +34,7 @@
     }
 </div>
 
-<div class="filter-bar d-flex justify-content-between mb-5">
+<div class="filter-bar-pc mb-5">
     <div class="filter-item filter-item-city position-relative">
         <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="popup-btn @(Filter.ProvinceId != 0 ? "bg-grey" : "")" placeholder="@cityChoosenValue" readonly />
         <div @onclick:preventDefault class="my-dropdown" style="display: @(isCityShow ? "block" : "none")">
@@ -43,7 +43,7 @@
                 {
                     @foreach (var province in provinces)
                     {
-                        <li @onmousedown="() => ChooseCityValue(province)">@province.Name</li>
+                        <li @onmousedown="() => ChooseCityValueAsync(province)">@province.Name</li>
                     }
                 }
             </ul>
@@ -61,7 +61,25 @@
                 {
                     @foreach (var district in districts)
                     {
-                        <li @onmousedown="() => ChooseDistrictValue(district)">@district.Name</li>
+                        <li @onmousedown="() => ChooseDistrictValueAsync(district)">@district.Name</li>
+                    }
+                }
+            </ul>
+        </div>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+
+    <div class="filter-item filter-item-ward position-relative">
+        <input @onclick="ToggleWardDropdown" @onfocusout="CloseWardDropdown" class="popup-btn @(Filter.WardId != 0 ? "bg-grey" : "")" placeholder="@wardChoosenValue" readonly />
+        <div class="my-dropdown" style="display: @(isWardShow ? "block" : "none")">
+            <ul>
+                @if (wards is not null)
+                {
+                    @foreach (var ward in wards)
+                    {
+                        <li @onmousedown="() => ChooseWardValue(ward)">@ward.Name</li>
                     }
                 }
             </ul>
@@ -103,29 +121,38 @@
         </span>
     </div>
 
-    <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
-    <button @onclick="ClearFilterAsync" type="button" class="clear-filter-btn">Xóa lọc</button>
+    <div class="btn-wrapper">
+        <button @onclick="UpdateFilterValueAsync" class="filter-btn">
+            @*<span class="material-icons-outlined">
+                filter_alt
+            </span>*@
+            Lọc
+        </button>
+        <button @onclick="ClearFilterAsync" type="button" class="clear-filter-btn">Xóa lọc</button>
+    </div>
 </div>
 
+<div class="filter-bar-mobile">
+</div>
 
-<div class="arrange-bar d-flex align-items-center">
-    <label class="d-inline-block m-0 me-5">Sắp xếp theo</label>
-    @foreach (var item in orderDatas)
-    {
-        <div class="d-flex align-items-center ps-0 pe-5">
-            @if (OrderList[item.OrderBy])
-            {
-                <input @onchange='() => ChangeOrderAsync(item.OrderBy)' class="my-radio-box cursor-pointer" type="checkbox" checked id="@item.OrderBy">
-            }
-            else
-            {
-                <input @onchange='() => ChangeOrderAsync(item.OrderBy)' class="my-radio-box cursor-pointer" type="checkbox" id="@item.OrderBy">
-            }
-            <label class="my-radio-box-label cursor-pointer" for="@item.OrderBy">@item.Name</label>
-        </div>
+    <div class="arrange-bar">
+        <label class="d-inline-block m-0 me-5">Sắp xếp theo</label>
+        @foreach (var item in orderDatas)
+        {
+            <div class="d-flex align-items-center ps-0 pe-5">
+                @if (OrderList[item.OrderBy])
+                {
+                    <input @onchange='() => ChangeOrderAsync(item.OrderBy)' class="my-radio-box cursor-pointer" type="checkbox" checked id="@item.OrderBy">
+                }
+                else
+                {
+                    <input @onchange='() => ChangeOrderAsync(item.OrderBy)' class="my-radio-box cursor-pointer" type="checkbox" id="@item.OrderBy">
+                }
+                <label class="my-radio-box-label cursor-pointer" for="@item.OrderBy">@item.Name</label>
+            </div>
+        }
+    </div>
+
+
+    @code {
     }
-</div>
-
-
-@code {
-}

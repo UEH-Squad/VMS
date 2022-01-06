@@ -6,7 +6,7 @@
                 @activity.Name
             </p>
             <div class="title__name">
-                <span class="material-icons"><span class="earth-icon">public</span></span>
+                <span class="material-icons"><span class="earth-icon me-2">public</span></span>
                 <a class="org-name" href="@($"{Routes.OrgProfile}/{activity.OrgId}")">
                     <p class="organization m-0">@activity.Organizer?.FullName</p>
                 </a>
@@ -16,9 +16,29 @@
                     <p class="postdate m-0 ms-2">
                         Ngày đăng: @activity.CreatedDate
                     </p>
-                    <button @onclick="@(() => HandleFavorite(activity.Id))" class="@(isFav ? "heart-button2" : "heart-button1")">
-                        <span class="material-icons"><span class="heart-icon">@(isFav ? "favorite" : "favorite_border")</span></span>
-                    </button>
+                    <AuthorizeView Roles="@($"{Role.Admin}")">
+                        <div class="managementTool__create dropdown mb-0">
+                            <span class="material-icons-outlined dropdown-toggle icon-dots" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                more_vert
+                            </span>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li @onclick="ShowEditRequirementAsync" class="mb-2">Yêu cầu chỉnh sửa</li>
+                                <li><a href="@Routes.EditActivity/@activity.Id">Chỉnh sửa hoạt động</a></li>
+                            </ul>
+                        </div>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="@($"{Role.Organization}")">
+                        <div class="managementTool__create dropdown mb-3">
+                            <button @onclick="() => OnClickNavigateToEditActivty(activity.Id)" class="btn d-flex align-items-center">
+                                <span>Chỉnh sửa</span>
+                            </button>
+                        </div>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="@($"{Role.User}")">
+                        <button @onclick="@(() => HandleFavorite(activity.Id))" class="@(isFav ? "heart-button2" : "heart-button1")">
+                            <span class="material-icons"><span class="heart-icon">@(isFav ? "favorite" : "favorite_border")</span></span>
+                        </button>
+                    </AuthorizeView>
                 </div>
             </div>
         </div>
@@ -33,11 +53,14 @@
             </div>
             <div class="activity__mission">
                 <p class="mission">Sứ mệnh:</p>
-                @((MarkupString)activity.Mission)
+                <p>@((MarkupString)activity.Mission)</p>
             </div>
             <div class="activity__assignment">
                 <p class="assignment">Các nhiệm vụ tình nguyện viên sẽ tham gia:</p>
-                @((MarkupString)activity.Commission)
+                <p>@((MarkupString)activity.Commission)</p>
+            </div>
+            <div class="activity__detail">
+                <p class="detail mb-3">Chi tiết hoạt động:</p>
             </div>
         </div>
     </div>

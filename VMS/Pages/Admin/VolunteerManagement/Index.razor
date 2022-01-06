@@ -1,0 +1,18 @@
+﻿@layout AdminLayout
+
+@attribute [Route(Routes.AdminVolunteerManagement)]
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="row mt-4">
+    <div class="col-lg-10 mx-auto p-0">
+        <FilterUser FilterChanged="OnFilterChangedAsync" />
+        <VMS.Pages.SearchOrganizer.SearchResult
+            IsUserResult="true" IsUsedForAdmin="true"
+            PagedResult="pagedResult"
+            OnPageChanged="OnPageChangedAsync" />
+    </div>
+</div>
+
+@code {
+
+}

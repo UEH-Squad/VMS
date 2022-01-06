@@ -18,6 +18,7 @@ namespace VMS.Pages.UserProflie
         [Parameter] public UserViewModel User { get; set; } = new();
         [CascadingParameter] public IModalService Modal { get; set; }
         [CascadingParameter] public string CurrentUserId { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
 
         [Inject] private IUploadService UploadService { get; set; }
         [Inject] private IUserService UserService { get; set; }

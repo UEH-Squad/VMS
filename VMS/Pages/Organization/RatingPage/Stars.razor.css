@@ -11,11 +11,17 @@
     background-color: #FFFFFF;
     border: none;
     font-size: 85%;
-    padding: 3px; }
+    padding: 2px; }
+    @media (min-width: 576px) {
+      .member-star_button {
+        padding: 3px; } }
   .member-star #member-star_icon {
     color: #C4C4C4;
-    font-size: 165%;
+    font-size: 90%;
     cursor: pointer; }
+    @media (min-width: 576px) {
+      .member-star #member-star_icon {
+        font-size: 165%; } }
   .member-star_tooltip {
     visibility: hidden;
     opacity: 0;

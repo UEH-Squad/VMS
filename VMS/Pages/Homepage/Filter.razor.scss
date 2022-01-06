@@ -1,7 +1,11 @@
 ﻿@import "../../Resources/scss/common/_variables";
 .my-filter {
-    padding: 50px 0;
+    padding: 25px 0;
     text-align: center;
+
+    @include on('lg') {
+        padding: 50px 0;
+    }
 
     .container {
         padding: 0;
@@ -21,7 +25,7 @@
             font-size: 24px;
         }
 
-        @include on("xl") {
+        @include on("lg") {
             font-size: 30px;
         }
     }
@@ -114,7 +118,7 @@
             font-weight: 400;
             display: inline-block;
             transition: all 0.3s linear;
-            font-size: 16px;
+            font-size: 12px;
 
             @include on("sm") {
                 font-size: 18px;
@@ -139,15 +143,24 @@
     }
 
     ::deep .owl-nav {
+
         .owl-prev {
             position: absolute;
-            top: -35px;
-            left: 0;
+            top: -12px;
+            left: 13px;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    font-size: 60px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -159,9 +172,13 @@
                 background: none;
             }
 
+            @include on('md') {
+                left: -3px;
+            }
+
             @include on("lg") {
                 top: -30px;
-                left: 30px;
+                left: 0;
             }
 
             @include on("xxl") {
@@ -172,13 +189,21 @@
 
         .owl-next {
             position: absolute;
-            top: -35px;
-            right: 0;
+            top: -12px;
+            right: 13px;
 
             span {
-                font-size: 80px;
+                font-size: 50px;
                 color: $blue;
                 transition: all 0.3s linear;
+
+                @include on('md') {
+                    font-size: 60px;
+                }
+
+                @include on('lg') {
+                    font-size: 80px;
+                }
 
                 &:hover {
                     color: $blue-bold;
@@ -190,9 +215,13 @@
                 background: none;
             }
 
+            @include on('md') {
+                right: -3px;
+            }
+
             @include on("lg") {
                 top: -30px;
-                right: 30px;
+                right: 0;
             }
 
             @include on("xxl") {

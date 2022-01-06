@@ -69,7 +69,7 @@
     display: flex;
     flex-direction: row;
     padding: 20px 18px;
-    height: 267px;
+    height: 283px;
     margin-bottom: 15px;
     background-color: $grey;
     border-radius: 10px;
@@ -163,10 +163,68 @@
                 display: inline-block;
             }
         }
+
+        .icon-tooltip {
+            display: none;
+            color: #000;
+            min-width: max-content;
+            position: absolute;
+            transform: translate(-80%,-95%);
+            padding: 2px 10px;
+            font-size: 12px;
+            background-color: $white;
+            border-radius: 10px;
+            border-bottom-right-radius: 3px;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25%);
+        }
+
+        .my-icon {
+            cursor: default;
+
+            &:hover + .icon-tooltip {
+                display: block;
+            }
+        }
+
+        .record-icon {
+            color: $green
+        }
+
+        .record-text {
+            color: $grey-text;
+            font-weight: 500;
+        }
+
+        .material-icons-outlined {
+            font-size: 16px;
+
+            @include on('sm') {
+                font-size: 18px;
+            }
+
+            @include on('xl') {
+                font-size: 20px;
+            }
+        }
+
+        span {
+            font-size: 8px;
+            font-weight: 400;
+            color: $blue-bold;
+
+            @include on('sm') {
+                font-size: 10px;
+            }
+
+            @include on('xl') {
+                font-size: 14px;
+            }
+        }
     }
 
     &__footer {
-        bottom: 0;
+        bottom: -8px;
+
         &__btn {
             width: fit-content;
         }
@@ -250,6 +308,11 @@
     &__cbb-rate {
         width: 120px;
         background-color: $blue;
+
+        a {
+            text-decoration: none;
+            color: $white;
+        }
 
         &:hover {
             background-color: $blue-bold;
@@ -446,4 +509,33 @@
 
 .lmtext-3 {
     -webkit-line-clamp: 3;
+}
+
+.div-volunteer {
+    .icon-check {
+        color: $green;
+        font-size: 16px;
+
+        @include on('sm') {
+            font-size: 18px;
+        }
+
+        @include on('xl') {
+            font-size: 20px;
+        }
+    }
+
+    span {
+        font-weight: 500;
+        color: $grey-close-btn;
+        font-size: 8px;
+
+        @include on('sm') {
+            font-size: 10px;
+        }
+
+        @include on('xl') {
+            font-size: 14px;
+        }
+    }
 }

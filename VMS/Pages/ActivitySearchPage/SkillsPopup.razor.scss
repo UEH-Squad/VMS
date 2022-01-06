@@ -13,48 +13,111 @@
 }
 
 .my-custom-popup {
-    width: 50%;
+    width: 325px;
     background-color: #fff;
     border-radius: 10px;
-    z-index: 999;
+    z-index: 998;
+
+    @include on('sm') {
+        width: 500px;
+    }
+
+    @include on('md') {
+        width: 570px;
+    }
+
+    @include on('lg') {
+        width: 620px;
+    }
 
     h3 {
-        font-size: 24px;
         font-weight: 500;
+        font-size: 22px;
         color: $green;
+
+        @include on('lg') {
+            font-size: 24px;
+        }
     }
 
     .close-btn {
         position: absolute;
-        top: 25px;
-        right: 25px;
-        width: 40px;
-        height: 40px;
+        top: 15px;
+        right: 15px;
+        width: 20px;
+        height: 20px;
         background-color: $grey-bg;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 25px;
+        font-size: 16px;
         cursor: pointer;
+
+        @include on('md') {
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            top: 18px;
+            right: 29px;
+        }
+
+        @include on('xl') {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+        }
     }
 
     .skill-modal-content {
-        /*height: 70%;*/
 
         &__container {
-            height: 100%;
             display: grid;
-            grid-template-columns: auto auto;
+            grid-template-columns: auto;
+            grid-column-gap: 10px;
+            height: 315px;
+            overflow-y: scroll;
+            overflow-x: visible;
+
+            &::-webkit-scrollbar {
+                width: 3px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $grey-icon;
+                border-radius: 20px;
+            }
+
+            @include on('sm') {
+                height: 100%;
+                grid-template-columns: auto auto;
+                overflow-y: visible;
+            }
+
+            @include on('xl') {
+                height: 100%;
+                grid-template-columns: auto auto;
+            }
         }
     }
 
     .skill-item-wrapper {
         cursor: pointer;
+        margin-bottom: 17px;
+
+        @include on('lg') {
+            margin-bottom: 20px;
+        }
+
+
 
         & > p {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 400;
+
+            @include on('xl') {
+                font-size: 16px;
+            }
         }
 
         & > p:hover {
@@ -68,10 +131,19 @@
 
     .save-btn {
         @include green-btn;
-        font-size: 16px;
-        width: 90px;
-        height: 40px;
-        margin-bottom: 10px;
+        font-size: 20px;
+        width: 74px;
+        height: 33px;
+
+        @include on('md') {
+            width: 82px;
+            height: 36px;
+        }
+
+        @include on('xl') {
+            width: 90px;
+            height: 40px;
+        }
 
         &:hover {
             background-color: $green-bold;
@@ -79,13 +151,27 @@
     }
 
     .my-custom-sub-popup {
-        top: -60px;
-        left: 100%;
+        top: 20px;
+        left: 42px;
         background-color: white;
         box-shadow: 0 4px 60px 2px rgba(4, 20, 69, 0.25);
         padding: 15px 25px 0;
         border-radius: 5px;
-        min-width: 250px;
+        min-width: 190px;
+        font-size: 12px;
+
+        @include on ('sm') {
+            top: -60px;
+            left: 85px;
+            min-width: 210px;
+            font-size: 14px;
+        }
+
+        @include on('xl') {
+            min-width: 250px;
+            left: 100%;
+        }
+
         font-size: 14px;
         z-index: 999;
         display: none;

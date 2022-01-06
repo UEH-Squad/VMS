@@ -1,0 +1,53 @@
+﻿@import "../../Resources/scss/common/_variables";
+
+.container {
+    .activities {
+        ::deep .act {
+            h1 {
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 36px;
+                color: $grey-text;
+                padding-bottom: 5px;
+
+                @include on('lg') {
+                    font-size: 30px;
+                }
+
+                span {
+                    font-weight: 600;
+                    font-size: 18px;
+                    color: $green;
+
+                    @include on('lg') {
+                        font-size: 30px;
+                    }
+                }
+            }
+
+            hr {
+                display: none;
+
+                @include on('lg') {
+                    display: block;
+                    width: 60%;
+                    height: 1px;
+                    background-color: #707070;
+                    opacity: 50%;
+                }
+            }
+
+            .owl-carousel {
+                z-index: 0;
+            }
+
+            .act__linkAll {
+                display: none;
+
+                @include on('lg') {
+                    display: block;
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,10 @@
 ﻿@import "../../../Resources/scss/common/_variables";
+.error-message {
+    color: $error;
+    background-color: $blue-background;
+    font-weight: 300;
+    font-size: 18px;
+}
 
 .my-editProfile {
     ::deep .form-control:focus {
@@ -6,25 +12,30 @@
         box-shadow: none;
     }
 
-    .error-message {
-        color: $error;
-        background-color: $blue-background;
-        font-weight: 300;
-        font-size: 18px;
-    }
-
     .required-asterick {
         color: $error;
     }
 
     .editProfile__title {
-        font-size: 36px;
+        font-size: 18px;
         font-weight: 600;
         color: $blue;
         text-align: center;
 
         span {
             color: $green;
+        }
+
+        @include on("sm") {
+            font-size: 24px;
+        }
+
+        @include on("lg") {
+            font-size: 30px;
+        }
+
+        @include on("xxl") {
+            font-size: 36px;
         }
     }
 
@@ -49,19 +60,44 @@
     }
 
     .form-text {
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 500;
         color: $border-color-bold;
-        margin: auto 0;
+        margin-bottom: 12px;
+        padding: 0;
+
+        @include on("sm") {
+            font-size: 12px;
+        }
+
+        @include on("md") {
+            margin: auto 0;
+        }
+
+        @include on("lg") {
+            font-size: 14px;
+        }
+
+        @include on("xxl") {
+            font-size: 16px;
+        }
     }
 
     ::deep .form-input {
         padding: 10px;
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 300;
         color: $grey-text;
         border: 1px solid $grey-input;
         border-radius: 5px;
+
+        @include on("md") {
+            font-size: 14px;
+        }
+
+        @include on("xl") {
+            font-size: 16px;
+        }
     }
 
     .form-field {
@@ -84,10 +120,27 @@
 
     .form-field-item {
         text-align: center;
-        width: 20%;
+        width: 33.33%;
         display: inline-block;
+
+        @include on("md") {
+            width: 25%;
+        }
+
+        @include on("xl") {
+            width: 20%;
+        }
+
         &:hover > i {
-            font-size: 40px;
+            font-size: 25px;
+
+            @include on("sm") {
+                font-size: 35px;
+            }
+
+            @include on("lg") {
+                font-size: 40px;
+            }
 
             @include on("xxl") {
                 font-size: 45px;
@@ -104,15 +157,29 @@
             color: white;
             margin: 5px auto;
             transition: all 0.3s linear;
-            width: 73px;
-            height: 73px;
-            line-height: 73px;
-            font-size: 30px;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+
+            @include on("sm") {
+                width: 55px;
+                height: 55px;
+                line-height: 55px;
+                font-size: 25px;
+            }
+
+            @include on("lg") {
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+                font-size: 30px;
+            }
 
             @include on("xxl") {
-                width: 83px;
-                height: 83px;
-                line-height: 83px;
+                width: 85px;
+                height: 85px;
+                line-height: 85px;
                 font-size: 35px;
             }
         }
@@ -121,8 +188,17 @@
             font-weight: 500;
             display: inline-block;
             transition: all 0.3s linear;
-            font-size: 18px;
-            margin-top: 20px;
+            font-size: 14px;
+            margin-top: 10px;
+
+            @include on("lg") {
+                font-size: 18px;
+                margin-top: 20px;
+            }
+
+            @include on("xxl") {
+                font-size: 20px;
+            }
 
             @include on("xxl") {
                 font-size: 20px;
@@ -133,36 +209,95 @@
             background: $grey-close-bg;
             opacity: 50%;
             color: $white;
-            font-size: 60px;
+            font-size: 35px;
+
+            @include on("sm") {
+                font-size: 40px;
+            }
+
+            @include on("lg") {
+                font-size: 45px;
+            }
+
+            @include on("xxl") {
+                font-size: 50px;
+            }
 
             &:hover {
                 background: $grey-close-bg;
                 opacity: 100%;
-                font-size: 70px;
+                font-size: 40px;
+
+                @include on("sm") {
+                    font-size: 50px;
+                }
+
+                @include on("lg") {
+                    font-size: 55px;
+                }
+
+                @include on("xxl") {
+                    font-size: 60px;
+                }
             }
         }
 
         &.item-add {
-            width: 20%;
+            width: 33.33%;
             cursor: pointer;
+
+            @include on("md") {
+                width: 25%;
+            }
+
+            @include on("xl") {
+                width: 20%;
+            }
         }
     }
-
 
     .countWord {
         color: $border-color-bold;
         position: absolute;
-        top: 135px;
+        bottom: -20px;
         right: 15px;
+        font-size: 12px;
+
+        @include on("md") {
+            font-size: 14px;
+        }
+
+        @include on("lg") {
+            bottom: 0px;
+        }
+
+        @include on("xl") {
+            font-size: 16px;
+        }
     }
 
     .from__btn {
         margin: 60px 0;
+        text-align: right;
+
+        @include on("md") {
+            text-align: left;
+        }
 
         .btn {
-            padding: 12px 35px;
-            font-size: 16px;
+            padding: 5px 20px;
+            font-size: 14px;
             font-weight: 600;
+
+            @include on("md") {
+                font-size: 16px;
+                padding: 7px 25px;
+            }
+
+            @include on("xl") {
+                font-size: 16px;
+                padding: 12px 35px;
+            }
         }
 
         .from__btn-cancel {

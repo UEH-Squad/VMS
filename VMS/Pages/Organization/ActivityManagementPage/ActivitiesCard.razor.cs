@@ -12,7 +12,7 @@ namespace VMS.Pages.Organization.ActivityManagementPage
 {
     public partial class ActivitiesCard : ComponentBase
     {
-        private int rateId;
+        private bool isLoading;
         private int dropdownId;
         private int page = 1;
         private PaginatedList<ActivityViewModel> data = new(new(), 0, 1, 1);
@@ -21,9 +21,9 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         public FilterOrgActivityViewModel Filter { get; set; }
         [Parameter]
         public bool IsOrgProfile { get; set; } = false;
+
         [CascadingParameter]
         public IModalService Modal { get; set; }
-
 
         [Inject]
         private IActivityService ActivityService { get; set; }
@@ -34,26 +34,26 @@ namespace VMS.Pages.Organization.ActivityManagementPage
         {
             await JS.InvokeVoidAsync("vms.AddOutsideClickMenuHandler", DotNetObjectReference.Create(this), nameof(HideMenuInterop));
         }
+
         [JSInvokable]
         public Task HideMenuInterop()
         {
-            data.Items.ForEach(a => a.IsMenu = false);
+            dropdownId = 0;
             return InvokeAsync(StateHasChanged);
-        }
-
-        void ShowMenu(int id)
-        {
-            data.Items.ForEach(a => a.IsMenu = a.Id == id && !a.IsMenu);
         }
 
         protected override async Task OnParametersSetAsync()
         {
+            isLoading = true;
             data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, 1);
+            isLoading = false;
         }
 
         private async Task HandlePageChangedAsync(bool isPaging = false)
         {
+            isLoading = true;
             data = await ActivityService.GetAllOrganizationActivityViewModelAsync(Filter, page);
+            isLoading = false;
             StateHasChanged();
             if (isPaging)
             {
@@ -61,33 +61,14 @@ namespace VMS.Pages.Organization.ActivityManagementPage
             }
         }
 
-        private void ChangeRateState(int id)
-        {
-            rateId = (rateId == id ? 0 : id);
-            dropdownId = 0;
-        }
-
         private void ChangeDropdownState(int id)
         {
-            rateId = 0;
             dropdownId = (dropdownId == id ? 0 : id);
-        }
-
-        private bool CheckForZIndex(int id)
-        {
-            return id == dropdownId || id == rateId;
         }
 
         private async Task ShowDeleteModalAsync(ActivityViewModel activity)
         {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-
-            var result = await Modal.Show(typeof(Profile.DeleteConfirm), "", options).Result;
+            var result = await Modal.Show(typeof(Profile.DeleteConfirm), "", BlazoredModalOptions.GetModalOptions()).Result;
 
             if ((bool)result.Data)
             {
@@ -101,20 +82,13 @@ namespace VMS.Pages.Organization.ActivityManagementPage
             var parameters = new ModalParameters();
             parameters.Add("IsClosed", activity.IsClosed);
 
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-
-            var result = await Modal.Show(typeof(Profile.CloseConfirm), "", parameters, options).Result;
+            var result = await Modal.Show(typeof(Profile.CloseConfirm), "", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
             if ((bool)result.Data)
             {
                 await ActivityService.CloseOrDeleteActivity(activity.Id, activity.IsDeleted, !activity.IsClosed);
                 activity.IsClosed = !activity.IsClosed;
-                Modal.Show(typeof(Profile.CloseSuccess), "", parameters, options);
+                Modal.Show(typeof(Profile.CloseSuccess), "", parameters, BlazoredModalOptions.GetModalOptions());
             }
         }
     }

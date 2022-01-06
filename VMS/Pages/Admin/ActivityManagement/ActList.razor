@@ -1,0 +1,141 @@
+﻿<section class="my-act row justify-content-center">
+    <div class="act col-10 px-0" id="act">
+
+        <Spinner IsLoading="isLoading" />
+
+        <h3>Có <span>@pagedResult.TotalItems hoạt động</span> ứng với kết quả tìm kiếm</h3>
+        <div class="px-2">
+            @if (pagedResult is not null && pagedResult.Items.Count != 0)
+            {
+                <div class="act__page-1">
+                    @foreach (var item in pagedResult.Items)
+                    {
+                        if (item.IsDenied == false)
+                        {
+                            <div class="act__item row">
+                                <div class="col-4 h-100 d-flex align-items-center pe-0 ps-3 py-2">
+                                    <img class="w-100" src="@item.Banner" alt="">
+                                </div>
+                                <div class="col-8 act__content d-flex flex-column justify-content-between px-3">
+                                    <ul class="position-absolute act-menu p-2 @(menuId == item.Id ? "d-block" : "d-none")">
+                                        @if (item.EndDate < DateTime.Now)
+                                        {
+                                            <li @onclick="() => ShowDeleteModalAsync(item)" class="delete pb-2">Xóa</li>
+                                        }
+                                        else
+                                        {
+                                            <li @onclick="() => ShowActPrivorModalAsync(item)" class="pb-2">@(item.IsPin ? "Gỡ ưu" : "Ưu") tiên hoạt động</li>
+                                            <a href="@Routes.EditActivity/@item.Id" class="pb-2 text-decoration-none">Chỉnh sửa hoạt động</a>
+                                            <li @onclick="() => ShowEditModal(item.Id)" class="pb-2">Yêu cầu chỉnh sửa</li>
+                                            <li @onclick="() => ShowDeleteModalAsync(item)" class="delete pb-2">Xóa</li>
+                                        }
+                                    </ul>
+                                    <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute act__content__icon">
+                                        more_horiz
+                                    </i>
+                                    <div class="pe-4">
+                                        <a href="@Routes.AdminActivityInfo/@item.Id" class="lmtext-2 text-decoration-none">@item.Name</a>
+                                        <div class="star">
+                                            <Star Rating="item.Rating" />
+                                        </div>
+                                        <h5 class="org-name d-flex align-items-center mb-0">
+                                            <i class="material-icons">public</i> @item.Organizer?.FullName
+                                        </h5>
+                                        <p class="lmtext-2 act__content-description mb-0">@((MarkupString)item.Description)</p>
+                                        <div class="act__content-date d-flex flex-column mb-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex mb-1 align-items-center">
+                                                    <span class="material-icons-outlined me-2 my-icon">
+                                                        assignment
+                                                    </span>
+                                                    <span class="icon-tooltip">Thời hạn đăng ký</span>
+                                                    <span>@item.CloseDate.ToString("dd/MM/yyyy")</span>
+                                                </div>
+                                                @if (item.IsApproved && item.IsDay)
+                                                {
+                                                    <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
+                                                        <i class="material-icons-outlined icon-check">
+                                                            check_circle
+                                                        </i>
+                                                        <span class="ms-2">Số ngày tình nguyện: @item.NumberOfDays</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="material-icons-outlined me-2 my-icon">
+                                                        today
+                                                    </span>
+                                                    <span class="icon-tooltip">Ngày diễn ra</span>
+                                                    <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
+                                                </div>
+                                                @if (item.IsApproved && item.IsPoint)
+                                                {
+                                                    <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
+                                                        <i class="material-icons-outlined icon-check">
+                                                            check_circle
+                                                        </i>
+                                                        <span class="ms-2">Cập nhật mã vạch</span>
+                                                    </div>
+                                                }
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-normal d-flex align-items-center position-absolute act__content-participant">
+                                            <i class="material-icons">
+                                                person
+                                            </i> @item.MemberQuantity
+                                        </h5>
+                                        <div class="d-flex position-absolute act-footer">
+                                            @if (item.EndDate >= DateTime.Now.Date)
+                                            {
+                                                if (item.IsClosed || item.CloseDate < DateTime.Now.Date)
+                                                {
+                                                    <h5 class="act-footer__warn d-flex align-items-center fw-normal fst-italic">
+                                                        <i class="material-icons-outlined fst-normal">
+                                                            error
+                                                        </i> Đã đóng đăng ký
+                                                    </h5>
+                                                }
+                                                else if (item.StartDate >= DateTime.Now.Date && item.IsApproved == false)
+                                                {
+                                                    <div class="act-footer__btn d-flex align-items-center">
+                                                        <button @onclick="() => ShowDenyModalAsync(item.Id)" class="btn btn-deny">Từ chối</button>
+                                                    </div>
+                                                    <div class="act-footer__btn d-flex align-items-center">
+                                                        <button @onclick="() => ShowApproveModalAsync(item.Id)" class="btn act-footer__btn--blue">Duyệt</button>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @if (item.EndDate < DateTime.Now.Date)
+                                            {
+                                                <div class="act-footer__btn d-flex align-items-center">
+                                                    <a href="@Routes.AdminWatchlistVolunteer/@item.Id" class="btn text-decoration-none act-footer__btn--green">Xem danh sách</a>
+                                                </div>
+                                                <div class="act-footer__btn d-flex align-items-center">
+                                                    <a href="@Routes.AdminWatchRating/@item.Id" class="btn text-decoration-none act-footer__btn--blue">Xem đánh giá</a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        <div class="d-flex justify-content-center">
+            <Pager CurrentPage="@pagedResult.PageIndex"
+                   PageCount="@pagedResult.TotalPages"
+                   OnPageChanged="@(async (e)=> { page = e; await HandlePageChangedAsync(); })"
+                   ShowPageNumbers="true" />
+        </div>
+    </div>
+</section>
+
+@code {
+}

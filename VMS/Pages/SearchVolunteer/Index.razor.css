@@ -1,0 +1,32 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.yellow-colored {
+  color: #EDF131 !important; }
+
+.my-container {
+  border-top: none; }
+  @media (min-width: 992px) {
+    .my-container {
+      border-top: 2px solid #b4b4b4; } }
+
+.search-result ::deep .my-container {
+  border-top: none; }
+
+.search-result ::deep .result-heading {
+  display: none; }
+
+.search-result ::deep .org-item__name-group a {
+  color: #515151; }
+
+.search-result ::deep .org-item__name-group p {
+  color: #515151; }
+
+.search-result ::deep .org-item__rate-group .seperate-line {
+  display: block;
+  height: 80%;
+  border: 0.5px solid #b4b4b4;
+  margin-right: 30px; }

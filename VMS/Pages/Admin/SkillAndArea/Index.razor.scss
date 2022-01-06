@@ -1,0 +1,170 @@
+﻿@import '../../../Resources/scss/common/_variables';
+.my-option {
+    .btn:focus {
+        box-shadow: none;
+    }
+
+    .btn-area, .btn-skill {
+        position: relative;
+        width: 117px;
+        height: 42px;
+        padding: 0;
+        background: #F3F3F5;
+        font-weight: 600;
+        font-size: 18px;
+        color: $blue;
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 4px;
+            background: #0B588C;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: none;
+        }
+
+        &:hover::after {
+            display: block;
+        }
+    }
+
+    .btn-addVideo {
+        width: 260px;
+        height: 36px;
+        padding: 0 6px;
+        background: $green;
+        border-radius: 5px;
+        color: $white;
+        cursor: pointer;
+
+        &:hover {
+            background: $green-bold;
+        }
+
+        .icon-add {
+            font-size: 24px;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+
+    .btn-add {
+        width: 165px;
+        height: 36px;
+        padding: 0 6px;
+        background: $blue;
+        border-radius: 5px;
+        color: $white;
+        cursor: pointer;
+
+        &:hover {
+            background: $blue-bold;
+        }
+
+        .icon-add {
+            font-size: 24px;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+
+    .btn-delete {
+        width: 47px;
+        height: 36px;
+        padding: 0;
+        background: $red;
+        font-weight: 600;
+        font-size: 16px;
+        color: $white;
+
+        &:hover {
+            background: $red-warning;
+        }
+    }
+}
+
+.my-areas {
+    .cursor-pointer {
+        cursor: pointer
+    }
+
+    .lm-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 2;
+    }
+
+    .div-checkbox {
+        width: 15px;
+        height: 15px;
+    }
+
+    .check-box {
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        vertical-align: top;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 1px solid $grey-icon;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid #18A0FB;
+            border-bottom: 2px solid #18A0FB;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+    }
+
+    .area {
+        margin-top: 30px;
+        width: 85%;
+
+        i {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50px;
+            background-color: $red;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        span {
+            font-weight: 400;
+            font-size: 16px;
+            color: $red;
+        }
+    }
+}

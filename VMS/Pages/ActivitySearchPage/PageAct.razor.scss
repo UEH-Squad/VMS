@@ -2,6 +2,7 @@
 
 .bg-grey {
     background-color: $grey-icon !important;
+
     &:hover {
         background-color: $grey-icon !important;
         cursor: default !important;
@@ -14,9 +15,13 @@
 
     h3 {
         margin-top: 10px;
-        font-size: 24px;
+        font-size: 14px;
         font-weight: 400;
         color: #18A0FB;
+
+        @include on('xl') {
+            font-size: 24px;
+        }
 
         span {
             color: #64D72F;
@@ -26,10 +31,15 @@
     .act__item {
         background-color: $grey;
         padding: 10px 0px;
-        border-radius: 10px;
+        border-radius: 5px;
         margin-top: 30px;
-        height: 285px;
-        img{
+        height: 180px;
+
+        @include on('xl') {
+            height: 310px;
+        }
+
+        img {
             height: 100%;
             object-fit: cover;
         }
@@ -40,7 +50,6 @@
     position: relative;
 
     a {
-        font-size: 24px;
         font-weight: 400;
         color: #18A0FB;
         text-decoration: none;
@@ -52,17 +61,41 @@
         }
     }
 
+    a:first-of-type {
+        font-size: 14px;
+
+        @include on('xl') {
+            font-size: 24px;
+        }
+    }
+
+    a:nth-of-type(2) {
+        font-size: 12px;
+
+        @include on('xl') {
+            font-size: 24px;
+        }
+    }
+
     h5 {
         display: flex;
         align-items: center;
         font-size: 14px;
         font-weight: 600;
-        margin: 10px 0;
+        margin: 5px 0;
+
+        @include on('xl') {
+            margin: 10px 0;
+        }
 
         i {
             color: $green;
             margin-right: 5px;
-            font-size: 24px;
+            font-size: 18px;
+
+            @include on('xl') {
+                font-size: 24px;
+            }
         }
     }
 
@@ -72,12 +105,64 @@
     }
 
     span {
-        font-size: 14px;
         font-weight: 400;
+        color: $blue-bold;
+        font-size: 8px;
+
+        @include on('sm') {
+            font-size: 10px;
+        }
+
+        @include on('xl') {
+            font-size: 14px;
+        }
     }
 
     ::deep &-description > * {
         margin: 0;
+    }
+
+    .icon-tooltip {
+        display: none;
+        color: #000;
+        min-width: max-content;
+        position: absolute;
+        transform: translate(-80%,-95%);
+        padding: 2px 10px;
+        font-size: 12px;
+        background-color: $white;
+        border-radius: 10px;
+        border-bottom-right-radius: 3px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25%);
+    }
+
+    .my-icon {
+        cursor: default;
+
+        &:hover + .icon-tooltip {
+            display: block;
+        }
+    }
+
+    .record-icon {
+        color: $green
+    }
+
+    .record-text {
+        color: $grey-text;
+        font-weight: 500;
+    }
+
+    .material-icons-outlined {
+        font-size: 16px;
+
+        @include on('sm') {
+            font-size: 18px;
+        }
+
+        @include on('xl') {
+            font-size: 20px;
+        }
     }
 }
 
@@ -85,21 +170,31 @@
     display: flex;
 
     i {
-        font-size: 36px;
+        font-size: 24px;
         color: #F14747;
         cursor: pointer;
         margin-left: auto;
+
+        @include on('xl') {
+            font-size: 36px;
+        }
     }
 
     button {
         background-color: $green;
         padding: 0px 20px;
-        margin-left: 20px;
-        font-size: 20px;
+        margin-left: 10px;
+        font-size: 14px;
         font-weight: 600;
         color: $white;
-        padding: 5px 15px;
+        padding: 2px 10px;
         border-radius: 5px;
+
+        @include on('xl') {
+            font-size: 20px;
+            padding: 5px 15px;
+            margin-left: 20px;
+        }
 
         &:hover {
             background-color: $green-bold;
@@ -122,4 +217,41 @@
 
 .lmtext-3 {
     -webkit-line-clamp: 3;
+}
+
+.act__content-description {
+    display: none;
+
+    @include on('xl') {
+        display: -webkit-box;
+    }
+}
+
+.div-volunteer {
+    .icon-check {
+        color: $green;
+        font-size: 16px;
+
+        @include on('sm') {
+            font-size: 18px;
+        }
+
+        @include on('xl') {
+            font-size: 20px;
+        }
+    }
+
+    span {
+        font-weight: 500;
+        color: $grey-close-btn;
+        font-size: 8px;
+
+        @include on('sm') {
+            font-size: 10px;
+        }
+
+        @include on('xl') {
+            font-size: 14px;
+        }
+    }
 }

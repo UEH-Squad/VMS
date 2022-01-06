@@ -1,35 +1,35 @@
 ﻿@inject IJSRuntime JS;
 
-<div class="container">
-    <div class="row act">
-        <div class="d-flex align-items-center justify-content-between my-5">
-            <h1 class="mb-0">Hoạt động <span>@Title</span></h1>
-            <hr />
-        </div>
+@if (Datas is not null && Datas.Count > 0)
+{
+    <div class="container">
+        <div class="row act">
+            <div class="d-flex align-items-center justify-content-between my-lg-5 my-2 my-sm-3 px-3">
+                <h1 style="@(IsUsedForAdmin ? "font-size:24px;" : "")" class="mb-0">Hoạt động <span>@Title</span></h1>
+                <hr />
+            </div>
 
-        @if (Datas is not null)
-        {
-            <div class="@(Datas.Count >4 ? "owl-carousel owl-theme organize__carousel" : "d-flex ") position-relative">
+            <div class="owl-carousel owl-theme position-relative px-3">
                 @foreach (var item in Datas)
                 {
-                    <div class="@(Datas.Count >4 ? "" : "w-25 mx-2") act-container item position-relative">
+                    <div class="act-container item position-relative">
                         <div class="img-container position-relative">
-                            <img src="@item?.Banner" alt="" class="act-img">
+                            <img src="@item?.Banner" alt="" class="act-img" style="@(IsUsedForAdmin ? "height:200px;" : "")">
                             <div class="@(item.IsClosed ? "overlay" : "")"></div>
                         </div>
                         <div class="act-content @(OverridesImg ? "position-absolute act-content-overrides ":"" )">
                             <a href="@Routes.ActivityInfo/@item.Id" class="@(item.IsClosed ? "content-cl" : "content-nm") ">
-                                <h3 class="act-title mb-0 lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
+                                <h3 style="@(IsUsedForAdmin ? "font-size:16px;" : "")" class="act-title mb-0 lm-text @(item.IsClosed ? "title-cl" : "title-nm")">@item?.Name</h3>
                             </a>
                         </div>
                         <ul class="act-menu p-2 @(item.IsMenu ? "d-block" : "d-none")">
-                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
+                            <a href="@Routes.EditActivity/@item.Id" class="edit pb-1 pb-sm-2    text-decoration-none">Chỉnh sửa</a>
 
-                            <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-2">Xóa</li>
+                            <li @onclick="(() => ShowDeleteModalAsync(item.Id))" class="delete pb-1 pb-sm-2">Xóa</li>
 
                             @if (item.CloseDate.Date >= DateTime.Now.Date)
                             {
-                                <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close pb-2">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
+                                <li @onclick="(() => ShowCloseModalAsync(item.Id))" class="close">@(item.IsClosed ? "Mở hoạt động" : "Đóng hoạt động")</li>
                             }
                         </ul>
                         @if (HaveControl)
@@ -39,32 +39,25 @@
                             </i>
                         }
 
-
-                        @if (HaveHeart && IsUser)
-                        {
-                            <span class="material-icons-outlined icon-favorite position-absolute" @onclick="(() => ShowLoginRequire())">
-                                favorite
-                            </span>
-                        }
-                        @* Phần này của Bằng e không đụng tới *@
-
-                        @if (HaveFav && !string.IsNullOrEmpty(CurrentUserId))
-                        {
-                            <a class="position-absolute favorite" @onclick="() => AnimateHeart(item)">
-                                <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
-                            </a>
-                        }
+                        <AuthorizeView Roles="@($"{Role.User}")">
+                            @if (HaveFav)
+                            {
+                                <a class="position-absolute favorite" @onclick="() => AnimateHeart(item)">
+                                    <span class="material-icons @(item.IsFav ? "isfav" : "nonefav")">@(item.IsFav ? "favorite" : "favorite_border")</span>
+                                </a>
+                            }
+                        </AuthorizeView>
                     </div>
                 }
             </div>
-        }
 
 
-        @if (HaveLinkAll)
-        {
-            <div class="act__linkAll text-end mt-5">
-                <a href="@Routes.ActivitySearch/@QueryString">@TitleLinkALl >>></a>
-            </div>
-        }
+            @if (HaveLinkAll)
+            {
+                <div class="act__linkAll text-end mt-lg-5 mt-2 mt-sm-3 pe-3">
+                    <a href="@Routes.ActivitySearch/@QueryString">@TitleLinkALl >>></a>
+                </div>
+            }
+        </div>
     </div>
-</div>
+}

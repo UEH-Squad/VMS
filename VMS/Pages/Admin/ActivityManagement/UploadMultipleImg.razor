@@ -1,0 +1,27 @@
+﻿@inject IJSRuntime JS;
+<div class="position-relative my-uploadImg">
+        <InputFile OnChange="OnInputFileAsync" class="w-100 uploadImg__input" multiple />
+        <div class="d-flex align-items-center justify-content-center flex-column">
+            <div class="d-flex w-100 justify-content-center align-items-center">
+                <i class="material-icons">
+                    cloud_upload
+                </i>
+                <span class="d-block">@prompt</span>
+            </div>
+            <div class="image-list d-flex w-100">
+                @foreach (var img in Image)
+                {
+                    <div class="position-relative flex-column align-items-center me-3 d-flex">
+                        <img src="@img" class="preview-img my-2" />
+                        <i class="material-icons-outlined position-absolute mx-0 close-btn" @onclick="() => OnDiscardImageAsync(img)">close</i>
+                        <span class=""></span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+@code {
+
+   
+}

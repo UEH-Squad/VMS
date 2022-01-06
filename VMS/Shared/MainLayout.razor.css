@@ -5,7 +5,7 @@
 /*#region mixins */
 /*#endregion */
 .main-layout {
-  margin-top: 75px; }
-  @media (min-width: 992px) {
+  margin-top: 65px; }
+  @media (min-width: 1200px) {
     .main-layout {
       margin-top: 80px; } }

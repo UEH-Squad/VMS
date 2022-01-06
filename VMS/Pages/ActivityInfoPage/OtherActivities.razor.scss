@@ -10,7 +10,7 @@ $fav-icon: #fff;
     position: relative;
 
     &__title {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         font-style: normal;
         font-weight: 500;
 
@@ -18,8 +18,12 @@ $fav-icon: #fff;
             color: $blue;
             font-size: 18px;
 
-            @include on('md') {
+            @include on('sm') {
                 font-size: 24px;
+            }
+
+            @include on('lg') {
+                font-size: 30px;
             }
         }
 
@@ -81,18 +85,14 @@ $fav-icon: #fff;
         &__img {
             position: relative;
             width: 100%;
-            height: calc(#{$img-heigh} * 0.4);
+            height: 133px;
 
-            @include on('md') {
-                height: calc(#{$img-heigh} * 0.6);
+            @include on('lg') {
+                height: 180px;
             }
 
             @include on('xl') {
-                height: calc(#{$img-heigh} * 0.8);
-            }
-
-            @include on('xxl') {
-                height: $img-heigh;
+                height: 250px;
             }
 
             img {
@@ -108,51 +108,48 @@ $fav-icon: #fff;
             padding: 10px;
             font-style: normal;
             font-weight: 600;
-            font-size: 8px;
+            font-size: 14px;
             color: $blue;
-            //limit 3 line
-            height: 160px;
+            height: 100px;
             overflow: hidden;
+            line-height: 17px;
 
-            @include on('md') {
-                padding: 14px;
-                font-size: 14px;
-                height: 160px;
+            @include on('sm') {
+                font-size: 16px;
+                line-height: 20px;
+                height: 118px;
             }
 
-            @include on('xl') {
-                padding: 16px;
-                font-size: 18px;
-                height: 160px;
-            }
-
-            @include on('xxl') {
+            @include on('lg') {
                 padding: 19px;
                 font-size: 20px;
-                height: 160px;
+                line-height: 30px;
+                height: 170px;
             }
         }
 
         &__icon {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            bottom: -4px;
+            right: 3px;
+
+            @include on('lg') {
+                bottom: 2px;
+                right: 10px;
+            }
 
             span {
                 font-size: 16px;
                 color: transparent;
-                -webkit-text-stroke: 2px $fav-icon;
+                -webkit-text-stroke: 2px $red;
 
-                @include on('md') {
+                @include on('sm') {
                     font-size: 18px;
                 }
 
-                @include on('xl') {
-                    font-size: 36px;
-                }
-
-                @include on('xxl') {
-                    font-size: 36px;
+                @include on('lg') {
+                    -webkit-text-stroke: 3px $red;
+                    font-size: 25px;
                 }
             }
         }
@@ -162,7 +159,7 @@ $fav-icon: #fff;
 .heart {
     span {
         cursor: pointer;
-        color: $fav-icon !important;
+        color: $red !important;
     }
 }
 .heart-line {
@@ -177,7 +174,7 @@ $fav-icon: #fff;
     z-index: 0;
 }
 
-::deep .owl-nav {
+::deep .owl-carousel {
 
     .owl-prev, .owl-next {
         position: absolute;
@@ -191,21 +188,40 @@ $fav-icon: #fff;
     .owl-next {
         right: 0;
     }
+}
 
-    .owl-prev, .owl-next:hover {
-        background-color: transparent !important;
-    }
+::deep .owl-nav {
+    button.owl-next,
+    button.owl-prev {
+        background: $blue;
+        position: absolute;
+        border-radius: 100%;
+        top: 26%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    span {
-        font-size: 50px;
-        color: $white;
-        transition: all 0.3s linear;
-        border-radius: 100% !important;
-        background-color: $blue !important;
+        span {
+            font-size: 40px;
+            margin-bottom: 5px;
+            line-height: 0;
+            color: $white;
+        }
 
         &:hover {
-            filter: blur(90%);
+            background: $blue-bold;
+            opacity: .73;
         }
+    }
+
+    button.owl-prev {
+        left: 5px;
+    }
+
+    button.owl-next {
+        right: 5px;
     }
 }
 
@@ -219,9 +235,5 @@ $fav-icon: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    -webkit-line-clamp: 3;
-
-    @include on('sm') {
-        -webkit-line-clamp: 4;
-    }
+    -webkit-line-clamp: 4;
 }

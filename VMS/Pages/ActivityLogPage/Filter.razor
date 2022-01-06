@@ -1,9 +1,6 @@
 ﻿<div class="filter-container">
-    <div class="act-title">
-        Lọc hoạt động
-    </div>
-    <div class="act-filter d-flex">
-        <div class="select-filter">
+    <div class="row act-filter d-flex">
+        <div class="col-12 col-lg-6 col-xl-5 col-xxl-5 select-filter">
             <div class="select-container">
                 <div class="act-filter__select" @onclick="Showlist1">
                     <span class="act-filter__select-default">@semesterDefault</span>
@@ -32,7 +29,8 @@
                 </div>
             </div>
         </div>
-        <div class="act-filter__radio d-flex">
+
+        <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 act-filter__radio d-flex">
             <div class="act-filter__radio-1 d-flex align-items-center">
                 @if (filter.IsRated.HasValue && !filter.IsRated.Value)
                 {
@@ -56,9 +54,9 @@
                 <label class="label-2" for="rated">Đã đánh giá</label><br>
             </div>
         </div>
-        <div class="act-filter__btn-container">
-            <button @onclick="UpdateFilterValueAsync" class="act-filter__btn --filter">Lọc</button>
-            <button @onclick="ClearFilterAsync" class="act-filter__btn --del">Xóa lọc</button>
+        <div class="col-12 col-xl-2 col-xxl-3 act-filter__btn-container">
+            <button class="act-filter__btn --filter" @onclick="UpdateFilterValueAsync">Lọc</button>
+            <button class="act-filter__btn --del" @onclick="ClearFilterAsync">Xóa lọc</button>
         </div>
     </div>
 </div>

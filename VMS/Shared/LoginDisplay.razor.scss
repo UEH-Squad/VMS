@@ -28,8 +28,15 @@
 
 .login-btn {
     background-color: $blue;
-    width: 137px;
-    height: 40px;
+    width: 100px;
+    height: 27px;
+    font-size: 12px;
+
+    @include on ('sm') {
+        width: 137px;
+        height: 40px;
+        font-size: 18px;
+    }
 
     &:hover {
         background-color: $blue-bold;
@@ -41,8 +48,6 @@
         font-size: 20px;
         line-height: 60px;
     }
-
-  
 }
 
 .user-section {
@@ -50,11 +55,12 @@
 
     &__link {
         .user-avatar {
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: block;
             margin: 0 auto;
+            object-fit: cover;
 
             @include on('xl') {
                 width: 50px;
@@ -84,6 +90,7 @@
     }
 
     .dropdown-menu {
+        position: absolute;
         top: 100%;
         left: auto;
         right: -50%;
@@ -97,11 +104,9 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: -62%;
-        color: $blue;
-        font-size: 35px;
+        right: -55%;
+        font-size: 30px;
         cursor: pointer;
-        display: none;
 
         @include on('xl') {
             display: block;
@@ -110,11 +115,14 @@
 
     &__list {
         margin: 10px auto 0;
-        width: 420px;
-        height: 350px;
+        width: 260px;
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+
+        @include on('xl') {
+            width: 420px;
+        }
     }
 
     @include on('xl') {
@@ -138,20 +146,44 @@
 .user-info {
 
     .user-img {
-        width: 70px;
-        height: 70px;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+
+        @include on('xl') {
+            width: 70px;
+            height: 70px;
+        }
     }
 
     h3 {
         color: $grey-text;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 500;
     }
 
     h4 {
         color: $grey-text;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 400;
+    }
+
+    .user-info-link {
+        flex-direction: column;
+
+        @include on('xl') {
+            flex-direction: row;
+        }
+
+        .user-info-heading {
+            text-align: center;
+
+            @include on('xl') {
+                text-align: left;
+            }
+        }
     }
 }
 
@@ -162,7 +194,7 @@
         border: solid 1px $blue;
 
         h4 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 300;
             color: $blue;
         }

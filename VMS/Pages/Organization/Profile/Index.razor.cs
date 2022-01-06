@@ -18,9 +18,12 @@ namespace VMS.Pages.Organization.Profile
         public bool haveControl;
         public bool haveFav;
         public bool haveLogin;
+        private bool isLoading;
         
         [Parameter]
         public string UserId { get; set; }
+        [Parameter] public bool IsUsedForAdmin { get; set; }
+
 
         [CascadingParameter]
         public string CurrentUserId { get; set; }
@@ -36,6 +39,7 @@ namespace VMS.Pages.Organization.Profile
 
         protected override async Task OnParametersSetAsync()
         {
+            isLoading = true;
             if (string.IsNullOrEmpty(CurrentUserId) && string.IsNullOrEmpty(UserId))
             {
                 NavigationManager.NavigateTo(Routes.LogIn, true);
@@ -83,6 +87,7 @@ namespace VMS.Pages.Organization.Profile
             }
 
             haveLogin = true;
+            isLoading = false;
         }
 
         private static bool CheckInforUser(UserViewModel org) => !string.IsNullOrEmpty(org.FullName)

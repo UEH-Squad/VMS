@@ -1,58 +1,63 @@
 ﻿@inject IJSRuntime JSRuntinme;
 
 <div class="my-profile">
-    <div class="container">
-        <div class="d-flex justify-content-between  py-5">
+    <div class="@(IsUsedForAdmin ? "" : "container")">
+        <div class="container-profile d-flex justify-content-between py-5">
             <div class="text-center profile__logo">
                 <div class="">
                     <div class="proflie__logo-img py-3">
                         <div class=" text-center d-inline-block position-relative">
-                            <img src="@User.Avatar" alt="@User.FullName">
+                            <img src="@(string.IsNullOrEmpty(User.Avatar) ? "img/Default/avatar.png" : User.Avatar)" alt="@User.FullName" style="@(IsUsedForAdmin ? "width: 150px; height: 150px;" : "")">
                             @if (IsUser)
                             {
                                 <label for="myfile">
                                     <svg class="icon-camera" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z" /><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1a.5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0z" /></g></svg>
                                 </label>
                             }
-                            <InputFile OnChange="OnAvatarFileChangedAsync" type="file" id="myfile" name="myfile" class="d-none"/>
+                            <InputFile OnChange="OnAvatarFileChangedAsync" type="file" id="myfile" name="myfile" class="d-none" />
                         </div>
                     </div>
-                    <p class="m-0 ">@User.FullName</p>
+                    <p class="m-0" style="@(IsUsedForAdmin ? "font-size: 16px" : "")">@User.FullName</p>
                     @if (IsUser)
                     {
                         <button @onclick="ShowModalAppellationAsync" class="profile__type d-inline-block btn mx-auto mt-1 mb-4">@appellation</button>
                     }
                     else
                     {
-                        <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4">Chiến sĩ hạng đồng</span>
+                        <span class="profile__type profile__type-notHover d-inline-block mx-auto mt-1 mb-4" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">Chiến sĩ hạng đồng</span>
                     }
 
-                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser"/>
+                    <ProfileRank Rank="@User.Rank" TotalRating="@User.QuantityRating" Stars="@User.AverageRating" IsUser="@IsUser" IsUsedForAdmin=@IsUsedForAdmin />
 
                 </div>
             </div>
-            <div class="profile__contact ">
-                <h3 class="text-center mb-3">Thông tin cá nhân</h3>
+
+            <div class="profile__contact" style="@(IsUsedForAdmin ? "width: 32%" : "")">
+                <h3 class="text-center mb-3" style="@(IsUsedForAdmin ? "font-size: 24px" : "")">Thông tin cá nhân</h3>
                 <div class="profile__contact-content pb-4 mb-4 ">
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">account_circle</p>
-                        <p class="col-10 profile__contact-text">@User.StudentId</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.StudentId</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">folder_shared</p>
-                        <p class="col-10 profile__contact-text">@User.Course - @User.Class</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.Course - @User.Class</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">email</p>
-                        <p class="col-10 profile__contact-text">@User.Email</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">
+                            <a href="mailto:@User.Email">@User.Email</a>
+                        </p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">contact_phone</p>
-                        <p class="col-10 profile__contact-text">@User.PhoneNumber</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">
+                            <a href="tel:@User.PhoneNumber">@User.PhoneNumber</a>
+                        </p>
                     </div>
 
                 </div>
-                <div class="profile__filter text-center">
+                <div class="profile__filter-1">
                     <h3>Lĩnh vực</h3>
                     <div class="@(User.Areas.Count > 3 ? "owl-carousel owl-theme profile__carousel" : " profile__NoCarousel pe-0 d-flex justify-content-center")">
                         @foreach (var item in User.Areas)
@@ -70,13 +75,28 @@
 
             <div class=" profile__skills">
                 <div class="profile__skills-content pt-3 pb-4 pb-xxl-5">
-                    <h3 class="mb-4 text-center">Kĩ Năng</h3>
-                    <div class=" mx-auto profile__content ">
+                    <h3 class="mb-4" style="@(IsUsedForAdmin ? "font-size: 24px" : "")">Kĩ Năng</h3>
+                    <div class=" mx-auto profile__content" style="@(IsUsedForAdmin ? "padding: 0 20px" : "")">
                         @foreach (var item in User.Skills)
                         {
                             <p class="profile__skill">@item.Name</p>
                         }
                     </div>
+                </div>
+
+            </div>
+
+            <div class="profile__filter-2">
+                <h3>Lĩnh vực</h3>
+                <div class="@(User.Areas.Count > 3 ? "owl-carousel owl-theme profile__carousel" : " profile__NoCarousel pe-0 d-flex justify-content-center")">
+                    @foreach (var item in User.Areas)
+                    {
+                        <div class="item @(User.Areas.Count > 3 ? "" : "mx-2")">
+                            <i class="material-icons" style="background-color: @item.Color">@item.Icon</i>
+                            <span style="color: @(item.IsPinned ? item.Color : "#64D72F")">@item.Name</span>
+                        </div>
+                    }
+
                 </div>
 
             </div>

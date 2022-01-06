@@ -1,5 +1,7 @@
 ﻿@inject IJSRuntime JS;
 
+<Spinner IsLoading="isLoading" />
+
 <div class="row">
     <div class="text-result mb-5">Có <span>@data?.TotalItems</span> hoạt động tương ứng với kết quả tìm kiếm của bạn.</div>
 </div>
@@ -7,11 +9,11 @@
 {
     @foreach (var item in data.Items)
     {
-        <div class="org-card" style="z-index:@(CheckForZIndex(item.Id) ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || CheckForZIndex(item.Id) ? 1 : 0.75)">
-            <i @onclick="() => ShowMenu(item.Id)" class="material-icons position-absolute">
+        <div class="org-card" style="z-index:@(item.Id == dropdownId ? "2" : "1"); display:@(item.IsDeleted ? "none" : "flex"); opacity: @(!item.IsClosed || item.Id == dropdownId ? 1 : 0.75)">
+            <i @onclick="() => ChangeDropdownState(item.Id)" class="material-icons position-absolute">
                 more_horiz
             </i>
-            <ul class="act-menu p-2 position-absolute @(item.IsMenu ? "d-block" : "d-none")">
+            <ul class="act-menu p-2 position-absolute @(item.Id == dropdownId ? "d-block" : "d-none")">
                 <a href="@Routes.EditActivity/@item.Id" class="edit pb-2 text-decoration-none">Chỉnh sửa</a>
 
                 <li @onclick="(() => ShowDeleteModalAsync(item))" class="delete pb-2">Xóa</li>
@@ -29,13 +31,48 @@
                     <a href="@Routes.ActivityInfo/@item.Id">@item.Name</a>
                 </div>
                 <div class="org-card__info__rate">
-                    <Star Rating="@item.Rating"/>
+                    <Star Rating="@item.Rating" />
                 </div>
                 <div class="lmtext-2 org-card__info__desc">
                     @((MarkupString)item.Description)
                 </div>
-                <div class="org-card__info__date">
-                    Ngày đăng: <span>@item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                <div class="org-card__info__date d-flex flex-column mb-1">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex mb-1 align-items-center">
+                            <span class="material-icons-outlined me-2 my-icon">
+                                assignment
+                            </span>
+                            <span class="icon-tooltip">Hạn đăng ký</span>
+                            <span>@item.CloseDate.ToString("dd/MM/yyyy")</span>
+                        </div>
+                        @if (item.IsDay)
+                        {
+                            <div class="col-6 d-flex mb-1 align-items-center div-volunteer">
+                                <i class="material-icons-outlined icon-check">
+                                    check_circle
+                                </i>
+                                <span class="ms-2">Số ngày tình nguyện: @item.NumberOfDays</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span class="material-icons-outlined me-2 my-icon">
+                                today
+                            </span>
+                            <span class="icon-tooltip">Ngày diễn ra</span>
+                            <span>@item.StartDate.ToString("dd/MM/yyyy") - @item.EndDate.ToString("dd/MM/yyyy")</span>
+                        </div>
+                        @if (item.IsPoint)
+                        {
+                            <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
+                                <i class="material-icons-outlined icon-check">
+                                    check_circle
+                                </i>
+                                <span class="ms-2">Điểm rèn luyện</span>
+                            </div>
+                        }
+                    </div>
                 </div>
                 <div class="org-card__footer w-100 d-flex position-absolute">
                     <div class="org-card__member py-1 d-flex px-0">
@@ -44,20 +81,13 @@
                         </span>
                         <span class="org-card__member__text">@item.MemberQuantity</span>
                     </div>
-                    <div class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
+                    <a href="@Routes.VolunteersList/@item.Id" class="org-card__btn-list card-btn d-flex justify-content-center align-items-center me-3">
                         Xem danh sách
-                    </div>
+                    </a>
                     @if (DateTime.Now.Date > item.EndDate)
                     {
                         <div class="org-card__cbb-rate card-btn d-flex justify-content-around px-1 align-items-center ms-1 position-relative">
-                            <div href="#" class="org-card__cbb-rate__title" @onclick="() => ChangeRateState(item.Id)">Đánh giá</div>
-                            <span class="material-icons-outlined expand-icon" @onclick="() => ChangeRateState(item.Id)">
-                                expand_more
-                            </span>
-                            <ul class="rate-menu org-card__cbb-rate__list card-list position-absolute" style="display:@(item.Id == rateId ? "inline-block" : "none");">
-                                <li>Tình nguyện viên</li>
-                                <li>Xem đánh giá hoạt động</li>
-                            </ul>
+                            <a href="@Routes.Rating/@item.Id" class="org-card__cbb-rate__title">Đánh giá</a>
                         </div>
                     }
                 </div>

@@ -1,0 +1,71 @@
+﻿<h1 class="my-5 pb-3">Quản lý tài khoản <span>@Tilte</span></h1>
+<div class="d-flex justify-content-between my-managementTool">
+    <div class="managementTool__filter">
+        <div class="d-flex align-items-center">
+            <div class="position-relative managementTool__course  @(PageRole == Role.User || PageRole == Role.Organization ? "d-block" : "d-none")">
+                <input @onclick="ToggCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn form-control @(!string.IsNullOrEmpty(filter.Course) ? "bg-grey" : "")" placeholder="@GetDropdownValue()" readonly />
+                <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
+                    <ul>
+                        @foreach (var course in courses)
+                        {
+                            <li @onmousedown="() => ChooseCourseValue(course)">@course</li>
+                            }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute popup-btn-icon">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="ms-4 @(PageRole == Role.Admin ? "d-none" : "d-block")">
+                <button @onclick="OnClickFilterAsync" class="btn-filter btn">Lọc</button>
+                <button @onclick="ClearFilterAsync" class="btn-delete-filter btn">Xóa lọc</button>
+                </div>
+            </div>
+        <div class="d-flex align-items-center managementTool__sort mt-4 ">
+            <p class="mb-0">Sắp xếp theo ngày tạo</p>
+
+            <label class="d-flex align-items-center">
+                <input @onclick="@(async () => await OnClickOrderAsync(true))" type="radio" id="near" name="filter" />
+                <span>Gần nhất</span>
+            </label>
+
+            <label class="d-flex align-items-center">
+                <input @onclick="@(async () => await OnClickOrderAsync(false))" type="radio" id="old" name="filter" class="me-2 input-radio cursor-pointer" />
+                <span>Cũ nhất</span>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="managementTool__create dropdown">
+        @if (PageRole != Role.Admin)
+        {
+            <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons-outlined icon-add">
+                    control_point
+                </i>
+                <span>Tạo tài khoản</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li @onclick="ShowCreateAccountAsync" class="mb-2">Tạo một tài khoản</li>
+                <li @onclick="ShowCreateAccountsAsync">Tạo nhiều tài khoản</li>
+            </ul>
+        }
+        else
+        {
+            <button @onclick="ShowCreateAccountAsync" class="btn dropdown-toggle d-flex align-items-center">
+                <i class="material-icons-outlined icon-add">
+                    control_point
+                </i>
+                <span>Tạo tài khoản</span>
+            </button>
+        }
+    </div>
+
+</div>
+
+@code {
+}
+
+

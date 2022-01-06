@@ -4,33 +4,87 @@
 }
 
 h3 {
-    font-size: 36px;
+    font-weight: 600;
+    font-size: 18px;
     color: $blue;
+    margin: 20px 0;
+
+    @include on('sm') {
+        font-size: 24px;
+    }
+
+    @include on('lg') {
+        font-size: 36px;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    @include on('xl') {
+        font-size: 48px;
+    }
+
     span {
         color: $green;
     }
 }
 
 p {
-    font-size: 30px;
+    font-size: 12px;
     color: $blue;
 
+    @include on('sm') {
+        font-size: 16px;
+    }
+
+    @include on('lg') {
+        font-size: 24px;
+    }
+
+    @include on('xl') {
+        font-size: 30px;
+    }
+
+    span {
+        color: $green;
+
+        @include on('lg') {
+            color: $blue;
+        }
+    }
+}
+
+.filter-bar_left {
+    width: 65% !important;
+
+    @include on('xl') {
+        width: 40% !important;
+    }
 }
 
 .filter-item {
+    font-size: 10px;
     width: 50%;
 
+    @include on('xl') {
+        font-size: 18px;
+    }
+
     &__icon {
+        font-size: 18px;
         top: 50%;
         transform: translateY(-50%);
         right: 10px;
         pointer-events: none;
+
+        @include on('xl') {
+            font-size: 24px;
+        }
     }
 }
 
-.popup-btn {
+.popup-btn_1 {
     border-radius: 8px;
-    height: 40px;
+    height: 29px;
     width: 100%;
     border: 1px solid $border-color-bold;
     cursor: pointer;
@@ -45,30 +99,80 @@ p {
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
 
+    @include on('xl') {
+        height: 40px;
+    }
+
+    &::placeholder {
+        color: #b4b4b4;
+    }
+}
+
+.popup-btn_2 {
+    display: flex !important;
+    align-items: center;
+    border-radius: 8px;
+    height: 29px;
+    width: 100%;
+    border: 1px solid $border-color-bold;
+    cursor: pointer;
+    color: #b4b4b4;
+    padding-left: 8px;
+    padding-right: 30px;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+
+    @include on('xl') {
+        height: 40px;
+    }
+
     &::placeholder {
         color: #b4b4b4;
     }
 }
 
 .my-dropdown {
-    padding: 15px 22px;
+    padding: 5px 6px;
     border-radius: 4px;
     border: none;
     margin-top: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 100%;
+    top: 40%;
     background-color: #fff;
-    z-index: 1;
+    z-index: 10;
     display: none;
     width: 100%;
 
+    @include on('xl') {
+        padding: 15px 18px;
+        top: 100%;
+    }
+
     ul {
+        font-size: 9px;
+        font-weight: 500;
         overflow-y: scroll;
         list-style: none;
         padding: 0;
         height: 100%;
         margin: 0;
+
+        @include on('sm') {
+            font-size: 12px;
+        }
+
+        @include on('lg') {
+            font-size: 14px;
+        }
+
+        @include on('xxl') {
+            font-size: 16px;
+        }
 
         &::-webkit-scrollbar {
             width: 5px;
@@ -82,8 +186,17 @@ p {
         li {
             color: $blue;
             line-height: 24px;
-            margin-bottom: 12px;
+            margin-bottom: 0;
             cursor: pointer;
+
+            @include on('xl') {
+                margin-bottom: 12px;
+            }
+
+            &:hover {
+                color: $green;
+                background-color: rgba(24, 160, 251, 0.1);
+            }
         }
     }
 }
@@ -94,9 +207,22 @@ p {
 
 .filter-btn {
     @include green-btn;
-    font-size: 20px;
-    height: 40px;
-    padding: 0 20px;
+    font-weight: 400;
+    font-size: 12px;
+    height: 26px;
+    padding: 0 10px;
+
+    @include on('sm') {
+        font-size: 16px;
+        height: 32px;
+        padding: 0 12px;
+    }
+
+    @include on('md') {
+        font-size: 18x;
+        height: 36px;
+        padding: 0 16px;
+    }
 
     &:hover {
         background-color: #306C14;
@@ -106,10 +232,19 @@ p {
 
 .clear-filter-btn {
     @include green-btn;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 12px;
     width: fit-content;
-    color: $grey-icon;
+    color: #000000;
     background-color: #fff;
+
+    @include on('sm') {
+        font-size: 18px;
+    }
+
+    @include on('lg') {
+        color: $grey-icon;
+    }
 
     &:hover {
         text-decoration: underline;

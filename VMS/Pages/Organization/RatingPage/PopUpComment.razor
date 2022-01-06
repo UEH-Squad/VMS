@@ -1,4 +1,4 @@
-﻿@using VMS.Application.ViewModels
+﻿@*@using VMS.Application.ViewModels*@
 
 <div class="overlay">
     <div class="popup-comment">
@@ -10,7 +10,7 @@
         <div class="popup-comment_member">
             <div class="name">
                 <div class="popup-avatar">
-                    <img src="@UserTop.Avatar" alt="avatar">
+                    <img src="@(string.IsNullOrEmpty(UserTop.Avatar) ? "img/Default/avatar.png" : UserTop.Avatar)" alt="avatar">
                 </div>
                 <div class="popup-member">
                     <p class="popup-member1">@UserTop.FullName</p>
@@ -44,7 +44,7 @@
         <div class="popup-comment_organization">
             <div class="name">
                 <div class="popup-avatar">
-                    <img src="@UserBottom.Avatar" alt="avatar">
+                    <img src="@(string.IsNullOrEmpty(UserBottom.Avatar) ? "img/Default/avatar.png" : UserBottom.Avatar)" alt="avatar">
                 </div>
                 <div class="popup-member">
                     <p class="popup-member1">@UserBottom.FullName</p>

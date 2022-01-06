@@ -1,0 +1,95 @@
+﻿@inject NavigationManager NavigationManager
+
+<nav class="col-3 sidebar">
+
+    <div class="d-flex align-items-center profile-container">
+        <img src="img/Default/avatar.png" class="rounded-avatar" alt="admin avatar" />
+        <div class="profile-info">Admin</div>
+    </div>
+
+    <div class="menu-container mb-4">
+        <div class="d-flex menu-item">
+            <NavLink href="@Routes.AdminActivityManagement" class="d-flex">
+                <span class="menu-item__icon material-icons">description</span>
+                <div>Quản lý hoạt động</div>
+            </NavLink>
+        </div>
+        <div class="d-flex menu-item">
+            <NavLink href="@Routes.AdminOrganizationManagement" class="d-flex">
+                <span class="menu-item__icon material-icons">public</span>
+                <div>Quản lý tổ chức</div>
+            </NavLink>
+        </div>
+        <div class="d-flex menu-item">
+            <NavLink href="@Routes.AdminVolunteerManagement" class="d-flex">
+                <span class="menu-item__icon material-icons">account_circle</span>
+                <div>Quản lý tình nguyện viên</div>
+            </NavLink>
+        </div>
+        <div class="d-flex flex-wrap menu-item">
+            <span class="menu-item__icon material-icons @(isAccountMenuPages ? "blue-text" : "")">folder_shared</span>
+            <div class="menu-item__name cursor-pointer @(isAccountMenuPages ? "blue-text" : "")" @onclick="ToggleAccountMenu">Quản lý tài khoản</div>
+            <span class="menu-item__icon material-icons cursor-pointer @(isAccountMenuPages ? "blue-text" : "")" @onclick="ToggleAccountMenu">@(isAccountMenuCollapsed? "expand_more" : "expand_less")</span>
+            @if (!isAccountMenuCollapsed)
+            {
+                <div class="sub-menu-container">
+                    <div class="d-flex flex-column sub-menu-item">
+                        <NavLink href="@Routes.AdminOrgAccountManagement" class="menu-item__name">Tài khoản tổ chức</NavLink>
+                        <NavLink href="@Routes.AdminVolunteerAccountManagement" class="menu-item__name">Tài khoản tình nguyện viên</NavLink>
+                        <NavLink href="@Routes.AdminAdminAccountManagement" class="menu-item__name">Tài khoản quản trị viên</NavLink>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="d-flex menu-item">
+            <NavLink href="@Routes.AdminResolveReport" class="d-flex">
+                <span class="menu-item__icon material-icons">warning</span>
+                <div>Xử lý báo cáo</div>
+            </NavLink>
+        </div>
+        <div class="d-flex menu-item">
+            <NavLink href="@Routes.AdminFeatureSuggestionManagement" class="d-flex">
+                <span class="menu-item__icon material-icons">bookmark_add</span>
+                <div>Bổ sung tính năng</div>
+            </NavLink>
+
+        </div>
+        <div class="d-flex menu-item">
+            <NavLink href="@Routes.AdminDashboardManagement" class="d-flex">
+                <span class="menu-item__icon material-icons">bar_chart</span>
+                <div>Báo cáo thống kê</div>
+            </NavLink>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+    
+    <div class="mt-4 d-flex menu-item">
+        <form method="post" action="@Routes.LogOut">
+            <button type="submit" class="d-flex text-decoration-none px-0">
+                <span class="menu-item__icon material-icons">logout</span>
+                <div>Đăng xuất</div>
+            </button>
+        </form>
+    </div>
+</nav>
+
+@code
+{
+    bool isAccountMenuCollapsed = true;
+    bool isAccountMenuPages = false;
+
+    private void ToggleAccountMenu()
+    {
+        isAccountMenuCollapsed = !isAccountMenuCollapsed;
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        isAccountMenuPages = NavigationManager.Uri.Contains(Routes.AdminOrgAccountManagement)
+                                || NavigationManager.Uri.Contains(Routes.AdminVolunteerAccountManagement)
+                                || NavigationManager.Uri.Contains(Routes.AdminAdminAccountManagement);
+    }
+}

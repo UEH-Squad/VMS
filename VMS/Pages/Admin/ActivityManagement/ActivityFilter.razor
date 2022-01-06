@@ -1,0 +1,175 @@
+﻿@using VMS.Application.ViewModels;
+
+<section class="row justify-content-center">
+    <div class="act-filter col-10 px-0">
+        <div class="d-flex mb-4">
+            <div class="act-filter__type d-flex justify-content-center">
+                <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                    <input @bind="@Filter.Virtual" type="checkbox" id="md1" class="d-flex justify-content-center align-items-center me-2">
+                    <label for="md1">Virtual</label>
+                </div>
+                <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                    <input @bind="@Filter.Actual" type="checkbox" id="md2" class="d-flex justify-content-center align-items-center me-2">
+                    <label for="md2">Actual</label>
+                </div>
+                @if (areasPinned is not null)
+                {
+                    @foreach (var area in areasPinned)
+                    {
+                        <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                            @if (Filter.Areas.Exists(x => x.Id == area.Id))
+                            {
+                                <input @onclick="(() => ChangeStatePinnedArea(area))" class="d-flex justify-content-center align-items-center me-2" type="checkbox" id="@area.Icon" checked style="--checkbox-color: @area.Color">
+                            }
+                            else
+                            {
+                                <input @onclick="(() => ChangeStatePinnedArea(area))" class="d-flex justify-content-center align-items-center me-2" type="checkbox" id="@area.Icon" style="--checkbox-color: @area.Color">
+                            }
+                            <label class="my-check-box-label d-flex align-items-center cursor-pointer" style="color: @area.Color" for="@area.Icon">
+                                @area.Name
+                                <span class="material-icons-outlined">
+                                    @area.Icon
+                                </span>
+                            </label>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleCityDropdown" @onfocusout="CloseCityDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterCity ? "bg-grey" : "")" placeholder="@cityChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isCityShow ? "block" : "none")">
+                    <ul>
+                        @if (provinces is not null)
+                        {
+                            @foreach (var province in provinces)
+                            {
+                                <li @onmousedown="() => ChooseCityValueAsync(province)">@province.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleDistrictDropdown" @onfocusout="CloseDistrictDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterDistrict ? "bg-grey" : "")" placeholder="@districtChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isDistrictShow ? "block" : "none")">
+                    <ul>
+                        @if (districts is not null)
+                        {
+                            @foreach (var district in districts)
+                            {
+                                <li @onmousedown="() => ChooseDistrictValueAsync(district)">@district.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleWardDropdown" @onfocusout="CloseWardDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterWard ? "bg-grey" : "")" placeholder="@wardChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isWardShow ? "block" : "none")">
+                    <ul>
+                        @if (wards is not null)
+                        {
+                            @foreach (var ward in wards)
+                            {
+                                <li @onmousedown="() => ChooseWardValue(ward)">@ward.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <div @onclick="ShowAreasPopupAsync" class="filter-item__btn filter-item__btn--lmtext-1 @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+                <span class="material-icons-outlined position-absolute">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <div @onclick="ShowSkillsPopupAsync" class="filter-item__btn filter-item__btn--lmtext-1 @(Filter.Skills.Count != 0 ? "bg-grey" : "")">Kỹ năng</div>
+                <span class="material-icons-outlined position-absolute">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterLevel ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fit-content" style="display: @(isLevelShow ? "block" : "none")">
+                    <ul>
+                        @if (levels is not null)
+                        {
+                            @foreach (var level in levels)
+                            {
+                                <li @onmousedown="() => ChooseLevelValue(level)">@level</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleOrganizationDropdown" @onfocusout="CloseOrganizationDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterOrganization ? "bg-grey" : "")" placeholder="@organizationChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown" style="display: @(isOrganizationShow ? "block" : "none")">
+                    <ul>
+                        @if (organizers is not null)
+                        {
+                            @foreach (var organization in organizers)
+                            {
+                                <li @onmousedown="() => ChooseOrganizationValue(organization)">@organization.FullName</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <input @onclick="ToggleActTypeDropdown" @onfocusout="CloseActTypeDropdown" class="filter-item__btn filter-item__btn--lmtext-1 @(isFilterActType ? "bg-grey" : "")" placeholder="@acttypeChoosenValue" readonly />
+                <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fit-content" style="display: @(isActTypeShow ? "block" : "none")">
+                    <ul>
+                        @if (actTypes is not null)
+                        {
+                            @foreach (var actType in actTypes)
+                            {
+                                <li @onmousedown="() => ChooseActTypeValue(actType)">@actType</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <span class="material-icons-outlined position-absolute pe-none">
+                    expand_more
+                </span>
+            </div>
+
+            <div class="filter-item position-relative mb-4">
+                <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@DateTimeValue" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3" : "")" OnChange="ChooseMonthValue" Format="MM/yyyy" />
+            </div>
+        </div>
+
+        <div class="act-filter__btn d-flex justify-content-start align-items-center mb-4 text-center">
+            <button @onclick="UpdateFilterValueAsync" class="btn act-filter__btn--green px-3 py-1">Lọc</button>
+            <button @onclick="ClearFilterAsync" class="act-filter__btn--clear ms-3">Xóa lọc</button>
+        </div>
+    </div>
+</section>
+

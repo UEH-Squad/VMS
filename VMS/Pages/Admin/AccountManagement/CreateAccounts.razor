@@ -1,0 +1,33 @@
+﻿<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__create">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center">Tạo tài khoản <span>@(Role == Role.User ? "tình nguyện viên" : "tổ chức")</span></h3>
+            <p class="modal__step ">Bước 1: Tải về file mẫu </p>
+            <button @onclick="OnClickDownloadDemoAsync" class="btn btn-down d-flex align-items-center">
+                <i class="material-icons icon-down me-1 ">
+                    vertical_align_bottom
+                </i>
+                <span>Tải file mẫu</span>
+            </button>
+            <p class="modal__step ">Bước 2: Điền thông tin sinh viên vào file  </p>
+            <p class="modal__step mb-3">Bước 3: Tải lên file .xlsx đã điền  </p>
+            <UploadImg DefaultPrompt="Chọn, kéo và thả file tại đây" AcceptPattern="@acceptPattern" InputFileChanged="OnInputFileChanged" />
+
+            <div class="from__btn text-center">
+                <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
+                <button @onclick="OnClickCreateAsync" type="submit" class="btn btn-create">Tạo tài khoản</button>
+            </div>
+
+            <Spinner IsLoading="isLoading" />
+        </div>
+    </div>
+</div>
+
+
+@code {
+}

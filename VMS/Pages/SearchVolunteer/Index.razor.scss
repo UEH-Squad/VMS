@@ -1,0 +1,46 @@
+﻿@import "../../Resources/scss/common/_variables.scss";
+$yellow: #EDF131;
+$org-avata-size: 115px;
+$border-width: 1px;
+
+.yellow-colored {
+    color: $yellow !important;
+}
+
+.my-container {
+    border-top: none;
+
+    @include on('lg') {
+        border-top: 2px solid $border-color-normal;
+    }
+}
+
+.search-result {
+
+    ::deep .my-container {
+        border-top: none;
+    }
+
+    ::deep .result-heading {
+        display: none;
+    }
+
+    ::deep .org-item__name-group {
+        a {
+            color: $grey-text;
+        }
+
+        p {
+            color: $grey-text;
+        }
+    }
+
+    ::deep .org-item__rate-group {
+        .seperate-line {
+            display: block;
+            height: 80%;
+            border: 0.5px solid $border-color-normal;
+            margin-right: 30px;
+        }
+    }
+}

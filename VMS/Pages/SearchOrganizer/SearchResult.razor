@@ -1,52 +1,48 @@
 ﻿@inject IJSRuntime JsRuntime
 <section class="my-container mb-5">
-    <h3 class="result-heading mt-4 mb-3">Có <span>@(pagedResult is null ? "0" : pagedResult.RowCount) tổ chức</span> ứng với kết quả tìm kiếm của bạn</h3>
-    @if (pagedResult != null && pagedResult.Results.Length != 0)
+    <h3 class="result-heading mt-4 mb-3">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) @(IsOrgResult ? "tổ chức" : "tình nguyện viên")</span> ứng với kết quả tìm kiếm của bạn</h3>
+    @if (PagedResult != null && PagedResult.TotalItems != 0)
     {
-        @foreach (var item in pagedResult.Results)
+        @foreach (var item in PagedResult.Items)
         {
             <div class="org-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img class="org-item__img me-4" src="/img/act.png" alt="Alternate Text" />
-                    <div class="org-item__name-group ms-5">
-                        <a class="org-item__name" href="#">@item.OrganizationName</a>
-                        <p>@item.Level</p>
+                    <img class="org-item__img me-2" src="@(string.IsNullOrEmpty(item.Avatar) ? "img/Default/avatar.png" : item.Avatar)" alt="@item.FullName" />
+                    <div class="org-item__name-group ms-4">
+                        <a class="org-item__name lmtext-2"
+                            href="@(IsUsedForAdmin
+                            ? (IsUserResult ? Routes.AdminVolunteerProfile : Routes.AdminOrganizationProfile)
+                            : (IsUserResult ? Routes.UserProfile : Routes.OrgProfile))/@item.Id">@item.FullName</a>
+                        <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Course</p>
+                        <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">
+                            Đã tổ chức <span style="@(IsUsedForAdmin ? "cursor: pointer;" : "")"
+                                     @onclick="(() => ShowHeldActivitiesAsync(item.Id))">@item.Activities.Count</span> hoạt động
+                        </p>
+                        <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course - Lớp @item.Class</p>
                     </div>
                 </div>
-                <div class="org-item__rate-group d-flex align-items-center me-5">
+                <div class="org-item__rate-group d-flex align-items-center @(IsUsedForAdmin ? "me-3" : "me-5")">
+                    <div class="seperate-line"></div>
                     <span class="me-4">#@item.Rank</span>
                     <div>
                         <p class="m-0 d-flex align-items-center">
-                            @item.StarNumber
-                            @for (int i = 1; i <= 5; i++)
-                            {
-                                isYellow = false;
-                                isHalf = false;
-                                @if (i <= item.StarNumber)
-                                {
-                                    isYellow = true;
-                                }
-                                @if ((item.StarNumber % 1) != 0 && (i == Math.Ceiling(item.StarNumber / 1)))
-                                {
-                                    isHalf = true;
-                                    isYellow = true;
-                                }
-                                <span class="material-icons org-item__rate-group-star ms-2 @(isYellow ? "yellow-colored" : "")">
-                                    star@(isHalf ? "_half" : "")
-                                </span>
-                            }
+                            @item.AverageRating
+                            <Star Rating="item.AverageRating" />
                         </p>
-                        <p class="m-0">
-                            @if (item.RateNumber >= 1000)
+                        <p class="m-0 @(IsUserResult ? "d-none" : "")">
+                            @if (item.QuantityRating >= 1000)
                             {
-                                var a = Math.Round((double)item.RateNumber / 1000, 1, MidpointRounding.ToZero);
+                                var a = Math.Round((double)item.QuantityRating / 1000, 1, MidpointRounding.ToZero);
                                 @(a + "N")
                             }
                             else
                             {
-                                @item.RateNumber
+                                @item.QuantityRating
                             }
                             xếp hạng
+                        </p>
+                        <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">
+                            / @(item.QuantityRating) đánh giá
                         </p>
                     </div>
                 </div>
@@ -55,67 +51,23 @@
     }
 </section>
 
-<Pager CurrentPage="@pagedResult.CurrentPage"
-       PageCount="@pagedResult.PageCount"
-       OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })" />
+<Pager CurrentPage="@PagedResult.PageIndex"
+       PageCount="@PagedResult.TotalPages"
+       OnPageChanged="@(async (e)=> { await HandlePageChangedAsync(e); })" />
+
 @code {
     private bool isYellow;
     private bool isHalf;
 
-    private class FakeData
-    {
-        public string OrganizationName { get; set; }
-        public string Level { get; set; }
-        public int Rank { get; set; }
-        public double StarNumber { get; set; }
-        public int RateNumber { get; set; }
-    }
+    [Parameter]
+    public bool HaveLevel { get; set; }
 
-    public abstract class PagedResultBase
-    {
-        public int CurrentPage { get; set; }
-        public int PageCount { get; set; }
-        public int PageSize { get; set; }
-        public int RowCount { get; set; }
-        public int FirstRowOnPage => Math.Min((CurrentPage - 1) * PageSize + 1, RowCount);
-        public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
-    }
+    [Parameter]
+    public bool IsOrgResult { get; set; }
 
-    public class PagedResult<T> : PagedResultBase where T : class
-    {
-        public T[] Results { get; set; }
-    }
-    private PagedResult<FakeData> pagedResult;
-    private int page = 1;
+    [Parameter]
+    public bool IsUserResult { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        pagedResult = GetFakeData();
-    }
-
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetFakeData();
-        StateHasChanged();
-        await Interop.ScrollToTop(JsRuntime);
-    }
-
-    private PagedResult<FakeData> GetFakeData()
-    {
-        var result = new PagedResult<FakeData>();
-        result.CurrentPage = page;
-        result.RowCount = 200;
-        result.PageSize = 20;
-        result.PageCount = result.RowCount / result.PageSize;
-        result.Results = Enumerable.Range(0, result.PageSize).Select(x => new FakeData
-        {
-            OrganizationName = "Khoa CNTT kinh doanh - BIT",
-            Level = "Khoa/Viện/KTX",
-            Rank = 2,
-            StarNumber = 2.5,
-            RateNumber = 15500,
-        }).ToArray();
-
-        return result;
-    }
+    [Parameter]
+    public bool IsUsedForAdmin { get; set; }
 }

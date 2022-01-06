@@ -1,21 +1,12 @@
-﻿@attribute [Route(Routes.VolunteersList)]
+﻿@attribute [Route(Routes.VolunteersList + "/{ActId:int}")]
 
-@attribute [Authorize]
+@attribute [Authorize(Roles = "Organization")]
 
-<div class="container-lg px-0 layout">
-    <Title></Title>
-
-    <NavMini OnToggleListType="OnToggleListType" />
-
-    <Listcard ShowDeletedList="isDeletedList" />
+<div class="container px-0 layout">
+    <Title Name =@actName></Title>
+    <Listcard  ActId =@ActId/>
 </div>
 
 @code {
-    bool isDeletedList = false;
-
-    async Task OnToggleListType()
-    {
-        isDeletedList = !isDeletedList;
-        StateHasChanged();
-    }
+   
 }

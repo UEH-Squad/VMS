@@ -1,12 +1,19 @@
-﻿@attribute [Route(Routes.OrganizerSearch)]
+﻿@using VMS.Application.ViewModels
+@attribute [Route(Routes.OrganizerSearch)]
 <div class="container-lg">
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <SearchAndFilter />
-            <SearchResult />
+            <SearchAndFilter
+                HaveSearchBox="true" IsLongDistanceFilter="true"
+                FilterChanged="OnFilterChangedAsync" />
+
+            <SearchResult
+                HaveLevel="true"
+                PagedResult="pagedResult"
+                OnPageChanged="OnPageChangedAsync" />
         </div>
     </div>
-</div>   
-@code {
+</div>
 
+@code {
 }

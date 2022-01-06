@@ -1,0 +1,190 @@
+﻿@import "../../../Resources/scss/common/_variables";
+
+.pop-up {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 120;
+
+    .border-10 {
+        border-radius: 10px;
+    }
+
+    .center-screen {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pop-up-container {
+        background-color: $white;
+        position: relative;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+    }
+
+    .close-btn {
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 20px;
+            color: $grey-close-btn;
+        }
+    }
+
+    .close-btn-s {
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 14px;
+            color: $grey-close-btn;
+            line-height: 0;
+        }
+    }
+
+
+    .pop-up-content {
+        padding: 30px 55px 20px 55px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            font-size: 20px;
+            line-height: 25px;
+            font-weight: 500;
+            margin-bottom: 0;
+            color: $blue;
+        }
+
+        span {
+            color: $green;
+        }
+    }
+
+    .content {
+        padding: 34px 64px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            color: $green;
+            font-weight: 500;
+            font-size: 20px;
+        }
+
+        span {
+            color: $blue;
+        }
+    }
+
+    .pop-up-btn {
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 30px;
+        font-weight: 600;
+
+        .deny {
+            background-color: $white;
+            color: $blue;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 104px;
+            height: 32px;
+            font-weight: 600;
+        }
+
+        .accept {
+            background-color: $blue;
+            color: $white;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 104px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+}
+.div-checkbox {
+    .check-box {
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        vertical-align: top;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 1px solid #B4B4B4;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid #18A0FB;
+            border-bottom: 2px solid #18A0FB;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+    }
+
+    label {
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 14px;
+        color: #515151;
+    }
+
+    .input-number {
+        width: 55px;
+        margin-left: 7px;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+}

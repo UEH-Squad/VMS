@@ -1,29 +1,59 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
 .search-and-button {
-    display: grid;
-    grid-template-columns: 55% 45%;
 
-    .button-download {
+    .dropdown {
 
-        margin-top:15px;
-        &__text {
-           
-            display:flex;
-            color: $blue;
-            background: none;
-            border: none;
-            padding: 0 12px;
+        display: none;
+
+        @include on ('md') {
+            display: block;
+        }
+
+        button {
             float: right;
-            font-weight:500;
+            color: $blue;
+            background: $white;
+            border: 1px solid $blue;
+            font-size: 16px;
+            min-width: 158px;
+            cursor: pointer;
 
             &:hover {
-                color: $blue-hv;
+                color: $white;
+                background: $blue;
             }
 
-            .material-icons {
-                margin-right:5px;
-                font-size:24px;
+            &:focus, &:active {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+        }
+
+        .dropdown-menu {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border: none;
+
+            .dropdown-item {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 500;
+                position: relative;
+
+                &__download {
+                    color: $green;
+                }
+
+                &__upload {
+                    color: $blue;
+                }
+
+                .material-icons-outlined {
+                    position: absolute;
+                    right: 20px;
+                }
             }
         }
     }
@@ -36,61 +66,81 @@
     margin: 15px 0 20px;
 
     .quantity-volunteers {
-        width: 50%;
-        font-size: 18px;
+        font-size: 14px;
         color: $blue;
+        margin-bottom: 0;
+
+        @include on('sm') {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
 
         span {
             color: $green;
         }
     }
 
-    .button {
-        width: 30%;
+    .button-and-link {
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row-reverse;
 
-        &__text {
-            float: right;
-            font-size: 16px;
-            color: $white;
-            padding: 8px 25px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 7px;
+        @include on ('md') {
+            flex-direction: row;
         }
 
-        &__text--undo {
-            background-color: $blue;
+        .button {
 
-            &:hover {
-                background-color: $blue-hv;
+            &__text {
+                font-size: 14px;
+                color: $white;
+                padding: 4px 10px;
+                border: none;
+                border-radius: 5px;
+
+                @include on('sm') {
+                    font-size: 16px;
+                    padding: 8px 25px;
+                    margin-right: 7px;
+                }
+            }
+
+            &__text--undo {
+                background-color: $blue;
+
+                &:hover {
+                    background-color: $blue-hv;
+                }
+            }
+
+            &__text--del {
+                background-color: $grey-close-bg;
+
+                &:hover {
+                    background-color: $red;
+                }
             }
         }
 
-        &__text--del {
-            background-color:$grey-close-bg;
+        .link {
 
-            &:hover {
-                background-color: $red;
+            &__text {
+                font-size: 14px;
+                margin: auto;
+                cursor: pointer;
+
+                @include on ('sm') {
+                    font-size: 18px;
+                }
             }
-        }
-    }
 
-    .link {
-        width: 20%;
+            &__text--del {
+                color: #F14747;
+            }
 
-        &__text {
-            float: right;
-            font-size: 20px;
-            margin: auto;
-            cursor: pointer;
-        }
-
-        &__text--del {
-            color: #F14747;
-        }
-
-        &__text--undo {
-            color: $blue;
+            &__text--undo {
+                color: $blue;
+            }
         }
     }
 }

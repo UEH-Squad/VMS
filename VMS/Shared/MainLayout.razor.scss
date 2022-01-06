@@ -1,9 +1,9 @@
 ﻿@import '../Resources/scss/common/_variables';
 
 .main-layout {
-    margin-top: 75px;
+    margin-top: 65px;
 
-    @include on('lg') {
+    @include on('xl') {
         margin-top: 80px;
     }
 }

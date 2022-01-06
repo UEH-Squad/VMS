@@ -1,0 +1,44 @@
+﻿@inherits LayoutComponentBase
+
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-3 d-flex flex-column my-navbar__brand">
+            <a href="@Routes.ActivitySearch" class="my-navbar__brand-item">
+                <img src="img/GoVirlunteer (1).png" alt="Go Volunteer logo" class="brand__govirlunteer" />
+            </a>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-9 mx-auto p-0">
+                    <VMS.Pages.ActivitySearchPage.SearchBox IsUsedForAdmin="true" SearchValue="" />
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-end">
+                    <a href="#" class="text-decoration-none position-absolute notification-link">
+                        <span class="material-icons my-notifications" data-icon="notifications_none"></span>
+                        <span class="material-icons-outlined notification-link__icon">
+                            notifications
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="admin-divider"></div>
+<main class="container flex-grow-1">
+    <div class="row">
+        <AdminSidebar />
+
+        <div class="col-9 flex-grow-1">
+            <div class="row">
+                @Body
+            </div>
+        </div>
+    </div>
+</main>
+
+<Footer IsFloat="true" />
+
+@code {
+
+}

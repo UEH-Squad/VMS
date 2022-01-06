@@ -48,13 +48,13 @@
                 <span>Tạo tài khoản</span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li @onclick="ShowCreateAccount" class="mb-2">Tạo một tài khoản</li>
+                <li @onclick="ShowCreateAccountAsync" class="mb-2">Tạo một tài khoản</li>
                 <li @onclick="ShowCreateAccountsAsync">Tạo nhiều tài khoản</li>
             </ul>
         }
         else
         {
-            <button @onclick="ShowCreateAccount" class="btn dropdown-toggle d-flex align-items-center">
+            <button @onclick="ShowCreateAccountAsync" class="btn dropdown-toggle d-flex align-items-center">
                 <i class="material-icons-outlined icon-add">
                     control_point
                 </i>

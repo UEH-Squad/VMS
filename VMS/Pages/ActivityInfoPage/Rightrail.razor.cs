@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Domain.Models;
@@ -72,7 +73,7 @@ namespace VMS.Pages.ActivityInfoPage
             Modal.Show<PopUpReport>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
 
-        private void ShowSignUpPopUp()
+        private async Task ShowSignUpPopUpAsync()
         {
             if (currentUser is null)
             {
@@ -88,7 +89,9 @@ namespace VMS.Pages.ActivityInfoPage
             ModalParameters parameters = new();
             parameters.Add("ActivityId", Activity.Id);
 
-            Modal.Show<ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions());
+            await Modal.Show<ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            OnInitialized();
         }
 
         private void ShowRequireSignup()

@@ -215,43 +215,48 @@
   @media (min-width: 1200px) {
     .nav-mega-menu:hover .mega-menu {
       display: block; } }
-  .nav-mega-menu .mega-menu {
+  .nav-mega-menu .mega-menu-k {
     display: none;
-    width: 760px;
+    width: 660px;
     position: absolute;
-    bottom: -275px;
-    left: -250px;
+    bottom: -226px;
+    left: -225px;
     background: #FFFFFF;
     box-shadow: 5px 10px 40px 2px rgba(11, 40, 50, 0.15);
     z-index: 100;
-    padding: 15px 15px 15px 35px; }
-    .nav-mega-menu .mega-menu a {
+    padding: 30px;
+    border-radius: 10px; }
+    .nav-mega-menu .mega-menu-k .mega-menu-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+    .nav-mega-menu .mega-menu-k .mega-menu-a {
       display: block;
-      padding: 25px 0 25px 40px; }
-      .nav-mega-menu .mega-menu a:hover {
+      padding: 10px; }
+      .nav-mega-menu .mega-menu-k .mega-menu-a:hover {
         background: rgba(24, 160, 251, 0.1); }
-      .nav-mega-menu .mega-menu a span {
-        font-weight: 400;
-        font-size: 22px;
+      .nav-mega-menu .mega-menu-k .mega-menu-a span {
+        font-weight: 500;
+        font-size: 18px;
         letter-spacing: -0.015em;
         color: #000000; }
-      .nav-mega-menu .mega-menu a i {
+      .nav-mega-menu .mega-menu-k .mega-menu-a i {
         color: #85CEFF;
         margin-right: 20px;
         font-size: 32px;
         transform: translateY(-4px); }
-    .nav-mega-menu .mega-menu .mega-menu-detail h6 {
+    .nav-mega-menu .mega-menu-k .mega-menu-detail h6 {
       color: #64D72F;
       font-size: 20px;
       font-weight: 600; }
-    .nav-mega-menu .mega-menu .mega-menu-detail .mega-menu-img {
-      width: 70px;
-      height: 70px;
-      overflow: hidden;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 12px; }
-    .nav-mega-menu .mega-menu .mega-menu-detail p {
+    .nav-mega-menu .mega-menu-k .mega-menu-detail .mega-menu-image {
+      display: flex;
+      justify-content: center; }
+      .nav-mega-menu .mega-menu-k .mega-menu-detail .mega-menu-image img {
+        height: 100px; }
+    .nav-mega-menu .mega-menu-k .mega-menu-detail p {
       font-weight: 400;
       font-size: 14px;
+      line-height: 24px;
+      text-align: center;
       color: #515151; }

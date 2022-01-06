@@ -219,16 +219,9 @@ p {
     }
 
     @include on('md') {
-        font-size: 18px;
+        font-size: 18x;
         height: 36px;
         padding: 0 16px;
-    }
-
-    @include on('lg') {
-        font-size: 20px;
-        font-weight: 600;
-        height: 40px;
-        padding: 0 20px;
     }
 
     &:hover {
@@ -246,16 +239,10 @@ p {
     background-color: #fff;
 
     @include on('sm') {
-        font-size: 16px;
-    }
-
-    @include on('md') {
         font-size: 18px;
     }
 
     @include on('lg') {
-        font-size: 20px;
-        font-weight: 600;
         color: $grey-icon;
     }
 

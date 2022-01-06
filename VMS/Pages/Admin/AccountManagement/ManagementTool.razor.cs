@@ -75,22 +75,24 @@ namespace VMS.Pages.Admin.AccountManagement
             await ClearFilterAsync();
         }
 
-        private void ShowCreateAccount()
+        private async Task ShowCreateAccountAsync()
         {
             switch (PageRole)
             {
                 case Role.Admin:
-                    Modal.Show<CreateAccountAdminSp>("", BlazoredModalOptions.GetModalOptions());
+                    await Modal.Show<CreateAccountAdminSp>("", BlazoredModalOptions.GetModalOptions()).Result;
                     break;
 
                 case Role.Organization:
-                    Modal.Show<CreateAccountOrg>("", BlazoredModalOptions.GetModalOptions());
+                    await Modal.Show<CreateAccountOrg>("", BlazoredModalOptions.GetModalOptions()).Result;
                     break;
 
                 case Role.User:
-                    Modal.Show<CreateAccountUser>("", BlazoredModalOptions.GetModalOptions());
+                    await Modal.Show<CreateAccountUser>("", BlazoredModalOptions.GetModalOptions()).Result;
                     break;
             }
+
+            await ClearFilterAsync();
         }
     }
 }

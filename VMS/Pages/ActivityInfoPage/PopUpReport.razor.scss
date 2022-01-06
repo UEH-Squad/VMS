@@ -303,11 +303,23 @@
     border-radius: 4px;
     border: 1px solid $grey-icon;
     min-height: 36px;
-    padding: 0 50px;
+    padding: 0 12px;
+
+    @include on ('sm') {
+        padding: 0 15px;
+    }
+
+    @include on ('md') {
+        padding:0 30px;
+    }
+
+    @include on ('lg') {
+        padding: 0 50px;
+    }
 
     .my-icon-upload {
         font-size: 30px;
-        color: $grey-icon;
+        color: $grey-text;
         margin-right: 15px;
     }
 

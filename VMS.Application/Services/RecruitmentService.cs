@@ -72,6 +72,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     r => r.ActivityId == activityId,
                     GetConditionBySearchOrOrder(searchValue, isRated)
                 },
@@ -100,6 +101,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     x => x.ActivityId == activityId
                 },
                 Includes = r => r.Include(x => x.RecruitmentRatings)
@@ -247,6 +249,7 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     r => r.UserId == userId,
                     r => r.Activity.EndDate < DateTime.Now.Date,
                     GetConditionBySearchOrOrder(filter.SearchValue, null, false)
@@ -256,6 +259,7 @@ namespace VMS.Application.Services
             {
                 return new List<Expression<Func<Recruitment, bool>>>()
                 {
+                    r => !r.IsDeleted,
                     r => r.UserId == userId,
                     r => r.Activity.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     r => r.Activity.EndDate < DateTime.Now.Date,
@@ -264,6 +268,7 @@ namespace VMS.Application.Services
                 };
             }
         }
+
         public async Task<PaginatedList<RecruitmentViewModel>> GetAllRatingAsync(int activityId, FilterRecruitmentViewModel filter, int currentPage)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -301,6 +306,7 @@ namespace VMS.Application.Services
             {
                 return new()
                 {
+                    r => !r.IsDeleted,
                     r => r.ActivityId == activityId,
                     r => r.User.FullName.ToLower().Contains(filter.SearchValue.ToLower())
                         || r.Activity.Name.ToLower().Contains(filter.SearchValue.ToLower())
@@ -312,6 +318,7 @@ namespace VMS.Application.Services
             {
                 return new()
                 {
+                    r => !r.IsDeleted,
                     r => r.ActivityId == activityId,
                     r => !filter.IsOrgRating.HasValue || r.RecruitmentRatings.Any(x => x.IsOrgRating == filter.IsOrgRating.Value),
                     r => r.RecruitmentRatings.Any(x => filter.Ranks.Contains(x.Rank)) || filter.Ranks.Count == 0

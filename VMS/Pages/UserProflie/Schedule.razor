@@ -18,7 +18,11 @@
                                         <span class="material-icons schedule__act-icon me-3">
                                             public
                                         </span>
-                                        <span class="schedule__act-text">@item.Organizer.FullName</span>
+                                        <span class="schedule__act-text">
+                                            <a href="@Routes.OrgProfile/@item.OrgId">
+                                                @item.Organizer.FullName
+                                            </a>
+                                        </span>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <span class="material-icons schedule__act-icon me-3">

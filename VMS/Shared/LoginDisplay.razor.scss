@@ -60,6 +60,7 @@
             border-radius: 50%;
             display: block;
             margin: 0 auto;
+            object-fit: cover;
 
             @include on('xl') {
                 width: 50px;

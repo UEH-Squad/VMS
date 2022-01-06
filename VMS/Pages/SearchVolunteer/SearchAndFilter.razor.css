@@ -219,8 +219,7 @@ p {
       padding: 0 16px; } }
   @media (min-width: 992px) {
     .filter-btn {
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 18px;
       height: 40px;
       padding: 0 20px; } }
   .filter-btn:hover {
@@ -247,8 +246,7 @@ p {
       font-size: 18px; } }
   @media (min-width: 992px) {
     .clear-filter-btn {
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 18px;
       color: #B4B4B4; } }
   .clear-filter-btn:hover {
     text-decoration: underline; }

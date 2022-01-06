@@ -25,7 +25,8 @@
   ::deep .inside-the-border .icons {
     order: 2; }
   ::deep .inside-the-border .about-infor {
-    order: 1; }
+    order: 1;
+    margin-top: unset; }
 
 ::deep .title__content {
   margin-bottom: 0; }

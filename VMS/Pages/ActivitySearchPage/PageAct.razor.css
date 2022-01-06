@@ -25,7 +25,7 @@
   .act .act__item {
     background-color: #F3F3F5;
     padding: 10px 0px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 30px;
     height: 180px; }
     @media (min-width: 1200px) {
@@ -75,9 +75,12 @@
     font-size: 16px;
     font-weight: 400; }
   .act__content span {
-    font-size: 10px;
     font-weight: 400;
-    color: #0B588C; }
+    color: #0B588C;
+    font-size: 8px; }
+    @media (min-width: 576px) {
+      .act__content span {
+        font-size: 10px; } }
     @media (min-width: 1200px) {
       .act__content span {
         font-size: 14px; } }
@@ -100,7 +103,13 @@
     .act__content .my-icon:hover + .icon-tooltip {
       display: block; }
   .act__content .material-icons-outlined {
-    font-size: 20px; }
+    font-size: 16px; }
+    @media (min-width: 576px) {
+      .act__content .material-icons-outlined {
+        font-size: 18px; } }
+    @media (min-width: 1200px) {
+      .act__content .material-icons-outlined {
+        font-size: 20px; } }
 
 .act__signUp {
   display: flex; }
@@ -150,10 +159,22 @@
       display: -webkit-box; } }
 
 .div-volunteer .icon-check {
-  font-size: 14px;
-  color: #F14747; }
+  color: #64D72F;
+  font-size: 16px; }
+  @media (min-width: 576px) {
+    .div-volunteer .icon-check {
+      font-size: 18px; } }
+  @media (min-width: 1200px) {
+    .div-volunteer .icon-check {
+      font-size: 20px; } }
 
 .div-volunteer span {
   font-weight: 500;
-  font-size: 14px;
-  color: #F14747; }
+  color: #717171;
+  font-size: 8px; }
+  @media (min-width: 576px) {
+    .div-volunteer span {
+      font-size: 10px; } }
+  @media (min-width: 1200px) {
+    .div-volunteer span {
+      font-size: 14px; } }

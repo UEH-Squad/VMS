@@ -59,6 +59,10 @@
         font-size: 18px;
         padding: 30px 50px;
         width: 360px; } }
+    @media (min-width: 1200px) {
+      .min-overlay .report-success {
+        padding: 25px 40px;
+        width: 30%; } }
     .min-overlay .report-success .min-overlay--icon {
       position: absolute;
       top: 5px;
@@ -113,7 +117,8 @@
   @media (min-width: 768px) {
     .my-container {
       width: 600px;
-      padding: 30px 20px 30px 30px; } }
+      height: 481px;
+      padding: 30px; } }
   .my-container::-webkit-scrollbar {
     width: 10px; }
   .my-container::-webkit-scrollbar-thumb {
@@ -156,6 +161,12 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px; }
+  @media (min-width: 768px) {
+    .title-header {
+      margin-top: 50px; } }
+  @media (min-width: 992px) {
+    .title-header {
+      margin-top: 0px; } }
   .title-header .title-header__report {
     color: #64D72F; }
   .title-header .title-header__activity {

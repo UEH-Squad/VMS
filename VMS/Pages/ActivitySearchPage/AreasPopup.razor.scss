@@ -118,15 +118,25 @@
             background-color: #B4B4B4;
             border-radius: 50%;
             color: #fff;
+            transition: all 0.3s linear;
         }
 
         p {
             font-weight: 400;
             font-size: 16px;
+            transition: all 0.3s linear;
         }
 
-        &:hover > div{
-            background-color: $blue;
+        &:hover > div {
+            font-size: 24px;
+        }
+
+        &:hover > .area-item-title {
+            transform: translateY(-5px);
+        }
+
+        &:hover > .area-item-icon {
+            font-size: 30px;
         }
     }
 

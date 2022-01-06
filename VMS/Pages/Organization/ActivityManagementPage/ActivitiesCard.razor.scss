@@ -187,13 +187,29 @@
         }
 
         .material-icons-outlined {
-            font-size: 20px;
+            font-size: 16px;
+
+            @include on('sm') {
+                font-size: 18px;
+            }
+
+            @include on('xl') {
+                font-size: 20px;
+            }
         }
 
         span {
-            font-size: 14px;
+            font-size: 8px;
             font-weight: 400;
             color: $blue-bold;
+
+            @include on('sm') {
+                font-size: 10px;
+            }
+
+            @include on('xl') {
+                font-size: 14px;
+            }
         }
     }
 
@@ -484,4 +500,33 @@
 
 .lmtext-3 {
     -webkit-line-clamp: 3;
+}
+
+.div-volunteer {
+    .icon-check {
+        color: $green;
+        font-size: 16px;
+
+        @include on('sm') {
+            font-size: 18px;
+        }
+
+        @include on('xl') {
+            font-size: 20px;
+        }
+    }
+
+    span {
+        font-weight: 500;
+        color: $grey-close-btn;
+        font-size: 8px;
+
+        @include on('sm') {
+            font-size: 10px;
+        }
+
+        @include on('xl') {
+            font-size: 14px;
+        }
+    }
 }

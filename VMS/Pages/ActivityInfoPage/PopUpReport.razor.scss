@@ -64,10 +64,6 @@
 
         @include on('xl') {
             padding: 25px 40px;
-            width: 40%;
-        }
-
-        @include on('xxl') {
             width: 30%;
         }
 

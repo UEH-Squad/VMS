@@ -41,24 +41,8 @@ namespace VMS.Pages.Admin.ActivityInfo
 
         private async Task ShowApproveModalAsync()
         {
-            var approveResult = new ApprovalActivity.ApproveResult
-            {
-                IsApprove = false,
-                IsPoint = activity.IsPoint,
-                IsDay = activity.IsDay,
-                NumberOfDays = activity.NumberOfDays
-            };
-
-            var parameters = new ModalParameters();
-            parameters.Add("Result", approveResult);
-
-            await Modal.Show<ApprovalActivity>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
-
-            if (approveResult.IsApprove)
-            {
-                await ActivityService.ApproveActAsync(ActId, approveResult.IsPoint, approveResult.IsDay, approveResult.NumberOfDays);
-                await OnParametersSetAsync();
-            }
+            await ActivityService.ApproveActAsync(ActId, activity.IsPoint, activity.IsDay, activity.IsDay ? activity.NumberOfDays : 0);
+            await OnParametersSetAsync();
         }
 
         private async Task ShowDenyModalAsync()

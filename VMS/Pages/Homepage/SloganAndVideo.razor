@@ -5,20 +5,20 @@
         <div class="video-header__note__text">
             GoVirlunteer: Cộng đồng Tình nguyện trực tuyến Đại học UEH
         </div>
-    </div>@*
-    <img src="./img/Banner.png" alt="Alternate Text" class="w-100" />*@
-    <video class="video-header__source" loop muted></video> 
+    </div>
+    <img src="./img/Banner.jpg" alt="Alternate Text" class="w-100" />
+    @*<video class="video-header__source" loop muted></video>*@ 
 </div>
 
 @code {
     //Change your video url here
-    private string videoUrl = "https://rr1---sn-npoe7ner.c.drive.google.com/videoplayback?expire=1641462548&ei=1ILWYcTNJu6amvUP48yR4AI&ip=2402:800:6345:687f:49ec:e3c9:39be:60fd&cp=QVRJU0VfUVVSSVhPOnIyRnk5MVNkc3lpRVVkQU5SYkVEaE9vcmJSeDdqT2paeTBNQVotZDB2YUc&id=4c5f81dbfb977917&itag=22&source=webdrive&requiressl=yes&mh=Xq&mm=32&mn=sn-npoe7ner&ms=su&mv=m&mvi=1&pl=50&ttl=transient&susc=dr&driveid=1_kRv0lH5dOlTKmIfM7OFodi4ro-6w1w7&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=60.000&lmt=1641441849146436&mt=1641447861&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRAIgBxcpeyg6qRAw-LNgMaYed73WnEL_VKvbKCOafU3Sjz4CIDi_g6ZQbA2Og3j2rc_swxbFcoExUU_QYErUMNmd5pqZ&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRQIhAO0Fg62WzAW4KBqk6g3rTHCSJV8ZQHSbtB9oDm_4Mm_UAiBIzi9EVjcN6hNoPr9iAIki9NH7RuPOfMehHJBtEFmRMQ==&cpn=CzjsVHvqfwCHSSrT&c=WEB_EMBEDDED_PLAYER&cver=1.20220104.01.00";
+    //private string videoUrl = "https://player.vimeo.com/external/359344963.sd.mp4?s=95e2d6120bf8034a2f0d9c797f9b6a059e1deaf1&profile_id=165";
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JsRuntime.InvokeVoidAsync("vms.PlayVideo", videoUrl);
-        }
-    }
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        await JsRuntime.InvokeVoidAsync("vms.PlayVideo", videoUrl);
+    //    }
+    //}
 }

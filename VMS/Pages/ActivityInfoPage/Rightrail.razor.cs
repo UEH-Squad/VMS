@@ -16,6 +16,7 @@ namespace VMS.Pages.ActivityInfoPage
         readonly List<string> targets = new();
         User currentUser;
         bool isAlreadySignedUp;
+        string activityAddress;
 
         [CascadingParameter] public IModalService Modal { get; set; }
         
@@ -37,11 +38,12 @@ namespace VMS.Pages.ActivityInfoPage
         protected override void OnParametersSet()
         {
             string fullAddress = Activity.AddressPaths.Reverse().Aggregate("", (acc, next) => acc + ", " + next.Name);
-            Activity.Address = !string.IsNullOrEmpty(Activity.Address)
+            activityAddress = !string.IsNullOrEmpty(Activity.Address)
                 ? $"{Activity.Address}{fullAddress}"
                 : fullAddress.Trim(',', ' ');
             if (!string.IsNullOrEmpty(Activity.Targets))
             {
+                targets.Clear();
                 targets.AddRange(Activity.Targets?.Split('|'));
             }
         }

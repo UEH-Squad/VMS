@@ -211,7 +211,7 @@ namespace VMS.Application.Services
         {
             User user = FindUserById(userId);
 
-            if (IsInRole(user, Role.User))
+            if (user is not null && IsInRole(user, Role.User))
             {
                 UserViewModel userViewModel = _mapper.Map<UserViewModel>(user);
 

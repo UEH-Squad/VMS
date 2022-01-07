@@ -3,9 +3,12 @@
 
 <Spinner IsLoading="isLoading" />
 
-<Information Org="org" UserId="@UserId" HaveControl="haveControl" IsUsedForAdmin="@IsUsedForAdmin"></Information>
-<Vision Org="org"></Vision>
-<Mission Org="org"></Mission>
-<Act Title="đang diễn ra" HaveDecor="true" HaveControl="haveControl" HaveFav="haveFav" HaveLogin="haveLogin" Datas="actCurrent" IsUsedForAdmin="@IsUsedForAdmin"/>
-<Act Title="được yêu thích" HaveDecor="false" HaveFav="haveFav" HaveLogin="haveLogin" Datas="actFavorite" IsUsedForAdmin="@IsUsedForAdmin"/>
-<ActTookPlace ActEnded="actEnded"></ActTookPlace>
+@if (org is not null)
+{
+    <Information Org="org" UserId="@UserId" HaveControl="haveControl" IsUsedForAdmin="@IsUsedForAdmin" />
+    <Vision Org="org" />
+    <Mission Org="org" />
+    <Act Title="đang diễn ra" HaveDecor="true" HaveControl="haveControl" HaveFav="haveFav" HaveLogin="haveLogin" Datas="actCurrent" IsUsedForAdmin="@IsUsedForAdmin" />
+    <Act Title="được yêu thích" HaveDecor="false" HaveFav="haveFav" HaveLogin="haveLogin" Datas="actFavorite" IsUsedForAdmin="@IsUsedForAdmin" />
+    <ActTookPlace ActEnded="actEnded" />
+}

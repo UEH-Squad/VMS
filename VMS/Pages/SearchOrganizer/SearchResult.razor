@@ -1,6 +1,6 @@
 ﻿@inject IJSRuntime JsRuntime
 <section class="my-container mb-5">
-    <h3 class="result-heading mt-4 mb-3">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) @(IsOrgResult ? "tổ chức" : "tình nguyện viên")</span> ứng với kết quả tìm kiếm của bạn</h3>
+    <h3 class="result-heading mt-4 mb-3">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) @(IsUserResult ? "tình nguyện viên" : "tổ chức")</span> ứng với kết quả tìm kiếm của bạn</h3>
     @if (PagedResult != null && PagedResult.TotalItems != 0)
     {
         @foreach (var item in PagedResult.Items)

@@ -10,7 +10,7 @@
             <ul class="p-0">
                 @foreach (var faculty in faculties)
                 {
-                    <li style="@(chooseCount == 1 && !faculty.isChosen ? "cursor: default;":"") @(faculty.isChosen ? "color: #64D72F;":"")" @onclick="() => ChooseFacultyValue(faculty.Id)">@faculty.Name</li>
+                    <li style="@(choosenFaculties.Exists(a => a.Id == faculty.Id) ? "color: #64D72F;":"")" @onclick="() => ChangeState(faculty)">@faculty.Name</li>
                 }
             </ul>
         </div>
@@ -41,11 +41,11 @@
     {
         public string Name { get; set; }
         public int Id { get; set; }
-        public bool isChosen { get; set; } = false;
 
     }
 
     private List<FakeData> faculties = new();
+    private List<FakeData> choosenFaculties = new();
 
     protected override void OnInitialized()
     {
@@ -57,27 +57,17 @@
                 Id = i
             });
         }
+
+        choosenFaculties = new();
     }
 
-    private void ChooseFacultyValue(int id)
+    private void ChangeState(FakeData facultyChosen)
     {
-        var item = faculties.Find(x => x.Id == id);
-
-        if (item.isChosen)
-        {
-            item.isChosen = false;
-            chooseCount--;
-            filter.IsFilter = false;
-        }
-        else
-        {
-            if (chooseCount < 1)
-            {
-                item.isChosen = true;
-                chooseCount++;
-                filter.FacultyName = Convert.ToString(item.Name);
-                filter.IsFilter = true;
-            }
-        }
+        choosenFaculties.Clear();
+        choosenFaculties.Add(facultyChosen);
+        var item = faculties.Find(x => x.Id == facultyChosen.Id);
+        filter.FacultyName = Convert.ToString(item.Name);
+        filter.IsFilter = true;
+        return;
     }
 }

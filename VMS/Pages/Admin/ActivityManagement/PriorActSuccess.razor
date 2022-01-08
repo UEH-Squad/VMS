@@ -1,13 +1,13 @@
 ﻿<div class="pop-up">
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
         <div class="pop-up-container position-relative border-10">
-            <div @onclick="CloseModal" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
+            <div @onclick="CloseModalAsync" class="close-btn-s position-absolute d-flex justify-content-center align-items-center">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <div class="pop-up-content text-center my-4 mx-5">
-                <h3 class="mb-0 fw-medium">Bạn đã <span>ưu tiên hoạt động</span></h3>
+                <h3 class="mb-0 fw-medium">Bạn đã <span>@(IsPin?"Ưu tiên":"Gỡ ưu tiên") hoạt động</span></h3>
                 <h3 class="mb-0 fw-medium">thành công</h3>
             </div>
         </div>
@@ -15,11 +15,15 @@
 </div>
 
 @code {
+    [Parameter]
+    public bool IsPin{ get; set; }
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
+    private bool isSuccess;
 
-    private async Task CloseModal()
+    private async Task CloseModalAsync()
     {
-        await Modal.CloseAsync();
+        isSuccess = true;
+        await Modal.CloseAsync(ModalResult.Ok((bool)isSuccess));
     }
 }

@@ -5,13 +5,10 @@
 /*#region mixins */
 /*#endregion */
 .filter-container {
-  padding: 3% 3% 5% 3%;
-  border-radius: 10px;
   margin-bottom: 30px; }
   @media (min-width: 576px) {
     .filter-container {
-      border: 1px solid #C4C4C4;
-      margin-top: 40px;
+      margin-top: 10px;
       margin-bottom: 60px; } }
 
 .act-title {
@@ -57,7 +54,13 @@
     .act-filter__select-default {
       font-weight: 400;
       color: #B4B4B4;
-      margin-left: 5%; }
+      margin-left: 5%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      /* number of lines to show */
+      -webkit-box-orient: vertical; }
     .act-filter__select #act-filter__select-icon {
       pointer-events: none;
       font-size: 16px;
@@ -181,18 +184,18 @@
     @media (min-width: 1200px) {
       .act-filter__btn-container {
         margin-top: 0;
-        justify-content: space-between; } }
+        justify-content: space-around; } }
     @media (min-width: 1400px) {
       .act-filter__btn-container {
         padding: 0 12px;
         justify-content: space-around; } }
   .act-filter__btn {
-    padding: 3px 25px;
+    padding: 4px 16px;
     background-color: #64D72F;
     border: none;
     color: white;
     border-radius: 5px;
-    font-weight: 600; }
+    font-weight: 300; }
     .act-filter__btn.--filter:hover {
       background-color: #306C14; }
     .act-filter__btn.--del {

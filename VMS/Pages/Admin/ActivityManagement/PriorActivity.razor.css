@@ -50,7 +50,9 @@
   .pop-up__act {
     border-radius: 5px;
     border: solid 1px #C4C4C4;
-    font-weight: 600; }
+    font-weight: 600;
+    height: 102px;
+    width: 400px; }
     .pop-up__act__title {
       font-size: 14px;
       color: #18A0FB; }

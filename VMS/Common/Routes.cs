@@ -9,6 +9,7 @@
         public const string ActivityInfo = "/chi-tiet-hoat-dong";
         public const string Map = "/ban-do";
         public const string OrganizerSearch = "/don-vi-to-chuc";
+        public const string VolunteerSearch = "/tinh-nguyen-vien";
         public const string GloryAvenue = "/dai-lo-danh-vong";
 
         #endregion Main

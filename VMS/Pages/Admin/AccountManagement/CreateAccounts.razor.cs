@@ -14,6 +14,7 @@ namespace VMS.Pages.Admin.AccountManagement
 {
     public partial class CreateAccounts : ComponentBase
     {
+        private bool isLoading;
         private IBrowserFile file;
         private readonly string acceptPattern = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
@@ -25,6 +26,7 @@ namespace VMS.Pages.Admin.AccountManagement
         [Inject] private IExcelService ExcelService { get; set; }
         [Inject] private IWebHostEnvironment WebHostEnvironment { get; set; }
         [Inject] private IJSRuntime JSRuntime { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
         private async Task CloseModalAsync()
         {
@@ -45,7 +47,9 @@ namespace VMS.Pages.Admin.AccountManagement
 
         private async Task OnClickCreateAsync()
         {
+            isLoading = true;
             bool isSuccess = await ExcelService.AddListAccountsFromExcelFileAsync(file, Role);
+            isLoading = false;
 
             await CloseModalAsync();
 

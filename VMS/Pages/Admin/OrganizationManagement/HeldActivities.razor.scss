@@ -83,6 +83,14 @@
         i {
             color: $green;
         }
+
+        span {
+            color: $grey-text;
+        }
+
+        &__org a {
+            color: $grey-text;
+        }
     }
 
     .close-btn-s {

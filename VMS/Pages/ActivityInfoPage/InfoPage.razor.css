@@ -173,3 +173,44 @@
 
 ::deep ul {
   margin: 0 auto; }
+
+.managementTool__create .btn {
+  width: 125px;
+  background: #18A0FB;
+  padding: 6px 10px;
+  border-radius: 5px; }
+  .managementTool__create .btn:hover {
+    background-color: #0B588C; }
+  .managementTool__create .btn:focus {
+    box-shadow: none; }
+  .managementTool__create .btn::after {
+    color: #FFFFFF; }
+  .managementTool__create .btn .icon-add {
+    font-size: 24px;
+    color: #FFFFFF; }
+  .managementTool__create .btn span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-left: 5px;
+    padding-right: 5px; }
+
+.managementTool__create .icon-dots {
+  cursor: pointer; }
+  .managementTool__create .icon-dots::after {
+    display: none; }
+
+.managementTool__create .dropdown-menu {
+  width: 210px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  transform: translate(-85px, 52px) !important; }
+  .managementTool__create .dropdown-menu li, .managementTool__create .dropdown-menu a {
+    padding: 0 3px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #515151; }
+  .managementTool__create .dropdown-menu li:hover {
+    background: rgba(24, 160, 251, 0.1); }

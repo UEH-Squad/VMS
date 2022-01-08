@@ -1,13 +1,10 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 
 .filter-container {
-    padding: 3% 3% 5% 3%;
-    border-radius: 10px;
     margin-bottom: 30px;
 
     @include on('sm') {
-        border: 1px solid $grey-close-bg;
-        margin-top: 40px;
+        margin-top: 10px;
         margin-bottom: 60px;
     }
 }
@@ -67,6 +64,11 @@
             font-weight: 400;
             color: $grey-icon;
             margin-left: 5%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; /* number of lines to show */
+            -webkit-box-orient: vertical;
         }
 
         #act-filter__select-icon {
@@ -236,7 +238,7 @@
 
         @include on('xl') {
             margin-top: 0;
-            justify-content: space-between;
+            justify-content: space-around;
         }
 
         @include on('xxl') {
@@ -246,12 +248,12 @@
     }
 
     &__btn {
-        padding: 3px 25px;
+        padding: 4px 16px;
         background-color: $green;
         border: none;
         color: white;
         border-radius: 5px;
-        font-weight: 600;
+        font-weight: 300;
 
         &.--filter:hover {
             background-color: $green-bold;

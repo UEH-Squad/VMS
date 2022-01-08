@@ -236,3 +236,66 @@
         margin: 0 auto;
     }
 }
+.managementTool__create {
+    .btn {
+        width: 125px;
+        background: $blue;
+        padding: 6px 10px;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: $blue-bold;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &::after {
+            color: $white;
+        }
+
+        .icon-add {
+            font-size: 24px;
+            color: $white;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 16px;
+            color: $white;
+            margin-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+    .icon-dots {
+        cursor: pointer;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    .dropdown-menu {
+        width: 210px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 10px 12px;
+        transform: translate(-85px, 52px) !important;
+
+        li, a {
+            padding: 0 3px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #515151;
+        }
+
+        li:hover {
+            background: rgba(24, 160, 251, 0.1);
+        }
+
+
+    }
+}

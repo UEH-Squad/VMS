@@ -8,14 +8,17 @@
   background-color: rgba(196, 196, 196, 0.38); }
 
 .my-custom-popup {
-  width: 90%;
+  width: 75%;
   background-color: #FFFFFF;
   padding: 30px 40px;
   border-radius: 10px;
   text-align: center; }
+  @media (min-width: 576px) {
+    .my-custom-popup {
+      width: 65%; } }
   @media (min-width: 768px) {
     .my-custom-popup {
-      width: 30%; } }
+      width: 430px; } }
   .my-custom-popup .close-btn {
     position: absolute;
     top: 5px;
@@ -46,8 +49,14 @@
         background-color: #0B588C; }
 
 ::deep h3 {
-  font-size: 20px;
+  font-size: 16px;
   color: #64D72F;
   margin: 0; }
+  @media (min-width: 576px) {
+    ::deep h3 {
+      font-size: 18px; } }
+  @media (min-width: 992px) {
+    ::deep h3 {
+      font-size: 20px; } }
   ::deep h3 span {
     color: #18A0FB; }

@@ -7,6 +7,7 @@ using VMS.Application.ViewModels;
 using VMS.Application.Interfaces;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
+using VMS.Common;
 
 namespace VMS.Pages.UserProflie
 {
@@ -37,14 +38,7 @@ namespace VMS.Pages.UserProflie
                 var parameters = new ModalParameters();
                 parameters.Add("Avatar", avatar);
 
-                var options = new ModalOptions()
-                {
-                    HideCloseButton = true,
-                    DisableBackgroundCancel = true,
-                    UseCustomLayout = true,
-                };
-
-                var result = await Modal.Show<Notification>("", parameters, options).Result;
+                var result = await Modal.Show<Notification>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
                 if ((bool)result.Data)
                 {
@@ -64,14 +58,7 @@ namespace VMS.Pages.UserProflie
 
         private async Task ShowModalAppellationAsync()
         {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-
-            var result = await Modal.Show<Appellation>("", options).Result;
+            var result = await Modal.Show<Appellation>("", BlazoredModalOptions.GetModalOptions()).Result;
 
             if (!string.IsNullOrEmpty(Convert.ToString(result.Data)))
             {

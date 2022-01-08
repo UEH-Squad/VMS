@@ -2,6 +2,7 @@
 
 .bg-grey {
     background-color: $grey-icon !important;
+
     &:hover {
         background-color: $grey-icon !important;
         cursor: default !important;
@@ -30,12 +31,12 @@
     .act__item {
         background-color: $grey;
         padding: 10px 0px;
-        border-radius: 10px;
+        border-radius: 5px;
         margin-top: 30px;
-        min-height: 135px;
+        height: 180px;
 
         @include on('xl') {
-            min-height: 285px;
+            height: 310px;
         }
 
         img {
@@ -104,14 +105,17 @@
     }
 
     span {
-        font-size: 10px;
+        font-weight: 400;
+        color: $blue-bold;
+        font-size: 8px;
+
+        @include on('sm') {
+            font-size: 10px;
+        }
 
         @include on('xl') {
             font-size: 14px;
         }
-
-        font-weight: 400;
-        color: $blue-bold;
     }
 
     ::deep &-description > * {
@@ -140,8 +144,25 @@
         }
     }
 
+    .record-icon {
+        color: $green
+    }
+
+    .record-text {
+        color: $grey-text;
+        font-weight: 500;
+    }
+
     .material-icons-outlined {
-        font-size: 20px;
+        font-size: 16px;
+
+        @include on('sm') {
+            font-size: 18px;
+        }
+
+        @include on('xl') {
+            font-size: 20px;
+        }
     }
 }
 
@@ -203,5 +224,34 @@
 
     @include on('xl') {
         display: -webkit-box;
+    }
+}
+
+.div-volunteer {
+    .icon-check {
+        color: $green;
+        font-size: 16px;
+
+        @include on('sm') {
+            font-size: 18px;
+        }
+
+        @include on('xl') {
+            font-size: 20px;
+        }
+    }
+
+    span {
+        font-weight: 500;
+        color: $grey-close-btn;
+        font-size: 8px;
+
+        @include on('sm') {
+            font-size: 10px;
+        }
+
+        @include on('xl') {
+            font-size: 14px;
+        }
     }
 }

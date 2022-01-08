@@ -72,8 +72,10 @@ body {
 .about-infor {
     padding: 0 15px;
 
+
     @include on('lg') {
         padding: 0 30px;
+        margin-top: -70px;
     }
 
     .titles {
@@ -184,3 +186,33 @@ body {
     }
 }
 /* ------end report-----*/
+.recognize {
+    i {
+        color: $green;
+        margin-right: 12px;
+        font-size: 16px;
+
+        @include on('md')
+        {
+            font-size: 20px;
+        }
+
+        @include on('lg') {
+            font-size: 24px;
+        }
+    }
+
+    span {
+        font-weight: 500;
+        font-size: 12px;
+        color: #515151;
+
+        @include on('md') {
+            font-size: 14px;
+        }
+
+        @include on('lg') {
+            font-size: 16px;
+        }
+    }
+}

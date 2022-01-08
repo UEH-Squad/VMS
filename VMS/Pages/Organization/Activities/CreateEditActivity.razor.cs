@@ -72,7 +72,8 @@ namespace VMS.Pages.Organization.Activities
             isEditPage = true;
             CreateActivityViewModel activityFromParam = await ActivityService.GetCreateActivityViewModelAsync(ActivityId);
 
-            if (activityFromParam == null || !string.Equals(activityFromParam.OrgId, IdentityService.GetCurrentUserId()))
+            if (activityFromParam == null
+                || !string.Equals(activityFromParam.OrgId, UserId) && !IdentityService.IsInRole(UserId, Role.Admin))
             {
                 NavigationManager.NavigateTo("404");
                 return;
@@ -187,7 +188,7 @@ namespace VMS.Pages.Organization.Activities
             isLoading = true;
             try
             {
-                activity.OrgId = IdentityService.GetCurrentUserId();
+                activity.OrgId = string.IsNullOrEmpty(activity.OrgId) ? UserId : activity.OrgId;
                 RenderFragment title;
 
                 if (!isEditPage)

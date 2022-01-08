@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace VMS.Application.ViewModels
 {
@@ -13,6 +9,9 @@ namespace VMS.Application.ViewModels
         public int ActivityId { get; set; }
         public string ReportBy { get; set; }
         public bool IsReportUser { get; set; }
+
+        public bool IsRequest { get; set; }
+
         public List<string> Reasons { get; set; }
         public List<string> Images { get; set; }
     }

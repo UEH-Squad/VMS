@@ -15,9 +15,6 @@ namespace VMS.Pages.ActivitySearchPage
     {
         private SignUpActivityViewModel signupModel = new();
 
-        [Required]
-        private Check check;
-
         [Parameter]
         public int ActivityId { get; set; }
         [Parameter]
@@ -66,7 +63,7 @@ namespace VMS.Pages.ActivitySearchPage
                     ActivityId = ActivityId,
                     PhoneNumber = signupModel.PhoneNumber,
                     Desire = signupModel.Desire,
-                    IsCommit = (check == Check.Sure),
+                    IsCommit = signupModel.IsCommit,
                     EnrollTime = System.DateTime.Now,
                     CreatedBy = CurrentUser.Id,
                     CreatedDate = System.DateTime.Now
@@ -75,6 +72,11 @@ namespace VMS.Pages.ActivitySearchPage
             }
 
             await ShowReportSuccessAsync();
+        }
+
+        private void OnCommitChanged(bool value)
+        {
+            signupModel.IsCommit = value;
         }
     }
 }

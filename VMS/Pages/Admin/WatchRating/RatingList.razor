@@ -1,62 +1,75 @@
-﻿<div class="card">
-    <div class="card-member">
-        <div class="card-member_name">
-            <a href="@Routes.UserProfile" class="avatar">
-                <img src="./img/avatar sinh viên.png" alt="avatar">
-            </a>
-            <div class="name">
-                <a href="@Routes.UserProfile" class="name-member">Tên sinh viên</a>
-                <div class="name_stars">
-                    <span style="color: @Color1;" class="material-icons">star_rate</span>
-                    <span style="color: @Color2;" class="material-icons">star_rate</span>
-                    <span style="color: @Color3;" class="material-icons">star_rate</span>
-                    <span style="color: @Color4;" class="material-icons">star_rate</span>
-                    <span style="color: @Color5;" class="material-icons">star_rate</span>
+﻿@using VMS.Application.ViewModels
+@using VMS.GenericRepository
+<div class="card">
+    @if (!IsOrgRating.HasValue || IsOrgRating.HasValue && !IsOrgRating.Value)
+    {
+        <div class="card-member">
+            <div class="card-member_name">
+                <a href="@Routes.AdminVolunteerProfile/@Item.User.Id" class="avatar">
+                    <img src="@(string.IsNullOrEmpty(Item.User.Avatar) ? "img/Default/avatar.png" : Item.User.Avatar)" alt="avatar">
+                </a>
+                <div class="name">
+                    <a href="@Routes.AdminVolunteerProfile/@Item.User.Id" class="name-member">@Item.User.FullName</a>
+                    <div class="name_stars">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= Item.Rating)
+                            {
+                                <span style="color: @Color1;" class="material-icons">star_rate</span>
+                            }
+                            else
+                            {
+                                <span style="color: @Color2;" class="material-icons">star_rate</span>
+                            }
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-member_comment mt-2 mb-3">
-            <p class="comment-show">
-                @memberComment
-            </p>
-        </div>
-    </div>
-    <div class="card-organization">
-        <div class="card-organization_name">
-            <a href="@Routes.OrgProfile" class="avatar">
-                <img src="./img/avatar tổ chức.png" alt="avatar">
-            </a>
-            <div class="name">
-                <a href="@Routes.OrgProfile" class="name-organization">Tên tổ chức</a>
-                <div class="name_stars">
-                    <span style="color: @Color1;" class="material-icons">star_rate</span>
-                    <span style="color: @Color2;" class="material-icons">star_rate</span>
-                    <span style="color: @Color3;" class="material-icons">star_rate</span>
-                    <span style="color: @Color4;" class="material-icons">star_rate</span>
-                    <span style="color: @Color5;" class="material-icons">star_rate</span>
-                </div>
+            <div class="card-member_comment mt-2 mb-3">
+                <p class="comment-show">
+                    @Item.CommentByUser
+                </p>
             </div>
         </div>
-        <div class="card-organization_comment mt-2 mb-3">
-            <p class="comment-show">
-                @organizationComment
-            </p>
+    }
+    @if (!IsOrgRating.HasValue || IsOrgRating.HasValue && IsOrgRating.Value)
+    {
+        <div class="card-organization">
+            <div class="card-organization_name">
+                <a href="@Routes.AdminOrganizationProfile/@Item.Organizer.Id" class="avatar">
+                    <img src="@(string.IsNullOrEmpty(Item.Organizer.Avatar) ? "img/Default/avatar.png" : Item.Organizer.Avatar)" alt="avatar">
+                </a>
+                <div class="name">
+                    <a href="@Routes.AdminOrganizationProfile/@Item.Organizer.Id" class="name-organization">@Item.Organizer.FullName</a>
+                    <div class="name_stars">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= Item.RatingByOrg)
+                            {
+                                <span style="color: @Color1;" class="material-icons">star_rate</span>
+                            }
+                            else
+                            {
+                                <span style="color: @Color2;" class="material-icons">star_rate</span>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="card-organization_comment mt-2 mb-3">
+                <p class="comment-show">
+                    @Item.CommentByOrg
+                </p>
+            </div>
         </div>
-    </div>
+    }
 </div>
 
 @code {
     string Color1 = "#EDF131";
-    string Color2 = "#EDF131";
-    string Color3 = "#EDF131";
-    string Color4 = "#EDF131";
-    string Color5 = "#EDF131";
-    string Color6 = "#EDF131";
-    string Color7 = "#EDF131";
-    string Color8 = "#EDF131";
-    string Color9 = "#EDF131";
-    string Color10 = "#C4C4C4";
+    string Color2 = "#C4C4C4";
 
-    string memberComment = "Hoạt động gất bổ ích...............................................!! Mình gất vui khi tham gia hoạt động này .......!! Lỡ mình có nói dài thì show hết giúp mình nha !!.....................";
-    string organizationComment = "TNV gất năng nổ !!";
+    [Parameter] public bool? IsOrgRating { get; set; }
+
+    [Parameter] public RecruitmentViewModel Item { get; set; }
 }

@@ -63,26 +63,28 @@
     .filter-bar ::deep .ant-picker-clear {
       display: none; }
   .filter-bar .filter-btn {
+    font-weight: 400 !important;
     color: #fff;
     font-weight: bold;
     background-color: #64D72F;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     height: 40px;
-    padding: 0 20px; }
+    padding: 0 16px; }
     .filter-bar .filter-btn:hover {
       background-color: #306C14;
       opacity: 78%; }
   .filter-bar .clear-filter-btn {
+    font-weight: 400 !important;
     color: #fff;
     font-weight: bold;
     background-color: #64D72F;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     width: fit-content;
     color: #B4B4B4;
     background-color: #fff; }

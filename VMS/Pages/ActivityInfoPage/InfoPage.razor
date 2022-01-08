@@ -16,7 +16,24 @@
                     <p class="postdate m-0 ms-2">
                         Ngày đăng: @activity.CreatedDate
                     </p>
-
+                    <AuthorizeView Roles="@($"{Role.Admin}")">
+                        <div class="managementTool__create dropdown mb-0">
+                            <span class="material-icons-outlined dropdown-toggle icon-dots" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                more_vert
+                            </span>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li @onclick="ShowEditRequirementAsync" class="mb-2">Yêu cầu chỉnh sửa</li>
+                                <li><a href="@Routes.EditActivity/@activity.Id">Chỉnh sửa hoạt động</a></li>
+                            </ul>
+                        </div>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="@($"{Role.Organization}")">
+                        <div class="managementTool__create dropdown mb-3">
+                            <button @onclick="() => OnClickNavigateToEditActivty(activity.Id)" class="btn d-flex align-items-center">
+                                <span>Chỉnh sửa</span>
+                            </button>
+                        </div>
+                    </AuthorizeView>
                     <AuthorizeView Roles="@($"{Role.User}")">
                         <button @onclick="@(() => HandleFavorite(activity.Id))" class="@(isFav ? "heart-button2" : "heart-button1")">
                             <span class="material-icons"><span class="heart-icon">@(isFav ? "favorite" : "favorite_border")</span></span>

@@ -5,14 +5,18 @@
 }
 
 .my-custom-popup {
-    width: 90%;
+    width: 75%;
     background-color: $white;
     padding: 30px 40px;
     border-radius: 10px;
     text-align: center;
 
+    @include on ('sm') {
+        width: 65%;
+    }
+
     @include on('md') {
-        width: 30%;
+        width: 430px;
     }
 
     .close-btn {
@@ -58,9 +62,18 @@
 
 ::deep {
     h3 {
-        font-size: 20px;
+        font-size: 16px;
         color: $green;
-       margin: 0;
+        margin: 0;
+
+        @include on ('sm') {
+            font-size: 18px;
+        }
+
+        @include on ('lg') {
+            font-size: 20px;
+        }
+
         span {
             color: $blue;
         }

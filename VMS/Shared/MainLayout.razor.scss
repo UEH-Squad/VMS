@@ -3,7 +3,7 @@
 .main-layout {
     margin-top: 65px;
 
-    @include on('lg') {
+    @include on('xl') {
         margin-top: 80px;
     }
 }

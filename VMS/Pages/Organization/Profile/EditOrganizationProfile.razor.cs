@@ -40,20 +40,21 @@ namespace VMS.Pages.Organization.Profile
         [Parameter]
         public bool IsUsedForAdmin { get; set; }
 
-        private int width;
-        private string classWidth = "";
-        private string OrgId;
+        [Parameter] public string UserId { get; set; }
+
+        private string orgId;
         private int count;
         private bool isErrorMessageShown = false;
         private IBrowserFile uploadFile;
         private IList<AreaViewModel> choosenAreas = new List<AreaViewModel>();
         private CreateOrgProfileViewModel org = new();
-        [CascadingParameter] public string UserId { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        [CascadingParameter] public string CurrentUserId { get; set; }
+
+        protected override async Task OnParametersSetAsync()
         {
-            OrgId = IdentityService.GetCurrentUserId();
-            org = await UserService.GetOrgProfileViewModelAsync(OrgId);
+            orgId = string.IsNullOrEmpty(UserId) ? IdentityService.GetCurrentUserId() : UserId;
+            org = await UserService.GetOrgProfileViewModelAsync(orgId);
             choosenAreas = org.Areas;
         }
 
@@ -109,16 +110,18 @@ namespace VMS.Pages.Organization.Profile
                     if (uploadFile is not null)
                     {
                         string oldImageName = org.Banner;
-                        org.Banner = await UploadService.SaveImageAsync(uploadFile, OrgId, ImgFolder.Banner);
+                        org.Banner = await UploadService.SaveImageAsync(uploadFile, orgId, ImgFolder.Banner);
                         UploadService.RemoveImage(oldImageName);
                     }
 
-                    await UserService.UpdateOrgProfile(org, OrgId);
+                    await UserService.UpdateOrgProfile(org, orgId);
 
                     ModalParameters modalParams = new();
                     modalParams.Add("Title", succeededCreateTitle);
                     await Modal.Show<Activities.NotificationPopup>("", modalParams, BlazoredModalOptions.GetModalOptions()).Result;
-                    NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);
+
+                    string redirectUrl = string.IsNullOrEmpty(UserId) ? $"{Routes.OrgProfile}/{org.Id}" : $"{Routes.AdminOrganizationProfile}/{org.Id}";
+                    NavigationManager.NavigateTo(redirectUrl, true);
                 }
                 catch (Exception ex)
                 {

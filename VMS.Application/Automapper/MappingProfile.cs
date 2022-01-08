@@ -79,6 +79,7 @@ namespace VMS.Application.Automapper
             MapAccountToUserAndBack();
 
             CreateMap<PaginatedList<User>, PaginatedList<UserViewModel>>();
+            CreateMap<EditRequirementViewModel, Feedback>();
         }
 
         private void MapReportToFeedback()
@@ -112,9 +113,6 @@ namespace VMS.Application.Automapper
             CreateMap<User, AccountViewModel>()
                 .ForMember(x => x.Faculty, opt => opt.MapFrom(src => src.FacultyId.HasValue ? src.Faculty.Name : ""));
             CreateMap<AccountViewModel, User>()
-                .ForMember(x => x.PasswordHash, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.Password)
-                                                                          ? hasher.HashPassword(null, src.Password)
-                                                                          : src.Password))
                 .ForMember(x => x.NormalizedEmail, opt => opt.MapFrom(src => src.Email.ToUpper()))
                 .ForMember(x => x.NormalizedUserName, opt => opt.MapFrom(src => src.UserName.ToUpper()));
         }

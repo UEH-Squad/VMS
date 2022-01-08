@@ -127,6 +127,13 @@
   .act__content .act-footer {
     bottom: 10px;
     right: 16px; }
+    .act__content .act-footer .btn-deny {
+      background: #D8D8D8;
+      border-radius: 5px;
+      color: #707070;
+      font-weight: 600; }
+      .act__content .act-footer .btn-deny:hover {
+        color: #707070; }
     .act__content .act-footer__warn {
       color: #E10B0B; }
     .act__content .act-footer__btn button, .act__content .act-footer__btn a {
@@ -153,3 +160,12 @@
       .act__content .act-footer__btn--blue:hover {
         color: #FFFFFF;
         background-color: #0B588C; }
+
+.div-volunteer .icon-check {
+  font-size: 17px;
+  color: #64D72F; }
+
+.div-volunteer span {
+  font-weight: 500;
+  font-size: 14px;
+  color: #717171; }

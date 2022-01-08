@@ -31,40 +31,40 @@
 
     .report-success {
         position: absolute;
-        padding: 10px;
+        padding: 15px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
         z-index: 103;
         background-color: white;
         border-radius: 10px;
-        font-size: 10px;
         font-weight: 500;
-        letter-spacing: 1px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 60%;
+        font-size: 12px;
+        width: 210px;
 
         @include on('sm') {
-            font-size: 16px;
-            width: 45%;
+            font-size: 14px;
+            width: 230px;
         }
 
         @include on('md') {
-            padding: 25px 35px;
-            font-size: 24px;
-            width: 60%;
+            font-size: 16px;
+            width: 300px;
+            padding: 30px 15px;
         }
 
         @include on('lg') {
-            padding: 30px 49px;
-            font-size: 24px;
-            width: 45%;
+            font-size: 18px;
+            padding: 30px 50px;
+            width: 360px;
         }
 
         @include on('xl') {
-            padding: 40px 75px;
+            padding: 25px 40px;
+            width: 30%;
         }
 
         .min-overlay--icon {
@@ -116,7 +116,8 @@
 }
 
 .my-container {
-    width: 100%;
+    width: 95%;
+    max-height: 80%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -125,24 +126,17 @@
     background-color: white;
     border-radius: 10px;
     padding: 16px;
+    padding-right: 6px;
     overflow-y: scroll;
 
     @include on('sm') {
-        width: 100%;
-        height: 100%;
-        padding: 0 30px 24px;
+        width: 500px;
     }
-
-    @include on('md') {
-        width: 70%;
-        height: 470px;
-        padding: 0 30px;
-    }
-
-    @include on('lg') {
+      
+    @include on ('md') {
         width: 600px;
-        height: 550px;
-        padding: 50px;
+        height: 481px;
+        padding: 30px;
     }
 
     &::-webkit-scrollbar {
@@ -157,8 +151,8 @@
 
     .icon-close-popup {
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 15px;
+        right: 10px;
         width: 33px;
         height: 33px;
         border-radius: 50%;
@@ -168,11 +162,14 @@
 
         @include on('md') {
             top: 50px;
+            right: 20px;
         }
 
         @include on('lg') {
             top: 20px;
+            right: 20px;
         }
+
         .material-icons {
             margin: auto;
             font-size: 22px;
@@ -199,7 +196,6 @@
     font-weight: 500;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
     margin-bottom: 20px;
 
     @include on('md') {
@@ -207,7 +203,7 @@
     }
 
     @include on('lg') {
-        margin-top: 30px;
+        margin-top: 0px;
     }
 
     .title-header__report {
@@ -223,16 +219,20 @@
 /*-----reporting reason------*/
 .dropdown .my-btn {
     width: 100%;
-    border: 1px solid $grey-text;
+    border: 1px solid $grey-icon;
     height: 36px;
 
     .my-icon-dropdown {
         float: right;
     }
+
+    &:focus {
+        border: 1px solid #86b7fe;
+    }
 }
 
 .dropdown-menu {
-    width: 101%;
+    width: 100%;
     box-shadow: 5px 5px 10px 10px #dee2e687;
     left: 50%;
     transform: translateX(-50%);
@@ -240,6 +240,7 @@
 
     .dropdown-item {
         display: flex;
+        align-items: center;
         margin: 5px 0;
         white-space: unset;
 
@@ -250,6 +251,13 @@
         label {
             width: 100%;
         }
+    }
+
+
+    dropdown-item.active, .dropdown-item:active {
+        color: $grey-text;
+        text-decoration: none;
+        background-color: white;
     }
 }
 
@@ -262,7 +270,7 @@
 
 /*-----report description-----*/
 ::deep .form-control {
-    border: 1px solid;
+    border: 1px solid $grey-icon;
     height: 100px;
     overflow-y: scroll;
 
@@ -283,15 +291,31 @@
         border-radius: 20px;
         border: 2px solid white;
     }
+
+    &:focus {
+        border: 1px solid #86b7fe;
+    }
 }
 /*-----end report description-----*/
 
 /*---attached proof-----*/
 .add-file {
     border-radius: 4px;
-    border: 1px solid $grey-text;
+    border: 1px solid $grey-icon;
     min-height: 36px;
-    padding: 0 50px;
+    padding: 0 12px;
+
+    @include on ('sm') {
+        padding: 0 15px;
+    }
+
+    @include on ('md') {
+        padding:0 30px;
+    }
+
+    @include on ('lg') {
+        padding: 0 50px;
+    }
 
     .my-icon-upload {
         font-size: 30px;
@@ -322,6 +346,15 @@
 
     &::-webkit-file-upload-button {
         display: none;
+    }
+
+    p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 1;
     }
 }
 /*----end attached proof----*/

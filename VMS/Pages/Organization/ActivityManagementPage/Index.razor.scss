@@ -7,13 +7,72 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
-    font-size: 48px;
+    font-size: 18px;
     text-align: center;
     color: $green;
 
+    @include on('sm') {
+        font-size: 24px;
+    }
+
+    @include on('md') {
+        font-size: 30px;
+    }
+
+    @include on('lg') {
+        font-size: 36px;
+    }
+
+    @include on('xxl') {
+        font-size: 42px;
+    }
+
+    @include on('xxl') {
+        font-size: 48px;
+    }
+
     span {
-        color: $blue-less;
+        color: $blue;
     }
 }
 
+.search-box {
+    width: 100%;
 
+    @include on('lg') {
+        width: 50%;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column-reverse;
+
+    @include on('lg') {
+        flex-direction: row;
+    }
+
+    .activities {
+        width: 100%;
+
+        @include on('lg') {
+            width: 75%;
+        }
+    }
+
+    .filter-1 {
+        width: 100%;
+
+        @include on('lg') {
+            width: 8.33%;
+        }
+    }
+
+    .filter-2 {
+        width: 100%;
+
+        @include on('lg') {
+            width: 16.67%;
+        }
+    }
+}

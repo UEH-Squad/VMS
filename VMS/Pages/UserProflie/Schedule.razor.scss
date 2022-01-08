@@ -4,6 +4,10 @@
     .schedule {
         display: flex;
         flex-direction: column;
+
+        @include on('lg') {
+            flex-direction: row;
+        }
     }
 }
 
@@ -77,26 +81,30 @@
 
 .schedule__act {
     width: 100%;
+    margin-top: 50px;
 
     @include on('lg') {
         width: 50%;
+        margin-top: unset;
     }
 
     h3 {
         font-size: 18px;
         font-weight: 600;
         color: $green;
+        margin-bottom: 20px !important;
 
         @include on('lg') {
+            font-size: 24px;
+            margin-bottom: 0;
+        }
+
+        @include on('xxl') {
             font-size: 30px;
         }
 
         span {
             color: $blue;
-
-            @include on('lg') {
-                font-size: 30px;
-            }
         }
     }
 
@@ -155,6 +163,10 @@
 
         @include on('lg') {
             font-size: 16px;
+        }
+
+        a {
+            color: $grey-text;
         }
     }
 

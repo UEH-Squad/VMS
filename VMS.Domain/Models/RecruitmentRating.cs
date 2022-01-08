@@ -7,12 +7,9 @@ namespace VMS.Domain.Models
         public int RecruitmentId { get; set; }
         public string Comment { get; set; }
         public double Rank { get; set; }
-        public bool IsReport { get; set; }
         public string ReportContent { get; set; }
         public bool IsOrgRating { get; set; }
 
         public virtual Recruitment Recruitment { get; set; }
-        public virtual ICollection<ReasonReport> ReasonReports { get; set; }
-        public virtual ICollection<ImageReport> ImageReports { get; set; }
     }
 }

@@ -29,7 +29,7 @@
         width: 45%; } }
     @media (min-width: 1400px) {
       .my-notification .notification__content {
-        width: 35%; } }
+        width: 30%; } }
   .my-notification .notification__img {
     overflow: hidden; }
     .my-notification .notification__img img {
@@ -40,8 +40,8 @@
       object-position: center; }
       @media (min-width: 1400px) {
         .my-notification .notification__img img {
-          width: 250px;
-          height: 250px; } }
+          width: 216px;
+          height: 216px; } }
   .my-notification .notification__btn {
     border-top: 1px solid #707070; }
   .my-notification .btn__cancel {

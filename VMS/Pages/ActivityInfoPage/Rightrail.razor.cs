@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VMS.Application.ViewModels;
 using VMS.Common;
 using VMS.Domain.Models;
@@ -15,6 +16,7 @@ namespace VMS.Pages.ActivityInfoPage
         readonly List<string> targets = new();
         User currentUser;
         bool isAlreadySignedUp;
+        string activityAddress;
 
         [CascadingParameter] public IModalService Modal { get; set; }
         
@@ -36,11 +38,12 @@ namespace VMS.Pages.ActivityInfoPage
         protected override void OnParametersSet()
         {
             string fullAddress = Activity.AddressPaths.Reverse().Aggregate("", (acc, next) => acc + ", " + next.Name);
-            Activity.Address = !string.IsNullOrEmpty(Activity.Address)
+            activityAddress = !string.IsNullOrEmpty(Activity.Address)
                 ? $"{Activity.Address}{fullAddress}"
                 : fullAddress.Trim(',', ' ');
             if (!string.IsNullOrEmpty(Activity.Targets))
             {
+                targets.Clear();
                 targets.AddRange(Activity.Targets?.Split('|'));
             }
         }
@@ -72,7 +75,7 @@ namespace VMS.Pages.ActivityInfoPage
             Modal.Show<PopUpReport>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
 
-        private void ShowSignUpPopUp()
+        private async Task ShowSignUpPopUpAsync()
         {
             if (currentUser is null)
             {
@@ -88,7 +91,9 @@ namespace VMS.Pages.ActivityInfoPage
             ModalParameters parameters = new();
             parameters.Add("ActivityId", Activity.Id);
 
-            Modal.Show<ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions());
+            await Modal.Show<ActivitySearchPage.Signup>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            OnInitialized();
         }
 
         private void ShowRequireSignup()

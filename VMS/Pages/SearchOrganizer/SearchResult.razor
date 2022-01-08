@@ -1,19 +1,22 @@
 ﻿@inject IJSRuntime JsRuntime
 <section class="my-container mb-5">
-    <h3 class="result-heading mt-4 mb-3">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) tổ chức</span> ứng với kết quả tìm kiếm của bạn</h3>
+    <h3 class="result-heading mt-4 mb-3">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) @(IsUserResult ? "tình nguyện viên" : "tổ chức")</span> ứng với kết quả tìm kiếm của bạn</h3>
     @if (PagedResult != null && PagedResult.TotalItems != 0)
     {
         @foreach (var item in PagedResult.Items)
         {
             <div class="org-item d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img class="org-item__img me-2" src="@item.Avatar" alt="@item.FullName" />
+                    <img class="org-item__img me-2" src="@(string.IsNullOrEmpty(item.Avatar) ? "img/Default/avatar.png" : item.Avatar)" alt="@item.FullName" />
                     <div class="org-item__name-group ms-4">
-                        <a class="org-item__name lmtext-2" href="@(IsUserResult ? Routes.AdminVolunteerProfile : (IsOrgResult ? Routes.AdminOrganizationProfile : Routes.OrgProfile))/@item.Id">@item.FullName</a>
+                        <a class="org-item__name lmtext-2"
+                            href="@(IsUsedForAdmin
+                            ? (IsUserResult ? Routes.AdminVolunteerProfile : Routes.AdminOrganizationProfile)
+                            : (IsUserResult ? Routes.UserProfile : Routes.OrgProfile))/@item.Id">@item.FullName</a>
                         <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Course</p>
                         <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">
                             Đã tổ chức <span style="@(IsUsedForAdmin ? "cursor: pointer;" : "")"
-                                     @onclick=" (()=> ShowHeldActivitiesAsync())">@item.Activities.Count</span> hoạt động
+                                     @onclick="(() => ShowHeldActivitiesAsync(item.Id))">@item.Activities.Count</span> hoạt động
                         </p>
                         <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course - Lớp @item.Class</p>
                     </div>

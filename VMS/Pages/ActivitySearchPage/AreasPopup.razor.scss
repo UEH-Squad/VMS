@@ -12,7 +12,7 @@
 }
 
 .my-custom-popup {
-    width: 90%;
+    width: 280px;
     background-color: #fff;
     border-radius: 10px;
     z-index: 999;
@@ -115,19 +115,28 @@
         div {
             width: 40px;
             height: 40px;
-            background-color: $blue;
+            background-color: #B4B4B4;
             border-radius: 50%;
             color: #fff;
+            transition: all 0.3s linear;
         }
 
         p {
             font-weight: 400;
             font-size: 16px;
+            transition: all 0.3s linear;
         }
 
-        span:hover ~ p,
-        p:hover {
-           /* color: $green;*/
+        &:hover > div {
+            font-size: 24px;
+        }
+
+        &:hover > .area-item-title {
+            transform: translateY(-5px);
+        }
+
+        &:hover > .area-item-icon {
+            font-size: 30px;
         }
     }
 

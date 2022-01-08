@@ -9,22 +9,90 @@
         </div>
         <div class="d-flex my-navbar__brand">
             <NavLink href="@Routes.ActivitySearch" class="my-navbar__brand-item">
-                <img src="img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
+                <img src="img/GoVirlunteer (1).png" alt="Logo GoVirlunteer" class="brand__govirlunteer" />
             </NavLink>
         </div>
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
             <ul class="navbar-nav navbar-list mb-4 mb-xl-0 fw-bold my-collapse__list">
-                <li class="nav-item">
-                    <NavLink href="@Routes.HomePage" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-2 mx-xxl-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
+                <li class="nav-item nav-item-haverHover">
+                    <NavLink href="@Routes.HomePage" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
                 </li>
-                <li class="nav-item">
-                    <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-2 mx-xxl-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
+                <li class="nav-item nav-item-haverHover">
+                    <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
                 </li>
-                <li class="nav-item">
-                    <NavLink href="@Routes.OrganizerSearch" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đơn vị tổ chức</NavLink>
+                <li class="nav-item  nav-mega-menu @(isShowMenu ? "" : "nav-item-haverHover")">
+                    <NavLink @onclick="ShowMenu" class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link d-flex align-items-center " >
+                        <span>Cộng đồng</span>
+                        <i class="material-icons-outlined icon-down-up ms-1">
+                            @(isShowMenu ? "expand_less" : "expand_more")
+                        </i>
+                    </NavLink>
+                    <div class="mega-menu mega-menu-k">
+                        <div class="row">
+                            <div class="col-6 mega-menu-col">
+                                <a href="@Routes.OrganizerSearch" @onmousemove="(() => ShowDetail(1))" class="d-flex align-items-center mega-menu-a">
+                                    <i class="material-icons"> person </i>
+                                    <span>Đơn vị tổ chức</span>
+                                </a>
+                                <a href="@Routes.VolunteerSearch" @onmousemove="(() => ShowDetail(2))" class="d-flex align-items-center mega-menu-a">
+                                    <i class="material-icons-outlined"> people </i>
+                                    <span>Tình nguyện viên</span>
+                                </a>
+                                <a @onmousemove="(() => ShowDetail(3))" class="d-flex align-items-center mega-menu-a">
+                                    <i class="material-icons"> local_fire_department </i>
+                                    <span>Đại lộ danh vọng</span>
+                                </a>
+                            </div>
+
+                            <div class="col-6 mega-menu-detail mega-menu-detail-org @(isShowDetailOrg ? "d-block" :"d-none")">
+                                <div class="mega-menu-image">
+                                    <img src="./img/Cộng đồng-DVTC.png" class="" />
+                                </div>
+                                <p class="mb-0">
+                                    Những đơn vị tổ chức uy tín hứa hẹn mang đến cho sinh viên không gian tình nguyện bổ ích và chất lượng.
+                                </p>
+                            </div>
+
+                            <div class="col-6 mega-menu-detail mega-menu-detail-org @(isShowDetailUser ? "d-block" :"d-none")">
+                                <div class="mega-menu-image">
+                                    <img src="./img/Cộng đồng-TNV.png" class="" />
+                                </div>
+                                <p class="mb-0">
+                                    Các tình nguyện viên là những sinh viên tài năng, nhiệt huyết, hứa hẹn lan tỏa giá trị tích cực đến cộng đồng.
+                                </p>
+                            </div>
+
+                            <div class="col-6 mega-menu-detail mega-menu-detail-org @(isShowDetailRank ? "d-block" :"d-none")">
+                                <div class="mega-menu-image">
+                                    <img src="./img/Cộng đồng-DLDV.png"/>
+                                </div>
+                                <p class="mb-0">Đại lộ danh vọng là không gian vinh danh những cá nhân và tập thể có thành tích tình nguyện xuất sắc.</p>
+                            </div>
+                        </div>                      
+                    </div>
+                    <div class="menuCommunity @(isShowMenu ? "d-block" : "d-none")">
+                        <a href="@Routes.OrganizerSearch" class="d-flex align-items-center mega-menu-li-org">
+                            <i class="material-icons">
+                                person
+                            </i>
+                            <span>Đơn vị tổ chức</span>
+                        </a>
+                        <a href="@Routes.VolunteerSearch" class="d-flex align-items-center mega-menu-li-user">
+                            <i class="material-icons-outlined">
+                                people
+                            </i>
+                            <span>Tình nguyện viên</span>
+                        </a>
+                        <a href="@Routes.OrganizerSearch" class="d-flex align-items-center mega-menu-li-rank">
+                            <i class="material-icons">
+                                local_fire_department
+                            </i>
+                            <span>Đại lộ danh vọng</span>
+                        </a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <NavLink href="@Routes.GloryAvenue" class="nav-link text-decoration-none mx-2 mx-xxl-4 py-2 py-lg-3 position-relative my-collapse__list__link">Đại lộ danh vọng</NavLink>
+                <li class="nav-item nav-item-haverHover">
+                    <NavLink  class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
                 </li>
             </ul>
         </div>
@@ -42,4 +110,39 @@
 
     [Parameter]
     public bool IsFixedTop { get; set; }
+
+    bool isShowDetailOrg = true;
+    bool isShowDetailUser = false;
+    bool isShowDetailRank = false;
+    bool isShowMenu = false;
+
+    private void ShowMenu()
+    {
+        isShowMenu = !isShowMenu;
+    }
+
+    private void ShowDetail(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                isShowDetailOrg = false;
+                isShowDetailUser = false;
+                isShowDetailRank = false;
+                isShowDetailOrg = true;
+                break;
+            case 2:
+                isShowDetailOrg = false;
+                isShowDetailUser = false;
+                isShowDetailRank = false;
+                isShowDetailUser = true;
+                break;
+            case 3:
+                isShowDetailOrg = false;
+                isShowDetailUser = false;
+                isShowDetailRank = false;
+                isShowDetailRank = true;
+                break;
+        }
+    }
 }

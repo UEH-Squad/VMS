@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VMS</title>
+    <title>GoVirlunteer - @ViewData["Title"]</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha512-F7WyTLiiiPqvu2pGumDR15med0MDkUIo5VTVyyfECR5DZmCnDhti9q5VID02ItWjq6fvDfMaBaDl2J3WdL1uxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/IdentityCss/Layout.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="./img/apple-touch-icon.png"/>
     @RenderSection("Styles", required: false)
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -23,7 +24,7 @@
         <div class="container-lg p-0 my-navbar-container">
             <div class="d-flex my-navbar__brand">
                 <a href="@Routes.ActivitySearch" class="my-navbar__brand-item">
-                    <img src="~/img/GoVirlunteer.png" alt="Go Volunteer logo" class="brand__govirlunteer" />
+                    <img src="~/img/GoVirlunteer (1).png" alt="Logo GoVirlunteer" class="brand__govirlunteer" />
                 </a>
             </div>
            
@@ -55,47 +56,48 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <div class="row ">
-                <div class="footer__logo col-6 col-xl-4">
-                    <img src="~/img/GoVirlunteer (1).png" alt="" class="footer__logo-govirlunteer">
+
+        <div class="container my-container">
+            <div class="row kha-row">
+                <div class="footer__logo col-7 col-xl-4">
+                    <img src="img/GoVirlunteer (1).png" alt="Logo GoVirlunteer" class="footer__logo-govirlunteer">
                     <div class="footer__logo-ueh-hsv">
-                        <img src="img/UEH-logo-2.png" alt="" class="footer__logo-ueh">
-                        <img src="img/hsv.png" alt="" class="footer__logo-hsv">
+                        <img src="img/UEH-logo-2.png" alt="Logo UEH" class="footer__logo-ueh">
+                        <img src="img/hsv.png" alt="Logo Hội sinh viên" class="footer__logo-hsv">
                     </div>
                     <p>
-                        Trang web được phát triển bởi Hội sinh viên <br /> Trường Đại học Kinh tế TP. HCM
+                        <a href="https://docs.google.com/document/d/1Vxw-AaBldxJ7fdoETebtKYIHueTin7JyUX2kY5UhMY4" target="_blank" style="color:#515151; text-decoration:none">Trang web được phát triển bởi Hội sinh viên UEH</a>
                     </p>
                 </div>
                 <div class="footer__contact d-none d-xl-block col-6">
                     <div class="d-flex justify-content-center">
                         <div>
-                            <h6 class="contact__name">Văn phòng Hội sinh viên Trường Đại học Kinh tế TP.HCM</h6>
-                            <h6>279 Nguyễn Tri Phương, Quận 10, TP. Hồ Chí Minh</h6>
-                            <h6>Điện thoại: 19001001</h6>
-                            <h6>Email: hihi@gmail.com</h6>
-                            <h6><a href="" class="contact-items contact__contribute">Liên hệ/Đóng góp</a></h6>
+                            <h6 class="contact__name">Văn phòng Đoàn Hội sinh viên UEH</h6>
+                            <h6>B2 - 603 279 Nguyễn Tri Phương, <br /> Phường 5, Quận 10, TP. Hồ Chí Minh</h6>
+                            <h6>Điện thoại: (84) 28 36063090</h6>
+                            <h6><a href="mailto:hoisinhvien@ueh.edu.vn" class="contact-items contact__contribute">Liên hệ/Đóng góp</a></h6>
                         </div>
                     </div>
-
                 </div>
-                <div class="footer__right col-6 col-xl-2">
-                    <h6><a href="">Chính sách bảo mật</a></h6>
-                    <h6><a href="">Nội quy sử dụng</a></h6>
-                    <h6><a href="">Trung tâm trợ giúp</a></h6>
-                    <h6><a href="">Hướng dẫn sử dụng</a></h6>
-                </div>
-                <div class="footer__contact col-6 d-xl-none m-auto text-center">
-                    <div>
-                        <h6 class="contact__name">Văn phòng Hội sinh viên Trường Đại học Kinh tế TP.HCM</h6>
-                        <h6>279 Nguyễn Tri Phương, Quận 10, TP. Hồ Chí Minh</h6>
-                        <h6>Điện thoại: 84.28.38295.99 - Email: info@ueh.edu.vn</h6>
-                        <h6><a href="" class="contact-items contact__contribute">Liên hệ/Đóng góp</a></h6>
-                    </div>
+                <div class="footer__right col-5 col-xl-2">
+                    <span>
+                        <h6><a href="https://docs.google.com/document/d/1j3zHV_3PEO-sPFDKtNXG-cpUKY6gnUf0ovXLQi9infg" target="_blank">Chính sách bảo mật</a></h6>
+                        <h6><a href="https://docs.google.com/document/d/1U8lQ7argOmXHWPueYnMUm1BmpCQTNkXvMYCS4YcsicQ" target="_blank">Nội quy sử dụng</a></h6>
+                        <h6><a href="https://docs.google.com/document/d/1f2iJRLQhu8nkb1HN00D3ehKC-nYz_sr6HbENIqn1Rgk" target="_blank">Trung tâm trợ giúp</a></h6>
+                        <h6><a href="https://docs.google.com/document/d/1KTaVtq309BP5bkD7wiLldLNgzzzOGWbuXvSKOdCyWrw" target="_blank">Hướng dẫn sử dụng</a></h6>
+                    </span>
                 </div>
 
             </div>
 
+            <div class="footer__contact col-10 d-xl-none m-auto text-center">
+                <div>
+                    <h6 class="contact__name">Văn phòng Đoàn Hội sinh viên UEH</h6>
+                    <h6>B2 - 603 279 Nguyễn Tri Phương, <br /> Phường 5, Quận 10, TP. Hồ Chí Minh</h6>
+                    <h6>Điện thoại: (84) 28 36063090</h6>
+                    <h6><a href="mailto:hoisinhvien@ueh.edu.vn" class="contact-items contact__contribute">Liên hệ/Đóng góp</a></h6>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js" integrity="sha512-PqRelaJGXVuQ81N6wjUrRQelCDR7z8RvKGiR9SbSxKHPIt15eJDmIVv9EJgwq0XvgylszsjzvQ0+VyI2WtIshQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

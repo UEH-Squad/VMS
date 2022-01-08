@@ -1,17 +1,17 @@
 ﻿<div class="@(HaveSearchBox ? "d-block" : "d-none")">
-    <h3 class="text-center my-5">Tìm kiếm <span>Đơn vị tổ chức</span></h3>
+    <h3 class="text-center">Tìm kiếm <span>Đơn vị tổ chức</span></h3>
 </div>
 @* search box component *@
 <div class="col-lg-8 @(HaveSearchBox ? "d-block" : "d-none")">
     <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="OnSearchValueChangedAsync" />
 </div>
 
-<p class="mt-5 @(HaveSearchBox ? "d-block" : "d-none")">Lọc tổ chức</p>
+@*<p class="mt-5 @(HaveSearchBox ? "d-block" : "d-none")">Lọc <span>tổ chức</span></p>*@
 
 <div class="filter-bar d-flex @(IsLongDistanceFilter?"justify-content-between":"") my-4">
-    <div class="d-flex me-3" style="width: @(IsLongDistanceFilter? 40 : 50)%;">
+    <div class="filter-bar_left d-flex me-3" style="width: @(IsLongDistanceFilter? 40 : 50)%;">
         <div class="filter-item position-relative me-3">
-        <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+        <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn_1 @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
         <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
             <ul>
                 @if (levels is not null)
@@ -29,14 +29,14 @@
     </div>
 
         <div class="filter-item position-relative">
-            <div @onclick="ShowAreasPopupAsync" class="popup-btn @(filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+            <div @onclick="ShowAreasPopupAsync" class="popup-btn_2 @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
             <span class="material-icons-outlined position-absolute filter-item__icon">
                 expand_more
             </span>
         </div>
     </div>
-    <div class="d-flex">
-        <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
+    <div class="filter-bar_right d-flex">
+        <button @onclick="UpdateFilterValueAsync" class="filter-btn me-3">Lọc</button>
         <button @onclick="ClearFilterAsync" type="button" class="clear-filter-btn">Xóa lọc</button>
     </div>
 </div>

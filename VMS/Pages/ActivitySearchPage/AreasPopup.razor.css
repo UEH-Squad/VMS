@@ -14,7 +14,7 @@
   background-color: rgba(196, 196, 196, 0.38); }
 
 .my-custom-popup {
-  width: 90%;
+  width: 280px;
   background-color: #fff;
   border-radius: 10px;
   z-index: 999; }
@@ -92,15 +92,20 @@
     .my-custom-popup .area-item-wrapper div {
       width: 40px;
       height: 40px;
-      background-color: #18A0FB;
+      background-color: #B4B4B4;
       border-radius: 50%;
-      color: #fff; }
+      color: #fff;
+      transition: all 0.3s linear; }
     .my-custom-popup .area-item-wrapper p {
       font-weight: 400;
-      font-size: 16px; }
-    .my-custom-popup .area-item-wrapper span:hover ~ p,
-    .my-custom-popup .area-item-wrapper p:hover {
-      /* color: $green;*/ }
+      font-size: 16px;
+      transition: all 0.3s linear; }
+    .my-custom-popup .area-item-wrapper:hover > div {
+      font-size: 24px; }
+    .my-custom-popup .area-item-wrapper:hover > .area-item-title {
+      transform: translateY(-5px); }
+    .my-custom-popup .area-item-wrapper:hover > .area-item-icon {
+      font-size: 30px; }
   .my-custom-popup .save-btn {
     color: #fff;
     font-weight: bold;

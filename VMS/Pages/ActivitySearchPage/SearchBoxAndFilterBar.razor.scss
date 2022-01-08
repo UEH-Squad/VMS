@@ -197,18 +197,18 @@
 .filter-btn {
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    padding: 5px 20px;
     width: fit-content;
     color: $blue;
     font-size: 14px;
-    font-weight: 600;
     border-radius: 8px;
     border: 1px solid $blue;
     background-color: $white;
+    font-weight: 400!important;
 
     @include on('xl') {
         @include green-btn;
-        font-size: 20px;
+        font-size: 16px;
         height: 40px;
 
         &:hover {
@@ -219,6 +219,7 @@
 }
 
 .clear-filter-btn {
+    font-weight: 400 !important;
     @include green-btn;
     font-size: 14px;
     width: fit-content;
@@ -227,7 +228,7 @@
     width: 50%;
 
     @include on('xl') {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     &:hover {

@@ -18,7 +18,8 @@ namespace VMS.Pages.Organization.Profile
         public bool haveControl;
         public bool haveFav;
         public bool haveLogin;
-        
+        private bool isLoading;
+
         [Parameter]
         public string UserId { get; set; }
         [Parameter] public bool IsUsedForAdmin { get; set; }
@@ -29,27 +30,23 @@ namespace VMS.Pages.Organization.Profile
 
         [Inject]
         private IOrganizationService OrganizationService { get; set; }
-        
+
         [Inject]
         private IActivityService ActivityService { get; set; }
-        
+
         [Inject]
         NavigationManager NavigationManager { get; set; }
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
-            if (string.IsNullOrEmpty(CurrentUserId) && string.IsNullOrEmpty(UserId))
-            {
-                NavigationManager.NavigateTo(Routes.LogIn, true);
-            }
-
             UserId = string.IsNullOrEmpty(UserId) ? CurrentUserId : UserId;
 
-            org = OrganizationService.GetOrgFull(UserId);
+            org = OrganizationService.GetOrgViewModel(UserId);
 
-            if (org == null)
+            if (org is null || string.IsNullOrEmpty(UserId))
             {
-                NavigationManager.NavigateTo(Routes.HomePage, true);
+                NavigationManager.NavigateTo("404", true);
+                return;
             }
 
             bool isUserOrg = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);
@@ -58,16 +55,20 @@ namespace VMS.Pages.Organization.Profile
             {
                 if (!CheckInforUser(org))
                 {
-                    NavigationManager.NavigateTo(Routes.EditOrgProfile);
+                    NavigationManager.NavigateTo(Routes.EditOrgProfile, true);
                 }
 
                 haveFav = false;
                 haveControl = true;
             }
 
+            isLoading = true;
+
             actCurrent = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Current);
             actFavorite = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Favor);
             actEnded = await ActivityService.GetOrgActsAsync(UserId, StatusAct.Ended);
+
+            isLoading = false;
 
             if (string.IsNullOrEmpty(CurrentUserId))
             {

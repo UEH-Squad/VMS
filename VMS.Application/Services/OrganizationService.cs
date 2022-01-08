@@ -36,12 +36,12 @@ namespace VMS.Application.Services
         {
             var recruitmentRatings = activities.SelectMany(x => x.Recruitments)
                                                     .SelectMany(x => x.RecruitmentRatings)
-                                                    .Where(x => !x.IsOrgRating && !x.IsReport);
+                                                    .Where(x => !x.IsOrgRating);
             totalRating = recruitmentRatings.Count();
             totalRank = recruitmentRatings.Sum(x => x.Rank);
         }
 
-        public UserViewModel GetOrgFull(string id)
+        public UserViewModel GetOrgViewModel(string id)
         {
             User org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas)
                                                        .ThenInclude(x => x.Area)
@@ -50,7 +50,7 @@ namespace VMS.Application.Services
                                                        .ThenInclude(x => x.RecruitmentRatings)
                                                        .FirstOrDefault(x => x.Id == id)).Result;
 
-            if (IsInRole(org, Role.Organization))
+            if (org is not null && IsInRole(org, Role.Organization))
             {
                 UserViewModel orgViewModel = _mapper.Map<UserViewModel>(org);
 
@@ -104,8 +104,9 @@ namespace VMS.Application.Services
                 Includes = x => x.Include(x => x.Activities)
                                  .ThenInclude(x => x.Recruitments)
                                  .ThenInclude(x => x.RecruitmentRatings),
+                OrderBy = GetOrderByFilter(filter),
                 PageIndex = currentPage,
-                PageSize = 8,
+                PageSize = 8
             };
 
             PaginatedList<User> organizers = await _repository.GetListAsync(dbContext, specification);
@@ -120,6 +121,20 @@ namespace VMS.Application.Services
             }
 
             return paginatedList;
+        }
+
+        private Func<IQueryable<User>, IOrderedQueryable<User>> GetOrderByFilter(FilterOrgViewModel filter)
+        {
+            if (filter.OrderByTotalActivity.HasValue)
+            {
+                return x => filter.OrderByTotalActivity.Value
+                            ? x.OrderBy(x => x.Activities.Count)
+                            : x.OrderByDescending(x => x.Activities.Count);
+            }
+            else
+            {
+                return x => x.OrderByDescending(x => x.CreatedDate);
+            }
         }
 
         private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterOrgViewModel filter)

@@ -187,6 +187,16 @@
         bottom: 10px;
         right: 16px;
 
+        .btn-deny {
+            background: #D8D8D8;
+            border-radius: 5px;
+            color: #707070;
+            font-weight:600;
+            &:hover {
+                color: #707070;
+            }
+        }
+
         &__warn {
             color: $red-warning;
         }
@@ -230,5 +240,17 @@
                 }
             }
         }
+    }
+}
+.div-volunteer {
+    .icon-check {
+        font-size: 17px;
+        color: $green;
+    }
+
+    span {
+        font-weight: 500;
+        font-size: 14px;
+        color: $grey-close-btn;
     }
 }

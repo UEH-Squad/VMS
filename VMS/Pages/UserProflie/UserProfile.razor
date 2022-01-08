@@ -41,7 +41,7 @@
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">folder_shared</p>
-                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.Course - @User.Class</p>
+                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@User.Course @(!string.IsNullOrEmpty(User.Faculty) ? $"- {User.Faculty}" : "")</p>
                     </div>
                     <div class="row align-items-center">
                         <p class=" col-2 material-icons profile__contact-icon">email</p>
@@ -49,13 +49,15 @@
                             <a href="mailto:@User.Email">@User.Email</a>
                         </p>
                     </div>
-                    <div class="row align-items-center">
-                        <p class=" col-2 material-icons profile__contact-icon">contact_phone</p>
-                        <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">
-                            <a href="tel:@User.PhoneNumber">@User.PhoneNumber</a>
-                        </p>
-                    </div>
-
+                    @if (!string.IsNullOrEmpty(User.PhoneNumber))
+                    {
+                        <div class="row align-items-center">
+                            <p class=" col-2 material-icons profile__contact-icon">contact_phone</p>
+                            <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">
+                                <a href="tel:@User.PhoneNumber">@User.PhoneNumber</a>
+                            </p>
+                        </div>
+                    }
                 </div>
                 <div class="profile__filter-1">
                     <h3>Lĩnh vực</h3>
@@ -67,9 +69,7 @@
                                 <span style="color: @(item.IsPinned ? item.Color : "#64D72F")">@item.Name</span>
                             </div>
                         }
-
                     </div>
-
                 </div>
             </div>
 
@@ -83,7 +83,6 @@
                         }
                     </div>
                 </div>
-
             </div>
 
             <div class="profile__filter-2">
@@ -96,9 +95,7 @@
                             <span style="color: @(item.IsPinned ? item.Color : "#64D72F")">@item.Name</span>
                         </div>
                     }
-
                 </div>
-
             </div>
 
         </div>

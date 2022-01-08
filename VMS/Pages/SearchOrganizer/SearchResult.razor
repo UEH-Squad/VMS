@@ -18,7 +18,14 @@
                             Đã tổ chức <span style="@(IsUsedForAdmin ? "cursor: pointer;" : "")"
                                      @onclick="(() => ShowHeldActivitiesAsync(item.Id))">@item.Activities.Count</span> hoạt động
                         </p>
-                        <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course - Lớp @item.Class</p>
+                        @if (IsUsedForAdmin)
+                        {
+                            <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course @(!string.IsNullOrEmpty(item.Class) ? $"- {item.Class}" : "")</p>
+                        }
+                        else
+                        {
+                            <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course @(!string.IsNullOrEmpty(item.Faculty) ? $"- {item.Faculty}" : "")</p>
+                        }
                     </div>
                 </div>
                 <div class="org-item__rate-group d-flex align-items-center @(IsUsedForAdmin ? "me-3" : "me-5")">

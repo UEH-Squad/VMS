@@ -68,7 +68,6 @@ namespace VMS.Pages.UserProflie
         {
             return !string.IsNullOrEmpty(user.Class)
                 && !string.IsNullOrEmpty(user.Email)
-                && !string.IsNullOrEmpty(user.PhoneNumber)
                 && user.Skills.Count != 0
                 && user.Areas.Count != 0;
         }

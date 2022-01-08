@@ -22,7 +22,7 @@ namespace VMS.Application.ViewModels
         [EmailAddress]
         public string NotifiedEmail { get; set; }
 
-        [Required] public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public string Banner { get; set; }
         public string Avatar { get; set; }

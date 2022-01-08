@@ -26,6 +26,7 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
             CreateMap<User, UserViewModel>()
+                .ForMember(x => x.Faculty, opt => opt.MapFrom(src => src.Faculty.Name))
                 .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
                 {
                     Id = x.AreaId,

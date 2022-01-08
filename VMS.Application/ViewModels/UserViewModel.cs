@@ -22,6 +22,8 @@ namespace VMS.Application.ViewModels
         public string Class { get; set; }
         public string Course { get; set; }
 
+        public string Faculty { get; set; }
+
         public List<AreaViewModel> Areas { get; set; }
         public List<Activity> Activities { get; set; }
         public List<SkillViewModel> Skills {  get; set; }

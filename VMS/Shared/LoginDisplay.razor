@@ -50,7 +50,7 @@
                             </li>
                             <hr class="mx-3 my-2" />
                         }
-                        else
+                        else if (context.User.IsInRole(Role.Organization.ToString()))
                         {
                             <li class="user-info">
                                 <a href="@profileUrl" class="user-info-link d-flex px-3 pt-4 text-decoration-none align-items-center">
@@ -75,6 +75,25 @@
                             <li class="manage d-flex justify-content-between py-2 my-1 mx-3">
                                 <a href="@Routes.ActivityManagement" class="text-decoration-none mx-3">
                                     Quản lý hoạt động
+                                </a>
+                            </li>
+                            <hr class="mx-3 mt-3" />
+                        }
+                        else
+                        {
+                            <li class="user-info">
+                                <a class="user-info-link d-flex px-3 pt-4 text-decoration-none align-items-center">
+                                    <img src="@userAvatar" class="user-img" />
+                                    <div class="ms-3 user-info-heading d-flex flex-column">
+                                        <h3 class="py-1 mb-0">@userFullname</h3>
+                                        <h4 class="py-1 mb-0">Quản trị viên GoVirlunteer</h4>
+                                    </div>
+                                </a>
+                            </li>
+                            <hr class="mx-3 my-3" />
+                            <li class="manage d-flex justify-content-between py-2 my-1 mx-3">
+                                <a href="@Routes.AdminActivityManagement" class="text-decoration-none mx-3">
+                                    Trang quản trị
                                 </a>
                             </li>
                             <hr class="mx-3 mt-3" />
@@ -120,7 +139,7 @@
 
         var user = IdentityService.FindUserById(UserId);
         userAvatar = string.IsNullOrEmpty(user?.Avatar) ? "img/Default/avatar.png" : user?.Avatar;
-        userFullname = user?.FullName;
+        userFullname = !string.IsNullOrEmpty(user?.FullName) ? user?.FullName : user?.Email;
     }
 
     private void OnAvatarClick()

@@ -70,21 +70,21 @@ namespace VMS.Application.Services
             {
                 return new CreateAccountViewModel()
                 {
-                    StudentId = sheet.Cells[row, 1].Value.ToString(),
-                    FullName = sheet.Cells[row, 2].Value.ToString() + " " + sheet.Cells[row, 3].Value.ToString(),
+                    StudentId = sheet.Cells[row, 1].Value?.ToString(),
+                    FullName = sheet.Cells[row, 2].Value?.ToString() + " " + sheet.Cells[row, 3].Value?.ToString(),
                     Class = sheet.Cells[row, 4].Value?.ToString(),
-                    Course = sheet.Cells[row, 5].Value.ToString(),
-                    Email = sheet.Cells[row, 6].Value.ToString()
+                    Course = sheet.Cells[row, 5].Value?.ToString(),
+                    Email = sheet.Cells[row, 6].Value?.ToString()
                 };
             }
             else
             {
                 return new CreateAccountViewModel()
                 {
-                    Email = sheet.Cells[row, 2].Value.ToString(),
-                    FullName = sheet.Cells[row, 3].Value.ToString(),
-                    Course = sheet.Cells[row, 4].Value.ToString(),
-                    Password = sheet.Cells[row, 5].Value.ToString()
+                    Email = sheet.Cells[row, 2].Value?.ToString(),
+                    FullName = sheet.Cells[row, 3].Value?.ToString(),
+                    Course = sheet.Cells[row, 4].Value?.ToString(),
+                    Password = sheet.Cells[row, 5].Value?.ToString()
                 };
             }
         }

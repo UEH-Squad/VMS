@@ -1,10 +1,12 @@
 ﻿
 <div class="myModal">
-    <span @onclick="CloseModal" class="material-icons close">  cancel  </span>
-    @if (Image != "")
-    {
-        <img class="modal-content" src="@Image">
-    }
+    <div class="cover-image">
+        <span @onclick="CloseModal" class="material-icons close">  cancel  </span>
+        @if (Image != "")
+        {
+            <img class="modal-content" src="@Image">
+        }
+    </div>
 </div>
 @code {
     [CascadingParameter]

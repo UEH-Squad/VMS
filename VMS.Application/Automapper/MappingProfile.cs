@@ -88,10 +88,12 @@ namespace VMS.Application.Automapper
         {
             CreateMap<ReportViewModel, Feedback>()
                 .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ReportBy))
-                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.Content))
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
-                .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ReportBy));
+            CreateMap<Feedback, ReportViewModel>()
+                .ForMember(x => x.ActivityName, opt => opt.MapFrom(src => src.Activity.Name))
+                .ForMember(x => x.ReportBy, opt => opt.MapFrom(src => src.CreatedBy))
+                .ForMember(x => x.ReporterName, opt => opt.MapFrom(src => src.Reporter.FullName))
+                .ForMember(x => x.HandlerName, opt => opt.MapFrom(src => src.Handler.FullName));
         }
 
         private void MapAccountToUserAndBack()

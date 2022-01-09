@@ -16,6 +16,10 @@ namespace VMS.Application.ViewModels
         public bool? IsDone { get; set; }
         public bool IsClosed { get; set; }
 
+        public string ActivityName { get; set; }
+        public string HandlerName { get; set; }
+        public string ReporterName { get; set; }
+
         public List<string> Reasons { get; set; }
         public List<string> Images { get; set; }
     }

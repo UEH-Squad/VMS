@@ -5,8 +5,13 @@ namespace VMS.Application.ViewModels
 {
     public class FilterReportViewModel
     {
-        public bool IsReportUser { get; set; }
+        public bool? IsReportUser { get; set; }
         public ReportState State { get; set; }
-        public DateTime Time { get; set; }
+        public DateTime? Time { get; set; }
+
+        public FilterReportViewModel()
+        {
+            State = ReportState.Default;
+        }
     }
 }

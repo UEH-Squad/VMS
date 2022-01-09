@@ -21,7 +21,11 @@ namespace VMS.Domain.Models
         public bool? IsDone { get; set; }
         public bool IsClosed { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual User User { get; set; }
+        public virtual User Handler { get; set; }
+        public virtual User Reporter { get; set; }
         public virtual Activity Activity { get; set; }
         public virtual ICollection<ReasonReport> ReasonReports { get; set; }
         public virtual ICollection<ImageReport> ImageReports { get; set; }

@@ -5,6 +5,7 @@
         Pinned,
         Processing,
         Done,
-        Closed
+        Closed,
+        Default
     }
 }

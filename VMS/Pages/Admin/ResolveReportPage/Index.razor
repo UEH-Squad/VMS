@@ -1,15 +1,19 @@
-﻿@layout AdminLayout
+﻿@using VMS.Application.ViewModels
+@layout AdminLayout
 
 @attribute [Route(Routes.AdminResolveReport)]
 @attribute [Authorize(Roles = "Admin")]
 
 <div class="my-content">
-    <Filter @bind-Status="selectedStatus"></Filter>
-    <ListReport SelectedStatus="@selectedStatus"></ListReport>
+    <Filter />
+    <ListReport Filter="@filter" />
 </div>
 
 @code {
-    private string selectedStatus = "";
+    private FilterReportViewModel filter = new();
 
-
+    private void OnFilterChanged(FilterReportViewModel filter)
+    {
+        this.filter = filter;
+    }
 }

@@ -80,8 +80,37 @@ namespace VMS.Application.Services
                 ReportState.Done => x => x.IsDone.HasValue && x.IsDone.Value,
                 ReportState.Processing => x => x.IsDone.HasValue && !x.IsDone.Value,
                 ReportState.Closed => x => x.IsClosed,
-                _ => x => true,
+                ReportState.Deleted => x => true,
+                _ => x => true
             };
+        }
+
+        public async Task UpdateReportStateAsync(int reportId, ReportState state)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Feedback feedback = await _repository.GetByIdAsync<Feedback>(dbContext, reportId);
+
+            switch (state)
+            {
+                case ReportState.Pinned:
+                    feedback.IsPinned = !feedback.IsPinned;
+                    break;
+                case ReportState.Done:
+                    feedback.IsDone = true;
+                    break;
+                case ReportState.Processing:
+                    feedback.IsDone = false;
+                    break;
+                case ReportState.Closed:
+                    feedback.IsClosed = !feedback.IsClosed;
+                    break;
+                case ReportState.Deleted:
+                    feedback.IsDeleted = true;
+                    break;
+            }
+
+            await _repository.UpdateAsync(dbContext, feedback);
         }
     }
 }

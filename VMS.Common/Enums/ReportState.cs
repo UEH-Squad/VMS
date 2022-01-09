@@ -6,6 +6,7 @@
         Processing,
         Done,
         Closed,
-        Default
+        Default,
+        Deleted
     }
 }

@@ -87,13 +87,15 @@ namespace VMS.Application.Automapper
         private void MapReportToFeedback()
         {
             CreateMap<ReportViewModel, Feedback>()
-                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ReportBy));
             CreateMap<Feedback, ReportViewModel>()
                 .ForMember(x => x.ActivityName, opt => opt.MapFrom(src => src.Activity.Name))
                 .ForMember(x => x.ReportBy, opt => opt.MapFrom(src => src.CreatedBy))
                 .ForMember(x => x.ReporterName, opt => opt.MapFrom(src => src.Reporter.FullName))
-                .ForMember(x => x.HandlerName, opt => opt.MapFrom(src => src.Handler.FullName));
+                .ForMember(x => x.HandlerName, opt => opt.MapFrom(src => src.Handler.FullName))
+                .ForMember(x => x.Reasons, opt => opt.MapFrom(src => src.ReasonReports.Select(x => x.Reason).ToList()))
+                .ForMember(x => x.Images, opt => opt.MapFrom(src => src.ImageReports.Select(x => x.Image).ToList()));
+            CreateMap<PaginatedList<Feedback>, PaginatedList<ReportViewModel>>();
         }
 
         private void MapAccountToUserAndBack()

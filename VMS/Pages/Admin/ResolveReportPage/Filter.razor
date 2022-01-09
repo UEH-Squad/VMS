@@ -5,8 +5,8 @@
         <span class="material-icons-outlined"> expand_more </span>
         <input readonly="readonly" placeholder="@valueTypeReport" data-bs-toggle="dropdown" class="@(haveType?"bg-grey":"") dropdown-input" />
         <ul class="dropdown-menu">
-            <li @onclick="() =>ChooseValueType(1)">Báo cáo tổ chức</li>
-            <li @onclick="() =>ChooseValueType(2)">Báo cáo tình nguyện viên</li>
+            <li @onclick="() => ChooseValueType(false)">Báo cáo tổ chức</li>
+            <li @onclick="() => ChooseValueType(true)">Báo cáo tình nguyện viên</li>
         </ul>
     </div>
 
@@ -14,88 +14,21 @@
         <span class="material-icons-outlined"> expand_more </span>
         <input readonly="readonly" placeholder="@valueStatus" data-bs-toggle="dropdown" class="@(haveStatus?"bg-grey":"") dropdown-input" />
         <ul class="dropdown-menu">
-            <li @onclick="() => ChooseValueStatus(1)" style="color: #F14747">Đã ghim</li>
-            <li @onclick="() => ChooseValueStatus(2)" style="color: #18A0FB">Đang xử lý</li>
-            <li @onclick="() => ChooseValueStatus(3)" style="color: #64D72F">Hoàn tất xử lý</li>
-            <li @onclick="() => ChooseValueStatus(4)" style="color: unset">Đã đóng</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Pinned)" style="color: #F14747">Đã ghim</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Processing)" style="color: #18A0FB">Đang xử lý</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Done)" style="color: #64D72F">Hoàn tất xử lý</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Closed)" style="color: unset">Đã đóng</li>
         </ul>
     </div>
 
     <div class="item filter-item">
-        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" OnChange="ChooseMonthValue" Format="MM/yyyy"/>
+        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" Value="timeValue" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" ValueChanged="(DateTime e) => OnTimeValueChanged(e)" Format="MM/yyyy" />
     </div>
 
-    <button @onclick="UpdateFilterValueAsync" class="filter-btn">Lọc</button>
+    <button @onclick="OnClickFilterAsync" class="filter-btn">Lọc</button>
 
-    <button @onclick="ClearFilter" type="button" class="clear-filter-btn">Xóa lọc</button>
+    <button @onclick="ClearFilterAsync" type="button" class="clear-filter-btn">Xóa lọc</button>
 </div>
 
-
 @code {
-    [Parameter]
-    public string Status { get; set; }
-
-    DateTime Value { get; set; }
-
-    [Parameter]
-    public EventCallback<string> StatusChanged { get; set; }
-
-    private string valueTypeReport = "Loại báo báo";
-    private string valueStatus = "Trạng thái";
-    private bool haveType = false;
-    private bool haveStatus = false;
-    private bool isFilterMonth = false;
-
-    public void ChooseMonthValue()
-    {
-        isFilterMonth = true;
-    }
-
-    public void ChooseValueType(int id)
-    {
-        haveType = true;
-        if (id == 1)
-        {
-            valueTypeReport = "Báo cáo tổ chức";
-        }
-        else
-        {
-            valueTypeReport = "Báo cáo tình nguyện viên";
-        }
-    }
-    public void ChooseValueStatus(int id)
-    {
-        haveStatus = true;
-        switch (id)
-        {
-            case 1: valueStatus = "Đã ghim"; break;
-            case 2: valueStatus = "Đang xử lý"; break;
-            case 3: valueStatus = "Hoàn tất xử lý"; break;
-            case 4: valueStatus = "Đã đóng"; break;
-            default: break;
-        }
-    }
-    private async Task ClearFilter()
-    {
-        valueStatus = "Trạng thái";
-        valueTypeReport = "Loại báo cáo";
-        isFilterMonth = false;
-        haveStatus = false;
-        haveType = false;
-        Value = DateTime.Now;
-        await StatusChanged.InvokeAsync("");
-    }
-    private async Task UpdateFilterValueAsync()
-    {
-        string tmp = "";
-        switch (valueStatus)
-        {
-            case "Đã ghim": tmp = "pinned";break;
-            case "Đang xử lý":tmp = "processing";break;
-            case "Hoàn tất xử lý":tmp = "complete"; break;
-            case "Đã đóng": tmp = "closed"; break;
-            default:break;
-        }
-        await StatusChanged.InvokeAsync(tmp);
-    }
 }

@@ -11,6 +11,13 @@
     background-color: rgba(196, 196, 196, 0.4);
     z-index: 101;
 
+    .cover-image {
+        max-height: 90%;
+        max-width:70%;
+        overflow-y: scroll;
+        overflow-x: scroll;
+        margin: auto;
+    }
     /* The Close Button */
     .close {
         position: absolute;
@@ -29,11 +36,8 @@
 
     .modal-content {
         border: none;
-        border-radius: 10px;
         display: block;
-        width: 80%;
         margin: auto;
-        max-width: 800px;
         animation-name: zoom;
         animation-duration: 0.6s;
     }

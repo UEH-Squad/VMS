@@ -25,14 +25,27 @@
 .card-btn {
   background-color: #64D72F;
   color: white;
-  border-radius: 5px;
+  border-radius: 2px;
   -webkit-user-select: none;
   user-select: none;
   cursor: pointer;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px; }
+  font-size: 8px; }
+  @media (min-width: 768px) {
+    .card-btn {
+      font-size: 10px; } }
+  @media (min-width: 992px) {
+    .card-btn {
+      border-radius: 5px;
+      font-size: 12px; } }
+  @media (min-width: 1200px) {
+    .card-btn {
+      font-size: 14px; } }
+  @media (min-width: 1400px) {
+    .card-btn {
+      font-size: 16px; } }
   .card-btn:hover {
     background-color: #306C14; }
 
@@ -53,55 +66,121 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  padding: 20px 18px;
-  height: 283px;
+  padding: 10px 7px;
+  height: 130px;
   margin-bottom: 15px;
   background-color: #F3F3F5;
-  border-radius: 10px; }
+  border-radius: 5px; }
+  @media (min-width: 768px) {
+    .org-card {
+      height: 160px; } }
+  @media (min-width: 992px) {
+    .org-card {
+      height: 200px;
+      border-radius: 10px; } }
+  @media (min-width: 1400px) {
+    .org-card {
+      padding: 20px 18px;
+      height: 245px; } }
 
 .org-card__img {
-  aspect-ratio: calc(267/188);
   display: flex;
   align-items: center; }
+  @media (min-width: 1400px) {
+    .org-card__img {
+      aspect-ratio: calc(267/188); } }
   .org-card__img img {
-    width: 100%;
-    height: 100%;
+    width: 97px;
+    height: 110px;
     object-fit: cover; }
+    @media (min-width: 768px) {
+      .org-card__img img {
+        width: 100%;
+        height: 100%; } }
+    @media (min-width: 992px) {
+      .org-card__img img {
+        width: 270px; } }
 
 .org-card__info {
   flex: 3;
-  padding-left: 40px; }
+  padding-left: 10px; }
+  @media (min-width: 1400px) {
+    .org-card__info {
+      padding-left: 20px; } }
+  .org-card__info .lmtext-2 {
+    -webkit-line-clamp: 3 !important; }
+    @media (min-width: 992px) {
+      .org-card__info .lmtext-2 {
+        -webkit-line-clamp: 2 !important; } }
   .org-card__info__title {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
-    margin-bottom: 5px; }
+    font-size: 10px; }
+    @media (min-width: 768px) {
+      .org-card__info__title {
+        font-size: 14px; } }
+    @media (min-width: 1400px) {
+      .org-card__info__title {
+        font-size: 20px; } }
     .org-card__info__title a {
       color: #18A0FB;
       text-decoration: none; }
     .org-card__info__title a:hover {
       color: #0B588c; }
   .org-card__info__rate {
-    display: inline-block;
-    color: yellow;
-    margin-bottom: 5px; }
+    display: flex;
+    margin-top: 1px;
+    margin-bottom: 3px;
+    color: yellow; }
+    @media (min-width: 992px) {
+      .org-card__info__rate {
+        display: inline-block; } }
+    .org-card__info__rate ::deep span {
+      font-size: 12px; }
+      @media (min-width: 768px) {
+        .org-card__info__rate ::deep span {
+          font-size: 14px; } }
+      @media (min-width: 1200px) {
+        .org-card__info__rate ::deep span {
+          font-size: 20px; } }
+      @media (min-width: 1400px) {
+        .org-card__info__rate ::deep span {
+          font-size: 24px; } }
   ::deep .org-card__info__desc {
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 8px;
     color: #515151;
-    margin-bottom: 10px; }
+    margin-bottom: 2px; }
+    @media (min-width: 768px) {
+      ::deep .org-card__info__desc {
+        font-size: 12px; } }
+    @media (min-width: 1400px) {
+      ::deep .org-card__info__desc {
+        font-size: 18px; } }
     ::deep .org-card__info__desc p {
       margin-bottom: 0; }
   .org-card__info__date {
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 8px;
     color: #515151;
     margin-bottom: 10px; }
+    @media (min-width: 768px) {
+      .org-card__info__date {
+        font-size: 10px; } }
+    @media (min-width: 992px) {
+      .org-card__info__date {
+        font-size: 12px; } }
+    @media (min-width: 1200px) {
+      .org-card__info__date {
+        font-size: 14px; } }
+    @media (min-width: 1400px) {
+      .org-card__info__date {
+        font-size: 16px; } }
   .org-card__info__joiner {
     font-family: Montserrat;
     font-style: normal;
@@ -124,13 +203,26 @@
     position: absolute;
     transform: translate(-80%, -95%);
     padding: 2px 10px;
-    font-size: 12px;
+    font-size: 8px;
     background-color: #FFFFFF;
     border-radius: 10px;
     border-bottom-right-radius: 3px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25); }
+    @media (min-width: 1400px) {
+      .org-card__info .icon-tooltip {
+        font-size: 12px; } }
   .org-card__info .my-icon {
+    font-size: 8px !important;
     cursor: default; }
+    @media (min-width: 768px) {
+      .org-card__info .my-icon {
+        font-size: 10px !important; } }
+    @media (min-width: 1200px) {
+      .org-card__info .my-icon {
+        font-size: 14px !important; } }
+    @media (min-width: 1400px) {
+      .org-card__info .my-icon {
+        font-size: 16px !important; } }
     .org-card__info .my-icon:hover + .icon-tooltip {
       display: block; }
   .org-card__info .record-icon {
@@ -158,7 +250,12 @@
         font-size: 14px; } }
 
 .org-card__footer {
-  bottom: -8px; }
+  bottom: -8px;
+  align-items: flex-end; }
+  @media (min-width: 992px) {
+    .org-card__footer {
+      font-size: 14px;
+      align-items: unset; } }
   .org-card__footer__btn {
     width: fit-content; }
 
@@ -174,15 +271,31 @@
 
 .org-card ul {
   background: #FFFFFF;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
   z-index: 1; }
+  @media (min-width: 992px) {
+    .org-card ul {
+      border-radius: 10px; } }
   .org-card ul li, .org-card ul a {
     list-style: none;
-    font-size: 16px;
+    font-size: 8px;
     font-weight: 500;
-    padding: 10px 20px;
+    padding-right: 10px;
     display: block; }
+    @media (min-width: 768px) {
+      .org-card ul li, .org-card ul a {
+        font-size: 10px; } }
+    @media (min-width: 992px) {
+      .org-card ul li, .org-card ul a {
+        font-size: 12px;
+        padding: 10px 20px; } }
+    @media (min-width: 1200px) {
+      .org-card ul li, .org-card ul a {
+        font-size: 14px; } }
+    @media (min-width: 1400px) {
+      .org-card ul li, .org-card ul a {
+        font-size: 16px; } }
     .org-card ul li:hover, .org-card ul a:hover {
       background: rgba(24, 160, 251, 0.1); }
   .org-card ul .edit {
@@ -193,26 +306,50 @@
     cursor: pointer; }
   .org-card ul .close {
     color: #64D72F;
-    cursor: pointer; }
+    cursor: pointer;
+    padding-bottom: 0 !important; }
+    @media (min-width: 992px) {
+      .org-card ul .close {
+        padding-bottom: unset; } }
 
 .org-card .org-card__member {
-  margin-right: 50px; }
+  align-items: flex-end;
+  margin-right: 25px; }
+  @media (min-width: 992px) {
+    .org-card .org-card__member {
+      align-items: unset;
+      margin-right: 170px; } }
   @media (min-width: 1400px) {
     .org-card .org-card__member {
-      margin-right: 62px; } }
+      margin-right: 200px; } }
   .org-card .org-card__member .material-icons {
     color: #64D72F; }
 
 .org-card .material-icons {
   color: #515151;
-  font-size: 24px;
+  font-size: 14px;
   right: 10px;
   top: 2px; }
+  @media (min-width: 992px) {
+    .org-card .material-icons {
+      font-size: 18px; } }
+  @media (min-width: 992px) {
+    .org-card .material-icons {
+      font-size: 24px; } }
   .org-card .material-icons:hover {
     cursor: pointer; }
 
 .org-card__btn-list {
-  width: 157px; }
+  width: 81px;
+  height: 17px; }
+  @media (min-width: 768px) {
+    .org-card__btn-list {
+      width: 100px;
+      height: 25px; } }
+  @media (min-width: 992px) {
+    .org-card__btn-list {
+      width: 157px;
+      height: 38px; } }
 
 .org-card__cbb-rate {
   width: 120px;
@@ -342,8 +479,22 @@
 
 /*------Text Result-------*/
 .text-result {
-  font-size: 24px;
+  margin-bottom: 15px !important;
+  font-size: 10px;
   color: #18A0FB; }
+  @media (min-width: 768px) {
+    .text-result {
+      font-size: 14px; } }
+  @media (min-width: 992px) {
+    .text-result {
+      margin-bottom: unset;
+      font-size: 16px; } }
+  @media (min-width: 1200px) {
+    .text-result {
+      font-size: 20px; } }
+  @media (min-width: 1400px) {
+    .text-result {
+      font-size: 24px; } }
   .text-result span {
     color: #64D72F; }
 

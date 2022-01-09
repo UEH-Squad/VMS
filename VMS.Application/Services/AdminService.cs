@@ -116,7 +116,15 @@ namespace VMS.Application.Services
 
             PaginationSpecification<User> specification = new()
             {
-                Conditions = GetConditionsByFilter(filter),
+                Conditions = new()
+                {
+                    x => x.NormalizedEmail.Contains(filter.SearchValue.Trim().ToUpper())
+                        || x.NormalizedUserName.Contains(filter.SearchValue.Trim().ToUpper())
+                        || x.StudentId.Contains(filter.SearchValue.Trim().ToUpper())
+                        || x.FullName.Contains(filter.SearchValue.Trim().ToUpper()),
+                    x => x.UserRoles.Any(x => x.Role.Name == filter.Role),
+                    x => x.Course == filter.Course || string.IsNullOrEmpty(filter.Course)
+                },
                 OrderBy = GetOrderByFilter(filter),
                 PageSize = pageSize,
                 PageIndex = page
@@ -145,27 +153,6 @@ namespace VMS.Application.Services
             List<User> users = await _repository.GetListAsync(dbContext, specification);
 
             return _mapper.Map<List<AccountViewModel>>(users);
-        }
-
-        private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterAccountViewModel filter)
-        {
-            if (filter.IsSearch)
-            {
-                return new List<Expression<Func<User, bool>>>()
-                {
-                    x => x.NormalizedEmail.Contains(filter.SearchValue.Trim().ToUpper())
-                        || x.NormalizedUserName.Contains(filter.SearchValue.Trim().ToUpper()),
-                    x => x.UserRoles.Any(x => x.Role.Name == filter.Role)
-                };
-            }
-            else
-            {
-                return new List<Expression<Func<User, bool>>>()
-                {
-                    x => x.Course == filter.Course || string.IsNullOrEmpty(filter.Course),
-                    x => x.UserRoles.Any(x => x.Role.Name == filter.Role)
-                };
-            }
         }
 
         private static Func<IQueryable<User>, IOrderedQueryable<User>> GetOrderByFilter(FilterAccountViewModel filter)

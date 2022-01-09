@@ -81,7 +81,7 @@ p {
 
 .filter-bar_row-1 {
     display: flex;
-    margin-bottom: 5%;
+    margin-bottom:24px;
     justify-content: space-around;
 }
 
@@ -90,7 +90,7 @@ p {
     justify-content: space-around;
 
     @include on('lg') {
-        margin-bottom: 5%;
+        margin-bottom: 24px;
     }
 }
 

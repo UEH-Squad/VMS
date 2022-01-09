@@ -137,6 +137,10 @@
             ? Routes.OrgProfile
             : Routes.UserProfile) + $"/{UserId}";
 
+        profileUrl = (_httpContext.HttpContext.User.IsInRole(Role.Admin.ToString()))
+            ? Routes.AdminActivityManagement
+            : profileUrl;
+
         var user = IdentityService.FindUserById(UserId);
         userAvatar = string.IsNullOrEmpty(user?.Avatar) ? "img/Default/avatar.png" : user?.Avatar;
         userFullname = !string.IsNullOrEmpty(user?.FullName) ? user?.FullName : user?.Email;

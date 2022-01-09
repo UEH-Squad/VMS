@@ -36,7 +36,6 @@
 
         #region Identity
 
-        public const string Register = "/dang-ky";
         public const string LogIn = "/dang-nhap";
         public const string ChangePassword = "/doi-mat-khau";
         public const string LogOut = "Identity/Account/LogOut";

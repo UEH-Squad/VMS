@@ -15,8 +15,8 @@
                 <div class="d-flex justify-content-between">
 
                     <div class="info-item">
-                        <p class="info-item__who">Báo cáo bởi: @item.ReporterName</p>
-                        <p class="info-item__activity">Hoạt động: @item.ActivityName</p>
+                        <p class="info-item__who">Báo cáo bởi: <a href="@Routes.AdminVolunteerProfile/@item.ReportBy">@item.ReporterName</a></p>
+                        <p class="info-item__activity">Hoạt động: <a href="@Routes.AdminActivityInfo/@item.ActivityId">@item.ActivityName</a></p>
                     </div>
 
                     <div class="info-item">

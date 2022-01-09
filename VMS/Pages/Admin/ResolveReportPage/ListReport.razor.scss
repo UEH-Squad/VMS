@@ -51,6 +51,10 @@
         }
 
         .info-item {
+            a {
+                color: $grey-text;
+            }
+
             p {
                 margin: 0;
                 font-style: oblique;

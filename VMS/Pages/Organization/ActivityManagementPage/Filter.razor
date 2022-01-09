@@ -2,30 +2,32 @@
     <div class="org-filter__title">
         Lọc <span>hoạt động</span>
     </div>
-    <div class="org-filter__act">
-        <div class="org-filter__act__child">
-            <input @bind="FilterAct.IsHappenning" type="checkbox" id="hd1">
-            <label for="hd1">Đang diễn ra</label>
+    <div class="filter-container">
+        <div class="org-filter__act">
+            <div class="org-filter__act__child">
+                <input @bind="FilterAct.IsHappenning" type="checkbox" id="hd1">
+                <label for="hd1">Đang diễn ra</label>
+            </div>
+            <div class="org-filter__act__child">
+                <input @bind="FilterAct.IsTookPlace" type="checkbox" id="hd2">
+                <label for="hd2">Đã diễn ra</label>
+            </div>
         </div>
-        <div class="org-filter__act__child">
-            <input @bind="FilterAct.IsTookPlace" type="checkbox" id="hd2">
-            <label for="hd2">Đã diễn ra</label>
+        <hr>
+        <div class="org-filter__act">
+            <div class="org-filter__act__child">
+                <input @bind="FilterAct.IsVirtual" type="checkbox" id="md1">
+                <label for="md1">Virtual</label>
+            </div>
+            <div class="org-filter__act__child">
+                <input @bind="FilterAct.IsActual" type="checkbox" id="md2">
+                <label for="md2">Actual</label>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="org-filter__act">
-        <div class="org-filter__act__child">
-            <input @bind="FilterAct.IsVirtual" type="checkbox" id="md1">
-            <label for="md1">Virtual</label><br>
+        <div class="org-filter__btn">
+            <div class="btn " @onclick="(async() => await OnClickFilterAsync())">Lọc</div>
+            <div class="btn-clear" @onclick="(() => ClearFilterAsync())">Xóa lọc</div>
         </div>
-        <div class="org-filter__act__child">
-            <input @bind="FilterAct.IsActual" type="checkbox" id="md2">
-            <label for="md2">Actual</label><br>
-        </div>
-    </div>
-    <div class="org-filter__btn">
-        <div class="btn " @onclick="(async() => await OnClickFilterAsync())">Lọc</div>
-        <div class="btn-clear" @onclick="(() => ClearFilterAsync())">Xóa lọc</div>
     </div>
 </div>
 

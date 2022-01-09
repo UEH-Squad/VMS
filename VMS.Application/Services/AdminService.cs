@@ -119,6 +119,7 @@ namespace VMS.Application.Services
                 Conditions = new()
                 {
                     x => x.NormalizedEmail.Contains(filter.SearchValue.Trim().ToUpper())
+                        || x.NormalizedUserName.Contains(filter.SearchValue.Trim().ToUpper())
                         || x.StudentId.Contains(filter.SearchValue.Trim().ToUpper())
                         || x.FullName.Contains(filter.SearchValue.Trim().ToUpper()),
                     x => x.UserRoles.Any(x => x.Role.Name == filter.Role),

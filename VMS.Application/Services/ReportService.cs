@@ -59,10 +59,17 @@ namespace VMS.Application.Services
                     x => !filter.Time.HasValue || (x.CreatedDate.Month == filter.Time.Value.Month
                                                   && x.CreatedDate.Year == filter.Time.Value.Year),
                 },
+
                 OrderBy = x => x.OrderByDescending(x => x.IsPinned)
                                 .ThenByDescending(x => x.CreatedDate),
+
                 Includes = x => x.Include(x => x.User)
-                                 .Include(x => x.Activity),
+                                 .Include(x => x.Handler)
+                                 .Include(x => x.Reporter)
+                                 .Include(x => x.Activity)
+                                 .Include(x => x.ReasonReports)
+                                 .Include(x => x.ImageReports),
+
                 PageIndex = currentPage,
                 PageSize = 20
             };

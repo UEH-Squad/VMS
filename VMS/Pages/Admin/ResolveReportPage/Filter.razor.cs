@@ -15,7 +15,7 @@ namespace VMS.Pages.Admin.ResolveReportPage
         private bool haveStatus;
         private bool haveType;
 
-        [Parameter] public FilterReportViewModel FilterReport { get; set; } = new();
+        private FilterReportViewModel filter = new();
 
         [Parameter] public EventCallback<FilterReportViewModel> OnFilterChanged { get; set; }
 
@@ -36,19 +36,19 @@ namespace VMS.Pages.Admin.ResolveReportPage
 
         public void ChooseValueType(bool isReportUser)
         {
-            FilterReport.IsReportUser = isReportUser;
+            filter.IsReportUser = isReportUser;
             haveType = true;
         }
 
         public void ChooseValueStatus(ReportState state)
         {
             haveStatus = true;
-            FilterReport.State = state;
+            filter.State = state;
         }
 
         private void OnTimeValueChanged(DateTime time)
         {
-            FilterReport.Time = time;
+            filter.Time = time;
             timeValue = time;
             isFilterMonth = true;
         }
@@ -57,14 +57,14 @@ namespace VMS.Pages.Admin.ResolveReportPage
         {
             SetDefaultValues();
 
-            FilterReport = new();
+            filter = new();
 
             await OnClickFilterAsync();
         }
 
         private async Task OnClickFilterAsync()
         {
-            await OnFilterChanged.InvokeAsync(FilterReport);
+            await OnFilterChanged.InvokeAsync(filter);
         }
     }
 }

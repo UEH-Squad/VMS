@@ -5,7 +5,7 @@
 @attribute [Authorize(Roles = "Admin")]
 
 <div class="my-content">
-    <Filter />
+    <Filter OnFilterChanged="OnFilterChanged" />
     <ListReport Filter="@filter" />
 </div>
 

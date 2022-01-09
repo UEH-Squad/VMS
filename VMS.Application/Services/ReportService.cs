@@ -92,32 +92,49 @@ namespace VMS.Application.Services
             };
         }
 
-        public async Task UpdateReportStateAsync(int reportId, ReportState state)
+        public async Task UpdateReportStateAsync(int reportId, ReportState state, string handlerId)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Feedback feedback = await _repository.GetByIdAsync<Feedback>(dbContext, reportId);
 
-            switch (state)
+            feedback.IsPinned = state.Equals(ReportState.Pinned) ? !feedback.IsPinned : feedback.IsPinned;
+
+            if (!state.Equals(ReportState.Pinned))
             {
-                case ReportState.Pinned:
-                    feedback.IsPinned = !feedback.IsPinned;
-                    break;
-                case ReportState.Done:
-                    feedback.IsDone = true;
-                    break;
-                case ReportState.Processing:
-                    feedback.IsDone = false;
-                    break;
-                case ReportState.Closed:
-                    feedback.IsClosed = !feedback.IsClosed;
-                    break;
-                case ReportState.Deleted:
-                    feedback.IsDeleted = true;
-                    break;
+                feedback.IsDone = state.Equals(ReportState.Done) ? true : state.Equals(ReportState.Processing) ? false : null;
+                feedback.IsClosed = state.Equals(ReportState.Closed) && !feedback.IsClosed;
+                feedback.IsDeleted = state.Equals(ReportState.Deleted);
             }
 
+            feedback.UpdatedBy = handlerId;
+            feedback.UpdatedDate = DateTime.Now;
+
             await _repository.UpdateAsync(dbContext, feedback);
+        }
+
+        public async Task<ReportViewModel> GetReportByIdAsync(int reportId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Feedback> specification = new()
+            {
+                Conditions = new()
+                {
+                    x => x.Id == reportId
+                },
+
+                Includes = x => x.Include(x => x.User)
+                                 .Include(x => x.Handler)
+                                 .Include(x => x.Reporter)
+                                 .Include(x => x.Activity)
+                                 .Include(x => x.ReasonReports)
+                                 .Include(x => x.ImageReports)
+            };
+
+            Feedback feedback = await _repository.GetAsync(dbContext, specification);
+
+            return _mapper.Map<ReportViewModel>(feedback);
         }
     }
 }

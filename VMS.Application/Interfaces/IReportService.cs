@@ -11,6 +11,8 @@ namespace VMS.Application.Interfaces
 
         Task<PaginatedList<ReportViewModel>> GetAllReportsAsync(FilterReportViewModel filter, int currentPage);
 
-        Task UpdateReportStateAsync(int reportId, ReportState state);
+        Task UpdateReportStateAsync(int reportId, ReportState state, string handlerId);
+
+        Task<ReportViewModel> GetReportByIdAsync(int reportId);
     }
 }

@@ -23,9 +23,16 @@ namespace VMS.Application.ViewModels
         public string ActivityName { get; set; }
         public string HandlerName { get; set; }
         public string ReporterName { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
 
         public List<string> Reasons { get; set; }
         public List<string> Images { get; set; }
+
+        public ReportViewModel()
+        {
+            CreatedDate = DateTime.Now;
+            Reasons = new();
+            Images = new();
+        }
     }
 }

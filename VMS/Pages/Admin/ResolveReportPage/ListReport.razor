@@ -34,8 +34,7 @@
                                     <span class="material-icons"> check_circle </span>
                                     <span class="icon-tooltip">Hoàn tất xử lý</span>
                                 </div>
-                            }
-                            @if (item.IsDone.HasValue && !item.IsDone.Value)
+                            } else if (item.IsDone.HasValue && !item.IsDone.Value)
                             {
                                 <div class="info-item__status--processing">
                                     <svg class="material-icons">
@@ -45,8 +44,7 @@
 
                                     <span class="icon-tooltip">Đang xử lý</span>
                                 </div>
-                            }
-                            @if (item.IsClosed)
+                            }else if (item.IsClosed)
                             {
                                 <div class="info-item__status--closed">
                                     <span class="material-icons"> cancel </span>

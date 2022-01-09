@@ -17,6 +17,8 @@ namespace VMS.Pages.Admin.ResolveReportPage
 
         [Parameter] public FilterReportViewModel Filter { get; set; } = new();
 
+        [CascadingParameter] public string CurrentUserId { get; set; }
+
         [Inject] private IReportService ReportService { get; set; }
 
         protected override async Task OnParametersSetAsync()
@@ -38,14 +40,14 @@ namespace VMS.Pages.Admin.ResolveReportPage
             await Interop.ScrollToTop(JsRuntime);
         }
 
-        private static string ConvertListReasonsToString(List<string> reasons)
+        public static string ConvertListReasonsToString(List<string> reasons)
         {
             return reasons.Aggregate((a, b) => a + "; " + b);
         }
 
         private async Task HandlePinAsync(int reportId)
         {
-            await ReportService.UpdateReportStateAsync(reportId, ReportState.Pinned);
+            await ReportService.UpdateReportStateAsync(reportId, ReportState.Pinned, CurrentUserId);
             await SetDataAsync();
         }
     }

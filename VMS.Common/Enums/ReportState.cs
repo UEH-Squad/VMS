@@ -2,11 +2,11 @@
 {
     public enum ReportState
     {
-        Pinned,
-        Processing,
-        Done,
-        Closed,
-        Default,
-        Deleted
+        Default = 0,
+        Pinned = 1,
+        Processing = 2,
+        Done = 3,
+        Closed = 4,
+        Deleted = 5
     }
 }

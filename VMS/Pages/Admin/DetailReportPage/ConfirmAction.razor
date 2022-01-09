@@ -1,29 +1,29 @@
 ﻿<div class="pop-up">
     <div class="center-screen">
-        <div class="pop-up-container border-10 @(isConfirm? "d-none" : "d-block")">
-            <div @onclick="CloseModal" class="close-btn">
+        <div class="pop-up-container border-10 @(isConfirm ? "d-none" : "d-block")">
+            <div @onclick="CloseModalAsync" class="close-btn">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <div class="content">
                 <h3>Bạn có chắc chắn muốn</h3>
-                <h3><span class="delete-text">@(ActionDelete?"xóa báo cáo":"đóng báo cáo")</span> này không?</h3>
+                <h3><span class="delete-text">@(ActionDelete ? "xóa báo cáo" : IsClosed ? "mở báo cáo" : "đóng báo cáo")</span> này không?</h3>
             </div>
             <div class="pop-up-btn">
-                <div @onclick="CloseModal" class="btn px-0 deny">Hủy</div>
+                <div @onclick="CloseModalAsync" class="btn px-0 deny">Hủy</div>
                 <div @onclick="DeleteSuccess" class="btn accept px-0">Xác nhận</div>
             </div>
         </div>
 
-        <div class="pop-up-container border-10 @(isConfirm? "d-block" : "d-none")">
-            <div @onclick="CloseModal" class="close-btn-s">
+        <div class="pop-up-container border-10 @(isConfirm ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="close-btn-s">
                 <span class="material-icons">
                     close
                 </span>
             </div>
             <div class="pop-up-content">
-                <h3 class="delete-act">Bạn đã <span>@(ActionDelete?"xóa báo cáo":"đóng báo cáo")</span> thành công!</h3>
+                <h3 class="delete-act">Bạn đã <span>@(ActionDelete ? "xóa báo cáo" : IsClosed ? "mở báo cáo" : "đóng báo cáo")</span> thành công!</h3>
             </div>
         </div>
     </div>
@@ -37,10 +37,13 @@
     [Parameter]
     public bool ActionDelete { get; set; }
 
-    private bool isConfirm= false;
+    [Parameter]
+    public bool IsClosed { get; set; }
+
+    private bool isConfirm = false;
     private bool isDeleteSuccess;
 
-    private async Task CloseModal()
+    private async Task CloseModalAsync()
     {
         await Modal.CloseAsync(ModalResult.Ok<bool>(isConfirm));
     }

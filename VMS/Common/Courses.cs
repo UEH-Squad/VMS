@@ -17,6 +17,8 @@ namespace VMS.Common
                 courses.Add($"K{presentCourse - i}");
             }
 
+            courses.Add("Khác");
+
             return courses;
         }
 

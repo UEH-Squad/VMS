@@ -90,7 +90,6 @@ namespace VMS.Pages.Organization.Profile
 
         private static bool CheckInforUser(UserViewModel org) => !string.IsNullOrEmpty(org.FullName)
                                                                  && !string.IsNullOrEmpty(org.Email)
-                                                                 && !string.IsNullOrEmpty(org.PhoneNumber)
                                                                  && !string.IsNullOrEmpty(org.Mission)
                                                                  && !string.IsNullOrEmpty(org.Banner)
                                                                  && org.Areas.Count != 0;

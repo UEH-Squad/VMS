@@ -24,7 +24,7 @@
                         <a href="@Routes.EditOrgProfile" class="d-flex align-self-center me-2 me-md-4 pe-2">
                             #@Org?.Rank @*There will be processing code in another place*@
                         </a>
-                        <div  class="text-start">
+                        <div class="text-start">
                             <p class="mb-1 mb-md-2 d-flex justify-content-evenly align-self-end">
                                 <span class="information__rank-number">@Org?.AverageRating</span>
                                 <i class="material-icons-outlined" style="color:@(Org.AverageRating > 0 ? "#EDF131" : "#B4B4B4")">
@@ -80,21 +80,24 @@
                                 <span style="@(IsUsedForAdmin ? "font-size: 18px" : "")">@Org.QuantityRating xếp hạng</span>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="col-right information__contact mb-3 mb-md-0 mt-1 mt-md-0">
                         <p class="d-flex align-self-center">
                             <i class="material-icons">
                                 email
                             </i>
-                            <a href="mailto:@Org?.Email">@Org?.Email</a>
+                            <a href="mailto:@Org?.Email">@Org?.NotifiedEmail</a>
                         </p>
-                        <p class="d-flex align-self-center mb-0">
-                            <i class="material-icons">
-                                contact_phone
-                            </i>
-                            <a href="tel:@Org?.PhoneNumber">@Org?.PhoneNumber</a>
-                        </p>
+                        @if (!string.IsNullOrEmpty(Org?.PhoneNumber))
+                        {
+                            <p class="d-flex align-self-center mb-0">
+                                <i class="material-icons">
+                                    contact_phone
+                                </i>
+                                <a href="tel:@Org?.PhoneNumber">@Org?.PhoneNumber</a>
+                            </p>
+                        }
                     </div>
 
                 </div>
@@ -129,7 +132,7 @@
                                     <i class="material-icons-outlined">add</i>
                                     <span class="ms-2">Tạo hoạt động</span>
                                 </a>
-                            </div>           
+                            </div>
                         }
                     </div>
                 </div>

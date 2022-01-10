@@ -67,24 +67,13 @@
   display: flex;
   flex-direction: row;
   padding: 10px 7px;
-  height: 165px;
+  height: 180px;
   margin-bottom: 15px;
   background-color: #F3F3F5;
   border-radius: 5px; }
-  @media (min-width: 768px) {
-    .org-card {
-      height: 200px; } }
-  @media (min-width: 992px) {
-    .org-card {
-      height: 200px;
-      border-radius: 10px; } }
   @media (min-width: 1200px) {
     .org-card {
-      height: 220px; } }
-  @media (min-width: 1400px) {
-    .org-card {
-      padding: 20px 18px;
-      height: 280px; } }
+      height: 310px; } }
 
 .org-card__img {
   width: 30%;
@@ -311,9 +300,6 @@
     .org-card .org-card__member {
       align-items: unset;
       margin-right: 170px; } }
-  @media (min-width: 1400px) {
-    .org-card .org-card__member {
-      margin-right: 200px; } }
   .org-card .org-card__member .material-icons {
     color: #64D72F; }
 
@@ -325,7 +311,7 @@
   @media (min-width: 992px) {
     .org-card .material-icons {
       font-size: 18px; } }
-  @media (min-width: 992px) {
+  @media (min-width: 1400px) {
     .org-card .material-icons {
       font-size: 24px; } }
   .org-card .material-icons:hover {
@@ -366,11 +352,19 @@
 .org-card__noti {
   padding: 5px 15px;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 10px;
   color: #E10B0B;
   text-indent: 5px;
   bottom: 5px;
   right: 0; }
+  @media (min-width: 992px) {
+    .org-card__noti {
+      font-size: 18px; } }
+  @media (min-width: 1400px) {
+    .org-card__noti {
+      font-size: 24px; } }
+  .org-card__noti span {
+    font-size: inherit; }
 
 .org-card__member {
   width: fit-content; }
@@ -480,7 +474,7 @@
   @media (min-width: 992px) {
     .text-result {
       margin-bottom: unset;
-      font-size: 16px; } }
+      font-size: 18px; } }
   @media (min-width: 1200px) {
     .text-result {
       font-size: 20px; } }
@@ -505,13 +499,13 @@
 
 .div-volunteer .icon-check {
   color: #64D72F;
-  font-size: 16px; }
-  @media (min-width: 576px) {
+  font-size: 10px; }
+  @media (min-width: 992px) {
     .div-volunteer .icon-check {
       font-size: 18px; } }
-  @media (min-width: 1200px) {
+  @media (min-width: 1400px) {
     .div-volunteer .icon-check {
-      font-size: 20px; } }
+      font-size: 24px; } }
 
 .div-volunteer span {
   font-weight: 500;

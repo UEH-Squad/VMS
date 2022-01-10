@@ -79,6 +79,8 @@
       @media (min-width: 1200px) {
         .org-item__name-group a {
           font-size: 18px; } }
+      .org-item__name-group a:hover {
+        color: #0B588c; }
     .org-item__name-group p {
       font-size: 8px;
       color: #b4b4b4; }

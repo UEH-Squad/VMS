@@ -97,6 +97,10 @@ $border-width: 1px;
             @include on('xl') {
                 font-size: 18px;
             }
+
+            &:hover {
+                color: $blue-hv;
+            }
         }
 
         p {

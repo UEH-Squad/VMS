@@ -167,6 +167,10 @@
                 margin-bottom: unset;
                 padding-bottom: unset;
             }
+
+            p{
+                margin-bottom: 0;
+            }
         }
 
 
@@ -216,7 +220,7 @@
             @include on('lg') {
                 display: block;
                 text-align: center;
-                margin-top: 30px;
+                margin-top: 20px;
             }
 
             .profile__carousel, .profile__NoCarousel {
@@ -489,7 +493,7 @@
         }
 
         @include on("xxl") {
-            height: 323px;
+            height: 362px;
             overflow-y: scroll;
             padding-left: 45px;
             padding-right: 45px;

@@ -86,27 +86,13 @@
     display: flex;
     flex-direction: row;
     padding: 10px 7px;
-    height: 165px;
+    height: 180px;
     margin-bottom: 15px;
     background-color: $grey;
     border-radius: 5px;
 
-    @include on('md') {
-        height: 200px;
-    }
-
-    @include on('lg') {
-        height: 200px;
-        border-radius: 10px;
-    }
-
     @include on('xl') {
-        height: 220px;
-    }
-
-    @include on('xxl') {
-        padding: 20px 18px;
-        height: 280px;
+        height: 310px;
     }
 }
 
@@ -433,10 +419,6 @@
             margin-right: 170px;
         }
 
-        @include on("xxl") {
-            margin-right: 200px;
-        }
-
         .material-icons, {
             color: $green;
         }
@@ -452,7 +434,7 @@
             font-size: 18px;
         }
 
-        @include on('lg') {
+        @include on('xxl') {
             font-size: 24px;
         }
 
@@ -510,11 +492,23 @@
     &__noti {
         padding: 5px 15px;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 10px;
         color: $red-warning;
         text-indent: 5px;
         bottom: 5px;
         right: 0;
+
+        @include on('lg') {
+            font-size: 18px;
+        }
+
+        @include on('xxl') {
+            font-size: 24px;
+        }
+
+        span {
+            font-size: inherit;
+        }
     }
 
     &__member {
@@ -668,7 +662,7 @@
 
     @include on('lg') {
         margin-bottom: unset;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     @include on('xl') {
@@ -703,14 +697,14 @@
 .div-volunteer {
     .icon-check {
         color: $green;
-        font-size: 16px;
+        font-size: 10px;
 
-        @include on('sm') {
+        @include on('lg') {
             font-size: 18px;
         }
 
-        @include on('xl') {
-            font-size: 20px;
+        @include on('xxl') {
+            font-size: 24px;
         }
     }
 

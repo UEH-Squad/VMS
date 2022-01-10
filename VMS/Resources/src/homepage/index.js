@@ -103,7 +103,7 @@ const rankCarousel = () => {
         loop: true,
         margin: 0,
         nav: true,
-        autoplay: false,
+        autoplay: true,
         autoplayTimeout: 5000,
         autoplaySpeed: 2000,
         autoplayHoverPause: true,

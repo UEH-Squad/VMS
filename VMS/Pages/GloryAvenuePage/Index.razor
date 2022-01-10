@@ -1,0 +1,18 @@
+﻿@attribute [Route(Routes.GloryAvenue)]
+<div class="container position-relative">
+    <h1 class="text-center my-4 my-lg-5">Đại lộ <span>danh vọng</span></h1>
+    <h2 class="text-center my-4">Vinh danh @Unit xuất sắc</h2>
+    <VMS.Pages.Homepage.Rank isShowTitle="false" />
+    <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@Value" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3" : "" )" OnChange="ChooseMonthValue" Format="MM/yyyy" />
+    <Ranking Role="tổ chức" Type="theo khoa" />
+    <Ranking Role="tổ chức" Type="theo lĩnh vực" />
+</div>
+@code {
+    private bool isFilterMonth;
+    [Parameter] public DateTime Value { get; set; }
+    [Parameter] public string Unit { get; set; } = "tập thể";
+    void ChooseMonthValue()
+    {
+        isFilterMonth = true;
+    }
+}

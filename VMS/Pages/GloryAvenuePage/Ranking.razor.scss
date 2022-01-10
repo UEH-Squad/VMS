@@ -1,0 +1,284 @@
+﻿@import '../../Resources/scss/common/_variables.scss';
+
+.ranking {
+    h1 {
+        font-size: 18px;
+        font-weight: 600;
+        color: $blue;
+
+        span {
+            color: $green;
+        }
+
+        @include on("sm") {
+            font-size: 20px;
+        }
+
+        @include on("lg") {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        @include on("xl") {
+            font-size: 30px;
+        }
+    }
+
+    hr {
+        display: none;
+        height: 1px;
+        background-color: #707070;
+        opacity: 50%;
+
+        @include on('xl') {
+            width: 40%;
+            display: block;
+        }
+    }
+
+    &-list {
+        height: 500px;
+        background-color: $grey;
+        border-radius: 10px;
+
+        @include on('lg') {
+            height: 600px;
+        }
+    }
+
+    &-img {
+        padding-top: 20px;
+
+        @include on('lg') {
+            padding-top: 26px;
+        }
+    }
+
+    &-name {
+        height: 75px;
+
+        h3 {
+            font-size: 20px;
+            color: $blue;
+            padding-top: 10px;
+
+            @include on('lg') {
+                font-size: 30px;
+            }
+        }
+
+        @include on('lg') {
+            height: 90px;
+        }
+    }
+
+    &-img__container {
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+
+        @include on('lg') {
+        }
+
+        img {
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    &-item {
+        h1 {
+            font-size: 40px;
+            color: $blue;
+            font-weight: 500;
+
+            @include on('lg') {
+                font-size: 45px;
+            }
+        }
+
+        &__img {
+            border: solid 2px $green;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            overflow: hidden;
+
+            @include on('lg') {
+                width: 56px;
+                height: 56px;
+            }
+
+            img {
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        h2 {
+            font-size: 14px;
+            color: $grey-text;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            -webkit-line-clamp: 1;
+
+            @include on('lg') {
+                font-size: 16px;
+                -webkit-line-clamp: 2;
+            }
+        }
+
+        p {
+            font-size: 18px;
+            color: $border-color-bold;
+            font-weight: 700;
+
+            @include on('lg') {
+                font-size: 14px;
+            }
+        }
+
+        i {
+            color: $yellow-star;
+            font-size: 14px;
+
+            @include on('lg') {
+                font-size: 16px;
+            }
+        }
+
+        .star-noColor {
+            color: $grey-icon;
+        }
+    }
+
+    ::deep .owl-nav {
+        display: none;
+
+        @include on('lg') {
+            display: inline-block;
+        }
+
+        .owl-prev {
+            span {
+                position: absolute;
+                top: 15%;
+                left: -10px;
+                font-size: 100px;
+                color: $blue;
+                transition: all 0.3s linear;
+                display: block;
+
+                @include on('lg') {
+                    top: 32%;
+                    left: 0;
+                }
+
+                &:hover {
+                    color: $blue-bold;
+                    opacity: 0.73;
+                }
+            }
+        }
+
+        .owl-next {
+            span {
+                position: absolute;
+                top: 15%;
+                right: -10px;
+                font-size: 100px;
+                color: $blue;
+                transition: all 0.3s linear;
+                display: block;
+
+                @include on('lg') {
+                    top: 32%;
+                    right: 0;
+                }
+
+                &:hover {
+                    color: $blue-bold;
+                    opacity: 0.73;
+                }
+            }
+        }
+    }
+
+
+    ::deep .owl-dots {
+        transform: translateY(-50%);
+        margin-top: 20px;
+
+        @include on('lg') {
+            margin-top: 0;
+        }
+
+        span {
+            background-color: #C4C4C4;
+            width: 6px;
+            height: 6px;
+            margin: 5px 4px;
+
+            &:hover {
+                background-color: $blue;
+            }
+        }
+
+        .owl-dot.active > span {
+            background-color: $blue;
+            width: 20px;
+        }
+    }
+
+    .bg-grey {
+        background-color: #f3f3f3;
+    }
+
+    .filter-item {
+        width: 50%;
+
+        @include on('sm') {
+            width: 30%;
+        }
+
+        @include on('md') {
+            display: none;
+        }
+
+        .material-icons-outlined {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px;
+            cursor: pointer;
+        }
+    }
+
+    .filter-item__btn {
+        border-radius: 10px;
+        height: 33px;
+        width: 100%;
+        border: 1px solid $border-color-bold;
+        cursor: pointer;
+        color: $grey-icon;
+        padding-left: 20px;
+        padding-right: 30px;
+        font-size: 12px;
+        outline: none;
+        line-height: 40px;
+
+        &--lmtext-1 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        &::placeholder {
+            color: $grey-icon;
+        }
+    }
+}

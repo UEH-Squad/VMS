@@ -650,5 +650,21 @@
   {
     "outputFile": "Pages/SearchVolunteer/Index.razor.css",
     "inputFile": "Pages/SearchVolunteer/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/GloryAvenuePage/Ranking.razor.css",
+    "inputFile": "Pages/GloryAvenuePage/Ranking.razor.scss"
+  },
+  {
+    "outputFile": "Pages/GloryAvenuePage/Index.razor.css",
+    "inputFile": "Pages/GloryAvenuePage/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/GloryAvenuePage/LevelPopup.razor.css",
+    "inputFile": "Pages/GloryAvenuePage/LevelPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/GloryAvenuePage/FacultyPopup.razor.css",
+    "inputFile": "Pages/GloryAvenuePage/FacultyPopup.razor.scss"
   }
 ]

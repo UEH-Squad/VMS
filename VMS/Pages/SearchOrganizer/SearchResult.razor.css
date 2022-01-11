@@ -50,7 +50,8 @@
     min-width: 55px;
     border-radius: 50%;
     z-index: 2;
-    object-fit: cover; }
+    object-fit: cover;
+    cursor: pointer; }
     @media (min-width: 1200px) {
       .org-item__img {
         height: 115px;

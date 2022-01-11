@@ -20,13 +20,16 @@ namespace VMS.Pages.ActivityInfoPage
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
+        [CascadingParameter]
+        public string UserId { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             isLoading = true;
             
             activity = await ActivityService.GetViewActivityViewModelAsync(ActivityId);
 
-            if (activity is null)
+            if (activity is null || !activity.IsApproved && !activity.OrgId.Equals(UserId))
             {
                 NavigationManager.NavigateTo("404");
                 return;

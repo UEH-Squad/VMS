@@ -14,10 +14,10 @@
         <span class="material-icons-outlined"> expand_more </span>
         <input readonly="readonly" placeholder="@valueStatus" data-bs-toggle="dropdown" class="@(haveStatus?"bg-grey":"") dropdown-input" />
         <ul class="dropdown-menu">
-            <li @onclick="() => ChooseValueStatus(ReportState.Pinned)" style="color: #F14747">Đã ghim</li>
-            <li @onclick="() => ChooseValueStatus(ReportState.Processing)" style="color: #18A0FB">Đang xử lý</li>
-            <li @onclick="() => ChooseValueStatus(ReportState.Done)" style="color: #64D72F">Hoàn tất xử lý</li>
-            <li @onclick="() => ChooseValueStatus(ReportState.Closed)" style="color: unset">Đã đóng</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Pinned)" style="color: #F14747">@ReportState.Pinned.GetName()</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Processing)" style="color: #18A0FB">@ReportState.Processing.GetName()</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Done)" style="color: #64D72F">@ReportState.Done.GetName()</li>
+            <li @onclick="() => ChooseValueStatus(ReportState.Closed)" style="color: unset">@ReportState.Closed.GetName()</li>
         </ul>
     </div>
 

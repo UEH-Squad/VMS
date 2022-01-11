@@ -27,9 +27,15 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+.list-card .card-item :hover {
+  background-color: #F3F3F5;
+}
 .list-card .item {
   padding: 15px;
   border-bottom: 1px solid #D8D8D8;
+}
+.list-card .item--pinned {
+  background-color: #F3F3F5;
 }
 .list-card .item .list-reason {
   font-size: 16px;
@@ -114,6 +120,6 @@
   background-color: #fff;
   border-radius: 10px;
   border-bottom-right-radius: 3px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0025);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.35);
   color: #515151;
 }

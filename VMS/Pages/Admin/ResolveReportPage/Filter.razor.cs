@@ -38,12 +38,14 @@ namespace VMS.Pages.Admin.ResolveReportPage
         {
             filter.IsReportUser = isReportUser;
             haveType = true;
+            valueTypeReport = isReportUser ? "Báo cáo tình nguyện viên" : "Báo cáo tổ chức";
         }
 
         public void ChooseValueStatus(ReportState state)
         {
-            haveStatus = true;
             filter.State = state;
+            haveStatus = true;
+            valueStatus = state.GetName();
         }
 
         private void OnTimeValueChanged(DateTime time)

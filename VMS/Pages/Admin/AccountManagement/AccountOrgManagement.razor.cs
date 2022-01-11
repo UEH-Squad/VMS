@@ -28,7 +28,7 @@ namespace VMS.Pages.Admin.AccountManagement
 
         [Inject] IAdminService AdminService { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
             filter.Role = Role.Organization.ToString();
             filter.SearchValue = SearchValue;

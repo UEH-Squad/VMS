@@ -69,10 +69,11 @@
       display: block; } }
 
 input[type="checkbox"] {
+  -webkit-appearance: none;
   height: 10px;
   width: 10px;
   background-color: #FFFFFF;
-  border: 1px solid #B4B4B4;
+  border: 1px solid #515151;
   display: flex;
   align-items: center;
   justify-content: center; }
@@ -86,10 +87,13 @@ input[type="checkbox"] {
 input[type="checkbox"]::after {
   font-family: "Material Icons";
   content: "\e876";
-  font-size: 18px;
+  font-size: 8px;
   font-weight: 600;
   color: #18A0FB;
   display: none; }
+  @media (min-width: 992px) {
+    input[type="checkbox"]::after {
+      font-size: 18px; } }
 
 input[type="checkbox"]:hover {
   background-color: rgba(0, 0, 0, 0.1); }

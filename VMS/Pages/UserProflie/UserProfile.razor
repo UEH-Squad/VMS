@@ -46,7 +46,7 @@
                     <div class="row align-items-center mb-3">
                         <p class=" col-2 material-icons profile__contact-icon">email</p>
                         <p class="col-10 profile__contact-text" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">
-                            <a href="mailto:@User.Email">@User.Email</a>
+                            <a href="mailto:@User.NotifiedEmail">@User.NotifiedEmail</a>
                         </p>
                     </div>
                     @if (!string.IsNullOrEmpty(User.PhoneNumber))

@@ -29,4 +29,5 @@ export const SaveAs = (filename, bytesBase64) => volunteerListPage.saveAsFile(fi
 
 export const SaveAsFile = (filename, bytesBase64) => admin.saveAsFile(filename, bytesBase64);
 export const RankingCarousel = () => gloryAvenue.rankingCarousel();
+export const AddOutsideClickNavBarHandler = () => homepage.addOutsideClickNavBarHandler();
 

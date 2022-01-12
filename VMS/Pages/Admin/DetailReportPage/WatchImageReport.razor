@@ -1,7 +1,8 @@
 ﻿
 <div class="myModal">
+    <span class="material-icons close" @onclick="CloseModal">  cancel  </span>
+    <div class="bg-close" @onclick="CloseModal"></div>
     <div class="cover-image">
-        <span @onclick="CloseModal" class="material-icons close">  cancel  </span>
         @if (Image != "")
         {
             <img class="modal-content" src="@Image">

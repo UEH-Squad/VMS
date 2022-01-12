@@ -190,10 +190,12 @@ namespace VMS.Pages.ActivitySearchPage
         {
             cityChoosenValue = "Tỉnh/Thành phố";
             districtChoosenValue = "Quận/Huyện";
+            wardChoosenValue = "Phường/Xã";
             organizationChoosenValue = "Tổ chức";
 
             isCityShow = false;
             isDistrictShow = false;
+            isWardShow = false;
             isOrganizationShow = false;
             isActTypeShow = false;
 

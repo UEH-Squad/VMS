@@ -131,4 +131,33 @@ const rankCarousel = () => {
     })
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber, rankCarousel };
+const addOutsideClickNavBarHandler = () => {
+    const hideNavBar = () => {
+        if ($('#navbarSupportedContent').hasClass('show')) {
+            $('#navbarSupportedContent').removeClass('show');
+        }
+
+        if (!$('my-navbar__hamburger-wrapper__btn').hasClass('collapsed')) {
+            $('my-navbar__hamburger-wrapper__btn').addClass('collapsed');
+        }
+    };
+
+    window.addEventListener('click', (e) => {
+        if (!document.getElementById('navbarSupportedContent').contains(e.target)) {
+            hideNavBar();
+        }
+    });
+
+    let previousUrl = '';
+    const observer = new MutationObserver(function (mutations) {
+        if (location.href !== previousUrl) {
+            previousUrl = location.href;
+            hideNavBar();
+        }
+    });
+
+    const config = { subtree: true, childList: true };
+    observer.observe(document, config);
+}
+
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber, rankCarousel, addOutsideClickNavBarHandler };

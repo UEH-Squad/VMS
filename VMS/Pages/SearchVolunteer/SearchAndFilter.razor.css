@@ -149,7 +149,8 @@ p {
   background-color: #fff;
   z-index: 10;
   display: none;
-  width: 100%; }
+  width: 100%;
+  height: 240px; }
   @media (min-width: 1200px) {
     .my-dropdown {
       padding: 15px 18px; } }

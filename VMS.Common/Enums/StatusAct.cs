@@ -14,4 +14,17 @@
         Approved,
         NotApproved,
     }
+
+    public static class StatusActExtension
+    {
+        public static string GetName(this StatusAct status)
+        {
+            return status switch
+            {
+                StatusAct.Happenning => "Đang diễn ra",
+                StatusAct.TookPlace => "Đã diễn ra",
+                _ => string.Empty,
+            };
+        }
+    }
 }

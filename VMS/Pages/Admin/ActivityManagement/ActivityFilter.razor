@@ -162,7 +162,7 @@
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@DateTimeValue" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3" : "")" OnChange="ChooseMonthValue" Format="MM/yyyy" />
+                <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@DateTimeValue" DefaultValue="DateTime.Now" Class="@(isFilterMonth ? "text-color pe-1 " : " pe-1" )"  OnChange="ChooseMonthValue" Format="MM/yyyy" />
             </div>
         </div>
 

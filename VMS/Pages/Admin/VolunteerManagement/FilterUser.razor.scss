@@ -1,6 +1,10 @@
 ﻿@import "../../../Resources/scss/common/_variables.scss";
 .bg-grey {
-    background-color: #f3f3f3;
+    &::placeholder {
+        color: #515151 !important;
+    }
+
+    color: #515151 !important;
 }
 
 .colored-red {

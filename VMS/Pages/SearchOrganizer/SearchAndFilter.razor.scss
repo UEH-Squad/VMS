@@ -1,6 +1,10 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 .bg-grey {
-    background-color: #f3f3f3;
+    &::placeholder {
+        color: #515151 !important;
+    }
+
+    color: #515151 !important;
 }
 
 h3 {
@@ -104,7 +108,7 @@ p {
     }
 
     &::placeholder {
-        color: #b4b4b4;
+        color: #B4B4B4;
     }
 }
 
@@ -116,7 +120,6 @@ p {
     width: 100%;
     border: 1px solid $border-color-bold;
     cursor: pointer;
-    color: #b4b4b4;
     padding-left: 8px;
     padding-right: 30px;
     outline: none;
@@ -125,13 +128,10 @@ p {
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
+    color: #B4B4B4;
 
     @include on('xl') {
         height: 40px;
-    }
-
-    &::placeholder {
-        color: #b4b4b4;
     }
 }
 

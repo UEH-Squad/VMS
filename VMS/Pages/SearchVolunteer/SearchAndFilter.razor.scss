@@ -1,7 +1,11 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 
 .bg-grey {
-    background-color: #f3f3f3;
+    &::placeholder {
+        color: #515151 !important;
+    }
+
+    color: #515151 !important;
 }
 
 h3 {
@@ -163,9 +167,8 @@ p {
         height: 40px;
     }
 
-    &::placeholder {
-        color: #b4b4b4;
-    }
+    color: #b4b4b4;
+
 }
 
 .my-dropdown {

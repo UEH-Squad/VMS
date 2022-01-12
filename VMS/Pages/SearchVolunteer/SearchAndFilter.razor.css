@@ -5,7 +5,9 @@
 /*#region mixins */
 /*#endregion */
 .bg-grey {
-  background-color: #f3f3f3; }
+  color: #515151 !important; }
+  .bg-grey::placeholder {
+    color: #515151 !important; }
 
 h3 {
   font-weight: 600;
@@ -132,12 +134,11 @@ p {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   /* number of lines to show */
-  -webkit-box-orient: vertical; }
+  -webkit-box-orient: vertical;
+  color: #b4b4b4; }
   @media (min-width: 1200px) {
     .popup-btn_2 {
       height: 40px; } }
-  .popup-btn_2::placeholder {
-    color: #b4b4b4; }
 
 .my-dropdown {
   padding: 5px 6px;

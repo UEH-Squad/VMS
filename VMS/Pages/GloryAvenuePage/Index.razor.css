@@ -29,6 +29,15 @@
       font-size: 48px;
       font-weight: 500; } }
 
+.container .text-color .ant-picker-input input {
+  color: #515151 !important; }
+
+.container ::deep .text-color .ant-picker-input input {
+  color: #515151 !important; }
+
+.container ::deep .ant-picker-focused {
+  box-shadow: none; }
+
 .container ::deep .ant-picker {
   position: absolute;
   border-radius: 10px;

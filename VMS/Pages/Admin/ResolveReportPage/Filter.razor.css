@@ -5,7 +5,9 @@
 /*#region mixins */
 /*#endregion */
 .bg-grey {
-  background-color: #f3f3f3; }
+  color: #515151 !important; }
+  .bg-grey::placeholder {
+    color: #515151 !important; }
 
 .filter-bar {
   display: flex;
@@ -45,6 +47,8 @@
         .filter-bar .item .dropdown-menu li:hover {
           color: #64D72F;
           background-color: rgba(24, 160, 251, 0.1); }
+  .filter-bar ::deep .text-color .ant-picker-input input {
+    color: #515151 !important; }
   .filter-bar ::deep .ant-picker {
     width: 100%;
     padding: 6px 30px 6px 10px;
@@ -62,6 +66,8 @@
           outline: none !important; }
     .filter-bar ::deep .ant-picker-clear {
       display: none; }
+  .filter-bar ::deep .ant-picker-focused {
+    box-shadow: none; }
   .filter-bar .filter-btn {
     font-weight: 400 !important;
     color: #fff;

@@ -98,14 +98,14 @@
 
     @include on('xl') {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
     }
 }
 .filter-item {
     width: 100%;
 
     @include on('xl') {
-        width: 16%;
+        width: 18%;
     }
 
     &__icon {

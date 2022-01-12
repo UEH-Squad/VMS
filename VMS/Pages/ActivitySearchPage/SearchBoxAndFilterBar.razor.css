@@ -83,13 +83,13 @@
   @media (min-width: 1200px) {
     .filter-bar-pc {
       display: flex;
-      justify-content: space-between; } }
+      flex-wrap: wrap; } }
 
 .filter-item {
   width: 100%; }
   @media (min-width: 1200px) {
     .filter-item {
-      width: 16%; } }
+      width: 18%; } }
   .filter-item__icon {
     top: 50%;
     transform: translateY(-50%);

@@ -129,7 +129,7 @@
         margin-top: 5%;
 
         @include on("lg") {
-            width: 28%;
+            width: 35%;
             border-top: none;
             padding-top: 0;
             margin-top: 0;
@@ -451,6 +451,7 @@
 
     .profile__skills-content {
         display: flex;
+        align-items: baseline;
         padding-bottom: 10px !important;
         border: none;
 
@@ -477,7 +478,7 @@
             width: 98%;
             height: 305px;
             overflow-y: scroll;
-            overflow-x: unset;
+            overflow-x: hidden;
             padding-left: 35px;
             padding-right: 35px;
 
@@ -502,27 +503,23 @@
 
     h3 {
         text-align: start !important;
-        width: 500px;
+        width: 600px;
         color: $blue;
         display: inline;
         font-weight: 600;
         font-size: 16px;
 
         @include on("sm") {
-            text-align: center !important;
-            width: unset;
             font-size: 20px;
         }
 
         @include on("lg") {
             text-align: center !important;
-            width: unset;
+            width: 100%;
             font-size: 24px;
         }
 
         @include on("xxl") {
-            text-align: center !important;
-            width: unset;
             font-size: 30px;
         }
     }

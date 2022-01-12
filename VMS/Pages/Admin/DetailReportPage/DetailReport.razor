@@ -1,6 +1,6 @@
 ﻿@layout AdminLayout
 
-@attribute [Route(Routes.AdminDetailReport)]
+@attribute [Route(Routes.AdminDetailReport + "/{ReportId:int}")]
 @attribute [Authorize(Roles = "Admin")]
 
 
@@ -11,43 +11,44 @@
     </div>
 
     <div class="general-info">
-        <div class="general-info__item general-info__status @(action==""?"d-none":"")">
-            @switch (action)
+        <div class="general-info__item general-info__status @(string.IsNullOrEmpty(report.HandlerName) ? "d-none" : "d-block")">
+            @if (report.IsPinned)
             {
-                case "Đã ghim báo cáo":
-                    <div class=" status-item general-info__status--pin">
-                        <span class="material-icons"> push_pin </span>
-                        <p>@action</p>
-                    </div>
 
-                    break;
-                case "Đã đóng báo cáo":
-                    <div class=" status-item general-info__status--cancel">
-                        <span class="material-icons"> cancel </span>
-                        <p>@action</p>
-                    </div>
-                    break;
-                case "Đang xử lý báo cáo":
-                    <div class=" status-item general-info__status--processing">
-                        <svg class="material-icons">
-                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                            <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2m0 2c-4.42 0-8 3.58-8 8s3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8m0 1c3.87 0 7 3.13 7 7s-3.13 7-7 7c-1.93 0-3.68-.78-4.95-2.05L12 12V5z" fill="currentColor" />
-                        </svg>
-                        <p>@action</p>
-                    </div>
-                    break;
-                case "Hoàn tất xử lý báo cáo":
-                    <div class=" status-item general-info__status--complete">
-                        <span class="material-icons"> check_circle </span>
-                        <p>@action</p>
-                    </div>
-                    break;
-                default: break;
+                <div class=" status-item general-info__status--pin">
+                    <span class="material-icons"> push_pin </span>
+                    <p>Đã ghim báo cáo</p>
+                </div>
+            }
+            @if (report.IsClosed)
+            {
+
+                <div class=" status-item general-info__status--cancel">
+                    <span class="material-icons"> cancel </span>
+                    <p>Đã đóng báo cáo</p>
+                </div>
+            }
+            else if (report.IsDone.HasValue && !report.IsDone.Value)
+            {
+                <div class=" status-item general-info__status--processing">
+                    <svg class="material-icons">
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                        <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2m0 2c-4.42 0-8 3.58-8 8s3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8m0 1c3.87 0 7 3.13 7 7s-3.13 7-7 7c-1.93 0-3.68-.78-4.95-2.05L12 12V5z" fill="currentColor" />
+                    </svg>
+                    <p>Đang xử lý báo cáo</p>
+                </div>
+            } 
+            else if (report.IsDone.HasValue && report.IsDone.Value)
+            {
+                <div class=" status-item general-info__status--complete">
+                    <span class="material-icons"> check_circle </span>
+                    <p>Hoàn tất xử lý báo cáo</p>
+                </div>
             }
         </div>
-        <div class="general-info__item general-info__who">Được báo cáo bởi: <a href="@Routes.UserProfile">Bùi Minh Kha</a></div>
-        <div class="general-info__item general-info__activity">Hoạt động: <a>Tuyển tình nguyện viên tham gia phòng chống covid-19</a></div>
-        <div class="general-info__item general-info__date">Ngày báo cáo: 20/02/2020</div>
+        <div class="general-info__item general-info__who">Được báo cáo bởi: <a href="@Routes.AdminVolunteerProfile/@report.ReportBy">@report.ReporterName</a></div>
+        <div class="general-info__item general-info__activity">Hoạt động: <a href="@Routes.AdminActivityInfo/@report.ActivityId">@report.ActivityName</a></div>
+        <div class="general-info__item general-info__date">Ngày báo cáo: @report.CreatedDate.ToString("dd/MM/yyyy")</div>
     </div>
 
     <div class="form-report">
@@ -55,110 +56,41 @@
         <div class="dropdown form-report__more">
             <span class="material-icons-outlined" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"> more_horiz </span>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li @onclick="() => ShowNotification(1)" class="dropdown-item dropdown-pin">Ghim báo cáo</li>
+                <li @onclick="async () => await ChangeReportStateAsync(ReportState.Pinned)" class="dropdown-item dropdown-pin">@(report.IsPinned ? "Bỏ ghim" : "Ghim") báo cáo</li>
 
-                <li @onclick="() => ShowConfirm(0)" class="dropdown-item dropdown-close">Đóng báo cáo</li>
-                <li @onclick="() => ShowConfirm(1)" class="dropdown-item dropdown-delete">Xóa</li>
+                <li @onclick="async () => await ChangeReportStateAsync(ReportState.Closed)" class="dropdown-item dropdown-close">@(report.IsClosed ? "Mở" : "Đóng") báo cáo</li>
+                <li @onclick="async () => await ChangeReportStateAsync(ReportState.Deleted)" class="dropdown-item dropdown-delete">Xóa</li>
             </ul>
         </div>
-        <h1 class="form-report__title">Báo cáo&nbsp;<span>hoạt động</span></h1>
+        <h1 class="form-report__title">Báo cáo&nbsp;<span>@(report.IsReportUser ? "tình nguyện viên" : "hoạt động")</span></h1>
 
         <div class="form-report__reason mb-3">
             <h6 class="form-report__reason--text">Lý do báo cáo <span>(*)</span></h6>
-            <textarea rows="2" disabled="true">Hoạt động này không có thật; Hoạt động tổ chức không chuyên nghiệp; Hoạt động lừa đảo tham gia.</textarea>
+            <textarea rows="2" disabled>@reasons</textarea>
         </div>
 
         <div class="form-report__discript mb-3">
             <h6 class="form-report__discript--text">Mô tả về báo cáo <span>(*)</span></h6>
-            <textarea rows="4" disabled="true">Có hai cái cây trong một cái rừng. Trên những tán cây nở rộ những đóa hoa. Có hai đứa nhóc đang chơi trốn tìm. Tìm hoài tìm mãi nên quên lối về. Anh đi tìm thì em trốn, anh đi trốn em không tìm (Ah). Lòng em không gợn sóng, cuối cùng anh mất công chìm (Yeah). Nếu mà có cây búa anh sẽ nện cho bõ công. Vì nhớ nhung đặc quánh giờ nó khô thành bê tông.</textarea>
+            <textarea rows="4" disabled>@report.Content</textarea>
         </div>
 
         <div class="form-report__proof">
             <h6 class="form-report__proof--text">Minh chứng đính kèm <span>(*)</span></h6>
-            <div class="list-img-report d-flex @(soLuongAnhBaoCao==3? "justify-content-between":soLuongAnhBaoCao<3?"justify-content-evenly":"")">
-                @for (int i = 0; i < soLuongAnhBaoCao; i++)
+            <div class="list-img-report d-flex @(report.Images.Count == 3 ? "justify-content-between" : report.Images.Count < 3 ? "justify-content-evenly" : "")">
+                @foreach (var img in report.Images)
                 {
-                    <img @onclick="() =>ShowImage(nameImg)" class="form-report__proof--item @(soLuongAnhBaoCao>3?"margin-right-img":"")" src="@nameImg" alt="Ảnh mô tả báo cáo" />
+                    <img @onclick="() => ShowImage(img)" class="form-report__proof--item @(report.Images.Count > 3 ? "margin-right-img" : "")" src="@img" alt="Ảnh mô tả báo cáo" />
                 }
             </div>
         </div>
 
     </div>
     <div class="action-button d-flex justify-content-center">
-        <button @onclick="() => ShowNotification(2)" class="action-button__processing">Đang xử lý</button>
-        <button @onclick="() => ShowNotification(3)" class="action-button__complete-processing">Hoàn tất xử lý</button>
+        <button @onclick="async () => await ChangeReportStateAsync(ReportState.Processing)" class="action-button__processing">Đang xử lý</button>
+        <button @onclick="async () => await ChangeReportStateAsync(ReportState.Done)" class="action-button__complete-processing">Hoàn tất xử lý</button>
     </div>
 
 </div>
 
-
 @code {
-    string nameImg = "./img/activities/132858657740779848_c9a737b3-0bd1-4e99-8b9c-649179be2b72.jpg";
-    private int soLuongAnhBaoCao = 4;
-    private string action = "";
-
-    [CascadingParameter] public IModalService Modal { get; set; }
-    async Task ShowImage(string nameImg)
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        ModalParameters para = new();
-        para.Add("Image", nameImg);
-        Modal.Show<VMS.Pages.Admin.DetailReportPage.WatchImageReport>("", para, options);
-    }
-
-    async Task ShowConfirm(int act)
-    {
-        var options = new ModalOptions()
-        {
-
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-
-        ModalParameters parameters = new();
-        if (act == 1)
-        {
-            parameters.Add("ActionDelete", true);
-            var result = await Modal.Show<VMS.Pages.Admin.DetailReportPage.ConfirmAction>("", parameters, options).Result;
-            if ((bool)result.Data)
-            {
-                action = "";
-            }
-        }
-        else
-        {
-            parameters.Add("ActionDelete", false);
-            var Result = await Modal.Show<VMS.Pages.Admin.DetailReportPage.ConfirmAction>("", parameters, options).Result;
-            if ((bool)Result.Data)
-            {
-                action = "Đã đóng báo cáo";
-            }
-        }
-
-    }
-    async Task ShowNotification(int act)
-    {
-        var options = new ModalOptions()
-        {
-            HideCloseButton = true,
-            DisableBackgroundCancel = true,
-            UseCustomLayout = true
-        };
-        ModalParameters para = new();
-        switch (act)
-        {
-            case 1: action = "Đã ghim báo cáo"; break;
-            case 2: action = "Đang xử lý báo cáo"; break;
-            case 3: action = "Hoàn tất xử lý báo cáo"; break;
-        }
-        para.Add("TypeNotification", act);
-        Modal.Show<VMS.Pages.Admin.DetailReportPage.Notification>("", para, options);
-
-    }
 }

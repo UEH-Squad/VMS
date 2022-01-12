@@ -50,14 +50,6 @@
 
     @include on('lg') {
         border-radius: 5px;
-        font-size: 12px;
-    }
-
-    @include on('xl') {
-        font-size: 14px;
-    }
-
-    @include on('xxl') {
         font-size: 16px;
     }
 
@@ -86,10 +78,20 @@
     display: flex;
     flex-direction: row;
     padding: 10px 7px;
-    height: 180px;
+    height: 170px;
     margin-bottom: 15px;
     background-color: $grey;
     border-radius: 5px;
+
+    @include on('md')
+    {
+        height: 180px;
+    }
+
+    @include on('lg')
+    {
+        height: 272px;
+    }
 
     @include on('xl') {
         height: 310px;
@@ -122,11 +124,7 @@
         }
 
         .lmtext-2 {
-            -webkit-line-clamp: 3 !important;
-
-            @include on('lg') {
-                -webkit-line-clamp: 2 !important;
-            }
+            -webkit-line-clamp: 2;
         }
 
         &__title {
@@ -135,11 +133,11 @@
             font-weight: 500;
             font-size: 10px;
 
-            @include on('md') {
-                font-size: 14px;
+            @include on('sm') {
+                font-size: 12px;
             }
 
-            @include on('xxl') {
+            @include on('lg') {
                 font-size: 20px;
             }
 
@@ -186,18 +184,24 @@
             font-weight: normal;
             font-size: 8px;
             color: $grey-text;
-            margin-bottom: 2px;
+            margin-bottom: 5px;
 
-            @include on('md') {
-                font-size: 12px;
+            @include on('sm') {
+                font-size: 10px;
             }
 
-            @include on('xxl') {
+            @include on('lg') {
                 font-size: 18px;
             }
 
             p {
                 margin-bottom: 0;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal;
+                -webkit-line-clamp: 2;
             }
         }
 
@@ -267,20 +271,7 @@
         }
 
         .my-icon {
-            font-size: 8px !important;
             cursor: default;
-
-            @include on('md') {
-                font-size: 10px !important;
-            }
-
-            @include on('xl') {
-                font-size: 14px !important;
-            }
-
-            @include on('xxl') {
-                font-size: 16px !important;
-            }
 
             &:hover + .icon-tooltip {
                 display: block;
@@ -297,13 +288,9 @@
         }
 
         .material-icons-outlined {
-            font-size: 16px;
+            font-size: 12px;
 
-            @include on('sm') {
-                font-size: 18px;
-            }
-
-            @include on('xl') {
+            @include on('lg') {
                 font-size: 20px;
             }
         }
@@ -317,15 +304,19 @@
                 font-size: 10px;
             }
 
-            @include on('xl') {
+            @include on('lg') {
                 font-size: 14px;
             }
         }
     }
 
     &__footer {
-        bottom: -8px;
+        bottom: -3px;
         align-items: center;
+
+        @include on('md') {
+            bottom: 0;
+        }
 
         @include on('lg') {
             font-size: 14px;
@@ -411,12 +402,26 @@
     }
 
     .org-card__member {
-        align-items: flex-end;
-        margin-right: 25px;
+        margin-right: 40px;
+
+        @include on('sm') {
+            margin-right: 100px;
+        }
+
+        @include on("md") {
+            margin-right: 196px;
+        }
 
         @include on("lg") {
-            align-items: unset;
-            margin-right: 170px;
+            margin-right: 118px;
+        }
+
+        @include on("xl") {
+            margin-right: 150px;
+        }
+
+        @include on("xxl") {
+            margin-right: 230px;
         }
 
         .material-icons, {
@@ -427,10 +432,12 @@
     .material-icons, {
         color: $grey-text;
         font-size: 14px;
-        right: 10px;
+        right: 6px;
         top: 2px;
+        z-index: 1;
 
         @include on('lg') {
+            right: 10px;
             font-size: 18px;
         }
 
@@ -446,6 +453,7 @@
     &__btn-list {
         width: 81px;
         height: 17px;
+        margin-right: 8px;
 
         @include on('md') {
             width: 100px;
@@ -459,7 +467,8 @@
     }
 
     &__cbb-rate {
-        width: 120px;
+        width: 60px;
+        height: 17px;
         background-color: $blue;
 
         a {
@@ -487,23 +496,34 @@
                 background: rgba(24, 160, 251, 0.1);
             }
         }
+
+        @include on('md') {
+            width: 80px;
+            height: 25px;
+        }
+
+        @include on('lg') {
+            width: 104px;
+            height: 38px;
+        }
     }
 
     &__noti {
-        padding: 5px 15px;
+        padding: 8px 9px;
         font-weight: 400;
-        font-size: 10px;
+        font-size: 6px;
         color: $red-warning;
         text-indent: 5px;
         bottom: 5px;
         right: 0;
 
-        @include on('lg') {
-            font-size: 18px;
+        @include on('sm') {
+            padding: 0px 9px;
+            font-size: 8px;
         }
 
-        @include on('xxl') {
-            font-size: 24px;
+        @include on('lg') {
+            font-size: 14px;
         }
 
         span {
@@ -697,14 +717,10 @@
 .div-volunteer {
     .icon-check {
         color: $green;
-        font-size: 10px;
+        font-size: 12px;
 
         @include on('lg') {
-            font-size: 18px;
-        }
-
-        @include on('xxl') {
-            font-size: 24px;
+            font-size: 20px;
         }
     }
 
@@ -717,7 +733,7 @@
             font-size: 10px;
         }
 
-        @include on('xl') {
+        @include on('lg') {
             font-size: 14px;
         }
     }

@@ -121,6 +121,19 @@
         </span>
     </div>
 
+    <div class="filter-item filter-item-organization position-relative">
+        <input @onclick="ToggleActTypeDropdown" @onfocusout="CloseActTypeDropdown" class="popup-btn bg-grey" placeholder="@Filter.ActType.GetName()" readonly />
+        <div class="my-dropdown" style="display: @(isActTypeShow ? "block" : "none")">
+            <ul>
+                <li @onmousedown="() => ChooseActType(StatusAct.Happenning)">@StatusAct.Happenning.GetName()</li>
+                <li @onmousedown="() => ChooseActType(StatusAct.TookPlace)">@StatusAct.TookPlace.GetName()</li>
+            </ul>
+        </div>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+
     <div class="btn-wrapper">
         <button @onclick="UpdateFilterValueAsync" class="filter-btn">
             @*<span class="material-icons-outlined">

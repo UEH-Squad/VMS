@@ -39,12 +39,6 @@
   @media (min-width: 992px) {
     .card-btn {
       border-radius: 5px;
-      font-size: 12px; } }
-  @media (min-width: 1200px) {
-    .card-btn {
-      font-size: 14px; } }
-  @media (min-width: 1400px) {
-    .card-btn {
       font-size: 16px; } }
   .card-btn:hover {
     background-color: #306C14; }
@@ -67,10 +61,16 @@
   display: flex;
   flex-direction: row;
   padding: 10px 7px;
-  height: 180px;
+  height: 170px;
   margin-bottom: 15px;
   background-color: #F3F3F5;
   border-radius: 5px; }
+  @media (min-width: 768px) {
+    .org-card {
+      height: 180px; } }
+  @media (min-width: 992px) {
+    .org-card {
+      height: 272px; } }
   @media (min-width: 1200px) {
     .org-card {
       height: 310px; } }
@@ -91,19 +91,16 @@
     .org-card__info {
       padding-left: 20px; } }
   .org-card__info .lmtext-2 {
-    -webkit-line-clamp: 3 !important; }
-    @media (min-width: 992px) {
-      .org-card__info .lmtext-2 {
-        -webkit-line-clamp: 2 !important; } }
+    -webkit-line-clamp: 2; }
   .org-card__info__title {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
     font-size: 10px; }
-    @media (min-width: 768px) {
+    @media (min-width: 576px) {
       .org-card__info__title {
-        font-size: 14px; } }
-    @media (min-width: 1400px) {
+        font-size: 12px; } }
+    @media (min-width: 992px) {
       .org-card__info__title {
         font-size: 20px; } }
     .org-card__info__title a {
@@ -136,15 +133,21 @@
     font-weight: normal;
     font-size: 8px;
     color: #515151;
-    margin-bottom: 2px; }
-    @media (min-width: 768px) {
+    margin-bottom: 5px; }
+    @media (min-width: 576px) {
       ::deep .org-card__info__desc {
-        font-size: 12px; } }
-    @media (min-width: 1400px) {
+        font-size: 10px; } }
+    @media (min-width: 992px) {
       ::deep .org-card__info__desc {
         font-size: 18px; } }
     ::deep .org-card__info__desc p {
-      margin-bottom: 0; }
+      margin-bottom: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      -webkit-line-clamp: 2; }
   .org-card__info__date {
     font-style: normal;
     font-weight: normal;
@@ -194,17 +197,7 @@
       .org-card__info .icon-tooltip {
         font-size: 12px; } }
   .org-card__info .my-icon {
-    font-size: 8px !important;
     cursor: default; }
-    @media (min-width: 768px) {
-      .org-card__info .my-icon {
-        font-size: 10px !important; } }
-    @media (min-width: 1200px) {
-      .org-card__info .my-icon {
-        font-size: 14px !important; } }
-    @media (min-width: 1400px) {
-      .org-card__info .my-icon {
-        font-size: 16px !important; } }
     .org-card__info .my-icon:hover + .icon-tooltip {
       display: block; }
   .org-card__info .record-icon {
@@ -213,11 +206,8 @@
     color: #515151;
     font-weight: 500; }
   .org-card__info .material-icons-outlined {
-    font-size: 16px; }
-    @media (min-width: 576px) {
-      .org-card__info .material-icons-outlined {
-        font-size: 18px; } }
-    @media (min-width: 1200px) {
+    font-size: 12px; }
+    @media (min-width: 992px) {
       .org-card__info .material-icons-outlined {
         font-size: 20px; } }
   .org-card__info span {
@@ -227,13 +217,16 @@
     @media (min-width: 576px) {
       .org-card__info span {
         font-size: 10px; } }
-    @media (min-width: 1200px) {
+    @media (min-width: 992px) {
       .org-card__info span {
         font-size: 14px; } }
 
 .org-card__footer {
-  bottom: -8px;
+  bottom: -3px;
   align-items: center; }
+  @media (min-width: 768px) {
+    .org-card__footer {
+      bottom: 0; } }
   @media (min-width: 992px) {
     .org-card__footer {
       font-size: 14px; } }
@@ -294,22 +287,34 @@
         padding-bottom: unset; } }
 
 .org-card .org-card__member {
-  align-items: flex-end;
-  margin-right: 25px; }
+  margin-right: 40px; }
+  @media (min-width: 576px) {
+    .org-card .org-card__member {
+      margin-right: 100px; } }
+  @media (min-width: 768px) {
+    .org-card .org-card__member {
+      margin-right: 196px; } }
   @media (min-width: 992px) {
     .org-card .org-card__member {
-      align-items: unset;
-      margin-right: 170px; } }
+      margin-right: 118px; } }
+  @media (min-width: 1200px) {
+    .org-card .org-card__member {
+      margin-right: 150px; } }
+  @media (min-width: 1400px) {
+    .org-card .org-card__member {
+      margin-right: 230px; } }
   .org-card .org-card__member .material-icons {
     color: #64D72F; }
 
 .org-card .material-icons {
   color: #515151;
   font-size: 14px;
-  right: 10px;
-  top: 2px; }
+  right: 6px;
+  top: 2px;
+  z-index: 1; }
   @media (min-width: 992px) {
     .org-card .material-icons {
+      right: 10px;
       font-size: 18px; } }
   @media (min-width: 1400px) {
     .org-card .material-icons {
@@ -319,7 +324,8 @@
 
 .org-card__btn-list {
   width: 81px;
-  height: 17px; }
+  height: 17px;
+  margin-right: 8px; }
   @media (min-width: 768px) {
     .org-card__btn-list {
       width: 100px;
@@ -330,7 +336,8 @@
       height: 38px; } }
 
 .org-card__cbb-rate {
-  width: 120px;
+  width: 60px;
+  height: 17px;
   background-color: #18A0FB; }
   .org-card__cbb-rate a {
     text-decoration: none;
@@ -348,21 +355,30 @@
       padding: 0 10px; }
     .org-card__cbb-rate__list li:hover {
       background: rgba(24, 160, 251, 0.1); }
+  @media (min-width: 768px) {
+    .org-card__cbb-rate {
+      width: 80px;
+      height: 25px; } }
+  @media (min-width: 992px) {
+    .org-card__cbb-rate {
+      width: 104px;
+      height: 38px; } }
 
 .org-card__noti {
-  padding: 5px 15px;
+  padding: 8px 9px;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 6px;
   color: #E10B0B;
   text-indent: 5px;
   bottom: 5px;
   right: 0; }
+  @media (min-width: 576px) {
+    .org-card__noti {
+      padding: 0px 9px;
+      font-size: 8px; } }
   @media (min-width: 992px) {
     .org-card__noti {
-      font-size: 18px; } }
-  @media (min-width: 1400px) {
-    .org-card__noti {
-      font-size: 24px; } }
+      font-size: 14px; } }
   .org-card__noti span {
     font-size: inherit; }
 
@@ -499,13 +515,10 @@
 
 .div-volunteer .icon-check {
   color: #64D72F;
-  font-size: 10px; }
+  font-size: 12px; }
   @media (min-width: 992px) {
     .div-volunteer .icon-check {
-      font-size: 18px; } }
-  @media (min-width: 1400px) {
-    .div-volunteer .icon-check {
-      font-size: 24px; } }
+      font-size: 20px; } }
 
 .div-volunteer span {
   font-weight: 500;
@@ -514,6 +527,6 @@
   @media (min-width: 576px) {
     .div-volunteer span {
       font-size: 10px; } }
-  @media (min-width: 1200px) {
+  @media (min-width: 992px) {
     .div-volunteer span {
       font-size: 14px; } }

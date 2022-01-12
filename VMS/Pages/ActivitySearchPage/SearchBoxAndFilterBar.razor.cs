@@ -35,6 +35,7 @@ namespace VMS.Pages.ActivitySearchPage
         private bool isCityShow;
         private bool isDistrictShow;
         private bool isWardShow;
+        private bool isActTypeShow;
         private string cityChoosenValue = "Tỉnh/Thành phố";
         private string districtChoosenValue = "Quận/Huyện";
         private string wardChoosenValue = "Phường/Xã";
@@ -65,6 +66,8 @@ namespace VMS.Pages.ActivitySearchPage
             provinces = await AddressService.GetAllProvincesAsync();
 
             areasPinned = await AreaService.GetAllAreasAsync(true);
+
+            Filter.ActType = StatusAct.Happenning;
         }
 
         private void ToggleCityDropdown()
@@ -146,6 +149,22 @@ namespace VMS.Pages.ActivitySearchPage
             ToggleOrganizationDropdown();
         }
 
+        private void ToggleActTypeDropdown()
+        {
+            isActTypeShow = !isActTypeShow;
+        }
+
+        private void CloseActTypeDropdown()
+        {
+            isActTypeShow = false;
+        }
+
+        private void ChooseActType(StatusAct status)
+        {
+            Filter.ActType = status;
+            ToggleActTypeDropdown();
+        }
+
         private async Task ShowAreasPopupAsync()
         {
             var parameters = new ModalParameters();
@@ -158,13 +177,6 @@ namespace VMS.Pages.ActivitySearchPage
         {
             var skillsParameter = new ModalParameters();
             skillsParameter.Add("ChoosenSkillsList", Filter.Skills);
-
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true
-            };
 
             await Modal.Show<SkillsPopup>("", skillsParameter, BlazoredModalOptions.GetModalOptions()).Result;
         }
@@ -183,11 +195,15 @@ namespace VMS.Pages.ActivitySearchPage
             isCityShow = false;
             isDistrictShow = false;
             isOrganizationShow = false;
+            isActTypeShow = false;
 
             districts = new();
             provinces = await AddressService.GetAllProvincesAsync();
 
             Filter = new();
+
+            Filter.ActType = StatusAct.Happenning;
+
             await FilterChanged.InvokeAsync(Filter);
         }
 

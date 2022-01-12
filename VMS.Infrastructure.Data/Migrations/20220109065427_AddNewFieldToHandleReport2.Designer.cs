@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220109065427_AddNewFieldToHandleReport2")]
+    partial class AddNewFieldToHandleReport2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -369,21 +371,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "751a4c6b-11eb-46a1-bbe1-529e6a6ede9d",
+                            ConcurrencyStamp = "82ad2a33-e2bb-41b8-ad83-585e5f16d1eb",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "5106e56c-0bfb-4573-a463-60955791adaf",
+                            ConcurrencyStamp = "68f47ecf-1814-4245-8962-87c025ed19ee",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "6c58758a-d090-41d1-b825-d7dbfbd1786e",
+                            ConcurrencyStamp = "9d9e9721-5e63-41d8-ba59-b54dd8437c72",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -669,7 +671,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -704,8 +706,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
-
-                    b.HasIndex("CreatedBy");
 
                     b.HasIndex("UpdatedBy");
 
@@ -1200,7 +1200,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "57b728d8-9622-41c1-9b70-a4f1445520a7",
+                            ConcurrencyStamp = "7e1a16cb-ac89-4e52-a40c-ea0fcf1dbcac",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1208,7 +1208,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP4HTz2uCSk9gUPO/tg0eMEn4+9DWp/JdLPNycq2sVj/h/6ARwVxkwqWajnQNyVg6Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECF7nrys+9dusQSdJUmDDvizZTys9YBOLtEpcPK/L1s6IxUl7LORvnwcpYfIPBJjuA==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",
@@ -1470,10 +1470,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VMS.Domain.Models.User", "Reporter")
-                        .WithMany("UserReports")
-                        .HasForeignKey("CreatedBy");
-
                     b.HasOne("VMS.Domain.Models.User", "Handler")
                         .WithMany("ReportHandles")
                         .HasForeignKey("UpdatedBy");
@@ -1486,8 +1482,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("Activity");
 
                     b.Navigation("Handler");
-
-                    b.Navigation("Reporter");
 
                     b.Navigation("User");
                 });
@@ -1711,8 +1705,6 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Navigation("UserAddresses");
 
                     b.Navigation("UserAreas");
-
-                    b.Navigation("UserReports");
 
                     b.Navigation("UserRoles");
 

@@ -33,9 +33,9 @@
         padding: 10px 0px;
         border-radius: 5px;
         margin-top: 30px;
-        height: 180px;
+        height: 203px;
 
-        @include on('xl') {
+        @include on('lg') {
             height: 310px;
         }
 
@@ -54,7 +54,6 @@
         color: #18A0FB;
         text-decoration: none;
         cursor: pointer;
-        word-spacing: -2px;
 
         &:hover {
             color: $blue-hv;
@@ -62,20 +61,23 @@
     }
 
     a:first-of-type {
-        font-size: 14px;
+        font-size: 10px;
 
-        @include on('xl') {
-            font-size: 24px;
+        @include on('sm') {
+            font-size: 14px;
+        }
+
+        @include on('lg') {
+            font-size: 20px;
         }
     }
-
-    a:nth-of-type(2) {
+    /*a:nth-of-type(2) {
         font-size: 12px;
 
         @include on('xl') {
             font-size: 24px;
         }
-    }
+    }*/
 
     h5 {
         display: flex;
@@ -91,17 +93,39 @@
         i {
             color: $green;
             margin-right: 5px;
-            font-size: 18px;
+            font-size: 12px;
 
-            @include on('xl') {
-                font-size: 24px;
+            @include on('lg') {
+                font-size: 20px;
+            }
+        }
+
+        p {
+            font-size: 8px;
+            font-weight: 600;
+            word-spacing: 1px;
+
+            @include on('sm') {
+                font-size: 10px;
+            }
+
+            @include on('lg') {
+                font-size: 16px;
             }
         }
     }
 
     p {
-        font-size: 16px;
         font-weight: 400;
+        font-size: 8px;
+
+        @include on('sm') {
+            font-size: 12px;
+        }
+
+        @include on('lg') {
+            font-size: 18px;
+        }
     }
 
     span {
@@ -216,11 +240,7 @@
 }
 
 .act__content-description {
-    display: none;
-
-    @include on('xl') {
-        display: -webkit-box;
-    }
+    display: -webkit-box;
 }
 .div-volunteer {
     .icon-check {

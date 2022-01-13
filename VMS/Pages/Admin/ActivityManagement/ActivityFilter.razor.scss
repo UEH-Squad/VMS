@@ -32,6 +32,7 @@ input[type="checkbox"] {
 }
 
 .act-filter__btn {
+    transform:translateY(-10px);
 
     &--green {
         border-radius: 5px;

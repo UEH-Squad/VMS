@@ -74,3 +74,386 @@
         -webkit-line-clamp: 5;
     }
 }
+
+.act {
+    h1 {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 36px;
+        color: $grey-text;
+        padding-bottom: 5px;
+
+        @include on("sm") {
+            font-size: 20px;
+        }
+
+        @include on("lg") {
+            font-size: 24px;
+        }
+
+        @include on("xl") {
+            font-size: 30px;
+        }
+
+        span {
+            color: $green;
+        }
+    }
+
+    hr {
+        display: none;
+        height: 1px;
+        background-color: #707070;
+        opacity: 50%;
+
+        @include on('xl') {
+            width: 60%;
+            display: block;
+        }
+    }
+
+    .owl-carousel {
+        z-index: 0;
+    }
+}
+
+.overlay {
+    background-color: rgba(100,100,100,.2);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+.act-container {
+    margin-bottom: 30px;
+
+    &:last-of-type {
+        margin-bottom: 0px;
+    }
+
+    ul {
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        background: $white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+        width: 86px;
+
+        @include on('sm') {
+            width: 115px;
+        }
+
+        @include on('md') {
+            width: 140px;
+        }
+
+        @include on('lg') {
+            width: 160.5px;
+        }
+
+        @include on('xl') {
+            width: 190.5px;
+        }
+
+        li, a {
+            list-style: none;
+            font-size: 8px;
+            font-weight: 500;
+            padding: 2px 0px;
+            display: block;
+
+            @include on('sm') {
+                font-size: 10px;
+                padding: 3px 5px;
+            }
+
+            @include on('md') {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            @include on('lg') {
+                padding: 7px 15px;
+            }
+
+            @include on('xl') {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            &:hover {
+                background: rgba(24, 160, 251, 0.1);
+            }
+        }
+
+        .edit {
+            color: $grey-text;
+            cursor: pointer;
+        }
+
+        .delete {
+            color: $red;
+            cursor: pointer;
+        }
+
+        .close {
+            color: $green;
+            cursor: pointer;
+        }
+    }
+
+    .material-icons, {
+        color: $white;
+        font-size: 24px;
+        right: 10px;
+        top: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .icon-favorite {
+        color: #BE2222;
+        font-size: 30px;
+        right: 10px;
+        top: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.act-content {
+    background-color: $grey;
+    border-radius: 0 0 10px 10px;
+
+    a {
+        height: 100px;
+
+        @include on('sm') {
+            height: 118px;
+        }
+
+        @include on('lg') {
+            height: 160px;
+        }
+    }
+
+    .content-cl {
+        background-color: rgba(100,100,100,.2);
+    }
+
+    .content-nm,
+    .content-cl {
+        padding: 10px 13px 10px 13px;
+        text-decoration: none;
+        display: block;
+        border-radius: 0 0 10px 10px;
+
+        @include on('lg') {
+            padding: 17px 17px 17px 28px;
+        }
+
+        .act-title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 17px;
+
+            @include on('sm') {
+                line-height: 23px;
+                font-size: 16px;
+            }
+
+            @include on('lg') {
+                font-size: 20px;
+                line-height: 30px;
+            }
+        }
+
+        .title-nm {
+            color: $blue;
+        }
+
+        .title-cl {
+            color: $grey-text;
+        }
+    }
+
+    .lm-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 4;
+    }
+}
+
+.act-container:hover {
+    & > .img-container {
+        opacity: .6;
+    }
+
+    & > .act-content {
+        .title-nm {
+            color: $blue-bold;
+        }
+
+        .title-cl {
+            color: $blue-bold;
+        }
+    }
+}
+
+.act-content-overrides {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(28, 28, 28, 0.4);
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    align-items: end;
+    opacity: 0;
+
+
+    &:hover {
+        opacity: 1;
+
+        .act-title {
+            color: $white !important;
+        }
+    }
+
+    .content-nm, .content-cl {
+        .act-title {
+            color: $white;
+            font-size: 24px;
+            font-weight: 400;
+            height: 90px;
+            width: 100%;
+        }
+    }
+}
+
+.img-container {
+    .act-img {
+        width: 100%;
+        height: 133px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px 10px 0 0;
+
+        @include on('lg') {
+            height: 180px;
+        }
+
+        @include on('xl') {
+            height: 250px;
+        }
+    }
+}
+
+::deep .owl-carousel {
+
+    .owl-prev, .owl-next {
+        position: absolute;
+        top: 25%;
+    }
+
+    .owl-prev {
+        left: 0;
+    }
+
+    .owl-next {
+        right: 0;
+    }
+}
+
+::deep .owl-carousel.owl-loading {
+    opacity: 1;
+}
+
+::deep .owl-nav {
+    button.owl-next,
+    button.owl-prev {
+        background: $blue;
+        position: absolute;
+        border-radius: 100%;
+        top: 26%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            font-size: 40px;
+            margin-bottom: 5px;
+            line-height: 0;
+            color: $white;
+        }
+
+        &:hover {
+            background: $blue-bold;
+            opacity: .73;
+        }
+    }
+
+    button.owl-prev {
+        left: 20px;
+    }
+
+    button.owl-next {
+        right: 20px;
+    }
+}
+
+::deep .owl-dots {
+    display: none;
+}
+
+.act__linkAll {
+
+    a {
+        font-weight: 600;
+        font-size: 14px;
+        color: $green;
+
+        @include on('sm') {
+            font-size: 20px;
+        }
+
+        @include on('lg') {
+            font-size: 24px;
+        }
+
+        &:hover {
+            color: $green-bold;
+            cursor: pointer;
+        }
+    }
+}
+
+.favorite {
+    right: 10px;
+    top: 10px;
+
+    .material-icons {
+        font-size: 30px;
+    }
+
+    .isfav {
+        color: #BE2222;
+    }
+
+    .nonefav {
+        color: $white;
+    }
+}

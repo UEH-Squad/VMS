@@ -206,45 +206,51 @@ p {
 }
 
 .filter-btn {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    width: fit-content;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 400 !important;
     @include green-btn;
-    font-weight: 400;
-    font-size: 12px;
     height: 26px;
-    padding: 0 10px;
-
-    @include on('sm') {
-        font-size: 16px;
-        height: 32px;
-        padding: 0 12px;
-    }
-
-    @include on('md') {
-        font-size: 18x;
-        height: 36px;
-        padding: 0 16px;
-    }
 
     &:hover {
         background-color: #306C14;
         opacity: 78%;
     }
+
+    @include on('md') {
+        font-size: 16px;
+        height: 32px;
+    }
+
+    @include on('xl') {
+        height: 40px;
+    }
 }
 
 .clear-filter-btn {
+    font-weight: 400 !important;
     @include green-btn;
-    font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     width: fit-content;
-    color: #000000;
+    color: $grey-icon;
     background-color: #fff;
+    width: 70px;
+    height: 26px;
 
-    @include on('sm') {
-        font-size: 18px;
+    @include on('md') {
+        font-size: 16px;
+        height: 32px;
     }
 
-    @include on('lg') {
-        color: $grey-icon;
+    @include on('xl') {
+        height: 40px;
     }
+
+
 
     &:hover {
         text-decoration: underline;

@@ -27,21 +27,22 @@ input[type="checkbox"] {
   input[type="checkbox"]:checked:after {
     display: block; }
 
-.act-filter__btn--green {
-  border-radius: 5px;
-  font-size: 16px;
-  color: #FFFFFF;
-  background-color: #64D72F; }
-  .act-filter__btn--green:hover {
-    background-color: #306C14; }
-
-.act-filter__btn--clear {
-  border: none;
-  font-size: 16px;
-  color: #b4b4b4;
-  background-color: #FFFFFF; }
-  .act-filter__btn--clear:hover {
-    text-decoration: underline; }
+.act-filter__btn {
+  transform: translateY(-10px); }
+  .act-filter__btn--green {
+    border-radius: 5px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: #64D72F; }
+    .act-filter__btn--green:hover {
+      background-color: #306C14; }
+  .act-filter__btn--clear {
+    border: none;
+    font-size: 16px;
+    color: #b4b4b4;
+    background-color: #FFFFFF; }
+    .act-filter__btn--clear:hover {
+      text-decoration: underline; }
 
 .bg-grey {
   color: #515151 !important; }

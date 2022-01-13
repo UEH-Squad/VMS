@@ -1,7 +1,11 @@
 ﻿@import "../../Resources/scss/common/_variables.scss";
 
 .bg-grey {
-    background-color: #f3f3f3;
+    &::placeholder {
+        color: #515151 !important;
+    }
+
+    color: #515151 !important;
 }
 
 h3 {
@@ -163,9 +167,8 @@ p {
         height: 40px;
     }
 
-    &::placeholder {
-        color: #b4b4b4;
-    }
+    color: #b4b4b4;
+
 }
 
 .my-dropdown {
@@ -179,6 +182,7 @@ p {
     z-index: 10;
     display: none;
     width: 100%;
+    height: 240px;
 
     @include on('xl') {
         padding: 15px 18px;

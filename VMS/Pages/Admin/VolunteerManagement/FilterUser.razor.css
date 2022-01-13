@@ -5,7 +5,9 @@
 /*#region mixins */
 /*#endregion */
 .bg-grey {
-  background-color: #f3f3f3; }
+  color: #515151 !important; }
+  .bg-grey::placeholder {
+    color: #515151 !important; }
 
 .colored-red {
   color: #f14747 !important; }

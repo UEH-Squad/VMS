@@ -1,7 +1,11 @@
 ﻿@import '../../../Resources/scss/common/_variables.scss';
 
 .bg-grey {
-    background-color: #f3f3f3;
+    &::placeholder {
+        color: #515151 !important;
+    }
+
+    color: #515151 !important;
 }
 
 .filter-bar {
@@ -58,6 +62,10 @@
     }
 
     ::deep {
+        .text-color .ant-picker-input input {
+            color: #515151 !important;
+        }
+
         .ant-picker {
             width: 100%;
             padding: 6px 30px 6px 10px;
@@ -83,6 +91,10 @@
             &-clear {
                 display: none;
             }
+        }
+
+        .ant-picker-focused {
+            box-shadow: none;
         }
     }
 

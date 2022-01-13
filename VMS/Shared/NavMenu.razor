@@ -1,4 +1,6 @@
-﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(IsFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
+﻿@inject IJSRuntime JSRuntime;
+
+<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(IsFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
     <div class="container-lg p-0 my-navbar-container">
         <div class="my-navbar__hamburger-wrapper">
             <button class="d-flex align-items-center my-navbar__hamburger-wrapper__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +40,7 @@
                                     <i class="material-icons-outlined"> people </i>
                                     <span>Tình nguyện viên</span>
                                 </a>
-                                <a @onmousemove="(() => ShowDetail(3))" href="@Routes.GloryAvenue" class="d-flex align-items-center mega-menu-a">
+                                <a @onmousemove="(() => ShowDetail(3))" class="d-flex align-items-center mega-menu-a">
                                     <i class="material-icons"> local_fire_department </i>
                                     <span>Đại lộ danh vọng</span>
                                 </a>
@@ -83,7 +85,7 @@
                             </i>
                             <span>Tình nguyện viên</span>
                         </a>
-                        <a href="@Routes.OrganizerSearch" class="d-flex align-items-center mega-menu-li-rank">
+                        <a class="d-flex align-items-center mega-menu-li-rank">
                             <i class="material-icons">
                                 local_fire_department
                             </i>
@@ -157,4 +159,11 @@
         isClick = false;
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("vms.AddOutsideClickNavBarHandler");
+        }
+    }
 }

@@ -56,7 +56,7 @@ h1 {
 
 
 .popup-btn {
-    border: 1px solid #D8D8D8;
+    border: 1px solid #707070;
     border-radius: 10px;
     cursor: pointer;
     color: #b4b4b4;
@@ -85,8 +85,8 @@ h1 {
         box-shadow: none;
     }
 
-    &.bg-grey {
-        background-color: #f3f3f3;
+    &.bg-grey::placeholder {
+        color: #515151 !important;
     }
 }
 

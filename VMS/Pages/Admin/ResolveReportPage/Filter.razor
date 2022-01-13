@@ -22,7 +22,7 @@
     </div>
 
     <div class="item filter-item">
-        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" Value="timeValue" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3":"")" ValueChanged="(DateTime e) => OnTimeValueChanged(e)" Format="MM/yyyy" />
+        <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" Value="timeValue" Class="@(isFilterMonth ? "text-color pe-1 " : " pe-1" )" ValueChanged="(DateTime e) => OnTimeValueChanged(e)" Format="MM/yyyy" />
     </div>
 
     <button @onclick="OnClickFilterAsync" class="filter-btn">Lọc</button>

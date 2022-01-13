@@ -108,14 +108,14 @@
     </div>
 
     <div class="filter-item position-relative">
-        <div @onclick="ShowAreasPopupAsync" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+        <div @onclick="ShowAreasPopupAsync" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")">@(Filter.Areas.Count != 0 ? Filter.Areas.GetListNames() : "Lĩnh vực")</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
     </div>
 
     <div class="filter-item position-relative">
-        <div @onclick="ShowSkillsPopupAsync" class="popup-btn @(Filter.Skills.Count != 0? "bg-grey" : "")">Kỹ năng</div>
+        <div @onclick="ShowSkillsPopupAsync" class="popup-btn @(Filter.Skills.Count != 0? "bg-grey" : "")">@(Filter.Skills.Count != 0 ? Filter.Skills.GetListNames() : "Kỹ năng")</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more
         </span>
@@ -127,6 +127,7 @@
             <ul>
                 <li @onmousedown="() => ChooseActType(StatusAct.Happenning)">@StatusAct.Happenning.GetName()</li>
                 <li @onmousedown="() => ChooseActType(StatusAct.TookPlace)">@StatusAct.TookPlace.GetName()</li>
+                <li @onmousedown="() => ChooseActType(StatusAct.Closed)">@StatusAct.Closed.GetName()</li>
             </ul>
         </div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
@@ -137,12 +138,13 @@
     <div class="btn-wrapper">
         <button @onclick="UpdateFilterValueAsync" class="filter-btn">
             @*<span class="material-icons-outlined">
-                filter_alt
-            </span>*@
+                    filter_alt
+                </span>*@
             Lọc
         </button>
         <button @onclick="ClearFilterAsync" type="button" class="clear-filter-btn">Xóa lọc</button>
     </div>
+
 </div>
 
 <div class="filter-bar-mobile">

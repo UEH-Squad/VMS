@@ -34,62 +34,78 @@
         }
     }
 
-    ::deep .ant-picker {
-        position: absolute;
-        border-radius: 10px;
-        width: 29%;
-        border: 1px solid $border-color-bold;
-        color: $grey-icon;
-        padding-left: 10px;
-        outline: none;
-        line-height: 40px;
-        top: 87px;
-        right: 24px;
-        height: 33px;
+    .text-color .ant-picker-input input {
+        color: #515151 !important;
+    }
 
-        &-input {
-            font-size: 21px;
-            padding-right: 6px;
+    ::deep {
+        .text-color .ant-picker-input input {
+            color: #515151 !important;
+        }
 
-            & > input {
-                font-size: 12px;
-                color: #b4b4b4;
+        .ant-picker-focused {
+            box-shadow: none;
+        }
+
+        .ant-picker {
+            position: absolute;
+            border-radius: 10px;
+            width: 29%;
+            border: 1px solid $border-color-bold;
+            color: $grey-icon;
+            padding-left: 10px;
+            outline: none;
+            line-height: 40px;
+            top: 87px;
+            right: 24px;
+            height: 33px;
+
+
+
+            &-input {
+                font-size: 21px;
+                padding-right: 6px;
+
+                & > input {
+                    font-size: 12px;
+                    color: #b4b4b4;
+
+                    @include on('lg') {
+                        font-size: 18px;
+                    }
+                }
+
+                @include on('md') {
+                    padding-right: 15px;
+                    padding-left: 15px;
+                }
 
                 @include on('lg') {
-                    font-size: 18px;
+                    padding-right: 0.6rem;
+                    font-size: 24px;
                 }
             }
 
-            @include on('md') {
-                padding-right: 15px;
-                padding-left: 15px;
+            &-clear {
+                display: none;
+            }
+
+            @include on('sm') {
+                top: 124px;
+                width: 19%;
             }
 
             @include on('lg') {
-                padding-right: 0.6rem;
-                font-size: 24px;
+                top: 197px;
+                right: 30px;
+                height: 40px;
+                width: 22%;
             }
-        }
 
-        &-clear {
-            display: none;
-        }
-
-        @include on('sm') {
-            top: 124px;
-            width: 19%;
-        }
-
-        @include on('lg') {
-            top: 197px;
-            right: 30px;
-            height: 40px;
-            width: 22%;
-        }
-
-        @include on('xl') {
-            width: 16%;
-            padding-left: 20px;
+            @include on('xl') {
+                width: 16%;
+                padding-left: 20px;
+            }
         }
     }
 }

@@ -68,7 +68,26 @@
       @media (min-width: 576px) {
         .act-filter__select #act-filter__select-icon {
           font-size: 24px; } }
-  .act-filter__list {
+  .act-filter__list-1 {
+    position: absolute;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    height: 105px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    box-shadow: 0px 4px 10px rgba(11, 50, 60, 0.2);
+    padding: 10% 0%;
+    z-index: 1; }
+    @media (min-width: 576px) {
+      .act-filter__list-1 {
+        height: 157px; } }
+    .act-filter__list-1::-webkit-scrollbar {
+      width: 3px; }
+    .act-filter__list-1::-webkit-scrollbar-thumb {
+      background-color: #B4B4B4;
+      border-radius: 20px; }
+  .act-filter__list-2 {
     position: absolute;
     background-color: #FFFFFF;
     border-radius: 10px;
@@ -81,27 +100,27 @@
     z-index: 1;
     overflow-y: scroll; }
     @media (min-width: 576px) {
-      .act-filter__list {
+      .act-filter__list-2 {
         height: 157px; } }
-    .act-filter__list::-webkit-scrollbar {
+    .act-filter__list-2::-webkit-scrollbar {
       width: 3px; }
-    .act-filter__list::-webkit-scrollbar-thumb {
+    .act-filter__list-2::-webkit-scrollbar-thumb {
       background-color: #B4B4B4;
       border-radius: 20px; }
-    .act-filter__list-item {
-      text-align: center;
-      font-size: 12px;
-      font-weight: 500;
-      color: #18A0FB;
-      background-color: #FFFFFF;
-      padding: 4%;
-      cursor: pointer; }
-      @media (min-width: 576px) {
-        .act-filter__list-item {
-          font-size: 16px; } }
-    .act-filter__list-item:hover {
-      color: #64D72F;
-      background-color: rgba(24, 160, 251, 0.1); }
+  .act-filter__list-item {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #18A0FB;
+    background-color: #FFFFFF;
+    padding: 4%;
+    cursor: pointer; }
+    @media (min-width: 576px) {
+      .act-filter__list-item {
+        font-size: 16px; } }
+  .act-filter__list-item:hover {
+    color: #64D72F;
+    background-color: rgba(24, 160, 251, 0.1); }
   .act-filter__radio {
     /*width: 33%;*/
     justify-content: space-around; }

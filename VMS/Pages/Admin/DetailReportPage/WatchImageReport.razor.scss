@@ -11,13 +11,12 @@
     z-index: 101;
 
     .cover-image {
-        max-height: 90%;
-        max-width: 70%;
-        overflow-y: scroll;
-        overflow-x: scroll;
+        max-width: 65%;
         margin: auto;
         z-index: 103;
+
         .modal-content {
+            max-height: 90vh;
             border: none;
             display: block;
             margin: auto;

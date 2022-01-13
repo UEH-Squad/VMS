@@ -134,6 +134,7 @@ namespace VMS.Application.Services
                 return new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
+                    a => !filter.IsApproved.HasValue || a.IsApproved == filter.IsApproved.Value,
                     GetFilterActByType(filter.ActType),
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,
@@ -619,7 +620,7 @@ namespace VMS.Application.Services
             switch (actType)
             {
                 case StatusAct.Upcoming:
-                    return x => x.StartDate <= DateTime.Now.Date.AddDays(15);
+                    return x => DateTime.Now.Date <= x.StartDate && x.StartDate <= DateTime.Now.Date.AddDays(15);
                 case StatusAct.Happenning:
                     return x => (x.StartDate <= DateTime.Now.Date && DateTime.Now.Date <= x.EndDate) || x.CloseDate >= DateTime.Now.Date;
                 case StatusAct.TookPlace:

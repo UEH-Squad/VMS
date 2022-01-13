@@ -217,10 +217,15 @@ namespace VMS.Pages.Organization.Activities
                 }
 
                 isLoading = false;
+
+                string redirectUrl = IdentityService.IsInRole(UserId, Role.Admin)
+                                    ? $"{Routes.AdminActivityInfo}/{ActivityId}"
+                                    : $"{Routes.ActivityInfo}/{ActivityId}";
+
                 var modalParams = new ModalParameters();
                 modalParams.Add("Title", title);
                 modalParams.Add("CTAText", "Xem hoạt động");
-                modalParams.Add("CTALink", $"{Routes.ActivityInfo}/{ActivityId}");
+                modalParams.Add("CTALink", redirectUrl);
                 modalParams.Add("CancelText", "Đóng");
                 await ShowModalAsync(typeof(NotificationPopup), modalParams);
                 NavigationManager.NavigateTo($"{Routes.OrgProfile}/{UserId}", true);

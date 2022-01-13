@@ -20,6 +20,7 @@ namespace VMS.Application.ViewModels
         public StatusAct ActType { get; set; } = StatusAct.All;
         public bool IsMonthFilter { get; set; } = false;
         public DateTime DateTimeValue { get; set; }
+        public bool? IsApproved { get; set; }
         public List<AreaViewModel> Areas { get; set; }
         public List<SkillViewModel> Skills { get; set; }
 

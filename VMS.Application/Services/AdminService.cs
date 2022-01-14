@@ -178,8 +178,7 @@ namespace VMS.Application.Services
             foreach (User user in users)
             {
                 user.UserRoles.Clear();
-                user.IsDeleted = true;
-                user.StudentId = user.NormalizedEmail = user.Email = user.UserName = user.NormalizedUserName = null;
+                user.NormalizedEmail = user.Email = user.UserName = user.NormalizedUserName = null;
             }
 
             await _repository.UpdateAsync(dbContext, users);

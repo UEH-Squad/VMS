@@ -110,6 +110,7 @@ $border-width: 1px;
         p {
             font-size: 8px;
             color: $border-color-normal;
+            font-weight: 400;
 
             @include on('sm') {
                 font-size: 12px;

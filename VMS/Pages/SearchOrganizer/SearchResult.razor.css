@@ -85,7 +85,8 @@
         color: #0B588c; }
     .org-item__name-group p {
       font-size: 8px;
-      color: #b4b4b4; }
+      color: #b4b4b4;
+      font-weight: 400; }
       @media (min-width: 576px) {
         .org-item__name-group p {
           font-size: 12px; } }

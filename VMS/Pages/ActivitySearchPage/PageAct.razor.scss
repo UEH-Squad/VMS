@@ -70,14 +70,11 @@
         @include on('lg') {
             font-size: 20px;
         }
-    }
-    /*a:nth-of-type(2) {
-        font-size: 12px;
 
         @include on('xl') {
             font-size: 24px;
         }
-    }*/
+    }
 
     h5 {
         display: flex;

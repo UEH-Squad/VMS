@@ -143,6 +143,10 @@
                 margin-right: 30px;
             }
 
+            @include on('xl') {
+                font-size: 24px;
+            }
+
             a {
                 color: $blue;
                 text-decoration: none;

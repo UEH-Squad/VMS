@@ -7,16 +7,23 @@
     {
         @foreach (var item in pagedResult.Items)
         {
-    <div class="col-4 pe-5">
-        <div class="d-flex align-items-center mt-4">
-            <div class="div-checkbox div-checkbox-skillGr me-2 "><input @bind="item.IsCheckSkill" class="check-box check-box-skillGr" type="checkbox"></div>
-            <p  @onclick="(() => ShowOptions(false))" class="skill-group mb-0 cursor-pointer lm-text">@item.SkillGroup</p>
-        </div>
-        <div class="d-flex align-items-center ms-4 ps-2 mt-2">
-            <div class="div-checkbox div-checkbox-skill me-3"><input @bind="item.IsCheckSkillGroup" class="check-box check-box-skill" type="checkbox"></div>
-            <p  @onclick="(() => ShowOptions(false))" class="skill mb-0 cursor-pointer lm-text">@item.Skill</p>
-        </div>
-    </div>
+            <div class="col-4 pe-5">
+                <div class="d-flex align-items-center mt-4">
+                    <div class="div-checkbox div-checkbox-skillGr me-2 "><input @bind="item.IsCheckSkill" class="check-box check-box-skillGr" type="checkbox"></div>
+                    <p @onclick="(() => ShowOptions(false))" class="skill-group mb-0 cursor-pointer lm-text">@item.SkillGroup</p>
+                    <span class="material-icons-outlined my-material-icons-outlined" data-bs-toggle="collapse" data-bs-target="#cho_nay_phai_dung_id"> arrow_drop_up </span>
+                </div>
+                <div class="collapse" id="cho_nay_phai_dung_id">
+                    <div class="d-flex align-items-center ms-4 ps-2 mt-2">
+                        <div class="div-checkbox div-checkbox-skill me-3"><input @bind="item.IsCheckSkillGroup" class="check-box check-box-skill" type="checkbox"></div>
+                        <p @onclick="(() => ShowOptions(false))" class="skill mb-0 cursor-pointer lm-text">@item.Skill</p>
+                    </div>
+                    <div class="d-flex align-items-center ms-4 ps-2 mt-2">
+                        <div class="div-checkbox div-checkbox-skill me-3"><input @bind="item.IsCheckSkillGroup" class="check-box check-box-skill" type="checkbox"></div>
+                        <p @onclick="(() => ShowOptions(false))" class="skill mb-0 cursor-pointer lm-text">@item.Skill</p>
+                    </div>
+                </div>
+            </div>
         }
     }
 
@@ -71,9 +78,9 @@
     }
 
     private async Task ShowOptions(bool isAdd)
-    { 
+    {
         var parameters = new ModalParameters();
         parameters.Add(nameof(OptionsSkill.isAdd), isAdd);
-        Modal.Show<Admin.SkillAndArea.OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions());       
+        Modal.Show<Admin.SkillAndArea.OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions());
     }
 }

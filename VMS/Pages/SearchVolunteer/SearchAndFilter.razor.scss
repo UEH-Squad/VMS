@@ -67,10 +67,12 @@ p {
 .filter-bar_left {
     width: 75%;
     flex-direction: column;
+    margin-left: -5px;
 
     @include on('lg') {
         flex-direction: row;
         justify-content: space-between;
+        margin-left: -10px;
     }
 }
 

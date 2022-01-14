@@ -53,11 +53,13 @@ p {
 
 .filter-bar_left {
   width: 75%;
-  flex-direction: column; }
+  flex-direction: column;
+  margin-left: -5px; }
   @media (min-width: 992px) {
     .filter-bar_left {
       flex-direction: row;
-      justify-content: space-between; } }
+      justify-content: space-between;
+      margin-left: -10px; } }
 
 .filter-bar_row-1 {
   display: flex;

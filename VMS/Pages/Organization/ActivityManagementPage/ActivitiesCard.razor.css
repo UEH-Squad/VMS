@@ -105,6 +105,9 @@
       .org-card__info__title {
         font-size: 20px;
         margin-right: 30px; } }
+    @media (min-width: 1200px) {
+      .org-card__info__title {
+        font-size: 24px; } }
     .org-card__info__title a {
       color: #18A0FB;
       text-decoration: none; }

@@ -6,9 +6,9 @@
         @foreach (var item in PagedResult.Items)
         {
             <div class="org-item d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
+                <div class="org-item_group d-flex align-items-center">
                     <img class="org-item__img me-2" src="@(string.IsNullOrEmpty(item.Avatar) ? "img/Default/avatar.png" : item.Avatar)" alt="@item.FullName" />
-                    <div class="org-item__name-group ms-4">
+                    <div class="org-item__name-group">
                         <a class="org-item__name lmtext-2"
                             href="@(IsUsedForAdmin
                             ? (IsUserResult ? Routes.AdminVolunteerProfile : Routes.AdminOrganizationProfile)
@@ -28,7 +28,7 @@
                         }
                     </div>
                 </div>
-                <div class="org-item__rate-group d-flex align-items-center @(IsUsedForAdmin ? "me-3" : "me-5")">
+                <div class="org-item__rate-group d-flex align-items-center @(IsUsedForAdmin ? "me-3" : "")">
                     <div class="seperate-line"></div>
                     <span class="me-4">#@item.Rank</span>
                     <div>

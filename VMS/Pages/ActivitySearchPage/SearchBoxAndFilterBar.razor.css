@@ -89,7 +89,7 @@
   width: 100%; }
   @media (min-width: 1200px) {
     .filter-item {
-      width: 18%; } }
+      width: 14%; } }
   .filter-item__icon {
     top: 50%;
     transform: translateY(-50%);

@@ -35,6 +35,9 @@ namespace VMS.Pages.Admin.ActivityManagement
         private bool isFilterLevel;
         private bool isFilterOrganization;
         private bool isFilterMonth;
+
+        private bool isApproved, isNotApproved;
+
         private string cityChoosenValue = "Tỉnh/Thành phố";
         private string districtChoosenValue = "Quận/Huyện";
         private string wardChoosenValue = "Phường/Xã";
@@ -180,38 +183,43 @@ namespace VMS.Pages.Admin.ActivityManagement
             Filter.Level = level;
             isFilterLevel = true;
         }
+
         private void CloseLevelDropdown()
         {
             isLevelShow = false;
         }
+
         private void ToggleActTypeDropdown()
         {
             isActTypeShow = !isActTypeShow;
         }
+
         private void ChooseActTypeValue(string actType)
         {
-            switch (actType){
-                case ActType.Upcoming: Filter.ActType = StatusAct.Upcoming; break;
-                case ActType.Happenning: Filter.ActType = StatusAct.Happenning; break;
-                case ActType.TookPlace: Filter.ActType = StatusAct.TookPlace; break;
-                case ActType.Closed: Filter.ActType = StatusAct.Closed; break;
-                case ActType.Approved: Filter.ActType = StatusAct.Approved; break;
-                case ActType.NotApproved: Filter.ActType = StatusAct.NotApproved; break;
-                default: Filter.ActType = StatusAct.All; break;
-            } 
+            Filter.ActType = actType switch
+            {
+                ActType.Upcoming => StatusAct.Upcoming,
+                ActType.Happenning => StatusAct.Happenning,
+                ActType.TookPlace => StatusAct.TookPlace,
+                ActType.Closed => StatusAct.Closed,
+                _ => StatusAct.All,
+            };
             acttypeChoosenValue = actType;
             isFilterActType = true;
         }
+
         private void CloseActTypeDropdown()
         {
             isActTypeShow = false;
         }
+
         void ChooseMonthValue()
         {
             Filter.IsMonthFilter = true;
             Filter.DateTimeValue = DateTimeValue;
             isFilterMonth = true;
         }
+
         private async Task UpdateFilterValueAsync()
         {
             await FilterChanged.InvokeAsync(Filter);
@@ -233,6 +241,7 @@ namespace VMS.Pages.Admin.ActivityManagement
             isFilterLevel = false;
             isFilterMonth = false;
             isFilterOrganization = false;
+            isApproved = isNotApproved = false;
             districts = new();
             wards = new();
             provinces = await AddressService.GetAllProvincesAsync();
@@ -251,6 +260,17 @@ namespace VMS.Pages.Admin.ActivityManagement
             {
                 Filter.Areas.Remove(area);
             }
+        }
+
+        private async Task OnChangeApprovalFilterAsync(bool isApprove)
+        {
+            isApproved = isApprove ? !isApproved : isApproved;
+            isNotApproved = isApprove ? isNotApproved : !isNotApproved;
+
+            Filter.IsApproved = ((isApproved && isNotApproved) || (!isApproved && !isNotApproved))
+                                ? null : isApproved;
+
+            await UpdateFilterValueAsync();
         }
     }
 }

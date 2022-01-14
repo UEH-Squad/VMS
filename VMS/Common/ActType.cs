@@ -8,8 +8,8 @@ namespace VMS.Common
         public const string Happenning = "Đang diễn ra";
         public const string TookPlace = "Đã diễn ra";
         public const string Closed = "Đã đóng đăng ký";
-        public const string Approved = "Đã được duyệt";
-        public const string NotApproved = "Chưa được duyệt";
+        public const string Approved = "Đã kiểm duyệt";
+        public const string NotApproved = "Chưa kiểm duyệt";
 
 
         public static List<string> GetList()
@@ -19,9 +19,7 @@ namespace VMS.Common
                 Upcoming,
                 Happenning,
                 TookPlace,
-                Closed,
-                Approved,
-                NotApproved
+                Closed
             };
         }
     }

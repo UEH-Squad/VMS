@@ -9,9 +9,9 @@
 @*<p class="mt-5 @(HaveSearchBox ? "d-block" : "d-none")">Lọc <span>tổ chức</span></p>*@
 
 <div class="filter-bar d-flex @(IsLongDistanceFilter?"justify-content-between":"") my-4">
-    <div class="filter-bar_left d-flex me-3" style="width: @(IsLongDistanceFilter? 40 : 50)%;">
+    <div class="filter-bar_left d-flex me-3">
         <div class="filter-item position-relative me-3">
-            <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn_1 @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+            <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
             <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
                 <ul>
                     @if (levels is not null)
@@ -29,9 +29,7 @@
         </div>
 
         <div class="filter-item position-relative">
-            <div @onclick="ShowAreasPopupAsync" class="popup-btn_2 @(Filter.Areas.Count != 0 ? "bg-grey" : "")">
-                @(Filter.Areas.Count != 0 ? Filter.Areas.GetListNames() : "Lĩnh vực")
-            </div>
+            <input @onclick="ShowAreasPopupAsync" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")" placeholder="@(Filter.Areas.Count != 0 ? Filter.Areas.GetListNames() : "Lĩnh vực")" readonly />
             <span class="material-icons-outlined position-absolute filter-item__icon">
                 expand_more
             </span>

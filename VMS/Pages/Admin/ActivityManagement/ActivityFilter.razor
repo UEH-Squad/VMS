@@ -170,11 +170,25 @@
         <div class="d-flex justify-content-between">
             <div class="act-filter__type d-flex justify-content-center">
                 <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
-                    <input type="checkbox" id="md3" class="d-flex justify-content-center align-items-center me-2">
+                    @if (isNotApproved)
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(false)" type="checkbox" checked id="md3" class="d-flex justify-content-center align-items-center me-2">
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(false)" type="checkbox" id="md3" class="d-flex justify-content-center align-items-center me-2">
+                    }
                     <label for="md3">Chưa kiểm duyệt</label>
                 </div>
                 <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
-                    <input type="checkbox" id="md4" class="d-flex justify-content-center align-items-center me-2">
+                    @if (isApproved)
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(true)" type="checkbox" checked id="md4" class="d-flex justify-content-center align-items-center me-2">
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(true)" type="checkbox" id="md4" class="d-flex justify-content-center align-items-center me-2">
+                    }
                     <label for="md4">Đã kiểm duyệt</label>
                 </div>
             </div>

@@ -44,6 +44,8 @@
     @media (min-width: 1200px) {
       .org-item::before {
         width: calc(115px / 2 + 1px); } }
+  .org-item .org-item_group {
+    width: 65%; }
   .org-item__img {
     height: 55px;
     width: 55px;
@@ -63,7 +65,7 @@
     .org-item__name-group a {
       font-weight: 600;
       font-size: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
       text-decoration: none;
       color: #18A0FB; }
       @media (min-width: 576px) {
@@ -75,8 +77,7 @@
           margin-bottom: 0px; } }
       @media (min-width: 992px) {
         .org-item__name-group a {
-          font-size: 16px;
-          margin-bottom: 0px; } }
+          font-size: 16px; } }
       @media (min-width: 1200px) {
         .org-item__name-group a {
           font-size: 18px; } }
@@ -100,6 +101,7 @@
       .org-item__name-group p span {
         color: #64D72F; }
   .org-item__rate-group {
+    width: 35%;
     height: inherit; }
     .org-item__rate-group .seperate-line {
       display: none;

@@ -133,6 +133,14 @@
         }
     }
 
+    #filter-item-notpl {
+        padding-left: 0;
+
+        .filter-item__btn {
+            width: 225px;
+        }
+    }
+
     .form__note {
         position: absolute;
         bottom: -20px;
@@ -170,11 +178,12 @@
         font-size: 14px;
         color: #B4B4B4;
 
-        .check-box {
-            border-radius: 5px;
-            width: 15px;
-            height: 15px;
-            margin-right: 5px;
+        .radio-skill {
+            position: relative;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
             vertical-align: top;
             background-color: #fff;
             background-repeat: no-repeat;
@@ -185,19 +194,18 @@
             -moz-appearance: none;
             appearance: none;
             -webkit-print-color-adjust: exact;
-            position: relative;
             cursor: pointer;
 
             &::before {
                 content: "";
-                width: 9px;
-                height: 5px;
-                border-left: 2px solid #18A0FB;
-                border-bottom: 2px solid #18A0FB;
                 position: absolute;
-                top: 40%;
-                left: 52%;
-                transform: translate(-50%, -50%) rotate( -45deg );
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: $blue;
                 display: none;
             }
 
@@ -208,9 +216,9 @@
 
         label {
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 400;
             font-size: 16px;
-            color: $blue;
+            color: $grey-text;
         }
     }
 
@@ -229,8 +237,6 @@
         height: 1px;
         visibility: hidden;
     }
-
-
 }
 
 .filter-item {
@@ -319,4 +325,38 @@
     }
 }
 
+.radio-skill {
+    position: relative;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    vertical-align: top;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid $grey-icon;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    cursor: pointer;
 
+    &::before {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $blue;
+        display: none;
+    }
+
+    &:checked::before {
+        display: block;
+    }
+}

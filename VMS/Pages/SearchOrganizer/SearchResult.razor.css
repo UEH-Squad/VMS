@@ -95,10 +95,10 @@
           font-size: 14px; } }
       @media (min-width: 992px) {
         .org-item__name-group p {
-          font-size: 16px; } }
+          font-size: 14px; } }
       @media (min-width: 1200px) {
         .org-item__name-group p {
-          font-size: 20px; } }
+          font-size: 16px; } }
       .org-item__name-group p span {
         color: #64D72F; }
   .org-item__rate-group {

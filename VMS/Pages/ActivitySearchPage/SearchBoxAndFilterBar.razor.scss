@@ -186,6 +186,10 @@
     }
 }
 
+.my-custom-dropdown {
+    height: unset;
+}
+
 .popup-btn:focus ~ .my-dropdown {
     display: block;
 }

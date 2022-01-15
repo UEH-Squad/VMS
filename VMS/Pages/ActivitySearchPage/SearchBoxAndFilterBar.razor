@@ -123,8 +123,8 @@
 
     <div class="filter-item filter-item-organization position-relative">
         <input @onclick="ToggleActTypeDropdown" @onfocusout="CloseActTypeDropdown" class="popup-btn bg-grey" placeholder="@Filter.ActType.GetName()" readonly />
-        <div class="my-dropdown" style="display: @(isActTypeShow ? "block" : "none")">
-            <ul>
+        <div class="my-dropdown my-custom-dropdown" style="display: @(isActTypeShow ? "block" : "none")">
+            <ul class="m-0">
                 <li @onmousedown="() => ChooseActType(StatusAct.Happenning)">@StatusAct.Happenning.GetName()</li>
                 <li @onmousedown="() => ChooseActType(StatusAct.TookPlace)">@StatusAct.TookPlace.GetName()</li>
                 <li @onmousedown="() => ChooseActType(StatusAct.Closed)">@StatusAct.Closed.GetName()</li>

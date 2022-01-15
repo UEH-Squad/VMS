@@ -152,6 +152,9 @@
         color: #64D72F;
         background-color: rgba(24, 160, 251, 0.1); }
 
+.my-custom-dropdown {
+  height: unset; }
+
 .popup-btn:focus ~ .my-dropdown {
   display: block; }
 

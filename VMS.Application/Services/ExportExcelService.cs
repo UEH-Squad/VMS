@@ -45,7 +45,7 @@ namespace VMS.Application.Services
                 worksheet.Cells[row, 6].Value = item.User.FacultyId == null? "": item.User.Faculty.Name;
                 worksheet.Cells[row, 7].Value = item.User.NotifiedEmail;
                 worksheet.Cells[row, 8].Value = item.Desire;
-                worksheet.Cells[row, 9].Value = item.IsCommit ? "" : "X";
+                worksheet.Cells[row, 9].Value = item.IsCommit ? "X" : "";
 
                 row++;
             }

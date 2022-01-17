@@ -10,30 +10,33 @@
     background-color: #B4B4B4 !important;
     cursor: default !important; }
 
-.act {
+.my-act h3 {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #18A0FB;
   border-top: 2px solid #b4b4b4; }
-  .act h3 {
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #18A0FB; }
-    @media (min-width: 1200px) {
-      .act h3 {
-        font-size: 24px; } }
-    .act h3 span {
-      color: #64D72F; }
-  .act .act__item {
-    background-color: #F3F3F5;
-    padding: 10px 0px;
-    border-radius: 5px;
-    margin-top: 30px;
-    height: 203px; }
-    @media (min-width: 992px) {
-      .act .act__item {
-        height: 310px; } }
-    .act .act__item img {
-      height: 100%;
-      object-fit: cover; }
+  @media (min-width: 1200px) {
+    .my-act h3 {
+      font-size: 18px; } }
+  .my-act h3 span {
+    color: #64D72F; }
+
+.act .act__item {
+  background-color: #F3F3F5;
+  padding: 10px 0px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  height: 203px; }
+  .act .act__item:last-of-type {
+    margin-bottom: 0px; }
+  @media (min-width: 992px) {
+    .act .act__item {
+      height: 310px; } }
+  .act .act__item img {
+    height: 100%;
+    object-fit: cover; }
 
 .act__content {
   position: relative; }

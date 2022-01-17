@@ -3,8 +3,15 @@
 <section class="my-act">
     <div class="container">
         <div class="row">
-            <div class="act col-12 col-xl-8 ps-0" id="act">
+            <div class="col-12 col-xl-8 ps-0">
                 <h3>Có <span>@(pagedResult is null ? "0" : pagedResult.TotalItems) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <div class="act col-12 col-xl-8 ps-0" id="act">
+
                 <div class="px-2">
                     <div class="act__page-1">
                         @if (pagedResult is not null && pagedResult.TotalItems != 0)
@@ -99,6 +106,7 @@
                 <FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
             </div>
         </div>
+           
     </div>
 </section>
 

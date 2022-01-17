@@ -15,7 +15,8 @@
 
 .result-heading {
   display: none;
-  font-size: 24px;
+  font-size: 18px;
+  font-weight: 400;
   color: #18A0FB; }
   @media (min-width: 992px) {
     .result-heading {

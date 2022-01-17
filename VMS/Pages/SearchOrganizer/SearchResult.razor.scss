@@ -16,7 +16,8 @@ $border-width: 1px;
 
 .result-heading {
     display: none;
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: 400;
     color: $blue;
 
     @include on('lg') {

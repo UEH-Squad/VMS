@@ -486,19 +486,14 @@
 
 /*------Text Result-------*/
 .text-result {
-  margin-bottom: 15px !important;
-  font-size: 10px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  font-size: 14px;
+  font-weight: 400;
   color: #18A0FB; }
-  @media (min-width: 768px) {
-    .text-result {
-      font-size: 14px; } }
-  @media (min-width: 992px) {
-    .text-result {
-      margin-bottom: unset;
-      font-size: 18px; } }
   @media (min-width: 1200px) {
     .text-result {
-      font-size: 24px; } }
+      font-size: 18px; } }
   .text-result span {
     color: #64D72F; }
 

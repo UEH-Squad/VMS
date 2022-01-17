@@ -15,12 +15,20 @@ $border-width: 1px;
 }
 
 .result-heading {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    margin-bottom:0px;
     display: none;
-    font-size: 24px;
+    font-size: 14px;
+    font-weight: 400;
     color: $blue;
 
     @include on('lg') {
         display: block;
+    }
+
+    @include on('xl') {
+        font-size: 18px;
     }
 
     span {
@@ -38,6 +46,10 @@ $border-width: 1px;
     @include on('xl') {
         height: $org-avata-size;
         margin-top: 28px;
+    }
+
+    &:first-of-type {
+        margin-top: 0px;
     }
 
     &::before {

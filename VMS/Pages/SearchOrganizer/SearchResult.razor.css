@@ -14,12 +14,19 @@
       border-top: 2px solid #b4b4b4; } }
 
 .result-heading {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  margin-bottom: 0px;
   display: none;
-  font-size: 24px;
+  font-size: 14px;
+  font-weight: 400;
   color: #18A0FB; }
   @media (min-width: 992px) {
     .result-heading {
       display: block; } }
+  @media (min-width: 1200px) {
+    .result-heading {
+      font-size: 18px; } }
   .result-heading span {
     color: #64D72F; }
 
@@ -33,6 +40,8 @@
     .org-item {
       height: 115px;
       margin-top: 28px; } }
+  .org-item:first-of-type {
+    margin-top: 0px; }
   .org-item::before {
     content: "";
     height: calc(100% + 2 * 1px);

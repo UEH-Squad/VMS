@@ -19,6 +19,10 @@
   .card-member_name .avatar {
     text-decoration: none; }
     .card-member_name .avatar img {
+      width: 52;
+      height: 52;
+      object-fit: cover;
+      border-radius: 50%;
       cursor: pointer; }
   .card-member_name .name {
     display: flex;
@@ -47,6 +51,10 @@
   .card-organization_name .avatar {
     text-decoration: none; }
     .card-organization_name .avatar img {
+      width: 52;
+      height: 52;
+      object-fit: cover;
+      border-radius: 50%;
       cursor: pointer; }
   .card-organization_name .name {
     display: flex;

@@ -22,6 +22,10 @@
             text-decoration: none;
 
             img {
+                width: 52;
+                height: 52;
+                object-fit: cover;
+                border-radius: 50%;
                 cursor: pointer;
             }
         }
@@ -67,7 +71,12 @@
 
         .avatar {
             text-decoration: none;
+
             img {
+                width: 52;
+                height: 52;
+                object-fit: cover;
+                border-radius: 50%;
                 cursor: pointer;
             }
         }

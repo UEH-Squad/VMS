@@ -21,7 +21,35 @@
 .act-filter {
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px; }
+  margin-top: 10px;
+  /*
+    &__btn {
+        padding: 4px 16px;
+        background-color: $green;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        font-weight: 300;
+
+        &.--filter:hover {
+            background-color: $green-bold;
+        }
+
+        &.--del {
+            padding: 0;
+            color: $grey-icon;
+            background-color: transparent;
+            margin-left: 30px;
+
+            @include on ('xl') {
+                margin-left: 0;
+            }
+        }
+
+        &.--del:hover {
+            text-decoration: underline;
+        }
+    }*/ }
   @media (min-width: 576px) {
     .act-filter {
       margin-top: 25px; } }
@@ -203,27 +231,66 @@
     @media (min-width: 1200px) {
       .act-filter__btn-container {
         margin-top: 0;
-        justify-content: space-around; } }
+        justify-content: start; } }
     @media (min-width: 1400px) {
       .act-filter__btn-container {
-        padding: 0 12px;
-        justify-content: space-around; } }
-  .act-filter__btn {
-    padding: 4px 16px;
-    background-color: #64D72F;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    font-weight: 300; }
-    .act-filter__btn.--filter:hover {
-      background-color: #306C14; }
-    .act-filter__btn.--del {
-      padding: 0;
-      color: #B4B4B4;
-      background-color: transparent;
-      margin-left: 30px; }
-      @media (min-width: 1200px) {
-        .act-filter__btn.--del {
-          margin-left: 0; } }
-    .act-filter__btn.--del:hover {
-      text-decoration: underline; }
+        padding: 0 12px; } }
+
+/*.btn-wrapper {
+    display: flex;
+    align-items: flex-end;
+
+    @include on('xl') {
+        width: 17%;
+    }
+}*/
+.filter-btn {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  width: fit-content;
+  font-size: 14px;
+  border-radius: 8px;
+  font-weight: 400 !important;
+  color: #fff;
+  font-weight: bold;
+  background-color: #64D72F;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 26px; }
+  .filter-btn:hover {
+    background-color: #306C14;
+    opacity: 78%; }
+  @media (min-width: 768px) {
+    .filter-btn {
+      font-size: 16px;
+      height: 32px; } }
+  @media (min-width: 1200px) {
+    .filter-btn {
+      height: 40px; } }
+
+.clear-filter-btn {
+  font-weight: 400 !important;
+  color: #fff;
+  font-weight: bold;
+  background-color: #64D72F;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  width: fit-content;
+  color: #B4B4B4;
+  background-color: #fff;
+  width: 70px;
+  height: 26px; }
+  @media (min-width: 768px) {
+    .clear-filter-btn {
+      font-size: 16px;
+      height: 32px; } }
+  @media (min-width: 1200px) {
+    .clear-filter-btn {
+      font-size: 16px;
+      height: 40px; } }
+  .clear-filter-btn:hover {
+    text-decoration: underline; }

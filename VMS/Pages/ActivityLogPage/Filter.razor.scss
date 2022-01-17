@@ -267,15 +267,14 @@
 
         @include on('xl') {
             margin-top: 0;
-            justify-content: space-around;
+            justify-content: start;
         }
 
         @include on('xxl') {
             padding: 0 12px;
-            justify-content: space-around;
         }
     }
-
+/*
     &__btn {
         padding: 4px 16px;
         background-color: $green;
@@ -302,5 +301,67 @@
         &.--del:hover {
             text-decoration: underline;
         }
+    }*/
+}
+
+/*.btn-wrapper {
+    display: flex;
+    align-items: flex-end;
+
+    @include on('xl') {
+        width: 17%;
+    }
+}*/
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    width: fit-content;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 400 !important;
+    @include green-btn;
+    height: 26px;
+
+    &:hover {
+        background-color: #306C14;
+        opacity: 78%;
+    }
+
+    @include on('md') {
+        font-size: 16px;
+        height: 32px;
+    }
+
+    @include on('xl') {
+        height: 40px;
+    }
+}
+
+.clear-filter-btn {
+    font-weight: 400 !important;
+    @include green-btn;
+    font-size: 14px;
+    width: fit-content;
+    color: $grey-icon;
+    background-color: #fff;
+    width: 70px;
+    height: 26px;
+
+    @include on('md') {
+        font-size: 16px;
+        height: 32px;
+    }
+
+    @include on('xl') {
+        font-size: 16px;
+        height: 40px;
+    }
+
+
+
+    &:hover {
+        text-decoration: underline;
     }
 }

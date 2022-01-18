@@ -164,14 +164,11 @@
     }
 
     @include on("xl") {
-        width: 190px;
-        height: 190px;
+        width: 195px;
+        height: 195px;
     }
 
-    @include on("xxl") {
-        width: 210px;
-        height: 210px;
-    }
+
 }
 
 .act-img {

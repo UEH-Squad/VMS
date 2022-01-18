@@ -135,12 +135,8 @@
       height: 160px; } }
   @media (min-width: 1200px) {
     .img-container {
-      width: 190px;
-      height: 190px; } }
-  @media (min-width: 1400px) {
-    .img-container {
-      width: 210px;
-      height: 210px; } }
+      width: 195px;
+      height: 195px; } }
 
 .act-img {
   height: 100%;

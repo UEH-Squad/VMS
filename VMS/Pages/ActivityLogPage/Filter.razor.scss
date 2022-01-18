@@ -157,107 +157,6 @@
         }
     }
 
-    &__radio {
-        /*width: 33%;*/
-        justify-content: space-around;
-
-        &-1 {
-            width: 45%;
-        }
-
-        &-2 {
-            width: 40%;
-        }
-
-        .radio-1 {
-            position: relative;
-            border-radius: 50%;
-            width: 15px;
-            height: 15px;
-            background-color: $white;
-            border: 2px solid $blue;
-            appearance: none;
-            cursor: pointer;
-
-            &::before {
-                position: absolute;
-                content: "";
-                width: 9px;
-                height: 9px;
-                border-radius: 50%;
-                background-color: $blue;
-                top: 50%;
-                left: 51%;
-                transform: translate(-50%, -50%);
-                display: none;
-            }
-
-            &:checked::before {
-                display: block;
-            }
-
-            &:checked {
-                border-color: $blue;
-            }
-        }
-
-        .radio-2 {
-            position: relative;
-            border-radius: 50%;
-            width: 15px;
-            height: 15px;
-            background-color: $white;
-            border: 2px solid $blue;
-            appearance: none;
-            cursor: pointer;
-
-            &::before {
-                position: absolute;
-                content: "";
-                width: 9px;
-                height: 9px;
-                border-radius: 50%;
-                background-color: $blue;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                display: none;
-            }
-
-            &:checked::before {
-                display: block;
-            }
-
-            &:checked {
-                border-color: $blue;
-            }
-        }
-
-        .label-1 {
-            margin-left: 5%;
-            font-size: 12px;
-            font-weight: normal;
-            color: $border-color-bold;
-            cursor: pointer;
-
-            @include on('sm') {
-                font-size: 16px;
-            }
-        }
-
-        .label-2 {
-            margin-left: 5%;
-            font-size: 12px;
-            font-weight: normal;
-            color: $border-color-bold;
-            cursor: pointer;
-
-            @include on('sm') {
-                font-size: 16px;
-            }
-        }
-    }
-
     &__btn-container {
         /*width: 16%;*/
         display: flex;
@@ -274,44 +173,7 @@
             padding: 0 12px;
         }
     }
-/*
-    &__btn {
-        padding: 4px 16px;
-        background-color: $green;
-        border: none;
-        color: white;
-        border-radius: 5px;
-        font-weight: 300;
-
-        &.--filter:hover {
-            background-color: $green-bold;
-        }
-
-        &.--del {
-            padding: 0;
-            color: $grey-icon;
-            background-color: transparent;
-            margin-left: 30px;
-
-            @include on ('xl') {
-                margin-left: 0;
-            }
-        }
-
-        &.--del:hover {
-            text-decoration: underline;
-        }
-    }*/
 }
-
-/*.btn-wrapper {
-    display: flex;
-    align-items: flex-end;
-
-    @include on('xl') {
-        width: 17%;
-    }
-}*/
 
 .filter-btn {
     display: flex;
@@ -364,4 +226,40 @@
     &:hover {
         text-decoration: underline;
     }
+}
+
+/* pretty radio */
+label{
+    cursor:pointer;
+}
+label > input[type="radio"] {
+    display: none;
+}
+
+label > input[type="radio"] + *::before {
+    content: "";
+    display: inline-block;
+    vertical-align: bottom;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: $blue;
+}
+
+label > input[type="radio"]:checked + *::before {
+    background: radial-gradient($blue 0%, $blue 40%, transparent 50%, transparent);
+}
+/* basic layout */
+fieldset {
+    margin: 20px;
+    max-width: 400px;
+}
+
+label > input[type="radio"] + * {
+    display: inline-block;
+    color: #707070;
 }

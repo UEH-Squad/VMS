@@ -21,35 +21,7 @@
 .act-filter {
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  /*
-    &__btn {
-        padding: 4px 16px;
-        background-color: $green;
-        border: none;
-        color: white;
-        border-radius: 5px;
-        font-weight: 300;
-
-        &.--filter:hover {
-            background-color: $green-bold;
-        }
-
-        &.--del {
-            padding: 0;
-            color: $grey-icon;
-            background-color: transparent;
-            margin-left: 30px;
-
-            @include on ('xl') {
-                margin-left: 0;
-            }
-        }
-
-        &.--del:hover {
-            text-decoration: underline;
-        }
-    }*/ }
+  margin-top: 10px; }
   @media (min-width: 576px) {
     .act-filter {
       margin-top: 25px; } }
@@ -149,79 +121,6 @@
   .act-filter__list-item:hover {
     color: #64D72F;
     background-color: rgba(24, 160, 251, 0.1); }
-  .act-filter__radio {
-    /*width: 33%;*/
-    justify-content: space-around; }
-    .act-filter__radio-1 {
-      width: 45%; }
-    .act-filter__radio-2 {
-      width: 40%; }
-    .act-filter__radio .radio-1 {
-      position: relative;
-      border-radius: 50%;
-      width: 15px;
-      height: 15px;
-      background-color: #FFFFFF;
-      border: 2px solid #18A0FB;
-      appearance: none;
-      cursor: pointer; }
-      .act-filter__radio .radio-1::before {
-        position: absolute;
-        content: "";
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background-color: #18A0FB;
-        top: 50%;
-        left: 51%;
-        transform: translate(-50%, -50%);
-        display: none; }
-      .act-filter__radio .radio-1:checked::before {
-        display: block; }
-      .act-filter__radio .radio-1:checked {
-        border-color: #18A0FB; }
-    .act-filter__radio .radio-2 {
-      position: relative;
-      border-radius: 50%;
-      width: 15px;
-      height: 15px;
-      background-color: #FFFFFF;
-      border: 2px solid #18A0FB;
-      appearance: none;
-      cursor: pointer; }
-      .act-filter__radio .radio-2::before {
-        position: absolute;
-        content: "";
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background-color: #18A0FB;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: none; }
-      .act-filter__radio .radio-2:checked::before {
-        display: block; }
-      .act-filter__radio .radio-2:checked {
-        border-color: #18A0FB; }
-    .act-filter__radio .label-1 {
-      margin-left: 5%;
-      font-size: 12px;
-      font-weight: normal;
-      color: #707070;
-      cursor: pointer; }
-      @media (min-width: 576px) {
-        .act-filter__radio .label-1 {
-          font-size: 16px; } }
-    .act-filter__radio .label-2 {
-      margin-left: 5%;
-      font-size: 12px;
-      font-weight: normal;
-      color: #707070;
-      cursor: pointer; }
-      @media (min-width: 576px) {
-        .act-filter__radio .label-2 {
-          font-size: 16px; } }
   .act-filter__btn-container {
     /*width: 16%;*/
     display: flex;
@@ -236,14 +135,6 @@
       .act-filter__btn-container {
         padding: 0 12px; } }
 
-/*.btn-wrapper {
-    display: flex;
-    align-items: flex-end;
-
-    @include on('xl') {
-        width: 17%;
-    }
-}*/
 .filter-btn {
   display: flex;
   align-items: center;
@@ -294,3 +185,35 @@
       height: 40px; } }
   .clear-filter-btn:hover {
     text-decoration: underline; }
+
+/* pretty radio */
+label {
+  cursor: pointer; }
+
+label > input[type="radio"] {
+  display: none; }
+
+label > input[type="radio"] + *::before {
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: #18A0FB; }
+
+label > input[type="radio"]:checked + *::before {
+  background: radial-gradient(#18A0FB 0%, #18A0FB 40%, transparent 50%, transparent); }
+
+/* basic layout */
+fieldset {
+  margin: 20px;
+  max-width: 400px; }
+
+label > input[type="radio"] + * {
+  display: inline-block;
+  color: #707070; }

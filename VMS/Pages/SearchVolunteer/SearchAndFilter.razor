@@ -6,11 +6,11 @@
     <VMS.Pages.ActivitySearchPage.SearchBox SearchValueChanged="OnSearchValueChangedAsync" />
 </div>
 
-<div class="filter-bar d-flex my-4">
+<div class="filter-bar d-flex mt-4 mb-0">
     <div class="filter-bar_left d-flex me-3">
         <div class="filter-bar_row-1">
             <div class="filter-item position-relative">
-                <input @onclick="ToggleCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn_1 @(isCourseGrey ? "bg-grey" : "")" placeholder="@courseChoosenValue" readonly />
+                <input @onclick="ToggleCourseDropdown" @onfocusout="CloseCourseDropdown" class="popup-btn @(isCourseGrey ? "bg-grey" : "")" placeholder="@courseChoosenValue" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isCourseShow ? "block" : "none")">
                     <ul>
                         @if (courses is not null)
@@ -27,7 +27,7 @@
                 </span>
             </div>
             <div class="filter-item position-relative">
-                <div @onclick="ShowAreasPopupAsync" class="popup-btn_2 @(filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+                <input @onclick="ShowAreasPopupAsync" class="popup-btn @(filter.Areas.Count != 0 ? "bg-grey" : "")" placeholder="@(filter.Areas.Count != 0 ? filter.Areas.GetListNames() : "Lĩnh vực")" readonly />
                 <span class="material-icons-outlined position-absolute filter-item__icon">
                     expand_more
                 </span>
@@ -36,14 +36,14 @@
 
         <div class="filter-bar_row-2">
             <div class="filter-item position-relative">
-                <div @onclick="ShowSkillsPopupAsync" class="popup-btn_2 @(filter.Skills.Count != 0 ? "bg-grey" : "")">Kỹ năng</div>
+                <input @onclick="ShowSkillsPopupAsync" class="popup-btn @(filter.Areas.Count != 0 ? "bg-grey" : "")" placeholder="@(filter.Skills.Count != 0 ? filter.Skills.GetListNames() : "Kỹ năng")" readonly />
                 <span class="material-icons-outlined position-absolute filter-item__icon">
                     expand_more
                 </span>
             </div>
 
             <div class="filter-item position-relative">
-                <input @onclick="ToggleFacultyDropdown" @onfocusout="CloseFacultyDropdown" class="popup-btn_1 @(isFacultyGrey ? "bg-grey" : "")" placeholder="@facultyChoosenValue" readonly />
+                <input @onclick="ToggleFacultyDropdown" @onfocusout="CloseFacultyDropdown" class="popup-btn @(isFacultyGrey ? "bg-grey" : "")" placeholder="@facultyChoosenValue" readonly />
                 <div @onclick:preventDefault class="my-dropdown" style="display: @(isFacultyShow ? "block" : "none")">
                     <ul>
                         @if (faculties is not null)
@@ -59,11 +59,11 @@
                     expand_more
                 </span>
             </div>
-        </div>
+        </div>  
 
     </div>
-    <div class="filter-bar_right d-flex">
-        <button @onclick="UpdateFilterValueAsync" class="filter-btn me-3">Lọc</button>
+    <div class="filter-bar_right d-flex btn-wrapper 1">
+        <button @onclick="UpdateFilterValueAsync" class="filter-btn me-2">Lọc</button>
         <button @onclick="ClearFilterAsync" class="clear-filter-btn">Xóa lọc</button>
     </div>
 </div>

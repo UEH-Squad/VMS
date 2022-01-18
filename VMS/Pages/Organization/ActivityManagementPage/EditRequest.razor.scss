@@ -4,47 +4,92 @@
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin-top: 30px;
+
+    @include on('lg') {
+        margin-top: 30px;
+    }
 }
 
 .list-name {
     display: flex;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 12px;
+
+    @include on('lg') {
+        font-size: 16px;
+    }
+
+    @include on('xxl') {
+        font-size: 20px;
+    }
 
     .list-name_1 {
         margin: 0;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
         color: $blue;
     }
 
     .list-name_2 {
         margin: 0;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
         color: $green;
     }
 }
 
 .list-divider {
-    border: 0.5px solid $grey-icon;
-    margin-bottom: 8%;
+    display: none;
+
+    @include on('lg') {
+        border: 0.5px solid $grey-icon;
+        margin-bottom: 8%;
+    }
+}
+
+.list-card {
+    display: flex;
+    justify-content: space-between;
+
+    @include on('lg') {
+        display: block;
+    }
 }
 
 .card_edit-request {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    width: 30%;
     border: 1px solid $grey-icon;
-    border-radius: 5px;
-    padding: 7% 3% 6% 7%;
-    margin-bottom: 7%;
+    border-radius: 2px;
+    padding: 8px 10px;
+    margin-bottom: 5%;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include on('lg') {
+        width: auto;
+        padding: 7% 3% 6% 7%;
+        margin-bottom: 7%;
+        border-radius: 5px;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
     .card-title {
         font-style: normal;
         font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 10px;
         text-decoration: none;
         color: $blue;
+
+        @include on('md') {
+            font-size: 16px;
+        }
+
+        @include on('xxl') {
+            font-size: 20px;
+        }
     }
 
     .card-title:hover {

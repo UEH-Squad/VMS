@@ -14,12 +14,19 @@
       border-top: 2px solid #b4b4b4; } }
 
 .result-heading {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  margin-bottom: 0px;
   display: none;
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 400;
   color: #18A0FB; }
   @media (min-width: 992px) {
     .result-heading {
       display: block; } }
+  @media (min-width: 1200px) {
+    .result-heading {
+      font-size: 18px; } }
   .result-heading span {
     color: #64D72F; }
 
@@ -33,6 +40,8 @@
     .org-item {
       height: 115px;
       margin-top: 28px; } }
+  .org-item:first-of-type {
+    margin-top: 0px; }
   .org-item::before {
     content: "";
     height: calc(100% + 2 * 1px);
@@ -44,13 +53,16 @@
     @media (min-width: 1200px) {
       .org-item::before {
         width: calc(115px / 2 + 1px); } }
+  .org-item .org-item_group {
+    width: 65%; }
   .org-item__img {
     height: 55px;
     width: 55px;
     min-width: 55px;
     border-radius: 50%;
     z-index: 2;
-    object-fit: cover; }
+    object-fit: cover;
+    cursor: pointer; }
     @media (min-width: 1200px) {
       .org-item__img {
         height: 115px;
@@ -58,11 +70,11 @@
         min-width: 115px; } }
   .org-item__name-group {
     font-weight: 600;
-    max-width: 65%; }
+    max-width: 90%; }
     .org-item__name-group a {
       font-weight: 600;
       font-size: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
       text-decoration: none;
       color: #18A0FB; }
       @media (min-width: 576px) {
@@ -74,14 +86,16 @@
           margin-bottom: 0px; } }
       @media (min-width: 992px) {
         .org-item__name-group a {
-          font-size: 16px;
-          margin-bottom: 0px; } }
+          font-size: 16px; } }
       @media (min-width: 1200px) {
         .org-item__name-group a {
           font-size: 18px; } }
+      .org-item__name-group a:hover {
+        color: #0B588c; }
     .org-item__name-group p {
       font-size: 8px;
-      color: #b4b4b4; }
+      color: #b4b4b4;
+      font-weight: 400; }
       @media (min-width: 576px) {
         .org-item__name-group p {
           font-size: 12px; } }
@@ -90,13 +104,14 @@
           font-size: 14px; } }
       @media (min-width: 992px) {
         .org-item__name-group p {
-          font-size: 16px; } }
+          font-size: 14px; } }
       @media (min-width: 1200px) {
         .org-item__name-group p {
-          font-size: 20px; } }
+          font-size: 16px; } }
       .org-item__name-group p span {
         color: #64D72F; }
   .org-item__rate-group {
+    width: 35%;
     height: inherit; }
     .org-item__rate-group .seperate-line {
       display: none;

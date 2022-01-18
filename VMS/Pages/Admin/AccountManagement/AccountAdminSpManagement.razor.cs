@@ -23,11 +23,14 @@ namespace VMS.Pages.Admin.AccountManagement
 
         [CascadingParameter] public IModalService Modal { get; set; }
 
+        [CascadingParameter(Name = "SearchValue")] public string SearchValue { get; set; }
+
         [Inject] IAdminService AdminService { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
             filter.Role = Role.Admin.ToString();
+            filter.SearchValue = SearchValue;
             await ResetDataAsync(filter, 1);
         }
 
@@ -50,6 +53,7 @@ namespace VMS.Pages.Admin.AccountManagement
         {
             this.filter = filter;
             this.filter.Role = Role.Admin.ToString();
+            this.filter.SearchValue = SearchValue;
             await ResetDataAsync(this.filter, page);
         }
 

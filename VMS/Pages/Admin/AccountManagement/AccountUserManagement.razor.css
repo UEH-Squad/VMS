@@ -5,6 +5,7 @@
 /*#region mixins */
 /*#endregion */
 .managementTool__title {
+  margin-top: 10px;
   font-weight: 400;
   font-size: 18px;
   color: #18A0FB; }

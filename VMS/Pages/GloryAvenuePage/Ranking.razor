@@ -1,0 +1,108 @@
+﻿@inject IJSRuntime JS;
+<session class="ranking">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mt-3 mb-4 mt-lg-4 mb-md-5">
+            <h1 class="mb-0">Bảng xếp hạng @Role <span>@Type</span></h1>
+            <hr />
+        </div>
+        <div class="filter-item position-relative mb-4 ms-auto">
+            <input @onclick="ShowFacultyPopup" class="filter-item__btn filter-item__btn--lmtext-1 @(filter.IsFilter ? "bg-grey":"")" placeholder="@filter.FacultyName" readonly/>
+            <span class="material-icons-outlined position-absolute pe-none">
+                expand_more
+            </span>
+        </div>
+        <div class="owl-carousel owl-theme px-lg-5">
+            @foreach (var unit in unitList)
+            {
+            <div class="ranking-list">
+                <div class="ranking-img">
+                    <div class="ranking-img__container mx-auto">
+                        <img src="./img/hsv.png" alt="Alternate Text" class="w-100" />
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center ranking-name">
+                    <h3 class="text-center px-5 px-sm-2 px-md-5 px-lg-2">@unit.Faculty</h3>
+                </div>
+                @foreach (var item in honorsList)
+                {
+                    <div class="ranking-item d-flex align-items-center mb-lg-4 mb-3">
+                        <h1 class="mb-0 mx-3">@item.Order</h1>
+                        <div class="ranking-item__img me-3 flex-shrink-0">
+                            <img src="./img/personal.png" alt="Alternate Text" class="w-100" />
+                        </div>
+                        <div class="ranking-item__info pe-3">
+                            <h2 class="mb-0">@item.Name</h2>
+                            <div class="d-flex align-items-center">
+                                <p class="mb-0 me-2">@item.StarRating</p>
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= item.StarRating)
+                                    {
+                                        <i class="material-icons">star_rate</i>
+                                    }
+                                    else
+                                    {
+                                        <i class="material-icons star-noColor">star_rate</i>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            }
+        </div>
+    </div>
+</session>
+
+@code {
+    [Parameter] public string Role { get; set; }
+    [Parameter] public string Type { get; set; }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("vms.RankingCarousel");
+    }
+
+    class FakeData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Faculty { get; set; }
+        public int StarRating { get; set; }
+        public int Order { get; set; }
+    }
+
+    private List<FakeData> honorsList = new();
+    private List<FakeData> unitList = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            honorsList.Add(new FakeData()
+            {
+                Name = "Khoa Công nghệ thông tin kinh doanh",
+                Order = i,
+                Id = i,
+                StarRating = 3
+            });
+
+            unitList.Add(new FakeData()
+            {
+                Faculty = "Ban chuyên môn"
+            });
+        }
+    }
+
+    private FacultyPopup.Filter filter = new();
+
+    private async Task ShowFacultyPopup()
+    {
+        var result = await Modal.Show<FacultyPopup>("", BlazoredModalOptions.GetModalOptions()).Result;
+        filter = (FacultyPopup.Filter)(result.Data);
+    }
+}

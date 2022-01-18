@@ -191,6 +191,7 @@ namespace VMS.Application.Services
                                                     .ThenInclude(x => x.Skill)
                                                     .Include(x => x.Recruitments)
                                                     .ThenInclude(x => x.RecruitmentRatings)
+                                                    .Include(x => x.Faculty)
                                                     .FirstOrDefault(x => x.Id == userId)).Result;
         }
 
@@ -211,7 +212,7 @@ namespace VMS.Application.Services
         {
             User user = FindUserById(userId);
 
-            if (IsInRole(user, Role.User))
+            if (user is not null && IsInRole(user, Role.User))
             {
                 UserViewModel userViewModel = _mapper.Map<UserViewModel>(user);
 
@@ -264,7 +265,8 @@ namespace VMS.Application.Services
             {
                 Conditions = GetConditionsByFilter(filter),
                 Includes = x => x.Include(x => x.Recruitments)
-                                 .ThenInclude(x => x.RecruitmentRatings),
+                                 .ThenInclude(x => x.RecruitmentRatings)
+                                 .Include(x => x.Faculty),
                 PageIndex = currentPage,
                 PageSize = 8,
             };

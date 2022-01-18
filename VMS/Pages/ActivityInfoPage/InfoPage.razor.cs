@@ -77,9 +77,17 @@ namespace VMS.Pages.ActivityInfoPage
             parameters.Add("ActId", Activity.Id);
             Modal.Show<Admin.ActivityManagement.EditRequirement>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
+
         private void OnClickNavigateToEditActivty(int activityId)
         {
             NavigationManager.NavigateTo(Routes.EditActivity + "/" + activityId, true);
+        }
+
+        private void ShowImage()
+        {
+            var parameters = new ModalParameters();
+            parameters.Add("Image", Activity.Banner);
+            Modal.Show<Admin.DetailReportPage.WatchImageReport>("", parameters, BlazoredModalOptions.GetModalOptions());
         }
     }    
 }

@@ -48,5 +48,7 @@ namespace VMS.Domain.Models
         public virtual ICollection<Activity> ActivityApprovals { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<Feedback> ReportHandles { get; set; }
+        public virtual ICollection<Feedback> UserReports { get; set; }
     }
 }

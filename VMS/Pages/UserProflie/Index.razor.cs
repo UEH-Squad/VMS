@@ -26,50 +26,48 @@ namespace VMS.Pages.UserProflie
 
         protected override async Task OnInitializedAsync()
         {
-            isLoading = true;
             ValidateUserProfile();
             await GetAllActivities();
-            isLoading = false;
         }
 
         private async Task GetAllActivities()
         {
+            isLoading = true;
+
             currentActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Current, DateTime.Now);
 
             favoriteActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Favor, DateTime.Now);
 
             endedActivities = await ActivityService.GetAllUserActivityViewModelsAsync(UserId, StatusAct.Ended, DateTime.Now);
+
+            isLoading = false;
         }
 
         private void ValidateUserProfile()
         {
-            if (string.IsNullOrEmpty(UserId) && string.IsNullOrEmpty(CurrentUserId))
-            {
-                NavigationManager.NavigateTo(Routes.LogIn, true);
-            }
-
             UserId = string.IsNullOrEmpty(UserId) ? CurrentUserId : UserId;
 
             user = UserService.GetUserViewModel(UserId);
 
-            if (user == null)
+            if (string.IsNullOrEmpty(UserId) || user is null)
             {
-                NavigationManager.NavigateTo(Routes.HomePage, true);
+                NavigationManager.NavigateTo("404", true);
+                return;
             }
 
-            isUser = string.Equals(UserId, CurrentUserId, System.StringComparison.Ordinal);
+            isUser = string.Equals(UserId, CurrentUserId, StringComparison.Ordinal);
 
-            //if (isUser && !IsValidProfile(user))
-            //{
-            //    NavigationManager.NavigateTo(Routes.EditUserProfile, true);
-            //}
+            if (isUser && !IsValidProfile(user))
+            {
+                NavigationManager.NavigateTo(Routes.EditUserProfile, true);
+                return;
+            }
         }
 
         private static bool IsValidProfile(UserViewModel user)
         {
             return !string.IsNullOrEmpty(user.Class)
                 && !string.IsNullOrEmpty(user.Email)
-                && !string.IsNullOrEmpty(user.PhoneNumber)
                 && user.Skills.Count != 0
                 && user.Areas.Count != 0;
         }

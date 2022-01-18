@@ -18,6 +18,24 @@
     </div>
 
     <div class="filter-item position-relative">
+        <input @onclick="ToggleFacultyDropdown" @onfocusout="CloseFacultyDropdown" class="popup-btn @(isFacultyGrey ? "bg-grey" : "")" placeholder="@facultyChoosenValue" readonly />
+        <div @onclick:preventDefault class="my-dropdown" style="display: @(isFacultyShow ? "block" : "none")">
+            <ul>
+                @if (faculties is not null)
+                {
+                    @foreach (var faculty in faculties)
+                    {
+                        <li @onmousedown="() => ChooseFacultyValue(faculty.Name)">@faculty.Name</li>
+                    }
+                }
+            </ul>
+        </div>
+        <span class="material-icons-outlined position-absolute filter-item__icon">
+            expand_more
+        </span>
+    </div>
+
+    <div class="filter-item position-relative">
         <div @onclick="ShowAreasPopupAsync" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
         <span class="material-icons-outlined position-absolute filter-item__icon">
             expand_more

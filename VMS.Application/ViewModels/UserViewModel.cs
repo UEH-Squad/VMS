@@ -12,6 +12,7 @@ namespace VMS.Application.ViewModels
         public string Mission { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Email { get; set; }
+        public string NotifiedEmail { get; set; }
         public string PhoneNumber { get; set; }
         public double AverageRating { get; set; }
         public double QuantityRating { get; set; }
@@ -21,6 +22,8 @@ namespace VMS.Application.ViewModels
         public string StudentId { get; set; }
         public string Class { get; set; }
         public string Course { get; set; }
+
+        public string Faculty { get; set; }
 
         public List<AreaViewModel> Areas { get; set; }
         public List<Activity> Activities { get; set; }

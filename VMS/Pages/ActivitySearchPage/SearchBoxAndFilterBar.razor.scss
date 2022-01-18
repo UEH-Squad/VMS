@@ -5,7 +5,11 @@
 }
 
 .bg-grey {
-    background-color: #f3f3f3;
+    &::placeholder {
+        color: #515151 !important;
+    }
+
+    color: #515151 !important;
 }
 
 .colored-red {
@@ -94,14 +98,14 @@
 
     @include on('xl') {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
     }
 }
 .filter-item {
     width: 100%;
 
     @include on('xl') {
-        width: 16%;
+        width: 14%;
     }
 
     &__icon {
@@ -182,12 +186,17 @@
     }
 }
 
+.my-custom-dropdown {
+    height: unset;
+}
+
 .popup-btn:focus ~ .my-dropdown {
     display: block;
 }
 
 .btn-wrapper {
     display: flex;
+    align-items: flex-end;
 
     @include on('xl') {
         width: 17%;
@@ -199,22 +208,24 @@
     align-items: center;
     padding: 5px 20px;
     width: fit-content;
-    color: $blue;
     font-size: 14px;
     border-radius: 8px;
-    border: 1px solid $blue;
-    background-color: $white;
-    font-weight: 400!important;
+    font-weight: 400 !important;
+    @include green-btn;
+    height: 26px;
+
+    &:hover {
+        background-color: #306C14;
+        opacity: 78%;
+    }
+
+    @include on('md') {
+        font-size: 16px;
+        height: 32px;
+    }
 
     @include on('xl') {
-        @include green-btn;
-        font-size: 16px;
         height: 40px;
-
-        &:hover {
-            background-color: #306C14;
-            opacity: 78%;
-        }
     }
 }
 
@@ -225,11 +236,20 @@
     width: fit-content;
     color: $grey-icon;
     background-color: #fff;
-    width: 50%;
+    width: 70px;
+    height: 26px;
+
+    @include on('md') {
+        font-size: 16px;
+        height: 32px;
+    }
 
     @include on('xl') {
         font-size: 16px;
+        height: 40px;
     }
+
+
 
     &:hover {
         text-decoration: underline;

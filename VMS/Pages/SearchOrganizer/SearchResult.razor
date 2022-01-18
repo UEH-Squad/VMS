@@ -1,59 +1,68 @@
 ﻿@inject IJSRuntime JsRuntime
 <section class="my-container mb-5">
-    <h3 class="result-heading mt-4 mb-3">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) @(IsOrgResult ? "tổ chức" : "tình nguyện viên")</span> ứng với kết quả tìm kiếm của bạn</h3>
+    <h3 class="result-heading">Có <span>@(PagedResult is null ? "0" : PagedResult.TotalItems) @(IsUserResult ? "tình nguyện viên" : "tổ chức")</span> ứng với kết quả tìm kiếm của bạn</h3>
     @if (PagedResult != null && PagedResult.TotalItems != 0)
     {
         @foreach (var item in PagedResult.Items)
         {
             <div class="org-item d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
+                <div class="org-item_group d-flex align-items-center">
                     <img class="org-item__img me-2" src="@(string.IsNullOrEmpty(item.Avatar) ? "img/Default/avatar.png" : item.Avatar)" alt="@item.FullName" />
-                    <div class="org-item__name-group ms-4">
+                    <div class="org-item__name-group">
                         <a class="org-item__name lmtext-2"
-                            href="@(IsUsedForAdmin
+                           href="@(IsUsedForAdmin
                             ? (IsUserResult ? Routes.AdminVolunteerProfile : Routes.AdminOrganizationProfile)
                             : (IsUserResult ? Routes.UserProfile : Routes.OrgProfile))/@item.Id">@item.FullName</a>
-                        <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Course</p>
-                        <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">
-                            Đã tổ chức <span style="@(IsUsedForAdmin ? "cursor: pointer;" : "")"
-                                     @onclick="(() => ShowHeldActivitiesAsync(item.Id))">@item.Activities.Count</span> hoạt động
-                        </p>
-                        <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course - Lớp @item.Class</p>
-                    </div>
-                </div>
-                <div class="org-item__rate-group d-flex align-items-center @(IsUsedForAdmin ? "me-3" : "me-5")">
-                    <div class="seperate-line"></div>
-                    <span class="me-4">#@item.Rank</span>
-                    <div>
-                        <p class="m-0 d-flex align-items-center">
-                            @item.AverageRating
-                            <Star Rating="item.AverageRating" />
-                        </p>
-                        <p class="m-0 @(IsUserResult ? "d-none" : "")">
-                            @if (item.QuantityRating >= 1000)
-                            {
-                                var a = Math.Round((double)item.QuantityRating / 1000, 1, MidpointRounding.ToZero);
-                                @(a + "N")
+                            <p class="m-0 @(HaveLevel ? "d-block" : "d-none")">@item.Course</p>
+                            <p class="m-0 @(IsOrgResult? "d-block" : "d-none")">
+                                Đã tổ chức <span style="@(IsUsedForAdmin ? "cursor: pointer;" : "")"
+                                                 @onclick="(() => ShowHeldActivitiesAsync(item.Id))">@item.Activities.Count</span> hoạt động
+                                            </p>
+                                            @if (IsUsedForAdmin)
+                                            {
+                                                <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course @(!string.IsNullOrEmpty(item.Class) ? $"- {item.Class}" : "")</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">@item.Course @(!string.IsNullOrEmpty(item.Faculty) ? $"- {item.Faculty}" : "")</p>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="org-item__rate-group d-flex align-items-center @(IsUsedForAdmin ? "me-3" : "")">
+                                        <div class="seperate-line"></div>
+                                        <span class="me-4">#@item.Rank</span>
+                                        <div>
+                                            <p class="m-0 d-flex align-items-center">
+                                                @item.AverageRating
+                                                <Star Rating="item.AverageRating" />
+                                            </p>
+                                            <p class="m-0 @(IsUserResult ? "d-none" : "")">
+                                                @if (item.QuantityRating >= 1000)
+                                                {
+                                                    var a = Math.Round((double)item.QuantityRating / 1000, 1, MidpointRounding.ToZero);
+                                                    @(a + "N")
+                                                }
+                                                else
+                                                {
+                                                    @item.QuantityRating
+                                                }
+                                                xếp hạng
+                                            </p>
+                                            <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">
+                                                / @(item.QuantityRating) đánh giá
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             }
-                            else
-                            {
-                                @item.QuantityRating
-                            }
-                            xếp hạng
-                        </p>
-                        <p class="m-0 @(IsUserResult ? "d-block" : "d-none")">
-                            / @(item.QuantityRating) đánh giá
-                        </p>
-                    </div>
-                </div>
-            </div>
-        }
     }
 </section>
 
-<Pager CurrentPage="@PagedResult.PageIndex"
-       PageCount="@PagedResult.TotalPages"
-       OnPageChanged="@(async (e)=> { await HandlePageChangedAsync(e); })" />
+<div class="d-flex justify-content-center">
+    <Pager CurrentPage="@PagedResult.PageIndex"
+           PageCount="@PagedResult.TotalPages"
+           OnPageChanged="@(async (e)=> { await HandlePageChangedAsync(e); })" />
+</div>
 
 @code {
     private bool isYellow;

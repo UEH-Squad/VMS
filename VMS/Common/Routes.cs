@@ -10,6 +10,7 @@
         public const string Map = "/ban-do";
         public const string OrganizerSearch = "/don-vi-to-chuc";
         public const string VolunteerSearch = "/tinh-nguyen-vien";
+        public const string GloryAvenue = "/dai-lo-danh-vong";
 
         #endregion Main
 
@@ -36,7 +37,6 @@
 
         #region Identity
 
-        public const string Register = "/dang-ky";
         public const string LogIn = "/dang-nhap";
         public const string ChangePassword = "/doi-mat-khau";
         public const string LogOut = "Identity/Account/LogOut";

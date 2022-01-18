@@ -5,7 +5,9 @@
 /*#region mixins */
 /*#endregion */
 .bg-grey {
-  background-color: #f3f3f3; }
+  color: #515151 !important; }
+  .bg-grey::placeholder {
+    color: #515151 !important; }
 
 h3 {
   font-weight: 600;
@@ -50,31 +52,32 @@ p {
   justify-content: space-between; }
 
 .filter-bar_left {
-  width: 65%;
-  flex-direction: column; }
-  @media (min-width: 768px) {
-    .filter-bar_left {
-      width: 75%; } }
+  width: 75%;
+  flex-direction: column;
+  margin-left: -5px; }
   @media (min-width: 992px) {
     .filter-bar_left {
-      width: 65%;
       flex-direction: row;
-      justify-content: space-between; } }
-  @media (min-width: 1200px) {
-    .filter-bar_left {
-      width: 70%; } }
+      justify-content: space-between;
+      margin-left: -10px; } }
 
 .filter-bar_row-1 {
   display: flex;
-  margin-bottom: 5%;
+  width: 100%;
+  margin-bottom: 24px;
   justify-content: space-around; }
+  @media (min-width: 992px) {
+    .filter-bar_row-1 {
+      width: 50%; } }
 
 .filter-bar_row-2 {
   display: flex;
+  width: 100%;
   justify-content: space-around; }
   @media (min-width: 992px) {
     .filter-bar_row-2 {
-      margin-bottom: 5%; } }
+      width: 50%;
+      margin-bottom: 24px; } }
 
 .filter-item {
   font-size: 10px;
@@ -92,32 +95,7 @@ p {
       .filter-item__icon {
         font-size: 24px; } }
 
-.popup-btn_1 {
-  border-radius: 8px;
-  height: 29px;
-  width: 100%;
-  border: 1px solid #707070;
-  cursor: pointer;
-  color: #b4b4b4;
-  padding-left: 8px;
-  padding-right: 30px;
-  outline: none;
-  line-height: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  /* number of lines to show */
-  -webkit-box-orient: vertical; }
-  @media (min-width: 1200px) {
-    .popup-btn_1 {
-      height: 40px; } }
-  .popup-btn_1::placeholder {
-    color: #b4b4b4; }
-
-.popup-btn_2 {
-  display: flex !important;
-  align-items: center;
+.popup-btn {
   border-radius: 8px;
   height: 29px;
   width: 100%;
@@ -134,9 +112,9 @@ p {
   /* number of lines to show */
   -webkit-box-orient: vertical; }
   @media (min-width: 1200px) {
-    .popup-btn_2 {
+    .popup-btn {
       height: 40px; } }
-  .popup-btn_2::placeholder {
+  .popup-btn::placeholder {
     color: #b4b4b4; }
 
 .my-dropdown {
@@ -149,7 +127,8 @@ p {
   background-color: #fff;
   z-index: 10;
   display: none;
-  width: 100%; }
+  width: 100%;
+  height: 240px; }
   @media (min-width: 1200px) {
     .my-dropdown {
       padding: 15px 18px; } }
@@ -197,56 +176,51 @@ p {
       align-items: baseline; } }
 
 .filter-btn {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  width: fit-content;
+  font-size: 14px;
+  border-radius: 8px;
+  font-weight: 400 !important;
   color: #fff;
   font-weight: bold;
   background-color: #64D72F;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: 400;
-  font-size: 12px;
-  height: 26px;
-  padding: 0 10px; }
-  @media (min-width: 576px) {
-    .filter-btn {
-      font-size: 16px;
-      height: 32px;
-      padding: 0 12px; } }
-  @media (min-width: 768px) {
-    .filter-btn {
-      font-size: 18px;
-      height: 36px;
-      padding: 0 16px; } }
-  @media (min-width: 992px) {
-    .filter-btn {
-      font-size: 18px;
-      height: 40px;
-      padding: 0 20px; } }
+  height: 26px; }
   .filter-btn:hover {
     background-color: #306C14;
     opacity: 78%; }
+  @media (min-width: 768px) {
+    .filter-btn {
+      font-size: 16px;
+      height: 32px; } }
+  @media (min-width: 1200px) {
+    .filter-btn {
+      height: 40px; } }
 
 .clear-filter-btn {
+  font-weight: 400 !important;
   color: #fff;
   font-weight: bold;
   background-color: #64D72F;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   width: fit-content;
-  color: #000000;
-  background-color: #fff; }
-  @media (min-width: 576px) {
-    .clear-filter-btn {
-      font-size: 16px; } }
+  color: #B4B4B4;
+  background-color: #fff;
+  width: 70px;
+  height: 26px; }
   @media (min-width: 768px) {
     .clear-filter-btn {
-      font-size: 18px; } }
-  @media (min-width: 992px) {
+      font-size: 16px;
+      height: 32px; } }
+  @media (min-width: 1200px) {
     .clear-filter-btn {
-      font-size: 18px;
-      color: #B4B4B4; } }
+      height: 40px; } }
   .clear-filter-btn:hover {
     text-decoration: underline; }

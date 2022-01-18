@@ -26,6 +26,7 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, UserWithActivityViewModel>();
             CreateMap<Skill, SkillViewModel>();
             CreateMap<User, UserViewModel>()
+                .ForMember(x => x.Faculty, opt => opt.MapFrom(src => src.Faculty.Name))
                 .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel
                 {
                     Id = x.AreaId,
@@ -80,17 +81,21 @@ namespace VMS.Application.Automapper
 
             CreateMap<PaginatedList<User>, PaginatedList<UserViewModel>>();
             CreateMap<EditRequirementViewModel, Feedback>();
+            CreateMap<Recruitment, ListVolunteerViewModel>();
         }
 
         private void MapReportToFeedback()
         {
             CreateMap<ReportViewModel, Feedback>()
-                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTime.Now))
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ReportBy))
-                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => src.DesReport))
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
-                .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityId));
-            CreateMap<Recruitment, ListVolunteerViewModel>();
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ReportBy));
+            CreateMap<Feedback, ReportViewModel>()
+                .ForMember(x => x.ActivityName, opt => opt.MapFrom(src => src.Activity.Name))
+                .ForMember(x => x.ReportBy, opt => opt.MapFrom(src => src.CreatedBy))
+                .ForMember(x => x.ReporterName, opt => opt.MapFrom(src => src.Reporter.FullName))
+                .ForMember(x => x.HandlerName, opt => opt.MapFrom(src => src.Handler.UserName))
+                .ForMember(x => x.Reasons, opt => opt.MapFrom(src => src.ReasonReports.Select(x => x.Reason).ToList()))
+                .ForMember(x => x.Images, opt => opt.MapFrom(src => src.ImageReports.Select(x => x.Image).ToList()));
+            CreateMap<PaginatedList<Feedback>, PaginatedList<ReportViewModel>>();
         }
 
         private void MapAccountToUserAndBack()

@@ -3,14 +3,14 @@
 <div class="container">
     <div class="row align-items-center">
         <div class="col-3 d-flex flex-column my-navbar__brand">
-            <a href="@Routes.ActivitySearch" class="my-navbar__brand-item">
+            <a href="@Routes.HomePage" class="my-navbar__brand-item">
                 <img src="img/GoVirlunteer (1).png" alt="Go Volunteer logo" class="brand__govirlunteer" />
             </a>
         </div>
         <div class="col-9">
             <div class="row">
                 <div class="col-9 mx-auto p-0">
-                    <VMS.Pages.ActivitySearchPage.SearchBox IsUsedForAdmin="true" SearchValue="" />
+                    <VMS.Pages.ActivitySearchPage.SearchBox IsUsedForAdmin="true" SearchValueChanged="OnSearchValueChanged" />
                 </div>
                 <div class="col-1 d-flex align-items-center justify-content-end">
                     <a href="#" class="text-decoration-none position-absolute notification-link">
@@ -31,7 +31,9 @@
 
         <div class="col-9 flex-grow-1">
             <div class="row">
-                @Body
+                <CascadingValue Value="@searchValue" Name="SearchValue">
+                    @Body
+                </CascadingValue>
             </div>
         </div>
     </div>
@@ -40,5 +42,10 @@
 <Footer IsFloat="true" />
 
 @code {
+    private string searchValue = "";
 
+    private void OnSearchValueChanged(string value)
+    {
+        searchValue = value;
+    }
 }

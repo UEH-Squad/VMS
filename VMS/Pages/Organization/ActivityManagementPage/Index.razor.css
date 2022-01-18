@@ -5,8 +5,8 @@
 /*#region mixins */
 /*#endregion */
 .org-title {
-  margin-top: 20px;
-  margin-bottom: 50px;
+  margin-top: 12px;
+  margin-bottom: 5px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -21,8 +21,10 @@
       font-size: 30px; } }
   @media (min-width: 992px) {
     .org-title {
+      margin-top: 20px;
+      margin-bottom: 50px;
       font-size: 36px; } }
-  @media (min-width: 1400px) {
+  @media (min-width: 1200px) {
     .org-title {
       font-size: 42px; } }
   @media (min-width: 1400px) {

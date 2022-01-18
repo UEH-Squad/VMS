@@ -162,13 +162,40 @@
             </div>
 
             <div class="filter-item position-relative mb-4">
-                <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@DateTimeValue" DefaultValue="DateTime.Now" Class="pe-1" Style="@(isFilterMonth ? "background-color: #f3f3f3" : "")" OnChange="ChooseMonthValue" Format="MM/yyyy" />
+                <AntDesign.DatePicker Picker="@AntDesign.DatePickerType.Month" @bind-Value="@DateTimeValue" DefaultValue="DateTime.Now" Class="@(isFilterMonth ? "text-color pe-1 " : " pe-1" )" OnChange="ChooseMonthValue" Format="MM/yyyy" />
             </div>
         </div>
 
-        <div class="act-filter__btn d-flex justify-content-start align-items-center mb-4 text-center">
-            <button @onclick="UpdateFilterValueAsync" class="btn act-filter__btn--green px-3 py-1">Lọc</button>
-            <button @onclick="ClearFilterAsync" class="act-filter__btn--clear ms-3">Xóa lọc</button>
+        
+        <div class="d-flex justify-content-between">
+            <div class="act-filter__type d-flex justify-content-center">
+                <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                    @if (isNotApproved)
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(false)" type="checkbox" checked id="md3" class="d-flex justify-content-center align-items-center me-2">
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(false)" type="checkbox" id="md3" class="d-flex justify-content-center align-items-center me-2">
+                    }
+                    <label for="md3">Chưa kiểm duyệt</label>
+                </div>
+                <div class="act-filter__type__child d-flex justify-content-center align-items-center me-4">
+                    @if (isApproved)
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(true)" type="checkbox" checked id="md4" class="d-flex justify-content-center align-items-center me-2">
+                    }
+                    else
+                    {
+                        <input @onchange="() => OnChangeApprovalFilterAsync(true)" type="checkbox" id="md4" class="d-flex justify-content-center align-items-center me-2">
+                    }
+                    <label for="md4">Đã kiểm duyệt</label>
+                </div>
+            </div>
+            <div class="act-filter__btn d-flex justify-content-start align-items-center text-center">
+                <button @onclick="UpdateFilterValueAsync" class="btn act-filter__btn--green px-3 py-1">Lọc</button>
+                <button @onclick="ClearFilterAsync" class="act-filter__btn--clear ms-3">Xóa lọc</button>
+            </div>
         </div>
     </div>
 </section>

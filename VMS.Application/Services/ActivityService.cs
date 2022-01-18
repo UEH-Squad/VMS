@@ -15,6 +15,7 @@ using VMS.Domain.Models;
 using VMS.GenericRepository;
 using VMS.Infrastructure.Data.Context;
 using VMS.Common;
+using VMS.Common.Extensions;
 
 namespace VMS.Application.Services
 {
@@ -94,7 +95,6 @@ namespace VMS.Application.Services
                 {
                     a => !a.IsDeleted,
                     a => a.IsApproved,
-                    a => a.EndDate >= DateTime.Now.Date,
                     a => a.Name.ToUpper().Trim().Contains(filter.SearchValue.ToUpper().Trim())
                 };
             }
@@ -104,7 +104,6 @@ namespace VMS.Application.Services
                 {
                     a => !a.IsDeleted,
                     a => a.IsApproved,
-                    a => a.EndDate >= DateTime.Now.Date,
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,
                     a => a.IsVirtual == filter.Virtual || a.IsActual == filter.Actual || !filter.Virtual && !filter.Actual,
@@ -112,7 +111,8 @@ namespace VMS.Application.Services
                     a => a.ActivitySkills.Select(activitySkills => activitySkills.SkillId)
                                          .Where(actSkillId => filter.Skills.Select(skill => skill.Id)
                                                                            .Any(skillId => skillId == actSkillId))
-                                         .Count() == filter.Skills.Count
+                                         .Count() == filter.Skills.Count,
+                    GetFilterActByType(filter.ActType)
                 };
             }
         }
@@ -134,6 +134,7 @@ namespace VMS.Application.Services
                 return new List<Expression<Func<Activity, bool>>>()
                 {
                     a => !a.IsDeleted,
+                    a => !filter.IsApproved.HasValue || a.IsApproved == filter.IsApproved.Value,
                     GetFilterActByType(filter.ActType),
                     a => a.OrgId == filter.OrgId || string.IsNullOrEmpty(filter.OrgId),
                     a => filter.Areas.Select(x => x.Id).Any(z => z == a.AreaId) || filter.Areas.Count == 0,
@@ -619,9 +620,9 @@ namespace VMS.Application.Services
             switch (actType)
             {
                 case StatusAct.Upcoming:
-                    return x => x.StartDate <= DateTime.Now.Date.AddDays(15);
+                    return x => DateTime.Now.Date <= x.StartDate && x.StartDate <= DateTime.Now.Date.AddDays(15);
                 case StatusAct.Happenning:
-                    return x => x.EndDate >= DateTime.Now.Date && x.StartDate <= DateTime.Now.Date && x.IsApproved;
+                    return x => (x.StartDate <= DateTime.Now.Date && DateTime.Now.Date <= x.EndDate) || x.CloseDate >= DateTime.Now.Date;
                 case StatusAct.TookPlace:
                     return x => x.EndDate < DateTime.Now.Date;
                 case StatusAct.Closed:

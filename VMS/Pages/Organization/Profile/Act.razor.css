@@ -9,14 +9,7 @@
   font-size: 18px;
   line-height: 36px;
   color: #515151;
-  padding-bottom: 5px;
-  /*@include on('sm') {
-            font-size: 24px;
-        }
-
-        @include on('lg') {
-            font-size: 30px;
-        }*/ }
+  padding-bottom: 5px; }
   @media (min-width: 576px) {
     .act h1 {
       font-size: 20px; } }
@@ -34,7 +27,7 @@
   height: 1px;
   background-color: #707070;
   opacity: 50%; }
-  @media (min-width: 992px) {
+  @media (min-width: 1200px) {
     .act hr {
       width: 60%;
       display: block; } }

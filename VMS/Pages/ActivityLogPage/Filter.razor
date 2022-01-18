@@ -6,7 +6,7 @@
                     <span class="act-filter__select-default">@semesterDefault</span>
                     <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
                 </div>
-                <div class="act-filter__list @Display1">
+                <div class="act-filter__list-1 @Display1">
                     @foreach (var item in semesters.Keys)
                     {
                         <span class="act-filter__list-item" @onclick="() => ChooseSemester(item)">@semesters[item]</span>
@@ -18,7 +18,7 @@
                     <span class="act-filter__select-default">@orgDefault</span>
                     <span id="act-filter__select-icon" class="material-icons-outlined">expand_more</span>
                 </div>
-                <div class="act-filter__list @Display2">
+                <div class="act-filter__list-2 @Display2">
                     @if (organizers is not null)
                     {
                         @foreach (var org in organizers)
@@ -31,32 +31,37 @@
         </div>
 
         <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 act-filter__radio d-flex">
-            <div class="act-filter__radio-1 d-flex align-items-center">
-                @if (filter.IsRated.HasValue && !filter.IsRated.Value)
-                {
-                    <input class="radio-1" type="radio" id="rate" name="fav_language" @onclick="async () => await CheckOrderAsync(false)" checked>
-                }
-                else
-                {
-                    <input class="radio-1" type="radio" id="rate" name="fav_language" @onclick="async () => await CheckOrderAsync(false)">
-                }
-                <label class="label-1" for="rate">Chưa đánh giá</label><br>
+            <div class="act-filter__radio-1 d-flex align-items-center  ms-3 me-5 pe-1">
+
+                <label class="d-flex align-items-center" for="rate">
+                    @if (filter.IsRated.HasValue && !filter.IsRated.Value)
+                    {
+                        <input @onclick="async () => await CheckOrderAsync(false)" type="radio" id="rate"  name="filter" checked />
+                    }
+                    else
+                    {
+                        <input @onclick="async () => await CheckOrderAsync(false)" type="radio" id="rate"  name="filter"/>
+                    }                    
+                <span>Chưa đánh giá</span>
+                </label>
             </div>
             <div class="act-filter__radio-2 d-flex align-items-center">
-                @if (filter.IsRated.HasValue && filter.IsRated.Value)
-                {
-                    <input class="radio-2" type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)" checked>
-                }
-                else
-                {
-                    <input class="radio-2" type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)">
-                }
-                <label class="label-2" for="rated">Đã đánh giá</label><br>
+                <label class="d-flex align-items-center" for="rated">
+                    @if (filter.IsRated.HasValue && filter.IsRated.Value)
+                    {
+                    <input type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)" checked>
+                    }
+                    else
+                    {
+                        <input type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)">
+                    }
+                    <span>Đã đánh giá</span>
+                </label>
             </div>
         </div>
-        <div class="col-12 col-xl-2 col-xxl-3 act-filter__btn-container">
-            <button class="act-filter__btn --filter" @onclick="UpdateFilterValueAsync">Lọc</button>
-            <button class="act-filter__btn --del" @onclick="ClearFilterAsync">Xóa lọc</button>
+        <div class="col-12 col-xl-2 col-xxl-3 act-filter__btn-container ps-5">
+            <button class="act-filter__btn --filter me-2 filter-btn" @onclick="UpdateFilterValueAsync">Lọc</button>
+            <button class="act-filter__btn --del clear-filter-btn" @onclick="ClearFilterAsync">Xóa lọc</button>      
         </div>
     </div>
 </div>

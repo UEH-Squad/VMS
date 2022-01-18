@@ -3,23 +3,26 @@
 
 <Spinner IsLoading="isLoading" />
 
-<div class="container">
-    <div class="user-profile">
-        <UserProfile IsUsedForAdmin=@IsUsedForAdmin IsUser="@isUser" User="user"  />
+@if (user is not null)
+{
+    <div class="container">
+        <div class="user-profile">
+            <UserProfile IsUsedForAdmin=@IsUsedForAdmin IsUser="@isUser" User="user" />
+        </div>
+
+        <div class="activities">
+            <VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="đang diễn ra" HaveDecor="false" Datas="currentActivities" />
+
+            <VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="yêu thích" HaveDecor="true" HaveFav="@isUser" Datas="favoriteActivities" />
+
+            <VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="đã tham gia" OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas="endedActivities" />
+        </div>
+
+        <div class="schedule">
+            <Schedule UserId="@UserId" IsUser="@isUser"></Schedule>
+        </div>
     </div>
-
-    <div class="activities">
-        <VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="đang diễn ra" HaveDecor="false" Datas="currentActivities" />
-
-        <VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="yêu thích" HaveDecor="true" HaveFav="@isUser" Datas="favoriteActivities" />
-
-        <VMS.Pages.Organization.Profile.Act IsUsedForAdmin=@IsUsedForAdmin Title="đã tham gia" OverridesImg="true" HaveBorder="false" HaveLinkAll="true" Datas="endedActivities" />
-    </div>
-
-    <div class="schedule">
-        <Schedule UserId="@UserId" IsUser="@isUser"></Schedule>
-    </div>
-</div>
+}
 
 @code {
 

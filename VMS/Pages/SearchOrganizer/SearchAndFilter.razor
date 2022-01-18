@@ -9,34 +9,34 @@
 @*<p class="mt-5 @(HaveSearchBox ? "d-block" : "d-none")">Lọc <span>tổ chức</span></p>*@
 
 <div class="filter-bar d-flex @(IsLongDistanceFilter?"justify-content-between":"") my-4">
-    <div class="filter-bar_left d-flex me-3" style="width: @(IsLongDistanceFilter? 40 : 50)%;">
+    <div class="filter-bar_left d-flex me-3">
         <div class="filter-item position-relative me-3">
-        <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn_1 @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
-        <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
-            <ul>
-                @if (levels is not null)
-                {
-                    @foreach (var level in levels)
+            <input @onclick="ToggleLevelDropdown" @onfocusout="CloseLevelDropdown" class="popup-btn @(isLevelGrey ? "bg-grey" : "")" placeholder="@levelChoosenValue" readonly />
+            <div @onclick:preventDefault class="my-dropdown" style="display: @(isLevelShow ? "block" : "none")">
+                <ul>
+                    @if (levels is not null)
                     {
-                        <li @onmousedown="() => ChooseLevelValue(level)">@level</li>
+                        @foreach (var level in levels)
+                        {
+                            <li @onmousedown="() => ChooseLevelValue(level)">@level</li>
+                        }
                     }
-                }
-            </ul>
+                </ul>
+            </div>
+            <span class="material-icons-outlined position-absolute filter-item__icon">
+                expand_more
+            </span>
         </div>
-        <span class="material-icons-outlined position-absolute filter-item__icon">
-            expand_more
-        </span>
-    </div>
 
         <div class="filter-item position-relative">
-            <div @onclick="ShowAreasPopupAsync" class="popup-btn_2 @(Filter.Areas.Count != 0 ? "bg-grey" : "")">Lĩnh vực</div>
+            <input @onclick="ShowAreasPopupAsync" class="popup-btn @(Filter.Areas.Count != 0 ? "bg-grey" : "")" placeholder="@(Filter.Areas.Count != 0 ? Filter.Areas.GetListNames() : "Lĩnh vực")" readonly />
             <span class="material-icons-outlined position-absolute filter-item__icon">
                 expand_more
             </span>
         </div>
     </div>
-    <div class="filter-bar_right d-flex">
-        <button @onclick="UpdateFilterValueAsync" class="filter-btn me-3">Lọc</button>
+    <div class="filter-bar_right btn-wrapper d-flex">
+        <button @onclick="UpdateFilterValueAsync" class="filter-btn me-2">Lọc</button>
         <button @onclick="ClearFilterAsync" type="button" class="clear-filter-btn">Xóa lọc</button>
     </div>
 </div>

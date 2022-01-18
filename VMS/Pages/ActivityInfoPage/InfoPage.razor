@@ -28,11 +28,14 @@
                         </div>
                     </AuthorizeView>
                     <AuthorizeView Roles="@($"{Role.Organization}")">
-                        <div class="managementTool__create dropdown mb-3">
-                            <button @onclick="() => OnClickNavigateToEditActivty(activity.Id)" class="btn d-flex align-items-center">
-                                <span>Chỉnh sửa</span>
-                            </button>
-                        </div>
+                        @if (activity.OrgId.Equals(CurrentUserId))
+                        {
+                            <div class="managementTool__create dropdown mb-3">
+                                <button @onclick="() => OnClickNavigateToEditActivty(activity.Id)" class="btn d-flex align-items-center">
+                                    <span>Chỉnh sửa</span>
+                                </button>
+                            </div>
+                        }
                     </AuthorizeView>
                     <AuthorizeView Roles="@($"{Role.User}")">
                         <button @onclick="@(() => HandleFavorite(activity.Id))" class="@(isFav ? "heart-button2" : "heart-button1")">
@@ -49,7 +52,7 @@
                 </p>
             </div>
             <div class="activity__image">
-                <img src="@activity.Banner" alt="Activity Image">
+                <img @onclick="() => ShowImage()" src="@activity.Banner" alt="Activity Image">
             </div>
             <div class="activity__mission">
                 <p class="mission">Sứ mệnh:</p>

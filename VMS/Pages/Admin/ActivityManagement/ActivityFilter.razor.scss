@@ -32,6 +32,7 @@ input[type="checkbox"] {
 }
 
 .act-filter__btn {
+    transform:translateY(-10px);
 
     &--green {
         border-radius: 5px;
@@ -57,7 +58,11 @@ input[type="checkbox"] {
 }
 
 .bg-grey {
-    background-color: #f3f3f3;
+    &::placeholder {
+        color: #515151 !important;
+    }
+
+    color: #515151 !important;
 }
 
 .filter-item {
@@ -154,6 +159,9 @@ input[type="checkbox"] {
 }
 
 ::deep {
+    .text-color .ant-picker-input input {
+        color: #515151 !important;
+    }
 
     .ant-picker {
         border-radius: 10px;
@@ -179,5 +187,9 @@ input[type="checkbox"] {
         &-clear {
             display: none;
         }
+    }
+
+    .ant-picker-focused{
+        box-shadow: none;
     }
 }

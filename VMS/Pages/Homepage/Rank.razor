@@ -2,13 +2,15 @@
 
 <div class="my-rank d-none">
     <div class="container position-relative">
-        <h1>Đại lộ <span>danh vọng</span></h1>
+        @if(isShowTitle) {
+            <h1>Đại lộ <span>danh vọng</span></h1>
+        }
         <p class="rank__link d-flex align-items-center">
             <span @onclick="showOrg" class="rank__link-organization @(isShowOrg ? "cssShowOrg": "" )">Tổ chức</span>
             <span @onclick="showPer" class="rank__link-students @(isShowPer  ? "cssShowPer": "" )">Sinh viên</span>
         </p>
         
-        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-lg-5 px-4">
+        <div class=" owl-carousel owl-theme rank__owlcrousel rank__owlcrousel-organization px-lg-5">
             @foreach (var item in organizations)
             {
                 <div class="item">
@@ -54,6 +56,8 @@
 </div>
 
 @code {
+    [Parameter] 
+    public bool isShowTitle { get; set; } = true;
 
     class FakeData
     {

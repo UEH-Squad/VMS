@@ -41,7 +41,7 @@ namespace VMS.Application.Services
             totalRank = recruitmentRatings.Sum(x => x.Rank);
         }
 
-        public UserViewModel GetOrgFull(string id)
+        public UserViewModel GetOrgViewModel(string id)
         {
             User org = Task.Run(() => _userManager.Users.Include(x => x.UserAreas)
                                                        .ThenInclude(x => x.Area)
@@ -50,7 +50,7 @@ namespace VMS.Application.Services
                                                        .ThenInclude(x => x.RecruitmentRatings)
                                                        .FirstOrDefault(x => x.Id == id)).Result;
 
-            if (IsInRole(org, Role.Organization))
+            if (org is not null && IsInRole(org, Role.Organization))
             {
                 UserViewModel orgViewModel = _mapper.Map<UserViewModel>(org);
 

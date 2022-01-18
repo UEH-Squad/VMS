@@ -48,9 +48,10 @@
   margin: 15px 0 20px; }
   .my-container .quantity-volunteers {
     font-size: 14px;
+    font-weight: 400;
     color: #18A0FB;
     margin-bottom: 0; }
-    @media (min-width: 576px) {
+    @media (min-width: 1200px) {
       .my-container .quantity-volunteers {
         font-size: 18px;
         margin-bottom: 12px; } }

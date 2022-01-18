@@ -67,10 +67,11 @@
 
     .quantity-volunteers {
         font-size: 14px;
+        font-weight: 400;
         color: $blue;
         margin-bottom: 0;
 
-        @include on('sm') {
+        @include on('xl') {
             font-size: 18px;
             margin-bottom: 12px;
         }

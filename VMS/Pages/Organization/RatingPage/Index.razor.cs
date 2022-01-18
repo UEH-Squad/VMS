@@ -28,7 +28,7 @@ namespace VMS.Pages.Organization.RatingPage
 
         protected override async Task OnInitializedAsync()
         {
-            currentUser = OrganizationService.GetOrgFull(UserId);
+            currentUser = OrganizationService.GetOrgViewModel(UserId);
 
             activity = await ActivityService.GetViewActivityViewModelAsync(ActivityId);
 

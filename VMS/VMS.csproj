@@ -60,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\Avatar\" />
     <Folder Include="wwwroot\img\OrganizationProfile\" />
   </ItemGroup>
 

@@ -116,7 +116,15 @@ namespace VMS.Application.Services
 
             PaginationSpecification<User> specification = new()
             {
-                Conditions = GetConditionsByFilter(filter),
+                Conditions = new()
+                {
+                    x => x.NormalizedEmail.Contains(filter.SearchValue.Trim().ToUpper())
+                        || x.NormalizedUserName.Contains(filter.SearchValue.Trim().ToUpper())
+                        || x.StudentId.Contains(filter.SearchValue.Trim().ToUpper())
+                        || x.FullName.Contains(filter.SearchValue.Trim().ToUpper()),
+                    x => x.UserRoles.Any(x => x.Role.Name == filter.Role),
+                    x => x.Course == filter.Course || string.IsNullOrEmpty(filter.Course)
+                },
                 OrderBy = GetOrderByFilter(filter),
                 PageSize = pageSize,
                 PageIndex = page
@@ -147,27 +155,6 @@ namespace VMS.Application.Services
             return _mapper.Map<List<AccountViewModel>>(users);
         }
 
-        private static List<Expression<Func<User, bool>>> GetConditionsByFilter(FilterAccountViewModel filter)
-        {
-            if (filter.IsSearch)
-            {
-                return new List<Expression<Func<User, bool>>>()
-                {
-                    x => x.NormalizedEmail.Contains(filter.SearchValue.Trim().ToUpper())
-                        || x.NormalizedUserName.Contains(filter.SearchValue.Trim().ToUpper()),
-                    x => x.UserRoles.Any(x => x.Role.Name == filter.Role)
-                };
-            }
-            else
-            {
-                return new List<Expression<Func<User, bool>>>()
-                {
-                    x => x.Course == filter.Course || string.IsNullOrEmpty(filter.Course),
-                    x => x.UserRoles.Any(x => x.Role.Name == filter.Role)
-                };
-            }
-        }
-
         private static Func<IQueryable<User>, IOrderedQueryable<User>> GetOrderByFilter(FilterAccountViewModel filter)
         {
             return filter.IsNewest ? x => x.OrderByDescending(u => u.CreatedDate) : x => x.OrderBy(u => u.CreatedDate);
@@ -182,12 +169,19 @@ namespace VMS.Application.Services
                 Conditions = new List<Expression<Func<User, bool>>>()
                 {
                     acc => listAccountIds.Any(x => x == acc.Id)
-                }
+                },
+                Includes = x => x.Include(x => x.UserRoles)
             };
 
             IEnumerable<User> users = await _repository.GetListAsync(dbContext, specification);
 
-            await _repository.DeleteAsync(dbContext, users);
+            foreach (User user in users)
+            {
+                user.UserRoles.Clear();
+                user.NormalizedEmail = user.Email = user.UserName = user.NormalizedUserName = null;
+            }
+
+            await _repository.UpdateAsync(dbContext, users);
         }
 
         public async Task<bool> UpdateAccountAsync(AccountViewModel account, Role role)

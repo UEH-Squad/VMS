@@ -137,3 +137,20 @@
         display: block; } }
   .toppage .return-text:hover {
     color: #306C14; }
+
+.accroval-fixed {
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 30px;
+  z-index: 100; }
+  .accroval-fixed .accroval {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0px; }
+
+.accroval-fixed-back {
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: -1px;
+  z-index: 100; }

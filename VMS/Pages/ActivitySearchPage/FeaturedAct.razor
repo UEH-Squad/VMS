@@ -3,12 +3,15 @@
     {
         @foreach (var activity in FeaturedActivities)
         {
-            <div class="featuredAct__card ">
-                <img class="w-100" src="@activity.Banner" alt="">
-                <div class="featuredAct__title">
-                    <a class="lmtext-5" href="@Routes.ActivityInfo/@activity.Id">@activity.Name</a>
+            <div class="act-container item position-relative">
+                <div class="img-container position-relative">
+                    <img src="@activity.Banner" alt="" class="act-img">
                 </div>
-                <div class="featuredAct__overplay"></div>
+                <div class="act-content ">
+                    <a href="@Routes.ActivityInfo/@activity.Id " class="content-nm ">
+                        <h3 class="act-title mb-0 lm-text title-nm">@activity.Name</h3>
+                    </a>
+                </div>  
             </div>
         }
     }

@@ -369,21 +369,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "d8a35366-4fcc-494e-ab65-3d515e0b1990",
+                            ConcurrencyStamp = "751a4c6b-11eb-46a1-bbe1-529e6a6ede9d",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "903be336-8422-4da4-b84e-1a877aa0816f",
+                            ConcurrencyStamp = "5106e56c-0bfb-4573-a463-60955791adaf",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "d6b0bdad-dbd4-4458-a457-408f0917bbb5",
+                            ConcurrencyStamp = "6c58758a-d090-41d1-b825-d7dbfbd1786e",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -669,10 +669,22 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPinned")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsReportUser")
                         .HasColumnType("bit");
@@ -681,7 +693,7 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -692,6 +704,10 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.HasIndex("UserId");
 
@@ -1184,7 +1200,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "efdef68d-8c79-48af-b5c1-7dec37c9e108",
+                            ConcurrencyStamp = "57b728d8-9622-41c1-9b70-a4f1445520a7",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1192,7 +1208,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENOCkuhDoXVasyOW/yiWYZsuHya4BHwrpK54HLN41ALoOUoRwqqMMJXGnMHiWejy9w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP4HTz2uCSk9gUPO/tg0eMEn4+9DWp/JdLPNycq2sVj/h/6ARwVxkwqWajnQNyVg6Q==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",
@@ -1454,12 +1470,24 @@ namespace VMS.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VMS.Domain.Models.User", "Reporter")
+                        .WithMany("UserReports")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("VMS.Domain.Models.User", "Handler")
+                        .WithMany("ReportHandles")
+                        .HasForeignKey("UpdatedBy");
+
                     b.HasOne("VMS.Domain.Models.User", "User")
                         .WithMany("Feedbacks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Activity");
+
+                    b.Navigation("Handler");
+
+                    b.Navigation("Reporter");
 
                     b.Navigation("User");
                 });
@@ -1678,9 +1706,13 @@ namespace VMS.Infrastructure.Data.Migrations
 
                     b.Navigation("Recruitments");
 
+                    b.Navigation("ReportHandles");
+
                     b.Navigation("UserAddresses");
 
                     b.Navigation("UserAreas");
+
+                    b.Navigation("UserReports");
 
                     b.Navigation("UserRoles");
 

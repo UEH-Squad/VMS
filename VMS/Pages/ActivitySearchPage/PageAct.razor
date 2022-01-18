@@ -3,8 +3,15 @@
 <section class="my-act">
     <div class="container">
         <div class="row">
-            <div class="act col-12 col-xl-8 ps-0" id="act">
+            <div class="col-12 col-xl-8 ps-0">
                 <h3>Có <span>@(pagedResult is null ? "0" : pagedResult.TotalItems) hoạt động</span> đang cần tình nguyện viên ứng với kết quả tìm kiếm</h3>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <div class="act col-12 col-xl-8 ps-0" id="act">
+
                 <div class="px-2">
                     <div class="act__page-1">
                         @if (pagedResult is not null && pagedResult.TotalItems != 0)
@@ -20,14 +27,17 @@
                                             <a href="@Routes.ActivityInfo/@item.Id" class="lmtext-2">@item.Name</a>
                                             <a href="@Routes.OrgProfile/@item.OrgId">
                                                 <h5 class="org-name">
-                                                    <i class="material-icons">public</i> @item.Organizer?.FullName
+                                                    <i class="material-icons">public</i>
+                                                    <p class="mb-0">
+                                                        @item.Organizer?.FullName
+                                                    </p>
                                                 </h5>
                                             </a>
                                             <p class="lmtext-2 act__content-description">@((MarkupString)item.Description)</p>
                                             <div class="act_content-date d-flex flex-column mb-1">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="d-flex mb-1 align-items-center">
-                                                        <span class="material-icons-outlined me-2 my-icon">
+                                                        <span class="material-icons-outlined me-lg-2 me-1 my-icon">
                                                             assignment
                                                         </span>
                                                         <span class="icon-tooltip">Hạn đăng ký</span>
@@ -39,13 +49,13 @@
                                                             <i class="material-icons-outlined icon-check">
                                                                 check_circle
                                                             </i>
-                                                            <span class="ms-2">Số ngày tình nguyện: @item.NumberOfDays</span>
+                                                            <span class="ms-lg-2 ms-1">Số ngày tình nguyện: @item.NumberOfDays</span>
                                                         </div>
                                                     }
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="d-flex align-items-center">
-                                                        <span class="material-icons-outlined me-2 my-icon">
+                                                    <div class="d-flex mb-1 align-items-center">
+                                                        <span class="material-icons-outlined me-lg-2 me-1 my-icon">
                                                             today
                                                         </span>
                                                         <span class="icon-tooltip">Ngày diễn ra</span>
@@ -53,11 +63,11 @@
                                                     </div>
                                                     @if (item.IsPoint)
                                                     {
-                                                        <div class=" col-6 d-flex mb-1 align-items-center div-volunteer">
+                                                        <div class="col-6 d-flex mb-1 align-items-center div-volunteer">
                                                             <i class="material-icons-outlined icon-check">
                                                                 check_circle
                                                             </i>
-                                                            <span class="ms-2">Điểm rèn luyện</span>
+                                                            <span class="ms-lg-2 ms-1">Cập nhật mã vạch</span>
                                                         </div>
                                                     }
                                                 </div>
@@ -96,6 +106,7 @@
                 <FeaturedAct FeaturedActivities=@featuredActivities></FeaturedAct>
             </div>
         </div>
+           
     </div>
 </section>
 

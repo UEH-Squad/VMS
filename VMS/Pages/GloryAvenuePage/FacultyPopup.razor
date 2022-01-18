@@ -1,0 +1,73 @@
+﻿<div class="pop-up d-flex align-items-center justify-content-center">
+    <div class="pop-up-container h-100">
+        <div @onclick="CloseModalAsync" class="close-btn position-absolute d-flex justify-content-center align-items-center">
+            <span class="material-icons">
+                close
+            </span>
+        </div>
+        <h1 class="text-center">@FilterType</h1>
+        <div class="filter-list">
+            <ul class="p-0">
+                @foreach (var faculty in faculties)
+                {
+                    <li style="@(choosenFaculties.Exists(a => a.Id == faculty.Id) ? "color: #64D72F;":"")" @onclick="() => ChangeState(faculty)">@faculty.Name</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+    private int chooseCount = 0;
+
+    private string FilterType { get; set; } = "Khoa";
+
+    public class Filter
+    {
+        public string FacultyName { get; set; } = "Khoa";
+        public bool IsFilter { get; set; }
+    }
+
+    private Filter filter = new();
+
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync(ModalResult.Ok<Filter>(filter));
+    }
+
+    private class FakeData
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+
+    }
+
+    private List<FakeData> faculties = new();
+    private List<FakeData> choosenFaculties = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 1; i <= 50; i++)
+        {
+            faculties.Add(new FakeData()
+            {
+                Name = "Công nghệ thông tin kinh doanh trường Đại học Kinh tế TP. HCM 12345678910",
+                Id = i
+            });
+        }
+
+        choosenFaculties = new();
+    }
+
+    private void ChangeState(FakeData facultyChosen)
+    {
+        choosenFaculties.Clear();
+        choosenFaculties.Add(facultyChosen);
+        var item = faculties.Find(x => x.Id == facultyChosen.Id);
+        filter.FacultyName = Convert.ToString(item.Name);
+        filter.IsFilter = true;
+        return;
+    }
+}

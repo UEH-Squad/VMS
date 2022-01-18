@@ -10,30 +10,34 @@
     background-color: #B4B4B4 !important;
     cursor: default !important; }
 
-.act {
+.my-act h3 {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #18A0FB;
   border-top: 2px solid #b4b4b4; }
-  .act h3 {
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #18A0FB; }
-    @media (min-width: 1200px) {
-      .act h3 {
-        font-size: 24px; } }
-    .act h3 span {
-      color: #64D72F; }
-  .act .act__item {
-    background-color: #F3F3F5;
-    padding: 10px 0px;
-    border-radius: 5px;
-    margin-top: 30px;
-    height: 180px; }
-    @media (min-width: 1200px) {
-      .act .act__item {
-        height: 310px; } }
-    .act .act__item img {
-      height: 100%;
-      object-fit: cover; }
+  @media (min-width: 1200px) {
+    .my-act h3 {
+      font-size: 18px; } }
+  .my-act h3 span {
+    color: #64D72F; }
+
+.act .act__item {
+  background-color: #F3F3F5;
+  padding: 10px 0px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  height: 203px; }
+  .act .act__item:last-of-type {
+    margin-bottom: 0px; }
+  @media (min-width: 992px) {
+    .act .act__item {
+      height: 310px; } }
+  .act .act__item img {
+    height: 100%;
+    object-fit: cover; }
 
 .act__content {
   position: relative; }
@@ -41,19 +45,19 @@
     font-weight: 400;
     color: #18A0FB;
     text-decoration: none;
-    cursor: pointer;
-    word-spacing: -2px; }
+    cursor: pointer; }
     .act__content a:hover {
       color: #0B588c; }
   .act__content a:first-of-type {
-    font-size: 14px; }
+    font-size: 10px; }
+    @media (min-width: 576px) {
+      .act__content a:first-of-type {
+        font-size: 14px; } }
+    @media (min-width: 992px) {
+      .act__content a:first-of-type {
+        font-size: 20px; } }
     @media (min-width: 1200px) {
       .act__content a:first-of-type {
-        font-size: 24px; } }
-  .act__content a:nth-of-type(2) {
-    font-size: 12px; }
-    @media (min-width: 1200px) {
-      .act__content a:nth-of-type(2) {
         font-size: 24px; } }
   .act__content h5 {
     display: flex;
@@ -67,21 +71,37 @@
     .act__content h5 i {
       color: #64D72F;
       margin-right: 5px;
-      font-size: 18px; }
-      @media (min-width: 1200px) {
+      font-size: 12px; }
+      @media (min-width: 992px) {
         .act__content h5 i {
-          font-size: 24px; } }
+          font-size: 20px; } }
+    .act__content h5 p {
+      font-size: 8px;
+      font-weight: 600;
+      word-spacing: 1px; }
+      @media (min-width: 576px) {
+        .act__content h5 p {
+          font-size: 10px; } }
+      @media (min-width: 992px) {
+        .act__content h5 p {
+          font-size: 16px; } }
   .act__content p {
-    font-size: 16px;
-    font-weight: 400; }
-  .act__content span {
     font-weight: 400;
-    color: #0B588C;
     font-size: 8px; }
+    @media (min-width: 576px) {
+      .act__content p {
+        font-size: 12px; } }
+    @media (min-width: 992px) {
+      .act__content p {
+        font-size: 18px; } }
+  .act__content span {
+    font-size: 8px;
+    font-weight: 400;
+    color: #0B588C; }
     @media (min-width: 576px) {
       .act__content span {
         font-size: 10px; } }
-    @media (min-width: 1200px) {
+    @media (min-width: 992px) {
       .act__content span {
         font-size: 14px; } }
   ::deep .act__content-description > * {
@@ -108,11 +128,8 @@
     color: #515151;
     font-weight: 500; }
   .act__content .material-icons-outlined {
-    font-size: 16px; }
-    @media (min-width: 576px) {
-      .act__content .material-icons-outlined {
-        font-size: 18px; } }
-    @media (min-width: 1200px) {
+    font-size: 12px; }
+    @media (min-width: 992px) {
       .act__content .material-icons-outlined {
         font-size: 20px; } }
 
@@ -158,18 +175,12 @@
   -webkit-line-clamp: 3; }
 
 .act__content-description {
-  display: none; }
-  @media (min-width: 1200px) {
-    .act__content-description {
-      display: -webkit-box; } }
+  display: -webkit-box; }
 
 .div-volunteer .icon-check {
   color: #64D72F;
-  font-size: 16px; }
-  @media (min-width: 576px) {
-    .div-volunteer .icon-check {
-      font-size: 18px; } }
-  @media (min-width: 1200px) {
+  font-size: 12px; }
+  @media (min-width: 992px) {
     .div-volunteer .icon-check {
       font-size: 20px; } }
 
@@ -180,6 +191,6 @@
   @media (min-width: 576px) {
     .div-volunteer span {
       font-size: 10px; } }
-  @media (min-width: 1200px) {
+  @media (min-width: 992px) {
     .div-volunteer span {
       font-size: 14px; } }

@@ -1,4 +1,6 @@
-﻿<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(IsFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
+﻿@inject IJSRuntime JSRuntime;
+
+<nav class="navbar navbar-expand-xl navbar-light bg-white py-0 @(IsFixedTop ? "fixed-top" : "") shadow-sm my-navbar">
     <div class="container-lg p-0 my-navbar-container">
         <div class="my-navbar__hamburger-wrapper">
             <button class="d-flex align-items-center my-navbar__hamburger-wrapper__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,33 +10,33 @@
             </button>
         </div>
         <div class="d-flex my-navbar__brand">
-            <NavLink href="@Routes.ActivitySearch" class="my-navbar__brand-item">
+            <NavLink href="@Routes.HomePage" @onclick="NoUnderlined" class="my-navbar__brand-item">
                 <img src="img/GoVirlunteer (1).png" alt="Logo GoVirlunteer" class="brand__govirlunteer" />
             </NavLink>
         </div>
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
             <ul class="navbar-nav navbar-list mb-4 mb-xl-0 fw-bold my-collapse__list">
                 <li class="nav-item nav-item-haverHover">
-                    <NavLink href="@Routes.HomePage" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
+                    <NavLink href="@Routes.HomePage" @onclick="NoUnderlined"  Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
                 </li>
                 <li class="nav-item nav-item-haverHover">
-                    <NavLink href="@Routes.ActivitySearch" class="nav-link text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
+                    <NavLink href="@Routes.ActivitySearch" @onclick="NoUnderlined" class="nav-link text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
                 </li>
-                <li class="nav-item  nav-mega-menu @(isShowMenu ? "" : "nav-item-haverHover")">
-                    <NavLink @onclick="ShowMenu" class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link d-flex align-items-center " >
+                <li class="nav-item nav-item-haverHover nav-mega-menu @(isShowMenu ? "" : "nav-item-haverHover")">
+                    <a @onclick="ShowMenu" id="k-community" class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link d-flex align-items-center @(isClick? "active" : "")">
                         <span>Cộng đồng</span>
                         <i class="material-icons-outlined icon-down-up ms-1">
                             @(isShowMenu ? "expand_less" : "expand_more")
                         </i>
-                    </NavLink>
+                    </a>
                     <div class="mega-menu mega-menu-k">
                         <div class="row">
                             <div class="col-6 mega-menu-col">
-                                <a href="@Routes.OrganizerSearch" @onmousemove="(() => ShowDetail(1))" class="d-flex align-items-center mega-menu-a">
+                                <a href="@Routes.OrganizerSearch" @onmousemove="(() => ShowDetail(1))" @onclick="Underlined" class="d-flex align-items-center mega-menu-a">
                                     <i class="material-icons"> person </i>
                                     <span>Đơn vị tổ chức</span>
                                 </a>
-                                <a href="@Routes.VolunteerSearch" @onmousemove="(() => ShowDetail(2))" class="d-flex align-items-center mega-menu-a">
+                                <a href="@Routes.VolunteerSearch" @onmousemove="(() => ShowDetail(2))" @onclick="Underlined" class="d-flex align-items-center mega-menu-a">
                                     <i class="material-icons-outlined"> people </i>
                                     <span>Tình nguyện viên</span>
                                 </a>
@@ -64,11 +66,11 @@
 
                             <div class="col-6 mega-menu-detail mega-menu-detail-org @(isShowDetailRank ? "d-block" :"d-none")">
                                 <div class="mega-menu-image">
-                                    <img src="./img/Cộng đồng-DLDV.png"/>
+                                    <img src="./img/Cộng đồng-DLDV.png" />
                                 </div>
                                 <p class="mb-0">Đại lộ danh vọng là không gian vinh danh những cá nhân và tập thể có thành tích tình nguyện xuất sắc.</p>
                             </div>
-                        </div>                      
+                        </div>
                     </div>
                     <div class="menuCommunity @(isShowMenu ? "d-block" : "d-none")">
                         <a href="@Routes.OrganizerSearch" class="d-flex align-items-center mega-menu-li-org">
@@ -92,7 +94,7 @@
                     </div>
                 </li>
                 <li class="nav-item nav-item-haverHover">
-                    <NavLink  class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
+                    <NavLink class="nav-link text-decoration-none mx-4 py-2 py-lg-3 position-relative my-collapse__list__link">Bản đồ</NavLink>
                 </li>
             </ul>
         </div>
@@ -143,6 +145,25 @@
                 isShowDetailRank = false;
                 isShowDetailRank = true;
                 break;
+        }
+    }
+
+    private bool isClick = false;
+    private void Underlined()
+    {
+        isClick = true;
+    }
+
+    private void NoUnderlined()
+    {
+        isClick = false;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("vms.AddOutsideClickNavBarHandler");
         }
     }
 }

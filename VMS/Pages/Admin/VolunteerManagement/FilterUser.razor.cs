@@ -3,6 +3,7 @@ using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using VMS.Application.Interfaces;
 using VMS.Application.ViewModels;
 using VMS.Common;
 
@@ -14,6 +15,10 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private bool isYearShow;
         private bool isYearGrey = false;
 
+        private string facultyChoosenValue = "Khoa";
+        private bool isFacultyShow;
+        private bool isFacultyGrey = false;
+
         private string rankChoosenValue = "Hạng";
         private bool isRankShow;
         private bool isRankGrey = false;
@@ -23,8 +28,7 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private bool isLabelGrey = false;
 
         private List<string> courses;
-        private List<AreaViewModel> areas = new();
-        private List<SkillViewModel> skills = new();
+        private List<FacultyViewModel> faculties;
 
         [CascadingParameter]
         public IModalService Modal { get; set; }
@@ -35,9 +39,13 @@ namespace VMS.Pages.Admin.VolunteerManagement
         [Parameter]
         public EventCallback<FilterVolunteerViewModel> FilterChanged { get; set; }
 
-        protected override void OnInitialized()
+        [Inject]
+        private IFacultyService FacultyService { get; set; }
+
+        protected override async Task OnInitializedAsync()
         {
             courses = Courses.GetCourses();
+            faculties = await FacultyService.GetAllFacultiesAsync();
         }
 
         private async Task ShowAreasPopupAsync()
@@ -71,6 +79,23 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private void CloseCityDropdown()
         {
             isYearShow = false;
+        }
+
+        private void ChooseFacultyValue(string faculty)
+        {
+            facultyChoosenValue = faculty;
+            Filter.FacultyName = faculty;
+            isFacultyGrey = true;
+        }
+
+        private void ToggleFacultyDropdown()
+        {
+            isFacultyShow = !isFacultyShow;
+        }
+
+        private void CloseFacultyDropdown()
+        {
+            isFacultyShow = false;
         }
 
         public class fakeRanks
@@ -107,13 +132,6 @@ namespace VMS.Pages.Admin.VolunteerManagement
 
         private List<fakeLabels> Labels = new()
         {
-            new fakeLabels() { Label = "Siêu cấp đẹp trai" },
-            new fakeLabels() { Label = "Siêu cấp đẹp gái" },
-            new fakeLabels() { Label = "Siêu cấp cute" },
-            new fakeLabels() { Label = "Đỗ nghèo khỉ" },
-            new fakeLabels() { Label = "Thánh FA" },
-            new fakeLabels() { Label = "Kẻ hủy diệt deadline" },
-            new fakeLabels() { Label = "Chúa tể thả thính" },
         };
 
         private void ChooseLabellValue(fakeLabels label)
@@ -140,9 +158,11 @@ namespace VMS.Pages.Admin.VolunteerManagement
         private async Task ClearFilterAsync()
         {
             yearChoosenValue = "Khóa";
+            facultyChoosenValue = "Khoa";
             rankChoosenValue = "Hạng";
             labelChoosenValue = "Danh hiệu";
             isYearGrey = false;
+            isFacultyGrey = false;
             isRankGrey = false;
             isLabelGrey = false;
             Filter = new();

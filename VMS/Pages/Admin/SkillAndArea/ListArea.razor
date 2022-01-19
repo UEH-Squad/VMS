@@ -1,12 +1,6 @@
 ﻿@inject IJSRuntime JS;
-@using VMS.GenericRepository;
-@using Blazored.Modal;
-@using VMS.Application.ViewModels;
-@using VMS.Application.Interfaces;
 
-@using Microsoft.AspNetCore.Components;
-@using System.Collections.Generic;
-@using System.Threading.Tasks;
+<Spinner IsLoading="isLoading"/>
 
 <div class="row">
     @if (pagedResult is not null && pagedResult.Items.Count != 0)
@@ -15,73 +9,23 @@
         {
             <div class="col-4">
                 <div class="d-flex align-items-center area ">
-                    <div class="div-checkbox"><input @bind="item.IsCheck" class="check-box  " type="checkbox"></div>
-                    <div @onclick="(() => ShowOptions(false))" class="d-flex align-items-center align-items-center cursor-pointer">
-                        <i class="material-icons-outlined me-2 ms-3 col-4 ">@item.IconName</i>
-                        <span class="lm-text col-8">@item.Area</span>
+                    <div class="div-checkbox"><input class="check-box" type="checkbox"></div>
+                    <div @onclick="async () => await ShowEditModalAsync(item)" class="d-flex align-items-center align-items-center cursor-pointer">
+                        <i class="material-icons-outlined me-2 ms-3 col-4 ">@item.Icon</i>
+                        <span class="lm-text col-8">@item.Name</span>
                     </div>
                 </div>
-
             </div>
         }
     }
-
 </div>
+
 <div class="d-flex justify-content-center">
     <Pager CurrentPage="@pagedResult.PageIndex"
            PageCount="@pagedResult.TotalPages"
-           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
+           OnPageChanged="HandlePageChangedAsync"
            ShowPageNumbers="true" />
 </div>
 
 @code {
-    //Modal
-    [CascadingParameter] public IModalService Modal { get; set; }
-    // Areas
-
-    private PaginatedList<FakeDataAreas> pagedResult;
-    private int page = 1;
-
-    protected override void OnInitialized()
-    {
-        pagedResult = GetFakeData();
-    }
-
-    private async Task HandlePageChanged()
-    {
-        pagedResult = GetFakeData();
-        StateHasChanged();
-        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
-    }
-
-    private PaginatedList<FakeDataAreas> GetFakeData()
-    {
-        int i = 0;
-        var data = Enumerable.Range(0, 21).Select(x => new FakeDataAreas
-        {
-            Id = i,
-            IconName = "coronavirus",
-            Area = "Cộng đồng những xu hướng",
-            IsCheck = false,
-        }).ToList();
-
-        var result = new PaginatedList<FakeDataAreas>(data, 100, page, 20);
-        return result;
-    }
-
-    private class FakeDataAreas
-    {
-        public int Id { get; set; }
-        public string IconName { get; set; }
-        public string Area { get; set; }
-        public bool IsCheck { get; set; } = false;
-
-    }
-
-    private async Task ShowOptions(bool isAdd)
-    {
-        var parameters = new ModalParameters();
-        parameters.Add(nameof(OptionsArea.isAdd), isAdd);
-        Modal.Show<Admin.SkillAndArea.OptionsArea>("", parameters, BlazoredModalOptions.GetModalOptions());
-    }
 }

@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace VMS.Domain.Models
 {
-    [Keyless]
     public class Setting
     {
-        public string VideoHomepageURL { get; set; }
+        [Key]
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }

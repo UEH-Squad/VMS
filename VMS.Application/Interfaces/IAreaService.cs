@@ -12,5 +12,7 @@ namespace VMS.Application.Interfaces
         Task<PaginatedList<AreaViewModel>> GetAllAreasAsync(int pageIndex);
 
         Task UpdateListAreasAsync(List<AreaViewModel> areas);
+
+        Task AddAreaAsync(AreaViewModel areaViewModel);
     }
 }

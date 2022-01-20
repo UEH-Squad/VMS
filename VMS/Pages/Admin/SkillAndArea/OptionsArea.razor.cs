@@ -24,19 +24,34 @@ namespace VMS.Pages.Admin.SkillAndArea
         protected override async Task OnInitializedAsync()
         {
             pinnedAreas = await AreaService.GetAllAreasAsync(true);
+
+            var existArea = pinnedAreas.Find(x => x.Id == Area.Id);
+            if (existArea != null)
+            {
+                pinnedAreas.Remove(existArea);
+            }
         }
 
         private bool IsValidPinnedArea()
         {
-            return !(pinnedAreas.Where(x => x.IsPinned).Count() == 4 && !pinnedAreas.Exists(x => x.Id == Area.Id));
+            return pinnedAreas.Count < 4 || !Area.IsPinned;
         }
 
         private async Task OnValidSubmitAsync()
         {
-            if (IsValidPinnedArea())
+            if (pinnedAreas.Where(x => x.IsPinned).Count() < 4)
             {
-                pinnedAreas.Add(Area);
+                if (IsAdd)
+                {
+                    await AreaService.AddAreaAsync(Area);
+                }
+                else
+                {
+                    pinnedAreas.Add(Area);
+                }
+
                 await AreaService.UpdateListAreasAsync(pinnedAreas);
+
                 isAddSuccess = true;
             }
         }

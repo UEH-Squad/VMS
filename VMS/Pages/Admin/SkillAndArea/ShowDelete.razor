@@ -28,20 +28,20 @@
 </div>
 
 @code {
-
-    //Modal
     private bool isSuccess = false;
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
+
     [Parameter] public bool isArea { get; set; }
 
     private async Task CloseModalAsync()
     {
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok<bool>(isSuccess));
     }
-    private async Task ShowEditSuccess()
-    {
 
+    private void ShowEditSuccess()
+    {
         isSuccess = !isSuccess;
     }
 }

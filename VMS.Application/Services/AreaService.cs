@@ -25,16 +25,20 @@ namespace VMS.Application.Services
         {
             using DbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            List<Area> areas = await _repository.GetListAsync<Area>(dbContext);
+            Specification<Area> specification = new()
+            {
+                Conditions = new()
+                {
+                    x => !x.IsDeleted,
+                    x => x.IsPinned == isPinned
+                },
+                OrderBy = x => x.OrderByDescending(x => x.IsPinned)
+                                .ThenByDescending(x => x.Id)
+            };
 
-            if (isPinned)
-            {
-                return _mapper.Map<List<AreaViewModel>>(areas.Where(x => x.IsPinned).Take(4));
-            }
-            else
-            {
-                return _mapper.Map<List<AreaViewModel>>(areas.OrderByDescending(x => x.IsPinned));
-            }
+            List<Area> areas = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<List<AreaViewModel>>(areas);
         }
 
         public async Task<PaginatedList<AreaViewModel>> GetAllAreasAsync(int pageIndex)
@@ -43,6 +47,10 @@ namespace VMS.Application.Services
 
             PaginationSpecification<Area> specification = new()
             {
+                Conditions = new()
+                {
+                    x => !x.IsDeleted
+                },
                 PageIndex = pageIndex,
                 PageSize = 20,
                 OrderBy = x => x.OrderByDescending(x => x.IsPinned)
@@ -56,7 +64,7 @@ namespace VMS.Application.Services
 
         public async Task UpdateListAreasAsync(List<AreaViewModel> areas)
         {
-            using DbContext dbContext = _dbContextFactory.CreateDbContext();
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
 
             Specification<Area> specification = new()
             {
@@ -66,7 +74,7 @@ namespace VMS.Application.Services
                 }
             };
 
-            var listAreas = await _repository.GetListAsync(dbContext, specification);
+            IEnumerable<Area> listAreas = await _repository.GetListAsync(dbContext, specification);
 
             foreach (Area area in listAreas)
             {
@@ -78,9 +86,16 @@ namespace VMS.Application.Services
                 area.Icon = areaViewModel.Icon;
             }
 
-            //listAreas = _mapper.Map(areas, listAreas);
+            await _repository.UpdateAsync(dbContext, listAreas);
+        }
 
-            await _repository.UpdateAsync<Area>(dbContext, listAreas);
+        public async Task AddAreaAsync(AreaViewModel areaViewModel)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Area area = _mapper.Map<Area>(areaViewModel);
+
+            await _repository.InsertAsync(dbContext, area);
         }
     }
 }

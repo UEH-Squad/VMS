@@ -79,9 +79,11 @@
   font-size: 10px;
   color: #64D72F; }
 
-.my-material-icons-outlined {
-  cursor: pointer;
-  transform: rotate(-90deg); }
+.see-more {
+  cursor: pointer; }
 
-.my-material-icons-outlined:not(.collapsed) {
-  transform: none; }
+.see-more:not(.collapsed) {
+  transform: rotate(0deg); }
+
+.see-more[aria-expanded="true"] {
+  transform: rotate(90deg); }

@@ -11,7 +11,7 @@
                 <div class="d-flex align-items-center mt-4">
                     <div class="div-checkbox div-checkbox-skillGr me-2"><input @bind="item.IsCheckSkill" class="check-box check-box-skillGr @(ShowCheckbox?"d-block":"d-none")" type="checkbox"></div>
                     <p @onclick="(() => ShowOptions(false))" class="skill-group mb-0 cursor-pointer lm-text">@item.SkillGroup</p>
-                    <span class="material-icons-outlined my-material-icons-outlined" data-bs-toggle="collapse" data-bs-target="#cho_nay_phai_dung_id"> arrow_drop_up </span>
+                    <span class="material-icons-outlined see-more" data-bs-toggle="collapse" data-bs-target="#cho_nay_phai_dung_id" aria-expanded="false"> arrow_left </span>
                 </div>
                 <div class="collapse" id="cho_nay_phai_dung_id">
                     <div class="d-flex align-items-center ms-4 ps-2 mt-2">

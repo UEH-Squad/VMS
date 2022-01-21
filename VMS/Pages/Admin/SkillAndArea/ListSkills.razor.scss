@@ -89,11 +89,12 @@
     color: $green;
 }
 
-.my-material-icons-outlined {
+.see-more {
     cursor: pointer;
-    transform: rotate(-90deg);
 }
-
-.my-material-icons-outlined:not(.collapsed) {
-    transform: none;
+.see-more:not(.collapsed) {
+    transform: rotate(0deg);
+}
+.see-more[aria-expanded="true"] {
+    transform: rotate(90deg);
 }

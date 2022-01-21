@@ -14,8 +14,8 @@
 
 <div class="my-option px-5 mt-5">
     <div class="d-flex align-items-center mb-5">
-        <button @onclick="() => OnChooseType(true)" class="btn btn-area me-2">Lĩnh vực</button>
-        <button @onclick="() => OnChooseType(false)" class="btn btn-skill me-5">Kỹ năng</button>
+        <button @onclick="() => OnChooseType(true)" class="btn btn-area me-2 @(isArea? "btn-border-bottom":"")">Lĩnh vực</button>
+        <button @onclick="() => OnChooseType(false)" class="btn btn-skill me-5 @(isArea? "":"btn-border-bottom")">Kỹ năng</button>
         <div class="btn btn-addVideo d-flex align-items-center">
             <i class="material-icons-outlined icon-add me-1">
                 add_circle
@@ -30,6 +30,7 @@
             </i>
             <span @onclick="ShowOptionAsync">@(isArea ? "Thêm lĩnh vực" : "Thêm kỹ năng")</span>
         </div>
+        <button class="btn btn-choose me-4">Chọn</button>
         <button @onclick="ShowPopupDeleteAsync" class="btn btn-delete">Xóa</button>
     </div>
 </div>
@@ -38,7 +39,7 @@
 </div>
 
 <div class="my-skills px-5 @(!isArea ? "d-block" : "d-none")">
-   <ListSkills/>
+    <ListSkills />
 </div>
 
 @code {

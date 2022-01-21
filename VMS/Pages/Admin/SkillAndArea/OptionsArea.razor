@@ -8,7 +8,7 @@
                     close
                 </span>
             </div>
-            <h3 class="text-center ">@(IsAdd ? "Thêm" : "Sửa")  <span>lĩnh vực</span></h3>
+            <h3 class="text-center ">@(IsAdd ? "Thêm" : "Sửa")  <span>lĩnh vực mới</span></h3>
             <EditForm Model="Area" OnValidSubmit="OnValidSubmitAsync">
                 <DataAnnotationsValidator />
                 <div class="d-flex align-items-center mb-20">
@@ -18,14 +18,14 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-30">
-                    <p class="form__title form__title--icon">Icon name<span>(*)</span>:</p>
+                    <p class="form__title form__title--icon">Icon name <span>(*)</span>:</p>
                     <div class="position-relative">
                         <InputText @bind-Value="@Area.Icon" class="form-control" />
                         <span class="form__note">Icon name lấy từ Material Icons</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-20">
-                    <p class="form__title form__title--color">Mã màu<span>(*)</span>:</p>
+                    <p class="form__title form__title--color">Mã màu <span>(*)</span>:</p>
                     <div class="position-relative">
                         <InputText @bind-Value="@Area.Color" class="form-control" />
                         <InputText type="color" @bind-Value="@Area.Color" class="input-color" id="input-color" />

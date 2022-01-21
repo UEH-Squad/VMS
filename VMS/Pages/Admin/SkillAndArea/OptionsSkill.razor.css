@@ -4,6 +4,9 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.cursor-pointer {
+  cursor: pointer; }
+
 .my-modal {
   position: fixed;
   top: 0;
@@ -174,7 +177,7 @@
     visibility: hidden; }
 
 .filter-item {
-  width: 23%; }
+  margin-left: auto; }
   .filter-item .material-icons-outlined {
     top: 50%;
     transform: translateY(-50%);

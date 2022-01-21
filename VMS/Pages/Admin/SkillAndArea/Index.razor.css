@@ -16,17 +16,11 @@
   font-weight: 600;
   font-size: 18px;
   color: #18A0FB; }
-  .my-option .btn-area::after, .my-option .btn-skill::after {
-    content: "";
-    width: 100%;
-    height: 4px;
-    background: #0B588C;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: none; }
-  .my-option .btn-area:hover::after, .my-option .btn-skill:hover::after {
-    display: block; }
+  .my-option .btn-area:hover, .my-option .btn-skill:hover {
+    border-bottom: 4px solid #0B588C; }
+
+.my-option .btn-border-bottom {
+  border-bottom: 4px solid #0B588C; }
 
 .my-option .btn-addVideo {
   width: 260px;
@@ -59,6 +53,17 @@
   .my-option .btn-add span {
     font-weight: 600;
     font-size: 16px; }
+
+.my-option .btn-choose {
+  width: 60px;
+  height: 36px;
+  padding: 0;
+  background: #64D72F;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF; }
+  .my-option .btn-choose:hover {
+    background: #306C14; }
 
 .my-option .btn-delete {
   width: 47px;

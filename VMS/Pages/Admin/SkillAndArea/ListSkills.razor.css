@@ -79,9 +79,9 @@
   font-size: 10px;
   color: #64D72F; }
 
-span.material-icons-outlined {
+.my-material-icons-outlined {
   cursor: pointer;
-  transform: rotate(180deg); }
+  transform: rotate(-90deg); }
 
 .my-material-icons-outlined:not(.collapsed) {
-  transform: rotate(-90deg); }
+  transform: none; }

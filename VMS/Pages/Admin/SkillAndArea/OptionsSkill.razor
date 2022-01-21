@@ -18,8 +18,8 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-20">
-                    <input @bind="IsCheck" class="radio-skill" type="radio" name="radioskill">
-                    <p class="form__title form__title--icon">Chọn nhóm kỹ năng:</p>
+                    <input @bind="IsCheck" class="radio-skill" id="old-radio-skill" type="radio" name="radioskill">
+                    <label for="old-radio-skill" class="cursor-pointer">Chọn nhóm kỹ năng:</label>
                     <div class="filter-item position-relative" id="filter-item-notpl">
                         <input @onclick="ToggleSkillDropdown" @onfocusout="CloseSkillDropdown" class="filter-item__btn filter-item__btn--lmtext-1 form-control" placeholder="@skillChoosenValue" readonly />
                         <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fit-content" style="display: @(isSkillShow ? "block" : "none")">
@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center form__prioritize mb-30 me-3">
-                    <input @bind="IsCheck" class="radio-skill" type="radio" name="radioskill">
-                    <label for="all">Tạo nhóm kỹ năng mới</label>
+                    <input @bind="IsCheck" class="radio-skill" id="new-radio-skill" type="radio" name="radioskill">
+                    <label for="new-radio-skill">Tạo nhóm kỹ năng mới</label>
                 </div>
                 <div class="from__btn text-center">
                     <button @onclick="ShowAddSuccess" type="submit" class="btn btn-add">@(isAdd ? "Thêm" :"Sửa") kỹ năng</button>
@@ -83,7 +83,7 @@
     }
 
     //Nhóm kỹ năng
-    bool IsCheck= false;
+    bool IsCheck = false;
 
     private class FakeData
     {
@@ -95,12 +95,12 @@
     private string skillChoosenValue = "Kỹ năng";
     private List<FakeData> skills = new()
     {
-        new FakeData() { Name = "Kỹ năng mềm" },
-        new FakeData() { Name = "Quảng lý thời gian" },
-        new FakeData() { Name = "Thể lực tốt" },
-        new FakeData() { Name = "Lập trình" },
-        new FakeData() { Name = "Lái xe" },
-    };
+            new FakeData() { Name = "Kỹ năng mềm" },
+            new FakeData() { Name = "Quản lý thời gian" },
+            new FakeData() { Name = "Thể lực tốt" },
+            new FakeData() { Name = "Lập trình" },
+            new FakeData() { Name = "Lái xe" },
+        };
     private void ChooseSkillValue(FakeData level)
     {
         skillChoosenValue = level.Name;

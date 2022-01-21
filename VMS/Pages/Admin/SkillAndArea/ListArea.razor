@@ -9,7 +9,7 @@
         {
             <div class="col-4">
                 <div class="d-flex align-items-center area ">
-                    <div class="div-checkbox"><input @onchange="async () => await OnChooseAreaAsync(item)" class="check-box" type="checkbox"></div>
+                    <div class="div-checkbox"><input @onchange="async () => await OnChooseAreaAsync(item)" class="check-box @(ShowCheckbox?"d-block":"d-none")" type="checkbox"></div>
                     <div @onclick="async () => await ShowEditModalAsync(item)" class="d-flex align-items-center align-items-center cursor-pointer">
                         <i class="material-icons-outlined me-2 ms-3 col-4 ">@item.Icon</i>
                         <span class="lm-text col-8">@item.Name</span>

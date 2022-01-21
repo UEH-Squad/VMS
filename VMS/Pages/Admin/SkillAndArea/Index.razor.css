@@ -65,6 +65,11 @@
   .my-option .btn-choose:hover {
     background: #306C14; }
 
+.my-option .btn-uncheck {
+  background: #306C14; }
+  .my-option .btn-uncheck:hover {
+    background: #64D72F; }
+
 .my-option .btn-delete {
   width: 47px;
   height: 36px;

@@ -19,6 +19,8 @@ namespace VMS.Pages.Admin.SkillAndArea
 
         [Parameter] public EventCallback<List<AreaViewModel>> ChosenListChanged { get; set; }
 
+        [Parameter] public bool ShowCheckbox { get; set; }
+
         [CascadingParameter] public IModalService Modal { get; set; }
 
         [Inject] private IAreaService AreaService { get; set; }

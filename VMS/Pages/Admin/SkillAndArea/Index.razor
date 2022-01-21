@@ -30,17 +30,26 @@
             </i>
             <span @onclick="ShowOptionAsync">@(isArea ? "Thêm lĩnh vực" : "Thêm kỹ năng")</span>
         </div>
-        <button class="btn btn-choose me-4">Chọn</button>
+        <button @onclick="Choose" class="btn btn-choose me-4 @(showCheck? "btn-uncheck" : "")">Chọn</button>
         <button @onclick="ShowPopupDeleteAsync" class="btn btn-delete">Xóa</button>
     </div>
 </div>
 <div class="my-areas @(isArea ? "d-block" : "d-none") px-5 ">
-    <ListArea ChosenListChanged="OnChosenListChanged"/>
+    <ListArea ChosenListChanged="OnChosenListChanged" ShowCheckbox="showCheck" />
 </div>
 
 <div class="my-skills px-5 @(!isArea ? "d-block" : "d-none")">
-    <ListSkills />
+    <ListSkills ShowCheckbox="showCheck" />
 </div>
 
 @code {
+
+    private bool showCheck = false;
+
+    public void Choose()
+    {
+
+        showCheck = !showCheck;
+    }
+
 }

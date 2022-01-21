@@ -83,6 +83,14 @@
         }
     }
 
+    .btn-uncheck {
+        background: $green-bold;
+
+        &:hover {
+            background: $green;
+        }
+    }
+
     .btn-delete {
         width: 47px;
         height: 36px;

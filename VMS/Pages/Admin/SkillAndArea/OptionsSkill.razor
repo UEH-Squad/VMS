@@ -35,7 +35,7 @@
                                 {
                                     @foreach (var skill in parentSkills)
                                     {
-                                        @if (skill.Id != Skill.ParentSkillId)
+                                        @if (skill.Id != Skill.ParentSkillId && skill.Id != Skill.Id)
                                         {
                                             <li @onmousedown="() => ChooseSkill(skill)">@skill.Name</li>
                                         }

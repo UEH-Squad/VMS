@@ -87,7 +87,8 @@ namespace VMS.Application.Services
                 Conditions = new()
                 {
                     x => skills.Select(x => x.Id).Any(id => id == x.Id)
-                }
+                },
+                Includes = x => x.Include(x => x.SubSkills)
             };
 
             IEnumerable<Skill> listSkills = await _repository.GetListAsync(dbContext, specification);
@@ -95,8 +96,15 @@ namespace VMS.Application.Services
             foreach (var skill in listSkills)
             {
                 var skillViewModel = skills.Find(x => x.Id == skill.Id);
-                skill.IsDeleted = skillViewModel.IsDeleted;
+
                 skill.Name = skillViewModel.Name;
+                skill.IsDeleted = skillViewModel.IsDeleted;
+
+                if (skill.ParentSkill is null && skillViewModel.ParentSkillId is not null)
+                {
+                    skill.SubSkills.Clear();
+                }
+
                 skill.ParentSkillId = skillViewModel.ParentSkillId;
             }
 

@@ -45,7 +45,10 @@ namespace VMS.Pages.Admin.SkillAndArea
             var parameters = new ModalParameters();
             parameters.Add(nameof(OptionsSkill.IsAdd), false);
             parameters.Add(nameof(OptionsSkill.Skill), skill);
+
             await Modal.Show<OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+
+            await SetDataAsync();
         }
     }
 }

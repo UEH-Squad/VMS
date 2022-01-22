@@ -39,7 +39,6 @@ namespace VMS.Pages.Admin.SkillAndArea
         private void ChooseSkill(SkillViewModel skill)
         {
             Skill.ParentSkillId = skill.Id;
-
             skillChoosenValue = skill.Name;
         }
 

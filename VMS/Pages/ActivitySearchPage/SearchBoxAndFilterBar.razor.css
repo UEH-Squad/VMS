@@ -139,7 +139,8 @@
     padding: 0;
     height: 100%; }
     .my-dropdown ul::-webkit-scrollbar {
-      width: 5px; }
+      width: 5px;
+      height: 5px; }
     .my-dropdown ul::-webkit-scrollbar-thumb {
       background-color: #B4B4B4;
       border-radius: 20px; }
@@ -147,7 +148,9 @@
       color: #18A0FB;
       font-size: 18px;
       margin-bottom: 6px;
-      cursor: pointer; }
+      cursor: pointer;
+      text-overflow: clip;
+      white-space: nowrap; }
       .my-dropdown ul li:hover {
         color: #64D72F;
         background-color: rgba(24, 160, 251, 0.1); }

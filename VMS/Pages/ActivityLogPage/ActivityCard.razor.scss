@@ -57,13 +57,15 @@
             width: 100%;
             aspect-ratio: 1;
             border-radius: 100%;
+            object-fit: cover;
+            object-position: center;
         }
     }
 
     &__content {
-        display:flex;
-        flex-direction:column;
-        justify-content:space-between;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: 100px;
         flex: 1;
         padding: 10px 30px;
@@ -86,6 +88,12 @@
 
             p {
                 margin-bottom: 6px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal;
+                -webkit-line-clamp: 1;
 
                 @include on('xl') {
                     margin-bottom: 14px;

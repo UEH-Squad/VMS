@@ -165,6 +165,7 @@
 
         &::-webkit-scrollbar {
             width: 5px;
+            height: 5px;
         }
 
         &::-webkit-scrollbar-thumb {
@@ -177,6 +178,8 @@
             font-size: 18px;
             margin-bottom: 6px;
             cursor: pointer;
+            text-overflow: clip;
+            white-space: nowrap;
 
             &:hover {
                 color: $green;

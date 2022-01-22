@@ -11,14 +11,22 @@ namespace VMS.Pages.Admin.SkillAndArea
 {
     public partial class Index : ComponentBase
     {
-        private bool isArea = true;
-        private List<AreaViewModel> chosenAreas = new();
+        private bool isArea;
+        private List<AreaViewModel> chosenAreas;
+        private List<SkillViewModel> chosenSkills;
 
         [Inject] private IAreaService AreaService { get; set; }
 
         [Inject] private NavigationManager NavigationManager { get; set; }
 
         [CascadingParameter] public IModalService Modal { get; set; }
+
+        protected override void OnInitialized()
+        {
+            isArea = true;
+            chosenAreas = new();
+            chosenSkills = new();
+        }
 
         private void OnChooseType(bool isArea)
         {
@@ -32,7 +40,6 @@ namespace VMS.Pages.Admin.SkillAndArea
 
         private async Task ShowOptionAsync()
         {
-
             if (isArea)
             {
                 var parameters = new ModalParameters();
@@ -43,10 +50,10 @@ namespace VMS.Pages.Admin.SkillAndArea
             {
                 var parameters = new ModalParameters();
                 parameters.Add(nameof(OptionsSkill.IsAdd), true);
-                Modal.Show<OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions());
+                await Modal.Show<OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
             }
 
-            Refresh();
+            OnInitialized();
         }
 
         private void OnChosenListChanged(List<AreaViewModel> chosenList)
@@ -67,18 +74,12 @@ namespace VMS.Pages.Admin.SkillAndArea
                 {
                     chosenAreas.ForEach(x => x.IsDeleted = true);
                     await AreaService.UpdateListAreasAsync(chosenAreas);
-                    Refresh();
                 }
                 else
                 {
 
                 }
             }
-        }
-
-        private void Refresh()
-        {
-            NavigationManager.NavigateTo(Routes.AdminFeatureSuggestionManagement, true);
         }
     }
 }

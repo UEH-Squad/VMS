@@ -60,7 +60,15 @@ namespace VMS.Pages.Admin.SkillAndArea
 
         private async Task OnValidSubmitAsync()
         {
-            await SkillService.UpdateListSkillsAsync(new() { Skill });
+            if (IsAdd)
+            {
+                await SkillService.UpdateListSkillsAsync(new() { Skill });
+            }
+            else
+            {
+
+            }
+
             isAddSuccess = true;
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
@@ -35,6 +36,28 @@ namespace VMS.Application.Services
             return _mapper.Map<List<SkillViewModel>>(skills);
         }
 
+        public async Task<PaginatedList<SkillViewModel>> GetAllSkillsAsync(int pageIndex)
+        {
+            using DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            PaginationSpecification<Skill> specification = new()
+            {
+                Conditions = new()
+                {
+                    x => !x.IsDeleted,
+                    x => x.ParentSkillId == null
+                },
+                Includes = x => x.Include(x => x.SubSkills),
+                PageSize = 20,
+                PageIndex = pageIndex,
+                OrderBy = x => x.OrderByDescending(x => x.Id)
+            };
+
+            var skills = await _repository.GetListAsync(dbContext, specification);
+
+            return _mapper.Map<PaginatedList<SkillViewModel>>(skills);
+        }
+
         public async Task<List<SkillViewModel>> GetAllSkillsByNameAsync(string searchText)
         {
             if (string.IsNullOrWhiteSpace(searchText))
@@ -53,6 +76,31 @@ namespace VMS.Application.Services
             });
 
             return _mapper.Map<List<SkillViewModel>>(skills);
+        }
+
+        public async Task UpdateListSkillsAsync(List<SkillViewModel> skills)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Specification<Skill> specification = new()
+            {
+                Conditions = new()
+                {
+                    x => skills.Select(x => x.Id).Any(id => id == x.Id)
+                }
+            };
+
+            IEnumerable<Skill> listSkills = await _repository.GetListAsync(dbContext, specification);
+
+            foreach (var skill in listSkills)
+            {
+                var skillViewModel = skills.Find(x => x.Id == skill.Id);
+                skill.IsDeleted = skillViewModel.IsDeleted;
+                skill.Name = skillViewModel.Name;
+                skill.ParentSkillId = skillViewModel.ParentSkillId;
+            }
+
+            await _repository.UpdateAsync(dbContext, listSkills);
         }
     }
 }

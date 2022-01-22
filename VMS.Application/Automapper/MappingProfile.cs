@@ -26,11 +26,14 @@ namespace VMS.Application.Automapper
 
             CreateMap<Area, AreaViewModel>();
             CreateMap<AreaViewModel, Area>();
-            CreateMap<List<AreaViewModel>, List<Area>>();
             CreateMap<PaginatedList<Area>, PaginatedList<AreaViewModel>>();
 
             CreateMap<Activity, UserWithActivityViewModel>();
+
+            CreateMap<SkillViewModel, Skill>();
             CreateMap<Skill, SkillViewModel>();
+            CreateMap<PaginatedList<Skill>, PaginatedList<SkillViewModel>>();
+
             CreateMap<User, UserViewModel>()
                 .ForMember(x => x.Faculty, opt => opt.MapFrom(src => src.Faculty.Name))
                 .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel

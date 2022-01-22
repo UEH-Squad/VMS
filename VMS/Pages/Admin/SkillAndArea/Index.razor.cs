@@ -42,7 +42,7 @@ namespace VMS.Pages.Admin.SkillAndArea
             else
             {
                 var parameters = new ModalParameters();
-                parameters.Add(nameof(OptionsSkill.isAdd), true);
+                parameters.Add(nameof(OptionsSkill.IsAdd), true);
                 Modal.Show<OptionsSkill>("", parameters, BlazoredModalOptions.GetModalOptions());
             }
 

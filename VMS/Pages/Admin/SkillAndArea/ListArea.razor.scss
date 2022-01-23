@@ -1,5 +1,5 @@
 ﻿@import '../../../Resources/scss/common/_variables';
-.my-areas {
+
     .cursor-pointer {
         cursor: pointer
     }
@@ -71,8 +71,7 @@
 
         span {
             font-weight: 400;
-            font-size: 16px;
+            font-size: 20px;
             color: $red;
         }
     }
-}

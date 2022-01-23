@@ -48,8 +48,14 @@
                     </div>
 
                 </div>
-
-                <span @onclick="ShowModalAppellation" class="information__tilte mx-auto my-3" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">Tổ chức chuyên nghiệp</span>
+                @if (IsOrg)
+                {
+                    <span @onclick="ShowModalAppellation" class="information__tilte mx-auto my-3" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@appellation</span>
+                }
+                else
+                {
+                    <span class="information__tilte mx-auto my-3" style="@(IsUsedForAdmin ? "font-size: 14px" : "")">@appellation</span>
+                }
             </div>
             <div class="col-12 col-md-8 ps-4 ps-xxl-5">
                 <div class="row-1 d-flex align-items-center">
@@ -157,6 +163,18 @@
         {
             await JSRuntinme.InvokeVoidAsync("vms.InformationCarousel");
         }
+    }
+
+    private string appellation = "Tổ chức hoàn hảo";
+
+    private async Task ShowModalAppellation()
+    {
+        var result = await Modal.Show<Appellation>("", BlazoredModalOptions.GetModalOptions()).Result;
+        if (!string.IsNullOrEmpty(Convert.ToString(result.Data)))
+        {
+            appellation = Convert.ToString(result.Data);
+        }
+
     }
 
 }

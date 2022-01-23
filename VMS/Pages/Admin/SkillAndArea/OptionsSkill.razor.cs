@@ -11,7 +11,6 @@ namespace VMS.Pages.Admin.SkillAndArea
     public partial class OptionsSkill : ComponentBase
     {
         private bool isAddSuccess;
-        private bool isGroupSkill;
         private bool isSkillShow;
         private string skillChoosenValue;
 
@@ -32,8 +31,6 @@ namespace VMS.Pages.Admin.SkillAndArea
             parentSkills = parentSkills.OrderByDescending(x => x.Id == Skill.ParentSkillId).ToList();
 
             skillChoosenValue = Skill.ParentSkillId is null ? "Kỹ năng" : parentSkills.Find(x => x.Id == Skill.ParentSkillId).Name;
-
-            isGroupSkill = Skill.ParentSkillId is not null; 
         }
 
         private void ChooseSkill(SkillViewModel skill)
@@ -62,11 +59,11 @@ namespace VMS.Pages.Admin.SkillAndArea
         {
             if (IsAdd)
             {
-                await SkillService.UpdateListSkillsAsync(new() { Skill });
+                await SkillService.AddSkillAsync(Skill);
             }
             else
             {
-
+                await SkillService.UpdateListSkillsAsync(new() { Skill });
             }
 
             isAddSuccess = true;

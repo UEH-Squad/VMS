@@ -14,5 +14,7 @@ namespace VMS.Application.Interfaces
         Task<List<SkillViewModel>> GetAllSkillsByNameAsync(string searchText);
 
         Task UpdateListSkillsAsync(List<SkillViewModel> skills);
+
+        Task AddSkillAsync(SkillViewModel skillViewModel);
     }
 }

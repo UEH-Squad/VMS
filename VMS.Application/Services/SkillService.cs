@@ -28,6 +28,7 @@ namespace VMS.Application.Services
             {
                 Conditions = new List<Expression<Func<Skill, bool>>>()
                 {
+                    s => !s.IsDeleted,
                     s => s.ParentSkillId == parentSkillId
                 },
                 Includes = s => s.Include(x => x.SubSkills)
@@ -109,6 +110,15 @@ namespace VMS.Application.Services
             }
 
             await _repository.UpdateAsync(dbContext, listSkills);
+        }
+
+        public async Task AddSkillAsync(SkillViewModel skillViewModel)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            var skill = _mapper.Map<Skill>(skillViewModel);
+
+            await _repository.InsertAsync(dbContext, skill);
         }
     }
 }

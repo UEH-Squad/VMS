@@ -11,21 +11,26 @@ namespace VMS.Pages.Admin.SkillAndArea
 {
     public partial class Index : ComponentBase
     {
-        private bool isArea;
+        private bool isArea = true;
+        private bool isShowCheck;
         private List<AreaViewModel> chosenAreas;
         private List<SkillViewModel> chosenSkills;
 
         [Inject] private IAreaService AreaService { get; set; }
-
-        [Inject] private NavigationManager NavigationManager { get; set; }
+        
+        [Inject] private ISkillService SkillService { get; set; }
 
         [CascadingParameter] public IModalService Modal { get; set; }
 
         protected override void OnInitialized()
         {
-            isArea = true;
             chosenAreas = new();
             chosenSkills = new();
+        }
+
+        private void OnClickShowCheck()
+        {
+            isShowCheck = !isShowCheck;
         }
 
         private void OnChooseType(bool isArea)
@@ -56,15 +61,20 @@ namespace VMS.Pages.Admin.SkillAndArea
             OnInitialized();
         }
 
-        private void OnChosenListChanged(List<AreaViewModel> chosenList)
+        private void OnChosenAreasChanged(List<AreaViewModel> chosenList)
         {
             chosenAreas = chosenList;
+        }
+
+        private void OnChosenSkillsChanged(List<SkillViewModel> chosenList)
+        {
+            chosenSkills = chosenList;
         }
 
         private async Task ShowPopupDeleteAsync()
         {
             var parameters = new ModalParameters();
-            parameters.Add(nameof(ShowDelete.isArea), isArea);
+            parameters.Add(nameof(ShowDelete.IsArea), isArea);
 
             var result = await Modal.Show<ShowDelete>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
 
@@ -77,8 +87,11 @@ namespace VMS.Pages.Admin.SkillAndArea
                 }
                 else
                 {
-
+                    chosenSkills.ForEach(x => x.IsDeleted = true);
+                    await SkillService.UpdateListSkillsAsync(chosenSkills);
                 }
+
+                OnInitialized();
             }
         }
     }

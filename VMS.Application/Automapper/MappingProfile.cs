@@ -31,7 +31,8 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, UserWithActivityViewModel>();
 
             CreateMap<SkillViewModel, Skill>();
-            CreateMap<Skill, SkillViewModel>();
+            CreateMap<Skill, SkillViewModel>()
+                .ForMember(dest => dest.SubSkills, opt => opt.MapFrom(src => src.SubSkills.Where(x => !x.IsDeleted)));
             CreateMap<PaginatedList<Skill>, PaginatedList<SkillViewModel>>();
 
             CreateMap<User, UserViewModel>()

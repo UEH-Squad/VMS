@@ -1,6 +1,6 @@
 ﻿@inject IJSRuntime JS;
-@using VMS.GenericRepository;
-@using Blazored.Modal;
+
+<Spinner IsLoading="isLoading" />
 
 <div class="row">
     @if (pagedResult is not null && pagedResult.Items.Count != 0)
@@ -9,10 +9,19 @@
         {
             <div class="col-4 pe-5">
                 <div class="d-flex align-items-center mt-4">
-                    <div class="div-checkbox div-checkbox-skillGr me-2"><input class="check-box check-box-skillGr @(ShowCheckbox?"d-block":"d-none")" type="checkbox"></div>
+                    <div class="div-checkbox div-checkbox-skillGr me-2">
+                        @if (ChosenSkills.Contains(item))
+                        {
+                            <input @onchange="async () => await OnChooseSkillAsync(item)" class="check-box check-box-skillGr @(ShowCheckbox ? "d-block":"d-none")" type="checkbox" checked>
+                        }
+                        else
+                        {
+                            <input @onchange="async () => await OnChooseSkillAsync(item)" class="check-box check-box-skillGr @(ShowCheckbox ? "d-block":"d-none")" type="checkbox">
+                        }
+                    </div>
                     <p @onclick="async () => await ShowEditModalAsync(item)" class="skill-group mb-0 cursor-pointer lm-text">@item.Name</p>
                     <span class="material-icons-outlined see-more @(item.SubSkills is not null && item.SubSkills.Count > 0 ? "d-block" : "d-none")"
-                        data-bs-toggle="collapse" data-bs-target="#skill-@item.Id" aria-expanded="false"> arrow_left </span>
+                  data-bs-toggle="collapse" data-bs-target="#skill-@item.Id" aria-expanded="false"> arrow_left </span>
                 </div>
                 @if (item.SubSkills is not null && item.SubSkills.Count > 0)
                 {
@@ -20,7 +29,16 @@
                         @foreach (var skill in item.SubSkills)
                         {
                             <div class="d-flex align-items-center ms-4 ps-2 mt-2">
-                                <div class="div-checkbox div-checkbox-skill me-3"><input class="check-box check-box-skill @(ShowCheckbox?"d-block":"d-none")" type="checkbox"></div>
+                                <div class="div-checkbox div-checkbox-skill me-3">
+                                    @if (ChosenSkills.Contains(skill))
+                                    {
+                                        <input @onchange="async () => await OnChooseSkillAsync(skill)" class="check-box check-box-skill @(ShowCheckbox ? "d-block" : "d-none")" type="checkbox" checked>
+                                    }
+                                    else
+                                    {
+                                        <input @onchange="async () => await OnChooseSkillAsync(skill)" class="check-box check-box-skill @(ShowCheckbox ? "d-block" : "d-none")" type="checkbox">
+                                    }
+                                </div>
                                 <p @onclick="async () => await ShowEditModalAsync(skill)" class="skill mb-0 cursor-pointer lm-text">@skill.Name</p>
                             </div>
                         }

@@ -1,5 +1,52 @@
 ﻿@inject IJSRuntime JsRuntime
 
+<div class="overlay @display">
+
+    <div class="min-overlay @(isShowValidation ? "d-block" : "d-none")">
+
+        <div class="validate-success">
+
+            <div class="min-overlay--icon">
+                <span @onclick="@CloseModal" class="material-icons">
+                    close
+                </span>
+            </div>
+
+            <div class="validate-success__text">
+                <span class="green-text">Bạn đã</span>
+                <span class="blue-text">xác nhận ngày tình nguyện</span>
+                <span class="green-text">thành công</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="pop-up @(isShowValidation ? "d-none" : "d-block")">
+
+        <div class="pop-up__icon-close">
+            <span @onclick="@CloseModal" class="material-icons">close</span>
+        </div>
+
+        <div class="pop-up__title">
+            Xác nhận ngày tình nguyện
+        </div>
+
+        <div class="pop-up__chosen">
+            <div class="chosen d-flex">
+                <input type="radio" class="chosen-1" id="update" name="option" />
+                <label class="label-1" for="update">Cập nhật mã vạch</label>
+            </div>
+            <div class="chosen d-flex">
+                <input type="radio" class="chosen-2" id="record" name="option" />
+                <label class="label-2" for="record">Ghi nhận ngày tình nguyện</label>
+                <input type="number" class="day-number" value="10" readonly/>
+            </div>
+        </div>
+
+        <button class="pop-up__confirm" @onclick="@ShowModalValidationSucess">Xác nhận</button>
+    </div>
+</div>
+
 <div class="container__list-result">
     @*<SearchResult />*@
     <div class="container-member">
@@ -39,6 +86,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="activity__content__volunteer">
+                                <div class="activity__content__volunteer-day">
+                                    <div class="d-flex">
+                                        <span class="material-icons-outlined">
+                                            check_circle
+                                        </span>
+                                        <div class="name">Ghi nhận ngày tình nguyện: 123</div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <span class="material-icons-outlined">
+                                            check_circle
+                                        </span>
+                                        <div class="name">Cập nhật mã vạch</div>
+                                    </div>
+                                </div>
+                                <button class="activity__content__volunteer-validate" style="background-color: @color" @onclick="ToggleButton">
+                                    @buttonValidate
+                                </button>
+                            </div>
                         </div>
                         <div class="activity__icon d-flex">
                             <button class="activity__icon__report" @onclick="@(()=>ShowReportPopUp(item.Activity.Id))" id="popup-report_icon">
@@ -63,4 +129,32 @@
 </div>
 
 @code {
+    string buttonValidate = "Nhận quà";
+    string color = "#18A0FB";
+    string display = "d-none";
+
+    void ToggleButton()
+    {
+        buttonValidate = "Đã nhận quà";
+        color = "#B4B4B4";
+        display = "d-block";
+    }
+
+
+    [CascadingParameter]
+    private BlazoredModalInstance ValidationModal { get; set; }
+    void CloseModal()
+    {
+        display = "d-none";
+    }
+
+    bool isShowValidation = false;
+    void ShowModalValidationSucess()
+    {
+        isShowValidation = !isShowValidation;
+        if (isShowValidation == false)
+        {
+            ValidationModal.CloseAsync();
+        }
+    }
 }

@@ -36,6 +36,8 @@
     .act-filter .select-filter .select-container {
       position: relative;
       width: 46%; }
+  .act-filter__radio {
+    flex-wrap: wrap; }
   .act-filter__select {
     border: 1px solid #B4B4B4;
     width: 100%;
@@ -138,7 +140,7 @@
 .filter-btn {
   display: flex;
   align-items: center;
-  padding: 5px 20px;
+  padding: 0px 30px;
   width: fit-content;
   font-size: 14px;
   border-radius: 8px;

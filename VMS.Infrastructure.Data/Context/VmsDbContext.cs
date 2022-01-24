@@ -29,6 +29,7 @@ namespace VMS.Infrastructure.Data.Context
         public DbSet<Faculty> Faculties { get; set; }
         public new DbSet<AppRole> Roles { get; set; }
         public new DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Setting> Settings { get; set; }
 
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220120093408_AddNewModelSetting")]
+    partial class AddNewModelSetting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -369,21 +371,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "6f2b8357-bb81-4592-8ec3-10155d8fd8e1",
+                            ConcurrencyStamp = "53911d31-8866-41ec-8cfb-3189de1f0c2a",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "58971f87-5687-450b-a333-3805a8ce42fe",
+                            ConcurrencyStamp = "3140a680-1645-4ff7-aa93-541d5e6dd59b",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "6f20476c-0770-4f28-8ea0-ab996a0d8b80",
+                            ConcurrencyStamp = "a4050287-e973-48ab-bd07-2645f2443bed",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -840,13 +842,8 @@ namespace VMS.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("VMS.Domain.Models.Setting", b =>
                 {
-                    b.Property<string>("Key")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
+                    b.Property<string>("VideoHomepageURL")
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Key");
 
                     b.ToTable("Settings");
                 });
@@ -1213,7 +1210,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "941836e4-bdaf-4f18-ada1-d956a5869beb",
+                            ConcurrencyStamp = "1ff155c5-a6ab-4a63-bcf9-51ecbbe91540",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1221,7 +1218,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEhJf1pbO2lr7oVKPwPsJK9f1eBTj3e2927AthbN7wZl33YT4OcDt9aX0WvcTfYzJg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPFSmjipCqoYRsdAtnxp56yc/TmDh5WScMtLWstUEhgzXe+gfuAWbRiGzCmuhvo45Q==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",

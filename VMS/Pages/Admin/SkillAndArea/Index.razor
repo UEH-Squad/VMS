@@ -13,16 +13,14 @@
 @using System.Threading.Tasks;
 
 <div class="my-option px-5 mt-5">
-    <div class="d-flex align-items-center mb-5">
-        <button @onclick="() => OnChooseType(true)" class="btn btn-area me-2 @(isArea? "btn-border-bottom":"")">Lĩnh vực</button>
-        <button @onclick="() => OnChooseType(false)" class="btn btn-skill me-5 @(isArea? "":"btn-border-bottom")">Kỹ năng</button>
-        <div class="btn btn-addVideo d-flex align-items-center">
-            <i class="material-icons-outlined icon-add me-1">
-                add_circle
-            </i>
-            <span @onclick="ShowModalAddVideoAsync">Thêm video vào trang chủ</span>
-        </div>
-    </div>
+    <span class="d-flex align-items-center mb-5 grButton">
+        <button @onclick="() => OnChooseType(true)" class="me-2 btn btn-area @(isArea? "btn-clicked":"")">Lĩnh vực</button>
+        <button @onclick="() => OnChooseType(false)" class="me-2 btn btn-skill @(isArea? "":"btn-clicked")">Kỹ năng</button>
+        <button class="me-2 btn">Cấp</button>
+        <button class="me-2 btn">Khóa</button>
+        <button class="me-2 btn">Khoa</button>
+        <button class="btn" @onclick="ShowModalAddVideoAsync">Banner</button>
+    </span>
     <div class="d-flex align-items-center" style="float:right">
         <div class="btn btn-add d-flex align-items-center me-4">
             <i class="material-icons-outlined icon-add me-1">

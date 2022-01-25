@@ -4,39 +4,29 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-option .btn:focus {
-  box-shadow: none; }
-
-.my-option .btn-area, .my-option .btn-skill {
-  position: relative;
-  width: 117px;
-  height: 42px;
-  padding: 0;
+.my-option .grButton {
   background: #F3F3F5;
-  font-weight: 600;
-  font-size: 18px;
-  color: #18A0FB; }
-  .my-option .btn-area:hover, .my-option .btn-skill:hover {
-    border-bottom: 4px solid #0B588C; }
-
-.my-option .btn-border-bottom {
-  border-bottom: 4px solid #0B588C; }
-
-.my-option .btn-addVideo {
-  width: 260px;
-  height: 36px;
-  padding: 0 6px;
-  background: #64D72F;
   border-radius: 5px;
-  color: #FFFFFF;
-  cursor: pointer; }
-  .my-option .btn-addVideo:hover {
-    background: #306C14; }
-  .my-option .btn-addVideo .icon-add {
-    font-size: 24px; }
-  .my-option .btn-addVideo span {
+  padding: 4px;
+  width: fit-content; }
+  .my-option .grButton .btn {
+    width: 117px;
+    height: 38px;
+    padding: 0;
+    background: #F3F3F5;
     font-weight: 600;
-    font-size: 16px; }
+    font-size: 18px;
+    color: #18A0FB; }
+    .my-option .grButton .btn:focus {
+      box-shadow: none; }
+    .my-option .grButton .btn:hover {
+      color: #0B588c; }
+  .my-option .grButton .btn-area, .my-option .grButton .btn-skill {
+    position: relative; }
+  .my-option .grButton .btn-clicked {
+    box-shadow: 0px 0px 5px 0px #b4b4b4;
+    border-radius: 5px;
+    background-color: white; }
 
 .my-option .btn-add {
   width: 165px;

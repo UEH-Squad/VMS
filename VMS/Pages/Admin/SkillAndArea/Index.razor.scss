@@ -1,4 +1,5 @@
 ﻿@import '../../../Resources/scss/common/_variables';
+
 .my-option {
     .grButton {
         background: #F3F3F5;
@@ -169,6 +170,26 @@
             font-weight: 400;
             font-size: 16px;
             color: $red;
+        }
+    }
+}
+
+.my-banner {
+    .btn-addVideo {
+        width: fit-content;
+        height: 38px;
+        padding: 5px;
+        background: $green;
+        font-weight: 600;
+        font-size: 18px;
+        color: $white;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &:hover {
+            background: $green-bold;
         }
     }
 }

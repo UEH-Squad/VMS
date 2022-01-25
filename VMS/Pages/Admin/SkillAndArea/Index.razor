@@ -38,17 +38,22 @@
 <div class="my-skills px-5 @(isSkill ? "d-block" : "d-none")">
     <ListSkills ShowCheckbox="isShowCheck" ChosenSkills="chosenSkills" ChosenListChanged="OnChosenSkillsChanged" />
 </div>
-<div class="my-skills px-5 @(isLevel ? "d-block" : "d-none")">
+<div class="px-5 @(isLevel ? "d-block" : "d-none")">
     Đây là chỗ chỉnh sửa Cấp
 </div>
-<div class="my-skills px-5 @(isCourse ? "d-block" : "d-none")">
+<div class="px-5 @(isCourse ? "d-block" : "d-none")">
     Đây là chỗ chỉnh sửa Khoá
 </div>
-<div class="my-skills px-5 @(isDepartment ? "d-block" : "d-none")">
+<div class="px-5 @(isDepartment ? "d-block" : "d-none")">
     Đây là chỗ chỉnh sửa Khoa
 </div>
-<div class="my-skills px-5 @(isBanner ? "d-block" : "d-none")">
-    Hòa làm tiếp ở chỗ này nhé
+<div class="my-banner px-5 @(isBanner ? "d-block" : "d-none")">
+    <div class="btn btn-addVideo d-flex align-items-center">
+        <i class="material-icons-outlined icon-add me-1">
+            add_circle
+        </i>
+        <span @onclick="ShowModalAddVideoAsync">Thêm video vào trang chủ</span>
+    </div>
 </div>
 @code {
 }

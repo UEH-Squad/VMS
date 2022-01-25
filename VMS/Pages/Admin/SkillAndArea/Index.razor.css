@@ -133,3 +133,16 @@
     font-weight: 400;
     font-size: 16px;
     color: #F14747; }
+
+.my-banner .btn-addVideo {
+  width: fit-content;
+  height: 38px;
+  padding: 5px;
+  background: #64D72F;
+  font-weight: 600;
+  font-size: 18px;
+  color: #FFFFFF; }
+  .my-banner .btn-addVideo:focus {
+    box-shadow: none; }
+  .my-banner .btn-addVideo:hover {
+    background: #306C14; }

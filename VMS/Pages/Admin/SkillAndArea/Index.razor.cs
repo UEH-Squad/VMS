@@ -12,12 +12,17 @@ namespace VMS.Pages.Admin.SkillAndArea
     public partial class Index : ComponentBase
     {
         private bool isArea = true;
+        private bool isSkill = false;
+        private bool isLevel = false;
+        private bool isCourse = false;
+        private bool isDepartment = false;
+        private bool isBanner = false;
         private bool isShowCheck;
         private List<AreaViewModel> chosenAreas;
         private List<SkillViewModel> chosenSkills;
 
         [Inject] private IAreaService AreaService { get; set; }
-        
+
         [Inject] private ISkillService SkillService { get; set; }
 
         [CascadingParameter] public IModalService Modal { get; set; }
@@ -33,9 +38,18 @@ namespace VMS.Pages.Admin.SkillAndArea
             isShowCheck = !isShowCheck;
         }
 
-        private void OnChooseType(bool isArea)
+        private void OnChooseType(int number)
         {
-            this.isArea = isArea;
+            isArea = false; isSkill = false; isDepartment = false; isCourse = false; isBanner = false; isLevel = false;
+            switch (number)
+            {
+                case 2: isSkill = true; break;
+                case 3: isLevel = true; break;
+                case 4: isCourse = true; break;
+                case 5: isDepartment = true; break;
+                case 6: isBanner = true; break;
+                default: isArea = true; break;
+            }
         }
 
         private async Task ShowModalAddVideoAsync()

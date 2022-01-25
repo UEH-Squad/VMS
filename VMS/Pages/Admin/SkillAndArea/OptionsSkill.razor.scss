@@ -267,8 +267,9 @@
     height: 240px;
 
     &--fit-content {
-        height: fit-content;
-        padding: 15px 22px 0 22px;
+        width: fit-content;
+        padding: 15px 22px;
+        height: 270px;
     }
 
     ul {

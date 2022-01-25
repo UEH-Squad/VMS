@@ -14,12 +14,12 @@
 
 <div class="my-option px-5 mt-5">
     <span class="d-flex align-items-center mb-5 grButton">
-        <button @onclick="() => OnChooseType(true)" class="me-2 btn btn-area @(isArea? "btn-clicked":"")">Lĩnh vực</button>
-        <button @onclick="() => OnChooseType(false)" class="me-2 btn btn-skill @(isArea? "":"btn-clicked")">Kỹ năng</button>
-        <button class="me-2 btn">Cấp</button>
-        <button class="me-2 btn">Khóa</button>
-        <button class="me-2 btn">Khoa</button>
-        <button class="btn" @onclick="ShowModalAddVideoAsync">Banner</button>
+        <button @onclick="() => OnChooseType(1)" class="me-2 btn btn-area @(isArea? "btn-clicked":"")">Lĩnh vực</button>
+        <button @onclick="() => OnChooseType(2)" class="me-2 btn btn-skill @(isSkill? "btn-clicked":"")">Kỹ năng</button>
+        <button @onclick="() => OnChooseType(3)" class="me-2 btn @(isLevel? "btn-clicked":"")">Cấp</button>
+        <button @onclick="() => OnChooseType(4)" class="me-2 btn @(isCourse? "btn-clicked":"")">Khóa</button>
+        <button @onclick="() => OnChooseType(5)" class="me-2 btn @(isDepartment? "btn-clicked":"")">Khoa</button>
+        <button @onclick="() => OnChooseType(6)" class="btn @(isBanner? "btn-clicked":"")">Banner</button>
     </span>
     <div class="d-flex align-items-center" style="float:right">
         <div class="btn btn-add d-flex align-items-center me-4">
@@ -35,10 +35,20 @@
 <div class="my-areas @(isArea ? "d-block" : "d-none") px-5 ">
     <ListArea ChosenListChanged="OnChosenAreasChanged" ChosenAreas="chosenAreas" ShowCheckbox="isShowCheck" />
 </div>
-
-<div class="my-skills px-5 @(!isArea ? "d-block" : "d-none")">
+<div class="my-skills px-5 @(isSkill ? "d-block" : "d-none")">
     <ListSkills ShowCheckbox="isShowCheck" ChosenSkills="chosenSkills" ChosenListChanged="OnChosenSkillsChanged" />
 </div>
-
+<div class="my-skills px-5 @(isLevel ? "d-block" : "d-none")">
+    Đây là chỗ chỉnh sửa Cấp
+</div>
+<div class="my-skills px-5 @(isCourse ? "d-block" : "d-none")">
+    Đây là chỗ chỉnh sửa Khoá
+</div>
+<div class="my-skills px-5 @(isDepartment ? "d-block" : "d-none")">
+    Đây là chỗ chỉnh sửa Khoa
+</div>
+<div class="my-skills px-5 @(isBanner ? "d-block" : "d-none")">
+    Hòa làm tiếp ở chỗ này nhé
+</div>
 @code {
 }

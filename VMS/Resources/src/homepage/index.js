@@ -160,4 +160,33 @@ const addOutsideClickNavBarHandler = () => {
     observer.observe(document, config);
 }
 
-export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber, rankCarousel, addOutsideClickNavBarHandler };
+const addOutsideClickNotificationHandler = () => {
+    const hideNavBar = () => {
+        if ($('#notifycation-board').hasClass('show')) {
+            $('#notifycation-board').removeClass('show');
+        }
+
+        if (!$('notification-link').hasClass('collapsed')) {
+            $('notification-link').addClass('collapsed');
+        }
+    };
+
+    window.addEventListener('click', (e) => {
+        if (!document.getElementById('notifycation-board').contains(e.target)) {
+            hideNavBar();
+        }
+    });
+
+    let previousUrl = '';
+    const observer = new MutationObserver(function (mutations) {
+        if (location.href !== previousUrl) {
+            previousUrl = location.href;
+            hideNavBar();
+        }
+    });
+
+    const config = { subtree: true, childList: true };
+    observer.observe(document, config);
+}
+
+export default { playVideo, filterCarousel, logoBanerCarousel, getUserLocation, setUserLocation, increaseNumber, rankCarousel, addOutsideClickNavBarHandler, addOutsideClickNotificationHandler };

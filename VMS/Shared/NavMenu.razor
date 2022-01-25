@@ -17,7 +17,7 @@
         <div id="navbarSupportedContent" class="collapse navbar-collapse style-collapse bg-white my-collapse">
             <ul class="navbar-nav navbar-list mb-4 mb-xl-0 fw-bold my-collapse__list">
                 <li class="nav-item nav-item-haverHover">
-                    <NavLink href="@Routes.HomePage" @onclick="NoUnderlined"  Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
+                    <NavLink href="@Routes.HomePage" @onclick="NoUnderlined" Match="NavLinkMatch.All" class=" nav-link  text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Trang chủ</NavLink>
                 </li>
                 <li class="nav-item nav-item-haverHover">
                     <NavLink href="@Routes.ActivitySearch" @onclick="NoUnderlined" class="nav-link text-decoration-none mx-4  py-2 py-lg-3 position-relative my-collapse__list__link">Go Virlunteer</NavLink>
@@ -104,6 +104,33 @@
         </ul>
 
     </div>
+    <div id="notifycation-board" class="collapse">
+        <div class="d-flex justify-content-between notifycation-board__header">
+            <span>Thông báo</span>
+            <button>Đã đọc tất cả</button>
+        </div>
+        <ul class="notification-list">
+            @for(var i = 1; i < 10; i++)
+            {
+                <li class="notification-item">
+                    <a href="#" class="d-flex">
+                        <img src="/img/avatar sinh viên.png" alt="Alternate Text" />
+                        <div>
+                            <div class="d-flex align-items-center">
+                                <p class="notification-item-desc lmtext-3"><span>@Lam.Name1</span> @Lam.Action <span>@Lam.Name2</span></p>
+                                <div class="read" style="@(Lam.IsRead ? "visibility: hidden;" : "")">
+                                    <span class="material-icons">
+                                        fiber_manual_record
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="notification-item-time">@Lam.Time phút trước</span>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 </nav>
 
 @code
@@ -164,6 +191,29 @@
         if (firstRender)
         {
             await JSRuntime.InvokeVoidAsync("vms.AddOutsideClickNavBarHandler");
+            await JSRuntime.InvokeVoidAsync("vms.addOutsideClickNotificationHandler");
+
         }
     }
+
+    private class FakeData
+    {
+        public string Name1 { get; set; }
+        public string Name2 { get; set; }
+        public string Action { get; set; }
+        public int Time  { get; set; }
+        public bool IsRead { get; set; }
+
+        public FakeData(string FirstMan, string SecondMan, string Doing, int TimeHappened, bool Read)
+        {
+            Name1 = FirstMan;
+            Name2 = SecondMan;
+            Action = Doing;
+            Time = TimeHappened;
+            IsRead = Read;
+        }
+    }
+
+    FakeData Lam = new FakeData("Bạn", "Xuân tình nguyện 2022, mùa xuân cánh én bay đầy", "đã đăng ký thành công hoạt động", 20, false);
+
 }

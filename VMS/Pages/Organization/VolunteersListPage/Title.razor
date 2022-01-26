@@ -1,7 +1,14 @@
 ﻿
 <div class="title">
     <div class="main-title">
-        <div>Danh sách <span>tình nguyện viên</span></div>
+        @if (isDeletedList)
+        {
+            <div style="color: red">Danh sách xóa <span>tình nguyện viên</span></div>
+        }
+        else
+        {
+            <div>Danh sách <span>tình nguyện viên</span></div>
+        }
     </div>
     <div class="sub-title">
         <div class="sub-title--content">@Name</div>
@@ -9,5 +16,5 @@
 </div>
 
 @code {
-
+    private bool isDeletedList = false; // true thì show danh sách xóa, false thì show danh sách đăng ký
 }

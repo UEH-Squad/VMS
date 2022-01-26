@@ -93,6 +93,10 @@
         .my-container .button-and-link .link__text {
           font-size: 18px; } }
     .my-container .button-and-link .link__text--del {
+      display: block;
       color: #F14747; }
+      @media (min-width: 768px) {
+        .my-container .button-and-link .link__text--del {
+          display: none; } }
     .my-container .button-and-link .link__text--undo {
       color: #18A0FB; }

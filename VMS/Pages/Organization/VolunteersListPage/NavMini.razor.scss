@@ -139,7 +139,12 @@
             }
 
             &__text--del {
+                display: block;
                 color: #F14747;
+
+                @include on ('md') {
+                    display: none;
+                }
             }
 
             &__text--undo {

@@ -21,17 +21,21 @@
         <button @onclick="() => OnChooseType(5)" class="me-2 btn @(isDepartment? "btn-clicked":"")">Khoa</button>
         <button @onclick="() => OnChooseType(6)" class="btn @(isBanner? "btn-clicked":"")">Banner</button>
     </span>
-    <div class="d-flex align-items-center" style="float:right">
-        <div class="btn btn-add d-flex align-items-center me-4">
-            <i class="material-icons-outlined icon-add me-1">
-                add_circle
-            </i>
-            <span @onclick="ShowOptionAsync">@(isArea ? "Thêm lĩnh vực" : "Thêm kỹ năng")</span>
+    @if (isArea == true || isSkill == true)
+    {
+        <div class="d-flex align-items-center" style="float:right">
+            <div class="btn btn-add d-flex align-items-center me-4">
+                <i class="material-icons-outlined icon-add me-1">
+                    add_circle
+                </i>
+                <span @onclick="ShowOptionAsync">@(isArea ? "Thêm lĩnh vực" : "Thêm kỹ năng")</span>
+            </div>
+            <button @onclick="OnClickShowCheck" class="btn btn-choose me-4 @(isShowCheck? "btn-uncheck" : "")">Chọn</button>
+            <button @onclick="ShowPopupDeleteAsync" class="btn btn-delete">Xóa</button>
         </div>
-        <button @onclick="OnClickShowCheck" class="btn btn-choose me-4 @(isShowCheck? "btn-uncheck" : "")">Chọn</button>
-        <button @onclick="ShowPopupDeleteAsync" class="btn btn-delete">Xóa</button>
-    </div>
+    }
 </div>
+
 <div class="my-areas @(isArea ? "d-block" : "d-none") px-5 ">
     <ListArea ChosenListChanged="OnChosenAreasChanged" ChosenAreas="chosenAreas" ShowCheckbox="isShowCheck" />
 </div>

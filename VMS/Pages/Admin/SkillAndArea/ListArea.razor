@@ -20,8 +20,15 @@
                         }
                     </div>
                     <div @onclick="async () => await ShowEditModalAsync(item)" class="d-flex align-items-center align-items-center cursor-pointer">
-                        <i class="material-icons-outlined me-2 ms-3 col-4 ">@item.Icon</i>
-                        <span class="lm-text col-8">@item.Name</span>
+                        <i class="material-icons-outlined me-2 ms-3 col-4" style="background:@item.Color">@item.Icon</i>
+                        @if (item.IsPinned)
+                        {
+                            <span class="lm-text col-8" style="color:@item.Color">@item.Name</span>
+                        }
+                        else
+                        {
+                            <span class="lm-text col-8">@item.Name</span>
+                        }
                     </div>
                 </div>
             </div>

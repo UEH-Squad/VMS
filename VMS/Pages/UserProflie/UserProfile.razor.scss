@@ -476,7 +476,7 @@
         @include on("lg") {
             display: block;
             width: 98%;
-            height: 170px;
+            height: 200px;
             overflow-y: scroll;
             overflow-x: hidden;
             padding-left: 35px;
@@ -491,6 +491,10 @@
                 background-color: #B4B4B4;
                 border-radius: 20px;
             }
+        }
+
+        @include on('xl'){
+            height: 170px;
         }
 
         @include on("xxl") {
@@ -575,11 +579,16 @@
         }
     }
 
-    &-pb {
+    &-pc {
         display: none;
 
         @include on('lg') {
             display: block;
+            margin-top: 37px;
+        }
+
+        @include on('xxl') {
+            margin-top: 50px;
         }
     }
 
@@ -626,6 +635,10 @@
             font-weight: 500;
 
             @include on('lg') {
+                font-size: 27px;
+            }
+
+            @include on('xl') {
                 font-size: 30px;
             }
         }
@@ -642,6 +655,10 @@
             }
 
             @include on('lg') {
+                font-size: 14px;
+            }
+
+            @include on('xl') {
                 font-size: 16px;
             }
         }

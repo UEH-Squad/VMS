@@ -4,45 +4,29 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-option .btn:focus {
-  box-shadow: none; }
-
-.my-option .btn-area, .my-option .btn-skill {
-  position: relative;
-  width: 117px;
-  height: 42px;
-  padding: 0;
+.my-option .grButton {
   background: #F3F3F5;
-  font-weight: 600;
-  font-size: 18px;
-  color: #18A0FB; }
-  .my-option .btn-area::after, .my-option .btn-skill::after {
-    content: "";
-    width: 100%;
-    height: 4px;
-    background: #0B588C;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: none; }
-  .my-option .btn-area:hover::after, .my-option .btn-skill:hover::after {
-    display: block; }
-
-.my-option .btn-addVideo {
-  width: 260px;
-  height: 36px;
-  padding: 0 6px;
-  background: #64D72F;
   border-radius: 5px;
-  color: #FFFFFF;
-  cursor: pointer; }
-  .my-option .btn-addVideo:hover {
-    background: #306C14; }
-  .my-option .btn-addVideo .icon-add {
-    font-size: 24px; }
-  .my-option .btn-addVideo span {
+  padding: 4px;
+  width: fit-content; }
+  .my-option .grButton .btn {
+    width: 117px;
+    height: 38px;
+    padding: 0;
+    background: #F3F3F5;
     font-weight: 600;
-    font-size: 16px; }
+    font-size: 18px;
+    color: #18A0FB; }
+    .my-option .grButton .btn:focus {
+      box-shadow: none; }
+    .my-option .grButton .btn:hover {
+      color: #0B588c; }
+  .my-option .grButton .btn-area, .my-option .grButton .btn-skill {
+    position: relative; }
+  .my-option .grButton .btn-clicked {
+    box-shadow: 0px 0px 5px 0px #b4b4b4;
+    border-radius: 5px;
+    background-color: white; }
 
 .my-option .btn-add {
   width: 165px;
@@ -59,6 +43,22 @@
   .my-option .btn-add span {
     font-weight: 600;
     font-size: 16px; }
+
+.my-option .btn-choose {
+  width: 60px;
+  height: 36px;
+  padding: 0;
+  background: #64D72F;
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF; }
+  .my-option .btn-choose:hover {
+    background: #306C14; }
+
+.my-option .btn-uncheck {
+  background: #306C14; }
+  .my-option .btn-uncheck:hover {
+    background: #64D72F; }
 
 .my-option .btn-delete {
   width: 47px;
@@ -133,3 +133,16 @@
     font-weight: 400;
     font-size: 16px;
     color: #F14747; }
+
+.my-banner .btn-addVideo {
+  width: fit-content;
+  height: 38px;
+  padding: 5px;
+  background: #64D72F;
+  font-weight: 600;
+  font-size: 18px;
+  color: #FFFFFF; }
+  .my-banner .btn-addVideo:focus {
+    box-shadow: none; }
+  .my-banner .btn-addVideo:hover {
+    background: #306C14; }

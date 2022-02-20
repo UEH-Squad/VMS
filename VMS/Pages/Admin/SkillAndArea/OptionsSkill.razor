@@ -2,33 +2,43 @@
 
 <div class="my-modal">
     <div class="modal__content">
-        <div class="modal__addArea @(isAddSuccess? " d-none" : "d-block" )">
+        <div class="modal__addArea @(isAddSuccess ? "d-none" : "d-block" )">
             <div @onclick="CloseModalAsync" class="icon-close">
                 <span class="material-icons">
                     close
                 </span>
             </div>
-            <h3 class="text-center">@(isAdd ? "Thêm" :"Sửa") <span>kỹ năng</span></h3>
-            <EditForm Model="skill">
+            <h3 class="text-center">@(IsAdd ? "Thêm" :"Sửa") <span>kỹ năng</span></h3>
+            <EditForm Model="Skill" OnValidSubmit="OnValidSubmitAsync">
                 <DataAnnotationsValidator />
                 <div class="d-flex align-items-center mb-20">
                     <p class="form__title form__title--name">Tên kỹ năng <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@skill.Name" class="form-control" />
+                        <InputText @bind-Value="@Skill.Name" class="form-control" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-20">
-                    <input @bind="IsCheck" class="radio-skill" type="radio" name="radioskill">
-                    <p class="form__title form__title--icon">Chọn nhóm kỹ năng:</p>
+                    @if (Skill.ParentSkillId is not null)
+                    {
+                        <input class="radio-skill" id="old-radio-skill" type="radio" name="radioskill" checked disabled>
+                    }
+                    else
+                    {
+                        <input class="radio-skill" id="old-radio-skill" type="radio" name="radioskill" disabled>
+                    }
+                    <label for="old-radio-skill" class="cursor-pointer">Chọn nhóm kỹ năng:</label>
                     <div class="filter-item position-relative" id="filter-item-notpl">
                         <input @onclick="ToggleSkillDropdown" @onfocusout="CloseSkillDropdown" class="filter-item__btn filter-item__btn--lmtext-1 form-control" placeholder="@skillChoosenValue" readonly />
                         <div @onclick:preventDefault class="filter-item__dropdown filter-item__dropdown--fit-content" style="display: @(isSkillShow ? "block" : "none")">
                             <ul>
-                                @if (skills is not null)
+                                @if (parentSkills is not null)
                                 {
-                                    @foreach (var level in skills)
+                                    @foreach (var skill in parentSkills)
                                     {
-                                        <li @onmousedown="() => ChooseSkillValue(level)">@level.Name</li>
+                                        @if (skill.Id != Skill.ParentSkillId && skill.Id != Skill.Id)
+                                        {
+                                            <li @onmousedown="() => ChooseSkill(skill)">@skill.Name</li>
+                                        }
                                     }
                                 }
                             </ul>
@@ -39,11 +49,18 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center form__prioritize mb-30 me-3">
-                    <input @bind="IsCheck" class="radio-skill" type="radio" name="radioskill">
-                    <label for="all">Tạo nhóm kỹ năng mới</label>
+                    @if (Skill.ParentSkillId is not null)
+                    {
+                        <input @onchange="ResetParentSkill" class="radio-skill" id="new-radio-skill" type="radio" name="radioskill">
+                    }
+                    else
+                    {
+                        <input @onchange="ResetParentSkill" class="radio-skill" id="new-radio-skill" type="radio" name="radioskill" checked>
+                    }
+                    <label for="new-radio-skill">Tạo nhóm kỹ năng mới</label>
                 </div>
                 <div class="from__btn text-center">
-                    <button @onclick="ShowAddSuccess" type="submit" class="btn btn-add">@(isAdd ? "Thêm" :"Sửa") kỹ năng</button>
+                    <button type="submit" class="btn btn-add">@(IsAdd ? "Thêm" :"Sửa") kỹ năng</button>
                 </div>
 
             </EditForm>
@@ -57,7 +74,7 @@
                 </span>
             </div>
             <div>
-                <h3 class="text-center mb-0">Bạn đã <span>@(isAdd ? "thêm" :"sửa") kỹ năng</span> thành công </h3>
+                <h3 class="text-center mb-0">Bạn đã <span>@(IsAdd ? "thêm" :"sửa") kỹ năng</span> thành công </h3>
             </div>
         </div>
 
@@ -65,54 +82,5 @@
 </div>
 
 @code {
-    private bool isAddSuccess;
-
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-    [Parameter] public bool isAdd { get; set; }
-
-    private SkillViewModel skill = new();
-
-    private async Task CloseModalAsync()
-    {
-        await Modal.CloseAsync();
-    }
-    private async Task ShowAddSuccess()
-    {
-        isAddSuccess = true;
-    }
-
-    //Nhóm kỹ năng
-    bool IsCheck= false;
-
-    private class FakeData
-    {
-        public string Name { get; set; }
-    }
-
-    private bool isFilterSkill;
-    private bool isSkillShow;
-    private string skillChoosenValue = "Kỹ năng";
-    private List<FakeData> skills = new()
-    {
-        new FakeData() { Name = "Kỹ năng mềm" },
-        new FakeData() { Name = "Quảng lý thời gian" },
-        new FakeData() { Name = "Thể lực tốt" },
-        new FakeData() { Name = "Lập trình" },
-        new FakeData() { Name = "Lái xe" },
-    };
-    private void ChooseSkillValue(FakeData level)
-    {
-        skillChoosenValue = level.Name;
-        isFilterSkill = true;
-    }
-    private void ToggleSkillDropdown()
-    {
-        isSkillShow = !isSkillShow;
-    }
-    private void CloseSkillDropdown()
-    {
-        isSkillShow = false;
-    }
 }
 

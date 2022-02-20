@@ -9,7 +9,7 @@
                 </span>
             </div>
             <div>
-                <h3 class="text-center mb-3">Bạn có chắc chắn muốn <span>xóa @(isArea ? "lĩnh vực" : "kỹ năng")</span> này không?</h3>
+                <h3 class="text-center mb-3">Bạn có chắc chắn muốn <span>xóa @(IsArea ? "lĩnh vực" : "kỹ năng")</span> này không?</h3>
                 <div class="text-end">
                     <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
                     <button @onclick="ShowEditSuccess" class="btn btn-confirm">Chắc chắn</button>
@@ -22,26 +22,26 @@
                     close
                 </span>
             </div>
-            <h3 class="text-center mb-0">Bạn đã <span>xóa @(isArea ? "lĩnh vực" : "kỹ năng")</span> thành công </h3>
+            <h3 class="text-center mb-0">Bạn đã <span>xóa @(IsArea ? "lĩnh vực" : "kỹ năng")</span> thành công </h3>
         </div>
     </div>
 </div>
 
 @code {
-
-    //Modal
     private bool isSuccess = false;
+
     [CascadingParameter]
     public BlazoredModalInstance Modal { get; set; }
-    [Parameter] public bool isArea { get; set; }
+
+    [Parameter] public bool IsArea { get; set; }
 
     private async Task CloseModalAsync()
     {
-        await Modal.CloseAsync();
+        await Modal.CloseAsync(ModalResult.Ok<bool>(isSuccess));
     }
-    private async Task ShowEditSuccess()
-    {
 
+    private void ShowEditSuccess()
+    {
         isSuccess = !isSuccess;
     }
 }

@@ -7,16 +7,27 @@
 .notification-link {
   top: 50%;
   transform: translateY(-50%);
-  left: -40px; }
+  left: -40px;
+  border: none;
+  background: transparent; }
   @media (min-width: 992px) {
     .notification-link {
       left: -45px; } }
   @media (min-width: 1200px) {
     .notification-link {
       left: unset;
-      right: 80px; } }
+      right: 55px; } }
   .notification-link__icon {
     color: #18A0FB;
     font-size: 32px; }
   .notification-link:hover .notification-link__icon {
     color: #0B588C; }
+
+#notifycation-board {
+  position: absolute;
+  top: 50px;
+  width: 100vw;
+  background-color: red; }
+
+.collapse:not(.show) {
+  display: none; }

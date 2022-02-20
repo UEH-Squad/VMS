@@ -9,6 +9,8 @@
     top: 50%;
     transform: translateY(-50%);
     left: -40px;
+    border: none;
+    background: transparent;
 
     @include on('lg') {
         left: -45px;
@@ -16,13 +18,12 @@
 
     @include on('xl') {
         left: unset;
-        right: 80px;
+        right: 55px;
     }
 
     @include on('xxl') {
-        
     }
-    
+
     &__icon {
         @include profile-icon-mobile;
     }
@@ -32,4 +33,13 @@
     }
 }
 
+#notifycation-board {
+    position: absolute;
+    top: 50px;
+    width: 100vw;
+    background-color: red;
+}
 
+.collapse:not(.show) {
+    display: none;
+}

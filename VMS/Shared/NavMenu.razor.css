@@ -210,6 +210,82 @@
   .my-navbar .navbar-collapse {
     width: 285px; }
 
+#notifycation-board {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-color: #FFFFFF;
+  padding: 0 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 101;
+  transition: unset;
+  overflow: hidden; }
+  @media (min-width: 1200px) {
+    #notifycation-board {
+      top: 85px;
+      left: unset;
+      right: 20px;
+      width: 350px;
+      height: 80vh; } }
+  #notifycation-board .notifycation-board__header span {
+    font-size: 24px;
+    color: #707070;
+    margin-left: 10px; }
+  #notifycation-board .notifycation-board__header button {
+    font-size: 12px;
+    border: none;
+    background-color: transparent;
+    color: #18A0FB; }
+    #notifycation-board .notifycation-board__header button:hover {
+      text-decoration: underline; }
+  #notifycation-board .notification-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 100%;
+    overflow-y: scroll; }
+    #notifycation-board .notification-list .notification-item a {
+      align-items: flex-start;
+      color: #000;
+      padding: 5px 0; }
+    #notifycation-board .notification-list .notification-item:hover {
+      border-radius: 10px;
+      background-color: #C4C4C4; }
+    #notifycation-board .notification-list img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      margin: 0 10px; }
+    #notifycation-board .notification-list .notification-item-desc {
+      font-size: 12px;
+      margin: 0; }
+      #notifycation-board .notification-list .notification-item-desc span {
+        font-weight: 600; }
+    #notifycation-board .notification-list .notification-item-time {
+      font-size: 12px;
+      color: #717171; }
+    #notifycation-board .notification-list .read {
+      color: #18A0FB;
+      margin: 0 5px; }
+      #notifycation-board .notification-list .read span {
+        font-size: 16px; }
+    #notifycation-board .notification-list::-webkit-scrollbar {
+      width: 5px; }
+    #notifycation-board .notification-list::-webkit-scrollbar-thumb {
+      background-color: #B4B4B4;
+      border-radius: 20px; }
+
+.lmtext-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 3; }
+
 .nav-mega-menu {
   position: relative; }
   @media (min-width: 1200px) {

@@ -1,0 +1,264 @@
+﻿@import '../../../Resources/scss/common/_variables.scss';
+
+.my-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.38);
+    z-index: 120;
+
+    .modal__content {
+        width: 100%;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal__edit {
+        width: 600px;
+/*        height: 523px;*/
+        padding: 30px 50px;
+        background-color: $white;
+        position: relative;
+        box-shadow: 0px 4px 100px rgba(0, 0, 0,.25);
+        border-radius: 10px;
+
+        h3 {
+            font-weight: 500;
+            font-size: 24px;
+            color: $green;
+            margin-bottom: 30px;
+
+            span {
+                color: $blue;
+            }
+        }
+    }
+
+    .modal__edit .icon-close {
+        width: 33px;
+        height: 33px;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        background: rgba(196, 196, 196, .5);
+
+        .material-icons {
+            font-size: 20px;
+            color: $grey-close-btn;
+        }
+    }
+    //Edit form
+
+    .form__title {
+        font-weight: 400;
+        font-size: 16px;
+        color: #515151;
+        margin-bottom: 0;
+
+        span {
+            color: red;
+        }
+    }
+
+    .form-control {
+        border: 1px solid #D8D8D8;
+    }
+
+    .from__btn {
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 30px;
+
+        .btn-cancel {
+            background-color: transparent;
+            color: $green;
+
+            &:hover {
+                background-color: transparent;
+                color: $green-bold;
+            }
+
+            &:focus {
+                box-shadow: none
+            }
+        }
+
+        .btn-create {
+            background-color: $green;
+            color: $white;
+
+            &:hover {
+                background-color: $green-bold;
+                color: $white;
+            }
+        }
+    }
+}
+.btn-request {
+    height: 39px;
+    width: 182px;
+    color: white;
+    background: $blue;
+    border-radius: 5px;
+
+    &:hover {
+        background: $blue-hv;
+        color: white;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+::deep .my-uploadImg{
+    padding: 0 !important;
+}
+.popup-btn {
+    border: 1px solid #D8D8D8;
+    cursor: pointer;
+    color: #515151;
+    font-size: 16px;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+
+    &::placeholder {
+        color: #b4b4b4;
+    }
+
+    &-icon, {
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        pointer-events: none;
+        color: #B4B4B4;
+    }
+}
+
+
+.my-dropdown {
+    padding: 15px 22px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 0%;
+    right: 0;
+    transform: translateY(105%);
+    background-color: #fff;
+    z-index: 1;
+    display: none;
+    width: 200px;
+
+    ul {
+        overflow-y: scroll;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+
+        li {
+            color: $blue;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            &:last-of-type {
+                margin-bottom: 0px;
+            }
+
+            &:hover {
+                color: $green;
+                background-color: rgba(24, 160, 251, 0.1);
+            }
+        }
+    }
+}
+
+.popup-btn:focus ~ .my-dropdown {
+    display: block;
+}
+
+.check-box {
+    border-radius: 5px;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    vertical-align: top;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid $grey-icon;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+        content: "";
+        width: 9px;
+        height: 5px;
+        border-left: 2px solid #18A0FB;
+        border-bottom: 2px solid #18A0FB;
+        position: absolute;
+        top: 40%;
+        left: 52%;
+        transform: translate(-50%, -50%) rotate( -45deg );
+        display: none;
+    }
+
+    &:checked::before {
+        display: block;
+    }
+}
+::deep .form-control:disabled, .form-control[readonly]{
+    background-color: transparent!important;
+}
+.btn-group {
+    .icon-down {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}
+.dropdown-menu {
+    width: 460px;
+    padding: 10px;
+    transform: translate(41px, 40px) !important;
+
+    li {
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    label {
+        cursor: pointer;
+    }
+}
+

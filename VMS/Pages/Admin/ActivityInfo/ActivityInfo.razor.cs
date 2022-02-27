@@ -60,5 +60,9 @@ namespace VMS.Pages.Admin.ActivityInfo
         {
             Modal.Show<PopupConvert>("", BlazoredModalOptions.GetModalOptions());
         }
+        private void ShowRequestEdit()
+        {
+            Modal.Show<PopupRequestEdit>("", BlazoredModalOptions.GetModalOptions());
+        }
     }
 }

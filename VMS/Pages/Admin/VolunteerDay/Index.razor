@@ -1,0 +1,185 @@
+﻿@layout AdminLayout
+@attribute [Route(Routes.AdminVolunteerDay)]
+@attribute [Authorize(Roles = "Admin")]
+@inject IJSRuntime JS;
+@using VMS.GenericRepository;
+@using Blazored.Modal;
+@using VMS.Application.ViewModels;
+<div class="px-5">
+    <h1 class="my-5 pb-3">Quản lý <span>ngày tình nguyện</span></h1>
+    <div class="d-flex justify-content-between my-managementTool pb-3">
+        <div class="managementTool__filter">
+            <div class="d-flex align-items-center">
+                <div class="filter-item position-relative">
+                    <div @onclick="ShowAreasPopupAsync" class="popup-btn ps-2">Lĩnh vực</div>
+                    <span class="material-icons-outlined position-absolute filter-item__icon">
+                        expand_more
+                    </span>
+                </div>
+                <div class="ms-4 ">
+                    <button class="btn-filter btn">Lọc</button>
+                    <button class="btn-delete-filter btn">Xóa lọc</button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="managementTool__create dropdown">
+            <button @onclick="ShowEditVolunteerDay" class="btn  d-flex align-items-center" type="button">
+                <i class="material-icons-outlined icon-add">
+                    control_point
+                </i>
+                <span>Tạo mới</span>
+            </button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-2">
+        <p class="managementTool__title mb-0">Có <span>@(pagedResult.Items.Count * 20) kết quả</span> ứng với tìm kiếm</p>
+        <div class="managementTool__down d-flex align-items-center">
+            <i class="material-icons icon-down me-1">
+                vertical_align_bottom
+            </i>
+            <span>Tải danh sách</span>
+        </div>
+    </div>
+    <div class=" d-flex align-items-center justify-content-end pb-3">
+        <div class="d-flex align-items-center managementTool__chosseAll me-3">
+            <input @bind="@IsCheckAll" @onclick="ChoseAll" class="check-box" type="checkbox" id="all">
+            <label for="all">Chọn tất cả</label>
+        </div>
+        <button class="btn-delete btn">Xóa</button>
+    </div>
+    <div class="my-acc">
+        <table class="acc__table">
+            <tr>
+                <th class="acc__tilte acc__tilte--checkbox"></th>
+                <th class="acc__tilte acc__tilte--area">Lĩnh vực</th>
+                <th class="acc__tilte acc__tilte--numberWork">Số ngày hoạt động</th>
+                <th class="acc__tilte acc__tilte--numberVolunteer">Số ngày tình nguyện</th>
+                <th class="acc__tilte acc__tilte--describe">Mô tả</th>
+                <th class="acc__tilte acc__tilte--note">Ghi chú</th>
+            </tr>
+            @if (pagedResult is not null && pagedResult.Items.Count != 0)
+            {
+                bool oddIndex = false;
+                string bg = "#FFF";
+                @foreach (var item in pagedResult.Items)
+                {
+                    oddIndex = !oddIndex;
+                    if (oddIndex)
+                    {
+                        bg = "#F2F9FF";
+                    }
+                    else
+                    {
+                        bg = "#FFF";
+                    }
+                    <tr class="position-relative" style="background-color:@bg">
+                        <td class="acc__content acc__content--checkbox pt-2">
+                            <div class="d-flex align-items-center">
+                                <input @bind="@item.IsCheck" @onclick="DeselectAll" class="check-box" type="checkbox" id="acc-@item.Id" value="acc-@item.Id">
+                            </div>
+                        </td>
+                        <td class="acc__content acc__content--area">@item.Area</td>
+                        <td class="acc__content acc__content--numberWork">@item.NumberWork</td>
+                        <td class="acc__content acc__content--numberVolunteer">@item.NumberVolunterrDay</td>
+                        <td class="acc__content acc__content--describe">@item.Describe</td>
+                        <td class="acc__content acc__content--note">@item.Note</td>
+                        <div class="acc__menu dropdown">
+                            <i class="material-icons-outlined icon-menu dropdown-toggle" id="dropdownMenu-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
+                                more_vert
+                            </i>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu-@item.Id">
+                                <li @onclick="ShowEditVolunteerDay" class="mb-2 dropdown-menu-edit">Sửa nội dung</li>
+                                <li @onclick="ShowDeleteVolunteerDay" class="dropdown-menu-delete">Xóa nội dung</li>
+                            </ul>
+                        </div>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <Pager CurrentPage="@pagedResult.PageIndex"
+               PageCount="@pagedResult.TotalPages"
+               OnPageChanged="@(async (e) => { page = e; await HandlePageChanged(); })"
+               ShowPageNumbers="true" />
+    </div>
+</div>
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+    private PaginatedList<FakeData> pagedResult;
+    private int page = 1;
+    protected override void OnInitialized()
+    {
+        pagedResult = GetFakeData();
+    }
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+    private PaginatedList<FakeData> GetFakeData()
+    {
+        int i = 0;
+        var data = Enumerable.Range(0, 20).Select(x => new FakeData
+        {
+            Id = ++i + (page - 1) * 20,
+            Area = "COVID-19",
+            NumberWork = 10,
+            NumberVolunterrDay = 10,
+            Describe = "Hỗ trợ phòng chống dịch Covid-19: Hỗ trợ tiêm vaccine, nhập liệu, đi chợ thay người dân, hậu cần tại bệnh viện...Hỗ trợ phòng chống dịch Covid - 19: Hỗ trợ tiêm vaccine, nhập liệu, đi chợ thay người dân, hậu cần tại bệnh viện...",
+            Note = "Hỗ trợ phòng chống dịch Covid-19: Hỗ trợ tiêm vaccine, nhập liệu, đi chợ thay người dân, hậu cần tại bệnh viện"
+        }).ToList();
+        var result = new PaginatedList<FakeData>(data, 100, page, 20);
+        return result;
+    }
+    private class FakeData
+    {
+        public int Id { get; set; }
+        public string Area { get; set; }
+        public int NumberWork { get; set; }
+        public int NumberVolunterrDay { get; set; }
+        public string Describe { get; set; }
+        public string Note { get; set; }
+        public string Level { get; set; }
+        public bool IsCheck { get; set; } = false;
+    }
+    // Chose all
+    bool IsCheckAll = false;
+    private void ChoseAll()
+    {
+        IsCheckAll = !IsCheckAll;
+        @foreach (var item in pagedResult.Items)
+        {
+            item.IsCheck = IsCheckAll;
+        }
+    }
+    private void DeselectAll()
+    {
+        IsCheckAll = false;
+    }
+    // Modal
+    private async Task ShowEditVolunteerDay()
+    {
+        Modal.Show<PopupEvaluate>("", BlazoredModalOptions.GetModalOptions());
+    }
+    private async Task ShowDeleteVolunteerDay()
+    {
+        Modal.Show<PopupDeleteVolunteerDay>("", BlazoredModalOptions.GetModalOptions());
+    }
+
+
+    public FilterActivityViewModel Filter { get; set; }
+    private async Task ShowAreasPopupAsync()
+    {
+        //var parameters = new ModalParameters();
+        //parameters.Add("ChoosenAreasList", Filter.Areas);
+        Modal.Show<VMS.Pages.ActivitySearchPage.AreasPopup>("", BlazoredModalOptions.GetModalOptions());
+    }
+}
+
+
+

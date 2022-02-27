@@ -1,4 +1,10 @@
-﻿::deep .pagination {
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+::deep .pagination {
   display: flex;
   justify-content: center; }
 
@@ -13,4 +19,35 @@
 .boxes-group {
   display: grid;
   grid-template-columns: auto auto;
-  grid-column-gap: 80px; }
+  grid-auto-rows: 30px;
+  grid-column-gap: 20px; }
+
+/* pretty radio */
+label > input[type="radio"] {
+  display: none; }
+
+label > input[type="radio"] + *::before {
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: #18A0FB; }
+
+.boxes-group {
+  /* basic layout */ }
+  .boxes-group label > input[type="radio"]:checked + *::before {
+    background: radial-gradient(#18A0FB 0%, #18A0FB 40%, transparent 50%, transparent); }
+  .boxes-group fieldset {
+    margin: 20px;
+    max-width: 400px; }
+  .boxes-group label > input[type="radio"] + * {
+    display: inline-block;
+    /* padding: 0.5rem 1rem;*/ }
+  .boxes-group label > spam {
+    font-size: 14px; }

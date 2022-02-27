@@ -68,6 +68,7 @@
 
         public const string AdminVolunteerProfile = "/admin/ho-so-ca-nhan";
         public const string AdminOrganizationProfile = "/admin/ho-so-to-chuc";
+        public const string AdminVolunteerDay = "/admin/quan-ly-ngay-tinh-nguyen";
 
         #endregion Admin
     }

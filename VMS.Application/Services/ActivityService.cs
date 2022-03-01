@@ -284,6 +284,7 @@ namespace VMS.Application.Services
             activity.IsDay = false;
             activity.IsPoint = false;
             activity.NumberOfDays = 0;
+            activity.IsSingleChoice = false;
 
             activity.UpdatedBy = activity.OrgId;
             activity.UpdatedDate = DateTime.Now;
@@ -695,7 +696,7 @@ namespace VMS.Application.Services
             await _repository.UpdateAsync<Activity>(dbContext, activities);
         }
 
-        public async Task ApproveActAsync(int id, bool isPoint, bool isDay, int numberOfDay)
+        public async Task ApproveActAsync(int id, bool isPoint, bool isDay, int numberOfDay, bool isSingleChoice)
         {
             DbContext dbContext = _dbContextFactory.CreateDbContext();
 
@@ -705,6 +706,7 @@ namespace VMS.Application.Services
             activity.IsPoint = isPoint;
             activity.IsDay = isDay;
             activity.NumberOfDays = numberOfDay;
+            activity.IsSingleChoice = isSingleChoice;
 
             await _repository.UpdateAsync(dbContext, activity);
         }

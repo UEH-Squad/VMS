@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220301062245_AddBothChoiceFieldActivity")]
+    partial class AddBothChoiceFieldActivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,6 +154,9 @@ namespace VMS.Infrastructure.Data.Migrations
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsBothChoice")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
@@ -165,9 +170,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsPoint")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsSingleChoice")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsVirtual")
@@ -372,21 +374,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "db4d1b63-2b91-4d94-9e47-6327e0d3aac1",
+                            ConcurrencyStamp = "04d3cf0a-f1ef-46db-b797-7661d141c593",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "b339282d-bdb4-4a46-ae23-02663d718963",
+                            ConcurrencyStamp = "c01a181a-ceee-45b4-83cd-c3f32555b040",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "f32a1b5e-723e-462c-b33d-4986d2c51ada",
+                            ConcurrencyStamp = "2a0aacaf-2b05-469b-a012-069cb1dee37a",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -1216,7 +1218,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a9388752-17d1-456d-877a-70424d9d4e4e",
+                            ConcurrencyStamp = "05b2de43-9224-48fb-b39c-2eb89b356f1e",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1224,7 +1226,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFG2ojID0srEJdCSEpjuG29jwkLpW2v8XUPdtCvdezFTgVn2jaka1S5XUXVSyJ1ePw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN7E6m6p+sUSRuqBRofnhmVzpl+cfEwjK7J6eyJD50hFg5+aJQX9geQCayVH5/D31g==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",

@@ -43,7 +43,7 @@ namespace VMS.Application.Interfaces
 
         Task ChangePinStateListActivityAsync(List<ActivityViewModel> activityViewModels);
 
-        Task ApproveActAsync(int id, bool isPoint, bool isDay, int numberOfDay);
+        Task ApproveActAsync(int id, bool isPoint, bool isDay, int numberOfDay, bool isSingleChoice);
 
         Task EditRequirementActAsync(EditRequirementViewModel editRequirementViewModel);
     }

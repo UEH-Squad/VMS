@@ -32,6 +32,7 @@ namespace VMS.Application.ViewModels
         public bool IsDay { get; set; }
         public int NumberOfDays { get; set; }
         public bool IsDenied { get; set; }
+        public bool IsSingleChoice { get; set; }
 
         public User Organizer { get; set; }
         public ICollection<ActivityAddress> ActivityAddresses { get; set; }

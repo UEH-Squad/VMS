@@ -41,7 +41,7 @@ namespace VMS.Pages.Admin.ActivityInfo
 
         private async Task ShowApproveModalAsync()
         {
-            await ActivityService.ApproveActAsync(ActId, activity.IsPoint, activity.IsDay, activity.IsDay ? activity.NumberOfDays : 0);
+            await ActivityService.ApproveActAsync(ActId, activity.IsPoint, activity.IsDay, activity.IsDay ? activity.NumberOfDays : 0, activity.IsSingleChoice);
             await OnParametersSetAsync();
         }
 

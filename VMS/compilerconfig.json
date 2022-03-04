@@ -666,5 +666,9 @@
   {
     "outputFile": "Pages/GloryAvenuePage/FacultyPopup.razor.css",
     "inputFile": "Pages/GloryAvenuePage/FacultyPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/UpBanner.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/UpBanner.razor.scss"
   }
 ]

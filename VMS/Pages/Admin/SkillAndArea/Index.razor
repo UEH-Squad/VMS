@@ -52,12 +52,7 @@
     Đây là chỗ chỉnh sửa Khoa
 </div>
 <div class="my-banner px-5 @(isBanner ? "d-block" : "d-none")">
-    <div class="btn btn-addVideo d-flex align-items-center">
-        <i class="material-icons-outlined icon-add me-1">
-            add_circle
-        </i>
-        <span @onclick="ShowModalAddVideoAsync">Thêm video vào trang chủ</span>
-    </div>
+    <UpBanner/>
 </div>
 @code {
 }

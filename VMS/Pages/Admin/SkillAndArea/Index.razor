@@ -43,13 +43,13 @@
     <ListSkills ShowCheckbox="isShowCheck" ChosenSkills="chosenSkills" ChosenListChanged="OnChosenSkillsChanged" />
 </div>
 <div class="px-5 @(isLevel ? "d-block" : "d-none")">
-    Đây là chỗ chỉnh sửa Cấp
+    <ClassifyList Type="Cấp"/>
 </div>
 <div class="px-5 @(isCourse ? "d-block" : "d-none")">
-    Đây là chỗ chỉnh sửa Khoá
+    <ClassifyList Type="Khóa"/>
 </div>
 <div class="px-5 @(isDepartment ? "d-block" : "d-none")">
-    Đây là chỗ chỉnh sửa Khoa
+    <ClassifyList Type="Khoa"/>
 </div>
 <div class="my-banner px-5 @(isBanner ? "d-block" : "d-none")">
     <UpBanner/>

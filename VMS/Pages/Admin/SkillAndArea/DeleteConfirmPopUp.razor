@@ -1,0 +1,54 @@
+﻿@using VMS.Application.Interfaces
+
+<div class="pop-up">
+    <div class="center-screen">
+        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="close-btn">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="content">
+                <h3>Bạn có chắc chắn muốn</h3>
+                <h3><span class="delete-text">xóa @Type</span> này không?</h3>
+            </div>
+            <div class="pop-up-btn">
+                <div @onclick="CloseModalAsync" class="btn px-0 deny">Hủy</div>
+                <div @onclick="DeleteSuccessAsync" class="btn accept px-0">Xác nhận</div>
+            </div>
+        </div>
+
+        <div class="pop-up-container border-10 @(!isDeleteSuccess ? "d-none" : "d-block")">
+            <div @onclick="CloseModalAsync" class="close-btn-s">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div class="pop-up-content">
+                <h3 class="delete-act">Bạn đã <span>xóa @Type</span> thành công</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private bool isDeleteSuccess;
+    [Parameter] public string Type { get; set; }
+
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    [Inject]
+    private IActivityService ActivityService { get; set; }
+
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync();
+    }
+
+    private async Task DeleteSuccessAsync()
+    {
+        isDeleteSuccess = true;
+    }
+}

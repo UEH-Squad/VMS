@@ -1,0 +1,224 @@
+﻿/*#region colors */
+/*#endregion */
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.pop-up {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(196, 196, 196, 0.38);
+  z-index: 120; }
+  .pop-up .border-10 {
+    border-radius: 10px; }
+  .pop-up .center-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .pop-up .pop-up-container {
+    background-color: #FFFFFF;
+    position: relative;
+    box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25); }
+  .pop-up .close-btn {
+    width: 11px;
+    height: 11px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    @media (min-width: 576px) {
+      .pop-up .close-btn {
+        width: 22px;
+        height: 22px; } }
+    @media (min-width: 1200px) {
+      .pop-up .close-btn {
+        width: 33px;
+        height: 33px; } }
+    .pop-up .close-btn .material-icons {
+      font-size: 8px;
+      color: #717171; }
+      @media (min-width: 576px) {
+        .pop-up .close-btn .material-icons {
+          font-size: 16px; } }
+      @media (min-width: 768px) {
+        .pop-up .close-btn .material-icons {
+          font-size: 20px; } }
+  .pop-up .close-btn-s {
+    width: 11px;
+    height: 11px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background: rgba(196, 196, 196, 0.5); }
+    @media (min-width: 576px) {
+      .pop-up .close-btn-s {
+        width: 16px;
+        height: 16px; } }
+    @media (min-width: 1200px) {
+      .pop-up .close-btn-s {
+        width: 22px;
+        height: 22px; } }
+    .pop-up .close-btn-s .material-icons {
+      font-size: 8px;
+      color: #717171;
+      line-height: 0; }
+      @media (min-width: 576px) {
+        .pop-up .close-btn-s .material-icons {
+          font-size: 12px; } }
+      @media (min-width: 1200px) {
+        .pop-up .close-btn-s .material-icons {
+          font-size: 14px; } }
+  .pop-up .pop-up-content {
+    padding: 5px 35px; }
+    @media (min-width: 576px) {
+      .pop-up .pop-up-content {
+        padding: 7px 40px; } }
+    @media (min-width: 768px) {
+      .pop-up .pop-up-content {
+        padding: 7px 45px; } }
+    @media (min-width: 992px) {
+      .pop-up .pop-up-content {
+        padding: 10px 50px; } }
+    @media (min-width: 1200px) {
+      .pop-up .pop-up-content {
+        padding: 13px 55px; } }
+    .pop-up .pop-up-content .delete-act {
+      font-size: 10px;
+      line-height: 36px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #64D72F; }
+      .pop-up .pop-up-content .delete-act span {
+        color: #18A0FB; }
+      @media (min-width: 576px) {
+        .pop-up .pop-up-content .delete-act {
+          font-size: 12px; } }
+      @media (min-width: 768px) {
+        .pop-up .pop-up-content .delete-act {
+          font-size: 14px; } }
+      @media (min-width: 992px) {
+        .pop-up .pop-up-content .delete-act {
+          font-size: 16px; } }
+      @media (min-width: 1200px) {
+        .pop-up .pop-up-content .delete-act {
+          font-size: 18px; } }
+  .pop-up .content {
+    padding: 20px 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    @media (min-width: 768px) {
+      .pop-up .content {
+        padding: 20px 40px 20px; } }
+    @media (min-width: 992px) {
+      .pop-up .content {
+        padding: 20px 50px 20px; } }
+    @media (min-width: 1200px) {
+      .pop-up .content {
+        padding: 34px 64px 18px; } }
+    .pop-up .content h3 {
+      font-size: 10px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #64D72F; }
+      @media (min-width: 576px) {
+        .pop-up .content h3 {
+          font-size: 14px;
+          line-height: 25px; } }
+      @media (min-width: 768px) {
+        .pop-up .content h3 {
+          font-size: 16px; } }
+      @media (min-width: 992px) {
+        .pop-up .content h3 {
+          font-size: 18px; } }
+      @media (min-width: 1200px) {
+        .pop-up .content h3 {
+          font-size: 20px; } }
+    .pop-up .content .delete-text {
+      color: #F14747; }
+  .pop-up .pop-up-btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px 20px 0;
+    font-weight: 600; }
+    @media (min-width: 576px) {
+      .pop-up .pop-up-btn {
+        padding: 0 20px 20px 0; } }
+    .pop-up .pop-up-btn .deny {
+      background-color: #FFFFFF;
+      color: #18A0FB;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      width: 37px;
+      height: 17px;
+      font-size: 8px; }
+      @media (min-width: 576px) {
+        .pop-up .pop-up-btn .deny {
+          width: 57px;
+          height: 22px;
+          font-size: 12px; } }
+      @media (min-width: 768px) {
+        .pop-up .pop-up-btn .deny {
+          width: 67px;
+          height: 27px;
+          font-size: 14px; } }
+      @media (min-width: 992px) {
+        .pop-up .pop-up-btn .deny {
+          width: 87px;
+          height: 30px;
+          font-size: 16px; } }
+      @media (min-width: 1200px) {
+        .pop-up .pop-up-btn .deny {
+          width: 94px;
+          height: 32px;
+          font-size: 18px; } }
+    .pop-up .pop-up-btn .accept {
+      background-color: #18A0FB;
+      color: #FFFFFF;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      width: 57px;
+      height: 17px;
+      font-size: 8px; }
+      @media (min-width: 576px) {
+        .pop-up .pop-up-btn .accept {
+          width: 77px;
+          height: 22px;
+          font-size: 12px; } }
+      @media (min-width: 768px) {
+        .pop-up .pop-up-btn .accept {
+          width: 87px;
+          height: 27px;
+          font-size: 14px; } }
+      @media (min-width: 992px) {
+        .pop-up .pop-up-btn .accept {
+          width: 97px;
+          height: 30px;
+          font-size: 16px; } }
+      @media (min-width: 1200px) {
+        .pop-up .pop-up-btn .accept {
+          width: 104px;
+          height: 32px;
+          font-size: 18px; } }

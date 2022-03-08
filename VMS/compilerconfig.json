@@ -670,5 +670,21 @@
   {
     "outputFile": "Pages/Admin/SkillAndArea/UpBanner.razor.css",
     "inputFile": "Pages/Admin/SkillAndArea/UpBanner.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/ClassifyList.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/ClassifyList.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/DeleteConfirmPopUp.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/DeleteConfirmPopUp.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/AddItemSuccess.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/AddItemSuccess.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/SkillAndArea/EditItemSuccess.razor.css",
+    "inputFile": "Pages/Admin/SkillAndArea/EditItemSuccess.razor.scss"
   }
 ]

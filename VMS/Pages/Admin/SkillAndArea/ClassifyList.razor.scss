@@ -1,0 +1,103 @@
+﻿@import '../../../Resources/scss/common/_variables';
+
+h1 {
+    font-size: 18px;
+    color: $grey-text;
+    font-weight: 600;
+}
+
+.list-container {
+    border: 1px solid $grey-input;
+    border-radius: 6px;
+
+    .list-edit {
+        margin-top: 20px;
+        margin-left: 26px;
+        margin-right: 20px;
+    }
+
+    input {
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 0.5px solid $grey-input;
+        width: 414px;
+        outline: none;
+    }
+
+    .list-btn-add {
+        width: 74px;
+        height: 32px;
+        color: $white;
+        font-weight: 400;
+        border-radius: 5px;
+        border: none;
+        background-color: $blue;
+    }
+
+    .list-btn-cancel {
+        width: 74px;
+        height: 32px;
+        color: $grey-text;
+        font-weight: 400;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .list-add-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid $grey-icon;
+        cursor: pointer;
+
+        span {
+            color: $grey-icon;
+            font-size: 20px;
+        }
+    }
+
+    .list-data {
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 8px;
+        height: 250px;
+        overflow-x: scroll;
+
+        span[contenteditable="true"] {
+            width: 414px;
+
+            &:focus {
+                outline: none;
+                border-bottom: 0.5px solid $grey-input;
+            }
+        }
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+
+        &-icon {
+            color: #959594;
+            cursor: pointer;
+        }
+
+        &-item {
+            &-hover {
+                background-color: rgba(24, 160, 251, 0.1);
+            }
+        }
+    }
+}

@@ -1,0 +1,133 @@
+﻿@inject IJSRuntime JS;
+@using VMS.GenericRepository;
+@using Blazored.Modal;
+<h1 class="mb-4">@Type</h1>
+<div class="list-container">
+    <div class="list-edit d-flex align-items-center">
+        <div class="d-flex @(isShowAddItem ? "" : "d-none")">
+            <input type="text" class="me-4"/>
+            <button class="btn list-btn-add me-1" @onclick="ShowAddSuccessModal">Thêm</button>
+            <button class="btn list-btn-cancel" @onclick="showAddItem">Hủy</button>
+        </div>
+        <div class="list-add-icon d-flex justify-content-center align-items-center ms-auto @(isShowAddItem ? "d-none" : "")" @onclick="showAddItem">
+            <span class="material-icons-outlined">
+                add
+            </span>
+        </div>
+    </div>
+    @if (pagedResult is not null && pagedResult.Items.Count != 0)
+    {
+        <div class="list-data ms-4">
+            @foreach (var item in pagedResult.Items)
+            {
+                <div @onmouseover="() => showEditItem(item.Id)" @onmouseout="() => showEditItem(item.Id)" class="d-flex align-items-center px-3 list-data-item py-2 @(item.IsShowEditItem && !item.IsEditItem? "list-data-item-hover":"")">
+                    <span class="me-4" contenteditable="@(item.IsEditItem? "true":"false")">
+                        @item.Name
+                    </span>
+                    <button class="btn list-btn-add me-1 @(item.IsEditItem? "":"d-none")" @onclick="(() => ShowEditSuccessModal(item.Id))">Lưu</button>
+                    <button class="btn list-btn-cancel @(item.IsEditItem? "":"d-none")" @onclick="() => editItem(item.Id)">Hủy</button>
+                    @if (!item.IsEditItem)
+                    {
+                        <span class="ms-5 material-icons list-data-icon @(item.IsShowEditItem? "":"d-none")" @onclick="() => editItem(item.Id)">
+                            mode_edit
+                        </span>
+                        <span class="material-icons-outlined list-data-icon ms-auto @(item.IsShowEditItem? "":"d-none")" @onclick="(() => ShowDeleteConfirmModal(item.Id))">
+                            delete
+                        </span>
+                    }
+                </div>
+            }
+        </div>
+    }
+</div>
+<div class="d-flex justify-content-center">
+    <Pager CurrentPage="@pagedResult.PageIndex"
+           PageCount="@pagedResult.TotalPages"
+           OnPageChanged="@(async (e)=> { page = e; await HandlePageChanged(); })"
+           ShowPageNumbers="true" />
+</div>
+
+@code {
+    [Parameter] public string Type { get; set; }
+
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
+
+    class FakeData
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public bool IsShowEditItem { get; set; } = false;
+        public bool IsEditItem { get; set; } = false;
+        public bool IsSaved { get; set; } = false;
+    }
+
+    private PaginatedList<FakeData> pagedResult;
+    private int page = 1;
+    private bool isShowAddItem = false;
+
+    protected override void OnInitialized()
+    {
+        pagedResult = GetFakeData();
+    }
+
+    private async Task HandlePageChanged()
+    {
+        pagedResult = GetFakeData();
+        StateHasChanged();
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
+
+    private PaginatedList<FakeData> GetFakeData()
+    {
+        int i = 0;
+        var data = Enumerable.Range(0, 20).Select(x => new FakeData
+        {
+            Name = "Công nghệ thông tin kinh doanh",
+            Id = ++i
+        }).ToList();
+
+        var result = new PaginatedList<FakeData>(data, 100, page, 20);
+        return result;
+    }
+
+    void showAddItem()
+    {
+        isShowAddItem = !isShowAddItem;
+    }
+
+    void showEditItem(int id)
+    {
+        pagedResult.Items.ForEach(a => a.IsShowEditItem = a.Id == id && !a.IsShowEditItem);
+    }
+
+    void editItem(int id)
+    {
+        pagedResult.Items.ForEach(a => a.IsEditItem = a.Id == id && !a.IsEditItem);
+    }
+
+    private async Task ShowEditSuccessModal(int id)
+    {
+        pagedResult.Items.ForEach(a => a.IsEditItem = a.Id == id && !a.IsEditItem);
+
+        var parameters = new ModalParameters();
+        parameters.Add("Type", Type.ToLower());
+        var result = Modal.Show<EditItemSuccess>("", parameters,BlazoredModalOptions.GetModalOptions()).Result;
+    }
+
+    private async Task ShowDeleteConfirmModal(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Type", Type.ToLower());
+        var result = Modal.Show<DeleteConfirmPopUp>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+    }
+
+    private async Task ShowAddSuccessModal()
+    {
+        isShowAddItem = !isShowAddItem;
+
+        var parameters = new ModalParameters();
+        parameters.Add("Type", Type.ToLower());
+        var result = Modal.Show<AddItemSuccess>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
+    }
+}

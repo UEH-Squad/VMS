@@ -154,3 +154,25 @@
   position: sticky;
   top: -1px;
   z-index: 100; }
+
+.btn-edit {
+  height: 39px;
+  width: 200px;
+  color: #18A0FB;
+  border-radius: 5px; }
+  .btn-edit:hover {
+    color: #18A0FB; }
+  .btn-edit:focus {
+    box-shadow: none; }
+
+.btn-request {
+  height: 39px;
+  width: 182px;
+  color: white;
+  background: #18A0FB;
+  border-radius: 5px; }
+  .btn-request:hover {
+    background: #0B588c;
+    color: white; }
+  .btn-request:focus {
+    box-shadow: none; }

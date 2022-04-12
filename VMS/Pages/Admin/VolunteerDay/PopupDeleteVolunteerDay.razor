@@ -1,0 +1,41 @@
+﻿
+<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__confirm @(isShowConfirm ? "d-block" : "d-none")">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <div>
+                <h3 class="text-center mb-3">Bạn có chắc chắn muốn <span>xóa nội dung</span> này không? </h3>
+                <div class="text-end">
+                    <button @onclick="CloseModalAsync" class="btn btn-cancel">Hủy</button>
+                    <button @onclick="ShowPopupSuccess" class="btn btn-confirm">Chắc chắn</button>
+                </div>
+            </div>
+        </div>
+        <div class=" modal__success @(isShowConfirm ? "d-none" : "d-block")">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center mb-0">Bạn đã <span>xóa nội dung</span> thành công </h3>
+        </div>
+
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] public BlazoredModalInstance Modal { get; set; }
+    private bool isShowConfirm =true;
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync();
+    }
+    private async Task ShowPopupSuccess()
+    {        
+        isShowConfirm = false;
+    }
+}

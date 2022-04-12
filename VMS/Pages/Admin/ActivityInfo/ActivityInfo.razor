@@ -18,7 +18,7 @@
 
         <div class="col-9 d-flex align-items-center justify-content-between mx-auto py-3">
             <div>
-                <div class=" d-flex align-items-center div-checkbox mb-3">
+                <div class=" d-flex align-items-center div-checkbox">
                     <input @bind="activity.IsPoint" id="pointTraining" class="check-box" type="checkbox">
                     <label for="pointTraining" class="ms-2">Cập nhật mã vạch</label>
                 </div>
@@ -27,6 +27,13 @@
                     <label for="dayVolunteer" class="ms-2">Ghi nhận ngày tình nguyện</label>
                     <input @bind="@activity.NumberOfDays" type="number" min="0" class="form-control input-number" />
                 </div>
+                @if (activity.IsPoint && activity.IsDay)
+                {
+                    <div class=" d-flex align-items-center div-checkbox mt-1">
+                        <input id="1in2" @bind="@activity.IsSingleChoice" class="check-box" type="checkbox">
+                        <label for="1in2" class="ms-2">Tình nguyện viên chỉ chọn 1 trong 2</label>
+                    </div>
+                }
             </div>
             <div class="">
                 <div class="mb-2 text-end">
@@ -48,6 +55,12 @@
             <div class="mb-3">
                 <VMS.Pages.ActivityInfoPage.Rightrail Activity="@activity" />
             </div>
+
+
+        </div>
+        <div class="col-9 d-flex justify-content-center mb-4">
+            <button class="btn btn-edit me-2">Chỉnh sửa hoạt động</button>
+            <button @onclick="ShowRequestEdit" class="btn btn-request">Yêu cầu chỉnh sửa</button>
         </div>
     </div>
 </div>

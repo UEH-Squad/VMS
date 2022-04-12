@@ -666,5 +666,21 @@
   {
     "outputFile": "Pages/GloryAvenuePage/FacultyPopup.razor.css",
     "inputFile": "Pages/GloryAvenuePage/FacultyPopup.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/ActivityInfo/PopupRequestEdit.razor.css",
+    "inputFile": "Pages/Admin/ActivityInfo/PopupRequestEdit.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerDay/Index.razor.css",
+    "inputFile": "Pages/Admin/VolunteerDay/Index.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerDay/PopupEvaluate.razor.css",
+    "inputFile": "Pages/Admin/VolunteerDay/PopupEvaluate.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Admin/VolunteerDay/PopupDeleteVolunteerDay.razor.css",
+    "inputFile": "Pages/Admin/VolunteerDay/PopupDeleteVolunteerDay.razor.scss"
   }
 ]

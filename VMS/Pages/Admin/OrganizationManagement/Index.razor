@@ -7,61 +7,85 @@
         <VMS.Pages.SearchOrganizer.SearchAndFilter Filter="filter" FilterChanged="OnFilterChangedAsync" />
         <div class="arrange-bar mb-3">
             <div class="labels">
-                <span>Số hoạt động đã tổ chức</span>
+                <span class="mb-1">Số hoạt động đã tổ chức</span>
                 <span>Thứ hạng</span>
             </div>
             <div class="boxes-group">
                 <span>
                     @if (filter.OrderByTotalActivity.HasValue && filter.OrderByTotalActivity.Value)
                     {
-                        <input @onchange="() => OnOrderByTotalActivityChanged(true)"
-                           type="radio" name="order" id="increase" checked />
+                        <label for="increase" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByTotalActivityChanged(true)"
+                               type="radio" name="order" id="increase" checked />
+                            <span>Tăng dần</span>
+                        </label>
                     }
                     else
                     {
-                        <input @onchange="() => OnOrderByTotalActivityChanged(true)"
-                           type="radio" name="order" id="increase" />
+                        <label for="increase" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByTotalActivityChanged(true)"
+                               type="radio" name="order" id="increase"/>
+                            <span>Tăng dần</span>
+                        </label>
                     }
-                    &#160;<label for="increase">Tăng dần</label>
+                    &#160;
                 </span>
                 <span>
                     @if (filter.OrderByTotalActivity.HasValue && !filter.OrderByTotalActivity.Value)
                     {
-                        <input @onchange="() => OnOrderByTotalActivityChanged(false)"
-                           type="radio" name="order" value="decrease" id="decrease" checked />
+                        <label for="decrease" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByTotalActivityChanged(false)"
+                                   type="radio" name="order" value="decrease" id="decrease" checked />
+                            <span>Giảm dần</span>
+                        </label>
                     }
                     else
-                    {
-                        <input @onchange="() => OnOrderByTotalActivityChanged(false)"
-                           type="radio" name="order" value="decrease" id="decrease" />
+                    {      
+                        <label for="decrease" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByTotalActivityChanged(false)"
+                               type="radio" name="order" value="decrease" id="decrease" />
+                            <span>Giảm dần</span>
+                        </label>
                     }
-                    &#160;<label for="decrease">Giảm dần</label>
+                    &#160;  
                 </span>
                 <span>
                     @if (filter.OrderByRank.HasValue && filter.OrderByRank.Value)
                     {
-                        <input @onchange="() => OnOrderByRankChanged(true)"
-                           type="radio" name="rank" id="higher-to-lower" checked />
+                        <label for="higher-to-lower" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByRankChanged(true)"
+                                   type="radio" name="rank" id="higher-to-lower" checked />
+                            <span>Từ cao xuống thấp</span>
+                        </label>
                     }
                     else
                     {
-                        <input @onchange="() => OnOrderByRankChanged(true)"
-                           type="radio" name="rank" id="higher-to-lower" />
+                        <label for="higher-to-lower" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByRankChanged(true)"
+                               type="radio" name="rank" id="higher-to-lower" />
+                            <span>Từ cao xuống thấp</span>
+                        </label>
                     }
-                    &#160;<label for="higher-to-lower">Từ cao xuống thấp</label>
+                    &#160;
                 </span>
                 <span>
                     @if (filter.OrderByRank.HasValue && !filter.OrderByRank.Value)
                     {
-                        <input @onchange="() => OnOrderByRankChanged(false)"
-                           type="radio" name="rank" id="lower-to-higher" checked />
+                        <label for="lower-to-higher" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByRankChanged(false)"
+                                   type="radio" name="rank" id="lower-to-higher" checked />
+                            <span>Từ thấp đến cao</span>
+                        </label>
                     }
                     else
                     {
-                        <input @onchange="() => OnOrderByRankChanged(false)"
-                           type="radio" name="rank" id="lower-to-higher" />
+                        <label for="lower-to-higher" class="d-flex align-items-center">
+                            <input @onchange="() => OnOrderByRankChanged(false)"
+                               type="radio" name="rank" id="lower-to-higher" />
+                            <span>Từ thấp đến cao</span>
+                        </label>
                     }
-                    &#160;<label for="lower-to-higher">Từ thấp đến cao</label>
+                    &#160;
                 </span>
             </div>
         </div>

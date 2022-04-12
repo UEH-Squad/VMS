@@ -199,4 +199,33 @@
     top: -1px;
     z-index: 100;
 }
+.btn-edit {
+    height: 39px;
+    width: 200px;
+    color: $blue;
+    border-radius: 5px;
+
+    &:hover {
+        color: $blue;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+.btn-request {
+    height: 39px;
+    width: 182px;
+    color: white;
+    background: $blue;
+    border-radius: 5px;
+
+    &:hover {
+        background: $blue-hv;
+        color: white;
+    }
+    &:focus{
+        box-shadow: none;
+    }
+}
 

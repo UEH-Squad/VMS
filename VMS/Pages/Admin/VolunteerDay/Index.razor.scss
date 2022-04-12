@@ -1,0 +1,490 @@
+﻿@import '../../../Resources/scss/common/_variables';
+
+h1 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 36px;
+    color: $green;
+
+    span {
+        color: $blue;
+    }
+}
+
+.my-managementTool {
+    border-bottom: 1px solid #B4B4B4;
+}
+
+.managementTool__filter {
+
+    .btn-filter {
+        background: $green;
+        width: 90px;
+        height: 40px;
+        padding: 0px;
+        font-size: 18px;
+        color: $white;
+
+        &:hover {
+            background: $green-bold;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .btn-delete-filter {
+        background-color: transparent;
+        padding: 7px 20px;
+        font-size: 18px;
+        color: #B4B4B4;
+
+        &:hover {
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.managementTool__level, .managementTool__course {
+    width: 200px;
+}
+
+
+//popup
+
+
+.popup-btn {
+    border: 1px solid #707070;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #b4b4b4;
+    font-size: 16px;
+    line-height: 40px;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    background-color: white;
+
+    &::placeholder {
+        color: #b4b4b4;
+    }
+
+    &-icon {
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        pointer-events: none;
+    }
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &.bg-grey::placeholder {
+        color: #515151 !important;
+    }
+}
+
+.my-dropdown {
+    padding: 15px 22px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 0%;
+    right: 0;
+    transform: translateY(105%);
+    background-color: #fff;
+    z-index: 1;
+    display: none;
+    width: 200px;
+
+    ul {
+        overflow-y: scroll;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-icon;
+            border-radius: 20px;
+        }
+
+        li {
+            color: $blue;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            &:last-of-type {
+                margin-bottom: 0px;
+            }
+
+            &:hover {
+                color: $green;
+                background-color: rgba(24, 160, 251, 0.1);
+            }
+        }
+    }
+}
+
+.popup-btn:focus ~ .my-dropdown {
+    display: block;
+}
+// end popup
+.managementTool__create {
+    .btn {
+        width: 140px;
+        background: $blue;
+        padding: 6px 10px;
+        border-radius: 5px;
+
+        &:hover {
+            background-color: $blue-bold;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &::after {
+            color: $white;
+        }
+
+        .icon-add {
+            font-size: 24px;
+            color: $white;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 18px;
+            color: $white;
+            margin-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+
+}
+
+.managementTool__sort {
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        color: black;
+    }
+
+    input, span {
+        cursor: pointer;
+    }
+
+    span {
+        font-weight: 400;
+        font-size: 16px;
+        color: #515151;
+    }
+    /* pretty radio */
+    label > input[type="radio"] {
+        display: none;
+    }
+
+    label > input[type="radio"] + *::before {
+        content: "";
+        display: inline-block;
+        vertical-align: bottom;
+        width: 1rem;
+        height: 1rem;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 0.1rem;
+        border-color: #B4B4B4;
+    }
+
+    label > input[type="radio"]:checked + *::before {
+        background: radial-gradient($blue 0%, $blue 40%, transparent 50%, transparent);
+    }
+    /* basic layout */
+    fieldset {
+        margin: 20px;
+        max-width: 400px;
+    }
+
+    label > input[type="radio"] + * {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+    }
+}
+.filter-item {
+    width: 180px;
+    height: 40px;
+
+    &__icon {
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        pointer-events: none;
+    }
+}
+
+
+.managementTool__title {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 18px;
+    color: $blue;
+
+    span {
+        color: $green;
+    }
+}
+
+.managementTool__down {
+    color: $green;
+    cursor: pointer;
+
+    &:hover {
+        color: $green-bold;
+    }
+
+    .icon-down {
+        font-size: 24px;
+    }
+
+    span {
+        font-weight: 600;
+        font-size: 18px;
+    }
+}
+
+.managementTool__chosseAll {
+    font-weight: 600;
+    font-size: 14px;
+    color: #B4B4B4;
+
+    .check-box {
+        border-radius: 5px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        vertical-align: top;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 1px solid $grey-icon;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            width: 9px;
+            height: 5px;
+            border-left: 2px solid #18A0FB;
+            border-bottom: 2px solid #18A0FB;
+            position: absolute;
+            top: 40%;
+            left: 52%;
+            transform: translate(-50%, -50%) rotate( -45deg );
+            display: none;
+        }
+
+        &:checked::before {
+            display: block;
+        }
+    }
+
+    label {
+        cursor: pointer;
+    }
+}
+
+.btn-delete {
+    background: $red;
+    width: 42px;
+    height: 25px;
+    padding: 0;
+    font-weight: 600;
+    font-size: 14px;
+    color: $white;
+
+    &:hover {
+        background: $red-warning
+    }
+
+    &:focus {
+        box-shadow: none
+    }
+}
+
+.my-acc {
+    border: 1px solid $grey-close-bg;
+    border-radius: 7px;
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+        width: 3px;
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #707070;
+        border-radius: 10px;
+    }
+}
+
+.acc__table {
+    table-layout: fixed;
+
+    .acc__tilte, .acc__content {
+        padding: 5px 15px;
+    }
+
+    .acc__tilte {
+        font-weight: 500;
+        font-size: 16px;
+        color: #515151;
+        padding-bottom: 15px;
+    }
+
+    .acc__content {
+        vertical-align: top;
+        font-weight: 300;
+        font-size: 16px;
+        color: black;
+    }
+
+    .acc__tilte--checkbox, .acc__content--checkbox {
+        min-width: 10px;
+
+        .check-box {
+            border-radius: 5px;
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            vertical-align: top;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            border: 1px solid $grey-icon;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-print-color-adjust: exact;
+            position: relative;
+            cursor: pointer;
+
+            &::before {
+                content: "";
+                width: 9px;
+                height: 5px;
+                border-left: 2px solid #18A0FB;
+                border-bottom: 2px solid #18A0FB;
+                position: absolute;
+                top: 40%;
+                left: 52%;
+                transform: translate(-50%, -50%) rotate( -45deg );
+                display: none;
+            }
+
+            &:checked::before {
+                display: block;
+            }
+        }
+    }
+
+    .acc__tilte--area, .acc__content--area {
+        min-width: 140px;
+    }
+
+    .acc__tilte--numberWork, .acc__content--numberWork {
+        min-width: 200px;
+        padding-right: 30px;
+    }
+
+    .acc__tilte--numberVolunteer, .acc__content--numberVolunteer {
+        min-width: 220px;
+        padding-right: 30px;
+    }
+
+    .acc__tilte--describe, .acc__content--describe {
+        min-width: 300px;
+        padding-right: 30px;
+    }
+
+    .acc__tilte-note, .acc__content--note {
+        min-width: 300px;
+        padding-right: 30px;
+    }
+
+
+    .acc__menu {
+        position: absolute;
+        top: 2px;
+        right: 0px;
+
+        .icon-menu {
+            cursor: pointer;
+            color: #707070;
+            font-size: 20px;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        .dropdown-menu {
+            background: #FFFFFF;
+            border-radius: 5px;
+            width: 170px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0,.25);
+            z-index: 1;
+            transform: translate(-102%, 0) !important;
+            padding: 15px 12px;
+
+            li {
+                padding: 0 3px;
+                cursor: pointer;
+            }
+
+            li:hover {
+                background: rgba(24, 160, 251, 0.1);
+            }
+
+            &-edit {
+                color: $green;
+            }
+
+            &-delete {
+                color: $red;
+            }
+        }
+    }
+}
+

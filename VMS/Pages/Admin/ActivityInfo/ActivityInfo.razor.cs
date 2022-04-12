@@ -41,7 +41,7 @@ namespace VMS.Pages.Admin.ActivityInfo
 
         private async Task ShowApproveModalAsync()
         {
-            await ActivityService.ApproveActAsync(ActId, activity.IsPoint, activity.IsDay, activity.IsDay ? activity.NumberOfDays : 0);
+            await ActivityService.ApproveActAsync(ActId, activity.IsPoint, activity.IsDay, activity.IsDay ? activity.NumberOfDays : 0, activity.IsSingleChoice);
             await OnParametersSetAsync();
         }
 
@@ -59,6 +59,10 @@ namespace VMS.Pages.Admin.ActivityInfo
         private void ShowPopupConvert()
         {
             Modal.Show<PopupConvert>("", BlazoredModalOptions.GetModalOptions());
+        }
+        private void ShowRequestEdit()
+        {
+            Modal.Show<PopupRequestEdit>("", BlazoredModalOptions.GetModalOptions());
         }
     }
 }

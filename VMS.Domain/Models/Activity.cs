@@ -42,6 +42,7 @@ namespace VMS.Domain.Models
         public bool IsPoint { get; set; }
         public bool IsDay { get; set; }
         public int NumberOfDays { get; set; }
+        public bool IsSingleChoice { get; set; }
         public virtual User Organizer { get; set; }
         public virtual User Approver { get; set; }
         public virtual Area Area { get; set; }

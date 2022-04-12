@@ -1,0 +1,67 @@
+﻿@using VMS.Application.ViewModels;
+<div class="my-modal">
+    <div class="modal__content">
+        <div class="modal__edit">
+            <div @onclick="CloseModalAsync" class="icon-close">
+                <span class="material-icons">
+                    close
+                </span>
+            </div>
+            <h3 class="text-center">Yêu cầu <span>chỉnh sửa</span></h3>
+            <EditForm Model="skill">
+                <DataAnnotationsValidator />
+                <div class="mb-2">
+                    <p class="form__title ">Mục cần yêu cầu chỉnh sửa<span>(*)</span>:</p>
+                    <div class="btn-group w-100 position-relative">
+                        <input class="btn dropdown-toggle form-control"  data-bs-auto-close="outside" type="button" data-bs-toggle="dropdown" aria-expanded="false" readonly />
+                        <span class="material-icons-outlined icon-down">
+                            arrow_drop_down
+                        </span>
+                        <ul class="dropdown-menu ">
+                            @for (var i = 0; i < 11; i++)
+                            {
+                                <li>
+                                    <div class="d-flex align-items-center managementTool__chosseAll me-3">
+                                        <input class="check-box me-3" type="checkbox" id="item-@i">
+                                        <label for="item-@i">Nhiệm vụ tình nguyện viên sẽ tham gia</label>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <p class="form__title ">Nội dung yêu cầu chỉnh sửa<span>(*)</span>:</p>
+                    <div class="position-relative">
+                        <InputTextArea @bind-Value="skill.Name" rows="5" class="form-control" />
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <p class="form__title ">Hình ảnh đính kèm</p>
+                    <div class="position-relative">
+                        <VMS.Shared.Components.UploadImg />
+                    </div>
+                </div>
+                <div class="from__btn text-center ">
+                    <button type="submit" class="btn btn-request">Yêu cầu chỉnh sửa</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    private SkillViewModel skill = new();
+
+    [CascadingParameter]
+    public BlazoredModalInstance Modal { get; set; }
+
+    private async Task CloseModalAsync()
+    {
+        await Modal.CloseAsync();
+    }
+
+    //
+    
+}

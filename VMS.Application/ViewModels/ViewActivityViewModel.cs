@@ -31,6 +31,7 @@ namespace VMS.Application.ViewModels
         public bool IsPoint { get; set; }
         public bool IsDay { get; set; }
         public int NumberOfDays { get; set; }
+        public bool IsSingleChoice { get; set; }
 
 
         public Area Area { get; set; }

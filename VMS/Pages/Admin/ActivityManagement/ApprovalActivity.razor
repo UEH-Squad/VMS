@@ -16,8 +16,15 @@
                     <div class=" d-flex align-items-center div-checkbox">
                         <input @bind="Result.IsDay" id="dayVolunteer" class="check-box" type="checkbox">
                         <label for="dayVolunteer" class="ms-2">Ghi nhận ngày tình nguyện</label>
-                        <input @bind="Result.NumberOfDays" type="number" min="0" class="form-control input-number"/>
+                        <input @bind="Result.NumberOfDays" type="number" min="0" class="form-control input-number" />
                     </div>
+                    @if (Result.IsPoint && Result.IsDay)
+                    {
+                        <div class=" d-flex align-items-center div-checkbox mt-1">
+                            <input @bind="Result.IsSingleChoice" id="1in2" class="check-box" type="checkbox">
+                            <label for="1in2" class="ms-2">Tình nguyện viên chọn 1 trong 2</label>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="pop-up-btn">
@@ -46,6 +53,7 @@
         public bool IsPoint { get; set; }
         public bool IsDay { get; set; }
         public int NumberOfDays { get; set; }
+        public bool IsSingleChoice { get; set; }
     }
 
     [CascadingParameter]

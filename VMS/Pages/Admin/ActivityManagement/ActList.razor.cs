@@ -81,7 +81,7 @@ namespace VMS.Pages.Admin.ActivityManagement
 
             if (approveResult.IsApprove)
             {
-                await ActivityService.ApproveActAsync(activityId, approveResult.IsPoint, approveResult.IsDay, approveResult.NumberOfDays);
+                await ActivityService.ApproveActAsync(activityId, approveResult.IsPoint, approveResult.IsDay, approveResult.NumberOfDays, approveResult.IsSingleChoice);
                 await InitDataAsync();
             }
         }

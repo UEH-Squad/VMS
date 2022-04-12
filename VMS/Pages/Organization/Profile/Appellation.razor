@@ -1,30 +1,36 @@
 ﻿<div class="my-appellation">
     <div class="appellation__content mx-auto text-center py-4">
         <div>
-            <i @onclick="CloseAppellation" class="material-icons-outlined icon-exitModal">
+            <i @onclick="() => CloseAppellation()" class="material-icons-outlined icon-exitModal">
                 close
             </i>
         </div>
         <h3>Danh hiệu</h3>
-        <p>Tổ chức hoàn hảo</p>
-        <p>Tổ chức chuyên nghiệp</p>
-        <p>Hoạt động nổi bật năm học</p>
-        <p>Hoạt động nổi bật trong tháng</p>
-
-
+        @foreach (var item in appellations)
+        {
+            <p @onclick="() => CloseAppellation(item)">@item</p>
+        }
     </div>
 
 </div>
 
 @code {
+    private List<string> appellations = new();
+
     [CascadingParameter]
     private BlazoredModalInstance Modal { get; set; }
 
-
-    private async Task CloseAppellation()
+    protected override void OnInitialized()
     {
+        appellations.Add("Tổ chức hoàn hảo");
+        appellations.Add("Tổ chức chuyên nghiệp");
+        appellations.Add("Hoạt động nổi bật năm học");
+        appellations.Add("Hoạt động nổi bật trong tháng");
+    }
 
-        await Modal.CloseAsync();
+    private async Task CloseAppellation(string appellation = "")
+    {
+        await Modal.CloseAsync(ModalResult.Ok<string>(appellation));
     }
 }
 

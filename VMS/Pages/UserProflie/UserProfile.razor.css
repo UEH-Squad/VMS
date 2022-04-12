@@ -342,7 +342,7 @@
     .profile__skills .profile__content {
       display: block;
       width: 98%;
-      height: 305px;
+      height: 200px;
       overflow-y: scroll;
       overflow-x: hidden;
       padding-left: 35px;
@@ -353,9 +353,12 @@
       .profile__skills .profile__content::-webkit-scrollbar-thumb {
         background-color: #B4B4B4;
         border-radius: 20px; } }
+  @media (min-width: 1200px) {
+    .profile__skills .profile__content {
+      height: 170px; } }
   @media (min-width: 1400px) {
     .profile__skills .profile__content {
-      height: 362px;
+      height: 185px;
       overflow-y: scroll;
       padding-left: 45px;
       padding-right: 45px; } }
@@ -410,3 +413,77 @@
     .profile__dictum {
       font-size: 24px;
       margin-bottom: 20px !important; } }
+
+.profile__volunteer > div {
+  justify-content: start; }
+
+@media (min-width: 992px) {
+  .profile__volunteer-mb {
+    display: none; } }
+
+.profile__volunteer-pc {
+  display: none; }
+  @media (min-width: 992px) {
+    .profile__volunteer-pc {
+      display: block;
+      margin-top: 37px; } }
+  @media (min-width: 1400px) {
+    .profile__volunteer-pc {
+      margin-top: 50px; } }
+
+.profile__volunteer-number {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid #707070;
+  border-radius: 50%;
+  text-align: center;
+  color: #64D72F;
+  font-size: 20px;
+  font-weight: 700; }
+  @media (min-width: 576px) {
+    .profile__volunteer-number {
+      font-size: 24px; } }
+  @media (min-width: 992px) {
+    .profile__volunteer-number {
+      width: 95px;
+      height: 95px;
+      line-height: 95px;
+      font-size: 36px; } }
+
+.profile__volunteer-text {
+  color: #18A0FB;
+  text-align: left; }
+  .profile__volunteer-text p:first-child {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 30px; }
+    @media (min-width: 992px) {
+      .profile__volunteer-text p:first-child {
+        font-size: 48px;
+        line-height: 50px; } }
+  .profile__volunteer-text p:last-child {
+    font-size: 16px;
+    font-weight: 500; }
+    @media (min-width: 992px) {
+      .profile__volunteer-text p:last-child {
+        font-size: 27px; } }
+    @media (min-width: 1200px) {
+      .profile__volunteer-text p:last-child {
+        font-size: 30px; } }
+
+.profile__volunteer .profile__volunteer-statistic p {
+  border-right: 0.16px solid #515151;
+  font-size: 8px;
+  font-weight: 300; }
+  .profile__volunteer .profile__volunteer-statistic p span {
+    font-weight: 500; }
+  @media (min-width: 992px) {
+    .profile__volunteer .profile__volunteer-statistic p {
+      font-size: 14px; } }
+  @media (min-width: 1200px) {
+    .profile__volunteer .profile__volunteer-statistic p {
+      font-size: 16px; } }
+
+.profile__volunteer .profile__volunteer-statistic p:last-child {
+  border-right: none; }

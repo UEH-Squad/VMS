@@ -49,15 +49,24 @@
       font-weight: 500;
       font-size: 20px;
       color: #18A0FB; }
-      @media (min-width: 768px) {
+      @media (min-width: 992px) {
+        .my-appellation .appellation__content h3 {
+          font-size: 20px; } }
+      @media (min-width: 1400px) {
         .my-appellation .appellation__content h3 {
           font-size: 24px; } }
     .my-appellation .appellation__content p {
       margin-bottom: 20px;
       font-weight: 500;
-      font-size: 14px; }
-      @media (min-width: 768px) {
+      font-size: 14px;
+      cursor: pointer; }
+      .my-appellation .appellation__content p:hover {
+        color: #64D72F; }
+      @media (min-width: 992px) {
         .my-appellation .appellation__content p {
-          font-size: 16px; } }
+          font-size: 18px; } }
+      @media (min-width: 1400px) {
+        .my-appellation .appellation__content p {
+          font-size: 20px; } }
     .my-appellation .appellation__content p:last-child {
       margin-bottom: 0px; }

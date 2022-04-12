@@ -2,7 +2,7 @@
 <div class="calendar">
     <div class="d-flex flex-column align-items-center pb-2 calendar-header">
         <div class="d-flex my-4 justify-content-center">
-            <AntDesign.DatePicker @bind-Value="@Value" OnChange="OnValueChanged" Format="dd/MM/yyyy" AllowClear="false" ClassName="form-control w-50 my-date-picker" />
+            <AntDesign.DatePicker @bind-Value="@Value" OnChange="OnValueChanged" Format="dd/MM/yyyy" AllowClear="false" ClassName="form-control my-date-picker" />
             <button type="button" class="btn btn-sm ms-3" @onclick="e => OnChangeMonth(0)">
                 <span>@Today</span>
             </button>

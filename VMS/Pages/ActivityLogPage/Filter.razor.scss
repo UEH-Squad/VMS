@@ -43,6 +43,10 @@
         }
     }
 
+    &__radio {
+        flex-wrap: wrap;
+    }
+
     &__select {
         border: 1px solid $grey-icon;
         width: 100%;
@@ -178,7 +182,7 @@
 .filter-btn {
     display: flex;
     align-items: center;
-    padding: 5px 20px;
+    padding: 0px 30px;
     width: fit-content;
     font-size: 14px;
     border-radius: 8px;

@@ -37,22 +37,24 @@
                     <h4 class="title-discript__text">Lý do bạn muốn báo cáo</h4>
                     <h4 class="title-discript__check check">(*)</h4>
                 </div>
-                <button @onclick="ListReason" class="btn my-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="" aria-expanded="false">
-                    <span class="material-icons-outlined my-icon-dropdown">
-                        arrow_drop_down
-                    </span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="display:@(showListReason ? "block" : "none")">
-                    @foreach (var reason in Reasons)
-                    {
-                        <li>
-                            <div class="dropdown-item" href="#">
-                                <input id="@reason" @onchange="x => { CheckboxClicked(reason, x.Value); }" type="checkbox" class="dropdown-item--checkbox" />
-                                <label for="@reason">@reason</label>
-                            </div>
-                        </li>
-                    }
-                </ul>
+                <div class="dropdown">
+                    <button @onclick="ListReason" class="btn my-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <span class="material-icons-outlined my-icon-dropdown">
+                            arrow_drop_down
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        @foreach (var reason in Reasons)
+                        {
+                            <li>
+                                <div class="dropdown-item" href="#">
+                                    <input id="@reason" @onchange="x => { CheckboxClicked(reason, x.Value); }" type="checkbox" class="dropdown-item--checkbox" />
+                                    <label for="@reason">@reason</label>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </div>
 
             <div class="report-description mb-3">

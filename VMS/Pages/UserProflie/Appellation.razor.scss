@@ -68,6 +68,11 @@
             margin-bottom: 20px;
             font-weight: 500;
             font-size: 14px;
+            cursor: pointer;
+
+            &:hover{
+                color: $green;
+            }
 
             @include on('lg') {
                 font-size: 18px;
@@ -81,6 +86,5 @@
         p:last-child {
             margin-bottom: 0px;
         }
-    }
 }
 

@@ -1,55 +1,38 @@
 ﻿@import '../../../Resources/scss/common/_variables';
+
 .my-option {
-    .btn:focus {
-        box-shadow: none;
-    }
-
-    .btn-area, .btn-skill {
-        position: relative;
-        width: 117px;
-        height: 42px;
-        padding: 0;
+    .grButton {
         background: #F3F3F5;
-        font-weight: 600;
-        font-size: 18px;
-        color: $blue;
-
-        &::after {
-            content: "";
-            width: 100%;
-            height: 4px;
-            background: #0B588C;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            display: none;
-        }
-
-        &:hover::after {
-            display: block;
-        }
-    }
-
-    .btn-addVideo {
-        width: 260px;
-        height: 36px;
-        padding: 0 6px;
-        background: $green;
         border-radius: 5px;
-        color: $white;
-        cursor: pointer;
+        padding: 4px;
+        width: fit-content;
 
-        &:hover {
-            background: $green-bold;
-        }
-
-        .icon-add {
-            font-size: 24px;
-        }
-
-        span {
+        .btn {
+            width: 117px;
+            height: 38px;
+            padding: 0;
+            background: #F3F3F5;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 18px;
+            color: $blue;
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            &:hover {
+                color: $blue-hv;
+            }
+        }
+
+        .btn-area, .btn-skill {
+            position: relative;
+        }
+
+        .btn-clicked {
+            box-shadow: 0px 0px 5px 0px #b4b4b4;
+            border-radius: 5px;
+            background-color: white;
         }
     }
 
@@ -73,6 +56,28 @@
         span {
             font-weight: 600;
             font-size: 16px;
+        }
+    }
+
+    .btn-choose {
+        width: 60px;
+        height: 36px;
+        padding: 0;
+        background: $green;
+        font-weight: 600;
+        font-size: 16px;
+        color: $white;
+
+        &:hover {
+            background: $green-bold;
+        }
+    }
+
+    .btn-uncheck {
+        background: $green-bold;
+
+        &:hover {
+            background: $green;
         }
     }
 
@@ -165,6 +170,26 @@
             font-weight: 400;
             font-size: 16px;
             color: $red;
+        }
+    }
+}
+
+.my-banner {
+    .btn-addVideo {
+        width: fit-content;
+        height: 38px;
+        padding: 5px;
+        background: $green;
+        font-weight: 600;
+        font-size: 18px;
+        color: $white;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &:hover {
+            background: $green-bold;
         }
     }
 }

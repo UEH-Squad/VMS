@@ -4,10 +4,10 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
-.my-areas .cursor-pointer {
+.cursor-pointer {
   cursor: pointer; }
 
-.my-areas .lm-text {
+.lm-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -15,11 +15,11 @@
   white-space: normal;
   -webkit-line-clamp: 2; }
 
-.my-areas .div-checkbox {
+.div-checkbox {
   width: 15px;
   height: 15px; }
 
-.my-areas .check-box {
+.check-box {
   border-radius: 5px;
   width: 15px;
   height: 15px;
@@ -36,7 +36,7 @@
   -webkit-print-color-adjust: exact;
   position: relative;
   cursor: pointer; }
-  .my-areas .check-box::before {
+  .check-box::before {
     content: "";
     width: 9px;
     height: 5px;
@@ -47,13 +47,13 @@
     left: 52%;
     transform: translate(-50%, -50%) rotate(-45deg);
     display: none; }
-  .my-areas .check-box:checked::before {
+  .check-box:checked::before {
     display: block; }
 
-.my-areas .area {
+.area {
   margin-top: 30px;
   width: 85%; }
-  .my-areas .area i {
+  .area i {
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -62,7 +62,6 @@
     text-align: center;
     color: white;
     font-size: 24px; }
-  .my-areas .area span {
+  .area span {
     font-weight: 400;
-    font-size: 16px;
-    color: #F14747; }
+    font-size: 20px; }

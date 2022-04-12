@@ -11,6 +11,8 @@ namespace VMS.Pages.Organization.Profile
 {
     public partial class Information : ComponentBase
     {
+        [Parameter] 
+        public bool IsOrg { get; set; } = false;
         [Parameter]
         public string UserId { get; set; }
         [Parameter] public UserViewModel Org { get; set; }
@@ -46,16 +48,7 @@ namespace VMS.Pages.Organization.Profile
             }
 
         }
-        async Task ShowModalAppellation()
-        {
-            var options = new ModalOptions()
-            {
-                HideCloseButton = true,
-                DisableBackgroundCancel = true,
-                UseCustomLayout = true,
-            };
-            Modal.Show<Appellation>("", options);
-        }
+        
         private static bool HaftStar(double rate, int star)
         {
             if (rate - star > 0 && rate - star <= 0.5)

@@ -447,7 +447,7 @@ namespace VMS.Application.Services
                 return x => x.OrderByDescending(x => x.EndDate);
             }
 
-            return x => x.OrderByDescending(x => x.Id);
+            return x => x.OrderBy(x => x.IsClosed).ThenByDescending(x => x.Id);
         }
 
         private static int? GetTakeByStatusAct(StatusAct status)

@@ -44,26 +44,29 @@
       text-align: center;
       background-color: rgba(196, 196, 196, 0.5);
       cursor: pointer; }
-    .my-appellation .appellation__content h3 {
-      margin-bottom: 30px;
-      font-weight: 500;
-      font-size: 16x;
-      color: #18A0FB; }
-      @media (min-width: 992px) {
-        .my-appellation .appellation__content h3 {
-          font-size: 20px; } }
-      @media (min-width: 1400px) {
-        .my-appellation .appellation__content h3 {
-          font-size: 24px; } }
-    .my-appellation .appellation__content p {
-      margin-bottom: 20px;
-      font-weight: 500;
-      font-size: 14px; }
-      @media (min-width: 992px) {
-        .my-appellation .appellation__content p {
-          font-size: 18px; } }
-      @media (min-width: 1400px) {
-        .my-appellation .appellation__content p {
-          font-size: 20px; } }
-    .my-appellation .appellation__content p:last-child {
-      margin-bottom: 0px; }
+  .my-appellation h3 {
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 16x;
+    color: #18A0FB; }
+    @media (min-width: 992px) {
+      .my-appellation h3 {
+        font-size: 20px; } }
+    @media (min-width: 1400px) {
+      .my-appellation h3 {
+        font-size: 24px; } }
+  .my-appellation p {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer; }
+    .my-appellation p:hover {
+      color: #64D72F; }
+    @media (min-width: 992px) {
+      .my-appellation p {
+        font-size: 18px; } }
+    @media (min-width: 1400px) {
+      .my-appellation p {
+        font-size: 20px; } }
+  .my-appellation p:last-child {
+    margin-bottom: 0px; }

@@ -3,7 +3,6 @@
 .search-and-button {
 
     .dropdown {
-
         display: none;
 
         @include on ('md') {
@@ -39,14 +38,18 @@
                 align-items: center;
                 cursor: pointer;
                 font-size: 16px;
-                font-weight: 500;
+                font-weight: 400;
                 position: relative;
 
-                &__download {
+                &:hover {
+                    background-color: rgba(24, 160, 251, 0.1);
+                }
+
+                &__download span {
                     color: $green;
                 }
 
-                &__upload {
+                &__upload span {
                     color: $blue;
                 }
 
@@ -136,7 +139,12 @@
             }
 
             &__text--del {
+                display: block;
                 color: #F14747;
+
+                @include on ('md') {
+                    display: none;
+                }
             }
 
             &__text--undo {

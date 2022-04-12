@@ -4,6 +4,9 @@
 /*#endregion */
 /*#region mixins */
 /*#endregion */
+.cursor-pointer {
+  cursor: pointer; }
+
 .my-modal {
   position: fixed;
   top: 0;
@@ -174,7 +177,7 @@
     visibility: hidden; }
 
 .filter-item {
-  width: 23%; }
+  margin-left: auto; }
   .filter-item .material-icons-outlined {
     top: 50%;
     transform: translateY(-50%);
@@ -195,8 +198,9 @@
   width: 100%;
   height: 240px; }
   .filter-item__dropdown--fit-content {
-    height: fit-content;
-    padding: 15px 22px 0 22px; }
+    width: fit-content;
+    padding: 15px 22px;
+    height: 270px; }
   .filter-item__dropdown ul {
     overflow-y: scroll;
     list-style: none;

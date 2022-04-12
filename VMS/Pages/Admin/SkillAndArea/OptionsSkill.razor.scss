@@ -1,5 +1,8 @@
 ﻿@import '../../../Resources/scss/common/_variables';
 
+.cursor-pointer {
+    cursor: pointer;
+}
 .my-modal {
     position: fixed;
     top: 0;
@@ -240,8 +243,7 @@
 }
 
 .filter-item {
-    width: 23%;
-
+    margin-left: auto;
     .material-icons-outlined {
         top: 50%;
         transform: translateY(-50%);
@@ -265,8 +267,9 @@
     height: 240px;
 
     &--fit-content {
-        height: fit-content;
-        padding: 15px 22px 0 22px;
+        width: fit-content;
+        padding: 15px 22px;
+        height: 270px;
     }
 
     ul {

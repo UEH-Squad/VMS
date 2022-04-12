@@ -31,31 +31,44 @@
         </div>
 
         <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 act-filter__radio d-flex">
-            <div class="act-filter__radio-1 d-flex align-items-center  ms-3 me-5 pe-1">
+            <div class="act-filter__radio-1 d-flex align-items-center ms-3 me-5 pe-1">
 
                 <label class="d-flex align-items-center" for="rate">
                     @if (filter.IsRated.HasValue && !filter.IsRated.Value)
                     {
-                        <input @onclick="async () => await CheckOrderAsync(false)" type="radio" id="rate"  name="filter" checked />
+                        <input @onclick="async () => await CheckOrderAsync(false)" type="radio" id="rate" name="filter" checked />
                     }
                     else
                     {
-                        <input @onclick="async () => await CheckOrderAsync(false)" type="radio" id="rate"  name="filter"/>
-                    }                    
-                <span>Chưa đánh giá</span>
+                        <input @onclick="async () => await CheckOrderAsync(false)" type="radio" id="rate" name="filter" />
+                    }
+                    <span>Chưa đánh giá</span>
                 </label>
             </div>
             <div class="act-filter__radio-2 d-flex align-items-center">
                 <label class="d-flex align-items-center" for="rated">
                     @if (filter.IsRated.HasValue && filter.IsRated.Value)
                     {
-                    <input type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)" checked>
+                        <input type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)" checked>
                     }
                     else
                     {
                         <input type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)">
                     }
                     <span>Đã đánh giá</span>
+                </label>
+            </div>
+            <div class="act-filter__radio-3 d-flex align-items-center ms-3">
+                <label class="d-flex align-items-center" for="rated">
+                    @if (filter.IsRated.HasValue && filter.IsRated.Value)
+                    {
+                        <input type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)" checked>
+                    }
+                    else
+                    {
+                        <input type="radio" id="rated" name="fav_language" @onclick="async () => await CheckOrderAsync(true)">
+                    }
+                    <span>Chưa xác nhận ngày tình nguyện</span>
                 </label>
             </div>
         </div>

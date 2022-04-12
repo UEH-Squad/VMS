@@ -8,55 +8,55 @@
                     close
                 </span>
             </div>
-            <h3 class="text-center ">@(isAdd ? "Thêm" : "Sửa")  <span>lĩnh vực</span></h3>
-            <EditForm Model="area">
+            <h3 class="text-center ">@(IsAdd ? "Thêm" : "Sửa")  <span>lĩnh vực mới</span></h3>
+            <EditForm Model="Area" OnValidSubmit="OnValidSubmitAsync">
                 <DataAnnotationsValidator />
                 <div class="d-flex align-items-center mb-20">
                     <p class="form__title form__title--name">Tên lĩnh vực <span>(*)</span>:</p>
                     <div class="">
-                        <InputText @bind-Value="@area.Name" class="form-control"/>
+                        <InputText @bind-Value="@Area.Name" class="form-control"/>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-30">
-                    <p class="form__title form__title--icon">Icon name<span>(*)</span>:</p>
+                    <p class="form__title form__title--icon">Icon name <span>(*)</span>:</p>
                     <div class="position-relative">
-                        <InputText @bind-Value="@area.Icon" class="form-control" />
+                        <InputText @bind-Value="@Area.Icon" class="form-control" />
                         <span class="form__note">Icon name lấy từ Material Icons</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-20">
-                    <p class="form__title form__title--color">Mã màu<span>(*)</span>:</p>
+                    <p class="form__title form__title--color">Mã màu <span>(*)</span>:</p>
                     <div class="position-relative">
-                        <InputText @bind-Value="@area.Color" class="form-control" />
-                        <InputText type="color" @bind-Value="@area.Color" class="input-color" id="input-color" />
+                        <InputText @bind-Value="@Area.Color" class="form-control" />
+                        <InputText type="color" @bind-Value="@Area.Color" class="input-color" id="input-color" />
                         <label for="input-color" class="material-icons-outlined icon-color">
                             format_color_fill
                         </label>
                     </div>
                 </div>
                 <div class="d-flex align-items-center form__prioritize me-3">
-                    <input @bind="IsCheckAreaPrioritize" class="check-box" type="checkbox" id="all">
+                    <input @bind="Area.IsPinned" class="check-box" type="checkbox" id="all">
                     <label for="all">Thêm lĩnh vực ưu tiên </label>
                 </div>
-                <div class="modal__areaPrioritize @(isFullAreaPrioritize && IsCheckAreaPrioritize? "d-block" : "d-none" )">
+                <div class="modal__areaPrioritize @(!IsValidPinnedArea() ? "d-block" : "d-none" )">
                     <hr />
                     <h3 class="text-center mb-1">Lĩnh vực ưu tiên <span>đã đạt giới hạn</span></h3>
                     <p class="mb-3">Vui lòng gỡ ưu tiên ít nhất một lĩnh vực để tiếp tục thao tác này</p>
                     <div class="row">
-                        @foreach (var item in areaPrioritize)
+                        @foreach (var item in pinnedAreas)
                         {
                             <div class="col-6 d-flex align-items-center item">
-                                <input @bind="item.IsCheck" class="check-box" type="checkbox" id="areaPrioritize-@item.Id">
+                                <input @bind="item.IsPinned" class="check-box" type="checkbox" id="areaPrioritize-@item.Id">
                                 <label for="areaPrioritize-@item.Id" class="d-flex align-items-center">
-                                    <i class="material-icons-outlined me-2 ms-1">@item.IconName</i>
-                                    <span>@item.Area</span>
+                                    <i class="material-icons-outlined me-2 ms-1">@item.Icon</i>
+                                    <span>@item.Name</span>
                                 </label>
                             </div>
                         }
                     </div>
                 </div>
                 <div class="from__btn text-center ">
-                    <button @onclick="AddAreas" type="submit" class="btn btn-add">@(isAdd ? "Thêm" :"Sửa") @TitleBtn</button>
+                    <button type="submit" class="btn btn-add">@(IsAdd ? "Thêm" :"Sửa") Lĩnh vực</button>
                 </div>
             </EditForm>
         </div>
@@ -68,7 +68,7 @@
                 </span>
             </div>
             <div>
-                <h3 class="text-center mb-0">Bạn đã <span>@(isAdd ? "thêm" :"sửa") @Title</span></h3>
+                <h3 class="text-center mb-0">Bạn đã <span>@(IsAdd ? "thêm" : "sửa") @(Area.IsPinned ? "lĩnh vực ưu tiên" : "lĩnh vực mới")</span></h3>
                 <p class="text-center mb-0">thành công</p>
             </div>
         </div>  
@@ -77,70 +77,5 @@
 </div>
 
 @code {
-    private bool isAddSuccess;
-    private string Title;
-    private string TitleBtn = "lĩnh vực";
-
-    [CascadingParameter]
-    public BlazoredModalInstance Modal { get; set; }
-    [Parameter] public bool isAdd { get; set; }
-
-    private AreaViewModel area = new();
-
-    private async Task CloseModalAsync()
-    {
-        await Modal.CloseAsync();
-    }
-    private async Task ShowSuccess()
-    {
-        isAddSuccess = true;
-    }
-
-    //Lĩnh vực ưu tiên
-    class FakeData
-    {
-        public int Id { get; set; }
-        public string IconName { get; set; }
-        public string Area { get; set; }
-        public bool IsCheck { get; set; } = false;
-    }
-    private List<FakeData> areaPrioritize = new();
-    protected override void OnInitialized()
-    {
-
-        for (int i = 0; i < 4; i++)
-        {
-            areaPrioritize.Add(new FakeData()
-            {
-                Id = i,
-                IconName = "coronavirus",
-                Area = "COVID-19",
-                IsCheck=false,
-
-            });
-        }
-    }
-    bool isFullAreaPrioritize = false;
-    bool IsCheckAreaPrioritize = false;
-    private void AddAreas()
-    {
-        if (areaPrioritize.Count == 4 && IsCheckAreaPrioritize)
-        {
-            isFullAreaPrioritize = true;
-            foreach (var item in areaPrioritize)
-            {
-                if (item.IsCheck)
-                {
-                    Title = "lĩnh vực ưu tiên";
-                    ShowSuccess();
-                }
-            }
-        }
-        else
-        {
-            Title = "lĩnh vực mới";
-            ShowSuccess();
-        }
-    }
 }
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using VMS.Application.ViewModels;
 using VMS.Domain.Models;
@@ -22,9 +23,18 @@ namespace VMS.Application.Automapper
             CreateMap<Activity, CreateActivityViewModel>();
             CreateMap<Activity, ViewActivityViewModel>()
                 .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate.ToString("dd/MM/yyyy")));
+
             CreateMap<Area, AreaViewModel>();
+            CreateMap<AreaViewModel, Area>();
+            CreateMap<PaginatedList<Area>, PaginatedList<AreaViewModel>>();
+
             CreateMap<Activity, UserWithActivityViewModel>();
-            CreateMap<Skill, SkillViewModel>();
+
+            CreateMap<SkillViewModel, Skill>();
+            CreateMap<Skill, SkillViewModel>()
+                .ForMember(dest => dest.SubSkills, opt => opt.MapFrom(src => src.SubSkills.Where(x => !x.IsDeleted)));
+            CreateMap<PaginatedList<Skill>, PaginatedList<SkillViewModel>>();
+
             CreateMap<User, UserViewModel>()
                 .ForMember(x => x.Faculty, opt => opt.MapFrom(src => src.Faculty.Name))
                 .ForMember(x => x.Areas, opt => opt.MapFrom(src => src.UserAreas.OrderByDescending(x => x.Area.IsPinned).Select(x => new AreaViewModel

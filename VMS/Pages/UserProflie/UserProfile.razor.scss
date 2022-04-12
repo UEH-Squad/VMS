@@ -168,7 +168,7 @@
                 padding-bottom: unset;
             }
 
-            p{
+            p {
                 margin-bottom: 0;
             }
         }
@@ -476,7 +476,7 @@
         @include on("lg") {
             display: block;
             width: 98%;
-            height: 305px;
+            height: 200px;
             overflow-y: scroll;
             overflow-x: hidden;
             padding-left: 35px;
@@ -493,8 +493,12 @@
             }
         }
 
+        @include on('xl'){
+            height: 170px;
+        }
+
         @include on("xxl") {
-            height: 362px;
+            height: 185px;
             overflow-y: scroll;
             padding-left: 45px;
             padding-right: 45px;
@@ -561,5 +565,106 @@
     @include on("xxl") {
         font-size: 24px;
         margin-bottom: 20px !important;
+    }
+}
+
+.profile__volunteer {
+    & > div {
+        justify-content: start;
+    }
+
+    &-mb {
+        @include on('lg') {
+            display: none;
+        }
+    }
+
+    &-pc {
+        display: none;
+
+        @include on('lg') {
+            display: block;
+            margin-top: 37px;
+        }
+
+        @include on('xxl') {
+            margin-top: 50px;
+        }
+    }
+
+    &-number {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        border: 1px solid $border-color-bold;
+        border-radius: 50%;
+        text-align: center;
+        color: $green;
+        font-size: 20px;
+        font-weight: 700;
+
+        @include on('sm') {
+            font-size: 24px;
+        }
+
+        @include on("lg") {
+            width: 95px;
+            height: 95px;
+            line-height: 95px;
+            font-size: 36px;
+        }
+    }
+
+    &-text {
+        color: $blue;
+        text-align: left;
+
+        p:first-child {
+            font-size: 26px;
+            font-weight: 500;
+            line-height: 30px;
+
+            @include on('lg') {
+                font-size: 48px;
+                line-height: 50px;
+            }
+        }
+
+        p:last-child {
+            font-size: 16px;
+            font-weight: 500;
+
+            @include on('lg') {
+                font-size: 27px;
+            }
+
+            @include on('xl') {
+                font-size: 30px;
+            }
+        }
+    }
+
+    .profile__volunteer-statistic {
+        p {
+            border-right: 0.16px solid $grey-text;
+            font-size: 8px;
+            font-weight: 300;
+
+            span {
+                font-weight: 500;
+            }
+
+            @include on('lg') {
+                font-size: 14px;
+            }
+
+            @include on('xl') {
+                font-size: 16px;
+            }
+        }
+
+        p:last-child {
+            border-right: none;
+        }
     }
 }

@@ -725,5 +725,20 @@ namespace VMS.Application.Services
 
             await _repository.InsertAsync(dbContext, report);
         }
+
+        public async Task CreteUserActivityAsync(EditRequirementViewModel editRequirementViewModel)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+
+            Feedback report = _mapper.Map<Feedback>(editRequirementViewModel);
+
+            report.ImageReports = editRequirementViewModel.Images.Select(x => new ImageReport()
+            {
+                Image = x,
+                Feedback = report
+            }).ToList();
+
+            await _repository.InsertAsync(dbContext, report);
+        }
     }
 }

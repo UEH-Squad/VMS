@@ -66,7 +66,8 @@ namespace VMS.Pages.ActivitySearchPage
                     IsCommit = signupModel.IsCommit,
                     EnrollTime = System.DateTime.Now,
                     CreatedBy = CurrentUser.Id,
-                    CreatedDate = System.DateTime.Now
+                    CreatedDate = System.DateTime.Now,
+                    IsGift = false
                 });
                 IdentityService.UpdateUser(CurrentUser);
             }

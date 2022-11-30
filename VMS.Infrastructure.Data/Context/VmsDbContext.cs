@@ -31,6 +31,8 @@ namespace VMS.Infrastructure.Data.Context
         public new DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<UserActivity> UserActivities { get; set; }
+
         public VmsDbContext(DbContextOptions<VmsDbContext> options) : base(options)
         {
         }
@@ -105,6 +107,19 @@ namespace VMS.Infrastructure.Data.Context
                 .HasOne(x => x.Reporter)
                 .WithMany(x => x.UserReports)
                 .HasForeignKey(x => x.CreatedBy);
+
+            builder.Entity<UserActivity>().HasKey(x => new { x.UserId, x.ActivityId });
+
+            builder.Entity<UserActivity>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.UserActivities)
+                .HasForeignKey(x => x.UserId);
+
+
+            builder.Entity<UserActivity>()
+                .HasOne(x => x.Activity)
+                .WithMany(x => x.UserActivities)
+                .HasForeignKey(x => x.ActivityId);
 
             builder.Entity<Skill>().HasData(
                     new Skill { Id = 1, Name = "Kiến thức chuyên ngành" },

@@ -104,6 +104,9 @@
                                 <button class="activity__content__volunteer-validate" style="background-color: @color" @onclick="ToggleButton">
                                     @buttonValidate
                                 </button>
+                                <button class="activity__content__volunteer-validate" style="background-color: @color" @onclick="@(()=>HandleReceiveGift(item.User.Id, item.Activity.Id))">
+                                    @buttonValidate
+                                </button>
                             </div>
                         </div>
                         <div class="activity__icon d-flex">

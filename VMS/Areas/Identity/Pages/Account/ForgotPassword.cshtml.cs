@@ -43,6 +43,9 @@ namespace VMS.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
+                var role = await _userManager.IsInRoleAsync(user, "User") ? "Tình nguyện viên" : "Tổ chức tình nguyện";
+
+
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -61,7 +64,7 @@ namespace VMS.Areas.Identity.Pages.Account
                     values: new { area = "Identity", email = user.Email, code, returnUrl = Routes.ResetPassword },
                     protocol: Request.Scheme);
 
-                await _mailService.SendConfirmEmail(user.Email, callbackUrl);
+                await _mailService.SendForgotPasswordEmail(user.Email, callbackUrl, user.FullName, role);
 
                 return RedirectToPage("./ForgotPasswordConfirmation", new { userEmail = user.Email });
             }

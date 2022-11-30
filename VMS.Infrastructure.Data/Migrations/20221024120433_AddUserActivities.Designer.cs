@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using VMS.Infrastructure.Data.Context;
@@ -10,9 +11,10 @@ using VMS.Infrastructure.Data.Context;
 namespace VMS.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(VmsDbContext))]
-    partial class VmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221024120433_AddUserActivities")]
+    partial class AddUserActivities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,21 +374,21 @@ namespace VMS.Infrastructure.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e570",
-                            ConcurrencyStamp = "476bcfb8-6297-43f0-b5a8-074dbaa43e5b",
+                            ConcurrencyStamp = "805f24cc-954a-4332-b0ee-ac87d7ec95a8",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e571",
-                            ConcurrencyStamp = "fb17deed-6b10-4020-8774-41795613c69a",
+                            ConcurrencyStamp = "08d75cd7-43cb-4252-a0af-127cec6cfaa1",
                             Name = "Organization",
                             NormalizedName = "Organization"
                         },
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e572",
-                            ConcurrencyStamp = "24562a46-0b5e-4667-9341-c41df523d1c6",
+                            ConcurrencyStamp = "9518c449-d9bf-43f2-97f0-12b611c21cd5",
                             Name = "User",
                             NormalizedName = "User"
                         });
@@ -786,9 +788,6 @@ namespace VMS.Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsGift")
                         .HasColumnType("bit");
 
                     b.Property<string>("PhoneNumber")
@@ -1219,7 +1218,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0848f0df-978e-4ca3-8365-0808a1ffc9cb",
+                            ConcurrencyStamp = "9f364f0c-4380-47df-b329-e1868d3e9a7b",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hsv.ueh@ueh.edu.vn",
                             EmailConfirmed = true,
@@ -1227,7 +1226,7 @@ namespace VMS.Infrastructure.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hsv.ueh@ueh.edu.vn",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHHqoLb5vk6QLOrgmHPOciMsP8gYiUX0NKVb8fa8DPr8+/WWwkE+oDSbCdRMfmPq4Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMq4eOS6tTMcQAiPkABY6pD8vJQuvPslaY04V0B38t9bkrNSbYVCseoBujTftwWlbw==",
                             PhoneNumberConfirmed = false,
                             Rank = 0,
                             SecurityStamp = "",

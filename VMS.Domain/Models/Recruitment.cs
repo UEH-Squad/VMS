@@ -12,7 +12,7 @@ namespace VMS.Domain.Models
         public bool IsCommit { get; set; }
         public DateTime EnrollTime { get; set; }
         public DateTime AcceptTime { get; set; }
-
+        public bool IsGift { get; set; }
         public virtual User User { get; set; }
         public virtual Activity Activity { get; set; }
         public ICollection<RecruitmentRating> RecruitmentRatings { get; set; }

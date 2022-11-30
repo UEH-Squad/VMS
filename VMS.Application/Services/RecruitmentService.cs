@@ -325,5 +325,23 @@ namespace VMS.Application.Services
                 };
             }
         }
+
+        public async Task UpdateIsGiftAsync(string userId, int activityId)
+        {
+            DbContext dbContext = _dbContextFactory.CreateDbContext();
+            Specification<Recruitment> specification = new()
+            {
+                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                {
+                    x => x.UserId == userId,
+                    x => x.ActivityId == activityId,
+                    x => x.IsDeleted == false
+                },
+                //Includes = r => r.Include(x => x.User)
+            };
+            Recruitment recruitment = await _repository.GetByIdAsync<Recruitment>(dbContext, specification);
+            recruitment.IsGift = true;
+            await _repository.UpdateAsync(dbContext, recruitment);
+        }
     }
 }

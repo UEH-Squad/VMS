@@ -50,5 +50,6 @@ namespace VMS.Domain.Models
         public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual ICollection<Feedback> ReportHandles { get; set; }
         public virtual ICollection<Feedback> UserReports { get; set; }
+        public virtual ICollection<UserActivity> UserActivities { get; set; }
     }
 }

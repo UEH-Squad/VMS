@@ -31,7 +31,7 @@
                     <div class="profile__volunteer mt-4 profile__volunteer-mb">
                         <div class="d-flex align-items-center justify-content-center mb-2">
                             <div class="d-flex justify-content-evenly align-self-center">
-                                <span class="profile__volunteer-number">4</span>
+                                <span class="profile__volunteer-number">@User.Activities</span>
                             </div>
                             <div class="profile__volunteer-text ms-2 justify-content-center">
                                 <p class="mb-0">Ngày</p>
@@ -102,7 +102,7 @@
                 <div class="profile__volunteer profile__volunteer-pc">
                     <div class="d-flex align-items-center mb-3">
                         <div class="d-flex justify-content-evenly align-self-center">
-                            <span class="profile__volunteer-number">4</span>
+                            <span class="profile__volunteer-number">@User.TotalActivitiesDay</span>
                         </div>
                         <div class="profile__volunteer-text ms-2 ms-lg-4">
                             <p class="mb-0">Ngày</p>
@@ -110,9 +110,9 @@
                         </div>
                     </div>
                     <div class="d-flex profile__volunteer-statistic">
-                        <p class="pe-2"><span>22</span> hoạt động</p>
-                        <p class="px-2"><span>06</span> lĩnh vực</p>
-                        <p class="ps-2"><span>10</span> tổ chức</p>
+                        <p class="pe-2"><span>@User.Activities.Distinct().Count()</span> hoạt động</p>
+                        <p class="px-2"><span>@User.TotalArea</span> lĩnh vực</p>
+                        <p class="ps-2"><span>@User.TotalOrganisation</span> tổ chức</p>
                     </div>
                 </div>
             </div>

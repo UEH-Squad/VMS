@@ -25,6 +25,10 @@ namespace VMS.Application.ViewModels
 
         public string Faculty { get; set; }
 
+        public int TotalActivitiesDay { get; set; }
+        public int TotalArea { get; set; }
+        public int TotalOrganisation { get; set; }
+
         public List<AreaViewModel> Areas { get; set; }
         public List<Activity> Activities { get; set; }
         public List<SkillViewModel> Skills {  get; set; }

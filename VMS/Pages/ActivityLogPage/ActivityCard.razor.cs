@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VMS.Application.Interfaces;
@@ -65,10 +66,9 @@ namespace VMS.Pages.ActivityLogPage
             await CommentModal.Show<Organization.RatingPage.PopUpComment>("", parameters, BlazoredModalOptions.GetModalOptions()).Result;
         }
 
-        public async Task HandleReceiveGift(string userId, int activityId)
+        private async Task HandleReceiveGift(string userId, int activityId)
         {
             await RecruitmentService.UpdateIsGiftAsync(userId, activityId);
-            return;
         }
     }
 }

@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <button class="pop-up__confirm" @onclick="@ShowModalValidationSucess">Xác nhận</button>
+        <button class="pop-up__confirm" @onclick="@(async() => await ShowModalValidationSucess())">Xác nhận</button>
     </div>
 </div>
 
@@ -101,12 +101,20 @@
                                         <div class="name">Cập nhật mã vạch</div>
                                     </div>
                                 </div>
-                                <button class="activity__content__volunteer-validate" style="background-color: @color" @onclick="ToggleButton">
-                                    @buttonValidate
-                                </button>
-                                <button class="activity__content__volunteer-validate" style="background-color: @color" @onclick="@(()=>HandleReceiveGift(item.User.Id, item.Activity.Id))">
-                                    @buttonValidate
-                                </button>
+                                @if(@item.IsGift || @item.IsCommit)
+                                {
+                                    <button class="inActivity__content__volunteer-validate">
+                                        Đã nhận quà
+                                    </button>
+                                    
+                                }
+                                else
+                                {
+                                    <button class="activity__content__volunteer-validate" @onclick="@(() => ToggleButton(item.User.Id, item.Activity.Id))">
+                                        Nhận quà
+                                    </button>
+                                }
+                               
                             </div>
                         </div>
                         <div class="activity__icon d-flex">
@@ -132,14 +140,14 @@
 </div>
 
 @code {
-    string buttonValidate = "Nhận quà";
-    string color = "#18A0FB";
     string display = "d-none";
+    string userId;
+    int activityId;
 
-    void ToggleButton()
+    void ToggleButton(string UserId, int ActivityId)
     {
-        buttonValidate = "Đã nhận quà";
-        color = "#B4B4B4";
+        userId = UserId;
+        activityId = ActivityId;
         display = "d-block";
     }
 
@@ -152,12 +160,15 @@
     }
 
     bool isShowValidation = false;
-    void ShowModalValidationSucess()
+    async Task ShowModalValidationSucess()
     {
-        isShowValidation = !isShowValidation;
-        if (isShowValidation == false)
+        await HandleReceiveGift(userId, activityId);
+        //isShowValidation = !isShowValidation;
+        display = "d-none";
+        await HandlePageChangedAsync();
+        @* if (isShowValidation == false)
         {
             ValidationModal.CloseAsync();
-        }
+        } *@
     }
 }

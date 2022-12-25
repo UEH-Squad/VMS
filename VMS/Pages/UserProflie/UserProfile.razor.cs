@@ -8,6 +8,8 @@ using VMS.Application.Interfaces;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using VMS.Common;
+using VMS.Domain.Models;
+using System.Linq;
 
 namespace VMS.Pages.UserProflie
 {
@@ -26,7 +28,15 @@ namespace VMS.Pages.UserProflie
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            await Calculator(User);
             await JSRuntinme.InvokeVoidAsync("vms.ProfileCarousel");
+        }
+
+        private async Task Calculator(UserViewModel User)
+        {
+            this.User.TotalActivitiesDay = User.Activities.Sum(x => x.NumberOfDays);
+            this.User.TotalArea = User.Areas.Count();
+            this.User.TotalOrganisation = User.Activities.Distinct().Count();
         }
 
         private async Task OnAvatarFileChangedAsync(InputFileChangeEventArgs e)

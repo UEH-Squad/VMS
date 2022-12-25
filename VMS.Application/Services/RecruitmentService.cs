@@ -295,6 +295,9 @@ namespace VMS.Application.Services
 
                 item.RatingByOrg = item.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Rank;
                 item.CommentByOrg = item.RecruitmentRatings.FirstOrDefault(z => z.IsOrgRating)?.Comment;
+
+                item.IsGift = item.IsGift;
+                item.IsCommit = item.IsCommit;
             }
 
             return paginatedList;
@@ -331,15 +334,15 @@ namespace VMS.Application.Services
             DbContext dbContext = _dbContextFactory.CreateDbContext();
             Specification<Recruitment> specification = new()
             {
-                Conditions = new List<Expression<Func<Recruitment, bool>>>()
+                Conditions = new List<Expression<Func<Recruitment, bool>>>
                 {
                     x => x.UserId == userId,
                     x => x.ActivityId == activityId,
                     x => x.IsDeleted == false
                 },
-                //Includes = r => r.Include(x => x.User)
+                Includes = r => r.Include(x => x.User)
             };
-            Recruitment recruitment = await _repository.GetByIdAsync<Recruitment>(dbContext, specification);
+            Recruitment recruitment = await _repository.GetAsync(dbContext, specification);
             recruitment.IsGift = true;
             await _repository.UpdateAsync(dbContext, recruitment);
         }

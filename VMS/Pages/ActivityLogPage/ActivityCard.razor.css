@@ -342,6 +342,12 @@
       padding: 5px 10px; }
       .activity__content__volunteer-validate:hover {
         background-color: #0B588c; }
+    
+    .inActivity__content__volunteer-validate {
+      color: #B4B4B4;
+      border-radius: 5px;
+      border: none;
+      padding: 5px 10px; }
 
 .activity__icon {
   padding: 0 3px;
